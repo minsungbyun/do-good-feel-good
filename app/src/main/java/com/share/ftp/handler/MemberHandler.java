@@ -2,21 +2,21 @@ package com.share.ftp.handler;
 
 import java.sql.Date;
 import java.util.List;
-import com.share.ftp.domain.Member;
+import com.share.ftp.domain.MemberDTO;
 import com.share.util.Prompt;
 
 public class MemberHandler {
 
-  List<Member> memberList;
+  List<MemberDTO> memberList;
 
-  public MemberHandler(List<Member> memberList) {
+  public MemberHandler(List<MemberDTO> memberList) {
     this.memberList = memberList;
   }
 
   public void add() {
     System.out.println("[회원 등록]");
 
-    Member member = new Member();
+    MemberDTO member = new MemberDTO();
 
     member.setNo(Prompt.inputInt("번호? "));
     member.setName(Prompt.inputString("이름? "));
@@ -32,9 +32,9 @@ public class MemberHandler {
   public void list() {
     System.out.println("[회원 목록]");
 
-    Member[] list = memberList.toArray(new Member[0]);
+    MemberDTO[] list = memberList.toArray(new MemberDTO[0]);
 
-    for (Member member : list) {
+    for (MemberDTO member : list) {
       System.out.printf("%d, %s, %s, %s, %s\n", 
           member.getNo(), 
           member.getName(), 
@@ -48,7 +48,7 @@ public class MemberHandler {
     System.out.println("[회원 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    Member member = findByNo(no);
+    MemberDTO member = findByNo(no);
 
     if (member == null) {
       System.out.println("해당 번호의 회원이 없습니다.");
@@ -66,7 +66,7 @@ public class MemberHandler {
     System.out.println("[회원 변경]");
     int no = Prompt.inputInt("번호? ");
 
-    Member member = findByNo(no);
+    MemberDTO member = findByNo(no);
 
     if (member == null) {
       System.out.println("해당 번호의 회원이 없습니다.");
@@ -98,7 +98,7 @@ public class MemberHandler {
     System.out.println("[회원 삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    Member member = findByNo(no);
+    MemberDTO member = findByNo(no);
 
     if (member == null) {
       System.out.println("해당 번호의 회원이 없습니다.");
@@ -116,9 +116,9 @@ public class MemberHandler {
     System.out.println("회원을 삭제하였습니다.");
   }
 
-  private Member findByNo(int no) {
-    Member[] arr = memberList.toArray(new Member[0]);
-    for (Member member : arr) {
+  private MemberDTO findByNo(int no) {
+    MemberDTO[] arr = memberList.toArray(new MemberDTO[0]);
+    for (MemberDTO member : arr) {
       if (member.getNo() == no) {
         return member;
       }
@@ -127,8 +127,8 @@ public class MemberHandler {
   }
 
   public boolean exist(String name) {
-    Member[] arr = memberList.toArray(new Member[0]);
-    for (Member member : arr) {
+    MemberDTO[] arr = memberList.toArray(new MemberDTO[0]);
+    for (MemberDTO member : arr) {
       if (member.getName().equals(name)) {
         return true;
       }

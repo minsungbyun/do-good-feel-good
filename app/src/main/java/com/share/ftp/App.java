@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import com.share.ftp.domain.Board;
-import com.share.ftp.domain.Member;
+import com.share.ftp.domain.MemberDTO;
 import com.share.ftp.domain.Project;
 import com.share.ftp.domain.Task;
 import com.share.ftp.handler.BoardHandler;
@@ -17,7 +17,7 @@ import com.share.util.Prompt;
 
 public class App {
   List<Board> boardList = new ArrayList<>();
-  List<Member> memberList = new LinkedList<>();
+  List<MemberDTO> memberList = new LinkedList<>();
   List<Project> projectList = new ArrayList<>();
   List<Task> taskList = new LinkedList<>();
 
@@ -40,7 +40,7 @@ public class App {
     MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setPrevMenuTitle("종료");
 
-    MenuGroup boardMenu = new MenuGroup("게시판");
+    MenuGroup boardMenu = new MenuGroup("함께해요");
     mainMenuGroup.add(boardMenu);
 
     boardMenu.add(new Menu("등록") {
@@ -64,7 +64,7 @@ public class App {
         boardHandler.delete(); 
       }});
 
-    MenuGroup memberMenu = new MenuGroup("회원");
+    MenuGroup memberMenu = new MenuGroup("소통해요");
     mainMenuGroup.add(memberMenu);
 
     memberMenu.add(new Menu("등록") {
@@ -88,7 +88,7 @@ public class App {
         memberHandler.delete(); 
       }});
 
-    MenuGroup projectMenu = new MenuGroup("프로젝트");
+    MenuGroup projectMenu = new MenuGroup("챌린지");
     mainMenuGroup.add(projectMenu);
 
     projectMenu.add(new Menu("등록") {
@@ -112,7 +112,7 @@ public class App {
         projectHandler.delete(); 
       }});
 
-    MenuGroup taskMenu = new MenuGroup("작업");
+    MenuGroup taskMenu = new MenuGroup("모금함");
     mainMenuGroup.add(taskMenu);
 
     taskMenu.add(new Menu("등록") {
@@ -136,14 +136,9 @@ public class App {
         taskHandler.delete(); 
       }});
 
-    MenuGroup mg1 = new MenuGroup("관리1");
+    MenuGroup mg1 = new MenuGroup("고객센터");
     mainMenuGroup.add(mg1);
 
-    MenuGroup mg2 = new MenuGroup("관리2");
-    mg1.add(mg2);
-
-    MenuGroup mg3 = new MenuGroup("관리3");
-    mg2.add(mg3);
 
     return mainMenuGroup;
   }
