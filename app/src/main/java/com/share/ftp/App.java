@@ -40,6 +40,9 @@ public class App {
     MenuGroup mainMenuGroup = new MenuGroup("로그인");
     mainMenuGroup.setPrevMenuTitle("종료");
 
+    MenuGroup guestMenu = new MenuGroup("비회원");
+    mainMenuGroup.add(guestMenu);
+
     MenuGroup personalMenu = new MenuGroup("개인");
     mainMenuGroup.add(personalMenu);
 
@@ -49,363 +52,483 @@ public class App {
     MenuGroup adminMenu = new MenuGroup("관리자");
     mainMenuGroup.add(adminMenu);
 
-    MenuGroup boardMenu = new MenuGroup("함께해요");
-    personalMenu.add(boardMenu);
+    MenuGroup guestBoardMenu = new MenuGroup("함께해요");
+    guestMenu.add(guestBoardMenu);
 
-    boardMenu.add(new Menu("등록") {
+    guestBoardMenu.add(new Menu("등록") {
       @Override
       public void execute() {
         boardHandler.add(); 
       }});
-    boardMenu.add(new Menu("목록") {
+    guestBoardMenu.add(new Menu("목록") {
       @Override
       public void execute() {
         boardHandler.list(); 
       }});
-    boardMenu.add(new Menu("상세보기") {
+    guestBoardMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
         boardHandler.detail(); 
       }});
-    boardMenu.add(new Menu("변경") {
+    guestBoardMenu.add(new Menu("변경") {
       @Override
       public void execute() {
         boardHandler.update(); 
       }});
-    boardMenu.add(new Menu("삭제") {
+    guestBoardMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
         boardHandler.delete(); 
       }});
 
-    MenuGroup memberMenu = new MenuGroup("소통해요");
-    personalMenu.add(memberMenu);
+    MenuGroup guestMemberMenu = new MenuGroup("소통해요");
+    guestMenu.add(guestMemberMenu);
 
-    memberMenu.add(new Menu("등록") {
+    guestMemberMenu.add(new Menu("등록") {
       @Override
       public void execute() {
         memberHandler.add(); 
       }});
-    memberMenu.add(new Menu("목록") {
+    guestMemberMenu.add(new Menu("목록") {
       @Override
       public void execute() {
         memberHandler.list(); 
       }});
-    memberMenu.add(new Menu("상세보기") {
+    guestMemberMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
         memberHandler.detail(); 
       }});
-    memberMenu.add(new Menu("변경") {
+    guestMemberMenu.add(new Menu("변경") {
       @Override
       public void execute() {
         memberHandler.update(); 
       }});
-    memberMenu.add(new Menu("삭제") {
+    guestMemberMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
         memberHandler.delete(); 
       }});
 
-    MenuGroup projectMenu = new MenuGroup("챌린지");
-    personalMenu.add(projectMenu);
+    MenuGroup guestProjectMenu = new MenuGroup("챌린지");
+    guestMenu.add(guestProjectMenu);
 
-    projectMenu.add(new Menu("등록") {
+    guestProjectMenu.add(new Menu("등록") {
       @Override
       public void execute() {
         projectHandler.add(); 
       }});
-    projectMenu.add(new Menu("목록") {
+    guestProjectMenu.add(new Menu("목록") {
       @Override
       public void execute() {
         projectHandler.list(); 
       }});
-    projectMenu.add(new Menu("상세보기") {
+    guestProjectMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
         projectHandler.detail(); 
       }});
-    projectMenu.add(new Menu("변경") {
+    guestProjectMenu.add(new Menu("변경") {
       @Override
       public void execute() {
         projectHandler.update(); 
       }});
-    projectMenu.add(new Menu("삭제") {
+    guestProjectMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
         projectHandler.delete(); 
       }});
 
-    MenuGroup taskMenu = new MenuGroup("모금함");
-    personalMenu.add(taskMenu);
+    MenuGroup guestTaskMenu = new MenuGroup("모금함");
+    guestMenu.add(guestTaskMenu);
 
-    taskMenu.add(new Menu("등록") {
+    guestTaskMenu.add(new Menu("등록") {
       @Override
       public void execute() {
         taskHandler.add(); 
       }});
-    taskMenu.add(new Menu("목록") {
+    guestTaskMenu.add(new Menu("목록") {
       @Override
       public void execute() {
         taskHandler.list(); 
       }});
-    taskMenu.add(new Menu("상세보기") {
+    guestTaskMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
         taskHandler.detail(); 
       }});
-    taskMenu.add(new Menu("변경") {
+    guestTaskMenu.add(new Menu("변경") {
       @Override
       public void execute() {
         taskHandler.update(); 
       }});
-    taskMenu.add(new Menu("삭제") {
+    guestTaskMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
         taskHandler.delete(); 
       }});
 
-    MenuGroup mg1 = new MenuGroup("고객센터");
-    personalMenu.add(mg1);
+    MenuGroup guestServiceCenter = new MenuGroup("고객센터");
+    guestMenu.add(guestServiceCenter);
 
 
-    MenuGroup boardMenu2 = new MenuGroup("함께해요");
-    organizationMenu.add(boardMenu2);
+    MenuGroup personalBoardMenu = new MenuGroup("함께해요");
+    personalMenu.add(personalBoardMenu);
 
-    boardMenu2.add(new Menu("등록") {
+    personalBoardMenu.add(new Menu("등록") {
       @Override
       public void execute() {
         boardHandler.add(); 
       }});
-    boardMenu2.add(new Menu("목록") {
+    personalBoardMenu.add(new Menu("목록") {
       @Override
       public void execute() {
         boardHandler.list(); 
       }});
-    boardMenu2.add(new Menu("상세보기") {
+    personalBoardMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
         boardHandler.detail(); 
       }});
-    boardMenu2.add(new Menu("변경") {
+    personalBoardMenu.add(new Menu("변경") {
       @Override
       public void execute() {
         boardHandler.update(); 
       }});
-    boardMenu2.add(new Menu("삭제") {
+    personalBoardMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
         boardHandler.delete(); 
       }});
 
-    MenuGroup memberMenu2 = new MenuGroup("소통해요");
-    organizationMenu.add(memberMenu2);
+    MenuGroup personalMemberMenu = new MenuGroup("소통해요");
+    personalMenu.add(personalMemberMenu);
 
-    memberMenu2.add(new Menu("등록") {
+    personalMemberMenu.add(new Menu("등록") {
       @Override
       public void execute() {
         memberHandler.add(); 
       }});
-    memberMenu2.add(new Menu("목록") {
+    personalMemberMenu.add(new Menu("목록") {
       @Override
       public void execute() {
         memberHandler.list(); 
       }});
-    memberMenu2.add(new Menu("상세보기") {
+    personalMemberMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
         memberHandler.detail(); 
       }});
-    memberMenu2.add(new Menu("변경") {
+    personalMemberMenu.add(new Menu("변경") {
       @Override
       public void execute() {
         memberHandler.update(); 
       }});
-    memberMenu2.add(new Menu("삭제") {
+    personalMemberMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
         memberHandler.delete(); 
       }});
 
-    MenuGroup projectMenu2 = new MenuGroup("챌린지");
-    organizationMenu.add(projectMenu2);
+    MenuGroup personalProjectMenu = new MenuGroup("챌린지");
+    personalMenu.add(personalProjectMenu);
 
-    projectMenu2.add(new Menu("등록") {
+    personalProjectMenu.add(new Menu("등록") {
       @Override
       public void execute() {
         projectHandler.add(); 
       }});
-    projectMenu2.add(new Menu("목록") {
+    personalProjectMenu.add(new Menu("목록") {
       @Override
       public void execute() {
         projectHandler.list(); 
       }});
-    projectMenu2.add(new Menu("상세보기") {
+    personalProjectMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
         projectHandler.detail(); 
       }});
-    projectMenu2.add(new Menu("변경") {
+    personalProjectMenu.add(new Menu("변경") {
       @Override
       public void execute() {
         projectHandler.update(); 
       }});
-    projectMenu2.add(new Menu("삭제") {
+    personalProjectMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
         projectHandler.delete(); 
       }});
 
-    MenuGroup taskMenu2 = new MenuGroup("모금함");
-    organizationMenu.add(taskMenu2);
+    MenuGroup personalTaskMenu = new MenuGroup("모금함");
+    personalMenu.add(personalTaskMenu);
 
-    taskMenu2.add(new Menu("등록") {
+    personalTaskMenu.add(new Menu("등록") {
       @Override
       public void execute() {
         taskHandler.add(); 
       }});
-    taskMenu2.add(new Menu("목록") {
+    personalTaskMenu.add(new Menu("목록") {
       @Override
       public void execute() {
         taskHandler.list(); 
       }});
-    taskMenu2.add(new Menu("상세보기") {
+    personalTaskMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
         taskHandler.detail(); 
       }});
-    taskMenu2.add(new Menu("변경") {
+    personalTaskMenu.add(new Menu("변경") {
       @Override
       public void execute() {
         taskHandler.update(); 
       }});
-    taskMenu2.add(new Menu("삭제") {
+    personalTaskMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
         taskHandler.delete(); 
       }});
 
-    MenuGroup mg2 = new MenuGroup("고객센터");
-    organizationMenu.add(mg2);
+    MenuGroup personalServiceCenter = new MenuGroup("고객센터");
+    personalMenu.add(personalServiceCenter);
 
-    MenuGroup boardMenu3 = new MenuGroup("함께해요");
-    adminMenu.add(boardMenu3);
 
-    boardMenu3.add(new Menu("등록") {
+    MenuGroup organizationBoardMenu = new MenuGroup("함께해요");
+    organizationMenu.add(organizationBoardMenu);
+
+    organizationBoardMenu.add(new Menu("등록") {
       @Override
       public void execute() {
         boardHandler.add(); 
       }});
-    boardMenu3.add(new Menu("목록") {
+    organizationBoardMenu.add(new Menu("목록") {
       @Override
       public void execute() {
         boardHandler.list(); 
       }});
-    boardMenu3.add(new Menu("상세보기") {
+    organizationBoardMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
         boardHandler.detail(); 
       }});
-    boardMenu3.add(new Menu("변경") {
+    organizationBoardMenu.add(new Menu("변경") {
       @Override
       public void execute() {
         boardHandler.update(); 
       }});
-    boardMenu3.add(new Menu("삭제") {
+    organizationBoardMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
         boardHandler.delete(); 
       }});
 
-    MenuGroup memberMenu3 = new MenuGroup("소통해요");
-    adminMenu.add(memberMenu3);
+    MenuGroup organizationMemberMenu = new MenuGroup("소통해요");
+    organizationMenu.add(organizationMemberMenu);
 
-    memberMenu3.add(new Menu("등록") {
+    organizationMemberMenu.add(new Menu("등록") {
       @Override
       public void execute() {
         memberHandler.add(); 
       }});
-    memberMenu3.add(new Menu("목록") {
+    organizationMemberMenu.add(new Menu("목록") {
       @Override
       public void execute() {
         memberHandler.list(); 
       }});
-    memberMenu3.add(new Menu("상세보기") {
+    organizationMemberMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
         memberHandler.detail(); 
       }});
-    memberMenu3.add(new Menu("변경") {
+    organizationMemberMenu.add(new Menu("변경") {
       @Override
       public void execute() {
         memberHandler.update(); 
       }});
-    memberMenu3.add(new Menu("삭제") {
+    organizationMemberMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
         memberHandler.delete(); 
       }});
 
-    MenuGroup projectMenu3 = new MenuGroup("챌린지");
-    adminMenu.add(projectMenu3);
+    MenuGroup organizationProjectMenu = new MenuGroup("챌린지");
+    organizationMenu.add(organizationProjectMenu);
 
-    projectMenu3.add(new Menu("등록") {
+    organizationProjectMenu.add(new Menu("등록") {
       @Override
       public void execute() {
         projectHandler.add(); 
       }});
-    projectMenu3.add(new Menu("목록") {
+    organizationProjectMenu.add(new Menu("목록") {
       @Override
       public void execute() {
         projectHandler.list(); 
       }});
-    projectMenu3.add(new Menu("상세보기") {
+    organizationProjectMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
         projectHandler.detail(); 
       }});
-    projectMenu3.add(new Menu("변경") {
+    organizationProjectMenu.add(new Menu("변경") {
       @Override
       public void execute() {
         projectHandler.update(); 
       }});
-    projectMenu3.add(new Menu("삭제") {
+    organizationProjectMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
         projectHandler.delete(); 
       }});
 
-    MenuGroup taskMenu3 = new MenuGroup("모금함");
-    adminMenu.add(taskMenu3);
+    MenuGroup organizationtaskMenu = new MenuGroup("모금함");
+    organizationMenu.add(organizationtaskMenu);
 
-    taskMenu3.add(new Menu("등록") {
+    organizationtaskMenu.add(new Menu("등록") {
       @Override
       public void execute() {
         taskHandler.add(); 
       }});
-    taskMenu3.add(new Menu("목록") {
+    organizationtaskMenu.add(new Menu("목록") {
       @Override
       public void execute() {
         taskHandler.list(); 
       }});
-    taskMenu3.add(new Menu("상세보기") {
+    organizationtaskMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
         taskHandler.detail(); 
       }});
-    taskMenu3.add(new Menu("변경") {
+    organizationtaskMenu.add(new Menu("변경") {
       @Override
       public void execute() {
         taskHandler.update(); 
       }});
-    taskMenu3.add(new Menu("삭제") {
+    organizationtaskMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
         taskHandler.delete(); 
       }});
 
-    MenuGroup mg3 = new MenuGroup("고객센터");
-    adminMenu.add(mg3);
+    MenuGroup organizationServiceCenter = new MenuGroup("고객센터");
+    organizationMenu.add(organizationServiceCenter);
+
+    MenuGroup adminBoardMenu = new MenuGroup("함께해요");
+    adminMenu.add(adminBoardMenu);
+
+    adminBoardMenu.add(new Menu("등록") {
+      @Override
+      public void execute() {
+        boardHandler.add(); 
+      }});
+    adminBoardMenu.add(new Menu("목록") {
+      @Override
+      public void execute() {
+        boardHandler.list(); 
+      }});
+    adminBoardMenu.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        boardHandler.detail(); 
+      }});
+    adminBoardMenu.add(new Menu("변경") {
+      @Override
+      public void execute() {
+        boardHandler.update(); 
+      }});
+    adminBoardMenu.add(new Menu("삭제") {
+      @Override
+      public void execute() {
+        boardHandler.delete(); 
+      }});
+
+    MenuGroup adminMemberMenu = new MenuGroup("소통해요");
+    adminMenu.add(adminMemberMenu);
+
+    adminMemberMenu.add(new Menu("등록") {
+      @Override
+      public void execute() {
+        memberHandler.add(); 
+      }});
+    adminMemberMenu.add(new Menu("목록") {
+      @Override
+      public void execute() {
+        memberHandler.list(); 
+      }});
+    adminMemberMenu.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        memberHandler.detail(); 
+      }});
+    adminMemberMenu.add(new Menu("변경") {
+      @Override
+      public void execute() {
+        memberHandler.update(); 
+      }});
+    adminMemberMenu.add(new Menu("삭제") {
+      @Override
+      public void execute() {
+        memberHandler.delete(); 
+      }});
+
+    MenuGroup adminProjectMenu = new MenuGroup("챌린지");
+    adminMenu.add(adminProjectMenu);
+
+    adminProjectMenu.add(new Menu("등록") {
+      @Override
+      public void execute() {
+        projectHandler.add(); 
+      }});
+    adminProjectMenu.add(new Menu("목록") {
+      @Override
+      public void execute() {
+        projectHandler.list(); 
+      }});
+    adminProjectMenu.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        projectHandler.detail(); 
+      }});
+    adminProjectMenu.add(new Menu("변경") {
+      @Override
+      public void execute() {
+        projectHandler.update(); 
+      }});
+    adminProjectMenu.add(new Menu("삭제") {
+      @Override
+      public void execute() {
+        projectHandler.delete(); 
+      }});
+
+    MenuGroup adminTaskMenu = new MenuGroup("모금함");
+    adminMenu.add(adminTaskMenu);
+
+    adminTaskMenu.add(new Menu("등록") {
+      @Override
+      public void execute() {
+        taskHandler.add(); 
+      }});
+    adminTaskMenu.add(new Menu("목록") {
+      @Override
+      public void execute() {
+        taskHandler.list(); 
+      }});
+    adminTaskMenu.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        taskHandler.detail(); 
+      }});
+    adminTaskMenu.add(new Menu("변경") {
+      @Override
+      public void execute() {
+        taskHandler.update(); 
+      }});
+    adminTaskMenu.add(new Menu("삭제") {
+      @Override
+      public void execute() {
+        taskHandler.delete(); 
+      }});
+
+    MenuGroup adminServiceCenter = new MenuGroup("고객센터");
+    adminMenu.add(adminServiceCenter);
 
 
     return mainMenuGroup;
