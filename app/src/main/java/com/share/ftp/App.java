@@ -4,19 +4,11 @@
 package com.share.ftp;
 
 public class App {
-<<<<<<< HEAD
+
     public String getGreeting() {
         return "Hello!";
     }
-=======
-  public String getGreeting() {
 
-    return " welcome to Hell world!!!!! welcome";
-
-
-
-  }
->>>>>>> 9dd4dc8cf57f80b7afb29ef03e6a00c38a806886
 
   public static void main(String[] args) {
     System.out.println(new App().getGreeting());
