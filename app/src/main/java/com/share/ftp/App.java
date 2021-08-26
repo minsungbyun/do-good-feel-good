@@ -132,34 +132,44 @@ public class App {
         projectHandler.delete(); 
       }});
 
-    MenuGroup personalTaskMenu = new MenuGroup("모금함");
-    personalMenu.add(personalTaskMenu);
+    MenuGroup personalDonationMenu = new MenuGroup("모금함");
+    personalMenu.add(personalDonationMenu);
 
-    personalTaskMenu.add(new Menu("등록") {
-      @Override
-      public void execute() {
-        taskHandler.add(); 
-      }});
-    personalTaskMenu.add(new Menu("목록") {
-      @Override
-      public void execute() {
-        taskHandler.list(); 
-      }});
-    personalTaskMenu.add(new Menu("상세보기") {
-      @Override
-      public void execute() {
-        taskHandler.detail(); 
-      }});
-    personalTaskMenu.add(new Menu("변경") {
-      @Override
-      public void execute() {
-        taskHandler.update(); 
-      }});
-    personalTaskMenu.add(new Menu("삭제") {
-      @Override
-      public void execute() {
-        taskHandler.delete(); 
-      }});
+    MenuGroup personalDonationBoard = new MenuGroup("모금함 게시판");
+    personalDonationMenu.add(personalDonationBoard);
+    
+    MenuGroup personalDonation = new MenuGroup("모금함 기부하기");
+    personalDonationBoard.add(personalDonation);
+    
+    personalDonation.add(new Menu("등록") {
+    	@Override
+    	public void execute() {
+    		taskHandler.add(); 
+    	}});
+    personalDonation.add(new Menu("목록") {
+    	@Override
+    	public void execute() {
+    		taskHandler.list(); 
+    	}});
+    personalDonation.add(new Menu("상세보기") {
+    	@Override
+    	public void execute() {
+    		taskHandler.detail(); 
+    	}});
+    personalDonation.add(new Menu("변경") {
+    	@Override
+    	public void execute() {
+    		taskHandler.update(); 
+    	}});
+    personalDonation.add(new Menu("삭제") {
+    	@Override
+    	public void execute() {
+    		taskHandler.delete(); 
+    	}});
+    
+    MenuGroup personalDonationTotal = new MenuGroup("전체 모금액");
+    personalDonationMenu.add(personalDonationTotal);
+
 
     MenuGroup personalServiceCenter = new MenuGroup("고객센터");
     personalMenu.add(personalServiceCenter);
@@ -258,33 +268,36 @@ public class App {
 
     MenuGroup organizationtaskMenu = new MenuGroup("모금함");
     organizationMenu.add(organizationtaskMenu);
-
-    organizationtaskMenu.add(new Menu("등록") {
-      @Override
-      public void execute() {
-        taskHandler.add(); 
-      }});
-    organizationtaskMenu.add(new Menu("목록") {
-      @Override
-      public void execute() {
-        taskHandler.list(); 
-      }});
-    organizationtaskMenu.add(new Menu("상세보기") {
-      @Override
-      public void execute() {
-        taskHandler.detail(); 
-      }});
-    organizationtaskMenu.add(new Menu("변경") {
-      @Override
-      public void execute() {
-        taskHandler.update(); 
-      }});
-    organizationtaskMenu.add(new Menu("삭제") {
-      @Override
-      public void execute() {
-        taskHandler.delete(); 
-      }});
-
+    
+    MenuGroup organizationDonationApply = new MenuGroup("모금함 신청");
+    organizationtaskMenu.add(organizationDonationApply);
+    
+    organizationDonationApply.add(new Menu("등록") {
+    	@Override
+    	public void execute() {
+    		taskHandler.add(); 
+    	}});
+    organizationDonationApply.add(new Menu("목록") {
+    	@Override
+    	public void execute() {
+    		taskHandler.list(); 
+    	}});
+    
+    organizationDonationApply.add(new Menu("상세보기") {
+    	@Override
+    	public void execute() {
+    		taskHandler.detail(); 
+    	}});
+    organizationDonationApply.add(new Menu("변경") {
+    	@Override
+    	public void execute() {
+    		taskHandler.update(); 
+    	}});
+    organizationDonationApply.add(new Menu("삭제") {
+    	@Override
+    	public void execute() {
+    		taskHandler.delete(); 
+    	}});
     MenuGroup organizationServiceCenter = new MenuGroup("고객센터");
     organizationMenu.add(organizationServiceCenter);
 
