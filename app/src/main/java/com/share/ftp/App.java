@@ -52,6 +52,9 @@ public class App {
     MenuGroup adminMenu = new MenuGroup("관리자");
     mainMenuGroup.add(adminMenu);
 
+    MenuGroup managerMenu = new MenuGroup("관리자2");
+    mainMenuGroup.add(managerMenu);
+
     MenuGroup guestBoardMenu = new MenuGroup("함께해요");
     guestMenu.add(guestBoardMenu);
 
