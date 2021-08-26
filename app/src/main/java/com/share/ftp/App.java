@@ -336,82 +336,82 @@ public class App {
         boardHandler.delete(); 
       }});
 
-    MenuGroup personalMyPage1 = new MenuGroup("마이페이지");
-    personalMenu.add(personalMyPage1);
+    MenuGroup personalMyPage = new MenuGroup("마이페이지");
+    personalMenu.add(personalMyPage);
 
-    MenuGroup personalMyProfile = new MenuGroup("회원정보수정");
-    personalMyPage1.add(personalMyProfile);
+    MenuGroup MyProfile = new MenuGroup("회원정보수정");
+    personalMyPage.add(MyProfile);
 
-    personalMyProfile.add(new Menu("변경") {
+    MyProfile.add(new Menu("변경") {
       @Override
       public void execute() {
         boardHandler.update(); 
       }});
-    personalMyProfile.add(new Menu("삭제") {
+    MyProfile.add(new Menu("삭제") {
       @Override
       public void execute() {
         boardHandler.delete(); 
       }});
 
-    MenuGroup personalMyVolunteer = new MenuGroup("나의 봉사");
-    personalMyPage1.add(personalMyVolunteer);
+    MenuGroup MyVolunteer = new MenuGroup("나의 봉사");
+    personalMyPage.add(MyVolunteer);
 
-    personalMyVolunteer.add(new Menu("목록") {
+    MyVolunteer.add(new Menu("목록") {
       @Override
       public void execute() {
         boardHandler.list(); 
       }});
-    personalMyVolunteer.add(new Menu("상세보기") {
+    MyVolunteer.add(new Menu("상세보기") {
       @Override
       public void execute() {
         boardHandler.detail(); 
       }});    
 
-    MenuGroup personalMyBoard = new MenuGroup("나의 작성글");
-    personalMyPage1.add(personalMyBoard);
+    MenuGroup MyBoard = new MenuGroup("나의 작성글");
+    personalMyPage.add(MyBoard);
 
-    personalMyBoard.add(new Menu("목록") {
+    MyBoard.add(new Menu("목록") {
       @Override
       public void execute() {
         boardHandler.list(); 
       }});
-    personalMyBoard.add(new Menu("상세보기") {
+    MyBoard.add(new Menu("상세보기") {
       @Override
       public void execute() {
         boardHandler.detail(); 
       }});    
 
-    MenuGroup personalMyPoint = new MenuGroup("나의 포인트");
-    personalMyPage1.add(personalMyPoint);
+    MenuGroup MyPoint = new MenuGroup("나의 포인트");
+    personalMyPage.add(MyPoint);
 
-    personalMyPoint.add(new Menu("상세보기") {
+    MyPoint.add(new Menu("상세보기") {
       @Override
       public void execute() {
         boardHandler.detail(); 
       }});    
 
-    MenuGroup personalMyDonation = new MenuGroup("나의 모금함");
-    personalMyPage1.add(personalMyDonation);
+    MenuGroup MyDonation = new MenuGroup("나의 모금함");
+    personalMyPage.add(MyDonation);
 
-    personalMyDonation.add(new Menu("상세보기") {
+    MyDonation.add(new Menu("상세보기") {
       @Override
       public void execute() {
         boardHandler.detail(); 
       }});    
 
-    MenuGroup personalMyOrganizationMember = new MenuGroup("기관 승인 신청");
-    personalMyPage1.add(personalMyOrganizationMember);
+    MenuGroup OrganizationApprove = new MenuGroup("기관 승인 신청");
+    personalMyPage.add(OrganizationApprove);
 
-    personalMyOrganizationMember.add(new Menu("상태보기") {
+    OrganizationApprove.add(new Menu("상태보기") {
       @Override
       public void execute() {
         boardHandler.detail(); 
       }});   
 
-    MenuGroup personalCancelMember = new MenuGroup("회원 탈퇴");
-    personalMyPage1.add(personalCancelMember);
+    MenuGroup CancelMember = new MenuGroup("회원 탈퇴");
+    personalMyPage.add(CancelMember);
 
-    personalCancelMember.add(new Menu("삭제") {
+    CancelMember.add(new Menu("탈퇴") {
       @Override
       public void execute() {
         boardHandler.delete(); 
