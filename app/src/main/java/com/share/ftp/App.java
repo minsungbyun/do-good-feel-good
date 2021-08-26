@@ -120,27 +120,27 @@ public class App {
     reviewMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        boardHandler.add(); 
+        boardHandler.write(); 
       }});
     reviewMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        boardHandler.list(); 
+        boardHandler.reviewList(); 
       }});
     reviewMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        boardHandler.detail(); 
+        boardHandler.reviewDetail(); 
       }});
     reviewMenu.add(new Menu("변경") {
       @Override
       public void execute() {
-        boardHandler.update(); 
+        boardHandler.reviewChange(); 
       }});
     reviewMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        boardHandler.delete(); 
+        boardHandler.reviewDelete(); 
       }});
 
     MenuGroup bestReviewMenu = new MenuGroup("나눔 이야기 BEST");
@@ -149,7 +149,7 @@ public class App {
     bestReviewMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        memberHandler.list(); 
+        boardHandler.bestReview(); 
       }});
 
     MenuGroup shortReviewMenu = new MenuGroup("한 줄 후기");
@@ -158,24 +158,24 @@ public class App {
     shortReviewMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        memberHandler.add(); 
+        boardHandler.shortReviewAdd(); 
       }});
 
     shortReviewMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        memberHandler.list(); 
+        boardHandler.shortReviewList(); 
       }});
 
     shortReviewMenu.add(new Menu("수정") {
       @Override
       public void execute() {
-        memberHandler.update(); 
+        boardHandler.shortReviewUpdate(); 
       }});
     shortReviewMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        memberHandler.delete(); 
+        boardHandler.shortReviewDelete(); 
       }});
 
     MenuGroup personalChallengeMenu = new MenuGroup("챌린지");
@@ -188,12 +188,12 @@ public class App {
     monthlyChallengeMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        projectHandler.list(); 
+        boardHandler.monthlyChallengeList(); 
       }});
     monthlyChallengeMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        projectHandler.detail(); 
+        boardHandler.monthlyChallengeDetail(); 
       }});
 
 
@@ -204,18 +204,18 @@ public class App {
     monthlyRankingMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        projectHandler.list(); 
+        boardHandler.monthlyRankingList(); 
       }});
     monthlyRankingMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        projectHandler.detail(); 
+        boardHandler.monthlyRankingDetail(); 
       }});
 
     monthlyRankingMenu.add(new Menu("나의 랭킹보기") {
       @Override
       public void execute() {
-        projectHandler.detail(); 
+        boardHandler.rankingList(); 
       }});
 
 
@@ -425,27 +425,27 @@ public class App {
     organizationMemberMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        memberHandler.add(); 
+        boardHandler.add(); 
       }});
     organizationMemberMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        memberHandler.list(); 
+        boardHandler.list(); 
       }});
     organizationMemberMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        memberHandler.detail(); 
+        boardHandler.detail(); 
       }});
     organizationMemberMenu.add(new Menu("변경") {
       @Override
       public void execute() {
-        memberHandler.update(); 
+        boardHandler.update(); 
       }});
     organizationMemberMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        memberHandler.delete(); 
+        boardHandler.delete(); 
       }});
 
     MenuGroup organizationProjectMenu = new MenuGroup("챌린지");

@@ -152,33 +152,100 @@ public class BoardHandler {
   // 소통해요 : 변민성
 
   public void write() {
+    System.out.println("게시글을 작성합니다.");
+  }
+
+  public void reviewList() {
+    System.out.println("1. 오늘 너무 환상적인 봉사였어요");
+    System.out.println("2. 오늘 짱이에요");
+    System.out.println("3. 날씨도 좋은걸요?");
+  }
+
+  public void reviewDetail() {
+    System.out.println("오늘 너무 환상적인 봉사였어요");
+    System.out.println("너무 환상적인 봉사였어요");
+    System.out.println("환상적인 봉사였어요");
+    System.out.println("봉사였어요");
+  }
+
+  public void reviewChange() {
+    System.out.println("해당 게시물이 변경되었습니다.");
+  }
+
+  public void reviewDelete() {
+    System.out.println("해당 게시물이 삭제되었습니다.");
+  }
+
+  public void bestReview() {
+    System.out.println("너무너무너무너무너무너무너무");
+  }
+
+  public void shortReviewAdd() {
+    System.out.println("1. 추가추가추가추가");
+  }
+
+  public void shortReviewList() {
+    System.out.println("1. 추가하");
+    System.out.println("2. 추가요");
+    System.out.println("3. 추가욤");
+    System.out.println("4. 추가열");
 
   }
 
-  public void oneLine() {
+  public void shortReviewUpdate() {
+    System.out.println("해당 게시물이 변경되었습니다.");
 
   }
 
-  public void challengeList() {
+  public void shortReviewDelete() {
+    System.out.println("해당 게시물이 삭제되었습니다.");
 
   }
 
-  public void challengeDetail() {
+
+  public void monthlyChallengeList() {
+    System.out.println("1. 오호라");
+    System.out.println("2. 코딩스쿨");
+    System.out.println("3. 좋아");
+    System.out.println("4. 가는거야");
 
   }
 
+  public void monthlyChallengeDetail() {
+    System.out.println("오호라오호라오호라오호라");
+    System.out.println("쫄지마쫄지마쫄지마쫄지마");
+    System.out.println("쫄지마쫄지마쫄지마쫄지마");
+    System.out.println("쫄지마쫄지마쫄지마");
+
+  }
+
+  public void monthlyRankingList() {
+    System.out.println("1. 오호라");
+    System.out.println("2. 코딩스쿨");
+    System.out.println("3. 좋아");
+    System.out.println("4. 가는거야");
+
+  }
+
+  public void monthlyRankingDetail() {
+    System.out.println("오호라오호라오호라오호라");
+    System.out.println("쫄지마쫄지마쫄지마쫄지마");
+    System.out.println("쫄지마쫄지마쫄지마쫄지마");
+    System.out.println("쫄지마쫄지마쫄지마");
+
+  }
 
   public void rankingList() {
+    System.out.println("1. 1등");
+    System.out.println("2. 2등");
+    System.out.println("3. 3등");
 
   }
 
-  public void myRanking() {
 
-  }
 
-  public void rankingDetail() {
 
-  }
+
 
   // 모금함 : 박성준
 
