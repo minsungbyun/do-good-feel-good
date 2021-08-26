@@ -14,17 +14,19 @@ public class BoardHandler {
   }
 
   public void add() {
-    System.out.println("[새 게시글]");
 
-    Board board = new Board();
 
-    board.setNo(Prompt.inputInt("번호? "));
-    board.setTitle(Prompt.inputString("제목? "));
-    board.setContent(Prompt.inputString("내용? "));
-    board.setWriter(Prompt.inputString("작성자? "));
-    board.setRegisteredDate(new Date(System.currentTimeMillis()));
+        System.out.println("[새 게시글]");
 
-    boardList.add(board);
+        Board board = new Board();
+    
+        board.setNo(Prompt.inputInt("번호? "));
+        board.setTitle(Prompt.inputString("제목? "));
+        board.setContent(Prompt.inputString("내용? "));
+        board.setWriter(Prompt.inputString("작성자? "));
+        board.setRegisteredDate(new Date(System.currentTimeMillis()));
+    
+        boardList.add(board);
   }
 
   public void list() {
