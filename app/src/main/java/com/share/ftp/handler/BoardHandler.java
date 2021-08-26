@@ -132,6 +132,113 @@ public class BoardHandler {
     return null;
   }
 
+  // 함께해요 : 위정욱
+  public void add1() {
+
+  }
+
+  public void registerPersonal() {
+
+  }
+
+  public void registerOrganization() {
+
+  }
+
+  public void jjim() {
+
+  }
+
+  // 소통해요 : 변민성
+
+  public void write() {
+
+  }
+
+  public void oneLine() {
+
+  }
+
+  public void challengeList() {
+
+  }
+
+  public void challengeDetail() {
+
+  }
+
+
+  public void rankingList() {
+
+  }
+
+  public void myRanking() {
+
+  }
+
+  public void rankingDetail() {
+
+  }
+
+  // 모금함 : 박성준
+
+
+  public void okMessage() {
+
+  }
+
+  public void donationList() {
+
+  }
+
+  public void totalList() {
+
+  }
+
+
+  // 마이페이지 : 구백연
+
+
+  public void checkchange() {
+
+  }
+
+  public void checkUpdate() {
+
+  }
+
+  public void checkDelete() {
+
+  }
+
+  public void okSubmit() {
+
+  }
+
+  public void getOutHere() {
+
+  }
+
+
+  // 고객센터 : 이지호
+
+  public void askMesasge() {
+
+  }
+
+  public void finish() {
+
+  }
+
+  public void ask() {
+
+  }
+
+
+  // 관리자 페이지 
+
+
+
 
 
 
