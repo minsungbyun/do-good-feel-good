@@ -280,7 +280,7 @@ public class App {
     ask.add(new Menu("등록") {
       @Override
       public void execute() {
-        boardHandler.add(); 
+        boardHandler.askMesasge(); 
       }});
     ask.add(new Menu("목록") {
       @Override
@@ -295,12 +295,12 @@ public class App {
     ask.add(new Menu("변경") {
       @Override
       public void execute() {
-        boardHandler.update(); 
+        boardHandler.finish(); 
       }});
     ask.add(new Menu("삭제") {
       @Override
       public void execute() {
-        boardHandler.delete(); 
+        boardHandler.ask(); 
       }});
 
     MenuGroup personalMyPage = new MenuGroup("마이페이지");
@@ -542,22 +542,22 @@ public class App {
     donationMenu.add(new Menu("신청기관목록") {
       @Override
       public void execute() {
-        memberHandler.list(); 
+        boardHandler.list(); 
       }});
     donationMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        memberHandler.detail(); 
+        boardHandler.detail(); 
       }});
     donationMenu.add(new Menu("승인") {
       @Override
       public void execute() {
-        memberHandler.update(); 
+        boardHandler.update(); 
       }});
     donationMenu.add(new Menu("반려") {
       @Override
       public void execute() {
-        memberHandler.delete(); 
+        boardHandler.delete(); 
       }});
 
     MenuGroup volunteerMenu = new MenuGroup("봉사활동 관리");
@@ -566,22 +566,22 @@ public class App {
     volunteerMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        memberHandler.list(); 
+        boardHandler.list(); 
       }});
     volunteerMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        memberHandler.detail(); 
+        boardHandler.detail(); 
       }});
     volunteerMenu.add(new Menu("승인") {
       @Override
       public void execute() {
-        memberHandler.update(); 
+        boardHandler.update(); 
       }});
     volunteerMenu.add(new Menu("반려") {
       @Override
       public void execute() {
-        memberHandler.delete(); 
+        boardHandler.delete(); 
       }});
 
 
@@ -591,27 +591,27 @@ public class App {
     noticeMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        memberHandler.add(); 
+        boardHandler.add(); 
       }});
     noticeMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        memberHandler.list(); 
+        boardHandler.list(); 
       }});
     noticeMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        memberHandler.detail(); 
+        boardHandler.detail(); 
       }});
     noticeMenu.add(new Menu("변경") {
       @Override
       public void execute() {
-        memberHandler.update(); 
+        boardHandler.update(); 
       }});
     noticeMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        memberHandler.delete(); 
+        boardHandler.delete(); 
       }});
 
 
@@ -621,27 +621,27 @@ public class App {
     askInfo.add(new Menu("등록") {
       @Override
       public void execute() {
-        taskHandler.add(); 
+        boardHandler.add(); 
       }});
     askInfo.add(new Menu("목록") {
       @Override
       public void execute() {
-        taskHandler.list(); 
+        boardHandler.list(); 
       }});
     askInfo.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        taskHandler.detail(); 
+        boardHandler.detail(); 
       }});
     askInfo.add(new Menu("변경") {
       @Override
       public void execute() {
-        taskHandler.update(); 
+        boardHandler.update(); 
       }});
     askInfo.add(new Menu("삭제") {
       @Override
       public void execute() {
-        taskHandler.delete(); 
+        boardHandler.delete(); 
       }});
 
     MenuGroup challengeInfo = new MenuGroup("챌린지 관리");
@@ -650,27 +650,27 @@ public class App {
     challengeInfo.add(new Menu("등록") {
       @Override
       public void execute() {
-        taskHandler.add(); 
+        boardHandler.add(); 
       }});
     challengeInfo.add(new Menu("목록") {
       @Override
       public void execute() {
-        taskHandler.list(); 
+        boardHandler.list(); 
       }});
     challengeInfo.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        taskHandler.detail(); 
+        boardHandler.detail(); 
       }});
     challengeInfo.add(new Menu("변경") {
       @Override
       public void execute() {
-        taskHandler.update(); 
+        boardHandler.update(); 
       }});
     challengeInfo.add(new Menu("삭제") {
       @Override
       public void execute() {
-        taskHandler.delete(); 
+        boardHandler.delete(); 
       }});
 
     MenuGroup approveInfo = new MenuGroup("기관 승인");
@@ -679,22 +679,22 @@ public class App {
     approveInfo.add(new Menu("목록") {
       @Override
       public void execute() {
-        taskHandler.list(); 
+        boardHandler.list(); 
       }});
     approveInfo.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        taskHandler.detail(); 
+        boardHandler.detail(); 
       }});
     approveInfo.add(new Menu("승인") {
       @Override
       public void execute() {
-        taskHandler.update(); 
+        boardHandler.update(); 
       }});
     approveInfo.add(new Menu("반려") {
       @Override
       public void execute() {
-        taskHandler.delete(); 
+        boardHandler.delete(); 
       }});
 
 
