@@ -47,8 +47,11 @@ public class App {
     MenuGroup personalBoardMenu1 = new MenuGroup("함께해요");
     personalMenu.add(personalBoardMenu1);
 
+    MenuGroup volunteerApply = new MenuGroup("등록");
+    personalBoardMenu1.add(volunteerApply);
+
     MenuGroup personalApply = new MenuGroup("개인봉사등록");
-    personalBoardMenu1.add(personalApply);
+    volunteerApply.add(personalApply);
 
     personalApply.add(new Menu("등록") {
       @Override
@@ -77,7 +80,7 @@ public class App {
       }});
 
     MenuGroup oragnizationApply = new MenuGroup("기관봉사등록");
-    personalBoardMenu1.add(oragnizationApply);
+    volunteerApply.add(oragnizationApply);
 
     oragnizationApply.add(new Menu("등록") {
       @Override
@@ -104,6 +107,9 @@ public class App {
       public void execute() {
         boardHandler.delete(); 
       }});
+
+    MenuGroup volunteerBoard = new MenuGroup("봉사목록");
+    personalBoardMenu1.add(volunteerBoard);
 
     MenuGroup personalMemberMenu = new MenuGroup("소통해요");
     personalMenu.add(personalMemberMenu);
@@ -240,36 +246,21 @@ public class App {
     MenuGroup personalDonationMenu = new MenuGroup("모금함");
     personalMenu.add(personalDonationMenu);
 
-    MenuGroup personalDonationBoard = new MenuGroup("모금함 게시판");
-    personalDonationMenu.add(personalDonationBoard);
+    MenuGroup donationList = new MenuGroup("모금함 목록");
+    personalDonationMenu.add(donationList);
 
-    MenuGroup personalMyPage = new MenuGroup("모금함 기부하기");
-    personalDonationBoard.add(personalMyPage);
+    MenuGroup donation = new MenuGroup("모금함 기부하기");
+    donationList.add(donation);
 
-    personalMyPage.add(new Menu("등록") {
+    donation.add(new Menu("기부하기") {
       @Override
       public void execute() {
         taskHandler.add(); 
       }});
-    personalMyPage.add(new Menu("목록") {
+    donation.add(new Menu("기부내역") {
       @Override
       public void execute() {
         taskHandler.list(); 
-      }});
-    personalMyPage.add(new Menu("상세보기") {
-      @Override
-      public void execute() {
-        taskHandler.detail(); 
-      }});
-    personalMyPage.add(new Menu("변경") {
-      @Override
-      public void execute() {
-        taskHandler.update(); 
-      }});
-    personalMyPage.add(new Menu("삭제") {
-      @Override
-      public void execute() {
-        taskHandler.delete(); 
       }});
 
     MenuGroup personalDonationTotal = new MenuGroup("전체 모금액");
