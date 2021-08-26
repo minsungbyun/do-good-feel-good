@@ -161,8 +161,65 @@ public class App {
         taskHandler.delete(); 
       }});
 
-    MenuGroup personalServiceCenter = new MenuGroup("고객센터");
-    personalMenu.add(personalServiceCenter);
+    MenuGroup support = new MenuGroup("고객센터");
+    personalMenu.add(support);
+
+    MenuGroup notice = new MenuGroup("공지사항");
+    support.add(notice);
+
+    notice.add(new Menu("목록") {
+      @Override
+      public void execute() {
+        boardHandler.list(); 
+      }});
+    notice.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        boardHandler.detail(); 
+      }});
+
+    MenuGroup faQ = new MenuGroup("FAQ");
+    support.add(faQ);
+
+    faQ.add(new Menu("목록") {
+      @Override
+      public void execute() {
+        boardHandler.list(); 
+      }});
+    faQ.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        boardHandler.detail(); 
+      }});
+
+    MenuGroup inquire = new MenuGroup("문의하기");
+    support.add(inquire);
+
+    inquire.add(new Menu("등록") {
+      @Override
+      public void execute() {
+        boardHandler.add(); 
+      }});
+    inquire.add(new Menu("목록") {
+      @Override
+      public void execute() {
+        boardHandler.list(); 
+      }});
+    inquire.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        boardHandler.detail(); 
+      }});
+    inquire.add(new Menu("변경") {
+      @Override
+      public void execute() {
+        boardHandler.update(); 
+      }});
+    inquire.add(new Menu("삭제") {
+      @Override
+      public void execute() {
+        boardHandler.delete(); 
+      }});
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////    
 
@@ -410,8 +467,87 @@ public class App {
         taskHandler.delete(); 
       }});
 
-    MenuGroup adminServiceCenter = new MenuGroup("고객센터");
-    adminMenu.add(adminServiceCenter);
+    MenuGroup manageSupportInfo = new MenuGroup("문의사항 관리");
+    adminMenu.add(manageSupportInfo);
+
+    manageSupportInfo.add(new Menu("등록") {
+      @Override
+      public void execute() {
+        taskHandler.add(); 
+      }});
+    manageSupportInfo.add(new Menu("목록") {
+      @Override
+      public void execute() {
+        taskHandler.list(); 
+      }});
+    manageSupportInfo.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        taskHandler.detail(); 
+      }});
+    manageSupportInfo.add(new Menu("변경") {
+      @Override
+      public void execute() {
+        taskHandler.update(); 
+      }});
+    manageSupportInfo.add(new Menu("삭제") {
+      @Override
+      public void execute() {
+        taskHandler.delete(); 
+      }});
+
+    MenuGroup manageChallengeInfo = new MenuGroup("챌린지 관리");
+    adminMenu.add(manageChallengeInfo);
+
+    manageChallengeInfo.add(new Menu("등록") {
+      @Override
+      public void execute() {
+        taskHandler.add(); 
+      }});
+    manageChallengeInfo.add(new Menu("목록") {
+      @Override
+      public void execute() {
+        taskHandler.list(); 
+      }});
+    manageChallengeInfo.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        taskHandler.detail(); 
+      }});
+    manageChallengeInfo.add(new Menu("변경") {
+      @Override
+      public void execute() {
+        taskHandler.update(); 
+      }});
+    manageChallengeInfo.add(new Menu("삭제") {
+      @Override
+      public void execute() {
+        taskHandler.delete(); 
+      }});
+
+    MenuGroup manageApproveInfo = new MenuGroup("기관 승인");
+    adminMenu.add(manageApproveInfo);
+
+    manageApproveInfo.add(new Menu("목록") {
+      @Override
+      public void execute() {
+        taskHandler.list(); 
+      }});
+    manageApproveInfo.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        taskHandler.detail(); 
+      }});
+    manageApproveInfo.add(new Menu("수락") {
+      @Override
+      public void execute() {
+        taskHandler.update(); 
+      }});
+    manageApproveInfo.add(new Menu("반려") {
+      @Override
+      public void execute() {
+        taskHandler.delete(); 
+      }});
 
 
     return mainMenuGroup;
