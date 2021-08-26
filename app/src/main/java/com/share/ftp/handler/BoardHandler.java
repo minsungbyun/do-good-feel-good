@@ -196,38 +196,38 @@ public class BoardHandler {
 
 
   public void checkchange() {
-
+    System.out.println("변경되었습니다.");
   }
 
   public void checkUpdate() {
-
+    System.out.println("수정되었습니다.");
   }
 
   public void checkDelete() {
-
+    System.out.println("삭제되었습니다.");
   }
 
   public void okSubmit() {
-
+    System.out.println("신청완료되었습니다.");
   }
 
   public void getOutHere() {
-
+    System.out.println("탈퇴되었습니다.");
   }
 
 
   // 고객센터 : 이지호
 
   public void askMesasge() {
-
+    System.out.println("문의가 완료 되었습니다.");
   }
 
   public void finish() {
-
+    System.out.println("변경이 완료 되었습니다.");
   }
 
   public void ask() {
-
+    System.out.println("삭제가 완료 되었습니다.");
   }
 
 
