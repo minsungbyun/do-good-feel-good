@@ -239,8 +239,8 @@ public class App {
         boardHandler.donationList(); 
       }});
 
-    MenuGroup personalDonationTotal = new MenuGroup("전체 모금액");
-    personalDonationMenu.add(personalDonationTotal);
+    MenuGroup donationTotal = new MenuGroup("전체 모금액");
+    personalDonationMenu.add(donationTotal);
 
 
     MenuGroup support = new MenuGroup("고객센터");
