@@ -211,11 +211,7 @@ public class App {
     MenuGroup monthlyRankingMenu = new MenuGroup("이달의 랭킹");
     personalChallengeMenu.add(monthlyRankingMenu);
 
-    monthlyRankingMenu.add(new Menu("등록") {
-      @Override
-      public void execute() {
-        projectHandler.add(); 
-      }});
+
     monthlyRankingMenu.add(new Menu("목록") {
       @Override
       public void execute() {
@@ -226,16 +222,7 @@ public class App {
       public void execute() {
         projectHandler.detail(); 
       }});
-    monthlyRankingMenu.add(new Menu("변경") {
-      @Override
-      public void execute() {
-        projectHandler.update(); 
-      }});
-    monthlyRankingMenu.add(new Menu("삭제") {
-      @Override
-      public void execute() {
-        projectHandler.delete(); 
-      }});
+
 
     MenuGroup personalDonationMenu = new MenuGroup("모금함");
     personalMenu.add(personalDonationMenu);
