@@ -223,15 +223,15 @@ public class BoardHandler {
   // 고객센터 : 이지호
 
   public void askMesasge() {
-
+    System.out.println("문의가 완료 되었습니다.");
   }
 
   public void finish() {
-
+    System.out.println("변경이 완료 되었습니다.");
   }
 
   public void ask() {
-
+    System.out.println("삭제가 완료 되었습니다.");
   }
 
 
