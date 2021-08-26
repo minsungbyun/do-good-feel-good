@@ -222,36 +222,21 @@ public class App {
     MenuGroup personalDonationMenu = new MenuGroup("모금함");
     personalMenu.add(personalDonationMenu);
 
-    MenuGroup personalDonationBoard = new MenuGroup("모금함 게시판");
-    personalDonationMenu.add(personalDonationBoard);
+    MenuGroup donationList = new MenuGroup("모금함 목록");
+    personalDonationMenu.add(donationList);
 
-    MenuGroup personalMyPage = new MenuGroup("모금함 기부하기");
-    personalDonationBoard.add(personalMyPage);
+    MenuGroup donation = new MenuGroup("모금함 기부하기");
+    donationList.add(donation);
 
-    personalMyPage.add(new Menu("등록") {
+    donation.add(new Menu("기부하기") {
       @Override
       public void execute() {
         taskHandler.add(); 
       }});
-    personalMyPage.add(new Menu("목록") {
+    donation.add(new Menu("기부내역") {
       @Override
       public void execute() {
         taskHandler.list(); 
-      }});
-    personalMyPage.add(new Menu("상세보기") {
-      @Override
-      public void execute() {
-        taskHandler.detail(); 
-      }});
-    personalMyPage.add(new Menu("변경") {
-      @Override
-      public void execute() {
-        taskHandler.update(); 
-      }});
-    personalMyPage.add(new Menu("삭제") {
-      @Override
-      public void execute() {
-        taskHandler.delete(); 
       }});
 
     MenuGroup personalDonationTotal = new MenuGroup("전체 모금액");
