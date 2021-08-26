@@ -109,7 +109,7 @@ public class App {
       }});
 
     MenuGroup volunteerBoard = new MenuGroup("봉사목록");
-    personalBoardMenu1.add(volunteerBoard);
+    personalvolunteerMenu.add(volunteerBoard);
 
     MenuGroup personalMemberMenu = new MenuGroup("소통해요");
     personalMenu.add(personalMemberMenu);
