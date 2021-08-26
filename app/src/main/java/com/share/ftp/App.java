@@ -56,7 +56,7 @@ public class App {
     personalApply.add(new Menu("등록") {
       @Override
       public void execute() {
-        boardHandler.add(); 
+        boardHandler.registerFinish(); 
       }});
     personalApply.add(new Menu("목록") {
       @Override
@@ -71,12 +71,12 @@ public class App {
     personalApply.add(new Menu("변경") {
       @Override
       public void execute() {
-        boardHandler.update(); 
+        boardHandler.volunteerupdate(); 
       }});
     personalApply.add(new Menu("삭제") {
       @Override
       public void execute() {
-        boardHandler.delete(); 
+        boardHandler.volunteerdelete(); 
       }});
 
     MenuGroup oragnizationApply = new MenuGroup("기관봉사등록");
@@ -85,7 +85,7 @@ public class App {
     oragnizationApply.add(new Menu("등록") {
       @Override
       public void execute() {
-        boardHandler.add(); 
+        boardHandler.registerFinish(); 
       }});
     oragnizationApply.add(new Menu("목록") {
       @Override
@@ -100,12 +100,12 @@ public class App {
     oragnizationApply.add(new Menu("변경") {
       @Override
       public void execute() {
-        boardHandler.update(); 
+        boardHandler.volunteerupdate(); 
       }});
     oragnizationApply.add(new Menu("삭제") {
       @Override
       public void execute() {
-        boardHandler.delete(); 
+        boardHandler.volunteerdelete(); 
       }});
 
     MenuGroup volunteerBoard = new MenuGroup("봉사목록");

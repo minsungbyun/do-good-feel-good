@@ -133,20 +133,16 @@ public class BoardHandler {
   }
 
   // 함께해요 : 위정욱
-  public void add1() {
-
+  public void registerFinish() {
+    System.out.println("등록이 완료 되었습니다.");
   }
 
-  public void registerPersonal() {
-
+  public void volunteerupdate() {
+    System.out.println("변경이 완료 되었습니다.");
   }
 
-  public void registerOrganization() {
-
-  }
-
-  public void jjim() {
-
+  public void volunteerdelete() {
+    System.out.println("삭제가 완료 되었습니다.");
   }
 
   // 소통해요 : 변민성
