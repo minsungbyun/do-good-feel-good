@@ -47,8 +47,11 @@ public class App {
     MenuGroup personalBoardMenu1 = new MenuGroup("함께해요");
     personalMenu.add(personalBoardMenu1);
 
+    MenuGroup volunteerApply = new MenuGroup("등록");
+    personalBoardMenu1.add(volunteerApply);
+
     MenuGroup personalApply = new MenuGroup("개인봉사등록");
-    personalBoardMenu1.add(personalApply);
+    volunteerApply.add(personalApply);
 
     personalApply.add(new Menu("등록") {
       @Override
@@ -77,7 +80,7 @@ public class App {
       }});
 
     MenuGroup oragnizationApply = new MenuGroup("기관봉사등록");
-    personalBoardMenu1.add(oragnizationApply);
+    volunteerApply.add(oragnizationApply);
 
     oragnizationApply.add(new Menu("등록") {
       @Override
@@ -104,6 +107,9 @@ public class App {
       public void execute() {
         boardHandler.delete(); 
       }});
+
+    MenuGroup volunteerBoard = new MenuGroup("봉사목록");
+    personalBoardMenu1.add(volunteerBoard);
 
     MenuGroup personalMemberMenu = new MenuGroup("소통해요");
     personalMenu.add(personalMemberMenu);
