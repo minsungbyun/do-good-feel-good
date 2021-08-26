@@ -184,15 +184,17 @@ public class BoardHandler {
 
 
   public void okMessage() {
-
+	System.out.println("감사합니다. 기부가 완료되었습니다!");
   }
 
   public void donationList() {
-
+	System.out.println("비트캠프 회원님 100000원 기부");
+	System.out.println("비트캠프2 회원님 100원 기부");
+	System.out.println("비트캠프3 회원님 1000원 기부");
   }
 
   public void totalList() {
-
+	System.out.println("2021년 총 100분이 100000000원을 기부해주셨습니다!!");
   }
 
 
