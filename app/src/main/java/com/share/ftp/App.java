@@ -40,20 +40,11 @@ public class App {
     MenuGroup mainMenuGroup = new MenuGroup("로그인");
     mainMenuGroup.setPrevMenuTitle("종료");
 
+    //////////////////////////////////////////////////////////////////////////////////////
+
     MenuGroup guestMenu = new MenuGroup("비회원");
     mainMenuGroup.add(guestMenu);
 
-    MenuGroup personalMenu = new MenuGroup("개인");
-    mainMenuGroup.add(personalMenu);
-
-    MenuGroup organizationMenu = new MenuGroup("기관");
-    mainMenuGroup.add(organizationMenu);
-
-    MenuGroup adminMenu = new MenuGroup("관리자");
-    mainMenuGroup.add(adminMenu);
-
-    MenuGroup managerMenu = new MenuGroup("관리자2");
-    mainMenuGroup.add(managerMenu);
 
     MenuGroup guestBoardMenu = new MenuGroup("함께해요");
     guestMenu.add(guestBoardMenu);
@@ -173,6 +164,38 @@ public class App {
 
     MenuGroup guestServiceCenter = new MenuGroup("고객센터");
     guestMenu.add(guestServiceCenter);
+
+    guestServiceCenter.add(new Menu("등록") {
+      @Override
+      public void execute() {
+        taskHandler.add(); 
+      }});
+    guestServiceCenter.add(new Menu("목록") {
+      @Override
+      public void execute() {
+        taskHandler.list(); 
+      }});
+    guestServiceCenter.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        taskHandler.detail(); 
+      }});
+    guestServiceCenter.add(new Menu("변경") {
+      @Override
+      public void execute() {
+        taskHandler.update(); 
+      }});
+    guestTaskMenu.add(new Menu("삭제") {
+      @Override
+      public void execute() {
+        taskHandler.delete(); 
+      }});
+
+
+    //////////////////////////////////////////////////////////////////////////// 
+
+    MenuGroup personalMenu = new MenuGroup("개인");
+    mainMenuGroup.add(personalMenu);
 
 
     MenuGroup personalBoardMenu = new MenuGroup("함께해요");
@@ -294,6 +317,10 @@ public class App {
     MenuGroup personalServiceCenter = new MenuGroup("고객센터");
     personalMenu.add(personalServiceCenter);
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////    
+
+    MenuGroup organizationMenu = new MenuGroup("기관");
+    mainMenuGroup.add(organizationMenu);
 
     MenuGroup organizationBoardMenu = new MenuGroup("함께해요");
     organizationMenu.add(organizationBoardMenu);
@@ -413,6 +440,12 @@ public class App {
 
     MenuGroup organizationServiceCenter = new MenuGroup("고객센터");
     organizationMenu.add(organizationServiceCenter);
+
+    //////////////////////////////////////////////////////////////////////////////////////////////
+
+    MenuGroup adminMenu = new MenuGroup("관리자");
+    mainMenuGroup.add(adminMenu);
+
 
     MenuGroup adminBoardMenu = new MenuGroup("함께해요");
     adminMenu.add(adminBoardMenu);
