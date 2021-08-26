@@ -241,6 +241,11 @@ public class App {
 
     MenuGroup donationTotal = new MenuGroup("전체 모금액");
     personalDonationMenu.add(donationTotal);
+    donationTotal.add(new Menu("목록") {
+        @Override
+        public void execute() {
+          boardHandler.totalList(); 
+        }});
 
 
     MenuGroup support = new MenuGroup("고객센터");
