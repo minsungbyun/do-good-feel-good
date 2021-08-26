@@ -200,23 +200,23 @@ public class BoardHandler {
 
 
   public void checkchange() {
-
+    System.out.println("변경되었습니다.");
   }
 
   public void checkUpdate() {
-
+    System.out.println("수정되었습니다.");
   }
 
   public void checkDelete() {
-
+    System.out.println("삭제되었습니다.");
   }
 
   public void okSubmit() {
-
+    System.out.println("신청완료되었습니다.");
   }
 
   public void getOutHere() {
-
+    System.out.println("탈퇴되었습니다.");
   }
 
 
