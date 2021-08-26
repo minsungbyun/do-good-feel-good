@@ -148,49 +148,116 @@ public class BoardHandler {
   // 소통해요 : 변민성
 
   public void write() {
+    System.out.println("게시글을 작성합니다.");
+  }
+
+  public void reviewList() {
+    System.out.println("1. 오늘 너무 환상적인 봉사였어요");
+    System.out.println("2. 오늘 짱이에요");
+    System.out.println("3. 날씨도 좋은걸요?");
+  }
+
+  public void reviewDetail() {
+    System.out.println("오늘 너무 환상적인 봉사였어요");
+    System.out.println("너무 환상적인 봉사였어요");
+    System.out.println("환상적인 봉사였어요");
+    System.out.println("봉사였어요");
+  }
+
+  public void reviewChange() {
+    System.out.println("해당 게시물이 변경되었습니다.");
+  }
+
+  public void reviewDelete() {
+    System.out.println("해당 게시물이 삭제되었습니다.");
+  }
+
+  public void bestReview() {
+    System.out.println("너무너무너무너무너무너무너무");
+  }
+
+  public void shortReviewAdd() {
+    System.out.println("1. 추가추가추가추가");
+  }
+
+  public void shortReviewList() {
+    System.out.println("1. 추가하");
+    System.out.println("2. 추가요");
+    System.out.println("3. 추가욤");
+    System.out.println("4. 추가열");
 
   }
 
-  public void oneLine() {
+  public void shortReviewUpdate() {
+    System.out.println("해당 게시물이 변경되었습니다.");
 
   }
 
-  public void challengeList() {
+  public void shortReviewDelete() {
+    System.out.println("해당 게시물이 삭제되었습니다.");
 
   }
 
-  public void challengeDetail() {
+
+  public void monthlyChallengeList() {
+    System.out.println("1. 오호라");
+    System.out.println("2. 코딩스쿨");
+    System.out.println("3. 좋아");
+    System.out.println("4. 가는거야");
 
   }
 
+  public void monthlyChallengeDetail() {
+    System.out.println("오호라오호라오호라오호라");
+    System.out.println("쫄지마쫄지마쫄지마쫄지마");
+    System.out.println("쫄지마쫄지마쫄지마쫄지마");
+    System.out.println("쫄지마쫄지마쫄지마");
+
+  }
+
+  public void monthlyRankingList() {
+    System.out.println("1. 오호라");
+    System.out.println("2. 코딩스쿨");
+    System.out.println("3. 좋아");
+    System.out.println("4. 가는거야");
+
+  }
+
+  public void monthlyRankingDetail() {
+    System.out.println("오호라오호라오호라오호라");
+    System.out.println("쫄지마쫄지마쫄지마쫄지마");
+    System.out.println("쫄지마쫄지마쫄지마쫄지마");
+    System.out.println("쫄지마쫄지마쫄지마");
+
+  }
 
   public void rankingList() {
+    System.out.println("1. 1등");
+    System.out.println("2. 2등");
+    System.out.println("3. 3등");
 
   }
 
-  public void myRanking() {
 
-  }
 
-  public void rankingDetail() {
 
-  }
+
 
   // 모금함 : 박성준
 
 
   public void okMessage() {
-	System.out.println("감사합니다. 기부가 완료되었습니다!");
+    System.out.println("감사합니다. 기부가 완료되었습니다!");
   }
 
   public void donationList() {
-	System.out.println("비트캠프 회원님 100,000원 기부");
-	System.out.println("비트캠프2 회원님 100원 기부");
-	System.out.println("비트캠프3 회원님 1,000원 기부");
+    System.out.println("비트캠프 회원님 100000원 기부");
+    System.out.println("비트캠프2 회원님 100원 기부");
+    System.out.println("비트캠프3 회원님 1000원 기부");
   }
 
   public void totalList() {
-	System.out.println("2021년 총 100분이 100,000,000원을 기부해주셨습니다!!");
+    System.out.println("2021년 총 100분이 100_000_000원을 기부해주셨습니다!!");
   }
 
 
@@ -234,6 +301,145 @@ public class BoardHandler {
 
 
   // 관리자 페이지 
+
+  public void adminList() {
+    System.out.println("1. 홍길동");
+    System.out.println("2. 임꺽정");
+  }
+
+  public void adminDetail() {
+    System.out.println("나이는 20살 ㅎㅎ");
+  }
+
+  public void adminGetOut() {
+    System.out.println("선택하신 회원을 추방하였습니다.");
+  }
+
+  public void adminDonationList() {
+    System.out.println("1. 홍길동");
+    System.out.println("2. 임꺽정");  
+  }
+
+  public void adminDonationDetail() {
+    System.out.println("나이는 20살 ㅎㅎ");
+  }
+
+  public void adminok() {
+    System.out.println("승인되었습니다.");
+  }
+
+  public void adminOut() {
+    System.out.println("반려되었습니다..");
+  }
+
+  public void adminVolunteerList() {
+    System.out.println("1. 오호라");
+    System.out.println("2. 임꺽정"); 
+  }
+
+  public void adminVolunteerDetail() {
+    System.out.println("나이는 20살 ㅎㅎ");
+  }
+
+  public void adminVolunteerok() {
+    System.out.println("승인되었습니다.");
+  }
+
+  public void adminVolunteerOut() {
+    System.out.println("반려되었습니다..");
+  }
+
+
+  public void adminNoticeAdd() {
+    System.out.println("1. 오호라");
+    System.out.println("2. 임꺽정"); 
+  }
+
+  public void adminNoticeList() {
+    System.out.println("1. 오호라");
+    System.out.println("2. 임꺽정"); 
+  }
+
+  public void adminNoticeDetail() {
+    System.out.println("나이는 20살 ㅎㅎ");
+  }
+
+  public void adminNoticeOk() {
+    System.out.println("변경되었습니다.");
+  }
+
+  public void adminNoticeOut() {
+    System.out.println("삭제되었습니다..");
+  }
+
+
+  public void adminaskInfoAdd() {
+    System.out.println("1. 오호라");
+    System.out.println("2. 임꺽정"); 
+  }
+
+  public void adminaskInfoList() {
+    System.out.println("1. 오호라");
+    System.out.println("2. 임꺽정"); 
+  }
+
+  public void adminaskInfoDetail() {
+    System.out.println("나이는 20살 ㅎㅎ");
+  }
+
+  public void adminaskInfoOk() {
+    System.out.println("변경되었습니다.");
+  }
+
+  public void adminaskInfoOut() {
+    System.out.println("삭제되었습니다..");
+  }
+
+
+  public void adminChallengeInfoAdd() {
+    System.out.println("1. 오호라");
+    System.out.println("2. 임꺽정"); 
+  }
+
+  public void adminChallengeInfoList() {
+    System.out.println("1. 오호라");
+    System.out.println("2. 임꺽정"); 
+  }
+
+  public void adminChallengeInfoDetail() {
+    System.out.println("나이는 20살 ㅎㅎ");
+  }
+
+  public void adminChallengeInfoOk() {
+    System.out.println("변경되었습니다.");
+  }
+
+  public void adminApproveInfoOut() {
+    System.out.println("삭제되었습니다..");
+  }
+
+  public void adminApproveInfoAdd() {
+    System.out.println("1. 오호라");
+    System.out.println("2. 임꺽정"); 
+  }
+
+  public void adminApproveInfoList() {
+    System.out.println("승인되었습니다.");
+
+  }
+
+  public void adminApproveInfoDetail() {
+    System.out.println("하하되었습니다.");
+
+  }
+
+  public void adminApproveNO() {
+    System.out.println("반려되었습니다.");
+  }
+
+
+
+
 
 
 
