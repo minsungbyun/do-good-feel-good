@@ -40,35 +40,65 @@ public class App {
     MenuGroup mainMenuGroup = new MenuGroup("로그인");
     mainMenuGroup.setPrevMenuTitle("종료");
 
-
     MenuGroup personalMenu = new MenuGroup("개인");
     mainMenuGroup.add(personalMenu);
 
+    MenuGroup personalBoardMenu1 = new MenuGroup("함께해요");
+    personalMenu.add(personalBoardMenu1);
 
-    MenuGroup personalBoardMenu = new MenuGroup("함께해요");
-    personalMenu.add(personalBoardMenu);
+    MenuGroup personalApply = new MenuGroup("개인봉사등록");
+    personalBoardMenu1.add(personalApply);
 
-    personalBoardMenu.add(new Menu("등록") {
+    personalApply.add(new Menu("등록") {
       @Override
       public void execute() {
         boardHandler.add(); 
       }});
-    personalBoardMenu.add(new Menu("목록") {
+    personalApply.add(new Menu("목록") {
       @Override
       public void execute() {
         boardHandler.list(); 
       }});
-    personalBoardMenu.add(new Menu("상세보기") {
+    personalApply.add(new Menu("상세보기") {
       @Override
       public void execute() {
         boardHandler.detail(); 
       }});
-    personalBoardMenu.add(new Menu("변경") {
+    personalApply.add(new Menu("변경") {
       @Override
       public void execute() {
         boardHandler.update(); 
       }});
-    personalBoardMenu.add(new Menu("삭제") {
+    personalApply.add(new Menu("삭제") {
+      @Override
+      public void execute() {
+        boardHandler.delete(); 
+      }});
+
+    MenuGroup oragnizationApply = new MenuGroup("기관봉사등록");
+    personalBoardMenu1.add(oragnizationApply);
+
+    oragnizationApply.add(new Menu("등록") {
+      @Override
+      public void execute() {
+        boardHandler.add(); 
+      }});
+    oragnizationApply.add(new Menu("목록") {
+      @Override
+      public void execute() {
+        boardHandler.list(); 
+      }});
+    oragnizationApply.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        boardHandler.detail(); 
+      }});
+    oragnizationApply.add(new Menu("변경") {
+      @Override
+      public void execute() {
+        boardHandler.update(); 
+      }});
+    oragnizationApply.add(new Menu("삭제") {
       @Override
       public void execute() {
         boardHandler.delete(); 
