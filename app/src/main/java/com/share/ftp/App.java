@@ -231,16 +231,16 @@ public class App {
     donation.add(new Menu("기부하기") {
       @Override
       public void execute() {
-        taskHandler.add(); 
+        boardHandler.okMessage(); 
       }});
     donation.add(new Menu("기부내역") {
       @Override
       public void execute() {
-        taskHandler.list(); 
+        boardHandler.donationList(); 
       }});
 
-    MenuGroup personalDonationTotal = new MenuGroup("전체 모금액");
-    personalDonationMenu.add(personalDonationTotal);
+    MenuGroup donationTotal = new MenuGroup("전체 모금액");
+    personalDonationMenu.add(donationTotal);
 
 
     MenuGroup support = new MenuGroup("고객센터");
