@@ -429,7 +429,7 @@ public class BoardHandler {
   }
 
   public void adminApproveInfoDetail() {
-    System.out.println("하하되었습니다.");
+    System.out.println("승인 완료 되었습니다.");
 
   }
 

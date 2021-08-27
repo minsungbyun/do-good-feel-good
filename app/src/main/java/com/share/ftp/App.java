@@ -242,10 +242,10 @@ public class App {
     MenuGroup donationTotal = new MenuGroup("전체 모금액");
     personalDonationMenu.add(donationTotal);
     donationTotal.add(new Menu("목록") {
-        @Override
-        public void execute() {
-          boardHandler.totalList(); 
-        }});
+      @Override
+      public void execute() {
+        boardHandler.totalList(); 
+      }});
 
 
     MenuGroup support = new MenuGroup("고객센터");
@@ -503,7 +503,7 @@ public class App {
     organizationDonationApply.add(new Menu("등록") {
       @Override
       public void execute() {
-        boardHandler.okMessage(); 
+        boardHandler.okSubmit(); 
       }});
     organizationDonationApply.add(new Menu("목록") {
       @Override
