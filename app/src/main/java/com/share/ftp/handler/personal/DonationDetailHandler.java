@@ -7,7 +7,7 @@ public class DonationDetailHandler {
 
   }
 
-  public void joinDonationLit() {
+  public void joinDonationList() {
 
   }
 }
