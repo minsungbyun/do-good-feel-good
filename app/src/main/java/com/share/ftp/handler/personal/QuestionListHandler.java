@@ -1,12 +1,17 @@
 package com.share.ftp.handler.personal;
 
-import com.share.ftp.domain.personal.myQuestionListDTO;
+import com.share.ftp.domain.personal.MyQuestionListDTO;
 import com.share.util.Prompt;
 
 public class QuestionListHandler {
 
+<<<<<<< HEAD
   public static final int MAX_LENGTH = 5;
   myQuestionListDTO[] boards = new myQuestionListDTO[MAX_LENGTH];
+=======
+  static final int MAX_LENGTH = 5;
+  MyQuestionListDTO[] boards = new MyQuestionListDTO[MAX_LENGTH];
+>>>>>>> cc313ceac033eaa9f5c3ff3a2b128342c7e5b954
   int size = 0;
 
 
@@ -14,7 +19,7 @@ public class QuestionListHandler {
 
     System.out.println("[게시글 등록하기]");
 
-    myQuestionListDTO board = new myQuestionListDTO();
+    MyQuestionListDTO board = new MyQuestionListDTO();
 
     board.no = Prompt.inputInt("번호? ");
     board.title = Prompt.inputString("제목? ");
@@ -45,7 +50,7 @@ public class QuestionListHandler {
     System.out.println("[게시글 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    myQuestionListDTO board = null;
+    MyQuestionListDTO board = null;
 
     for (int i = 0; i < this.size; i++) {
       if (this.boards[i].no == no) {
@@ -70,7 +75,7 @@ public class QuestionListHandler {
     System.out.println("[게시글 수정하기]");
     int no = Prompt.inputInt("번호? ");
 
-    myQuestionListDTO board = null;
+    MyQuestionListDTO board = null;
 
     for (int i = 0; i < this.size; i++) {
       if (this.boards[i].no == no) {
