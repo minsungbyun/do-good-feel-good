@@ -23,6 +23,10 @@ public class Prompt {
     return Date.valueOf(inputString(title));
   }
 
+  public static Boolean inputBool(String title) {
+    return Boolean.valueOf(inputString(title));
+  }
+
   public static void close() {
     keyboardScan.close();
   }
