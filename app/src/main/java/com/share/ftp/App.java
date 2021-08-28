@@ -1,9 +1,3 @@
-package com.share.ftp;
+package com.share.ftp; {
 
-
-
-public class App {
-  public static void main(String[] args) {
-
-  }
 }
