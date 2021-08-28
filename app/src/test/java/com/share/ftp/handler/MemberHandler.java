@@ -1,6 +1,5 @@
 package com.share.ftp.handler;
 
-import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.MemberDTO;
 import com.share.util.Prompt;
@@ -17,14 +16,14 @@ public class MemberHandler {
     System.out.println("[회원 등록]");
 
     MemberDTO member = new MemberDTO();
-
-    member.setNo(Prompt.inputInt("번호? "));
-    member.setName(Prompt.inputString("이름? "));
-    member.setEmail(Prompt.inputString("이메일? "));
-    member.setPassword(Prompt.inputString("암호? "));
-    member.setPhoto(Prompt.inputString("사진? "));
-    member.setTel(Prompt.inputString("전화? "));
-    member.setRegisteredDate(new Date(System.currentTimeMillis()));
+    //
+    //    member.setNo(Prompt.inputInt("번호? "));
+    //    member.setName(Prompt.inputString("이름? "));
+    //    member.setEmail(Prompt.inputString("이메일? "));
+    //    member.setPassword(Prompt.inputString("암호? "));
+    //    member.setPhoto(Prompt.inputString("사진? "));
+    //    member.setTel(Prompt.inputString("전화? "));
+    //    member.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     memberList.add(member);
   }
@@ -34,14 +33,14 @@ public class MemberHandler {
 
     MemberDTO[] list = memberList.toArray(new MemberDTO[0]);
 
-    for (MemberDTO member : list) {
-      System.out.printf("%d, %s, %s, %s, %s\n", 
-          member.getNo(), 
-          member.getName(), 
-          member.getEmail(), 
-          member.getTel(), 
-          member.getRegisteredDate());
-    }
+    //    for (MemberDTO member : list) {
+    //      System.out.printf("%d, %s, %s, %s, %s\n", 
+    //          member.getNo(), 
+    //          member.getName(), 
+    //          member.getEmail(), 
+    //          member.getTel(), 
+    //          member.getRegisteredDate());
+    //    }
   }
 
   public void detail() {
@@ -55,11 +54,11 @@ public class MemberHandler {
       return;
     }
 
-    System.out.printf("이름: %s\n", member.getName());
-    System.out.printf("이메일: %s\n", member.getEmail());
-    System.out.printf("사진: %s\n", member.getPhoto());
-    System.out.printf("전화: %s\n", member.getTel());
-    System.out.printf("등록일: %s\n", member.getRegisteredDate());
+    //    System.out.printf("이름: %s\n", member.getName());
+    //    System.out.printf("이메일: %s\n", member.getEmail());
+    //    System.out.printf("사진: %s\n", member.getPhoto());
+    //    System.out.printf("전화: %s\n", member.getTel());
+    //    System.out.printf("등록일: %s\n", member.getRegisteredDate());
   }
 
   public void update() {
@@ -85,11 +84,11 @@ public class MemberHandler {
       return;
     }
 
-    member.setName(name);
-    member.setEmail(email);
-    member.setPassword(password);
-    member.setPhoto(photo);
-    member.setTel(tel);
+    //    member.setName(name);
+    //    member.setEmail(email);
+    //    member.setPassword(password);
+    //    member.setPhoto(photo);
+    //    member.setTel(tel);
 
     System.out.println("회원을 변경하였습니다.");
   }

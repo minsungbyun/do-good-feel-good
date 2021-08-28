@@ -66,6 +66,8 @@ public class ProjectHandler {
       return;
     }
 
+
+
     System.out.printf("프로젝트명: %s\n", project.getTitle());
     System.out.printf("내용: %s\n", project.getContent());
     System.out.printf("시작일: %s\n", project.getStartDate());
