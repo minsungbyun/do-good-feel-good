@@ -2,7 +2,7 @@ package com.share.ftp.domain.personal;
 
 import java.sql.Date;
 
-public class myQuestionListDTO {
+public class MyQuestionListDTO {
   public int no;
   public String title;
   public String memberld;
