@@ -1,6 +1,6 @@
 package com.share.ftp;
 
-import com.share.ftp.handler.VolListHandler;
+import com.share.ftp.handler.personal.VolListHandler;
 import com.share.util.Prompt;
 
 public class App100 {

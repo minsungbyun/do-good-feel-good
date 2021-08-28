@@ -1,15 +1,15 @@
 package com.share.ftp.domain.admin;
 
 public class QuestionDTO {
-
-  private String adminId;
+  private int adminId;
   private String title;
   private String content;
 
-  public String getAdminId() {
+
+  public int getAdminId() {
     return adminId;
   }
-  public void setAdminId(String adminId) {
+  public void setAdminId(int adminId) {
     this.adminId = adminId;
   }
   public String getTitle() {
@@ -24,7 +24,5 @@ public class QuestionDTO {
   public void setContent(String content) {
     this.content = content;
   }
-
-
 
 }
