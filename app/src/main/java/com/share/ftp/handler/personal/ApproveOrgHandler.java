@@ -3,7 +3,7 @@ package com.share.ftp.handler.personal;
 import com.share.ftp.domain.personal.ApproveOrgDTO;
 import com.share.util.Prompt;
 
-public class ApproveDonationHandler {
+public class ApproveOrgHandler {
 
   static final int MAX_LENGTH = 5;
 

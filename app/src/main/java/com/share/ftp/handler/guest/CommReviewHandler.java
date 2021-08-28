@@ -1,4 +1,4 @@
-package com.share.ftp.handler.personal;
+package com.share.ftp.handler.guest;
 
 import java.sql.Date;
 import com.share.ftp.domain.personal.CommReviewDTO;

@@ -1,5 +1,6 @@
 package com.share.ftp;
 
+import com.share.ftp.handler.admin.ShowChallengeHandler;
 import com.share.ftp.handler.personal.VolListHandler;
 import com.share.util.Prompt;
 
@@ -142,6 +143,65 @@ public class App100 {
     System.out.println("0. 종료");
     System.out.println("1. 함께해요");
     return Prompt.inputInt("번호 > "); 
+  }
+
+
+
+
+
+
+  ShowChallengeHandler show = new ShowChallengeHandler();
+
+  try {
+    while (true) {
+      System.out.println("메인");
+      System.out.println("1. 챌린지 등록");
+      System.out.println("0. 종료");
+      System.out.println();
+      int input = Prompt.inputInt("번호? ");
+
+      if (input == 0) {
+        return;
+      } else if (input == 1) {
+
+        LOOP: while (true) {
+          System.out.println("0. 이전메뉴");
+          System.out.println("1. 등록");
+          System.out.println("2. 목록");
+          System.out.println("3. 세부");
+          System.out.println("4. 수정");
+          System.out.println("5. 삭제");
+
+          int menuNo = Prompt.inputInt("번호?> ");
+          System.out.println();
+
+          switch (menuNo) {
+            case 1: show.add(); break ;
+            case 2: show.list(); break ;
+            case 3: show.detail(); break ;
+            case 4: show.update(); break ;
+            case 5: show.delete(); break ;
+            case 0: break LOOP;
+            default: System.out.println("다시 입력!");
+
+          } 
+        }
+      } else if (input == 2) {
+
+      } else if (input == 3) {
+
+      } else if (input == 4) {
+
+      } else if (input == 5) {
+
+      } else {
+        System.out.println("다시입력");
+      }
+    }
+  } catch (Throwable e) {
+    System.out.println("올바른 숫자를 입력하세요");
+    System.out.println("----------------------------");
+    e.printStackTrace();
   }
 
 }
