@@ -3,6 +3,7 @@ package com.share.ftp;
 
 import com.share.ftp.handler.admin.AdminPageHandler;
 import com.share.ftp.handler.admin.ShowDonationHandler;
+import com.share.ftp.handler.admin.ShowVolHandler;
 import com.share.ftp.handler.personal.ChallengeHandler;
 import com.share.ftp.handler.personal.CommHandler;
 import com.share.ftp.handler.personal.DonationBoardHandler;
@@ -19,7 +20,7 @@ public class App {
 
   // 개인 페이지
   static PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler();
-  static VolListHandler volListHandler = new VolListHandler(); 
+  static VolListHandler volListHandler = new VolListHandler(personalVolRequestHandler); 
   static DonationRegisterHandler donationRegisterHandler = new DonationRegisterHandler();
   static DonationDetailHandler donationDetailHandler = new DonationDetailHandler(donationRegisterHandler);
   static DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationDetailHandler, donationRegisterHandler);
@@ -32,7 +33,8 @@ public class App {
 
   // 관리자 페이지
   static ShowDonationHandler showDonationHandler = new ShowDonationHandler(donationBoardHandler);
-  static AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler, showDonationHandler, donationBoardHandler); 
+  static ShowVolHandler showVolHandler = new ShowVolHandler(personalVolRequestHandler);
+  static AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler,showVolHandler,donationBoardHandler,showDonationHandler); 
 
 
   public static void main(String[] args) {
@@ -76,6 +78,7 @@ public class App {
       System.out.println("1. 봉사신청");
       System.out.println("2. 봉사목록");
       System.out.println("3. 봉사참여");
+      System.out.println("4. 개인폼(테스트)");
       System.out.println("0. 이전메뉴");
 
       int menuNo = Prompt.inputInt("함께해요> ");
@@ -85,6 +88,7 @@ public class App {
         case 1: volListHandler.volAuthForm();break;
         case 2: volListHandler.volApprovedList(); break;
         case 3: volListHandler.volJoin(); break;
+        case 4: personalVolRequestHandler.apply(); break;
         case 0: return;
         default:
           System.out.println("무효한 메뉴 번호입니다.");
@@ -141,7 +145,6 @@ public class App {
       System.out.println("2. 모금함 상세보기");
       System.out.println("3. 기부 총 금액");
       System.out.println("4. 모금함 개설 신청");
-      System.out.println("5. ");
       System.out.println("0. 이전메뉴");
 
       int menuNo = Prompt.inputInt("모금함> ");
@@ -150,7 +153,6 @@ public class App {
         case 2: donationBoardHandler.detailDonation(); break;
         case 3: donationBoardHandler.totalDonationDetail(); break;
         case 4: donationBoardHandler.applyDonation(); break;
-        case 5: break;
         case 0: return;
         default:
           System.out.println("무효한 메뉴 번호입니다.");
