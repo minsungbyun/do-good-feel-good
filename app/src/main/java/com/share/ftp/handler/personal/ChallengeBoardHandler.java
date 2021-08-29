@@ -18,6 +18,7 @@ public class ChallengeBoardHandler {
   }
 
   public void showReview() {
+
     System.out.println("[참여인증&댓글]");
 
     while (true) {
@@ -42,7 +43,6 @@ public class ChallengeBoardHandler {
       }
       System.out.println();
     }
-
   }
 
   public void showQuestionList() {
@@ -72,12 +72,3 @@ public class ChallengeBoardHandler {
     }
   }
 }
-
-
-
-
-
-
-
-
-

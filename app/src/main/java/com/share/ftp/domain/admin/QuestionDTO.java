@@ -1,6 +1,7 @@
 package com.share.ftp.domain.admin;
 
 public class QuestionDTO {
+
   private int adminId;
   private String title;
   private String content;
