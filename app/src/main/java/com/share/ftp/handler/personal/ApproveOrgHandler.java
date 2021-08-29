@@ -5,7 +5,7 @@ import com.share.util.Prompt;
 
 public class ApproveOrgHandler {
 
-  static final int MAX_LENGTH = 5;
+  static final int MAX_LENGTH = 100;
 
   ApproveOrgDTO[] approveOrgs = new ApproveOrgDTO[MAX_LENGTH];
   int size = 0;
@@ -26,6 +26,11 @@ public class ApproveOrgHandler {
 
     this.approveOrgs[this.size++] = approveOrg;
   }
+
+  //  public ApproveOrgDTO[] toAdmin() {
+  //    
+  //    return 
+  //  }
 
   public void list() {
     System.out.println("[기관인증 신청내역]");
