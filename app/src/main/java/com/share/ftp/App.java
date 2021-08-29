@@ -2,6 +2,7 @@ package com.share.ftp;
 
 
 import com.share.ftp.handler.admin.AdminPageHandler;
+import com.share.ftp.handler.admin.ShowVolHandler;
 import com.share.ftp.handler.personal.ChallengeHandler;
 import com.share.ftp.handler.personal.CommHandler;
 import com.share.ftp.handler.personal.DonationBoardHandler;
@@ -17,7 +18,7 @@ public class App {
 
   // 개인 페이지
   static PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler();
-  static VolListHandler volListHandler = new VolListHandler(); 
+  static VolListHandler volListHandler = new VolListHandler(personalVolRequestHandler); 
   static DonationRegisterHandler donationRegisterHandler;
   static DonationDetailHandler donationDetailHandler = new DonationDetailHandler();
   static DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationDetailHandler, donationRegisterHandler);
@@ -30,7 +31,8 @@ public class App {
 
 
   // 관리자 페이지
-  static AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler); 
+  static ShowVolHandler showVolHandler = new ShowVolHandler(personalVolRequestHandler);
+  static AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler,showVolHandler); 
 
   public static void main(String[] args) {
 
@@ -73,6 +75,7 @@ public class App {
       System.out.println("1. 봉사신청");
       System.out.println("2. 봉사목록");
       System.out.println("3. 봉사참여");
+      System.out.println("4. 개인폼(테스트)");
       System.out.println("0. 이전메뉴");
 
       int menuNo = Prompt.inputInt("함께해요> ");
@@ -82,6 +85,7 @@ public class App {
         case 1: volListHandler.volAuthForm();break;
         case 2: volListHandler.volApprovedList(); break;
         case 3: volListHandler.volJoin(); break;
+        case 4: personalVolRequestHandler.apply(); break;
         case 0: return;
         default:
           System.out.println("무효한 메뉴 번호입니다.");
