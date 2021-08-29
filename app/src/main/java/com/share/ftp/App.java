@@ -14,21 +14,18 @@ public class App {
 
 
   // 개인 페이지
+  static PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler();
   static VolListHandler volListHandler = new VolListHandler(); 
   static ChallengeHandler challengeHandler = new ChallengeHandler();
   static CommHandler commHandler = new CommHandler();
+  static SupportHandler supportHandler = new SupportHandler();
 
   // 기관 페이지
 
 
   // 관리자 페이지
-  static PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler();
   static AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler); 
 
-
-
-
-  static SupportHandler supportHandler = new SupportHandler();
 
   public static void main(String[] args) {
 
