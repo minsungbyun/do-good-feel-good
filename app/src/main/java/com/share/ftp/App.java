@@ -2,11 +2,17 @@ package com.share.ftp;
 
 import com.share.ftp.handler.personal.ChallengeHandler;
 import com.share.ftp.handler.personal.CommHandler;
+import com.share.ftp.handler.personal.DonationBoardHandler;
+import com.share.ftp.handler.personal.DonationDetailHandler;
+import com.share.ftp.handler.personal.DonationRegisterHandler;
 import com.share.ftp.handler.personal.SupportHandler;
 import com.share.util.Prompt;
 
 public class App {
 
+  static DonationRegisterHandler donationRegisterHandler;
+  static DonationDetailHandler donationDetailHandler = new DonationDetailHandler();
+  static DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationDetailHandler, donationRegisterHandler);
   static SupportHandler supportHandler = new SupportHandler();
   static ChallengeHandler challengeHandler = new ChallengeHandler();
   static CommHandler commHandler = new CommHandler();
@@ -114,19 +120,19 @@ public class App {
   static void doDonationMenu() {
     while (true) {
       System.out.println("[메인/모금함]");
-      System.out.println("1. ");
-      System.out.println("2. ");
-      System.out.println("3. ");
-      System.out.println("4. ");
+      System.out.println("1. 모금함 목록");
+      System.out.println("2. 모금함 상세보기");
+      System.out.println("3. 기부 총 금액");
+      System.out.println("4. 모금함 개설 신청");
       System.out.println("5. ");
       System.out.println("0. 이전메뉴");
 
       int menuNo = Prompt.inputInt("모금함> ");
       switch (menuNo) {
-        case 1: break;
-        case 2: break;
-        case 3: break;
-        case 4: break;
+        case 1: donationBoardHandler.list(); break;
+        case 2: donationBoardHandler.detailDonation(); break;
+        case 3: donationBoardHandler.totalDonationDetail(); break;
+        case 4: donationBoardHandler.applyDonation(); break;
         case 5: break;
         case 0: return;
         default:
