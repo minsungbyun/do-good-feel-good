@@ -9,7 +9,7 @@ public class OrgRequestDTO {
   private String sort;
   private String tel;
   private String email;
-  private Date volunteerPeriod;
+  private String volunteerPeriod;
   private Date volunteerTime;
   private String volunteerList;
   private String content;
@@ -46,10 +46,10 @@ public class OrgRequestDTO {
   public void setEmail(String email) {
     this.email = email;
   }
-  public Date getVolunteerPeriod() {
+  public String getVolunteerPeriod() {
     return volunteerPeriod;
   }
-  public void setVolunteerPeriod(Date volunteerPeriod) {
+  public void setVolunteerPeriod(String volunteerPeriod) {
     this.volunteerPeriod = volunteerPeriod;
   }
   public Date getVolunteerTime() {

@@ -8,6 +8,7 @@ import com.share.ftp.handler.personal.CommHandler;
 import com.share.ftp.handler.personal.DonationBoardHandler;
 import com.share.ftp.handler.personal.DonationDetailHandler;
 import com.share.ftp.handler.personal.DonationRegisterHandler;
+import com.share.ftp.handler.personal.OrgVolRequestHandler;
 import com.share.ftp.handler.personal.PersonalVolRequestHandler;
 import com.share.ftp.handler.personal.SupportHandler;
 import com.share.ftp.handler.personal.VolListHandler;
@@ -19,8 +20,10 @@ public class App {
 
   // 개인 페이지
   static PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler();
-  static VolListHandler volListHandler = new VolListHandler(personalVolRequestHandler); 
-  static DonationRegisterHandler donationRegisterHandler;
+  static OrgVolRequestHandler orgVolRequestHandler = new OrgVolRequestHandler();
+  static VolListHandler volListHandler = new VolListHandler(personalVolRequestHandler,orgVolRequestHandler);
+
+  static DonationRegisterHandler donationRegisterHandler = new DonationRegisterHandler();
   static DonationDetailHandler donationDetailHandler = new DonationDetailHandler();
   static DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationDetailHandler, donationRegisterHandler);
   static ChallengeHandler challengeHandler = new ChallengeHandler();
@@ -31,7 +34,7 @@ public class App {
 
 
   // 관리자 페이지
-  static ShowVolHandler showVolHandler = new ShowVolHandler(personalVolRequestHandler);
+  static ShowVolHandler showVolHandler = new ShowVolHandler(personalVolRequestHandler,orgVolRequestHandler);
   static AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler,showVolHandler); 
 
 
@@ -39,6 +42,7 @@ public class App {
 
     while (true) {
       try {
+        System.out.println();
         int menuNo = doMainMenu();
 
         if (menuNo == 0) {
@@ -72,6 +76,7 @@ public class App {
 
   static void doVolunteerMenu() {
     while (true) {
+      System.out.println();
       System.out.println("[메인/함께해요]");
       System.out.println("1. 봉사신청");
       System.out.println("2. 봉사목록");
@@ -98,6 +103,7 @@ public class App {
 
   static void doCommunityMenu() {
     while (true) {
+      System.out.println();
       System.out.println("[메인/소통해요]");
       System.out.println("1. 나눔이야기");
       System.out.println("2. 나눔이야기Best");
@@ -119,6 +125,7 @@ public class App {
 
   static void doChallengeMenu() {
     while (true) {
+      System.out.println();
       System.out.println("[메인/챌린지]");
       System.out.println("1. 이달의 챌린지");
       System.out.println("2. 이달의 랭킹");
@@ -138,12 +145,12 @@ public class App {
 
   static void doDonationMenu() {
     while (true) {
+      System.out.println();
       System.out.println("[메인/모금함]");
       System.out.println("1. 모금함 목록");
       System.out.println("2. 모금함 상세보기");
       System.out.println("3. 기부 총 금액");
       System.out.println("4. 모금함 개설 신청");
-      System.out.println("5. ");
       System.out.println("0. 이전메뉴");
 
       int menuNo = Prompt.inputInt("모금함> ");
@@ -152,7 +159,6 @@ public class App {
         case 2: donationBoardHandler.detailDonation(); break;
         case 3: donationBoardHandler.totalDonationDetail(); break;
         case 4: donationBoardHandler.applyDonation(); break;
-        case 5: break;
         case 0: return;
         default:
           System.out.println("무효한 메뉴 번호입니다.");
@@ -163,6 +169,7 @@ public class App {
 
   static void doSupportMenu() {
     while (true) {
+      System.out.println();
       System.out.println("[메인/고객센터]");
       System.out.println("1. 공지사항");
       System.out.println("2. 문의하기");
@@ -182,6 +189,7 @@ public class App {
 
   static void doMyPageMenu() {
     while (true) {
+      System.out.println();
       System.out.println("[메인/마이페이지]");
       System.out.println("1. ");
       System.out.println("2. ");
@@ -207,6 +215,7 @@ public class App {
 
   static void doAdminPageMenu() {
     while (true) {
+      System.out.println();
       System.out.println("[메인/관리자페이지]");
       System.out.println("1. 회원정보조회");
       System.out.println("2. 모금관리");
