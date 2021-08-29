@@ -4,11 +4,11 @@ import com.share.util.Prompt;
 
 public class DonationDetailHandler {
 
-  DonationRegisterHandler donationRegisterHandler = new DonationRegisterHandler();
+  DonationRegisterHandler donationRegisterHandler;
 
-  //  public DonationDetailHandler(DonationRegisterHandler donationRegisterHandler) {
-  //    this.donationRegisterHandler = donationRegisterHandler;
-  //  }
+  public DonationDetailHandler(DonationRegisterHandler donationRegisterHandler) {
+    this.donationRegisterHandler = donationRegisterHandler;
+  }
 
 
   public void detailDonationInfo() {
