@@ -5,25 +5,57 @@ import com.share.util.Prompt;
 
 public class DonationBoardHandler {
 
-  static final int MAX_LENGTH = 10;
 
-  DonationBoardDTO[] donationBoards = new DonationBoardDTO[MAX_LENGTH];
+  static final int MAX_LENGTH = 10;
   int size;
 
+
+  DonationBoardDTO[] donationBoardDTO = new DonationBoardDTO[MAX_LENGTH];
+  DonationDetailHandler donationDetailHandler;
+  DonationRegisterHandler donationRegisterHandler;
+
+  public DonationBoardHandler(DonationDetailHandler donationDetailHandler, DonationRegisterHandler donationRegisterHandler) {
+    this.donationDetailHandler = donationDetailHandler;
+    this.donationRegisterHandler = donationRegisterHandler;
+  }
+
   public void list() {
-    System.out.println("모금함 목록");
+    System.out.println("[모금함 목록]");
   }
 
   public void detailDonation() {
-    System.out.println("모금함 상세보기");
+    while (true) {
+      try {
+        System.out.println("1. 모금함 정보 상세보기");
+        System.out.println("2. 기부하기");
+        System.out.println("0. 이전메뉴");
+
+        int menuNo = Prompt.inputInt("모금함 상세보기> ");
+        switch (menuNo) {
+          case 1: donationDetailHandler.detailDonationInfo(); break;
+          case 2: donationDetailHandler.joinDonationList(); break;
+          case 3: break;
+          case 4: break;
+          case 5: break;
+          case 0: return;
+          default:
+            System.out.println("무효한 메뉴 번호입니다.");
+        }
+        System.out.println();
+      } catch (Throwable e) {
+        System.out.println("--------------------------------------------------------------");
+        System.out.printf("오류 발생: %s\n", e.getClass().getName());
+        System.out.println("--------------------------------------------------------------");
+      }
+    }
   }
 
   public void totalDonationDetail() {
-    System.out.println("기부 총 금액");
+    System.out.println("[기부 총 금액]");
   }
 
   public void applyDonation() {
-    System.out.println("모금함 개설 신청");
+    System.out.println("[모금함 개설 신청]");
 
     DonationBoardDTO donationBoard = new DonationBoardDTO();
 
@@ -34,9 +66,77 @@ public class DonationBoardHandler {
     donationBoard.setContent(Prompt.inputString("내용: "));
     donationBoard.setFileUpload(Prompt.inputString("첨부파일: "));
     donationBoard.setPassword(Prompt.inputString("비밀번호: "));
-    donationBoard.setRegisteredDate(Prompt.inputDate("제안기간: "));
+    donationBoard.setRegisteredDate(Prompt.inputDate("제안기간(yyyy-mm-dd): "));
 
-    this.donationBoards[this.size++] = donationBoard;
+    donationBoardDTO[size++] = donationBoard;
+
+    System.out.println("[모금함 개설 신청이 완료되었습니다.]");
 
   }
+
+  public void applyDonationList() {
+    System.out.println("[모금함 개설 신청 목록]");
+
+    for (int i = 0; i < this.size; i++) {
+      System.out.printf("%d, %s, %s, %s, %s, %s, %s\n", 
+          donationBoardDTO[i].getNo(), 
+          donationBoardDTO[i].getTitle(), 
+          donationBoardDTO[i].getLeader(),
+          donationBoardDTO[i].getContent(),
+          donationBoardDTO[i].getFileUpload(), 
+          donationBoardDTO[i].getPassword(),
+          donationBoardDTO[i].getRegisteredDate());
+    }
+  }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

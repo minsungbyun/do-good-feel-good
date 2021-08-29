@@ -8,11 +8,8 @@ public class ChallengeBoardHandler {
   ChallengeQuestionHandler challengeQuestionHandler = new ChallengeQuestionHandler();
 
   public void join() {
-
     System.out.println("참여하기");
-
     System.out.println("참여가 완료되었습니다.");
-
   }
 
   public void showMemberList() {
@@ -73,8 +70,5 @@ public class ChallengeBoardHandler {
       }
       System.out.println();
     }
-
   }
-
-
 }

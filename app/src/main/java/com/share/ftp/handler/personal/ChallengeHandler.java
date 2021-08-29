@@ -50,6 +50,5 @@ public class ChallengeHandler {
       System.out.println();
     }
   }
-
 }
 
