@@ -1,5 +1,7 @@
 package com.share.ftp.handler.personal;
 
+MyDonationHandler myDonationHandler = new MyDonationHandler();
+
 public class MyPageHandler {
   public void myProfile() {
     System.out.println("나의 개인정보수정 창을 보여줌");

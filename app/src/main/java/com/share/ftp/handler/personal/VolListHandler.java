@@ -1,54 +1,76 @@
 package com.share.ftp.handler.personal;
 
-import com.share.ftp.domain.personal.VolListDTO;
-import com.share.ftp.handler.admin.ShowOrgApproveHandler;
 import com.share.util.Prompt;
 
 public class VolListHandler {
 
-  public static final int MAX_LENTGH = 100;
-  VolListDTO[] volListsDTO = new VolListDTO[MAX_LENTGH];
-  int size;    
-
-  PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler();
+  // 봉사등록
+  PersonalVolRequestHandler personalVolReqestHandler = new PersonalVolRequestHandler();
   OrgVolRequestHandler orgVolRequestHandler = new OrgVolRequestHandler();
-  public ShowOrgApproveHandler showOrgApproveHandler;
-  public ApproveOrgHandler approveOrghandler;
 
-  public void approveList() {
-    System.out.println("관리자의 승인을 받은 리스트를 보여준다.");
+  // 봉사리스트
+  VolApprovedHandler volApprovedHandler = new VolApprovedHandler();
 
+  // 봉사참여
+  VolJoinHandler volJoinHandler = new VolJoinHandler();   
 
-  }
+  public void volAuthForm() {
 
-  public void detail() {
-    System.out.println("관리자의 승인을 받은 리스트 중 세부사항을 보여준다.");
+    System.out.println("[메인/함께해요/봉사신청]");
+    System.out.println("1. 개인봉사신청");
+    System.out.println("2. 기관봉사신청");
+    System.out.println("0. 이전메뉴");
 
+    int input = Prompt.inputInt("봉사신청> ");
+    System.out.println();
 
-  }
-
-  public void join() {
-
-    while (true) {
-      System.out.println("0. 이전메뉴");
-      System.out.println("1. 개인봉사등록");
-      System.out.println("2. 기관봉사등록");
-      System.out.println("3. 관리자 확인");
-      System.out.println("4. 확인");
-
-      int input = Prompt.inputInt("번호 > ");
-      switch (input) {
-        case 0: 
-        case 1: personalVolRequestHandler.apply(); break;
-        case 2: orgVolRequestHandler.apply(); break;
-        case 3: showOrgApproveHandler.list(); break;
-        case 4: approveOrghandler.list(); break;
-        default : System.out.println("다시 입력해주세요");
-      }
-      System.out.println();
-
+    switch (input) {
+      case 1: personalVolReqestHandler.apply(); break;
+      case 2: orgVolRequestHandler.apply(); break;
+      case 0: return;
+      default: System.out.println("다시 입력해주세요");
     }
+    System.out.println();
 
   }
 
+  public void volApprovedList() {
+
+    System.out.println("[메인/함께해요/봉사목록]");
+    System.out.println("1. 봉사목록 보기");
+    System.out.println("2. 봉사세부사항 보기");
+    System.out.println("3. 관리자test");
+    System.out.println("0. 이전메뉴");
+
+    int input = Prompt.inputInt("봉사목록> ");
+
+    switch (input) {
+      case 1: volApprovedHandler.approvedList(); break;
+      case 2: volApprovedHandler.approvedDetail(); break;
+      case 0: return;
+      default: System.out.println("다시 입력해주세요");
+    }
+    System.out.println();
+  }
+
+  public void volJoin() {
+
+    System.out.println("[메인/함께해요/봉사참여]");
+    System.out.println("1. 봉사참여");
+    System.out.println("2. 봉사참여내역");
+    System.out.println("3. 봉사참여자목록");
+    System.out.println("0. 이전메뉴");
+
+    int input = Prompt.inputInt("봉사참여> ");
+
+    switch (input) {
+      case 1: volJoinHandler.join(); break;
+      case 2: volJoinHandler.joinList(); break;
+      case 3: volJoinHandler.joinMemberList(); break;
+      case 0: return;
+      default: System.out.println("다시 입력해주세요");
+    }
+    System.out.println();
+  }
 }
+

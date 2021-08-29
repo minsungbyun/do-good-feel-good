@@ -1,13 +1,14 @@
 package com.share.ftp.handler.personal;
 
+import java.sql.Date;
 import com.share.ftp.domain.personal.MyQuestionListDTO;
 import com.share.util.Prompt;
 
 public class QuestionListHandler {
 
-  static final int MAX_LENGTH = 5;
 
-  MyQuestionListDTO[] boards = new MyQuestionListDTO[MAX_LENGTH];
+  static final int MAX_LENGTH = 5;
+  MyQuestionListDTO[] myQuestionLists = new MyQuestionListDTO[MAX_LENGTH];
   int size = 0;
 
 
@@ -15,29 +16,30 @@ public class QuestionListHandler {
 
     System.out.println("[게시글 등록하기]");
 
-    MyQuestionListDTO board = new MyQuestionListDTO();
+    MyQuestionListDTO myQuestionList = new MyQuestionListDTO();
 
-    board.no = Prompt.inputInt("번호? ");
-    board.title = Prompt.inputString("제목? ");
-    board.password = Prompt.inputInt("비밀번호? ");
-    board.content = Prompt.inputString("내용? ");
-    board.fileUpload = Prompt.inputString("파일첨부? ");
-    board.viewCount = 0;
+    myQuestionList.no = Prompt.inputInt("번호? ");
+    myQuestionList.title = Prompt.inputString("제목? ");
+    myQuestionList.password = Prompt.inputInt("비밀번호? ");
+    myQuestionList.content = Prompt.inputString("내용? ");
+    myQuestionList.fileUpload = Prompt.inputString("파일첨부? ");
+    myQuestionList.registeredDate = new Date(System.currentTimeMillis());
 
-    this.boards[this.size++] = board;
+    this.myQuestionLists[this.size++] = myQuestionList;
   }
 
-  public void showQuestionList() {
+  public void questionList() {
     System.out.println("[게시글 목록]");
     for (int i = 0; i < this.size; i++) {
-      System.out.printf("%d, %s, %s, %s, %d, %d\n", 
-          this.boards[i].no, 
-          this.boards[i].title, 
-          this.boards[i].memberld,
-          this.boards[i].content,
-          this.boards[i].fileUpload,
-          this.boards[i].registeredDate,
-          this.boards[i].viewCount);
+      System.out.printf("%d, %s, %s, %d, %s, %s, %s, %d\n", 
+          this.myQuestionLists[i].no, 
+          this.myQuestionLists[i].title, 
+          this.myQuestionLists[i].memberld,
+          this.myQuestionLists[i].password,
+          this.myQuestionLists[i].content,
+          this.myQuestionLists[i].fileUpload,
+          this.myQuestionLists[i].registeredDate,
+          this.myQuestionLists[i].viewCount);
 
     }
   }
@@ -46,47 +48,47 @@ public class QuestionListHandler {
     System.out.println("[게시글 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    MyQuestionListDTO board = null;
+    MyQuestionListDTO myQuestionList = null;
 
     for (int i = 0; i < this.size; i++) {
-      if (this.boards[i].no == no) {
-        board = this.boards[i];
+      if (this.myQuestionLists[i].no == no) {
+        myQuestionList = this.myQuestionLists[i];
         break;
       }
     }
 
-    if (board == null) {
+    if (myQuestionList == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
 
-    System.out.printf("제목: %s\n", board.title);
-    System.out.printf("내용: %s\n", board.content);
-    System.out.printf("작성자: %s\n", board.memberld);
-    System.out.printf("등록일: %s\n", board.registeredDate);
-    System.out.printf("조회수: %d\n", ++board.viewCount);
+    System.out.printf("제목: %s\n", myQuestionList.title);
+    System.out.printf("내용: %s\n", myQuestionList.content);
+    System.out.printf("작성자: %s\n", myQuestionList.memberld);
+    System.out.printf("등록일: %s\n", myQuestionList.registeredDate);
+    System.out.printf("조회수: %d\n", ++myQuestionList.viewCount);
   }
 
   public void updateQuestion() {
     System.out.println("[게시글 수정하기]");
     int no = Prompt.inputInt("번호? ");
 
-    MyQuestionListDTO board = null;
+    MyQuestionListDTO myQuestionList = null;
 
     for (int i = 0; i < this.size; i++) {
-      if (this.boards[i].no == no) {
-        board = this.boards[i];
+      if (this.myQuestionLists[i].no == no) {
+        myQuestionList = this.myQuestionLists[i];
         break;
       }
     }
 
-    if (board == null) {
+    if (myQuestionList == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
 
-    String title = Prompt.inputString(String.format("제목(%s)? ", board.title));
-    String content = Prompt.inputString(String.format("내용(%s)? ", board.content));
+    String title = Prompt.inputString(String.format("제목(%s)? ", myQuestionList.title));
+    String content = Prompt.inputString(String.format("내용(%s)? ", myQuestionList.content));
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -94,8 +96,8 @@ public class QuestionListHandler {
       return;
     }
 
-    board.title = title;
-    board.content = content;
+    myQuestionList.title = title;
+    myQuestionList.content = content;
     System.out.println("게시글을 변경하였습니다.");
   }
 
@@ -106,7 +108,7 @@ public class QuestionListHandler {
     int boardIndex = -1;
 
     for (int i = 0; i < this.size; i++) {
-      if (this.boards[i].no == no) {
+      if (this.myQuestionLists[i].no == no) {
         boardIndex = i;
         break;
       }
@@ -124,9 +126,9 @@ public class QuestionListHandler {
     }
 
     for (int i = boardIndex + 1; i < this.size; i++) {
-      this.boards[i - 1] = this.boards[i];
+      this.myQuestionLists[i - 1] = this.myQuestionLists[i];
     }
-    this.boards[--this.size] = null;
+    this.myQuestionLists[--this.size] = null;
 
     System.out.println("게시글을 삭제하였습니다.");
   }

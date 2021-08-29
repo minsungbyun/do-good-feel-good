@@ -49,7 +49,9 @@ public class ChallengeHandler {
       }
       System.out.println();
     }
-
-
   }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> c912884663083caf72315455f8db127709eb66e4
