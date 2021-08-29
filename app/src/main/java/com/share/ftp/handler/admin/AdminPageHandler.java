@@ -1,5 +1,6 @@
 package com.share.ftp.handler.admin;
 
+import com.share.ftp.handler.personal.DonationBoardHandler;
 import com.share.ftp.handler.personal.PersonalVolRequestHandler;
 import com.share.util.Prompt;
 
@@ -7,11 +8,18 @@ public class AdminPageHandler {
 
   // 봉사활동 관련 Handler
   PersonalVolRequestHandler personalVolRequestHandler;
+
+  // 모금활동 관련
+  DonationBoardHandler donationBoardHandler;
+  ShowDonationHandler showDonationHandler;
   ShowVolHandler showVolHandler;
 
-  public AdminPageHandler(PersonalVolRequestHandler personalVolRequestHandler,ShowVolHandler showVolHandler) {
+  public AdminPageHandler(PersonalVolRequestHandler personalVolRequestHandler,ShowVolHandler showVolHandler,
+      DonationBoardHandler donationBoardHandler, ShowDonationHandler showDonationHandler) {
     this.personalVolRequestHandler = personalVolRequestHandler;
     this.showVolHandler = showVolHandler;
+    this.showDonationHandler = showDonationHandler;
+    this.donationBoardHandler = donationBoardHandler;
   }
 
 
@@ -21,9 +29,21 @@ public class AdminPageHandler {
     personalVolRequestHandler.applyList();
   }
 
+  // 기관이 모금함 개설 신청한 내역을 받아서 관리자가 관리
   public void showDonation() {
-    System.out.println("모금활동 관리");
+    while (true) {
+      System.out.println("1. 모금활동 관리");
+      System.out.println("0. 이전메뉴");
 
+      int menuNo = Prompt.inputInt("모금활동관리> ");
+      switch (menuNo) {
+        case 1: showDonationHandler.list(); break;
+        case 0: return;
+        default:
+          System.out.println("무효한 메뉴 번호입니다.");
+      }
+      System.out.println();
+    }
   }
 
   public void showVolunteer() {

@@ -2,6 +2,7 @@ package com.share.ftp;
 
 
 import com.share.ftp.handler.admin.AdminPageHandler;
+import com.share.ftp.handler.admin.ShowDonationHandler;
 import com.share.ftp.handler.admin.ShowVolHandler;
 import com.share.ftp.handler.personal.ChallengeHandler;
 import com.share.ftp.handler.personal.CommHandler;
@@ -21,9 +22,9 @@ public class App {
   static PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler();
   static OrgVolRequestHandler orgVolRequestHandler = new OrgVolRequestHandler();
   static VolListHandler volListHandler = new VolListHandler(personalVolRequestHandler,orgVolRequestHandler);
-
   static DonationRegisterHandler donationRegisterHandler = new DonationRegisterHandler();
-  static DonationDetailHandler donationDetailHandler = new DonationDetailHandler();
+  static DonationDetailHandler donationDetailHandler = new DonationDetailHandler(donationRegisterHandler);
+
   static DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationDetailHandler, donationRegisterHandler);
   static ChallengeHandler challengeHandler = new ChallengeHandler();
   static CommHandler commHandler = new CommHandler();
@@ -36,6 +37,7 @@ public class App {
   // 관리자 페이지
   static ShowVolHandler showVolHandler = new ShowVolHandler(personalVolRequestHandler,orgVolRequestHandler);
   static AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler,showVolHandler); 
+  static ShowDonationHandler showDonationHandler = new ShowDonationHandler(donationBoardHandler);
 
   public static void main(String[] args) {
 

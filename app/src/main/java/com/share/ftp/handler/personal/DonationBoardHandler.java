@@ -5,7 +5,6 @@ import com.share.util.Prompt;
 
 public class DonationBoardHandler {
 
-
   static final int MAX_LENGTH = 10;
   int size;
 
@@ -19,14 +18,16 @@ public class DonationBoardHandler {
     this.donationRegisterHandler = donationRegisterHandler;
   }
 
+  // 모금함 목록
   public void list() {
     System.out.println("[모금함 목록]");
   }
 
+  // 모금함 상세보기
   public void detailDonation() {
     while (true) {
       try {
-        System.out.println("1. 모금함 정보 상세보기");
+        System.out.println("1. 모금함 상세보기");
         System.out.println("2. 기부하기");
         System.out.println("0. 이전메뉴");
 
@@ -50,10 +51,12 @@ public class DonationBoardHandler {
     }
   }
 
+  // 기부 총 금액
   public void totalDonationDetail() {
     System.out.println("[기부 총 금액]");
   }
 
+  // 모금함 개설 신청(기관)
   public void applyDonation() {
     System.out.println("[모금함 개설 신청]");
 
@@ -74,6 +77,7 @@ public class DonationBoardHandler {
 
   }
 
+  // 모금함 개설 신청내역 목록을 -> 관리자에게 전달
   public void applyDonationList() {
     System.out.println("[모금함 개설 신청 목록]");
 
@@ -89,6 +93,34 @@ public class DonationBoardHandler {
     }
   }
 
+  // 모금함 개설 신청내역 상세보기 -> 관리자에게 전달
+  public void applyDonationdetail() {
+    System.out.println("[모금함 개설 신청내역 상세보기]");
+    int no = Prompt.inputInt("번호? ");
+
+    DonationBoardDTO donationBoard = findByNo(no);
+
+    if (donationBoard == null) {
+      System.out.println("해당 번호의 모금함 개설 신청내역이 없습니다.");
+      return;
+    }
+
+    System.out.printf("개설번호: %s\n", donationBoard.getNo());
+    System.out.printf("제목: %s\n", donationBoard.getTitle());
+    System.out.printf("주최자: %s\n", donationBoard.getLeader());
+    System.out.printf("내용: %s\n", donationBoard.getContent());
+    System.out.printf("첨부파일: %d\n", donationBoard.getFileUpload());
+    System.out.printf("제안기간: %d\n", donationBoard.getRegisteredDate());
+  }
+
+  private DonationBoardDTO findByNo(int no) {
+    for (int i = 0; i < this.size; i++) {
+      if (donationBoardDTO[i].getNo() == no) {
+        return donationBoardDTO[i];
+      }
+    }
+    return null;
+  }
 }
 
 
