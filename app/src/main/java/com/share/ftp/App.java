@@ -1,23 +1,40 @@
 package com.share.ftp;
 
+
+import com.share.ftp.handler.admin.AdminPageHandler;
 import com.share.ftp.handler.personal.ChallengeHandler;
 import com.share.ftp.handler.personal.CommHandler;
 import com.share.ftp.handler.personal.DonationBoardHandler;
 import com.share.ftp.handler.personal.DonationDetailHandler;
 import com.share.ftp.handler.personal.DonationRegisterHandler;
+import com.share.ftp.handler.personal.PersonalVolRequestHandler;
 import com.share.ftp.handler.personal.SupportHandler;
+import com.share.ftp.handler.personal.VolListHandler;
 import com.share.util.Prompt;
 
 public class App {
 
+
+
+  // 개인 페이지
+  static PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler();
+  static VolListHandler volListHandler = new VolListHandler(); 
   static DonationRegisterHandler donationRegisterHandler;
   static DonationDetailHandler donationDetailHandler = new DonationDetailHandler();
   static DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationDetailHandler, donationRegisterHandler);
-  static SupportHandler supportHandler = new SupportHandler();
   static ChallengeHandler challengeHandler = new ChallengeHandler();
   static CommHandler commHandler = new CommHandler();
+  static SupportHandler supportHandler = new SupportHandler();
+
+  // 기관 페이지
+
+
+  // 관리자 페이지
+  static AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler); 
+
 
   public static void main(String[] args) {
+
     while (true) {
       try {
         int menuNo = doMainMenu();
@@ -54,27 +71,25 @@ public class App {
   static void doVolunteerMenu() {
     while (true) {
       System.out.println("[메인/함께해요]");
-      System.out.println("1. ");
-      System.out.println("2. ");
-      System.out.println("3. ");
-      System.out.println("4. ");
-      System.out.println("5. ");
-      System.out.println("6. ");
+      System.out.println("1. 봉사신청");
+      System.out.println("2. 봉사목록");
+      System.out.println("3. 봉사참여");
       System.out.println("0. 이전메뉴");
 
       int menuNo = Prompt.inputInt("함께해요> ");
+
+
       switch (menuNo) {
-        case 1: break;
-        case 2: break;
-        case 3: break;
-        case 4: break;
-        case 5: break;
+        case 1: volListHandler.volAuthForm();break;
+        case 2: volListHandler.volApprovedList(); break;
+        case 3: volListHandler.volJoin(); break;
         case 0: return;
         default:
           System.out.println("무효한 메뉴 번호입니다.");
       }
       System.out.println();
-    }
+    } 
+
   }
 
   static void doCommunityMenu() {
@@ -189,20 +204,24 @@ public class App {
   static void doAdminPageMenu() {
     while (true) {
       System.out.println("[메인/관리자페이지]");
-      System.out.println("1. ");
-      System.out.println("2. ");
-      System.out.println("3. ");
-      System.out.println("4. ");
-      System.out.println("5. ");
+      System.out.println("1. 회원정보조회");
+      System.out.println("2. 모금관리");
+      System.out.println("3. 봉사활동관리");
+      System.out.println("4. 공지사항관리");
+      System.out.println("5. 문의사항관리");
+      System.out.println("6. 챌린지관리");
+      System.out.println("7. 기관승인");
       System.out.println("0. 이전메뉴");
 
       int menuNo = Prompt.inputInt("관리자페이지> ");
       switch (menuNo) {
-        case 1: break;
-        case 2: break;
-        case 3: break;
-        case 4: break;
-        case 5: break;
+        case 1: adminPageHandler.showMember(); break;
+        case 2: adminPageHandler.showDonation(); break;
+        case 3: adminPageHandler.showVolunteer(); break;
+        case 4: adminPageHandler.showNotice(); break;
+        case 5: adminPageHandler.showQuestion(); break;
+        case 6: adminPageHandler.showChallenge(); break;
+        case 7: adminPageHandler.showOrgApprove(); break;
         case 0: return;
         default:
           System.out.println("무효한 메뉴 번호입니다.");
@@ -221,7 +240,9 @@ public class App {
     System.out.println("6. 마이페이지");
     System.out.println("7. 관리자페이지");
     System.out.println("0. 종료");
+    System.out.println();
     return Prompt.inputInt("메뉴번호> "); 
+
   }
 
 }

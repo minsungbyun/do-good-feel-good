@@ -15,6 +15,9 @@ public class OrgVolRequestHandler {
   public void apply() {
 
     try {
+
+      System.out.println("[기관봉사활동 양식]");
+
       OrgRequestDTO orgRequestDTO = new OrgRequestDTO();
 
       orgRequestDTO.setNo(Prompt.inputInt("번호? ")); 
@@ -32,7 +35,9 @@ public class OrgVolRequestHandler {
       orgRequestsDTO[size++] = orgRequestDTO;
 
     } catch (Throwable e) {
-      System.out.println(e.getClass().getName());
+      System.out.println("--------------------------------------------------------------");
+      System.out.printf("오류 발생: %s\n", e.getClass().getName());
+      System.out.println("--------------------------------------------------------------");
     }
 
 
