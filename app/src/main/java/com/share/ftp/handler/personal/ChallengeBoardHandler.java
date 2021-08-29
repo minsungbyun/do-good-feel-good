@@ -8,14 +8,41 @@ public class ChallengeBoardHandler {
 	ChallengeQuestionHandler challengeQuestionHandler = new ChallengeQuestionHandler();
 	
   public void join() {
+<<<<<<< HEAD
+    System.out.println("참여하기");
+=======
 	  System.out.println("참여가 완료되었습니다.");
+>>>>>>> 4c06da1b6cae24ab53d89fe0f3c64ab5fdcd8bc4
   }
-  
+
   public void showMemberList() {
+<<<<<<< HEAD
+    System.out.println("참여자 정보");
+=======
 	  System.out.println("참여자 목록");
+>>>>>>> 4c06da1b6cae24ab53d89fe0f3c64ab5fdcd8bc4
   }
-  
+
   public void showReview() {
+<<<<<<< HEAD
+    System.out.println("참여인증&댓글");
+    while (true) {
+      System.out.println("0. 이전메뉴");
+      System.out.println("1. 개인봉사등록");
+      System.out.println("2. 기관봉사등록");
+
+      int input = Prompt.inputInt("번호 > ");
+      switch (input) {
+        case 1: 
+        case 2: personalVolRequestHandler.apply(); break;
+        case 3: orgVolRequestHandler.apply(); break;
+        default : System.out.println("다시 입력해주세요");
+      }
+      System.out.println();
+
+    }
+
+=======
 	  System.out.println("[참여인증&댓글]");
 
 	    while (true) {
@@ -68,7 +95,13 @@ public class ChallengeBoardHandler {
 	      }
 	      System.out.println();
 	    }
+>>>>>>> 4c06da1b6cae24ab53d89fe0f3c64ab5fdcd8bc4
   }
+}
+
+public void showQuestionList() {
+  System.out.println("문의하기");
+}
 
 }
 
