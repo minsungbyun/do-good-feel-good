@@ -10,14 +10,17 @@ public class MyProfileHandler {
   int size;
 
 
+  public void updateMyProfile() {
 
-  public void apply() {
+    System.out.println();
+    System.out.println("[메인/ 마이페이지 / 회원정보/ 수정하기]");
+
     MyProfileDTO myProfileDTO = new MyProfileDTO();
 
-    myProfileDTO.setPhoto(Prompt.inputString("제목? ")); 
-    myProfileDTO.setPassword(Prompt.inputString("분류? ")); 
-    myProfileDTO.setEmail(Prompt.inputString("전화번호? ")); 
-    myProfileDTO.setAdress(Prompt.inputString("이메일? ")); 
+    myProfileDTO.setPhoto(Prompt.inputString("사진? ")); 
+    myProfileDTO.setPassword(Prompt.inputString("비밀번호? ")); 
+    myProfileDTO.setEmail(Prompt.inputString("이메일? ")); 
+    myProfileDTO.setEmail(Prompt.inputString("주소? ")); 
 
     myProfilesDTO[size++] = myProfileDTO;
 

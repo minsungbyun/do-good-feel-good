@@ -11,8 +11,8 @@ public class ApproveOrgHandler {
   int size = 0;
 
   public void add() {
-    System.out.println("[기관인증 신청]");
-
+    System.out.println();
+    System.out.println("[메인/ 마이페이지 / 기관승인신청/ 신청하기]");
     ApproveOrgDTO approveOrg = new ApproveOrgDTO();
 
     approveOrg.setNo(Prompt.inputInt("번호? "));
@@ -33,7 +33,8 @@ public class ApproveOrgHandler {
   //  }
 
   public void list() {
-    System.out.println("[기관인증 신청내역]");
+    System.out.println();
+    System.out.println("[메인/ 마이페이지 / 기관승인신청/ 신청내역]");
     for (int i = 0; i < this.size; i++) {
       System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s\n", 
           this.approveOrgs[i].getNo(), 
@@ -48,7 +49,8 @@ public class ApproveOrgHandler {
   }
 
   public void detail() {
-    System.out.println("[기관인증 신청내역 상세보기]");
+    System.out.println();
+    System.out.println("[메인/ 마이페이지 / 기관승인신청/ 신청내역 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
     ApproveOrgDTO approveOrg = findByNo(no);
@@ -69,7 +71,8 @@ public class ApproveOrgHandler {
   }
 
   public void update() {
-    System.out.println("[기관인증 신청내역 변경]");
+    System.out.println();
+    System.out.println("[메인/ 마이페이지 / 기관승인신청/ 신청내역 변경]");
     int no = Prompt.inputInt("번호? ");
 
     ApproveOrgDTO approveOrg = findByNo(no);
@@ -105,7 +108,8 @@ public class ApproveOrgHandler {
   }
 
   public void delete() {
-    System.out.println("[기관인증 신청내역 삭제]");
+    System.out.println();
+    System.out.println("[메인/ 마이페이지 / 기관승인신청/ 신청내역삭제]");
     int no = Prompt.inputInt("번호? ");
 
     int index = indexOf(no);
