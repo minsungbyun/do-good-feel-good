@@ -5,12 +5,14 @@ import com.share.util.Prompt;
 public class VolListHandler {
 
   // 봉사등록
-  PersonalVolRequestHandler personalVolReqestHandler;
-  public VolListHandler(PersonalVolRequestHandler personalVolReqestHandler) {
-    this.personalVolReqestHandler = personalVolReqestHandler;
-  }
 
-  OrgVolRequestHandler orgVolRequestHandler = new OrgVolRequestHandler();
+  PersonalVolRequestHandler personalVolReqestHandler; // 개인
+  OrgVolRequestHandler orgVolRequestHandler; // 기관
+
+  public VolListHandler(PersonalVolRequestHandler personalVolReqestHandler, OrgVolRequestHandler orgVolRequestHandler) {
+    this.personalVolReqestHandler = personalVolReqestHandler;
+    this.orgVolRequestHandler = orgVolRequestHandler;
+  }
 
   // 봉사리스트
   VolApprovedHandler volApprovedHandler = new VolApprovedHandler();
@@ -19,7 +21,7 @@ public class VolListHandler {
   VolJoinHandler volJoinHandler = new VolJoinHandler();   
 
   public void volAuthForm() {
-
+    System.out.println();
     System.out.println("[메인/함께해요/봉사신청]");
     System.out.println("1. 개인봉사신청");
     System.out.println("2. 기관봉사신청");
@@ -41,7 +43,7 @@ public class VolListHandler {
   }
 
   public void volApprovedList() {
-
+    System.out.println();
     System.out.println("[메인/함께해요/봉사목록]");
     System.out.println("1. 봉사목록 보기");
     System.out.println("2. 봉사세부사항 보기");
@@ -60,7 +62,7 @@ public class VolListHandler {
   }
 
   public void volJoin() {
-
+    System.out.println();
     System.out.println("[메인/함께해요/봉사참여]");
     System.out.println("1. 봉사참여");
     System.out.println("2. 봉사참여내역");

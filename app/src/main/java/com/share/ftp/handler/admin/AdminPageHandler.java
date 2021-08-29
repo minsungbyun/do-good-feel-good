@@ -75,7 +75,29 @@ public class AdminPageHandler {
   }
 
   public void showNotice() {
-    System.out.println("공지사항 관리");
+
+    while (true) {
+      System.out.println("[메인 / 관리자페이지 / 공지사항 관리]");
+      System.out.println("1. 개인봉사신청내역");
+      System.out.println("2. 기관봉사신청내역");
+      System.out.println("3. 승인하기");
+      System.out.println("4. 반려하기");
+      System.out.println("5. 개인폼(테스트)");
+      System.out.println("0. 이전메뉴");
+
+      int menuNo = Prompt.inputInt("봉사활동관리> ");
+      switch (menuNo) {
+        case 1: showVolHandler.personalApprove(); break;
+        case 2: showVolHandler.orgApprove(); break;
+        case 3: showVolHandler.accept(); break;
+        case 4: showVolHandler.reject(); break;
+        case 5: personalVolRequestHandler.applyList(); break;
+        case 0: return;
+        default:
+          System.out.println("무효한 메뉴 번호입니다.");
+      }
+      System.out.println();
+    }
 
   }
 

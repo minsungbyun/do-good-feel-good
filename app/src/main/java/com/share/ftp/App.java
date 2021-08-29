@@ -10,6 +10,7 @@ import com.share.ftp.handler.personal.DonationBoardHandler;
 import com.share.ftp.handler.personal.DonationDetailHandler;
 import com.share.ftp.handler.personal.DonationRegisterHandler;
 import com.share.ftp.handler.personal.MyPageHandler;
+import com.share.ftp.handler.personal.OrgVolRequestHandler;
 import com.share.ftp.handler.personal.PersonalVolRequestHandler;
 import com.share.ftp.handler.personal.SupportHandler;
 import com.share.ftp.handler.personal.VolListHandler;
@@ -19,9 +20,11 @@ public class App {
 
   // 개인 페이지
   static PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler();
-  static VolListHandler volListHandler = new VolListHandler(personalVolRequestHandler); 
+  static OrgVolRequestHandler orgVolRequestHandler = new OrgVolRequestHandler();
+  static VolListHandler volListHandler = new VolListHandler(personalVolRequestHandler,orgVolRequestHandler);
   static DonationRegisterHandler donationRegisterHandler = new DonationRegisterHandler();
   static DonationDetailHandler donationDetailHandler = new DonationDetailHandler(donationRegisterHandler);
+
   static DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationDetailHandler, donationRegisterHandler);
   static ChallengeHandler challengeHandler = new ChallengeHandler();
   static CommHandler commHandler = new CommHandler();
@@ -32,14 +35,15 @@ public class App {
 
 
   // 관리자 페이지
+  static ShowVolHandler showVolHandler = new ShowVolHandler(personalVolRequestHandler,orgVolRequestHandler);
+  static AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler,showVolHandler); 
   static ShowDonationHandler showDonationHandler = new ShowDonationHandler(donationBoardHandler);
-  static ShowVolHandler showVolHandler = new ShowVolHandler(personalVolRequestHandler);
-  static AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler,showVolHandler,donationBoardHandler,showDonationHandler); 
 
   public static void main(String[] args) {
 
     while (true) {
       try {
+        System.out.println();
         int menuNo = doMainMenu();
 
         if (menuNo == 0) {
@@ -74,6 +78,7 @@ public class App {
   static void doVolunteerMenu() {
     while (true) {
       System.out.println();
+
       System.out.println("[메인/ 함께해요]");
       System.out.println("1. 봉사신청");
       System.out.println("2. 봉사목록");
@@ -101,7 +106,9 @@ public class App {
   static void doCommunityMenu() {
     while (true) {
       System.out.println();
+
       System.out.println("[메인/ 소통해요]");
+
       System.out.println("1. 나눔이야기");
       System.out.println("2. 나눔이야기Best");
       System.out.println("3. 한줄후기");
@@ -188,6 +195,7 @@ public class App {
   static void doMyPageMenu() {
     while (true) {
       System.out.println();
+
       System.out.println("[메인/ 마이페이지]");
       System.out.println("1. 회원정보수정");
       System.out.println("2. 나의 봉사");
