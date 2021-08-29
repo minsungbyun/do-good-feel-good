@@ -1,6 +1,7 @@
 package com.share.ftp;
 
 import com.share.ftp.handler.personal.ChallengeHandler;
+import com.share.ftp.handler.personal.CommHandler;
 import com.share.ftp.handler.personal.DonationBoardHandler;
 import com.share.ftp.handler.personal.DonationDetailHandler;
 import com.share.ftp.handler.personal.DonationRegisterHandler;
@@ -12,6 +13,7 @@ public class App {
   static DonationDetailHandler donationDetailHandler = new DonationDetailHandler();
   static DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationDetailHandler, donationRegisterHandler);
   static ChallengeHandler challengeHandler = new ChallengeHandler();
+  static CommHandler commHandler = new CommHandler();
 
   public static void main(String[] args) {
     while (true) {
@@ -76,20 +78,16 @@ public class App {
   static void doCommunityMenu() {
     while (true) {
       System.out.println("[메인/소통해요]");
-      System.out.println("1. ");
-      System.out.println("2. ");
-      System.out.println("3. ");
-      System.out.println("4. ");
-      System.out.println("5. ");
+      System.out.println("1. 나눔이야기");
+      System.out.println("2. 나눔이야기Best");
+      System.out.println("3. 한줄후기");
       System.out.println("0. 이전메뉴");
 
       int menuNo = Prompt.inputInt("소통해요> ");
       switch (menuNo) {
-        case 1: break;
-        case 2: break;
-        case 3: break;
-        case 4: break;
-        case 5: break;
+        case 1: commHandler.commBoard(); break;
+        case 2: commHandler.commBest(); break;
+        case 3: commHandler.commReview(); break;
         case 0: return;
         default:
           System.out.println("무효한 메뉴 번호입니다.");
@@ -116,6 +114,7 @@ public class App {
       System.out.println();
     }
   }
+
 
   static void doDonationMenu() {
     while (true) {
