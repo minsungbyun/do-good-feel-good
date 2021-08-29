@@ -3,13 +3,14 @@ package com.share.ftp.handler.personal;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
 import com.share.util.Prompt;
 
-public class DonationRegisterHandler {
+public class DonationRegisterHandler { // 모금함 기부하기 양식 쓰는곳
 
   static final int MAX_LENGTH = 10;
 
   DonationRegisterDTO[] donationRegisters = new DonationRegisterDTO[MAX_LENGTH];
   int size;
 
+  // 모금함 기부하기
   public void add() {
     System.out.println("[모금함 기부하기]");
 
@@ -29,6 +30,7 @@ public class DonationRegisterHandler {
 
   }
 
+  // 모금함 기부 목록
   public void applyDonationList() {
     System.out.println("[모금함 기부 목록]");
 

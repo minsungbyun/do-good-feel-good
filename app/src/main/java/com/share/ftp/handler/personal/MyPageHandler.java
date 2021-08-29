@@ -1,32 +1,160 @@
 package com.share.ftp.handler.personal;
 
+import com.share.util.Prompt;
+
 public class MyPageHandler {
+
+  MyProfileHandler myProfileHandler =  new MyProfileHandler();
+  MyVolHandler myVolHandler = new MyVolHandler();
+  MyBoardListHandler myBoardListHandler = new MyBoardListHandler();
+  MyPointHandler myPointHandler = new MyPointHandler();
+  MyDonationHandler myDonationHandler = new MyDonationHandler();
+  ApproveOrgHandler approveOrgHandler = new ApproveOrgHandler();
+  WithdrawMemberHandler withdrawMemberHandler = new WithdrawMemberHandler();
+
   public void myProfile() {
-    System.out.println("나의 개인정보수정 창을 보여줌");
+
+    while (true) {
+      System.out.println();
+      System.out.println("[메인/ 마이페이지 / 회원정보수정]");
+      System.out.println("1. 회원정보 수정");
+      System.out.println("0. 이전메뉴");
+
+      int menuNo = Prompt.inputInt("메뉴> ");
+      switch (menuNo) {
+        case 1:myProfileHandler.updateMyProfile(); break;
+        case 0: return;
+        default:
+          System.out.println("무효한 메뉴 번호입니다.");
+      }
+      System.out.println();
+    }
   }
 
+
   public void myVolunteer() {
-    System.out.println("나의 봉사 목록");
+    while (true) {
+      System.out.println();
+      System.out.println("[메인/ 마이페이지 / 나의봉사]");
+      System.out.println("1. 신청내역");
+      System.out.println("2. 활동승인");
+      System.out.println("3. 찜한봉사");
+      System.out.println("0. 이전메뉴");
+
+      int menuNo = Prompt.inputInt("메뉴> ");
+      switch (menuNo) {
+        case 1:myVolHandler.showVolApplyList(); break;
+        case 2:myVolHandler.showApproveList(); break;
+        case 3:myVolHandler.showVolBookmark(); break;
+        case 0: return;
+        default:
+          System.out.println("무효한 메뉴 번호입니다.");
+      }
+      System.out.println();
+    }
   }
 
   public void myBoardList() {
-    System.out.println("나의 작성글 목록");
+    while (true) {
+      System.out.println();
+      System.out.println("[메인/ 마이페이지 / 나의작성글]");
+      System.out.println("1. 함께해요");
+      System.out.println("2. 나눔이야기");
+      System.out.println("3. 문의내역");
+      System.out.println("0. 이전메뉴");
+
+      int menuNo = Prompt.inputInt("메뉴> ");
+      switch (menuNo) {
+        case 1:myBoardListHandler.showVolBoardList(); break;
+        case 0: return;
+        default:
+          System.out.println("무효한 메뉴 번호입니다.");
+      }
+      System.out.println();
+    }
   }
 
   public void myPoint() {
-    System.out.println("나의 포인트");
+    while (true) {
+      System.out.println();
+      System.out.println("[메인/ 마이페이지 / 나의포인트]");
+      System.out.println("1. 나의포인트확인");
+      System.out.println("0. 이전메뉴");
+
+      int menuNo = Prompt.inputInt("메뉴> ");
+      switch (menuNo) {
+        case 1: myPointHandler.showMyPointList(); break;
+        case 0: return;
+        default:
+          System.out.println("무효한 메뉴 번호입니다.");
+      }
+      System.out.println();
+    }
   }
 
+
   public void myDonation() {
-    System.out.println("나의 기부내역 목록");
+    while (true) {
+      System.out.println();
+      System.out.println("[메인/ 마이페이지 / 나의모금함]");
+      System.out.println("1. 나의기부내역");
+      System.out.println("0. 이전메뉴");
+
+      int menuNo = Prompt.inputInt("메뉴> ");
+      switch (menuNo) {
+        case 1: myDonationHandler.showMyTotalDonation(); break;
+        case 0: return;
+        default:
+          System.out.println("무효한 메뉴 번호입니다.");
+      }
+      System.out.println();
+    }
   }
 
   public void approveOrganization() {
-    System.out.println("기관승인신청");
+    while (true) {
+      System.out.println();
+      System.out.println("[메인/ 마이페이지 / 기관승인신청]");
+      System.out.println("1. 기관인증신청");
+      System.out.println("1. 기관인증신청내역");
+      System.out.println("1. 기관인증신청상세보기");
+      System.out.println("1. 기관인증신청내역 변경");
+      System.out.println("1. 기관인증신청내역 삭제");
+      System.out.println("0. 이전메뉴");
+
+      int menuNo = Prompt.inputInt("메뉴> ");
+      switch (menuNo) {
+        case 1: approveOrgHandler.add(); break;
+        case 2: approveOrgHandler.list(); break;
+        case 3: approveOrgHandler.detail(); break;
+        case 4: approveOrgHandler.update(); break;
+        case 5: approveOrgHandler.delete(); break;
+        case 0: return;
+        default:
+          System.out.println("무효한 메뉴 번호입니다.");
+      }
+      System.out.println();
+    }
   }
 
   public void withdrawMember() {
-    System.out.println("회원탈퇴");
+    while (true) {
+      System.out.println();
+      System.out.println();
+      System.out.println("[메인/ 마이페이지 / 회원탈퇴]");
+      System.out.println("1. 탈퇴하기");
+      System.out.println("0. 이전메뉴");
+
+      int menuNo = Prompt.inputInt("메뉴> ");
+      switch (menuNo) {
+        case 1: withdrawMemberHandler.withdraw(); break;
+        case 0: return;
+        default:
+          System.out.println("무효한 메뉴 번호입니다.");
+      }
+      System.out.println();
+    }
+
   }
 
 }

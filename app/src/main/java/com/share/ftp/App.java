@@ -2,6 +2,7 @@ package com.share.ftp;
 
 
 import com.share.ftp.handler.admin.AdminPageHandler;
+import com.share.ftp.handler.admin.ShowDonationHandler;
 import com.share.ftp.handler.admin.ShowVolHandler;
 import com.share.ftp.handler.personal.ChallengeHandler;
 import com.share.ftp.handler.personal.CommHandler;
@@ -16,13 +17,11 @@ import com.share.util.Prompt;
 
 public class App {
 
-
-
   // 개인 페이지
   static PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler();
   static VolListHandler volListHandler = new VolListHandler(personalVolRequestHandler); 
-  static DonationRegisterHandler donationRegisterHandler;
-  static DonationDetailHandler donationDetailHandler = new DonationDetailHandler();
+  static DonationRegisterHandler donationRegisterHandler = new DonationRegisterHandler();
+  static DonationDetailHandler donationDetailHandler = new DonationDetailHandler(donationRegisterHandler);
   static DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationDetailHandler, donationRegisterHandler);
   static ChallengeHandler challengeHandler = new ChallengeHandler();
   static CommHandler commHandler = new CommHandler();
@@ -33,9 +32,9 @@ public class App {
 
 
   // 관리자 페이지
+  static ShowDonationHandler showDonationHandler = new ShowDonationHandler(donationBoardHandler);
   static ShowVolHandler showVolHandler = new ShowVolHandler(personalVolRequestHandler);
-  static AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler,showVolHandler); 
-
+  static AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler,showVolHandler,donationBoardHandler,showDonationHandler); 
 
   public static void main(String[] args) {
 
@@ -74,7 +73,8 @@ public class App {
 
   static void doVolunteerMenu() {
     while (true) {
-      System.out.println("[메인/함께해요]");
+      System.out.println();
+      System.out.println("[메인/ 함께해요]");
       System.out.println("1. 봉사신청");
       System.out.println("2. 봉사목록");
       System.out.println("3. 봉사참여");
@@ -100,7 +100,8 @@ public class App {
 
   static void doCommunityMenu() {
     while (true) {
-      System.out.println("[메인/소통해요]");
+      System.out.println();
+      System.out.println("[메인/ 소통해요]");
       System.out.println("1. 나눔이야기");
       System.out.println("2. 나눔이야기Best");
       System.out.println("3. 한줄후기");
@@ -137,16 +138,17 @@ public class App {
       }
       System.out.println();
     }
+
   }
 
   static void doDonationMenu() {
     while (true) {
+      System.out.println();
       System.out.println("[메인/모금함]");
       System.out.println("1. 모금함 목록");
       System.out.println("2. 모금함 상세보기");
       System.out.println("3. 기부 총 금액");
       System.out.println("4. 모금함 개설 신청");
-      System.out.println("5. ");
       System.out.println("0. 이전메뉴");
 
       int menuNo = Prompt.inputInt("모금함> ");
@@ -155,7 +157,6 @@ public class App {
         case 2: donationBoardHandler.detailDonation(); break;
         case 3: donationBoardHandler.totalDonationDetail(); break;
         case 4: donationBoardHandler.applyDonation(); break;
-        case 5: break;
         case 0: return;
         default:
           System.out.println("무효한 메뉴 번호입니다.");
@@ -186,7 +187,8 @@ public class App {
 
   static void doMyPageMenu() {
     while (true) {
-      System.out.println("[메인/마이페이지]");
+      System.out.println();
+      System.out.println("[메인/ 마이페이지]");
       System.out.println("1. 회원정보수정");
       System.out.println("2. 나의 봉사");
       System.out.println("3. 나의 작성글");
@@ -215,6 +217,7 @@ public class App {
 
   static void doAdminPageMenu() {
     while (true) {
+      System.out.println();
       System.out.println("[메인/관리자페이지]");
       System.out.println("1. 회원정보조회");
       System.out.println("2. 모금관리");
@@ -243,6 +246,7 @@ public class App {
   }
 
   static int doMainMenu() {
+    System.out.println();
     System.out.println("[행복하share에 오신것을 환영합니다.]");
     System.out.println("1. 함께해요");
     System.out.println("2. 소통해요");
