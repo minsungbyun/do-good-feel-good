@@ -2,7 +2,7 @@ package com.share.ftp.handler.personal;
 
 import com.share.util.Prompt;
 
-public class DonationDetailHandler {
+public class DonationDetailHandler { // 모금함 정보를 상세보기 하는 곳
 
   DonationRegisterHandler donationRegisterHandler;
 
@@ -11,10 +11,12 @@ public class DonationDetailHandler {
   }
 
 
+  // 모금함 정보 상세보기
   public void detailDonationInfo() {
     System.out.println("[모금함 정보 상세보기]");
   }
 
+  // 모금함 기부하기
   public void joinDonationList() {
     while (true) {
       try {
@@ -24,10 +26,6 @@ public class DonationDetailHandler {
         int menuNo = Prompt.inputInt("기부하기> ");
         switch (menuNo) {
           case 1: donationRegisterHandler.add(); break;
-          case 2: break;
-          case 3: break;
-          case 4: break;
-          case 5: break;
           case 0: return;
           default:
             System.out.println("무효한 메뉴 번호입니다.");

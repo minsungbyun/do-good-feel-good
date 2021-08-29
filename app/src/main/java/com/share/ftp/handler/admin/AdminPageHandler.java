@@ -29,6 +29,7 @@ public class AdminPageHandler {
     personalVolRequestHandler.applyList();
   }
 
+  // 기관이 모금함 개설 신청한 내역을 받아서 관리자가 관리
   public void showDonation() {
     while (true) {
       System.out.println("1. 모금활동 관리");
