@@ -6,7 +6,12 @@ import com.share.util.Prompt;
 public class QuestionListHandler {
 
   static final int MAX_LENGTH = 5;
+
   MyQuestionListDTO[] boards = new MyQuestionListDTO[MAX_LENGTH];
+<<<<<<< HEAD
+=======
+
+>>>>>>> 626bb7adce966a6a270ad6d2c794660e15664c37
   int size = 0;
 
 
