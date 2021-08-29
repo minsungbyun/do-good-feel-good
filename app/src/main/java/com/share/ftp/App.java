@@ -121,6 +121,7 @@ public class App {
 
   static void doChallengeMenu() {
     while (true) {
+      System.out.println();
       System.out.println("[메인/챌린지]");
       System.out.println("1. 이달의 챌린지");
       System.out.println("2. 이달의 랭킹");
@@ -165,6 +166,7 @@ public class App {
 
   static void doSupportMenu() {
     while (true) {
+      System.out.println();
       System.out.println("[메인/고객센터]");
       System.out.println("1. 공지사항");
       System.out.println("2. 문의하기");
