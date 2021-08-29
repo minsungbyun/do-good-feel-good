@@ -2,51 +2,32 @@ package com.share.ftp;
 
 
 import com.share.ftp.handler.admin.AdminPageHandler;
-import com.share.ftp.handler.admin.ShowVolHandler;
 import com.share.ftp.handler.personal.ChallengeHandler;
-<<<<<<< HEAD
+import com.share.ftp.handler.personal.CommHandler;
 import com.share.ftp.handler.personal.PersonalVolRequestHandler;
 import com.share.ftp.handler.personal.VolListHandler;
-=======
-<<<<<<< HEAD
-import com.share.ftp.handler.personal.CommHandler;
-=======
->>>>>>> 4c06da1b6cae24ab53d89fe0f3c64ab5fdcd8bc4
->>>>>>> 79df3bf96df76c428bb23c62d4d4d1c553e79b9b
 import com.share.util.Prompt;
 
 public class App {
 
-<<<<<<< HEAD
+
 
   // 개인 페이지
   static VolListHandler volListHandler = new VolListHandler(); 
   static ChallengeHandler challengeHandler = new ChallengeHandler();
+  static CommHandler commHandler = new CommHandler();
 
   // 기관 페이지
 
 
   // 관리자 페이지
   static PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler();
-  static ShowVolHandler showVolHandler = new ShowVolHandler(personalVolRequestHandler);
   static AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler); 
 
 
 
 
-
-=======
-<<<<<<< HEAD
-  static CommHandler commHandler = new CommHandler();
-  static ChallengeHandler challengeHandler = new ChallengeHandler();
-=======
-static ChallengeHandler challengeHandler = new ChallengeHandler();
->>>>>>> 4c06da1b6cae24ab53d89fe0f3c64ab5fdcd8bc4
->>>>>>> 79df3bf96df76c428bb23c62d4d4d1c553e79b9b
-
   public static void main(String[] args) {
-
-
 
     while (true) {
       try {
@@ -127,10 +108,7 @@ static ChallengeHandler challengeHandler = new ChallengeHandler();
   }
 
   static void doChallengeMenu() {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 79df3bf96df76c428bb23c62d4d4d1c553e79b9b
+
     while (true) {
       System.out.println("[메인/챌린지]");
       System.out.println("1. 이달의 챌린지");
@@ -148,28 +126,7 @@ static ChallengeHandler challengeHandler = new ChallengeHandler();
       System.out.println();
     }
   }
-<<<<<<< HEAD
-=======
-=======
-	    while (true) {
-	      System.out.println("[메인/챌린지]");
-	      System.out.println("1. 이달의 챌린지");
-	      System.out.println("2. 이달의 랭킹");
-	      System.out.println("0. 이전메뉴");
 
-	      int menuNo = Prompt.inputInt("챌린지> ");
-	      switch (menuNo) {
-	        case 1: challengeHandler.showChallenge(); break;
-	        case 2: challengeHandler.showRanking(); break;
-	        case 0: return;
-	        default:
-	          System.out.println("무효한 메뉴 번호입니다.");
-	      }
-	      System.out.println();
-	    }
-	  }
->>>>>>> 4c06da1b6cae24ab53d89fe0f3c64ab5fdcd8bc4
->>>>>>> 79df3bf96df76c428bb23c62d4d4d1c553e79b9b
 
   static void doDonationMenu() {
     while (true) {
