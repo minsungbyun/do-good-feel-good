@@ -1,6 +1,7 @@
 package com.share.ftp.handler.personal;
 
 import com.share.ftp.domain.personal.VolListDTO;
+import com.share.ftp.handler.admin.ShowOrgApproveHandler;
 import com.share.util.Prompt;
 
 public class VolListHandler {
@@ -11,6 +12,8 @@ public class VolListHandler {
 
   PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler();
   OrgVolRequestHandler orgVolRequestHandler = new OrgVolRequestHandler();
+  public ShowOrgApproveHandler showOrgApproveHandler;
+  public ApproveOrgHandler approveOrghandler;
 
   public void approveList() {
     System.out.println("관리자의 승인을 받은 리스트를 보여준다.");
@@ -30,12 +33,16 @@ public class VolListHandler {
       System.out.println("0. 이전메뉴");
       System.out.println("1. 개인봉사등록");
       System.out.println("2. 기관봉사등록");
+      System.out.println("3. 관리자 확인");
+      System.out.println("4. 확인");
 
       int input = Prompt.inputInt("번호 > ");
       switch (input) {
         case 0: 
         case 1: personalVolRequestHandler.apply(); break;
         case 2: orgVolRequestHandler.apply(); break;
+        case 3: showOrgApproveHandler.list(); break;
+        case 4: approveOrghandler.list(); break;
         default : System.out.println("다시 입력해주세요");
       }
       System.out.println();
