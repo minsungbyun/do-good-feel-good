@@ -27,7 +27,7 @@ public class ChallengeReviewHandler {
 	  public void list() {
 	    System.out.println("[참여인증&댓글 목록]");
 	    for (int i = 0; i < this.size; i++) {
-	      System.out.printf("%d, %s, %s, %s, %d, %d\n", 
+	      System.out.printf("%d, %s, %s, %s, %s", 
 	          this.boards[i].no, 
 	          this.boards[i].memberId, 
 	          this.boards[i].content,
