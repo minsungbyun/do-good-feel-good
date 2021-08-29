@@ -28,7 +28,7 @@ public class SupportHandler {
       int input = Prompt.inputInt("번호 > ");
       switch (input) {
         case 0: return;
-        case 1: questionListHandler.QuestionList(); break;
+        case 1: questionListHandler.questionList(); break;
         case 2: questionListHandler.addQuestionlist(); break;
         case 3: questionListHandler.detailQuestion(); break;
         case 4: questionListHandler.updateQuestion(); break;

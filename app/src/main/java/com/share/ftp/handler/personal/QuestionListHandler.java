@@ -27,7 +27,7 @@ public class QuestionListHandler {
     this.myQuestionLists[this.size++] = myQuestionList;
   }
 
-  public void QuestionList() {
+  public void questionList() {
     System.out.println("[게시글 목록]");
     for (int i = 0; i < this.size; i++) {
       System.out.printf("%d, %s, %s, %d, %s, %s, %s, %d\n", 
