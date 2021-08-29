@@ -47,7 +47,6 @@ public class ChallengeBoardHandler {
 
   public void showQuestionList() {
     System.out.println("문의하기");
-    <<<<<<< HEAD
 
     while (true) {
       System.out.println("챌린지 상세정보 / 문의하기");
@@ -71,42 +70,6 @@ public class ChallengeBoardHandler {
       }
       System.out.println();
     }
-
   }
-
-  =======
-
-      while (true) {
-        System.out.println("챌린지 상세정보 / 문의하기");
-        System.out.println("1. 문의 등록");
-        System.out.println("2. 문의 목록");
-        System.out.println("3. 문의 상세보기");
-        System.out.println("4. 문의 수정");
-        System.out.println("5. 문의 삭제");
-        System.out.println("0. 이전메뉴");
-        >>>>>>> c912884663083caf72315455f8db127709eb66e4
-
-    int menuNo = Prompt.inputInt("메뉴> ");
-    switch (menuNo) {
-      case 1: challengeQuestionHandler.add(); break;
-      case 2: challengeQuestionHandler.list(); break;
-      case 3: challengeQuestionHandler.detail(); break;
-      case 4: challengeQuestionHandler.update(); break;
-      case 5: challengeQuestionHandler.delete(); break;
-      case 0: return;
-      default:
-        System.out.println("무효한 메뉴 번호입니다.");
-    }
-    System.out.println();
-      }
 }
-}
-<<<<<<< HEAD
 
-
-
-
-
-
-=======
->>>>>>> c912884663083caf72315455f8db127709eb66e4
