@@ -1,13 +1,20 @@
 package com.share.ftp;
 
 import com.share.ftp.handler.personal.ChallengeHandler;
+<<<<<<< HEAD
 import com.share.ftp.handler.personal.CommHandler;
+=======
+>>>>>>> 4c06da1b6cae24ab53d89fe0f3c64ab5fdcd8bc4
 import com.share.util.Prompt;
 
 public class App {
 
+<<<<<<< HEAD
   static CommHandler commHandler = new CommHandler();
   static ChallengeHandler challengeHandler = new ChallengeHandler();
+=======
+static ChallengeHandler challengeHandler = new ChallengeHandler();
+>>>>>>> 4c06da1b6cae24ab53d89fe0f3c64ab5fdcd8bc4
 
   public static void main(String[] args) {
     while (true) {
@@ -91,6 +98,7 @@ public class App {
   }
 
   static void doChallengeMenu() {
+<<<<<<< HEAD
     while (true) {
       System.out.println("[메인/챌린지]");
       System.out.println("1. 이달의 챌린지");
@@ -108,6 +116,25 @@ public class App {
       System.out.println();
     }
   }
+=======
+	    while (true) {
+	      System.out.println("[메인/챌린지]");
+	      System.out.println("1. 이달의 챌린지");
+	      System.out.println("2. 이달의 랭킹");
+	      System.out.println("0. 이전메뉴");
+
+	      int menuNo = Prompt.inputInt("챌린지> ");
+	      switch (menuNo) {
+	        case 1: challengeHandler.showChallenge(); break;
+	        case 2: challengeHandler.showRanking(); break;
+	        case 0: return;
+	        default:
+	          System.out.println("무효한 메뉴 번호입니다.");
+	      }
+	      System.out.println();
+	    }
+	  }
+>>>>>>> 4c06da1b6cae24ab53d89fe0f3c64ab5fdcd8bc4
 
   static void doDonationMenu() {
     while (true) {
