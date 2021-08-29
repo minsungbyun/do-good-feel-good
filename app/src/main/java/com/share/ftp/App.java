@@ -5,6 +5,7 @@ import com.share.ftp.handler.admin.AdminPageHandler;
 import com.share.ftp.handler.personal.ChallengeHandler;
 import com.share.ftp.handler.personal.CommHandler;
 import com.share.ftp.handler.personal.PersonalVolRequestHandler;
+import com.share.ftp.handler.personal.SupportHandler;
 import com.share.ftp.handler.personal.VolListHandler;
 import com.share.util.Prompt;
 
@@ -26,6 +27,8 @@ public class App {
 
 
 
+
+  static SupportHandler supportHandler = new SupportHandler();
 
   public static void main(String[] args) {
 
@@ -108,7 +111,6 @@ public class App {
   }
 
   static void doChallengeMenu() {
-
     while (true) {
       System.out.println("[메인/챌린지]");
       System.out.println("1. 이달의 챌린지");
@@ -126,7 +128,6 @@ public class App {
       System.out.println();
     }
   }
-
 
   static void doDonationMenu() {
     while (true) {
@@ -156,20 +157,14 @@ public class App {
   static void doSupportMenu() {
     while (true) {
       System.out.println("[메인/고객센터]");
-      System.out.println("1. ");
-      System.out.println("2. ");
-      System.out.println("3. ");
-      System.out.println("4. ");
-      System.out.println("5. ");
+      System.out.println("1. 공지사항");
+      System.out.println("2. 문의하기");
       System.out.println("0. 이전메뉴");
 
       int menuNo = Prompt.inputInt("고객센터> ");
       switch (menuNo) {
-        case 1: break;
-        case 2: break;
-        case 3: break;
-        case 4: break;
-        case 5: break;
+        case 1: supportHandler.showNoticeList(); break;
+        case 2: supportHandler.showQuestionList(); break;
         case 0: return;
         default:
           System.out.println("무효한 메뉴 번호입니다.");

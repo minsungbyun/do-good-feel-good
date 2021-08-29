@@ -2,7 +2,7 @@ package com.share.ftp.handler.personal;
 
 public class NoticeListHandler {
 
-  public void NoticeList() {
+  public static void NoticeList() {
     System.out.println("공지사항 목록");
   }
   public void NoticeDetail() {
