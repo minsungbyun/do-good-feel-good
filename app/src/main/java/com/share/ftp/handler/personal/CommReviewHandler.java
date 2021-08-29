@@ -91,8 +91,8 @@ public class CommReviewHandler {
     this.commReviewDTOs[--this.size] = null;
 
     System.out.println("삭제되었습니다.");
+    System.out.println();
   }
-
 }
 
 
