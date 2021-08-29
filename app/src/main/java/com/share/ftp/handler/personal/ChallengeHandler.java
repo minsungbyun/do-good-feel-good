@@ -53,8 +53,4 @@ public class ChallengeHandler {
 
   }
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 4c06da1b6cae24ab53d89fe0f3c64ab5fdcd8bc4
