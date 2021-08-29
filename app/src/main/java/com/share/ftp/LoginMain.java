@@ -1,11 +1,8 @@
 package com.share.ftp;
 
-import com.share.ftp.handler.personal.SupportHandler;
 import com.share.util.Prompt;
 
-public class App {
-
-  static SupportHandler supportHandler = new SupportHandler();
+public class LoginMain {
 
   public static void main(String[] args) {
     while (true) {
@@ -15,19 +12,15 @@ public class App {
         if (menuNo == 0) {
           break;
         } else if (menuNo == 1) {
-          doVolunteerMenu();
+          doLoginMenu();
         } else if (menuNo == 2) {
-          doCommunityMenu();
+          doSignupMenu();
         } else if (menuNo == 3) {
-          doChallengeMenu();
+          doFindIdMenu();
         } else if (menuNo == 4) {
-          doDonationMenu();
+          doFindpwMenu();
         } else if (menuNo == 5) {
-          doSupportMenu();
-        } else if (menuNo == 6) {
-          doMyPageMenu();
-        } else if (menuNo == 7) {
-          doAdminPageMenu();
+          doSnsLoginMenu();
         } else {
           System.out.println("메뉴 번호가 유효하지 않습니다.");
         }
@@ -41,7 +34,33 @@ public class App {
     Prompt.close();
   }
 
-  static void doVolunteerMenu() {
+  static void doLoginMenu() {
+    while (true) {
+      System.out.println("[메인/로그인]");
+      System.out.println("1. 로그인");
+      System.out.println("2. ");
+      System.out.println("3. ");
+      System.out.println("4. ");
+      System.out.println("5. ");
+      System.out.println("6. ");
+      System.out.println("0. 이전메뉴");
+
+      int menuNo = Prompt.inputInt("함께해요> ");
+      switch (menuNo) {
+        case 1: break;
+        case 2: break;
+        case 3: break;
+        case 4: break;
+        case 5: break;
+        case 0: return;
+        default:
+          System.out.println("무효한 메뉴 번호입니다.");
+      }
+      System.out.println();
+    }
+  }
+
+  static void doSignupMenu() {
     while (true) {
       System.out.println("[메인/함께해요]");
       System.out.println("1. ");
@@ -67,42 +86,18 @@ public class App {
     }
   }
 
-  static void doCommunityMenu() {
+  static void doFindIdMenu() {
     while (true) {
-      System.out.println("[메인/소통해요]");
+      System.out.println("[메인/함께해요]");
       System.out.println("1. ");
       System.out.println("2. ");
       System.out.println("3. ");
       System.out.println("4. ");
       System.out.println("5. ");
+      System.out.println("6. ");
       System.out.println("0. 이전메뉴");
 
-      int menuNo = Prompt.inputInt("소통해요> ");
-      switch (menuNo) {
-        case 1: break;
-        case 2: break;
-        case 3: break;
-        case 4: break;
-        case 5: break;
-        case 0: return;
-        default:
-          System.out.println("무효한 메뉴 번호입니다.");
-      }
-      System.out.println();
-    } 
-  }
-
-  static void doChallengeMenu() {
-    while (true) {
-      System.out.println("[메인/챌린지]");
-      System.out.println("1. ");
-      System.out.println("2. ");
-      System.out.println("3. ");
-      System.out.println("4. ");
-      System.out.println("5. ");
-      System.out.println("0. 이전메뉴");
-
-      int menuNo = Prompt.inputInt("챌린지> ");
+      int menuNo = Prompt.inputInt("함께해요> ");
       switch (menuNo) {
         case 1: break;
         case 2: break;
@@ -117,17 +112,18 @@ public class App {
     }
   }
 
-  static void doDonationMenu() {
+  static void doFindpwMenu() {
     while (true) {
-      System.out.println("[메인/모금함]");
+      System.out.println("[메인/함께해요]");
       System.out.println("1. ");
       System.out.println("2. ");
       System.out.println("3. ");
       System.out.println("4. ");
       System.out.println("5. ");
+      System.out.println("6. ");
       System.out.println("0. 이전메뉴");
 
-      int menuNo = Prompt.inputInt("모금함> ");
+      int menuNo = Prompt.inputInt("함께해요> ");
       switch (menuNo) {
         case 1: break;
         case 2: break;
@@ -142,36 +138,18 @@ public class App {
     }
   }
 
-  static void doSupportMenu() {
+  static void doSnsLoginMenu() {
     while (true) {
-      System.out.println("[메인/고객센터]");
-      System.out.println("1. 공지사항");
-      System.out.println("2. 문의하기");
-      System.out.println("0. 이전메뉴");
-
-      int menuNo = Prompt.inputInt("고객센터> ");
-      switch (menuNo) {
-        case 1: supportHandler.showNoticeList(); break;
-        case 2: supportHandler.showQuestionList(); break;
-        case 0: return;
-        default:
-          System.out.println("무효한 메뉴 번호입니다.");
-      }
-      System.out.println();
-    }
-  }
-
-  static void doMyPageMenu() {
-    while (true) {
-      System.out.println("[메인/마이페이지]");
+      System.out.println("[메인/함께해요]");
       System.out.println("1. ");
       System.out.println("2. ");
       System.out.println("3. ");
       System.out.println("4. ");
       System.out.println("5. ");
+      System.out.println("6. ");
       System.out.println("0. 이전메뉴");
 
-      int menuNo = Prompt.inputInt("마이페이지> ");
+      int menuNo = Prompt.inputInt("함께해요> ");
       switch (menuNo) {
         case 1: break;
         case 2: break;
@@ -186,40 +164,15 @@ public class App {
     }
   }
 
-  static void doAdminPageMenu() {
-    while (true) {
-      System.out.println("[메인/관리자페이지]");
-      System.out.println("1. ");
-      System.out.println("2. ");
-      System.out.println("3. ");
-      System.out.println("4. ");
-      System.out.println("5. ");
-      System.out.println("0. 이전메뉴");
-
-      int menuNo = Prompt.inputInt("관리자페이지> ");
-      switch (menuNo) {
-        case 1: break;
-        case 2: break;
-        case 3: break;
-        case 4: break;
-        case 5: break;
-        case 0: return;
-        default:
-          System.out.println("무효한 메뉴 번호입니다.");
-      }
-      System.out.println();
-    }
-  }
 
   static int doMainMenu() {
     System.out.println("[행복하share에 오신것을 환영합니다.]");
-    System.out.println("1. 함께해요");
-    System.out.println("2. 소통해요");
-    System.out.println("3. 챌린지");
-    System.out.println("4. 모금함");
-    System.out.println("5. 고객센터");
-    System.out.println("6. 마이페이지");
-    System.out.println("7. 관리자페이지");
+
+    System.out.println("1. 로그인");
+    System.out.println("2. 회원가입");
+    System.out.println("3. 아이디찾기");
+    System.out.println("4. 비밀번호찾기");
+    System.out.println("5. SNS로그인");
     System.out.println("0. 종료");
     return Prompt.inputInt("메뉴번호> "); 
   }
