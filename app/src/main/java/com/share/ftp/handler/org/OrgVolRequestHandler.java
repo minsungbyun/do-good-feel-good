@@ -20,7 +20,7 @@ public class OrgVolRequestHandler {
     orgRequestDTO.setSort(Prompt.inputString("분류? ")); 
     orgRequestDTO.setTel(Prompt.inputString("전화번호? ")); 
     orgRequestDTO.setEmail(Prompt.inputString("이메일? ")); 
-    orgRequestDTO.setVolunteerPeriod(Prompt.inputDate("봉사기간? ")); 
+    orgRequestDTO.setVolunteerPeriod(Prompt.inputString("봉사기간? ")); 
     orgRequestDTO.setVolunteerTime(new Date(System.currentTimeMillis())); 
     orgRequestDTO.setVolunteerList(Prompt.inputString("봉사시간? ")); 
     orgRequestDTO.setContent(Prompt.inputString("내용? ")); 
