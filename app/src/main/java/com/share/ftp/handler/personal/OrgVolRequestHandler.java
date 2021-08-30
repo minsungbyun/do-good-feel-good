@@ -24,7 +24,8 @@ public class OrgVolRequestHandler {
       orgRequestDTO.setEmail(Prompt.inputString("이메일? ")); 
       orgRequestDTO.setVolunteerPeriod(Prompt.inputString("봉사기간? ")); 
       orgRequestDTO.setVolunteerTime(new Date(System.currentTimeMillis())); 
-      orgRequestDTO.setVolunteerList(Prompt.inputString("봉사시간? ")); 
+      orgRequestDTO.setVolunteerList(Prompt.inputString("봉사목록? ")); 
+      orgRequestDTO.setJoinNum(Prompt.inputInt("봉사인원? ")); 
       orgRequestDTO.setContent(Prompt.inputString("내용? ")); 
       orgRequestDTO.setFileUpload(Prompt.inputString("파일? ")); 
       orgRequestDTO.setIsOrg(true); 
@@ -44,7 +45,8 @@ public class OrgVolRequestHandler {
   public void applyList() {
     System.out.println("[기관봉사신청 목록]");
     for (int i = 0; i < this.size; i++) {
-      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %b \n", 
+      System.out.printf("번호: %d\n봉사제목: %s\n전화번호: %s\n이메일: %s\n봉사기간: %s\n봉사시간: %s"
+      		+ "봉사목록: %s\n봉사인원: %d\n봉사내용: %s\n첨부파일: %s\n승인여부: %b \n\n", 
           this.orgRequestsDTO[i].getNo(), 
           this.orgRequestsDTO[i].getTitle(), 
           this.orgRequestsDTO[i].getTel(),
@@ -52,6 +54,7 @@ public class OrgVolRequestHandler {
           this.orgRequestsDTO[i].getVolunteerPeriod(),
           this.orgRequestsDTO[i].getVolunteerTime(),
           this.orgRequestsDTO[i].getVolunteerList(),
+          this.orgRequestsDTO[i].getJoinNum(),
           this.orgRequestsDTO[i].getContent(),
           this.orgRequestsDTO[i].getFileUpload(),
           this.orgRequestsDTO[i].isOrg()

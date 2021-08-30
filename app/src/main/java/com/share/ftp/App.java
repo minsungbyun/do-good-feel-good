@@ -40,7 +40,6 @@ public class App {
 
   // 마이 페이지
 
-
   // 기관 페이지
 
 

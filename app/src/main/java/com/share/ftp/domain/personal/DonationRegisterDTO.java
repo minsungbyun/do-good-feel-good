@@ -26,8 +26,7 @@ public class DonationRegisterDTO {
     return donationMoney;
   }
   public void setDonationMoney(int donationMoney) {
-    DonationMoney = donationMoney;
-
+    this.donationMoney = donationMoney;
   }
   public void setName(String name) {
     this.name = name;
