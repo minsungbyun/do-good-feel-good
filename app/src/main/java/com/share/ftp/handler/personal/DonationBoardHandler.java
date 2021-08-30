@@ -54,27 +54,36 @@ public class DonationBoardHandler {
   // 기부 총 금액
   public void totalDonationDetail() {
     System.out.println("[기부 총 금액]");
+    donationRegisterHandler.totalDonationMoney();
   }
 
   // 모금함 개설 신청(기관)
   public void applyDonation() {
     System.out.println("[모금함 개설 신청]");
+    System.out.println("[1.아동] [2.청소년] [3.어르신] [4.장애인] [5.동물] [6.환경] [7.기타] ");
+
 
     DonationBoardDTO donationBoard = new DonationBoardDTO();
 
+    try {
+      donationBoard.setNo(Prompt.inputInt("개설번호: "));
+      donationBoard.setTitle(Prompt.inputString("제목: "));
+      donationBoard.setLeader(Prompt.inputString("주최자: "));
+      donationBoard.setContent(Prompt.inputString("내용: "));
+      donationBoard.setFileUpload(Prompt.inputString("첨부파일: "));
+      donationBoard.setPassword(Prompt.inputString("비밀번호: "));
+      donationBoard.setRegisteredDate(Prompt.inputDate("제안기간(yyyy-mm-dd): "));
 
-    donationBoard.setNo(Prompt.inputInt("개설번호: "));
-    donationBoard.setTitle(Prompt.inputString("제목: "));
-    donationBoard.setLeader(Prompt.inputString("주최자: "));
-    donationBoard.setContent(Prompt.inputString("내용: "));
-    donationBoard.setFileUpload(Prompt.inputString("첨부파일: "));
-    donationBoard.setPassword(Prompt.inputString("비밀번호: "));
-    donationBoard.setRegisteredDate(Prompt.inputDate("제안기간(yyyy-mm-dd): "));
+      donationBoardDTO[size++] = donationBoard;
 
-    donationBoardDTO[size++] = donationBoard;
+      System.out.println("[모금함 개설 신청이 완료되었습니다.]");
 
-    System.out.println("[모금함 개설 신청이 완료되었습니다.]");
-
+    } catch (Throwable e) {
+      System.out.println("--------------------------------------------------------------");
+      System.out.printf("오류 발생: %s\n", e.getClass().getName());
+      System.out.println("--------------------------------------------------------------");
+      System.out.println("제안기간의 양식에 맞춰서 작성 해주세요");
+    }
   }
 
   // 모금함 개설 신청내역 목록을 -> 관리자에게 전달

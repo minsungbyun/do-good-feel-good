@@ -4,18 +4,14 @@ import java.sql.Date;
 
 public class DonationRegisterDTO {
   private int no;
-<<<<<<< HEAD
   private int donationMoney;
-=======
-  private int DonationMoney;
-
->>>>>>> 22dc14b705c1b80efcd4c2cccfc40fc9256607eb
   private String name;
   private String registerationNumber;
   private Date birthDate;
   private String tel;
   private String email;
   private String address;
+
   public int getNo() {
     return no;
   }
@@ -26,17 +22,10 @@ public class DonationRegisterDTO {
     return name;
   }
   public int getDonationMoney() {
-<<<<<<< HEAD
     return donationMoney;
   }
   public void setDonationMoney(int donationMoney) {
     this.donationMoney = donationMoney;
-=======
-    return DonationMoney;
-  }
-  public void setDonationMoney(int donationMoney) {
-    DonationMoney = donationMoney;
->>>>>>> 22dc14b705c1b80efcd4c2cccfc40fc9256607eb
   }
   public void setName(String name) {
     this.name = name;
