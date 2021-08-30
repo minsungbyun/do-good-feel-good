@@ -11,7 +11,8 @@ public class CommHandler {
   public void commBoard() {
 
     while (true) {
-      System.out.println("[소통해요/ 나눔이야기]");
+      System.out.println();
+      System.out.println("[메인/소통해요/나눔이야기]");
       System.out.println("1. 등록");
       System.out.println("2. 목록");
       System.out.println("3. 상세보기");
@@ -35,8 +36,9 @@ public class CommHandler {
   }
 
   public void commBest() {
+    System.out.println();
     while (true) {
-      System.out.println("소통해요/ 나눔이야기 Best");
+      System.out.println("[메인/소통해요/나눔이야기Best]");
       System.out.println("1. 목록");
       System.out.println("2. 상세보기");
       System.out.println("0. 이전메뉴");
@@ -54,9 +56,9 @@ public class CommHandler {
   }
 
   public void commReview() {
-
+    System.out.println();
     while (true) {
-      System.out.println("소통해요/ 한줄후기");
+      System.out.println("[메인/소통해요/한줄후기]");
       System.out.println("1. 등록");
       System.out.println("2. 목록");
       System.out.println("3. 변경");
