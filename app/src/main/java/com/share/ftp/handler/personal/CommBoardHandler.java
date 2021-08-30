@@ -14,7 +14,7 @@ public class CommBoardHandler {
   public void add() {
 
     System.out.println();
-    System.out.println("[소통해요/ 나눔이야기/ 등록]");
+    System.out.println("[메인/소통해요/나눔이야기/등록]");
 
     try {
 
@@ -38,7 +38,7 @@ public class CommBoardHandler {
 
   public void list() {
     System.out.println();
-    System.out.println("[소통해요/ 나눔이야기/ 목록]");
+    System.out.println("[메인/소통해요/나눔이야기/목록]");
     for (int i = 0; i < this.size; i++) {
       System.out.printf("%d, %s, %s, %s, %s, %d\n", 
           this.commBoardsDTO[i].getNo(), 
@@ -53,7 +53,7 @@ public class CommBoardHandler {
 
   public void detail() {
     System.out.println();
-    System.out.println("[소통해요/ 나눔이야기/ 상세보기]");
+    System.out.println("[메인/소통해요/나눔이야기/상세보기]");
     int no = Prompt.inputInt("번호? ");
 
     CommBoardDTO commBoardDTO = findByNo(no);
@@ -75,7 +75,7 @@ public class CommBoardHandler {
 
   public void update() {
     System.out.println();
-    System.out.println("[소통해요/ 나눔이야기/ 게시글변경]");
+    System.out.println("[메인/소통해요/나눔이야기/게시글변경]");
     int no = Prompt.inputInt("번호? ");
 
     CommBoardDTO commBoardDTO = findByNo(no);
@@ -104,7 +104,7 @@ public class CommBoardHandler {
 
   public void delete() {
     System.out.println();
-    System.out.println("[소통해요/ 나눔이야기/ 게시글삭제]");
+    System.out.println("[메인/소통해요/나눔이야기/게시글삭제]");
     int no = Prompt.inputInt("번호? ");
 
     int index = indexOf(no);

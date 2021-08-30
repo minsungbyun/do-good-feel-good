@@ -53,27 +53,6 @@ public class DonationRegisterHandler { // 모금함 기부하기 양식 쓰는�
 
   public void totalDonationMoney() {
 
-    //    for (int i = 0; i < this.size; i++) {
-    //      System.out.printf("기부금액: %d ",donationRegisters[i].getDonationMoney());
-    //    }
-    //
-    //    DonationRegisterDTO[] arr = new DonationRegisterDTO[this.size];
-    //    for (DonationRegisterDTO donation : arr) {
-    //      System.out.printf("기부 총 금액 : %d", donation.getDonationMoney());
-
-
-    for (int i = 0; i < this.size; i++) {
-      total += donationRegisters[i].getDonationMoney();
-    }
-
-
-
-
-
-
-    //    int 배열 int[] arr = { 1, 2, 3, 4, 5 }; 
-    //    합계 계산 int sum = 0; for (int num : arr) { sum += num; }
-    //     결과 출력 System.out.println(sum); 
 
 
 
