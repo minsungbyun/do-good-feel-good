@@ -145,9 +145,27 @@ public class CommBoardHandler {
     return -1;
   }
 
+  public CommBoardDTO[] chooseBoard() {
+
+    // 조회수 높은 상위 3개 담을 배열
+    CommBoardDTO[] top3 = new CommBoardDTO[3];
+
+    CommBoardDTO max = commBoardsDTO[0];
+
+    for (int i = 0; i < this.size; i++) {
+      if (max.getViewCount() < commBoardsDTO[i].getViewCount()) {
+        max = commBoardsDTO[i];
+        top3[0] = max;
+      }
+    }
+    return top3;
+
+  }
+
+
+
+
 }
-
-
 
 
 

@@ -41,11 +41,15 @@ public class ShowVolHandler { // 개인, 기관이 신청한 양식 보는 곳
       int input = Prompt.inputInt("번호> ");
 
       if (input == 1) {
+        // 개인 봉사 승인
         personalVolRequestHandler.acceptApply();
         break;
+
       } else if (input == 2) {
+        // 기관 봉사 승인
         orgVolRequestHandler.acceptApply();
         break;
+
       } else {
         System.out.println("잘못 입력하셨습니다. 다시 입력해주세요");
         System.out.println();
@@ -64,11 +68,14 @@ public class ShowVolHandler { // 개인, 기관이 신청한 양식 보는 곳
       int input = Prompt.inputInt("번호> ");
 
       if (input == 1) {
+        // 개인 봉사 반려
         personalVolRequestHandler.rejectApply();
         break;
-      } else if (input == 2) {
+      } else if (input == 2) {        
+        // 기관 봉사 반려
         orgVolRequestHandler.rejectApply();
         break;
+
       } else {
         System.out.println("잘못 입력하셨습니다. 다시 입력해주세요");
         System.out.println();

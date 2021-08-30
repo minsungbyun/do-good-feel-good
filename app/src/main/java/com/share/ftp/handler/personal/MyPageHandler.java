@@ -4,8 +4,15 @@ import com.share.util.Prompt;
 
 public class MyPageHandler {
 
+  MyVolHandler myVolHandler;
+
+  public MyPageHandler(MyVolHandler myVolHandler) {
+    this.myVolHandler = myVolHandler;
+  }
+
+
   MyProfileHandler myProfileHandler =  new MyProfileHandler();
-  MyVolHandler myVolHandler = new MyVolHandler();
+
   MyBoardListHandler myBoardListHandler = new MyBoardListHandler();
   MyPointHandler myPointHandler = new MyPointHandler();
   MyDonationHandler myDonationHandler = new MyDonationHandler();

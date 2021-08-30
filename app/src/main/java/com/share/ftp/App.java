@@ -5,11 +5,14 @@ import com.share.ftp.handler.admin.AdminPageHandler;
 import com.share.ftp.handler.admin.ShowDonationHandler;
 import com.share.ftp.handler.admin.ShowVolHandler;
 import com.share.ftp.handler.personal.ChallengeHandler;
+import com.share.ftp.handler.personal.CommBestHandler;
+import com.share.ftp.handler.personal.CommBoardHandler;
 import com.share.ftp.handler.personal.CommHandler;
 import com.share.ftp.handler.personal.DonationBoardHandler;
 import com.share.ftp.handler.personal.DonationDetailHandler;
 import com.share.ftp.handler.personal.DonationRegisterHandler;
 import com.share.ftp.handler.personal.MyPageHandler;
+import com.share.ftp.handler.personal.MyVolHandler;
 import com.share.ftp.handler.personal.OrgVolRequestHandler;
 import com.share.ftp.handler.personal.PersonalVolRequestHandler;
 import com.share.ftp.handler.personal.SupportHandler;
@@ -25,11 +28,17 @@ public class App {
   static DonationRegisterHandler donationRegisterHandler = new DonationRegisterHandler();
   static DonationDetailHandler donationDetailHandler = new DonationDetailHandler(donationRegisterHandler);
 
+
+  static CommBoardHandler commBoardHandler = new CommBoardHandler();
+  static MyVolHandler myVolHandler = new MyVolHandler(personalVolRequestHandler);
   static DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationDetailHandler, donationRegisterHandler);
   static ChallengeHandler challengeHandler = new ChallengeHandler();
-  static CommHandler commHandler = new CommHandler();
+  static CommBestHandler commBestHandler = new CommBestHandler(commBoardHandler);
+  static CommHandler commHandler = new CommHandler(commBoardHandler,commBestHandler);
   static SupportHandler supportHandler = new SupportHandler();
-  static MyPageHandler myPageHandler = new MyPageHandler();
+  static MyPageHandler myPageHandler = new MyPageHandler(myVolHandler);
+
+  // 마이 페이지
 
   // 기관 페이지
 
@@ -83,7 +92,6 @@ public class App {
       System.out.println("1. 봉사신청");
       System.out.println("2. 봉사목록");
       System.out.println("3. 봉사참여");
-      System.out.println("4. 개인폼(테스트)");
       System.out.println("0. 이전메뉴");
 
       int menuNo = Prompt.inputInt("함께해요> ");
@@ -93,7 +101,6 @@ public class App {
         case 1: volListHandler.volAuthForm();break;
         case 2: volListHandler.volApprovedList(); break;
         case 3: volListHandler.volJoin(); break;
-        case 4: personalVolRequestHandler.apply(); break;
         case 0: return;
         default:
           System.out.println("무효한 메뉴 번호입니다.");
