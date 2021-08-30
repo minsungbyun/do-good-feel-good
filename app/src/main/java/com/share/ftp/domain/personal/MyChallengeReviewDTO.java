@@ -3,6 +3,7 @@ package com.share.ftp.domain.personal;
 import java.sql.Date;
 
 public class MyChallengeReviewDTO {
+<<<<<<< HEAD
 	  public int no;
 	  public String content;
 	  public String memberId;
@@ -40,4 +41,11 @@ public class MyChallengeReviewDTO {
 		this.registeredDate = registeredDate;
 	}
 	
+=======
+  public int no;
+  public String content;
+  public String memberId;
+  public String fileUpload;
+  public Date registeredDate;
+>>>>>>> f0ec0913e6ae0b89a6e038b2a3cb418ccb769dad
 }
