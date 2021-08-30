@@ -6,88 +6,88 @@ import com.share.util.Prompt;
 
 public class CommBoardHandler {
 
-  static final int MAX_LENGTH = 5;
+  static final int MAX_LENGTH = 100;
 
-  CommBoardDTO[] commBoardDTOs = new CommBoardDTO[MAX_LENGTH];
-  int size = 0;
+  CommBoardDTO[] commBoardsDTO = new CommBoardDTO[MAX_LENGTH];
+  int size;
 
   public void add() {
-    System.out.println("[나눔이야기 등록]");
 
-    CommBoardDTO commBoardDTO = new CommBoardDTO();
+    System.out.println();
+    System.out.println("[소통해요/ 나눔이야기/ 등록]");
 
-    commBoardDTO.no = Prompt.inputInt("번호? ");
-    commBoardDTO.title = Prompt.inputString("제목? ");
-    commBoardDTO.content = Prompt.inputString("내용? ");
-    commBoardDTO.fileUpload = Prompt.inputString("첨부파일? ");
-    commBoardDTO.password = Prompt.inputString("비밀번호? ");
-    commBoardDTO.registeredDate = new Date(System.currentTimeMillis());
+    try {
 
-    this.commBoardDTOs[this.size++] = commBoardDTO;
+      CommBoardDTO commBoardDTO = new CommBoardDTO();
+
+      commBoardDTO.setNo(Prompt.inputInt("번호? "));
+      commBoardDTO.setTitle(Prompt.inputString("제목? "));
+      commBoardDTO.setContent(Prompt.inputString("내용? "));
+      commBoardDTO.setFileUpload(Prompt.inputString("첨부파일? "));
+      commBoardDTO.setPassword(Prompt.inputString("비밀번호? "));
+      commBoardDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+      commBoardsDTO[size++] = commBoardDTO;
+
+    } catch (Throwable e) {
+      System.out.println("--------------------------------------------------------------");
+      System.out.printf("오류 발생: %s\n", e.getClass().getName());
+      System.out.println("--------------------------------------------------------------");
+    }
   }
 
   public void list() {
-    System.out.println("[나눔이야기 목록]");
+    System.out.println();
+    System.out.println("[소통해요/ 나눔이야기/ 목록]");
     for (int i = 0; i < this.size; i++) {
-      System.out.printf("%d, %s, %s, %s, %s, %s, %d\n", 
-          this.commBoardDTOs[i].no, 
-          this.commBoardDTOs[i].title, 
-          this.commBoardDTOs[i].content,
-          this.commBoardDTOs[i].fileUpload,
-          this.commBoardDTOs[i].password,
-          this.commBoardDTOs[i].registeredDate, 
-          this.commBoardDTOs[i].viewCount);
+      System.out.printf("%d, %s, %s, %s, %s, %d\n", 
+          this.commBoardsDTO[i].getNo(), 
+          this.commBoardsDTO[i].getTitle(), 
+          this.commBoardsDTO[i].getContent(),
+          this.commBoardsDTO[i].getFileUpload(),
+          //this.commBoardsDTO[i].getPassword(),
+          this.commBoardsDTO[i].getRegisteredDate(), 
+          this.commBoardsDTO[i].getViewCount());
     }
   }
 
   public void detail() {
-    System.out.println("[상세보기]");
+    System.out.println();
+    System.out.println("[소통해요/ 나눔이야기/ 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    CommBoardDTO commBoardDTO = null;
-
-    for (int i = 0; i < this.size; i++) {
-      if (this.commBoardDTOs[i].no == no) {
-        commBoardDTO = this.commBoardDTOs[i];
-        break;
-      }
-    }
+    CommBoardDTO commBoardDTO = findByNo(no);
 
     if (commBoardDTO == null) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
+      System.out.println("해당 게시글이 없습니다.");
       return;
     }
 
-    System.out.printf("번호: %s\n", commBoardDTO.no);
-    System.out.printf("제목: %s\n", commBoardDTO.title);
-    System.out.printf("내용: %s\n", commBoardDTO.content);
-    System.out.printf("작성자: %s\n", commBoardDTO.fileUpload);
-    System.out.printf("작성자: %s\n", commBoardDTO.password);
-    System.out.printf("등록일: %s\n", commBoardDTO.registeredDate);
-    System.out.printf("조회수: %d\n", ++commBoardDTO.viewCount);
+    System.out.printf("번호: %s\n", commBoardDTO.getNo());
+    System.out.printf("제목: %s\n", commBoardDTO.getTitle());
+    System.out.printf("내용: %s\n", commBoardDTO.getContent());
+    System.out.printf("작성자: %s\n", commBoardDTO.getFileUpload());
+    System.out.printf("등록일: %s\n", commBoardDTO.getRegisteredDate());
+
+    commBoardDTO.setViewCount(commBoardDTO.getViewCount() + 1);
+    System.out.printf("조회수: %d\n", commBoardDTO.getViewCount());
   }
 
   public void update() {
-    System.out.println("[게시글 변경]");
+    System.out.println();
+    System.out.println("[소통해요/ 나눔이야기/ 게시글변경]");
     int no = Prompt.inputInt("번호? ");
 
-    CommBoardDTO commBoardDTO = null;
-
-    for (int i = 0; i < this.size; i++) {
-      if (this.commBoardDTOs[i].no == no) {
-        commBoardDTO = this.commBoardDTOs[i];
-        break;
-      }
-    }
+    CommBoardDTO commBoardDTO = findByNo(no);
 
     if (commBoardDTO == null) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
+      System.out.println("해당 게시글이 없습니다.");
       return;
     }
 
-    String title = Prompt.inputString(String.format("제목(%s)? ", commBoardDTO.title));
-    String content = Prompt.inputString(String.format("내용(%s)? ", commBoardDTO.content));
-    String fileUpload = Prompt.inputString(String.format("첨부파일(%s)? ", commBoardDTO.fileUpload));
+    String title = Prompt.inputString(String.format("제목(%s)? ", commBoardDTO.getTitle()));
+    String content = Prompt.inputString(String.format("내용(%s)? ", commBoardDTO.getContent()));
+    String fileUpload = Prompt.inputString(String.format("첨부파일(%s)? ", commBoardDTO.getFileUpload()));
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -95,49 +95,77 @@ public class CommBoardHandler {
       return;
     }
 
-    commBoardDTO.title = title;
-    commBoardDTO.content = content;
-    commBoardDTO.fileUpload = fileUpload;
+    commBoardDTO.setTitle(title);
+    commBoardDTO.setContent(content);
+    commBoardDTO.setFileUpload(fileUpload);
 
     System.out.println("게시글을 변경하였습니다.");
   }
 
   public void delete() {
-    System.out.println("[게시글 삭제]");
+    System.out.println();
+    System.out.println("[소통해요/ 나눔이야기/ 게시글삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    int commBoardIndex = -1;
+    int index = indexOf(no);
 
-    // Board 인스턴스가 들어 있는 배열을 뒤져서
-    // 게시글 번호와 일치하는 Board 인스턴스를 찾는다. 
-    for (int i = 0; i < this.size; i++) {
-      if (this.commBoardDTOs[i].no == no) {
-        commBoardIndex = i;
-        break;
-      }
-    }
-
-    if (commBoardIndex == -1) {
+    if (index == -1) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
 
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      System.out.println("게시글 삭제를 취소하였습니다.");
       return;
     }
 
-    for (int i = commBoardIndex + 1; i < this.size; i++) {
-      this.commBoardDTOs[i - 1] = this.commBoardDTOs[i];
+    for (int i = index + 1; i < this.size; i++) {
+      this.commBoardsDTO[i - 1] = this.commBoardsDTO[i];
     }
-    this.commBoardDTOs[--this.size] = null;
+    this.commBoardsDTO[--this.size] = null;
 
     System.out.println("게시글을 삭제하였습니다.");
   }
 
+  private CommBoardDTO findByNo(int no) {
+    for (int i = 0; i < this.size; i++) {
+      if(this.commBoardsDTO[i].getNo() == no) {
+        return this.commBoardsDTO[i];
+      }
+    }
+    return null;
+  }
+  private int indexOf(int no) {
+    for (int i = 0; i < this.size; i++) {
+      if (this.commBoardsDTO[i].getNo() == no) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  public CommBoardDTO[] chooseBoard() {
+
+    // 조회수 높은 상위 3개 담을 배열
+    CommBoardDTO[] top3 = new CommBoardDTO[3];
+
+    CommBoardDTO max = commBoardsDTO[0];
+
+    for (int i = 0; i < this.size; i++) {
+      if (max.getViewCount() < commBoardsDTO[i].getViewCount()) {
+        max = commBoardsDTO[i];
+        top3[0] = max;
+      }
+    }
+    return top3;
+
+  }
+
+
+
+
 }
-
-
 
 
 

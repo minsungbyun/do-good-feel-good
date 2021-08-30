@@ -4,8 +4,12 @@ import com.share.util.Prompt;
 
 public class CommHandler {
 
-  CommBoardHandler commBoardHandler = new CommBoardHandler();
-  CommBestHandler commBestHandler = new CommBestHandler();
+  CommBoardHandler commBoardHandler;
+  CommBestHandler commBestHandler;
+  public CommHandler( CommBoardHandler commBoardHandler,CommBestHandler commBestHandler) {
+    this.commBoardHandler = commBoardHandler;
+    this.commBestHandler = commBestHandler;
+  }
   CommReviewHandler commReviewHandler = new CommReviewHandler();
 
   public void commBoard() {

@@ -1,8 +1,17 @@
 package com.share.ftp.handler.personal;
 
 public class MyVolHandler {
+
+  PersonalVolRequestHandler personalVolRequestHandler;
+  public MyVolHandler(PersonalVolRequestHandler personalVolRequestHandler) {
+    this.personalVolRequestHandler = personalVolRequestHandler;
+  }
+
+
   public void showVolApplyList() {
-    System.out.println("승인신청내역");
+    //승인 봉사 목록
+    personalVolRequestHandler.appliedList();
+
   }
   public void showApproveList() {
     System.out.println("활동승인내역");
