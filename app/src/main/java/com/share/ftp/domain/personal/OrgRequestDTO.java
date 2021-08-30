@@ -12,6 +12,7 @@ public class OrgRequestDTO {
   private String volunteerPeriod;
   private Date volunteerTime;
   private String volunteerList;
+  private int joinNum;
   private String content;
   private String fileUpload;
   private boolean isOrg;
@@ -64,7 +65,13 @@ public class OrgRequestDTO {
   public void setVolunteerList(String volunteerList) {
     this.volunteerList = volunteerList;
   }
-  public String getContent() {
+  public int getJoinNum() {
+    return joinNum;
+}
+  public void setJoinNum(int joinNum) {
+    this.joinNum = joinNum;
+}
+public String getContent() {
     return content;
   }
   public void setContent(String content) {

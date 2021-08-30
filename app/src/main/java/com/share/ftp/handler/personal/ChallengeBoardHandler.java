@@ -1,28 +1,35 @@
 package com.share.ftp.handler.personal;
 
+import com.share.ftp.domain.personal.MyChallengeReviewDTO;
 import com.share.util.Prompt;
 
 public class ChallengeBoardHandler {
+  static final int MAX_LENGTH = 10;
+  int size;
+
+  MyChallengeReviewDTO myChallengeReview = new MyChallengeReviewDTO();
 
   ChallengeReviewHandler challengeReviewHandler = new ChallengeReviewHandler();
   ChallengeQuestionHandler challengeQuestionHandler = new ChallengeQuestionHandler();
 
   public void join() {
-    System.out.println("참여하기");
+    System.out.println();
+    System.out.println("챌린지/ 이달의 챌린지/ 챌린지 상세정보 / 참여하기");
     System.out.println("참여가 완료되었습니다.");
   }
 
   public void showMemberList() {
-    System.out.println("참여자 정보");
+    System.out.println();
+    System.out.println("챌린지/ 이달의 챌린지/ 챌린지 상세정보 / 참여자 정보");
     System.out.println("참여자 목록");
   }
 
   public void showReview() {
-
-    System.out.println("[참여인증&댓글]");
+    System.out.println();
+    System.out.println("챌린지/ 이달의 챌린지/ 챌린지 상세정보 / 참여인증&댓글");
 
     while (true) {
-      System.out.println("챌린지 상세정보 / 참여인증&댓글");
+      System.out.println("[참여인증&댓글]");
       System.out.println("1. 댓글 등록");
       System.out.println("2. 댓글 목록");
       System.out.println("3. 댓글 상세보기");
@@ -46,10 +53,11 @@ public class ChallengeBoardHandler {
   }
 
   public void showQuestionList() {
-    System.out.println("문의하기");
+    System.out.println();
+    System.out.println("챌린지/ 이달의 챌린지/ 챌린지 상세정보 / 문의하기");
 
     while (true) {
-      System.out.println("챌린지 상세정보 / 문의하기");
+      System.out.println("문의하기");
       System.out.println("1. 문의 등록");
       System.out.println("2. 문의 목록");
       System.out.println("3. 문의 상세보기");

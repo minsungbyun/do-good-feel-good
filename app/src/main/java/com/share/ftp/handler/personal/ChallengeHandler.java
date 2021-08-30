@@ -9,10 +9,11 @@ public class ChallengeHandler {
   RankingHandler rankingHandler = new RankingHandler();
 
   public void showChallenge() {
-    System.out.println("[이달의 챌린지]");
+    System.out.println();
+    System.out.println("챌린지/ 이달의챌린지");
 
     while (true) {
-      System.out.println("챌린지/ 이달의챌린지");
+      System.out.println("[이달의 챌린지]");
       System.out.println("1. 목록");
       System.out.println("2. 상세보기");
       System.out.println("0. 이전메뉴");
@@ -31,10 +32,11 @@ public class ChallengeHandler {
   }
 
   public void showRanking() {
-    System.out.println("[이달의 랭킹]");
+    System.out.println();
+    System.out.println("챌린지/ 이달의랭킹");
 
     while (true) {
-      System.out.println("챌린지/ 이달의랭킹");
+      System.out.println("[이달의 랭킹]");
       System.out.println("1. 전체랭킹");
       System.out.println("2. 나의랭킹");
       System.out.println("0. 이전메뉴");
