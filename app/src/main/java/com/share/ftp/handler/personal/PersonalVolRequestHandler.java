@@ -24,7 +24,8 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
       personalRequestDTO.setEmail(Prompt.inputString("이메일? ")); 
       personalRequestDTO.setVolunteerPeriod(Prompt.inputString("봉사기간? ")); 
       personalRequestDTO.setVolunteerTime(new Date(System.currentTimeMillis())); 
-      personalRequestDTO.setVolunteerList(Prompt.inputString("봉사시간? ")); 
+      personalRequestDTO.setVolunteerList(Prompt.inputString("봉사목록? ")); 
+      personalRequestDTO.setJoinNum(Prompt.inputInt("봉사인원? "));
       personalRequestDTO.setContent(Prompt.inputString("내용? ")); 
       personalRequestDTO.setFileUpload(Prompt.inputString("파일? ")); 
       personalRequestDTO.setIsOrg(false); 
@@ -49,7 +50,8 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
   public void applyList() {
     System.out.println("[개인봉사신청 목록]");
     for (int i = 0; i < this.size; i++) {
-      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %b \n", 
+      System.out.printf("번호: %d\n봉사제목: %s\n전화번호: %s\n이메일: %s\n봉사기간: %s\n봉사시간: %s\n"
+      		+ "봉사목록: %s\n봉사인원: %d\n봉사내용: %s\n첨부파일: %s\n승인여부: %b \n\n", 
           this.personalRequestsDTO[i].getNo(), 
           this.personalRequestsDTO[i].getTitle(), 
           this.personalRequestsDTO[i].getTel(),
@@ -57,6 +59,7 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
           this.personalRequestsDTO[i].getVolunteerPeriod(),
           this.personalRequestsDTO[i].getVolunteerTime(),
           this.personalRequestsDTO[i].getVolunteerList(),
+          this.personalRequestsDTO[i].getJoinNum(),
           this.personalRequestsDTO[i].getContent(),
           this.personalRequestsDTO[i].getFileUpload(),
           this.personalRequestsDTO[i].isOrg()

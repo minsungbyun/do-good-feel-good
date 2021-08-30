@@ -11,10 +11,11 @@ public class ChallengeListHandler {
 	}
 	
 	public void showDetail() {
-		System.out.println("챌린지 상세정보");
+		System.out.println();
+		System.out.println("챌린지/ 이달의챌린지/ 챌린지 상세정보");
 		
 	    while (true) {
-	      System.out.println("이달의챌린지/ 챌린지 상세정보");
+	      System.out.println("[챌린지 상세정보]");
 	      System.out.println("1. 참여하기");
 	      System.out.println("2. 참여자 보기");
 	      System.out.println("3. 참여인증&댓글");
