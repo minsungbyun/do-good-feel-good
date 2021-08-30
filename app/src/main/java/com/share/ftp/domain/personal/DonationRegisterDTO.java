@@ -11,6 +11,7 @@ public class DonationRegisterDTO {
   private String tel;
   private String email;
   private String address;
+
   public int getNo() {
     return no;
   }

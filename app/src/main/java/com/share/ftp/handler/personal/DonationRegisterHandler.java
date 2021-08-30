@@ -13,6 +13,7 @@ public class DonationRegisterHandler { // 모금함 기부하기 양식 쓰는�
   int total;
 
 
+
   // 모금함 기부하기
   public void add() {
     System.out.println("[모금함 기부하기]");
@@ -58,9 +59,7 @@ public class DonationRegisterHandler { // 모금함 기부하기 양식 쓰는�
     }
     System.out.printf("기부 총 금액 : %d\n", total);
   }
-
 }
-
 
 
 
