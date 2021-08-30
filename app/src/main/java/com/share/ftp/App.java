@@ -36,8 +36,8 @@ public class App {
 
   // 관리자 페이지
   static ShowVolHandler showVolHandler = new ShowVolHandler(personalVolRequestHandler,orgVolRequestHandler);
-  static AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler,showVolHandler); 
   static ShowDonationHandler showDonationHandler = new ShowDonationHandler(donationBoardHandler);
+  static AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler,showVolHandler,donationBoardHandler,showDonationHandler); 
 
   public static void main(String[] args) {
 

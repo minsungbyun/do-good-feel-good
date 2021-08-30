@@ -12,6 +12,7 @@ public class PersonalRequestDTO {
   private String volunteerPeriod;
   private Date volunteerTime;
   private String volunteerList;
+  private int joinNum;
   private String content;
   private String fileUpload;
   private boolean isOrg;
@@ -63,6 +64,12 @@ public class PersonalRequestDTO {
   }
   public void setVolunteerList(String volunteerList) {
     this.volunteerList = volunteerList;
+  }
+  public int getJoinNum() {
+    return joinNum;
+  }
+  public void setJoinNum(int joinNum) {
+    this.joinNum = joinNum;
   }
   public String getContent() {
     return content;
