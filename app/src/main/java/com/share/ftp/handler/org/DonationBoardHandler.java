@@ -7,8 +7,14 @@ public class DonationBoardHandler {
 
   static final int MAX_LENGTH = 10;
 
+
   DonationBoardDTO[] donationBoards = new DonationBoardDTO[MAX_LENGTH];
+  DonationRegisterHandler donationRegisterHandler;
   int size;
+
+  public DonationBoardHandler(DonationRegisterHandler donationRegisterHandler) {
+    this.donationRegisterHandler = donationRegisterHandler;
+  }
 
   public void list() {
     System.out.println("모금함 목록");
@@ -19,7 +25,25 @@ public class DonationBoardHandler {
   }
 
   public void totalDonationDetail() {
-    System.out.println("기부 총 금액");
+    while (true) {
+      try {
+        System.out.println("[기부 총 금액]");
+        System.out.println("0. 이전메뉴");
+
+        int menuNo = Prompt.inputInt("신청내역 상세보기> ");
+        switch (menuNo) {
+          case 1: 
+          case 0: return;
+          default:
+            System.out.println("무효한 메뉴 번호입니다.");
+        }
+        System.out.println();
+      } catch (Throwable e) {
+        System.out.println("--------------------------------------------------------------");
+        System.out.printf("오류 발생: %s\n", e.getClass().getName());
+        System.out.println("--------------------------------------------------------------");
+      }
+    }
   }
 
   public void applyDonation() {

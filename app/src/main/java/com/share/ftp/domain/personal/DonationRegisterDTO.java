@@ -5,13 +5,13 @@ import java.sql.Date;
 public class DonationRegisterDTO {
   private int no;
   private int donationMoney;
-  private int DonationMoney;
   private String name;
   private String registerationNumber;
   private Date birthDate;
   private String tel;
   private String email;
   private String address;
+
   public int getNo() {
     return no;
   }
@@ -22,7 +22,6 @@ public class DonationRegisterDTO {
     return name;
   }
   public int getDonationMoney() {
-
     return donationMoney;
   }
   public void setDonationMoney(int donationMoney) {
