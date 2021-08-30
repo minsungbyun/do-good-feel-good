@@ -4,6 +4,8 @@ import java.sql.Date;
 
 public class DonationRegisterDTO {
   private int no;
+  private int DonationMoney;
+
   private String name;
   private String registerationNumber;
   private Date birthDate;
@@ -18,6 +20,12 @@ public class DonationRegisterDTO {
   }
   public String getName() {
     return name;
+  }
+  public int getDonationMoney() {
+    return DonationMoney;
+  }
+  public void setDonationMoney(int donationMoney) {
+    DonationMoney = donationMoney;
   }
   public void setName(String name) {
     this.name = name;
