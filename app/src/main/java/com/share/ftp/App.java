@@ -8,6 +8,7 @@ import com.share.ftp.handler.personal.ChallengeHandler;
 import com.share.ftp.handler.personal.CommBestHandler;
 import com.share.ftp.handler.personal.CommBoardHandler;
 import com.share.ftp.handler.personal.CommHandler;
+import com.share.ftp.handler.personal.CommReviewHandler;
 import com.share.ftp.handler.personal.DonationBoardHandler;
 import com.share.ftp.handler.personal.DonationDetailHandler;
 import com.share.ftp.handler.personal.DonationRegisterHandler;
@@ -28,13 +29,13 @@ public class App {
   static DonationRegisterHandler donationRegisterHandler = new DonationRegisterHandler();
   static DonationDetailHandler donationDetailHandler = new DonationDetailHandler(donationRegisterHandler);
 
-
-  static CommBoardHandler commBoardHandler = new CommBoardHandler();
+  static CommReviewHandler commReviewHandler = new CommReviewHandler();
+  static CommBoardHandler commBoardHandler = new CommBoardHandler(null);
   static MyVolHandler myVolHandler = new MyVolHandler(personalVolRequestHandler);
   static DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationDetailHandler, donationRegisterHandler);
   static ChallengeHandler challengeHandler = new ChallengeHandler();
   static CommBestHandler commBestHandler = new CommBestHandler(commBoardHandler);
-  static CommHandler commHandler = new CommHandler(commBoardHandler,commBestHandler);
+  static CommHandler commHandler = new CommHandler(commBoardHandler,commBestHandler,commReviewHandler);
   static SupportHandler supportHandler = new SupportHandler();
   static MyPageHandler myPageHandler = new MyPageHandler(myVolHandler);
 
