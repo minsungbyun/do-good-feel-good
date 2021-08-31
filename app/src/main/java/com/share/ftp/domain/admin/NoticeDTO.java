@@ -1,6 +1,7 @@
 package com.share.ftp.domain.admin;
 
 import java.sql.Date;
+import java.util.Objects;
 
 public class NoticeDTO {
 
@@ -11,6 +12,33 @@ public class NoticeDTO {
   private String fileUpload;
   private Date registeredDate;
   private int viewCount;
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(adminId, content, fileUpload, no, registeredDate, title, viewCount);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    NoticeDTO other = (NoticeDTO) obj;
+    return Objects.equals(adminId, other.adminId) && Objects.equals(content, other.content)
+        && Objects.equals(fileUpload, other.fileUpload) && no == other.no
+        && Objects.equals(registeredDate, other.registeredDate)
+        && Objects.equals(title, other.title) && viewCount == other.viewCount;
+  }
+
+  @Override
+  public String toString() {
+    return "NoticeDTO [no=" + no + ", adminId=" + adminId + ", title=" + title + ", content="
+        + content + ", fileUpload=" + fileUpload + ", registeredDate=" + registeredDate
+        + ", viewCount=" + viewCount + "]";
+  }
 
   public int getNo() {
     return no;
