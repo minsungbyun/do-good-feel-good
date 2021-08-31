@@ -10,11 +10,7 @@ public class MyPageHandler {
     this.myVolHandler = myVolHandler;
   }
 
-  MyBoardListHandler myBoardListHandler = new MyBoardListHandler();
-  MyPointHandler myPointHandler = new MyPointHandler();
-  MyDonationHandler myDonationHandler = new MyDonationHandler();
-  ApproveOrgHandler approveOrgHandler = new ApproveOrgHandler();
-  WithdrawMemberHandler withdrawMemberHandler = new WithdrawMemberHandler();
+
 
   public void myProfile() {
 
@@ -26,7 +22,7 @@ public class MyPageHandler {
 
       int menuNo = Prompt.inputInt("메뉴> ");
       switch (menuNo) {
-        case 1:myProfileHandler.updateMyProfile(); break;
+        case 1: myProfileHandler.updateMyProfile(); break;
         case 0: return;
         default:
           System.out.println("무효한 메뉴 번호입니다.");

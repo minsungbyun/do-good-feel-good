@@ -31,9 +31,8 @@ public class CommReviewHandler {
     System.out.println();
     System.out.println("[소통해요/ 한줄후기/ 목록]");
 
-    CommReviewDTO[] commReviewsDTO = new CommReviewDTO [commReviewDTOList.size()];
 
-    for (CommReviewDTO commReviewDTO : commReviewsDTO) {
+    for (CommReviewDTO commReviewDTO : commReviewDTOList) {
       System.out.printf("%d, %s, %s\n", 
           commReviewDTO.getNo(), 
           commReviewDTO.getContent(),
@@ -89,8 +88,7 @@ public class CommReviewHandler {
   }
 
   private CommReviewDTO findByNo(int no) {
-    CommReviewDTO[] arr = commReviewDTOList.toArray(new  CommReviewDTO[0]);
-    for(CommReviewDTO  commReviewDTO : arr) {
+    for(CommReviewDTO  commReviewDTO : commReviewDTOList) {
       if(commReviewDTO.getNo() == no) {
         return commReviewDTO;
       }

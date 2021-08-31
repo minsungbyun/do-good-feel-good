@@ -2,18 +2,19 @@ package com.share.ftp.handler.personal;
 
 import java.util.List;
 import com.share.ftp.domain.personal.DonationBoardDTO;
+import com.share.ftp.domain.personal.DonationRegisterDTO;
 import com.share.util.Prompt;
 
 public class DonationBoardHandler {
 
   List<DonationBoardDTO> donationBoardDTOList;
-  DonationDetailHandler donationDetailHandler;
-  DonationRegisterHandler donationRegisterHandler;
+  List<DonationRegisterDTO> donationRegisterDTOList;
+  //  DonationDetailHandler donationDetailHandler;
 
-  public DonationBoardHandler(List<DonationBoardDTO> donationBoardDTOList, DonationDetailHandler donationDetailHandler, DonationRegisterHandler donationRegisterHandler) {
+  public DonationBoardHandler(List<DonationBoardDTO> donationBoardDTOList, List<DonationRegisterDTO> donationRegisterDTOList) {
     this.donationBoardDTOList = donationBoardDTOList;
-    this.donationDetailHandler = donationDetailHandler;
-    this.donationRegisterHandler = donationRegisterHandler;
+    //    this.donationDetailHandler = donationDetailHandler;
+    this.donationRegisterDTOList = donationRegisterDTOList;
   }
 
   // 모금함 목록
