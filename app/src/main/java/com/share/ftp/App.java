@@ -31,6 +31,7 @@ import com.share.ftp.handler.admin.ShowVolHandler;
 import com.share.ftp.handler.org.DonationRegisterHandler;
 import com.share.ftp.handler.org.OrgVolRequestHandler;
 import com.share.ftp.handler.org.PersonalVolRequestHandler;
+import com.share.ftp.handler.personal.ApproveOrgHandler;
 import com.share.ftp.handler.personal.ChallengeHandler;
 import com.share.ftp.handler.personal.CommBestHandler;
 import com.share.ftp.handler.personal.CommBoardHandler;
@@ -38,11 +39,16 @@ import com.share.ftp.handler.personal.CommHandler;
 import com.share.ftp.handler.personal.CommReviewHandler;
 import com.share.ftp.handler.personal.DonationBoardHandler;
 import com.share.ftp.handler.personal.DonationDetailHandler;
-import com.share.ftp.handler.personal.MyPageHandler;
+import com.share.ftp.handler.personal.MyBoardListHandler;
+import com.share.ftp.handler.personal.MyDonationHandler;
+import com.share.ftp.handler.personal.MyPointHandler;
 import com.share.ftp.handler.personal.MyVolHandler;
+import com.share.ftp.handler.personal.NoticeListHandler;
+import com.share.ftp.handler.personal.QuestionListHandler;
 import com.share.ftp.handler.personal.SupportHandler;
 import com.share.ftp.handler.personal.VolApprovedHandler;
 import com.share.ftp.handler.personal.VolListHandler;
+import com.share.ftp.handler.personal.WithdrawMemberHandler;
 import com.share.menu.Menu;
 import com.share.menu.MenuGroup;
 import com.share.util.Prompt;
@@ -80,26 +86,23 @@ public class App {
   List<NoticeDTO> noticeDTO = new ArrayList<>();
   List<QuestionDTO> questionDTO = new ArrayList<>();
 
+
   // 함께해요 핸들러(기능)
+
   static PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler();
   static OrgVolRequestHandler orgVolRequestHandler = new OrgVolRequestHandler();
-
   static VolApprovedHandler volApprovedHandler = new VolApprovedHandler();
-
   static VolListHandler volListHandler = new VolListHandler(personalVolRequestHandler,orgVolRequestHandler);
-  // 개인 페이지
-
 
   // 소통해요 핸들러(기능)
-  static CommReviewHandler commReviewHandler = new CommReviewHandler();
   static CommBoardHandler commBoardHandler = new CommBoardHandler();
   static CommBestHandler commBestHandler = new CommBestHandler(commBoardHandler);
-  static CommHandler commHandler = new CommHandler(commBoardHandler,commBestHandler);
+  static CommReviewHandler commReviewHandler = new CommReviewHandler();
+  static CommHandler commHandler = new CommHandler(commBoardHandler,commBestHandler,commReviewHandler);
 
 
   // 챌린지 핸들러(기능)
   static ChallengeHandler challengeHandler = new ChallengeHandler();
-
 
 
   // 기부 핸들러(기능)
@@ -109,29 +112,44 @@ public class App {
 
   // 마이페이지 핸들러(기능)
   static MyVolHandler myVolHandler = new MyVolHandler(personalVolRequestHandler);
-  static MyPageHandler myPageHandler = new MyPageHandler(myVolHandler);
 
-  // 고객센터 핸들러(기능)
-  static SupportHandler supportHandler = new SupportHandler();
+  static QuestionListHandler questionListHandler = new QuestionListHandler();
+  static NoticeListHandler noticeListHandler = new NoticeListHandler();
+  static MyBoardListHandler myBoardListHandler = new MyBoardListHandler();
+  static MyPointHandler myPointHandler = new MyPointHandler();
+  static MyDonationHandler myDonationHandler = new MyDonationHandler();
+  static ApproveOrgHandler approveOrgHandler = new ApproveOrgHandler();
+  static WithdrawMemberHandler withdrawMemberHandler = new WithdrawMemberHandler();
+
+
 
   // 관리자 핸들러(기능)
+
   // 회원정보 관련 Handler
   static ShowMemberHandler showMemberHandler = new ShowMemberHandler();
   static ShowVolHandler showVolHandler = new ShowVolHandler(personalVolRequestHandler,orgVolRequestHandler);
   static ShowDonationHandler showDonationHandler = new ShowDonationHandler(donationBoardHandler);
 
+
   // 공지사항 관련
   static ShowNoticeHandler showNoticeHandler = new ShowNoticeHandler();
   // 문의사항 관련
-  static ShowQuestionHandler showQuestionHandler = new ShowQuestionHandler();
+  static ShowQuestionHandler showQuestionHandler = new ShowQuestionHandler(questionDTOList);
+
+  // 고객센터 핸들러(기능)
+  static SupportHandler supportHandler = new SupportHandler(questionListHandler, noticeListHandler);
 
   // 챌린지관리 관련
   static ShowChallengeHandler showChallengeHandler = new ShowChallengeHandler();
 
   // 기관승인 관련
   static ShowOrgApproveHandler showOrgApproveHandler = new ShowOrgApproveHandler();
-
   static AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler,showVolHandler, donationBoardHandler, showDonationHandler); 
+
+
+  // 마이 페이지
+
+
 
 
 
