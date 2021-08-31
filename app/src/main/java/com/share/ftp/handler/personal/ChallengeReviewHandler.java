@@ -1,14 +1,18 @@
 package com.share.ftp.handler.personal;
 
 import java.sql.Date;
+import java.util.List;
 import com.share.ftp.domain.personal.MyChallengeReviewDTO;
 import com.share.util.Prompt;
 
 public class ChallengeReviewHandler {
-  static final int MAX_LENGTH = 100;
 
-  MyChallengeReviewDTO[] myChallengeReviews = new MyChallengeReviewDTO[MAX_LENGTH];
-  int size = 0;
+  List<MyChallengeReviewDTO> myChallengeReviewDTOList;
+
+  public ChallengeReviewHandler(List<MyChallengeReviewDTO> myChallengeReviewDTOList) {
+    this.myChallengeReviewDTOList = myChallengeReviewDTOList;
+  }
+
 
   public void add() {
     System.out.println("[참여인증&댓글 등록]");
@@ -21,18 +25,18 @@ public class ChallengeReviewHandler {
     myChallengeReview.setFileUpload(Prompt.inputString("파일첨부: "));
     myChallengeReview.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    this.myChallengeReviews[this.size++] = myChallengeReview;
+    myChallengeReviewDTOList.add(myChallengeReview);
   }
 
   public void list() {
     System.out.println("[참여인증&댓글 목록]");
-    for (int i = 0; i < this.size; i++) {
+    for (MyChallengeReviewDTO myChallengeReviewDTO : myChallengeReviewDTOList) {
       System.out.printf("%d, %s, %s, %s, %s", 
-          this.myChallengeReviews[i].getNo(), 
-          this.myChallengeReviews[i].getMemberId(), 
-          this.myChallengeReviews[i].getContent(),
-          this.myChallengeReviews[i].getFileUpload(),
-          this.myChallengeReviews[i].getRegisteredDate());
+          myChallengeReviewDTO.getNo(), 
+          myChallengeReviewDTO.getMemberId(), 
+          myChallengeReviewDTO.getContent(),
+          myChallengeReviewDTO.getFileUpload(),
+          myChallengeReviewDTO.getRegisteredDate());
     }
   }
 
@@ -40,32 +44,32 @@ public class ChallengeReviewHandler {
     System.out.println("[참여인증&댓글 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    MyChallengeReviewDTO myChallengeReview = findByNo(no);
+    MyChallengeReviewDTO myChallengeReviewDTO = findByNo(no);
 
-    if (myChallengeReview == null) {
+    if (myChallengeReviewDTO == null) {
       System.out.println("해당 번호의 참여인증&댓글이 없습니다.");
       return;
     }
 
-    System.out.printf("아이디: %s\n", myChallengeReview.getMemberId());
-    System.out.printf("내용: %s\n", myChallengeReview.getContent());
-    System.out.printf("파일첨부: %s\n", myChallengeReview.getFileUpload());
-    System.out.printf("등록일: %s\n", myChallengeReview.getRegisteredDate());
+    System.out.printf("아이디: %s\n", myChallengeReviewDTO.getMemberId());
+    System.out.printf("내용: %s\n", myChallengeReviewDTO.getContent());
+    System.out.printf("파일첨부: %s\n", myChallengeReviewDTO.getFileUpload());
+    System.out.printf("등록일: %s\n", myChallengeReviewDTO.getRegisteredDate());
   }
 
   public void update() {
     System.out.println("[참여인증&댓글 변경]");
     int no = Prompt.inputInt("번호? ");
 
-    MyChallengeReviewDTO myChallengeReview = findByNo(no);
+    MyChallengeReviewDTO myChallengeReviewDTO = findByNo(no);
 
-    if (myChallengeReview == null) {
+    if (myChallengeReviewDTO == null) {
       System.out.println("해당 번호의 참여인증&댓글이 없습니다.");
       return;
     }
 
-    String content = Prompt.inputString(String.format("내용(%s)? ", myChallengeReview.getContent()));
-    String fileUpload = Prompt.inputString(String.format("파일첨부(%s)? ", myChallengeReview.getFileUpload()));
+    String content = Prompt.inputString(String.format("내용(%s)? ", myChallengeReviewDTO.getContent()));
+    String fileUpload = Prompt.inputString(String.format("파일첨부(%s)? ", myChallengeReviewDTO.getFileUpload()));
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -73,8 +77,8 @@ public class ChallengeReviewHandler {
       return;
     }
 
-    myChallengeReview.setContent(content);
-    myChallengeReview.setFileUpload(fileUpload);
+    myChallengeReviewDTO.setContent(content);
+    myChallengeReviewDTO.setFileUpload(fileUpload);
     System.out.println("참여인증&댓글을 변경하였습니다.");
   }
 
@@ -82,9 +86,9 @@ public class ChallengeReviewHandler {
     System.out.println("[댓글 삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    int index = indexOf(no);
+    MyChallengeReviewDTO myChallengeReviewDTO = findByNo(no);
 
-    if (index == -1) {
+    if (myChallengeReviewDTO == null) {
       System.out.println("해당 번호의 참여인증&댓글이 없습니다.");
       return;
     }
@@ -95,40 +99,20 @@ public class ChallengeReviewHandler {
       return;
     }
 
-    for (int i = index + 1; i < this.size; i++) {
-      this.myChallengeReviews[i - 1] = this.myChallengeReviews[i];
-    }
-    this.myChallengeReviews[--this.size] = null;
+    myChallengeReviewDTOList.remove(myChallengeReviewDTO);
 
     System.out.println("참여인증&댓글을 삭제하였습니다.");
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 5817a6d96c08be8e7c859f806417750d10136fe5
->>>>>>> e4ea84d2e301647c2b888afd2a1efe0585243009
-=======
->>>>>>> 416a1777ac3b9ac218dd56cc3aed17e787feb5a3
   private MyChallengeReviewDTO findByNo(int no) {
-    for (int i = 0; i < this.size; i++) {
-      if (this.myChallengeReviews[i].getNo() == no) {
-        return this.myChallengeReviews[i];
+    for (MyChallengeReviewDTO myChallengeReviewDTO : myChallengeReviewDTOList) {
+      if (myChallengeReviewDTO.getNo() == no) {
+        return myChallengeReviewDTO;
       }
     }
     return null;
   }
 
-  private int indexOf(int no) {
-    for (int i = 0; i < this.size; i++) {
-      if (this.myChallengeReviews[i].getNo() == no) {
-        return i;
-      }
-    }
-    return -1;
-  }
+
 }

@@ -9,12 +9,13 @@ public class DonationBoardHandler {
 
   List<DonationBoardDTO> donationBoardDTOList;
   List<DonationRegisterDTO> donationRegisterDTOList;
+  DonationRegisterHandler donationRegisterHandler;
   //  DonationDetailHandler donationDetailHandler;
 
-  public DonationBoardHandler(List<DonationBoardDTO> donationBoardDTOList, List<DonationRegisterDTO> donationRegisterDTOList) {
+  public DonationBoardHandler(List<DonationBoardDTO> donationBoardDTOList, DonationRegisterHandler donationRegisterHandler) {
     this.donationBoardDTOList = donationBoardDTOList;
     //    this.donationDetailHandler = donationDetailHandler;
-    this.donationRegisterDTOList = donationRegisterDTOList;
+    this.donationRegisterHandler = donationRegisterHandler;
   }
 
   // 모금함 목록
@@ -32,9 +33,9 @@ public class DonationBoardHandler {
 
         int menuNo = Prompt.inputInt("모금함 상세보기> ");
         switch (menuNo) {
-          case 1: donationDetailHandler.detailDonationInfo(); break;
-          case 2: donationDetailHandler.joinDonationList(); break;
-          case 3: break;
+          //          case 1: donationDetailHandler.detailDonationInfo(); break;
+          //          case 2: donationDetailHandler.joinDonationList(); break;
+          //          case 3: break;
           case 4: break;
           case 5: break;
           case 0: return;

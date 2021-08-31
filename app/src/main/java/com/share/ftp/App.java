@@ -6,6 +6,7 @@ import java.util.List;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.admin.NoticeDTO;
 import com.share.ftp.domain.admin.QuestionDTO;
+import com.share.ftp.domain.login.Member;
 import com.share.ftp.domain.personal.ApproveOrgDTO;
 import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.domain.personal.CommReviewDTO;
@@ -27,8 +28,12 @@ import com.share.ftp.handler.admin.ShowNoticeHandler;
 import com.share.ftp.handler.admin.ShowOrgApproveHandler;
 import com.share.ftp.handler.admin.ShowQuestionHandler;
 import com.share.ftp.handler.admin.ShowVolHandler;
+import com.share.ftp.handler.login.AuthHandler;
 import com.share.ftp.handler.personal.ApproveOrgHandler;
+import com.share.ftp.handler.personal.ChallengeBoardHandler;
 import com.share.ftp.handler.personal.ChallengeHandler;
+import com.share.ftp.handler.personal.ChallengeQuestionHandler;
+import com.share.ftp.handler.personal.ChallengeReviewHandler;
 import com.share.ftp.handler.personal.CommBestHandler;
 import com.share.ftp.handler.personal.CommBoardHandler;
 import com.share.ftp.handler.personal.CommReviewHandler;
@@ -65,6 +70,7 @@ public class App {
   List<CommReviewDTO> commReviewDTOList = new ArrayList<>();
 
   // 챌린지 도메인(값)
+
   List<MyChallengeQuestionDTO> myChallengeQuestionDTOList = new ArrayList<>();
   List<MyChallengeReviewDTO> myChallengeReviewDTOList = new ArrayList<>();
 
@@ -82,10 +88,13 @@ public class App {
   List<NoticeDTO> noticeDTOList = new ArrayList<>();
   List<QuestionDTO> questionDTOList = new ArrayList<>();
 
+  // 관리자
+  List<Member> memberList = new ArrayList<>();
+
 
   // 함께해요 핸들러(기능)
-  PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler();
-  OrgVolRequestHandler orgVolRequestHandler = new OrgVolRequestHandler();
+  PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler(); // 아직 List 변경 안함
+  OrgVolRequestHandler orgVolRequestHandler = new OrgVolRequestHandler(); // 아직 List 변경 안함
   VolApprovedHandler volApprovedHandler = new VolApprovedHandler();
   VolListHandler volListHandler = new VolListHandler(personalVolRequestHandler,orgVolRequestHandler);
 
@@ -97,12 +106,14 @@ public class App {
 
   // 챌린지 핸들러(기능)
   ChallengeHandler challengeHandler = new ChallengeHandler();
-  ShowChallengeHandler showChallengeHandler = new ShowChallengeHandler();
+  ChallengeReviewHandler challengeReviewHandler = new ChallengeReviewHandler(myChallengeReviewDTOList);
+  ChallengeBoardHandler challengeBoardHandler = new ChallengeBoardHandler(myChallengeReviewDTOList);
+  ChallengeQuestionHandler challengeQuestionHandler = new ChallengeQuestionHandler(myChallengeQuestionDTOList);
 
   // 모금함 관련 핸들러(기능)
   DonationRegisterHandler donationRegisterHandler = new DonationRegisterHandler(donationRegisterDTOList);
   //  DonationDetailHandler donationDetailHandler = new DonationDetailHandler(donationRegisterHandler);
-  DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationBoardDTOList, donationRegisterDTOList);
+  DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationBoardDTOList, donationRegisterHandler);
 
   // 마이 페이지 핸들러(기능)
   // MyPageHandler myVolHandler = new MyPageHandler();
@@ -115,7 +126,7 @@ public class App {
   WithdrawMemberHandler withdrawMemberHandler = new WithdrawMemberHandler();
 
   // 고객센터 핸들러(기능)
-  ShowNoticeHandler showNoticeHandler = new ShowNoticeHandler();
+  ShowNoticeHandler showNoticeHandler = new ShowNoticeHandler(); // 아직 List 변경 안함
   ShowQuestionHandler showQuestionHandler = new ShowQuestionHandler(questionDTOList);
   SupportHandler supportHandler = new SupportHandler(questionListHandler, noticeListHandler);
 
@@ -123,10 +134,14 @@ public class App {
   ShowVolHandler showVolHandler = new ShowVolHandler(personalVolRequestHandler,orgVolRequestHandler);
   ShowDonationHandler showDonationHandler = new ShowDonationHandler(donationBoardHandler);
   ShowMemberHandler showMemberHandler = new ShowMemberHandler();
+  ShowChallengeHandler showChallengeHandler = new ShowChallengeHandler(); // 아직 List 변경 안함
   ShowOrgApproveHandler showOrgApproveHandler = new ShowOrgApproveHandler();
   MyProfileHandler myProfileHandler = new MyProfileHandler(myProfileDTOList);
   //  AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler,showVolHandler, donationBoardHandler, showDonationHandler); 
 
+
+  // 로그인 
+  AuthHandler authHandler = new AuthHandler(memberList);
 
   public static void main(String[] args) {
 
@@ -141,8 +156,50 @@ public class App {
 
 
   Menu createMenu() {
-    MenuGroup mainMenuGroup = new MenuGroup("로그인");
+    MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setPrevMenuTitle("종료");
+
+    mainMenuGroup.add(new Menu("로그인", Menu.ENABLE_LOGOUT) {
+      @Override
+      public void execute() {
+        authHandler.login(); 
+      }
+    });
+
+    mainMenuGroup.add(new Menu("회원가입", Menu.ENABLE_LOGOUT) {
+      @Override
+      public void execute() {
+        authHandler.login(); 
+      }
+    });
+
+    mainMenuGroup.add(new Menu("아이디찾기", Menu.ENABLE_LOGOUT) {
+      @Override
+      public void execute() {
+        authHandler.login(); 
+      }
+    });
+
+    mainMenuGroup.add(new Menu("비밀번호찾기", Menu.ENABLE_LOGOUT) {
+      @Override
+      public void execute() {
+        authHandler.login(); 
+      }
+    });
+
+    mainMenuGroup.add(new Menu("내정보", Menu.ENABLE_LOGIN) {
+      @Override
+      public void execute() {
+        authHandler.displayLoginUser(); 
+      }
+    });
+
+    mainMenuGroup.add(new Menu("로그아웃", Menu.ENABLE_LOGIN) {
+      @Override
+      public void execute() {
+        authHandler.logout(); 
+      }
+    });
 
 
     MenuGroup personalMenu = new MenuGroup("개인");
@@ -161,12 +218,12 @@ public class App {
       public void execute() {
         orgVolRequestHandler.apply(); 
       }});
-    doVolMenu.add(new Menu("승인봉사목록") {
+    doVolMenu.add(new Menu("인증봉사리스트") {
       @Override
       public void execute() {
         volApprovedHandler.approvedList(); 
       }});
-    doVolMenu.add(new Menu("봉사참여하기") {
+    doVolMenu.add(new Menu("인증봉사세부사항") {
       @Override
       public void execute() {
         volApprovedHandler.approvedDetail(); 
