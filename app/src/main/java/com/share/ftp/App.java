@@ -284,7 +284,7 @@ public class App {
     donation.add(new Menu("기부하기") {
       @Override
       public void execute() {
-        boardHandler.okMessage(); 
+        donationRegisterHandler.add(); 
       }});
     donation.add(new Menu("기부내역") {
       @Override

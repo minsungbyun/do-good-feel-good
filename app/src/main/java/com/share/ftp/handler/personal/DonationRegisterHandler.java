@@ -1,17 +1,17 @@
 package com.share.ftp.handler.personal;
 
+import java.util.List;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
 import com.share.util.Prompt;
 
 public class DonationRegisterHandler { // 모금함 기부하기 양식 쓰는곳
 
-  static final int MAX_LENGTH = 10;
-
-  DonationRegisterDTO[] donationRegisters = new DonationRegisterDTO[MAX_LENGTH];
-
-  int size;
+  List<DonationRegisterDTO> donationRegisterDTOList;
   int total;
 
+  public DonationRegisterHandler(List<DonationRegisterDTO> donationRegisterDTOList) {
+    this.donationRegisterDTOList = donationRegisterDTOList;
+  }
 
   // 모금함 기부하기
   public void add() {
@@ -28,7 +28,7 @@ public class DonationRegisterHandler { // 모금함 기부하기 양식 쓰는�
     donationRegister.setEmail(Prompt.inputString("이메일: "));
     donationRegister.setAddress(Prompt.inputString("주소: "));
 
-    donationRegisters[size++] = donationRegister;
+    donationRegisterDTOList.add(donationRegister);
 
     System.out.println("[기부가 완료되었습니다.]");
 
@@ -38,26 +38,23 @@ public class DonationRegisterHandler { // 모금함 기부하기 양식 쓰는�
   public void applyDonationList() {
     System.out.println("[모금함 기부 목록]");
 
-    for (int i = 0; i < this.size; i++) {
+    for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {
       System.out.printf("%d, %d, %s, %s, %s, %s, %s, %s\n", 
-          donationRegisters[i].getNo(), 
-          donationRegisters[i].getDonationMoney(), 
-          donationRegisters[i].getName(), 
-          donationRegisters[i].getRegisterationNumber(),
-          donationRegisters[i].getBirthDate(),
-          donationRegisters[i].getTel(), 
-          donationRegisters[i].getEmail(),
-          donationRegisters[i].getAddress());
+          donationRegisterDTO.getNo(), 
+          donationRegisterDTO.getDonationMoney(), 
+          donationRegisterDTO.getName(), 
+          donationRegisterDTO.getRegisterationNumber(),
+          donationRegisterDTO.getBirthDate(),
+          donationRegisterDTO.getTel(), 
+          donationRegisterDTO.getEmail(),
+          donationRegisterDTO.getAddress());
     }
   }
 
   public void totalDonationMoney() {
 
-
-
-
-    for (int i = 0; i < this.size; i++) {
-      total += donationRegisters[i].getDonationMoney();
+    for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {
+      total += donationRegisterDTO.getDonationMoney();
     }
     System.out.printf("기부 총 금액 : %d\n", total);
   }
