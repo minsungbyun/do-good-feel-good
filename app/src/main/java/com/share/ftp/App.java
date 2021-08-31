@@ -1,279 +1,830 @@
 package com.share.ftp;
 
 
+import java.util.ArrayList;
+import java.util.List;
+import com.share.ftp.domain.admin.ChallengeDTO;
+import com.share.ftp.domain.admin.NoticeDTO;
+import com.share.ftp.domain.admin.QuestionDTO;
+import com.share.ftp.domain.personal.ApproveOrgDTO;
+import com.share.ftp.domain.personal.CommBoardDTO;
+import com.share.ftp.domain.personal.CommReviewDTO;
+import com.share.ftp.domain.personal.DonationBoardDTO;
+import com.share.ftp.domain.personal.DonationRegisterDTO;
+import com.share.ftp.domain.personal.MyChallengeQuestionDTO;
+import com.share.ftp.domain.personal.MyChallengeReviewDTO;
+import com.share.ftp.domain.personal.MyProfileDTO;
+import com.share.ftp.domain.personal.MyQuestionListDTO;
+import com.share.ftp.domain.personal.OrgRequestDTO;
+import com.share.ftp.domain.personal.PersonalRequestApplyDTO;
+import com.share.ftp.domain.personal.PersonalRequestDTO;
+import com.share.ftp.domain.personal.PersonalRequestRejectDTO;
+import com.share.ftp.domain.personal.VolListDTO;
 import com.share.ftp.handler.admin.AdminPageHandler;
+import com.share.ftp.handler.admin.ShowChallengeHandler;
 import com.share.ftp.handler.admin.ShowDonationHandler;
+import com.share.ftp.handler.admin.ShowMemberHandler;
+import com.share.ftp.handler.admin.ShowNoticeHandler;
+import com.share.ftp.handler.admin.ShowOrgApproveHandler;
+import com.share.ftp.handler.admin.ShowQuestionHandler;
 import com.share.ftp.handler.admin.ShowVolHandler;
+import com.share.ftp.handler.org.DonationRegisterHandler;
+import com.share.ftp.handler.org.OrgVolRequestHandler;
+import com.share.ftp.handler.org.PersonalVolRequestHandler;
 import com.share.ftp.handler.personal.ChallengeHandler;
 import com.share.ftp.handler.personal.CommBestHandler;
 import com.share.ftp.handler.personal.CommBoardHandler;
 import com.share.ftp.handler.personal.CommHandler;
 import com.share.ftp.handler.personal.DonationBoardHandler;
 import com.share.ftp.handler.personal.DonationDetailHandler;
-import com.share.ftp.handler.personal.DonationRegisterHandler;
 import com.share.ftp.handler.personal.MyPageHandler;
 import com.share.ftp.handler.personal.MyVolHandler;
-import com.share.ftp.handler.personal.OrgVolRequestHandler;
-import com.share.ftp.handler.personal.PersonalVolRequestHandler;
 import com.share.ftp.handler.personal.SupportHandler;
+import com.share.ftp.handler.personal.VolApprovedHandler;
 import com.share.ftp.handler.personal.VolListHandler;
+import com.share.menu.Menu;
+import com.share.menu.MenuGroup;
 import com.share.util.Prompt;
 
 public class App {
 
-  // 개인 페이지
+  // 함께해요 도메인(값)
+  List<VolListDTO> volListDTO = new ArrayList<>();
+  List<PersonalRequestApplyDTO> personalRequestApplyDTO = new ArrayList<>();
+  List<PersonalRequestDTO> personalRequestDTO = new ArrayList<>();
+  List<PersonalRequestRejectDTO> personalRequestRejectDTO = new ArrayList<>();
+
+
+  List<ApproveOrgDTO> approveOrgDTO = new ArrayList<>();
+
+  // 소통해요 도메인(값)
+  List<CommBoardDTO> commBoardDTO = new ArrayList<>();
+  List<CommReviewDTO> commReviewDTO = new ArrayList<>();
+
+  // 챌린지 도메인(값)
+  List<MyChallengeQuestionDTO> myChallengeQuestionDTO = new ArrayList<>();
+  List<MyChallengeReviewDTO> myChallengeReviewDTO = new ArrayList<>();
+
+  // 기부 도메인(값)
+  List<DonationBoardDTO> donationBoardDTO = new ArrayList<>();
+  List<DonationRegisterDTO> donationRegisterDTO = new ArrayList<>();
+
+  //마이페이지 도메인(값)
+  List<MyProfileDTO> myProfileDTO = new ArrayList<>();
+  List<MyQuestionListDTO> myQuestionListDTO = new ArrayList<>();
+  List<OrgRequestDTO> orgRequestDTO = new ArrayList<>();
+
+  //관리자 도메인(값)
+  List<ChallengeDTO> challengeDTO = new ArrayList<>();
+  List<NoticeDTO> noticeDTO = new ArrayList<>();
+  List<QuestionDTO> questionDTO = new ArrayList<>();
+
+  // 함께해요 핸들러(기능)
   static PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler();
   static OrgVolRequestHandler orgVolRequestHandler = new OrgVolRequestHandler();
+
+  static VolApprovedHandler volApprovedHandler = new VolApprovedHandler();
+
   static VolListHandler volListHandler = new VolListHandler(personalVolRequestHandler,orgVolRequestHandler);
-  static DonationRegisterHandler donationRegisterHandler = new DonationRegisterHandler();
-  static DonationDetailHandler donationDetailHandler = new DonationDetailHandler(donationRegisterHandler);
 
-
+  // 소통해요 핸들러(기능)
   static CommBoardHandler commBoardHandler = new CommBoardHandler();
-  static MyVolHandler myVolHandler = new MyVolHandler(personalVolRequestHandler);
-  static DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationDetailHandler, donationRegisterHandler);
-  static ChallengeHandler challengeHandler = new ChallengeHandler();
   static CommBestHandler commBestHandler = new CommBestHandler(commBoardHandler);
   static CommHandler commHandler = new CommHandler(commBoardHandler,commBestHandler);
-  static SupportHandler supportHandler = new SupportHandler();
+
+  // 챌린지 핸들러(기능)
+  static ChallengeHandler challengeHandler = new ChallengeHandler();
+
+  // 기부 핸들러(기능)
+  static DonationRegisterHandler donationRegisterHandler = new DonationRegisterHandler();
+  static DonationDetailHandler donationDetailHandler = new DonationDetailHandler(donationRegisterHandler);
+  static DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationDetailHandler, donationRegisterHandler);
+
+  // 마이페이지 핸들러(기능)
+  static MyVolHandler myVolHandler = new MyVolHandler(personalVolRequestHandler);
   static MyPageHandler myPageHandler = new MyPageHandler(myVolHandler);
 
-  // 마이 페이지
+  // 고객센터 핸들러(기능)
+  static SupportHandler supportHandler = new SupportHandler();
 
-  // 기관 페이지
-
-
-  // 관리자 페이지
+  // 관리자 핸들러(기능)
+  // 회원정보 관련 Handler
+  static ShowMemberHandler showMemberHandler = new ShowMemberHandler();
   static ShowVolHandler showVolHandler = new ShowVolHandler(personalVolRequestHandler,orgVolRequestHandler);
   static ShowDonationHandler showDonationHandler = new ShowDonationHandler(donationBoardHandler);
+
+  // 공지사항 관련
+  static ShowNoticeHandler showNoticeHandler = new ShowNoticeHandler();
+  // 문의사항 관련
+  static ShowQuestionHandler showQuestionHandler = new ShowQuestionHandler();
+
+  // 챌린지관리 관련
+  static ShowChallengeHandler showChallengeHandler = new ShowChallengeHandler();
+
+  // 기관승인 관련
+  static ShowOrgApproveHandler showOrgApproveHandler = new ShowOrgApproveHandler();
+
   static AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler,showVolHandler, donationBoardHandler, showDonationHandler); 
+
+
+
 
   public static void main(String[] args) {
 
-    while (true) {
-      try {
-        System.out.println();
-        int menuNo = doMainMenu();
-
-        if (menuNo == 0) {
-          break;
-        } else if (menuNo == 1) {
-          doVolunteerMenu();
-        } else if (menuNo == 2) {
-          doCommunityMenu();
-        } else if (menuNo == 3) {
-          doChallengeMenu();
-        } else if (menuNo == 4) {
-          doDonationMenu();
-        } else if (menuNo == 5) {
-          doSupportMenu();
-        } else if (menuNo == 6) {
-          doMyPageMenu();
-        } else if (menuNo == 7) {
-          doAdminPageMenu();
-        } else {
-          System.out.println("메뉴 번호가 유효하지 않습니다.");
-        }
-        System.out.println();
-      } catch (Throwable e) {
-        System.out.println("--------------------------------------------------------------");
-        System.out.printf("오류 발생: %s\n", e.getClass().getName());
-        System.out.println("--------------------------------------------------------------");
-      }
-    }
+    App app = new App(); 
+    app.service();
+  }
+  void service() {
+    createMenu().execute();
     Prompt.close();
   }
 
-  static void doVolunteerMenu() {
-    while (true) {
-      System.out.println();
-
-      System.out.println("[메인/ 함께해요]");
-      System.out.println("1. 봉사신청");
-      System.out.println("2. 봉사목록");
-      System.out.println("3. 봉사참여");
-      System.out.println("0. 이전메뉴");
-
-      int menuNo = Prompt.inputInt("함께해요> ");
+  Menu createMenu() {
+    MenuGroup mainMenuGroup = new MenuGroup("로그인");
+    mainMenuGroup.setPrevMenuTitle("종료");
 
 
-      switch (menuNo) {
-        case 1: volListHandler.volAuthForm();break;
-        case 2: volListHandler.volApprovedList(); break;
-        case 3: volListHandler.volJoin(); break;
-        case 0: return;
-        default:
-          System.out.println("무효한 메뉴 번호입니다.");
-      }
-      System.out.println();
-    } 
+    MenuGroup personalMenu = new MenuGroup("개인");
+    mainMenuGroup.add(personalMenu);
 
+    MenuGroup doVolMenu = new MenuGroup("함께해요");
+    personalMenu.add(doVolMenu);
+
+    doVolMenu.add(new Menu("1. 개인봉사신청양식") {
+      @Override
+      public void execute() {
+        personalVolRequestHandler.apply(); 
+      }});
+    doVolMenu.add(new Menu("2. 기관봉사신청양식") {
+      @Override
+      public void execute() {
+        orgVolRequestHandler.apply(); 
+      }});
+    doVolMenu.add(new Menu("3. 승인봉사목록") {
+      @Override
+      public void execute() {
+        volApprovedHandler.approvedList(); 
+      }});
+    doVolMenu.add(new Menu("4. 봉사참여하기") {
+      @Override
+      public void execute() {
+        volApprovedHandler.approvedDetail(); 
+      }});
+
+
+    //
+    //    MenuGroup personalCommunityMenu = new MenuGroup("소통해요");
+    //    personalMenu.add(personalCommunityMenu);
+    //
+    //    MenuGroup reviewMenu = new MenuGroup("나눔 이야기");
+    //    personalCommunityMenu.add(reviewMenu);
+    //
+    //    reviewMenu.add(new Menu("등록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.write(); 
+    //      }});
+    //    reviewMenu.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.reviewList(); 
+    //      }});
+    //    reviewMenu.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.reviewDetail(); 
+    //      }});
+    //    reviewMenu.add(new Menu("변경") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.reviewChange(); 
+    //      }});
+    //    reviewMenu.add(new Menu("삭제") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.reviewDelete(); 
+    //      }});
+    //
+    //    MenuGroup bestReviewMenu = new MenuGroup("나눔 이야기 BEST");
+    //    personalCommunityMenu.add(bestReviewMenu);
+    //
+    //    bestReviewMenu.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.bestReview(); 
+    //      }});
+    //
+    //    MenuGroup shortReviewMenu = new MenuGroup("한 줄 후기");
+    //    personalCommunityMenu.add(shortReviewMenu);
+    //
+    //    shortReviewMenu.add(new Menu("등록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.shortReviewAdd(); 
+    //      }});
+    //
+    //    shortReviewMenu.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.shortReviewList(); 
+    //      }});
+    //
+    //    shortReviewMenu.add(new Menu("수정") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.shortReviewUpdate(); 
+    //      }});
+    //    shortReviewMenu.add(new Menu("삭제") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.shortReviewDelete(); 
+    //      }});
+    //
+    //    MenuGroup personalChallengeMenu = new MenuGroup("챌린지");
+    //    personalMenu.add(personalChallengeMenu);
+    //
+    //    MenuGroup monthlyChallengeMenu = new MenuGroup("이달의 챌린지");
+    //    personalChallengeMenu.add(monthlyChallengeMenu);
+    //
+    //
+    //    monthlyChallengeMenu.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.monthlyChallengeList(); 
+    //      }});
+    //    monthlyChallengeMenu.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.monthlyChallengeDetail(); 
+    //      }});
+    //
+    //
+    //    MenuGroup monthlyRankingMenu = new MenuGroup("이달의 랭킹");
+    //    personalChallengeMenu.add(monthlyRankingMenu);
+    //
+    //
+    //    monthlyRankingMenu.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.monthlyRankingList(); 
+    //      }});
+    //    monthlyRankingMenu.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.monthlyRankingDetail(); 
+    //      }});
+    //
+    //    monthlyRankingMenu.add(new Menu("나의 랭킹보기") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.rankingList(); 
+    //      }});
+    //
+    //
+    //    MenuGroup personalDonationMenu = new MenuGroup("모금함");
+    //    personalMenu.add(personalDonationMenu);
+    //
+    //    MenuGroup donationList = new MenuGroup("모금함 목록");
+    //    personalDonationMenu.add(donationList);
+    //
+    //    MenuGroup donation = new MenuGroup("모금함 기부하기");
+    //    donationList.add(donation);
+    //
+    //    donation.add(new Menu("기부하기") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.okMessage(); 
+    //      }});
+    //    donation.add(new Menu("기부내역") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.donationList(); 
+    //      }});
+    //
+    //    MenuGroup donationTotal = new MenuGroup("전체 모금액");
+    //    personalDonationMenu.add(donationTotal);
+    //
+    //
+    //    MenuGroup support = new MenuGroup("고객센터");
+    //    personalMenu.add(support);
+    //
+    //    MenuGroup notice = new MenuGroup("공지사항");
+    //    support.add(notice);
+    //
+    //    notice.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.list(); 
+    //      }});
+    //    notice.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.detail(); 
+    //      }});
+    //
+    //    MenuGroup faQ = new MenuGroup("FAQ");
+    //    support.add(faQ);
+    //
+    //    faQ.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.list(); 
+    //      }});
+    //    faQ.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.detail(); 
+    //      }});
+    //
+    //    MenuGroup ask = new MenuGroup("문의하기");
+    //    support.add(ask);
+    //
+    //    ask.add(new Menu("등록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.askMesasge(); 
+    //      }});
+    //    ask.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.list(); 
+    //      }});
+    //    ask.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.detail(); 
+    //      }});
+    //    ask.add(new Menu("변경") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.finish(); 
+    //      }});
+    //    ask.add(new Menu("삭제") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.ask(); 
+    //      }});
+    //
+    MenuGroup personalMyPage = new MenuGroup("마이페이지");
+    personalMenu.add(personalMyPage);
+
+    MenuGroup myProfile = new MenuGroup("회원정보수정");
+    personalMyPage.add(myProfile);
+    //
+    //    myProfile.add(new Menu("변경") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.checkchange(); 
+    //      }});
+    //    myProfile.add(new Menu("삭제") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.checkDelete(); 
+    //      }});
+    //
+    MenuGroup myVolunteer = new MenuGroup("나의 봉사");
+    personalMyPage.add(myVolunteer);
+    //
+    myVolunteer.add(new Menu("1. 나의 봉사신청서 확인") {
+      @Override
+      public void execute() {
+        myVolHandler.showVolApplyList(); 
+      }});
+    myVolunteer.add(new Menu("2. 승인된 봉사내역") {
+      @Override
+      public void execute() {
+        myVolHandler.showApproveList(); 
+      }});    
+    myVolunteer.add(new Menu("3. 찜한봉사") {
+      @Override
+      public void execute() {
+        myVolHandler.showVolBookmark(); 
+      }});    
+
+    MenuGroup myBoard = new MenuGroup("나의 게시글");
+    personalMyPage.add(myBoard);
+    //
+    //    MenuGroup myBoardList = new MenuGroup("목록");
+    //    myBoard.add(myBoardList);
+    //
+    //    MenuGroup myBoardDetail = new MenuGroup("상세보기");
+    //    myBoard.add(myBoardDetail);
+    //
+    //    myBoardDetail.add(new Menu("수정") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.checkUpdate(); 
+    //      }});
+    //    myBoardDetail.add(new Menu("삭제") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.checkDelete(); 
+    //      }});    
+    //
+    MenuGroup myPoint = new MenuGroup("나의 포인트");
+    personalMyPage.add(myPoint);
+    //
+    myPoint.add(new Menu("1. 나의포인트확인") {
+      @Override
+      public void execute() {
+        myPointHandler.showMyPointList(); 
+      }});    
+    //
+    MenuGroup myDonation = new MenuGroup("나의 모금함");
+    personalMyPage.add(myDonation);
+    //
+    myDonation.add(new Menu("1. 나의기부내역") {
+      @Override
+      public void execute() {
+        myDonationHandler.showMyTotalDonation(); 
+      }});    
+    //
+    MenuGroup organizationApprove = new MenuGroup("기관 승인 신청");
+    personalMyPage.add(organizationApprove);
+
+    //    organizationApprove.add(new Menu("승인 요청하기") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.okSubmit(); 
+    //      }});  
+    //
+    //    organizationApprove.add(new Menu("승인 현황보기") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.detail(); 
+    //      }});   
+    //
+    //    MenuGroup cancelMember = new MenuGroup("회원 탈퇴");
+    //    personalMyPage.add(cancelMember);
+    //
+    //    cancelMember.add(new Menu("탈퇴") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.getOutHere(); 
+    //      }});
+    //
+    //
+    //    //////////////////////////////////////////////////////////////////////////////////////////////////////    
+    //
+    //    MenuGroup organizationMenu = new MenuGroup("기관");
+    //    mainMenuGroup.add(organizationMenu);
+    //
+    //    MenuGroup organizationBoardMenu = new MenuGroup("함께해요");
+    //    organizationMenu.add(organizationBoardMenu);
+    //
+    //    organizationBoardMenu.add(new Menu("등록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.registerFinish(); 
+    //      }});
+    //    organizationBoardMenu.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.reviewList(); 
+    //      }});
+    //    organizationBoardMenu.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.reviewDetail(); 
+    //      }});
+    //    organizationBoardMenu.add(new Menu("변경") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.volunteerupdate(); 
+    //      }});
+    //    organizationBoardMenu.add(new Menu("삭제") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.volunteerdelete(); 
+    //      }});
+    //
+    //    MenuGroup organizationMemberMenu = new MenuGroup("소통해요");
+    //    organizationMenu.add(organizationMemberMenu);
+    //
+    //    organizationMemberMenu.add(new Menu("등록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.write(); 
+    //      }});
+    //    organizationMemberMenu.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.reviewList(); 
+    //      }});
+    //    organizationMemberMenu.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.reviewDetail(); 
+    //      }});
+    //    organizationMemberMenu.add(new Menu("변경") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.reviewChange(); 
+    //      }});
+    //    organizationMemberMenu.add(new Menu("삭제") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.reviewDelete(); 
+    //      }});
+    //
+    //    MenuGroup organizationProjectMenu = new MenuGroup("챌린지");
+    //    organizationMenu.add(organizationProjectMenu);
+    //
+    //    organizationProjectMenu.add(new Menu("등록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.shortReviewAdd(); 
+    //      }});
+    //    organizationProjectMenu.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.shortReviewList(); 
+    //      }});
+    //    organizationProjectMenu.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.reviewDetail(); 
+    //      }});
+    //    organizationProjectMenu.add(new Menu("변경") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.shortReviewUpdate(); 
+    //      }});
+    //    organizationProjectMenu.add(new Menu("삭제") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.shortReviewDelete(); 
+    //      }});
+    //
+    //    MenuGroup organizationtaskMenu = new MenuGroup("모금함");
+    //    organizationMenu.add(organizationtaskMenu);
+    //
+    //    MenuGroup organizationDonationApply = new MenuGroup("모금함 신청");
+    //    organizationtaskMenu.add(organizationDonationApply);
+    //
+    //    organizationDonationApply.add(new Menu("등록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.okMessage(); 
+    //      }});
+    //    organizationDonationApply.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.donationList(); 
+    //      }});
+    //
+    //    organizationDonationApply.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.totalList(); 
+    //      }});
+    //    organizationDonationApply.add(new Menu("변경") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.checkUpdate(); 
+    //      }});
+    //    organizationDonationApply.add(new Menu("삭제") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.checkDelete(); 
+    //      }});
+    //    MenuGroup organizationServiceCenter = new MenuGroup("고객센터");
+    //    organizationMenu.add(organizationServiceCenter);
+    //
+    //    MenuGroup organizationNotice = new MenuGroup("공지사항");
+    //    organizationServiceCenter.add(organizationNotice);
+    //
+    //    organizationNotice.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.monthlyChallengeList(); 
+    //      }});
+    //    organizationNotice.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.monthlyChallengeDetail(); 
+    //      }});
+    //
+    //    MenuGroup organizationFaQ = new MenuGroup("FAQ");
+    //    organizationServiceCenter.add(organizationFaQ);
+    //
+    //    organizationFaQ.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.shortReviewList(); 
+    //      }});
+    //    organizationFaQ.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.monthlyChallengeDetail(); 
+    //      }});
+    //
+    //    MenuGroup organizationAsk = new MenuGroup("문의하기");
+    //    organizationServiceCenter.add(organizationAsk);
+    //
+    //    organizationAsk.add(new Menu("등록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.shortReviewAdd(); 
+    //      }});
+    //    organizationAsk.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.monthlyRankingList(); 
+    //      }});
+    //    organizationAsk.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.monthlyChallengeDetail(); 
+    //      }});
+    //    organizationAsk.add(new Menu("변경") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.checkUpdate(); 
+    //      }});
+    //    organizationAsk.add(new Menu("삭제") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.checkDelete(); 
+    //      }});
+    //
+    //    //////////////////////////////////////////////////////////////////////////////////////////////
+    MenuGroup adminMenu = new MenuGroup("관리자");
+    mainMenuGroup.add(adminMenu);
+    //
+    //
+    MenuGroup memberMenu = new MenuGroup("1. 회원정보 조회");
+    adminMenu.add(memberMenu);
+    //
+    memberMenu.add(new Menu("1. 회원목록") {
+      @Override
+      public void execute() {
+        showMemberHandler.list(); 
+      }});
+    memberMenu.add(new Menu("2. 회원추방") {
+      @Override
+      public void execute() {
+        showMemberHandler.getOutMember(); 
+      }});
+
+    //
+    MenuGroup donationMenu = new MenuGroup("2. 모금 관리");
+    adminMenu.add(donationMenu);
+    //
+    donationMenu.add(new Menu("1. 모금활동관리") {
+      @Override
+      public void execute() {
+        showDonationHandler.list(); 
+      }});
+
+    //
+    MenuGroup volunteerMenu = new MenuGroup("3. 봉사활동 관리");
+    adminMenu.add(volunteerMenu);
+    //
+    volunteerMenu.add(new Menu("1. 개인봉사신청내역") {
+      @Override
+      public void execute() {
+        showVolHandler.personalApprove(); 
+      }});
+    volunteerMenu.add(new Menu("2. 기관봉사신청내역") {
+      @Override
+      public void execute() {
+        showVolHandler.orgApprove(); 
+      }});
+    volunteerMenu.add(new Menu("3. 승인하기") {
+      @Override
+      public void execute() {
+        showVolHandler.accept(); 
+      }});
+    volunteerMenu.add(new Menu("4. 반려하기") {
+      @Override
+      public void execute() {
+        showVolHandler.reject(); 
+      }});
+    //
+    //
+    MenuGroup noticeMenu = new MenuGroup("4. 공지사항 관리");
+    adminMenu.add(noticeMenu);
+    //
+    noticeMenu.add(new Menu("1. 공지사항 등록") {
+      @Override
+      public void execute() {
+        showNoticeHandler.add(); 
+      }});
+    noticeMenu.add(new Menu("2. 공지사항 목록") {
+      @Override
+      public void execute() {
+        showNoticeHandler.list(); 
+      }});
+    noticeMenu.add(new Menu("3. 공지사항 상세보기") {
+      @Override
+      public void execute() {
+        showNoticeHandler.detail(); 
+      }});
+    noticeMenu.add(new Menu("4. 공지사항 변경") {
+      @Override
+      public void execute() {
+        showNoticeHandler.update(); 
+      }});
+    noticeMenu.add(new Menu("5. 공지사항 삭제") {
+      @Override
+      public void execute() {
+        showNoticeHandler.delete(); 
+      }});
+    //
+    //
+    MenuGroup askInfo = new MenuGroup("5. 문의사항 관리");
+    adminMenu.add(askInfo);
+    //
+    askInfo.add(new Menu("1. 문의사항 등록") {
+      @Override
+      public void execute() {
+        showQuestionHandler.addreply(); 
+      }});
+    askInfo.add(new Menu("2. 문의사항 목록") {
+      @Override
+      public void execute() {
+        showQuestionHandler.list(); 
+      }});
+    askInfo.add(new Menu("3. 문의사항 상세보기") {
+      @Override
+      public void execute() {
+        showQuestionHandler.detail(); 
+      }});
+    askInfo.add(new Menu("4. 문의사항 변경") {
+      @Override
+      public void execute() {
+        showQuestionHandler.update(); 
+      }});
+    askInfo.add(new Menu("5. 문의사항 삭제") {
+      @Override
+      public void execute() {
+        showQuestionHandler.delete(); 
+      }});
+    //
+    MenuGroup challengeInfo = new MenuGroup("6. 챌린지 관리");
+    adminMenu.add(challengeInfo);
+
+    challengeInfo.add(new Menu("1. 챌린지 등록") {
+      @Override
+      public void execute() {
+        showChallengeHandler.add(); 
+      }});
+    challengeInfo.add(new Menu("2. 챌린지 목록") {
+      @Override
+      public void execute() {
+        showChallengeHandler.list(); 
+      }});
+    challengeInfo.add(new Menu("3. 챌린지 상세보기") {
+      @Override
+      public void execute() {
+        showChallengeHandler.detail(); 
+      }});
+    challengeInfo.add(new Menu("4. 챌린지 변경") {
+      @Override
+      public void execute() {
+        showChallengeHandler.update(); 
+      }});
+    challengeInfo.add(new Menu("5. 챌린지 삭제") {
+      @Override
+      public void execute() {
+        showChallengeHandler.delete(); 
+      }});
+    //
+    MenuGroup approveInfo = new MenuGroup("7. 기관 승인");
+    adminMenu.add(approveInfo);
+    //
+    approveInfo.add(new Menu("1. 기관승인신청 목록") {
+      @Override
+      public void execute() {
+        showOrgApproveHandler.list(); 
+      }});
+    approveInfo.add(new Menu("2. 기관승인신청 내용") {
+      @Override
+      public void execute() {
+        showOrgApproveHandler.detail(); 
+      }});
+    approveInfo.add(new Menu("3. 기관승인신청 변경") {
+      @Override
+      public void execute() {
+        showOrgApproveHandler.update(); 
+      }});
+    approveInfo.add(new Menu("4. 기관승인신청 삭제") {
+      @Override
+      public void execute() {
+        showOrgApproveHandler.delete(); 
+      }});
+
+
+
+    return mainMenuGroup;
   }
 
-  static void doCommunityMenu() {
-    while (true) {
-      System.out.println();
 
-      System.out.println("[메인/ 소통해요]");
-
-      System.out.println("1. 나눔이야기");
-      System.out.println("2. 나눔이야기Best");
-      System.out.println("3. 한줄후기");
-      System.out.println("0. 이전메뉴");
-
-      int menuNo = Prompt.inputInt("소통해요> ");
-      switch (menuNo) {
-        case 1: commHandler.commBoard(); break;
-        case 2: commHandler.commBest(); break;
-        case 3: commHandler.commReview(); break;
-        case 0: return;
-        default:
-          System.out.println("무효한 메뉴 번호입니다.");
-      }
-      System.out.println();
-    } 
-  }
-
-  static void doChallengeMenu() {
-    while (true) {
-      System.out.println();
-      System.out.println("[메인/챌린지]");
-      System.out.println("1. 이달의 챌린지");
-      System.out.println("2. 이달의 랭킹");
-      System.out.println("0. 이전메뉴");
-
-      int menuNo = Prompt.inputInt("챌린지> ");
-      switch (menuNo) {
-        case 1: challengeHandler.showChallenge(); break;
-        case 2: challengeHandler.showRanking(); break;
-        case 0: return;
-        default:
-          System.out.println("무효한 메뉴 번호입니다.");
-      }
-      System.out.println();
-    }
-
-  }
-
-  static void doDonationMenu() {
-    while (true) {
-      System.out.println();
-      System.out.println("[메인/모금함]");
-      System.out.println("1. 모금함 목록");
-      System.out.println("2. 모금함 상세보기");
-      System.out.println("3. 기부 총 금액");
-      System.out.println("4. 모금함 개설 신청");
-      System.out.println("0. 이전메뉴");
-
-      int menuNo = Prompt.inputInt("모금함> ");
-      switch (menuNo) {
-        case 1: donationBoardHandler.list(); break;
-        case 2: donationBoardHandler.detailDonation(); break;
-        case 3: donationBoardHandler.totalDonationDetail(); break;
-        case 4: donationBoardHandler.applyDonation(); break;
-        case 0: return;
-        default:
-          System.out.println("무효한 메뉴 번호입니다.");
-      }
-      System.out.println();
-    }
-  }
-
-  static void doSupportMenu() {
-    while (true) {
-      System.out.println();
-      System.out.println("[메인/고객센터]");
-      System.out.println("1. 공지사항");
-      System.out.println("2. 문의하기");
-      System.out.println("0. 이전메뉴");
-
-      int menuNo = Prompt.inputInt("고객센터> ");
-      switch (menuNo) {
-        case 1: supportHandler.showNoticeList(); break;
-        case 2: supportHandler.showQuestionList(); break;
-        case 0: return;
-        default:
-          System.out.println("무효한 메뉴 번호입니다.");
-      }
-      System.out.println();
-    }
-  }
-
-  static void doMyPageMenu() {
-    while (true) {
-      System.out.println();
-
-      System.out.println("[메인/ 마이페이지]");
-      System.out.println("1. 회원정보수정");
-      System.out.println("2. 나의 봉사");
-      System.out.println("3. 나의 작성글");
-      System.out.println("4. 나의 포인트");
-      System.out.println("5. 나의 모금함");
-      System.out.println("6. 기관 승인 신청");
-      System.out.println("7. 회원탈퇴");
-      System.out.println("0. 이전메뉴");
-
-      int menuNo = Prompt.inputInt("마이페이지> ");
-      switch (menuNo) {
-        case 1: myPageHandler.myProfile(); break;
-        case 2: myPageHandler.myVolunteer(); break;
-        case 3: myPageHandler.myBoardList(); break;
-        case 4: myPageHandler.myPoint(); break;
-        case 5: myPageHandler.myDonation(); break;
-        case 6: myPageHandler.approveOrganization(); break;
-        case 7: myPageHandler.withdrawMember(); break;
-        case 0: return;
-        default:
-          System.out.println("무효한 메뉴 번호입니다.");
-      }
-      System.out.println();
-    }
-  }
-
-  static void doAdminPageMenu() {
-    while (true) {
-      System.out.println();
-      System.out.println("[메인/관리자페이지]");
-      System.out.println("1. 회원정보조회");
-      System.out.println("2. 모금관리");
-      System.out.println("3. 봉사활동관리");
-      System.out.println("4. 공지사항관리");
-      System.out.println("5. 문의사항관리");
-      System.out.println("6. 챌린지관리");
-      System.out.println("7. 기관승인");
-      System.out.println("0. 이전메뉴");
-
-      int menuNo = Prompt.inputInt("관리자페이지> ");
-      switch (menuNo) {
-        case 1: adminPageHandler.showMember(); break;
-        case 2: adminPageHandler.showDonation(); break;
-        case 3: adminPageHandler.showVolunteer(); break;
-        case 4: adminPageHandler.showNotice(); break;
-        case 5: adminPageHandler.showQuestion(); break;
-        case 6: adminPageHandler.showChallenge(); break;
-        case 7: adminPageHandler.showOrgApprove(); break;
-        case 0: return;
-        default:
-          System.out.println("무효한 메뉴 번호입니다.");
-      }
-      System.out.println();
-    }
-  }
-
-  static int doMainMenu() {
-    System.out.println();
-    System.out.println("[행복하share에 오신것을 환영합니다.]");
-    System.out.println("1. 함께해요");
-    System.out.println("2. 소통해요");
-    System.out.println("3. 챌린지");
-    System.out.println("4. 모금함");
-    System.out.println("5. 고객센터");
-    System.out.println("6. 마이페이지");
-    System.out.println("7. 관리자페이지");
-    System.out.println("0. 종료");
-    System.out.println();
-    return Prompt.inputInt("메뉴번호> "); 
-
-  }
 
 }
+
+
+
+
+

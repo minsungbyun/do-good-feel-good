@@ -1,11 +1,12 @@
 package com.share.ftp.handler.org;
 
+import com.share.ftp.handler.personal.CommBoardHandler;
 import com.share.util.Prompt;
 
 public class CommHandler {
 
   CommBoardHandler commBoardHandler = new CommBoardHandler();
-  CommBestHandler commBestHandler = new CommBestHandler();
+  CommBestHandler commBestHandler = new CommBestHandler(commBoardHandler);
   CommReviewHandler commReviewHandler = new CommReviewHandler();
 
   public void commBoard() {

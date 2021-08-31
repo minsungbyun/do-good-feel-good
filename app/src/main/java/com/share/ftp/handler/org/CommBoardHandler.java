@@ -4,7 +4,7 @@ import java.sql.Date;
 import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.util.Prompt;
 
-public class CommBoardHandler {
+public class commBoardHandler {
 
   static final int MAX_LENGTH = 100;
 
