@@ -1,6 +1,7 @@
 package com.share.ftp.domain.guest;
 
 import java.sql.Date;
+import java.util.Objects;
 
 public class JoinDTO {
   private String id;
@@ -13,6 +14,33 @@ public class JoinDTO {
   public String getId() {
     return id;
   }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(adress, email, id, name, password, registerDate, tel);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    JoinDTO other = (JoinDTO) obj;
+    return Objects.equals(adress, other.adress) && Objects.equals(email, other.email)
+        && Objects.equals(id, other.id) && Objects.equals(name, other.name)
+        && Objects.equals(password, other.password)
+        && Objects.equals(registerDate, other.registerDate) && Objects.equals(tel, other.tel);
+  }
+
+  @Override
+  public String toString() {
+    return "JoinDTO [id=" + id + ", password=" + password + ", name=" + name + ", tel=" + tel
+        + ", email=" + email + ", adress=" + adress + ", registerDate=" + registerDate + "]";
+  }
+
   public void setId(String id) {
     this.id = id;
   }
