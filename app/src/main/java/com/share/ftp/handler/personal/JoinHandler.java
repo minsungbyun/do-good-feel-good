@@ -78,8 +78,8 @@ public class JoinHandler {
           joinDTO.getPassword(), 
           joinDTO.getTel(), 
           joinDTO.getEmail(), 
-          joinDTO.getAdress());
-      joinDTO.getRegisterDate());
+          joinDTO.getAdress(),
+          joinDTO.getRegisterDate());
     }
   }
 

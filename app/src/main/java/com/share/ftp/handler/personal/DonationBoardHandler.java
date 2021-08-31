@@ -7,12 +7,10 @@ import com.share.util.Prompt;
 public class DonationBoardHandler {
 
   List<DonationBoardDTO> donationBoardDTOList;
-  DonationDetailHandler donationDetailHandler;
   DonationRegisterHandler donationRegisterHandler;
 
-  public DonationBoardHandler(List<DonationBoardDTO> donationBoardDTOList, DonationDetailHandler donationDetailHandler, DonationRegisterHandler donationRegisterHandler) {
+  public DonationBoardHandler(List<DonationBoardDTO> donationBoardDTOList, DonationRegisterHandler donationRegisterHandler) {
     this.donationBoardDTOList = donationBoardDTOList;
-    this.donationDetailHandler = donationDetailHandler;
     this.donationRegisterHandler = donationRegisterHandler;
   }
 
@@ -23,30 +21,11 @@ public class DonationBoardHandler {
 
   // 모금함 상세보기
   public void detailDonation() {
-    while (true) {
-      try {
-        System.out.println("1. 모금함 상세보기");
-        System.out.println("2. 기부하기");
-        System.out.println("0. 이전메뉴");
-
-        int menuNo = Prompt.inputInt("모금함 상세보기> ");
-        switch (menuNo) {
-          case 1: donationDetailHandler.detailDonationInfo(); break;
-          case 2: donationDetailHandler.joinDonationList(); break;
-          case 3: break;
-          case 4: break;
-          case 5: break;
-          case 0: return;
-          default:
-            System.out.println("무효한 메뉴 번호입니다.");
-        }
-        System.out.println();
-      } catch (Throwable e) {
-        System.out.println("--------------------------------------------------------------");
-        System.out.printf("오류 발생: %s\n", e.getClass().getName());
-        System.out.println("--------------------------------------------------------------");
-      }
-    }
+    System.out.println("1. 모금함 상세보기");
+    System.out.println("2. 기부하기");
+    System.out.println("0. 이전메뉴");
+    //    case 1: donationDetailHandler.detailDonationInfo(); break;
+    //    case 2: donationDetailHandler.joinDonationList(); break;
   }
 
   // 기부 총 금액
@@ -90,7 +69,7 @@ public class DonationBoardHandler {
     System.out.println("[모금함 개설 신청 목록]");
 
     for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
-      System.out.printf("%d, %s, %s, %s, %s, %s, %s\n", 
+      System.out.printf("%d, %s, %s, %s, %s, %s, %s ~ %s\n", 
           donationBoardDTO.getNo(), 
           donationBoardDTO.getTitle(), 
           donationBoardDTO.getLeader(),
