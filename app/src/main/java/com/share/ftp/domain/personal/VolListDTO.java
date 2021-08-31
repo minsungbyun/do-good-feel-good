@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class VolListDTO {
 
-
   private String title;
   private String content;
   private String location;

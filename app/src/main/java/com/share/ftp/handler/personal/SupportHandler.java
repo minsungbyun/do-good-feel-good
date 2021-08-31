@@ -4,8 +4,12 @@ import com.share.util.Prompt;
 
 public class SupportHandler {
 
-  QuestionListHandler questionListHandler = new QuestionListHandler();
-  NoticeListHandler noticeListHandler = new NoticeListHandler();
+  QuestionListHandler questionListHandler;
+  NoticeListHandler noticeListHandler;
+  public SupportHandler(QuestionListHandler questionListHandler, NoticeListHandler noticeListHandler) {
+    this.questionListHandler = questionListHandler;
+    this.noticeListHandler = noticeListHandler;
+  }
 
   public void showNoticeList() {
     while (true) {

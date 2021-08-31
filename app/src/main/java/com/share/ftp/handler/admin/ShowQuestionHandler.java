@@ -1,34 +1,36 @@
 package com.share.ftp.handler.admin;
 
+import java.util.List;
 import com.share.ftp.domain.admin.QuestionDTO;
 import com.share.util.Prompt;
 
 public class ShowQuestionHandler {
 
-  static final int MAX_LENGTH = 10;
+  List<QuestionDTO> questionDTOList;
 
-  QuestionDTO[] questions = new QuestionDTO[MAX_LENGTH];
-  int size = 0;
+  public ShowQuestionHandler(List<QuestionDTO> questionDTOList) {
+    this.questionDTOList = questionDTOList;
+  }
 
   public void addreply() {
     System.out.println("[문의사항 등록]");
 
-    QuestionDTO question = new QuestionDTO();
+    QuestionDTO questionDTO = new QuestionDTO();
 
-    question.setAdminId(Prompt.inputInt("관리자ID: "));
-    question.setTitle(Prompt.inputString("제목: "));
-    question.setContent(Prompt.inputString("내용: "));
+    questionDTO.setAdminId(Prompt.inputInt("관리자ID: "));
+    questionDTO.setTitle(Prompt.inputString("제목: "));
+    questionDTO.setContent(Prompt.inputString("내용: "));
 
-    this.questions[this.size++] = question;
+    questionDTOList.add(questionDTO);
   }
 
   public void list() {
     System.out.println("[문의사항 목록]");
-    for (int i = 0; i < this.size; i++) {
-      System.out.printf("%s, %s, %s\n", 
-          this.questions[i].getAdminId(), 
-          this.questions[i].getTitle(), 
-          this.questions[i].getContent());
+    for (QuestionDTO questionDTO : questionDTOList) {
+      System.out.printf("%d, %s, %s\n", 
+          questionDTO.getAdminId(), 
+          questionDTO.getTitle(), 
+          questionDTO.getContent());
     }
   }
 
@@ -36,14 +38,7 @@ public class ShowQuestionHandler {
     System.out.println("[문의사항 상세보기]");
     int no = Prompt.inputInt("관리자ID: ");
 
-    QuestionDTO questionDTO = null;
-
-    for (int i = 0; i < this.size; i++) {
-      if (this.questions[i].getAdminId() == no) {
-        questionDTO = this.questions[i];
-        break;
-      }
-    }
+    QuestionDTO questionDTO = findByNo(no);
 
     if (questionDTO == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -58,14 +53,7 @@ public class ShowQuestionHandler {
     System.out.println("[문의사항 변경]");
     int no = Prompt.inputInt("번호? ");
 
-    QuestionDTO questionDTO = null;
-
-    for (int i = 0; i < this.size; i++) {
-      if (this.questions[i].getAdminId() == no) {
-        questionDTO = this.questions[i];
-        break;
-      }
-    }
+    QuestionDTO questionDTO = findByNo(no);
 
     if (questionDTO == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -90,16 +78,9 @@ public class ShowQuestionHandler {
     System.out.println("[게시글 삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    int questionDTOIndex = -1;
+    QuestionDTO questionDTO = findByNo(no);
 
-    for (int i = 0; i < this.size; i++) {
-      if (this.questions[i].getAdminId() == no) {
-        questionDTOIndex = i;
-        break;
-      }
-    }
-
-    if (questionDTOIndex == -1) {
+    if (questionDTO == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
@@ -110,12 +91,19 @@ public class ShowQuestionHandler {
       return;
     }
 
-    for (int i = questionDTOIndex + 1; i < this.size; i++) {
-      this.questions[i - 1] = this.questions[i];
-    }
-    this.questions[--this.size] = null;
+    questionDTOList.remove(questionDTO);
 
     System.out.println("게시글을 삭제하였습니다.");
+  }
+
+  private QuestionDTO findByNo(int no) {
+    QuestionDTO[] arr = questionDTOList.toArray(new QuestionDTO[0]);
+    for (QuestionDTO questionDTO : arr) {
+      if (questionDTO.getNo() == no) {
+        return questionDTO;
+      }
+    }
+    return null;
   }
 
 }

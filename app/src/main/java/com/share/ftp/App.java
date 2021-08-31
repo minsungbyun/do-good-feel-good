@@ -27,6 +27,8 @@ public class App {
   static VolListHandler volListHandler = new VolListHandler(personalVolRequestHandler,orgVolRequestHandler);
   static DonationRegisterHandler donationRegisterHandler = new DonationRegisterHandler();
   static DonationDetailHandler donationDetailHandler = new DonationDetailHandler(donationRegisterHandler);
+  static QuestionListHandler questionListHandler = new QuestionListHandler();
+  static NoticeListHandler noticeListHandler = new NoticeListHandler();
 
 
   static CommBoardHandler commBoardHandler = new CommBoardHandler();
@@ -35,10 +37,11 @@ public class App {
   static ChallengeHandler challengeHandler = new ChallengeHandler();
   static CommBestHandler commBestHandler = new CommBestHandler(commBoardHandler);
   static CommHandler commHandler = new CommHandler(commBoardHandler,commBestHandler);
-  static SupportHandler supportHandler = new SupportHandler();
+  static SupportHandler supportHandler = new SupportHandler(questionListHandler, noticeListHandler);
   static MyPageHandler myPageHandler = new MyPageHandler(myVolHandler);
 
   // 마이 페이지
+  static MyPageHandler myVolHandler = new MyPageHandler();
 
   // 기관 페이지
 
