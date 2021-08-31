@@ -1,4 +1,4 @@
-package com.share.util;
+package com.share.ftp.util;
 
 import java.sql.Date;
 import java.util.Scanner;

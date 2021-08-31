@@ -6,6 +6,7 @@ public class SupportHandler {
 
   QuestionListHandler questionListHandler;
   NoticeListHandler noticeListHandler;
+
   public SupportHandler(QuestionListHandler questionListHandler, NoticeListHandler noticeListHandler) {
     this.questionListHandler = questionListHandler;
     this.noticeListHandler = noticeListHandler;

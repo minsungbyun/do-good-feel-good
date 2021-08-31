@@ -1,4 +1,4 @@
-package com.share.ftp.menu;
+package com.share.menu;
 
 import java.util.Stack;
 import com.share.util.Prompt;
