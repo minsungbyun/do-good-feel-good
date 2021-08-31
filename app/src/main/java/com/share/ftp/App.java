@@ -41,8 +41,8 @@ import com.share.ftp.handler.personal.DonationBoardHandler;
 import com.share.ftp.handler.personal.DonationDetailHandler;
 import com.share.ftp.handler.personal.MyBoardListHandler;
 import com.share.ftp.handler.personal.MyDonationHandler;
+import com.share.ftp.handler.personal.MyPageHandler;
 import com.share.ftp.handler.personal.MyPointHandler;
-import com.share.ftp.handler.personal.MyVolHandler;
 import com.share.ftp.handler.personal.NoticeListHandler;
 import com.share.ftp.handler.personal.QuestionListHandler;
 import com.share.ftp.handler.personal.SupportHandler;
@@ -94,6 +94,7 @@ public class App {
   static VolApprovedHandler volApprovedHandler = new VolApprovedHandler();
   static VolListHandler volListHandler = new VolListHandler(personalVolRequestHandler,orgVolRequestHandler);
 
+
   // 소통해요 핸들러(기능)
   static CommBoardHandler commBoardHandler = new CommBoardHandler();
   static CommBestHandler commBestHandler = new CommBestHandler(commBoardHandler);
@@ -101,18 +102,21 @@ public class App {
   static CommHandler commHandler = new CommHandler(commBoardHandler,commBestHandler,commReviewHandler);
 
 
-  // 챌린지 핸들러(기능)
+  //챌린지 핸들러(기능)
   static ChallengeHandler challengeHandler = new ChallengeHandler();
+  static ShowChallengeHandler showChallengeHandler = new ShowChallengeHandler();
 
 
-  // 기부 핸들러(기능)
+  // 모금함 관련 핸들러(기능)
   static DonationRegisterHandler donationRegisterHandler = new DonationRegisterHandler();
   static DonationDetailHandler donationDetailHandler = new DonationDetailHandler(donationRegisterHandler);
+  static QuestionListHandler questionListHandler = new QuestionListHandler(myQuestionListDTO);
+  static NoticeListHandler noticeListHandler = new NoticeListHandler();
   static DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationDetailHandler, donationRegisterHandler);
 
-  // 마이페이지 핸들러(기능)
-  static MyVolHandler myVolHandler = new MyVolHandler(personalVolRequestHandler);
 
+  // 마이 페이지
+  static MyPageHandler myVolHandler = new MyPageHandler();
   static QuestionListHandler questionListHandler = new QuestionListHandler();
   static NoticeListHandler noticeListHandler = new NoticeListHandler();
   static MyBoardListHandler myBoardListHandler = new MyBoardListHandler();
@@ -121,34 +125,36 @@ public class App {
   static ApproveOrgHandler approveOrgHandler = new ApproveOrgHandler();
   static WithdrawMemberHandler withdrawMemberHandler = new WithdrawMemberHandler();
 
-
-
-  // 관리자 핸들러(기능)
-
-  // 회원정보 관련 Handler
-  static ShowMemberHandler showMemberHandler = new ShowMemberHandler();
-  static ShowVolHandler showVolHandler = new ShowVolHandler(personalVolRequestHandler,orgVolRequestHandler);
-  static ShowDonationHandler showDonationHandler = new ShowDonationHandler(donationBoardHandler);
-
-
-  // 공지사항 관련
-  static ShowNoticeHandler showNoticeHandler = new ShowNoticeHandler();
-  // 문의사항 관련
-  static ShowQuestionHandler showQuestionHandler = new ShowQuestionHandler(questionDTOList);
-
   // 고객센터 핸들러(기능)
+  static ShowNoticeHandler showNoticeHandler = new ShowNoticeHandler();
+  static ShowQuestionHandler showQuestionHandler = new ShowQuestionHandler(questionDTOList);
   static SupportHandler supportHandler = new SupportHandler(questionListHandler, noticeListHandler);
 
-  // 챌린지관리 관련
-  static ShowChallengeHandler showChallengeHandler = new ShowChallengeHandler();
 
-  // 기관승인 관련
+  // 관리자 페이지
+  static ShowVolHandler showVolHandler = new ShowVolHandler(personalVolRequestHandler,orgVolRequestHandler);
+  static ShowDonationHandler showDonationHandler = new ShowDonationHandler(donationBoardHandler);
+  static ShowMemberHandler showMemberHandler = new ShowMemberHandler();
   static ShowOrgApproveHandler showOrgApproveHandler = new ShowOrgApproveHandler();
   static AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler,showVolHandler, donationBoardHandler, showDonationHandler); 
 
 
+
   // 마이 페이지
 
+  //<<<<<<< HEAD
+  //=======
+  //    donation.add(new Menu("기부하기") {
+  //      @Override
+  //      public void execute() {
+  //        donationRegisterHandler.add(); 
+  //      }});
+  //    donation.add(new Menu("기부내역") {
+  //      @Override
+  //      public void execute() {
+  //        boardHandler.donationList(); 
+  //      }});
+  //>>>>>>> 416a1777ac3b9ac218dd56cc3aed17e787feb5a3
 
 
 
@@ -158,11 +164,13 @@ public class App {
 
     App app = new App(); 
     app.service();
+
   }
   void service() {
     createMenu().execute();
     Prompt.close();
   }
+
 
   Menu createMenu() {
     MenuGroup mainMenuGroup = new MenuGroup("로그인");

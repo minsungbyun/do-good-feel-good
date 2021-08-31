@@ -1,19 +1,17 @@
 package com.share.ftp.handler.personal;
 
+import java.util.List;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.util.Prompt;
 
 public class DonationBoardHandler {
 
-  static final int MAX_LENGTH = 10;
-  int size;
-
-
-  DonationBoardDTO[] donationBoardDTO = new DonationBoardDTO[MAX_LENGTH];
+  List<DonationBoardDTO> donationBoardDTOList;
   DonationDetailHandler donationDetailHandler;
   DonationRegisterHandler donationRegisterHandler;
 
-  public DonationBoardHandler(DonationDetailHandler donationDetailHandler, DonationRegisterHandler donationRegisterHandler) {
+  public DonationBoardHandler(List<DonationBoardDTO> donationBoardDTOList, DonationDetailHandler donationDetailHandler, DonationRegisterHandler donationRegisterHandler) {
+    this.donationBoardDTOList = donationBoardDTOList;
     this.donationDetailHandler = donationDetailHandler;
     this.donationRegisterHandler = donationRegisterHandler;
   }
@@ -63,18 +61,18 @@ public class DonationBoardHandler {
     System.out.println("[1.아동] [2.청소년] [3.어르신] [4.장애인] [5.동물] [6.환경] [7.기타] ");
 
 
-    DonationBoardDTO donationBoard = new DonationBoardDTO();
+    DonationBoardDTO donationBoardDTO = new DonationBoardDTO();
 
     try {
-      donationBoard.setNo(Prompt.inputInt("개설번호: "));
-      donationBoard.setTitle(Prompt.inputString("제목: "));
-      donationBoard.setLeader(Prompt.inputString("주최자: "));
-      donationBoard.setContent(Prompt.inputString("내용: "));
-      donationBoard.setFileUpload(Prompt.inputString("첨부파일: "));
-      donationBoard.setPassword(Prompt.inputString("비밀번호: "));
-      donationBoard.setRegisteredDate(Prompt.inputDate("제안기간(yyyy-mm-dd): "));
+      donationBoardDTO.setNo(Prompt.inputInt("개설번호: "));
+      donationBoardDTO.setTitle(Prompt.inputString("제목: "));
+      donationBoardDTO.setLeader(Prompt.inputString("주최자: "));
+      donationBoardDTO.setContent(Prompt.inputString("내용: "));
+      donationBoardDTO.setFileUpload(Prompt.inputString("첨부파일: "));
+      donationBoardDTO.setPassword(Prompt.inputString("비밀번호: "));
+      donationBoardDTO.setRegisteredDate(Prompt.inputDate("제안기간(yyyy-mm-dd): "));
 
-      donationBoardDTO[size++] = donationBoard;
+      donationBoardDTOList.add(donationBoardDTO);
 
       System.out.println("[모금함 개설 신청이 완료되었습니다.]");
 
@@ -90,15 +88,15 @@ public class DonationBoardHandler {
   public void applyDonationList() {
     System.out.println("[모금함 개설 신청 목록]");
 
-    for (int i = 0; i < this.size; i++) {
+    for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
       System.out.printf("%d, %s, %s, %s, %s, %s, %s\n", 
-          donationBoardDTO[i].getNo(), 
-          donationBoardDTO[i].getTitle(), 
-          donationBoardDTO[i].getLeader(),
-          donationBoardDTO[i].getContent(),
-          donationBoardDTO[i].getFileUpload(), 
-          donationBoardDTO[i].getPassword(),
-          donationBoardDTO[i].getRegisteredDate());
+          donationBoardDTO.getNo(), 
+          donationBoardDTO.getTitle(), 
+          donationBoardDTO.getLeader(),
+          donationBoardDTO.getContent(),
+          donationBoardDTO.getFileUpload(), 
+          donationBoardDTO.getPassword(),
+          donationBoardDTO.getRegisteredDate());
     }
   }
 
@@ -107,25 +105,25 @@ public class DonationBoardHandler {
     System.out.println("[모금함 개설 신청내역 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    DonationBoardDTO donationBoard = findByNo(no);
+    DonationBoardDTO donationBoardDTO = findByNo(no);
 
-    if (donationBoard == null) {
+    if (donationBoardDTO == null) {
       System.out.println("해당 번호의 모금함 개설 신청내역이 없습니다.");
       return;
     }
 
-    System.out.printf("개설번호: %s\n", donationBoard.getNo());
-    System.out.printf("제목: %s\n", donationBoard.getTitle());
-    System.out.printf("주최자: %s\n", donationBoard.getLeader());
-    System.out.printf("내용: %s\n", donationBoard.getContent());
-    System.out.printf("첨부파일: %d\n", donationBoard.getFileUpload());
-    System.out.printf("제안기간: %d\n", donationBoard.getRegisteredDate());
+    System.out.printf("개설번호: %s\n", donationBoardDTO.getNo());
+    System.out.printf("제목: %s\n", donationBoardDTO.getTitle());
+    System.out.printf("주최자: %s\n", donationBoardDTO.getLeader());
+    System.out.printf("내용: %s\n", donationBoardDTO.getContent());
+    System.out.printf("첨부파일: %d\n", donationBoardDTO.getFileUpload());
+    System.out.printf("제안기간: %d\n", donationBoardDTO.getRegisteredDate());
   }
 
   private DonationBoardDTO findByNo(int no) {
-    for (int i = 0; i < this.size; i++) {
-      if (donationBoardDTO[i].getNo() == no) {
-        return donationBoardDTO[i];
+    for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
+      if (donationBoardDTO.getNo() == no) {
+        return donationBoardDTO;
       }
     }
     return null;
