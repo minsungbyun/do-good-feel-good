@@ -35,6 +35,7 @@ import com.share.ftp.handler.personal.ChallengeHandler;
 import com.share.ftp.handler.personal.CommBestHandler;
 import com.share.ftp.handler.personal.CommBoardHandler;
 import com.share.ftp.handler.personal.CommHandler;
+import com.share.ftp.handler.personal.CommReviewHandler;
 import com.share.ftp.handler.personal.DonationBoardHandler;
 import com.share.ftp.handler.personal.DonationDetailHandler;
 import com.share.ftp.handler.personal.MyPageHandler;
@@ -86,14 +87,20 @@ public class App {
   static VolApprovedHandler volApprovedHandler = new VolApprovedHandler();
 
   static VolListHandler volListHandler = new VolListHandler(personalVolRequestHandler,orgVolRequestHandler);
+  // 개인 페이지
+
 
   // 소통해요 핸들러(기능)
+  static CommReviewHandler commReviewHandler = new CommReviewHandler();
   static CommBoardHandler commBoardHandler = new CommBoardHandler();
   static CommBestHandler commBestHandler = new CommBestHandler(commBoardHandler);
   static CommHandler commHandler = new CommHandler(commBoardHandler,commBestHandler);
 
+
   // 챌린지 핸들러(기능)
   static ChallengeHandler challengeHandler = new ChallengeHandler();
+
+
 
   // 기부 핸들러(기능)
   static DonationRegisterHandler donationRegisterHandler = new DonationRegisterHandler();

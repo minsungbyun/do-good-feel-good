@@ -102,9 +102,15 @@ public class ChallengeReviewHandler {
 
     System.out.println("참여인증&댓글을 삭제하였습니다.");
   }
+<<<<<<< HEAD
+=======
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5817a6d96c08be8e7c859f806417750d10136fe5
+>>>>>>> e4ea84d2e301647c2b888afd2a1efe0585243009
   private MyChallengeReviewDTO findByNo(int no) {
     for (int i = 0; i < this.size; i++) {
       if (this.myChallengeReviews[i].getNo() == no) {
