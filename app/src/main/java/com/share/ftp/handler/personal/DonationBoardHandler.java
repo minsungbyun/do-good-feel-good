@@ -70,7 +70,8 @@ public class DonationBoardHandler {
       donationBoardDTO.setContent(Prompt.inputString("내용: "));
       donationBoardDTO.setFileUpload(Prompt.inputString("첨부파일: "));
       donationBoardDTO.setPassword(Prompt.inputString("비밀번호: "));
-      donationBoardDTO.setRegisteredDate(Prompt.inputDate("제안기간(yyyy-mm-dd): "));
+      donationBoardDTO.setRegisteredStartDate(Prompt.inputDate("시작일(yyyy-mm-dd): "));
+      donationBoardDTO.setRegisteredEndDate(Prompt.inputDate("종료일(yyyy-mm-dd): "));
 
       donationBoardDTOList.add(donationBoardDTO);
 
@@ -96,7 +97,8 @@ public class DonationBoardHandler {
           donationBoardDTO.getContent(),
           donationBoardDTO.getFileUpload(), 
           donationBoardDTO.getPassword(),
-          donationBoardDTO.getRegisteredDate());
+          donationBoardDTO.getRegisteredStartDate(),
+          donationBoardDTO.getRegisteredEndDate());
     }
   }
 
@@ -117,7 +119,8 @@ public class DonationBoardHandler {
     System.out.printf("주최자: %s\n", donationBoardDTO.getLeader());
     System.out.printf("내용: %s\n", donationBoardDTO.getContent());
     System.out.printf("첨부파일: %d\n", donationBoardDTO.getFileUpload());
-    System.out.printf("제안기간: %d\n", donationBoardDTO.getRegisteredDate());
+    System.out.printf("시작일: %d\n", donationBoardDTO.getRegisteredStartDate());
+    System.out.printf("종료일: %d\n", donationBoardDTO.getRegisteredEndDate());
   }
 
   private DonationBoardDTO findByNo(int no) {
