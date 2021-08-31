@@ -10,9 +10,6 @@ public class MyPageHandler {
     this.myVolHandler = myVolHandler;
   }
 
-
-  MyProfileHandler myProfileHandler =  new MyProfileHandler();
-
   MyBoardListHandler myBoardListHandler = new MyBoardListHandler();
   MyPointHandler myPointHandler = new MyPointHandler();
   MyDonationHandler myDonationHandler = new MyDonationHandler();

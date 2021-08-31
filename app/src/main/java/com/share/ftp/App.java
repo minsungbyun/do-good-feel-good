@@ -30,10 +30,12 @@ import com.share.ftp.handler.personal.ChallengeHandler;
 import com.share.ftp.handler.personal.CommBestHandler;
 import com.share.ftp.handler.personal.CommBoardHandler;
 import com.share.ftp.handler.personal.CommHandler;
+import com.share.ftp.handler.personal.CommReviewHandler;
 import com.share.ftp.handler.personal.DonationBoardHandler;
 import com.share.ftp.handler.personal.DonationDetailHandler;
 import com.share.ftp.handler.personal.MyPageHandler;
 import com.share.ftp.handler.personal.MyVolHandler;
+import com.share.ftp.handler.personal.QuestionListHandler;
 import com.share.ftp.handler.personal.SupportHandler;
 import com.share.ftp.handler.personal.VolListHandler;
 import com.share.menu.Menu;
@@ -63,6 +65,54 @@ public class App {
   List<QuestionDTO> questionDTO = new ArrayList<>();
 
   // 개인 페이지
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> e4ea84d2e301647c2b888afd2a1efe0585243009
+  static PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler();
+  static OrgVolRequestHandler orgVolRequestHandler = new OrgVolRequestHandler();
+  static VolListHandler volListHandler = new VolListHandler(personalVolRequestHandler,orgVolRequestHandler);
+  static DonationRegisterHandler donationRegisterHandler = new DonationRegisterHandler();
+  static DonationDetailHandler donationDetailHandler = new DonationDetailHandler(donationRegisterHandler);
+<<<<<<< HEAD
+  static QuestionListHandler questionListHandler = new QuestionListHandler(myQuestionListDTO);
+  static NoticeListHandler noticeListHandler = new NoticeListHandler();
+
+
+  static CommBoardHandler commBoardHandler = new CommBoardHandler();
+=======
+
+  static CommReviewHandler commReviewHandler = new CommReviewHandler();
+  static CommBoardHandler commBoardHandler = new CommBoardHandler(null);
+>>>>>>> e4ea84d2e301647c2b888afd2a1efe0585243009
+  static MyVolHandler myVolHandler = new MyVolHandler(personalVolRequestHandler);
+  static DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationDetailHandler, donationRegisterHandler);
+  static ChallengeHandler challengeHandler = new ChallengeHandler();
+  static CommBestHandler commBestHandler = new CommBestHandler(commBoardHandler);
+<<<<<<< HEAD
+  static CommHandler commHandler = new CommHandler(commBoardHandler,commBestHandler);
+  static SupportHandler supportHandler = new SupportHandler(questionListHandler, noticeListHandler);
+  static MyPageHandler myPageHandler = new MyPageHandler(myVolHandler);
+  //  PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler();
+  //  OrgVolRequestHandler orgVolRequestHandler = new OrgVolRequestHandler();
+  //  VolListHandler volListHandler = new VolListHandler(personalVolRequestHandler,orgVolRequestHandler);
+  //  DonationRegisterHandler donationRegisterHandler = new DonationRegisterHandler();
+  //  DonationDetailHandler donationDetailHandler = new DonationDetailHandler(donationRegisterHandler);
+  //
+  //
+  //  CommBoardHandler commBoardHandler = new CommBoardHandler();
+  //  MyVolHandler myVolHandler = new MyVolHandler(personalVolRequestHandler);
+  //  DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationDetailHandler, donationRegisterHandler);
+  //  ChallengeHandler challengeHandler = new ChallengeHandler();
+  //  CommBestHandler commBestHandler = new CommBestHandler(commBoardHandler);
+  //  CommHandler commHandler = new CommHandler(commBoardHandler,commBestHandler);
+  //  SupportHandler supportHandler = new SupportHandler();
+  //  MyPageHandler myPageHandler = new MyPageHandler(myVolHandler);
+=======
+  static CommHandler commHandler = new CommHandler(commBoardHandler,commBestHandler,commReviewHandler);
+  static SupportHandler supportHandler = new SupportHandler();
+  static MyPageHandler myPageHandler = new MyPageHandler(myVolHandler);
+=======
   PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler();
   OrgVolRequestHandler orgVolRequestHandler = new OrgVolRequestHandler();
   VolListHandler volListHandler = new VolListHandler(personalVolRequestHandler,orgVolRequestHandler);
@@ -78,8 +128,11 @@ public class App {
   CommHandler commHandler = new CommHandler(commBoardHandler,commBestHandler);
   SupportHandler supportHandler = new SupportHandler();
   MyPageHandler myPageHandler = new MyPageHandler(myVolHandler);
+>>>>>>> 5817a6d96c08be8e7c859f806417750d10136fe5
+>>>>>>> e4ea84d2e301647c2b888afd2a1efe0585243009
 
   // 마이 페이지
+  static MyPageHandler myVolHandler = new MyPageHandler();
 
   // 기관 페이지
 
