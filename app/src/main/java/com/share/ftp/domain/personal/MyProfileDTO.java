@@ -1,10 +1,36 @@
 package com.share.ftp.domain.personal;
 
+import java.util.Objects;
+
 public class MyProfileDTO {
   public String photo;
   public String password;
   public String email;
   public String adress;
+
+  @Override
+  public String toString() {
+    return "MyProfileDTO [photo=" + photo + ", password=" + password + ", email=" + email
+        + ", adress=" + adress + "]";
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(adress, email, password, photo);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    MyProfileDTO other = (MyProfileDTO) obj;
+    return Objects.equals(adress, other.adress) && Objects.equals(email, other.email)
+        && Objects.equals(password, other.password) && Objects.equals(photo, other.photo);
+  }
 
   public String getPhoto() {
     return photo;

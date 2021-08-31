@@ -1,5 +1,7 @@
 package com.share.ftp.domain.personal;
 
+import java.util.Objects;
+
 public class ApproveOrgDTO {
   private int no;
   private String orgName;
@@ -10,6 +12,32 @@ public class ApproveOrgDTO {
   private String orgInfo;
   private String fileUpload;
 
+  @Override
+  public String toString() {
+    return "ApproveOrgDTO [no=" + no + ", orgName=" + orgName + ", sort=" + sort + ", orgCheif="
+        + orgCheif + ", tel=" + tel + ", orgAddress=" + orgAddress + ", orgInfo=" + orgInfo
+        + ", fileUpload=" + fileUpload + "]";
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(fileUpload, no, orgAddress, orgCheif, orgInfo, orgName, sort, tel);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    ApproveOrgDTO other = (ApproveOrgDTO) obj;
+    return Objects.equals(fileUpload, other.fileUpload) && no == other.no
+        && Objects.equals(orgAddress, other.orgAddress) && Objects.equals(orgCheif, other.orgCheif)
+        && Objects.equals(orgInfo, other.orgInfo) && Objects.equals(orgName, other.orgName)
+        && Objects.equals(sort, other.sort) && Objects.equals(tel, other.tel);
+  }
 
   public int getNo() {
     return no;

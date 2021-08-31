@@ -1,6 +1,7 @@
 package com.share.ftp.domain.personal;
 
 import java.sql.Date;
+import java.util.Objects;
 
 public class DonationBoardDTO {
   private int no;
@@ -10,6 +11,35 @@ public class DonationBoardDTO {
   private String fileUpload;
   private String password;
   private Date registeredDate;
+
+  @Override
+  public String toString() {
+    return "DonationBoardDTO [no=" + no + ", title=" + title + ", leader=" + leader + ", content="
+        + content + ", fileUpload=" + fileUpload + ", password=" + password + ", registeredDate="
+        + registeredDate + "]";
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(content, fileUpload, leader, no, password, registeredDate, title);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    DonationBoardDTO other = (DonationBoardDTO) obj;
+    return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
+        && Objects.equals(leader, other.leader) && no == other.no
+        && Objects.equals(password, other.password)
+        && Objects.equals(registeredDate, other.registeredDate)
+        && Objects.equals(title, other.title);
+  }
+
   public int getNo() {
     return no;
   }
