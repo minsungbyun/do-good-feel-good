@@ -6,7 +6,7 @@ public class AdminPageHandler {
   //  // 회원정보 관련 Handler
   //  ShowMemberHandler showMemberHandler = new ShowMemberHandler();
   //
-  //  // 봉사활동 관련 Handler
+  // 봉사활동 관련 Handler
   //  PersonalVolRequestHandler personalVolRequestHandler;
   //
   //  // 모금활동 관련
@@ -16,13 +16,13 @@ public class AdminPageHandler {
   //
   //  // 공지사항 관련
   //  ShowNoticeHandler showNoticeHandler = new ShowNoticeHandler();
-  //  
+  //
   //  // 문의사항 관련
   //  ShowQuestionHandler showQuestionHandler = new ShowQuestionHandler();
-  //  
+  //
   //  // 챌린지관리 관련
   //  ShowChallengeHandler showChallengeHandler = new ShowChallengeHandler();
-  //  
+  //
   //  // 기관승인 관련
   //  ShowOrgApproveHandler showOrgApproveHandler = new ShowOrgApproveHandler();
   //
@@ -33,12 +33,12 @@ public class AdminPageHandler {
   //    this.showDonationHandler = showDonationHandler;
   //    this.donationBoardHandler = donationBoardHandler;
   //  }
-  //
+
 
 
   public void showMember() {
     System.out.println("회원정보 조회");
-    personalVolRequestHandler.applyList();
+    personalVolRequestHandler.apply();
 
     while (true) {
       System.out.println();
