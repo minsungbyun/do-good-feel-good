@@ -7,7 +7,7 @@ public class DonationBoardHandler {
 
   static final int MAX_LENGTH = 10;
 
-  DonationBoardDTO[] donationBoards = new DonationBoardDTO[MAX_LENGTH];
+  DonationBoardDTO[] donationBoardsDTO = new DonationBoardDTO[MAX_LENGTH];
   int size;
 
   public void list() {
@@ -25,18 +25,19 @@ public class DonationBoardHandler {
   public void applyDonation() {
     System.out.println("모금함 개설 신청");
 
-    DonationBoardDTO donationBoard = new DonationBoardDTO();
+    DonationBoardDTO donationBoardDTO = new DonationBoardDTO();
 
 
-    donationBoard.setNo(Prompt.inputInt("개설번호: "));
-    donationBoard.setTitle(Prompt.inputString("제목: "));
-    donationBoard.setLeader(Prompt.inputString("주최자: "));
-    donationBoard.setContent(Prompt.inputString("내용: "));
-    donationBoard.setFileUpload(Prompt.inputString("첨부파일: "));
-    donationBoard.setPassword(Prompt.inputString("비밀번호: "));
-    // donationBoard.setRegisteredDate(Prompt.inputDate("제안기간: "));
+    donationBoardDTO.setNo(Prompt.inputInt("개설번호: "));
+    donationBoardDTO.setTitle(Prompt.inputString("제목: "));
+    donationBoardDTO.setLeader(Prompt.inputString("주최자: "));
+    donationBoardDTO.setContent(Prompt.inputString("내용: "));
+    donationBoardDTO.setFileUpload(Prompt.inputString("첨부파일: "));
+    donationBoardDTO.setPassword(Prompt.inputString("비밀번호: "));
+    donationBoardDTO.setRegisteredStartDate(Prompt.inputDate("시작일: "));
+    donationBoardDTO.setRegisteredEndDate(Prompt.inputDate("종료일: "));
 
-    this.donationBoards[this.size++] = donationBoard;
+    this.donationBoardsDTO[this.size++] = donationBoardDTO;
 
   }
 }

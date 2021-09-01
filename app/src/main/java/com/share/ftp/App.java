@@ -42,6 +42,7 @@ import com.share.ftp.handler.personal.DonationBoardHandler;
 import com.share.ftp.handler.personal.DonationRegisterHandler;
 import com.share.ftp.handler.personal.MyBoardListHandler;
 import com.share.ftp.handler.personal.MyDonationHandler;
+import com.share.ftp.handler.personal.MyPageHandler2;
 import com.share.ftp.handler.personal.MyPointHandler;
 import com.share.ftp.handler.personal.MyProfileHandler;
 import com.share.ftp.handler.personal.NoticeListHandler;
@@ -127,7 +128,7 @@ public class App {
   // 모금함 관련 핸들러(기능)
   DonationRegisterHandler donationRegisterHandler = new DonationRegisterHandler(donationRegisterDTOList);
   //  DonationDetailHandler donationDetailHandler = new DonationDetailHandler(donationRegisterHandler);
-  DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationBoardDTOList, donationRegisterHandler);
+  DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationBoardDTOList);
 
   // 마이 페이지 핸들러(기능)
   // MyPageHandler myVolHandler = new MyPageHandler();
@@ -138,6 +139,7 @@ public class App {
   MyDonationHandler myDonationHandler = new MyDonationHandler();
   ApproveOrgHandler approveOrgHandler = new ApproveOrgHandler(approveOrgDTOList);
   WithdrawMemberHandler withdrawMemberHandler = new WithdrawMemberHandler();
+  MyPageHandler2 myPageHandler2 = new MyPageHandler2(joinDTOList, joinHandler);
 
   // 고객센터 핸들러(기능)
   ShowNoticeHandler showNoticeHandler = new ShowNoticeHandler(); // 아직 List 변경 안함
@@ -417,7 +419,7 @@ public class App {
     MenuGroup donation = new MenuGroup("모금함 상세보기");
     donationList.add(donation);
 
-    donation.add(new Menu("기부하기") {
+    donation.add(new Menu("기부하기", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
         donationRegisterHandler.add(); 
@@ -425,7 +427,7 @@ public class App {
     donation.add(new Menu("기부내역") {
       @Override
       public void execute() {
-        donationRegisterHandler.applyDonationList(); 
+        donationRegisterHandler.participationDonation(); 
       }});
 
     MenuGroup donationTotal = new MenuGroup("전체 모금액");
@@ -437,7 +439,7 @@ public class App {
         donationRegisterHandler.totalDonationMoney(); 
       }});
 
-    MenuGroup applyDonation = new MenuGroup("모금함 개설신청");
+    MenuGroup applyDonation = new MenuGroup("모금함 개설신청", Menu.ENABLE_ORG);
     personalDonationMenu.add(applyDonation);
 
     applyDonation.add(new Menu("개설신청") {
@@ -631,14 +633,20 @@ public class App {
         showMemberHandler.getOutMember(); 
       }});
 
-    MenuGroup donationMenu = new MenuGroup("모금 관리");
+    MenuGroup donationMenu = new MenuGroup("모금함 관리");
     adminMenu.add(donationMenu);
 
-    donationMenu.add(new Menu("모금활동관리") {
+    donationMenu.add(new Menu("모금함 개설 신청내역 목록") {
       @Override
       public void execute() {
-        showDonationHandler.list(); 
+        donationBoardHandler.applyDonationList(); 
       }});
+    donationMenu.add(new Menu("모금함 개설 신청내역 상세보기") {
+      @Override
+      public void execute() {
+        donationBoardHandler.applyDonationdetail(); 
+      }});
+
 
     MenuGroup volunteerMenu = new MenuGroup("봉사활동 관리");
     adminMenu.add(volunteerMenu);

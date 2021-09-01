@@ -233,8 +233,6 @@ public class MenuGroup extends Menu {
     int i = 1;
     for (Menu menu : menuList) {
       System.out.printf("%d. %-20s\n", i++, menu.title);
-
-
     }
 
     if (!disablePrevMenu) {
