@@ -39,6 +39,7 @@ import com.share.ftp.handler.personal.DonationBoardHandler;
 import com.share.ftp.handler.personal.DonationRegisterHandler;
 import com.share.ftp.handler.personal.MyBoardListHandler;
 import com.share.ftp.handler.personal.MyDonationHandler;
+import com.share.ftp.handler.personal.MyPageHandler2;
 import com.share.ftp.handler.personal.MyPointHandler;
 import com.share.ftp.handler.personal.MyProfileHandler;
 import com.share.ftp.handler.personal.NoticeListHandler;
@@ -122,6 +123,7 @@ public class App {
   MyDonationHandler myDonationHandler = new MyDonationHandler();
   ApproveOrgHandler approveOrgHandler = new ApproveOrgHandler(approveOrgDTOList);
   WithdrawMemberHandler withdrawMemberHandler = new WithdrawMemberHandler();
+  MyPageHandler2 myPageHandler2 = new MyPageHandler2(joinDTOList, joinHandler);
 
   // 고객센터 핸들러(기능)
   ShowNoticeHandler showNoticeHandler = new ShowNoticeHandler();
@@ -329,7 +331,7 @@ public class App {
     MenuGroup donation = new MenuGroup("모금함 상세보기");
     donationList.add(donation);
 
-    donation.add(new Menu("기부하기") {
+    donation.add(new Menu("기부하기", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
         donationRegisterHandler.add(); 
@@ -337,7 +339,7 @@ public class App {
     donation.add(new Menu("기부내역") {
       @Override
       public void execute() {
-        donationRegisterHandler.applyDonationList(); 
+        donationRegisterHandler.participationDonation(); 
       }});
 
     MenuGroup donationTotal = new MenuGroup("전체 모금액");
@@ -349,7 +351,7 @@ public class App {
         donationRegisterHandler.totalDonationMoney(); 
       }});
 
-    MenuGroup applyDonation = new MenuGroup("모금함 개설신청");
+    MenuGroup applyDonation = new MenuGroup("모금함 개설신청", Menu.ENABLE_LOGIN);
     personalDonationMenu.add(applyDonation);
 
     applyDonation.add(new Menu("개설신청") {
@@ -419,8 +421,27 @@ public class App {
     //        boardHandler.ask(); 
     //      }});
     //    //
-    //    MenuGroup personalMyPage = new MenuGroup("마이페이지");
-    //    personalMenu.add(personalMyPage);
+    MenuGroup MyPage = new MenuGroup("마이페이지", Menu.ENABLE_LOGIN);
+    mainMenuGroup.add(MyPage);
+
+    MenuGroup MyPofile = new MenuGroup("내정보", Menu.ENABLE_LOGIN);
+    MyPage.add(MyPofile);
+
+    MyPofile.add(new Menu("내 정보 상세보기") {
+      @Override
+      public void execute() {
+        authHandler.displayLoginUser(); 
+      }});
+    MyPofile.add(new Menu("내정보 변경하기") {
+      @Override
+      public void execute() {
+        joinHandler.detail(); 
+      }});
+    MyPage.add(new Menu("회원탈퇴") {
+      @Override
+      public void execute() {
+        joinHandler.delete(); 
+      }});
     //    
     //    MenuGroup myProfile = new MenuGroup("회원정보수정");
     //    personalMyPage.add(myProfile);

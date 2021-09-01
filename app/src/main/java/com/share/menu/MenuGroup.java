@@ -176,7 +176,7 @@ public class MenuGroup extends Menu {
   private void printMenuList(List<Menu> menuList) {
     int i = 1;
     for (Menu menu : menuList) {
-      System.out.printf("%d. %s\n", i++, menu.title);
+      System.out.printf("%d. %-20s\n", i++, menu.title);
     }
 
     if (!disablePrevMenu) {

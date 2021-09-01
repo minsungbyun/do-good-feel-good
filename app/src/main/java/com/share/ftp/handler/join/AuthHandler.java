@@ -8,7 +8,7 @@ public class AuthHandler {
 
   List<JoinDTO> joinDTOList;
 
-  static JoinDTO loginUser;
+  public static JoinDTO loginUser;
   public static JoinDTO getLoginUser() {
     return loginUser;
   }
