@@ -2,19 +2,16 @@ package com.share.ftp.handler.personal;
 
 import java.util.List;
 import com.share.ftp.domain.personal.DonationBoardDTO;
-import com.share.ftp.domain.personal.DonationRegisterDTO;
 import com.share.util.Prompt;
 
 public class DonationBoardHandler {
 
   List<DonationBoardDTO> donationBoardDTOList;
-  List<DonationRegisterDTO> donationRegisterDTOList;
-  //  DonationDetailHandler donationDetailHandler;
+  DonationRegisterHandler donationRegisterHandler;
 
-  public DonationBoardHandler(List<DonationBoardDTO> donationBoardDTOList, List<DonationRegisterDTO> donationRegisterDTOList) {
+  public DonationBoardHandler(List<DonationBoardDTO> donationBoardDTOList, DonationRegisterHandler donationRegisterHandler) {
     this.donationBoardDTOList = donationBoardDTOList;
-    //    this.donationDetailHandler = donationDetailHandler;
-    this.donationRegisterDTOList = donationRegisterDTOList;
+    this.donationRegisterHandler = donationRegisterHandler;
   }
 
   // 모금함 목록
@@ -24,30 +21,11 @@ public class DonationBoardHandler {
 
   // 모금함 상세보기
   public void detailDonation() {
-    while (true) {
-      try {
-        System.out.println("1. 모금함 상세보기");
-        System.out.println("2. 기부하기");
-        System.out.println("0. 이전메뉴");
-
-        int menuNo = Prompt.inputInt("모금함 상세보기> ");
-        switch (menuNo) {
-          case 1: donationDetailHandler.detailDonationInfo(); break;
-          case 2: donationDetailHandler.joinDonationList(); break;
-          case 3: break;
-          case 4: break;
-          case 5: break;
-          case 0: return;
-          default:
-            System.out.println("무효한 메뉴 번호입니다.");
-        }
-        System.out.println();
-      } catch (Throwable e) {
-        System.out.println("--------------------------------------------------------------");
-        System.out.printf("오류 발생: %s\n", e.getClass().getName());
-        System.out.println("--------------------------------------------------------------");
-      }
-    }
+    System.out.println("1. 모금함 상세보기");
+    System.out.println("2. 기부하기");
+    System.out.println("0. 이전메뉴");
+    //    case 1: donationDetailHandler.detailDonationInfo(); break;
+    //    case 2: donationDetailHandler.joinDonationList(); break;
   }
 
   // 기부 총 금액
@@ -71,7 +49,8 @@ public class DonationBoardHandler {
       donationBoardDTO.setContent(Prompt.inputString("내용: "));
       donationBoardDTO.setFileUpload(Prompt.inputString("첨부파일: "));
       donationBoardDTO.setPassword(Prompt.inputString("비밀번호: "));
-      donationBoardDTO.setRegisteredDate(Prompt.inputDate("제안기간(yyyy-mm-dd): "));
+      donationBoardDTO.setRegisteredStartDate(Prompt.inputDate("시작일(yyyy-mm-dd): "));
+      donationBoardDTO.setRegisteredEndDate(Prompt.inputDate("종료일(yyyy-mm-dd): "));
 
       donationBoardDTOList.add(donationBoardDTO);
 
@@ -90,14 +69,15 @@ public class DonationBoardHandler {
     System.out.println("[모금함 개설 신청 목록]");
 
     for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
-      System.out.printf("%d, %s, %s, %s, %s, %s, %s\n", 
+      System.out.printf("%d, %s, %s, %s, %s, %s, %s ~ %s\n", 
           donationBoardDTO.getNo(), 
           donationBoardDTO.getTitle(), 
           donationBoardDTO.getLeader(),
           donationBoardDTO.getContent(),
           donationBoardDTO.getFileUpload(), 
           donationBoardDTO.getPassword(),
-          donationBoardDTO.getRegisteredDate());
+          donationBoardDTO.getRegisteredStartDate(),
+          donationBoardDTO.getRegisteredEndDate());
     }
   }
 
@@ -118,7 +98,8 @@ public class DonationBoardHandler {
     System.out.printf("주최자: %s\n", donationBoardDTO.getLeader());
     System.out.printf("내용: %s\n", donationBoardDTO.getContent());
     System.out.printf("첨부파일: %d\n", donationBoardDTO.getFileUpload());
-    System.out.printf("제안기간: %d\n", donationBoardDTO.getRegisteredDate());
+    System.out.printf("시작일: %d\n", donationBoardDTO.getRegisteredStartDate());
+    System.out.printf("종료일: %d\n", donationBoardDTO.getRegisteredEndDate());
   }
 
   private DonationBoardDTO findByNo(int no) {

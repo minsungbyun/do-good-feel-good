@@ -3,14 +3,17 @@ package com.share.ftp.handler.personal;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.personal.CommBoardDTO;
+import com.share.ftp.handler.join.JoinHandler;
 import com.share.util.Prompt;
 
 public class CommBoardHandler {
 
   List<CommBoardDTO> commBoardDTOList;
+  JoinHandler joinHandler;
 
-  public CommBoardHandler(List<CommBoardDTO> commBoardDTOList) {
+  public CommBoardHandler(List<CommBoardDTO> commBoardDTOList, JoinHandler joinHandler) {
     this.commBoardDTOList = commBoardDTOList;
+    this.joinHandler = joinHandler;
   }
 
   public void add() {
@@ -86,6 +89,7 @@ public class CommBoardHandler {
       System.out.println("해당 게시글이 없습니다.");
       return;
     }
+
 
     String title = Prompt.inputString(String.format("제목(%s)? ", commBoardDTO.getTitle()));
     String content = Prompt.inputString(String.format("내용(%s)? ", commBoardDTO.getContent()));
