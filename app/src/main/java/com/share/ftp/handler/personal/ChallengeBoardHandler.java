@@ -7,20 +7,17 @@ public class ChallengeBoardHandler {
   static final int MAX_LENGTH = 10;
   int size;
 
+  ChallengeReviewHandler challengeReviewHandler;
+  ChallengeQuestionHandler challengeQuestionHandler;
   MyChallengeReviewDTO myChallengeReview = new MyChallengeReviewDTO();
-
-  ChallengeReviewHandler challengeReviewHandler = new ChallengeReviewHandler();
-  ChallengeQuestionHandler challengeQuestionHandler = new ChallengeQuestionHandler();
 
   public void join() {
     System.out.println();
-    System.out.println("챌린지/ 이달의 챌린지/ 챌린지 상세정보 / 참여하기");
     System.out.println("참여가 완료되었습니다.");
   }
 
   public void showMemberList() {
     System.out.println();
-    System.out.println("챌린지/ 이달의 챌린지/ 챌린지 상세정보 / 참여자 정보");
     System.out.println("참여자 목록");
   }
 

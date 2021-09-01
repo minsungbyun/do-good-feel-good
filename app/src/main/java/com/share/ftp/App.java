@@ -28,7 +28,11 @@ import com.share.ftp.handler.admin.ShowOrgApproveHandler;
 import com.share.ftp.handler.admin.ShowQuestionHandler;
 import com.share.ftp.handler.admin.ShowVolHandler;
 import com.share.ftp.handler.personal.ApproveOrgHandler;
+import com.share.ftp.handler.personal.ChallengeBoardHandler;
 import com.share.ftp.handler.personal.ChallengeHandler;
+import com.share.ftp.handler.personal.ChallengeListHandler;
+import com.share.ftp.handler.personal.ChallengeQuestionHandler;
+import com.share.ftp.handler.personal.ChallengeReviewHandler;
 import com.share.ftp.handler.personal.CommBestHandler;
 import com.share.ftp.handler.personal.CommBoardHandler;
 import com.share.ftp.handler.personal.CommReviewHandler;
@@ -42,6 +46,7 @@ import com.share.ftp.handler.personal.NoticeListHandler;
 import com.share.ftp.handler.personal.OrgVolRequestHandler;
 import com.share.ftp.handler.personal.PersonalVolRequestHandler;
 import com.share.ftp.handler.personal.QuestionListHandler;
+import com.share.ftp.handler.personal.RankingHandler;
 import com.share.ftp.handler.personal.SupportHandler;
 import com.share.ftp.handler.personal.VolApprovedHandler;
 import com.share.ftp.handler.personal.VolListHandler;
@@ -96,8 +101,11 @@ public class App {
   //  CommHandler commHandler = new CommHandler(commBoardHandler,commBestHandler,commReviewHandler);
 
   // 챌린지 핸들러(기능)
-  ChallengeHandler challengeHandler = new ChallengeHandler();
-  ShowChallengeHandler showChallengeHandler = new ShowChallengeHandler();
+  ChallengeListHandler challengeListHandler = new ChallengeListHandler();
+  ChallengeBoardHandler challengeBoardHandler = new ChallengeBoardHandler();
+  RankingHandler rankingHandler = new RankingHandler();
+  ChallengeQuestionHandler challengeQuestionHandler = new ChallengeQuestionHandler(myChallengeQuestionDTOList);
+  ChallengeReviewHandler challengeReviewHandler = new ChallengeReviewHandler(myChallengeReviewDTOList);
 
   // 모금함 관련 핸들러(기능)
   DonationRegisterHandler donationRegisterHandler = new DonationRegisterHandler(donationRegisterDTOList);
@@ -123,6 +131,7 @@ public class App {
   ShowVolHandler showVolHandler = new ShowVolHandler(personalVolRequestHandler,orgVolRequestHandler);
   ShowDonationHandler showDonationHandler = new ShowDonationHandler(donationBoardHandler);
   ShowMemberHandler showMemberHandler = new ShowMemberHandler();
+  ShowChallengeHandler showChallengeHandler = new ShowChallengeHandler();
   ShowOrgApproveHandler showOrgApproveHandler = new ShowOrgApproveHandler();
   MyProfileHandler myProfileHandler = new MyProfileHandler(myProfileDTOList);
   //  AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler,showVolHandler, donationBoardHandler, showDonationHandler); 
@@ -241,45 +250,104 @@ public class App {
     //        boardHandler.shortReviewDelete(); 
     //      }});
     //
-    //    MenuGroup personalChallengeMenu = new MenuGroup("챌린지");
-    //    personalMenu.add(personalChallengeMenu);
-    //
-    //    MenuGroup monthlyChallengeMenu = new MenuGroup("이달의 챌린지");
-    //    personalChallengeMenu.add(monthlyChallengeMenu);
-    //
-    //
-    //    monthlyChallengeMenu.add(new Menu("목록") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.monthlyChallengeList(); 
-    //      }});
-    //    monthlyChallengeMenu.add(new Menu("상세보기") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.monthlyChallengeDetail(); 
-    //      }});
-    //
-    //
-    //    MenuGroup monthlyRankingMenu = new MenuGroup("이달의 랭킹");
-    //    personalChallengeMenu.add(monthlyRankingMenu);
-    //
-    //
-    //    monthlyRankingMenu.add(new Menu("목록") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.monthlyRankingList(); 
-    //      }});
-    //    monthlyRankingMenu.add(new Menu("상세보기") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.monthlyRankingDetail(); 
-    //      }});
-    //
-    //    monthlyRankingMenu.add(new Menu("나의 랭킹보기") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.rankingList(); 
-    //      }});
+        MenuGroup personalChallengeMenu = new MenuGroup("챌린지");
+        personalMenu.add(personalChallengeMenu);
+    
+        MenuGroup monthlyChallengeMenu = new MenuGroup("이달의 챌린지");
+        personalChallengeMenu.add(monthlyChallengeMenu);
+    
+    
+        monthlyChallengeMenu.add(new Menu("목록") {
+          @Override
+          public void execute() {
+            challengeListHandler.showList(); 
+          }});
+        MenuGroup monthlyChallengeDetail = new MenuGroup("상세보기");
+        monthlyChallengeMenu.add(monthlyChallengeDetail);
+        
+        monthlyChallengeDetail.add(new Menu("참여하기") {
+          @Override
+          public void execute() {
+            challengeBoardHandler.join(); 
+          }});
+        monthlyChallengeDetail.add(new Menu("참여자 목록") {
+            @Override
+            public void execute() {
+              challengeBoardHandler.showMemberList(); 
+            }});
+        MenuGroup ChallengeReview = new MenuGroup("참여인증&댓글");
+        monthlyChallengeDetail.add(ChallengeReview);
+        MenuGroup ChallengeQuestion = new MenuGroup("문의하기");
+        monthlyChallengeDetail.add(ChallengeQuestion);
+        
+        ChallengeReview.add(new Menu("참여인증&댓글 등록") {
+            @Override
+            public void execute() {
+              challengeReviewHandler.add(); 
+            }});
+        ChallengeReview.add(new Menu("참여인증&댓글 목록") {
+            @Override
+            public void execute() {
+              challengeReviewHandler.list(); 
+            }});
+        ChallengeReview.add(new Menu("참여인증&댓글 상세보기") {
+            @Override
+            public void execute() {
+              challengeReviewHandler.detail(); 
+            }});
+        ChallengeReview.add(new Menu("참여인증&댓글 수정") {
+            @Override
+            public void execute() {
+              challengeReviewHandler.update(); 
+            }});
+        ChallengeReview.add(new Menu("참여인증&댓글 삭제") {
+            @Override
+            public void execute() {
+              challengeReviewHandler.delete(); 
+            }});
+        
+        ChallengeQuestion.add(new Menu("문의 등록") {
+            @Override
+            public void execute() {
+              challengeQuestionHandler.add(); 
+            }});
+        ChallengeQuestion.add(new Menu("문의 목록") {
+            @Override
+            public void execute() {
+              challengeQuestionHandler.list(); 
+            }});
+        ChallengeQuestion.add(new Menu("문의 상세보기") {
+            @Override
+            public void execute() {
+              challengeQuestionHandler.detail(); 
+            }});
+        ChallengeQuestion.add(new Menu("문의 수정") {
+            @Override
+            public void execute() {
+              challengeQuestionHandler.update(); 
+            }});
+        ChallengeQuestion.add(new Menu("문의 삭제") {
+            @Override
+            public void execute() {
+              challengeQuestionHandler.delete(); 
+            }});
+    
+    
+        MenuGroup monthlyRankingMenu = new MenuGroup("이달의 랭킹");
+        personalChallengeMenu.add(monthlyRankingMenu);
+    
+    
+        monthlyRankingMenu.add(new Menu("이달의 랭킹보기") {
+          @Override
+          public void execute() {
+            rankingHandler.showTotalRanking(); 
+          }});
+    
+        monthlyRankingMenu.add(new Menu("나의 랭킹보기") {
+          @Override
+          public void execute() {
+            rankingHandler.showMyRanking(); 
+          }});
     //
     //
     //        MenuGroup personalDonationMenu = new MenuGroup("모금함");
