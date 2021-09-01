@@ -31,7 +31,9 @@ public class CommReviewHandler {
     System.out.println();
     System.out.println("[소통해요/ 한줄후기/ 목록]");
 
-
+    //    CommReviewDTO[] commReviewsDTO = new CommReviewDTO [commReviewDTOList.size()];
+    //    commReviewDTOList.toArray(commReviewsDTO);
+    //    for (CommReviewDTO commReviewDTO : commReviewsDTO) {
     for (CommReviewDTO commReviewDTO : commReviewDTOList) {
       System.out.printf("%d, %s, %s\n", 
           commReviewDTO.getNo(), 

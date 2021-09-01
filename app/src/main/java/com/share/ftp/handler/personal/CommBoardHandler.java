@@ -35,9 +35,12 @@ public class CommBoardHandler {
     System.out.println();
     System.out.println("[메인/소통해요/나눔이야기/목록]");
 
-    CommBoardDTO[] commBoardsDTO = new CommBoardDTO [commBoardDTOList.size()];
+    for(CommBoardDTO commBoardDTO : commBoardDTOList) {
 
-    for (CommBoardDTO commBoardDTO : commBoardsDTO) {
+      //    CommBoardDTO[] commBoardsDTO = new CommBoardDTO [commBoardDTOList.size()];
+      //    commBoardDTOList.toArray(commBoardsDTO);
+      //
+      //    for (CommBoardDTO commBoardDTO : commBoardsDTO) {
       System.out.printf("%d, %s, %s, %s, %s, %d\n", 
           commBoardDTO.getNo(), 
           commBoardDTO.getTitle(), 
