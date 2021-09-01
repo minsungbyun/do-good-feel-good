@@ -4,9 +4,9 @@ public class ChallengeListHandler {
 
   //	ChallengeBoardHandler challengeBoardHandler = new ChallengeBoardHandler();
 
-  public void showList() {
-    System.out.println("관리자가 등록한 챌린지 리스트");
-  }
+//  public void showList() {
+//    System.out.println("관리자가 등록한 챌린지 리스트");
+//  }
 
   public void showDetail() {
     System.out.println();
