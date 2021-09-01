@@ -17,21 +17,17 @@ public class PersonalRequestDTO {
   private String content;
   private String fileUpload;
   private boolean isOrg;
+  private boolean isChecked;
 
-  @Override
-  public String toString() {
-    return "PersonalRequestDTO [no=" + no + ", title=" + title + ", sort=" + sort + ", tel=" + tel
-        + ", email=" + email + ", volunteerPeriod=" + volunteerPeriod + ", volunteerTime="
-        + volunteerTime + ", volunteerList=" + volunteerList + ", joinNum=" + joinNum + ", content="
-        + content + ", fileUpload=" + fileUpload + ", isOrg=" + isOrg + "]";
-  }
+
+
+
 
   @Override
   public int hashCode() {
-    return Objects.hash(content, email, fileUpload, isOrg, joinNum, no, sort, tel, title,
+    return Objects.hash(content, email, fileUpload, isChecked, isOrg, joinNum, no, sort, tel, title,
         volunteerList, volunteerPeriod, volunteerTime);
   }
-
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -42,16 +38,21 @@ public class PersonalRequestDTO {
       return false;
     PersonalRequestDTO other = (PersonalRequestDTO) obj;
     return Objects.equals(content, other.content) && Objects.equals(email, other.email)
-        && Objects.equals(fileUpload, other.fileUpload) && isOrg == other.isOrg
-        && joinNum == other.joinNum && no == other.no && Objects.equals(sort, other.sort)
-        && Objects.equals(tel, other.tel) && Objects.equals(title, other.title)
-        && Objects.equals(volunteerList, other.volunteerList)
+        && Objects.equals(fileUpload, other.fileUpload) && isChecked == other.isChecked
+        && isOrg == other.isOrg && joinNum == other.joinNum && no == other.no
+        && Objects.equals(sort, other.sort) && Objects.equals(tel, other.tel)
+        && Objects.equals(title, other.title) && Objects.equals(volunteerList, other.volunteerList)
         && Objects.equals(volunteerPeriod, other.volunteerPeriod)
         && Objects.equals(volunteerTime, other.volunteerTime);
   }
-
-
-
+  @Override
+  public String toString() {
+    return "PersonalRequestDTO [no=" + no + ", title=" + title + ", sort=" + sort + ", tel=" + tel
+        + ", email=" + email + ", volunteerPeriod=" + volunteerPeriod + ", volunteerTime="
+        + volunteerTime + ", volunteerList=" + volunteerList + ", joinNum=" + joinNum + ", content="
+        + content + ", fileUpload=" + fileUpload + ", isOrg=" + isOrg + ", isChecked=" + isChecked
+        + "]";
+  }
   public int getNo() {
     return no;
   }
@@ -124,6 +125,19 @@ public class PersonalRequestDTO {
   public void setIsOrg(boolean isOrg) {
     this.isOrg = isOrg;
   }
+
+  public boolean isChecked() {
+    return isChecked;
+  }
+
+  public void setChecked(boolean isChecked) {
+    this.isChecked = isChecked;
+  }
+
+  public void setOrg(boolean isOrg) {
+    this.isOrg = isOrg;
+  }
+
 
 
 
