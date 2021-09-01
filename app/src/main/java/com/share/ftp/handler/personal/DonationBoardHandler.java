@@ -2,12 +2,18 @@ package com.share.ftp.handler.personal;
 
 import java.util.List;
 import com.share.ftp.domain.personal.DonationBoardDTO;
+import com.share.ftp.domain.personal.DonationRegisterDTO;
 import com.share.util.Prompt;
 
 public class DonationBoardHandler {
 
   List<DonationBoardDTO> donationBoardDTOList;
+
+  List<DonationRegisterDTO> donationRegisterDTOList;
   DonationRegisterHandler donationRegisterHandler;
+  //  DonationDetailHandler donationDetailHandler;
+
+
 
   public DonationBoardHandler(List<DonationBoardDTO> donationBoardDTOList, DonationRegisterHandler donationRegisterHandler) {
     this.donationBoardDTOList = donationBoardDTOList;
@@ -21,11 +27,15 @@ public class DonationBoardHandler {
 
   // 모금함 상세보기
   public void detailDonation() {
+
+
+
     System.out.println("1. 모금함 상세보기");
     System.out.println("2. 기부하기");
     System.out.println("0. 이전메뉴");
     //    case 1: donationDetailHandler.detailDonationInfo(); break;
     //    case 2: donationDetailHandler.joinDonationList(); break;
+
   }
 
   // 기부 총 금액

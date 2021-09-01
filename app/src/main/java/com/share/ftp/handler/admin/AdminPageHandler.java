@@ -1,47 +1,45 @@
 package com.share.ftp.handler.admin;
 
-import com.share.ftp.handler.personal.DonationBoardHandler;
-import com.share.ftp.handler.personal.PersonalVolRequestHandler;
 import com.share.util.Prompt;
 
 public class AdminPageHandler {
-  // 회원정보 관련 Handler
-  ShowMemberHandler showMemberHandler = new ShowMemberHandler();
-
+  //  // 회원정보 관련 Handler
+  //  ShowMemberHandler showMemberHandler = new ShowMemberHandler();
+  //
   // 봉사활동 관련 Handler
-  PersonalVolRequestHandler personalVolRequestHandler;
-
-  // 모금활동 관련
-  DonationBoardHandler donationBoardHandler;
-  ShowDonationHandler showDonationHandler;
-  ShowVolHandler showVolHandler;
-
-  // 공지사항 관련
-  ShowNoticeHandler showNoticeHandler = new ShowNoticeHandler();
-  
-  // 문의사항 관련
-  ShowQuestionHandler showQuestionHandler = new ShowQuestionHandler();
-  
-  // 챌린지관리 관련
-  ShowChallengeHandler showChallengeHandler = new ShowChallengeHandler();
-  
-  // 기관승인 관련
-  ShowOrgApproveHandler showOrgApproveHandler = new ShowOrgApproveHandler();
-
-  public AdminPageHandler(PersonalVolRequestHandler personalVolRequestHandler,ShowVolHandler showVolHandler,
-      DonationBoardHandler donationBoardHandler, ShowDonationHandler showDonationHandler) {
-    this.personalVolRequestHandler = personalVolRequestHandler;
-    this.showVolHandler = showVolHandler;
-    this.showDonationHandler = showDonationHandler;
-    this.donationBoardHandler = donationBoardHandler;
-  }
+  //  PersonalVolRequestHandler personalVolRequestHandler;
+  //
+  //  // 모금활동 관련
+  //  DonationBoardHandler donationBoardHandler;
+  //  ShowDonationHandler showDonationHandler;
+  //  ShowVolHandler showVolHandler;
+  //
+  //  // 공지사항 관련
+  //  ShowNoticeHandler showNoticeHandler = new ShowNoticeHandler();
+  //
+  //  // 문의사항 관련
+  //  ShowQuestionHandler showQuestionHandler = new ShowQuestionHandler();
+  //
+  //  // 챌린지관리 관련
+  //  ShowChallengeHandler showChallengeHandler = new ShowChallengeHandler();
+  //
+  //  // 기관승인 관련
+  //  ShowOrgApproveHandler showOrgApproveHandler = new ShowOrgApproveHandler();
+  //
+  //  public AdminPageHandler(PersonalVolRequestHandler personalVolRequestHandler,ShowVolHandler showVolHandler,
+  //      DonationBoardHandler donationBoardHandler, ShowDonationHandler showDonationHandler) {
+  //    this.personalVolRequestHandler = personalVolRequestHandler;
+  //    this.showVolHandler = showVolHandler;
+  //    this.showDonationHandler = showDonationHandler;
+  //    this.donationBoardHandler = donationBoardHandler;
+  //  }
 
 
 
   public void showMember() {
     System.out.println("회원정보 조회");
-    personalVolRequestHandler.applyList();
-    
+    personalVolRequestHandler.apply();
+
     while (true) {
       System.out.println();
       System.out.println("[메인 / 관리자페이지 / 회원정보 관리]");
@@ -56,10 +54,10 @@ public class AdminPageHandler {
         case 0: return;
         default:
           System.out.println("무효한 메뉴 번호입니다.");
-        }
-        System.out.println();
+      }
+      System.out.println();
 
-        }
+    }
   }
 
   // 기관이 모금함 개설 신청한 내역을 받아서 관리자가 관리
@@ -110,13 +108,13 @@ public class AdminPageHandler {
   public void showNotice() {
 
     while (true) {
-        System.out.println();
-        System.out.println("[메인 / 관리자페이지 / 공지사항 관리]");
-        System.out.println("1. 공지사항 등록");
-        System.out.println("2. 공지사항 목록");
-        System.out.println("3. 공지사항 상세보기");
-        System.out.println("4. 공지사항 변경");
-        System.out.println("5. 공지사항 삭제");
+      System.out.println();
+      System.out.println("[메인 / 관리자페이지 / 공지사항 관리]");
+      System.out.println("1. 공지사항 등록");
+      System.out.println("2. 공지사항 목록");
+      System.out.println("3. 공지사항 상세보기");
+      System.out.println("4. 공지사항 변경");
+      System.out.println("5. 공지사항 삭제");
 
       int menuNo = Prompt.inputInt("공지사항관리> ");
       switch (menuNo) {
@@ -136,67 +134,67 @@ public class AdminPageHandler {
 
   public void showQuestion() {
     System.out.println("문의사항 관리");
-    
+
     while (true) {
-        System.out.println();
-        System.out.println("[메인 / 관리자페이지 / 문의사항 관리]");
-        System.out.println("1. 문의사항 등록");
-        System.out.println("2. 문의사항 목록");
-        System.out.println("3. 문의사항 상세보기");
-        System.out.println("4. 문의사항 변경");
-        System.out.println("5. 문의사항 삭제");
-        System.out.println("0. 이전메뉴");
+      System.out.println();
+      System.out.println("[메인 / 관리자페이지 / 문의사항 관리]");
+      System.out.println("1. 문의사항 등록");
+      System.out.println("2. 문의사항 목록");
+      System.out.println("3. 문의사항 상세보기");
+      System.out.println("4. 문의사항 변경");
+      System.out.println("5. 문의사항 삭제");
+      System.out.println("0. 이전메뉴");
 
-        int menuNo = Prompt.inputInt("문의사항관리> ");
-        switch (menuNo) {
-          case 1: showQuestionHandler.addreply(); break;
-          case 2: showQuestionHandler.list(); break;
-          case 3: showQuestionHandler.detail(); break;
-          case 4: showQuestionHandler.update(); break;
-          case 5: showQuestionHandler.delete(); break;
-          case 0: return;
-          default:
-            System.out.println("무효한 메뉴 번호입니다.");
-        }
-        System.out.println();
-
+      int menuNo = Prompt.inputInt("문의사항관리> ");
+      switch (menuNo) {
+        case 1: showQuestionHandler.addreply(); break;
+        case 2: showQuestionHandler.list(); break;
+        case 3: showQuestionHandler.detail(); break;
+        case 4: showQuestionHandler.update(); break;
+        case 5: showQuestionHandler.delete(); break;
+        case 0: return;
+        default:
+          System.out.println("무효한 메뉴 번호입니다.");
       }
+      System.out.println();
+
+    }
 
   }
 
   public void showChallenge() {
     System.out.println("챌린지 관리");
-    
+
     while (true) {
-        System.out.println();
-        System.out.println("[메인 / 관리자페이지 / 챌린지 관리]");
-        System.out.println("1. 챌린지 등록");
-        System.out.println("2. 챌린지 목록");
-        System.out.println("3. 챌린지 상세보기");
-        System.out.println("4. 챌린지 변경");
-        System.out.println("5. 챌린지 삭제");
-        System.out.println("0. 이전메뉴");
+      System.out.println();
+      System.out.println("[메인 / 관리자페이지 / 챌린지 관리]");
+      System.out.println("1. 챌린지 등록");
+      System.out.println("2. 챌린지 목록");
+      System.out.println("3. 챌린지 상세보기");
+      System.out.println("4. 챌린지 변경");
+      System.out.println("5. 챌린지 삭제");
+      System.out.println("0. 이전메뉴");
 
-        int menuNo = Prompt.inputInt("챌린지관리> ");
-        switch (menuNo) {
-          case 1: showChallengeHandler.add(); break;
-          case 2: showChallengeHandler.list(); break;
-          case 3: showChallengeHandler.detail(); break;
-          case 4: showChallengeHandler.update(); break;
-          case 5: showChallengeHandler.delete(); break;
-          case 0: return;
-          default:
-            System.out.println("무효한 메뉴 번호입니다.");
-        }
-        System.out.println();
-
+      int menuNo = Prompt.inputInt("챌린지관리> ");
+      switch (menuNo) {
+        case 1: showChallengeHandler.add(); break;
+        case 2: showChallengeHandler.list(); break;
+        case 3: showChallengeHandler.detail(); break;
+        case 4: showChallengeHandler.update(); break;
+        case 5: showChallengeHandler.delete(); break;
+        case 0: return;
+        default:
+          System.out.println("무효한 메뉴 번호입니다.");
       }
+      System.out.println();
+
+    }
 
   }
 
   public void showOrgApprove() {
     System.out.println("기관 승인");
-    
+
 
     while (true) {
       System.out.println();

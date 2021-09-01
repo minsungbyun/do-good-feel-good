@@ -2,7 +2,9 @@ package com.share.ftp.handler.org;
 
 import java.sql.Date;
 import java.util.List;
+import com.share.ftp.domain.guest.JoinDTO;
 import com.share.ftp.domain.personal.OrgRequestDTO;
+import com.share.ftp.handler.join.AuthHandler;
 import com.share.util.Prompt;
 
 public class OrgVolRequestHandler {
@@ -15,6 +17,15 @@ public class OrgVolRequestHandler {
   }
 
   public void apply() {
+    System.out.println("[기관봉사활동 양식]");
+
+    JoinDTO joinDTO = AuthHandler.getLoginUser();
+
+    if (joinDTO == null) {
+      System.out.println("로그인 후 사용가능합니다.");
+      return;
+    }
+
     OrgRequestDTO orgRequestDTO = new OrgRequestDTO();
 
     orgRequestDTO.setNo(Prompt.inputInt("번호? ")); 

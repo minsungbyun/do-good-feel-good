@@ -3,17 +3,14 @@ package com.share.ftp.handler.personal;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.personal.CommBoardDTO;
-import com.share.ftp.handler.join.JoinHandler;
 import com.share.util.Prompt;
 
 public class CommBoardHandler {
 
   List<CommBoardDTO> commBoardDTOList;
-  JoinHandler joinHandler;
 
-  public CommBoardHandler(List<CommBoardDTO> commBoardDTOList, JoinHandler joinHandler) {
+  public CommBoardHandler(List<CommBoardDTO> commBoardDTOList) {
     this.commBoardDTOList = commBoardDTOList;
-    this.joinHandler = joinHandler;
   }
 
   public void add() {
