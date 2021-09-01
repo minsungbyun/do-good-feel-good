@@ -294,7 +294,6 @@ public class App {
         MenuGroup monthlyChallengeMenu = new MenuGroup("이달의 챌린지", Menu.ENABLE_ALL);
         personalChallengeMenu.add(monthlyChallengeMenu);
     
-    
         monthlyChallengeMenu.add(new Menu("목록", Menu.ENABLE_ALL) {
           @Override
           public void execute() {
@@ -315,8 +314,6 @@ public class App {
             }});
         MenuGroup ChallengeReview = new MenuGroup("참여인증&댓글", Menu.ENABLE_ALL);
         monthlyChallengeDetail.add(ChallengeReview);
-        MenuGroup ChallengeQuestion = new MenuGroup("문의하기", Menu.ENABLE_ALL);
-        monthlyChallengeDetail.add(ChallengeQuestion);
         
         ChallengeReview.add(new Menu("참여인증&댓글 등록", Menu.ENABLE_LOGIN) {
             @Override
@@ -344,6 +341,8 @@ public class App {
               challengeReviewHandler.delete(); 
             }});
         
+        MenuGroup ChallengeQuestion = new MenuGroup("문의하기", Menu.ENABLE_ALL);
+        monthlyChallengeDetail.add(ChallengeQuestion);
         ChallengeQuestion.add(new Menu("문의 등록", Menu.ENABLE_LOGIN) {
             @Override
             public void execute() {
