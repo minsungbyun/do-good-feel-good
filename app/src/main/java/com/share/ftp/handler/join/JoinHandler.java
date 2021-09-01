@@ -69,6 +69,7 @@ public class JoinHandler {
 
   // 회원 가입하기
   public void joinSite() {
+    System.out.println();
     System.out.println("[회원 가입]");
 
     JoinDTO joinDTO = new JoinDTO();
@@ -86,6 +87,7 @@ public class JoinHandler {
 
   // 가입회원 목록 (관리자가 가입한 회원의 목록을 볼 수 있다) => 관리자 연결
   public void list() {
+    System.out.println();
     System.out.println("[회원 목록]");
     for (JoinDTO joinDTO : joinDTOList) {
       System.out.printf("%s, %s, %s, %s, %s\n", 
@@ -100,6 +102,7 @@ public class JoinHandler {
 
   // 아이디찾기 이름, 이메일을 통해 찾는다.
   public void searchId() {
+    System.out.println();
     String name = Prompt.inputString("이름? ");
     String email = Prompt.inputString("이메일? ");
 
@@ -113,6 +116,7 @@ public class JoinHandler {
   }
 
   public void searchPassword() {
+    System.out.println();
     String id = Prompt.inputString("아이디? ");
     String email = Prompt.inputString("이메일? ");
 
@@ -129,6 +133,7 @@ public class JoinHandler {
 
   // 가입회원 상세보기 (관리자가 가입한 회원의 상세정보를을 볼 수 있다) => 관리자 연결
   public void detail() {
+    System.out.println();
     System.out.println("[회원 상세보기]");
     String id = Prompt.inputString("아이디? "); 
     String password = Prompt.inputString("비밀번호? ");
@@ -150,6 +155,7 @@ public class JoinHandler {
 
   // 
   public void update() {
+    System.out.println();
     System.out.println("[회원 변경]");
     String id = Prompt.inputString("아이디? ");
     String password = Prompt.inputString("비밀번호? ");
@@ -183,6 +189,7 @@ public class JoinHandler {
   }
 
   public void delete() {
+    System.out.println();
     System.out.println("[회원 탈퇴]");
     String id = Prompt.inputString("아이디? ");
     String password = Prompt.inputString("비밀번호? ");
