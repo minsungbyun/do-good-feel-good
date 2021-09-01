@@ -11,13 +11,19 @@ public class JoinDTO {
   private String email;
   private String adress;
   private Date registerDate;
-  public String getId() {
-    return id;
-  }
+  private boolean isAdmin;
+  private boolean isPersonal;
+  private boolean isOrg;
+
+
+
+
+
 
   @Override
   public int hashCode() {
-    return Objects.hash(adress, email, id, name, password, registerDate, tel);
+    return Objects.hash(adress, email, id, isAdmin, isOrg, isPersonal, name, password, registerDate,
+        tel);
   }
 
   @Override
@@ -30,7 +36,8 @@ public class JoinDTO {
       return false;
     JoinDTO other = (JoinDTO) obj;
     return Objects.equals(adress, other.adress) && Objects.equals(email, other.email)
-        && Objects.equals(id, other.id) && Objects.equals(name, other.name)
+        && Objects.equals(id, other.id) && isAdmin == other.isAdmin && isOrg == other.isOrg
+        && isPersonal == other.isPersonal && Objects.equals(name, other.name)
         && Objects.equals(password, other.password)
         && Objects.equals(registerDate, other.registerDate) && Objects.equals(tel, other.tel);
   }
@@ -38,7 +45,17 @@ public class JoinDTO {
   @Override
   public String toString() {
     return "JoinDTO [id=" + id + ", password=" + password + ", name=" + name + ", tel=" + tel
-        + ", email=" + email + ", adress=" + adress + ", registerDate=" + registerDate + "]";
+        + ", email=" + email + ", adress=" + adress + ", registerDate=" + registerDate
+        + ", isAdmin=" + isAdmin + ", isPersonal=" + isPersonal + ", isOrg=" + isOrg + ", getId()="
+        + getId() + ", getPassword()=" + getPassword() + ", getName()=" + getName() + ", getTel()="
+        + getTel() + ", getEmail()=" + getEmail() + ", getAdress()=" + getAdress()
+        + ", getRegisterDate()=" + getRegisterDate() + ", isPersonal()=" + isPersonal()
+        + ", isOrg()=" + isOrg() + ", isAdmin()=" + isAdmin() + ", getClass()=" + getClass()
+        + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+  }
+
+  public String getId() {
+    return id;
   }
 
   public void setId(String id) {
@@ -80,6 +97,33 @@ public class JoinDTO {
   public void setRegisterDate(Date registerDate) {
     this.registerDate = registerDate;
   }
+
+  public boolean isPersonal() {
+    return isPersonal;
+  }
+
+  public void setPersonal(boolean isPersonal) {
+    this.isPersonal = isPersonal;
+  }
+
+  public boolean isOrg() {
+    return isOrg;
+  }
+
+  public void setOrg(boolean isOrg) {
+    this.isOrg = isOrg;
+  }
+
+  public boolean isAdmin() {
+    return isAdmin;
+  }
+
+  public void setAdmin(boolean isAdmin) {
+    this.isAdmin = isAdmin;
+  }
+
+
+
 
 
 }

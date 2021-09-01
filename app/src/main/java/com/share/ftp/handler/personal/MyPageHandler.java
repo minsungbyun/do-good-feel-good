@@ -22,7 +22,7 @@ public class MyPageHandler {
 
       int menuNo = Prompt.inputInt("메뉴> ");
       switch (menuNo) {
-        case 1: myProfileHandler.updateMyProfile(); break;
+        //        case 1: myProfileHandler.updateMyProfile(); break;
         case 0: return;
         default:
           System.out.println("무효한 메뉴 번호입니다.");
@@ -65,7 +65,7 @@ public class MyPageHandler {
 
       int menuNo = Prompt.inputInt("메뉴> ");
       switch (menuNo) {
-        case 1:myBoardListHandler.showVolBoardList(); break;
+        //        case 1:myBoardListHandler.showVolBoardList(); break;
         case 0: return;
         default:
           System.out.println("무효한 메뉴 번호입니다.");
@@ -83,7 +83,7 @@ public class MyPageHandler {
 
       int menuNo = Prompt.inputInt("메뉴> ");
       switch (menuNo) {
-        case 1: myPointHandler.showMyPointList(); break;
+        //        case 1: myPointHandler.showMyPointList(); break;
         case 0: return;
         default:
           System.out.println("무효한 메뉴 번호입니다.");
@@ -102,7 +102,7 @@ public class MyPageHandler {
 
       int menuNo = Prompt.inputInt("메뉴> ");
       switch (menuNo) {
-        case 1: myDonationHandler.showMyTotalDonation(); break;
+        //        case 1: myDonationHandler.showMyTotalDonation(); break;
         case 0: return;
         default:
           System.out.println("무효한 메뉴 번호입니다.");
@@ -124,11 +124,11 @@ public class MyPageHandler {
 
       int menuNo = Prompt.inputInt("메뉴> ");
       switch (menuNo) {
-        case 1: approveOrgHandler.add(); break;
-        case 2: approveOrgHandler.list(); break;
-        case 3: approveOrgHandler.detail(); break;
-        case 4: approveOrgHandler.update(); break;
-        case 5: approveOrgHandler.delete(); break;
+        //        case 1: approveOrgHandler.add(); break;
+        //        case 2: approveOrgHandler.list(); break;
+        //        case 3: approveOrgHandler.detail(); break;
+        //        case 4: approveOrgHandler.update(); break;
+        //        case 5: approveOrgHandler.delete(); break;
         case 0: return;
         default:
           System.out.println("무효한 메뉴 번호입니다.");
@@ -147,7 +147,7 @@ public class MyPageHandler {
 
       int menuNo = Prompt.inputInt("메뉴> ");
       switch (menuNo) {
-        case 1: withdrawMemberHandler.withdraw(); break;
+        //        case 1: withdrawMemberHandler.withdraw(); break;
         case 0: return;
         default:
           System.out.println("무효한 메뉴 번호입니다.");

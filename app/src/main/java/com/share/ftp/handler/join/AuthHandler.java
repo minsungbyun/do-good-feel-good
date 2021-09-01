@@ -33,13 +33,25 @@ public class AuthHandler {
     }
   }
 
-  public void displayLoginUser() {
-    System.out.println("[내정보]");
+
+
+  public void logout() {
+    System.out.println("[로그아웃]");
+
+    loginUser = null;
+    System.out.println("로그아웃 하였습니다.");
+  }
+
+  // 마이페이지의 나의정보보기
+  public void displayUserInfo() {
+
+    JoinDTO loginUser = AuthHandler.getLoginUser();
 
     if (loginUser == null) {
       System.out.println("로그인 하지 않았습니다.");
       return;
     }
+    System.out.printf("[ %s님의 정보입니다 ]\n", loginUser.getName());
 
     System.out.printf("이름: %s\n", loginUser.getName());
     System.out.printf("전화: %s\n", loginUser.getTel());
@@ -48,12 +60,43 @@ public class AuthHandler {
     System.out.printf("등록일: %s\n", loginUser.getRegisterDate());
   }
 
-  public void logout() {
-    System.out.println("[로그아웃]");
+  // 마이페이지의 나의정보수정
+  public void changeUserInfo() {
+    System.out.println("[회원 변경]");
 
-    loginUser = null;
-    System.out.println("로그아웃 하였습니다.");
+    JoinDTO loginUser = AuthHandler.getLoginUser();
+
+    if (loginUser == null) {
+      System.out.println("로그인 하지 않았습니다.");
+      return;
+    }
+
+    String name = Prompt.inputString("이름(" + loginUser.getName()  + ")? ");
+    String tel = Prompt.inputString("전화(" + loginUser.getTel() + ")? ");
+    String email = Prompt.inputString("이메일(" + loginUser.getEmail() + ")? ");
+    String adress = Prompt.inputString("주소(" + loginUser.getAdress() + ")? ");
+    String passwords = Prompt.inputString("암호? ");
+
+    String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
+    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      System.out.println("회원 변경을 취소하였습니다.");
+      return;
+    }
+
+    loginUser.setName(name);
+    loginUser.setTel(tel);
+    loginUser.setEmail(email);
+    loginUser.setAdress(adress);
+    loginUser.setPassword(passwords);
+
+    System.out.println("회원정보가 수정되었습니다.");
   }
+
+
+
+
+
+
 
   private JoinDTO findByMember(String id, String password) {
     for (JoinDTO joinDTO : joinDTOList) {

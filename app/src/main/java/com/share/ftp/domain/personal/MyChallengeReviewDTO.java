@@ -12,15 +12,16 @@ public class MyChallengeReviewDTO {
   public String memberId;
   public String fileUpload;
   public Date registeredDate;
+  private JoinDTO owner;
   private List<JoinDTO> joinDTO;
 
   @Override
   public String toString() {
 	return "MyChallengeReviewDTO [no=" + no + ", content=" + content + ", memberId=" + memberId + ", fileUpload="
-		+ fileUpload + ", registeredDate=" + registeredDate + ", joinDTO=" + joinDTO + "]";
+		+ fileUpload + ", registeredDate=" + registeredDate + ", owner=" + owner + ", joinDTO=" + joinDTO + "]";
 }
 
-  @Override
+@Override
   public int hashCode() {
     return Objects.hash(content, fileUpload, memberId, no, registeredDate);
   }
@@ -70,7 +71,13 @@ public class MyChallengeReviewDTO {
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
-  public List<JoinDTO> getJoinDTO() {
+  public JoinDTO getOwner() {
+	return owner;
+}
+  public void setOwner(JoinDTO owner) {
+	this.owner = owner;
+}
+public List<JoinDTO> getJoinDTO() {
 	return joinDTO;
   }
   public void setJoinDTO(List<JoinDTO> joinDTO) {
