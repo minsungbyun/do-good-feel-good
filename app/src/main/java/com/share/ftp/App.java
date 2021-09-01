@@ -6,6 +6,7 @@ import java.util.List;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.admin.NoticeDTO;
 import com.share.ftp.domain.admin.QuestionDTO;
+import com.share.ftp.domain.guest.JoinDTO;
 import com.share.ftp.domain.personal.ApproveOrgDTO;
 import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.domain.personal.CommReviewDTO;
@@ -27,6 +28,8 @@ import com.share.ftp.handler.admin.ShowNoticeHandler;
 import com.share.ftp.handler.admin.ShowOrgApproveHandler;
 import com.share.ftp.handler.admin.ShowQuestionHandler;
 import com.share.ftp.handler.admin.ShowVolHandler;
+import com.share.ftp.handler.join.AuthHandler;
+import com.share.ftp.handler.join.JoinHandler;
 import com.share.ftp.handler.personal.ApproveOrgHandler;
 import com.share.ftp.handler.personal.ChallengeHandler;
 import com.share.ftp.handler.personal.CommBestHandler;
@@ -51,6 +54,9 @@ import com.share.menu.MenuGroup;
 import com.share.util.Prompt;
 
 public class App {
+
+  // 회원가입 도메인(값)
+  List<JoinDTO> joinDTOList = new ArrayList<>();
 
   // 함께해요 도메인(값)
   List<VolListDTO> volListDTOList = new ArrayList<>();
@@ -82,6 +88,9 @@ public class App {
   List<NoticeDTO> noticeDTOList = new ArrayList<>();
   List<QuestionDTO> questionDTOList = new ArrayList<>();
 
+  // 회원가입 핸들러(기능)
+  JoinHandler joinHandler = new JoinHandler(joinDTOList);
+  AuthHandler authHandler = new AuthHandler(joinDTOList);
 
   // 함께해요 핸들러(기능)
   PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler();
@@ -141,15 +150,44 @@ public class App {
 
 
   Menu createMenu() {
-    MenuGroup mainMenuGroup = new MenuGroup("로그인");
+    MenuGroup mainMenuGroup = new MenuGroup("*행복하Share*");
     mainMenuGroup.setPrevMenuTitle("종료");
 
+    MenuGroup loginMenu = new MenuGroup("로그인", Menu.ENABLE_LOGOUT);
+    mainMenuGroup.add(loginMenu);
 
-    MenuGroup personalMenu = new MenuGroup("개인");
-    mainMenuGroup.add(personalMenu);
+    loginMenu.add(new Menu("로그인하기", Menu.ENABLE_LOGOUT) {
+      @Override
+      public void execute() {
+        authHandler.login(); 
+      }});
+
+    loginMenu.add(new Menu("아이디찾기", Menu.ENABLE_LOGOUT) {
+      @Override
+      public void execute() {
+        joinHandler.searchId(); 
+      }});
+
+    loginMenu.add(new Menu("비밀번호찾기", Menu.ENABLE_LOGOUT) {
+      @Override
+      public void execute() {
+        joinHandler.searchPassword(); 
+      }});
+
+    loginMenu.add(new Menu("회원가입", Menu.ENABLE_LOGOUT) {
+      @Override
+      public void execute() {
+        joinHandler.joinSite(); 
+      }});
+
+    mainMenuGroup.add(new Menu("로그아웃", Menu.ENABLE_LOGIN) {
+      @Override
+      public void execute() {
+        authHandler.logout(); 
+      }});
 
     MenuGroup doVolMenu = new MenuGroup("함께해요");
-    personalMenu.add(doVolMenu);
+    mainMenuGroup.add(doVolMenu);
 
     doVolMenu.add(new Menu("개인봉사신청양식") {
       @Override
@@ -173,9 +211,9 @@ public class App {
       }});
 
 
-    //
-    //    MenuGroup personalCommunityMenu = new MenuGroup("소통해요");
-    //    personalMenu.add(personalCommunityMenu);
+
+    MenuGroup personalCommunityMenu = new MenuGroup("소통해요");
+    mainMenuGroup.add(personalCommunityMenu);
     //
     //    MenuGroup reviewMenu = new MenuGroup("나눔 이야기");
     //    personalCommunityMenu.add(reviewMenu);
@@ -241,8 +279,8 @@ public class App {
     //        boardHandler.shortReviewDelete(); 
     //      }});
     //
-    //    MenuGroup personalChallengeMenu = new MenuGroup("챌린지");
-    //    personalMenu.add(personalChallengeMenu);
+    MenuGroup personalChallengeMenu = new MenuGroup("챌린지");
+    mainMenuGroup.add(personalChallengeMenu);
     //
     //    MenuGroup monthlyChallengeMenu = new MenuGroup("이달의 챌린지");
     //    personalChallengeMenu.add(monthlyChallengeMenu);
@@ -283,7 +321,7 @@ public class App {
     //
     //
     MenuGroup personalDonationMenu = new MenuGroup("모금함");
-    personalMenu.add(personalDonationMenu);
+    mainMenuGroup.add(personalDonationMenu);
 
     MenuGroup donationList = new MenuGroup("모금함 목록");
     personalDonationMenu.add(donationList);
@@ -321,8 +359,8 @@ public class App {
       }});
 
     //
-    //    MenuGroup support = new MenuGroup("고객센터");
-    //    personalMenu.add(support);
+    MenuGroup support = new MenuGroup("고객센터");
+    mainMenuGroup.add(support);
     //
     //    MenuGroup notice = new MenuGroup("공지사항");
     //    support.add(notice);
@@ -383,7 +421,7 @@ public class App {
     //    //
     //    MenuGroup personalMyPage = new MenuGroup("마이페이지");
     //    personalMenu.add(personalMyPage);
-    //
+    //    
     //    MenuGroup myProfile = new MenuGroup("회원정보수정");
     //    personalMyPage.add(myProfile);
     //
@@ -482,7 +520,7 @@ public class App {
     //
     //////////////////////////////////////////////////////////////////////////////////////////////////////////    
 
-    MenuGroup adminMenu = new MenuGroup("관리자");
+    MenuGroup adminMenu = new MenuGroup("관리자",  Menu.ENABLE_LOGIN);
     mainMenuGroup.add(adminMenu);
 
     MenuGroup memberMenu = new MenuGroup("회원정보 조회");
