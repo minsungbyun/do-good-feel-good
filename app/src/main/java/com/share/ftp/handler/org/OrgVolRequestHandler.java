@@ -1,16 +1,18 @@
 package com.share.ftp.handler.org;
 
 import java.sql.Date;
+import java.util.List;
 import com.share.ftp.domain.personal.OrgRequestDTO;
 import com.share.util.Prompt;
 
 public class OrgVolRequestHandler {
 
-  public static final int MAX_LENTGH = 100;
-  OrgRequestDTO[] orgRequestsDTO = new OrgRequestDTO[MAX_LENTGH];
-  int size;
 
+  List<OrgRequestDTO> orgRequestDTOList;
 
+  public OrgVolRequestHandler(List<OrgRequestDTO> orgRequestDTOList) {
+    this.orgRequestDTOList = orgRequestDTOList;
+  }
 
   public void apply() {
     OrgRequestDTO orgRequestDTO = new OrgRequestDTO();
@@ -27,7 +29,7 @@ public class OrgVolRequestHandler {
     orgRequestDTO.setFileUpload(Prompt.inputString("파일? ")); 
     orgRequestDTO.setIsOrg(Prompt.inputBool("기업여부? ")); 
 
-    orgRequestsDTO[size++] = orgRequestDTO;
+    orgRequestDTOList.add(orgRequestDTO);
 
     System.out.println("기관봉사신청이 완료되었습니다.");
   }
