@@ -18,6 +18,7 @@ public class AuthHandler {
   }
 
   public void login() {
+    System.out.println();
     System.out.println("[로그인]");
 
     String id = Prompt.inputString("아이디? ");
@@ -36,6 +37,7 @@ public class AuthHandler {
 
 
   public void logout() {
+    System.out.println();
     System.out.println("[로그아웃]");
 
     loginUser = null;
@@ -62,6 +64,7 @@ public class AuthHandler {
 
   // 마이페이지의 나의정보수정
   public void changeUserInfo() {
+    System.out.println();
     System.out.println("[회원 변경]");
 
     JoinDTO loginUser = AuthHandler.getLoginUser();

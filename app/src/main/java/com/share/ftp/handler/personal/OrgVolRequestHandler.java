@@ -12,7 +12,7 @@ public class OrgVolRequestHandler {
 
   public void apply() {
     try {
-
+      System.out.println();
       System.out.println("[기관봉사활동 양식]");
 
       OrgRequestDTO orgRequestDTO = new OrgRequestDTO();
@@ -43,10 +43,11 @@ public class OrgVolRequestHandler {
   }
 
   public void applyList() {
+    System.out.println();
     System.out.println("[기관봉사신청 목록]");
     for (int i = 0; i < this.size; i++) {
       System.out.printf("번호: %d\n봉사제목: %s\n전화번호: %s\n이메일: %s\n봉사기간: %s\n봉사시간: %s"
-      		+ "봉사목록: %s\n봉사인원: %d\n봉사내용: %s\n첨부파일: %s\n승인여부: %b \n\n", 
+          + "봉사목록: %s\n봉사인원: %d\n봉사내용: %s\n첨부파일: %s\n승인여부: %b \n\n", 
           this.orgRequestsDTO[i].getNo(), 
           this.orgRequestsDTO[i].getTitle(), 
           this.orgRequestsDTO[i].getTel(),
@@ -100,6 +101,7 @@ public class OrgVolRequestHandler {
 
   // 해당 봉사 신청서를 반려한다.
   public void rejectApply() {
+    System.out.println();
     System.out.println("[기관봉사신청서 반려]");
 
     int no = Prompt.inputInt("봉사번호? ");
