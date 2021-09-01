@@ -35,9 +35,12 @@ public class CommBoardHandler {
     System.out.println();
     System.out.println("[메인/소통해요/나눔이야기/목록]");
 
-    CommBoardDTO[] commBoardsDTO = new CommBoardDTO [commBoardDTOList.size()];
+    for(CommBoardDTO commBoardDTO : commBoardDTOList) {
 
-    for (CommBoardDTO commBoardDTO : commBoardsDTO) {
+      //    CommBoardDTO[] commBoardsDTO = new CommBoardDTO [commBoardDTOList.size()];
+      //    commBoardDTOList.toArray(commBoardsDTO);
+      //
+      //    for (CommBoardDTO commBoardDTO : commBoardsDTO) {
       System.out.printf("%d, %s, %s, %s, %s, %d\n", 
           commBoardDTO.getNo(), 
           commBoardDTO.getTitle(), 
@@ -83,6 +86,7 @@ public class CommBoardHandler {
       System.out.println("해당 게시글이 없습니다.");
       return;
     }
+
 
     String title = Prompt.inputString(String.format("제목(%s)? ", commBoardDTO.getTitle()));
     String content = Prompt.inputString(String.format("내용(%s)? ", commBoardDTO.getContent()));

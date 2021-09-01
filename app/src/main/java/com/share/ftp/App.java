@@ -114,6 +114,9 @@ public class App {
   CommReviewHandler commReviewHandler = new CommReviewHandler(commReviewDTOList);
   //  CommHandler commHandler = new CommHandler(commBoardHandler,commBestHandler,commReviewHandler);
 
+  //  // 챌린지 핸들러(기능)
+  //  ChallengeHandler challengeHandler = new ChallengeHandler();
+  //  ShowChallengeHandler showChallengeHandler = new ShowChallengeHandler();
   // 챌린지 핸들러(기능)
   ChallengeListHandler challengeListHandler = new ChallengeListHandler();
   ChallengeBoardHandler challengeBoardHandler = new ChallengeBoardHandler();
@@ -225,74 +228,80 @@ public class App {
         volApprovedHandler.approvedDetail(); 
       }});
 
-
-
-    MenuGroup personalCommunityMenu = new MenuGroup("소통해요",Menu.ENABLE_LOGIN);
+    MenuGroup personalCommunityMenu = new MenuGroup("소통해요", Menu.ENABLE_ALL);
     mainMenuGroup.add(personalCommunityMenu);
-    //
-    //    MenuGroup reviewMenu = new MenuGroup("나눔 이야기");
-    //    personalCommunityMenu.add(reviewMenu);
-    //
-    //    reviewMenu.add(new Menu("등록") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.write(); 
-    //      }});
-    //    reviewMenu.add(new Menu("목록") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.reviewList(); 
-    //      }});
-    //    reviewMenu.add(new Menu("상세보기") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.reviewDetail(); 
-    //      }});
-    //    reviewMenu.add(new Menu("변경") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.reviewChange(); 
-    //      }});
-    //    reviewMenu.add(new Menu("삭제") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.reviewDelete(); 
-    //      }});
-    //
-    //    MenuGroup bestReviewMenu = new MenuGroup("나눔 이야기 BEST");
-    //    personalCommunityMenu.add(bestReviewMenu);
-    //
-    //    bestReviewMenu.add(new Menu("목록") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.bestReview(); 
-    //      }});
-    //
-    //    MenuGroup shortReviewMenu = new MenuGroup("한 줄 후기");
-    //    personalCommunityMenu.add(shortReviewMenu);
-    //
-    //    shortReviewMenu.add(new Menu("등록") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.shortReviewAdd(); 
-    //      }});
-    //
-    //    shortReviewMenu.add(new Menu("목록") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.shortReviewList(); 
-    //      }});
-    //
-    //    shortReviewMenu.add(new Menu("수정") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.shortReviewUpdate(); 
-    //      }});
-    //    shortReviewMenu.add(new Menu("삭제") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.shortReviewDelete(); 
-    //      }});
+
+    MenuGroup reviewMenu = new MenuGroup("나눔 이야기", Menu.ENABLE_ALL);
+    personalCommunityMenu.add(reviewMenu);
+
+    reviewMenu.add(new Menu("등록", Menu.ENABLE_LOGIN) {
+      @Override
+      public void execute() {
+        commBoardHandler.add(); 
+      }});
+    reviewMenu.add(new Menu("목록", Menu.ENABLE_ALL) {
+      @Override
+      public void execute() {
+        commBoardHandler.list(); 
+      }});
+    reviewMenu.add(new Menu("상세보기", Menu.ENABLE_ALL) {
+      @Override
+      public void execute() {
+        commBoardHandler.detail(); 
+      }});
+    reviewMenu.add(new Menu("변경", Menu.ENABLE_LOGIN) {
+      @Override
+      public void execute() {
+        commBoardHandler.update(); 
+      }});
+    reviewMenu.add(new Menu("삭제", Menu.ENABLE_LOGIN) {
+      @Override
+      public void execute() {
+        commBoardHandler.delete(); 
+      }});
+
+    MenuGroup bestReviewMenu = new MenuGroup("나눔 이야기 BEST", Menu.ENABLE_ALL);
+    personalCommunityMenu.add(bestReviewMenu);
+
+    bestReviewMenu.add(new Menu("목록", Menu.ENABLE_ALL) {
+      @Override
+      public void execute() {
+        commBestHandler.showList(); 
+      }});
+
+    bestReviewMenu.add(new Menu("상세보기", Menu.ENABLE_ALL) {
+      @Override
+      public void execute() {
+        commBestHandler.showDetail(); 
+      }});
+
+    MenuGroup shortReviewMenu = new MenuGroup("한 줄 후기", Menu.ENABLE_ALL);
+    personalCommunityMenu.add(shortReviewMenu);
+
+    shortReviewMenu.add(new Menu("등록", Menu.ENABLE_LOGIN) {
+      @Override
+      public void execute() {
+        commReviewHandler.add(); 
+      }});
+
+    shortReviewMenu.add(new Menu("목록", Menu.ENABLE_ALL) {
+      @Override
+      public void execute() {
+        commReviewHandler.list(); 
+      }});
+
+    shortReviewMenu.add(new Menu("수정", Menu.ENABLE_LOGIN) {
+      @Override
+      public void execute() {
+        commReviewHandler.update(); 
+      }});
+
+    shortReviewMenu.add(new Menu("삭제", Menu.ENABLE_LOGIN) {
+      @Override
+      public void execute() {
+        commReviewHandler.delete(); 
+      }});
+
     //
         MenuGroup personalChallengeMenu = new MenuGroup("챌린지", Menu.ENABLE_ALL);
         mainMenuGroup.add(personalChallengeMenu);
@@ -464,35 +473,41 @@ public class App {
     //        boardHandler.detail(); 
     //      }});
     //
-    //    MenuGroup ask = new MenuGroup("문의하기");
-    //    support.add(ask);
-    //
-    //    ask.add(new Menu("등록") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.askMesasge(); 
-    //      }});
-    //    ask.add(new Menu("목록") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.list(); 
-    //      }});
-    //    ask.add(new Menu("상세보기") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.detail(); 
-    //      }});
-    //    ask.add(new Menu("변경") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.finish(); 
-    //      }});
-    //    ask.add(new Menu("삭제") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.ask(); 
-    //      }});
-    //    //
+    //        MenuGroup ask = new MenuGroup("문의하기");
+    //        support.add(ask);
+    //    
+    //        ask.add(new Menu("등록") {
+    //          @Override
+    //          public void execute() {
+    //            boardHandler.addQuestionlist(); 
+    //          }});
+    //        ask.add(new Menu("목록") {
+    //          @Override
+    //          public void execute() {
+    //            boardHandler.list(); 
+    //          }});
+    //        ask.add(new Menu("상세보기") {
+    //          @Override
+    //          public void execute() {
+    //            boardHandler.detail(); 
+    //          }});
+    //        ask.add(new Menu("변경") {
+    //          @Override
+    //          public void execute() {
+    //            boardHandler.finish(); 
+    //          }});
+    //        ask.add(new Menu("삭제") {
+    //          @Override
+    //          public void execute() {
+    //            boardHandler.ask(); 
+    //          }});
+    //        //
+    //    MenuGroup personalMyPage = new MenuGroup("마이페이지");
+    //    personalMenu.add(personalMyPage);
+    //    
+    //    MenuGroup myProfile = new MenuGroup("회원정보수정");
+    //    personalMyPage.add(myProfile);
+
     MenuGroup personalMyPage = new MenuGroup("마이페이지",Menu.ENABLE_MEMBER);
     mainMenuGroup.add(personalMyPage);
 
@@ -712,34 +727,34 @@ public class App {
         showQuestionHandler.delete(); 
       }});
 
-    MenuGroup challengeInfo = new MenuGroup("챌린지 관리");
-    adminMenu.add(challengeInfo);
-
-    challengeInfo.add(new Menu("챌린지 등록") {
-      @Override
-      public void execute() {
-        showChallengeHandler.add(); 
-      }});
-    challengeInfo.add(new Menu("챌린지 목록") {
-      @Override
-      public void execute() {
-        showChallengeHandler.list(); 
-      }});
-    challengeInfo.add(new Menu("챌린지 상세보기") {
-      @Override
-      public void execute() {
-        showChallengeHandler.detail(); 
-      }});
-    challengeInfo.add(new Menu("챌린지 변경") {
-      @Override
-      public void execute() {
-        showChallengeHandler.update(); 
-      }});
-    challengeInfo.add(new Menu("챌린지 삭제") {
-      @Override
-      public void execute() {
-        showChallengeHandler.delete(); 
-      }});
+    //    MenuGroup challengeInfo = new MenuGroup("챌린지 관리");
+    //    adminMenu.add(challengeInfo);
+    //
+    //    challengeInfo.add(new Menu("챌린지 등록") {
+    //      @Override
+    //      public void execute() {
+    //        showChallengeHandler.add(); 
+    //      }});
+    //    challengeInfo.add(new Menu("챌린지 목록") {
+    //      @Override
+    //      public void execute() {
+    //        showChallengeHandler.list(); 
+    //      }});
+    //    challengeInfo.add(new Menu("챌린지 상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        showChallengeHandler.detail(); 
+    //      }});
+    //    challengeInfo.add(new Menu("챌린지 변경") {
+    //      @Override
+    //      public void execute() {
+    //        showChallengeHandler.update(); 
+    //      }});
+    //    challengeInfo.add(new Menu("챌린지 삭제") {
+    //      @Override
+    //      public void execute() {
+    //        showChallengeHandler.delete(); 
+    //      }});
 
     MenuGroup approveInfo = new MenuGroup("기관 승인");
     adminMenu.add(approveInfo);

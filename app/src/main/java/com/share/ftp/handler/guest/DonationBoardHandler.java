@@ -34,7 +34,7 @@ public class DonationBoardHandler {
     donationBoard.setContent(Prompt.inputString("내용: "));
     donationBoard.setFileUpload(Prompt.inputString("첨부파일: "));
     donationBoard.setPassword(Prompt.inputString("비밀번호: "));
-    donationBoard.setRegisteredDate(Prompt.inputDate("제안기간: "));
+    // donationBoard.setRegisteredDate(Prompt.inputDate("제안기간: "));
 
     this.donationBoards[this.size++] = donationBoard;
 
