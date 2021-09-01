@@ -13,13 +13,13 @@ public class DonationRegisterDTO {
   private String email;
   private String address;
   private Date registeredDate;
+  private int sort;
 
   @Override
   public int hashCode() {
     return Objects.hash(address, birthDate, donationMoney, email, name, no, registerationNumber,
-        registeredDate, tel);
+        registeredDate, sort, tel);
   }
-
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -33,15 +33,15 @@ public class DonationRegisterDTO {
         && donationMoney == other.donationMoney && Objects.equals(email, other.email)
         && Objects.equals(name, other.name) && no == other.no
         && Objects.equals(registerationNumber, other.registerationNumber)
-        && Objects.equals(registeredDate, other.registeredDate) && Objects.equals(tel, other.tel);
+        && Objects.equals(registeredDate, other.registeredDate) && sort == other.sort
+        && Objects.equals(tel, other.tel);
   }
-
   @Override
   public String toString() {
     return "DonationRegisterDTO [no=" + no + ", donationMoney=" + donationMoney + ", name=" + name
         + ", registerationNumber=" + registerationNumber + ", birthDate=" + birthDate + ", tel="
         + tel + ", email=" + email + ", address=" + address + ", registeredDate=" + registeredDate
-        + "]";
+        + ", sort=" + sort + "]";
   }
 
   public int getNo() {
@@ -97,5 +97,11 @@ public class DonationRegisterDTO {
   }
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
+  }
+  public int getSort() {
+    return sort;
+  }
+  public void setSort(int sort) {
+    this.sort = sort;
   }
 }

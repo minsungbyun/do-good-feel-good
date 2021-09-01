@@ -17,11 +17,10 @@ public class DonationRegisterHandler { // 모금함 기부하기 양식 쓰는�
   // 모금함 기부하기
   public void add() {
     System.out.println("[모금함 기부하기]");
-    System.out.println("[1.아동] [2.청소년] [3.어르신] [4.장애인] [5.동물] [6.환경] [7.기타]");
 
     DonationRegisterDTO donationRegister = new DonationRegisterDTO();
 
-    donationRegister.setNo(Prompt.inputInt("기부 번호: "));
+    donationRegister.setSort(promptSort());
     donationRegister.setDonationMoney(Prompt.inputInt("기부 금액: "));
     donationRegister.setName(Prompt.inputString("이름: "));
     donationRegister.setRegisterationNumber(Prompt.inputString("주민등록번호: "));
@@ -60,7 +59,7 @@ public class DonationRegisterHandler { // 모금함 기부하기 양식 쓰는�
 
     for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {
       System.out.printf("모금함번호: %s\n %s, %s, %s\n", 
-          donationRegisterDTO.getNo(), 
+          donationRegisterDTO.getSort(), 
           donationRegisterDTO.getName(), 
           donationRegisterDTO.getDonationMoney(), 
           donationRegisterDTO.getRegisteredDate());
@@ -91,14 +90,14 @@ public class DonationRegisterHandler { // 모금함 기부하기 양식 쓰는�
     } else {
       System.out.printf("상태(%s)?\n", getSortLabel(sort));
     }
-    System.out.print("[0: 선택안함]");
-    System.out.print("[1: 아동]");
-    System.out.print("[2: 완료]");
-    System.out.print("[3: 완료]");
-    System.out.print("[4: 완료]");
-    System.out.print("[5: 완료]");
-    System.out.print("[6: 완료]");
-    System.out.print("[7: 완료]");
+    System.out.println("[0: 선택안함]");
+    System.out.println("[1: 아동]");
+    System.out.println("[2: 청소년]");
+    System.out.println("[3: 어르신]");
+    System.out.println("[4: 장애인]");
+    System.out.println("[5: 동물]");
+    System.out.println("[6: 환경]");
+    System.out.println("[7: 기타]");
     return Prompt.inputInt("> ");
   }
 

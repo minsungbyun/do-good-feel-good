@@ -3,6 +3,7 @@ package com.share.menu;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import com.share.ftp.domain.guest.JoinDTO;
 import com.share.ftp.handler.join.AuthHandler;
 import com.share.util.Prompt;
 
@@ -11,7 +12,7 @@ import com.share.util.Prompt;
 // 
 public class MenuGroup extends Menu {
 
-
+  public static final int MAX_LENGTH = 100;
   // 메뉴의 bread crumb 목록 보관
   // 모든 메뉴가 공유할 객체이기 때문에 스태틱 멤버로 선언한다.
   static Stack<Menu> breadCrumb = new Stack<>();
@@ -30,7 +31,6 @@ public class MenuGroup extends Menu {
     public void execute() {
     }
   }
-
   static PrevMenu prevMenu = new PrevMenu();
 
   // 생성자를 정의하지 않으면 컴파일러가 기본 생성자를 자동으로 추가해 준다.
@@ -118,6 +118,7 @@ public class MenuGroup extends Menu {
           breadCrumb.pop();
           return;
         }
+
         menu.execute();
 
       } catch (Exception e) {
@@ -149,25 +150,70 @@ public class MenuGroup extends Menu {
   // 왜?
   // - 메뉴 출력 속도를 빠르게 하기 위함.
   // - 메뉴를 출력할 때 출력할 메뉴와 출력하지 말아야 할 메뉴를 구분하는 시간을 줄이기 위함.
+
   //
   private List<Menu> getMenuList() {
     ArrayList<Menu> menuList = new ArrayList<>();
+
+    JoinDTO loginUser = AuthHandler.getLoginUser();
+
+    if (loginUser == null) {
+      System.out.println("[  현재 로그인 하지 않았습니다. ]");
+    } else {
+      System.out.printf("[  %s님은 현재 로그인 중입니다. ]\n", loginUser.getName());
+    }
+    System.out.println();
+
     for (int i = 0; i < this.size; i++) {
 
+      // 기본 접근메뉴
       if (this.childs[i].enableState == Menu.ENABLE_LOGOUT &&
           AuthHandler.getLoginUser() == null) {
         menuList.add(this.childs[i]);
 
-      } else if (this.childs[i].enableState == Menu.ENABLE_LOGIN &&
+      } else if (this.childs[i].enableState == Menu.ENABLE_LOGIN&&
           AuthHandler.getLoginUser() != null) {
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_ALL) {
         menuList.add(this.childs[i]);
-      }
-    } 
+
+
+        // 권한별 접근메뉴
+      } else if (this.childs[i].enableState == Menu.ENABLE_PERSONAL &&
+          AuthHandler.getLoginUser() != null &&
+          AuthHandler.getLoginUser().isPersonal() == true) {
+
+        menuList.add(this.childs[i]);
+
+      } else if (this.childs[i].enableState == Menu.ENABLE_ORG &&
+          AuthHandler.getLoginUser() != null &&
+          AuthHandler.getLoginUser().isOrg() == true) {
+
+        menuList.add(this.childs[i]);
+
+      } else if ((this.childs[i].enableState == Menu.ENABLE_MEMBER &&
+          AuthHandler.getLoginUser() != null) &&
+          (AuthHandler.getLoginUser().isPersonal() == true ||
+          AuthHandler.getLoginUser().isOrg() == true)) {
+
+        menuList.add(this.childs[i]);
+
+      } else if (this.childs[i].enableState == Menu.ENABLE_ADMIN &&
+          AuthHandler.getLoginUser() != null && 
+          AuthHandler.getLoginUser().isAdmin() == true) {
+
+        menuList.add(this.childs[i]);
+
+
+      } 
+
+
+
+    }
     return menuList;
   }
+
 
   private void printBreadCrumbMenuTitle() {
     System.out.printf("\n[%s]\n", getBreadCrumb());
@@ -192,12 +238,15 @@ public class MenuGroup extends Menu {
       return null;
     }
 
+
+
     if (menuNo == 0 && !disablePrevMenu) {
-      return prevMenu; // 호출한 쪽에 '이전 메뉴' 선택을 알리기 위해
-    }
+      return prevMenu; // 호출한 쪽에 '이전 메뉴' 선택을 알리게 위해 
+    } 
 
     return menuList.get(menuNo - 1);
   }
+
 }
 
 

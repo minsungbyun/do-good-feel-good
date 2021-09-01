@@ -11,66 +11,63 @@ public class JoinHandler {
 
   public JoinHandler(List<JoinDTO> joinDTOList) {
     this.joinDTOList = joinDTOList;
+
+    // 로그인 테스드를 위한 데이터
+
+    // 관리자
+    JoinDTO admin = new JoinDTO();
+    admin.setId("admin");
+    admin.setName("관리자");
+    admin.setEmail("aaa@test.com");
+    admin.setPassword("111");
+    admin.setTel("010-1111-1111");
+    admin.setAdress("no");
+    admin.setRegisterDate(new Date(System.currentTimeMillis()));
+    admin.setAdmin(true);
+
+    joinDTOList.add(admin);
+
+    // 개인회원
     JoinDTO testUser = new JoinDTO();
-    testUser.setId("admin");
-    testUser.setName("aaa");
+    testUser.setId("aaa");
+    testUser.setName("test1");
     testUser.setEmail("aaa@test.com");
     testUser.setPassword("111");
-    testUser.setTel("010-1111-1111");
+    testUser.setTel("010-2222-2222");
+    testUser.setAdress("no");
     testUser.setRegisterDate(new Date(System.currentTimeMillis()));
+    testUser.setPersonal(true);
+
+    joinDTOList.add(testUser);
+
+    // 기관회원
+    testUser = new JoinDTO();
+    testUser.setId("bbb");
+    testUser.setName("test2");
+    testUser.setEmail("bbb");
+    testUser.setPassword("111");
+    testUser.setTel("010-3333-3333");
+    testUser.setAdress("no");
+    testUser.setRegisterDate(new Date(System.currentTimeMillis()));
+    testUser.setOrg(true);
 
     joinDTOList.add(testUser);
 
     testUser = new JoinDTO();
-    testUser.setId("111");
-    testUser.setName("bbb");
-    testUser.setEmail("bbb@test.com");
+    testUser.setId("ccc");
+    testUser.setName("test3");
+    testUser.setEmail("ccc@test.com");
     testUser.setPassword("111");
-    testUser.setTel("010-2222-2222");
+    testUser.setTel("010-4444-4444");
+    testUser.setAdress("no");
     testUser.setRegisterDate(new Date(System.currentTimeMillis()));
 
     joinDTOList.add(testUser);
+
   }
 
-  //  this.memberList = memberList;
-  //
-  //  Member testUser = new Member();
-  //  testUser.setNo(0);
-  //  testUser.setName("aaa");
-  //  testUser.setEmail("a@test.com");
-  //  testUser.setPassword("1111");
-  //  testUser.setPhoto("1.jpg");
-  //  testUser.setTel("010-1111-1111");
-  //  testUser.setRegisteredDate(new Date(System.currentTimeMillis()));
-  //
-  //  memberList.add(testUser);
-  //
-  //  testUser = new Member();
-  //  testUser.setNo(1);
-  //  testUser.setName("bbb");
-  //  testUser.setEmail("b@test.com");
-  //  testUser.setPassword("1111");
-  //  testUser.setPhoto("b.jpg");
-  //  testUser.setTel("010-1111-2");
-  //  testUser.setRegisteredDate(new Date(System.currentTimeMillis()));
-  //
-  //  memberList.add(testUser);
-  //
-  //  memberList.add(testUser);
-  //
-  //  testUser = new Member();
-  //  testUser.setNo(2);
-  //  testUser.setName("bbb");
-  //  testUser.setEmail("b@test.com");
-  //  testUser.setPassword("1111");
-  //  testUser.setPhoto("b.jpg");
-  //  testUser.setTel("010-1111-2");
-  //  testUser.setRegisteredDate(new Date(System.currentTimeMillis()));
-  //
-  //  memberList.add(testUser);
 
-
-  // 가입하기
+  // 회원 가입하기
   public void joinSite() {
     System.out.println("[회원 가입]");
 
@@ -87,6 +84,7 @@ public class JoinHandler {
     joinDTOList.add(joinDTO);
   }
 
+  // 가입회원 목록 (관리자가 가입한 회원의 목록을 볼 수 있다) => 관리자 연결
   public void list() {
     System.out.println("[회원 목록]");
     for (JoinDTO joinDTO : joinDTOList) {
@@ -100,12 +98,12 @@ public class JoinHandler {
     }
   }
 
+  // 아이디찾기 이름, 이메일을 통해 찾는다.
   public void searchId() {
     String name = Prompt.inputString("이름? ");
     String email = Prompt.inputString("이메일? ");
-    String tel = Prompt.inputString("전화번호? ");
 
-    JoinDTO joinDTO = findById(name, email, tel);
+    JoinDTO joinDTO = findById(name, email);
 
     if (joinDTO == null) {
       System.out.println("해당 아이디를 찾을 수 없습니다.");
@@ -129,7 +127,7 @@ public class JoinHandler {
   }
 
 
-
+  // 가입회원 상세보기 (관리자가 가입한 회원의 상세정보를을 볼 수 있다) => 관리자 연결
   public void detail() {
     System.out.println("[회원 상세보기]");
     String id = Prompt.inputString("아이디? "); 
@@ -149,6 +147,8 @@ public class JoinHandler {
     System.out.printf("등록일: %s\n", joinDTO.getRegisterDate());
   }
 
+
+  // 
   public void update() {
     System.out.println("[회원 변경]");
     String id = Prompt.inputString("아이디? ");
@@ -225,11 +225,10 @@ public class JoinHandler {
     return null;
   }
 
-  private JoinDTO findById(String name, String email, String tel) {
+  private JoinDTO findById(String name, String email) {
     for (JoinDTO joinDTO : joinDTOList) {
       if (joinDTO.getName().equalsIgnoreCase(name) &&
-          joinDTO.getEmail().equalsIgnoreCase(email) &&
-          joinDTO.getTel().equalsIgnoreCase(tel)) {
+          joinDTO.getEmail().equalsIgnoreCase(email)) {
         return joinDTO;
       }
     }

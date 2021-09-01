@@ -1,15 +1,22 @@
 package com.share.ftp.handler.personal;
 
+import java.util.List;
 import com.share.ftp.domain.personal.MyChallengeReviewDTO;
+import com.share.ftp.handler.org.ChallengeQuestionHandler;
 import com.share.util.Prompt;
 
 public class ChallengeBoardHandler {
   static final int MAX_LENGTH = 10;
   int size;
 
+  List<MyChallengeReviewDTO> myChallengeReviewDTOList;
+  public ChallengeBoardHandler(List<MyChallengeReviewDTO> myChallengeReviewDTOList) {
+    this.myChallengeReviewDTOList = myChallengeReviewDTOList;
+  }
+
   MyChallengeReviewDTO myChallengeReview = new MyChallengeReviewDTO();
 
-  ChallengeReviewHandler challengeReviewHandler = new ChallengeReviewHandler();
+  ChallengeReviewHandler challengeReviewHandler = new ChallengeReviewHandler(myChallengeReviewDTOList);
   ChallengeQuestionHandler challengeQuestionHandler = new ChallengeQuestionHandler();
 
   public void join() {

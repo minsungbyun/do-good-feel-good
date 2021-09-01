@@ -1,7 +1,5 @@
 package com.share.ftp.handler.personal;
 
-import com.share.ftp.domain.personal.CommBoardDTO;
-
 public class CommBestHandler {
   CommBoardHandler commBoardHandler;
   public CommBestHandler(CommBoardHandler commBoardHandler) {
@@ -11,18 +9,18 @@ public class CommBestHandler {
   public void showList() {
     System.out.println("소통해요/ 나눔이야기Best/ 목록");
 
-    // 전체 목록중에서 조회수가 가장 높은 3개
-    CommBoardDTO[] arr = commBoardHandler.chooseBoard();
-
-    System.out.printf("%d, %s, %s, %s, %s, %d\n", 
-        arr[0].getNo(), 
-        arr[0].getTitle(), 
-        arr[0].getContent(),
-        arr[0].getFileUpload(),
-        //this.commBoardsDTO[i].getPassword(),
-        arr[0].getRegisteredDate(), 
-        arr[0].getViewCount());
-
+    //    // 전체 목록중에서 조회수가 가장 높은 3개
+    //    //    CommBoardDTO[] arr = commBoardHandler.chooseBoard();
+    //
+    //    System.out.printf("%d, %s, %s, %s, %s, %d\n", 
+    //        arr[0].getNo(), 
+    //        arr[0].getTitle(), 
+    //        arr[0].getContent(),
+    //        arr[0].getFileUpload(),
+    //        //this.commBoardsDTO[i].getPassword(),
+    //        arr[0].getRegisteredDate(), 
+    //        arr[0].getViewCount());
+    //
 
 
 

@@ -12,21 +12,21 @@ public class DonationBoardDTO {
   private String password;
   private Date registeredStartDate;
   private Date registeredEndDate;
+  private boolean isOrg;
+  private boolean isChecked;
 
   @Override
   public String toString() {
     return "DonationBoardDTO [no=" + no + ", title=" + title + ", leader=" + leader + ", content="
         + content + ", fileUpload=" + fileUpload + ", password=" + password
         + ", registeredStartDate=" + registeredStartDate + ", registeredEndDate="
-        + registeredEndDate + "]";
+        + registeredEndDate + ", isOrg=" + isOrg + ", isChecked=" + isChecked + "]";
   }
-
   @Override
   public int hashCode() {
-    return Objects.hash(content, fileUpload, leader, no, password, registeredEndDate,
-        registeredStartDate, title);
+    return Objects.hash(content, fileUpload, isChecked, isOrg, leader, no, password,
+        registeredEndDate, registeredStartDate, title);
   }
-
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -37,6 +37,7 @@ public class DonationBoardDTO {
       return false;
     DonationBoardDTO other = (DonationBoardDTO) obj;
     return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
+        && isChecked == other.isChecked && isOrg == other.isOrg
         && Objects.equals(leader, other.leader) && no == other.no
         && Objects.equals(password, other.password)
         && Objects.equals(registeredEndDate, other.registeredEndDate)
@@ -91,5 +92,17 @@ public class DonationBoardDTO {
   }
   public void setRegisteredEndDate(Date registeredEndDate) {
     this.registeredEndDate = registeredEndDate;
+  }
+  public boolean isOrg() {
+    return isOrg;
+  }
+  public void setOrg(boolean isOrg) {
+    this.isOrg = isOrg;
+  }
+  public boolean isChecked() {
+    return isChecked;
+  }
+  public void setChecked(boolean isChecked) {
+    this.isChecked = isChecked;
   }
 }

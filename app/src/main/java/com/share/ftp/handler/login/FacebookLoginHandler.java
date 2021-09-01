@@ -1,4 +1,4 @@
-package com.share.ftp.handler.personal;
+package com.share.ftp.handler.login;
 
 
 public class FacebookLoginHandler {

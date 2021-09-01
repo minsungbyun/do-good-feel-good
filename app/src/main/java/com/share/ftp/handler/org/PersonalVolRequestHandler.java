@@ -1,11 +1,14 @@
 package com.share.ftp.handler.org;
 
 import java.sql.Date;
+import java.util.List;
 import com.share.ftp.domain.personal.PersonalRequestDTO;
 import com.share.util.Prompt;
 
 public class PersonalVolRequestHandler {
 
+
+  List<PersonalRequestDTO> personalRequestDTOList;
   public static final int MAX_LENTGH = 100;
   PersonalRequestDTO[] personalRequestsDTO = new PersonalRequestDTO[MAX_LENTGH];
   int size;
