@@ -104,8 +104,8 @@ public class App {
 
 
   // 함께해요 핸들러(기능)
-  PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler(); // 아직 List 변경 안함
   OrgVolRequestHandler orgVolRequestHandler = new OrgVolRequestHandler(); // 아직 List 변경 안함
+  PersonalVolRequestHandler personalVolRequestHandler = new PersonalVolRequestHandler(orgVolRequestHandler); // 아직 List 변경 안함
   VolApprovedHandler volApprovedHandler = new VolApprovedHandler();
   VolListHandler volListHandler = new VolListHandler(personalVolRequestHandler,orgVolRequestHandler);
 
@@ -225,6 +225,11 @@ public class App {
         personalVolRequestHandler.appliedList(); 
       }});
     doVolMenu.add(new Menu("인증봉사세부사항") {
+      @Override
+      public void execute() {
+        volApprovedHandler.approvedDetail(); 
+      }});
+    doVolMenu.add(new Menu("찜하기") {
       @Override
       public void execute() {
         volApprovedHandler.approvedDetail(); 
