@@ -8,6 +8,10 @@ import com.share.util.Prompt;
 
 public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 곳
 
+  OrgVolRequestHandler orgVolRequestHandler;
+  public PersonalVolRequestHandler(OrgVolRequestHandler orgVolRequestHandler) {
+    this.orgVolRequestHandler = orgVolRequestHandler;
+  }
 
   // 전체 배열
   public static final int MAX_LENTGH = 100;
@@ -90,6 +94,12 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
 
   public void appliedList() {
     System.out.println("[개인봉사승인 목록]");
+
+    if (this.personalRequestsDTO == null) {
+      System.out.println("현재 승인된 봉사목록이 없습니다.");
+      return;
+    }
+
     for (int i = 0; i < this.applySize; i++) {
       System.out.printf("봉사명 : %d\n 봉사제목 : %s\n %s, %s, %s, %s, %s, %s, %s, %b \n", 
           this.personalRequestApplyDTO[i].getNo(), 
@@ -133,6 +143,9 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
 
     int personalRequestIndex = indexOf(no);
 
+
+
+
     //    PersonalRequestDTO personalRequestApplyDTO = null;
     PersonalRequestDTO personalRequestDTO = findByVol(no);
 
@@ -147,10 +160,12 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
 
     if (personalRequestIndex == -1) {
       System.out.println("해당 번호의 개인봉사신청서가 없습니다.");
+      return;
     }
 
     if (personalRequestDTO == null) {
       System.out.println("해당 번호의 개인봉사신청서가 없습니다.");
+      return;
     }
 
 
@@ -201,11 +216,13 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
 
     if (personalRequestDTO == null) {
       System.out.println("해당 번호의 개인봉사신청서가 없습니다.");
+      return;
     }
 
 
     String input = Prompt.inputString("정말 반려하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      System.out.println("해당 봉사신청 반려를 취소하였습니다.");
       return;
     }
 
@@ -250,6 +267,17 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
     }
 
     //구현예정
+
+  }
+
+
+  // 함께해요 - 찜한 목록(마이페이지 연동 예정)
+  public void showVolBookmark() {
+
+    // 인증받은 봉사 리스트 중 내가 선택한 번호의 봉사 리스트를
+    // 새로운 배열(리스트)에 담아서 마이페이지에서 보여준다.
+
+
 
   }
 
