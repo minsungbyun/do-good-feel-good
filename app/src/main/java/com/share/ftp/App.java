@@ -32,7 +32,7 @@ import com.share.ftp.handler.join.AuthHandler;
 import com.share.ftp.handler.join.JoinHandler;
 import com.share.ftp.handler.personal.ApproveOrgHandler;
 import com.share.ftp.handler.personal.ChallengeBoardHandler;
-import com.share.ftp.handler.personal.ChallengeHandler;
+import com.share.ftp.handler.personal.ChallengeListHandler;
 import com.share.ftp.handler.personal.ChallengeQuestionHandler;
 import com.share.ftp.handler.personal.ChallengeReviewHandler;
 import com.share.ftp.handler.personal.CommBestHandler;
@@ -42,12 +42,14 @@ import com.share.ftp.handler.personal.DonationBoardHandler;
 import com.share.ftp.handler.personal.DonationRegisterHandler;
 import com.share.ftp.handler.personal.MyBoardListHandler;
 import com.share.ftp.handler.personal.MyDonationHandler;
+import com.share.ftp.handler.personal.MyPageHandler2;
 import com.share.ftp.handler.personal.MyPointHandler;
 import com.share.ftp.handler.personal.MyProfileHandler;
 import com.share.ftp.handler.personal.NoticeListHandler;
 import com.share.ftp.handler.personal.OrgVolRequestHandler;
 import com.share.ftp.handler.personal.PersonalVolRequestHandler;
 import com.share.ftp.handler.personal.QuestionListHandler;
+import com.share.ftp.handler.personal.RankingHandler;
 import com.share.ftp.handler.personal.SupportHandler;
 import com.share.ftp.handler.personal.VolApprovedHandler;
 import com.share.ftp.handler.personal.VolListHandler;
@@ -117,15 +119,16 @@ public class App {
   //  ChallengeHandler challengeHandler = new ChallengeHandler();
   //  ShowChallengeHandler showChallengeHandler = new ShowChallengeHandler();
   // 챌린지 핸들러(기능)
-  ChallengeHandler challengeHandler = new ChallengeHandler();
-  ChallengeReviewHandler challengeReviewHandler = new ChallengeReviewHandler(myChallengeReviewDTOList);
-  ChallengeBoardHandler challengeBoardHandler = new ChallengeBoardHandler(myChallengeReviewDTOList);
+  ChallengeListHandler challengeListHandler = new ChallengeListHandler();
+  ChallengeBoardHandler challengeBoardHandler = new ChallengeBoardHandler();
+  RankingHandler rankingHandler = new RankingHandler();
   ChallengeQuestionHandler challengeQuestionHandler = new ChallengeQuestionHandler(myChallengeQuestionDTOList);
+  ChallengeReviewHandler challengeReviewHandler = new ChallengeReviewHandler(myChallengeReviewDTOList);
 
   // 모금함 관련 핸들러(기능)
   DonationRegisterHandler donationRegisterHandler = new DonationRegisterHandler(donationRegisterDTOList);
   //  DonationDetailHandler donationDetailHandler = new DonationDetailHandler(donationRegisterHandler);
-  DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationBoardDTOList, donationRegisterHandler);
+  DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationBoardDTOList);
 
   // 마이 페이지 핸들러(기능)
   // MyPageHandler myVolHandler = new MyPageHandler();
@@ -136,6 +139,7 @@ public class App {
   MyDonationHandler myDonationHandler = new MyDonationHandler();
   ApproveOrgHandler approveOrgHandler = new ApproveOrgHandler(approveOrgDTOList);
   WithdrawMemberHandler withdrawMemberHandler = new WithdrawMemberHandler();
+  MyPageHandler2 myPageHandler2 = new MyPageHandler2(joinDTOList, joinHandler);
 
   // 고객센터 핸들러(기능)
   ShowNoticeHandler showNoticeHandler = new ShowNoticeHandler(); // 아직 List 변경 안함
@@ -301,47 +305,106 @@ public class App {
       }});
 
     //
-    MenuGroup personalChallengeMenu = new MenuGroup("챌린지");
-    mainMenuGroup.add(personalChallengeMenu);
-    //
-    //    MenuGroup monthlyChallengeMenu = new MenuGroup("이달의 챌린지");
-    //    personalChallengeMenu.add(monthlyChallengeMenu);
-    //
-    //
-    //    monthlyChallengeMenu.add(new Menu("목록") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.monthlyChallengeList(); 
-    //      }});
-    //    monthlyChallengeMenu.add(new Menu("상세보기") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.monthlyChallengeDetail(); 
-    //      }});
-    //
-    //
-    //    MenuGroup monthlyRankingMenu = new MenuGroup("이달의 랭킹");
-    //    personalChallengeMenu.add(monthlyRankingMenu);
-    //
-    //
-    //    monthlyRankingMenu.add(new Menu("목록") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.monthlyRankingList(); 
-    //      }});
-    //    monthlyRankingMenu.add(new Menu("상세보기") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.monthlyRankingDetail(); 
-    //      }});
-    //
-    //    monthlyRankingMenu.add(new Menu("나의 랭킹보기") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.rankingList(); 
-    //      }});
-    //
-    //
+        MenuGroup personalChallengeMenu = new MenuGroup("챌린지", Menu.ENABLE_ALL);
+        mainMenuGroup.add(personalChallengeMenu);
+    
+        MenuGroup monthlyChallengeMenu = new MenuGroup("이달의 챌린지", Menu.ENABLE_ALL);
+        personalChallengeMenu.add(monthlyChallengeMenu);
+    
+        MenuGroup monthlyChallengeDetail = new MenuGroup("챌린지 상세보기", Menu.ENABLE_ALL);
+        monthlyChallengeMenu.add(monthlyChallengeDetail);
+        
+        monthlyChallengeDetail.add(new Menu("상세정보", Menu.ENABLE_ALL) {
+          @Override
+          public void execute() {
+            challengeBoardHandler.showChallengeDetail(); 
+          }});
+        monthlyChallengeDetail.add(new Menu("참여하기", Menu.ENABLE_PERSONAL) {
+          @Override
+          public void execute() {
+            challengeBoardHandler.join(); 
+          }});
+        monthlyChallengeDetail.add(new Menu("참여자 목록", Menu.ENABLE_LOGIN) {
+            @Override
+            public void execute() {
+              challengeBoardHandler.showMemberList(); 
+            }});
+        MenuGroup ChallengeReview = new MenuGroup("참여인증&댓글", Menu.ENABLE_ALL);
+        monthlyChallengeDetail.add(ChallengeReview);
+        
+        ChallengeReview.add(new Menu("참여인증&댓글 등록", Menu.ENABLE_LOGIN) {
+            @Override
+            public void execute() {
+              challengeReviewHandler.add(); 
+            }});
+        ChallengeReview.add(new Menu("참여인증&댓글 목록", Menu.ENABLE_ALL) {
+            @Override
+            public void execute() {
+              challengeReviewHandler.list(); 
+            }});
+        ChallengeReview.add(new Menu("참여인증&댓글 상세보기", Menu.ENABLE_ALL) {
+            @Override
+            public void execute() {
+              challengeReviewHandler.detail(); 
+            }});
+        ChallengeReview.add(new Menu("참여인증&댓글 수정", Menu.ENABLE_LOGIN) {
+            @Override
+            public void execute() {
+              challengeReviewHandler.update(); 
+            }});
+        ChallengeReview.add(new Menu("참여인증&댓글 삭제", Menu.ENABLE_LOGIN) {
+            @Override
+            public void execute() {
+              challengeReviewHandler.delete(); 
+            }});
+        
+        MenuGroup ChallengeQuestion = new MenuGroup("문의하기", Menu.ENABLE_ALL);
+        monthlyChallengeDetail.add(ChallengeQuestion);
+        ChallengeQuestion.add(new Menu("문의 등록", Menu.ENABLE_LOGIN) {
+            @Override
+            public void execute() {
+              challengeQuestionHandler.add(); 
+            }});
+        ChallengeQuestion.add(new Menu("문의 목록", Menu.ENABLE_ALL) {
+            @Override
+            public void execute() {
+              challengeQuestionHandler.list(); 
+            }});
+        ChallengeQuestion.add(new Menu("문의 상세보기", Menu.ENABLE_ALL) {
+            @Override
+            public void execute() {
+              challengeQuestionHandler.detail(); 
+            }});
+        ChallengeQuestion.add(new Menu("문의 수정", Menu.ENABLE_LOGIN) {
+            @Override
+            public void execute() {
+              challengeQuestionHandler.update(); 
+            }});
+        ChallengeQuestion.add(new Menu("문의 삭제", Menu.ENABLE_LOGIN) {
+            @Override
+            public void execute() {
+              challengeQuestionHandler.delete(); 
+            }});
+    
+    
+        MenuGroup monthlyRankingMenu = new MenuGroup("이달의 랭킹", Menu.ENABLE_ALL);
+        personalChallengeMenu.add(monthlyRankingMenu);
+    
+    
+        monthlyRankingMenu.add(new Menu("이달의 랭킹보기", Menu.ENABLE_ALL) {
+          @Override
+          public void execute() {
+            rankingHandler.showTotalRanking(); 
+          }});
+    
+        monthlyRankingMenu.add(new Menu("나의 랭킹보기", Menu.ENABLE_PERSONAL) {
+          @Override
+          public void execute() {
+            rankingHandler.showMyRanking(); 
+          }});
+
+        
+        
     MenuGroup personalDonationMenu = new MenuGroup("모금함");
     mainMenuGroup.add(personalDonationMenu);
 
@@ -351,7 +414,7 @@ public class App {
     MenuGroup donation = new MenuGroup("모금함 상세보기");
     donationList.add(donation);
 
-    donation.add(new Menu("기부하기") {
+    donation.add(new Menu("기부하기", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
         donationRegisterHandler.add(); 
@@ -359,7 +422,7 @@ public class App {
     donation.add(new Menu("기부내역") {
       @Override
       public void execute() {
-        donationRegisterHandler.applyDonationList(); 
+        donationRegisterHandler.participationDonation(); 
       }});
 
     MenuGroup donationTotal = new MenuGroup("전체 모금액");
@@ -371,7 +434,7 @@ public class App {
         donationRegisterHandler.totalDonationMoney(); 
       }});
 
-    MenuGroup applyDonation = new MenuGroup("모금함 개설신청");
+    MenuGroup applyDonation = new MenuGroup("모금함 개설신청", Menu.ENABLE_ORG);
     personalDonationMenu.add(applyDonation);
 
     applyDonation.add(new Menu("개설신청") {
@@ -595,14 +658,20 @@ public class App {
         showMemberHandler.getOutMember(); 
       }});
 
-    MenuGroup donationMenu = new MenuGroup("모금 관리");
+    MenuGroup donationMenu = new MenuGroup("모금함 관리");
     adminMenu.add(donationMenu);
 
-    donationMenu.add(new Menu("모금활동관리") {
+    donationMenu.add(new Menu("모금함 개설 신청내역 목록") {
       @Override
       public void execute() {
-        showDonationHandler.list(); 
+        donationBoardHandler.applyDonationList(); 
       }});
+    donationMenu.add(new Menu("모금함 개설 신청내역 상세보기") {
+      @Override
+      public void execute() {
+        donationBoardHandler.applyDonationdetail(); 
+      }});
+
 
     MenuGroup volunteerMenu = new MenuGroup("봉사활동 관리");
     adminMenu.add(volunteerMenu);

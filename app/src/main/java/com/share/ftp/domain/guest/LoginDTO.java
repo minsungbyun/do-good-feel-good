@@ -3,12 +3,12 @@ package com.share.ftp.domain.guest;
 import java.util.Objects;
 
 public class LoginDTO {
-  private String meberId;
+  private String memberId;
   private int password;
 
   @Override
   public int hashCode() {
-    return Objects.hash(meberId, password);
+    return Objects.hash(memberId, password);
   }
 
   @Override
@@ -20,19 +20,19 @@ public class LoginDTO {
     if (getClass() != obj.getClass())
       return false;
     LoginDTO other = (LoginDTO) obj;
-    return Objects.equals(meberId, other.meberId) && password == other.password;
+    return Objects.equals(memberId, other.memberId) && password == other.password;
   }
 
   @Override
   public String toString() {
-    return "LoginDTO [meberId=" + meberId + ", password=" + password + "]";
+    return "LoginDTO [meberId=" + memberId + ", password=" + password + "]";
   }
 
   public String getMeberId() {
-    return meberId;
+    return memberId;
   }
   public void setMeberId(String meberId) {
-    this.meberId = meberId;
+    this.memberId = meberId;
   }
   public int getPassword() {
     return password;

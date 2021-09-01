@@ -207,7 +207,8 @@ public class JoinHandler {
       return;
     }
 
-    joinDTOList.remove(joinDTO);
+    joinDTO = null;
+    //    joinDTOList.remove(joinDTO);
 
     System.out.println("회원을 탈퇴하였습니다.");
   }
@@ -221,7 +222,7 @@ public class JoinHandler {
   //    return null;
   //  }
 
-  private JoinDTO findByMember(String id, String email) {
+  public JoinDTO findByMember(String id, String email) {
     for (JoinDTO joinDTO : joinDTOList) {
       if (joinDTO.getId().equalsIgnoreCase(id) && 
           joinDTO.getEmail().equalsIgnoreCase(email)) {
@@ -316,6 +317,26 @@ public class JoinHandler {
       System.out.println("등록된 회원이 아닙니다.");
     }
     return joinDTOmembers;
+  }
+
+
+
+  public JoinDTO promptJoinDTO() {
+    System.out.println("이름:");
+    for (JoinDTO joinDTO : joinDTOList) {
+      System.out.printf("%s\n", joinDTO.getName());
+    }
+    while (true) {
+      String joinDTOName = Prompt.inputString("이름? (취소: 0) ");
+      if (joinDTOName == null) {
+        return null;
+      }
+      JoinDTO selectedJoinDTO = findByName(joinDTOName);
+      if (selectedJoinDTO != null) {
+        return selectedJoinDTO;
+      }
+      System.out.println("프로젝트 번호가 옳지 않습니다.");
+    }
   }
 }
 

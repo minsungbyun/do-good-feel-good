@@ -2,6 +2,9 @@ package com.share.ftp.handler.personal;
 
 import java.sql.Date;
 import java.util.List;
+
+import com.share.ftp.handler.join.AuthHandler;
+import com.share.ftp.domain.guest.JoinDTO;
 import com.share.ftp.domain.personal.MyChallengeReviewDTO;
 import com.share.util.Prompt;
 
@@ -12,26 +15,29 @@ public class ChallengeReviewHandler {
   public ChallengeReviewHandler(List<MyChallengeReviewDTO> myChallengeReviewDTOList) {
     this.myChallengeReviewDTOList = myChallengeReviewDTOList;
   }
-
+  
+  MyChallengeReviewDTO myChallengeReviewDTO;
 
   public void add() {
     System.out.println("[참여인증&댓글 등록]");
 
-    MyChallengeReviewDTO myChallengeReview = new MyChallengeReviewDTO();
+    MyChallengeReviewDTO myChallengeReviewDTO = new MyChallengeReviewDTO();
 
-    myChallengeReview.setNo(Prompt.inputInt("번호: "));
-    myChallengeReview.setMemberId(Prompt.inputString("아이디: "));
-    myChallengeReview.setContent(Prompt.inputString("내용: "));
-    myChallengeReview.setFileUpload(Prompt.inputString("파일첨부: "));
-    myChallengeReview.setRegisteredDate(new Date(System.currentTimeMillis()));
+    myChallengeReviewDTO.setNo(Prompt.inputInt("번호: "));
+    myChallengeReviewDTO.setMemberId(Prompt.inputString("아이디: "));
+    myChallengeReviewDTO.setContent(Prompt.inputString("내용: "));
+    myChallengeReviewDTO.setFileUpload(Prompt.inputString("파일첨부: "));
+    myChallengeReviewDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    myChallengeReviewDTOList.add(myChallengeReview);
+    myChallengeReviewDTOList.add(myChallengeReviewDTO);
   }
 
   public void list() {
     System.out.println("[참여인증&댓글 목록]");
-    for (MyChallengeReviewDTO myChallengeReviewDTO : myChallengeReviewDTOList) {
-      System.out.printf("%d, %s, %s, %s, %s", 
+    MyChallengeReviewDTO[] myChallengeReviewDTOs = new MyChallengeReviewDTO[myChallengeReviewDTOList.size()];
+    myChallengeReviewDTOList.toArray(myChallengeReviewDTOs);
+    for (MyChallengeReviewDTO myChallengeReviewDTO : myChallengeReviewDTOs) {
+      System.out.printf("%d, %s, %s, %s, %s\n", 
           myChallengeReviewDTO.getNo(), 
           myChallengeReviewDTO.getMemberId(), 
           myChallengeReviewDTO.getContent(),
@@ -58,7 +64,7 @@ public class ChallengeReviewHandler {
   }
 
   public void update() {
-    System.out.println("[참여인증&댓글 변경]");
+    System.out.println("[참여인증&댓글 수정]");
     int no = Prompt.inputInt("번호? ");
 
     MyChallengeReviewDTO myChallengeReviewDTO = findByNo(no);
@@ -71,9 +77,9 @@ public class ChallengeReviewHandler {
     String content = Prompt.inputString(String.format("내용(%s)? ", myChallengeReviewDTO.getContent()));
     String fileUpload = Prompt.inputString(String.format("파일첨부(%s)? ", myChallengeReviewDTO.getFileUpload()));
 
-    String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
+    String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("참여인증&댓글 변경을 취소하였습니다.");
+      System.out.println("참여인증&댓글 수정을 취소하였습니다.");
       return;
     }
 
@@ -81,14 +87,14 @@ public class ChallengeReviewHandler {
     myChallengeReviewDTO.setFileUpload(fileUpload);
     System.out.println("참여인증&댓글을 변경하였습니다.");
   }
-
+  
   public void delete() {
     System.out.println("[댓글 삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    MyChallengeReviewDTO myChallengeReviewDTO = findByNo(no);
+    MyChallengeReviewDTO myChallengeReview = findByNo(no);
 
-    if (myChallengeReviewDTO == null) {
+    if (myChallengeReview == null) {
       System.out.println("해당 번호의 참여인증&댓글이 없습니다.");
       return;
     }
@@ -99,18 +105,22 @@ public class ChallengeReviewHandler {
       return;
     }
 
-    myChallengeReviewDTOList.remove(myChallengeReviewDTO);
+    if (myChallengeReviewDTO.getOwner().getName() != AuthHandler.getLoginUser().getName()) {
+      System.out.println("이 프로젝트의 관리자가 아닙니다.");
+      return;
+      }
+    
+    myChallengeReviewDTOList.remove(myChallengeReview);
 
     System.out.println("참여인증&댓글을 삭제하였습니다.");
   }
   private MyChallengeReviewDTO findByNo(int no) {
-    for (MyChallengeReviewDTO myChallengeReviewDTO : myChallengeReviewDTOList) {
-      if (myChallengeReviewDTO.getNo() == no) {
-        return myChallengeReviewDTO;
+      MyChallengeReviewDTO[] arr = myChallengeReviewDTOList.toArray(new MyChallengeReviewDTO[0]);
+      for (MyChallengeReviewDTO myChallengeReviewDTO : arr) {
+        if (myChallengeReviewDTO.getNo() == no) {
+          return myChallengeReviewDTO;
       }
     }
     return null;
   }
-
-
 }
