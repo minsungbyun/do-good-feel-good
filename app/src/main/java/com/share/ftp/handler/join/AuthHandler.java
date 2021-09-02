@@ -17,33 +17,6 @@ public class AuthHandler {
     this.joinDTOList = joinDTOList;
   }
 
-  public void login() {
-    System.out.println();
-    System.out.println("[로그인]");
-
-    String id = Prompt.inputString("아이디? ");
-    String password = Prompt.inputString("비밀번호? ");
-
-    JoinDTO joinDTO = findByMember(id, password);
-
-    if (joinDTO == null) {
-      System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");
-    } else {
-      System.out.printf("%s님 환영합니다!\n", joinDTO.getName());
-      loginUser = joinDTO;
-    }
-  }
-
-
-
-  public void logout() {
-    System.out.println();
-    System.out.println("[로그아웃]");
-
-    loginUser = null;
-    System.out.println("로그아웃 하였습니다.");
-  }
-
   // 마이페이지의 나의정보보기
   public void displayUserInfo() {
 
@@ -95,20 +68,5 @@ public class AuthHandler {
     System.out.println("회원정보가 수정되었습니다.");
   }
 
-
-
-
-
-
-
-  private JoinDTO findByMember(String id, String password) {
-    for (JoinDTO joinDTO : joinDTOList) {
-      if (joinDTO.getId().equalsIgnoreCase(id) && 
-          joinDTO.getPassword().equalsIgnoreCase(password)) {
-        return joinDTO;
-      }
-    }
-    return null;
-  }
 }
 

@@ -10,10 +10,6 @@ public class MyPageHandler {
     this.myVolHandler = myVolHandler;
   }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 95cbba03245d494719d5fc025ee1158426d18e2f
 
   public void myProfile() {
 
