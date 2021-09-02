@@ -1,7 +1,7 @@
 package com.share.ftp.handler.admin;
 
-import com.share.ftp.handler.personal.DonationBoardHandler;
-import com.share.ftp.handler.personal.PersonalVolRequestHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardHandler;
+import com.share.ftp.handler.personal.volunteer.PersonalVolRequestHandler;
 import com.share.util.Prompt;
 
 public class AdminPageHandler {

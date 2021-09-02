@@ -1,4 +1,4 @@
-package com.share.ftp.handler.personal;
+package com.share.ftp.handler.personal.donation;
 
 import java.util.List;
 import com.share.ftp.domain.personal.DonationBoardDTO;

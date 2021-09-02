@@ -1,6 +1,6 @@
 package com.share.ftp.handler.admin;
 
-import com.share.ftp.handler.personal.DonationBoardHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardHandler;
 import com.share.util.Prompt;
 
 public class ShowDonationHandler { // 기관이 모금함 개설 신청한 양식 보는곳
