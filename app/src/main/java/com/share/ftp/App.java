@@ -52,18 +52,17 @@ import com.share.ftp.handler.personal.community.CommBoardDeleteHandler;
 import com.share.ftp.handler.personal.community.CommBoardDetailHandler;
 import com.share.ftp.handler.personal.community.CommBoardListHandler;
 import com.share.ftp.handler.personal.community.CommBoardUpdateHandler;
-<<<<<<< HEAD
 import com.share.ftp.handler.personal.community.CommReviewAddHandler;
 import com.share.ftp.handler.personal.community.CommReviewDeleteHandler;
 import com.share.ftp.handler.personal.community.CommReviewListHandler;
 import com.share.ftp.handler.personal.community.CommReviewUpdateHandler;
-=======
 import com.share.ftp.handler.personal.donation.DonationBoardHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterHandler;
 import com.share.ftp.handler.personal.mypage.MyBoardListHandler;
 import com.share.ftp.handler.personal.mypage.MyDonationHandler;
 import com.share.ftp.handler.personal.mypage.MyPageHandler2;
 import com.share.ftp.handler.personal.mypage.MyPointHandler;
+import com.share.ftp.handler.personal.mypage.MyProfileHandler;
 import com.share.ftp.handler.personal.mypage.WithdrawMemberHandler;
 import com.share.ftp.handler.personal.support.NoticeListHandler;
 import com.share.ftp.handler.personal.support.QuestionListHandler;
@@ -73,7 +72,6 @@ import com.share.ftp.handler.personal.volunteer.OrgVolRequestHandler;
 import com.share.ftp.handler.personal.volunteer.PersonalVolRequestHandler;
 import com.share.ftp.handler.personal.volunteer.VolApprovedHandler;
 import com.share.ftp.handler.personal.volunteer.VolListHandler;
->>>>>>> 7a51e7f03b1c7da4a7622c93e8818f61f1d7c7cb
 import com.share.menu.Menu;
 import com.share.menu.MenuGroup;
 import com.share.util.Prompt;
@@ -215,20 +213,15 @@ public class App {
 
 
   // 관리자 페이지 핸들러(기능)
-<<<<<<< HEAD
-  ShowVolHandler showVolHandler = new ShowVolHandler(personalVolRequestHandler,orgVolRequestHandler);
-  ShowDonationHandler showDonationHandler = new ShowDonationHandler(donationBoardHandler);
-  ShowMemberHandler showMemberHandler = new ShowMemberHandler();
-  ShowChallengeHandler showChallengeHandler = new ShowChallengeHandler(); // 아직 List 변경 안함
-  ShowOrgApproveHandler showOrgApproveHandler = new ShowOrgApproveHandler();
-=======
   //  ShowVolHandler showVolHandler = new ShowVolHandler(personalVolRequestHandler,orgVolRequestHandler);
+  //  ShowMemberHandler showMemberHandler = new ShowMemberHandler();
+  //  ShowChallengeHandler showChallengeHandler = new ShowChallengeHandler(); // 아직 List 변경 안함
+  //  ShowOrgApproveHandler showOrgApproveHandler = new ShowOrgApproveHandler();
   //  ShowDonationHandler showDonationHandler = new ShowDonationHandler(donationBoardHandler);
   //  AdminMemberListHandler showMemberHandler = new AdminMemberListHandler();
   //  AdminChallengeHandler showChallengeHandler = new AdminChallengeHandler(); // 아직 List 변경 안함
   //  AdminOrgApproveAddHandler showOrgApproveHandler = new AdminOrgApproveAddHandler();
   //  MyProfileHandler myProfileHandler = new MyProfileHandler(myProfileDTOList);
->>>>>>> 7a51e7f03b1c7da4a7622c93e8818f61f1d7c7cb
   //  AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler,showVolHandler, donationBoardHandler, showDonationHandler); 
 
 
@@ -247,12 +240,11 @@ public class App {
     commands.put("/commBoard/update", new CommBoardUpdateHandler(commBoardDTOList));
     commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList));
 
-<<<<<<< HEAD
     commands.put("/commReview/add ", new CommReviewAddHandler(commReviewDTOList));
     commands.put("/commReview/list ", new CommReviewListHandler(commReviewDTOList));
     commands.put("/commReview/update ", new CommReviewUpdateHandler(commReviewDTOList));
     commands.put("/commReview/delete ", new CommReviewDeleteHandler(commReviewDTOList));
-=======
+
     // 관리자 회원정보 조회
     commands.put("/adminMember/list", new AdminMemberListHandler());
     commands.put("/adminMember/delete", new AdminMemberDeleteHandler());
@@ -276,10 +268,6 @@ public class App {
     commands.put("/adminChallenge/detail", new AdminChallengeDetailHandler(challengeDTOList));
     commands.put("/adminChallenge/update", new AdminChallengeUpdateHandler(challengeDTOList));
     commands.put("/adminChallenge/delete", new AdminChallengeDeleteHandler(challengeDTOList));
-
-
->>>>>>> 7a51e7f03b1c7da4a7622c93e8818f61f1d7c7cb
-
 
     // 마이페이지
     commands.put("/myProfile/update", new MyProfileHandler(myProfileDTOList));
