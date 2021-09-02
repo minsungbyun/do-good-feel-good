@@ -1,26 +1,27 @@
 package com.share.ftp.handler.personal.community;
 
 import java.util.List;
-import com.share.ftp.domain.personal.CommBoardDTO;
+import com.share.ftp.domain.personal.CommReviewDTO;
 import com.share.util.Prompt;
 
-public class CommBoardDeleteHandler extends AbstractCommBoardHandler {
+public class CommReviewDeleteHandler extends AbstractCommReviewHandler{
 
+  List<CommReviewDTO> commReviewDTOList;
 
-  public CommBoardDeleteHandler(List<CommBoardDTO> commBoardDTOList) {
-    super(commBoardDTOList);
+  public CommReviewDeleteHandler(List<CommReviewDTO> commReviewDTOList) {
+    super(commReviewDTOList);
   }
 
   @Override
   public void execute() {
 
     System.out.println();
-    System.out.println("[메인/소통해요/나눔이야기/게시글삭제]");
+    System.out.println("[소통해요/ 한줄후기/ 삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    CommBoardDTO commBoardDTO = findByNo(no);
+    CommReviewDTO commReviewDTO = findByNo(no);
 
-    if (commBoardDTO == null) {
+    if (commReviewDTO == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
@@ -31,14 +32,16 @@ public class CommBoardDeleteHandler extends AbstractCommBoardHandler {
       return;
     }
 
-    commBoardDTOList.remove(commBoardDTO);
+    commReviewDTOList.remove(commReviewDTO);
 
     System.out.println("게시글을 삭제하였습니다.");
   }
-
-
-
 }
+
+
+
+
+
 
 
 

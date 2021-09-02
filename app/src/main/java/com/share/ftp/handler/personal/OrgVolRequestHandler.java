@@ -65,6 +65,7 @@ public class OrgVolRequestHandler {
 
   //해당 봉사 신청서를 승인한다.
   public void acceptApply() {
+    System.out.println();
     System.out.println("[기관봉사신청서 승인]");
     int no = Prompt.inputInt("번호? ");
 
@@ -81,8 +82,6 @@ public class OrgVolRequestHandler {
       System.out.println("해당 번호의 기관봉사신청서가 없습니다.");
       return;
     }
-
-
 
     String input = Prompt.inputString("정말 승인하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {

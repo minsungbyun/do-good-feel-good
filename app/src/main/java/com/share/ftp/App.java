@@ -58,6 +58,10 @@ import com.share.ftp.handler.personal.community.CommBoardDeleteHandler;
 import com.share.ftp.handler.personal.community.CommBoardDetailHandler;
 import com.share.ftp.handler.personal.community.CommBoardListHandler;
 import com.share.ftp.handler.personal.community.CommBoardUpdateHandler;
+import com.share.ftp.handler.personal.community.CommReviewAddHandler;
+import com.share.ftp.handler.personal.community.CommReviewDeleteHandler;
+import com.share.ftp.handler.personal.community.CommReviewListHandler;
+import com.share.ftp.handler.personal.community.CommReviewUpdateHandler;
 import com.share.menu.Menu;
 import com.share.menu.MenuGroup;
 import com.share.util.Prompt;
@@ -149,7 +153,10 @@ public class App {
   //  CommBoardUpdateHandler commBoardUpdateHandler = new CommBoardUpdateHandler(commBoardDTOList);
   //  CommBoardDeleteHandler commBoardDeleteHandler = new CommBoardDeleteHandler(commBoardDTOList);
 
-
+  CommReviewAddHandler commReviewAddHandler = new CommReviewAddHandler(commReviewDTOList);
+  CommReviewListHandler commReviewListHandler = new CommReviewListHandler(commReviewDTOList);
+  CommReviewUpdateHandler commReviewUpdateHandler = new CommReviewUpdateHandler(commReviewDTOList);
+  CommReviewDeleteHandler commReviewDeleteHandler = new CommReviewDeleteHandler(commReviewDTOList);
 
   //  CommBestHandler commBestHandler = new CommBestHandler(commBoardHandler);
   //  CommReviewHandler commReviewHandler = new CommReviewHandler(commReviewDTOList);
@@ -182,6 +189,7 @@ public class App {
   // MyPageHandler myVolHandler = new MyPageHandler();
   QuestionListHandler questionListHandler = new QuestionListHandler(myQuestionListDTOList);
   NoticeListHandler noticeListHandler = new NoticeListHandler();
+  MyProfileHandler myProfileHandler = new MyProfileHandler(myProfileDTOList);
   MyBoardListHandler myBoardListHandler = new MyBoardListHandler();
   MyPointHandler myPointHandler = new MyPointHandler();
   MyDonationHandler myDonationHandler = new MyDonationHandler();
@@ -204,7 +212,6 @@ public class App {
   ShowMemberHandler showMemberHandler = new ShowMemberHandler();
   ShowChallengeHandler showChallengeHandler = new ShowChallengeHandler(); // 아직 List 변경 안함
   ShowOrgApproveHandler showOrgApproveHandler = new ShowOrgApproveHandler();
-  MyProfileHandler myProfileHandler = new MyProfileHandler(myProfileDTOList);
   //  AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler,showVolHandler, donationBoardHandler, showDonationHandler); 
 
 
@@ -223,10 +230,17 @@ public class App {
     commands.put("/commBoard/update", new CommBoardUpdateHandler(commBoardDTOList));
     commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList));
 
+    commands.put("/commReview/add ", new CommReviewAddHandler(commReviewDTOList));
+    commands.put("/commReview/list ", new CommReviewListHandler(commReviewDTOList));
+    commands.put("/commReview/update ", new CommReviewUpdateHandler(commReviewDTOList));
+    commands.put("/commReview/delete ", new CommReviewDeleteHandler(commReviewDTOList));
 
 
-  }
+    // 마이페이지
+    commands.put("/myProfile/update", new MyProfileHandler(myProfileDTOList));
 
+
+  }       
   void service() {
     createMenu().execute();
     Prompt.close();
@@ -312,48 +326,48 @@ public class App {
     reviewMenu.add(new MenuItem("변경", Menu.ENABLE_LOGIN,"/commBoard/update"));
     reviewMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN,"/commBoard/delete"));
 
-    MenuGroup bestReviewMenu = new MenuGroup("나눔 이야기 BEST", Menu.ENABLE_ALL);
-    personalCommunityMenu.add(bestReviewMenu);
+    //        MenuGroup bestReviewMenu = new MenuGroup("나눔 이야기 BEST", Menu.ENABLE_ALL);
+    //        personalCommunityMenu.add(bestReviewMenu);
+    //    
+    //            bestReviewMenu.add(new Menu("목록", Menu.ENABLE_ALL) {
+    //              @Override
+    //              public void execute() {
+    //                commBestHandler.showList(); 
+    //              }});
+    //            bestReviewMenu.add(new Menu("상세보기", Menu.ENABLE_ALL) {
+    //              @Override
+    //              public void execute() {
+    //                commBestHandler.showDetail(); 
+    //              }});
 
-    //    bestReviewMenu.add(new Menu("목록", Menu.ENABLE_ALL) {
-    //      @Override
-    //      public void execute() {
-    //        commBestHandler.showList(); 
-    //      }});
-    //    bestReviewMenu.add(new Menu("상세보기", Menu.ENABLE_ALL) {
-    //      @Override
-    //      public void execute() {
-    //        commBestHandler.showDetail(); 
-    //      }});
-    //
-    //    MenuGroup shortReviewMenu = new MenuGroup("한 줄 후기", Menu.ENABLE_ALL);
-    //    personalCommunityMenu.add(shortReviewMenu);
-    //
-    //    shortReviewMenu.add(new Menu("등록", Menu.ENABLE_LOGIN) {
-    //      @Override
-    //      public void execute() {
-    //        commReviewHandler.add(); 
-    //      }});
-    //
-    //    shortReviewMenu.add(new Menu("목록", Menu.ENABLE_ALL) {
-    //      @Override
-    //      public void execute() {
-    //        commReviewHandler.list(); 
-    //      }});
-    //
-    //    shortReviewMenu.add(new Menu("수정", Menu.ENABLE_LOGIN) {
-    //      @Override
-    //      public void execute() {
-    //        commReviewHandler.update(); 
-    //      }});
-    //
-    //    shortReviewMenu.add(new Menu("삭제", Menu.ENABLE_LOGIN) {
-    //      @Override
-    //      public void execute() {
-    //        commReviewHandler.delete(); 
-    //      }});
+    MenuGroup shortReviewMenu = new MenuGroup("한 줄 후기", Menu.ENABLE_ALL);
+    personalCommunityMenu.add(shortReviewMenu);
 
-    //
+    shortReviewMenu.add(new Menu("등록", Menu.ENABLE_LOGIN) {
+      @Override
+      public void execute() {
+        commReviewAddHandler.execute(); 
+      }});
+
+    shortReviewMenu.add(new Menu("목록", Menu.ENABLE_ALL) {
+      @Override
+      public void execute() {
+        commReviewListHandler.execute(); 
+      }});
+
+    shortReviewMenu.add(new Menu("수정", Menu.ENABLE_LOGIN) {
+      @Override
+      public void execute() {
+        commReviewUpdateHandler.execute(); 
+      }});
+
+    shortReviewMenu.add(new Menu("삭제", Menu.ENABLE_LOGIN) {
+      @Override
+      public void execute() {
+        commReviewDeleteHandler.execute(); 
+      }});
+
+
     MenuGroup personalChallengeMenu = new MenuGroup("챌린지", Menu.ENABLE_ALL);
     mainMenuGroup.add(personalChallengeMenu);
 
@@ -453,10 +467,6 @@ public class App {
       }});
 
     //
-
-
-
-
     MenuGroup personalDonationMenu = new MenuGroup("모금함");
     mainMenuGroup.add(personalDonationMenu);
 

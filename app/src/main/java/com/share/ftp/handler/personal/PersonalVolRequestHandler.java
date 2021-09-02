@@ -29,6 +29,7 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
 
 
   public void apply() {
+    System.out.println();
     System.out.println("[개인봉사활동 양식]");
 
     JoinDTO joinDTO = AuthHandler.getLoginUser();
@@ -72,7 +73,13 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
   }
 
   public void applyList() {
+    System.out.println();
     System.out.println("[개인봉사신청 목록]");
+
+    if (this.personalRequestsDTO == null) {
+      System.out.println("현재 신청된 봉사목록이 없습니다.");
+      return;
+    }
 
     for (int i = 0; i < this.size; i++) {
       System.out.printf("번호: %d\n봉사제목: %s\n전화번호: %s\n이메일: %s\n봉사기간: %s\n봉사시간: %s\n"
@@ -93,9 +100,10 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
   }
 
   public void appliedList() {
+    System.out.println();
     System.out.println("[개인봉사승인 목록]");
 
-    if (this.personalRequestsDTO == null) {
+    if (this.personalRequestApplyDTO == null) {
       System.out.println("현재 승인된 봉사목록이 없습니다.");
       return;
     }
@@ -117,7 +125,14 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
   }
 
   public void rejectedList() {
+    System.out.println();
     System.out.println("[개인봉사반려 목록]");
+
+    if (this.personalRequestRejectDTO == null) {
+      System.out.println("현재 승인된 봉사목록이 없습니다.");
+      return;
+    }
+
     for (int i = 0; i < this.rejectSize; i++) {
       System.out.printf("봉사명 : %d\n 봉사제목 : %s\n %s, %s, %s, %s, %s, %s, %s, %b \n", 
           this.personalRequestRejectDTO[i].getNo(), 
@@ -136,8 +151,7 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
 
   //해당 봉사 신청서를 승인한다.   
   public void acceptApply() {
-
-
+    System.out.println();
     System.out.println("[개인봉사신청서 승인]");
     int no = Prompt.inputInt("번호? ");
 
@@ -246,6 +260,7 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
 
   // 인증받은 봉사 리스트 세부사항
   public void approvedDetail() {
+    System.out.println();
 
     // 인증받은 봉사 중 1개를 선택해서 세부사항을 본다.
     // 선택 > 참여자현황 / 신청하기 / 세부설명(봉사정보,위치) / 문의사항 

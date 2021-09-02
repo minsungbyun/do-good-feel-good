@@ -12,11 +12,8 @@ public abstract class AbstractCommBoardHandler implements Command {
     this.commBoardDTOList = commBoardDTOList;
   }
 
-
-
   protected CommBoardDTO findByNo(int no) {
-    CommBoardDTO[] arr = commBoardDTOList.toArray(new CommBoardDTO[0]);
-    for(CommBoardDTO commBoardDTO : arr) {
+    for(CommBoardDTO commBoardDTO : commBoardDTOList) {
       if (commBoardDTO.getNo() == no) {
         return commBoardDTO;
       }
