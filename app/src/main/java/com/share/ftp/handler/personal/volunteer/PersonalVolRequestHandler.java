@@ -95,10 +95,12 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
   public void appliedList() {
     System.out.println("[개인봉사승인 목록]");
 
-    if (this.personalRequestsDTO == null) {
+
+    if (this.applySize == 0) {
       System.out.println("현재 승인된 봉사목록이 없습니다.");
       return;
     }
+
 
     for (int i = 0; i < this.applySize; i++) {
       System.out.printf("봉사명 : %d\n 봉사제목 : %s\n %s, %s, %s, %s, %s, %s, %s, %b \n", 
@@ -118,6 +120,12 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
 
   public void rejectedList() {
     System.out.println("[개인봉사반려 목록]");
+
+    if (this.rejectSize == 0) {
+      System.out.println("현재 반려된 봉사목록이 없습니다.");
+      return;
+    }
+
     for (int i = 0; i < this.rejectSize; i++) {
       System.out.printf("봉사명 : %d\n 봉사제목 : %s\n %s, %s, %s, %s, %s, %s, %s, %b \n", 
           this.personalRequestRejectDTO[i].getNo(), 
@@ -142,8 +150,6 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
     int no = Prompt.inputInt("번호? ");
 
     int personalRequestIndex = indexOf(no);
-
-
 
 
     //    PersonalRequestDTO personalRequestApplyDTO = null;
