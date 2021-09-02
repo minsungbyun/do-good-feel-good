@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 import com.share.ftp.domain.guest.JoinDTO;
-import com.share.ftp.handler.join.AuthLoginHandler;
+import com.share.ftp.handler.join.AuthHandler;
 import com.share.util.Prompt;
 
 // 역할
@@ -165,7 +165,7 @@ public class MenuGroup extends Menu {
   private List<Menu> getMenuList() {
     ArrayList<Menu> menuList = new ArrayList<>();
 
-    JoinDTO loginUser = AuthLoginHandler.getLoginUser();
+    JoinDTO loginUser = AuthHandler.getLoginUser();
 
     if (loginUser == null) {
       System.out.println("[  현재 로그인 하지 않았습니다. ]");
@@ -178,11 +178,11 @@ public class MenuGroup extends Menu {
 
       // 기본 접근메뉴
       if (this.childs[i].enableState == Menu.ENABLE_LOGOUT &&
-          AuthLoginHandler.getLoginUser() == null) {
+          AuthHandler.getLoginUser() == null) {
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_LOGIN&&
-          AuthLoginHandler.getLoginUser() != null) {
+          AuthHandler.getLoginUser() != null) {
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_ALL) {
@@ -191,27 +191,27 @@ public class MenuGroup extends Menu {
 
         // 권한별 접근메뉴
       } else if (this.childs[i].enableState == Menu.ENABLE_PERSONAL &&
-          AuthLoginHandler.getLoginUser() != null &&
-          AuthLoginHandler.getLoginUser().isPersonal() == true) {
+          AuthHandler.getLoginUser() != null &&
+          AuthHandler.getLoginUser().isPersonal() == true) {
 
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_ORG &&
-          AuthLoginHandler.getLoginUser() != null &&
-          AuthLoginHandler.getLoginUser().isOrg() == true) {
+          AuthHandler.getLoginUser() != null &&
+          AuthHandler.getLoginUser().isOrg() == true) {
 
         menuList.add(this.childs[i]);
 
       } else if ((this.childs[i].enableState == Menu.ENABLE_MEMBER &&
-          AuthLoginHandler.getLoginUser() != null) &&
-          (AuthLoginHandler.getLoginUser().isPersonal() == true ||
-          AuthLoginHandler.getLoginUser().isOrg() == true)) {
+          AuthHandler.getLoginUser() != null) &&
+          (AuthHandler.getLoginUser().isPersonal() == true ||
+          AuthHandler.getLoginUser().isOrg() == true)) {
 
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_ADMIN &&
-          AuthLoginHandler.getLoginUser() != null && 
-          AuthLoginHandler.getLoginUser().isAdmin() == true) {
+          AuthHandler.getLoginUser() != null && 
+          AuthHandler.getLoginUser().isAdmin() == true) {
 
         menuList.add(this.childs[i]);
 
