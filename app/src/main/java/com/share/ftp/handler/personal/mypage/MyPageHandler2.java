@@ -1,4 +1,4 @@
-package com.share.ftp.handler.personal;
+package com.share.ftp.handler.personal.mypage;
 
 import java.util.List;
 import com.share.ftp.domain.guest.JoinDTO;

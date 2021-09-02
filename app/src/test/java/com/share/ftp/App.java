@@ -8,15 +8,15 @@ import com.share.ftp.handler.personal.ChallengeHandler;
 import com.share.ftp.handler.personal.CommBestHandler;
 import com.share.ftp.handler.personal.CommBoardHandler;
 import com.share.ftp.handler.personal.DonationBoardHandler;
-import com.share.ftp.handler.personal.DonationDetailHandler;
 import com.share.ftp.handler.personal.DonationRegisterHandler;
-import com.share.ftp.handler.personal.MyPageHandler;
-import com.share.ftp.handler.personal.MyVolHandler;
 import com.share.ftp.handler.personal.OrgVolRequestHandler;
 import com.share.ftp.handler.personal.PersonalVolRequestHandler;
 import com.share.ftp.handler.personal.SupportHandler;
 import com.share.ftp.handler.personal.VolListHandler;
 import com.share.ftp.handler.personal.community.CommHandler;
+import com.share.ftp.handler.personal.donation.DonationDetailHandler;
+import com.share.ftp.handler.personal.mypage.MyPageHandler;
+import com.share.ftp.handler.personal.mypage.MyVolHandler;
 import com.share.util.Prompt;
 
 public class App {
