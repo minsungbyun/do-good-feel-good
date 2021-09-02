@@ -10,11 +10,14 @@ public class MyPageHandler {
     this.myVolHandler = myVolHandler;
   }
 
+<<<<<<< HEAD
 <<<<<<< HEAD:app/src/main/java/com/share/ftp/handler/personal/MyPageHandler.java
 =======
 
 
 >>>>>>> 7a51e7f03b1c7da4a7622c93e8818f61f1d7c7cb:app/src/main/java/com/share/ftp/handler/personal/mypage/MyPageHandler.java
+=======
+>>>>>>> f11e23e1e36d5e22ffb6646924e2938c8ae3224a
   public void myProfile() {
 
     while (true) {
