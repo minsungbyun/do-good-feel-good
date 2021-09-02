@@ -115,23 +115,23 @@ public class DonationBoardHandler {
   }
 
   //해당 모금함 개설 신청을 승인한다.   
-  //  public void acceptApply() {
-  //
-  //
-  //    System.out.println("[모금함 개설신청서 승인]");
-  //    int no = Prompt.inputInt("번호? ");
-  //
-  //    int applyDonationIndex = indexOf(no);
-  //
-  //    DonationBoardDTO donationBoardDTO = findByVol(no);
-  //
-  //    for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
-  //      if (this.personalRequestsDTO[i].getNo() == no) {
-  //        personalRequestDTO = personalRequestsDTO[i];
-  //        personalRequestIndex = i;
-  //        break;
+  //    public void acceptApply() {
+  //  
+  //  
+  //      System.out.println("[모금함 개설신청서 승인]");
+  //      int no = Prompt.inputInt("번호? ");
+  //  
+  //      int applyDonationIndex = indexOf(no);
+  //  
+  //      DonationBoardDTO donationBoardDTO = findByVol(no);
+  //  
+  //      for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
+  //        if (this.personalRequestsDTO[i].getNo() == no) {
+  //          personalRequestDTO = personalRequestsDTO[i];
+  //          personalRequestIndex = i;
+  //          break;
+  //        }
   //      }
-  //    }
   //
   //
   //    if (applyDonationIndex == -1) {
@@ -227,15 +227,15 @@ public class DonationBoardHandler {
   //    return null;
   //  }
   //
-  //  private DonationBoardDTO findByVol(int no) {
-  //    for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
-  //      if (personalRequestsDTO[i].getNo() == no) {
-  //        return personalRequestsDTO[i];
+  //    private DonationBoardDTO findByVol(int no) {
+  //      for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
+  //        if (donationBoardDTO.getNo() == no) {
+  //          return donationBoardDTO.getNo();
+  //        }
   //      }
+  //      return null;
+  //  
   //    }
-  //    return null;
-  //
-  //  }
 }
 
 
