@@ -1,7 +1,7 @@
 package com.share.ftp.handler.admin;
 
-import com.share.ftp.handler.personal.OrgVolRequestHandler;
-import com.share.ftp.handler.personal.PersonalVolRequestHandler;
+import com.share.ftp.handler.personal.volunteer.OrgVolRequestHandler;
+import com.share.ftp.handler.personal.volunteer.PersonalVolRequestHandler;
 import com.share.util.Prompt;
 
 public class ShowVolHandler { // 개인, 기관이 신청한 양식 보는 곳

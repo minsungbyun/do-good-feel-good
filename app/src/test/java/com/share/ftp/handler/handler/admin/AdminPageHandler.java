@@ -1,12 +1,12 @@
 package com.share.ftp.handler.admin;
 
-import com.share.ftp.handler.personal.DonationBoardHandler;
-import com.share.ftp.handler.personal.PersonalVolRequestHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardHandler;
+import com.share.ftp.handler.personal.volunteer.PersonalVolRequestHandler;
 import com.share.util.Prompt;
 
 public class AdminPageHandler {
   // 회원정보 관련 Handler
-  ShowMemberHandler showMemberHandler = new ShowMemberHandler();
+  AdminMemberListHandler showMemberHandler = new AdminMemberListHandler();
 
   // 봉사활동 관련 Handler
   PersonalVolRequestHandler personalVolRequestHandler;
@@ -17,16 +17,16 @@ public class AdminPageHandler {
   ShowVolHandler showVolHandler;
 
   // 공지사항 관련
-  ShowNoticeHandler showNoticeHandler = new ShowNoticeHandler();
+  AdminNoticeHandler showNoticeHandler = new AdminNoticeHandler();
   
   // 문의사항 관련
-  ShowQuestionHandler showQuestionHandler = new ShowQuestionHandler();
+  AdminQuestionHandler showQuestionHandler = new AdminQuestionHandler();
   
   // 챌린지관리 관련
-  ShowChallengeHandler showChallengeHandler = new ShowChallengeHandler();
+  AdminChallengeHandler showChallengeHandler = new AdminChallengeHandler();
   
   // 기관승인 관련
-  ShowOrgApproveHandler showOrgApproveHandler = new ShowOrgApproveHandler();
+  AdminOrgApproveAddHandler showOrgApproveHandler = new AdminOrgApproveAddHandler();
 
   public AdminPageHandler(PersonalVolRequestHandler personalVolRequestHandler,ShowVolHandler showVolHandler,
       DonationBoardHandler donationBoardHandler, ShowDonationHandler showDonationHandler) {
