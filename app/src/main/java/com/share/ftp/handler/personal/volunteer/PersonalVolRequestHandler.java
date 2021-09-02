@@ -103,12 +103,8 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
     System.out.println();
     System.out.println("[개인봉사승인 목록]");
 
-<<<<<<< HEAD:app/src/main/java/com/share/ftp/handler/personal/PersonalVolRequestHandler.java
-    if (this.personalRequestApplyDTO == null) {
-=======
 
     if (this.applySize == 0) {
->>>>>>> 7a51e7f03b1c7da4a7622c93e8818f61f1d7c7cb:app/src/main/java/com/share/ftp/handler/personal/volunteer/PersonalVolRequestHandler.java
       System.out.println("현재 승인된 봉사목록이 없습니다.");
       return;
     }
@@ -134,13 +130,8 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
     System.out.println();
     System.out.println("[개인봉사반려 목록]");
 
-<<<<<<< HEAD:app/src/main/java/com/share/ftp/handler/personal/PersonalVolRequestHandler.java
-    if (this.personalRequestRejectDTO == null) {
-      System.out.println("현재 승인된 봉사목록이 없습니다.");
-=======
     if (this.rejectSize == 0) {
       System.out.println("현재 반려된 봉사목록이 없습니다.");
->>>>>>> 7a51e7f03b1c7da4a7622c93e8818f61f1d7c7cb:app/src/main/java/com/share/ftp/handler/personal/volunteer/PersonalVolRequestHandler.java
       return;
     }
 
