@@ -43,6 +43,7 @@ import com.share.ftp.handler.personal.MyBoardListHandler;
 import com.share.ftp.handler.personal.MyDonationHandler;
 import com.share.ftp.handler.personal.MyPageHandler;
 import com.share.ftp.handler.personal.MyPointHandler;
+import com.share.ftp.handler.personal.MyVolHandler;
 import com.share.ftp.handler.personal.NoticeListHandler;
 import com.share.ftp.handler.personal.QuestionListHandler;
 import com.share.ftp.handler.personal.SupportHandler;
@@ -110,13 +111,12 @@ public class App {
   // 모금함 관련 핸들러(기능)
   static DonationRegisterHandler donationRegisterHandler = new DonationRegisterHandler();
   static DonationDetailHandler donationDetailHandler = new DonationDetailHandler(donationRegisterHandler);
-  static QuestionListHandler questionListHandler = new QuestionListHandler(myQuestionListDTO);
-  static NoticeListHandler noticeListHandler = new NoticeListHandler();
   static DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationDetailHandler, donationRegisterHandler);
 
 
   // 마이 페이지
-  static MyPageHandler myVolHandler = new MyPageHandler();
+  static MyVolHandler myVolHandler = new MyVolHandler(personalVolRequestHandler);
+  static MyPageHandler myPageHandler = new MyPageHandler(myVolHandler);
   static QuestionListHandler questionListHandler = new QuestionListHandler();
   static NoticeListHandler noticeListHandler = new NoticeListHandler();
   static MyBoardListHandler myBoardListHandler = new MyBoardListHandler();

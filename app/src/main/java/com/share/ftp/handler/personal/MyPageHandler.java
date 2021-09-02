@@ -10,11 +10,6 @@ public class MyPageHandler {
     this.myVolHandler = myVolHandler;
   }
 
-  MyBoardListHandler myBoardListHandler = new MyBoardListHandler();
-  MyPointHandler myPointHandler = new MyPointHandler();
-  MyDonationHandler myDonationHandler = new MyDonationHandler();
-  ApproveOrgHandler approveOrgHandler = new ApproveOrgHandler();
-  WithdrawMemberHandler withdrawMemberHandler = new WithdrawMemberHandler();
 
   public void myProfile() {
 
