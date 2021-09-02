@@ -51,8 +51,11 @@ import com.share.ftp.handler.personal.mypage.MyPointHandler;
 import com.share.ftp.handler.personal.mypage.MyProfileHandler;
 import com.share.ftp.handler.personal.mypage.WithdrawMemberHandler;
 import com.share.ftp.handler.personal.support.NoticeListHandler;
+import com.share.ftp.handler.personal.support.QuestionAddHandler;
+import com.share.ftp.handler.personal.support.QuestionDeleteHandler;
+import com.share.ftp.handler.personal.support.QuestionDetailHandler;
 import com.share.ftp.handler.personal.support.QuestionListHandler;
-import com.share.ftp.handler.personal.support.SupportHandler;
+import com.share.ftp.handler.personal.support.QuestionUpdateHandler;
 import com.share.ftp.handler.personal.volunteer.ApproveOrgHandler;
 import com.share.ftp.handler.personal.volunteer.OrgVolRequestHandler;
 import com.share.ftp.handler.personal.volunteer.PersonalVolRequestHandler;
@@ -122,7 +125,6 @@ public class App {
 
     }
 
-
   }
 
 
@@ -138,8 +140,6 @@ public class App {
   VolListHandler volListHandler = new VolListHandler(personalVolRequestHandler,orgVolRequestHandler);
 
 
-
-
   // 소통해요 핸들러(기능)
 
 
@@ -149,16 +149,15 @@ public class App {
   //  CommBoardUpdateHandler commBoardUpdateHandler = new CommBoardUpdateHandler(commBoardDTOList);
   //  CommBoardDeleteHandler commBoardDeleteHandler = new CommBoardDeleteHandler(commBoardDTOList);
 
-
-
   //  CommBestHandler commBestHandler = new CommBestHandler(commBoardHandler);
   //  CommReviewHandler commReviewHandler = new CommReviewHandler(commReviewDTOList);
-
 
 
   //  // 챌린지 핸들러(기능)
   //  ChallengeHandler challengeHandler = new ChallengeHandler();
   //  ShowChallengeHandler showChallengeHandler = new ShowChallengeHandler();
+
+
   // 챌린지 핸들러(기능)
   ChallengeListHandler challengeListHandler = new ChallengeListHandler();
   ChallengeBoardHandler challengeBoardHandler = new ChallengeBoardHandler();
@@ -167,20 +166,15 @@ public class App {
   ChallengeReviewHandler challengeReviewHandler = new ChallengeReviewHandler(myChallengeReviewDTOList);
 
 
-
-
   // 모금함 관련 핸들러(기능)
   DonationRegisterHandler donationRegisterHandler = new DonationRegisterHandler(donationRegisterDTOList);
   //  DonationDetailHandler donationDetailHandler = new DonationDetailHandler(donationRegisterHandler);
   DonationBoardHandler donationBoardHandler = new DonationBoardHandler(donationBoardDTOList);
 
 
-
-
-
   // 마이 페이지 핸들러(기능)
   // MyPageHandler myVolHandler = new MyPageHandler();
-  QuestionListHandler questionListHandler = new QuestionListHandler(myQuestionListDTOList);
+  //QuestionHandler questionHandler = new QuestionHandler(myQuestionListDTOList);
   NoticeListHandler noticeListHandler = new NoticeListHandler();
   MyBoardListHandler myBoardListHandler = new MyBoardListHandler();
   MyPointHandler myPointHandler = new MyPointHandler();
@@ -194,7 +188,7 @@ public class App {
   // 고객센터 핸들러(기능)
   ShowNoticeHandler showNoticeHandler = new ShowNoticeHandler(); // 아직 List 변경 안함
   ShowQuestionHandler showQuestionHandler = new ShowQuestionHandler(questionDTOList);
-  SupportHandler supportHandler = new SupportHandler(questionListHandler, noticeListHandler);
+  //SupportHandler supportHandler = new SupportHandler(questionHandler, noticeListHandler);
 
 
 
@@ -223,7 +217,12 @@ public class App {
     commands.put("/commBoard/update", new CommBoardUpdateHandler(commBoardDTOList));
     commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList));
 
-
+    // 고객센터 문의하기
+    commands.put("/question/add", new QuestionAddHandler(myQuestionListDTOList));
+    commands.put("/question/list", new QuestionListHandler(myQuestionListDTOList));
+    commands.put("/question/detail", new QuestionDetailHandler(myQuestionListDTOList));
+    commands.put("/question/update", new QuestionUpdateHandler(myQuestionListDTOList));
+    commands.put("/question/delete", new QuestionDeleteHandler(myQuestionListDTOList));
 
   }
 
@@ -525,31 +524,11 @@ public class App {
     MenuGroup ask = new MenuGroup("문의하기");
     support.add(ask);
 
-    ask.add(new Menu("등록", Menu.ENABLE_LOGIN) {
-      @Override
-      public void execute() {
-        questionListHandler.add(); 
-      }});
-    ask.add(new Menu("목록") {
-      @Override
-      public void execute() {
-        questionListHandler.list(); 
-      }});
-    ask.add(new Menu("상세보기", Menu.ENABLE_LOGIN) {
-      @Override
-      public void execute() {
-        questionListHandler.detail(); 
-      }});
-    ask.add(new Menu("변경", Menu.ENABLE_LOGIN) {
-      @Override
-      public void execute() {
-        questionListHandler.update(); 
-      }});
-    ask.add(new Menu("삭제", Menu.ENABLE_LOGIN) {
-      @Override
-      public void execute() {
-        questionListHandler.delete(); 
-      }});
+    ask.add(new MenuItem("등록", Menu.ENABLE_LOGIN, "/question/add"));
+    ask.add(new MenuItem("목록", "/question/list"));
+    ask.add(new MenuItem("상세보기", Menu.ENABLE_LOGIN, "/question/detail"));
+    ask.add(new MenuItem("변경", Menu.ENABLE_LOGIN, "/question/update"));
+    ask.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/question/delete"));
 
     MenuGroup personalMyPage = new MenuGroup("마이페이지",Menu.ENABLE_MEMBER);
     mainMenuGroup.add(personalMyPage);
