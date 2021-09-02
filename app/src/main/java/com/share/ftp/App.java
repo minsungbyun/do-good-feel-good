@@ -757,19 +757,19 @@ public class App {
     adminMenu.add(askInfo);
 
     askInfo.add(new MenuItem("문의사항 등록","/adminQuestion/add"));
-    askInfo.add(new MenuItem("문의사항 목록","/adminQuestion/add"));
-    askInfo.add(new MenuItem("문의사항 상세보기","/adminQuestion/add"));
-    askInfo.add(new MenuItem("문의사항 변경","/adminQuestion/add"));
-    askInfo.add(new MenuItem("문의사항 삭제","/adminQuestion/add"));
+    askInfo.add(new MenuItem("문의사항 목록","/adminQuestion/list"));
+    askInfo.add(new MenuItem("문의사항 상세보기","/adminQuestion/detail"));
+    askInfo.add(new MenuItem("문의사항 변경","/adminQuestion/update"));
+    askInfo.add(new MenuItem("문의사항 삭제","/adminQuestion/delete"));
 
     MenuGroup challengeInfo = new MenuGroup("챌린지 관리");
     adminMenu.add(challengeInfo);
 
     challengeInfo.add(new MenuItem("챌린지 등록","/adminChallenge/add"));
-    challengeInfo.add(new MenuItem("챌린지 목록","/adminChallenge/add"));
-    challengeInfo.add(new MenuItem("챌린지 상세보기","/adminChallenge/add"));
-    challengeInfo.add(new MenuItem("챌린지 변경","/adminChallenge/add"));
-    challengeInfo.add(new MenuItem("챌린지 삭제","/adminChallenge/add"));
+    challengeInfo.add(new MenuItem("챌린지 목록","/adminChallenge/list"));
+    challengeInfo.add(new MenuItem("챌린지 상세보기","/adminChallenge/detail"));
+    challengeInfo.add(new MenuItem("챌린지 변경","/adminChallenge/update"));
+    challengeInfo.add(new MenuItem("챌린지 삭제","/adminChallenge/delete"));
 
     MenuGroup approveInfo = new MenuGroup("기관 승인");
     adminMenu.add(approveInfo);
