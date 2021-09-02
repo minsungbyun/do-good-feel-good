@@ -1,4 +1,4 @@
-package com.share.ftp.handler.personal;
+package com.share.ftp.handler.personal.volunteer;
 
 import java.util.List;
 import com.share.ftp.domain.personal.ApproveOrgDTO;

@@ -1,4 +1,4 @@
-package com.share.ftp.handler.personal;
+package com.share.ftp.handler.personal.support;
 
 import java.sql.Date;
 import java.util.List;
