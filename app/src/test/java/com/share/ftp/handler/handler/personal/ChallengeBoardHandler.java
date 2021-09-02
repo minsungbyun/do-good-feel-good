@@ -10,7 +10,7 @@ public class ChallengeBoardHandler {
   MyChallengeReviewDTO myChallengeReview = new MyChallengeReviewDTO();
 
   ChallengeReviewHandler challengeReviewHandler = new ChallengeReviewHandler();
-  ChallengeQuestionHandler challengeQuestionHandler = new ChallengeQuestionHandler();
+  AbstractChallengeQuestionHandler challengeQuestionHandler = new AbstractChallengeQuestionHandler();
 
   public void join() {
     System.out.println();
