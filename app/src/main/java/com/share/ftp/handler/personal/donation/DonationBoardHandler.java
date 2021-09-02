@@ -114,128 +114,126 @@ public class DonationBoardHandler {
     return null;
   }
 
-  //해당 모금함 개설 신청을 승인한다.   
-  //    public void acceptApply() {
+  // 해당 모금함 개설 신청을 승인한다.   
+  //      public void acceptApply() {
+  //    
+  //    
+  //        System.out.println("[모금함 개설신청서 승인]");
+  //        int no = Prompt.inputInt("번호? ");
+  //    
+  //    
+  //        DonationBoardDTO donationBoardDTO = findByVol(no);
+  //    
+  //        for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
+  //          if (donationBoardDTO.getNo() == no) {
+  //            donationBoardDTOList = donationBoardDTO.getNo();
+  //            break;
+  //          }
+  //        }
   //  
   //  
-  //      System.out.println("[모금함 개설신청서 승인]");
-  //      int no = Prompt.inputInt("번호? ");
+  //      if (applyDonationIndex == -1) {
+  //        System.out.println("해당 번호의 개인봉사신청서가 없습니다.");
+  //      }
+  //  
+  //      if (applyDonationIndex == null) {
+  //        System.out.println("해당 번호의 개인봉사신청서가 없습니다.");
+  //      }
+  //  
+  //  
+  //  
+  //  
+  //      String input = Prompt.inputString("정말 승인하시겠습니까?(y/N) ");
+  //      if (input.equalsIgnoreCase("n") || input.length() == 0) {
+  //        System.out.println("해당 봉사신청 승인을 취소하였습니다.");
+  //        return;
+  //      }
+  //  
+  //      donationBoardDTO.setChecked(true);
+  //      personalRequestApplyDTO[applySize++] = personalRequestDTO;
+  //  
+  //      //    for (int i = personalRequestIndex + 1; i < this.size; i++) {
+  //      //      this.personalRequestsDTO[i - 1] = this.personalRequestsDTO[i];
+  //      //    }
+  //      //    this.personalRequestsDTO[--this.size] = null;
+  //  
+  //      System.out.println("해당 봉사신청을 승인하였습니다.");
+  //  
+  //    }
+  //  
+  //  
+  //  
+  //    // 해당 모금함 개설 신청서를 반려한다.
+  //    public void rejectApply() {
+  //      System.out.println();
+  //      System.out.println("[모금함 개설 신청서 반려]");
+  //  
+  //      int no = Prompt.inputInt("봉사번호? ");
   //  
   //      int applyDonationIndex = indexOf(no);
-  //  
-  //      DonationBoardDTO donationBoardDTO = findByVol(no);
+  //      DonationBoardDTO donationBoardsDTO = findByVol(no);
   //  
   //      for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
-  //        if (this.personalRequestsDTO[i].getNo() == no) {
-  //          personalRequestDTO = personalRequestsDTO[i];
-  //          personalRequestIndex = i;
+  //        if (donationBoardDTO.getNo() == no) {
+  //          donationBoardDTOList = donationBoardDTO.getNo();
+  //          applyDonationIndex = i;
   //          break;
   //        }
   //      }
-  //
-  //
-  //    if (applyDonationIndex == -1) {
-  //      System.out.println("해당 번호의 개인봉사신청서가 없습니다.");
-  //    }
-  //
-  //    if (applyDonationIndex == null) {
-  //      System.out.println("해당 번호의 개인봉사신청서가 없습니다.");
-  //    }
-  //
-  //
-  //
-  //
-  //    String input = Prompt.inputString("정말 승인하시겠습니까?(y/N) ");
-  //    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-  //      System.out.println("해당 봉사신청 승인을 취소하였습니다.");
-  //      return;
-  //    }
-  //
-  //    donationBoardDTO.setChecked(true);
-  //    personalRequestApplyDTO[applySize++] = personalRequestDTO;
-  //
-  //    //    for (int i = personalRequestIndex + 1; i < this.size; i++) {
-  //    //      this.personalRequestsDTO[i - 1] = this.personalRequestsDTO[i];
-  //    //    }
-  //    //    this.personalRequestsDTO[--this.size] = null;
-  //
-  //    System.out.println("해당 봉사신청을 승인하였습니다.");
-  //
-  //  }
-  //
-  //
-  //
-  //  // 해당 봉사 신청서를 반려한다.
-  //  public void rejectApply() {
-  //    System.out.println();
-  //    System.out.println("[개인봉사신청서 반려]");
-  //
-  //    int no = Prompt.inputInt("봉사번호? ");
-  //
-  //    int applyDonationIndex = indexOf(no);
-  //    DonationBoardDTO donationBoardDTO = findByVol(no);
-  //
-  //    for (int i = 0; i < this.size; i++) {
-  //      if (this.personalRequestsDTO[i].getNo() == no) {
-  //        personalRequestDTO = personalRequestsDTO[i];
-  //        personalRequestIndex = i;
-  //        break;
-  //      }
-  //    }
-  //
-  //    if (personalRequestIndex == -1) {
-  //      System.out.println("개인봉사신청서를 찾을 수 없습니다.");
-  //      return;
-  //    }
-  //
-  //    if (personalRequestDTO == null) {
-  //      System.out.println("해당 번호의 개인봉사신청서가 없습니다.");
-  //    }
-  //
-  //
-  //    String input = Prompt.inputString("정말 반려하시겠습니까?(y/N) ");
-  //    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-  //      return;
-  //    }
-  //
-  //    personalRequestDTO.setChecked(false);
-  //    personalRequestApplyDTO[applySize++] = personalRequestDTO;
-  //
-  //    for (int i = personalRequestIndex + 1; i < this.size; i++) {
-  //      this.personalRequestsDTO[i - 1] = this.personalRequestsDTO[i];
-  //    }
-  //    this.personalRequestsDTO[--this.size] = null;
-  //
-  //    System.out.println("해당 봉사신청을 반려하였습니다.");
-  //  }
   //  
-  //  private int indexOf(int no) {
-  //    for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
-  //      if (this.personalRequestsDTO[i].getNo() == no) {
-  //        return i;
+  //      if (personalRequestIndex == -1) {
+  //        System.out.println("개인봉사신청서를 찾을 수 없습니다.");
+  //        return;
   //      }
-  //    }
-  //    return -1;
-  //  }
-  //
-  //  public String getReturnMessage() {
-  //    for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
-  //      if (this.personalRequestsDTO[i] == null) {
-  //        return ""; 
+  //  
+  //      if (personalRequestDTO == null) {
+  //        System.out.println("해당 번호의 개인봉사신청서가 없습니다.");
   //      }
+  //  
+  //  
+  //      String input = Prompt.inputString("정말 반려하시겠습니까?(y/N) ");
+  //      if (input.equalsIgnoreCase("n") || input.length() == 0) {
+  //        return;
+  //      }
+  //  
+  //      personalRequestDTO.setChecked(false);
+  //      personalRequestApplyDTO[applySize++] = personalRequestDTO;
+  //  
+  //      for (int i = personalRequestIndex + 1; i < this.size; i++) {
+  //        this.personalRequestsDTO[i - 1] = this.personalRequestsDTO[i];
+  //      }
+  //      this.personalRequestsDTO[--this.size] = null;
+  //  
+  //      System.out.println("해당 봉사신청을 반려하였습니다.");
   //    }
-  //    return null;
-  //  }
-  //
-  //    private DonationBoardDTO findByVol(int no) {
+  //    
+  //    private int indexOf(int no) {
   //      for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
   //        if (donationBoardDTO.getNo() == no) {
   //          return donationBoardDTO.getNo();
   //        }
   //      }
-  //      return null;
-  //  
+  //      return -1;
   //    }
+  //  
+  //    public String getReturnMessage() {
+  //      for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
+  //        if (donationBoardDTO == null) {
+  //          return ""; 
+  //        }
+  //      }
+  //      return null;
+  //    }
+  //  
+  //      private DonationBoardDTO findByVol(int no) {
+  //        for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
+  //          if (donationBoardDTO.getNo() == no) {
+  //            return donationBoardDTO;
+  //          }
+  //        }
+  //        return null;
+  //    
+  //      }
 }
 
 
