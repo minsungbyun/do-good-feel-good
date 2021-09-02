@@ -1,114 +1,107 @@
 package com.share.ftp.handler.personal;
 
+import java.util.List;
 import com.share.ftp.domain.personal.MyChallengeQuestionDTO;
 import com.share.util.Prompt;
 
 public class ChallengeQuestionHandler {
-	  static final int MAX_LENGTH = 100;
 
-	  MyChallengeQuestionDTO[] myChallengeQuestions = new MyChallengeQuestionDTO[MAX_LENGTH];
-	  int size = 0;
+  List<MyChallengeQuestionDTO> myChallengeQuestionDTOList;
 
-	  public void add() {
-	    System.out.println("[문의하기 등록]");
+  public ChallengeQuestionHandler(List<MyChallengeQuestionDTO> myChallengeQuestionDTOList) {
+    this.myChallengeQuestionDTOList = myChallengeQuestionDTOList;
+  }
 
-	    MyChallengeQuestionDTO myChallengeQuestion = new MyChallengeQuestionDTO();
+  public void add() {
+    System.out.println("[문의 등록]");
 
-	    myChallengeQuestion.setNo(Prompt.inputInt("번호: "));
-	    myChallengeQuestion.setMemberId(Prompt.inputString("아이디: "));
-	    myChallengeQuestion.setContent(Prompt.inputString("내용: "));
+    MyChallengeQuestionDTO myChallengeQuestionDTO = new MyChallengeQuestionDTO();
 
-	    myChallengeQuestions[size++] = myChallengeQuestion;
-	  }
+    myChallengeQuestionDTO.setNo(Prompt.inputInt("번호: "));
+    myChallengeQuestionDTO.setMemberId(Prompt.inputString("아이디: "));
+    myChallengeQuestionDTO.setContent(Prompt.inputString("내용: "));
 
-	  public void list() {
-	    System.out.println("[문의 목록]");
-	    for (int i = 0; i < this.size; i++) {
-	      System.out.printf("%d, %s, %s, %s, %d, %d\n", 
-	          myChallengeQuestions[i].getMemberId(), 
-	          myChallengeQuestions[i].getContent());
-	    }
-	  }
+    myChallengeQuestionDTOList.add(myChallengeQuestionDTO);
+  }
 
-	  public void detail() {
-	    System.out.println("[문의 상세보기]");
-	    int no = Prompt.inputInt("번호? ");
+  public void list() {
+    System.out.println("[문의 목록]");
+    MyChallengeQuestionDTO[] myChallengeQuestionDTOs = new MyChallengeQuestionDTO[myChallengeQuestionDTOList.size()];
+    myChallengeQuestionDTOList.toArray(myChallengeQuestionDTOs);
+    for (MyChallengeQuestionDTO myChallengeQuestionDTO : myChallengeQuestionDTOs) {
+      System.out.printf("%s, %s\n", 
+      myChallengeQuestionDTO.getMemberId(), 
+      myChallengeQuestionDTO.getContent());
+    }
+  }
 
-	    MyChallengeQuestionDTO myChallengeQuestion = findByNo(no);
+  public void detail() {
+    System.out.println("[문의 상세보기]");
+    int no = Prompt.inputInt("번호? ");
 
-	    if (myChallengeQuestion == null) {
-	      System.out.println("해당 번호의 문의가 없습니다.");
-	      return;
-	    }
+    MyChallengeQuestionDTO myChallengeQuestion = findByNo(no);
 
-	    System.out.printf("아이디: %s\n", myChallengeQuestion.getMemberId());
-	    System.out.printf("내용: %s\n", myChallengeQuestion.getContent());
-	  }
+    if (myChallengeQuestion == null) {
+      System.out.println("해당 번호의 문의가 없습니다.");
+      return;
+    }
 
-	  public void update() {
-	    System.out.println("[문의 변경]");
-	    int no = Prompt.inputInt("번호? ");
+    System.out.printf("아이디: %s\n", myChallengeQuestion.getMemberId());
+    System.out.printf("내용: %s\n", myChallengeQuestion.getContent());
+  }
 
-	    MyChallengeQuestionDTO myChallengeQuestion = findByNo(no);
+  public void update() {
+    System.out.println("[문의 수정]");
+    int no = Prompt.inputInt("번호? ");
 
-	    if (myChallengeQuestion == null) {
-	      System.out.println("해당 번호의 문의가 없습니다.");
-	      return;
-	    }
+    MyChallengeQuestionDTO myChallengeQuestion = findByNo(no);
 
-	    String content = Prompt.inputString(String.format("내용: " + myChallengeQuestion.getContent()));
+    if (myChallengeQuestion == null) {
+      System.out.println("해당 번호의 문의가 없습니다.");
+      return;
+    }
 
-	    String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
-	    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-	      System.out.println("문의하기 변경을 취소하였습니다.");
-	      return;
-	    }
+    String content = Prompt.inputString(String.format("내용(%s)? ", myChallengeQuestion.getContent()));
 
-	    myChallengeQuestion.setContent(content);
-	    System.out.println("문의하기를 변경하였습니다.");
-	  }
+    String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
+    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      System.out.println("문의 수정을 취소하였습니다.");
+      return;
+    }
 
-	  public void delete() {
-	    System.out.println("[문의 삭제]");
-	    int no = Prompt.inputInt("번호? ");
+    myChallengeQuestion.setContent(content);
+    System.out.println("문의를 수정하였습니다.");
+  }
 
-	    int index = indexOf(no);
+  public void delete() {
+    System.out.println("[문의 삭제]");
+    int no = Prompt.inputInt("번호? ");
 
-	    if (index == -1) {
-	      System.out.println("해당 번호의 문의가 없습니다.");
-	      return;
-	    }
+    MyChallengeQuestionDTO myChallengeQuestion = findByNo(no);
 
-	    String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
-	    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-	      System.out.println("문의하기 삭제를 취소하였습니다.");
-	      return;
-	    }
+    if (myChallengeQuestion == null) {
+      System.out.println("해당 번호의 문의가 없습니다.");
+      return;
+    }
 
-	    for (int i = index + 1; i < this.size; i++) {
-	      this.myChallengeQuestions[i - 1] = this.myChallengeQuestions[i];
-	    }
-	    this.myChallengeQuestions[--this.size] = null;
+    String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
+    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      System.out.println("문의 삭제를 취소하였습니다.");
+      return;
+    }
 
-	    System.out.println("문의하기를 삭제하였습니다.");
-	  }
+    myChallengeQuestionDTOList.remove(myChallengeQuestion);
+
+    System.out.println("문의를 삭제하였습니다.");
+  }
 
   private MyChallengeQuestionDTO findByNo(int no) {
-    for (int i = 0; i < this.size; i++) {
-      if (this.myChallengeQuestions[i].getNo() == no) {
-        return this.myChallengeQuestions[i];
+      MyChallengeQuestionDTO[] arr = myChallengeQuestionDTOList.toArray(new MyChallengeQuestionDTO[0]);
+      for (MyChallengeQuestionDTO myChallengeQuestionDTO : arr) {
+        if (myChallengeQuestionDTO.getNo() == no) {
+          return myChallengeQuestionDTO;
       }
     }
     return null;
   }
-
-  private int indexOf(int no) {
-    for (int i = 0; i < this.size; i++) {
-      if (this.myChallengeQuestions[i].getNo() == no) {
-        return i;
-      }
-    }
-    return -1;
-  }
-
 }

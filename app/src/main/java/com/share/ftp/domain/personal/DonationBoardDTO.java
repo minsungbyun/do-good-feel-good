@@ -10,20 +10,23 @@ public class DonationBoardDTO {
   private String content;
   private String fileUpload;
   private String password;
-  private Date registeredDate;
+  private Date registeredStartDate;
+  private Date registeredEndDate;
+  private boolean isOrg;
+  private boolean isChecked;
 
   @Override
   public String toString() {
     return "DonationBoardDTO [no=" + no + ", title=" + title + ", leader=" + leader + ", content="
-        + content + ", fileUpload=" + fileUpload + ", password=" + password + ", registeredDate="
-        + registeredDate + "]";
+        + content + ", fileUpload=" + fileUpload + ", password=" + password
+        + ", registeredStartDate=" + registeredStartDate + ", registeredEndDate="
+        + registeredEndDate + ", isOrg=" + isOrg + ", isChecked=" + isChecked + "]";
   }
-
   @Override
   public int hashCode() {
-    return Objects.hash(content, fileUpload, leader, no, password, registeredDate, title);
+    return Objects.hash(content, fileUpload, isChecked, isOrg, leader, no, password,
+        registeredEndDate, registeredStartDate, title);
   }
-
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -34,9 +37,11 @@ public class DonationBoardDTO {
       return false;
     DonationBoardDTO other = (DonationBoardDTO) obj;
     return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
+        && isChecked == other.isChecked && isOrg == other.isOrg
         && Objects.equals(leader, other.leader) && no == other.no
         && Objects.equals(password, other.password)
-        && Objects.equals(registeredDate, other.registeredDate)
+        && Objects.equals(registeredEndDate, other.registeredEndDate)
+        && Objects.equals(registeredStartDate, other.registeredStartDate)
         && Objects.equals(title, other.title);
   }
 
@@ -76,12 +81,28 @@ public class DonationBoardDTO {
   public void setPassword(String password) {
     this.password = password;
   }
-  public Date getRegisteredDate() {
-    return registeredDate;
+  public Date getRegisteredStartDate() {
+    return registeredStartDate;
   }
-  public void setRegisteredDate(Date registeredDate) {
-    this.registeredDate = registeredDate;
+  public void setRegisteredStartDate(Date registeredStartDate) {
+    this.registeredStartDate = registeredStartDate;
   }
-
-
+  public Date getRegisteredEndDate() {
+    return registeredEndDate;
+  }
+  public void setRegisteredEndDate(Date registeredEndDate) {
+    this.registeredEndDate = registeredEndDate;
+  }
+  public boolean isOrg() {
+    return isOrg;
+  }
+  public void setOrg(boolean isOrg) {
+    this.isOrg = isOrg;
+  }
+  public boolean isChecked() {
+    return isChecked;
+  }
+  public void setChecked(boolean isChecked) {
+    this.isChecked = isChecked;
+  }
 }

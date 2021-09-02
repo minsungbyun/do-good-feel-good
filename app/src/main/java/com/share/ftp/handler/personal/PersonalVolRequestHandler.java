@@ -1,11 +1,17 @@
 package com.share.ftp.handler.personal;
 
 import java.sql.Date;
+import com.share.ftp.domain.guest.JoinDTO;
 import com.share.ftp.domain.personal.PersonalRequestDTO;
+import com.share.ftp.handler.join.AuthHandler;
 import com.share.util.Prompt;
 
 public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 곳
 
+  OrgVolRequestHandler orgVolRequestHandler;
+  public PersonalVolRequestHandler(OrgVolRequestHandler orgVolRequestHandler) {
+    this.orgVolRequestHandler = orgVolRequestHandler;
+  }
 
   // 전체 배열
   public static final int MAX_LENTGH = 100;
@@ -24,6 +30,13 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
 
   public void apply() {
     System.out.println("[개인봉사활동 양식]");
+
+    JoinDTO joinDTO = AuthHandler.getLoginUser();
+
+    if (joinDTO == null) {
+      System.out.println("로그인 후 사용가능합니다.");
+      return;
+    }
 
     try {
       PersonalRequestDTO personalRequestDTO = new PersonalRequestDTO();
@@ -60,6 +73,7 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
 
   public void applyList() {
     System.out.println("[개인봉사신청 목록]");
+
     for (int i = 0; i < this.size; i++) {
       System.out.printf("번호: %d\n봉사제목: %s\n전화번호: %s\n이메일: %s\n봉사기간: %s\n봉사시간: %s\n"
           + "봉사목록: %s\n봉사인원: %d\n봉사내용: %s\n첨부파일: %s\n승인여부: %b \n\n", 
@@ -73,13 +87,19 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
           this.personalRequestsDTO[i].getJoinNum(),
           this.personalRequestsDTO[i].getContent(),
           this.personalRequestsDTO[i].getFileUpload(),
-          this.personalRequestsDTO[i].isOrg()
+          this.personalRequestsDTO[i].isChecked()
           );
     }
   }
 
   public void appliedList() {
     System.out.println("[개인봉사승인 목록]");
+
+    if (this.personalRequestsDTO == null) {
+      System.out.println("현재 승인된 봉사목록이 없습니다.");
+      return;
+    }
+
     for (int i = 0; i < this.applySize; i++) {
       System.out.printf("봉사명 : %d\n 봉사제목 : %s\n %s, %s, %s, %s, %s, %s, %s, %b \n", 
           this.personalRequestApplyDTO[i].getNo(), 
@@ -91,7 +111,7 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
           this.personalRequestApplyDTO[i].getVolunteerList(),
           this.personalRequestApplyDTO[i].getContent(),
           this.personalRequestApplyDTO[i].getFileUpload(),
-          this.personalRequestApplyDTO[i].isOrg()
+          this.personalRequestApplyDTO[i].isChecked()
           );
     }
   }
@@ -109,7 +129,7 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
           this.personalRequestRejectDTO[i].getVolunteerList(),
           this.personalRequestRejectDTO[i].getContent(),
           this.personalRequestRejectDTO[i].getFileUpload(),
-          this.personalRequestRejectDTO[i].isOrg()
+          this.personalRequestRejectDTO[i].isChecked()
           );
     }
   }
@@ -123,22 +143,14 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
 
     int personalRequestIndex = indexOf(no);
 
+
+
+
     //    PersonalRequestDTO personalRequestApplyDTO = null;
     PersonalRequestDTO personalRequestDTO = findByVol(no);
 
     for (int i = 0; i < this.size; i++) {
       if (this.personalRequestsDTO[i].getNo() == no) {
-        //        PersonalRequestApplyDTO personalRequestApplyDTO = new PersonalRequestApplyDTO();
-        //        this.personalRequestApplyDTO[i].getNo(); 
-        //        //        this.personalRequestsDTO[i].getTitle(), 
-        //        this.personalRequestsDTO[i].getTel(),
-        //        this.personalRequestsDTO[i].getEmail(),
-        //        this.personalRequestsDTO[i].getVolunteerPeriod(),
-        //        this.personalRequestsDTO[i].getVolunteerTime(),
-        //        this.personalRequestsDTO[i].getVolunteerList(),
-        //        this.personalRequestsDTO[i].getContent(),
-        //        this.personalRequestsDTO[i].getFileUpload(),
-        //        this.personalRequestsDTO[i].isOrg()
         personalRequestDTO = personalRequestsDTO[i];
         personalRequestIndex = i;
         break;
@@ -148,10 +160,12 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
 
     if (personalRequestIndex == -1) {
       System.out.println("해당 번호의 개인봉사신청서가 없습니다.");
+      return;
     }
 
     if (personalRequestDTO == null) {
       System.out.println("해당 번호의 개인봉사신청서가 없습니다.");
+      return;
     }
 
 
@@ -163,12 +177,13 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
       return;
     }
 
+    personalRequestDTO.setChecked(true);
     personalRequestApplyDTO[applySize++] = personalRequestDTO;
 
-    for (int i = personalRequestIndex + 1; i < this.size; i++) {
-      this.personalRequestsDTO[i - 1] = this.personalRequestsDTO[i];
-    }
-    this.personalRequestsDTO[--this.size] = null;
+    //    for (int i = personalRequestIndex + 1; i < this.size; i++) {
+    //      this.personalRequestsDTO[i - 1] = this.personalRequestsDTO[i];
+    //    }
+    //    this.personalRequestsDTO[--this.size] = null;
 
     System.out.println("해당 봉사신청을 승인하였습니다.");
 
@@ -201,15 +216,17 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
 
     if (personalRequestDTO == null) {
       System.out.println("해당 번호의 개인봉사신청서가 없습니다.");
+      return;
     }
-
 
 
     String input = Prompt.inputString("정말 반려하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      System.out.println("해당 봉사신청 반려를 취소하였습니다.");
       return;
     }
 
+    personalRequestDTO.setChecked(false);
     personalRequestApplyDTO[applySize++] = personalRequestDTO;
 
     for (int i = personalRequestIndex + 1; i < this.size; i++) {
@@ -219,6 +236,55 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
 
     System.out.println("해당 봉사신청을 반려하였습니다.");
   }
+
+  //인증받은 봉사 리스트 (개인 + 기관)
+  public void approvedList() {
+
+    // 구현예정
+
+  }
+
+  // 인증받은 봉사 리스트 세부사항
+  public void approvedDetail() {
+
+    // 인증받은 봉사 중 1개를 선택해서 세부사항을 본다.
+    // 선택 > 참여자현황 / 신청하기 / 세부설명(봉사정보,위치) / 문의사항 
+
+    System.out.println("[개인봉사승인 목록]");
+    for (int i = 0; i < this.applySize; i++) {
+      System.out.printf("봉사명 : %d\n 봉사제목 : %s\n %s, %s, %s, %s, %s, %s, %s, %b \n", 
+          this.personalRequestApplyDTO[i].getNo(), 
+          this.personalRequestApplyDTO[i].getTitle(), 
+          this.personalRequestApplyDTO[i].getTel(),
+          this.personalRequestApplyDTO[i].getEmail(),
+          this.personalRequestApplyDTO[i].getVolunteerPeriod(),
+          this.personalRequestApplyDTO[i].getVolunteerTime(),
+          this.personalRequestApplyDTO[i].getVolunteerList(),
+          this.personalRequestApplyDTO[i].getContent(),
+          this.personalRequestApplyDTO[i].getFileUpload(),
+          this.personalRequestApplyDTO[i].isChecked()
+          );
+    }
+
+    //구현예정
+
+  }
+
+
+  // 함께해요 - 찜한 목록(마이페이지 연동 예정)
+  public void showVolBookmark() {
+
+    // 인증받은 봉사 리스트 중 내가 선택한 번호의 봉사 리스트를
+    // 새로운 배열(리스트)에 담아서 마이페이지에서 보여준다.
+
+
+
+  }
+
+
+
+
+
 
   private int indexOf(int no) {
     for (int i = 0; i < this.size; i++) {
