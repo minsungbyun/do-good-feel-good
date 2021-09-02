@@ -23,13 +23,23 @@ import com.share.ftp.domain.personal.PersonalRequestDTO;
 import com.share.ftp.domain.personal.PersonalRequestRejectDTO;
 import com.share.ftp.domain.personal.VolListDTO;
 import com.share.ftp.handler.Command;
-import com.share.ftp.handler.admin.ShowChallengeHandler;
-import com.share.ftp.handler.admin.ShowDonationHandler;
-import com.share.ftp.handler.admin.ShowMemberHandler;
-import com.share.ftp.handler.admin.ShowNoticeHandler;
-import com.share.ftp.handler.admin.ShowOrgApproveHandler;
-import com.share.ftp.handler.admin.ShowQuestionHandler;
-import com.share.ftp.handler.admin.ShowVolHandler;
+import com.share.ftp.handler.admin.AdminChallengeDeleteHandler;
+import com.share.ftp.handler.admin.AdminChallengeDetailHandler;
+import com.share.ftp.handler.admin.AdminChallengeListHandler;
+import com.share.ftp.handler.admin.AdminChallengeUpdateHandler;
+import com.share.ftp.handler.admin.AdminMemberDeleteHandler;
+import com.share.ftp.handler.admin.AdminMemberListHandler;
+import com.share.ftp.handler.admin.AdminNoticeAddHandler;
+import com.share.ftp.handler.admin.AdminNoticeDeleteHandler;
+import com.share.ftp.handler.admin.AdminNoticeDetailHandler;
+import com.share.ftp.handler.admin.AdminNoticeListHandler;
+import com.share.ftp.handler.admin.AdminNoticeUpdateHandler;
+import com.share.ftp.handler.admin.AdminQuestionAddHandler;
+import com.share.ftp.handler.admin.AdminQuestionDeleteHandler;
+import com.share.ftp.handler.admin.AdminQuestionDetailHandler;
+import com.share.ftp.handler.admin.AdminQuestionHandler;
+import com.share.ftp.handler.admin.AdminQuestionListHandler;
+import com.share.ftp.handler.admin.AdminQuestionUpdateHandler;
 import com.share.ftp.handler.join.AuthHandler;
 import com.share.ftp.handler.join.JoinHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeBoardHandler;
@@ -48,7 +58,6 @@ import com.share.ftp.handler.personal.mypage.MyBoardListHandler;
 import com.share.ftp.handler.personal.mypage.MyDonationHandler;
 import com.share.ftp.handler.personal.mypage.MyPageHandler2;
 import com.share.ftp.handler.personal.mypage.MyPointHandler;
-import com.share.ftp.handler.personal.mypage.MyProfileHandler;
 import com.share.ftp.handler.personal.mypage.WithdrawMemberHandler;
 import com.share.ftp.handler.personal.support.NoticeListHandler;
 import com.share.ftp.handler.personal.support.QuestionListHandler;
@@ -106,7 +115,7 @@ public class App {
     String menuId;
 
     public MenuItem(String title, String menuId) {
-      this(title, ENABLE_ALL, menuId);
+      this(title, Menu.ENABLE_ALL, menuId);
       this.menuId = menuId;
     }
 
@@ -119,10 +128,7 @@ public class App {
     public void execute() {
       Command command = commands.get(menuId);
       command.execute();
-
     }
-
-
   }
 
 
@@ -192,19 +198,18 @@ public class App {
 
 
   // 고객센터 핸들러(기능)
-  ShowNoticeHandler showNoticeHandler = new ShowNoticeHandler(); // 아직 List 변경 안함
-  ShowQuestionHandler showQuestionHandler = new ShowQuestionHandler(questionDTOList);
+  AdminQuestionHandler showQuestionHandler = new AdminQuestionHandler(questionDTOList);
   SupportHandler supportHandler = new SupportHandler(questionListHandler, noticeListHandler);
 
 
 
   // 관리자 페이지 핸들러(기능)
-  ShowVolHandler showVolHandler = new ShowVolHandler(personalVolRequestHandler,orgVolRequestHandler);
-  ShowDonationHandler showDonationHandler = new ShowDonationHandler(donationBoardHandler);
-  ShowMemberHandler showMemberHandler = new ShowMemberHandler();
-  ShowChallengeHandler showChallengeHandler = new ShowChallengeHandler(); // 아직 List 변경 안함
-  ShowOrgApproveHandler showOrgApproveHandler = new ShowOrgApproveHandler();
-  MyProfileHandler myProfileHandler = new MyProfileHandler(myProfileDTOList);
+  //  ShowVolHandler showVolHandler = new ShowVolHandler(personalVolRequestHandler,orgVolRequestHandler);
+  //  ShowDonationHandler showDonationHandler = new ShowDonationHandler(donationBoardHandler);
+  //  AdminMemberListHandler showMemberHandler = new AdminMemberListHandler();
+  //  AdminChallengeHandler showChallengeHandler = new AdminChallengeHandler(); // 아직 List 변경 안함
+  //  AdminOrgApproveAddHandler showOrgApproveHandler = new AdminOrgApproveAddHandler();
+  //  MyProfileHandler myProfileHandler = new MyProfileHandler(myProfileDTOList);
   //  AdminPageHandler adminPageHandler = new AdminPageHandler(personalVolRequestHandler,showVolHandler, donationBoardHandler, showDonationHandler); 
 
 
@@ -222,6 +227,31 @@ public class App {
     commands.put("/commBoard/detail", new CommBoardDetailHandler(commBoardDTOList));
     commands.put("/commBoard/update", new CommBoardUpdateHandler(commBoardDTOList));
     commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList));
+
+    // 관리자 회원정보 조회
+    commands.put("/adminMember/list", new AdminMemberListHandler());
+    commands.put("/adminMember/delete", new AdminMemberDeleteHandler());
+
+    // 관리자 공지사항
+    commands.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDTOList));
+    commands.put("/adminNotice/list", new AdminNoticeListHandler(noticeDTOList));
+    commands.put("/adminNotice/detail", new AdminNoticeDetailHandler(noticeDTOList));
+    commands.put("/adminNotice/update", new AdminNoticeUpdateHandler(noticeDTOList));
+    commands.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDTOList));
+
+    // 관리자 문의사항
+    commands.put("/adminQuestion/add", new AdminQuestionAddHandler(questionDTOList));
+    commands.put("/adminQuestion/list", new AdminQuestionListHandler(questionDTOList));
+    commands.put("/adminQuestion/detail", new AdminQuestionDetailHandler(questionDTOList));
+    commands.put("/adminQuestion/update", new AdminQuestionUpdateHandler(questionDTOList));
+    commands.put("/adminQuestion/delete", new AdminQuestionDeleteHandler(questionDTOList));
+
+    // 관리자 챌린지
+    commands.put("/adminChallenge/list", new AdminChallengeListHandler(challengeDTOList));
+    commands.put("/adminChallenge/detail", new AdminChallengeDetailHandler(challengeDTOList));
+    commands.put("/adminChallenge/update", new AdminChallengeUpdateHandler(challengeDTOList));
+    commands.put("/adminChallenge/delete", new AdminChallengeDeleteHandler(challengeDTOList));
+
 
 
 
@@ -662,16 +692,8 @@ public class App {
     MenuGroup memberMenu = new MenuGroup("회원정보 조회");
     adminMenu.add(memberMenu);
     //
-    memberMenu.add(new Menu("회원목록") {
-      @Override
-      public void execute() {
-        showMemberHandler.list(); 
-      }});
-    memberMenu.add(new Menu("회원추방") {
-      @Override
-      public void execute() {
-        showMemberHandler.getOutMember(); 
-      }});
+    memberMenu.add(new MenuItem("회원목록","/adminMember/list"));
+    memberMenu.add(new MenuItem("회원추방","/adminMember/list"));
 
     MenuGroup donationMenu = new MenuGroup("모금함 관리");
     adminMenu.add(donationMenu);
@@ -725,113 +747,37 @@ public class App {
     MenuGroup noticeMenu = new MenuGroup("공지사항 관리");
     adminMenu.add(noticeMenu);
 
-    noticeMenu.add(new Menu("공지사항 등록") {
-      @Override
-      public void execute() {
-        showNoticeHandler.add(); 
-      }});
-    noticeMenu.add(new Menu("공지사항 목록") {
-      @Override
-      public void execute() {
-        showNoticeHandler.list(); 
-      }});
-    noticeMenu.add(new Menu("공지사항 상세보기") {
-      @Override
-      public void execute() {
-        showNoticeHandler.detail(); 
-      }});
-    noticeMenu.add(new Menu("공지사항 변경") {
-      @Override
-      public void execute() {
-        showNoticeHandler.update(); 
-      }});
-    noticeMenu.add(new Menu("공지사항 삭제") {
-      @Override
-      public void execute() {
-        showNoticeHandler.delete(); 
-      }});
+    noticeMenu.add(new MenuItem("공지사항 등록","/adminNotice/add"));
+    noticeMenu.add(new MenuItem("공지사항 목록","/adminNotice/list"));
+    noticeMenu.add(new MenuItem("공지사항 상세보기","/adminNotice/detail"));
+    noticeMenu.add(new MenuItem("공지사항 변경","/adminNotice/update"));
+    noticeMenu.add(new MenuItem("공지사항 삭제","/adminNotice/delete"));
 
     MenuGroup askInfo = new MenuGroup("문의사항 관리");
     adminMenu.add(askInfo);
 
-    askInfo.add(new Menu("문의사항 등록") {
-      @Override
-      public void execute() {
-        showQuestionHandler.addreply(); 
-      }});
-    askInfo.add(new Menu("문의사항 목록") {
-      @Override
-      public void execute() {
-        showQuestionHandler.list(); 
-      }});
-    askInfo.add(new Menu("문의사항 상세보기") {
-      @Override
-      public void execute() {
-        showQuestionHandler.detail(); 
-      }});
-    askInfo.add(new Menu("문의사항 변경") {
-      @Override
-      public void execute() {
-        showQuestionHandler.update(); 
-      }});
-    askInfo.add(new Menu("문의사항 삭제") {
-      @Override
-      public void execute() {
-        showQuestionHandler.delete(); 
-      }});
+    askInfo.add(new MenuItem("문의사항 등록","/adminQuestion/add"));
+    askInfo.add(new MenuItem("문의사항 목록","/adminQuestion/add"));
+    askInfo.add(new MenuItem("문의사항 상세보기","/adminQuestion/add"));
+    askInfo.add(new MenuItem("문의사항 변경","/adminQuestion/add"));
+    askInfo.add(new MenuItem("문의사항 삭제","/adminQuestion/add"));
 
-    //    MenuGroup challengeInfo = new MenuGroup("챌린지 관리");
-    //    adminMenu.add(challengeInfo);
-    //
-    //    challengeInfo.add(new Menu("챌린지 등록") {
-    //      @Override
-    //      public void execute() {
-    //        showChallengeHandler.add(); 
-    //      }});
-    //    challengeInfo.add(new Menu("챌린지 목록") {
-    //      @Override
-    //      public void execute() {
-    //        showChallengeHandler.list(); 
-    //      }});
-    //    challengeInfo.add(new Menu("챌린지 상세보기") {
-    //      @Override
-    //      public void execute() {
-    //        showChallengeHandler.detail(); 
-    //      }});
-    //    challengeInfo.add(new Menu("챌린지 변경") {
-    //      @Override
-    //      public void execute() {
-    //        showChallengeHandler.update(); 
-    //      }});
-    //    challengeInfo.add(new Menu("챌린지 삭제") {
-    //      @Override
-    //      public void execute() {
-    //        showChallengeHandler.delete(); 
-    //      }});
+    MenuGroup challengeInfo = new MenuGroup("챌린지 관리");
+    adminMenu.add(challengeInfo);
+
+    challengeInfo.add(new MenuItem("챌린지 등록","/adminChallenge/add"));
+    challengeInfo.add(new MenuItem("챌린지 목록","/adminChallenge/add"));
+    challengeInfo.add(new MenuItem("챌린지 상세보기","/adminChallenge/add"));
+    challengeInfo.add(new MenuItem("챌린지 변경","/adminChallenge/add"));
+    challengeInfo.add(new MenuItem("챌린지 삭제","/adminChallenge/add"));
 
     MenuGroup approveInfo = new MenuGroup("기관 승인");
     adminMenu.add(approveInfo);
 
-    approveInfo.add(new Menu("기관승인신청 목록") {
-      @Override
-      public void execute() {
-        showOrgApproveHandler.list(); 
-      }});
-    approveInfo.add(new Menu("기관승인신청 내용") {
-      @Override
-      public void execute() {
-        showOrgApproveHandler.detail(); 
-      }});
-    approveInfo.add(new Menu("기관승인신청 변경") {
-      @Override
-      public void execute() {
-        showOrgApproveHandler.update(); 
-      }});
-    approveInfo.add(new Menu("기관승인신청 삭제") {
-      @Override
-      public void execute() {
-        showOrgApproveHandler.delete(); 
-      }});
+    approveInfo.add(new MenuItem("기관승인신청 목록","/adminChallenge/list"));
+    approveInfo.add(new MenuItem("기관승인신청 내용","/adminChallenge/detail"));
+    approveInfo.add(new MenuItem("기관승인신청 변경","/adminChallenge/update"));
+    approveInfo.add(new MenuItem("기관승인신청 삭제","/adminChallenge/delete"));
 
     return mainMenuGroup;
   }

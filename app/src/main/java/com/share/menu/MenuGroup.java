@@ -241,10 +241,10 @@ public class MenuGroup extends Menu {
   }
 
   private Menu selectMenu(List<Menu> menuList) {
-    int menuNo = 0 ;
 
 
-    menuNo = Prompt.inputInt("선택> ");
+
+    int menuNo = Prompt.inputInt("선택> ");
 
     if (menuNo < 0 || menuNo > menuList.size()) {
       return null;
