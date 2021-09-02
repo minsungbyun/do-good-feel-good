@@ -3,7 +3,7 @@ package com.share.ftp.handler.personal.volunteer;
 import java.sql.Date;
 import com.share.ftp.domain.guest.JoinDTO;
 import com.share.ftp.domain.personal.PersonalRequestDTO;
-import com.share.ftp.handler.join.AuthHandler;
+import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
 public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 곳
@@ -32,7 +32,7 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
     System.out.println();
     System.out.println("[개인봉사활동 양식]");
 
-    JoinDTO joinDTO = AuthHandler.getLoginUser();
+    JoinDTO joinDTO = AuthLoginHandler.getLoginUser();
 
     if (joinDTO == null) {
       System.out.println("로그인 후 사용가능합니다.");
