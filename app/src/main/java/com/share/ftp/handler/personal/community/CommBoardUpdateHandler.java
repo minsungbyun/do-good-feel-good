@@ -6,12 +6,11 @@ import com.share.util.Prompt;
 
 public class CommBoardUpdateHandler extends AbstractCommBoardHandler {
 
-
   public CommBoardUpdateHandler(List<CommBoardDTO> commBoardDTOList) {
     super(commBoardDTOList);
   }
 
-
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("[메인/소통해요/나눔이야기/게시글변경]");

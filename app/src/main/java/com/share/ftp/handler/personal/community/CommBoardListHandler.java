@@ -9,7 +9,7 @@ public class CommBoardListHandler extends AbstractCommBoardHandler {
     super(commBoardDTOList);
   }
 
-
+  @Override
   public void execute() {
 
     System.out.println();

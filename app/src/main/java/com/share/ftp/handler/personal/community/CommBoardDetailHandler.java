@@ -6,13 +6,11 @@ import com.share.util.Prompt;
 
 public class CommBoardDetailHandler extends AbstractCommBoardHandler {
 
-
-
   public CommBoardDetailHandler(List<CommBoardDTO> commBoardDTOList) {
     super(commBoardDTOList);
   }
 
-
+  @Override
   public void execute() {
 
     System.out.println();

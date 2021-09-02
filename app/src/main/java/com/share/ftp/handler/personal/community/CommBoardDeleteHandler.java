@@ -11,8 +11,7 @@ public class CommBoardDeleteHandler extends AbstractCommBoardHandler {
     super(commBoardDTOList);
   }
 
-
-
+  @Override
   public void execute() {
 
     System.out.println();

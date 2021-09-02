@@ -4,11 +4,11 @@ import java.util.List;
 import com.share.ftp.domain.admin.QuestionDTO;
 import com.share.util.Prompt;
 
-public class ShowQuestionHandler {
+public class AdminQuestionHandler {
 
   List<QuestionDTO> questionDTOList;
 
-  public ShowQuestionHandler(List<QuestionDTO> questionDTOList) {
+  public AdminQuestionHandler(List<QuestionDTO> questionDTOList) {
     this.questionDTOList = questionDTOList;
   }
 

@@ -1,7 +1,6 @@
 package com.share.ftp.handler.org;
 
 import com.share.ftp.domain.personal.CommBoardDTO;
-import com.share.ftp.handler.personal.community.CommBoardHandler;
 
 public class CommBestHandler {
   CommBoardHandler commBoardHandler;
@@ -23,10 +22,6 @@ public class CommBestHandler {
         //this.commBoardsDTO[i].getPassword(),
         arr[0].getRegisteredDate(), 
         arr[0].getViewCount());
-
-
-
-
   }
 
   public void showDetail() {

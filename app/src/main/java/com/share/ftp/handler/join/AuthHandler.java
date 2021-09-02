@@ -26,6 +26,7 @@ public class AuthHandler {
       System.out.println("로그인 하지 않았습니다.");
       return;
     }
+    System.out.println();
     System.out.printf("[ %s님의 정보입니다 ]\n", loginUser.getName());
 
     System.out.printf("이름: %s\n", loginUser.getName());

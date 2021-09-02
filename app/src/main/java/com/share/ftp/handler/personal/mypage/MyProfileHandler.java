@@ -2,9 +2,10 @@ package com.share.ftp.handler.personal.mypage;
 
 import java.util.List;
 import com.share.ftp.domain.personal.MyProfileDTO;
+import com.share.ftp.handler.Command;
 import com.share.util.Prompt;
 
-public class MyProfileHandler {
+public class MyProfileHandler implements Command {
 
   List<MyProfileDTO> myProfileDTOList;
 
@@ -12,7 +13,8 @@ public class MyProfileHandler {
     this.myProfileDTOList = myProfileDTOList;
   }
 
-  public void updateMyProfile() {
+  @Override
+  public void execute() {
 
     System.out.println();
     System.out.println("[메인/ 마이페이지 / 회원정보/ 수정하기]");
