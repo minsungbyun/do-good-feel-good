@@ -78,8 +78,8 @@ import com.share.ftp.handler.personal.support.NoticeListHandler;
 import com.share.ftp.handler.personal.support.QuestionAddHandler;
 import com.share.ftp.handler.personal.support.QuestionDeleteHandler;
 import com.share.ftp.handler.personal.support.QuestionDetailHandler;
+import com.share.ftp.handler.personal.support.QuestionListHandler;
 import com.share.ftp.handler.personal.support.QuestionUpdateHandler;
-import com.share.ftp.handler.personal.support.SupportHandler;
 import com.share.ftp.handler.personal.volunteer.ApproveOrgHandler;
 import com.share.ftp.handler.personal.volunteer.OrgVolRequestHandler;
 import com.share.ftp.handler.personal.volunteer.PersonalVolRequestHandler;
@@ -170,14 +170,11 @@ public class App {
   //  CommBoardUpdateHandler commBoardUpdateHandler = new CommBoardUpdateHandler(commBoardDTOList);
   //  CommBoardDeleteHandler commBoardDeleteHandler = new CommBoardDeleteHandler(commBoardDTOList);
 
-<<<<<<< HEAD
-  CommReviewAddHandler commReviewAddHandler = new CommReviewAddHandler(commReviewDTOList);
-  CommReviewListHandler commReviewListHandler = new CommReviewListHandler(commReviewDTOList);
-  CommReviewUpdateHandler commReviewUpdateHandler = new CommReviewUpdateHandler(commReviewDTOList);
-  CommReviewDeleteHandler commReviewDeleteHandler = new CommReviewDeleteHandler(commReviewDTOList);
+  //  CommReviewAddHandler commReviewAddHandler = new CommReviewAddHandler(commReviewDTOList);
+  //  CommReviewListHandler commReviewListHandler = new CommReviewListHandler(commReviewDTOList);
+  //  CommReviewUpdateHandler commReviewUpdateHandler = new CommReviewUpdateHandler(commReviewDTOList);
+  //  CommReviewDeleteHandler commReviewDeleteHandler = new CommReviewDeleteHandler(commReviewDTOList);
 
-=======
->>>>>>> f11e23e1e36d5e22ffb6646924e2938c8ae3224a
   //  CommBestHandler commBestHandler = new CommBestHandler(commBoardHandler);
   //  CommReviewHandler commReviewHandler = new CommReviewHandler(commReviewDTOList);
 
@@ -216,7 +213,7 @@ public class App {
   // 고객센터 핸들러(기능)
 
   AdminQuestionHandler showQuestionHandler = new AdminQuestionHandler(questionDTOList);
-  SupportHandler supportHandler = new SupportHandler(questionHandler, noticeListHandler);
+  // SupportHandler supportHandler = new SupportHandler(questionHandler, noticeListHandler);
 
 
 
@@ -255,20 +252,21 @@ public class App {
     commands.put("/commBoard/update", new CommBoardUpdateHandler(commBoardDTOList));
     commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList));
 
-<<<<<<< HEAD
     commands.put("/commReview/add ", new CommReviewAddHandler(commReviewDTOList));
     commands.put("/commReview/list ", new CommReviewListHandler(commReviewDTOList));
     commands.put("/commReview/update ", new CommReviewUpdateHandler(commReviewDTOList));
     commands.put("/commReview/delete ", new CommReviewDeleteHandler(commReviewDTOList));
 
-=======
+
+
+
     // 고객센터 문의하기
     commands.put("/question/add", new QuestionAddHandler(myQuestionListDTOList));
     commands.put("/question/list", new QuestionListHandler(myQuestionListDTOList));
     commands.put("/question/detail", new QuestionDetailHandler(myQuestionListDTOList));
     commands.put("/question/update", new QuestionUpdateHandler(myQuestionListDTOList));
     commands.put("/question/delete", new QuestionDeleteHandler(myQuestionListDTOList));
->>>>>>> f11e23e1e36d5e22ffb6646924e2938c8ae3224a
+
     // 관리자 회원정보 조회
     commands.put("/adminMember/list", new AdminMemberListHandler());
     commands.put("/adminMember/delete", new AdminMemberDeleteHandler());
@@ -296,12 +294,7 @@ public class App {
     // 마이페이지
     commands.put("/myProfile/update", new MyProfileHandler(myProfileDTOList));
 
-<<<<<<< HEAD
-=======
 
-<<<<<<< HEAD
-  }       
-=======
     // 챌린지 문의하기
     commands.put("/callengeQuestion/add", new ChallengeQuestionAddHandler(myChallengeQuestionDTOList));
     commands.put("/callengeQuestion/list", new ChallengeQuestionListHandler(myChallengeQuestionDTOList));
@@ -320,10 +313,8 @@ public class App {
     commands.put("/join/list", new JoinListHandler(joinDTOList)); // 관리자가 회원 목록을 조회
     commands.put("/join/detail", new JoinDetailHandler(joinDTOList)); // 가입회원 상세보기 (관리자연결)
 
->>>>>>> 0fd9c2be2f1acccb598fb2fd15dda141f1d2589e
   }
 
->>>>>>> 0fd9c2be2f1acccb598fb2fd15dda141f1d2589e
   void service() {
     createMenu().execute();
     Prompt.close();
@@ -412,30 +403,10 @@ public class App {
     MenuGroup shortReviewMenu = new MenuGroup("한 줄 후기", Menu.ENABLE_ALL);
     personalCommunityMenu.add(shortReviewMenu);
 
-    shortReviewMenu.add(new Menu("등록", Menu.ENABLE_LOGIN) {
-      @Override
-      public void execute() {
-        commReviewAddHandler.execute(); 
-      }});
-
-    shortReviewMenu.add(new Menu("목록", Menu.ENABLE_ALL) {
-      @Override
-      public void execute() {
-        commReviewListHandler.execute(); 
-      }});
-
-    shortReviewMenu.add(new Menu("수정", Menu.ENABLE_LOGIN) {
-      @Override
-      public void execute() {
-        commReviewUpdateHandler.execute(); 
-      }});
-
-    shortReviewMenu.add(new Menu("삭제", Menu.ENABLE_LOGIN) {
-      @Override
-      public void execute() {
-        commReviewDeleteHandler.execute(); 
-      }});
-
+    shortReviewMenu.add(new MenuItem("등록", Menu.ENABLE_LOGIN, "/commReview/add"));
+    shortReviewMenu.add(new MenuItem("목록", Menu.ENABLE_ALL, "/commReview/list")); 
+    shortReviewMenu.add(new MenuItem("수정", Menu.ENABLE_LOGIN, "/commReview/update")); 
+    shortReviewMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/commReview/delete")); 
 
     MenuGroup personalChallengeMenu = new MenuGroup("챌린지", Menu.ENABLE_ALL);
     mainMenuGroup.add(personalChallengeMenu);
@@ -515,11 +486,7 @@ public class App {
       public void execute() {
         rankingHandler.showMyRanking(); 
       }});
-    //
-<<<<<<< HEAD
-=======
 
->>>>>>> f11e23e1e36d5e22ffb6646924e2938c8ae3224a
     MenuGroup personalDonationMenu = new MenuGroup("모금함");
     mainMenuGroup.add(personalDonationMenu);
 
