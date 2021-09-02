@@ -1,17 +1,20 @@
 package com.share.ftp.handler.admin;
 
 import java.sql.Date;
+import java.util.List;
 import com.share.ftp.domain.admin.NoticeDTO;
 import com.share.util.Prompt;
 
-public class ShowNoticeHandler {
+public class AdminNoticeDetailHandler extends AbstractAdminNoticeHandler {
 
-  static final int MAX_LENGTH = 100;
 
-  NoticeDTO[] noticesDTO = new NoticeDTO[MAX_LENGTH];
-  int size = 0;
+  public AdminNoticeDetailHandler(List<NoticeDTO> noticeDTOList) {
+    super(noticeDTOList);
+  }
 
-  public void add() {
+
+
+  public void execute() {
     System.out.println("[공지사항 등록]");
 
     NoticeDTO noticeDTO = new NoticeDTO();
@@ -23,26 +26,22 @@ public class ShowNoticeHandler {
     noticeDTO.setFileUpload(Prompt.inputString("첨부파일? ")); 
     noticeDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    if (this.size == this.noticesDTO.length) {
-      NoticeDTO[] arr = new NoticeDTO[this.noticesDTO.length + (this.noticesDTO.length >> 1)];
-      for (int i = 0; i < this.size; i++) {
-        arr[i] = this.noticesDTO[i];
-      }
-      this.noticesDTO = arr;
-    }
-    this.noticesDTO[this.size++] = noticeDTO;
+
+    noticeDTOList.add(noticeDTO);
+
   }
 
   public void list() {
     System.out.println("[회원 목록]");
-    for (int i = 0; i < this.size; i++) {
+
+    for (NoticeDTO noticeDTO : noticeDTOList) {
       System.out.printf("%d, %s, %s, %s, %s\n", 
-          this.noticesDTO[i].getNo(), 
-          this.noticesDTO[i].getAdminId(), 
-          this.noticesDTO[i].getTitle(), 
-          this.noticesDTO[i].getContent(), 
-          this.noticesDTO[i].getFileUpload(), 
-          this.noticesDTO[i].getRegisteredDate());
+          noticeDTO.getNo(), 
+          noticeDTO.getAdminId(), 
+          noticeDTO.getTitle(), 
+          noticeDTO.getContent(), 
+          noticeDTO.getFileUpload(), 
+          noticeDTO.getRegisteredDate());
     }
   }
 
@@ -97,9 +96,9 @@ public class ShowNoticeHandler {
     System.out.println("[공지사항 삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    int index = indexOf(no);
+    NoticeDTO noticeDTO = findByNo(no);
 
-    if (index == -1) {
+    if (noticeDTO == null) {
       System.out.println("해당 번호의 회원이 없습니다.");
       return;
     }
@@ -110,33 +109,11 @@ public class ShowNoticeHandler {
       return;
     }
 
-    for (int i = index + 1; i < this.size; i++) {
-      this.noticesDTO[i - 1] = this.noticesDTO[i];
-    }
-    this.noticesDTO[--this.size] = null;
+    noticeDTOList.remove(noticeDTO);
 
     System.out.println("공지사항을 삭제하였습니다.");
   }
 
 
-
-  private NoticeDTO findByNo(int no) {
-    for (int i = 0; i < this.size; i++) {
-      if (this.noticesDTO[i].getNo() == no) {
-        return this.noticesDTO[i];
-      }
-    }
-    return null;
-  }
-
-
-  private int indexOf(int no) {
-    for (int i = 0; i < this.size; i++) {
-      if (this.noticesDTO[i].getNo() == no) {
-        return i;
-      }
-    }
-    return -1;
-  }
 
 }
