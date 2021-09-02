@@ -452,6 +452,9 @@ public class App {
         rankingHandler.showMyRanking(); 
       }});
 
+    //
+
+
 
 
     MenuGroup personalDonationMenu = new MenuGroup("모금함");
@@ -492,24 +495,23 @@ public class App {
         donationBoardHandler.applyDonation(); 
       }});
 
-    //
     MenuGroup support = new MenuGroup("고객센터");
     mainMenuGroup.add(support);
-    //
-    //    MenuGroup notice = new MenuGroup("공지사항");
-    //    support.add(notice);
-    //
-    //    notice.add(new Menu("목록") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.list(); 
-    //      }});
-    //    notice.add(new Menu("상세보기") {
-    //      @Override
-    //      public void execute() {
-    //        boardHandler.detail(); 
-    //      }});
-    //
+
+    MenuGroup notice = new MenuGroup("공지사항");
+    support.add(notice);
+
+    notice.add(new Menu("목록") {
+      @Override
+      public void execute() {
+        noticeListHandler.noticeList(); 
+      }});
+    notice.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        noticeListHandler.noticeDetail(); 
+      }});
+
     //    MenuGroup faQ = new MenuGroup("FAQ");
     //    support.add(faQ);
     //
@@ -523,41 +525,35 @@ public class App {
     //      public void execute() {
     //        boardHandler.detail(); 
     //      }});
-    //
-    //        MenuGroup ask = new MenuGroup("문의하기");
-    //        support.add(ask);
-    //    
-    //        ask.add(new Menu("등록") {
-    //          @Override
-    //          public void execute() {
-    //            boardHandler.addQuestionlist(); 
-    //          }});
-    //        ask.add(new Menu("목록") {
-    //          @Override
-    //          public void execute() {
-    //            boardHandler.list(); 
-    //          }});
-    //        ask.add(new Menu("상세보기") {
-    //          @Override
-    //          public void execute() {
-    //            boardHandler.detail(); 
-    //          }});
-    //        ask.add(new Menu("변경") {
-    //          @Override
-    //          public void execute() {
-    //            boardHandler.finish(); 
-    //          }});
-    //        ask.add(new Menu("삭제") {
-    //          @Override
-    //          public void execute() {
-    //            boardHandler.ask(); 
-    //          }});
-    //        //
-    //    MenuGroup personalMyPage = new MenuGroup("마이페이지");
-    //    personalMenu.add(personalMyPage);
-    //    
-    //    MenuGroup myProfile = new MenuGroup("회원정보수정");
-    //    personalMyPage.add(myProfile);
+
+    MenuGroup ask = new MenuGroup("문의하기");
+    support.add(ask);
+
+    ask.add(new Menu("등록", Menu.ENABLE_LOGIN) {
+      @Override
+      public void execute() {
+        questionListHandler.addQuestionlist(); 
+      }});
+    ask.add(new Menu("목록") {
+      @Override
+      public void execute() {
+        questionListHandler.questionList(); 
+      }});
+    ask.add(new Menu("상세보기", Menu.ENABLE_LOGIN) {
+      @Override
+      public void execute() {
+        questionListHandler.detailQuestion(); 
+      }});
+    ask.add(new Menu("변경", Menu.ENABLE_LOGIN) {
+      @Override
+      public void execute() {
+        questionListHandler.updateQuestion(); 
+      }});
+    ask.add(new Menu("삭제", Menu.ENABLE_LOGIN) {
+      @Override
+      public void execute() {
+        questionListHandler.deleteQuestion(); 
+      }});
 
     MenuGroup personalMyPage = new MenuGroup("마이페이지",Menu.ENABLE_MEMBER);
     mainMenuGroup.add(personalMyPage);
