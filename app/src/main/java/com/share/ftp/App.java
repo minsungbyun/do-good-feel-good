@@ -451,11 +451,7 @@ public class App {
       public void execute() {
         rankingHandler.showMyRanking(); 
       }});
-
     //
-
-
-
 
     MenuGroup personalDonationMenu = new MenuGroup("모금함");
     mainMenuGroup.add(personalDonationMenu);
@@ -532,27 +528,27 @@ public class App {
     ask.add(new Menu("등록", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
-        questionListHandler.addQuestionlist(); 
+        questionListHandler.add(); 
       }});
     ask.add(new Menu("목록") {
       @Override
       public void execute() {
-        questionListHandler.questionList(); 
+        questionListHandler.list(); 
       }});
     ask.add(new Menu("상세보기", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
-        questionListHandler.detailQuestion(); 
+        questionListHandler.detail(); 
       }});
     ask.add(new Menu("변경", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
-        questionListHandler.updateQuestion(); 
+        questionListHandler.update(); 
       }});
     ask.add(new Menu("삭제", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
-        questionListHandler.deleteQuestion(); 
+        questionListHandler.delete(); 
       }});
 
     MenuGroup personalMyPage = new MenuGroup("마이페이지",Menu.ENABLE_MEMBER);

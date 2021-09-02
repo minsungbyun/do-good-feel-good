@@ -13,7 +13,7 @@ public class QuestionListHandler {
     this.myQuestionListDTOList = myQuestionListDTOList;
   }
 
-  public void addQuestionlist() {
+  public void add() {
 
     System.out.println("[고객센터/문의하기/문의하기 등록]");
 
@@ -29,7 +29,7 @@ public class QuestionListHandler {
     myQuestionListDTOList.add(myQuestionListDTO);
   }
 
-  public void questionList() {
+  public void list() {
     System.out.println("[고객센터/문의하기/문의하기 목록]");
     for (MyQuestionListDTO myQuestionListDTO : myQuestionListDTOList) {
       System.out.printf("%d, %s, %s, %s, %s, %s, %d\n", 
@@ -43,7 +43,7 @@ public class QuestionListHandler {
     }
   }
 
-  public void detailQuestion() {
+  public void detail() {
     System.out.println("[고객센터/문의하기/문의하기 상세]");
     int no = Prompt.inputInt("번호? ");
 
@@ -63,7 +63,7 @@ public class QuestionListHandler {
     System.out.printf("조회수: %d\n", myQuestionListDTO.getViewCount());
   }
 
-  public void updateQuestion() {
+  public void update() {
     System.out.println("[게시글 수정하기]");
     int no = Prompt.inputInt("번호? ");
 
@@ -88,7 +88,7 @@ public class QuestionListHandler {
     System.out.println("게시글을 변경하였습니다.");
   }
 
-  public void deleteQuestion() {
+  public void delete() {
     System.out.println("[고객센터/문의하기/문의하기 삭제]");
     int no = Prompt.inputInt("번호? ");
 
