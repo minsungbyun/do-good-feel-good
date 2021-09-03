@@ -166,7 +166,6 @@ public class MenuGroup extends Menu {
   private List<Menu> getMenuList() {
     ArrayList<Menu> menuList = new ArrayList<>();
 
-    //JoinDTO loginUser = AuthLoginHandler.getLoginUser();
     JoinDTO loginUser = AuthLoginHandler.getLoginUser();
 
 

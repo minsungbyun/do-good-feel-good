@@ -60,11 +60,6 @@ import com.share.ftp.handler.personal.challenge.ChallengeQuestionDetailHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionSearchHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionUpdateHandler;
-//import com.share.ftp.handler.personal.challenge.ChallengeReviewDeleteHandler;
-//import com.share.ftp.handler.personal.challenge.ChallengeReviewDetailHandler;
-//import com.share.ftp.handler.personal.challenge.ChallengeReviewListHandler;
-//import com.share.ftp.handler.personal.challenge.ChallengeReviewSearchHandler;
-//import com.share.ftp.handler.personal.challenge.ChallengeReviewUpdateHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewAddHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewDeleteHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewDetailHandler;
@@ -83,10 +78,14 @@ import com.share.ftp.handler.personal.community.CommReviewAddHandler;
 import com.share.ftp.handler.personal.community.CommReviewDeleteHandler;
 import com.share.ftp.handler.personal.community.CommReviewListHandler;
 import com.share.ftp.handler.personal.community.CommReviewUpdateHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardAcceptApplyHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardAppliedListHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardApplyCompleteListHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardApplyDetailHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardApplyHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardApplyListHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardRejectApplyHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterAddHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterParticipationHandler;
@@ -152,8 +151,12 @@ public class App {
   List<MyChallengeQuestionDTO> myChallengeQuestionDTOList = new ArrayList<>();
   List<MyChallengeReviewDTO> myChallengeReviewDTOList = new ArrayList<>();
 
-  // 기부 도메인(값)
+  // 모금함 개설 신청 관련 도메인(값)
   List<DonationBoardDTO> donationBoardDTOList = new ArrayList<>();
+  List<DonationBoardDTO> donationBoardApplyDTOList = new ArrayList<>();
+  List<DonationBoardDTO> donationBoardRejectDTOList = new ArrayList<>();
+
+  // 기부 도메인(값)
   List<DonationRegisterDTO> donationRegisterDTOList = new ArrayList<>();
 
   // 마이페이지 도메인(값)
@@ -333,11 +336,19 @@ public class App {
     commands.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(myChallengeReviewDTOList));
     commands.put("/challengeReview/search", new ChallengeReviewSearchHandler(myChallengeReviewDTOList));
 
-    // 모금함
+
+    // 모금함 (개설신청하기, 개설목록, 승인, 반려)
     commands.put("/donationBoard/apply", new DonationBoardApplyHandler(donationBoardDTOList));
     commands.put("/donationBoard/applyList", new DonationBoardApplyListHandler(donationBoardDTOList));
+    commands.put("/donationBoard/applyCompleteList", new DonationBoardApplyCompleteListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
+    commands.put("/donationBoard/appliedList", new DonationBoardAppliedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
+    commands.put("/donationBoard/acceptApply", new DonationBoardAcceptApplyHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
+    commands.put("/donationBoard/rejectApply", new DonationBoardRejectApplyHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
     commands.put("/donationBoard/applyDetail", new DonationBoardApplyDetailHandler(donationBoardDTOList));
 
+
+
+    // 모금함 (기부하기)
     commands.put("/donationRegister/add", new DonationRegisterAddHandler(donationRegisterDTOList));
     commands.put("/donationRegister/participation", new DonationRegisterParticipationHandler(donationRegisterDTOList));
     commands.put("/donationRegister/totalMoney", new DonationRegisterTotalMoneyHandler(donationRegisterDTOList));
@@ -604,6 +615,14 @@ public class App {
     myVolunteer.add(new MenuItem("나의 봉사신청서 확인","/volRequestPersonal/applyCompleteList")); // 보완필요
     myVolunteer.add(new MenuItem("승인된 봉사내역","/volRequestPersonal/appliedList"));    
     myVolunteer.add(new MenuItem("반려된 봉사내역","/volRequestPersonal/rejectedList"));    
+    myVolunteer.add(new MenuItem("찜한봉사","/volRequestPersonal/bookmark")); // 구현예정
+
+    MenuGroup myDonation = new MenuGroup("나의 모금함");
+    personalMyPage.add(myDonation);
+    myDonation.add(new MenuItem("나의 모금함 개설신청서 확인", Menu.ENABLE_ORG, "/donationBoard/applyCompleteList")); 
+    //    myDonation.add(new MenuItem("나의 기부내역", Menu.ENABLE_MEMBER, "/donationRegister/list")); // 구현예정
+
+
     myVolunteer.add(new MenuItem("찜한봉사","/volRequestPersonal/bookmark")); // 구현예정    
 
 
@@ -621,9 +640,10 @@ public class App {
 
     myPoint.add(new MenuItem("나의포인트확인","MyPoint/list"));
 
-    MenuGroup myDonation = new MenuGroup("나의 모금함");
-    personalMyPage.add(myDonation);
-    myDonation.add(new MenuItem("나의기부내역", "/myDonation/list"));
+
+    //    MenuGroup myDonation = new MenuGroup("나의 모금함");
+    //    personalMyPage.add(myDonation);
+    //    myDonation.add(new MenuItem("나의기부내역", "/myDonation/list"));
 
 
     MenuGroup organizationApprove = new MenuGroup("기관 승인 신청");
@@ -634,7 +654,6 @@ public class App {
 
 
     personalMyPage.add(new MenuItem("탈퇴", Menu.ENABLE_MEMBER, "/MyPage/delete"));
-
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////    
 
@@ -651,9 +670,10 @@ public class App {
     MenuGroup donationMenu = new MenuGroup("모금함 관리");
     adminMenu.add(donationMenu);
 
-
-    donationMenu.add(new MenuItem("모금함 개설 신청내역 목록", "/donationBoard/applyList"));
+    donationMenu.add(new MenuItem("모금함 개설 신청내역", "/donationBoard/applyList"));
     donationMenu.add(new MenuItem("모금함 개설 신청내역 상세보기", "/donationBoard/applyDetail"));
+    donationMenu.add(new MenuItem("모금함 개설 승인하기", "/donationBoard/acceptApply"));
+    donationMenu.add(new MenuItem("모금함 개설 반려하기", "/donationBoard/rejectApply"));
 
 
     MenuGroup volunteerMenu = new MenuGroup("봉사활동 관리");
