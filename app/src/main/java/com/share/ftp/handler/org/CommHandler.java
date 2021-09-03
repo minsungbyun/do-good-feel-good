@@ -1,6 +1,5 @@
 package com.share.ftp.handler.org;
 
-import com.share.ftp.handler.personal.community.CommBoardHandler;
 import com.share.util.Prompt;
 
 public class CommHandler {

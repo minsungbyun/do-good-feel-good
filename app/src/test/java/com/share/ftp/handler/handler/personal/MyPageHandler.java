@@ -13,7 +13,7 @@ public class MyPageHandler {
 
   MyProfileHandler myProfileHandler =  new MyProfileHandler();
 
-  MyBoardListHandler myBoardListHandler = new MyBoardListHandler();
+  MyBoardUpdateHandler myBoardListHandler = new MyBoardUpdateHandler();
   MyPointHandler myPointHandler = new MyPointHandler();
   MyDonationHandler myDonationHandler = new MyDonationHandler();
   ApproveOrgHandler approveOrgHandler = new ApproveOrgHandler();

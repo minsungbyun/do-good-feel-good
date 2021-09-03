@@ -77,7 +77,7 @@ import com.share.ftp.handler.personal.community.CommReviewListHandler;
 import com.share.ftp.handler.personal.community.CommReviewUpdateHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterHandler;
-import com.share.ftp.handler.personal.mypage.MyBoardListHandler;
+import com.share.ftp.handler.personal.mypage.MyBoardUpdateHandler;
 import com.share.ftp.handler.personal.mypage.MyDonationHandler;
 import com.share.ftp.handler.personal.mypage.MyPointHandler;
 import com.share.ftp.handler.personal.mypage.MyProfileHandler;
@@ -210,7 +210,7 @@ public class CopyApp {
   //QuestionHandler questionHandler = new QuestionHandler(myQuestionListDTOList);
   AbstractNoticeHandler noticeListHandler = new AbstractNoticeHandler();
   MyProfileHandler myProfileHandler = new MyProfileHandler(myProfileDTOList);
-  MyBoardListHandler myBoardListHandler = new MyBoardListHandler();
+  MyBoardUpdateHandler myBoardListHandler = new MyBoardUpdateHandler();
   MyPointHandler myPointHandler = new MyPointHandler();
   MyDonationHandler myDonationHandler = new MyDonationHandler();
   ApproveOrgHandler approveOrgHandler = new ApproveOrgHandler(approveOrgDTOList);
