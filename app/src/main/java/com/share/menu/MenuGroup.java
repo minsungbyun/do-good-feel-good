@@ -131,7 +131,7 @@ public class MenuGroup extends Menu {
         System.out.println("올바른 숫자를 입력해주세요");
       }
 
-      //      } catch (Exception e) {
+      //    } catch (Exception e) {
       //        // try 블록 안에 있는 코드를 실행하다가 예외가 발생하면
       //        // 다음 문장을 실행한 후 시스템을 멈추지 않고 실행을 계속한다.
       //        System.out.println("--------------------------------------------------------------");
@@ -205,7 +205,8 @@ public class MenuGroup extends Menu {
       } else if ((this.childs[i].enableState == Menu.ENABLE_MEMBER &&
           AuthLoginHandler.getLoginUser() != null) &&
           (AuthLoginHandler.getLoginUser().isPersonal() == true ||
-          AuthLoginHandler.getLoginUser().isOrg() == true)) {
+          AuthLoginHandler.getLoginUser().isOrg() == true /*||
+          AuthLoginHandler.getLoginUser().isAdmin() == true*/)) {
 
         menuList.add(this.childs[i]);
 

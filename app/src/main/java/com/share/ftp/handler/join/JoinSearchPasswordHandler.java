@@ -10,6 +10,7 @@ public class JoinSearchPasswordHandler extends AbstractJoinHandler {
     super(joinDTOList);
   }
 
+  // 비밀번호 찾기 (아이디,이메일)
   @Override
   public void execute() {
     System.out.println();

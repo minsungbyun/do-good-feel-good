@@ -81,8 +81,32 @@ public class JoinAddHandler extends AbstractJoinHandler {
     joinDTO.setEmail(Prompt.inputString("이메일? "));
     joinDTO.setAdress(Prompt.inputString("주소? "));
     joinDTO.setRegisterDate(new Date(System.currentTimeMillis()));
+    System.out.println();
+
+    while (true) {
+      System.out.println("[회원 유형을 선택해주세요]");
+      System.out.println();
+      System.out.println("1. 개인");
+      System.out.println("2. 기관");
+      int no = Prompt.inputInt("번호> ");
+
+      if (no == 1) {
+        joinDTO.setPersonal(true);
+        break;
+
+      } else if (no == 2){
+        joinDTO.setOrg(true);
+        break;
+
+      } else {
+        System.out.println("잘못된 유형입니다. 다시입력해주세요");
+        continue;
+      }
+    }
 
     joinDTOList.add(joinDTO);
+
+    System.out.println("회원가입이 정상적으로 완료되었습니다.");
   }
 
 }
