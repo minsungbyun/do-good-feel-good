@@ -5,7 +5,7 @@ import com.share.util.Prompt;
 public class SupportHandler {
 
   QuestionListHandler questionListHandler = new QuestionListHandler();
-  NoticeListHandler noticeListHandler = new NoticeListHandler();
+  AbstractNoticeHandler noticeListHandler = new AbstractNoticeHandler();
 
   public void showNoticeList() {
     while (true) {
