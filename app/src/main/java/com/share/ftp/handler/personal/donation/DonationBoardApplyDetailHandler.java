@@ -18,7 +18,7 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
     System.out.println("[모금함 개설 신청내역 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    DonationBoardDTO donationBoardDTO = findByNo(no);
+    DonationBoardDTO donationBoardDTO = findByDonationApply(no);
 
     if (donationBoardDTO == null) {
       System.out.println("해당 번호의 모금함 개설 신청내역이 없습니다.");
