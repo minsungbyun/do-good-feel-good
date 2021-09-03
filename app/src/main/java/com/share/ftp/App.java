@@ -169,17 +169,14 @@ public class App {
   //  CommBoardUpdateHandler commBoardUpdateHandler = new CommBoardUpdateHandler(commBoardDTOList);
   //  CommBoardDeleteHandler commBoardDeleteHandler = new CommBoardDeleteHandler(commBoardDTOList);
 
-<<<<<<< HEAD
   //  CommReviewAddHandler commReviewAddHandler = new CommReviewAddHandler(commReviewDTOList);
   //  CommReviewListHandler commReviewListHandler = new CommReviewListHandler(commReviewDTOList);
   //  CommReviewUpdateHandler commReviewUpdateHandler = new CommReviewUpdateHandler(commReviewDTOList);
   //  CommReviewDeleteHandler commReviewDeleteHandler = new CommReviewDeleteHandler(commReviewDTOList);
-=======
   CommReviewAddHandler commReviewAddHandler = new CommReviewAddHandler(commReviewDTOList);
   CommReviewListHandler commReviewListHandler = new CommReviewListHandler(commReviewDTOList);
   CommReviewUpdateHandler commReviewUpdateHandler = new CommReviewUpdateHandler(commReviewDTOList);
   CommReviewDeleteHandler commReviewDeleteHandler = new CommReviewDeleteHandler(commReviewDTOList);
->>>>>>> 6abbb29512c40f0f769b85897f36257d3eeba0f8
 
   //  CommBestHandler commBestHandler = new CommBestHandler(commBoardHandler);
   //  CommReviewHandler commReviewHandler = new CommReviewHandler(commReviewDTOList);
@@ -219,11 +216,8 @@ public class App {
   // 고객센터 핸들러(기능)
 
   AdminQuestionHandler showQuestionHandler = new AdminQuestionHandler(questionDTOList);
-<<<<<<< HEAD
   // SupportHandler supportHandler = new SupportHandler(questionHandler, noticeListHandler);
-=======
   //  SupportHandler supportHandler = new SupportHandler(questionHandler, noticeListHandler);
->>>>>>> 6abbb29512c40f0f769b85897f36257d3eeba0f8
 
 
 
@@ -275,21 +269,15 @@ public class App {
     commands.put("/commReview/delete ", new CommReviewDeleteHandler(commReviewDTOList));
 
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 6abbb29512c40f0f769b85897f36257d3eeba0f8
     // 고객센터 문의하기
     commands.put("/question/add", new QuestionAddHandler(myQuestionListDTOList));
     commands.put("/question/list", new QuestionListHandler(myQuestionListDTOList));
     commands.put("/question/detail", new QuestionDetailHandler(myQuestionListDTOList));
     commands.put("/question/update", new QuestionUpdateHandler(myQuestionListDTOList));
     commands.put("/question/delete", new QuestionDeleteHandler(myQuestionListDTOList));
-<<<<<<< HEAD
 
-=======
->>>>>>> 6abbb29512c40f0f769b85897f36257d3eeba0f8
     // 관리자 회원정보 조회
     commands.put("/adminMember/list", new AdminMemberListHandler());
     commands.put("/adminMember/delete", new AdminMemberDeleteHandler());
@@ -317,10 +305,7 @@ public class App {
     // 마이페이지
     commands.put("/myProfile/update", new MyProfileHandler(myProfileDTOList));
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 6abbb29512c40f0f769b85897f36257d3eeba0f8
     // 챌린지 문의하기
     commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(myChallengeQuestionDTOList));
     commands.put("/challengeQuestion/list", new ChallengeQuestionListHandler(myChallengeQuestionDTOList));
@@ -501,10 +486,6 @@ public class App {
       public void execute() {
         rankingHandler.showMyRanking(); 
       }});
-<<<<<<< HEAD
-=======
-    //
->>>>>>> 6abbb29512c40f0f769b85897f36257d3eeba0f8
 
     MenuGroup personalDonationMenu = new MenuGroup("모금함");
     mainMenuGroup.add(personalDonationMenu);

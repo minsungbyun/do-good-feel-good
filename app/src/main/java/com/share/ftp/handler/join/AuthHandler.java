@@ -34,8 +34,6 @@ public class AuthHandler {
     }
   }
 
-
-
   public void logout() {
     System.out.println();
     System.out.println("[로그아웃]");
