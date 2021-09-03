@@ -9,11 +9,6 @@ public class MyPageHandler {
   public MyPageHandler(MyVolHandler myVolHandler) {
     this.myVolHandler = myVolHandler;
   }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 5d118454d21b069a568b73033bc00b28611784da
   public void myProfile() {
 
     while (true) {

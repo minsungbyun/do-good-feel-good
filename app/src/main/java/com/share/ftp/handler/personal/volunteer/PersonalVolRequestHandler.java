@@ -103,12 +103,8 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
     System.out.println();
     System.out.println("[개인봉사승인 목록]");
 
-<<<<<<< HEAD
-    if (personalRequestsDTO == null) {
-=======
 
     if (this.applySize == 0) {
->>>>>>> 5d118454d21b069a568b73033bc00b28611784da
       System.out.println("현재 승인된 봉사목록이 없습니다.");
       return;
     }

@@ -61,7 +61,12 @@ import com.share.ftp.handler.personal.challenge.ChallengeQuestionDetailHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionSearchHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionUpdateHandler;
-import com.share.ftp.handler.personal.challenge.ChallengeReviewHandler;
+import com.share.ftp.handler.personal.challenge.ChallengeReviewAddHandler;
+import com.share.ftp.handler.personal.challenge.ChallengeReviewDeleteHandler;
+import com.share.ftp.handler.personal.challenge.ChallengeReviewDetailHandler;
+import com.share.ftp.handler.personal.challenge.ChallengeReviewListHandler;
+import com.share.ftp.handler.personal.challenge.ChallengeReviewSearchHandler;
+import com.share.ftp.handler.personal.challenge.ChallengeReviewUpdateHandler;
 import com.share.ftp.handler.personal.challenge.RankingHandler;
 import com.share.ftp.handler.personal.community.CommBoardAddHandler;
 import com.share.ftp.handler.personal.community.CommBoardDeleteHandler;
@@ -189,7 +194,7 @@ public class App {
   ChallengeListHandler challengeListHandler = new ChallengeListHandler();
   ChallengeBoardHandler challengeBoardHandler = new ChallengeBoardHandler();
   RankingHandler rankingHandler = new RankingHandler();
-  ChallengeReviewHandler challengeReviewHandler = new ChallengeReviewHandler(myChallengeReviewDTOList);
+//  ChallengeReviewHandler challengeReviewHandler = new ChallengeReviewHandler(myChallengeReviewDTOList);
 
 
   // 모금함 관련 핸들러(기능)
@@ -265,6 +270,13 @@ public class App {
     commands.put("/commReview/update ", new CommReviewUpdateHandler(commReviewDTOList));
     commands.put("/commReview/delete ", new CommReviewDeleteHandler(commReviewDTOList));
 
+    // 챌린지 참여인증&댓글
+    commands.put("/challengeReview/add", new ChallengeReviewAddHandler(myChallengeReviewDTOList));
+    commands.put("/challengeReview/list", new ChallengeReviewListHandler(myChallengeReviewDTOList));
+    commands.put("/challengeReview/detail", new ChallengeReviewDetailHandler(myChallengeReviewDTOList));
+    commands.put("/challengeReview/update", new ChallengeReviewUpdateHandler(myChallengeReviewDTOList));
+    commands.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(myChallengeReviewDTOList));
+    commands.put("/challengeReview/search", new ChallengeReviewSearchHandler(myChallengeReviewDTOList));
 
     // 고객센터 문의하기
     commands.put("/question/add", new QuestionAddHandler(myQuestionListDTOList));
@@ -447,12 +459,12 @@ public class App {
       }});
     MenuGroup ChallengeReview = new MenuGroup("참여인증&댓글", Menu.ENABLE_ALL);
     monthlyChallengeDetail.add(ChallengeReview);
-
-    ChallengeReview.add(new MenuItem("등록", Menu.ENABLE_LOGIN, "/challengeReview/add"));
-    ChallengeReview.add(new MenuItem("목록", Menu.ENABLE_ALL,"/challengeReview/list"));
-    ChallengeReview.add(new MenuItem("상세보기", Menu.ENABLE_ALL,"/challengeReview/detail"));
-    ChallengeReview.add(new MenuItem("수정", Menu.ENABLE_LOGIN,"/challengeReview/update"));
-    ChallengeReview.add(new MenuItem("삭제", Menu.ENABLE_LOGIN,"/challengeReview/delete"));
+    ChallengeReview.add(new MenuItem("참여인증&댓글 등록", Menu.ENABLE_LOGIN, "/challengeReview/add"));
+    ChallengeReview.add(new MenuItem("참여인증&댓글 목록", Menu.ENABLE_ALL,"/challengeReview/list"));
+    ChallengeReview.add(new MenuItem("참여인증&댓글 상세보기", Menu.ENABLE_ALL,"/challengeReview/detail"));
+    ChallengeReview.add(new MenuItem("참여인증&댓글 수정", Menu.ENABLE_LOGIN,"/challengeReview/update"));
+    ChallengeReview.add(new MenuItem("참여인증&댓글 삭제", Menu.ENABLE_LOGIN,"/challengeReview/delete"));
+    ChallengeReview.add(new MenuItem("참여인증&댓글 검색", Menu.ENABLE_LOGIN, "/challengeReview/search"));
 
     MenuGroup ChallengeQuestion = new MenuGroup("문의하기", Menu.ENABLE_ALL);
     monthlyChallengeDetail.add(ChallengeQuestion);
@@ -744,8 +756,6 @@ public class App {
     return mainMenuGroup;
   }
 }
-
-
 
 
 
