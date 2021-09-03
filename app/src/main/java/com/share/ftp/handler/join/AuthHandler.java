@@ -17,8 +17,7 @@ public class AuthHandler {
     this.joinDTOList = joinDTOList;
   }
 
-<<<<<<< HEAD
-=======
+
   public void login() {
     System.out.println();
     System.out.println("[로그인]");
@@ -44,7 +43,7 @@ public class AuthHandler {
     System.out.println("로그아웃 하였습니다.");
   }
 
->>>>>>> 0c52c57f94bd015022730358b2a6c00fe52e1da8
+
   // 마이페이지의 나의정보보기
   public void displayUserInfo() {
 

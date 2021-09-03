@@ -187,7 +187,7 @@ public class MenuGroup extends Menu {
 
       } else if (this.childs[i].enableState == Menu.ENABLE_LOGIN&&
           //AuthLoginHandler.getLoginUser() != null) {
-          AuthLoginHandler.getLoginUser() == null) {
+          AuthLoginHandler.getLoginUser() != null) {
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_ALL) {

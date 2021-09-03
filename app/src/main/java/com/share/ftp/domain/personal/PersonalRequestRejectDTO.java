@@ -16,21 +16,19 @@ public class PersonalRequestRejectDTO {
   private String content;
   private String fileUpload;
   private boolean isOrg;
+  private boolean isChecked;
+  private String isSigned;
 
-  @Override
-  public String toString() {
-    return "PersonalRequestRejectDTO [no=" + no + ", title=" + title + ", sort=" + sort + ", tel="
-        + tel + ", email=" + email + ", volunteerPeriod=" + volunteerPeriod + ", volunteerTime="
-        + volunteerTime + ", volunteerList=" + volunteerList + ", content=" + content
-        + ", fileUpload=" + fileUpload + ", isOrg=" + isOrg + "]";
-  }
+
+
+
+
 
   @Override
   public int hashCode() {
-    return Objects.hash(content, email, fileUpload, isOrg, no, sort, tel, title, volunteerList,
-        volunteerPeriod, volunteerTime);
+    return Objects.hash(content, email, fileUpload, isChecked, isOrg, isSigned, no, sort, tel,
+        title, volunteerList, volunteerPeriod, volunteerTime);
   }
-
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -41,15 +39,21 @@ public class PersonalRequestRejectDTO {
       return false;
     PersonalRequestRejectDTO other = (PersonalRequestRejectDTO) obj;
     return Objects.equals(content, other.content) && Objects.equals(email, other.email)
-        && Objects.equals(fileUpload, other.fileUpload) && isOrg == other.isOrg && no == other.no
+        && Objects.equals(fileUpload, other.fileUpload) && isChecked == other.isChecked
+        && isOrg == other.isOrg && Objects.equals(isSigned, other.isSigned) && no == other.no
         && Objects.equals(sort, other.sort) && Objects.equals(tel, other.tel)
         && Objects.equals(title, other.title) && Objects.equals(volunteerList, other.volunteerList)
         && Objects.equals(volunteerPeriod, other.volunteerPeriod)
         && Objects.equals(volunteerTime, other.volunteerTime);
   }
-
-
-
+  @Override
+  public String toString() {
+    return "PersonalRequestRejectDTO [no=" + no + ", title=" + title + ", sort=" + sort + ", tel="
+        + tel + ", email=" + email + ", volunteerPeriod=" + volunteerPeriod + ", volunteerTime="
+        + volunteerTime + ", volunteerList=" + volunteerList + ", content=" + content
+        + ", fileUpload=" + fileUpload + ", isOrg=" + isOrg + ", isChecked=" + isChecked
+        + ", isSigned=" + isSigned + "]";
+  }
   public int getNo() {
     return no;
   }
@@ -114,6 +118,21 @@ public class PersonalRequestRejectDTO {
     return isOrg;
   }
   public void setIsOrg(boolean isOrg) {
+    this.isOrg = isOrg;
+  }
+  public boolean isChecked() {
+    return isChecked;
+  }
+  public void setChecked(boolean isChecked) {
+    this.isChecked = isChecked;
+  }
+  public String getIsSigned() {
+    return isSigned;
+  }
+  public void setIsSigned(String isSigned) {
+    this.isSigned = isSigned;
+  }
+  public void setOrg(boolean isOrg) {
     this.isOrg = isOrg;
   }
 
