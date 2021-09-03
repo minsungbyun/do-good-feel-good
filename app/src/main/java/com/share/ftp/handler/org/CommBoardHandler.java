@@ -145,6 +145,11 @@ public class CommBoardHandler {
     return -1;
   }
 
+  public CommBoardDTO[] chooseBoard() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
 }
 
 

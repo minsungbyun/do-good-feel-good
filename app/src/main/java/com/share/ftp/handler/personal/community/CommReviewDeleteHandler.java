@@ -6,8 +6,6 @@ import com.share.util.Prompt;
 
 public class CommReviewDeleteHandler extends AbstractCommReviewHandler{
 
-  List<CommReviewDTO> commReviewDTOList;
-
   public CommReviewDeleteHandler(List<CommReviewDTO> commReviewDTOList) {
     super(commReviewDTOList);
   }
