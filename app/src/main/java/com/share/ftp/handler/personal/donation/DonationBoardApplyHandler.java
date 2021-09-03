@@ -2,7 +2,9 @@ package com.share.ftp.handler.personal.donation;
 
 import java.sql.Date;
 import java.util.List;
+import com.share.ftp.domain.guest.JoinDTO;
 import com.share.ftp.domain.personal.DonationBoardDTO;
+import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
 public class DonationBoardApplyHandler extends AbstractDonationBoardHandler {
@@ -32,9 +34,17 @@ public class DonationBoardApplyHandler extends AbstractDonationBoardHandler {
     System.out.println("[모금함 개설 신청]");
     System.out.println("[1.아동] [2.청소년] [3.어르신] [4.장애인] [5.동물] [6.환경] [7.기타] ");
 
-    DonationBoardDTO donationBoardDTO = new DonationBoardDTO();
+    JoinDTO joinDTO = AuthLoginHandler.getLoginUser();
+
+    if (joinDTO == null) {
+      System.out.println("로그인 후 사용가능합니다.");
+      return;
+    }
 
     try {
+
+      DonationBoardDTO donationBoardDTO = new DonationBoardDTO();
+
       donationBoardDTO.setNo(Prompt.inputInt("개설번호: "));
       donationBoardDTO.setTitle(Prompt.inputString("제목: "));
       donationBoardDTO.setLeader(Prompt.inputString("주최자: "));
@@ -47,14 +57,15 @@ public class DonationBoardApplyHandler extends AbstractDonationBoardHandler {
 
       donationBoardDTOList.add(donationBoardDTO);
 
-      System.out.println("[모금함 개설 신청이 완료되었습니다.]");
-
-    } catch (Throwable e) {
+    } catch (Exception e) {
       System.out.println("--------------------------------------------------------------");
-      System.out.printf("오류 발생: %s\n", e.getClass().getName());
+      System.out.println("오류가 발생했으니 다시 입력 바랍니다.");
+      e.printStackTrace();
       System.out.println("--------------------------------------------------------------");
-      System.out.println("제안기간의 양식에 맞춰서 작성 해주세요");
     }
+
+    System.out.println("모금함 개설신청이 완료되었습니다.");
+
   }
 }
 

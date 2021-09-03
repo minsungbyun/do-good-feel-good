@@ -47,7 +47,7 @@ public class MyPageDelete extends AbstractJoinHandler {
     System.out.println("");
     System.out.println("[  그동안 행복하share를 이용해주셔서 감사했습니다.  ]");
     try {
-      artGen.printTextArt("thanks", ASCIIArt.ART_SIZE_MEDIUM);
+      artGen.printTextArt("Good Bye ~", ASCIIArt.ART_SIZE_MEDIUM);
     } catch (Exception e) {
       e.printStackTrace();
     }
