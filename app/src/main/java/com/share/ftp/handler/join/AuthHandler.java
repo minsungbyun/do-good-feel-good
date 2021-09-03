@@ -2,7 +2,6 @@ package com.share.ftp.handler.join;
 
 public class AuthHandler {
 
-<<<<<<< HEAD
   List<JoinDTO> joinDTOList;
 
   public static JoinDTO loginUser;
@@ -91,7 +90,7 @@ public class AuthHandler {
 
     System.out.println("회원정보가 수정되었습니다.");
   }
-=======
+
   //  List<JoinDTO> joinDTOList;
   //
   //  public static JoinDTO loginUser;
@@ -181,7 +180,7 @@ public class AuthHandler {
   //
   //    System.out.println("회원정보가 수정되었습니다.");
   //  }
->>>>>>> d55164116a8ca8df78149569db2d5181dc702b11
+  >>>>>>> d55164116a8ca8df78149569db2d5181dc702b11
 
 }
 

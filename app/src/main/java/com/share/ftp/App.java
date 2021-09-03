@@ -621,55 +621,9 @@ public class App {
 
     myPoint.add(new MenuItem("나의포인트확인","MyPoint/list"));
 
-
-    //    MenuGroup myDonation = new MenuGroup("나의 모금함");
-    //    personalMyPage.add(myDonation);
-    //    //
-    //    myDonation.add(new Menu("1. 나의기부내역") {
-    //      @Override
-    //      public void execute() {
-    //        myDonationHandler.showMyTotalDonation(); 
-    //      }});    
-    //
-
-    //            MenuGroup myBoard = new MenuGroup("나의 게시글");
-    //            personalMyPage.add(myBoard);
-    //        
-    //            MenuGroup myBoardList = new MenuGroup("목록");
-    //            myBoard.add(myBoardList);
-    //        
-    //            MenuGroup myBoardDetail = new MenuGroup("상세보기");
-    //            myBoard.add(myBoardDetail);
-    //        
-    //            myBoardDetail.add(new Menu("수정") {
-    //              @Override
-    //              public void execute() {
-    //                boardHandler.checkUpdate(); 
-    //              }});
-    //            myBoardDetail.add(new Menu("삭제") {
-    //              @Override
-    //              public void execute() {
-    //                boardHandler.checkDelete(); 
-    //              }});    
-
-
-    //    MenuGroup myPoint = new MenuGroup("나의 포인트");
-    //    personalMyPage.add(myPoint);
-    //    //
-    //    myPoint.add(new Menu("1. 나의포인트확인") {
-    //      @Override
-    //      public void execute() {
-    //        myPointHandler.showMyPointList(); 
-    //      }});    
-    //    //
-
     MenuGroup myDonation = new MenuGroup("나의 모금함");
     personalMyPage.add(myDonation);
     myDonation.add(new MenuItem("나의기부내역", "/myDonation/list"));
-
-
-    //    MenuGroup organizationApprove = new MenuGroup("기관 승인 신청");
-    //    personalMyPage.add(organizationApprove);
 
 
     MenuGroup organizationApprove = new MenuGroup("기관 승인 신청");
