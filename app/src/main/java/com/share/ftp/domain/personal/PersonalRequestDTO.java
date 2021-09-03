@@ -18,6 +18,9 @@ public class PersonalRequestDTO {
   private String fileUpload;
   private boolean isOrg;
   private boolean isChecked;
+  private String isSigned;
+
+
 
 
 
@@ -25,8 +28,8 @@ public class PersonalRequestDTO {
 
   @Override
   public int hashCode() {
-    return Objects.hash(content, email, fileUpload, isChecked, isOrg, joinNum, no, sort, tel, title,
-        volunteerList, volunteerPeriod, volunteerTime);
+    return Objects.hash(content, email, fileUpload, isChecked, isOrg, isSigned, joinNum, no, sort,
+        tel, title, volunteerList, volunteerPeriod, volunteerTime);
   }
   @Override
   public boolean equals(Object obj) {
@@ -39,9 +42,10 @@ public class PersonalRequestDTO {
     PersonalRequestDTO other = (PersonalRequestDTO) obj;
     return Objects.equals(content, other.content) && Objects.equals(email, other.email)
         && Objects.equals(fileUpload, other.fileUpload) && isChecked == other.isChecked
-        && isOrg == other.isOrg && joinNum == other.joinNum && no == other.no
-        && Objects.equals(sort, other.sort) && Objects.equals(tel, other.tel)
-        && Objects.equals(title, other.title) && Objects.equals(volunteerList, other.volunteerList)
+        && isOrg == other.isOrg && Objects.equals(isSigned, other.isSigned)
+        && joinNum == other.joinNum && no == other.no && Objects.equals(sort, other.sort)
+        && Objects.equals(tel, other.tel) && Objects.equals(title, other.title)
+        && Objects.equals(volunteerList, other.volunteerList)
         && Objects.equals(volunteerPeriod, other.volunteerPeriod)
         && Objects.equals(volunteerTime, other.volunteerTime);
   }
@@ -51,7 +55,7 @@ public class PersonalRequestDTO {
         + ", email=" + email + ", volunteerPeriod=" + volunteerPeriod + ", volunteerTime="
         + volunteerTime + ", volunteerList=" + volunteerList + ", joinNum=" + joinNum + ", content="
         + content + ", fileUpload=" + fileUpload + ", isOrg=" + isOrg + ", isChecked=" + isChecked
-        + "]";
+        + ", isSigned=" + isSigned + "]";
   }
   public int getNo() {
     return no;
@@ -137,6 +141,13 @@ public class PersonalRequestDTO {
   public void setOrg(boolean isOrg) {
     this.isOrg = isOrg;
   }
+  public String getIsSigned() {
+    return isSigned;
+  }
+  public void setIsSigned(String isSigned) {
+    this.isSigned = isSigned;
+  }
+
 
 
 
