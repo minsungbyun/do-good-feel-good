@@ -59,6 +59,17 @@ public abstract class AbstractJoinHandler implements Command {
         return joinDTO;
       }
     }
+    System.out.println("일치하는 이름이 없습니다.");
+    return null;
+  }
+
+  protected JoinDTO findByEmail(String email) {
+    for (JoinDTO joinDTO : joinDTOList) {
+      if (joinDTO.getName().equalsIgnoreCase(email)) {
+        return joinDTO;
+      }
+    }
+    System.out.println("일치하는 이메일이 없습니다.");
     return null;
   }
 

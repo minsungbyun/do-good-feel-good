@@ -583,9 +583,9 @@ public class App {
     MenuGroup myProfile = new MenuGroup("회원정보");
     personalMyPage.add(myProfile);
 
-    myProfile.add(new MenuItem("내 정보", "/auth/changeUserInfo"));
+    myProfile.add(new MenuItem("내 정보", "/auth/displayUserInfo"));
 
-    myProfile.add(new MenuItem("내 정보 수정", "/auth/displayUserInfo"));
+    myProfile.add(new MenuItem("내 정보 수정", "/auth/changeUserInfo"));
 
 
     MenuGroup myVolunteer = new MenuGroup("나의 봉사");
