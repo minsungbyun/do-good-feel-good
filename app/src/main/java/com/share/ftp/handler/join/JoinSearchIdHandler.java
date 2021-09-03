@@ -14,15 +14,33 @@ public class JoinSearchIdHandler extends AbstractJoinHandler {
   // 아이디찾기 이름, 이메일을 통해 찾는다.
   @Override
   public void execute() {
-    System.out.println();
-    String name = Prompt.inputString("이름? ");
-    String email = Prompt.inputString("이메일? ");
 
-    JoinDTO joinDTO = findById(name, email);
+    while (true) {
+      System.out.println("Q. 이름을 적어주세요.");
+      System.out.println();
+      String name = Prompt.inputString("이름? ");
 
-    if (joinDTO == null) {
-      System.out.println("해당 아이디를 찾을 수 없습니다.");
-      return;
+      JoinDTO joinDTO = findByName(name);
+
+      if (joinDTO.getName() == null) {
+        System.out.println("해당 이름은 존재하지 않습니다.");
+        return;
+      }
+    }
+
+
+
+    while (true) {
+      System.out.println("Q. 이메일을 적어주세요.");
+      String email = Prompt.inputString("이메일? ");
+
+
+      JoinDTO joinDTO = findByEmail(email);
+
+      if (joinDTO == null) {
+        System.out.println("해당 아이디를 찾을 수 없습니다.");
+        return;
+      }
     }
     System.out.printf("아이디: %s\n", joinDTO.getId());
   }
