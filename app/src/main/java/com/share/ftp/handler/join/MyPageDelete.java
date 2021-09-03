@@ -4,7 +4,7 @@ import java.util.List;
 import com.share.ftp.domain.guest.JoinDTO;
 import com.share.util.Prompt;
 
-public class MyPageDelete extends AbstractJoinHandler{
+public class MyPageDelete extends AbstractJoinHandler {
 
   public MyPageDelete(List<JoinDTO> joinDTOList) {
     super(joinDTOList);
