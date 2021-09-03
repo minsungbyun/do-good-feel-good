@@ -16,7 +16,7 @@ public class CommBoardListHandler extends AbstractCommBoardHandler {
     System.out.println("[메인/소통해요/나눔이야기/목록]");
 
     if (commBoardDTOList.isEmpty()) {
-      System.out.println("작성된 게시글이 없습니다.");
+      System.out.println("작성된 게시글이 없습니다");
       return;
     }
 

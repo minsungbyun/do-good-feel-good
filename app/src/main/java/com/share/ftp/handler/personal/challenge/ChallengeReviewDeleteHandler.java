@@ -1,9 +1,7 @@
 package com.share.ftp.handler.personal.challenge;
 
 import java.util.List;
-
 import com.share.ftp.domain.personal.MyChallengeReviewDTO;
-import com.share.ftp.handler.join.AuthHandler;
 import com.share.util.Prompt;
 
 public class ChallengeReviewDeleteHandler extends AbstractChallengeReviewHandler {
@@ -12,6 +10,7 @@ public class ChallengeReviewDeleteHandler extends AbstractChallengeReviewHandler
     super(myChallengeReviewDTOList);
   }
 
+  @Override
   public void execute() {
     System.out.println("[댓글 삭제]");
     int no = Prompt.inputInt("번호? ");
@@ -28,7 +27,7 @@ public class ChallengeReviewDeleteHandler extends AbstractChallengeReviewHandler
       System.out.println("참여인증&댓글 삭제를 취소하였습니다.");
       return;
     }
-    
+
     myChallengeReviewDTOList.remove(myChallengeReview);
 
     System.out.println("참여인증&댓글을 삭제하였습니다.");

@@ -16,8 +16,18 @@ public abstract class AbstractJoinHandler implements Command {
 
   protected JoinDTO findByMember(String id, String email) {
     for (JoinDTO joinDTO : joinDTOList) {
-      if (joinDTO.getId().equalsIgnoreCase(id) && 
-          joinDTO.getEmail().equalsIgnoreCase(email)) {
+      if (joinDTO.getId().equals(id) && 
+          joinDTO.getEmail().equals(email)) {
+        return joinDTO;
+      }
+    }
+    return null;
+  }
+
+  protected JoinDTO findByIdPassword(String id, String password) {
+    for (JoinDTO joinDTO : joinDTOList) {
+      if (joinDTO.getId().equals(id) && 
+          joinDTO.getPassword().equals(password)) {
         return joinDTO;
       }
     }
