@@ -55,7 +55,7 @@ public abstract class AbstractJoinHandler implements Command {
 
   protected JoinDTO findByName(String name) {
     for (JoinDTO joinDTO : joinDTOList) {
-      if (joinDTO.getName().equalsIgnoreCase(name)) {
+      if (joinDTO.getName().equals(name)) {
         return joinDTO;
       }
     }
@@ -63,13 +63,21 @@ public abstract class AbstractJoinHandler implements Command {
     return null;
   }
 
-  protected JoinDTO findByEmail(String email) {
+  protected JoinDTO findByTel(String tel) {
     for (JoinDTO joinDTO : joinDTOList) {
-      if (joinDTO.getName().equalsIgnoreCase(email)) {
+      if (joinDTO.getTel().equals(tel)) {
         return joinDTO;
       }
     }
-    System.out.println("일치하는 이메일이 없습니다.");
+    return null;
+  }
+
+  protected JoinDTO findByEmail(String email) {
+    for (JoinDTO joinDTO : joinDTOList) {
+      if (joinDTO.getName().equals(email)) {
+        return joinDTO;
+      }
+    }
     return null;
   }
 
