@@ -82,7 +82,7 @@ import com.share.ftp.handler.personal.mypage.MyDonationHandler;
 import com.share.ftp.handler.personal.mypage.MyPointHandler;
 import com.share.ftp.handler.personal.mypage.MyProfileHandler;
 import com.share.ftp.handler.personal.mypage.WithdrawMemberHandler;
-import com.share.ftp.handler.personal.support.NoticeListHandler;
+import com.share.ftp.handler.personal.support.AbstractNoticeHandler;
 import com.share.ftp.handler.personal.support.QuestionAddHandler;
 import com.share.ftp.handler.personal.support.QuestionDeleteHandler;
 import com.share.ftp.handler.personal.support.QuestionDetailHandler;
@@ -208,7 +208,7 @@ public class CopyApp {
   // 마이 페이지 핸들러(기능)
   // MyPageHandler myVolHandler = new MyPageHandler();
   //QuestionHandler questionHandler = new QuestionHandler(myQuestionListDTOList);
-  NoticeListHandler noticeListHandler = new NoticeListHandler();
+  AbstractNoticeHandler noticeListHandler = new AbstractNoticeHandler();
   MyProfileHandler myProfileHandler = new MyProfileHandler(myProfileDTOList);
   MyBoardListHandler myBoardListHandler = new MyBoardListHandler();
   MyPointHandler myPointHandler = new MyPointHandler();
