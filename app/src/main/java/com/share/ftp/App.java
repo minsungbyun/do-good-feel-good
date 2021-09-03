@@ -350,21 +350,21 @@ public class App {
     MenuGroup monthlyChallengeDetail = new MenuGroup("챌린지 상세보기");
     monthlyChallengeMenu.add(monthlyChallengeDetail);
 
-    monthlyChallengeDetail.add(new Menu("상세정보") {
-      @Override
-      public void execute() {
-        challengeBoardHandler.showChallengeDetail(); 
-      }});
-    monthlyChallengeDetail.add(new Menu("참여하기", Menu.ENABLE_PERSONAL) {
-      @Override
-      public void execute() {
-        challengeBoardHandler.join(); 
-      }});
-    monthlyChallengeDetail.add(new Menu("참여자 목록", Menu.ENABLE_MEMBER) {
-      @Override
-      public void execute() {
-        challengeBoardHandler.showMemberList(); 
-      }});
+    //    monthlyChallengeDetail.add(new Menu("상세정보") {
+    //      @Override
+    //      public void execute() {
+    //        challengeBoardHandler.showChallengeDetail(); 
+    //      }});
+    //    monthlyChallengeDetail.add(new Menu("참여하기", Menu.ENABLE_PERSONAL) {
+    //      @Override
+    //      public void execute() {
+    //        challengeBoardHandler.join(); 
+    //      }});
+    //    monthlyChallengeDetail.add(new Menu("참여자 목록", Menu.ENABLE_MEMBER) {
+    //      @Override
+    //      public void execute() {
+    //        challengeBoardHandler.showMemberList(); 
+    //      }});
     MenuGroup ChallengeReview = new MenuGroup("참여인증&댓글");
     monthlyChallengeDetail.add(ChallengeReview);
     ChallengeReview.add(new MenuItem("참여인증&댓글 등록", Menu.ENABLE_LOGIN, "/challengeReview/add"));
@@ -388,18 +388,18 @@ public class App {
     MenuGroup monthlyRankingMenu = new MenuGroup("이달의 랭킹", Menu.ENABLE_ALL);
     personalChallengeMenu.add(monthlyRankingMenu);
 
-
-    monthlyRankingMenu.add(new Menu("이달의 랭킹보기", Menu.ENABLE_ALL) {
-      @Override
-      public void execute() {
-        rankingHandler.showTotalRanking(); 
-      }});
-
-    monthlyRankingMenu.add(new Menu("나의 랭킹보기", Menu.ENABLE_PERSONAL) {
-      @Override
-      public void execute() {
-        rankingHandler.showMyRanking(); 
-      }});
+    //
+    //    monthlyRankingMenu.add(new Menu("이달의 랭킹보기", Menu.ENABLE_ALL) {
+    //      @Override
+    //      public void execute() {
+    //        rankingHandler.showTotalRanking(); 
+    //      }});
+    //
+    //    monthlyRankingMenu.add(new Menu("나의 랭킹보기", Menu.ENABLE_PERSONAL) {
+    //      @Override
+    //      public void execute() {
+    //        rankingHandler.showMyRanking(); 
+    //      }});
 
     /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -428,26 +428,7 @@ public class App {
     MenuGroup notice = new MenuGroup("공지사항");
     support.add(notice);
 
-    notice.add(new Menu("등록") {
-      @Override
-      public void execute() {
-        noticeListHandler.noticeList(); 
-      }});
-    notice.add(new Menu("목록") {
-      @Override
-      public void execute() {
-        noticeListHandler.noticeList(); 
-      }});
-    notice.add(new Menu("목록") {
-      @Override
-      public void execute() {
-        noticeListHandler.noticeList(); 
-      }});
-    notice.add(new Menu("상세보기") {
-      @Override
-      public void execute() {
-        noticeListHandler.noticeDetail(); 
-      }});
+
 
     notice.add(new MenuItem("등록", Menu.ENABLE_ADMIN,"/notice/add"));
     notice.add(new MenuItem("목록", "/notice/list"));
