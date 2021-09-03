@@ -26,6 +26,7 @@ public class PersonalRequestDTO {
 
 
 
+
   @Override
   public int hashCode() {
     return Objects.hash(content, email, fileUpload, isChecked, isOrg, isSigned, joinNum, no, sort,
