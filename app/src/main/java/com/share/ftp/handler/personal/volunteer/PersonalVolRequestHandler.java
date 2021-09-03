@@ -54,6 +54,7 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
       personalRequestDTO.setContent(Prompt.inputString("내용? ")); 
       personalRequestDTO.setFileUpload(Prompt.inputString("파일? ")); 
       personalRequestDTO.setIsOrg(false); 
+      personalRequestDTO.setIsSigned("승인대기");
 
       personalRequestsDTO[size++] = personalRequestDTO;
 
@@ -76,10 +77,13 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
     System.out.println();
     System.out.println("[개인봉사신청 목록]");
 
-    if (this.personalRequestsDTO == null) {
-      System.out.println("현재 신청된 봉사목록이 없습니다.");
+    if (this.size == 0) {
+      System.out.println("현재 등록된 봉사목록이 없습니다.");
       return;
     }
+
+
+
 
     for (int i = 0; i < this.size; i++) {
       System.out.printf("번호: %d\n봉사제목: %s\n전화번호: %s\n이메일: %s\n봉사기간: %s\n봉사시간: %s\n"
@@ -95,6 +99,7 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
           this.personalRequestsDTO[i].getContent(),
           this.personalRequestsDTO[i].getFileUpload(),
           this.personalRequestsDTO[i].isChecked()
+          //          this.personalRequestRejectDTO[i].getIsSigned()
           );
     }
   }
@@ -111,7 +116,7 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
 
 
     for (int i = 0; i < this.applySize; i++) {
-      System.out.printf("봉사명 : %d\n 봉사제목 : %s\n %s, %s, %s, %s, %s, %s, %s, %b \n", 
+      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %b \n", 
           this.personalRequestApplyDTO[i].getNo(), 
           this.personalRequestApplyDTO[i].getTitle(), 
           this.personalRequestApplyDTO[i].getTel(),
@@ -122,6 +127,7 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
           this.personalRequestApplyDTO[i].getContent(),
           this.personalRequestApplyDTO[i].getFileUpload(),
           this.personalRequestApplyDTO[i].isChecked()
+          //          this.personalRequestRejectDTO[i].getIsSigned()
           );
     }
   }
@@ -136,7 +142,7 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
     }
 
     for (int i = 0; i < this.rejectSize; i++) {
-      System.out.printf("봉사명 : %d\n 봉사제목 : %s\n %s, %s, %s, %s, %s, %s, %s, %b \n", 
+      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %b \n", 
           this.personalRequestRejectDTO[i].getNo(), 
           this.personalRequestRejectDTO[i].getTitle(), 
           this.personalRequestRejectDTO[i].getTel(),
@@ -147,6 +153,7 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
           this.personalRequestRejectDTO[i].getContent(),
           this.personalRequestRejectDTO[i].getFileUpload(),
           this.personalRequestRejectDTO[i].isChecked()
+          //          this.personalRequestRejectDTO[i].getIsSigned()
           );
     }
   }
@@ -192,6 +199,9 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
     }
 
     personalRequestDTO.setChecked(true);
+    //    personalRequestDTO.setIsSigned("승인됨");
+
+
     personalRequestApplyDTO[applySize++] = personalRequestDTO;
 
     //    for (int i = personalRequestIndex + 1; i < this.size; i++) {
@@ -241,6 +251,7 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
     }
 
     personalRequestDTO.setChecked(false);
+    //    personalRequestDTO.setIsSigned("반려됨");
     personalRequestApplyDTO[applySize++] = personalRequestDTO;
 
     for (int i = personalRequestIndex + 1; i < this.size; i++) {
@@ -267,7 +278,7 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
 
     System.out.println("[개인봉사승인 목록]");
     for (int i = 0; i < this.applySize; i++) {
-      System.out.printf("봉사명 : %d\n 봉사제목 : %s\n %s, %s, %s, %s, %s, %s, %s, %b \n", 
+      System.out.printf("봉사명 : %d\n 봉사제목 : %s\n %s, %s, %s, %s, %s, %s, %s, %s\n", 
           this.personalRequestApplyDTO[i].getNo(), 
           this.personalRequestApplyDTO[i].getTitle(), 
           this.personalRequestApplyDTO[i].getTel(),
@@ -277,7 +288,9 @@ public class PersonalVolRequestHandler { // 개인 봉사신청 양식 쓰는 �
           this.personalRequestApplyDTO[i].getVolunteerList(),
           this.personalRequestApplyDTO[i].getContent(),
           this.personalRequestApplyDTO[i].getFileUpload(),
-          this.personalRequestApplyDTO[i].isChecked()
+          //          this.personalRequestApplyDTO[i].isChecked()
+          this.personalRequestRejectDTO[i].getIsSigned()
+
           );
     }
 

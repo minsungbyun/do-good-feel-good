@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 import com.share.ftp.domain.guest.JoinDTO;
+//import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
@@ -131,7 +132,7 @@ public class MenuGroup extends Menu {
         System.out.println("올바른 숫자를 입력해주세요");
       }
 
-      //      } catch (Exception e) {
+      //    } catch (Exception e) {
       //        // try 블록 안에 있는 코드를 실행하다가 예외가 발생하면
       //        // 다음 문장을 실행한 후 시스템을 멈추지 않고 실행을 계속한다.
       //        System.out.println("--------------------------------------------------------------");
@@ -165,7 +166,9 @@ public class MenuGroup extends Menu {
   private List<Menu> getMenuList() {
     ArrayList<Menu> menuList = new ArrayList<>();
 
+    //JoinDTO loginUser = AuthLoginHandler.getLoginUser();
     JoinDTO loginUser = AuthLoginHandler.getLoginUser();
+
 
     if (loginUser == null) {
       System.out.println("[  현재 로그인 하지 않았습니다. ]");
@@ -178,11 +181,13 @@ public class MenuGroup extends Menu {
 
       // 기본 접근메뉴
       if (this.childs[i].enableState == Menu.ENABLE_LOGOUT &&
+          //AuthLoginHandler.getLoginUser() == null) {
           AuthLoginHandler.getLoginUser() == null) {
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_LOGIN&&
-          AuthLoginHandler.getLoginUser() != null) {
+          //AuthLoginHandler.getLoginUser() != null) {
+          AuthLoginHandler.getLoginUser() == null) {
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_ALL) {
@@ -191,25 +196,37 @@ public class MenuGroup extends Menu {
 
         // 권한별 접근메뉴
       } else if (this.childs[i].enableState == Menu.ENABLE_PERSONAL &&
+          //          AuthLoginHandler.getLoginUser() != null &&
+          //          AuthLoginHandler.getLoginUser().isPersonal() == true) {
+
           AuthLoginHandler.getLoginUser() != null &&
           AuthLoginHandler.getLoginUser().isPersonal() == true) {
 
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_ORG &&
+          //          AuthLoginHandler.getLoginUser() != null &&
+          //          AuthLoginHandler.getLoginUser().isOrg() == true) {
           AuthLoginHandler.getLoginUser() != null &&
           AuthLoginHandler.getLoginUser().isOrg() == true) {
 
         menuList.add(this.childs[i]);
 
       } else if ((this.childs[i].enableState == Menu.ENABLE_MEMBER &&
+          //          AuthLoginHandler.getLoginUser() != null) &&
+          //          (AuthLoginHandler.getLoginUser().isPersonal() == true ||
+          //          AuthLoginHandler.getLoginUser().isOrg() == true)) {
+
           AuthLoginHandler.getLoginUser() != null) &&
           (AuthLoginHandler.getLoginUser().isPersonal() == true ||
-          AuthLoginHandler.getLoginUser().isOrg() == true)) {
+          AuthLoginHandler.getLoginUser().isOrg() == true /*||
+          AuthLoginHandler.getLoginUser().isAdmin() == true*/)) {
 
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_ADMIN &&
+          //          AuthLoginHandler.getLoginUser() != null && 
+          //          AuthLoginHandler.getLoginUser().isAdmin() == true) {
           AuthLoginHandler.getLoginUser() != null && 
           AuthLoginHandler.getLoginUser().isAdmin() == true) {
 
