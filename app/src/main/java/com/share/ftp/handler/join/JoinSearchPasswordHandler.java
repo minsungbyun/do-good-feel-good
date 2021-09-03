@@ -23,8 +23,8 @@ public class JoinSearchPasswordHandler extends AbstractJoinHandler {
       System.out.println("해당 아이디를 찾을 수 없습니다.");
       return;
     }
-    System.out.printf("아이디: %s\n", joinDTO.getId());
-    System.out.printf("비밀번호: %s\n", joinDTO.getPassword());
+    System.out.println();
+    System.out.printf("비밀번호: [ %s ]\n", joinDTO.getPassword());
   }
 }
 

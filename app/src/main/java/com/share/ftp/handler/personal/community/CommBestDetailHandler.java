@@ -11,7 +11,10 @@ public class CommBestDetailHandler extends AbstractCommBestReviewHandler {
 
   @Override
   public void execute() {
-    System.out.println("소통해요/ 나눔이야기Best/ 목록");
+    System.out.println();
+    System.out.println("[소통해요/나눔이야기Best/목록]");
+
+
 
     //    //  전체 목록중에서 조회수가 가장 높은 3개
     //    CommBoardDTO[] arr = commBoardHandler.chooseBoard();

@@ -44,6 +44,38 @@ public abstract class AbstractJoinHandler implements Command {
   }
 
 
+  protected JoinDTO findByName(String name) {
+    for (JoinDTO joinDTO : joinDTOList) {
+      if (joinDTO.getName().equals(name)) {
+        return joinDTO;
+      }
+    }
+    return null;
+  }
+
+
+
+  protected JoinDTO findByTel(String tel) {
+    for (JoinDTO joinDTO : joinDTOList) {
+      if (joinDTO.getTel().equals(tel)) {
+        return joinDTO;
+      }
+    }
+    return null;
+  }
+
+  protected JoinDTO findByEmail(String email) {
+    for (JoinDTO joinDTO : joinDTOList) {
+      if (joinDTO.getName().equals(email)) {
+        return joinDTO;
+      }
+    }
+    return null;
+  }
+
+
+
+
   protected boolean exist(String name) {
     for (JoinDTO joinDTO : joinDTOList) {
       if (joinDTO.getName().equals(name)) {
@@ -53,14 +85,6 @@ public abstract class AbstractJoinHandler implements Command {
     return false;
   }
 
-  protected JoinDTO findByName(String name) {
-    for (JoinDTO joinDTO : joinDTOList) {
-      if (joinDTO.getName().equalsIgnoreCase(name)) {
-        return joinDTO;
-      }
-    }
-    return null;
-  }
 
   protected JoinDTO promptMember(String label) {
     while (true) {

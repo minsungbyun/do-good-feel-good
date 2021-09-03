@@ -29,7 +29,7 @@ public class JoinAddHandler extends AbstractJoinHandler {
     // 개인회원
     JoinDTO testUser = new JoinDTO();
     testUser.setId("aaa");
-    testUser.setName("test1");
+    testUser.setName("행복이");
     testUser.setEmail("aaa@test.com");
     testUser.setPassword("111");
     testUser.setTel("010-2222-2222");
