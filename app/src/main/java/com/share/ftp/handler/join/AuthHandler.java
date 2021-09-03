@@ -42,6 +42,7 @@ public class AuthHandler {
     System.out.println("로그아웃 하였습니다.");
   }
 
+
   // 마이페이지의 나의정보보기
   public void displayUserInfo() {
 
@@ -94,20 +95,5 @@ public class AuthHandler {
     System.out.println("회원정보가 수정되었습니다.");
   }
 
-
-
-
-
-
-
-  private JoinDTO findByMember(String id, String password) {
-    for (JoinDTO joinDTO : joinDTOList) {
-      if (joinDTO.getId().equalsIgnoreCase(id) && 
-          joinDTO.getPassword().equalsIgnoreCase(password)) {
-        return joinDTO;
-      }
-    }
-    return null;
-  }
 }
 
