@@ -45,8 +45,9 @@ import com.share.ftp.handler.join.AuthLogoutHandler;
 import com.share.ftp.handler.join.JoinAddHandler;
 import com.share.ftp.handler.join.JoinDetailHandler;
 import com.share.ftp.handler.join.JoinListHandler;
-import com.share.ftp.handler.join.JoinSearchIdHandler;
+import com.share.ftp.handler.join.JoinSearchEmailIdHandler;
 import com.share.ftp.handler.join.JoinSearchPasswordHandler;
+import com.share.ftp.handler.join.JoinSearchTelIdHandler;
 import com.share.ftp.handler.join.MyPageDelete;
 import com.share.ftp.handler.join.MyPageInfoHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeBoardHandler;
@@ -73,8 +74,14 @@ import com.share.ftp.handler.personal.community.CommReviewAddHandler;
 import com.share.ftp.handler.personal.community.CommReviewDeleteHandler;
 import com.share.ftp.handler.personal.community.CommReviewListHandler;
 import com.share.ftp.handler.personal.community.CommReviewUpdateHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardApplyDetailHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardApplyHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardApplyListHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardHandler;
+import com.share.ftp.handler.personal.donation.DonationRegisterAddHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterHandler;
+import com.share.ftp.handler.personal.donation.DonationRegisterParticipationHandler;
+import com.share.ftp.handler.personal.donation.DonationRegisterTotalMoneyHandler;
 import com.share.ftp.handler.personal.mypage.MyBoardListHandler;
 import com.share.ftp.handler.personal.mypage.MyDonationHandler;
 import com.share.ftp.handler.personal.mypage.MyPointHandler;
@@ -270,7 +277,8 @@ public class App {
 
     //회원가입
     commands.put("/join/add", new JoinAddHandler(joinDTOList)); // 회원가입
-    commands.put("/join/searchId", new JoinSearchIdHandler(joinDTOList)); // 아이디 찾기
+    commands.put("/join/searchTelId", new JoinSearchTelIdHandler(joinDTOList)); // 폰번호로 아이디 찾기
+    commands.put("/join/searchEmailId", new JoinSearchEmailIdHandler(joinDTOList)); // 이메일로 아이디 찾기
     commands.put("/join/searchPassword", new JoinSearchPasswordHandler(joinDTOList)); // 비밀번호 찾기
 
     //함께해요 (개인) + 마이페이지
@@ -304,6 +312,16 @@ public class App {
     commands.put("/challengeReview/update", new ChallengeReviewUpdateHandler(myChallengeReviewDTOList));
     commands.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(myChallengeReviewDTOList));
     commands.put("/challengeReview/search", new ChallengeReviewSearchHandler(myChallengeReviewDTOList));
+
+    // 모금함
+    commands.put("/donationBoard/apply", new DonationBoardApplyHandler(donationBoardDTOList));
+    commands.put("/donationBoard/applyList", new DonationBoardApplyListHandler(donationBoardDTOList));
+    commands.put("/donationBoard/applyDetail", new DonationBoardApplyDetailHandler(donationBoardDTOList));
+
+    commands.put("/donationRegister/add", new DonationRegisterAddHandler(donationRegisterDTOList));
+    commands.put("/donationRegister/participation", new DonationRegisterParticipationHandler(donationRegisterDTOList));
+    commands.put("/donationRegister/totalMoney", new DonationRegisterTotalMoneyHandler(donationRegisterDTOList));
+
 
     // 고객센터 문의하기
     commands.put("/question/add", new QuestionAddHandler(myQuestionListDTOList));
@@ -385,7 +403,15 @@ public class App {
 
 
     mainMenuGroup.add(new MenuItem("로그인", Menu.ENABLE_LOGOUT, "/auth/login"));
-    mainMenuGroup.add(new MenuItem("아이디찾기", Menu.ENABLE_LOGOUT, "/join/searchId"));
+
+
+    MenuGroup searchId = new MenuGroup("아이디찾기",  Menu.ENABLE_LOGOUT);
+    mainMenuGroup.add(searchId);
+
+    searchId.add(new MenuItem("휴대폰번호로아이디찾기", Menu.ENABLE_LOGOUT, "/join/searchTelId"));
+    searchId.add(new MenuItem("이메일로아이디찾기", Menu.ENABLE_LOGOUT, "/join/searchEmailId"));
+
+
     mainMenuGroup.add(new MenuItem("비밀번호찾기", Menu.ENABLE_LOGOUT, "/join/searchPassword"));
     mainMenuGroup.add(new MenuItem("회원가입", Menu.ENABLE_LOGOUT, "/join/add"));
     mainMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_LOGIN, "/auth/logout"));
@@ -498,40 +524,21 @@ public class App {
     MenuGroup personalDonationMenu = new MenuGroup("모금함");
     mainMenuGroup.add(personalDonationMenu);
 
+    personalDonationMenu.add(new MenuItem("전체 기부금 내역", "/donationRegister/totalMoney"));
+    personalDonationMenu.add(new MenuItem("모금함 개설신청", Menu.ENABLE_ORG, "/donationBoard/apply"));
+
+
     MenuGroup donationList = new MenuGroup("모금함 목록");
     personalDonationMenu.add(donationList);
 
+
     MenuGroup donation = new MenuGroup("모금함 상세보기");
-    donationList.add(donation);
+    personalDonationMenu.add(donation);
 
-    donation.add(new Menu("기부하기", Menu.ENABLE_MEMBER) {
-      @Override
-      public void execute() {
-        donationRegisterHandler.add(); 
-      }});
-    donation.add(new Menu("기부내역") {
-      @Override
-      public void execute() {
-        donationRegisterHandler.participationDonation(); 
-      }});
+    donation.add(new MenuItem("기부하기", Menu.ENABLE_MEMBER, "/donationRegister/add"));
+    donation.add(new MenuItem("참여내역", "/donationRegister/participation"));
 
-    MenuGroup donationTotal = new MenuGroup("전체 모금액");
-    personalDonationMenu.add(donationTotal);
 
-    donationTotal.add(new Menu("총 기부내역") {
-      @Override
-      public void execute() {
-        donationRegisterHandler.totalDonationMoney(); 
-      }});
-
-    MenuGroup applyDonation = new MenuGroup("모금함 개설신청", Menu.ENABLE_ORG);
-    personalDonationMenu.add(applyDonation);
-
-    applyDonation.add(new Menu("개설신청") {
-      @Override
-      public void execute() {
-        donationBoardHandler.applyDonation(); 
-      }});
 
     MenuGroup support = new MenuGroup("고객센터");
     mainMenuGroup.add(support);
@@ -661,16 +668,9 @@ public class App {
     MenuGroup donationMenu = new MenuGroup("모금함 관리");
     adminMenu.add(donationMenu);
 
-    donationMenu.add(new Menu("모금함 개설 신청내역 목록") {
-      @Override
-      public void execute() {
-        donationBoardHandler.applyDonationList(); 
-      }});
-    donationMenu.add(new Menu("모금함 개설 신청내역 상세보기") {
-      @Override
-      public void execute() {
-        donationBoardHandler.applyDonationdetail(); 
-      }});
+
+    donationMenu.add(new MenuItem("모금함 개설 신청내역 목록", "/donationBoard/applyList"));
+    donationMenu.add(new MenuItem("모금함 개설 신청내역 상세보기", "/donationBoard/applyDetail"));
 
 
     MenuGroup volunteerMenu = new MenuGroup("봉사활동 관리");

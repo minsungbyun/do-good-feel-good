@@ -53,9 +53,20 @@ public abstract class AbstractJoinHandler implements Command {
     return null;
   }
 
+
+
+  protected JoinDTO findByTel(String tel) {
+    for (JoinDTO joinDTO : joinDTOList) {
+      if (joinDTO.getTel().equals(tel)) {
+        return joinDTO;
+      }
+    }
+    return null;
+  }
+
   protected JoinDTO findByEmail(String email) {
     for (JoinDTO joinDTO : joinDTOList) {
-      if (joinDTO.getEmail().equals(email)) {
+      if (joinDTO.getName().equals(email)) {
         return joinDTO;
       }
     }
