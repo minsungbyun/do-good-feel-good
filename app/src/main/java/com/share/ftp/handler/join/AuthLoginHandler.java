@@ -34,7 +34,7 @@ public class AuthLoginHandler implements Command {
     String id = Prompt.inputString("아이디? ");
     String password = Prompt.inputString("비밀번호? ");
 
-    if (id.equals("admin") && password.equals("1")) {
+    if (id.equals("admin") && password.equals("111")) {
       JoinDTO root = new JoinDTO();
       root.setName("관리자");
       root.setEmail("admin@test.com");
@@ -48,14 +48,24 @@ public class AuthLoginHandler implements Command {
 
     if (joinDTO == null) {
       System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");
-    } else {
+      return;
+    } else if (joinDTO.isPersonal() == true) {
+      userAccessLevel = Menu.ACCESS_MEMBER | Menu.ACCESS_PERSONAL;
+
       System.out.printf("%s님 환영합니다!\n", joinDTO.getName());
 
-      loginUser = joinDTO;
+    } else if (joinDTO.isOrg() == true) {
+      userAccessLevel = Menu.ACCESS_MEMBER | Menu.ACCESS_ORG;
 
-      //      userAccessLevel = Menu.ACCESS_MEMBER;
+      System.out.printf("%s님 환영합니다!\n", joinDTO.getName());
     }
+
+    loginUser = joinDTO;
+
+    //      userAccessLevel = Menu.ACCESS_MEMBER;
   }
+
+
 
   private JoinDTO findByMember(String id, String password) {
     for (JoinDTO joinDTO : joinDTOList) {

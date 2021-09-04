@@ -1,13 +1,11 @@
 package com.share.ftp.handler.join;
 
 import java.util.List;
-import com.share.ASCIIArt;
 import com.share.ftp.domain.guest.JoinDTO;
 import com.share.util.Prompt;
 
 public class MyPageDelete extends AbstractJoinHandler {
 
-  ASCIIArt artGen = new ASCIIArt();
 
   public MyPageDelete(List<JoinDTO> joinDTOList) {
     super(joinDTOList);
@@ -46,11 +44,6 @@ public class MyPageDelete extends AbstractJoinHandler {
 
     System.out.println("");
     System.out.println("[  그동안 행복하share를 이용해주셔서 감사했습니다.  ]");
-    try {
-      artGen.printTextArt("Good Bye ~", ASCIIArt.ART_SIZE_MEDIUM);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
 
     return;
   }
