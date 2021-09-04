@@ -13,24 +13,24 @@ public class ChallengeBoardHandler {
 //  ChallengeQuestionHandler challengeQuestionHandler;
 //  MyChallengeReviewDTO myChallengeReview = new MyChallengeReviewDTO();
 
-  public void showChallengeDetail() {
-	System.out.println();
-	System.out.println("챌린지에 도전해보세요!");
-	System.out.println("이 챌린지에는 --포인트가 걸려있습니다.");
-	System.out.println("챌린지 참여방법은 ---입니다!");
-  }
-  public void join() {
-    System.out.println();
-    System.out.println("참여가 완료되었습니다.");
-  }
-
-  public void showMemberList() {
-    System.out.println();
-    System.out.println("참여자 목록");
-    System.out.println("1. 닉네임1");
-    System.out.println("2. 닉네임2");
-    System.out.println("3. 닉네임3");
-  }
+//  public void showChallengeDetail() {
+//	System.out.println();
+//	System.out.println("챌린지에 도전해보세요!");
+//	System.out.println("이 챌린지에는 --포인트가 걸려있습니다.");
+//	System.out.println("챌린지 참여방법은 ---입니다!");
+//  }
+//  public void join() {
+//    System.out.println();
+//    System.out.println("참여가 완료되었습니다.");
+//  }
+//
+//  public void showMemberList() {
+//    System.out.println();
+//    System.out.println("참여자 목록");
+//    System.out.println("1. 닉네임1");
+//    System.out.println("2. 닉네임2");
+//    System.out.println("3. 닉네임3");
+//  }
 //
 //  public void showReview() {
 //    System.out.println();
