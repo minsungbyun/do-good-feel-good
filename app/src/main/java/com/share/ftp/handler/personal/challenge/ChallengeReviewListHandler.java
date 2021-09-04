@@ -15,6 +15,11 @@ public class ChallengeReviewListHandler extends AbstractChallengeReviewHandler {
     System.out.println("[참여인증&댓글 목록]");
     MyChallengeReviewDTO[] myChallengeReviewDTOs = new MyChallengeReviewDTO[myChallengeReviewDTOList.size()];
     myChallengeReviewDTOList.toArray(myChallengeReviewDTOs);
+    
+    if (myChallengeReviewDTOList.isEmpty()) {
+      System.out.println("참여인증&댓글이 없습니다.");
+      return;
+    }
     for (MyChallengeReviewDTO myChallengeReviewDTO : myChallengeReviewDTOs) {
       System.out.printf("%d, %s, %s, %s, %s\n", 
           myChallengeReviewDTO.getNo(), 
