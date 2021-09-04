@@ -16,7 +16,7 @@ public class JoinSearchTelIdHandler extends AbstractJoinHandler {
   public void execute() {
     System.out.println();
 
-    System.out.println("휴대폰 번호를 입력해주세요.");
+    System.out.println("[휴대폰 번호를 입력해주세요.]");
     String tel = Prompt.inputString("휴대폰 번호? ");
 
     JoinDTO joinDTOTel = findByTel(tel);

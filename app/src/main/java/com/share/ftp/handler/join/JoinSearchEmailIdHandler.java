@@ -15,7 +15,7 @@ public class JoinSearchEmailIdHandler extends AbstractJoinHandler {
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("이메일을 입력해주세요.");
+    System.out.println("[이메일을 입력해주세요.]");
     String email = Prompt.inputString("이메일? ");
 
     JoinDTO joinDTOEmail = findByEmail(email);

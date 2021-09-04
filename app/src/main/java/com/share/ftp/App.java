@@ -57,11 +57,6 @@ import com.share.ftp.handler.personal.challenge.ChallengeQuestionDetailHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionSearchHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionUpdateHandler;
-//import com.share.ftp.handler.personal.challenge.ChallengeReviewDeleteHandler;
-//import com.share.ftp.handler.personal.challenge.ChallengeReviewDetailHandler;
-//import com.share.ftp.handler.personal.challenge.ChallengeReviewListHandler;
-//import com.share.ftp.handler.personal.challenge.ChallengeReviewSearchHandler;
-//import com.share.ftp.handler.personal.challenge.ChallengeReviewUpdateHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewAddHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewDeleteHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewDetailHandler;
@@ -79,9 +74,13 @@ import com.share.ftp.handler.personal.community.CommReviewAddHandler;
 import com.share.ftp.handler.personal.community.CommReviewDeleteHandler;
 import com.share.ftp.handler.personal.community.CommReviewListHandler;
 import com.share.ftp.handler.personal.community.CommReviewUpdateHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardAcceptApplyHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardAppliedListHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardApplyCompleteListHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardApplyDetailHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardApplyHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardApplyListHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardRejectApplyHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterAddHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterParticipationHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterTotalMoneyHandler;
@@ -91,7 +90,6 @@ import com.share.ftp.handler.personal.mypage.MyBoardListHandler;
 import com.share.ftp.handler.personal.mypage.MyBoardUpdateHandler;
 import com.share.ftp.handler.personal.mypage.MyDonationHandler;
 import com.share.ftp.handler.personal.mypage.MyPointHandler;
-import com.share.ftp.handler.personal.mypage.MyProfileHandler;
 import com.share.ftp.handler.personal.support.NoitceListHandler;
 import com.share.ftp.handler.personal.support.NoticeAddHandler;
 import com.share.ftp.handler.personal.support.NoticeDeleteHandler;
@@ -122,30 +120,31 @@ public class App {
 
   // 함께해요 도메인(값)
   List<VolListDTO> volListDTOList = new ArrayList<>();
+
   // 개인 봉사신청 관련 도메인
   List<PersonalRequestDTO> personalRequestDTOList = new ArrayList<>();
   List<PersonalRequestDTO> personalRequestApplyDTOList = new ArrayList<>();
   List<PersonalRequestDTO> personalRequestRejectDTOList = new ArrayList<>();
-  //  List<PersonalRequestApplyDTO> personalRequestApplyDTOList = new ArrayList<>();
-  //  List<PersonalRequestRejectDTO> personalRequestRejectDTOList = new ArrayList<>();
+
   // 기관 봉사신청 관련 도메인
   List<OrgRequestDTO> orgRequestDTOList = new ArrayList<>();
-  //  List<OrgRequestApplyDTO> OrgRequestApplyDTOList = new ArrayList<>();
-  //  List<OrgRequestRejectDTO> OrgRequestRejectDTOList = new ArrayList<>();
-
-  List<ApproveOrgDTO> approveOrgDTOList = new ArrayList<>();
+  List<OrgRequestDTO> orgRequestDTOApplyList = new ArrayList<>();
+  List<OrgRequestDTO> orgRequestDTORejectList = new ArrayList<>();
 
   // 소통해요 도메인(값)
   List<CommBoardDTO> commBoardDTOList = new ArrayList<>();
   List<CommReviewDTO> commReviewDTOList = new ArrayList<>();
 
   // 챌린지 도메인(값)
-
   List<MyChallengeQuestionDTO> myChallengeQuestionDTOList = new ArrayList<>();
   List<MyChallengeReviewDTO> myChallengeReviewDTOList = new ArrayList<>();
 
-  // 기부 도메인(값)
+  // 모금함 개설 신청 관련 도메인(값)
   List<DonationBoardDTO> donationBoardDTOList = new ArrayList<>();
+  List<DonationBoardDTO> donationBoardApplyDTOList = new ArrayList<>();
+  List<DonationBoardDTO> donationBoardRejectDTOList = new ArrayList<>();
+
+  // 기부 도메인(값)
   List<DonationRegisterDTO> donationRegisterDTOList = new ArrayList<>();
 
   // 마이페이지 도메인(값)
@@ -156,8 +155,9 @@ public class App {
   List<ChallengeDTO> challengeDTOList = new ArrayList<>();
   List<NoticeDTO> noticeDTOList = new ArrayList<>();
   List<QuestionDTO> questionDTOList = new ArrayList<>();
+  List<ApproveOrgDTO> approveOrgDTOList = new ArrayList<>();
 
-
+  // 메뉴 객체 컨트롤(Map)
   HashMap<String,Command> commands = new HashMap<>();
 
   class MenuItem extends Menu {
@@ -173,7 +173,6 @@ public class App {
       super(title, enableState);
       this.menuId = menuId;
     }
-
     @Override
     public void execute() {
       Command command = commands.get(menuId);
@@ -186,7 +185,6 @@ public class App {
 
     App app = new App(); 
     app.service();
-
   }
 
   public App() {
@@ -195,7 +193,6 @@ public class App {
     commands.put("/auth/logout", new AuthLogoutHandler()); // 로그아웃
     commands.put("/auth/changeUserInfo", new AuthChangeUserInfoHandler()); // 마이페이지 나의정보
     commands.put("/auth/displayUserInfo", new AuthDisplayUserInfoHandler()); // 마이페이지 나의정보수정
-
 
     //회원가입
     commands.put("/join/add", new JoinAddHandler(joinDTOList)); // 회원가입
@@ -214,7 +211,6 @@ public class App {
     commands.put("/volRequestPersonal/bookmark", new VolRequestPersonalBookmarkHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
     commands.put("/volRequest/totalApprovedList", new VolRequestTotalApprovedListHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
 
-
     // 소통해요 나눔이야기
     commands.put("/commBoard/add", new CommBoardAddHandler(commBoardDTOList));
     commands.put("/commBoard/list", new CommBoardListHandler(commBoardDTOList));
@@ -222,6 +218,7 @@ public class App {
     commands.put("/commBoard/update", new CommBoardUpdateHandler(commBoardDTOList));
     commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList));
 
+    // 소통해요 한줄후기
     commands.put("/commBest/list", new CommBestListHandler(commBoardDTOList));
     commands.put("/commBest/detail", new CommBestDetailHandler(commBoardDTOList));
 
@@ -231,12 +228,7 @@ public class App {
     commands.put("/commReview/delete", new CommReviewDeleteHandler(commReviewDTOList));
 
     // 챌린지 참여인증&댓글
-    //    commands.put("/challengeReview/add", new ChallengeReviewAddHandler(myChallengeReviewDTOList));
-    //    commands.put("/challengeReview/list", new ChallengeReviewListHandler(myChallengeReviewDTOList));
-    //    commands.put("/challengeReview/detail", new ChallengeReviewDetailHandler(myChallengeReviewDTOList));
-    //    commands.put("/challengeReview/update", new ChallengeReviewUpdateHandler(myChallengeReviewDTOList));
-    //    commands.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(myChallengeReviewDTOList));
-    //    commands.put("/challengeReview/search", new ChallengeReviewSearchHandler(myChallengeReviewDTOList));
+
     commands.put("/challengeReview/add", new ChallengeReviewAddHandler(myChallengeReviewDTOList));
     commands.put("/challengeReview/list", new ChallengeReviewListHandler(myChallengeReviewDTOList));
     commands.put("/challengeReview/detail", new ChallengeReviewDetailHandler(myChallengeReviewDTOList));
@@ -244,15 +236,33 @@ public class App {
     commands.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(myChallengeReviewDTOList));
     commands.put("/challengeReview/search", new ChallengeReviewSearchHandler(myChallengeReviewDTOList));
 
+    // 챌린지 문의하기
+    commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(myChallengeQuestionDTOList));
+    commands.put("/challengeQuestion/list", new ChallengeQuestionListHandler(myChallengeQuestionDTOList));
+    commands.put("/challengeQuestion/detail", new ChallengeQuestionDetailHandler(myChallengeQuestionDTOList));
+    commands.put("/challengeQuestion/update", new ChallengeQuestionUpdateHandler(myChallengeQuestionDTOList));
+    commands.put("/challengeQuestion/delete", new ChallengeQuestionDeleteHandler(myChallengeQuestionDTOList));
+    commands.put("/challengeQuestion/search", new ChallengeQuestionSearchHandler(myChallengeQuestionDTOList));
+
     // 모금함
+
+    // 모금함 (개설신청하기, 개설목록, 승인, 반려)
     commands.put("/donationBoard/apply", new DonationBoardApplyHandler(donationBoardDTOList));
     commands.put("/donationBoard/applyList", new DonationBoardApplyListHandler(donationBoardDTOList));
+    commands.put("/donationBoard/applyCompleteList", new DonationBoardApplyCompleteListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
+    commands.put("/donationBoard/appliedList", new DonationBoardAppliedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
+    commands.put("/donationBoard/acceptApply", new DonationBoardAcceptApplyHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
+    commands.put("/donationBoard/rejectApply", new DonationBoardRejectApplyHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
     commands.put("/donationBoard/applyDetail", new DonationBoardApplyDetailHandler(donationBoardDTOList));
 
+
+
+    // 모금함 (기부하기)
     commands.put("/donationRegister/add", new DonationRegisterAddHandler(donationRegisterDTOList));
     commands.put("/donationRegister/participation", new DonationRegisterParticipationHandler(donationRegisterDTOList));
     commands.put("/donationRegister/totalMoney", new DonationRegisterTotalMoneyHandler(donationRegisterDTOList));
 
+    // 고객센터 문의하기
 
     // 고객센터
 
@@ -268,12 +278,9 @@ public class App {
     commands.put("/question/update", new QuestionUpdateHandler(myQuestionListDTOList));
     commands.put("/question/delete", new QuestionDeleteHandler(myQuestionListDTOList));
 
-
     // 마이페이지
-    commands.put("/myProfile/update", new MyProfileHandler(myProfileDTOList));
-
-    commands.put("/MyPage/delete", new MyPageDelete(joinDTOList)); // 회원탈퇴
     commands.put("/MyPage/info", new MyPageInfoHandler(joinDTOList)); // 내정보 수정
+    commands.put("/MyPage/delete", new MyPageDelete(joinDTOList)); // 회원탈퇴
 
     commands.put("/MyBoard/list", new MyBoardListHandler()); // 나의게시글 목록
     commands.put("/MyBoard/detail", new MyBoardDetailHandler()); // 나의게시글 목록
@@ -284,8 +291,7 @@ public class App {
 
     commands.put("/OrgMyVol/apply", new MyVolApplyListHandler()); // 기관 마이페이지 승인신청 
     commands.put("/OrgMyVol/approve", new MyVolApproveListHandler()); // 기관 마이페이지 승인조회
-    commands.put("/myDonation/list", new MyDonationHandler()); // 내정보 수정
-
+    commands.put("/myDonation/list", new MyDonationHandler()); // 모금함
 
     // 관리자
     commands.put("/join/list", new JoinListHandler(joinDTOList)); // 관리자가 회원 목록을 조회
@@ -340,10 +346,7 @@ public class App {
     MenuGroup mainMenuGroup = new MenuGroup("*행복하Share*");
     mainMenuGroup.setPrevMenuTitle("종료");
 
-
-
     mainMenuGroup.add(new MenuItem("로그인", Menu.ENABLE_LOGOUT, "/auth/login"));
-
 
     MenuGroup searchId = new MenuGroup("아이디찾기",  Menu.ENABLE_LOGOUT);
     mainMenuGroup.add(searchId);
@@ -351,11 +354,11 @@ public class App {
     searchId.add(new MenuItem("휴대폰번호로아이디찾기", Menu.ENABLE_LOGOUT, "/join/searchTelId"));
     searchId.add(new MenuItem("이메일로아이디찾기", Menu.ENABLE_LOGOUT, "/join/searchEmailId"));
 
-
     mainMenuGroup.add(new MenuItem("비밀번호찾기", Menu.ENABLE_LOGOUT, "/join/searchPassword"));
     mainMenuGroup.add(new MenuItem("회원가입", Menu.ENABLE_LOGOUT, "/join/add"));
     mainMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_LOGIN, "/auth/logout"));
 
+    /////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -367,6 +370,8 @@ public class App {
     doVolMenu.add(new MenuItem("인증봉사리스트","/volRequestPersonal/appliedList")); // 개인만됨
     doVolMenu.add(new MenuItem("인증봉사세부사항",Menu.ENABLE_MEMBER,"/volRequestPersonal/appliedList"));
     doVolMenu.add(new MenuItem("찜하기",Menu.ENABLE_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
+
+    ///////////////////////////////////////////////////////////////////////////////////////////
 
     MenuGroup personalCommunityMenu = new MenuGroup("소통해요");
     mainMenuGroup.add(personalCommunityMenu);
@@ -393,16 +398,17 @@ public class App {
     shortReviewMenu.add(new MenuItem("수정", Menu.ENABLE_MEMBER, "/commReview/update")); 
     shortReviewMenu.add(new MenuItem("삭제", Menu.ENABLE_MEMBER, "/commReview/delete")); 
 
+    /////////////////////////////////////////////////////////////////////////////////////////
 
-    //    MenuGroup personalChallengeMenu = new MenuGroup("챌린지");
-    //    mainMenuGroup.add(personalChallengeMenu);
-    //
-    //    MenuGroup monthlyChallengeMenu = new MenuGroup("이달의 챌린지");
-    //    personalChallengeMenu.add(monthlyChallengeMenu);
-    //
-    //    MenuGroup monthlyChallengeDetail = new MenuGroup("챌린지 상세보기");
-    //    monthlyChallengeMenu.add(monthlyChallengeDetail);
-    //
+    MenuGroup personalChallengeMenu = new MenuGroup("챌린지");
+    mainMenuGroup.add(personalChallengeMenu);
+
+    MenuGroup monthlyChallengeMenu = new MenuGroup("이달의 챌린지");
+    personalChallengeMenu.add(monthlyChallengeMenu);
+
+    MenuGroup monthlyChallengeDetail = new MenuGroup("챌린지 상세보기");
+    monthlyChallengeMenu.add(monthlyChallengeDetail);
+
     //    monthlyChallengeDetail.add(new Menu("상세정보") {
     //      @Override
     //      public void execute() {
@@ -441,6 +447,29 @@ public class App {
     //    MenuGroup monthlyRankingMenu = new MenuGroup("이달의 랭킹", Menu.ENABLE_ALL);
     //    personalChallengeMenu.add(monthlyRankingMenu);
     //
+    MenuGroup ChallengeReview = new MenuGroup("참여인증&댓글");
+    monthlyChallengeDetail.add(ChallengeReview);
+    ChallengeReview.add(new MenuItem("참여인증&댓글 등록", Menu.ENABLE_LOGIN, "/challengeReview/add"));
+    ChallengeReview.add(new MenuItem("참여인증&댓글 목록", Menu.ENABLE_ALL,"/challengeReview/list"));
+    ChallengeReview.add(new MenuItem("참여인증&댓글 상세보기", Menu.ENABLE_ALL,"/challengeReview/detail"));
+    ChallengeReview.add(new MenuItem("참여인증&댓글 수정", Menu.ENABLE_LOGIN,"/challengeReview/update"));
+    ChallengeReview.add(new MenuItem("참여인증&댓글 삭제", Menu.ENABLE_LOGIN,"/challengeReview/delete"));
+    ChallengeReview.add(new MenuItem("참여인증&댓글 검색", Menu.ENABLE_LOGIN, "/challengeReview/search"));
+
+
+    MenuGroup ChallengeQuestion = new MenuGroup("문의하기");
+    monthlyChallengeDetail.add(ChallengeQuestion);
+    ChallengeQuestion.add(new MenuItem("문의 등록", Menu.ENABLE_MEMBER, "/challengeQuestion/add"));
+    ChallengeQuestion.add(new MenuItem("문의 목록",  "/challengeQuestion/list"));
+    ChallengeQuestion.add(new MenuItem("문의 상세보기",Menu.ENABLE_MEMBER,"/challengeQuestion/detail"));
+    ChallengeQuestion.add(new MenuItem("문의 수정", Menu.ENABLE_MEMBER, "/challengeQuestion/update"));
+    ChallengeQuestion.add(new MenuItem("문의 삭제", Menu.ENABLE_MEMBER, "/challengeQuestion/delete"));
+    ChallengeQuestion.add(new MenuItem("문의 검색",  "/challengeQuestion/search"));
+
+
+    MenuGroup monthlyRankingMenu = new MenuGroup("이달의 랭킹", Menu.ENABLE_ALL);
+    personalChallengeMenu.add(monthlyRankingMenu);
+
     //
     //    monthlyRankingMenu.add(new Menu("이달의 랭킹보기", Menu.ENABLE_ALL) {
     //      @Override
@@ -471,13 +500,15 @@ public class App {
     donation.add(new MenuItem("기부하기", Menu.ENABLE_MEMBER, "/donationRegister/add"));
     donation.add(new MenuItem("참여내역", "/donationRegister/participation"));
 
-
+    /////////////////////////////////////////////////////////////////////////////////////////
 
     MenuGroup support = new MenuGroup("고객센터");
     mainMenuGroup.add(support);
 
     MenuGroup notice = new MenuGroup("공지사항");
     support.add(notice);
+
+
 
     notice.add(new MenuItem("등록", Menu.ENABLE_ADMIN,"/notice/add"));
     notice.add(new MenuItem("목록", "/notice/list"));
@@ -494,6 +525,7 @@ public class App {
     ask.add(new MenuItem("변경",Menu.ENABLE_MEMBER,"/question/update"));
     ask.add(new MenuItem("삭제",Menu.ENABLE_MEMBER, "/question/delete"));
 
+    /////////////////////////////////////////////////////////////////////////////////////////
 
     // 마이페이지
 
@@ -515,6 +547,14 @@ public class App {
     myVolunteer.add(new MenuItem("나의 봉사신청서 확인","/volRequestPersonal/applyCompleteList")); // 보완필요
     myVolunteer.add(new MenuItem("승인된 봉사내역","/volRequestPersonal/appliedList"));    
     myVolunteer.add(new MenuItem("반려된 봉사내역","/volRequestPersonal/rejectedList"));    
+    myVolunteer.add(new MenuItem("찜한봉사","/volRequestPersonal/bookmark")); // 구현예정
+
+    MenuGroup myDonation = new MenuGroup("나의 모금함");
+    personalMyPage.add(myDonation);
+    myDonation.add(new MenuItem("나의 모금함 개설신청서 확인", Menu.ENABLE_ORG, "/donationBoard/applyCompleteList")); 
+    //    myDonation.add(new MenuItem("나의 기부내역", Menu.ENABLE_MEMBER, "/donationRegister/list")); // 구현예정
+
+
     myVolunteer.add(new MenuItem("찜한봉사","/volRequestPersonal/bookmark")); // 구현예정    
 
 
@@ -532,10 +572,6 @@ public class App {
 
     myPoint.add(new MenuItem("나의포인트확인","MyPoint/list"));
 
-    MenuGroup myDonation = new MenuGroup("나의 모금함");
-    personalMyPage.add(myDonation);
-    myDonation.add(new MenuItem("나의기부내역", "/myDonation/list"));
-
 
     MenuGroup organizationApprove = new MenuGroup("기관 승인 신청");
     personalMyPage.add(organizationApprove);
@@ -545,7 +581,6 @@ public class App {
 
 
     personalMyPage.add(new MenuItem("탈퇴", Menu.ENABLE_MEMBER, "/MyPage/delete"));
-
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////    
 
@@ -563,7 +598,10 @@ public class App {
     adminMenu.add(donationMenu);
 
     donationMenu.add(new MenuItem("모금함 개설 신청내역 목록", "/donationBoard/applyList"));
+    donationMenu.add(new MenuItem("모금함 개설 신청내역", "/donationBoard/applyList"));
     donationMenu.add(new MenuItem("모금함 개설 신청내역 상세보기", "/donationBoard/applyDetail"));
+    donationMenu.add(new MenuItem("모금함 개설 승인하기", "/donationBoard/acceptApply"));
+    donationMenu.add(new MenuItem("모금함 개설 반려하기", "/donationBoard/rejectApply"));
 
 
     MenuGroup volunteerMenu = new MenuGroup("봉사활동 관리");
