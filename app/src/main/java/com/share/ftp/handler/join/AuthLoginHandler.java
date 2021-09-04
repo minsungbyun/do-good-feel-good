@@ -3,6 +3,7 @@ package com.share.ftp.handler.join;
 import java.util.List;
 import com.share.ftp.domain.guest.JoinDTO;
 import com.share.ftp.handler.Command;
+import com.share.menu.Menu;
 import com.share.util.Prompt;
 
 public class AuthLoginHandler implements Command {
@@ -10,8 +11,15 @@ public class AuthLoginHandler implements Command {
   List<JoinDTO> joinDTOList;
 
   static JoinDTO loginUser;
+
+  static int userAccessLevel = Menu.ACCESS_LOGOUT;
+
   public static JoinDTO getLoginUser() {
     return loginUser;
+  }
+
+  public static int getUserAccessLevel() {
+    return userAccessLevel;
   }
 
   public AuthLoginHandler(List<JoinDTO> joinDTOList) {
@@ -26,13 +34,26 @@ public class AuthLoginHandler implements Command {
     String id = Prompt.inputString("아이디? ");
     String password = Prompt.inputString("비밀번호? ");
 
+    if (id.equals("admin") && password.equals("1")) {
+      JoinDTO root = new JoinDTO();
+      root.setName("관리자");
+      root.setEmail("admin@test.com");
+      loginUser = root;
+      userAccessLevel = Menu.ACCESS_ADMIN | Menu.ACCESS_MEMBER | Menu.ACCESS_ORG | Menu.ACCESS_PERSONAL;
+      return;
+    } 
+
+
     JoinDTO joinDTO = findByMember(id, password);
 
     if (joinDTO == null) {
       System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");
     } else {
       System.out.printf("%s님 환영합니다!\n", joinDTO.getName());
+
       loginUser = joinDTO;
+
+      //      userAccessLevel = Menu.ACCESS_MEMBER;
     }
   }
 
