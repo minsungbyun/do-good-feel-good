@@ -3,7 +3,7 @@ package com.share.menu;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-import com.share.ftp.domain.guest.JoinDTO;
+import com.share.ftp.domain.join.JoinDTO;
 //import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;

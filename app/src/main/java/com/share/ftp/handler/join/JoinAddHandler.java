@@ -2,7 +2,7 @@ package com.share.ftp.handler.join;
 
 import java.sql.Date;
 import java.util.List;
-import com.share.ftp.domain.guest.JoinDTO;
+import com.share.ftp.domain.join.JoinDTO;
 import com.share.menu.Menu;
 import com.share.util.Prompt;
 
@@ -54,13 +54,14 @@ public class JoinAddHandler extends AbstractJoinHandler {
     joinDTOList.add(testUser);
 
     testUser = new JoinDTO();
-    testUser.setId("ccc");
-    testUser.setName("test3");
+    testUser.setId("object");
+    testUser.setName("자바최고조상");
     testUser.setEmail("ccc@test.com");
     testUser.setPassword("111");
     testUser.setTel("010-4444-4444");
     testUser.setAdress("no");
     testUser.setRegisterDate(new Date(System.currentTimeMillis()));
+    testUser.setPersonal(true);
 
     joinDTOList.add(testUser);
 

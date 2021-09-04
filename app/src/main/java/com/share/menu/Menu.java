@@ -30,7 +30,6 @@ public abstract class Menu {
 
 
 
-
   public static final int ACCESS_LOGOUT = 0x01; //      비회원
   public static final int ACCESS_PERSONAL = 0x02; //    개인회원                0010
   public static final int ACCESS_ORG = 0x04;    //      기관회원                0100      

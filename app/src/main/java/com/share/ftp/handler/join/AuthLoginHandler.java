@@ -1,7 +1,7 @@
 package com.share.ftp.handler.join;
 
 import java.util.List;
-import com.share.ftp.domain.guest.JoinDTO;
+import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
 import com.share.menu.Menu;
 import com.share.util.Prompt;
