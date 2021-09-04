@@ -452,45 +452,6 @@ public class App {
     challengeMenu.add(createMonthlyRankingMenu()); // 이달의 랭킹
 
 
-
-    //    MenuGroup personalChallengeMenu = new MenuGroup("챌린지");
-    //    mainMenuGroup.add(personalChallengeMenu);
-    //
-    //    MenuGroup monthlyChallengeMenu = new MenuGroup("이달의 챌린지");
-    //    personalChallengeMenu.add(monthlyChallengeMenu);
-    //
-    //    MenuGroup monthlyChallengeDetail = new MenuGroup("챌린지 상세보기");
-    //    monthlyChallengeMenu.add(monthlyChallengeDetail);
-    //    monthlyChallengeDetail.add(new MenuItem("상세정보", "/showChallenge/detail"));  //챌린지 상세정보(구현예정)
-    //
-    //    monthlyChallengeDetail.add(new MenuItem("참여하기", ACCESS_MEMBER, "/challengeJoin/join"));  //챌린지 참여하기(구현예정)
-    //    monthlyChallengeDetail.add(new MenuItem("참여자 목록", ACCESS_MEMBER, "/challengeJoin/list"));  //챌린지 참여자목록(구현예정)
-    //
-    //    MenuGroup ChallengeReview = new MenuGroup("참여인증&댓글");
-    //    monthlyChallengeDetail.add(ChallengeReview);
-    //    ChallengeReview.add(new MenuItem("참여인증&댓글 등록", ACCESS_MEMBER, "/challengeReview/add"));
-    //    ChallengeReview.add(new MenuItem("참여인증&댓글 목록", "/challengeReview/list"));
-    //    ChallengeReview.add(new MenuItem("참여인증&댓글 상세보기", ACCESS_MEMBER,"/challengeReview/detail"));
-    //    ChallengeReview.add(new MenuItem("참여인증&댓글 수정", ACCESS_MEMBER,"/challengeReview/update"));
-    //    ChallengeReview.add(new MenuItem("참여인증&댓글 삭제", ACCESS_MEMBER,"/challengeReview/delete"));
-    //    ChallengeReview.add(new MenuItem("참여인증&댓글 검색", "/challengeReview/search"));
-    //
-    //
-    //    MenuGroup ChallengeQuestion = new MenuGroup("문의하기");
-    //    monthlyChallengeDetail.add(ChallengeQuestion);
-    //    ChallengeQuestion.add(new MenuItem("문의 등록", ACCESS_MEMBER, "/challengeQuestion/add"));
-    //    ChallengeQuestion.add(new MenuItem("문의 목록",  "/challengeQuestion/list"));
-    //    ChallengeQuestion.add(new MenuItem("문의 상세보기", ACCESS_MEMBER, "/challengeQuestion/detail"));
-    //    ChallengeQuestion.add(new MenuItem("문의 수정", ACCESS_MEMBER, "/challengeQuestion/update"));
-    //    ChallengeQuestion.add(new MenuItem("문의 삭제", ACCESS_MEMBER, "/challengeQuestion/delete"));
-    //    ChallengeQuestion.add(new MenuItem("문의 검색",  "/challengeQuestion/search"));
-    //
-    //
-    //    MenuGroup monthlyRankingMenu = new MenuGroup("이달의 랭킹");
-    //    personalChallengeMenu.add(monthlyRankingMenu);
-    //    monthlyRankingMenu.add(new MenuItem("이달의 랭킹보기", "/ranking/list"));  //전체랭킹(구현예정)
-    //    monthlyRankingMenu.add(new MenuItem("나의 랭킹보기", ACCESS_MEMBER, "/myRanking/list"));  //나의랭킹(구현예정)
-
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     MenuGroup personalDonationMenu = new MenuGroup("모금함");
