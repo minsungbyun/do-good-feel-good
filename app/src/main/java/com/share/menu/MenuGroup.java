@@ -18,8 +18,9 @@ public class MenuGroup extends Menu {
   // 모든 메뉴가 공유할 객체이기 때문에 스태틱 멤버로 선언한다.
   static Stack<Menu> breadCrumb = new Stack<>();
 
-  Menu[] childs = new Menu[100];
-  int size;
+  ArrayList<Menu> childs = new ArrayList<>();
+
+
   boolean disablePrevMenu;
   String prevMenuTitle = "이전 메뉴";
 
@@ -43,14 +44,18 @@ public class MenuGroup extends Menu {
     super(title);
   }
 
+  public MenuGroup(String title, int accessScope) {
+    super(title, accessScope);
+  }
+
   public MenuGroup(String title, boolean disablePrevMenu) {
     super(title);
     this.disablePrevMenu = disablePrevMenu;
   }
 
-  public MenuGroup(String title, int enableState) {
-    super(title);
-    this.enableState = enableState;
+  public MenuGroup(String title, boolean disablePrevMenu, int accessScope) {
+    super(title, accessScope);
+    this.disablePrevMenu = disablePrevMenu;
   }
 
   public void setPrevMenuTitle(String prevMenuTitle) {
@@ -59,42 +64,13 @@ public class MenuGroup extends Menu {
 
   // MenuGroup이 포함하는 하위 Menu를 다룰 수 있도록 메서드를 정의한다.
   public void add(Menu child) {
-    if (this.size == this.childs.length) {
-      return; // 하위 메뉴를 저장하는 배열이 꽉 찼다면 더이상 저장해서는 안된다.
-    }
-    this.childs[this.size++] = child; 
+    childs.add(child);
   }
 
   // 배열에 들어 있는 Menu 객체를 찾아 제거한다.
   public Menu remove(Menu child) {
-    int index = indexOf(child);
-    if (index == -1) {
-      return null;
-    }
-    for (int i = index + 1; i < this.size; i++) {
-      this.childs[i - 1] = this.childs[i];
-    }
-    childs[--this.size] = null;
-    return child;
-  }
-
-  // 배열에 들어 있는 Menu 객체의 인덱스를 알아낸다.
-  public int indexOf(Menu child) {
-    for (int i = 0; i < this.size; i++) {
-      if (this.childs[i] == child) {
-        return i;
-      }
-    }
-    return -1;
-  }
-
-  // 배열에 들어 있는 Menu 객체를 찾는다.
-  public Menu getMenu(String title) { 
-    for (int i = 0; i < this.size; i++) {
-      if (this.childs[i].title.equals(title)) {
-        return this.childs[i];
-      }
-    }
+    if (childs.remove(child)) 
+      return child;
     return null;
   }
 
@@ -176,67 +152,11 @@ public class MenuGroup extends Menu {
     }
     System.out.println();
 
-    for (int i = 0; i < this.size; i++) {
-
-      // 기본 접근메뉴
-      if (this.childs[i].enableState == Menu.ENABLE_LOGOUT &&
-          //AuthLoginHandler.getLoginUser() == null) {
-          AuthLoginHandler.getLoginUser() == null) {
-        menuList.add(this.childs[i]);
-
-      } else if (this.childs[i].enableState == Menu.ENABLE_LOGIN&&
-          //AuthLoginHandler.getLoginUser() != null) {
-          AuthLoginHandler.getLoginUser() != null) {
-        menuList.add(this.childs[i]);
-
-      } else if (this.childs[i].enableState == Menu.ENABLE_ALL) {
-        menuList.add(this.childs[i]);
-
-
-        // 권한별 접근메뉴
-      } else if (this.childs[i].enableState == Menu.ENABLE_PERSONAL &&
-          //          AuthLoginHandler.getLoginUser() != null &&
-          //          AuthLoginHandler.getLoginUser().isPersonal() == true) {
-
-          AuthLoginHandler.getLoginUser() != null &&
-          AuthLoginHandler.getLoginUser().isPersonal() == true) {
-
-        menuList.add(this.childs[i]);
-
-      } else if (this.childs[i].enableState == Menu.ENABLE_ORG &&
-          //          AuthLoginHandler.getLoginUser() != null &&
-          //          AuthLoginHandler.getLoginUser().isOrg() == true) {
-          AuthLoginHandler.getLoginUser() != null &&
-          AuthLoginHandler.getLoginUser().isOrg() == true) {
-
-        menuList.add(this.childs[i]);
-
-      } else if ((this.childs[i].enableState == Menu.ENABLE_MEMBER &&
-          //          AuthLoginHandler.getLoginUser() != null) &&
-          //          (AuthLoginHandler.getLoginUser().isPersonal() == true ||
-          //          AuthLoginHandler.getLoginUser().isOrg() == true)) {
-
-          AuthLoginHandler.getLoginUser() != null) &&
-          (AuthLoginHandler.getLoginUser().isPersonal() == true ||
-          AuthLoginHandler.getLoginUser().isOrg() == true /*||
-          AuthLoginHandler.getLoginUser().isAdmin() == true*/)) {
-
-        menuList.add(this.childs[i]);
-
-      } else if (this.childs[i].enableState == Menu.ENABLE_ADMIN &&
-          //          AuthLoginHandler.getLoginUser() != null && 
-          //          AuthLoginHandler.getLoginUser().isAdmin() == true) {
-          AuthLoginHandler.getLoginUser() != null && 
-          AuthLoginHandler.getLoginUser().isAdmin() == true) {
-
-        menuList.add(this.childs[i]);
-
-
+    for (Menu menu : childs) {
+      if ((menu.accessScope & AuthLoginHandler.getUserAccessLevel()) > 0 ) {
+        menuList.add(menu);
       } 
-
-
-
-    }
+    } 
     return menuList;
   }
 
@@ -257,8 +177,6 @@ public class MenuGroup extends Menu {
   }
 
   private Menu selectMenu(List<Menu> menuList) {
-
-
 
     int menuNo = Prompt.inputInt("선택> ");
 
