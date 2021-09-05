@@ -56,10 +56,10 @@ public class JoinAddHandler extends AbstractJoinHandler {
     testUser = new JoinDTO();
     testUser.setId("object");
     testUser.setName("자바최고조상");
-    testUser.setEmail("ccc@test.com");
+    testUser.setEmail("object@java.com");
     testUser.setPassword("111");
     testUser.setTel("010-4444-4444");
-    testUser.setAdress("no");
+    testUser.setAdress("모두의집");
     testUser.setRegisterDate(new Date(System.currentTimeMillis()));
     testUser.setPersonal(true);
 
@@ -76,7 +76,22 @@ public class JoinAddHandler extends AbstractJoinHandler {
 
     JoinDTO joinDTO = new JoinDTO();
 
-    joinDTO.setId(Prompt.inputString("아이디? "));
+    // 아이디 유효성검사
+    while (true) {
+
+      joinDTO.setId(Prompt.inputString("아이디? "));
+
+      Boolean vaildId = validId(joinDTO.getId());
+      if (vaildId == true) {
+        System.out.println("[  이미 존재하는 아이디입니다. ]");
+        System.out.println("[  다시 입력해주세요! ]");
+      } else {
+        break;
+      }
+    }
+
+
+
     joinDTO.setPassword(Prompt.inputString("비밀번호? "));
     joinDTO.setName(Prompt.inputString("이름? "));
     joinDTO.setTel(Prompt.inputString("전화? "));
@@ -111,6 +126,19 @@ public class JoinAddHandler extends AbstractJoinHandler {
     joinDTOList.add(joinDTO);
 
     System.out.println("회원가입이 정상적으로 완료되었습니다.");
+  }
+
+
+
+  private boolean validId(String id) {
+
+    for (JoinDTO joinDTO : joinDTOList) {
+      if (joinDTO.getId().contains(id)) {
+
+        return true;
+      }
+    }
+    return false;
   }
 
 

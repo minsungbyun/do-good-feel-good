@@ -40,6 +40,7 @@ public class VolRequestPersonalRejectApplyHandler extends AbstractVolRequestPers
     }
 
     personalRequestDTO.setChecked(false);
+    personalRequestDTO.setIsSigned("반려됨");
 
     // 기존 리스트 복사
     for (PersonalRequestDTO personalRejectRequestDTO : personalRequestDTOList) {
@@ -51,7 +52,7 @@ public class VolRequestPersonalRejectApplyHandler extends AbstractVolRequestPers
     //    }
     //    this.personalRequestsDTO[--this.size] = null;
 
-    System.out.println("해당 봉사신청을 반려하였습니다.");
+    System.out.println("[  해당 봉사신청을 반려하였습니다. ]");
   }
 
 

@@ -27,8 +27,10 @@ public class VolRequestPersonalAppliedListHandler extends AbstractVolRequestPers
     }
 
 
+
+
     for (PersonalRequestDTO personalRequestApplyDTO : personalRequestApplyDTOList) {
-      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %b \n", 
+      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
 
           personalRequestApplyDTO.getNo(),      
           personalRequestApplyDTO.getTitle(),     
@@ -44,7 +46,8 @@ public class VolRequestPersonalAppliedListHandler extends AbstractVolRequestPers
           personalRequestApplyDTO.getJoinNum(),
           personalRequestApplyDTO.getContent(),
           personalRequestApplyDTO.getFileUpload(),
-          personalRequestApplyDTO.isChecked()
+          //          personalRequestApplyDTO.isChecked(),
+          personalRequestApplyDTO.getIsSigned()
           //          this.personalRequestRejectDTO[i].getIsSigned()
           );
     }

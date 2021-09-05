@@ -32,6 +32,11 @@ import com.share.ftp.handler.admin.AdminChallengeDetailHandler;
 import com.share.ftp.handler.admin.AdminChallengeListHandler;
 import com.share.ftp.handler.admin.AdminChallengeUpdateHandler;
 import com.share.ftp.handler.admin.AdminMemberDeleteHandler;
+import com.share.ftp.handler.admin.AdminNoticeAddHandler;
+import com.share.ftp.handler.admin.AdminNoticeDeleteHandler;
+import com.share.ftp.handler.admin.AdminNoticeDetailHandler;
+import com.share.ftp.handler.admin.AdminNoticeListHandler;
+import com.share.ftp.handler.admin.AdminNoticeUpdateHandler;
 import com.share.ftp.handler.admin.AdminQuestionAddHandler;
 import com.share.ftp.handler.admin.AdminQuestionDeleteHandler;
 import com.share.ftp.handler.admin.AdminQuestionDetailHandler;
@@ -199,6 +204,17 @@ public class App {
     }
   }
 
+  // 전체 봉사보기 Handler 
+
+  VolRequestPersonalAppliedListHandler volRequestPersonalAppliedListHandler = 
+      new VolRequestPersonalAppliedListHandler
+      (personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList);
+
+  VolRequestOrgAppliedListHandler volRequestOrgAppliedListHandler = 
+      new VolRequestOrgAppliedListHandler
+      (orgRequestDTOList, orgRequestApplyDTOList, orgRequestRejectDTOList);
+
+
 
   public static void main(String[] args) {
 
@@ -228,8 +244,7 @@ public class App {
     commands.put("/volRequestPersonal/appliedList", new VolRequestPersonalAppliedListHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
     commands.put("/volRequestPersonal/rejectedList", new VolRequestPersonalRejectedListHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
     commands.put("/volRequestPersonal/bookmark", new VolRequestPersonalBookmarkHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
-    commands.put("/volRequest/totalApprovedList", new VolRequestTotalApprovedListHandler(
-        personalRequestDTOList, orgRequestDTOList,personalRequestApplyDTOList, personalRequestRejectDTOList,orgRequestApplyDTOList,orgRequestRejectDTOList));
+    commands.put("/volRequest/totalApprovedList", new VolRequestTotalApprovedListHandler(volRequestPersonalAppliedListHandler, volRequestOrgAppliedListHandler));
 
     //함께해요 (기관) + 마이페이지
     commands.put("/volRequestOrg/apply", new VolRequestOrgApplyHandler(orgRequestDTOList,joinDTOList));
@@ -333,11 +348,11 @@ public class App {
     commands.put("/join/delete", new AdminMemberDeleteHandler());
 
     // 관리자 공지사항
-    //    commands.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDTOList));
-    //    commands.put("/adminNotice/list", new AdminNoticeListHandler(noticeDTOList));
-    //    commands.put("/adminNotice/detail", new AdminNoticeDetailHandler(noticeDTOList));
-    //    commands.put("/adminNotice/update", new AdminNoticeUpdateHandler(noticeDTOList));
-    //    commands.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDTOList));
+    commands.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDTOList));
+    commands.put("/adminNotice/list", new AdminNoticeListHandler(noticeDTOList));
+    commands.put("/adminNotice/detail", new AdminNoticeDetailHandler(noticeDTOList));
+    commands.put("/adminNotice/update", new AdminNoticeUpdateHandler(noticeDTOList));
+    commands.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDTOList));
 
     // 관리자 문의사항
     commands.put("/adminAsk/add", new AdminQuestionAddHandler(questionDTOList));
@@ -387,9 +402,12 @@ public class App {
 
     doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volRequestPersonal/apply"));
     doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volRequestOrg/apply")); 
-    doVolMenu.add(new MenuItem("인증봉사리스트","/volRequestPersonal/totalApprovedList")); 
-    doVolMenu.add(new MenuItem("인증봉사세부사항", ACCESS_MEMBER,"/volRequestPersonal/appliedList"));
+    doVolMenu.add(new MenuItem("전체인증봉사리스트","/volRequest/totalApprovedList")); 
+    doVolMenu.add(new MenuItem("전체인증봉사세부사항", ACCESS_MEMBER,"/volRequestPersonal/appliedList"));
     doVolMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
+
+    // 함께해요 중복으로 인해서 메서드로 빼지 않습니다.
+    //    doVolMenu.add(createDoVolMenu());
 
     // 소통해요
     MenuGroup CommunityMenu = new MenuGroup("소통해요");
@@ -465,7 +483,7 @@ public class App {
     adminMenu.add(createAdminMemberMenu());      // 회원관리
     adminMenu.add(createAdminDonationMenu());    // 기부관리
     adminMenu.add(createAdminVolMenu());         // 봉사관리
-    // adminMenu.add(createAdminNoticeMenu());      // 공지사항관리
+    adminMenu.add(createAdminNoticeMenu());      // 공지사항관리
     // 관리자 공지사항 관리 => 회원 createNoticeMenu 부분과 기능 겹침. 삭제 고려
     adminMenu.add(createAdminAskMenu());         // 문의사항관리
     adminMenu.add(createAdminChallengeMenu());   // 챌린지관리
@@ -477,18 +495,19 @@ public class App {
   ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-  private Menu createDoVolMenu() {
-    MenuGroup doVolMenu = new MenuGroup("함께해요");
-
-    doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_MEMBER,"/volRequestPersonal/apply"));
-    //    doVolMenu.add(new MenuItem("기관봉사신청양식", Menu.ENABLE_ORG)); // 구현예정
-    doVolMenu.add(new MenuItem("인증봉사리스트","/volRequestPersonal/appliedList")); // 개인만됨
-    doVolMenu.add(new MenuItem("인증봉사세부사항",ACCESS_ORG,"/volRequestPersonal/appliedList"));
-    doVolMenu.add(new MenuItem("찜하기", ACCESS_ORG,"/volRequestPersonal/bookmark")); // 구현예정
-
-    return doVolMenu;
-  }
+  // 함께해요 중복으로 인해서 메서드로 빼지 않습니다.
+  //  private Menu createDoVolMenu() {
+  //    MenuGroup doVolMenu = new MenuGroup("함께해요");
+  //
+  //    doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volRequestPersonal/apply"));
+  //    doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volRequestOrg/apply")); 
+  //    doVolMenu.add(new MenuItem("전체인증봉사리스트","/volRequest/totalApprovedList")); 
+  //    doVolMenu.add(new MenuItem("전체인증봉사세부사항", ACCESS_MEMBER,"/volRequestPersonal/appliedList"));
+  //    doVolMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
+  //
+  //
+  //    return doVolMenu;
+  //  }
 
   private Menu createReviewMenu() {
     MenuGroup reviewMenu = new MenuGroup("나눔 이야기");
@@ -688,17 +707,17 @@ public class App {
   }
 
   // 관리자 공지사항 관리 => 회원 createNoticeMenu 부분과 기능 겹침. 삭제 고려
-  //  private Menu createAdminNoticeMenu() {
-  //    MenuGroup adminNoticeMenu = new MenuGroup("공지사항 관리");
-  //
-  //    adminNoticeMenu.add(new MenuItem("공지사항 등록","/adminNotice/add"));
-  //    adminNoticeMenu.add(new MenuItem("공지사항 목록","/adminNotice/list"));
-  //    adminNoticeMenu.add(new MenuItem("공지사항 상세보기","/adminNotice/detail"));
-  //    adminNoticeMenu.add(new MenuItem("공지사항 변경","/adminNotice/update"));
-  //    adminNoticeMenu.add(new MenuItem("공지사항 삭제","/adminNotice/delete"));
-  //
-  //    return adminNoticeMenu;
-  //}
+  private Menu createAdminNoticeMenu() {
+    MenuGroup adminNoticeMenu = new MenuGroup("공지사항 관리");
+
+    adminNoticeMenu.add(new MenuItem("공지사항 등록","/adminNotice/add"));
+    adminNoticeMenu.add(new MenuItem("공지사항 목록","/adminNotice/list"));
+    adminNoticeMenu.add(new MenuItem("공지사항 상세보기","/adminNotice/detail"));
+    adminNoticeMenu.add(new MenuItem("공지사항 변경","/adminNotice/update"));
+    adminNoticeMenu.add(new MenuItem("공지사항 삭제","/adminNotice/delete"));
+
+    return adminNoticeMenu;
+  }
 
   private Menu createAdminAskMenu() {
     MenuGroup adminAskInfo = new MenuGroup("문의사항 관리");

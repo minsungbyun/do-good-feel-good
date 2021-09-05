@@ -15,7 +15,7 @@ public class JoinDetailHandler extends AbstractJoinHandler {
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("[회원 상세보기]");
+    System.out.println("[  회원 상세보기  ]");
     String id = Prompt.inputString("아이디? "); 
     String password = Prompt.inputString("비밀번호? ");
 
