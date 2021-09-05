@@ -22,7 +22,7 @@ public class PersonalRequestDTO {
   private boolean isPersonal;
   private boolean isOrg;
   private boolean isChecked;
-  private String isSigned;
+  private String isSigned = "승인대기";
   private Date volSubmitTime;
   @Override
   public int hashCode() {

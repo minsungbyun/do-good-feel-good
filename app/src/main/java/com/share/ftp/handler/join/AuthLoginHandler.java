@@ -1,5 +1,6 @@
 package com.share.ftp.handler.join;
 
+import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
@@ -35,16 +36,26 @@ public class AuthLoginHandler implements Command {
     String password = Prompt.inputString("비밀번호? ");
 
     if (id.equals("admin") && password.equals("111")) {
-      JoinDTO root = new JoinDTO();
-      root.setName("관리자");
-      root.setEmail("admin@test.com");
-      loginUser = root;
+      JoinDTO admin = new JoinDTO();
+      admin.setId("admin");
+      admin.setName("관리자");
+      admin.setEmail("admin@test.com");
+      admin.setPassword("111");
+      admin.setTel("010-1111-1111");
+      admin.setAdress("no");
+      admin.setRegisterDate(new Date(System.currentTimeMillis()));
+      admin.setAdmin(true);
+
+      loginUser = admin;
       userAccessLevel = Menu.ACCESS_ADMIN | Menu.ACCESS_MEMBER | Menu.ACCESS_ORG | Menu.ACCESS_PERSONAL;
       return;
     } 
 
 
     JoinDTO joinDTO = findByMember(id, password);
+
+
+
 
     if (joinDTO == null) {
       System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");
@@ -69,8 +80,8 @@ public class AuthLoginHandler implements Command {
 
   private JoinDTO findByMember(String id, String password) {
     for (JoinDTO joinDTO : joinDTOList) {
-      if (joinDTO.getId().equalsIgnoreCase(id) && 
-          joinDTO.getPassword().equalsIgnoreCase(password)) {
+      if (joinDTO.getId().equals(id) && 
+          joinDTO.getPassword().equals(password)) {
         return joinDTO;
       }
     }
