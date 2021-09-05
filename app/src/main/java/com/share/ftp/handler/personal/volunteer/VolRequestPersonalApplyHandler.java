@@ -44,8 +44,8 @@ public class VolRequestPersonalApplyHandler extends AbstractVolRequestPersonalHa
         personalRequestDTO.setSort(Prompt.inputString("분류 ▶ "));
         personalRequestDTO.setTel(Prompt.inputString("전화번호 ▶ "));
         personalRequestDTO.setEmail(Prompt.inputString("이메일 ▶ ")); 
-        personalRequestDTO.setVolStartDate(Prompt.inputDate("봉사시작기간 ▶ ")); 
-        personalRequestDTO.setVolEndDate(Prompt.inputDate("봉사종료기간 ▶ ")); 
+        personalRequestDTO.setVolStartDate(Prompt.inputDate("봉사시작기간(yyyy-mm-dd) ▶ ")); 
+        personalRequestDTO.setVolEndDate(Prompt.inputDate("봉사종료기간(yyyy-mm-dd) ▶ ")); 
         personalRequestDTO.setVolStartTime(Prompt.inputString("봉사시작시간 ▶ ")); 
         personalRequestDTO.setVolEndTime(Prompt.inputString("봉사종료시간 ▶ ")); 
         personalRequestDTO.setVolList(Prompt.inputString("봉사목록 ▶ ")); 
@@ -54,7 +54,9 @@ public class VolRequestPersonalApplyHandler extends AbstractVolRequestPersonalHa
         personalRequestDTO.setVolSubmitTime(new Date(System.currentTimeMillis())); 
         personalRequestDTO.setFileUpload(Prompt.inputString("파일 ▶ ")); 
         personalRequestDTO.setPersonal(true);
-        //              personalRequestDTO.setIsSigned("승인대기");
+        personalRequestDTO.setChecked(false);
+        personalRequestDTO.getIsSigned();
+
 
         personalRequestDTOList.add(personalRequestDTO);
 

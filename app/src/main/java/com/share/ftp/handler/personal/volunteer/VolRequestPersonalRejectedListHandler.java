@@ -19,15 +19,15 @@ public class VolRequestPersonalRejectedListHandler extends AbstractVolRequestPer
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("[개인봉사반려 목록]");
+    System.out.println("[  개인봉사반려 목록  ]");
 
     if (personalRequestRejectDTOList.isEmpty()) {
-      System.out.println("현재 반려된 봉사목록이 없습니다.");
+      System.out.println("[  현재 반려된 봉사목록이 없습니다. ]");
       return;
     }
 
     for (PersonalRequestDTO personalRequestRejectDTO : personalRequestRejectDTOList) {
-      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %b \n", 
+      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
           personalRequestRejectDTO.getNo(),      
           personalRequestRejectDTO.getTitle(),     
           personalRequestRejectDTO.getOwner(), 
@@ -42,7 +42,8 @@ public class VolRequestPersonalRejectedListHandler extends AbstractVolRequestPer
           personalRequestRejectDTO.getJoinNum(),
           personalRequestRejectDTO.getContent(),
           personalRequestRejectDTO.getFileUpload(),
-          personalRequestRejectDTO.isChecked()
+          //          personalRequestRejectDTO.isChecked()
+          personalRequestRejectDTO.getIsSigned()
           //          this.personalRequestRejectDTO[i].getIsSigned()
           );
     }

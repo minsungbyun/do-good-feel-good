@@ -38,6 +38,7 @@ public class VolRequestPersonalAcceptApplyHandler extends AbstractVolRequestPers
     }
 
     personalRequestDTO.setChecked(true);
+    personalRequestDTO.setIsSigned("승인됨");
     //    personalRequestDTO.setIsSigned("승인됨");
 
 
@@ -46,7 +47,7 @@ public class VolRequestPersonalAcceptApplyHandler extends AbstractVolRequestPers
       personalRequestApplyDTOList.add(personalRequestApplyDTO);
 
 
-      System.out.println("해당 봉사신청을 승인하였습니다.");
+      System.out.println("[  해당 봉사신청을 승인하였습니다. ]");
 
     }
   }

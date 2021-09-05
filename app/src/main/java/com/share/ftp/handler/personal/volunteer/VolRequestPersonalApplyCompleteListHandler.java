@@ -41,7 +41,7 @@ public class VolRequestPersonalApplyCompleteListHandler extends AbstractVolReque
           + "봉사인원: %d\n"
           + "봉사내용: %s\n"
           + "첨부파일: %s\n"
-          + "승인여부: %b \n\n", 
+          + "승인여부: %s \n\n", 
 
           personalRequestDTO.getNo(), 
           personalRequestDTO.getTitle(), 
@@ -57,7 +57,8 @@ public class VolRequestPersonalApplyCompleteListHandler extends AbstractVolReque
           personalRequestDTO.getJoinNum(),
           personalRequestDTO.getContent(),
           personalRequestDTO.getFileUpload(),
-          personalRequestDTO.isChecked()
+          //          personalRequestDTO.isChecked(),
+          personalRequestDTO.getIsSigned()
           //          this.personalRequestRejectDTO[i].getIsSigned()
           );
     }

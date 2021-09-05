@@ -205,6 +205,15 @@ public class App {
     }
   }
 
+  VolRequestPersonalAppliedListHandler volRequestPersonalAppliedListHandler = 
+      new VolRequestPersonalAppliedListHandler
+      (personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList);
+
+  VolRequestOrgAppliedListHandler volRequestOrgAppliedListHandler = 
+      new VolRequestOrgAppliedListHandler
+      (orgRequestDTOList, orgRequestApplyDTOList, orgRequestRejectDTOList);
+
+
 
   public static void main(String[] args) {
 
@@ -234,8 +243,7 @@ public class App {
     commands.put("/volRequestPersonal/appliedList", new VolRequestPersonalAppliedListHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
     commands.put("/volRequestPersonal/rejectedList", new VolRequestPersonalRejectedListHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
     commands.put("/volRequestPersonal/bookmark", new VolRequestPersonalBookmarkHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
-    commands.put("/volRequest/totalApprovedList", new VolRequestTotalApprovedListHandler(
-        personalRequestDTOList, orgRequestDTOList,personalRequestApplyDTOList, personalRequestRejectDTOList,orgRequestApplyDTOList,orgRequestRejectDTOList));
+    commands.put("/volRequest/totalApprovedList", new VolRequestTotalApprovedListHandler(volRequestPersonalAppliedListHandler, volRequestOrgAppliedListHandler));
 
     //함께해요 (기관) + 마이페이지
     commands.put("/volRequestOrg/apply", new VolRequestOrgApplyHandler(orgRequestDTOList,joinDTOList));
@@ -395,8 +403,8 @@ public class App {
 
     doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volRequestPersonal/apply"));
     doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volRequestOrg/apply")); 
-    doVolMenu.add(new MenuItem("인증봉사리스트","/volRequestPersonal/totalApprovedList")); 
-    doVolMenu.add(new MenuItem("인증봉사세부사항", ACCESS_MEMBER,"/volRequestPersonal/appliedList"));
+    doVolMenu.add(new MenuItem("전체인증봉사리스트","/volRequest/totalApprovedList")); 
+    doVolMenu.add(new MenuItem("전체인증봉사세부사항", ACCESS_MEMBER,"/volRequestPersonal/appliedList"));
     doVolMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

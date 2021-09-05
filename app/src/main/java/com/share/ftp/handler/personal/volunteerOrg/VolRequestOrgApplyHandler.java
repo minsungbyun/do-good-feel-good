@@ -53,7 +53,7 @@ public class VolRequestOrgApplyHandler extends AbstractVolRequestOrgHandler { //
         orgRequestDTO.setContent(Prompt.inputString("내용 ▶ ")); 
         orgRequestDTO.setVolSubmitTime(new Date(System.currentTimeMillis())); 
         orgRequestDTO.setFileUpload(Prompt.inputString("파일 ▶ ")); 
-        orgRequestDTO.setPersonal(true);
+        orgRequestDTO.setOrg(true);
         //              personalRequestDTO.setIsSigned("승인대기");
 
         orgRequestDTOList.add(orgRequestDTO);
