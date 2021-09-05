@@ -2,7 +2,8 @@ package com.share.ftp.handler.join;
 
 import java.sql.Date;
 import java.util.List;
-import com.share.ftp.domain.guest.JoinDTO;
+import com.share.ftp.domain.join.JoinDTO;
+import com.share.menu.Menu;
 import com.share.util.Prompt;
 
 public class JoinAddHandler extends AbstractJoinHandler {
@@ -53,13 +54,14 @@ public class JoinAddHandler extends AbstractJoinHandler {
     joinDTOList.add(testUser);
 
     testUser = new JoinDTO();
-    testUser.setId("ccc");
-    testUser.setName("test3");
+    testUser.setId("object");
+    testUser.setName("자바최고조상");
     testUser.setEmail("ccc@test.com");
     testUser.setPassword("111");
     testUser.setTel("010-4444-4444");
     testUser.setAdress("no");
     testUser.setRegisterDate(new Date(System.currentTimeMillis()));
+    testUser.setPersonal(true);
 
     joinDTOList.add(testUser);
 
@@ -92,10 +94,12 @@ public class JoinAddHandler extends AbstractJoinHandler {
 
       if (no == 1) {
         joinDTO.setPersonal(true);
+        AuthLoginHandler.userAccessLevel = Menu.ACCESS_PERSONAL | Menu.ACCESS_LOGOUT;
         break;
 
       } else if (no == 2){
         joinDTO.setOrg(true);
+        AuthLoginHandler.userAccessLevel = Menu.ACCESS_ORG | Menu.ACCESS_LOGOUT;
         break;
 
       } else {
@@ -108,6 +112,7 @@ public class JoinAddHandler extends AbstractJoinHandler {
 
     System.out.println("회원가입이 정상적으로 완료되었습니다.");
   }
+
 
 }
 
