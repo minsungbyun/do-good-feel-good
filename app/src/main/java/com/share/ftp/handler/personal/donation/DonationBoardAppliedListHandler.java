@@ -21,24 +21,26 @@ public class DonationBoardAppliedListHandler extends AbstractDonationBoardHandle
     System.out.println("[모금함 개설 신청서 승인 목록]");
 
     if (donationBoardApplyDTOList.isEmpty()) {
-      System.out.println("현재 등록된 모금함 개설목록이 없습니다.");
+      System.out.println("현재 승인된 모금함 개설목록이 없습니다.");
       return;
     }
 
-    for (DonationBoardDTO donationBoardDTO : donationBoardApplyDTOList) {
-      System.out.printf("[%d, %s, %s, %s, %s, %s ~ %s, %b]\n", 
-          donationBoardDTO.getNo(), 
-          donationBoardDTO.getTitle(), 
-          donationBoardDTO.getLeader(),
-          donationBoardDTO.getContent(),
-          donationBoardDTO.getFileUpload(), 
-          donationBoardDTO.getPassword(),
-          donationBoardDTO.getRegisteredStartDate(),
-          donationBoardDTO.getRegisteredEndDate(),
-          donationBoardDTO.isChecked());
+    for (DonationBoardDTO donationBoardApplyDTO : donationBoardApplyDTOList) {
+
+      System.out.printf("[%d, %s, %s, %s, %s, %s ~ %s, %s]\n", 
+          donationBoardApplyDTO.getNo(), 
+          donationBoardApplyDTO.getTitle(), 
+          donationBoardApplyDTO.getLeader(),
+          donationBoardApplyDTO.getContent(),
+          donationBoardApplyDTO.getFileUpload(), 
+          donationBoardApplyDTO.getRegisteredStartDate(),
+          donationBoardApplyDTO.getRegisteredEndDate(),
+          //          donationBoardDTO.isChecked());
+          donationBoardApplyDTO.getIsSigned());
     }
   }
 }
+
 
 
 

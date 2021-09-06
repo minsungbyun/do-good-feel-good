@@ -15,6 +15,11 @@ public class DonationRegisterParticipationHandler extends AbstractDonationRegist
   public void execute() {
     System.out.println("[모금함 기부 참여내역]");
 
+    if (donationRegisterDTOList.isEmpty()) {
+      System.out.println("[  현재 참여된 기부 내역이 없습니다. ]");
+      return;
+    }
+
     for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {
       System.out.printf("모금함번호: %s\n %s, %s, %s\n", 
           donationRegisterDTO.getSort(), 

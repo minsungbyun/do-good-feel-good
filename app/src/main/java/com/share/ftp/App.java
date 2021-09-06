@@ -90,8 +90,11 @@ import com.share.ftp.handler.personal.donation.DonationBoardApplyCompleteListHan
 import com.share.ftp.handler.personal.donation.DonationBoardApplyDetailHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardApplyHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardApplyListHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardListHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardRejectApplyHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardRejectedListHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterAddHandler;
+import com.share.ftp.handler.personal.donation.DonationRegisterMyListHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterParticipationHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterTotalMoneyHandler;
 import com.share.ftp.handler.personal.mypage.MyBoardDeleteHandler;
@@ -215,6 +218,11 @@ public class App {
       new VolRequestOrgAppliedListHandler
       (orgRequestDTOList, orgRequestApplyDTOList, orgRequestRejectDTOList);
 
+  // 모금함 개설 승인된 목록 Handler
+
+  DonationBoardAppliedListHandler donationBoardAppliedListHandler =
+      new DonationBoardAppliedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList);
+
 
 
   public static void main(String[] args) {
@@ -299,12 +307,13 @@ public class App {
     commands.put("/myRanking/list", new MyRankingHandler()); //나의랭킹(구현예정)
 
     // 모금함 (개설신청하기, 개설목록, 승인, 반려)
-    commands.put("/donationBoard/apply", new DonationBoardApplyHandler(donationBoardDTOList));
+    commands.put("/donationBoard/list", new DonationBoardListHandler(donationBoardAppliedListHandler));
+    commands.put("/donationBoard/apply", new DonationBoardApplyHandler(donationBoardDTOList, joinDTOList));
     commands.put("/donationBoard/applyList", new DonationBoardApplyListHandler(donationBoardDTOList));
-    commands.put("/donationBoard/applyCompleteList", new DonationBoardApplyCompleteListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
     commands.put("/donationBoard/appliedList", new DonationBoardAppliedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
     commands.put("/donationBoard/acceptApply", new DonationBoardAcceptApplyHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
     commands.put("/donationBoard/rejectApply", new DonationBoardRejectApplyHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
+    commands.put("/donationBoard/rejectedList", new DonationBoardRejectedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
     commands.put("/donationBoard/applyDetail", new DonationBoardApplyDetailHandler(donationBoardDTOList));
 
     // 모금함 (기부하기)
@@ -342,6 +351,8 @@ public class App {
     commands.put("/OrgMyVol/apply", new MyVolApplyListHandler()); // 기관 마이페이지 승인신청 
     commands.put("/OrgMyVol/approve", new MyVolApproveListHandler()); // 기관 마이페이지 승인조회
     commands.put("/myDonation/list", new MyDonationHandler()); // 모금함
+    commands.put("/myDonation/registerlist", new DonationRegisterMyListHandler(donationRegisterDTOList)); // 모금함
+    commands.put("/myDonation//applyCompleteList", new DonationBoardApplyCompleteListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
 
     // 관리자
 
@@ -370,6 +381,7 @@ public class App {
     commands.put("/adminChallenge/update", new AdminChallengeUpdateHandler(challengeDTOList));
     commands.put("/adminChallenge/delete", new AdminChallengeDeleteHandler(challengeDTOList));
 
+
     // 관리자 기관승인
 
 
@@ -397,20 +409,9 @@ public class App {
     mainMenuGroup.add(new MenuItem("로그아웃", ACCESS_MEMBER, "/auth/logout"));
 
 
-
-
     // 함께해요
-    MenuGroup doVolMenu = new MenuGroup("함께해요");
-    mainMenuGroup.add(doVolMenu); 
+    mainMenuGroup.add(createDoVolMenu()); 
 
-    doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volRequestPersonal/apply"));
-    doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volRequestOrg/apply")); 
-    doVolMenu.add(new MenuItem("전체인증봉사리스트","/volRequest/totalApprovedList")); 
-    doVolMenu.add(new MenuItem("전체인증봉사세부사항", ACCESS_MEMBER,"/volRequestPersonal/appliedList"));
-    doVolMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
-
-    // 함께해요 중복으로 인해서 메서드로 빼지 않습니다.
-    //    doVolMenu.add(createDoVolMenu());
 
     // 소통해요
     MenuGroup CommunityMenu = new MenuGroup("소통해요");
@@ -444,13 +445,6 @@ public class App {
 
     challengeMenu.add(createMonthlyRankingMenu()); // 이달의 랭킹
 
-    MenuGroup MonthlyRankingMenu = new MenuGroup("이달의 랭킹");
-    challengeMenu.add(MonthlyRankingMenu);
-    MenuGroup MonthlyRankingList = new MenuGroup("이달의 랭킹보기");
-    MonthlyRankingMenu.add(MonthlyRankingList);
-    MenuGroup MyRankingMenu = new MenuGroup("나의 랭킹보기");
-    MonthlyRankingMenu.add(MyRankingMenu);
-
 
     // 모금함
     MenuGroup DonationMenu = new MenuGroup("모금함");
@@ -458,7 +452,14 @@ public class App {
 
     DonationMenu.add(new MenuItem("전체 기부금 내역", "/donationRegister/totalMoney"));
     DonationMenu.add(new MenuItem("모금함 개설신청", ACCESS_ORG, "/donationBoard/apply"));
-    DonationMenu.add(new MenuItem("모금함목록","/commBoard/list"));
+
+    MenuGroup doDonationListMenu = new MenuGroup("모금함목록");
+    DonationMenu.add(new MenuItem("모금함목록","/donationBoard/list"));
+
+    doDonationListMenu.add(new MenuItem("모금함 상세보기", "/donationBoard/applyDetail"));
+    doDonationListMenu.add(new MenuItem("기부하기", ACCESS_MEMBER, "/donationRegister/add"));
+    doDonationListMenu.add(new MenuItem("참여내역", "/donationRegister/participation"));
+
     DonationMenu.add(createDonationDetailMenu()); // 모금함 상세보기
 
     // 고객센터
@@ -499,18 +500,18 @@ public class App {
 
 
   // 함께해요 중복으로 인해서 메서드로 빼지 않습니다.
-  //  private Menu createDoVolMenu() {
-  //    MenuGroup doVolMenu = new MenuGroup("함께해요");
-  //
-  //    doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volRequestPersonal/apply"));
-  //    doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volRequestOrg/apply")); 
-  //    doVolMenu.add(new MenuItem("전체인증봉사리스트","/volRequest/totalApprovedList")); 
-  //    doVolMenu.add(new MenuItem("전체인증봉사세부사항", ACCESS_MEMBER,"/volRequestPersonal/appliedList"));
-  //    doVolMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
-  //
-  //
-  //    return doVolMenu;
-  //  }
+  private Menu createDoVolMenu() {
+    MenuGroup doVolMenu = new MenuGroup("함께해요");
+
+    doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volRequestPersonal/apply"));
+    doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volRequestOrg/apply")); 
+    doVolMenu.add(new MenuItem("전체인증봉사리스트","/volRequest/totalApprovedList")); 
+    doVolMenu.add(new MenuItem("전체인증봉사세부사항", ACCESS_MEMBER,"/volRequestPersonal/appliedList"));
+    doVolMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
+
+
+    return doVolMenu;
+  }
 
   private Menu createReviewMenu() {
     MenuGroup reviewMenu = new MenuGroup("나눔 이야기");
@@ -579,6 +580,7 @@ public class App {
 
   private Menu createDonationDetailMenu() {
     MenuGroup doDonationMenu = new MenuGroup("모금함 상세보기");
+    doDonationMenu.add(new MenuItem("모금함 상세보기", "/donationBoard/applyDetail"));
     doDonationMenu.add(new MenuItem("기부하기", ACCESS_MEMBER, "/donationRegister/add"));
     doDonationMenu.add(new MenuItem("참여내역", "/donationRegister/participation"));
 
@@ -649,8 +651,10 @@ public class App {
 
   private Menu createMyDonationMenu() {
     MenuGroup myDonation = new MenuGroup("나의 모금함"); 
-    myDonation.add(new MenuItem("나의 모금함 개설신청서 확인", ACCESS_ORG, "/donationBoard/applyCompleteList")); 
-    //    myDonation.add(new MenuItem("나의 기부내역", Menu.ENABLE_MEMBER, "/donationRegister/list")); // 구현예정
+    myDonation.add(new MenuItem("나의 모금함 개설신청서 확인", ACCESS_ORG, "/myDonation//applyCompleteList")); 
+    myDonation.add(new MenuItem("나의 기부내역", ACCESS_MEMBER, "/myDonation/registerlist"));
+    myDonation.add(new MenuItem("승인된 모금함 개설내역",ACCESS_ORG,"/donationBoard/appliedList")); 
+    myDonation.add(new MenuItem("반려된 모금함 개설내역", ACCESS_ORG,"/donationBoard/rejectedList"));  
 
     return myDonation;
   }
@@ -690,7 +694,6 @@ public class App {
     MenuGroup adminDonationMenu = new MenuGroup("모금함 관리");
 
     adminDonationMenu.add(new MenuItem("모금함 개설 신청내역 목록", "/donationBoard/applyList"));
-    adminDonationMenu.add(new MenuItem("모금함 개설 신청내역", "/donationBoard/applyList"));
     adminDonationMenu.add(new MenuItem("모금함 개설 신청내역 상세보기", "/donationBoard/applyDetail"));
     adminDonationMenu.add(new MenuItem("모금함 개설 승인하기", "/donationBoard/acceptApply"));
     adminDonationMenu.add(new MenuItem("모금함 개설 반려하기", "/donationBoard/rejectApply"));

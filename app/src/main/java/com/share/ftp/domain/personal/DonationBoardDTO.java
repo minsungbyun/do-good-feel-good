@@ -9,22 +9,23 @@ public class DonationBoardDTO {
   private String leader;
   private String content;
   private String fileUpload;
-  private String password;
   private Date registeredStartDate;
   private Date registeredEndDate;
   private boolean isOrg;
   private boolean isChecked;
+  private String isSigned = "승인대기";
+
 
   @Override
   public String toString() {
     return "DonationBoardDTO [no=" + no + ", title=" + title + ", leader=" + leader + ", content="
-        + content + ", fileUpload=" + fileUpload + ", password=" + password
-        + ", registeredStartDate=" + registeredStartDate + ", registeredEndDate="
-        + registeredEndDate + ", isOrg=" + isOrg + ", isChecked=" + isChecked + "]";
+        + content + ", fileUpload=" + fileUpload + ", registeredStartDate=" + registeredStartDate
+        + ", registeredEndDate=" + registeredEndDate + ", isOrg=" + isOrg + ", isChecked="
+        + isChecked + ", isSigned=" + isSigned + "]";
   }
   @Override
   public int hashCode() {
-    return Objects.hash(content, fileUpload, isChecked, isOrg, leader, no, password,
+    return Objects.hash(content, fileUpload, isChecked, isOrg, isSigned, leader, no,
         registeredEndDate, registeredStartDate, title);
   }
   @Override
@@ -38,13 +39,11 @@ public class DonationBoardDTO {
     DonationBoardDTO other = (DonationBoardDTO) obj;
     return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
         && isChecked == other.isChecked && isOrg == other.isOrg
-        && Objects.equals(leader, other.leader) && no == other.no
-        && Objects.equals(password, other.password)
-        && Objects.equals(registeredEndDate, other.registeredEndDate)
+        && Objects.equals(isSigned, other.isSigned) && Objects.equals(leader, other.leader)
+        && no == other.no && Objects.equals(registeredEndDate, other.registeredEndDate)
         && Objects.equals(registeredStartDate, other.registeredStartDate)
         && Objects.equals(title, other.title);
   }
-
   public int getNo() {
     return no;
   }
@@ -75,12 +74,6 @@ public class DonationBoardDTO {
   public void setFileUpload(String fileUpload) {
     this.fileUpload = fileUpload;
   }
-  public String getPassword() {
-    return password;
-  }
-  public void setPassword(String password) {
-    this.password = password;
-  }
   public Date getRegisteredStartDate() {
     return registeredStartDate;
   }
@@ -104,5 +97,11 @@ public class DonationBoardDTO {
   }
   public void setChecked(boolean isChecked) {
     this.isChecked = isChecked;
+  }
+  public String getIsSigned() {
+    return isSigned;
+  }
+  public void setIsSigned(String isSigned) {
+    this.isSigned = isSigned;
   }
 }

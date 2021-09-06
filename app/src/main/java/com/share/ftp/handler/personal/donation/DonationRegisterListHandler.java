@@ -18,6 +18,7 @@ public class DonationRegisterListHandler extends AbstractDonationRegisterHandler
 
     for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {
       System.out.printf("%d, %d, %s, %s, %s, %s, %s, %s\n", 
+          donationRegisterDTO.getSort(), 
           donationRegisterDTO.getNo(), 
           donationRegisterDTO.getDonationMoney(), 
           donationRegisterDTO.getName(), 
