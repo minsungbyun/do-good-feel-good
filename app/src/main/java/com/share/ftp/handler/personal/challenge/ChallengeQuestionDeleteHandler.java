@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.challenge;
 
 import java.util.List;
 import com.share.ftp.domain.personal.MyChallengeQuestionDTO;
+import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
 public class ChallengeQuestionDeleteHandler extends AbstractChallengeQuestionHandler {
@@ -13,13 +14,20 @@ public class ChallengeQuestionDeleteHandler extends AbstractChallengeQuestionHan
 
   @Override
   public void execute() {
+    while (true) {
     System.out.println("[문의 삭제]");
     int no = Prompt.inputInt("번호? ");
 
     MyChallengeQuestionDTO myChallengeQuestion = findByNo(no);
 
+    try {
     if (myChallengeQuestion == null) {
       System.out.println("해당 번호의 문의가 없습니다.");
+      return;
+    }
+    
+    if (myChallengeQuestion.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
+      System.out.println("삭제 권한이 없습니다.");
       return;
     }
 
@@ -27,10 +35,16 @@ public class ChallengeQuestionDeleteHandler extends AbstractChallengeQuestionHan
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("문의 삭제를 취소하였습니다.");
       return;
+    } else if (input.equals("y")) {
+      System.out.println("참여인증&댓글을 삭제하였습니다.");
+      myChallengeQuestionDTOList.remove(myChallengeQuestion);
+      return;
+    } else {
+      System.out.println("y 또는 n을 입력하세요.");
+      continue;
+    } 
+    } catch (Throwable e) {
     }
-
-    myChallengeQuestionDTOList.remove(myChallengeQuestion);
-
-    System.out.println("문의를 삭제하였습니다.");
+    }
   }
 }

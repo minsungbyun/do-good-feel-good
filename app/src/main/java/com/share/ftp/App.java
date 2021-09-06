@@ -66,7 +66,7 @@ import com.share.ftp.handler.personal.challenge.ChallengeQuestionSearchHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionUpdateHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewAddHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewDeleteHandler;
-import com.share.ftp.handler.personal.challenge.ChallengeReviewDetailHandler;
+//import com.share.ftp.handler.personal.challenge.ChallengeReviewDetailHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewSearchHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewUpdateHandler;
@@ -281,7 +281,7 @@ public class App {
     // 챌린지 참여인증&댓글
     commands.put("/challengeReview/add", new ChallengeReviewAddHandler(myChallengeReviewDTOList));
     commands.put("/challengeReview/list", new ChallengeReviewListHandler(myChallengeReviewDTOList));
-    commands.put("/challengeReview/detail", new ChallengeReviewDetailHandler(myChallengeReviewDTOList));
+//    commands.put("/challengeReview/detail", new ChallengeReviewDetailHandler(myChallengeReviewDTOList));
     commands.put("/challengeReview/update", new ChallengeReviewUpdateHandler(myChallengeReviewDTOList));
     commands.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(myChallengeReviewDTOList));
     commands.put("/challengeReview/search", new ChallengeReviewSearchHandler(myChallengeReviewDTOList));
@@ -400,14 +400,14 @@ public class App {
 
 
     // 함께해요
-    MenuGroup doVolMenu = new MenuGroup("함께해요");
-    mainMenuGroup.add(doVolMenu); 
+//    MenuGroup doVolMenu = new MenuGroup("함께해요");
+    mainMenuGroup.add(createDoVolMenu()); 
 
-    doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volRequestPersonal/apply"));
-    doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volRequestOrg/apply")); 
-    doVolMenu.add(new MenuItem("전체인증봉사리스트","/volRequest/totalApprovedList")); 
-    doVolMenu.add(new MenuItem("전체인증봉사세부사항", ACCESS_MEMBER,"/volRequestPersonal/appliedList"));
-    doVolMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
+//    doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volRequestPersonal/apply"));
+//    doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volRequestOrg/apply")); 
+//    doVolMenu.add(new MenuItem("전체인증봉사리스트","/volRequest/totalApprovedList")); 
+//    doVolMenu.add(new MenuItem("전체인증봉사세부사항", ACCESS_MEMBER,"/volRequestPersonal/appliedList"));
+//    doVolMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
 
     // 함께해요 중복으로 인해서 메서드로 빼지 않습니다.
     //    doVolMenu.add(createDoVolMenu());
@@ -427,29 +427,32 @@ public class App {
     MenuGroup monthlyChallengeMenu = new MenuGroup("이달의 챌린지");
     challengeMenu.add(monthlyChallengeMenu);
 
-    MenuGroup challengeListMenu = new MenuGroup("챌린지 목록");
-    monthlyChallengeMenu.add(challengeListMenu);
+//    MenuGroup challengeListMenu = new MenuGroup("챌린지 목록");
+//    monthlyChallengeMenu.add(challengeListMenu);
 
     MenuGroup challengeDetailMenu = new MenuGroup("챌린지 상세보기");
     monthlyChallengeMenu.add(challengeDetailMenu); 
+    
+    MenuGroup showChallengeDetailHandler = new MenuGroup("상세정보");  // 구현예정
+    challengeDetailMenu.add(showChallengeDetailHandler);
 
+    MenuGroup challengeParticipationMenu = new MenuGroup("참여하기");  // 구현예정
+    challengeDetailMenu.add(challengeParticipationMenu);
+
+    MenuGroup challengeParticipationListMenu = new MenuGroup("참여자목록");  // 구현예정
+    challengeDetailMenu.add(challengeParticipationListMenu);
+    
     challengeDetailMenu.add(createChallengeReviewMenu()); // 참여인증&댓글
     challengeDetailMenu.add(createChallengeQuestionMenu()); // 문의하기
 
-    MenuGroup challengeParticipationMenu = new MenuGroup("참여하기");
-    challengeDetailMenu.add(challengeParticipationMenu);
-
-    MenuGroup challengeParticipationListMenu = new MenuGroup("참여자목록");
-    challengeDetailMenu.add(challengeParticipationListMenu);
-
     challengeMenu.add(createMonthlyRankingMenu()); // 이달의 랭킹
 
-    MenuGroup MonthlyRankingMenu = new MenuGroup("이달의 랭킹");
-    challengeMenu.add(MonthlyRankingMenu);
-    MenuGroup MonthlyRankingList = new MenuGroup("이달의 랭킹보기");
-    MonthlyRankingMenu.add(MonthlyRankingList);
-    MenuGroup MyRankingMenu = new MenuGroup("나의 랭킹보기");
-    MonthlyRankingMenu.add(MyRankingMenu);
+//    MenuGroup MonthlyRankingMenu = new MenuGroup("이달의 랭킹");
+//    challengeMenu.add(MonthlyRankingMenu);
+//    MenuGroup MonthlyRankingList = new MenuGroup("이달의 랭킹보기");
+//    MonthlyRankingMenu.add(MonthlyRankingList);
+//    MenuGroup MyRankingMenu = new MenuGroup("나의 랭킹보기");
+//    MonthlyRankingMenu.add(MyRankingMenu);
 
 
     // 모금함
@@ -498,19 +501,19 @@ public class App {
   ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-  // 함께해요 중복으로 인해서 메서드로 빼지 않습니다.
-  //  private Menu createDoVolMenu() {
-  //    MenuGroup doVolMenu = new MenuGroup("함께해요");
-  //
-  //    doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volRequestPersonal/apply"));
-  //    doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volRequestOrg/apply")); 
-  //    doVolMenu.add(new MenuItem("전체인증봉사리스트","/volRequest/totalApprovedList")); 
-  //    doVolMenu.add(new MenuItem("전체인증봉사세부사항", ACCESS_MEMBER,"/volRequestPersonal/appliedList"));
-  //    doVolMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
-  //
-  //
-  //    return doVolMenu;
-  //  }
+//   함께해요 중복으로 인해서 메서드로 빼지 않습니다.
+    private Menu createDoVolMenu() {
+      MenuGroup doVolMenu = new MenuGroup("함께해요");
+  
+      doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volRequestPersonal/apply"));
+      doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volRequestOrg/apply")); 
+      doVolMenu.add(new MenuItem("전체인증봉사리스트","/volRequest/totalApprovedList")); 
+      doVolMenu.add(new MenuItem("전체인증봉사세부사항", ACCESS_MEMBER,"/volRequestPersonal/appliedList"));
+      doVolMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
+  
+  
+      return doVolMenu;
+    }
 
   private Menu createReviewMenu() {
     MenuGroup reviewMenu = new MenuGroup("나눔 이야기");
@@ -548,7 +551,7 @@ public class App {
     MenuGroup ChallengeReview = new MenuGroup("참여인증&댓글");
     ChallengeReview.add(new MenuItem("참여인증&댓글 등록", ACCESS_MEMBER, "/challengeReview/add"));
     ChallengeReview.add(new MenuItem("참여인증&댓글 목록", "/challengeReview/list"));
-    ChallengeReview.add(new MenuItem("참여인증&댓글 상세보기", ACCESS_MEMBER,"/challengeReview/detail"));
+//    ChallengeReview.add(new MenuItem("참여인증&댓글 상세보기", ACCESS_MEMBER,"/challengeReview/detail"));
     ChallengeReview.add(new MenuItem("참여인증&댓글 수정", ACCESS_MEMBER,"/challengeReview/update"));
     ChallengeReview.add(new MenuItem("참여인증&댓글 삭제", ACCESS_MEMBER,"/challengeReview/delete"));
     ChallengeReview.add(new MenuItem("참여인증&댓글 검색", "/challengeReview/search"));
@@ -589,11 +592,11 @@ public class App {
 
   private Menu createNoticeMenu() {
     MenuGroup notice = new MenuGroup("공지사항");
-    notice.add(new MenuItem("등록",ACCESS_ADMIN,"/notice/add"));
+//    notice.add(new MenuItem("등록",ACCESS_ADMIN,"/notice/add"));
     notice.add(new MenuItem("목록", "/notice/list"));
     notice.add(new MenuItem("상세보기", "/notice/detail"));
-    notice.add(new MenuItem("변경",ACCESS_ADMIN,"/notice/update"));
-    notice.add(new MenuItem("삭제",ACCESS_ADMIN, "/notice/delete"));
+//    notice.add(new MenuItem("변경",ACCESS_ADMIN,"/notice/update"));
+//    notice.add(new MenuItem("삭제",ACCESS_ADMIN, "/notice/delete"));
     notice.add(new MenuItem("검색", "/notice/search"));
 
     return notice;
