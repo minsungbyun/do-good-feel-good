@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.community;
 
 import java.util.List;
 import com.share.ftp.domain.personal.CommBoardDTO;
+import com.share.ftp.handler.join.AuthLoginHandler;
 
 public class CommBoardListHandler extends AbstractCommBoardHandler {
 
@@ -22,7 +23,8 @@ public class CommBoardListHandler extends AbstractCommBoardHandler {
 
     for(CommBoardDTO commBoardDTO : commBoardDTOList) {
 
-      System.out.printf("%d, %s, %s, %s, %s, %d\n", 
+      System.out.printf("%s, %d, %s, %s, %s, %s, %d\n", 
+          AuthLoginHandler.loginUser.getId(),
           commBoardDTO.getNo(), 
           commBoardDTO.getTitle(), 
           commBoardDTO.getContent(),
