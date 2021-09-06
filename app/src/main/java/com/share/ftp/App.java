@@ -546,7 +546,7 @@ public class App {
     ChallengeReview.add(new MenuItem("참여인증&댓글 등록", ACCESS_MEMBER, "/challengeReview/add"));
     ChallengeReview.add(new MenuItem("참여인증&댓글 목록", "/challengeReview/list"));
     ChallengeReview.add(new MenuItem("참여인증&댓글 상세보기", ACCESS_MEMBER,"/challengeReview/detail"));
-    ChallengeReview.add(new MenuItem("참여인증&댓글 수정", ACCESS_MEMBER,"/chal12lengeReview/update"));
+    ChallengeReview.add(new MenuItem("참여인증&댓글 수정", ACCESS_MEMBER,"/challengeReview/update"));
     ChallengeReview.add(new MenuItem("참여인증&댓글 삭제", ACCESS_MEMBER,"/challengeReview/delete"));
     ChallengeReview.add(new MenuItem("참여인증&댓글 검색", "/challengeReview/search"));
 
