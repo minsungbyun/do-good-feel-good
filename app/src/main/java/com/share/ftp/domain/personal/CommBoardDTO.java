@@ -2,30 +2,31 @@ package com.share.ftp.domain.personal;
 
 import java.sql.Date;
 import java.util.Objects;
+import com.share.ftp.domain.join.JoinDTO;
 
 public class CommBoardDTO {
   private int no;
   private String title;
-  // private String memberId;
+  private String id;
   private String content;
   private String fileUpload;
   private String password;
   private Date registeredDate;
+  private JoinDTO owner;
   private int viewCount;
 
 
   @Override
   public String toString() {
-    return "CommBoardDTO [no=" + no + ", title=" + title + ", content=" + content + ", fileUpload="
-        + fileUpload + ", password=" + password + ", registeredDate=" + registeredDate
-        + ", viewCount=" + viewCount + "]";
+    return "CommBoardDTO [no=" + no + ", title=" + title + ", id=" + id + ", content=" + content
+        + ", fileUpload=" + fileUpload + ", password=" + password + ", registeredDate="
+        + registeredDate + ", owner=" + owner + ", viewCount=" + viewCount + "]";
   }
-
   @Override
   public int hashCode() {
-    return Objects.hash(content, fileUpload, no, password, registeredDate, title, viewCount);
+    return Objects.hash(content, fileUpload, id, no, owner, password, registeredDate, title,
+        viewCount);
   }
-
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -36,11 +37,11 @@ public class CommBoardDTO {
       return false;
     CommBoardDTO other = (CommBoardDTO) obj;
     return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
-        && no == other.no && Objects.equals(password, other.password)
+        && Objects.equals(id, other.id) && no == other.no && Objects.equals(owner, other.owner)
+        && Objects.equals(password, other.password)
         && Objects.equals(registeredDate, other.registeredDate)
         && Objects.equals(title, other.title) && viewCount == other.viewCount;
   }
-
   public int getNo() {
     return no;
   }
@@ -52,6 +53,12 @@ public class CommBoardDTO {
   }
   public void setTitle(String title) {
     this.title = title;
+  }
+  public String getId() {
+    return id;
+  }
+  public void setId(String id) {
+    this.id = id;
   }
   public String getContent() {
     return content;
@@ -77,14 +84,16 @@ public class CommBoardDTO {
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
+  public JoinDTO getOwner() {
+    return owner;
+  }
+  public void setOwner(JoinDTO owner) {
+    this.owner = owner;
+  }
   public int getViewCount() {
     return viewCount;
   }
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
-
-
-
-
 }

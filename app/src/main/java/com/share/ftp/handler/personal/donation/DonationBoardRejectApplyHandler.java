@@ -35,6 +35,7 @@ public class DonationBoardRejectApplyHandler extends AbstractDonationBoardHandle
     }
 
     donationBoardDTO.setChecked(false);
+    donationBoardDTO.setIsSigned("반려됨");
 
     for (DonationBoardDTO donationBoardRejectDTO : donationBoardDTOList) {
       donationBoardRejectDTOList.add(donationBoardRejectDTO);

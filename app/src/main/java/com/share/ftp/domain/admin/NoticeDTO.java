@@ -14,6 +14,7 @@ public class NoticeDTO {
   private Date registeredDate;
   private int viewCount;
 
+
   @Override
   public int hashCode() {
     return Objects.hash(adminId, content, fileUpload, no, registeredDate, title, viewCount, writer);

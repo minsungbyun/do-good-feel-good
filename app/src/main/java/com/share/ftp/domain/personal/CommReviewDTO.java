@@ -2,22 +2,25 @@ package com.share.ftp.domain.personal;
 
 import java.sql.Date;
 import java.util.Objects;
+import com.share.ftp.domain.join.JoinDTO;
 
 public class CommReviewDTO {
-  public int no;
-  public String content;
-  //public int memberId;
-  public Date registeredDate;
+  private int no;
+  private String content;
+  private JoinDTO owner;
+  private Date registeredDate;
+
+
 
   @Override
   public String toString() {
-    return "CommReviewDTO [no=" + no + ", content=" + content + ", registeredDate=" + registeredDate
-        + "]";
+    return "CommReviewDTO [no=" + no + ", content=" + content + ", owner=" + owner
+        + ", registeredDate=" + registeredDate + "]";
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(content, no, registeredDate);
+    return Objects.hash(content, no, owner, registeredDate);
   }
 
   @Override
@@ -30,9 +33,9 @@ public class CommReviewDTO {
       return false;
     CommReviewDTO other = (CommReviewDTO) obj;
     return Objects.equals(content, other.content) && no == other.no
+        && Objects.equals(owner, other.owner)
         && Objects.equals(registeredDate, other.registeredDate);
   }
-
   public int getNo() {
     return no;
   }
@@ -45,13 +48,18 @@ public class CommReviewDTO {
   public void setContent(String content) {
     this.content = content;
   }
+  public JoinDTO getOwner() {
+    return owner;
+  }
+  public void setOwner(JoinDTO owner) {
+    this.owner = owner;
+  }
   public Date getRegisteredDate() {
     return registeredDate;
   }
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
-
 
 
 }
