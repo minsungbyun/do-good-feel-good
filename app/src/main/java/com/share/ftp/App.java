@@ -1,7 +1,5 @@
 package com.share.ftp;
 
-
-
 import static com.share.menu.Menu.ACCESS_ADMIN;
 import static com.share.menu.Menu.ACCESS_LOGOUT;
 import static com.share.menu.Menu.ACCESS_MEMBER;
