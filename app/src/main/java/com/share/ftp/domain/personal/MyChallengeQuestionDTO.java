@@ -1,21 +1,26 @@
 package com.share.ftp.domain.personal;
 
+import java.util.List;
 import java.util.Objects;
+
+import com.share.ftp.domain.join.JoinDTO;
 
 public class MyChallengeQuestionDTO {
   public int no;
-  public String memberId;
+  public String title;
   public String content;
+  private JoinDTO owner;
+  private List<JoinDTO> joinDTO;
 
   @Override
   public String toString() {
-    return "MyChallengeQuestionDTO [no=" + no + ", memberId=" + memberId + ", content=" + content
-        + "]";
+    return "MyChallengeQuestionDTO [no=" + no + ", memberId=" + title + ", content=" + content + ", owner=" + owner
+        + ", joinDTO=" + joinDTO + "]";
   }
 
-  @Override
+@Override
   public int hashCode() {
-    return Objects.hash(content, memberId, no);
+    return Objects.hash(content, title, no);
   }
 
   @Override
@@ -27,7 +32,7 @@ public class MyChallengeQuestionDTO {
     if (getClass() != obj.getClass())
       return false;
     MyChallengeQuestionDTO other = (MyChallengeQuestionDTO) obj;
-    return Objects.equals(content, other.content) && Objects.equals(memberId, other.memberId)
+    return Objects.equals(content, other.content) && Objects.equals(title, other.title)
         && no == other.no;
   }
 
@@ -37,11 +42,11 @@ public class MyChallengeQuestionDTO {
   public void setNo(int no) {
     this.no = no;
   }
-  public String getMemberId() {
-    return memberId;
+  public String getTitle() {
+    return title;
   }
-  public void setMemberId(String memberId) {
-    this.memberId = memberId;
+  public void setTitle(String title) {
+    this.title = title;
   }
   public String getContent() {
     return content;
@@ -49,5 +54,16 @@ public class MyChallengeQuestionDTO {
   public void setContent(String content) {
     this.content = content;
   }
-
+  public JoinDTO getOwner() {
+    return owner;
+  }
+  public void setOwner(JoinDTO owner) {
+    this.owner = owner;
+  }
+  public List<JoinDTO> getJoinDTO() {
+    return joinDTO;
+  }
+  public void setJoinDTO(List<JoinDTO> joinDTO) {
+    this.joinDTO = joinDTO;
+  }
 }

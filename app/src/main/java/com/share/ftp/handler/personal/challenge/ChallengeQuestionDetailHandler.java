@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.challenge;
 
 import java.util.List;
 import com.share.ftp.domain.personal.MyChallengeQuestionDTO;
+import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
 public class ChallengeQuestionDetailHandler extends AbstractChallengeQuestionHandler {
@@ -23,7 +24,13 @@ public class ChallengeQuestionDetailHandler extends AbstractChallengeQuestionHan
       return;
     }
 
-    System.out.printf("아이디: %s\n", myChallengeQuestion.getMemberId());
+    if (myChallengeQuestion.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
+      System.out.println("읽을 권한이 없습니다.");
+      return;
+    }
+    
+    System.out.printf("아이디: %s\n", myChallengeQuestion.getOwner().getId());
+    System.out.printf("제목: %s\n", myChallengeQuestion.getTitle());
     System.out.printf("내용: %s\n", myChallengeQuestion.getContent());
   }
 }
