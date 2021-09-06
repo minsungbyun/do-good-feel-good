@@ -17,6 +17,7 @@ public class VolDoJoinHandler extends AbstractVolRequestPersonalHandler {
 
   }
 
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("[  봉사 참여자 목록  ]");

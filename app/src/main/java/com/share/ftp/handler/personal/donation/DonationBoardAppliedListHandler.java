@@ -26,17 +26,19 @@ public class DonationBoardAppliedListHandler extends AbstractDonationBoardHandle
     }
 
     for (DonationBoardDTO donationBoardApplyDTO : donationBoardApplyDTOList) {
-
-      System.out.printf("[%d, %s, %s, %s, %s, %s ~ %s, %s]\n", 
-          donationBoardApplyDTO.getNo(), 
-          donationBoardApplyDTO.getTitle(), 
-          donationBoardApplyDTO.getLeader(),
-          donationBoardApplyDTO.getContent(),
-          donationBoardApplyDTO.getFileUpload(), 
-          donationBoardApplyDTO.getRegisteredStartDate(),
-          donationBoardApplyDTO.getRegisteredEndDate(),
-          //          donationBoardDTO.isChecked());
-          donationBoardApplyDTO.getIsSigned());
+      if (donationBoardApplyDTO.isChecked() == true) {
+        System.out.printf("개설번호: %d\n제목: %s\n주최자: %s\n내용: %s\n첨부파일: %s\n"
+            + "개설기간: %s ~ %s\n승인여부: %s\n",
+            donationBoardApplyDTO.getNo(), 
+            donationBoardApplyDTO.getTitle(), 
+            donationBoardApplyDTO.getLeader(),
+            donationBoardApplyDTO.getContent(),
+            donationBoardApplyDTO.getFileUpload(), 
+            donationBoardApplyDTO.getRegisteredStartDate(),
+            donationBoardApplyDTO.getRegisteredEndDate(),
+            //          donationBoardDTO.isChecked());
+            donationBoardApplyDTO.getIsSigned());
+      }
     }
   }
 }
