@@ -1,7 +1,7 @@
 package com.share.ftp.handler.join;
 
 import java.util.List;
-import com.share.ftp.domain.guest.JoinDTO;
+import com.share.ftp.domain.join.JoinDTO;
 import com.share.util.Prompt;
 
 public class JoinDetailHandler extends AbstractJoinHandler {
@@ -15,7 +15,7 @@ public class JoinDetailHandler extends AbstractJoinHandler {
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("[회원 상세보기]");
+    System.out.println("[  회원 상세보기  ]");
     String id = Prompt.inputString("아이디? "); 
     String password = Prompt.inputString("비밀번호? ");
 

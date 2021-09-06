@@ -3,8 +3,9 @@ package com.share.menu;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-import com.share.ftp.domain.guest.JoinDTO;
-import com.share.ftp.handler.join.AuthHandler;
+import com.share.ftp.domain.join.JoinDTO;
+//import com.share.ftp.handler.join.AuthLoginHandler;
+import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
 // 역할
@@ -17,8 +18,9 @@ public class MenuGroup extends Menu {
   // 모든 메뉴가 공유할 객체이기 때문에 스태틱 멤버로 선언한다.
   static Stack<Menu> breadCrumb = new Stack<>();
 
-  Menu[] childs = new Menu[100];
-  int size;
+  ArrayList<Menu> childs = new ArrayList<>();
+
+
   boolean disablePrevMenu;
   String prevMenuTitle = "이전 메뉴";
 
@@ -42,14 +44,18 @@ public class MenuGroup extends Menu {
     super(title);
   }
 
+  public MenuGroup(String title, int accessScope) {
+    super(title, accessScope);
+  }
+
   public MenuGroup(String title, boolean disablePrevMenu) {
     super(title);
     this.disablePrevMenu = disablePrevMenu;
   }
 
-  public MenuGroup(String title, int enableState) {
-    super(title);
-    this.enableState = enableState;
+  public MenuGroup(String title, boolean disablePrevMenu, int accessScope) {
+    super(title, accessScope);
+    this.disablePrevMenu = disablePrevMenu;
   }
 
   public void setPrevMenuTitle(String prevMenuTitle) {
@@ -58,42 +64,13 @@ public class MenuGroup extends Menu {
 
   // MenuGroup이 포함하는 하위 Menu를 다룰 수 있도록 메서드를 정의한다.
   public void add(Menu child) {
-    if (this.size == this.childs.length) {
-      return; // 하위 메뉴를 저장하는 배열이 꽉 찼다면 더이상 저장해서는 안된다.
-    }
-    this.childs[this.size++] = child; 
+    childs.add(child);
   }
 
   // 배열에 들어 있는 Menu 객체를 찾아 제거한다.
   public Menu remove(Menu child) {
-    int index = indexOf(child);
-    if (index == -1) {
-      return null;
-    }
-    for (int i = index + 1; i < this.size; i++) {
-      this.childs[i - 1] = this.childs[i];
-    }
-    childs[--this.size] = null;
-    return child;
-  }
-
-  // 배열에 들어 있는 Menu 객체의 인덱스를 알아낸다.
-  public int indexOf(Menu child) {
-    for (int i = 0; i < this.size; i++) {
-      if (this.childs[i] == child) {
-        return i;
-      }
-    }
-    return -1;
-  }
-
-  // 배열에 들어 있는 Menu 객체를 찾는다.
-  public Menu getMenu(String title) { 
-    for (int i = 0; i < this.size; i++) {
-      if (this.childs[i].title.equals(title)) {
-        return this.childs[i];
-      }
-    }
+    if (childs.remove(child)) 
+      return child;
     return null;
   }
 
@@ -131,7 +108,7 @@ public class MenuGroup extends Menu {
         System.out.println("올바른 숫자를 입력해주세요");
       }
 
-      //      } catch (Exception e) {
+      //    } catch (Exception e) {
       //        // try 블록 안에 있는 코드를 실행하다가 예외가 발생하면
       //        // 다음 문장을 실행한 후 시스템을 멈추지 않고 실행을 계속한다.
       //        System.out.println("--------------------------------------------------------------");
@@ -165,7 +142,8 @@ public class MenuGroup extends Menu {
   private List<Menu> getMenuList() {
     ArrayList<Menu> menuList = new ArrayList<>();
 
-    JoinDTO loginUser = AuthHandler.getLoginUser();
+    JoinDTO loginUser = AuthLoginHandler.getLoginUser();
+
 
     if (loginUser == null) {
       System.out.println("[  현재 로그인 하지 않았습니다. ]");
@@ -174,53 +152,11 @@ public class MenuGroup extends Menu {
     }
     System.out.println();
 
-    for (int i = 0; i < this.size; i++) {
-
-      // 기본 접근메뉴
-      if (this.childs[i].enableState == Menu.ENABLE_LOGOUT &&
-          AuthHandler.getLoginUser() == null) {
-        menuList.add(this.childs[i]);
-
-      } else if (this.childs[i].enableState == Menu.ENABLE_LOGIN&&
-          AuthHandler.getLoginUser() != null) {
-        menuList.add(this.childs[i]);
-
-      } else if (this.childs[i].enableState == Menu.ENABLE_ALL) {
-        menuList.add(this.childs[i]);
-
-
-        // 권한별 접근메뉴
-      } else if (this.childs[i].enableState == Menu.ENABLE_PERSONAL &&
-          AuthHandler.getLoginUser() != null &&
-          AuthHandler.getLoginUser().isPersonal() == true) {
-
-        menuList.add(this.childs[i]);
-
-      } else if (this.childs[i].enableState == Menu.ENABLE_ORG &&
-          AuthHandler.getLoginUser() != null &&
-          AuthHandler.getLoginUser().isOrg() == true) {
-
-        menuList.add(this.childs[i]);
-
-      } else if ((this.childs[i].enableState == Menu.ENABLE_MEMBER &&
-          AuthHandler.getLoginUser() != null) &&
-          (AuthHandler.getLoginUser().isPersonal() == true ||
-          AuthHandler.getLoginUser().isOrg() == true)) {
-
-        menuList.add(this.childs[i]);
-
-      } else if (this.childs[i].enableState == Menu.ENABLE_ADMIN &&
-          AuthHandler.getLoginUser() != null && 
-          AuthHandler.getLoginUser().isAdmin() == true) {
-
-        menuList.add(this.childs[i]);
-
-
+    for (Menu menu : childs) {
+      if ((menu.accessScope & AuthLoginHandler.getUserAccessLevel()) > 0 ) {
+        menuList.add(menu);
       } 
-
-
-
-    }
+    } 
     return menuList;
   }
 
@@ -241,8 +177,6 @@ public class MenuGroup extends Menu {
   }
 
   private Menu selectMenu(List<Menu> menuList) {
-
-
 
     int menuNo = Prompt.inputInt("선택> ");
 

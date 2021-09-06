@@ -9,13 +9,14 @@ public class NoticeDTO {
   private String adminId;
   private String title;
   private String content;
+  private String writer;
   private String fileUpload;
   private Date registeredDate;
   private int viewCount;
 
   @Override
   public int hashCode() {
-    return Objects.hash(adminId, content, fileUpload, no, registeredDate, title, viewCount);
+    return Objects.hash(adminId, content, fileUpload, no, registeredDate, title, viewCount, writer);
   }
 
   @Override
@@ -30,14 +31,15 @@ public class NoticeDTO {
     return Objects.equals(adminId, other.adminId) && Objects.equals(content, other.content)
         && Objects.equals(fileUpload, other.fileUpload) && no == other.no
         && Objects.equals(registeredDate, other.registeredDate)
-        && Objects.equals(title, other.title) && viewCount == other.viewCount;
+        && Objects.equals(title, other.title) && viewCount == other.viewCount
+        && Objects.equals(writer, other.writer);
   }
 
   @Override
   public String toString() {
     return "NoticeDTO [no=" + no + ", adminId=" + adminId + ", title=" + title + ", content="
-        + content + ", fileUpload=" + fileUpload + ", registeredDate=" + registeredDate
-        + ", viewCount=" + viewCount + "]";
+        + content + ", writer=" + writer + ", fileUpload=" + fileUpload + ", registeredDate="
+        + registeredDate + ", viewCount=" + viewCount + "]";
   }
 
   public int getNo() {
@@ -64,6 +66,18 @@ public class NoticeDTO {
   public void setContent(String content) {
     this.content = content;
   }
+  public String getWriter() {
+    return writer;
+  }
+  public void setWriter(String writer) {
+    this.writer = writer;
+  }
+  public String getFileUpload() {
+    return fileUpload;
+  }
+  public void setFileUpload(String fileUpload) {
+    this.fileUpload = fileUpload;
+  }
   public Date getRegisteredDate() {
     return registeredDate;
   }
@@ -76,14 +90,6 @@ public class NoticeDTO {
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
-  public String getFileUpload() {
-    return fileUpload;
-  }
-  public void setFileUpload(String fileUpload) {
-    this.fileUpload = fileUpload;
-  }
-
-
 
 
 
