@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.community;
 
 import java.util.List;
 import com.share.ftp.domain.personal.CommReviewDTO;
+import com.share.ftp.handler.join.AuthLoginHandler;
 
 public class CommReviewListHandler extends AbstractCommReviewHandler {
 
@@ -32,7 +33,8 @@ public class CommReviewListHandler extends AbstractCommReviewHandler {
     //    for (CommReviewDTO commReviewDTO : commReviewsDTO) {
 
     for (CommReviewDTO commReviewDTO : commReviewDTOList) {
-      System.out.printf("%d, %s, %s\n", 
+      System.out.printf("%s, %d, %s, %s\n", 
+          AuthLoginHandler.loginUser.getId(),
           commReviewDTO.getNo(), 
           commReviewDTO.getContent(),
           commReviewDTO.getRegisteredDate());

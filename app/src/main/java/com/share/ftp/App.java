@@ -79,6 +79,7 @@ import com.share.ftp.handler.personal.community.CommBoardAddHandler;
 import com.share.ftp.handler.personal.community.CommBoardDeleteHandler;
 import com.share.ftp.handler.personal.community.CommBoardDetailHandler;
 import com.share.ftp.handler.personal.community.CommBoardListHandler;
+import com.share.ftp.handler.personal.community.CommBoardSearchHandler;
 import com.share.ftp.handler.personal.community.CommBoardUpdateHandler;
 import com.share.ftp.handler.personal.community.CommReviewAddHandler;
 import com.share.ftp.handler.personal.community.CommReviewDeleteHandler;
@@ -261,6 +262,7 @@ public class App {
     commands.put("/commBoard/detail", new CommBoardDetailHandler(commBoardDTOList));
     commands.put("/commBoard/update", new CommBoardUpdateHandler(commBoardDTOList));
     commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList));
+    commands.put("/commBoard/search", new CommBoardSearchHandler(commBoardDTOList));
 
     // 소통해요 나눔이야기 BEST
     commands.put("/commBest/list", new CommBestListHandler(commBoardDTOList));
@@ -517,6 +519,8 @@ public class App {
     reviewMenu.add(new MenuItem("상세보기","/commBoard/detail"));
     reviewMenu.add(new MenuItem("변경", ACCESS_MEMBER,"/commBoard/update"));
     reviewMenu.add(new MenuItem("삭제",ACCESS_MEMBER,"/commBoard/delete"));
+    reviewMenu.add(new MenuItem("검색",ACCESS_MEMBER,"/commBoard/search"));
+
     return reviewMenu;
   }
 
@@ -536,6 +540,8 @@ public class App {
     shortReviewMenu.add(new MenuItem("목록", "/commReview/list")); 
     shortReviewMenu.add(new MenuItem("수정", ACCESS_MEMBER, "/commReview/update")); 
     shortReviewMenu.add(new MenuItem("삭제", ACCESS_MEMBER, "/commReview/delete")); 
+    shortReviewMenu.add(new MenuItem("검색",ACCESS_MEMBER,"/commReview/search"));
+
 
     return shortReviewMenu;
   }
