@@ -241,6 +241,25 @@ public class App {
     commands.put("/commBoard/update", new CommBoardUpdateHandler(commBoardDTOList));
     commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList));
 
+
+    // 챌린지 문의하기
+    commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(myChallengeQuestionDTOList));
+    commands.put("/challengeQuestion/list", new ChallengeQuestionListHandler(myChallengeQuestionDTOList));
+    commands.put("/challengeQuestion/detail", new ChallengeQuestionDetailHandler(myChallengeQuestionDTOList));
+    commands.put("/challengeQuestion/update", new ChallengeQuestionUpdateHandler(myChallengeQuestionDTOList));
+    commands.put("/challengeQuestion/delete", new ChallengeQuestionDeleteHandler(myChallengeQuestionDTOList));
+    commands.put("/challengeQuestion/search", new ChallengeQuestionSearchHandler(myChallengeQuestionDTOList));
+
+
+    // 마이페이지
+    commands.put("/MyPage/delete", new MyPageDelete(joinDTOList)); // 회원탈퇴
+    commands.put("/MyPage/info", new MyPageInfoHandler(joinDTOList)); // 내정보 수정
+
+
+    // 관리자
+    commands.put("/join/list", new JoinListHandler(joinDTOList)); // 관리자가 회원 목록을 조회
+    commands.put("/join/detail", new JoinDetailHandler(joinDTOList)); // 가입회원 상세보기 (관리자연결)
+
     // 관리자 회원정보 조회
     commands.put("/adminMember/list", new AdminMemberListHandler());
     commands.put("/adminMember/delete", new AdminMemberDeleteHandler());
@@ -265,25 +284,6 @@ public class App {
     commands.put("/adminChallenge/update", new AdminChallengeUpdateHandler(challengeDTOList));
     commands.put("/adminChallenge/delete", new AdminChallengeDeleteHandler(challengeDTOList));
 
-
-
-    // 챌린지 문의하기
-    commands.put("/callengeQuestion/add", new ChallengeQuestionAddHandler(myChallengeQuestionDTOList));
-    commands.put("/callengeQuestion/list", new ChallengeQuestionListHandler(myChallengeQuestionDTOList));
-    commands.put("/callengeQuestion/detail", new ChallengeQuestionDetailHandler(myChallengeQuestionDTOList));
-    commands.put("/callengeQuestion/update", new ChallengeQuestionUpdateHandler(myChallengeQuestionDTOList));
-    commands.put("/callengeQuestion/delete", new ChallengeQuestionDeleteHandler(myChallengeQuestionDTOList));
-    commands.put("/callengeQuestion/search", new ChallengeQuestionSearchHandler(myChallengeQuestionDTOList));
-
-
-    // 마이페이지
-    commands.put("/MyPage/delete", new MyPageDelete(joinDTOList)); // 회원탈퇴
-    commands.put("/MyPage/info", new MyPageInfoHandler(joinDTOList)); // 내정보 수정
-
-
-    // 관리자
-    commands.put("/join/list", new JoinListHandler(joinDTOList)); // 관리자가 회원 목록을 조회
-    commands.put("/join/detail", new JoinDetailHandler(joinDTOList)); // 가입회원 상세보기 (관리자연결)
 
   }
 
@@ -455,12 +455,12 @@ public class App {
 
     MenuGroup ChallengeQuestion = new MenuGroup("문의하기", Menu.ENABLE_ALL);
     monthlyChallengeDetail.add(ChallengeQuestion);
-    ChallengeQuestion.add(new MenuItem("문의 등록", Menu.ENABLE_LOGIN, "/callengeQuestion/add"));
-    ChallengeQuestion.add(new MenuItem("문의 목록", Menu.ENABLE_ALL, "/callengeQuestion/list"));
-    ChallengeQuestion.add(new MenuItem("문의 상세보기", Menu.ENABLE_ALL, "/callengeQuestion/detail"));
-    ChallengeQuestion.add(new MenuItem("문의 수정", Menu.ENABLE_LOGIN, "/callengeQuestion/update"));
-    ChallengeQuestion.add(new MenuItem("문의 삭제", Menu.ENABLE_LOGIN, "/callengeQuestion/delete"));
-    ChallengeQuestion.add(new MenuItem("문의 검색", Menu.ENABLE_LOGIN, "/callengeQuestion/search"));
+    ChallengeQuestion.add(new MenuItem("문의 등록", Menu.ENABLE_LOGIN, "/challengeQuestion/add"));
+    ChallengeQuestion.add(new MenuItem("문의 목록", Menu.ENABLE_ALL, "/challengeQuestion/list"));
+    ChallengeQuestion.add(new MenuItem("문의 상세보기", Menu.ENABLE_ALL, "/challengeQuestion/detail"));
+    ChallengeQuestion.add(new MenuItem("문의 수정", Menu.ENABLE_LOGIN, "/challengeQuestion/update"));
+    ChallengeQuestion.add(new MenuItem("문의 삭제", Menu.ENABLE_LOGIN, "/challengeQuestion/delete"));
+    ChallengeQuestion.add(new MenuItem("문의 검색", Menu.ENABLE_LOGIN, "/challengeQuestion/search"));
 
 
     MenuGroup monthlyRankingMenu = new MenuGroup("이달의 랭킹", Menu.ENABLE_ALL);
