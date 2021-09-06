@@ -1,7 +1,5 @@
 package com.share.ftp;
 
-
-
 import static com.share.menu.Menu.ACCESS_ADMIN;
 import static com.share.menu.Menu.ACCESS_LOGOUT;
 import static com.share.menu.Menu.ACCESS_MEMBER;
@@ -412,6 +410,17 @@ public class App {
     // 함께해요
     mainMenuGroup.add(createDoVolMenu()); 
 
+    //    MenuGroup doVolMenu = new MenuGroup("함께해요");
+    mainMenuGroup.add(createDoVolMenu()); 
+
+    //    doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volRequestPersonal/apply"));
+    //    doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volRequestOrg/apply")); 
+    //    doVolMenu.add(new MenuItem("전체인증봉사리스트","/volRequest/totalApprovedList")); 
+    //    doVolMenu.add(new MenuItem("전체인증봉사세부사항", ACCESS_MEMBER,"/volRequestPersonal/appliedList"));
+    //    doVolMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
+
+    // 함께해요 중복으로 인해서 메서드로 빼지 않습니다.
+    //    doVolMenu.add(createDoVolMenu());
 
     // 소통해요
     MenuGroup CommunityMenu = new MenuGroup("소통해요");

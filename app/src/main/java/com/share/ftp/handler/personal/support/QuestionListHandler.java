@@ -18,8 +18,8 @@ public class QuestionListHandler extends AbstractQuestionHandler {
       System.out.printf("%d, %s, %s, %s, %s, %s, %d\n", 
           myQuestionListDTO.getNo(), 
           myQuestionListDTO.getTitle(), 
-          myQuestionListDTO.getMemberld(),
           myQuestionListDTO.getContent(),
+          myQuestionListDTO.getOwner().getId(),
           myQuestionListDTO.getFileUpload(),
           myQuestionListDTO.getRegisteredDate(),
           myQuestionListDTO.getViewCount());
