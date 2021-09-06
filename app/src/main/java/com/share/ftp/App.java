@@ -104,6 +104,7 @@ import com.share.ftp.handler.personal.support.NoitceListHandler;
 import com.share.ftp.handler.personal.support.NoticeAddHandler;
 import com.share.ftp.handler.personal.support.NoticeDeleteHandler;
 import com.share.ftp.handler.personal.support.NoticeDetailHandler;
+import com.share.ftp.handler.personal.support.NoticeSearchHandler;
 import com.share.ftp.handler.personal.support.NoticeUpdateHandler;
 import com.share.ftp.handler.personal.support.QuestionAddHandler;
 import com.share.ftp.handler.personal.support.QuestionDeleteHandler;
@@ -317,6 +318,7 @@ public class App {
     commands.put("/notice/detail", new NoticeDetailHandler(noticeDTOList));
     commands.put("/notice/update", new NoticeUpdateHandler(noticeDTOList));
     commands.put("/notice/delete", new NoticeDeleteHandler(noticeDTOList));
+    commands.put("/notice/search", new NoticeSearchHandler(noticeDTOList));
 
     // 고객센터 문의사항
     commands.put("/question/add", new QuestionAddHandler(myQuestionListDTOList));
@@ -324,6 +326,7 @@ public class App {
     commands.put("/question/detail", new QuestionDetailHandler(myQuestionListDTOList));
     commands.put("/question/update", new QuestionUpdateHandler(myQuestionListDTOList));
     commands.put("/question/delete", new QuestionDeleteHandler(myQuestionListDTOList));
+    commands.put("/question/search", new QuestionDeleteHandler(myQuestionListDTOList));
 
     // 마이페이지
     commands.put("/MyPage/info", new MyPageInfoHandler(joinDTOList)); // 내정보 수정
@@ -591,6 +594,7 @@ public class App {
     notice.add(new MenuItem("상세보기", "/notice/detail"));
     notice.add(new MenuItem("변경",ACCESS_ADMIN,"/notice/update"));
     notice.add(new MenuItem("삭제",ACCESS_ADMIN, "/notice/delete"));
+    notice.add(new MenuItem("검색", "/notice/search"));
 
     return notice;
   }
@@ -602,6 +606,7 @@ public class App {
     ask.add(new MenuItem("상세보기", "/question/detail"));
     ask.add(new MenuItem("변경",ACCESS_MEMBER,"/question/update"));
     ask.add(new MenuItem("삭제",Menu.ACCESS_MEMBER, "/question/delete"));
+    ask.add(new MenuItem("검색", "question/search"));
 
     return ask;
   }
