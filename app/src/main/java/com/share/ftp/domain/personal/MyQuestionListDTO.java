@@ -2,6 +2,7 @@ package com.share.ftp.domain.personal;
 
 import java.sql.Date;
 import java.util.Objects;
+import com.share.ftp.domain.join.JoinDTO;
 
 public class MyQuestionListDTO {
 
@@ -9,22 +10,25 @@ public class MyQuestionListDTO {
   private String title;
   private String memberld;
   private int password;
+  private String writer;
   private String content;
   private String fileUpload;
   private Date registeredDate;
   private int viewCount;
+  private JoinDTO Owner;
 
   @Override
   public String toString() {
     return "MyQuestionListDTO [no=" + no + ", title=" + title + ", memberld=" + memberld
-        + ", password=" + password + ", content=" + content + ", fileUpload=" + fileUpload
-        + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount + "]";
+        + ", password=" + password + ", writer=" + writer + ", content=" + content + ", fileUpload="
+        + fileUpload + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount
+        + ", Owner=" + Owner + "]";
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(content, fileUpload, memberld, no, password, registeredDate, title,
-        viewCount);
+    return Objects.hash(Owner, content, fileUpload, memberld, no, password, registeredDate, title,
+        viewCount, writer);
   }
 
   @Override
@@ -36,13 +40,21 @@ public class MyQuestionListDTO {
     if (getClass() != obj.getClass())
       return false;
     MyQuestionListDTO other = (MyQuestionListDTO) obj;
-    return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
-        && Objects.equals(memberld, other.memberld) && no == other.no && password == other.password
+    return Objects.equals(Owner, other.Owner) && Objects.equals(content, other.content)
+        && Objects.equals(fileUpload, other.fileUpload) && Objects.equals(memberld, other.memberld)
+        && no == other.no && password == other.password
         && Objects.equals(registeredDate, other.registeredDate)
-        && Objects.equals(title, other.title) && viewCount == other.viewCount;
+        && Objects.equals(title, other.title) && viewCount == other.viewCount
+        && Objects.equals(writer, other.writer);
   }
 
+  public JoinDTO getOwner() {
+    return Owner;
+  }
 
+  public void setOwner(JoinDTO owner) {
+    Owner = owner;
+  }
 
   public int getNo() {
     return no;
@@ -68,6 +80,12 @@ public class MyQuestionListDTO {
   public void setPassword(int password) {
     this.password = password;
   }
+  public String getWriter() {
+    return writer;
+  }
+  public void setWriter(String writer) {
+    this.writer = writer;
+  }
   public String getContent() {
     return content;
   }
@@ -92,6 +110,7 @@ public class MyQuestionListDTO {
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
+
 
 
 }
