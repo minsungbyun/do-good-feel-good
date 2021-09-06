@@ -9,22 +9,17 @@ public class MyQuestionListDTO {
   private String title;
   private String memberld;
   private int password;
+  private String writer;
   private String content;
   private String fileUpload;
   private Date registeredDate;
   private int viewCount;
 
-  @Override
-  public String toString() {
-    return "MyQuestionListDTO [no=" + no + ", title=" + title + ", memberld=" + memberld
-        + ", password=" + password + ", content=" + content + ", fileUpload=" + fileUpload
-        + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount + "]";
-  }
 
   @Override
   public int hashCode() {
     return Objects.hash(content, fileUpload, memberld, no, password, registeredDate, title,
-        viewCount);
+        viewCount, writer);
   }
 
   @Override
@@ -39,10 +34,16 @@ public class MyQuestionListDTO {
     return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
         && Objects.equals(memberld, other.memberld) && no == other.no && password == other.password
         && Objects.equals(registeredDate, other.registeredDate)
-        && Objects.equals(title, other.title) && viewCount == other.viewCount;
+        && Objects.equals(title, other.title) && viewCount == other.viewCount
+        && Objects.equals(writer, other.writer);
   }
 
-
+  @Override
+  public String toString() {
+    return "MyQuestionListDTO [no=" + no + ", title=" + title + ", memberld=" + memberld
+        + ", password=" + password + ", writer=" + writer + ", content=" + content + ", fileUpload="
+        + fileUpload + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount + "]";
+  }
 
   public int getNo() {
     return no;
@@ -68,6 +69,12 @@ public class MyQuestionListDTO {
   public void setPassword(int password) {
     this.password = password;
   }
+  public String getWriter() {
+    return writer;
+  }
+  public void setWriter(String writer) {
+    this.writer = writer;
+  }
   public String getContent() {
     return content;
   }
@@ -92,6 +99,7 @@ public class MyQuestionListDTO {
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
+
 
 
 }
