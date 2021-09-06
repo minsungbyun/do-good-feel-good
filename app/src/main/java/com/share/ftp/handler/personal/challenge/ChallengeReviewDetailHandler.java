@@ -23,7 +23,7 @@ public class ChallengeReviewDetailHandler extends AbstractChallengeReviewHandler
       return;
     }
 
-    System.out.printf("아이디: %s\n", myChallengeReviewDTO.getMemberId());
+    System.out.printf("아이디: %s\n", myChallengeReviewDTO.getOwner().getId());
     System.out.printf("내용: %s\n", myChallengeReviewDTO.getContent());
     System.out.printf("파일첨부: %s\n", myChallengeReviewDTO.getFileUpload());
     System.out.printf("등록일: %s\n", myChallengeReviewDTO.getRegisteredDate());
