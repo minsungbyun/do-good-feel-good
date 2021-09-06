@@ -27,6 +27,7 @@ public class Prompt {
     return Boolean.valueOf(inputString(title));
   }
 
+
   public static void close() {
     keyboardScan.close();
   }

@@ -35,7 +35,7 @@ public abstract class Menu {
   public static final int ACCESS_ORG = 0x04;    //      기관회원                0100      
   public static final int ACCESS_MEMBER = 0x08;  //     개인회원 + 기관회원     1000
   public static final int ACCESS_ADMIN = 0x10; //       관리자
-  //  public static final int ACCESS_ADMIN = 0x20;  // 개인회원 + 기관회원 + 관리자
+  public static final int ACCESS_MEMBER_ADMIN = 0x20;  // 개인회원 + 기관회원 + 관리자
   //  public static final int ENABLE_PERSONAL = 5;
 
   String title;
@@ -43,7 +43,7 @@ public abstract class Menu {
   int accessScope;
 
   public Menu(String title) {
-    this(title, ACCESS_LOGOUT | ACCESS_PERSONAL | ACCESS_ORG  | ACCESS_MEMBER | ACCESS_ADMIN);
+    this(title, ACCESS_LOGOUT | ACCESS_PERSONAL | ACCESS_ORG  | ACCESS_MEMBER | ACCESS_ADMIN | ACCESS_MEMBER_ADMIN);
   }
 
   public Menu(String title, int accessScope) {

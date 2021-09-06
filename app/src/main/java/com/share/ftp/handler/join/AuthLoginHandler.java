@@ -11,7 +11,7 @@ public class AuthLoginHandler implements Command {
 
   List<JoinDTO> joinDTOList;
 
-  static JoinDTO loginUser;
+  public static JoinDTO loginUser;
 
   static int userAccessLevel = Menu.ACCESS_LOGOUT;
 
@@ -42,12 +42,12 @@ public class AuthLoginHandler implements Command {
       admin.setEmail("admin@test.com");
       admin.setPassword("111");
       admin.setTel("010-1111-1111");
-      admin.setAdress("no");
+      admin.setAddress("no");
       admin.setRegisterDate(new Date(System.currentTimeMillis()));
       admin.setAdmin(true);
 
       loginUser = admin;
-      userAccessLevel = Menu.ACCESS_ADMIN | Menu.ACCESS_MEMBER | Menu.ACCESS_ORG | Menu.ACCESS_PERSONAL;
+      userAccessLevel = Menu.ACCESS_ADMIN | Menu.ACCESS_MEMBER_ADMIN;
       return;
     } 
 
@@ -55,18 +55,16 @@ public class AuthLoginHandler implements Command {
     JoinDTO joinDTO = findByMember(id, password);
 
 
-
-
     if (joinDTO == null) {
       System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");
       return;
     } else if (joinDTO.isPersonal() == true) {
-      userAccessLevel = Menu.ACCESS_MEMBER | Menu.ACCESS_PERSONAL;
+      userAccessLevel = Menu.ACCESS_MEMBER | Menu.ACCESS_PERSONAL | Menu.ACCESS_MEMBER_ADMIN;
 
       System.out.printf("%s님 환영합니다!\n", joinDTO.getName());
 
     } else if (joinDTO.isOrg() == true) {
-      userAccessLevel = Menu.ACCESS_MEMBER | Menu.ACCESS_ORG;
+      userAccessLevel = Menu.ACCESS_MEMBER | Menu.ACCESS_ORG | Menu.ACCESS_MEMBER_ADMIN;
 
       System.out.printf("%s님 환영합니다!\n", joinDTO.getName());
     }
@@ -85,6 +83,15 @@ public class AuthLoginHandler implements Command {
         return joinDTO;
       }
     }
+    return null;
+  }
+
+  public static JoinDTO findByName(String name) {
+
+    if (loginUser.getName().equals(name)) { 
+      return loginUser;
+    }
+
     return null;
   }
 }

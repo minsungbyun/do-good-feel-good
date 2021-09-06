@@ -1,7 +1,6 @@
 package com.share.ftp.handler.personal.volunteer;
 
 import java.util.List;
-import com.share.ftp.domain.personal.OrgRequestDTO;
 import com.share.ftp.domain.personal.PersonalRequestDTO;
 import com.share.ftp.handler.Command;
 
@@ -22,9 +21,9 @@ public abstract class AbstractVolRequestPersonalHandler implements Command { // 
   protected List<PersonalRequestDTO> personalRequestRejectDTOList;
   //  //  List<PersonalRequestRejectDTO> personalRequestRejectDTOList;
 
-  protected List<OrgRequestDTO> orgRequestDTOList;
-  protected List<OrgRequestDTO> orgRequestApplyDTOList;
-  protected List<OrgRequestDTO> orgRequestRejectDTOList;
+  //  protected List<OrgRequestDTO> orgRequestDTOList;
+  //  protected List<OrgRequestDTO> orgRequestApplyDTOList;
+  //  protected List<OrgRequestDTO> orgRequestRejectDTOList;
 
 
   public AbstractVolRequestPersonalHandler(List<PersonalRequestDTO> personalRequestDTOList) {
@@ -50,22 +49,22 @@ public abstract class AbstractVolRequestPersonalHandler implements Command { // 
   //  }
 
   //
-  public AbstractVolRequestPersonalHandler(
-      List<PersonalRequestDTO> personalRequestDTOList,
-      List<OrgRequestDTO> orgRequestDTOList,
-      List<PersonalRequestDTO> personalRequestApplyDTOList,
-      List<PersonalRequestDTO> personalRequestRejectDTOList,
-      List<OrgRequestDTO> orgRequestDTOApplyList,
-      List<OrgRequestDTO> orgRequestDTORejectList) {
-
-    this(personalRequestDTOList);
-    this.orgRequestDTOList = this.orgRequestDTOList;
-    this.personalRequestApplyDTOList = personalRequestApplyDTOList;
-    this.personalRequestRejectDTOList = personalRequestRejectDTOList;
-    this.orgRequestApplyDTOList = orgRequestApplyDTOList;
-    this.orgRequestRejectDTOList = orgRequestRejectDTOList;
-
-  }
+  //  public AbstractVolRequestPersonalHandler(
+  //      List<PersonalRequestDTO> personalRequestDTOList,
+  //      List<OrgRequestDTO> orgRequestDTOList,
+  //      List<PersonalRequestDTO> personalRequestApplyDTOList,
+  //      List<PersonalRequestDTO> personalRequestRejectDTOList,
+  //      List<OrgRequestDTO> orgRequestDTOApplyList,
+  //      List<OrgRequestDTO> orgRequestDTORejectList) {
+  //
+  //    this(personalRequestDTOList);
+  //    this.orgRequestDTOList = this.orgRequestDTOList;
+  //    this.personalRequestApplyDTOList = personalRequestApplyDTOList;
+  //    this.personalRequestRejectDTOList = personalRequestRejectDTOList;
+  //    this.orgRequestApplyDTOList = orgRequestApplyDTOList;
+  //    this.orgRequestRejectDTOList = orgRequestRejectDTOList;
+  //
+  //  }
 
 
 
@@ -80,7 +79,15 @@ public abstract class AbstractVolRequestPersonalHandler implements Command { // 
       }
     }
     return null;
+  }
 
+  protected PersonalRequestDTO findByApplyVol(int no) {
+    for (PersonalRequestDTO personalRequestDTO : personalRequestApplyDTOList) {
+      if (personalRequestDTO.getNo() == no) {
+        return personalRequestDTO;
+      }
+    }
+    return null;
   }
 
   //  protected GeneralRequestDTO findByVol(int no) {

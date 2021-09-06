@@ -1,7 +1,9 @@
 package com.share.ftp.domain.personal;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
+import com.share.ftp.domain.join.JoinDTO;
 
 public class PersonalRequestDTO {
 
@@ -22,14 +24,32 @@ public class PersonalRequestDTO {
   private boolean isPersonal;
   private boolean isOrg;
   private boolean isChecked;
-  private String isSigned = "승인대기";
+  private String isSigned = "승인대기"; // 관리자 승인 여부확인
   private Date volSubmitTime;
+  private boolean isJoin; // 참여여부 확인
+  private List<JoinDTO> members; // 참여한 멤버들
+  private int joinCount; // 참여 횟수
+
+  @Override
+  public String toString() {
+    return "PersonalRequestDTO [no=" + no + ", title=" + title + ", owner=" + owner + ", sort="
+        + sort + ", tel=" + tel + ", email=" + email + ", volStartDate=" + volStartDate
+        + ", volEndDate=" + volEndDate + ", volStartTime=" + volStartTime + ", volEndTime="
+        + volEndTime + ", volList=" + volList + ", joinNum=" + joinNum + ", content=" + content
+        + ", fileUpload=" + fileUpload + ", isPersonal=" + isPersonal + ", isOrg=" + isOrg
+        + ", isChecked=" + isChecked + ", isSigned=" + isSigned + ", volSubmitTime=" + volSubmitTime
+        + ", isJoin=" + isJoin + ", members=" + members + ", joinCount=" + joinCount + "]";
+  }
+
+
   @Override
   public int hashCode() {
-    return Objects.hash(content, email, fileUpload, isChecked, isOrg, isPersonal, isSigned, joinNum,
-        no, owner, sort, tel, title, volEndDate, volEndTime, volList, volStartDate, volStartTime,
-        volSubmitTime);
+    return Objects.hash(content, email, fileUpload, isChecked, isJoin, isOrg, isPersonal, isSigned,
+        joinCount, joinNum, members, no, owner, sort, tel, title, volEndDate, volEndTime, volList,
+        volStartDate, volStartTime, volSubmitTime);
   }
+
+
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -41,8 +61,9 @@ public class PersonalRequestDTO {
     PersonalRequestDTO other = (PersonalRequestDTO) obj;
     return Objects.equals(content, other.content) && Objects.equals(email, other.email)
         && Objects.equals(fileUpload, other.fileUpload) && isChecked == other.isChecked
-        && isOrg == other.isOrg && isPersonal == other.isPersonal
-        && Objects.equals(isSigned, other.isSigned) && joinNum == other.joinNum && no == other.no
+        && isJoin == other.isJoin && isOrg == other.isOrg && isPersonal == other.isPersonal
+        && Objects.equals(isSigned, other.isSigned) && joinCount == other.joinCount
+        && joinNum == other.joinNum && Objects.equals(members, other.members) && no == other.no
         && Objects.equals(owner, other.owner) && Objects.equals(sort, other.sort)
         && Objects.equals(tel, other.tel) && Objects.equals(title, other.title)
         && Objects.equals(volEndDate, other.volEndDate)
@@ -51,16 +72,9 @@ public class PersonalRequestDTO {
         && Objects.equals(volStartTime, other.volStartTime)
         && Objects.equals(volSubmitTime, other.volSubmitTime);
   }
-  @Override
-  public String toString() {
-    return "PersonalRequestDTO [no=" + no + ", title=" + title + ", owner=" + owner + ", sort="
-        + sort + ", tel=" + tel + ", email=" + email + ", volStartDate=" + volStartDate
-        + ", volEndDate=" + volEndDate + ", volStartTime=" + volStartTime + ", volEndTime="
-        + volEndTime + ", volList=" + volList + ", joinNum=" + joinNum + ", content=" + content
-        + ", fileUpload=" + fileUpload + ", isPersonal=" + isPersonal + ", isOrg=" + isOrg
-        + ", isChecked=" + isChecked + ", isSigned=" + isSigned + ", volSubmitTime=" + volSubmitTime
-        + "]";
-  }
+
+
+
   public int getNo() {
     return no;
   }
@@ -85,6 +99,7 @@ public class PersonalRequestDTO {
   public void setSort(String sort) {
     this.sort = sort;
   }
+
   public String getTel() {
     return tel;
   }
@@ -94,12 +109,16 @@ public class PersonalRequestDTO {
   public String getEmail() {
     return email;
   }
+
   public void setEmail(String email) {
     this.email = email;
   }
+
   public Date getVolStartDate() {
     return volStartDate;
   }
+
+
   public void setVolStartDate(Date volStartDate) {
     this.volStartDate = volStartDate;
   }
@@ -109,69 +128,150 @@ public class PersonalRequestDTO {
   public void setVolEndDate(Date volEndDate) {
     this.volEndDate = volEndDate;
   }
+
   public String getVolStartTime() {
     return volStartTime;
   }
+
   public void setVolStartTime(String volStartTime) {
     this.volStartTime = volStartTime;
   }
+
   public String getVolEndTime() {
     return volEndTime;
   }
+
   public void setVolEndTime(String volEndTime) {
     this.volEndTime = volEndTime;
   }
+
+
   public String getVolList() {
     return volList;
   }
+
+
   public void setVolList(String volList) {
     this.volList = volList;
   }
+
+
   public int getJoinNum() {
     return joinNum;
   }
+
+
+
   public void setJoinNum(int joinNum) {
     this.joinNum = joinNum;
   }
+
+
+
   public String getContent() {
     return content;
   }
+
+
+
+
+
   public void setContent(String content) {
     this.content = content;
   }
+
+
+
+
+
   public String getFileUpload() {
     return fileUpload;
   }
+
+
+
+
+
   public void setFileUpload(String fileUpload) {
     this.fileUpload = fileUpload;
   }
+
+
+
+
+
   public boolean isPersonal() {
     return isPersonal;
   }
+
+
+
+
+
   public void setPersonal(boolean isPersonal) {
     this.isPersonal = isPersonal;
   }
+
+
+
+
+
   public boolean isOrg() {
     return isOrg;
   }
+
+
+
+
+
   public void setOrg(boolean isOrg) {
     this.isOrg = isOrg;
   }
+
+
+
+
+
   public boolean isChecked() {
     return isChecked;
   }
+
+
+
+
+
   public void setChecked(boolean isChecked) {
     this.isChecked = isChecked;
   }
+
+
+
+
+
   public String getIsSigned() {
     return isSigned;
   }
+
+
+
+
+
   public void setIsSigned(String isSigned) {
     this.isSigned = isSigned;
   }
+
+
+
+
+
   public Date getVolSubmitTime() {
     return volSubmitTime;
   }
+
+
+
+
+
   public void setVolSubmitTime(Date volSubmitTime) {
     this.volSubmitTime = volSubmitTime;
   }
@@ -180,10 +280,92 @@ public class PersonalRequestDTO {
 
 
 
+  public boolean isJoin() {
+    return isJoin;
+  }
 
 
 
 
+
+  public void setJoin(boolean isJoin) {
+    this.isJoin = isJoin;
+  }
+
+
+
+
+
+  public List<JoinDTO> getMembers() {
+    return members;
+  }
+
+
+
+
+
+  public void setMembers(List<JoinDTO> members) {
+    this.members = members;
+  }
+
+
+
+
+
+  public int getJoinCount() {
+    return ++joinCount;
+  }
+
+
+
+
+
+  public void setJoinCount(int joinCount) {
+    this.joinCount = joinCount;
+  }
+
+
+
+
+
+  public String getMemberNames() {
+    if (this.members == null) {
+      return "";
+    }
+    //    String memberInfo = "";
+    //    for (JoinDTO joinDTO : this.members) {
+    //      if (joinDTO.getNo() > 0) {
+    //        memberInfo = ",";
+    //      }
+    //      memberInfo += System.out.printf("%s(%s) " ,joinDTO.getId(),joinDTO.getName());
+    //    }
+    //    return memberInfo.toString();
+    //
+    StringBuilder names = new StringBuilder();
+
+    for (JoinDTO joinDTO : this.members) {
+      if (names.length() > 0) {
+        names.append(",");
+      }
+      names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
+
+    }
+
+    return names.toString();
+  }
+  //
+  //  StringBuilder names = new StringBuilder();
+  //  
+  //  for (JoinDTO joinDTO : this.members) {
+  //    if (names.length() > 0) {
+  //      names.append(",");
+  //    }
+  //    names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
+  //    
+  //  }
+  //  
+  //  return names.toString();
+  //}
 
 
 

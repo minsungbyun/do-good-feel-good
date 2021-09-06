@@ -37,7 +37,7 @@ public abstract class AbstractDonationRegisterHandler implements Command { // �
       System.out.println("기부목록:");
     } else {
       System.out.printf("상태(%s)?\n", getSortLabel(sort));
-    }
+    } 
     System.out.println("[0: 선택안함]");
     System.out.println("[1: 아동]");
     System.out.println("[2: 청소년]");
@@ -47,8 +47,12 @@ public abstract class AbstractDonationRegisterHandler implements Command { // �
     System.out.println("[6: 환경]");
     System.out.println("[7: 기타]");
     return Prompt.inputInt("> ");
-  }
+
+  } 
+
 }
+
+
 
 
 

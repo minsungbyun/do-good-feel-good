@@ -15,17 +15,7 @@ public class JoinAddHandler extends AbstractJoinHandler {
     // 로그인 테스드를 위한 데이터
 
     // 관리자
-    JoinDTO admin = new JoinDTO();
-    admin.setId("admin");
-    admin.setName("관리자");
-    admin.setEmail("aaa@test.com");
-    admin.setPassword("111");
-    admin.setTel("010-1111-1111");
-    admin.setAdress("no");
-    admin.setRegisterDate(new Date(System.currentTimeMillis()));
-    admin.setAdmin(true);
 
-    joinDTOList.add(admin);
 
     // 개인회원
     JoinDTO testUser = new JoinDTO();
@@ -34,7 +24,7 @@ public class JoinAddHandler extends AbstractJoinHandler {
     testUser.setEmail("aaa@test.com");
     testUser.setPassword("111");
     testUser.setTel("010-2222-2222");
-    testUser.setAdress("no");
+    testUser.setAddress("no");
     testUser.setRegisterDate(new Date(System.currentTimeMillis()));
     testUser.setPersonal(true);
 
@@ -47,9 +37,11 @@ public class JoinAddHandler extends AbstractJoinHandler {
     testUser.setEmail("bbb");
     testUser.setPassword("111");
     testUser.setTel("010-3333-3333");
-    testUser.setAdress("no");
+    testUser.setAddress("no");
     testUser.setRegisterDate(new Date(System.currentTimeMillis()));
     testUser.setOrg(true);
+    //    AuthLoginHandler.loginUser = testUser;
+    AuthLoginHandler.userAccessLevel = Menu.ACCESS_ORG | Menu.ACCESS_LOGOUT | Menu.ACCESS_MEMBER_ADMIN;
 
     joinDTOList.add(testUser);
 
@@ -59,9 +51,11 @@ public class JoinAddHandler extends AbstractJoinHandler {
     testUser.setEmail("object@java.com");
     testUser.setPassword("111");
     testUser.setTel("010-4444-4444");
-    testUser.setAdress("모두의집");
+    testUser.setAddress("모두의집");
     testUser.setRegisterDate(new Date(System.currentTimeMillis()));
     testUser.setPersonal(true);
+    //    AuthLoginHandler.loginUser = testUser;
+    AuthLoginHandler.userAccessLevel = Menu.ACCESS_PERSONAL | Menu.ACCESS_LOGOUT | Menu.ACCESS_MEMBER_ADMIN;
 
     joinDTOList.add(testUser);
 
@@ -96,7 +90,7 @@ public class JoinAddHandler extends AbstractJoinHandler {
     joinDTO.setName(Prompt.inputString("이름? "));
     joinDTO.setTel(Prompt.inputString("전화? "));
     joinDTO.setEmail(Prompt.inputString("이메일? "));
-    joinDTO.setAdress(Prompt.inputString("주소? "));
+    joinDTO.setAddress(Prompt.inputString("주소? "));
     joinDTO.setRegisterDate(new Date(System.currentTimeMillis()));
     System.out.println();
 
@@ -109,12 +103,12 @@ public class JoinAddHandler extends AbstractJoinHandler {
 
       if (no == 1) {
         joinDTO.setPersonal(true);
-        AuthLoginHandler.userAccessLevel = Menu.ACCESS_PERSONAL | Menu.ACCESS_LOGOUT;
+        AuthLoginHandler.userAccessLevel = Menu.ACCESS_PERSONAL | Menu.ACCESS_LOGOUT | Menu.ACCESS_MEMBER_ADMIN;
         break;
 
       } else if (no == 2){
         joinDTO.setOrg(true);
-        AuthLoginHandler.userAccessLevel = Menu.ACCESS_ORG | Menu.ACCESS_LOGOUT;
+        AuthLoginHandler.userAccessLevel = Menu.ACCESS_ORG | Menu.ACCESS_LOGOUT | Menu.ACCESS_MEMBER_ADMIN;
         break;
 
       } else {

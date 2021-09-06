@@ -12,7 +12,7 @@ public class CommBestDetailHandler extends AbstractCommBestReviewHandler {
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("[소통해요/나눔이야기Best/목록]");
+    System.out.println("[소통해요/나눔이야기Best/상세보기]");
 
 
 

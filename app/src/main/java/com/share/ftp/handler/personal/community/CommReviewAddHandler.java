@@ -3,6 +3,7 @@ package com.share.ftp.handler.personal.community;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.personal.CommReviewDTO;
+import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
 public class CommReviewAddHandler extends AbstractCommReviewHandler {
@@ -19,9 +20,10 @@ public class CommReviewAddHandler extends AbstractCommReviewHandler {
 
     CommReviewDTO commReviewDTO = new CommReviewDTO();
 
-    commReviewDTO.setNo(Prompt.inputInt("번호? "));
-    commReviewDTO.setContent(Prompt.inputString("내용? "));
+    commReviewDTO.setNo(Prompt.inputInt("번호 ▶ "));
+    commReviewDTO.setContent(Prompt.inputString("내용  ▶ "));
     commReviewDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
+    commReviewDTO.setOwner(AuthLoginHandler.getLoginUser());
 
     commReviewDTOList.add(commReviewDTO);
   }

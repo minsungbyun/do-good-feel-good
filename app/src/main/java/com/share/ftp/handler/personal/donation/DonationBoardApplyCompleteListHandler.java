@@ -28,7 +28,7 @@ public class DonationBoardApplyCompleteListHandler extends AbstractDonationBoard
 
     for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
       System.out.printf("개설번호: %d\n제목: %s\n주최자: %s\n내용: %s\n첨부파일: %s\n"
-          + "개설기간: %s ~ %s\n승인여부: %b\n", 
+          + "개설기간: %s ~ %s\n승인여부: %s\n", 
           donationBoardDTO.getNo(), 
           donationBoardDTO.getTitle(), 
           donationBoardDTO.getLeader(),
@@ -36,7 +36,7 @@ public class DonationBoardApplyCompleteListHandler extends AbstractDonationBoard
           donationBoardDTO.getFileUpload(), 
           donationBoardDTO.getRegisteredStartDate(),
           donationBoardDTO.getRegisteredEndDate(),
-          donationBoardDTO.isChecked());
+          donationBoardDTO.getIsSigned());
       System.out.println("------------------------------------------");
     }
   }

@@ -6,7 +6,9 @@ import com.share.ftp.domain.personal.DonationBoardDTO;
 public class DonationBoardApplyListHandler extends AbstractDonationBoardHandler {
 
 
-  public DonationBoardApplyListHandler(List<DonationBoardDTO> donationBoardDTOList) {
+  public DonationBoardApplyListHandler(
+      List<DonationBoardDTO> donationBoardDTOList) {
+
     super(donationBoardDTOList);
   }
 
@@ -23,16 +25,16 @@ public class DonationBoardApplyListHandler extends AbstractDonationBoardHandler 
 
     for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
       System.out.printf("개설번호: %d\n제목: %s\n주최자: %s\n내용: %s\n첨부파일: %s\n"
-          + "개설기간: %s~%s\n승인여부: %b\n", 
+          + "개설기간: %s ~ %s\n승인여부: %s\n", 
           donationBoardDTO.getNo(), 
           donationBoardDTO.getTitle(), 
           donationBoardDTO.getLeader(),
           donationBoardDTO.getContent(),
           donationBoardDTO.getFileUpload(), 
-          donationBoardDTO.getPassword(),
           donationBoardDTO.getRegisteredStartDate(),
           donationBoardDTO.getRegisteredEndDate(),
-          donationBoardDTO.isChecked());
+          donationBoardDTO.getIsSigned());
+      System.out.println("--------------------------------------------------------------");
     }
   }
 }

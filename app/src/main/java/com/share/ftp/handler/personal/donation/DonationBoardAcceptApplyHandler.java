@@ -30,14 +30,15 @@ public class DonationBoardAcceptApplyHandler extends AbstractDonationBoardHandle
 
     String input = Prompt.inputString("정말 승인하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("해당 모금함 개설신청 반려를 취소하였습니다.");
+      System.out.println("해당 모금함 개설신청 승인을 취소하였습니다.");
       return;
     }
 
     donationBoardDTO.setChecked(true);
+    donationBoardDTO.setIsSigned("승인됨");
 
-    for (DonationBoardDTO donationBoardApplyDTOList : donationBoardDTOList) {
-      donationBoardRejectDTOList.add(donationBoardApplyDTOList);
+    for (DonationBoardDTO donationBoardApplyDTO : donationBoardDTOList) {
+      donationBoardApplyDTOList.add(donationBoardApplyDTO);
     }
 
     System.out.println("해당 모금함 개설신청을 승인하였습니다.");

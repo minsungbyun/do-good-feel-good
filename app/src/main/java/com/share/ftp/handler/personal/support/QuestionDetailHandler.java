@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.support;
 
 import java.util.List;
 import com.share.ftp.domain.personal.MyQuestionListDTO;
+import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
 public class QuestionDetailHandler extends AbstractQuestionHandler {
@@ -23,8 +24,14 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
       return;
     }
 
+    if (myQuestionListDTO.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
+      System.out.println("본인이 작성한 글만 확인할 수 있습니다.");
+      return;
+    }
+
     System.out.printf("번호: %s\n", myQuestionListDTO.getNo());
     System.out.printf("제목: %s\n", myQuestionListDTO.getTitle());
+    System.out.printf("아이디: %s\n", myQuestionListDTO.getOwner().getId());
     System.out.printf("내용: %s\n", myQuestionListDTO.getContent());
     System.out.printf("작성자: %s\n", myQuestionListDTO.getFileUpload());
     System.out.printf("등록일: %s\n", myQuestionListDTO.getRegisteredDate());
