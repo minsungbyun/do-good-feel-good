@@ -429,18 +429,20 @@ public class App {
   }
 
   void service() {
+
     loadJoins();
     loadDonationBoards();
     loadDonationRegisters();
-
+    loadQuestion();
 
     createMenu().execute();
     Prompt.close();
 
-
+    saveJoins();
     saveDonationBoards();
     saveDonationRegisters();
-    saveJoins();
+    saveQuestion();
+
   }
 
   @SuppressWarnings("unchecked")
@@ -458,6 +460,8 @@ public class App {
       e.printStackTrace();
     }
   }
+
+
 
   private void saveDonationBoards() {
     try (ObjectOutputStream out = new ObjectOutputStream(
@@ -486,6 +490,7 @@ public class App {
 
     } catch (Exception e) {
       System.out.println("파일에서 모금함 기부하기 파일을 읽어 오는 중 오류 발생!");
+
       e.printStackTrace();
     }
   }
@@ -503,7 +508,6 @@ public class App {
       e.printStackTrace();
     }
   }
-
 
   @SuppressWarnings("unchecked")
   private void loadJoins() {
@@ -531,7 +535,37 @@ public class App {
 
     } catch (Exception e) {
       System.out.println("회원정보 파일에 저장 중 오류 발생!");
+
       e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadQuestion() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("Question.data"))) {
+
+      myQuestionListDTOList.addAll((List<MyQuestionListDTO>) in.readObject());
+
+      System.out.println("게시글 데이터 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 게시글 데이터를 읽어 오는 중 오류 발생!");
+
+    }
+  }
+
+
+  private void saveQuestion() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("Question.data"))) {
+
+      out.writeObject(myQuestionListDTOList);
+
+      System.out.println("게시글 데이터 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("게시글 데이터를 파일에 저장 중 오류 발생!");
     }
   }
 
@@ -554,7 +588,6 @@ public class App {
 
     // 함께해요
     mainMenuGroup.add(createDoVolMenu());
-
 
     //    doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volRequestPersonal/apply"));
     //    doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volRequestOrg/apply")); 
