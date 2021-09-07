@@ -21,6 +21,7 @@ public class VolDoJoinHandler implements Command {
 
   }
 
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("[  봉사 참여자 목록  ]");

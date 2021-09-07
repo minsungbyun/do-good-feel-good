@@ -21,10 +21,11 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
     DonationBoardDTO donationBoardDTO = findByDonationApply(no);
 
     if (donationBoardDTO == null) {
+      System.out.println();
       System.out.println("해당 번호의 모금함 개설 신청내역이 없습니다.");
       return;
     }
-
+    System.out.println();
     System.out.printf("개설번호: %s\n", donationBoardDTO.getNo());
     System.out.printf("제목: %s\n", donationBoardDTO.getTitle());
     System.out.printf("주최자: %s\n", donationBoardDTO.getLeader());

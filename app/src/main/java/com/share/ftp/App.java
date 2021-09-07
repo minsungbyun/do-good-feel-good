@@ -249,8 +249,9 @@ public class App {
   VolJoinDetailHandler volJoinDetailHandler = 
       new VolJoinDetailHandler
       (volRequestPersonalAppliedListDetailHandler,volRequestOrgAppliedListDetailHandler,volRequestTotalApprovedListHandler,volDoJoinHandler);
-  // 모금함 개설 승인된 목록 Handler
 
+
+  // 모금함 개설 승인된 목록 Handler
   DonationBoardAppliedListHandler donationBoardAppliedListHandler =
       new DonationBoardAppliedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList);
 
@@ -446,6 +447,7 @@ public class App {
     // 함께해요
     mainMenuGroup.add(createDoVolMenu());
 
+    mainMenuGroup.add(createDoVolMenu());
 
     //    doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volRequestPersonal/apply"));
     //    doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volRequestOrg/apply")); 
