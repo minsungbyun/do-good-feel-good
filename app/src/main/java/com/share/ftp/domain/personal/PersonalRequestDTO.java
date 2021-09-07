@@ -1,11 +1,13 @@
 package com.share.ftp.domain.personal;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
-public class PersonalRequestDTO {
+@SuppressWarnings("serial")
+public class PersonalRequestDTO implements Serializable {
 
   private int no;
   private String title;

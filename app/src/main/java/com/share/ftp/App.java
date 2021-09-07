@@ -6,6 +6,10 @@ import static com.share.menu.Menu.ACCESS_MEMBER;
 import static com.share.menu.Menu.ACCESS_MEMBER_ADMIN;
 import static com.share.menu.Menu.ACCESS_ORG;
 import static com.share.menu.Menu.ACCESS_PERSONAL;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -422,10 +426,249 @@ public class App {
 
   }
 
+
   void service() {
+
+    loadPersonalRequest();
+    loadPersonalRequestApply();
+    loadPersonalRequestReject();
+    loadPersonalSelected();
+    loadOrgRequest();
+    loadOrgRequestApply();
+    loadOrgRequestReject();
+
     createMenu().execute();
     Prompt.close();
+
+    savePersonalRequest();
+    savePersonalRequestApply();
+    savePersonalRequestReject();
+    savePersonalSelected();
+    saveOrgRequest();
+    saveOrgRequestApply();
+    saveOrgRequestReject();
   }
+
+  @SuppressWarnings("unchecked")
+  private void loadPersonalRequest() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("personalRequest.data"))) {
+
+      personalRequestDTOList.addAll((List<PersonalRequestDTO>) in.readObject());
+
+      System.out.println("봉사 신청서 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사 신청서를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+
+  private void savePersonalRequest() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("personalRequest.data"))) {
+
+      out.writeObject(personalRequestDTOList);
+
+      System.out.println("봉사 신청서 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사 신청서 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadPersonalRequestApply() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("personalRequestApply.data"))) {
+
+      personalRequestApplyDTOList.addAll((List<PersonalRequestDTO>) in.readObject());
+
+      System.out.println("봉사 승인 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사 승인 신청서를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+
+  }
+
+  private void savePersonalRequestApply() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("personalRequestApply.data"))) {
+
+      out.writeObject(personalRequestApplyDTOList);
+
+      System.out.println("봉사 승인 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사 승인 신청서 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadPersonalRequestReject() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("personalRequestReject.data"))) {
+
+      personalRequestRejectDTOList.addAll((List<PersonalRequestDTO>) in.readObject());
+
+      System.out.println("봉사 반려 신청서 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사 반려 신청서를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+  private void savePersonalRequestReject() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("personalRequestReject.data"))) {
+
+      out.writeObject(personalRequestRejectDTOList);
+
+      System.out.println("봉사 반려 신청서 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사 반려 신청서 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadPersonalSelected() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("personalSelected.data"))) {
+
+      personalSelectedList.addAll((List<PersonalRequestDTO>) in.readObject());
+
+      System.out.println("봉사 참여 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사 참여 하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+  private void savePersonalSelected() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("personalSelected.data"))) {
+
+      out.writeObject(personalSelectedList);
+
+      System.out.println("봉사 참여 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사 참여 하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadOrgRequest() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("orgRequest.data"))) {
+
+      orgRequestDTOList.addAll((List<OrgRequestDTO>) in.readObject());
+
+      System.out.println("기관봉사 신청서 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사신청서를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+
+  private void saveOrgRequest() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("orgRequest.data"))) {
+
+      out.writeObject(orgRequestDTOList);
+
+      System.out.println("기관 신청서 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사 신청서 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadOrgRequestApply() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("orgRequestApply.data"))) {
+
+      orgRequestApplyDTOList.addAll((List<OrgRequestDTO>) in.readObject());
+
+      System.out.println("기관봉사 승인 신청서 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("기관봉사 승인 신청서를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+  private void saveOrgRequestApply() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("orgRequestApply.data"))) {
+
+      out.writeObject(orgRequestApplyDTOList);
+
+      System.out.println("기관봉사 승인 신청서 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("기관봉사 승인 신청서 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadOrgRequestReject() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("orgRequestReject.data"))) {
+
+      orgRequestRejectDTOList.addAll((List<OrgRequestDTO>) in.readObject());
+
+      System.out.println("기관봉사 반려 신청서 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사 반려 신청서를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+  private void saveOrgRequestReject() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("orgRequestReject.data"))) {
+
+      out.writeObject(orgRequestRejectDTOList);
+
+      System.out.println("기관봉사 반려 신청서 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("기관봉사 반려 신청서 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+
 
   Menu createMenu() {
 
