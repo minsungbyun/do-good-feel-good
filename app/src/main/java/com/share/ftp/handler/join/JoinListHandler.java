@@ -21,7 +21,7 @@ public class JoinListHandler extends AbstractJoinHandler {
           joinDTO.getPassword(), 
           joinDTO.getTel(), 
           joinDTO.getEmail(), 
-          joinDTO.getAdress(),
+          joinDTO.getAddress(),
           joinDTO.getRegisterDate());
     }
   }

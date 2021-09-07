@@ -1,6 +1,5 @@
 package com.share.ftp.handler.join;
 
-import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
 
@@ -23,7 +22,7 @@ public class AuthDisplayUserInfoHandler implements Command {
     System.out.printf("이름: %s\n", loginUser.getName());
     System.out.printf("전화: %s\n", loginUser.getTel());
     System.out.printf("이메일: %s\n", loginUser.getEmail());
-    System.out.printf("주소: %s\n", loginUser.getAdress());
+    System.out.printf("주소: %s\n", loginUser.getAddress());
     System.out.printf("등록일: %s\n", loginUser.getRegisterDate());
   }
 }

@@ -17,47 +17,47 @@ public class JoinAddHandler extends AbstractJoinHandler {
     // 관리자
 
 
-    // 개인회원
-    JoinDTO testUser = new JoinDTO();
-    testUser.setId("aaa");
-    testUser.setName("행복이");
-    testUser.setEmail("aaa@test.com");
-    testUser.setPassword("111");
-    testUser.setTel("010-2222-2222");
-    testUser.setAddress("no");
-    testUser.setRegisterDate(new Date(System.currentTimeMillis()));
-    testUser.setPersonal(true);
+    //    // 개인회원
+    //    JoinDTO testUser = new JoinDTO();
+    //    testUser.setId("aaa");
+    //    testUser.setName("행복이");
+    //    testUser.setEmail("aaa@test.com");
+    //    testUser.setPassword("111");
+    //    testUser.setTel("010-2222-2222");
+    //    testUser.setAddress("no");
+    //    testUser.setRegisterDate(new Date(System.currentTimeMillis()));
+    //    testUser.setPersonal(true);
+    //
+    //    joinDTOList.add(testUser);
+    //
+    //    // 기관회원
+    //    testUser = new JoinDTO();
+    //    testUser.setId("bbb");
+    //    testUser.setName("test2");
+    //    testUser.setEmail("bbb");
+    //    testUser.setPassword("111");
+    //    testUser.setTel("010-3333-3333");
+    //    testUser.setAddress("no");
+    //    testUser.setRegisterDate(new Date(System.currentTimeMillis()));
+    //    testUser.setOrg(true);
+    //    //    AuthLoginHandler.loginUser = testUser;
+    //    AuthLoginHandler.userAccessLevel = Menu.ACCESS_ORG | Menu.ACCESS_LOGOUT | Menu.ACCESS_MEMBER_ADMIN;
+    //
+    //    joinDTOList.add(testUser);
+    //
+    //    testUser = new JoinDTO();
+    //    testUser.setId("object");
+    //    testUser.setName("자바최고조상");
+    //    testUser.setEmail("object@java.com");
+    //    testUser.setPassword("111");
+    //    testUser.setTel("010-4444-4444");
+    //    testUser.setAddress("모두의집");
+    //    testUser.setRegisterDate(new Date(System.currentTimeMillis()));
+    //    testUser.setPersonal(true);
+    //    //    AuthLoginHandler.loginUser = testUser;
+    //    AuthLoginHandler.userAccessLevel = Menu.ACCESS_PERSONAL | Menu.ACCESS_LOGOUT | Menu.ACCESS_MEMBER_ADMIN;
 
-    joinDTOList.add(testUser);
-
-    // 기관회원
-    testUser = new JoinDTO();
-    testUser.setId("bbb");
-    testUser.setName("test2");
-    testUser.setEmail("bbb");
-    testUser.setPassword("111");
-    testUser.setTel("010-3333-3333");
-    testUser.setAddress("no");
-    testUser.setRegisterDate(new Date(System.currentTimeMillis()));
-    testUser.setOrg(true);
-    //    AuthLoginHandler.loginUser = testUser;
-    AuthLoginHandler.userAccessLevel = Menu.ACCESS_ORG | Menu.ACCESS_LOGOUT | Menu.ACCESS_MEMBER_ADMIN;
-
-    joinDTOList.add(testUser);
-
-    testUser = new JoinDTO();
-    testUser.setId("object");
-    testUser.setName("자바최고조상");
-    testUser.setEmail("object@java.com");
-    testUser.setPassword("111");
-    testUser.setTel("010-4444-4444");
-    testUser.setAddress("모두의집");
-    testUser.setRegisterDate(new Date(System.currentTimeMillis()));
-    testUser.setPersonal(true);
-    //    AuthLoginHandler.loginUser = testUser;
-    AuthLoginHandler.userAccessLevel = Menu.ACCESS_PERSONAL | Menu.ACCESS_LOGOUT | Menu.ACCESS_MEMBER_ADMIN;
-
-    joinDTOList.add(testUser);
+    //    joinDTOList.add(testUser);
 
   }
 
