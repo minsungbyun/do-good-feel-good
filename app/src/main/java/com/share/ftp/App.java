@@ -97,6 +97,7 @@ import com.share.ftp.handler.personal.donation.DonationBoardApplyListHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardListHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardRejectApplyHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardRejectedListHandler;
+import com.share.ftp.handler.personal.donation.DonationPrompt;
 import com.share.ftp.handler.personal.donation.DonationRegisterAddHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterMyListHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterParticipationHandler;
@@ -259,6 +260,7 @@ public class App {
   DonationBoardAppliedListHandler donationBoardAppliedListHandler =
       new DonationBoardAppliedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList);
 
+  DonationPrompt donationPrompt = new DonationPrompt(donationBoardDTOList);
 
 
   public static void main(String[] args) {
@@ -353,7 +355,7 @@ public class App {
     commands.put("/donationBoard/acceptApply", new DonationBoardAcceptApplyHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
     commands.put("/donationBoard/rejectApply", new DonationBoardRejectApplyHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
     commands.put("/donationBoard/rejectedList", new DonationBoardRejectedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
-    commands.put("/donationBoard/applyDetail", new DonationBoardApplyDetailHandler(donationBoardDTOList));
+    commands.put("/donationBoard/applyDetail", new DonationBoardApplyDetailHandler(donationBoardDTOList, donationRegisterDTOList, donationPrompt));
 
     // 모금함 (기부하기)
     commands.put("/donationRegister/add", new DonationRegisterAddHandler(donationRegisterDTOList));
@@ -441,7 +443,6 @@ public class App {
     saveJoins();
   }
 
-
   @SuppressWarnings("unchecked")
   private void loadDonationBoards() {
     try (
@@ -471,6 +472,7 @@ public class App {
       e.printStackTrace();
     }
   }
+
 
   @SuppressWarnings("unchecked")
   private void loadDonationRegisters() {
@@ -518,8 +520,6 @@ public class App {
       e.printStackTrace();
     }
   }
-
-
 
   private void saveJoins() {
     try (ObjectOutputStream out = new ObjectOutputStream(
