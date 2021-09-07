@@ -6,6 +6,10 @@ import static com.share.menu.Menu.ACCESS_MEMBER;
 import static com.share.menu.Menu.ACCESS_MEMBER_ADMIN;
 import static com.share.menu.Menu.ACCESS_ORG;
 import static com.share.menu.Menu.ACCESS_PERSONAL;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -423,8 +427,74 @@ public class App {
   }
 
   void service() {
+    loadQuestion();
+    //    loadNotice();
+
     createMenu().execute();
     Prompt.close();
+
+    saveQuestion();
+    saveNotice();
+
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadQuestion() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("Question.data"))) {
+
+      myQuestionListDTOList.addAll((List<MyQuestionListDTO>) in.readObject());
+
+      System.out.println("게시글 데이터 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 게시글 데이터를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveQuestion() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("Question.data"))) {
+
+      out.writeObject(myQuestionListDTOList);
+
+      System.out.println("게시글 데이터 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("게시글 데이터를 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  // 관리자 페이지
+  //  @SuppressWarnings("unchecked")
+  //  private void loadNotice() {
+  //    try (ObjectInputStream in = new ObjectInputStream(
+  //        new FileInputStream("Notice.data"))) {
+  //
+  //      noticeDTOList.addAll((List<NoticeDTO>) in.readObject());
+  //
+  //      System.out.println("게시글 데이터 로딩 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("파일에서 게시글 데이터를 읽어 오는 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+
+  private void saveNotice() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("Notice.data"))) {
+
+      out.writeObject(noticeDTOList);
+
+      System.out.println("공지사항 데이터 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("공지사항 데이터를 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
   }
 
   Menu createMenu() {
@@ -445,7 +515,6 @@ public class App {
 
 
     // 함께해요
-    mainMenuGroup.add(createDoVolMenu());
 
     mainMenuGroup.add(createDoVolMenu());
 
