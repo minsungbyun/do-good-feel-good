@@ -1,9 +1,11 @@
 package com.share.ftp.domain.join;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
-public class JoinDTO {
+@SuppressWarnings("serial")
+public class JoinDTO implements Serializable {
   private int no;
   private String id;
   private String password;

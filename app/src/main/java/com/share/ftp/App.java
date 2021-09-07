@@ -6,6 +6,11 @@ import static com.share.menu.Menu.ACCESS_MEMBER;
 import static com.share.menu.Menu.ACCESS_MEMBER_ADMIN;
 import static com.share.menu.Menu.ACCESS_ORG;
 import static com.share.menu.Menu.ACCESS_PERSONAL;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -423,8 +428,15 @@ public class App {
   }
 
   void service() {
+
+    loadChallengeReviews();
+    loadChallengeQuestions();
+
     createMenu().execute();
     Prompt.close();
+
+    saveChallengeReviews();
+    saveChallengeQuestions();
   }
 
   Menu createMenu() {
@@ -445,8 +457,6 @@ public class App {
 
 
     // 함께해요
-    mainMenuGroup.add(createDoVolMenu());
-
     mainMenuGroup.add(createDoVolMenu());
 
     //    doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volRequestPersonal/apply"));
@@ -607,6 +617,34 @@ public class App {
 
     return ChallengeReview;
   }
+  
+  @SuppressWarnings("unchecked")
+  private void loadChallengeReviews() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("myChallengeReview.data"))) {
+
+      myChallengeReviewDTOList.addAll((List<MyChallengeReviewDTO>) in.readObject());
+
+      System.out.println("참여인증&댓글 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 참여인증&댓글을 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveChallengeReviews() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("myChallengeReview.data"))) {
+
+      out.writeObject(myChallengeReviewDTOList);
+
+      System.out.println("참여인증&댓글 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("참여인증&댓글을 파일에 저장 중 오류 발생!");
+    }
+  }
 
   private Menu createChallengeQuestionMenu() {
     MenuGroup ChallengeQuestion = new MenuGroup("문의하기");
@@ -618,6 +656,35 @@ public class App {
     ChallengeQuestion.add(new MenuItem("문의 검색",  "/challengeQuestion/search"));
 
     return ChallengeQuestion;
+  }
+  
+  @SuppressWarnings("unchecked")
+  private void loadChallengeQuestions() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("myChallengeQuestion.data"))) {
+
+    myChallengeQuestionDTOList.addAll((List<MyChallengeQuestionDTO>) in.readObject());
+
+    System.out.println("챌린지 문의글 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 챌린지 문의글을 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveChallengeQuestions() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("myChallengeQuestion.data"))) {
+
+      out.writeObject(myChallengeQuestionDTOList);
+
+      System.out.println("챌린지 문의글 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("챌린지 문의글을 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
   }
 
   private Menu createMonthlyRankingMenu() {
