@@ -18,26 +18,28 @@ public class DonationBoardAppliedListHandler extends AbstractDonationBoardHandle
   public void execute() {
 
     System.out.println();
-    System.out.println("[모금함 개설 신청서 승인 목록]");
+    System.out.println("[모금함 승인 목록]");
 
-    if (donationBoardApplyDTOList.isEmpty()) {
+    if (donationBoardDTOList.isEmpty()) {
       System.out.println("현재 승인된 모금함 개설목록이 없습니다.");
       return;
     }
 
-    for (DonationBoardDTO donationBoardApplyDTO : donationBoardApplyDTOList) {
-      if (donationBoardApplyDTO.isChecked() == true) {
+    for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
+      if (donationBoardDTO.isChecked() == true) {
         System.out.printf("개설번호: %d\n제목: %s\n주최자: %s\n내용: %s\n첨부파일: %s\n"
             + "개설기간: %s ~ %s\n승인여부: %s\n",
-            donationBoardApplyDTO.getNo(), 
-            donationBoardApplyDTO.getTitle(), 
-            donationBoardApplyDTO.getLeader(),
-            donationBoardApplyDTO.getContent(),
-            donationBoardApplyDTO.getFileUpload(), 
-            donationBoardApplyDTO.getRegisteredStartDate(),
-            donationBoardApplyDTO.getRegisteredEndDate(),
+            donationBoardDTO.getNo(), 
+            donationBoardDTO.getTitle(), 
+            donationBoardDTO.getLeader(),
+            donationBoardDTO.getContent(),
+            donationBoardDTO.getFileUpload(), 
+            donationBoardDTO.getRegisteredStartDate(),
+            donationBoardDTO.getRegisteredEndDate(),
             //          donationBoardDTO.isChecked());
-            donationBoardApplyDTO.getIsSigned());
+            donationBoardDTO.getIsSigned());
+        System.out.println("--------------------------------------------------------------");
+
       }
     }
   }

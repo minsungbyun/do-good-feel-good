@@ -17,9 +17,8 @@ public class DonationRegisterMyListHandler extends AbstractDonationRegisterHandl
     System.out.println("[나의 기부 내역]");
 
     for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {
-      System.out.printf("[기부 분류: %d] [기부 번호: %d] [기부 금액: %s원]\n", 
+      System.out.printf("[기부 분류: %d] [기부 금액: %s원]\n", 
           donationRegisterDTO.getSort(), 
-          donationRegisterDTO.getNo(), 
           donationRegisterDTO.getDonationMoney());
       continue;
     }
