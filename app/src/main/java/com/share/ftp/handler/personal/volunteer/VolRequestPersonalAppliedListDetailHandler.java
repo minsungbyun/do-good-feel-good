@@ -13,6 +13,7 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
   PersonalRequestDTO personalRequestDTO;
 
   List<PersonalRequestDTO> personalSelectedList;
+  ArrayList<JoinDTO> members = new ArrayList<>();
 
   public VolRequestPersonalAppliedListDetailHandler(
       List<PersonalRequestDTO> personalRequestDTOList,
@@ -91,29 +92,32 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
 
 
     personalRequestApplyDTO.setMembers(addJoinMember()); // 참여 멤버 등록
+    personalRequestApplyDTO.getJoinCount(); //참여인원증가
+    //    personalRequestDTO.setMembers( addJoinMember());
     //    personalRequestApplyDTO.getJoinCount(); // 카운트 1 증가
-    personalRequestApplyDTO.getJoinNum(); //참여인원증가
 
     personalSelectedList.add(personalRequestApplyDTO);
 
     System.out.println("[  봉사참여가 완료되었습니다. ]");
 
   }
-
   public List<JoinDTO> addJoinMember() {
-    ArrayList<JoinDTO> members = new ArrayList<>();
-    String memberName = AuthLoginHandler.getLoginUser().getName();
-    JoinDTO member = AuthLoginHandler.findByName(memberName);
+    //    ArrayList<JoinDTO> members = new ArrayList<>();
+    //    String memberName = AuthLoginHandler.getLoginUser().getName();
+    //    JoinDTO member = AuthLoginHandler.findByName(memberName);
+    JoinDTO member = AuthLoginHandler.getLoginUser();
 
     if (member != null) {
       members.add(member);
-      personalRequestDTO.setMembers(members);
     } else if (member == null) {
       System.out.println("등록된 회원이 아닙니다.");
     }
 
+    //    personalRequestDTO.setMembers(members);
     return members;
   }
+
+
 
 }
 

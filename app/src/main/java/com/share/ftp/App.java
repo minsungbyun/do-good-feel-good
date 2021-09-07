@@ -244,7 +244,7 @@ public class App {
   //봉사참여자목록
   VolDoJoinHandler volDoJoinHandler = 
       new VolDoJoinHandler
-      (personalSelectedList,personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList);
+      (personalSelectedList,volRequestPersonalAppliedListDetailHandler,personalRequestDTO);
 
   VolJoinDetailHandler volJoinDetailHandler = 
       new VolJoinDetailHandler
@@ -286,7 +286,7 @@ public class App {
     commands.put("/volRequestPersonal/bookmark", new VolRequestPersonalBookmarkHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
     commands.put("/volRequest/totalApprovedList", new VolRequestTotalApprovedListHandler(volRequestPersonalAppliedListHandler, volRequestOrgAppliedListHandler));
     commands.put("/volJoin/detail", new VolJoinDetailHandler(volRequestPersonalAppliedListDetailHandler, volRequestOrgAppliedListDetailHandler,volRequestTotalApprovedListHandler,volDoJoinHandler));
-    commands.put("/volDoJoin/detail", new VolDoJoinHandler(personalSelectedList,personalRequestDTOList, personalRequestApplyDTOList,personalRequestRejectDTOList));
+    commands.put("/volDoJoin/detail", new VolDoJoinHandler(personalSelectedList,volRequestPersonalAppliedListDetailHandler,personalRequestDTO));
 
     //함께해요 (기관) + 마이페이지
     commands.put("/volRequestOrg/apply", new VolRequestOrgApplyHandler(orgRequestDTOList,joinDTOList));
@@ -444,6 +444,7 @@ public class App {
 
 
     // 함께해요
+    mainMenuGroup.add(createDoVolMenu());
 
 
     //    doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volRequestPersonal/apply"));

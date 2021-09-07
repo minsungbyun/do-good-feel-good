@@ -2,18 +2,22 @@ package com.share.ftp.handler.personal.volunteer;
 
 import java.util.List;
 import com.share.ftp.domain.personal.PersonalRequestDTO;
+import com.share.ftp.handler.Command;
 import com.share.util.Prompt;
 
-public class VolDoJoinHandler extends AbstractVolRequestPersonalHandler {
+public class VolDoJoinHandler implements Command {
 
   List<PersonalRequestDTO> personalSelectedList;
+  VolRequestPersonalAppliedListDetailHandler volRequestPersonalAppliedListDetailHandler;
+  PersonalRequestDTO personalRequestDTO;
   public VolDoJoinHandler(
       List<PersonalRequestDTO> personalSelectedList,
-      List<PersonalRequestDTO> personalRequestDTOList,
-      List<PersonalRequestDTO> personalRequestApplyDTOList,
-      List<PersonalRequestDTO> personalRequestRejectDTOList) {
-    super(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList);
+      VolRequestPersonalAppliedListDetailHandler volRequestPersonalAppliedListDetailHandler,
+      PersonalRequestDTO personalRequestDTO
+      ) {
     this.personalSelectedList = personalSelectedList;
+    this.volRequestPersonalAppliedListDetailHandler = volRequestPersonalAppliedListDetailHandler;
+    this.personalRequestDTO = personalRequestDTO;
 
   }
 
@@ -28,7 +32,7 @@ public class VolDoJoinHandler extends AbstractVolRequestPersonalHandler {
     System.out.printf("봉사제목: %s\n총봉사인원: %d\n현재봉사인원 :%d\n봉사자명: %s\n",
         personalRequestSelectedDTO.getTitle(),
         personalRequestSelectedDTO.getJoinNum(),
-        personalRequestSelectedDTO.getJoinCount(),
+        totalJoinCount(),
         personalRequestSelectedDTO.getMemberNames());
 
 
@@ -36,7 +40,9 @@ public class VolDoJoinHandler extends AbstractVolRequestPersonalHandler {
 
   }
 
-  protected PersonalRequestDTO findBySelectedVol(int no) {
+
+
+  private PersonalRequestDTO findBySelectedVol(int no) {
     for (PersonalRequestDTO personalRequestSelectedDTO : personalSelectedList) {
       if (personalRequestSelectedDTO.getNo() == no) {
         return personalRequestSelectedDTO;
@@ -44,5 +50,15 @@ public class VolDoJoinHandler extends AbstractVolRequestPersonalHandler {
     }
     return null;
   }
+
+  private int totalJoinCount() {
+    int sum = 0;
+    for (PersonalRequestDTO personalRequestApplyDTO : personalSelectedList) {
+      sum = personalRequestApplyDTO.getJoinCount();
+    }
+    return sum;
+  }
+
+
 
 }

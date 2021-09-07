@@ -25,7 +25,7 @@ public class VolJoinDetailHandler implements Command {
 
   public void execute() {
     // 비회원 열람가능
-
+    System.out.println();
 
     // 봉사 관련된 내용들
 
@@ -36,6 +36,7 @@ public class VolJoinDetailHandler implements Command {
     // 주최자정보
     System.out.println("[ 봉사 목록  ]");
     volRequestTotalApprovedListHandler.execute();
+    System.out.println();
 
 
     LOOP: while (true) {

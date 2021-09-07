@@ -28,7 +28,7 @@ public class PersonalRequestDTO {
   private Date volSubmitTime;
   private boolean isJoin; // 참여여부 확인
   private List<JoinDTO> members; // 참여한 멤버들
-  private int joinCount; // 참여 횟수
+  private int joinCount = 0; // 참여 횟수
 
   @Override
   public String toString() {
@@ -313,6 +313,7 @@ public class PersonalRequestDTO {
 
 
   public int getJoinCount() {
+
     return ++joinCount;
   }
 
@@ -324,23 +325,10 @@ public class PersonalRequestDTO {
     this.joinCount = joinCount;
   }
 
-
-
-
-
-  public String getMemberNames() {
+  public  String getMemberNames() {
     if (this.members == null) {
       return "";
     }
-    //    String memberInfo = "";
-    //    for (JoinDTO joinDTO : this.members) {
-    //      if (joinDTO.getNo() > 0) {
-    //        memberInfo = ",";
-    //      }
-    //      memberInfo += System.out.printf("%s(%s) " ,joinDTO.getId(),joinDTO.getName());
-    //    }
-    //    return memberInfo.toString();
-    //
     StringBuilder names = new StringBuilder();
 
     for (JoinDTO joinDTO : this.members) {
@@ -353,6 +341,19 @@ public class PersonalRequestDTO {
 
     return names.toString();
   }
+
+
+
+
+  //    String memberInfo = "";
+  //    for (JoinDTO joinDTO : this.members) {
+  //      if (joinDTO.getNo() > 0) {
+  //        memberInfo = ",";
+  //      }
+  //      memberInfo += System.out.printf("%s(%s) " ,joinDTO.getId(),joinDTO.getName());
+  //    }
+  //    return memberInfo.toString();
+  //
   //
   //  StringBuilder names = new StringBuilder();
   //  
