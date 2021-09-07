@@ -28,7 +28,7 @@ public class MyPageInfoHandler extends AbstractJoinHandler {
     String name = Prompt.inputString("이름(" + joinDTO.getName()  + ")? ");
     String tel = Prompt.inputString("전화(" + joinDTO.getTel() + ")? ");
     String email = Prompt.inputString("이메일(" + joinDTO.getEmail() + ")? ");
-    String adress = Prompt.inputString("주소(" + joinDTO.getAdress() + ")? ");
+    String adress = Prompt.inputString("주소(" + joinDTO.getAddress() + ")? ");
     String passwords = Prompt.inputString("암호? ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
@@ -40,7 +40,7 @@ public class MyPageInfoHandler extends AbstractJoinHandler {
     joinDTO.setName(name);
     joinDTO.setTel(tel);
     joinDTO.setEmail(email);
-    joinDTO.setAdress(adress);
+    joinDTO.setAddress(adress);
     joinDTO.setPassword(passwords);
 
     System.out.println("회원을 변경하였습니다.");

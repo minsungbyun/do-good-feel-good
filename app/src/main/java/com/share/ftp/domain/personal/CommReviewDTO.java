@@ -24,6 +24,7 @@ public class CommReviewDTO implements Serializable {
   public int hashCode() {
     return Objects.hash(content, no, owner, registeredDate);
   }
+
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -37,7 +38,6 @@ public class CommReviewDTO implements Serializable {
         && Objects.equals(owner, other.owner)
         && Objects.equals(registeredDate, other.registeredDate);
   }
-
   public int getNo() {
     return no;
   }
@@ -62,7 +62,6 @@ public class CommReviewDTO implements Serializable {
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
-
 
 
 }
