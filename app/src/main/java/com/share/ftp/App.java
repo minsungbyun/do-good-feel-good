@@ -97,6 +97,7 @@ import com.share.ftp.handler.personal.donation.DonationBoardApplyListHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardListHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardRejectApplyHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardRejectedListHandler;
+import com.share.ftp.handler.personal.donation.DonationPrompt;
 import com.share.ftp.handler.personal.donation.DonationRegisterAddHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterMyListHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterParticipationHandler;
@@ -259,6 +260,7 @@ public class App {
   DonationBoardAppliedListHandler donationBoardAppliedListHandler =
       new DonationBoardAppliedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList);
 
+  DonationPrompt donationPrompt = new DonationPrompt(donationBoardDTOList);
 
 
   public static void main(String[] args) {
@@ -353,7 +355,7 @@ public class App {
     commands.put("/donationBoard/acceptApply", new DonationBoardAcceptApplyHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
     commands.put("/donationBoard/rejectApply", new DonationBoardRejectApplyHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
     commands.put("/donationBoard/rejectedList", new DonationBoardRejectedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
-    commands.put("/donationBoard/applyDetail", new DonationBoardApplyDetailHandler(donationBoardDTOList));
+    commands.put("/donationBoard/applyDetail", new DonationBoardApplyDetailHandler(donationBoardDTOList, donationRegisterDTOList, donationPrompt));
 
     // 모금함 (기부하기)
     commands.put("/donationRegister/add", new DonationRegisterAddHandler(donationRegisterDTOList));
@@ -429,6 +431,8 @@ public class App {
 
   void service() {
 
+    loadCommBoardDTO();
+    loadCommReviewDTO();
     loadJoins();
 
     loadPersonalRequest();
@@ -442,7 +446,7 @@ public class App {
 
     loadDonationBoards();
     loadDonationRegisters();
-
+    loadQuestion();
 
     createMenu().execute();
     Prompt.close();
@@ -586,8 +590,73 @@ public class App {
 
 
 
+    saveCommBoardDTO();
+    saveCommReviewDTO();
+    saveJoins();
+    saveDonationBoards();
+    saveDonationRegisters();
+    saveQuestion();
   }
 
+  @SuppressWarnings("unchecked")
+
+  private void loadCommBoardDTO() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("commBoard"))) {
+
+      commBoardDTOList.addAll((List<CommBoardDTO>) in.readObject());
+
+      System.out.println("게시글 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 게시글을 읽어 오는 중 오류 발생!");
+    }
+  }
+
+  private void saveCommBoardDTO() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("commBoard"))) {
+
+      out.writeObject(commBoardDTOList);
+
+      System.out.println("나눔이야기 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("게시글을 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+
+  private void loadCommReviewDTO() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("commReview"))) {
+
+      commReviewDTOList.addAll((List<CommReviewDTO>) in.readObject());
+
+      System.out.println("게시글 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 게시글을 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+
+  private void saveCommReviewDTO() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("commReview"))) {
+
+      out.writeObject(commReviewDTOList);
+
+      System.out.println("한줄후기 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("한줄후기 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
 
   @SuppressWarnings("unchecked")
   private void loadDonationBoards() {
@@ -605,6 +674,8 @@ public class App {
     }
   }
 
+
+
   private void saveDonationBoards() {
     try (ObjectOutputStream out = new ObjectOutputStream(
         new FileOutputStream("donationBoard.data"))) {
@@ -619,6 +690,7 @@ public class App {
     }
   }
 
+
   @SuppressWarnings("unchecked")
   private void loadDonationRegisters() {
     try (
@@ -631,6 +703,7 @@ public class App {
 
     } catch (Exception e) {
       System.out.println("파일에서 모금함 기부하기 파일을 읽어 오는 중 오류 발생!");
+
       e.printStackTrace();
     }
   }
@@ -649,7 +722,6 @@ public class App {
     }
   }
 
-
   @SuppressWarnings("unchecked")
   private void loadJoins() {
     try (
@@ -666,8 +738,6 @@ public class App {
     }
   }
 
-
-
   private void saveJoins() {
     try (ObjectOutputStream out = new ObjectOutputStream(
         new FileOutputStream("join.data"))) {
@@ -678,6 +748,7 @@ public class App {
 
     } catch (Exception e) {
       System.out.println("회원정보 파일에 저장 중 오류 발생!");
+
       e.printStackTrace();
     }
   }
@@ -778,6 +849,35 @@ public class App {
 
 
 
+  @SuppressWarnings("unchecked")
+  private void loadQuestion() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("Question.data"))) {
+
+      myQuestionListDTOList.addAll((List<MyQuestionListDTO>) in.readObject());
+
+      System.out.println("게시글 데이터 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 게시글 데이터를 읽어 오는 중 오류 발생!");
+
+    }
+  }
+
+
+  private void saveQuestion() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("Question.data"))) {
+
+      out.writeObject(myQuestionListDTOList);
+
+      System.out.println("게시글 데이터 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("게시글 데이터를 파일에 저장 중 오류 발생!");
+    }
+  }
+
   Menu createMenu() {
 
     MenuGroup mainMenuGroup = new MenuGroup("*행복하Share*");
@@ -797,7 +897,6 @@ public class App {
 
     // 함께해요
     mainMenuGroup.add(createDoVolMenu());
-
 
     //    doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volRequestPersonal/apply"));
     //    doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volRequestOrg/apply")); 

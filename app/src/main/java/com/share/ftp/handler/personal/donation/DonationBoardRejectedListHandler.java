@@ -20,12 +20,12 @@ public class DonationBoardRejectedListHandler extends AbstractDonationBoardHandl
     System.out.println();
     System.out.println("[모금함 개설 반려 목록]");
 
-    if (donationBoardRejectDTOList.isEmpty()) {
+    if (donationBoardDTOList.isEmpty()) {
       System.out.println("현재 반려된 모금함 개설목록이 없습니다.");
       return;
     }
 
-    for (DonationBoardDTO donationBoardRejectDTO : donationBoardRejectDTOList) {
+    for (DonationBoardDTO donationBoardRejectDTO : donationBoardDTOList) {
       if (donationBoardRejectDTO.isChecked() == false) {
         System.out.printf("개설번호: %d\n제목: %s\n주최자: %s\n내용: %s\n첨부파일: %s\n"
             + "개설기간: %s ~ %s\n승인여부: %s\n", 
