@@ -427,15 +427,116 @@ public class App {
   }
 
   void service() {
+
+    loadJoins();
+    loadDonationBoards();
+    loadDonationRegisters();
     loadQuestion();
-    //    loadNotice();
 
     createMenu().execute();
     Prompt.close();
 
+    saveJoins();
+    saveDonationBoards();
+    saveDonationRegisters();
     saveQuestion();
-    saveNotice();
 
+  }
+
+
+
+  @SuppressWarnings("unchecked")
+  private void loadDonationBoards() {
+    try (
+        ObjectInputStream in = new ObjectInputStream(
+            new FileInputStream("donationBoard.data"))) {
+
+      donationBoardDTOList.addAll((List<DonationBoardDTO>) in.readObject());
+
+      System.out.println("모금함 개설 등록 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 모금함 개설 등록 파일을 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+
+
+  private void saveDonationBoards() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("donationBoard.data"))) {
+
+      out.writeObject(donationBoardDTOList);
+
+      System.out.println("모금함 개설등록 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("모금함 개설 등록을 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadDonationRegisters() {
+    try (
+        ObjectInputStream in = new ObjectInputStream(
+            new FileInputStream("donationRegister.data"))) {
+
+      donationRegisterDTOList.addAll((List<DonationRegisterDTO>) in.readObject());
+
+      System.out.println("모금함 기부하기 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 모금함 기부하기 파일을 읽어 오는 중 오류 발생!");
+
+      e.printStackTrace();
+    }
+  }
+
+  private void saveDonationRegisters() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("donationRegister.data"))) {
+
+      out.writeObject(donationRegisterDTOList);
+
+      System.out.println("모금함 기부하기 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 모금함 기부하기 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadJoins() {
+    try (
+        ObjectInputStream in = new ObjectInputStream(
+            new FileInputStream("join.data"))) {
+
+      joinDTOList.addAll((List<JoinDTO>) in.readObject());
+
+      System.out.println("회원가입 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("회원가입 파일을 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveJoins() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("join.data"))) {
+
+      out.writeObject(joinDTOList);
+
+      System.out.println("회원정보 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("회원정보 파일에 저장 중 오류 발생!");
+
+      e.printStackTrace();
+    }
   }
 
   @SuppressWarnings("unchecked")
@@ -449,9 +550,10 @@ public class App {
 
     } catch (Exception e) {
       System.out.println("파일에서 게시글 데이터를 읽어 오는 중 오류 발생!");
-      e.printStackTrace();
+
     }
   }
+
 
   private void saveQuestion() {
     try (ObjectOutputStream out = new ObjectOutputStream(
@@ -463,37 +565,6 @@ public class App {
 
     } catch (Exception e) {
       System.out.println("게시글 데이터를 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  // 관리자 페이지
-  //  @SuppressWarnings("unchecked")
-  //  private void loadNotice() {
-  //    try (ObjectInputStream in = new ObjectInputStream(
-  //        new FileInputStream("Notice.data"))) {
-  //
-  //      noticeDTOList.addAll((List<NoticeDTO>) in.readObject());
-  //
-  //      System.out.println("게시글 데이터 로딩 완료!");
-  //
-  //    } catch (Exception e) {
-  //      System.out.println("파일에서 게시글 데이터를 읽어 오는 중 오류 발생!");
-  //      e.printStackTrace();
-  //    }
-  //  }
-
-  private void saveNotice() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("Notice.data"))) {
-
-      out.writeObject(noticeDTOList);
-
-      System.out.println("공지사항 데이터 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("공지사항 데이터를 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
     }
   }
 
@@ -516,7 +587,6 @@ public class App {
 
     // 함께해요
 
-    mainMenuGroup.add(createDoVolMenu());
 
     //    doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volRequestPersonal/apply"));
     //    doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volRequestOrg/apply")); 
@@ -612,6 +682,7 @@ public class App {
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
   //   함께해요 중복으로 인해서 메서드로 빼지 않습니다.
