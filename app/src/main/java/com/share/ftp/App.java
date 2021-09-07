@@ -6,6 +6,10 @@ import static com.share.menu.Menu.ACCESS_MEMBER;
 import static com.share.menu.Menu.ACCESS_MEMBER_ADMIN;
 import static com.share.menu.Menu.ACCESS_ORG;
 import static com.share.menu.Menu.ACCESS_PERSONAL;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -423,9 +427,78 @@ public class App {
   }
 
   void service() {
+
+    loadCommBoardDTO();
+    loadCommReviewDTO();
+
     createMenu().execute();
     Prompt.close();
+
+    saveCommBoardDTO();
+    saveCommReviewDTO();
   }
+
+  @SuppressWarnings("unchecked")
+
+  private void loadCommBoardDTO() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("commBoard"))) {
+
+      commBoardDTOList.addAll((List<CommBoardDTO>) in.readObject());
+
+      System.out.println("게시글 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 게시글을 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+
+  @SuppressWarnings("unchecked")
+
+  private void loadCommReviewDTO() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("commReview"))) {
+
+      commReviewDTOList.addAll((List<CommReviewDTO>) in.readObject());
+
+      System.out.println("게시글 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 게시글을 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveCommBoardDTO() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("commBoard"))) {
+
+      out.writeObject(commBoardDTOList);
+
+      System.out.println("나눔이야기 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("게시글을 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveCommReviewDTO() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("commReview"))) {
+
+      out.writeObject(commReviewDTOList);
+
+      System.out.println("한줄후기 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("한줄후기 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
 
   Menu createMenu() {
 

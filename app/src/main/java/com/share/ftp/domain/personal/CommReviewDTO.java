@@ -1,10 +1,12 @@
 package com.share.ftp.domain.personal;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
-public class CommReviewDTO {
+@SuppressWarnings("serial")
+public class CommReviewDTO implements Serializable {
   private int no;
   private String content;
   private JoinDTO owner;
@@ -22,7 +24,6 @@ public class CommReviewDTO {
   public int hashCode() {
     return Objects.hash(content, no, owner, registeredDate);
   }
-
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -36,6 +37,7 @@ public class CommReviewDTO {
         && Objects.equals(owner, other.owner)
         && Objects.equals(registeredDate, other.registeredDate);
   }
+
   public int getNo() {
     return no;
   }
@@ -60,6 +62,7 @@ public class CommReviewDTO {
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
+
 
 
 }

@@ -4,7 +4,8 @@ import java.sql.Date;
 import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
-public class CommBoardDTO {
+@SuppressWarnings("serial")
+public class CommBoardDTO implements java.io.Serializable{
   private int no;
   private String title;
   private String id;
