@@ -1,17 +1,28 @@
 package com.share.ftp.handler.personal.challenge;
 
-import com.share.ftp.handler.Command;
+import java.util.List;
 
-public class ChallengeJoinListHandler implements Command {
+import com.share.ftp.domain.personal.MyChallengeJoinDTO;
+
+public class ChallengeJoinListHandler extends AbstractChallengeJoinHandler {
+
+  public ChallengeJoinListHandler(List<MyChallengeJoinDTO> myChallengeJoinDTOList) {
+    super(myChallengeJoinDTOList);
+  }
 
   @Override
   public void execute() {
-    System.out.println();
-    System.out.println("참여자 목록");
-    System.out.println("1. 닉네임1");
-    System.out.println("2. 닉네임2");
-    System.out.println("3. 닉네임3");
+    System.out.println("[참여자 목록]");
     
+    if (myChallengeJoinDTOList.isEmpty()) {
+      System.out.println("참여자가 없습니다.");
+      return;
+    }
+    for (MyChallengeJoinDTO myChallengeJoinDTO : myChallengeJoinDTOList) {
+      System.out.printf("%s, %s\n", 
+          myChallengeJoinDTO.getJoiner().getId(),
+          myChallengeJoinDTO.getRegisteredDate());
+    }
   }
 
 }

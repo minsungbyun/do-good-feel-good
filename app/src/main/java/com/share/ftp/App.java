@@ -22,6 +22,7 @@ import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.domain.personal.CommReviewDTO;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
+import com.share.ftp.domain.personal.MyChallengeJoinDTO;
 import com.share.ftp.domain.personal.MyChallengeQuestionDTO;
 import com.share.ftp.domain.personal.MyChallengeReviewDTO;
 import com.share.ftp.domain.personal.MyProfileDTO;
@@ -173,6 +174,7 @@ public class App {
   List<CommReviewDTO> commReviewDTOList = new ArrayList<>();
 
   // 챌린지 도메인(값)
+  List<MyChallengeJoinDTO> myChallengeJoinDTOList = new ArrayList<>();
   List<MyChallengeQuestionDTO> myChallengeQuestionDTOList = new ArrayList<>();
   List<MyChallengeReviewDTO> myChallengeReviewDTOList = new ArrayList<>();
 
@@ -322,8 +324,8 @@ public class App {
 
     // 챌린지
     commands.put("/showChallenge/detail", new ShowChallengeDetailHandler());  // 챌린지 상세정보(구현예정)
-    commands.put("/challengeJoin/join", new ChallengeJoinHandler());  // 참여하기(구현예정)
-    commands.put("/challengeJoin/list", new ChallengeJoinListHandler());  // 참여자목록(구현예정)
+    commands.put("/challengeJoin/join", new ChallengeJoinHandler(myChallengeJoinDTOList));  // 참여하기(구현중..)
+    commands.put("/challengeJoin/list", new ChallengeJoinListHandler(myChallengeJoinDTOList));  // 참여자목록(구현중..)
 
     // 챌린지 참여인증&댓글
     commands.put("/challengeReview/add", new ChallengeReviewAddHandler(myChallengeReviewDTOList));
@@ -588,11 +590,9 @@ public class App {
     MenuGroup showChallengeDetailHandler = new MenuGroup("상세정보");  // 구현예정
     challengeDetailMenu.add(showChallengeDetailHandler);
 
-    MenuGroup challengeParticipationMenu = new MenuGroup("참여하기");  // 구현예정
-    challengeDetailMenu.add(challengeParticipationMenu);
+    challengeDetailMenu.add(new MenuItem("참여하기", ACCESS_MEMBER, "/challengeJoin/join"));
 
-    MenuGroup challengeParticipationListMenu = new MenuGroup("참여자목록");  // 구현예정
-    challengeDetailMenu.add(challengeParticipationListMenu);
+    challengeDetailMenu.add(new MenuItem("참여자 목록", ACCESS_MEMBER, "/challengeJoin/list"));
 
     challengeDetailMenu.add(createChallengeReviewMenu()); // 참여인증&댓글
     challengeDetailMenu.add(createChallengeQuestionMenu()); // 문의하기
