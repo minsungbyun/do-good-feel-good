@@ -23,6 +23,7 @@ public class VolJoinDetailHandler implements Command {
   }
 
 
+  @Override
   public void execute() {
     // 비회원 열람가능
     System.out.println();
@@ -34,26 +35,27 @@ public class VolJoinDetailHandler implements Command {
     // 봉사위치
 
     // 주최자정보
-    System.out.println("[ 봉사 목록  ]");
+    System.out.println("[ 봉사 목록 (개인 / 기관) ]");
     volRequestTotalApprovedListHandler.execute();
-    System.out.println();
 
 
     LOOP: while (true) {
       System.out.println("[ 상세한 봉사내역을 보실 카테고리를 선택해 주세요 ]");
+      System.out.println();
 
       System.out.println("1. 개인");
       System.out.println("2. 기관");
       System.out.println("3. 참여자정보");
 
-      int input = Prompt.inputInt("입력> ");
+      int input = Prompt.inputInt("입력 > ");
 
       switch (input) {
         case 1 : volRequestPersonalAppliedListDetailHandler.execute(); break LOOP;
         case 2 : volRequestOrgAppliedListDetailHandler.execute(); break LOOP;
-        case 3 :  volDoJoinHandler.execute(); break LOOP;
+        case 3 : volDoJoinHandler.execute(); break LOOP;
         default : System.out.println("다시 입력해주세요"); break;
       }
+      System.out.println();
     }
     //참여자목록
 

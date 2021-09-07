@@ -40,7 +40,8 @@ public class VolRequestPersonalApplyHandler extends AbstractVolRequestPersonalHa
 
         personalRequestDTO.setNo(Prompt.inputInt("번호 ▶ "));
         personalRequestDTO.setTitle(Prompt.inputString("제목 ▶ "));
-        personalRequestDTO.setOwner(joinDTO.getName());
+        personalRequestDTO.setOwner(joinDTO);
+        personalRequestDTO.setName(joinDTO.getName());
         personalRequestDTO.setSort(Prompt.inputString("분류 ▶ "));
         personalRequestDTO.setTel(Prompt.inputString("전화번호 ▶ "));
         personalRequestDTO.setEmail(Prompt.inputString("이메일 ▶ ")); 

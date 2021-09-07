@@ -22,7 +22,7 @@ public class AuthChangeUserInfoHandler implements Command{
     String name = Prompt.inputString("이름(" + loginUser.getName()  + ")? ");
     String tel = Prompt.inputString("전화(" + loginUser.getTel() + ")? ");
     String email = Prompt.inputString("이메일(" + loginUser.getEmail() + ")? ");
-    String adress = Prompt.inputString("주소(" + loginUser.getAdress() + ")? ");
+    String adress = Prompt.inputString("주소(" + loginUser.getAddress() + ")? ");
     String passwords = Prompt.inputString("암호? ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
@@ -34,7 +34,7 @@ public class AuthChangeUserInfoHandler implements Command{
     loginUser.setName(name);
     loginUser.setTel(tel);
     loginUser.setEmail(email);
-    loginUser.setAdress(adress);
+    loginUser.setAddress(adress);
     loginUser.setPassword(passwords);
 
     System.out.println("회원정보가 수정되었습니다.");
