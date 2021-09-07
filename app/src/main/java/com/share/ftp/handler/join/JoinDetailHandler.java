@@ -29,7 +29,7 @@ public class JoinDetailHandler extends AbstractJoinHandler {
     System.out.printf("이름: %s\n", joinDTO.getName());
     System.out.printf("전화: %s\n", joinDTO.getTel());
     System.out.printf("이메일: %s\n", joinDTO.getEmail());
-    System.out.printf("주소: %s\n", joinDTO.getAdress());
+    System.out.printf("주소: %s\n", joinDTO.getAddress());
     System.out.printf("등록일: %s\n", joinDTO.getRegisterDate());
   }
 }
