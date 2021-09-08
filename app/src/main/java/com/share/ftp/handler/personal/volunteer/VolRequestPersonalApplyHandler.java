@@ -41,11 +41,12 @@ public class VolRequestPersonalApplyHandler extends AbstractVolRequestPersonalHa
         personalRequestDTO.setNo(Prompt.inputInt("번호 ▶ "));
         personalRequestDTO.setTitle(Prompt.inputString("제목 ▶ "));
         personalRequestDTO.setOwner(joinDTO);
+        personalRequestDTO.setUserId(joinDTO.getId());
         personalRequestDTO.setName(joinDTO.getName());
         personalRequestDTO.setSort(Prompt.inputString("분류 ▶ "));
         personalRequestDTO.setTel(Prompt.inputString("전화번호 ▶ "));
         personalRequestDTO.setEmail(Prompt.inputString("이메일 ▶ ")); 
-        personalRequestDTO.setVolStartDate(Prompt.inputDate("봉사시작기간(yyyy-mm-dd) ▶ ")); 
+        personalRequestDTO.setVolStartDate(Prompt.inputDate("봉사시작기간(yyyy-mm-dd) ▶ "));
         personalRequestDTO.setVolEndDate(Prompt.inputDate("봉사종료기간(yyyy-mm-dd) ▶ ")); 
         personalRequestDTO.setVolStartTime(Prompt.inputString("봉사시작시간 ▶ ")); 
         personalRequestDTO.setVolEndTime(Prompt.inputString("봉사종료시간 ▶ ")); 
@@ -65,20 +66,24 @@ public class VolRequestPersonalApplyHandler extends AbstractVolRequestPersonalHa
         System.out.println("--------------------------------------------------------------");
         System.out.println("올바른 숫자를 입력하세요");
         System.out.println("--------------------------------------------------------------");
-        continue;
+        //        continue; // 나중에 설정할거
 
       } catch (Exception e) {
         System.out.println("--------------------------------------------------------------");
         //      System.out.printf("오류 발생: %s\n", e.getClass().getName());
         System.out.println("다시 입력 바랍니다.");
         System.out.println("--------------------------------------------------------------");
-        continue;
+        //        continue;
       }
       break;
     }
 
     System.out.println("[  개인봉사신청이 정상적으로 완료되었습니다.  ]");
   }
+
+  //  private List<JoinDTO> addOwner() {
+  //    
+  //  }
 
 
 
