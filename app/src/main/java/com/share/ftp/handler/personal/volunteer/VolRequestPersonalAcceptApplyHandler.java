@@ -6,13 +6,15 @@ import com.share.util.Prompt;
 
 public class VolRequestPersonalAcceptApplyHandler extends AbstractVolRequestPersonalHandler { // 개인 봉사신청 양식 쓰는 곳
 
-
+  List<PersonalRequestDTO> personalSelectedList;
   public VolRequestPersonalAcceptApplyHandler(
       List<PersonalRequestDTO> personalRequestDTOList,
       List<PersonalRequestDTO> personalRequestApplyDTOList,
-      List<PersonalRequestDTO> personalRequestRejectDTOList) {
+      List<PersonalRequestDTO> personalRequestRejectDTOList,
+      List<PersonalRequestDTO> personalSelectedList) {
 
     super(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList);
+    this.personalSelectedList = personalRequestRejectDTOList;
   }
 
 
@@ -36,9 +38,10 @@ public class VolRequestPersonalAcceptApplyHandler extends AbstractVolRequestPers
       System.out.println("해당 봉사신청 승인을 취소하였습니다.");
       return;
     }
-
+    //    public List<JoinDTO> addJoinMember()
     personalRequestDTO.setChecked(true);
     personalRequestDTO.setIsSigned("승인됨");
+
     //    personalRequestDTO.setIsSigned("승인됨");
 
 
@@ -46,6 +49,7 @@ public class VolRequestPersonalAcceptApplyHandler extends AbstractVolRequestPers
     for (PersonalRequestDTO personalRequestApplyDTO : personalRequestDTOList) {
       personalRequestApplyDTOList.add(personalRequestApplyDTO);
 
+      personalSelectedList.add(personalRequestApplyDTO);
 
       System.out.println("[  해당 봉사신청을 승인하였습니다. ]");
 

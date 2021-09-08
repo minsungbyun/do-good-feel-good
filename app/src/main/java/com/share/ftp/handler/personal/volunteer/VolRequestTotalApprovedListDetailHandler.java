@@ -27,10 +27,7 @@ public class VolRequestTotalApprovedListDetailHandler implements Command { // �
     // 선택 > 참여자현황 / 신청하기 / 세부설명(봉사정보,위치) / 문의사항 
 
 
-    System.out.println();
     System.out.println("[  전체봉사승인 목록  ]");
-
-
     volRequestPersonalAppliedListHandler.execute();
     volRequestOrgAppliedListHandler.execute();
 

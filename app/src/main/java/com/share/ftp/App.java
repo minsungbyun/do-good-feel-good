@@ -22,6 +22,7 @@ import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.domain.personal.CommReviewDTO;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
+import com.share.ftp.domain.personal.MyChallengeJoinDTO;
 import com.share.ftp.domain.personal.MyChallengeQuestionDTO;
 import com.share.ftp.domain.personal.MyChallengeReviewDTO;
 import com.share.ftp.domain.personal.MyProfileDTO;
@@ -174,6 +175,7 @@ public class App {
   List<CommReviewDTO> commReviewDTOList = new ArrayList<>();
 
   // 챌린지 도메인(값)
+  List<MyChallengeJoinDTO> myChallengeJoinDTOList = new ArrayList<>();
   List<MyChallengeQuestionDTO> myChallengeQuestionDTOList = new ArrayList<>();
   List<MyChallengeReviewDTO> myChallengeReviewDTOList = new ArrayList<>();
 
@@ -232,7 +234,7 @@ public class App {
 
   VolRequestPersonalAppliedListDetailHandler volRequestPersonalAppliedListDetailHandler =
       new VolRequestPersonalAppliedListDetailHandler
-      (personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList,personalSelectedList,personalRequestDTO);
+      (personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList,personalSelectedList);
 
   VolRequestOrgAppliedListDetailHandler volRequestOrgAppliedListDetailHandler =
       new VolRequestOrgAppliedListDetailHandler
@@ -249,7 +251,7 @@ public class App {
   //봉사참여자목록
   VolDoJoinHandler volDoJoinHandler = 
       new VolDoJoinHandler
-      (personalSelectedList,volRequestPersonalAppliedListDetailHandler,personalRequestDTO);
+      (personalSelectedList,volRequestPersonalAppliedListDetailHandler,personalRequestApplyDTOList);
 
   VolJoinDetailHandler volJoinDetailHandler = 
       new VolJoinDetailHandler
@@ -286,14 +288,14 @@ public class App {
     commands.put("/volRequestPersonal/apply", new VolRequestPersonalApplyHandler(personalRequestDTOList,joinDTOList));
     commands.put("/volRequestPersonal/applyList", new VolRequestPersonalApplyListHandler(personalRequestDTOList));
     commands.put("/volRequestPersonal/applyCompleteList", new VolRequestPersonalApplyCompleteListHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
-    commands.put("/volRequestPersonal/acceptApply", new VolRequestPersonalAcceptApplyHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
+    commands.put("/volRequestPersonal/acceptApply", new VolRequestPersonalAcceptApplyHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList,personalSelectedList));
     commands.put("/volRequestPersonal/rejectApply", new VolRequestPersonalRejectApplyHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
     commands.put("/volRequestPersonal/appliedList", new VolRequestPersonalAppliedListHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
     commands.put("/volRequestPersonal/rejectedList", new VolRequestPersonalRejectedListHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
     commands.put("/volRequestPersonal/bookmark", new VolRequestPersonalBookmarkHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
     commands.put("/volRequest/totalApprovedList", new VolRequestTotalApprovedListHandler(volRequestPersonalAppliedListHandler, volRequestOrgAppliedListHandler));
     commands.put("/volJoin/detail", new VolJoinDetailHandler(volRequestPersonalAppliedListDetailHandler, volRequestOrgAppliedListDetailHandler,volRequestTotalApprovedListHandler,volDoJoinHandler));
-    commands.put("/volDoJoin/detail", new VolDoJoinHandler(personalSelectedList,volRequestPersonalAppliedListDetailHandler,personalRequestDTO));
+    commands.put("/volDoJoin/detail", new VolDoJoinHandler(personalSelectedList,volRequestPersonalAppliedListDetailHandler,personalRequestApplyDTOList));
 
     //함께해요 (기관) + 마이페이지
     commands.put("/volRequestOrg/apply", new VolRequestOrgApplyHandler(orgRequestDTOList,joinDTOList));
@@ -324,8 +326,8 @@ public class App {
 
     // 챌린지
     commands.put("/showChallenge/detail", new ShowChallengeDetailHandler());  // 챌린지 상세정보(구현예정)
-    commands.put("/challengeJoin/join", new ChallengeJoinHandler());  // 참여하기(구현예정)
-    commands.put("/challengeJoin/list", new ChallengeJoinListHandler());  // 참여자목록(구현예정)
+    commands.put("/challengeJoin/join", new ChallengeJoinHandler(myChallengeJoinDTOList));  // 참여하기(구현중..)
+    commands.put("/challengeJoin/list", new ChallengeJoinListHandler(myChallengeJoinDTOList));  // 참여자목록(구현중..)
 
     // 챌린지 참여인증&댓글
     commands.put("/challengeReview/add", new ChallengeReviewAddHandler(myChallengeReviewDTOList));
@@ -428,9 +430,25 @@ public class App {
 
   }
 
-  void service() {
 
+  void service() {
+    loadChallengeReviews();
+    loadChallengeQuestions();
+    
+    loadCommBoardDTO();
+    loadCommReviewDTO();
+    
     loadJoins();
+
+    loadPersonalRequest();
+    loadPersonalRequestApply();
+    loadPersonalRequestReject();
+    loadPersonalSelected();
+
+    loadOrgRequest();
+    loadOrgRequestApply();
+    loadOrgRequestReject();
+
     loadDonationBoards();
     loadDonationRegisters();
     loadQuestion();
@@ -438,12 +456,275 @@ public class App {
     createMenu().execute();
     Prompt.close();
 
+    saveChallengeReviews();
+    saveChallengeQuestions();
+    
+    saveJoins();
+    
+    savePersonalRequest();
+    savePersonalRequestApply();
+    savePersonalRequestReject();
+    savePersonalSelected();
+    
+    saveOrgRequest();
+    saveOrgRequestApply();
+    saveOrgRequestReject();
+    
+    saveDonationBoards();
+    saveDonationRegisters();
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadPersonalRequest() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("personalRequest.data"))) {
+
+      personalRequestDTOList.addAll((List<PersonalRequestDTO>) in.readObject());
+
+      System.out.println("봉사 신청서 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사 신청서를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+
+  private void savePersonalRequest() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("personalRequest.data"))) {
+
+      out.writeObject(personalRequestDTOList);
+
+      System.out.println("봉사 신청서 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사 신청서 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadPersonalRequestApply() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("personalRequestApply.data"))) {
+
+      personalRequestApplyDTOList.addAll((List<PersonalRequestDTO>) in.readObject());
+
+      System.out.println("봉사 승인 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사 승인 신청서를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+
+  }
+
+  private void savePersonalRequestApply() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("personalRequestApply.data"))) {
+
+      out.writeObject(personalRequestApplyDTOList);
+
+      System.out.println("봉사 승인 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사 승인 신청서 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadPersonalRequestReject() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("personalRequestReject.data"))) {
+
+      personalRequestRejectDTOList.addAll((List<PersonalRequestDTO>) in.readObject());
+
+      System.out.println("봉사 반려 신청서 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사 반려 신청서를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+  private void savePersonalRequestReject() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("personalRequestReject.data"))) {
+
+      out.writeObject(personalRequestRejectDTOList);
+
+      System.out.println("봉사 반려 신청서 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사 반려 신청서 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadPersonalSelected() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("personalSelected.data"))) {
+
+      personalSelectedList.addAll((List<PersonalRequestDTO>) in.readObject());
+
+      System.out.println("봉사 참여 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사 참여 하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+  private void savePersonalSelected() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("personalSelected.data"))) {
+
+      out.writeObject(personalSelectedList);
+
+      System.out.println("봉사 참여 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사 참여 하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+
+
+    saveCommBoardDTO();
+    saveCommReviewDTO();
     saveJoins();
     saveDonationBoards();
     saveDonationRegisters();
     saveQuestion();
-
   }
+
+  @SuppressWarnings("unchecked")
+
+  private void loadCommBoardDTO() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("commBoard"))) {
+
+      commBoardDTOList.addAll((List<CommBoardDTO>) in.readObject());
+
+      System.out.println("게시글 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 게시글을 읽어 오는 중 오류 발생!");
+    }
+  }
+
+  private void saveCommBoardDTO() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("commBoard"))) {
+
+      out.writeObject(commBoardDTOList);
+
+      System.out.println("나눔이야기 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("게시글을 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+
+  private void loadCommReviewDTO() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("commReview"))) {
+
+      commReviewDTOList.addAll((List<CommReviewDTO>) in.readObject());
+
+      System.out.println("게시글 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 게시글을 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+
+  private void saveCommReviewDTO() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("commReview"))) {
+
+      out.writeObject(commReviewDTOList);
+
+      System.out.println("한줄후기 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("한줄후기 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+  
+  
+  @SuppressWarnings("unchecked")
+  private void loadChallengeReviews() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("myChallengeReview.data"))) {
+
+      myChallengeReviewDTOList.addAll((List<MyChallengeReviewDTO>) in.readObject());
+
+      System.out.println("참여인증&댓글 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 참여인증&댓글을 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveChallengeReviews() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("myChallengeReview.data"))) {
+
+      out.writeObject(myChallengeReviewDTOList);
+
+      System.out.println("참여인증&댓글 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("참여인증&댓글을 파일에 저장 중 오류 발생!");
+    }
+  }
+  
+  @SuppressWarnings("unchecked")
+  private void loadChallengeQuestions() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("myChallengeQuestion.data"))) {
+
+    myChallengeQuestionDTOList.addAll((List<MyChallengeQuestionDTO>) in.readObject());
+
+    System.out.println("챌린지 문의글 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 챌린지 문의글을 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveChallengeQuestions() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("myChallengeQuestion.data"))) {
+
+      out.writeObject(myChallengeQuestionDTOList);
+
+      System.out.println("챌린지 문의글 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("챌린지 문의글을 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+  
 
   @SuppressWarnings("unchecked")
   private void loadDonationBoards() {
@@ -541,6 +822,102 @@ public class App {
   }
 
   @SuppressWarnings("unchecked")
+  private void loadOrgRequest() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("orgRequest.data"))) {
+
+      orgRequestDTOList.addAll((List<OrgRequestDTO>) in.readObject());
+
+      System.out.println("기관봉사 신청서 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사신청서를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+
+  private void saveOrgRequest() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("orgRequest.data"))) {
+
+      out.writeObject(orgRequestDTOList);
+
+      System.out.println("기관 신청서 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사 신청서 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadOrgRequestApply() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("orgRequestApply.data"))) {
+
+      orgRequestApplyDTOList.addAll((List<OrgRequestDTO>) in.readObject());
+
+      System.out.println("기관봉사 승인 신청서 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("기관봉사 승인 신청서를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+  private void saveOrgRequestApply() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("orgRequestApply.data"))) {
+
+      out.writeObject(orgRequestApplyDTOList);
+
+      System.out.println("기관봉사 승인 신청서 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("기관봉사 승인 신청서 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadOrgRequestReject() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("orgRequestReject.data"))) {
+
+      orgRequestRejectDTOList.addAll((List<OrgRequestDTO>) in.readObject());
+
+      System.out.println("기관봉사 반려 신청서 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("봉사 반려 신청서를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+  private void saveOrgRequestReject() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("orgRequestReject.data"))) {
+
+      out.writeObject(orgRequestRejectDTOList);
+
+      System.out.println("기관봉사 반려 신청서 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("기관봉사 반려 신청서 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+
+  }
+
+
+
+  @SuppressWarnings("unchecked")
   private void loadQuestion() {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("Question.data"))) {
@@ -620,11 +997,9 @@ public class App {
     MenuGroup showChallengeDetailHandler = new MenuGroup("상세정보");  // 구현예정
     challengeDetailMenu.add(showChallengeDetailHandler);
 
-    MenuGroup challengeParticipationMenu = new MenuGroup("참여하기");  // 구현예정
-    challengeDetailMenu.add(challengeParticipationMenu);
+    challengeDetailMenu.add(new MenuItem("참여하기", ACCESS_MEMBER, "/challengeJoin/join"));
 
-    MenuGroup challengeParticipationListMenu = new MenuGroup("참여자목록");  // 구현예정
-    challengeDetailMenu.add(challengeParticipationListMenu);
+    challengeDetailMenu.add(new MenuItem("참여자 목록", ACCESS_MEMBER, "/challengeJoin/list"));
 
     challengeDetailMenu.add(createChallengeReviewMenu()); // 참여인증&댓글
     challengeDetailMenu.add(createChallengeQuestionMenu()); // 문의하기
@@ -748,6 +1123,8 @@ public class App {
 
     return ChallengeReview;
   }
+  
+
 
   private Menu createChallengeQuestionMenu() {
     MenuGroup ChallengeQuestion = new MenuGroup("문의하기");
@@ -760,6 +1137,8 @@ public class App {
 
     return ChallengeQuestion;
   }
+  
+
 
   private Menu createMonthlyRankingMenu() {
     MenuGroup monthlyRankingMenu = new MenuGroup("이달의 랭킹");

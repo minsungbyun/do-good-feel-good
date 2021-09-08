@@ -18,7 +18,7 @@ public class VolRequestOrgAppliedListHandler extends AbstractVolRequestOrgHandle
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("[  기관봉사승인 목록  ]");
+    System.out.println("[기관봉사승인 목록]");
 
 
     if (orgRequestApplyDTOList.isEmpty()) {
