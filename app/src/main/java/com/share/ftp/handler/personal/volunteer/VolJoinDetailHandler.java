@@ -28,24 +28,24 @@ public class VolJoinDetailHandler implements Command {
     // 비회원 열람가능
     System.out.println();
 
-    // 봉사 관련된 내용들
-
-    //봉사정보
-
-    // 봉사위치
-
-    // 주최자정보
-    System.out.println("[ 봉사 목록 (개인 / 기관) ]");
-    volRequestTotalApprovedListHandler.execute();
-
+    //    System.out.println("[ 봉사 목록 (개인 / 기관) ]");
+    //    System.out.println(" ▶ 목록을 보시려면 1번을 입력하세요.");
+    //    System.out.println();
+    //    int no = Prompt.inputInt("입력 > ");
+    //
+    //    if (no == 1) {
+    //      volRequestTotalApprovedListHandler.execute();
+    //      System.out.println();
+    //    } 
 
     LOOP: while (true) {
       System.out.println("[ 상세한 봉사내역을 보실 카테고리를 선택해 주세요 ]");
       System.out.println();
 
-      System.out.println("1. 개인");
-      System.out.println("2. 기관");
-      System.out.println("3. 참여자정보");
+      System.out.println("1. 개인봉사참여");
+      System.out.println("2. 기관봉사참여");
+      System.out.println("3. 참여자정보보기");
+      System.out.println();
 
       int input = Prompt.inputInt("입력 > ");
 

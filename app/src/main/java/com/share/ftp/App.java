@@ -434,12 +434,7 @@ public class App {
 
 
   void service() {
-    loadChallengeReviews();
-    loadChallengeQuestions();
-    
-    loadCommBoardDTO();
-    loadCommReviewDTO();
-    
+
     loadJoins();
 
     loadPersonalRequest();
@@ -451,29 +446,45 @@ public class App {
     loadOrgRequestApply();
     loadOrgRequestReject();
 
+    loadCommBoardDTO();
+    loadCommReviewDTO();
+
     loadDonationBoards();
     loadDonationRegisters();
     loadQuestion();
 
+    loadChallengeReviews();
+    loadChallengeQuestions();
+
+    loadQuestion();
+
+
     createMenu().execute();
     Prompt.close();
 
-    saveChallengeReviews();
-    saveChallengeQuestions();
-    
+
     saveJoins();
-    
+
     savePersonalRequest();
     savePersonalRequestApply();
     savePersonalRequestReject();
     savePersonalSelected();
-    
+
     saveOrgRequest();
     saveOrgRequestApply();
     saveOrgRequestReject();
-    
+
+    saveCommBoardDTO();
+    saveCommReviewDTO();
+
     saveDonationBoards();
     saveDonationRegisters();
+
+    saveChallengeReviews();
+    saveChallengeQuestions();
+
+    saveQuestion();
+
   }
 
   @SuppressWarnings("unchecked")
@@ -601,12 +612,7 @@ public class App {
 
 
 
-    saveCommBoardDTO();
-    saveCommReviewDTO();
-    saveJoins();
-    saveDonationBoards();
-    saveDonationRegisters();
-    saveQuestion();
+
   }
 
   @SuppressWarnings("unchecked")
@@ -668,8 +674,8 @@ public class App {
       e.printStackTrace();
     }
   }
-  
-  
+
+
   @SuppressWarnings("unchecked")
   private void loadChallengeReviews() {
     try (ObjectInputStream in = new ObjectInputStream(
@@ -697,15 +703,15 @@ public class App {
       System.out.println("참여인증&댓글을 파일에 저장 중 오류 발생!");
     }
   }
-  
+
   @SuppressWarnings("unchecked")
   private void loadChallengeQuestions() {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("myChallengeQuestion.data"))) {
 
-    myChallengeQuestionDTOList.addAll((List<MyChallengeQuestionDTO>) in.readObject());
+      myChallengeQuestionDTOList.addAll((List<MyChallengeQuestionDTO>) in.readObject());
 
-    System.out.println("챌린지 문의글 로딩 완료!");
+      System.out.println("챌린지 문의글 로딩 완료!");
 
     } catch (Exception e) {
       System.out.println("파일에서 챌린지 문의글을 읽어오는 중 오류 발생!");
@@ -726,7 +732,7 @@ public class App {
       e.printStackTrace();
     }
   }
-  
+
 
   @SuppressWarnings("unchecked")
   private void loadDonationBoards() {
@@ -1071,7 +1077,6 @@ public class App {
     doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volRequestOrg/apply")); 
     doVolMenu.add(new MenuItem("전체인증봉사리스트","/volRequest/totalApprovedList")); 
     doVolMenu.add(new MenuItem("전체인증봉사세부사항", ACCESS_MEMBER,"/volJoin/detail"));
-    doVolMenu.add(new MenuItem("전체인증봉사세부사항", ACCESS_MEMBER,"/volRequestPersonal/appliedList"));
     doVolMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
 
 
@@ -1125,7 +1130,7 @@ public class App {
 
     return ChallengeReview;
   }
-  
+
 
 
   private Menu createChallengeQuestionMenu() {
@@ -1139,7 +1144,7 @@ public class App {
 
     return ChallengeQuestion;
   }
-  
+
 
 
   private Menu createMonthlyRankingMenu() {
