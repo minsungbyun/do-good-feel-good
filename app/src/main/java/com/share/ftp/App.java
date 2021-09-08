@@ -22,6 +22,7 @@ import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.domain.personal.CommReviewDTO;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
+import com.share.ftp.domain.personal.MyChallengeJoinDTO;
 import com.share.ftp.domain.personal.MyChallengeQuestionDTO;
 import com.share.ftp.domain.personal.MyChallengeReviewDTO;
 import com.share.ftp.domain.personal.MyProfileDTO;
@@ -175,6 +176,7 @@ public class App {
   List<CommReviewDTO> commReviewDTOList = new ArrayList<>();
 
   // 챌린지 도메인(값)
+  List<MyChallengeJoinDTO> myChallengeJoinDTOList = new ArrayList<>();
   List<MyChallengeQuestionDTO> myChallengeQuestionDTOList = new ArrayList<>();
   List<MyChallengeReviewDTO> myChallengeReviewDTOList = new ArrayList<>();
 
@@ -326,8 +328,8 @@ public class App {
 
     // 챌린지
     commands.put("/showChallenge/detail", new ShowChallengeDetailHandler());  // 챌린지 상세정보(구현예정)
-    commands.put("/challengeJoin/join", new ChallengeJoinHandler());  // 참여하기(구현예정)
-    commands.put("/challengeJoin/list", new ChallengeJoinListHandler());  // 참여자목록(구현예정)
+    commands.put("/challengeJoin/join", new ChallengeJoinHandler(myChallengeJoinDTOList));  // 참여하기(구현중..)
+    commands.put("/challengeJoin/list", new ChallengeJoinListHandler(myChallengeJoinDTOList));  // 참여자목록(구현중..)
 
     // 챌린지 참여인증&댓글
     commands.put("/challengeReview/add", new ChallengeReviewAddHandler(myChallengeReviewDTOList));
@@ -432,9 +434,12 @@ public class App {
 
 
   void service() {
-
+    loadChallengeReviews();
+    loadChallengeQuestions();
+    
     loadCommBoardDTO();
     loadCommReviewDTO();
+    
     loadJoins();
 
     loadPersonalRequest();
@@ -453,16 +458,20 @@ public class App {
     createMenu().execute();
     Prompt.close();
 
+    saveChallengeReviews();
+    saveChallengeQuestions();
+    
     saveJoins();
+    
     savePersonalRequest();
     savePersonalRequestApply();
     savePersonalRequestReject();
     savePersonalSelected();
-
+    
     saveOrgRequest();
     saveOrgRequestApply();
     saveOrgRequestReject();
-
+    
     saveDonationBoards();
     saveDonationRegisters();
   }
@@ -659,6 +668,65 @@ public class App {
       e.printStackTrace();
     }
   }
+  
+  
+  @SuppressWarnings("unchecked")
+  private void loadChallengeReviews() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("myChallengeReview.data"))) {
+
+      myChallengeReviewDTOList.addAll((List<MyChallengeReviewDTO>) in.readObject());
+
+      System.out.println("참여인증&댓글 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 참여인증&댓글을 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveChallengeReviews() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("myChallengeReview.data"))) {
+
+      out.writeObject(myChallengeReviewDTOList);
+
+      System.out.println("참여인증&댓글 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("참여인증&댓글을 파일에 저장 중 오류 발생!");
+    }
+  }
+  
+  @SuppressWarnings("unchecked")
+  private void loadChallengeQuestions() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("myChallengeQuestion.data"))) {
+
+    myChallengeQuestionDTOList.addAll((List<MyChallengeQuestionDTO>) in.readObject());
+
+    System.out.println("챌린지 문의글 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 챌린지 문의글을 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveChallengeQuestions() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("myChallengeQuestion.data"))) {
+
+      out.writeObject(myChallengeQuestionDTOList);
+
+      System.out.println("챌린지 문의글 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("챌린지 문의글을 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+  
 
   @SuppressWarnings("unchecked")
   private void loadDonationBoards() {
@@ -931,11 +999,9 @@ public class App {
     MenuGroup showChallengeDetailHandler = new MenuGroup("상세정보");  // 구현예정
     challengeDetailMenu.add(showChallengeDetailHandler);
 
-    MenuGroup challengeParticipationMenu = new MenuGroup("참여하기");  // 구현예정
-    challengeDetailMenu.add(challengeParticipationMenu);
+    challengeDetailMenu.add(new MenuItem("참여하기", ACCESS_MEMBER, "/challengeJoin/join"));
 
-    MenuGroup challengeParticipationListMenu = new MenuGroup("참여자목록");  // 구현예정
-    challengeDetailMenu.add(challengeParticipationListMenu);
+    challengeDetailMenu.add(new MenuItem("참여자 목록", ACCESS_MEMBER, "/challengeJoin/list"));
 
     challengeDetailMenu.add(createChallengeReviewMenu()); // 참여인증&댓글
     challengeDetailMenu.add(createChallengeQuestionMenu()); // 문의하기
@@ -1059,6 +1125,8 @@ public class App {
 
     return ChallengeReview;
   }
+  
+
 
   private Menu createChallengeQuestionMenu() {
     MenuGroup ChallengeQuestion = new MenuGroup("문의하기");
@@ -1071,6 +1139,8 @@ public class App {
 
     return ChallengeQuestion;
   }
+  
+
 
   private Menu createMonthlyRankingMenu() {
     MenuGroup monthlyRankingMenu = new MenuGroup("이달의 랭킹");
