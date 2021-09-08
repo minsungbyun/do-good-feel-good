@@ -10,8 +10,7 @@ import com.share.util.Prompt;
 public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolRequestPersonalHandler { // 개인 봉사신청 양식 쓰는 곳
 
 
-  int joinCount;
-
+  int joinCounts = 1;
   List<PersonalRequestDTO> personalSelectedList;
   ArrayList<JoinDTO> members = new ArrayList<>();
 
@@ -98,13 +97,22 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
       return;
     }
 
+    // 참여한 적이 있다면 입벤
+    if (members.contains(AuthLoginHandler.getLoginUser())) {
+      System.out.println("이미 참여하였습니다.");
+      return;
+    }
 
 
     personalRequestApplyDTO.setMembers(addJoinMember()); // 참여 멤버 등록
-    joinCount = personalRequestApplyDTO.getJoinCount(); //참여인원증가
-    joinCount += 1;
+    //    ++joinCount;
     //    personalRequestDTO.setMembers( addJoinMember());
     //    personalRequestApplyDTO.getJoinCount(); // 카운트 1 증가
+
+    if (addJoinMember() == null) {
+      return;
+    }
+    joinCounts += personalRequestApplyDTO.getJoinCount(); //참여인원증가
 
     personalSelectedList.add(personalRequestApplyDTO);
 

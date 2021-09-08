@@ -9,10 +9,12 @@ import com.share.ftp.domain.join.JoinDTO;
 @SuppressWarnings("serial")
 public class PersonalRequestDTO implements Serializable {
 
+
   private int no;
   private String title;
   private String name;
   private JoinDTO owner; // 나중에 JoinDTO 변경 예정
+  private String userId;
   private String sort;
   private String tel;
   private String email;
@@ -40,12 +42,18 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   @Override
   public int hashCode() {
     return Objects.hash(content, email, fileUpload, isChecked, isJoin, isOrg, isPersonal, isSigned,
-        joinCount, joinNum, members, name, no, owner, sort, tel, title, volEndDate, volEndTime,
-        volList, volStartDate, volStartTime, volSubmitTime);
+        joinCount, joinNum, members, name, no, owner, sort, tel, title, userId, volEndDate,
+        volEndTime, volList, volStartDate, volStartTime, volSubmitTime);
   }
+
+
+
 
 
 
@@ -70,12 +78,15 @@ public class PersonalRequestDTO implements Serializable {
         && joinNum == other.joinNum && Objects.equals(members, other.members)
         && Objects.equals(name, other.name) && no == other.no && Objects.equals(owner, other.owner)
         && Objects.equals(sort, other.sort) && Objects.equals(tel, other.tel)
-        && Objects.equals(title, other.title) && Objects.equals(volEndDate, other.volEndDate)
+        && Objects.equals(title, other.title) && Objects.equals(userId, other.userId)
+        && Objects.equals(volEndDate, other.volEndDate)
         && Objects.equals(volEndTime, other.volEndTime) && Objects.equals(volList, other.volList)
         && Objects.equals(volStartDate, other.volStartDate)
         && Objects.equals(volStartTime, other.volStartTime)
         && Objects.equals(volSubmitTime, other.volSubmitTime);
   }
+
+
 
 
 
@@ -96,9 +107,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setNo(int no) {
     this.no = no;
   }
+
+
+
 
 
 
@@ -118,9 +135,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setTitle(String title) {
     this.title = title;
   }
+
+
+
 
 
 
@@ -140,9 +163,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setName(String name) {
     this.name = name;
   }
+
+
+
 
 
 
@@ -162,9 +191,43 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setOwner(JoinDTO owner) {
     this.owner = owner;
   }
+
+
+
+
+
+
+
+
+
+
+
+  public String getUserId() {
+    return userId;
+  }
+
+
+
+
+
+
+
+
+
+
+
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
+
+
+
 
 
 
@@ -184,9 +247,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setSort(String sort) {
     this.sort = sort;
   }
+
+
+
 
 
 
@@ -206,9 +275,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setTel(String tel) {
     this.tel = tel;
   }
+
+
+
 
 
 
@@ -228,9 +303,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setEmail(String email) {
     this.email = email;
   }
+
+
+
 
 
 
@@ -250,9 +331,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setVolStartDate(Date volStartDate) {
     this.volStartDate = volStartDate;
   }
+
+
+
 
 
 
@@ -272,9 +359,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setVolEndDate(Date volEndDate) {
     this.volEndDate = volEndDate;
   }
+
+
+
 
 
 
@@ -294,9 +387,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setVolStartTime(String volStartTime) {
     this.volStartTime = volStartTime;
   }
+
+
+
 
 
 
@@ -316,9 +415,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setVolEndTime(String volEndTime) {
     this.volEndTime = volEndTime;
   }
+
+
+
 
 
 
@@ -338,9 +443,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setVolList(String volList) {
     this.volList = volList;
   }
+
+
+
 
 
 
@@ -360,9 +471,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setJoinNum(int joinNum) {
     this.joinNum = joinNum;
   }
+
+
+
 
 
 
@@ -382,9 +499,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setContent(String content) {
     this.content = content;
   }
+
+
+
 
 
 
@@ -404,9 +527,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setFileUpload(String fileUpload) {
     this.fileUpload = fileUpload;
   }
+
+
+
 
 
 
@@ -426,9 +555,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setPersonal(boolean isPersonal) {
     this.isPersonal = isPersonal;
   }
+
+
+
 
 
 
@@ -448,9 +583,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setOrg(boolean isOrg) {
     this.isOrg = isOrg;
   }
+
+
+
 
 
 
@@ -470,9 +611,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setChecked(boolean isChecked) {
     this.isChecked = isChecked;
   }
+
+
+
 
 
 
@@ -492,9 +639,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setIsSigned(String isSigned) {
     this.isSigned = isSigned;
   }
+
+
+
 
 
 
@@ -514,9 +667,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setVolSubmitTime(Date volSubmitTime) {
     this.volSubmitTime = volSubmitTime;
   }
+
+
+
 
 
 
@@ -536,9 +695,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setJoin(boolean isJoin) {
     this.isJoin = isJoin;
   }
+
+
+
 
 
 
@@ -558,6 +723,9 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public void setMembers(List<JoinDTO> members) {
     this.members = members;
   }
@@ -569,9 +737,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public int getJoinCount() {
-    return joinCount;
+    return ++joinCount;
   }
+
+
+
 
 
 
@@ -591,14 +765,17 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   @Override
   public String toString() {
     return "PersonalRequestDTO [no=" + no + ", title=" + title + ", name=" + name + ", owner="
-        + owner + ", sort=" + sort + ", tel=" + tel + ", email=" + email + ", volStartDate="
-        + volStartDate + ", volEndDate=" + volEndDate + ", volStartTime=" + volStartTime
-        + ", volEndTime=" + volEndTime + ", volList=" + volList + ", joinNum=" + joinNum
-        + ", content=" + content + ", fileUpload=" + fileUpload + ", isPersonal=" + isPersonal
-        + ", isOrg=" + isOrg + ", isChecked=" + isChecked + ", isSigned=" + isSigned
+        + owner + ", userId=" + userId + ", sort=" + sort + ", tel=" + tel + ", email=" + email
+        + ", volStartDate=" + volStartDate + ", volEndDate=" + volEndDate + ", volStartTime="
+        + volStartTime + ", volEndTime=" + volEndTime + ", volList=" + volList + ", joinNum="
+        + joinNum + ", content=" + content + ", fileUpload=" + fileUpload + ", isPersonal="
+        + isPersonal + ", isOrg=" + isOrg + ", isChecked=" + isChecked + ", isSigned=" + isSigned
         + ", volSubmitTime=" + volSubmitTime + ", isJoin=" + isJoin + ", members=" + members
         + ", joinCount=" + joinCount + "]";
   }
@@ -610,16 +787,21 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public  String getMemberNames() {
 
-    members.add(owner);
+    //    List<JoinDTO> joinMembers = getMembers();
 
-    if (this.members == null) {
+
+    //    members.add(getOwner());
+    if (members == null) {
       return "";
     }
     StringBuilder names = new StringBuilder();
 
-    for (JoinDTO joinDTO : this.members) {
+    for (JoinDTO joinDTO : members) {
       if (names.length() > 0) {
         names.append(",");
       }

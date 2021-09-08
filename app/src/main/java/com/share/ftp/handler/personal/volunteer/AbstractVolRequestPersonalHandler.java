@@ -90,6 +90,15 @@ public abstract class AbstractVolRequestPersonalHandler implements Command { // 
     return null;
   }
 
+  public PersonalRequestDTO validOwner(int no) {
+    for (PersonalRequestDTO personalRequestDTO : personalRequestApplyDTOList) {
+      if (personalRequestDTO.getNo() == no) {
+        return personalRequestDTO;
+      }
+    }
+    return null;
+  }
+
 
 
   //  protected GeneralRequestDTO findByVol(int no) {

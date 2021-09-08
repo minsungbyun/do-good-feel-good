@@ -43,30 +43,38 @@ public class VolDoJoinHandler implements Command {
     }
     System.out.println("111111111111111");
     // 주최자면? 목록보기
-    if (AuthLoginHandler.getLoginUser().getName() == owner.getOwner().getName()) {
+    if (AuthLoginHandler.getLoginUser().getName().equals(owner.getOwner().getName())) {
+      System.out.println("난 주최자라구 들어왔어");
 
-
-
-      System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n봉사자명: %s\n",
+      System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n봉사자명: %s(%s)\n",
           owner.getTitle(),
           totalJoinCount(),
           owner.getJoinNum(),
-          owner.getMemberNames());
+          owner.getUserId(),
+          owner.getOwner().getName());
       // 주최자 아니면?
     } else {
 
-      System.out.println("2");
       if (personalRequestSelectedDTO == null) {
+        System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n봉사자명: %s(%s)\n",
+            owner.getTitle(),
+            totalJoinCount(),
+            owner.getJoinNum(),
+            owner.getUserId(),
+            owner.getOwner().getName());
 
-        System.out.println("해당 참여인원이 없습니다.");
-        return;
+
+      } else {
+        System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n봉사자명: %s(%s) , %s\n",
+            personalRequestSelectedDTO.getTitle(),
+            totalJoinCount(),
+            personalRequestSelectedDTO.getJoinNum(),
+            owner.getUserId(),
+            owner.getOwner().getName(),
+            personalRequestSelectedDTO.getMemberNames());
+
       }
 
-      System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n봉사자명: %s\n",
-          personalRequestSelectedDTO.getTitle(),
-          totalJoinCount(),
-          personalRequestSelectedDTO.getJoinNum(),
-          personalRequestSelectedDTO.getMemberNames());
     }
 
 
@@ -86,7 +94,7 @@ public class VolDoJoinHandler implements Command {
     return null;
   }
 
-  private PersonalRequestDTO findByOwnerVol(int no) {
+  public  PersonalRequestDTO findByOwnerVol(int no) {
     for (PersonalRequestDTO owner : personalRequestApplyDTOList) {
       if (owner.getNo() == no) {
         return owner;
@@ -98,7 +106,7 @@ public class VolDoJoinHandler implements Command {
   private int totalJoinCount() {
 
 
-    return volRequestPersonalAppliedListDetailHandler.joinCount;
+    return volRequestPersonalAppliedListDetailHandler.joinCounts;
 
 
 
