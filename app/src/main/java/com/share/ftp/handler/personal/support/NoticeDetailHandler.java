@@ -25,8 +25,9 @@ public class NoticeDetailHandler extends AbstractNoticeHandler {
 
     System.out.printf("번호: %s\n", noticeDTO.getNo());
     System.out.printf("제목: %s\n", noticeDTO.getTitle());
+    System.out.printf("아이디: %s\n", noticeDTO.getAdminId());
     System.out.printf("내용: %s\n", noticeDTO.getContent());
-    System.out.printf("작성자: %s\n", noticeDTO.getFileUpload());
+    System.out.printf("첨부파일: %s\n", noticeDTO.getFileUpload());
     System.out.printf("등록일: %s\n", noticeDTO.getRegisteredDate());
 
     noticeDTO.setViewCount(noticeDTO.getViewCount() + 1);
