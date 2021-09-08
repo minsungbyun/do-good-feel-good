@@ -9,8 +9,11 @@ import com.share.util.Prompt;
 
 public class ChallengeJoinHandler extends AbstractChallengeJoinHandler {
 
-  public ChallengeJoinHandler(List<MyChallengeJoinDTO> myChallengeJoinDTOList) {
+//  ChallengeJoinListHandler challengeJoinListHandler;
+  
+  public ChallengeJoinHandler(List<MyChallengeJoinDTO> myChallengeJoinDTOList /*ChallengeJoinListHandler challengeJoinListHandler*/) {
     super(myChallengeJoinDTOList);
+//    this.challengeJoinListHandler = challengeJoinListHandler
   }
 
   @Override
@@ -27,11 +30,16 @@ public class ChallengeJoinHandler extends AbstractChallengeJoinHandler {
       System.out.println("챌린지 참여를 취소하였습니다.");
       return;
     } else if (input.equals("y")) {
-      System.out.println("챌린지 참여를 완료하였습니다.");
+//        if (myChallengeJoinDTO.getJoiner().getId().equalsIgnoreCase(AuthLoginHandler.getLoginUser().getId())) {
+//      System.out.println("챌린지 참여를 완료하였습니다.");
       myChallengeJoinDTO.setJoiner(AuthLoginHandler.getLoginUser());
       myChallengeJoinDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
       myChallengeJoinDTOList.add(myChallengeJoinDTO);
       return;
+//      } else if (myChallengeJoinDTO.getJoiner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+//        System.out.println("이미 참여가 완료되었습니다.");
+//        return;
+//      }
     } else {
       System.out.println("y 또는 n을 입력하세요.");
       continue;

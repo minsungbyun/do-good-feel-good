@@ -8,9 +8,14 @@ public class MyChallengeJoinDTO {
   private JoinDTO joiner;
   public Date registeredDate;
 
+  @Override
+  public String toString() {
+    return "MyChallengeJoinDTO [joiner=" + joiner + ", registeredDate=" + registeredDate + "]";
+  }
   public JoinDTO getJoiner() {
     return joiner;
   }
+
   public void setJoiner(JoinDTO joiner) {
     this.joiner = joiner;
   }
