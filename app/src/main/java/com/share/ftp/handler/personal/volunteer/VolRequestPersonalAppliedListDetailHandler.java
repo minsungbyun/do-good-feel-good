@@ -10,7 +10,7 @@ import com.share.util.Prompt;
 public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolRequestPersonalHandler { // 개인 봉사신청 양식 쓰는 곳
 
 
-  PersonalRequestDTO personalRequestDTO;
+  int joinCount;
 
   List<PersonalRequestDTO> personalSelectedList;
   ArrayList<JoinDTO> members = new ArrayList<>();
@@ -19,21 +19,24 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
       List<PersonalRequestDTO> personalRequestDTOList,
       List<PersonalRequestDTO> personalRequestApplyDTOList,
       List<PersonalRequestDTO> personalRequestRejectDTOList,
-      List<PersonalRequestDTO> personalSelectedList,
-      PersonalRequestDTO personalRequestDTO) {
+      List<PersonalRequestDTO> personalSelectedList
+      ) {
 
     super(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList);
     this.personalSelectedList = personalSelectedList;
-    this.personalRequestDTO = personalRequestDTO;
+
+
   }
 
 
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("[  개인봉사승인 목록  ]");
-
-    int no = Prompt.inputInt("번호? ");
+    System.out.println("[  봉사 참여  ]");
+    System.out.println();
+    System.out.println(" ▶ 참여를 원하는 봉사번호를 입력해주세요 ");
+    System.out.println();
+    int no = Prompt.inputInt("봉사번호 > ");
 
     PersonalRequestDTO personalRequestApplyDTO = findByApplyVol(no);
 
@@ -47,7 +50,7 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
       System.out.println("[  해당 번호의 봉사목록이 없습니다. ]");
     }
 
-    System.out.printf("번호: %d\n"
+    System.out.printf("봉사번호: %d\n"
         + "봉사제목: %s\n"
         + "주최자: %s\n"
         + "봉사분류: %s\n"
@@ -60,13 +63,13 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
         + "봉사목록: %s\n"
         + "봉사인원: %d\n"
         + "봉사내용: %s\n"
-        + "첨부파일: %s\n"
-        //          + "승인여부: %b \n"
-        + "승인여부: %s \n\n",  
+        + "첨부파일: %s\n\n",
+        //          + "승인여부: %b \n",  
 
         personalRequestApplyDTO.getNo(),      
         personalRequestApplyDTO.getTitle(),     
-        personalRequestApplyDTO.getOwner(), 
+        personalRequestApplyDTO.getOwner().getName(), 
+        //        personalRequestApplyDTO.getName(), 
         personalRequestApplyDTO.getSort(), 
         personalRequestApplyDTO.getTel(),
         personalRequestApplyDTO.getEmail(),
@@ -77,9 +80,9 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
         personalRequestApplyDTO.getVolList(),
         personalRequestApplyDTO.getJoinNum(),
         personalRequestApplyDTO.getContent(),
-        personalRequestApplyDTO.getFileUpload(),
+        personalRequestApplyDTO.getFileUpload()
         //          personalRequestApplyDTO.isChecked(),
-        personalRequestApplyDTO.getIsSigned()
+        //        personalRequestApplyDTO.getIsSigned() // 이미 승인되있으니까..
         //          this.personalRequestRejectDTO[i].getIsSigned()
         );
 
@@ -89,10 +92,17 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
       return;
     }
 
+    // 주최자 유효성검사
+    if (personalRequestApplyDTO.getOwner().getName().equals(AuthLoginHandler.getLoginUser().getName())) {
+      System.out.println("당신은 이미 주최자입니다!");
+      return;
+    }
+
 
 
     personalRequestApplyDTO.setMembers(addJoinMember()); // 참여 멤버 등록
-    personalRequestApplyDTO.getJoinCount(); //참여인원증가
+    joinCount = personalRequestApplyDTO.getJoinCount(); //참여인원증가
+    joinCount += 1;
     //    personalRequestDTO.setMembers( addJoinMember());
     //    personalRequestApplyDTO.getJoinCount(); // 카운트 1 증가
 
@@ -107,6 +117,7 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
     //    JoinDTO member = AuthLoginHandler.findByName(memberName);
     JoinDTO member = AuthLoginHandler.getLoginUser();
 
+
     if (member != null) {
       members.add(member);
     } else if (member == null) {
@@ -116,6 +127,29 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
     //    personalRequestDTO.setMembers(members);
     return members;
   }
+
+  //  public List<JoinDTO> addOwner() {
+  //    //    ArrayList<JoinDTO> members = new ArrayList<>();
+  //    //    String memberName = AuthLoginHandler.getLoginUser().getName();
+  //    //    JoinDTO member = AuthLoginHandler.findByName(memberName);
+  //
+  //
+  //
+  //
+  //    //    personalRequestDTO.setMembers(members);
+  //    return members;
+  //  }
+  //
+  //
+  //  public  JoinDTO exist(String name) {
+  //    for (JoinDTO joinDTO : joinDTOList) {
+  //      if (joinDTO.getName() == name) {
+  //        return joinDTO;
+  //      }
+  //    }
+  //    return null;
+  //  }
+  //
 
 
 

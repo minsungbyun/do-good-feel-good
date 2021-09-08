@@ -18,7 +18,7 @@ public class VolRequestPersonalAppliedListHandler extends AbstractVolRequestPers
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("[  개인봉사승인 목록  ]");
+    System.out.println("[ 개인봉사승인 목록 ]");
 
 
     if (personalRequestApplyDTOList.isEmpty()) {
@@ -34,7 +34,7 @@ public class VolRequestPersonalAppliedListHandler extends AbstractVolRequestPers
 
           personalRequestApplyDTO.getNo(),      
           personalRequestApplyDTO.getTitle(),     
-          personalRequestApplyDTO.getOwner(), 
+          personalRequestApplyDTO.getOwner().getName(), 
           personalRequestApplyDTO.getSort(), 
           personalRequestApplyDTO.getTel(),
           personalRequestApplyDTO.getEmail(),

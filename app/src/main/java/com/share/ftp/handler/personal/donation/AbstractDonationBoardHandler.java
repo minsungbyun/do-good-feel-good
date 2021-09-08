@@ -37,5 +37,4 @@ public abstract class AbstractDonationBoardHandler implements Command {
     }
     return null;
   }
-
 }

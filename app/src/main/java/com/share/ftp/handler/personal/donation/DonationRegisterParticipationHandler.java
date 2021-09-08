@@ -21,11 +21,13 @@ public class DonationRegisterParticipationHandler extends AbstractDonationRegist
     }
 
     for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {
-      System.out.printf("모금함번호: %s\n %s, %s, %s\n", 
+      System.out.println();
+      System.out.printf("모금함번호: %s\n %s님, %s, %s\n", 
           donationRegisterDTO.getSort(), 
           donationRegisterDTO.getName(), 
           donationRegisterDTO.getDonationMoney(), 
           donationRegisterDTO.getRegisteredDate());
+      System.out.println();
     }
   }
 }

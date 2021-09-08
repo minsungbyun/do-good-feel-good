@@ -1,9 +1,11 @@
 package com.share.ftp.domain.personal;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
-public class OrgRequestDTO {
+@SuppressWarnings("serial")
+public class OrgRequestDTO implements Serializable {
 
   private int no;
   private String title;

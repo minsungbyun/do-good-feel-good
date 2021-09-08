@@ -45,7 +45,7 @@ public class VolRequestPersonalApplyCompleteListHandler extends AbstractVolReque
 
           personalRequestDTO.getNo(), 
           personalRequestDTO.getTitle(), 
-          personalRequestDTO.getOwner(), 
+          personalRequestDTO.getOwner().getName(), 
           personalRequestDTO.getSort(), 
           personalRequestDTO.getTel(),
           personalRequestDTO.getEmail(),
