@@ -40,6 +40,7 @@ import com.share.ftp.handler.admin.AdminNoticeAddHandler;
 import com.share.ftp.handler.admin.AdminNoticeDeleteHandler;
 import com.share.ftp.handler.admin.AdminNoticeDetailHandler;
 import com.share.ftp.handler.admin.AdminNoticeListHandler;
+import com.share.ftp.handler.admin.AdminNoticeSearchHandler;
 import com.share.ftp.handler.admin.AdminNoticeUpdateHandler;
 import com.share.ftp.handler.admin.AdminQuestionAddHandler;
 import com.share.ftp.handler.admin.AdminQuestionDeleteHandler;
@@ -400,12 +401,13 @@ public class App {
     commands.put("/join/detail", new JoinDetailHandler(joinDTOList)); // 가입회원 상세보기 (관리자연결)
     commands.put("/join/delete", new AdminMemberDeleteHandler());
 
-    // 관리자 공지사항
+    // 관리자 공지사항 관리
     commands.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDTOList));
     commands.put("/adminNotice/list", new AdminNoticeListHandler(noticeDTOList));
     commands.put("/adminNotice/detail", new AdminNoticeDetailHandler(noticeDTOList));
     commands.put("/adminNotice/update", new AdminNoticeUpdateHandler(noticeDTOList));
     commands.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDTOList));
+    commands.put("/adminNotice/search", new AdminNoticeSearchHandler(noticeDTOList));
 
     // 관리자 문의사항
     commands.put("/adminAsk/add", new AdminQuestionAddHandler(questionDTOList));
@@ -447,6 +449,7 @@ public class App {
 
     loadDonationBoards();
     loadDonationRegisters();
+
     loadQuestion();
 
     createMenu().execute();
@@ -468,6 +471,8 @@ public class App {
 
     saveDonationBoards();
     saveDonationRegisters();
+
+    saveQuestion();
   }
 
   @SuppressWarnings("unchecked")
@@ -916,7 +921,7 @@ public class App {
   @SuppressWarnings("unchecked")
   private void loadQuestion() {
     try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("Question.data"))) {
+        new FileInputStream("question.data"))) {
 
       myQuestionListDTOList.addAll((List<MyQuestionListDTO>) in.readObject());
 
@@ -931,7 +936,7 @@ public class App {
 
   private void saveQuestion() {
     try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("Question.data"))) {
+        new FileOutputStream("question.data"))) {
 
       out.writeObject(myQuestionListDTOList);
 
@@ -1293,6 +1298,7 @@ public class App {
     adminNoticeMenu.add(new MenuItem("공지사항 상세보기","/adminNotice/detail"));
     adminNoticeMenu.add(new MenuItem("공지사항 변경",ACCESS_ADMIN,"/adminNotice/update"));
     adminNoticeMenu.add(new MenuItem("공지사항 삭제",ACCESS_ADMIN,"/adminNotice/delete"));
+    adminNoticeMenu.add(new MenuItem("공지사항 검색","/adminNotice/search"));
 
     return adminNoticeMenu;
   }

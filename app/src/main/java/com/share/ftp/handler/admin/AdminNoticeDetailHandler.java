@@ -23,7 +23,7 @@ public class AdminNoticeDetailHandler extends AbstractAdminNoticeHandler {
     }
 
     System.out.printf("번호: %d\n", noticeDTO.getNo());
-    System.out.printf("관리자 아이디: %s\n", noticeDTO.getAdminId());
+    System.out.printf("관리자 아이디: %s\n", noticeDTO.getAdmin().getId());
     System.out.printf("제목: %s\n", noticeDTO.getTitle());
     System.out.printf("내용: %s\n", noticeDTO.getContent());
     System.out.printf("첨부파일: %s\n", noticeDTO.getFileUpload());
