@@ -14,6 +14,7 @@ public abstract class AbstractDonationRegisterHandler implements Command { // �
     this.donationRegisterDTOList = donationRegisterDTOList;
   }
 
+
   protected static String getSortLabel(int sort) {
     //[1.아동] [2.청소년] [3.어르신] [4.장애인] [5.동물] [6.환경] [7.기타]");
     switch (sort) {

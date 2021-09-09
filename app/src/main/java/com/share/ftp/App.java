@@ -188,6 +188,7 @@ public class App {
 
   // 기부 도메인(값)
   List<DonationRegisterDTO> donationRegisterDTOList = new ArrayList<>();
+  List<DonationRegisterDTO> donationMyRegisterDTOList;
 
   // 마이페이지 도메인(값)
   List<MyProfileDTO> myProfileDTOList = new ArrayList<>();
@@ -364,7 +365,7 @@ public class App {
     commands.put("/adminDonationBoard/applyDetail", new DonationBoardAdminApplyDetailHandler(donationBoardDTOList, donationRegisterDTOList, donationPrompt));
 
     // 모금함 (기부하기)
-    commands.put("/donationRegister/add", new DonationRegisterAddHandler(donationRegisterDTOList, joinDTOList));
+    commands.put("/donationRegister/add", new DonationRegisterAddHandler(donationRegisterDTOList, joinDTOList, donationBoardDTOList));
     commands.put("/donationRegister/participation", new DonationRegisterParticipationHandler(donationRegisterDTOList));
     commands.put("/donationRegister/totalMoney", new DonationRegisterTotalMoneyHandler(donationRegisterDTOList));
 
@@ -398,7 +399,7 @@ public class App {
     commands.put("/OrgMyVol/apply", new MyVolApplyListHandler()); // 기관 마이페이지 승인신청 
     commands.put("/OrgMyVol/approve", new MyVolApproveListHandler()); // 기관 마이페이지 승인조회
     commands.put("/myDonation/list", new MyDonationHandler()); // 모금함
-    commands.put("/myDonation/registerlist", new DonationRegisterMyListHandler(donationRegisterDTOList)); // 모금함
+    commands.put("/myDonation/registerlist", new DonationRegisterMyListHandler(donationRegisterDTOList, donationMyRegisterDTOList)); // 모금함
     commands.put("/myDonation//applyCompleteList", new DonationBoardApplyCompleteListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
 
     // 관리자
@@ -456,8 +457,8 @@ public class App {
     loadCommBoardDTO();
     loadCommReviewDTO();
 
-    //    loadDonationBoards();
-    //    loadDonationRegisters();
+    loadDonationBoards();
+    loadDonationRegisters();
     loadQuestion();
 
     loadChallengeReviews();
@@ -486,8 +487,8 @@ public class App {
     saveCommBoardDTO();
     saveCommReviewDTO();
 
-    //    saveDonationBoards();
-    //    saveDonationRegisters();
+    saveDonationBoards();
+    saveDonationRegisters();
 
     saveChallengeReviews();
     saveChallengeQuestions();

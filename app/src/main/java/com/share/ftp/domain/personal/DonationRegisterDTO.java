@@ -17,6 +17,7 @@ public class DonationRegisterDTO implements Serializable{
   private String other = "기타";
 
   private int donationMoney;
+  private int myTotaldonationMoney;
   private String name;
   private String registerationNumber;
   private Date birthDate;
@@ -34,15 +35,16 @@ public class DonationRegisterDTO implements Serializable{
     return "DonationRegisterDTO [no=" + no + ", children=" + children + ", teen=" + teen
         + ", elder=" + elder + ", handicappedPerson=" + handicappedPerson + ", animal=" + animal
         + ", environmental=" + environmental + ", other=" + other + ", donationMoney="
-        + donationMoney + ", name=" + name + ", registerationNumber=" + registerationNumber
-        + ", birthDate=" + birthDate + ", tel=" + tel + ", email=" + email + ", address=" + address
-        + ", registeredDate=" + registeredDate + ", sort=" + sort + "]";
+        + donationMoney + ", myTotaldonationMoney=" + myTotaldonationMoney + ", name=" + name
+        + ", registerationNumber=" + registerationNumber + ", birthDate=" + birthDate + ", tel="
+        + tel + ", email=" + email + ", address=" + address + ", registeredDate=" + registeredDate
+        + ", sort=" + sort + "]";
   }
   @Override
   public int hashCode() {
     return Objects.hash(address, animal, birthDate, children, donationMoney, elder, email,
-        environmental, handicappedPerson, name, no, other, registerationNumber, registeredDate,
-        sort, teen, tel);
+        environmental, handicappedPerson, myTotaldonationMoney, name, no, other,
+        registerationNumber, registeredDate, sort, teen, tel);
   }
   @Override
   public boolean equals(Object obj) {
@@ -58,8 +60,8 @@ public class DonationRegisterDTO implements Serializable{
         && donationMoney == other.donationMoney && Objects.equals(elder, other.elder)
         && Objects.equals(email, other.email) && Objects.equals(environmental, other.environmental)
         && Objects.equals(handicappedPerson, other.handicappedPerson)
-        && Objects.equals(name, other.name) && no == other.no
-        && Objects.equals(this.other, other.other)
+        && myTotaldonationMoney == other.myTotaldonationMoney && Objects.equals(name, other.name)
+        && no == other.no && Objects.equals(this.other, other.other)
         && Objects.equals(registerationNumber, other.registerationNumber)
         && Objects.equals(registeredDate, other.registeredDate) && Objects.equals(sort, other.sort)
         && Objects.equals(teen, other.teen) && Objects.equals(tel, other.tel);
@@ -118,6 +120,12 @@ public class DonationRegisterDTO implements Serializable{
   public void setDonationMoney(int donationMoney) {
     this.donationMoney = donationMoney;
   }
+  public int getMyTotaldonationMoney() {
+    return myTotaldonationMoney;
+  }
+  public void setMyTotaldonationMoney(int myTotaldonationMoney) {
+    this.myTotaldonationMoney = myTotaldonationMoney;
+  }
   public String getName() {
     return name;
   }
@@ -166,4 +174,7 @@ public class DonationRegisterDTO implements Serializable{
   public void setSort(String sort) {
     this.sort = sort;
   }
+
+
+
 }

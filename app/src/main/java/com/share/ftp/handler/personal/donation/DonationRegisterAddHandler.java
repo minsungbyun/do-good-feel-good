@@ -3,6 +3,7 @@ package com.share.ftp.handler.personal.donation;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
@@ -10,12 +11,15 @@ import com.share.util.Prompt;
 public class DonationRegisterAddHandler extends AbstractDonationRegisterHandler { // 모금함 기부하기 양식 쓰는곳
 
   List<JoinDTO> joinDTOList;
+  List<DonationBoardDTO> donationBoardDTOList;
 
   public DonationRegisterAddHandler(
       List<DonationRegisterDTO> donationRegisterDTOList,
-      List<JoinDTO> joinDTOList) {
+      List<JoinDTO> joinDTOList,
+      List<DonationBoardDTO> donationBoardDTOList) {
     super(donationRegisterDTOList);
     this.joinDTOList = joinDTOList;
+    this.donationBoardDTOList = donationBoardDTOList;
   }
 
   // 모금함 기부하기
@@ -56,7 +60,7 @@ public class DonationRegisterAddHandler extends AbstractDonationRegisterHandler 
         donationRegister.setSort(donationRegister.getChildren());
       } else if (input == 2) {
         System.out.printf("기부목록: %s\n", donationRegister.getTeen());
-        donationRegister.setSort(donationRegister.getChildren());
+        donationRegister.setSort(donationRegister.getTeen());
       } else if (input == 3) {
         System.out.printf("기부목록: %s\n", donationRegister.getElder());
         donationRegister.setSort(donationRegister.getElder());
@@ -77,7 +81,17 @@ public class DonationRegisterAddHandler extends AbstractDonationRegisterHandler 
         return;
       }
 
+      for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
+        if (input == donationBoardDTO.getNo()) {
+          donationRegister.setNo(donationBoardDTO.getNo());
+        } else {
+          donationRegister.setNo(input);
+          continue;
+        }
+      }
+
       donationRegister.setDonationMoney(Prompt.inputInt("기부 금액 ▶ "));
+      donationRegister.setMyTotaldonationMoney(donationRegister.getDonationMoney());
       donationRegister.setName(AuthLoginHandler.getLoginUser().getName());
       donationRegister.setRegisterationNumber(Prompt.inputString("주민등록번호 ▶ "));
       donationRegister.setBirthDate(Prompt.inputDate("생년월일(yyyy-mm-dd) ▶ "));
