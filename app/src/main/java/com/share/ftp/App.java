@@ -430,11 +430,6 @@ public class App {
 
 
   void service() {
-    loadChallengeReviews();
-    loadChallengeQuestions();
-
-    loadCommBoardDTO();
-    loadCommReviewDTO();
 
     loadJoins();
 
@@ -447,6 +442,12 @@ public class App {
     loadOrgRequestApply();
     loadOrgRequestReject();
 
+    loadCommBoardDTO();
+    loadCommReviewDTO();
+
+    loadChallengeReviews();
+    loadChallengeQuestions();
+
     loadDonationBoards();
     loadDonationRegisters();
 
@@ -454,9 +455,6 @@ public class App {
 
     createMenu().execute();
     Prompt.close();
-
-    saveChallengeReviews();
-    saveChallengeQuestions();
 
     saveJoins();
 
@@ -468,6 +466,12 @@ public class App {
     saveOrgRequest();
     saveOrgRequestApply();
     saveOrgRequestReject();
+
+    saveCommBoardDTO();
+    saveCommReviewDTO();
+
+    saveChallengeReviews();
+    saveChallengeQuestions();
 
     saveDonationBoards();
     saveDonationRegisters();
@@ -600,12 +604,7 @@ public class App {
 
 
 
-    saveCommBoardDTO();
-    saveCommReviewDTO();
-    saveJoins();
-    saveDonationBoards();
-    saveDonationRegisters();
-    saveQuestion();
+
   }
 
   @SuppressWarnings("unchecked")
@@ -1070,7 +1069,6 @@ public class App {
     doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volRequestOrg/apply")); 
     doVolMenu.add(new MenuItem("전체인증봉사리스트","/volRequest/totalApprovedList")); 
     doVolMenu.add(new MenuItem("전체인증봉사세부사항", ACCESS_MEMBER,"/volJoin/detail"));
-    doVolMenu.add(new MenuItem("전체인증봉사세부사항", ACCESS_MEMBER,"/volRequestPersonal/appliedList"));
     doVolMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
 
 
@@ -1158,6 +1156,7 @@ public class App {
 
     return doDonationMenu;
   }
+
 
 
 
