@@ -84,12 +84,12 @@ public class VolDoJoinHandler implements Command {
     return null;
   }
 
-  private int totalJoinCount() {
+  //  private int totalJoinCount() {
 
-    int sum = volRequestPersonalAppliedListDetailHandler.joinCounts + volRequestPersonalAppliedListDetailHandler.ownerCount;
+  //    int sum = volRequestPersonalAppliedListDetailHandler.joinCounts + volRequestPersonalAppliedListDetailHandler.ownerCount;
 
-    return sum;
+  //    return sum;
 
-  }
+  //}
 
 }

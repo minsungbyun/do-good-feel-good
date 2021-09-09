@@ -23,6 +23,8 @@ public class DonationPrompt {
       }
     }
     while (true) {
+
+
       System.out.println();
       int donationBoardNo = Prompt.inputInt("모금함 번호 선택? (취소: 0) ");
       if (donationBoardNo == 0) {

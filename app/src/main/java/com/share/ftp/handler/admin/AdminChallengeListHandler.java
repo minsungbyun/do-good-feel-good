@@ -10,12 +10,13 @@ public class AdminChallengeListHandler extends AbstractAdminChallengeHandler {
     super(challengeDTOList);
   }
 
+  @Override
   public void execute() {
     System.out.println("[챌린지 목록]");
     for (ChallengeDTO challengeDTO : challengeDTOList) {
-      System.out.printf("%d, %s, %s, %s, %s\n", 
+      System.out.printf("%d, %s, %s, %s\n", 
           challengeDTO.getNo(), 
-          challengeDTO.getAdminId(), 
+          //          challengeDTO.getAdminId(), 
           challengeDTO.getTitle(), 
           challengeDTO.getContent(), 
           challengeDTO.getFileUpload(), 

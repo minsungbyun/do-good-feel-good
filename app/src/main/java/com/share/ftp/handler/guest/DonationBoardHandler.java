@@ -33,7 +33,7 @@ public class DonationBoardHandler {
     donationBoardDTO.setLeader(Prompt.inputString("주최자: "));
     donationBoardDTO.setContent(Prompt.inputString("내용: "));
     donationBoardDTO.setFileUpload(Prompt.inputString("첨부파일: "));
-    donationBoardDTO.setPassword(Prompt.inputString("비밀번호: "));
+    //    donationBoardDTO.setPassword(Prompt.inputString("비밀번호: "));
     donationBoardDTO.setRegisteredStartDate(Prompt.inputDate("시작일: "));
     donationBoardDTO.setRegisteredEndDate(Prompt.inputDate("종료일: "));
 
