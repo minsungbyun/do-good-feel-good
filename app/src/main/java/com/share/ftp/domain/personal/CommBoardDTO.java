@@ -6,7 +6,7 @@ import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
 @SuppressWarnings("serial")
-public class CommBoardDTO implements Serializable {
+public class CommBoardDTO implements Serializable/*, Comparable<CommBoardDTO> */{
   private int no;
   private String title;
   private String id;
@@ -98,4 +98,9 @@ public class CommBoardDTO implements Serializable {
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
+  //  @Override
+  //  public int compareTo(CommBoardDTO o) {
+  //
+  //    return viewCount-o.viewCount;
+  //  }
 }

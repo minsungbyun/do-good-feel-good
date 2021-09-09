@@ -11,7 +11,8 @@ public class VolRequestPersonalAcceptApplyHandler extends AbstractVolRequestPers
       List<PersonalRequestDTO> personalRequestDTOList,
       List<PersonalRequestDTO> personalRequestApplyDTOList,
       List<PersonalRequestDTO> personalRequestRejectDTOList,
-      List<PersonalRequestDTO> personalSelectedList) {
+      List<PersonalRequestDTO> personalSelectedList
+      ) {
 
     super(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList);
     this.personalSelectedList = personalRequestRejectDTOList;
@@ -41,6 +42,8 @@ public class VolRequestPersonalAcceptApplyHandler extends AbstractVolRequestPers
     //    public List<JoinDTO> addJoinMember()
     personalRequestDTO.setChecked(true);
     personalRequestDTO.setIsSigned("승인됨");
+    //    personalRequestDTO.setMembers(addOwner(personalRequestDTO));
+    //    members.add(personalRequestDTO.getOwner()); // 주최자 등록
 
     //    personalRequestDTO.setIsSigned("승인됨");
 
@@ -55,4 +58,13 @@ public class VolRequestPersonalAcceptApplyHandler extends AbstractVolRequestPers
 
     }
   }
+
+  //  private List<JoinDTO> addOwner(PersonalRequestDTO owner) {
+  //
+  //    if (owner.getOwner().getName().equals(AuthLoginHandler.getLoginUser().getName())) {
+  //      members.add(owner.getOwner());
+  //    }
+  //    return members;
+  //  }
+
 }

@@ -3,7 +3,7 @@ package com.share.ftp.handler.personal.community;
 import java.util.List;
 import com.share.ftp.domain.personal.CommBoardDTO;
 
-public class CommBestListHandler extends AbstractCommBestReviewHandler {
+public class CommBestListHandler extends AbstractCommBestReviewHandler /*implements Comparable<CommBoardDTO>*/ {
 
   public CommBestListHandler(List<CommBoardDTO> commBoardDTOList) {
     super(commBoardDTOList);
@@ -13,6 +13,33 @@ public class CommBestListHandler extends AbstractCommBestReviewHandler {
   public void execute() {
 
     System.out.println("[소통해요/나눔이야기Best/목록]");
+
+
+    //  Collections.sort(commBoardDTOList);
+    //
+    //
+    //
+    //    for(CommBoardDTO commBoardDTO : commBoardDTOList) {
+    //
+    //
+    //      System.out.printf("%d, %s, %s, %s, %s, %s, %d\n", 
+    //          // AuthLoginHandler.loginUser.getId(),
+    //          commBoardDTO.getNo(), 
+    //          commBoardDTO.getOwner().getId(),
+    //          commBoardDTO.getTitle(), 
+    //          commBoardDTO.getContent(),
+    //          commBoardDTO.getFileUpload(),
+    //          //commBoardDTO.getPassword(),
+    //          commBoardDTO.getRegisteredDate(), 
+    //          commBoardDTO.getViewCount());
+    //
+    //        @Override
+    //        public int compareTo(CommBoardDTO o) {
+    //      
+    //          return commBoardDTO.getViewCount()-o.getViewCount;
+    //        }
+
+
 
     //    //  전체 목록중에서 조회수가 가장 높은 3개
     //    CommBoardDTO[] arr = commBoardHandler.chooseBoard();
@@ -25,5 +52,6 @@ public class CommBestListHandler extends AbstractCommBestReviewHandler {
     //        //this.commBoardsDTO[i].getPassword(),
     //        arr[0].getRegisteredDate(), 
     //        arr[0].getViewCount());
+
   }
 }

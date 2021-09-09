@@ -9,11 +9,10 @@ import com.share.util.Prompt;
 
 public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolRequestPersonalHandler { // 개인 봉사신청 양식 쓰는 곳
 
-
-  int joinCount;
+  int joinCounts = 1; // 최소인원(주최자) 설정
 
   List<PersonalRequestDTO> personalSelectedList;
-  ArrayList<JoinDTO> members = new ArrayList<>();
+  List<JoinDTO> members = new ArrayList<>();
 
   public VolRequestPersonalAppliedListDetailHandler(
       List<PersonalRequestDTO> personalRequestDTOList,
@@ -28,23 +27,16 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
 
   }
 
-
   @Override
   public void execute() {
     System.out.println();
     System.out.println("[  봉사 참여  ]");
-    System.out.println();
     System.out.println(" ▶ 참여를 원하는 봉사번호를 입력해주세요 ");
     System.out.println();
     int no = Prompt.inputInt("봉사번호 > ");
 
     PersonalRequestDTO personalRequestApplyDTO = findByApplyVol(no);
 
-    //
-    //    if (personalRequestApplyDTOList.isEmpty()) {
-    //      System.out.println("[  현재 승인된 봉사목록이 없습니다. ]");
-    //      return;
-    //    }
 
     if (personalRequestApplyDTO == null) {
       System.out.println("[  해당 번호의 봉사목록이 없습니다. ]");
@@ -87,7 +79,7 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
         );
 
     String input = Prompt.inputString("해당 봉사활동을 참가하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+    if (!input.equals("y") || input.length() == 0) {
       System.out.println("[  해당 봉사신청 참여를 취소하였습니다. ]");
       return;
     }
@@ -97,36 +89,54 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
       System.out.println("당신은 이미 주최자입니다!");
       return;
     }
-
-
-
-    personalRequestApplyDTO.setMembers(addJoinMember()); // 참여 멤버 등록
-    joinCount = personalRequestApplyDTO.getJoinCount(); //참여인원증가
-    joinCount += 1;
-    //    personalRequestDTO.setMembers( addJoinMember());
-    //    personalRequestApplyDTO.getJoinCount(); // 카운트 1 증가
-
-    personalSelectedList.add(personalRequestApplyDTO);
-
-    System.out.println("[  봉사참여가 완료되었습니다. ]");
-
-  }
-  public List<JoinDTO> addJoinMember() {
-    //    ArrayList<JoinDTO> members = new ArrayList<>();
-    //    String memberName = AuthLoginHandler.getLoginUser().getName();
-    //    JoinDTO member = AuthLoginHandler.findByName(memberName);
-    JoinDTO member = AuthLoginHandler.getLoginUser();
-
-
-    if (member != null) {
-      members.add(member);
-    } else if (member == null) {
-      System.out.println("등록된 회원이 아닙니다.");
+    // 이미 참여한 적이 있다면 못들어오지^^
+    if (members.contains(AuthLoginHandler.getLoginUser())) {
+      System.out.println("이미 봉사참여를 하셨습니다!");
+      return;
     }
 
-    //    personalRequestDTO.setMembers(members);
-    return members;
+    members.add(AuthLoginHandler.getLoginUser());
+    personalRequestApplyDTO.setMembers(members); // 참여 멤버 등록
+
+    //    personalRequestDTO.setMembers( addJoinMember());
+
+    joinCounts = personalRequestApplyDTO.getJoinCount(); //참여인원증가
+    joinCounts += 1;
+
+    personalSelectedList.add(personalRequestApplyDTO); 
+
+    System.out.println("[  봉사참여가 완료되었습니다. ]");
   }
+
+
+
+
+
+
+
+
+
+
+
+  //  public List<JoinDTO> members() {
+  //    //    ArrayList<JoinDTO> members = new ArrayList<>();
+  //    //    String memberName = AuthLoginHandler.getLoginUser().getName();
+  //    //    JoinDTO member = AuthLoginHandler.findByName(memberName);
+  //    JoinDTO member = AuthLoginHandler.getLoginUser();
+  //
+  //    //    PersonalRequestDTO personalRequestApplyDTO = findByApplyVol(no);
+  //    //    personalRequestApplyDTO.
+  //
+  //    if (members != null) {
+  //      members.add(member);
+  //      System.out.println("멤버 1명 추가");
+  //    } else if (members == null) {
+  //      System.out.println("등록된 회원이 아닙니다.");
+  //    }
+  //
+  //    //    personalRequestDTO.setMembers(members);
+  //    return members;
+  //  }
 
   //  public List<JoinDTO> addOwner() {
   //    //    ArrayList<JoinDTO> members = new ArrayList<>();
