@@ -41,6 +41,7 @@ import com.share.ftp.handler.admin.AdminNoticeAddHandler;
 import com.share.ftp.handler.admin.AdminNoticeDeleteHandler;
 import com.share.ftp.handler.admin.AdminNoticeDetailHandler;
 import com.share.ftp.handler.admin.AdminNoticeListHandler;
+import com.share.ftp.handler.admin.AdminNoticeSearchHandler;
 import com.share.ftp.handler.admin.AdminNoticeUpdateHandler;
 import com.share.ftp.handler.admin.AdminQuestionAddHandler;
 import com.share.ftp.handler.admin.AdminQuestionDeleteHandler;
@@ -109,12 +110,6 @@ import com.share.ftp.handler.personal.mypage.MyBoardListHandler;
 import com.share.ftp.handler.personal.mypage.MyBoardUpdateHandler;
 import com.share.ftp.handler.personal.mypage.MyDonationHandler;
 import com.share.ftp.handler.personal.mypage.MyPointHandler;
-import com.share.ftp.handler.personal.support.NoitceListHandler;
-import com.share.ftp.handler.personal.support.NoticeAddHandler;
-import com.share.ftp.handler.personal.support.NoticeDeleteHandler;
-import com.share.ftp.handler.personal.support.NoticeDetailHandler;
-import com.share.ftp.handler.personal.support.NoticeSearchHandler;
-import com.share.ftp.handler.personal.support.NoticeUpdateHandler;
 import com.share.ftp.handler.personal.support.QuestionAddHandler;
 import com.share.ftp.handler.personal.support.QuestionDeleteHandler;
 import com.share.ftp.handler.personal.support.QuestionDetailHandler;
@@ -366,13 +361,13 @@ public class App {
     commands.put("/donationRegister/participation", new DonationRegisterParticipationHandler(donationRegisterDTOList));
     commands.put("/donationRegister/totalMoney", new DonationRegisterTotalMoneyHandler(donationRegisterDTOList));
 
-    // 고객센터 공지사항 (개인+ 관리자)
-    commands.put("/notice/add", new NoticeAddHandler(noticeDTOList));
-    commands.put("/notice/list", new NoitceListHandler(noticeDTOList));
-    commands.put("/notice/detail", new NoticeDetailHandler(noticeDTOList));
-    commands.put("/notice/update", new NoticeUpdateHandler(noticeDTOList));
-    commands.put("/notice/delete", new NoticeDeleteHandler(noticeDTOList));
-    commands.put("/notice/search", new NoticeSearchHandler(noticeDTOList));
+    //    // 고객센터 공지사항 (개인+ 관리자)
+    //    commands.put("/notice/add", new NoticeAddHandler(noticeDTOList));
+    //    commands.put("/notice/list", new NoitceListHandler(noticeDTOList));
+    //    commands.put("/notice/detail", new NoticeDetailHandler(noticeDTOList));
+    //    commands.put("/notice/update", new NoticeUpdateHandler(noticeDTOList));
+    //    commands.put("/notice/delete", new NoticeDeleteHandler(noticeDTOList));
+    //    commands.put("/notice/search", new NoticeSearchHandler(noticeDTOList));
 
     // 고객센터 문의사항
     commands.put("/question/add", new QuestionAddHandler(myQuestionListDTOList));
@@ -406,12 +401,13 @@ public class App {
     commands.put("/join/detail", new JoinDetailHandler(joinDTOList)); // 가입회원 상세보기 (관리자연결)
     commands.put("/join/delete", new AdminMemberDeleteHandler());
 
-    // 관리자 공지사항
+    // 관리자 공지사항 관리
     commands.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDTOList));
     commands.put("/adminNotice/list", new AdminNoticeListHandler(noticeDTOList));
     commands.put("/adminNotice/detail", new AdminNoticeDetailHandler(noticeDTOList));
     commands.put("/adminNotice/update", new AdminNoticeUpdateHandler(noticeDTOList));
     commands.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDTOList));
+    commands.put("/adminNotice/search", new AdminNoticeSearchHandler(noticeDTOList));
 
     // 관리자 문의사항
     commands.put("/adminAsk/add", new AdminQuestionAddHandler(questionDTOList));
@@ -455,19 +451,16 @@ public class App {
 
     loadAdminChellengeAdd();
 
-    loadDonationBoards();
-    loadDonationRegisters();
-    loadQuestion();
-
     loadChallengeReviews();
     loadChallengeQuestions();
 
-    loadQuestion();
+    loadDonationBoards();
+    loadDonationRegisters();
 
+    loadQuestion();
 
     createMenu().execute();
     Prompt.close();
-
 
     saveJoins();
 
@@ -495,14 +488,13 @@ public class App {
 
     saveQuestion();
 
-    saveDonationBoards();
-    saveDonationRegisters();
-
     saveChallengeReviews();
     saveChallengeQuestions();
 
-    saveQuestion();
+    saveDonationBoards();
+    saveDonationRegisters();
 
+    saveQuestion();
   }
 
   @SuppressWarnings("unchecked")
@@ -976,7 +968,7 @@ public class App {
   @SuppressWarnings("unchecked")
   private void loadQuestion() {
     try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("Question.data"))) {
+        new FileInputStream("question.data"))) {
 
       myQuestionListDTOList.addAll((List<MyQuestionListDTO>) in.readObject());
 
@@ -991,7 +983,7 @@ public class App {
 
   private void saveQuestion() {
     try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("Question.data"))) {
+        new FileOutputStream("question.data"))) {
 
       out.writeObject(myQuestionListDTOList);
 
@@ -1085,7 +1077,7 @@ public class App {
     MenuGroup supportMenu = new MenuGroup("고객센터");
     mainMenuGroup.add(supportMenu);
 
-    supportMenu.add(createNoticeMenu());      // 공지사항
+    supportMenu.add(createAdminNoticeMenu());      // 공지사항
     supportMenu.add(createAskMenu());         // 문의하기
 
     // 마이페이지
@@ -1217,19 +1209,20 @@ public class App {
 
 
 
-  private Menu createNoticeMenu() {
-    MenuGroup notice = new MenuGroup("공지사항");
-    //    notice.add(new MenuItem("등록",ACCESS_ADMIN,"/notice/add"));
-    notice.add(new MenuItem("목록", "/adminNotice/list"));
-    notice.add(new MenuItem("상세보기", "/adminNotice/detail"));
-    notice.add(new MenuItem("목록", "/notice/list"));
-    notice.add(new MenuItem("상세보기", "/notice/detail"));
-    //    notice.add(new MenuItem("변경",ACCESS_ADMIN,"/notice/update"));
-    //    notice.add(new MenuItem("삭제",ACCESS_ADMIN, "/notice/delete"));
-    notice.add(new MenuItem("검색", "/notice/search"));
 
-    return notice;
-  }
+  //  private Menu createNoticeMenu() {
+  //    MenuGroup notice = new MenuGroup("공지사항");
+  //    //    notice.add(new MenuItem("등록",ACCESS_ADMIN,"/notice/add"));
+  //    notice.add(new MenuItem("목록", "/adminNotice/list"));
+  //    notice.add(new MenuItem("상세보기", "/adminNotice/detail"));
+  //    notice.add(new MenuItem("목록", "/notice/list"));
+  //    notice.add(new MenuItem("상세보기", "/notice/detail"));
+  //    //    notice.add(new MenuItem("변경",ACCESS_ADMIN,"/notice/update"));
+  //    //    notice.add(new MenuItem("삭제",ACCESS_ADMIN, "/notice/delete"));
+  //    notice.add(new MenuItem("검색", "/notice/search"));
+  //
+  //    return notice;
+  //  }
 
   private Menu createAskMenu() {
     MenuGroup ask = new MenuGroup("문의하기");
@@ -1346,15 +1339,15 @@ public class App {
     return adminVolMenu;
   }
 
-  // 관리자 공지사항 관리 => 회원 createNoticeMenu 부분과 기능 겹침. 삭제 고려
   private Menu createAdminNoticeMenu() {
-    MenuGroup adminNoticeMenu = new MenuGroup("공지사항 관리", ACCESS_ADMIN);
+    MenuGroup adminNoticeMenu = new MenuGroup("공지사항");
 
-    adminNoticeMenu.add(new MenuItem("공지사항 등록","/adminNotice/add"));
+    adminNoticeMenu.add(new MenuItem("공지사항 등록",ACCESS_ADMIN,"/adminNotice/add"));
     adminNoticeMenu.add(new MenuItem("공지사항 목록","/adminNotice/list"));
     adminNoticeMenu.add(new MenuItem("공지사항 상세보기","/adminNotice/detail"));
-    adminNoticeMenu.add(new MenuItem("공지사항 변경","/adminNotice/update"));
-    adminNoticeMenu.add(new MenuItem("공지사항 삭제","/adminNotice/delete"));
+    adminNoticeMenu.add(new MenuItem("공지사항 변경",ACCESS_ADMIN,"/adminNotice/update"));
+    adminNoticeMenu.add(new MenuItem("공지사항 삭제",ACCESS_ADMIN,"/adminNotice/delete"));
+    adminNoticeMenu.add(new MenuItem("공지사항 검색","/adminNotice/search"));
 
     return adminNoticeMenu;
   }

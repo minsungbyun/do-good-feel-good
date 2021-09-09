@@ -33,7 +33,7 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
     System.out.printf("제목: %s\n", myQuestionListDTO.getTitle());
     System.out.printf("아이디: %s\n", myQuestionListDTO.getOwner().getId());
     System.out.printf("내용: %s\n", myQuestionListDTO.getContent());
-    System.out.printf("작성자: %s\n", myQuestionListDTO.getFileUpload());
+    System.out.printf("첨부파일: %s\n", myQuestionListDTO.getFileUpload());
     System.out.printf("등록일: %s\n", myQuestionListDTO.getRegisteredDate());
 
     myQuestionListDTO.setViewCount(myQuestionListDTO.getViewCount() + 1);
