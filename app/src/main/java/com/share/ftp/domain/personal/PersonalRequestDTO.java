@@ -9,10 +9,12 @@ import com.share.ftp.domain.join.JoinDTO;
 @SuppressWarnings("serial")
 public class PersonalRequestDTO implements Serializable {
 
+
   private int no;
   private String title;
   private String name;
   private JoinDTO owner; // 나중에 JoinDTO 변경 예정
+  private String userId;
   private String sort;
   private String tel;
   private String email;
@@ -40,19 +42,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   @Override
   public int hashCode() {
     return Objects.hash(content, email, fileUpload, isChecked, isJoin, isOrg, isPersonal, isSigned,
-        joinCount, joinNum, members, name, no, owner, sort, tel, title, volEndDate, volEndTime,
-        volList, volStartDate, volStartTime, volSubmitTime);
+        joinCount, joinNum, members, name, no, owner, sort, tel, title, userId, volEndDate,
+        volEndTime, volList, volStartDate, volStartTime, volSubmitTime);
   }
-
-
-
-
-
-
-
 
   @Override
   public boolean equals(Object obj) {
@@ -70,30 +68,17 @@ public class PersonalRequestDTO implements Serializable {
         && joinNum == other.joinNum && Objects.equals(members, other.members)
         && Objects.equals(name, other.name) && no == other.no && Objects.equals(owner, other.owner)
         && Objects.equals(sort, other.sort) && Objects.equals(tel, other.tel)
-        && Objects.equals(title, other.title) && Objects.equals(volEndDate, other.volEndDate)
+        && Objects.equals(title, other.title) && Objects.equals(userId, other.userId)
+        && Objects.equals(volEndDate, other.volEndDate)
         && Objects.equals(volEndTime, other.volEndTime) && Objects.equals(volList, other.volList)
         && Objects.equals(volStartDate, other.volStartDate)
         && Objects.equals(volStartTime, other.volStartTime)
         && Objects.equals(volSubmitTime, other.volSubmitTime);
   }
 
-
-
-
-
-
-
-
-
   public int getNo() {
     return no;
   }
-
-
-
-
-
-
 
 
   public void setNo(int no) {
@@ -101,21 +86,9 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
   public String getTitle() {
     return title;
   }
-
-
-
-
-
-
 
 
   public void setTitle(String title) {
@@ -123,21 +96,9 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
   public String getName() {
     return name;
   }
-
-
-
-
-
-
 
 
   public void setName(String name) {
@@ -145,21 +106,9 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
   public JoinDTO getOwner() {
     return owner;
   }
-
-
-
-
-
-
 
 
   public void setOwner(JoinDTO owner) {
@@ -167,10 +116,14 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
+  public String getUserId() {
+    return userId;
+  }
 
 
-
-
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
 
 
   public String getSort() {
@@ -178,21 +131,9 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
   public void setSort(String sort) {
     this.sort = sort;
   }
-
-
-
-
-
-
 
 
   public String getTel() {
@@ -200,54 +141,22 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
   public void setTel(String tel) {
     this.tel = tel;
   }
-
-
-
-
-
-
 
 
   public String getEmail() {
     return email;
   }
 
-
-
-
-
-
-
-
   public void setEmail(String email) {
     this.email = email;
   }
 
-
-
-
-
-
-
-
   public Date getVolStartDate() {
     return volStartDate;
   }
-
-
-
-
-
-
 
 
   public void setVolStartDate(Date volStartDate) {
@@ -255,21 +164,9 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
   public Date getVolEndDate() {
     return volEndDate;
   }
-
-
-
-
-
-
 
 
   public void setVolEndDate(Date volEndDate) {
@@ -277,21 +174,9 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
   public String getVolStartTime() {
     return volStartTime;
   }
-
-
-
-
-
-
 
 
   public void setVolStartTime(String volStartTime) {
@@ -299,21 +184,9 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
   public String getVolEndTime() {
     return volEndTime;
   }
-
-
-
-
-
-
 
 
   public void setVolEndTime(String volEndTime) {
@@ -321,21 +194,9 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
   public String getVolList() {
     return volList;
   }
-
-
-
-
-
-
 
 
   public void setVolList(String volList) {
@@ -343,21 +204,9 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
   public int getJoinNum() {
     return joinNum;
   }
-
-
-
-
-
-
 
 
   public void setJoinNum(int joinNum) {
@@ -365,21 +214,9 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
   public String getContent() {
     return content;
   }
-
-
-
-
-
-
 
 
   public void setContent(String content) {
@@ -387,21 +224,9 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
   public String getFileUpload() {
     return fileUpload;
   }
-
-
-
-
-
-
 
 
   public void setFileUpload(String fileUpload) {
@@ -409,21 +234,9 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
   public boolean isPersonal() {
     return isPersonal;
   }
-
-
-
-
-
-
 
 
   public void setPersonal(boolean isPersonal) {
@@ -431,21 +244,9 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
   public boolean isOrg() {
     return isOrg;
   }
-
-
-
-
-
-
 
 
   public void setOrg(boolean isOrg) {
@@ -453,15 +254,12 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
   public boolean isChecked() {
     return isChecked;
   }
+
+
+
 
 
 
@@ -481,9 +279,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public String getIsSigned() {
     return isSigned;
   }
+
+
+
 
 
 
@@ -503,9 +307,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public Date getVolSubmitTime() {
     return volSubmitTime;
   }
+
+
+
 
 
 
@@ -525,9 +335,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public boolean isJoin() {
     return isJoin;
   }
+
+
+
 
 
 
@@ -547,9 +363,15 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public List<JoinDTO> getMembers() {
     return members;
   }
+
+
+
 
 
 
@@ -569,15 +391,12 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+
+
   public int getJoinCount() {
-    return joinCount;
+    return ++joinCount;
   }
-
-
-
-
-
-
 
 
   public void setJoinCount(int joinCount) {
@@ -585,46 +404,33 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
   @Override
   public String toString() {
     return "PersonalRequestDTO [no=" + no + ", title=" + title + ", name=" + name + ", owner="
-        + owner + ", sort=" + sort + ", tel=" + tel + ", email=" + email + ", volStartDate="
-        + volStartDate + ", volEndDate=" + volEndDate + ", volStartTime=" + volStartTime
-        + ", volEndTime=" + volEndTime + ", volList=" + volList + ", joinNum=" + joinNum
-        + ", content=" + content + ", fileUpload=" + fileUpload + ", isPersonal=" + isPersonal
-        + ", isOrg=" + isOrg + ", isChecked=" + isChecked + ", isSigned=" + isSigned
+        + owner + ", userId=" + userId + ", sort=" + sort + ", tel=" + tel + ", email=" + email
+        + ", volStartDate=" + volStartDate + ", volEndDate=" + volEndDate + ", volStartTime="
+        + volStartTime + ", volEndTime=" + volEndTime + ", volList=" + volList + ", joinNum="
+        + joinNum + ", content=" + content + ", fileUpload=" + fileUpload + ", isPersonal="
+        + isPersonal + ", isOrg=" + isOrg + ", isChecked=" + isChecked + ", isSigned=" + isSigned
         + ", volSubmitTime=" + volSubmitTime + ", isJoin=" + isJoin + ", members=" + members
         + ", joinCount=" + joinCount + "]";
   }
 
 
 
-
-
-
-
-
   public  String getMemberNames() {
 
-    members.add(owner);
-
-    if (this.members == null) {
+    if (members == null) {
       return "";
     }
+
     StringBuilder names = new StringBuilder();
 
-    for (JoinDTO joinDTO : this.members) {
+    for (JoinDTO joinDTO : members) {
       if (names.length() > 0) {
         names.append(",");
       }
       names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
-
     }
 
     return names.toString();
