@@ -7,6 +7,16 @@ import java.util.Objects;
 @SuppressWarnings("serial")
 public class DonationBoardDTO implements Serializable {
   private int no;
+
+  private String sort;
+  private String children = "아동";
+  private String teen = "청소년";
+  private String elder = "어르신";
+  private String handicappedPerson = "장애인";
+  private String animal = "동물";
+  private String environmental = "환경";
+  private String other = "기타";
+
   private String title;
   private String leader;
   private String content;
@@ -20,15 +30,19 @@ public class DonationBoardDTO implements Serializable {
 
   @Override
   public String toString() {
-    return "DonationBoardDTO [no=" + no + ", title=" + title + ", leader=" + leader + ", content="
-        + content + ", fileUpload=" + fileUpload + ", registeredStartDate=" + registeredStartDate
-        + ", registeredEndDate=" + registeredEndDate + ", isOrg=" + isOrg + ", isChecked="
-        + isChecked + ", isSigned=" + isSigned + "]";
+    return "DonationBoardDTO [no=" + no + ", sort=" + sort + ", children=" + children + ", teen="
+        + teen + ", elder=" + elder + ", handicappedPerson=" + handicappedPerson + ", animal="
+        + animal + ", environmental=" + environmental + ", other=" + other + ", title=" + title
+        + ", leader=" + leader + ", content=" + content + ", fileUpload=" + fileUpload
+        + ", registeredStartDate=" + registeredStartDate + ", registeredEndDate="
+        + registeredEndDate + ", isOrg=" + isOrg + ", isChecked=" + isChecked + ", isSigned="
+        + isSigned + "]";
   }
   @Override
   public int hashCode() {
-    return Objects.hash(content, fileUpload, isChecked, isOrg, isSigned, leader, no,
-        registeredEndDate, registeredStartDate, title);
+    return Objects.hash(animal, children, content, elder, environmental, fileUpload,
+        handicappedPerson, isChecked, isOrg, isSigned, leader, no, other, registeredEndDate,
+        registeredStartDate, sort, teen, title);
   }
   @Override
   public boolean equals(Object obj) {
@@ -39,11 +53,17 @@ public class DonationBoardDTO implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     DonationBoardDTO other = (DonationBoardDTO) obj;
-    return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
+    return Objects.equals(animal, other.animal) && Objects.equals(children, other.children)
+        && Objects.equals(content, other.content) && Objects.equals(elder, other.elder)
+        && Objects.equals(environmental, other.environmental)
+        && Objects.equals(fileUpload, other.fileUpload)
+        && Objects.equals(handicappedPerson, other.handicappedPerson)
         && isChecked == other.isChecked && isOrg == other.isOrg
         && Objects.equals(isSigned, other.isSigned) && Objects.equals(leader, other.leader)
-        && no == other.no && Objects.equals(registeredEndDate, other.registeredEndDate)
+        && no == other.no && Objects.equals(this.other, other.other)
+        && Objects.equals(registeredEndDate, other.registeredEndDate)
         && Objects.equals(registeredStartDate, other.registeredStartDate)
+        && Objects.equals(sort, other.sort) && Objects.equals(teen, other.teen)
         && Objects.equals(title, other.title);
   }
   public int getNo() {
@@ -51,6 +71,54 @@ public class DonationBoardDTO implements Serializable {
   }
   public void setNo(int no) {
     this.no = no;
+  }
+  public String getSort() {
+    return sort;
+  }
+  public void setSort(String sort) {
+    this.sort = sort;
+  }
+  public String getChildren() {
+    return children;
+  }
+  public void setChildren(String children) {
+    this.children = children;
+  }
+  public String getTeen() {
+    return teen;
+  }
+  public void setTeen(String teen) {
+    this.teen = teen;
+  }
+  public String getElder() {
+    return elder;
+  }
+  public void setElder(String elder) {
+    this.elder = elder;
+  }
+  public String getHandicappedPerson() {
+    return handicappedPerson;
+  }
+  public void setHandicappedPerson(String handicappedPerson) {
+    this.handicappedPerson = handicappedPerson;
+  }
+  public String getAnimal() {
+    return animal;
+  }
+  public void setAnimal(String animal) {
+    this.animal = animal;
+  }
+  public String getEnvironmental() {
+    return environmental;
+  }
+  public void setEnvironmental(String environmental) {
+    this.environmental = environmental;
+  }
+  public String getOther() {
+    return other;
+  }
+  public void setOther(String other) {
+    this.other = other;
   }
   public String getTitle() {
     return title;

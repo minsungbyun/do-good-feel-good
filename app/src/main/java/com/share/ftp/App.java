@@ -90,6 +90,7 @@ import com.share.ftp.handler.personal.community.CommReviewDeleteHandler;
 import com.share.ftp.handler.personal.community.CommReviewListHandler;
 import com.share.ftp.handler.personal.community.CommReviewUpdateHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardAcceptApplyHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardAdminApplyDetailHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardAppliedListHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardApplyCompleteListHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardApplyDetailHandler;
@@ -360,9 +361,10 @@ public class App {
     commands.put("/donationBoard/rejectApply", new DonationBoardRejectApplyHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
     commands.put("/donationBoard/rejectedList", new DonationBoardRejectedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
     commands.put("/donationBoard/applyDetail", new DonationBoardApplyDetailHandler(donationBoardDTOList, donationRegisterDTOList, donationPrompt));
+    commands.put("/adminDonationBoard/applyDetail", new DonationBoardAdminApplyDetailHandler(donationBoardDTOList, donationRegisterDTOList, donationPrompt));
 
     // 모금함 (기부하기)
-    commands.put("/donationRegister/add", new DonationRegisterAddHandler(donationRegisterDTOList));
+    commands.put("/donationRegister/add", new DonationRegisterAddHandler(donationRegisterDTOList, joinDTOList));
     commands.put("/donationRegister/participation", new DonationRegisterParticipationHandler(donationRegisterDTOList));
     commands.put("/donationRegister/totalMoney", new DonationRegisterTotalMoneyHandler(donationRegisterDTOList));
 
@@ -436,10 +438,10 @@ public class App {
   void service() {
     loadChallengeReviews();
     loadChallengeQuestions();
-    
+
     loadCommBoardDTO();
     loadCommReviewDTO();
-    
+
     loadJoins();
 
     loadPersonalRequest();
@@ -451,8 +453,8 @@ public class App {
     loadOrgRequestApply();
     loadOrgRequestReject();
 
-    loadDonationBoards();
-    loadDonationRegisters();
+    //    loadDonationBoards();
+    //    loadDonationRegisters();
     loadQuestion();
 
     createMenu().execute();
@@ -460,20 +462,20 @@ public class App {
 
     saveChallengeReviews();
     saveChallengeQuestions();
-    
+
     saveJoins();
-    
+
     savePersonalRequest();
     savePersonalRequestApply();
     savePersonalRequestReject();
     savePersonalSelected();
-    
+
     saveOrgRequest();
     saveOrgRequestApply();
     saveOrgRequestReject();
-    
-    saveDonationBoards();
-    saveDonationRegisters();
+
+    //    saveDonationBoards();
+    //    saveDonationRegisters();
   }
 
   @SuppressWarnings("unchecked")
@@ -668,8 +670,8 @@ public class App {
       e.printStackTrace();
     }
   }
-  
-  
+
+
   @SuppressWarnings("unchecked")
   private void loadChallengeReviews() {
     try (ObjectInputStream in = new ObjectInputStream(
@@ -697,15 +699,15 @@ public class App {
       System.out.println("참여인증&댓글을 파일에 저장 중 오류 발생!");
     }
   }
-  
+
   @SuppressWarnings("unchecked")
   private void loadChallengeQuestions() {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("myChallengeQuestion.data"))) {
 
-    myChallengeQuestionDTOList.addAll((List<MyChallengeQuestionDTO>) in.readObject());
+      myChallengeQuestionDTOList.addAll((List<MyChallengeQuestionDTO>) in.readObject());
 
-    System.out.println("챌린지 문의글 로딩 완료!");
+      System.out.println("챌린지 문의글 로딩 완료!");
 
     } catch (Exception e) {
       System.out.println("파일에서 챌린지 문의글을 읽어오는 중 오류 발생!");
@@ -726,7 +728,7 @@ public class App {
       e.printStackTrace();
     }
   }
-  
+
 
   @SuppressWarnings("unchecked")
   private void loadDonationBoards() {
@@ -1125,7 +1127,7 @@ public class App {
 
     return ChallengeReview;
   }
-  
+
 
 
   private Menu createChallengeQuestionMenu() {
@@ -1139,7 +1141,7 @@ public class App {
 
     return ChallengeQuestion;
   }
-  
+
 
 
   private Menu createMonthlyRankingMenu() {
@@ -1270,7 +1272,7 @@ public class App {
     MenuGroup adminDonationMenu = new MenuGroup("모금함 관리");
 
     adminDonationMenu.add(new MenuItem("모금함 개설 신청내역 목록", "/donationBoard/applyList"));
-    adminDonationMenu.add(new MenuItem("모금함 개설 신청내역 상세보기", "/donationBoard/applyDetail"));
+    adminDonationMenu.add(new MenuItem("모금함 개설 신청내역 상세보기", "/adminDonationBoard/applyDetail"));
     adminDonationMenu.add(new MenuItem("모금함 개설 승인하기", "/donationBoard/acceptApply"));
     adminDonationMenu.add(new MenuItem("모금함 개설 반려하기", "/donationBoard/rejectApply"));
 
