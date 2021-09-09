@@ -13,12 +13,12 @@ public class AdminNoticeListHandler extends AbstractAdminNoticeHandler {
 
 
   public void execute() {
-    System.out.println("[회원 목록]");
+    System.out.println("[공지사항 목록]");
 
     for (NoticeDTO noticeDTO : noticeDTOList) {
       System.out.printf("%d, %s, %s, %s, %s\n", 
           noticeDTO.getNo(), 
-          noticeDTO.getAdminId(), 
+          noticeDTO.getAdmin().getId(),
           noticeDTO.getTitle(), 
           noticeDTO.getContent(), 
           noticeDTO.getFileUpload(), 

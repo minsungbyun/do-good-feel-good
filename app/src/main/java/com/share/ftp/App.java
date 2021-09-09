@@ -1027,7 +1027,7 @@ public class App {
     MenuGroup supportMenu = new MenuGroup("고객센터");
     mainMenuGroup.add(supportMenu);
 
-    supportMenu.add(createNoticeMenu());      // 공지사항
+    supportMenu.add(createAdminNoticeMenu());      // 공지사항
     supportMenu.add(createAskMenu());         // 문의하기
 
     // 마이페이지
@@ -1160,19 +1160,19 @@ public class App {
 
 
 
-  private Menu createNoticeMenu() {
-    MenuGroup notice = new MenuGroup("공지사항");
-    //    notice.add(new MenuItem("등록",ACCESS_ADMIN,"/notice/add"));
-    notice.add(new MenuItem("목록", "/adminNotice/list"));
-    notice.add(new MenuItem("상세보기", "/adminNotice/detail"));
-    notice.add(new MenuItem("목록", "/notice/list"));
-    notice.add(new MenuItem("상세보기", "/notice/detail"));
-    //    notice.add(new MenuItem("변경",ACCESS_ADMIN,"/notice/update"));
-    //    notice.add(new MenuItem("삭제",ACCESS_ADMIN, "/notice/delete"));
-    notice.add(new MenuItem("검색", "/notice/search"));
-
-    return notice;
-  }
+//  private Menu createNoticeMenu() {
+//    MenuGroup notice = new MenuGroup("공지사항");
+//    //    notice.add(new MenuItem("등록",ACCESS_ADMIN,"/notice/add"));
+//    notice.add(new MenuItem("목록", "/adminNotice/list"));
+//    notice.add(new MenuItem("상세보기", "/adminNotice/detail"));
+//    notice.add(new MenuItem("목록", "/notice/list"));
+//    notice.add(new MenuItem("상세보기", "/notice/detail"));
+//    //    notice.add(new MenuItem("변경",ACCESS_ADMIN,"/notice/update"));
+//    //    notice.add(new MenuItem("삭제",ACCESS_ADMIN, "/notice/delete"));
+//    notice.add(new MenuItem("검색", "/notice/search"));
+//
+//    return notice;
+//  }
 
   private Menu createAskMenu() {
     MenuGroup ask = new MenuGroup("문의하기");
@@ -1289,13 +1289,13 @@ public class App {
 
   // 관리자 공지사항 관리 => 회원 createNoticeMenu 부분과 기능 겹침. 삭제 고려
   private Menu createAdminNoticeMenu() {
-    MenuGroup adminNoticeMenu = new MenuGroup("공지사항 관리");
+    MenuGroup adminNoticeMenu = new MenuGroup("공지사항");
 
-    adminNoticeMenu.add(new MenuItem("공지사항 등록","/adminNotice/add"));
+    adminNoticeMenu.add(new MenuItem("공지사항 등록", ACCESS_ADMIN, "/adminNotice/add"));
     adminNoticeMenu.add(new MenuItem("공지사항 목록","/adminNotice/list"));
     adminNoticeMenu.add(new MenuItem("공지사항 상세보기","/adminNotice/detail"));
-    adminNoticeMenu.add(new MenuItem("공지사항 변경","/adminNotice/update"));
-    adminNoticeMenu.add(new MenuItem("공지사항 삭제","/adminNotice/delete"));
+    adminNoticeMenu.add(new MenuItem("공지사항 변경", ACCESS_ADMIN, "/adminNotice/update"));
+    adminNoticeMenu.add(new MenuItem("공지사항 삭제", ACCESS_ADMIN, "/adminNotice/delete"));
 
     return adminNoticeMenu;
   }
