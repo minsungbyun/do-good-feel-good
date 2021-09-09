@@ -34,6 +34,7 @@ public class DonationRegisterMyListHandler extends AbstractDonationRegisterHandl
       if (AuthLoginHandler.getLoginUser().getName().equals(donationRegisterDTO.getName())) {
 
         total += donationRegisterDTO.getMyTotaldonationMoney();
+
       } else {
         total = 0;
       }
