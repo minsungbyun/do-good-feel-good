@@ -2,6 +2,7 @@ package com.share.ftp.handler.join;
 
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
+import com.share.menu.Menu;
 import com.share.util.Prompt;
 
 public class MyPageDelete extends AbstractJoinHandler {
@@ -15,7 +16,8 @@ public class MyPageDelete extends AbstractJoinHandler {
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("[회원 탈퇴]");
+    System.out.println("[  회원 탈퇴  ]");
+    System.out.println();
 
     if (AuthLoginHandler.getLoginUser() == null) {
       System.out.println("로그인 후 이용가능합니다.");
@@ -40,6 +42,7 @@ public class MyPageDelete extends AbstractJoinHandler {
 
 
     AuthLoginHandler.loginUser = null; // 로그인 끊는다.
+    AuthLoginHandler.userAccessLevel = Menu.ACCESS_LOGOUT;
     joinDTOList.remove(joinDTO); // 회원 제거한다.
 
     System.out.println("");

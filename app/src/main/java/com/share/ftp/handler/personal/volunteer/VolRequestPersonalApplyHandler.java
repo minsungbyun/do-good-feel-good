@@ -1,6 +1,7 @@
 package com.share.ftp.handler.personal.volunteer;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.personal.PersonalRequestDTO;
@@ -66,14 +67,14 @@ public class VolRequestPersonalApplyHandler extends AbstractVolRequestPersonalHa
         System.out.println("--------------------------------------------------------------");
         System.out.println("올바른 숫자를 입력하세요");
         System.out.println("--------------------------------------------------------------");
-        //        continue; // 나중에 설정할거
+        continue; // 나중에 설정할거
 
       } catch (Exception e) {
         System.out.println("--------------------------------------------------------------");
         //      System.out.printf("오류 발생: %s\n", e.getClass().getName());
         System.out.println("다시 입력 바랍니다.");
         System.out.println("--------------------------------------------------------------");
-        //        continue;
+        continue;
       }
       break;
     }
@@ -85,7 +86,16 @@ public class VolRequestPersonalApplyHandler extends AbstractVolRequestPersonalHa
   //    
   //  }
 
-
+  public static boolean checkDate(String checkDate) {
+    try {
+      SimpleDateFormat dateFormatParser = new SimpleDateFormat("yyyy/MM/dd"); //검증할 날짜 포맷 설정
+      dateFormatParser.setLenient(false); //false일경우 처리시 입력한 값이 잘못된 형식일 시 오류가 발생
+      dateFormatParser.parse(checkDate); //대상 값 포맷에 적용되는지 확인
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
 
   // 예외처리 ver.
 

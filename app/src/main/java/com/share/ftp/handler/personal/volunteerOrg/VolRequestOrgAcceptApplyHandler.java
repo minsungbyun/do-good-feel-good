@@ -38,16 +38,16 @@ public class VolRequestOrgAcceptApplyHandler extends AbstractVolRequestOrgHandle
     }
 
     orgRequestDTO.setChecked(true);
+    orgRequestDTO.setIsSigned("승인됨");
     //    personalRequestDTO.setIsSigned("승인됨");
 
 
     // 기존 리스트 복사
-    for (OrgRequestDTO orgRequesApplyDTO : orgRequestDTOList) {
-      orgRequestApplyDTOList.add(orgRequesApplyDTO);
+
+    orgRequestApplyDTOList.add(orgRequestDTO);
 
 
-      System.out.println("해당 봉사신청을 승인하였습니다.");
+    System.out.println("해당 봉사신청을 승인하였습니다.");
 
-    }
   }
 }

@@ -9,10 +9,11 @@ import com.share.util.Prompt;
 
 public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolRequestPersonalHandler { // 개인 봉사신청 양식 쓰는 곳
 
-  int joinCounts = 1; // 최소인원(주최자) 설정
+  int ownerCount = 1; // 최소인원(주최자) 설정
+  //  int joinCounts;
 
-  List<PersonalRequestDTO> personalSelectedList;
   List<JoinDTO> members = new ArrayList<>();
+  List<PersonalRequestDTO> personalSelectedList;
 
   public VolRequestPersonalAppliedListDetailHandler(
       List<PersonalRequestDTO> personalRequestDTOList,
@@ -89,19 +90,45 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
       System.out.println("당신은 이미 주최자입니다!");
       return;
     }
-    // 이미 참여한 적이 있다면 못들어오지^^
+
+    //    findByName(no);
     if (members.contains(AuthLoginHandler.getLoginUser())) {
       System.out.println("이미 봉사참여를 하셨습니다!");
+      return; 
+    } 
+    System.out.println("유효성 검사 전");
+    System.out.println("member객체의 사이즈:"+ members.size());
+
+    // 봉사인원 유효성 검사
+    if (members.size() + 1 == personalRequestApplyDTO.getJoinNum()) {
+      System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
       return;
     }
-
+    System.out.println("멤버추가시키기 전");
+    System.out.println("member객체의 사이즈:"+ members.size());
     members.add(AuthLoginHandler.getLoginUser());
+    System.out.println("멤버추가 시킨 후");
+    System.out.println("member객체의 사이즈:"+ members.size());
     personalRequestApplyDTO.setMembers(members); // 참여 멤버 등록
+
+    //    members.clear();
+
 
     //    personalRequestDTO.setMembers( addJoinMember());
 
-    joinCounts = personalRequestApplyDTO.getJoinCount(); //참여인원증가
+    //    int joinCount = personalRequestApplyDTO.getJoinCount() + 1;
+
+
+    int joinCounts = personalRequestApplyDTO.getTotalJoinCount(); 
+    System.out.println("참여 카운트(전) " +joinCounts);
     joinCounts += 1;
+
+    System.out.println("전체카운트 " + (joinCounts));
+    personalRequestApplyDTO.setTotalJoinCount(joinCounts);
+    System.out.println("참여 카운트(후) " +joinCounts);
+
+    //    joinCounts = personalRequestApplyDTO.getJoinCount() + 1; //참여인원증가
+
 
     personalSelectedList.add(personalRequestApplyDTO); 
 
@@ -112,7 +139,15 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
 
 
 
-
+  private PersonalRequestDTO findByName(int no) {
+    for (PersonalRequestDTO personalRequestApplyDTO : personalSelectedList) {
+      if (personalRequestApplyDTO.getName().equals(AuthLoginHandler.getLoginUser().getName()) ||
+          personalRequestApplyDTO.getNo() == no) {
+        return personalRequestApplyDTO;
+      }
+    }
+    return null;
+  }
 
 
 
@@ -164,7 +199,6 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
 
 
 }
-
 
 
 

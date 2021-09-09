@@ -42,6 +42,7 @@ public class VolRequestPersonalAcceptApplyHandler extends AbstractVolRequestPers
     //    public List<JoinDTO> addJoinMember()
     personalRequestDTO.setChecked(true);
     personalRequestDTO.setIsSigned("승인됨");
+    personalRequestDTO.setJoinCount(1);
     //    personalRequestDTO.setMembers(addOwner(personalRequestDTO));
     //    members.add(personalRequestDTO.getOwner()); // 주최자 등록
 
@@ -49,14 +50,14 @@ public class VolRequestPersonalAcceptApplyHandler extends AbstractVolRequestPers
 
 
     // 기존 리스트 복사
-    for (PersonalRequestDTO personalRequestApplyDTO : personalRequestDTOList) {
-      personalRequestApplyDTOList.add(personalRequestApplyDTO);
+    //    for (PersonalRequestDTO personalRequestApplyDTO : personalRequestDTOList) {
+    personalRequestApplyDTOList.add(personalRequestDTO);
 
-      personalSelectedList.add(personalRequestApplyDTO);
+    //    personalSelectedList.add(personalRequestDTO);
 
-      System.out.println("[  해당 봉사신청을 승인하였습니다. ]");
+    System.out.println("[  해당 봉사신청을 승인하였습니다. ]");
 
-    }
+    //    }
   }
 
   //  private List<JoinDTO> addOwner(PersonalRequestDTO owner) {

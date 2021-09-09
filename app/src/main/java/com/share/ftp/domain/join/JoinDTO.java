@@ -10,6 +10,7 @@ public class JoinDTO implements Serializable{
   private String id;
   private String password;
   private String name;
+  private Date birthdate;
   private String tel;
   private String email;
   private String address;
@@ -17,17 +18,11 @@ public class JoinDTO implements Serializable{
   private boolean isAdmin;
   private boolean isPersonal;
   private boolean isOrg;
-  @Override
-  public String toString() {
-    return "JoinDTO [no=" + no + ", id=" + id + ", password=" + password + ", name=" + name
-        + ", tel=" + tel + ", email=" + email + ", address=" + address + ", registerDate="
-        + registerDate + ", isAdmin=" + isAdmin + ", isPersonal=" + isPersonal + ", isOrg=" + isOrg
-        + "]";
-  }
+  private int authNum = 1004; // getter setter 만 적용했음
   @Override
   public int hashCode() {
-    return Objects.hash(address, email, id, isAdmin, isOrg, isPersonal, name, no, password,
-        registerDate, tel);
+    return Objects.hash(address, authNum, birthdate, email, id, isAdmin, isOrg, isPersonal, name,
+        no, password, registerDate, tel);
   }
   @Override
   public boolean equals(Object obj) {
@@ -38,11 +33,19 @@ public class JoinDTO implements Serializable{
     if (getClass() != obj.getClass())
       return false;
     JoinDTO other = (JoinDTO) obj;
-    return Objects.equals(address, other.address) && Objects.equals(email, other.email)
+    return Objects.equals(address, other.address) && authNum == other.authNum
+        && Objects.equals(birthdate, other.birthdate) && Objects.equals(email, other.email)
         && Objects.equals(id, other.id) && isAdmin == other.isAdmin && isOrg == other.isOrg
         && isPersonal == other.isPersonal && Objects.equals(name, other.name) && no == other.no
         && Objects.equals(password, other.password)
         && Objects.equals(registerDate, other.registerDate) && Objects.equals(tel, other.tel);
+  }
+  @Override
+  public String toString() {
+    return "JoinDTO [no=" + no + ", id=" + id + ", password=" + password + ", name=" + name
+        + ", birthdate=" + birthdate + ", tel=" + tel + ", email=" + email + ", address=" + address
+        + ", registerDate=" + registerDate + ", isAdmin=" + isAdmin + ", isPersonal=" + isPersonal
+        + ", isOrg=" + isOrg + ", authNum=" + authNum + "]";
   }
   public int getNo() {
     return no;
@@ -67,6 +70,12 @@ public class JoinDTO implements Serializable{
   }
   public void setName(String name) {
     this.name = name;
+  }
+  public Date getBirthdate() {
+    return birthdate;
+  }
+  public void setBirthdate(Date birthdate) {
+    this.birthdate = birthdate;
   }
   public String getTel() {
     return tel;
@@ -110,7 +119,12 @@ public class JoinDTO implements Serializable{
   public void setOrg(boolean isOrg) {
     this.isOrg = isOrg;
   }
-
+  public int getAuthNum() {
+    return authNum;
+  }
+  public void setAuthNum(int authNum) {
+    this.authNum = authNum;
+  }
 
 
 
