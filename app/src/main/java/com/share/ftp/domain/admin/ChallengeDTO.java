@@ -1,9 +1,11 @@
 package com.share.ftp.domain.admin;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
-public class ChallengeDTO {
+@SuppressWarnings("serial")
+public class ChallengeDTO implements Serializable{
 
   private int no;
   private String adminId;

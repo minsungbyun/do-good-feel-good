@@ -31,6 +31,7 @@ import com.share.ftp.domain.personal.OrgRequestDTO;
 import com.share.ftp.domain.personal.PersonalRequestDTO;
 import com.share.ftp.domain.personal.VolListDTO;
 import com.share.ftp.handler.Command;
+import com.share.ftp.handler.admin.AdminChallengeAddHandler;
 import com.share.ftp.handler.admin.AdminChallengeDeleteHandler;
 import com.share.ftp.handler.admin.AdminChallengeDetailHandler;
 import com.share.ftp.handler.admin.AdminChallengeListHandler;
@@ -76,7 +77,6 @@ import com.share.ftp.handler.personal.challenge.ChallengeReviewSearchHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewUpdateHandler;
 import com.share.ftp.handler.personal.challenge.MyRankingHandler;
 import com.share.ftp.handler.personal.challenge.RankingHandler;
-import com.share.ftp.handler.personal.challenge.ShowChallengeDetailHandler;
 import com.share.ftp.handler.personal.community.CommBestDetailHandler;
 import com.share.ftp.handler.personal.community.CommBestListHandler;
 import com.share.ftp.handler.personal.community.CommBoardAddHandler;
@@ -325,7 +325,7 @@ public class App {
     commands.put("/commReview/delete", new CommReviewDeleteHandler(commReviewDTOList));
 
     // 챌린지
-    commands.put("/showChallenge/detail", new ShowChallengeDetailHandler());  // 챌린지 상세정보(구현예정)
+    commands.put("adminChallenge/detail", new AdminChallengeDetailHandler(challengeDTOList));  // 챌린지 상세정보
     commands.put("/challengeJoin/join", new ChallengeJoinHandler(myChallengeJoinDTOList));  // 참여하기(구현중..)
     commands.put("/challengeJoin/list", new ChallengeJoinListHandler(myChallengeJoinDTOList));  // 참여자목록(구현중..)
 
@@ -419,6 +419,7 @@ public class App {
     commands.put("/adminAsk/delete", new AdminQuestionDeleteHandler(questionDTOList));
 
     // 관리자 챌린지
+    commands.put("/adminChallenge/add", new AdminChallengeAddHandler(challengeDTOList));
     commands.put("/adminChallenge/list", new AdminChallengeListHandler(challengeDTOList));
     commands.put("/adminChallenge/detail", new AdminChallengeDetailHandler(challengeDTOList));
     commands.put("/adminChallenge/update", new AdminChallengeUpdateHandler(challengeDTOList));
@@ -434,10 +435,8 @@ public class App {
   void service() {
     loadChallengeReviews();
     loadChallengeQuestions();
-    
-    loadCommBoardDTO();
-    loadCommReviewDTO();
-    
+
+
     loadJoins();
 
     loadPersonalRequest();
@@ -449,6 +448,10 @@ public class App {
     loadOrgRequestApply();
     loadOrgRequestReject();
 
+    loadCommBoard();
+    loadCommReview();
+
+    loadAdminChellengeAdd();
     loadDonationBoards();
     loadDonationRegisters();
     loadQuestion();
@@ -456,22 +459,32 @@ public class App {
     createMenu().execute();
     Prompt.close();
 
-    saveChallengeReviews();
-    saveChallengeQuestions();
-    
+
     saveJoins();
-    
+
     savePersonalRequest();
     savePersonalRequestApply();
     savePersonalRequestReject();
     savePersonalSelected();
-    
+
     saveOrgRequest();
     saveOrgRequestApply();
     saveOrgRequestReject();
-    
+
+    saveCommBoard();
+    saveCommReview();
+
+
+    saveAdminChellengeAdd();
+    saveChallengeReviews();
+    saveChallengeQuestions();
+
     saveDonationBoards();
     saveDonationRegisters();
+    saveDonationBoards();
+    saveDonationRegisters();
+
+    saveQuestion();
   }
 
   @SuppressWarnings("unchecked")
@@ -596,33 +609,24 @@ public class App {
       System.out.println("봉사 참여 하는 중 오류 발생!");
       e.printStackTrace();
     }
-
-
-
-    saveCommBoardDTO();
-    saveCommReviewDTO();
-    saveJoins();
-    saveDonationBoards();
-    saveDonationRegisters();
-    saveQuestion();
   }
 
   @SuppressWarnings("unchecked")
 
-  private void loadCommBoardDTO() {
+  private void loadCommBoard() {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("commBoard"))) {
 
       commBoardDTOList.addAll((List<CommBoardDTO>) in.readObject());
 
-      System.out.println("게시글 로딩 완료!");
+      System.out.println("나눔이야기 로딩 완료!");
 
     } catch (Exception e) {
-      System.out.println("파일에서 게시글을 읽어 오는 중 오류 발생!");
+      System.out.println("나눔이야기 읽어 오는 중 오류 발생!");
     }
   }
 
-  private void saveCommBoardDTO() {
+  private void saveCommBoard() {
     try (ObjectOutputStream out = new ObjectOutputStream(
         new FileOutputStream("commBoard"))) {
 
@@ -631,14 +635,14 @@ public class App {
       System.out.println("나눔이야기 저장 완료!");
 
     } catch (Exception e) {
-      System.out.println("게시글을 파일에 저장 중 오류 발생!");
+      System.out.println("나눔이야기 파일에 저장 중 오류 발생!");
       e.printStackTrace();
     }
   }
 
   @SuppressWarnings("unchecked")
 
-  private void loadCommReviewDTO() {
+  private void loadCommReview() {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("commReview"))) {
 
@@ -653,7 +657,7 @@ public class App {
   }
 
 
-  private void saveCommReviewDTO() {
+  private void saveCommReview() {
     try (ObjectOutputStream out = new ObjectOutputStream(
         new FileOutputStream("commReview"))) {
 
@@ -666,8 +670,38 @@ public class App {
       e.printStackTrace();
     }
   }
-  
-  
+
+
+  @SuppressWarnings({"unchecked"})
+
+  private void loadAdminChellengeAdd() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("monthlychallenge.data"))) {
+
+      challengeDTOList.addAll((List<ChallengeDTO>) in.readObject());
+
+      System.out.println("이달의 챌린지 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("이달의 챌린지 읽어 오는 중 오류 발생!");
+    }
+  }
+
+  private void saveAdminChellengeAdd() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("monthlychallenge.data"))) {
+
+      out.writeObject(challengeDTOList);
+
+      System.out.println("이달의 챌린지 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("이달의 챌린지 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+
   @SuppressWarnings("unchecked")
   private void loadChallengeReviews() {
     try (ObjectInputStream in = new ObjectInputStream(
@@ -695,15 +729,15 @@ public class App {
       System.out.println("참여인증&댓글을 파일에 저장 중 오류 발생!");
     }
   }
-  
+
   @SuppressWarnings("unchecked")
   private void loadChallengeQuestions() {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("myChallengeQuestion.data"))) {
 
-    myChallengeQuestionDTOList.addAll((List<MyChallengeQuestionDTO>) in.readObject());
+      myChallengeQuestionDTOList.addAll((List<MyChallengeQuestionDTO>) in.readObject());
 
-    System.out.println("챌린지 문의글 로딩 완료!");
+      System.out.println("챌린지 문의글 로딩 완료!");
 
     } catch (Exception e) {
       System.out.println("파일에서 챌린지 문의글을 읽어오는 중 오류 발생!");
@@ -724,7 +758,7 @@ public class App {
       e.printStackTrace();
     }
   }
-  
+
 
   @SuppressWarnings("unchecked")
   private void loadDonationBoards() {
@@ -994,8 +1028,10 @@ public class App {
     MenuGroup challengeDetailMenu = new MenuGroup("챌린지 상세보기");
     monthlyChallengeMenu.add(challengeDetailMenu); 
 
-    MenuGroup showChallengeDetailHandler = new MenuGroup("상세정보");  // 구현예정
-    challengeDetailMenu.add(showChallengeDetailHandler);
+    //    MenuGroup showChallengeDetailHandler = new MenuGroup("상세정보");  // 구현예정
+    //    challengeDetailMenu.add(showChallengeDetailHandler);
+
+    challengeDetailMenu.add(new MenuItem("상세정보", "adminChallenge/detail"));
 
     challengeDetailMenu.add(new MenuItem("참여하기", ACCESS_MEMBER, "/challengeJoin/join"));
 
@@ -1042,7 +1078,7 @@ public class App {
     MyPageMenu.add(new MenuItem("탈퇴", ACCESS_MEMBER, "/MyPage/delete")); // 탈퇴
 
     // 관리자
-    MenuGroup adminMenu = new MenuGroup("관리자",  ACCESS_ADMIN);
+    MenuGroup adminMenu = new MenuGroup("관리자", ACCESS_ADMIN);
     mainMenuGroup.add(adminMenu);
 
     adminMenu.add(createAdminMemberMenu());      // 회원관리
@@ -1123,7 +1159,7 @@ public class App {
 
     return ChallengeReview;
   }
-  
+
 
 
   private Menu createChallengeQuestionMenu() {
@@ -1137,7 +1173,7 @@ public class App {
 
     return ChallengeQuestion;
   }
-  
+
 
 
   private Menu createMonthlyRankingMenu() {
@@ -1254,7 +1290,7 @@ public class App {
   // 관리자
 
   private Menu createAdminMemberMenu() {
-    MenuGroup adminMemberMenu = new MenuGroup("회원정보 관리");
+    MenuGroup adminMemberMenu = new MenuGroup("회원정보 관리", ACCESS_ADMIN);
 
     adminMemberMenu.add(new MenuItem("회원목록", "/join/list"));
     adminMemberMenu.add(new MenuItem("가입회원 상세보기", "/join/detail"));
@@ -1264,7 +1300,7 @@ public class App {
   }
 
   private Menu createAdminDonationMenu() {
-    MenuGroup adminDonationMenu = new MenuGroup("모금함 관리");
+    MenuGroup adminDonationMenu = new MenuGroup("모금함 관리" ,ACCESS_ADMIN);
 
     adminDonationMenu.add(new MenuItem("모금함 개설 신청내역 목록", "/donationBoard/applyList"));
     adminDonationMenu.add(new MenuItem("모금함 개설 신청내역 상세보기", "/donationBoard/applyDetail"));
@@ -1275,7 +1311,7 @@ public class App {
   }
 
   private Menu createAdminVolMenu() {
-    MenuGroup adminVolMenu = new MenuGroup("봉사활동 관리");
+    MenuGroup adminVolMenu = new MenuGroup("봉사활동 관리", ACCESS_ADMIN);
 
     adminVolMenu.add(new MenuItem("개인봉사신청내역","/volRequestPersonal/applyList"));
     adminVolMenu.add(new MenuItem("기관봉사신청내역","/volRequestPersonal/bookmark")); // 구현예정
@@ -1289,7 +1325,7 @@ public class App {
 
   // 관리자 공지사항 관리 => 회원 createNoticeMenu 부분과 기능 겹침. 삭제 고려
   private Menu createAdminNoticeMenu() {
-    MenuGroup adminNoticeMenu = new MenuGroup("공지사항 관리");
+    MenuGroup adminNoticeMenu = new MenuGroup("공지사항 관리", ACCESS_ADMIN);
 
     adminNoticeMenu.add(new MenuItem("공지사항 등록","/adminNotice/add"));
     adminNoticeMenu.add(new MenuItem("공지사항 목록","/adminNotice/list"));
@@ -1301,13 +1337,13 @@ public class App {
   }
 
   private Menu createAdminAskMenu() {
-    MenuGroup adminAskInfo = new MenuGroup("문의사항 관리");
+    MenuGroup adminAskInfo = new MenuGroup("문의사항 관리", ACCESS_ADMIN);
 
     adminAskInfo.add(new MenuItem("문의사항 등록","/adminAsk/add"));
-    adminAskInfo.add(new MenuItem("문의사항 목록","/adminAsk/add"));
-    adminAskInfo.add(new MenuItem("문의사항 상세보기","/adminAsk/add"));
-    adminAskInfo.add(new MenuItem("문의사항 변경","/adminAsk/add"));
-    adminAskInfo.add(new MenuItem("문의사항 삭제","/adminAsk/add"));
+    adminAskInfo.add(new MenuItem("문의사항 목록","/adminAsk/list"));
+    adminAskInfo.add(new MenuItem("문의사항 상세보기","/adminAsk/detail"));
+    adminAskInfo.add(new MenuItem("문의사항 변경","/adminAsk/update"));
+    adminAskInfo.add(new MenuItem("문의사항 삭제","/adminAsk/delete"));
 
     return adminAskInfo;
   }
@@ -1316,16 +1352,16 @@ public class App {
     MenuGroup adminChallengeInfo = new MenuGroup("챌린지 관리");
 
     adminChallengeInfo.add(new MenuItem("챌린지 등록","/adminChallenge/add"));
-    adminChallengeInfo.add(new MenuItem("챌린지 목록","/adminChallenge/add"));
-    adminChallengeInfo.add(new MenuItem("챌린지 상세보기","/adminChallenge/add"));
-    adminChallengeInfo.add(new MenuItem("챌린지 변경","/adminChallenge/add"));
-    adminChallengeInfo.add(new MenuItem("챌린지 삭제","/adminChallenge/add"));
+    adminChallengeInfo.add(new MenuItem("챌린지 목록","/adminChallenge/list"));
+    adminChallengeInfo.add(new MenuItem("챌린지 상세보기","/adminChallenge/detail"));
+    adminChallengeInfo.add(new MenuItem("챌린지 변경","/adminChallenge/update"));
+    adminChallengeInfo.add(new MenuItem("챌린지 삭제","/adminChallenge/delete"));
 
     return adminChallengeInfo;
   }
 
   private Menu createAdminApproveInfoMenu() {
-    MenuGroup adminApproveInfo = new MenuGroup("기관 승인");
+    MenuGroup adminApproveInfo = new MenuGroup("기관 승인", ACCESS_ADMIN);
 
     adminApproveInfo.add(new MenuItem("기관승인신청 목록","/adminChallenge/list"));
     adminApproveInfo.add(new MenuItem("기관승인신청 내용","/adminChallenge/detail"));
