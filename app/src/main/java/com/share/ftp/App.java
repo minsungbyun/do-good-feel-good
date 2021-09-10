@@ -1247,8 +1247,8 @@ public class App {
   private Menu createAskMenu() {
     MenuGroup ask = new MenuGroup("문의하기");
     ask.add(new MenuItem("등록", ACCESS_MEMBER,"/question/add"));
-    ask.add(new MenuItem("목록", "/question/list"));
-    ask.add(new MenuItem("상세보기", "/question/detail"));
+    ask.add(new MenuItem("목록", ACCESS_MEMBER_ADMIN, "/question/list"));
+    ask.add(new MenuItem("상세보기", ACCESS_MEMBER_ADMIN, "/question/detail"));
     ask.add(new MenuItem("변경",ACCESS_MEMBER,"/question/update"));
     ask.add(new MenuItem("삭제",Menu.ACCESS_MEMBER, "/question/delete"));
     ask.add(new MenuItem("검색", "question/search"));
