@@ -98,12 +98,11 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
     }
 
 
-<<<<<<< HEAD
-    // 봉사인원 유효성 검사
-    if (personalRequestApplyDTO.getTotalJoinCount() == personalRequestApplyDTO.getJoinNum()) {
-      System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
-      return;
-=======
+    //    // 봉사인원 유효성 검사
+    //    if (personalRequestApplyDTO.getTotalJoinCount() == personalRequestApplyDTO.getJoinNum()) {
+    //      System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
+    //      return;
+
     if (no == 1) {
       if (m1.contains(AuthLoginHandler.getLoginUser())) {
         System.out.println("이미 봉사참여를 하셨습니다!");
@@ -166,7 +165,6 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
       personalRequestApplyDTO.setMembers3(m3);
 
 
->>>>>>> 7f242cdafb57104aa4981948e7c9fb717cb04810
     }
 
     //    //    findByName(no);
