@@ -98,9 +98,6 @@ public class CommBoardDTO implements Serializable/*, Comparable<CommBoardDTO> */
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
-  //  @Override
-  //  public int compareTo(CommBoardDTO o) {
-  //
-  //    return viewCount-o.viewCount;
-  //  }
 }
+
+
