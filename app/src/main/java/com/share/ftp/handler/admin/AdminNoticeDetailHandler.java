@@ -30,8 +30,5 @@ public class AdminNoticeDetailHandler extends AbstractAdminNoticeHandler {
     System.out.printf("등록일: %s\n", noticeDTO.getRegisteredDate());
   }
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> feccd57486d805acc37694477cd990d177f76356
+

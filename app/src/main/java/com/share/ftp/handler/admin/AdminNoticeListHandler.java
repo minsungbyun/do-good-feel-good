@@ -18,11 +18,7 @@ public class AdminNoticeListHandler extends AbstractAdminNoticeHandler {
     for (NoticeDTO noticeDTO : noticeDTOList) {
       System.out.printf("%d, %s, %s, %s, %s, %s\n", 
           noticeDTO.getNo(), 
-<<<<<<< HEAD
           noticeDTO.getAdmin().getId(), 
-=======
-          noticeDTO.getAdmin().getId(),
->>>>>>> feccd57486d805acc37694477cd990d177f76356
           noticeDTO.getTitle(), 
           noticeDTO.getContent(), 
           noticeDTO.getFileUpload(), 
