@@ -104,7 +104,7 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
         return; 
       } 
 
-      if (personalRequestApplyDTO.getTotalJoinCount() == personalRequestApplyDTO.getJoinNum()) {
+      if (personalRequestApplyDTO.getTotalJoinCount1() == personalRequestApplyDTO.getJoinNum()) {
         System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
         return;
       }
@@ -118,6 +118,11 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
 
       personalRequestApplyDTO.setMembers1(m1);
 
+      int joinCounts = personalRequestApplyDTO.getTotalJoinCount1(); 
+      joinCounts += 1;
+
+      personalRequestApplyDTO.setTotalJoinCount1(joinCounts);
+
     } else if (no == 2 ) {
 
       if (m2.contains(AuthLoginHandler.getLoginUser())) {
@@ -125,7 +130,7 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
         return; 
       } 
 
-      if (personalRequestApplyDTO.getTotalJoinCount() == personalRequestApplyDTO.getJoinNum()) {
+      if (personalRequestApplyDTO.getTotalJoinCount2() == personalRequestApplyDTO.getJoinNum()) {
         System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
         return;
       }
@@ -139,6 +144,11 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
       personalRequestApplyDTO.setMembers2(m2);
 
 
+      int joinCount2 = personalRequestApplyDTO.getTotalJoinCount2(); 
+      joinCount2 += 1;
+
+      personalRequestApplyDTO.setTotalJoinCount2(joinCount2);
+
     } else if (no == 3) {
 
 
@@ -147,7 +157,7 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
         return; 
       } 
 
-      if (personalRequestApplyDTO.getTotalJoinCount() == personalRequestApplyDTO.getJoinNum()) {
+      if (personalRequestApplyDTO.getTotalJoinCount3() == personalRequestApplyDTO.getJoinNum()) {
         System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
         return;
       }
@@ -158,7 +168,10 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
       }
 
       personalRequestApplyDTO.setMembers3(m3);
+      int joinCount3 = personalRequestApplyDTO.getTotalJoinCount3(); 
+      joinCount3 += 1;
 
+      personalRequestApplyDTO.setTotalJoinCount3(joinCount3);
 
     }
 
@@ -200,13 +213,13 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
     //    int joinCount = personalRequestApplyDTO.getJoinCount() + 1;
 
 
-    int joinCounts = personalRequestApplyDTO.getTotalJoinCount(); 
-    System.out.println("참여 카운트(전) " +joinCounts);
-    joinCounts += 1;
-
-    System.out.println("전체카운트 " + (joinCounts));
-    personalRequestApplyDTO.setTotalJoinCount(joinCounts);
-    System.out.println("참여 카운트(후) " +joinCounts);
+    //    int joinCounts = personalRequestApplyDTO.getTotalJoinCount(); 
+    //    System.out.println("참여 카운트(전) " +joinCounts);
+    //    joinCounts += 1;
+    //
+    //    System.out.println("전체카운트 " + (joinCounts));
+    //    personalRequestApplyDTO.setTotalJoinCount(joinCounts);
+    //    System.out.println("참여 카운트(후) " +joinCounts);
 
     //    joinCounts = personalRequestApplyDTO.getJoinCount() + 1; //참여인원증가
 

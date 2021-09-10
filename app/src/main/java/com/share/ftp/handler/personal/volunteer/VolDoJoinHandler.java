@@ -46,7 +46,7 @@ public class VolDoJoinHandler implements Command {
     // 주최자가 최초로 목록을 보는 경우
     if (AuthLoginHandler.getLoginUser().getName().equals(owner.getOwner().getName()) || 
         personalRequestSelectedDTO == null) {
-      System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n\n           [  봉사자명  ]\n\n%s(%s)\n",
+      System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n\n주최자명: %s(%s)\n",
           owner.getTitle(),
           owner.getJoinCount(), // 최초 주최자 1명
           owner.getJoinNum(),
@@ -59,26 +59,26 @@ public class VolDoJoinHandler implements Command {
 
 
       if (no == 1) {
-        System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n\n           [  봉사자명  ]\n\n%s(%s)\n%s\n",
+        System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n\n주최자명: %s(%s)\n\n           [  봉사자명  ]\n\n%s\n",
             owner.getTitle(),
-            personalRequestSelectedDTO.getTotalJoinCount(),
+            personalRequestSelectedDTO.getTotalJoinCount1(),
             owner.getJoinNum(),
             owner.getUserId(), // 주최자 아이디
             owner.getOwner().getName(), // 주최자 이룸
             personalRequestSelectedDTO.getMemberNames1());
       } else if (no ==2) {
-        System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n\n           [  봉사자명  ]\n\n%s(%s)\n%s\n",
+        System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n\n주최자명: %s(%s)\n\n           [  봉사자명  ]\n\n%s\n",
             owner.getTitle(),
-            personalRequestSelectedDTO.getTotalJoinCount(),
+            personalRequestSelectedDTO.getTotalJoinCount2(),
             owner.getJoinNum(),
             owner.getUserId(), // 주최자 아이디
             owner.getOwner().getName(), // 주최자 이룸
             personalRequestSelectedDTO.getMemberNames2());
 
       } else if (no ==3) {
-        System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n\n           [  봉사자명  ]\n\n%s(%s)\n%s\n",
+        System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n\n주최자명: %s(%s)\n\n           [  봉사자명  ]\n\n%s\n",
             owner.getTitle(),
-            personalRequestSelectedDTO.getTotalJoinCount(),
+            personalRequestSelectedDTO.getTotalJoinCount3(),
             owner.getJoinNum(),
             owner.getUserId(), // 주최자 아이디
             owner.getOwner().getName(), // 주최자 이룸
