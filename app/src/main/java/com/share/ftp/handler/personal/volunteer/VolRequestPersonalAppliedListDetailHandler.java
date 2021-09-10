@@ -100,7 +100,7 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
     System.out.println("member객체의 사이즈:"+ members.size());
 
     // 봉사인원 유효성 검사
-    if (members.size() + 1 == personalRequestApplyDTO.getJoinNum()) {
+    if (personalRequestApplyDTO.getTotalJoinCount() == personalRequestApplyDTO.getJoinNum()) {
       System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
       return;
     }
