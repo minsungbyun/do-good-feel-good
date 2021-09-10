@@ -1109,7 +1109,7 @@ public class App {
     MyPageMenu.add(createMyPointMenu());      // 나의포인트
     MyPageMenu.add(createMyDonationMenu());   // 나의모금함
     MyPageMenu.add(createOrgApprovewMenu());  // 기관승인신청
-    MyPageMenu.add(new MenuItem("탈퇴", ACCESS_MEMBER, "/MyPage/delete")); 
+    MyPageMenu.add(new MenuItem("탈퇴", ACCESS_MEMBER, "/myPage/delete")); 
 
     // 관리자
     MenuGroup adminMenu = new MenuGroup("관리자", ACCESS_ADMIN);
