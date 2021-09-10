@@ -12,7 +12,13 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
   int ownerCount = 1; // 최소인원(주최자) 설정
   //  int joinCounts;
 
-  List<JoinDTO> members = new ArrayList<>();
+  //  List<List<JoinDTO>> members1 = new ArrayList<>();
+  List<JoinDTO> m1 = new ArrayList<>();
+  List<JoinDTO> m2 = new ArrayList<>();
+  List<JoinDTO> m3 = new ArrayList<>();
+
+
+  //  List<JoinDTO> members = new ArrayList<>();
   List<PersonalRequestDTO> personalSelectedList;
 
   public VolRequestPersonalAppliedListDetailHandler(
@@ -91,25 +97,104 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
       return;
     }
 
-    //    findByName(no);
-    if (members.contains(AuthLoginHandler.getLoginUser())) {
-      System.out.println("이미 봉사참여를 하셨습니다!");
-      return; 
-    } 
-    System.out.println("유효성 검사 전");
-    System.out.println("member객체의 사이즈:"+ members.size());
 
     // 봉사인원 유효성 검사
-    if (personalRequestApplyDTO.getTotalJoinCount() == personalRequestApplyDTO.getJoinNum()) {
-      System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
-      return;
+    //    if (personalRequestApplyDTO.getTotalJoinCount() == personalRequestApplyDTO.getJoinNum()) {
+    //      System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
+    //      return;
+    if (no == 1) {
+      if (m1.contains(AuthLoginHandler.getLoginUser())) {
+        System.out.println("이미 봉사참여를 하셨습니다!");
+        return; 
+      } 
+
+      if (personalRequestApplyDTO.getTotalJoinCount() == personalRequestApplyDTO.getJoinNum()) {
+        System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
+        return;
+      }
+
+      m1.add(AuthLoginHandler.getLoginUser());
+
+
+      if (m1.contains(personalRequestApplyDTO.getOwner())) {
+        m1.remove(personalRequestApplyDTO.getOwner());
+      }
+
+      personalRequestApplyDTO.setMembers1(m1);
+
+    } else if (no == 2 ) {
+
+      if (m2.contains(AuthLoginHandler.getLoginUser())) {
+        System.out.println("이미 봉사참여를 하셨습니다!");
+        return; 
+      } 
+
+      if (personalRequestApplyDTO.getTotalJoinCount() == personalRequestApplyDTO.getJoinNum()) {
+        System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
+        return;
+      }
+
+      m2.add(AuthLoginHandler.getLoginUser());
+
+      if (m2.contains(personalRequestApplyDTO.getOwner())) {
+        m2.remove(personalRequestApplyDTO.getOwner());
+      }
+
+      personalRequestApplyDTO.setMembers2(m2);
+
+
+    } else if (no == 3) {
+
+
+      if (m3.contains(AuthLoginHandler.getLoginUser())) {
+        System.out.println("이미 봉사참여를 하셨습니다!");
+        return; 
+      } 
+
+      if (personalRequestApplyDTO.getTotalJoinCount() == personalRequestApplyDTO.getJoinNum()) {
+        System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
+        return;
+      }
+      m3.add(AuthLoginHandler.getLoginUser());
+
+      if (m3.contains(personalRequestApplyDTO.getOwner())) {
+        m3.remove(personalRequestApplyDTO.getOwner());
+      }
+
+      personalRequestApplyDTO.setMembers3(m3);
+
+
     }
-    System.out.println("멤버추가시키기 전");
-    System.out.println("member객체의 사이즈:"+ members.size());
-    members.add(AuthLoginHandler.getLoginUser());
-    System.out.println("멤버추가 시킨 후");
-    System.out.println("member객체의 사이즈:"+ members.size());
-    personalRequestApplyDTO.setMembers(members); // 참여 멤버 등록
+
+    //    //    findByName(no);
+    //    if (members.contains(AuthLoginHandler.getLoginUser())) {
+    //      System.out.println("이미 봉사참여를 하셨습니다!");
+    //      return; 
+    //    } 
+    //    System.out.println("유효성 검사 전");
+    //    System.out.println("member객체의 사이즈:"+ members.size());
+
+    // 봉사인원 유효성 검사
+    //    if (personalRequestApplyDTO.getTotalJoinCount() == personalRequestApplyDTO.getJoinNum()) {
+    //      System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
+    //      return;
+    //    }
+    //    System.out.println("멤버추가시키기 전");
+    //    System.out.println("member객체의 사이즈:"+ members.size());
+    //    //    if (!members.contains(AuthLoginHandler.getLoginUser())) {
+    //    //      members.add(AuthLoginHandler.getLoginUser());
+    //    //    }
+    //
+    //    if (members.contains(personalRequestApplyDTO.getOwner())) {
+    //      members.remove(personalRequestApplyDTO.getOwner());
+    //    }
+    //    System.out.println("멤버추가 시킨 후");
+    //    System.out.println("member객체의 사이즈:"+ members.size());
+    //
+    //
+    //
+    //
+    //    personalRequestApplyDTO.setMembers(members); // 참여 멤버 등록
 
     //    members.clear();
 
@@ -148,6 +233,16 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
     }
     return null;
   }
+
+  private PersonalRequestDTO findByVaild(int no) {
+    for (PersonalRequestDTO personalRequestSelectedDTO : personalSelectedList) {
+      if (personalRequestSelectedDTO.getNo() == no) {
+        return personalRequestSelectedDTO;
+      }
+    }
+    return null;
+  }
+
 
 
 

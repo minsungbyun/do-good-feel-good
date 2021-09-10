@@ -56,13 +56,36 @@ public class VolDoJoinHandler implements Command {
 
     } else {
       // 주최자 제외한 새로운 사람이 등록한 경우
-      System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n\n           [  봉사자명  ]\n\n%s(%s)\n%s\n",
-          owner.getTitle(),
-          personalRequestSelectedDTO.getTotalJoinCount(),
-          owner.getJoinNum(),
-          owner.getUserId(), // 주최자 아이디
-          owner.getOwner().getName(), // 주최자 이룸
-          personalRequestSelectedDTO.getMemberNames());
+
+
+      if (no == 1) {
+        System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n\n           [  봉사자명  ]\n\n%s(%s)\n%s\n",
+            owner.getTitle(),
+            personalRequestSelectedDTO.getTotalJoinCount(),
+            owner.getJoinNum(),
+            owner.getUserId(), // 주최자 아이디
+            owner.getOwner().getName(), // 주최자 이룸
+            personalRequestSelectedDTO.getMemberNames1());
+      } else if (no ==2) {
+        System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n\n           [  봉사자명  ]\n\n%s(%s)\n%s\n",
+            owner.getTitle(),
+            personalRequestSelectedDTO.getTotalJoinCount(),
+            owner.getJoinNum(),
+            owner.getUserId(), // 주최자 아이디
+            owner.getOwner().getName(), // 주최자 이룸
+            personalRequestSelectedDTO.getMemberNames2());
+
+      } else if (no ==3) {
+        System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n\n           [  봉사자명  ]\n\n%s(%s)\n%s\n",
+            owner.getTitle(),
+            personalRequestSelectedDTO.getTotalJoinCount(),
+            owner.getJoinNum(),
+            owner.getUserId(), // 주최자 아이디
+            owner.getOwner().getName(), // 주최자 이룸
+            personalRequestSelectedDTO.getMemberNames3());
+
+      }
+
     }
   }
 
