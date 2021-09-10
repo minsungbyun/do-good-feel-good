@@ -33,6 +33,9 @@ public class PersonalRequestDTO implements Serializable {
   private Date volSubmitTime;
   private boolean isJoin; // 참여여부 확인
   private List<JoinDTO> members; // 참여한 멤버들
+  private List<JoinDTO> members1; // 참여한 멤버들
+  private List<JoinDTO> members2; // 참여한 멤버들
+  private List<JoinDTO> members3; // 참여한 멤버들
   private int joinCount; // 최초 주최자 1명
   private int totalJoinCount = 1; // 참여 총 횟수
 
@@ -372,15 +375,6 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
-
-
-
   public void setMembers(List<JoinDTO> members) {
     this.members = members;
   }
@@ -394,6 +388,30 @@ public class PersonalRequestDTO implements Serializable {
 
 
 
+
+  public List<JoinDTO> getMembers1() {
+    return members1;
+  }
+
+  public void setMembers1(List<JoinDTO> members1) {
+    this.members1 = members1;
+  }
+
+  public List<JoinDTO> getMembers2() {
+    return members2;
+  }
+
+  public void setMembers2(List<JoinDTO> members2) {
+    this.members2 = members2;
+  }
+
+  public List<JoinDTO> getMembers3() {
+    return members3;
+  }
+
+  public void setMembers3(List<JoinDTO> members3) {
+    this.members3 = members3;
+  }
 
   public int getJoinCount() {
     return joinCount;
@@ -424,6 +442,60 @@ public class PersonalRequestDTO implements Serializable {
     StringBuilder names = new StringBuilder();
 
     for (JoinDTO joinDTO : members) {
+      if (names.length() > 0) {
+        names.append("\n");
+      }
+      names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
+    }
+
+    return names.toString();
+  }
+
+  public  String getMemberNames1() {
+
+    if (members1 == null) {
+      return "";
+    }
+
+    StringBuilder names = new StringBuilder();
+
+    for (JoinDTO joinDTO : members1) {
+      if (names.length() > 0) {
+        names.append("\n");
+      }
+      names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
+    }
+
+    return names.toString();
+  }
+
+  public  String getMemberNames2() {
+
+    if (members2 == null) {
+      return "";
+    }
+
+    StringBuilder names = new StringBuilder();
+
+    for (JoinDTO joinDTO : members2) {
+      if (names.length() > 0) {
+        names.append("\n");
+      }
+      names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
+    }
+
+    return names.toString();
+  }
+
+  public  String getMemberNames3() {
+
+    if (members3 == null) {
+      return "";
+    }
+
+    StringBuilder names = new StringBuilder();
+
+    for (JoinDTO joinDTO : members3) {
       if (names.length() > 0) {
         names.append("\n");
       }
