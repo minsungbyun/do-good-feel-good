@@ -34,6 +34,7 @@ public class AuthLoginHandler implements Command {
 
     String id = Prompt.inputString("아이디? ");
     String password = Prompt.inputString("비밀번호? ");
+    System.out.println();
 
     if (id.equals("admin") && password.equals("111")) {
       JoinDTO admin = new JoinDTO();
@@ -61,12 +62,12 @@ public class AuthLoginHandler implements Command {
     } else if (joinDTO.isPersonal() == true) {
       userAccessLevel = Menu.ACCESS_MEMBER | Menu.ACCESS_PERSONAL | Menu.ACCESS_MEMBER_ADMIN;
 
-      System.out.printf("%s님 환영합니다!\n", joinDTO.getName());
+      System.out.printf("[  %s님 환영합니다!  ]\n", joinDTO.getName());
 
     } else if (joinDTO.isOrg() == true) {
       userAccessLevel = Menu.ACCESS_MEMBER | Menu.ACCESS_ORG | Menu.ACCESS_MEMBER_ADMIN;
 
-      System.out.printf("%s님 환영합니다!\n", joinDTO.getName());
+      System.out.printf("[  %s님 환영합니다!  ]\n", joinDTO.getName());
     }
 
     loginUser = joinDTO;

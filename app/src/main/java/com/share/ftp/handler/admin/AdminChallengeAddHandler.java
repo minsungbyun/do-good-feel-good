@@ -13,13 +13,14 @@ public class AdminChallengeAddHandler extends AbstractAdminChallengeHandler {
   }
 
 
+  @Override
   public void execute() {
     System.out.println("[챌린지 등록]");
 
     ChallengeDTO challengeDTO = new ChallengeDTO();
 
     challengeDTO.setNo(Prompt.inputInt("번호? ")); 
-    challengeDTO.setAdminId(Prompt.inputString("관리자 아이디? "));
+    //    challengeDTO.setAdminId(Prompt.inputString("관리자 아이디? "));
     challengeDTO.setTitle(Prompt.inputString("제목? "));
     challengeDTO.setContent(Prompt.inputString("내용? ")); 
     challengeDTO.setFileUpload(Prompt.inputString("첨부파일? ")); 

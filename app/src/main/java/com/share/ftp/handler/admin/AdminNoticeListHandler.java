@@ -12,6 +12,7 @@ public class AdminNoticeListHandler extends AbstractAdminNoticeHandler {
 
 
 
+  @Override
   public void execute() {
     System.out.println("[공지사항 목록]");
 
@@ -25,7 +26,4 @@ public class AdminNoticeListHandler extends AbstractAdminNoticeHandler {
           noticeDTO.getRegisteredDate());
     }
   }
-
-
-
 }

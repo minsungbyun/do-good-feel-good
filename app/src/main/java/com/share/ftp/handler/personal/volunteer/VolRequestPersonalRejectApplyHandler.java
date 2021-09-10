@@ -43,9 +43,9 @@ public class VolRequestPersonalRejectApplyHandler extends AbstractVolRequestPers
     personalRequestDTO.setIsSigned("반려됨");
 
     // 기존 리스트 복사
-    for (PersonalRequestDTO personalRejectRequestDTO : personalRequestDTOList) {
-      personalRequestRejectDTOList.add(personalRejectRequestDTO);
-    }
+
+    personalRequestRejectDTOList.add(personalRequestDTO);
+
 
     //    for (int i = personalRequestIndex + 1; i < this.size; i++) {
     //      this.personalRequestsDTO[i - 1] = this.personalRequestsDTO[i];

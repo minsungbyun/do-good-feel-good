@@ -11,6 +11,7 @@ public class AdminNoticeDetailHandler extends AbstractAdminNoticeHandler {
     super(noticeDTOList);
   }
 
+  @Override
   public void execute() {
     System.out.println("[공지사항 상세보기]");
     int no = Prompt.inputInt("번호? ");
@@ -30,5 +31,5 @@ public class AdminNoticeDetailHandler extends AbstractAdminNoticeHandler {
     System.out.printf("등록일: %s\n", noticeDTO.getRegisteredDate());
   }
 
-}
 
+}

@@ -38,6 +38,7 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
     } else if (donationBoardDTO.isChecked() == true) {
       System.out.println();
       System.out.printf("개설번호: %s\n", donationBoardDTO.getNo());
+      System.out.printf("개설분류: %s\n", donationBoardDTO.getSort());
       System.out.printf("제목: %s\n", donationBoardDTO.getTitle());
       System.out.printf("주최자: %s\n", donationBoardDTO.getLeader());
       System.out.printf("내용: %s\n", donationBoardDTO.getContent());
@@ -56,8 +57,11 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
       DonationRegisterDTO donationRegister = new DonationRegisterDTO();
 
       System.out.println();
-      donationRegister.setSort(donationRegister.getSort());
+
+      donationRegister.setNo(donationBoardDTO.getNo());
+      donationRegister.setSort(donationBoardDTO.getSort());
       donationRegister.setDonationMoney(Prompt.inputInt("기부 금액: "));
+      donationRegister.setMyTotaldonationMoney(donationRegister.getDonationMoney());
       donationRegister.setName(AuthLoginHandler.getLoginUser().getName());
       donationRegister.setRegisterationNumber(Prompt.inputString("주민등록번호: "));
       donationRegister.setBirthDate(Prompt.inputDate("생년월일(yyyy-mm-dd): "));

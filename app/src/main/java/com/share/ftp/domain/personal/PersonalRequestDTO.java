@@ -33,7 +33,8 @@ public class PersonalRequestDTO implements Serializable {
   private Date volSubmitTime;
   private boolean isJoin; // 참여여부 확인
   private List<JoinDTO> members; // 참여한 멤버들
-  private int joinCount = 0; // 참여 횟수
+  private int joinCount; // 최초 주최자 1명
+  private int totalJoinCount = 1; // 참여 총 횟수
 
 
 
@@ -395,7 +396,7 @@ public class PersonalRequestDTO implements Serializable {
 
 
   public int getJoinCount() {
-    return ++joinCount;
+    return joinCount;
   }
 
 
@@ -404,19 +405,15 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-  @Override
-  public String toString() {
-    return "PersonalRequestDTO [no=" + no + ", title=" + title + ", name=" + name + ", owner="
-        + owner + ", userId=" + userId + ", sort=" + sort + ", tel=" + tel + ", email=" + email
-        + ", volStartDate=" + volStartDate + ", volEndDate=" + volEndDate + ", volStartTime="
-        + volStartTime + ", volEndTime=" + volEndTime + ", volList=" + volList + ", joinNum="
-        + joinNum + ", content=" + content + ", fileUpload=" + fileUpload + ", isPersonal="
-        + isPersonal + ", isOrg=" + isOrg + ", isChecked=" + isChecked + ", isSigned=" + isSigned
-        + ", volSubmitTime=" + volSubmitTime + ", isJoin=" + isJoin + ", members=" + members
-        + ", joinCount=" + joinCount + "]";
+
+
+  public int getTotalJoinCount() {
+    return totalJoinCount;
   }
 
-
+  public void setTotalJoinCount(int totalJoinCount) {
+    this.totalJoinCount = totalJoinCount;
+  }
 
   public  String getMemberNames() {
 
@@ -428,7 +425,7 @@ public class PersonalRequestDTO implements Serializable {
 
     for (JoinDTO joinDTO : members) {
       if (names.length() > 0) {
-        names.append(",");
+        names.append("\n");
       }
       names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
     }

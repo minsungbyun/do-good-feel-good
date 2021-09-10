@@ -36,7 +36,7 @@ public class VolListHandler {
       switch (input) {
         case 0: 
         case 1: personalVolRequestHandler.apply(); break;
-        case 2: orgVolRequestHandler.apply(); break;
+        //        case 2: orgVolRequestHandler.apply(); break;
         default : System.out.println("다시 입력해주세요");
       }
       System.out.println();

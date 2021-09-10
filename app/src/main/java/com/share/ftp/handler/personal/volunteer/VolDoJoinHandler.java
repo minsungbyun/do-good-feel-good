@@ -31,6 +31,7 @@ public class VolDoJoinHandler implements Command {
     System.out.println();
 
     int no = Prompt.inputInt("봉사번호 > ");
+    System.out.println();
 
     PersonalRequestDTO owner = findByOwnerVol(no); // 주최자 혼자 볼 때
     PersonalRequestDTO personalRequestSelectedDTO = findBySelectedVol(no); // 참여자 있을 때 
@@ -40,35 +41,28 @@ public class VolDoJoinHandler implements Command {
       return;
     }
 
+    // 열람만 하는 경우
+
     // 주최자가 최초로 목록을 보는 경우
-    if (AuthLoginHandler.getLoginUser().getName().equals(owner.getOwner().getName())) {
-      System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n봉사자명: %s(%s)\n",
+    if (AuthLoginHandler.getLoginUser().getName().equals(owner.getOwner().getName()) || 
+        personalRequestSelectedDTO == null) {
+      System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n\n           [  봉사자명  ]\n\n%s(%s)\n",
           owner.getTitle(),
-          totalJoinCount(),
+          owner.getJoinCount(), // 최초 주최자 1명
           owner.getJoinNum(),
           owner.getUserId(),
           owner.getOwner().getName());
 
-    } else {
-      // 주최자 아닌 사람이 목록 보기 위해 들어온 경우
-      if (personalRequestSelectedDTO == null) {
-        System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n봉사자명: %s(%s)\n",
-            owner.getTitle(),
-            totalJoinCount(),
-            owner.getJoinNum(),
-            owner.getUserId(),
-            owner.getOwner().getName());
 
-      } else {
-        // 주최자 제외한 새로운 사람이 등록한 경우
-        System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n봉사자명: %s(%s),%s\n",
-            personalRequestSelectedDTO.getTitle(),
-            totalJoinCount(),
-            personalRequestSelectedDTO.getJoinNum(),
-            owner.getUserId(), // 주최자 아이디
-            owner.getOwner().getName(), // 주최자 이룸
-            personalRequestSelectedDTO.getMemberNames());
-      }
+    } else {
+      // 주최자 제외한 새로운 사람이 등록한 경우
+      System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n\n           [  봉사자명  ]\n\n%s(%s)\n%s\n",
+          owner.getTitle(),
+          personalRequestSelectedDTO.getTotalJoinCount(),
+          owner.getJoinNum(),
+          owner.getUserId(), // 주최자 아이디
+          owner.getOwner().getName(), // 주최자 이룸
+          personalRequestSelectedDTO.getMemberNames());
     }
   }
 
@@ -90,10 +84,12 @@ public class VolDoJoinHandler implements Command {
     return null;
   }
 
-  private int totalJoinCount() {
+  //  private int totalJoinCount() {
 
-    return volRequestPersonalAppliedListDetailHandler.joinCounts;
+  //    int sum = volRequestPersonalAppliedListDetailHandler.joinCounts + volRequestPersonalAppliedListDetailHandler.ownerCount;
 
-  }
+  //    return sum;
+
+  //}
 
 }
