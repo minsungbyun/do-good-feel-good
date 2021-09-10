@@ -38,6 +38,9 @@ public class PersonalRequestDTO implements Serializable {
   private List<JoinDTO> members3; // 참여한 멤버들
   private int joinCount; // 최초 주최자 1명
   private int totalJoinCount = 1; // 참여 총 횟수
+  private int totalJoinCount1 = 1; // 참여 총 횟수
+  private int totalJoinCount2 = 1; // 참여 총 횟수
+  private int totalJoinCount3 = 1; // 참여 총 횟수
 
 
 
@@ -431,6 +434,34 @@ public class PersonalRequestDTO implements Serializable {
 
   public void setTotalJoinCount(int totalJoinCount) {
     this.totalJoinCount = totalJoinCount;
+  }
+
+
+
+
+
+  public int getTotalJoinCount1() {
+    return totalJoinCount1;
+  }
+
+  public void setTotalJoinCount1(int totalJoinCount1) {
+    this.totalJoinCount1 = totalJoinCount1;
+  }
+
+  public int getTotalJoinCount2() {
+    return totalJoinCount2;
+  }
+
+  public void setTotalJoinCount2(int totalJoinCount2) {
+    this.totalJoinCount2 = totalJoinCount2;
+  }
+
+  public int getTotalJoinCount3() {
+    return totalJoinCount3;
+  }
+
+  public void setTotalJoinCount3(int totalJoinCount3) {
+    this.totalJoinCount3 = totalJoinCount3;
   }
 
   public  String getMemberNames() {
