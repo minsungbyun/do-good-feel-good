@@ -1,12 +1,12 @@
 package com.share.ftp.handler.personal.challenge;
 
 import java.util.List;
-import com.share.ftp.domain.personal.MyChallengeReviewDTO;
+import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.util.Prompt;
 
 public class ChallengeReviewDeleteHandler extends AbstractChallengeReviewHandler {
 
-  public ChallengeReviewDeleteHandler(List<MyChallengeReviewDTO> myChallengeReviewDTOList) {
+  public ChallengeReviewDeleteHandler(List<ChallengeReviewDTO> myChallengeReviewDTOList) {
     super(myChallengeReviewDTOList);
   }
 
@@ -15,7 +15,7 @@ public class ChallengeReviewDeleteHandler extends AbstractChallengeReviewHandler
     System.out.println("[댓글 삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    MyChallengeReviewDTO myChallengeReview = findByNo(no);
+    ChallengeReviewDTO myChallengeReview = findByNo(no);
 
     if (myChallengeReview == null) {
       System.out.println("해당 번호의 참여인증&댓글이 없습니다.");

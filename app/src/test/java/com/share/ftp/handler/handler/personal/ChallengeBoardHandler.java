@@ -1,13 +1,13 @@
 package com.share.ftp.handler.personal;
 
-import com.share.ftp.domain.personal.MyChallengeReviewDTO;
+import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.util.Prompt;
 
 public class ChallengeBoardHandler {
   static final int MAX_LENGTH = 10;
   int size;
 
-  MyChallengeReviewDTO myChallengeReview = new MyChallengeReviewDTO();
+  ChallengeReviewDTO myChallengeReview = new ChallengeReviewDTO();
 
   ChallengeReviewHandler challengeReviewHandler = new ChallengeReviewHandler();
   AbstractChallengeQuestionHandler challengeQuestionHandler = new AbstractChallengeQuestionHandler();

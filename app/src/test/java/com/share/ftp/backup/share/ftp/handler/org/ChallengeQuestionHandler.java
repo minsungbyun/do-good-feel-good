@@ -1,18 +1,18 @@
 package com.share.ftp.handler.org;
 
-import com.share.ftp.domain.personal.MyChallengeQuestionDTO;
+import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 import com.share.util.Prompt;
 
 public class ChallengeQuestionHandler {
   static final int MAX_LENGTH = 100;
 
-  MyChallengeQuestionDTO[] boards = new MyChallengeQuestionDTO[MAX_LENGTH];
+  ChallengeQuestionDTO[] boards = new ChallengeQuestionDTO[MAX_LENGTH];
   int size = 0;
 
   public void add() {
     System.out.println("[문의하기 등록]");
 
-    MyChallengeQuestionDTO board = new MyChallengeQuestionDTO();
+    ChallengeQuestionDTO board = new ChallengeQuestionDTO();
 
     board.no = Prompt.inputInt("번호: ");
     board.memberId = Prompt.inputString("아이디: ");
@@ -35,7 +35,7 @@ public class ChallengeQuestionHandler {
     System.out.println("[문의 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    MyChallengeQuestionDTO board = null;
+    ChallengeQuestionDTO board = null;
 
     for (int i = 0; i < this.size; i++) {
       if (this.boards[i].no == no) {
@@ -57,7 +57,7 @@ public class ChallengeQuestionHandler {
     System.out.println("[문의 변경]");
     int no = Prompt.inputInt("번호? ");
 
-    MyChallengeQuestionDTO board = null;
+    ChallengeQuestionDTO board = null;
 
     for (int i = 0; i < this.size; i++) {
       if (this.boards[i].no == no) {

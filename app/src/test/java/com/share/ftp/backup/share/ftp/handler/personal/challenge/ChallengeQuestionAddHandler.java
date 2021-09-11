@@ -1,13 +1,13 @@
 package com.share.ftp.handler.personal.challenge;
 
 import java.util.List;
-import com.share.ftp.domain.personal.MyChallengeQuestionDTO;
+import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 import com.share.util.Prompt;
 
 public class ChallengeQuestionAddHandler extends AbstractChallengeQuestionHandler {
 
 
-  public ChallengeQuestionAddHandler(List<MyChallengeQuestionDTO> myChallengeQuestionDTOList) {
+  public ChallengeQuestionAddHandler(List<ChallengeQuestionDTO> myChallengeQuestionDTOList) {
     super(myChallengeQuestionDTOList);
   }
 
@@ -15,7 +15,7 @@ public class ChallengeQuestionAddHandler extends AbstractChallengeQuestionHandle
   public void execute() {
     System.out.println("[문의 등록]");
 
-    MyChallengeQuestionDTO myChallengeQuestionDTO = new MyChallengeQuestionDTO();
+    ChallengeQuestionDTO myChallengeQuestionDTO = new ChallengeQuestionDTO();
 
     myChallengeQuestionDTO.setNo(Prompt.inputInt("번호: "));
     myChallengeQuestionDTO.setMemberId(Prompt.inputString("아이디: "));

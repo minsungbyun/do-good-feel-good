@@ -4,21 +4,21 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
-import com.share.ftp.domain.personal.MyChallengeJoinDTO;
+import com.share.ftp.domain.personal.ChallengeJoinDTO;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
 public class ChallengeJoinHandler extends AbstractChallengeJoinHandler {
 
-  List<MyChallengeJoinDTO> myChallengeJoinDTOList;
+  List<ChallengeJoinDTO> ChallengeJoinDTOList;
   List<JoinDTO> members = new ArrayList<>();
 
   public ChallengeJoinHandler(
-      List<MyChallengeJoinDTO> myChallengeJoinDTOList
+      List<ChallengeJoinDTO> ChallengeJoinDTOList
       ) {
 
-    super(myChallengeJoinDTOList);
-    this.myChallengeJoinDTOList = myChallengeJoinDTOList;
+    super(ChallengeJoinDTOList);
+    this.ChallengeJoinDTOList = ChallengeJoinDTOList;
 
   }
 
@@ -28,7 +28,7 @@ public class ChallengeJoinHandler extends AbstractChallengeJoinHandler {
     System.out.println("[참여하기]");
 
     JoinDTO joinDTO = AuthLoginHandler.getLoginUser();
-    MyChallengeJoinDTO myChallengeJoinDTO = new MyChallengeJoinDTO();
+    ChallengeJoinDTO ChallengeJoinDTO = new ChallengeJoinDTO();
 
     String input = Prompt.inputString("정말 참여하시겠습니까?(y/N) ");
     if (!input.equals("y") || input.length() == 0) {
@@ -42,19 +42,19 @@ public class ChallengeJoinHandler extends AbstractChallengeJoinHandler {
       return;
     }
 
-    myChallengeJoinDTO.setUserId(joinDTO.getId()); // 참여 멤버 아이디 추가
+    ChallengeJoinDTO.setUserId(joinDTO.getId()); // 참여 멤버 아이디 추가
     members.add(AuthLoginHandler.getLoginUser());
-    myChallengeJoinDTO.setMembers(members); // 참여 멤버 등록
+    ChallengeJoinDTO.setMembers(members); // 참여 멤버 등록
 
-    myChallengeJoinDTO.setRegisteredDate(new Date(System.currentTimeMillis())); // 날짜 추가
-    myChallengeJoinDTOList.add(myChallengeJoinDTO); 
+    ChallengeJoinDTO.setRegisteredDate(new Date(System.currentTimeMillis())); // 날짜 추가
+    ChallengeJoinDTOList.add(ChallengeJoinDTO); 
 
     System.out.println("챌린지 참여를 완료하였습니다.");
   }
   ////  ChallengeJoinListHandler challengeJoinListHandler;
   //  
-  //  public ChallengeJoinHandler(List<MyChallengeJoinDTO> myChallengeJoinDTOList /*ChallengeJoinListHandler challengeJoinListHandler*/) {
-  //    super(myChallengeJoinDTOList);
+  //  public ChallengeJoinHandler(List<ChallengeJoinDTO> ChallengeJoinDTOList /*ChallengeJoinListHandler challengeJoinListHandler*/) {
+  //    super(ChallengeJoinDTOList);
   ////    this.challengeJoinListHandler = challengeJoinListHandler
   //  }
   //
@@ -63,7 +63,7 @@ public class ChallengeJoinHandler extends AbstractChallengeJoinHandler {
   //    while (true) {
   //    System.out.println("[참여하기]");
   //
-  //    MyChallengeJoinDTO myChallengeJoinDTO = new MyChallengeJoinDTO();
+  //    ChallengeJoinDTO ChallengeJoinDTO = new ChallengeJoinDTO();
   //
   //    try {
   //
@@ -72,13 +72,13 @@ public class ChallengeJoinHandler extends AbstractChallengeJoinHandler {
   //      System.out.println("챌린지 참여를 취소하였습니다.");
   //      return;
   //    } else if (input.equals("y")) {
-  ////        if (myChallengeJoinDTO.getJoiner().getId().equalsIgnoreCase(AuthLoginHandler.getLoginUser().getId())) {
+  ////        if (ChallengeJoinDTO.getJoiner().getId().equalsIgnoreCase(AuthLoginHandler.getLoginUser().getId())) {
   ////      System.out.println("챌린지 참여를 완료하였습니다.");
-  //      myChallengeJoinDTO.setJoiner(AuthLoginHandler.getLoginUser());
-  //      myChallengeJoinDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
-  //      myChallengeJoinDTOList.add(myChallengeJoinDTO);
+  //      ChallengeJoinDTO.setJoiner(AuthLoginHandler.getLoginUser());
+  //      ChallengeJoinDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
+  //      ChallengeJoinDTOList.add(ChallengeJoinDTO);
   //      return;
-  ////      } else if (myChallengeJoinDTO.getJoiner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+  ////      } else if (ChallengeJoinDTO.getJoiner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
   ////        System.out.println("이미 참여가 완료되었습니다.");
   ////        return;
   ////      }

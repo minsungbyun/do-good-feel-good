@@ -1,12 +1,12 @@
 package com.share.ftp.handler.personal.support;
 
 import java.util.List;
-import com.share.ftp.domain.personal.MyQuestionListDTO;
+import com.share.ftp.domain.personal.QuestionListDTO;
 import com.share.util.Prompt;
 
 public class QuestionSearchHandler extends AbstractQuestionHandler {
 
-  public QuestionSearchHandler(List<MyQuestionListDTO> myQuestionListDTOList) {
+  public QuestionSearchHandler(List<QuestionListDTO> myQuestionListDTOList) {
     super(myQuestionListDTOList);
   }
 
@@ -16,7 +16,7 @@ public class QuestionSearchHandler extends AbstractQuestionHandler {
 
     String input = Prompt.inputString("검색어? ");
 
-    for (MyQuestionListDTO myQuestionListDTO : myQuestionListDTOList) {
+    for (QuestionListDTO myQuestionListDTO : myQuestionListDTOList) {
       if (!myQuestionListDTO.getTitle().contains(input) &&
           !myQuestionListDTO.getContent().contains(input) &&
           !myQuestionListDTO.getWriter().contains(input)) {

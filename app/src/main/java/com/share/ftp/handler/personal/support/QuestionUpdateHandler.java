@@ -1,13 +1,13 @@
 package com.share.ftp.handler.personal.support;
 
 import java.util.List;
-import com.share.ftp.domain.personal.MyQuestionListDTO;
+import com.share.ftp.domain.personal.QuestionListDTO;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
 public class QuestionUpdateHandler extends AbstractQuestionHandler {
 
-  public QuestionUpdateHandler(List<MyQuestionListDTO> myQuestionListDTOList) {
+  public QuestionUpdateHandler(List<QuestionListDTO> myQuestionListDTOList) {
     super (myQuestionListDTOList);
   }
 
@@ -19,7 +19,7 @@ public class QuestionUpdateHandler extends AbstractQuestionHandler {
       System.out.println("[메인/고객센터/문의하기/게시글 수정]");
       int no = Prompt.inputInt("번호? ");
 
-      MyQuestionListDTO myQuestionListDTO = findByNo(no);
+      QuestionListDTO myQuestionListDTO = findByNo(no);
 
       try {
         if (myQuestionListDTO == null) {

@@ -4,11 +4,11 @@ import java.util.List;
 import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.handler.Command;
 
-public abstract class AbstractCommBestReviewHandler implements Command {
+public abstract class AbstractCommBestHandler implements Command {
 
   protected List<CommBoardDTO> commBoardDTOList;
 
-  public AbstractCommBestReviewHandler(List<CommBoardDTO> commBoardDTOList) {
+  public AbstractCommBestHandler(List<CommBoardDTO> commBoardDTOList) {
     this.commBoardDTOList = commBoardDTOList;
   }
 }

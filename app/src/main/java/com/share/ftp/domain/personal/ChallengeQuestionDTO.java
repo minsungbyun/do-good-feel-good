@@ -3,11 +3,10 @@ package com.share.ftp.domain.personal;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
-
 import com.share.ftp.domain.join.JoinDTO;
 
 @SuppressWarnings("serial")
-public class MyChallengeQuestionDTO implements Serializable {
+public class ChallengeQuestionDTO implements Serializable {
   public int no;
   public String title;
   public String content;
@@ -16,11 +15,11 @@ public class MyChallengeQuestionDTO implements Serializable {
 
   @Override
   public String toString() {
-    return "MyChallengeQuestionDTO [no=" + no + ", memberId=" + title + ", content=" + content + ", owner=" + owner
+    return "ChallengeQuestionDTO [no=" + no + ", memberId=" + title + ", content=" + content + ", owner=" + owner
         + ", joinDTO=" + joinDTO + "]";
   }
 
-@Override
+  @Override
   public int hashCode() {
     return Objects.hash(content, title, no);
   }
@@ -33,7 +32,7 @@ public class MyChallengeQuestionDTO implements Serializable {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    MyChallengeQuestionDTO other = (MyChallengeQuestionDTO) obj;
+    ChallengeQuestionDTO other = (ChallengeQuestionDTO) obj;
     return Objects.equals(content, other.content) && Objects.equals(title, other.title)
         && no == other.no;
   }

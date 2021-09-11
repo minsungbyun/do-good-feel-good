@@ -13,10 +13,10 @@ import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.domain.personal.CommReviewDTO;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
-import com.share.ftp.domain.personal.MyChallengeQuestionDTO;
-import com.share.ftp.domain.personal.MyChallengeReviewDTO;
+import com.share.ftp.domain.personal.ChallengeQuestionDTO;
+import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.ftp.domain.personal.MyProfileDTO;
-import com.share.ftp.domain.personal.MyQuestionListDTO;
+import com.share.ftp.domain.personal.QuestionListDTO;
 import com.share.ftp.domain.personal.OrgRequestDTO;
 import com.share.ftp.domain.personal.PersonalRequestApplyDTO;
 import com.share.ftp.domain.personal.PersonalRequestDTO;
@@ -116,8 +116,8 @@ public class CopyApp {
 
   // 챌린지 도메인(값)
 
-  List<MyChallengeQuestionDTO> myChallengeQuestionDTOList = new ArrayList<>();
-  List<MyChallengeReviewDTO> myChallengeReviewDTOList = new ArrayList<>();
+  List<ChallengeQuestionDTO> myChallengeQuestionDTOList = new ArrayList<>();
+  List<ChallengeReviewDTO> myChallengeReviewDTOList = new ArrayList<>();
 
   // 기부 도메인(값)
   List<DonationBoardDTO> donationBoardDTOList = new ArrayList<>();
@@ -125,7 +125,7 @@ public class CopyApp {
 
   // 마이페이지 도메인(값)
   List<MyProfileDTO> myProfileDTOList = new ArrayList<>();
-  List<MyQuestionListDTO> myQuestionListDTOList = new ArrayList<>();
+  List<QuestionListDTO> myQuestionListDTOList = new ArrayList<>();
   List<OrgRequestDTO> orgRequestDTOList = new ArrayList<>();
 
   // 관리자 도메인(값)

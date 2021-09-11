@@ -1,12 +1,12 @@
 package com.share.ftp.handler.personal.challenge;
 
 import java.util.List;
-import com.share.ftp.domain.personal.MyChallengeQuestionDTO;
+import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 import com.share.util.Prompt;
 
 public class ChallengeQuestionSearchHandler extends AbstractChallengeQuestionHandler {
 
-  public ChallengeQuestionSearchHandler(List<MyChallengeQuestionDTO> myChallengeQuestionDTOList) {
+  public ChallengeQuestionSearchHandler(List<ChallengeQuestionDTO> myChallengeQuestionDTOList) {
     super(myChallengeQuestionDTOList);
   }
 
@@ -15,7 +15,7 @@ public class ChallengeQuestionSearchHandler extends AbstractChallengeQuestionHan
 
     String input = Prompt.inputString("검색어? ");
 
-    for (MyChallengeQuestionDTO myChallengeQuestionDTO : myChallengeQuestionDTOList) {
+    for (ChallengeQuestionDTO myChallengeQuestionDTO : myChallengeQuestionDTOList) {
       if (!myChallengeQuestionDTO.getMemberId().contains(input) &&
           !myChallengeQuestionDTO.getContent().contains(input)) {
         continue;

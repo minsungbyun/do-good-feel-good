@@ -22,11 +22,11 @@ import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.domain.personal.CommReviewDTO;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
-import com.share.ftp.domain.personal.MyChallengeJoinDTO;
-import com.share.ftp.domain.personal.MyChallengeQuestionDTO;
-import com.share.ftp.domain.personal.MyChallengeReviewDTO;
+import com.share.ftp.domain.personal.ChallengeJoinDTO;
+import com.share.ftp.domain.personal.ChallengeQuestionDTO;
+import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.ftp.domain.personal.MyProfileDTO;
-import com.share.ftp.domain.personal.MyQuestionListDTO;
+import com.share.ftp.domain.personal.QuestionListDTO;
 import com.share.ftp.domain.personal.OrgRequestDTO;
 import com.share.ftp.domain.personal.PersonalRequestDTO;
 import com.share.ftp.domain.personal.VolListDTO;
@@ -155,7 +155,7 @@ public class App {
   List<VolListDTO> volListDTOList = new ArrayList<>();
 
   // 개인, 기관 공통 도메인
-  //    List<GeneralRequestDTO> generalRequestDTOList = new ArrayList<>();
+  //  List<GeneralRequestDTO> generalRequestDTOList = new ArrayList<>();
   //  List<GeneralRequestDTO> personalRequestApplyDTOList = new ArrayList<>();
   //  List<GeneralRequestDTO> personalRequestRejectDTOList = new ArrayList<>();
   //  List<GeneralRequestDTO> orgRequestDTOApplyList = new ArrayList<>();
@@ -178,9 +178,9 @@ public class App {
   List<CommReviewDTO> commReviewDTOList = new ArrayList<>();
 
   // 챌린지 도메인(값)
-  List<MyChallengeJoinDTO> myChallengeJoinDTOList = new ArrayList<>();
-  List<MyChallengeQuestionDTO> myChallengeQuestionDTOList = new ArrayList<>();
-  List<MyChallengeReviewDTO> myChallengeReviewDTOList = new ArrayList<>();
+  List<ChallengeJoinDTO> myChallengeJoinDTOList = new ArrayList<>();
+  List<ChallengeQuestionDTO> myChallengeQuestionDTOList = new ArrayList<>();
+  List<ChallengeReviewDTO> myChallengeReviewDTOList = new ArrayList<>();
 
   // 모금함 개설 신청 관련 도메인(값)
   List<DonationBoardDTO> donationBoardDTOList = new ArrayList<>();
@@ -193,7 +193,7 @@ public class App {
 
   // 마이페이지 도메인(값)
   List<MyProfileDTO> myProfileDTOList = new ArrayList<>();
-  List<MyQuestionListDTO> myQuestionListDTOList = new ArrayList<>();
+  List<QuestionListDTO> myQuestionListDTOList = new ArrayList<>();
 
   // 관리자 도메인(값)
   List<ChallengeDTO> challengeDTOList = new ArrayList<>();
@@ -459,18 +459,6 @@ public class App {
     loadOrgRequest();
     loadOrgRequestApply();
     loadOrgRequestReject();
-    //
-    //    loadCommBoardDTO();
-    //    loadCommReviewDTO();
-    //
-    //    loadDonationBoards();
-    //    loadDonationRegisters();
-    //    loadQuestion();
-    //
-    //    loadChallengeReviews();
-    //    loadChallengeQuestions();
-    //
-    //    loadQuestion();
 
     loadCommBoard();
     loadCommReview();
@@ -744,7 +732,7 @@ public class App {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("myChallengeReview.data"))) {
 
-      myChallengeReviewDTOList.addAll((List<MyChallengeReviewDTO>) in.readObject());
+      myChallengeReviewDTOList.addAll((List<ChallengeReviewDTO>) in.readObject());
 
       System.out.println("참여인증&댓글 로딩 완료!");
 
@@ -772,7 +760,7 @@ public class App {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("myChallengeQuestion.data"))) {
 
-      myChallengeQuestionDTOList.addAll((List<MyChallengeQuestionDTO>) in.readObject());
+      myChallengeQuestionDTOList.addAll((List<ChallengeQuestionDTO>) in.readObject());
 
       System.out.println("챌린지 문의글 로딩 완료!");
 
@@ -993,7 +981,7 @@ public class App {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("question.data"))) {
 
-      myQuestionListDTOList.addAll((List<MyQuestionListDTO>) in.readObject());
+      myQuestionListDTOList.addAll((List<QuestionListDTO>) in.readObject());
 
       System.out.println("게시글 데이터 로딩 완료!");
 

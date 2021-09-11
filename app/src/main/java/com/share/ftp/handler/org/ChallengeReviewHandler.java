@@ -1,19 +1,19 @@
 package com.share.ftp.handler.org;
 
 import java.sql.Date;
-import com.share.ftp.domain.personal.MyChallengeReviewDTO;
+import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.util.Prompt;
 
 public class ChallengeReviewHandler {
   static final int MAX_LENGTH = 100;
 
-  MyChallengeReviewDTO[] boards = new MyChallengeReviewDTO[MAX_LENGTH];
+  ChallengeReviewDTO[] boards = new ChallengeReviewDTO[MAX_LENGTH];
   int size = 0;
 
   public void add() {
     System.out.println("[참여인증&댓글 등록]");
 
-    MyChallengeReviewDTO board = new MyChallengeReviewDTO();
+    ChallengeReviewDTO board = new ChallengeReviewDTO();
 
     board.no = Prompt.inputInt("번호: ");
     board.memberId = Prompt.inputString("아이디: ");
@@ -40,7 +40,7 @@ public class ChallengeReviewHandler {
     System.out.println("[참여인증&댓글 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    MyChallengeReviewDTO board = null;
+    ChallengeReviewDTO board = null;
 
     for (int i = 0; i < this.size; i++) {
       if (this.boards[i].no == no) {
@@ -64,7 +64,7 @@ public class ChallengeReviewHandler {
     System.out.println("[참여인증&댓글 변경]");
     int no = Prompt.inputInt("번호? ");
 
-    MyChallengeReviewDTO board = null;
+    ChallengeReviewDTO board = null;
 
     for (int i = 0; i < this.size; i++) {
       if (this.boards[i].no == no) {

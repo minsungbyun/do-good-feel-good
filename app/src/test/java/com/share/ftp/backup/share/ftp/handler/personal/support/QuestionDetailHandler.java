@@ -1,12 +1,12 @@
 package com.share.ftp.handler.personal.support;
 
 import java.util.List;
-import com.share.ftp.domain.personal.MyQuestionListDTO;
+import com.share.ftp.domain.personal.QuestionListDTO;
 import com.share.util.Prompt;
 
 public class QuestionDetailHandler extends AbstractQuestionHandler {
 
-  public QuestionDetailHandler(List<MyQuestionListDTO> myQuestionListDTOList) {
+  public QuestionDetailHandler(List<QuestionListDTO> myQuestionListDTOList) {
     super (myQuestionListDTOList);
   }
 
@@ -16,7 +16,7 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
     System.out.println("[고객센터/문의하기/상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    MyQuestionListDTO myQuestionListDTO = findByNo(no);
+    QuestionListDTO myQuestionListDTO = findByNo(no);
 
     if (myQuestionListDTO == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
