@@ -1,22 +1,22 @@
 package com.share.ftp.handler.personal.challenge;
 
 import java.util.List;
-import com.share.ftp.domain.personal.MyChallengeQuestionDTO;
+import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
 
 public abstract class AbstractChallengeQuestionHandler  implements Command {
 
-  protected List<MyChallengeQuestionDTO> myChallengeQuestionDTOList;
+  protected List<ChallengeQuestionDTO> ChallengeQuestionDTOList;
 
-  public AbstractChallengeQuestionHandler(List<MyChallengeQuestionDTO> myChallengeQuestionDTOList) {
-    this.myChallengeQuestionDTOList = myChallengeQuestionDTOList;
+  public AbstractChallengeQuestionHandler(List<ChallengeQuestionDTO> ChallengeQuestionDTOList) {
+    this.ChallengeQuestionDTOList = ChallengeQuestionDTOList;
   }
 
-  protected MyChallengeQuestionDTO findByNo(int no) {
-    MyChallengeQuestionDTO[] arr = myChallengeQuestionDTOList.toArray(new MyChallengeQuestionDTO[0]);
-    for (MyChallengeQuestionDTO myChallengeQuestionDTO : arr) {
-      if (myChallengeQuestionDTO.getNo() == no) {
-        return myChallengeQuestionDTO;
+  protected ChallengeQuestionDTO findByNo(int no) {
+    ChallengeQuestionDTO[] arr = ChallengeQuestionDTOList.toArray(new ChallengeQuestionDTO[0]);
+    for (ChallengeQuestionDTO ChallengeQuestionDTO : arr) {
+      if (ChallengeQuestionDTO.getNo() == no) {
+        return ChallengeQuestionDTO;
       }
     }
     return null;

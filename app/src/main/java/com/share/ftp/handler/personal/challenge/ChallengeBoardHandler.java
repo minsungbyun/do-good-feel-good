@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.challenge;
 
 import java.util.List;
-import com.share.ftp.domain.personal.MyChallengeReviewDTO;
+import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.ftp.handler.org.ChallengeQuestionHandler;
 import com.share.util.Prompt;
 

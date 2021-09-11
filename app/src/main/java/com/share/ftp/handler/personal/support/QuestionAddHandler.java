@@ -2,13 +2,13 @@ package com.share.ftp.handler.personal.support;
 
 import java.sql.Date;
 import java.util.List;
-import com.share.ftp.domain.personal.MyQuestionListDTO;
+import com.share.ftp.domain.personal.QuestionListDTO;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
 public class QuestionAddHandler extends AbstractQuestionHandler {
 
-  public QuestionAddHandler(List<MyQuestionListDTO> myQuestionListDTOList) {
+  public QuestionAddHandler(List<QuestionListDTO> myQuestionListDTOList) {
     super (myQuestionListDTOList);
   }
 
@@ -17,7 +17,7 @@ public class QuestionAddHandler extends AbstractQuestionHandler {
     System.out.println("[고객센터/문의하기/문의하기 등록]");
 
 
-    MyQuestionListDTO myQuestionListDTO = new MyQuestionListDTO();
+    QuestionListDTO myQuestionListDTO = new QuestionListDTO();
 
     myQuestionListDTO.setNo(Prompt.inputInt("번호? "));
     myQuestionListDTO.setTitle(Prompt.inputString("제목? "));

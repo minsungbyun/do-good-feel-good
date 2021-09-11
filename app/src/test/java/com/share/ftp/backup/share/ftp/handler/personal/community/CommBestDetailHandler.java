@@ -3,7 +3,7 @@ package com.share.ftp.handler.personal.community;
 import java.util.List;
 import com.share.ftp.domain.personal.CommBoardDTO;
 
-public class CommBestDetailHandler extends AbstractCommBestReviewHandler {
+public class CommBestDetailHandler extends AbstractCommBestHandler {
 
   public CommBestDetailHandler(List<CommBoardDTO> commBoardDTOList) {
     super(commBoardDTOList);

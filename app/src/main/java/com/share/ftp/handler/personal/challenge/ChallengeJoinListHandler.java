@@ -1,37 +1,36 @@
 package com.share.ftp.handler.personal.challenge;
 
 import java.util.List;
-
 import com.share.ftp.domain.join.JoinDTO;
-import com.share.ftp.domain.personal.MyChallengeJoinDTO;
+import com.share.ftp.domain.personal.ChallengeJoinDTO;
 
 public class ChallengeJoinListHandler extends AbstractChallengeJoinHandler {
 
   ChallengeJoinHandler challengeJoinHandler;
-  List<MyChallengeJoinDTO> myChallengeJoinDTOList;
+  List<ChallengeJoinDTO> ChallengeJoinDTOList;
   List<JoinDTO> members;
 
   public ChallengeJoinListHandler(
-      List<MyChallengeJoinDTO> myChallengeJoinDTOList
+      List<ChallengeJoinDTO> ChallengeJoinDTOList
       ) {
 
-    super(myChallengeJoinDTOList);
-    this.myChallengeJoinDTOList = myChallengeJoinDTOList;
+    super(ChallengeJoinDTOList);
+    this.ChallengeJoinDTOList = ChallengeJoinDTOList;
   }
 
   @Override
   public void execute() {
 
     System.out.println("[참여자 목록]");
-    
-    if (myChallengeJoinDTOList.isEmpty()) {
+
+    if (ChallengeJoinDTOList.isEmpty()) {
       System.out.println("참여자가 없습니다.");
       return;
     }
-    for (MyChallengeJoinDTO myChallengeJoinDTO : myChallengeJoinDTOList) {
+    for (ChallengeJoinDTO ChallengeJoinDTO : ChallengeJoinDTOList) {
       System.out.printf("%s, %s\n", 
-          myChallengeJoinDTO.getUserId(),
-          myChallengeJoinDTO.getRegisteredDate());
+          ChallengeJoinDTO.getUserId(),
+          ChallengeJoinDTO.getRegisteredDate());
     }
   }
 

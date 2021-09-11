@@ -1,13 +1,13 @@
 package com.share.ftp.handler.personal.challenge;
 
 import java.util.List;
-import com.share.ftp.domain.personal.MyChallengeQuestionDTO;
+import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 import com.share.util.Prompt;
 
 public class ChallengeQuestionUpdateHandler extends AbstractChallengeQuestionHandler {
 
 
-  public ChallengeQuestionUpdateHandler(List<MyChallengeQuestionDTO> myChallengeQuestionDTOList) {
+  public ChallengeQuestionUpdateHandler(List<ChallengeQuestionDTO> myChallengeQuestionDTOList) {
     super(myChallengeQuestionDTOList);
   }
 
@@ -16,7 +16,7 @@ public class ChallengeQuestionUpdateHandler extends AbstractChallengeQuestionHan
     System.out.println("[문의 수정]");
     int no = Prompt.inputInt("번호? ");
 
-    MyChallengeQuestionDTO myChallengeQuestion = findByNo(no);
+    ChallengeQuestionDTO myChallengeQuestion = findByNo(no);
 
     if (myChallengeQuestion == null) {
       System.out.println("해당 번호의 문의가 없습니다.");

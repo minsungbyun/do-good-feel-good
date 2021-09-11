@@ -6,7 +6,7 @@ import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
 @SuppressWarnings("serial")
-public class MyQuestionListDTO implements Serializable {
+public class QuestionListDTO implements Serializable {
 
   private int no;
   private String title;
@@ -21,7 +21,7 @@ public class MyQuestionListDTO implements Serializable {
 
   @Override
   public String toString() {
-    return "MyQuestionListDTO [no=" + no + ", title=" + title + ", memberld=" + memberld
+    return "QuestionListDTO [no=" + no + ", title=" + title + ", memberld=" + memberld
         + ", password=" + password + ", writer=" + writer + ", content=" + content + ", fileUpload="
         + fileUpload + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount
         + ", Owner=" + Owner + "]";
@@ -41,7 +41,7 @@ public class MyQuestionListDTO implements Serializable {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    MyQuestionListDTO other = (MyQuestionListDTO) obj;
+    QuestionListDTO other = (QuestionListDTO) obj;
     return Objects.equals(Owner, other.Owner) && Objects.equals(content, other.content)
         && Objects.equals(fileUpload, other.fileUpload) && Objects.equals(memberld, other.memberld)
         && no == other.no && password == other.password
