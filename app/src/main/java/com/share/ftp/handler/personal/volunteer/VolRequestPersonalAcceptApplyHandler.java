@@ -42,7 +42,8 @@ public class VolRequestPersonalAcceptApplyHandler extends AbstractVolRequestPers
     //    public List<JoinDTO> addJoinMember()
     personalRequestDTO.setChecked(true);
     personalRequestDTO.setIsSigned("승인됨");
-    personalRequestDTO.setJoinCount(1);
+    personalRequestDTO.addMembers(personalRequestDTO.getOwner());
+    //    personalRequestDTO.setJoinCount(1);
     //    personalRequestDTO.setMembers(addOwner(personalRequestDTO));
     //    members.add(personalRequestDTO.getOwner()); // 주최자 등록
 

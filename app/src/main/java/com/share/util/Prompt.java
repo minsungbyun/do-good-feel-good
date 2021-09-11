@@ -12,6 +12,7 @@ public class Prompt {
   // => 다른 패키지에서도 접근할 수 있도록 하려면 public 으로 공개해야 한다.
   public static String inputString(String title) {
     System.out.print(title);
+
     return keyboardScan.nextLine();
   }
 

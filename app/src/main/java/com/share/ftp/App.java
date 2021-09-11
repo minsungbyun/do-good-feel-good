@@ -18,17 +18,17 @@ import com.share.ftp.domain.admin.NoticeDTO;
 import com.share.ftp.domain.admin.QuestionDTO;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.personal.ApproveOrgDTO;
+import com.share.ftp.domain.personal.ChallengeJoinDTO;
+import com.share.ftp.domain.personal.ChallengeQuestionDTO;
+import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.domain.personal.CommReviewDTO;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
-import com.share.ftp.domain.personal.ChallengeJoinDTO;
-import com.share.ftp.domain.personal.ChallengeQuestionDTO;
-import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.ftp.domain.personal.MyProfileDTO;
-import com.share.ftp.domain.personal.QuestionListDTO;
 import com.share.ftp.domain.personal.OrgRequestDTO;
 import com.share.ftp.domain.personal.PersonalRequestDTO;
+import com.share.ftp.domain.personal.QuestionListDTO;
 import com.share.ftp.domain.personal.VolListDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.admin.AdminChallengeAddHandler;
@@ -238,7 +238,7 @@ public class App {
 
   VolRequestPersonalAppliedListDetailHandler volRequestPersonalAppliedListDetailHandler =
       new VolRequestPersonalAppliedListDetailHandler
-      (personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList,personalSelectedList);
+      (personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList);
 
   VolRequestOrgAppliedListDetailHandler volRequestOrgAppliedListDetailHandler =
       new VolRequestOrgAppliedListDetailHandler
