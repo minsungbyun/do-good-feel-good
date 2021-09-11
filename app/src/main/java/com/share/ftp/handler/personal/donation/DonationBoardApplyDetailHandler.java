@@ -12,14 +12,17 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
 
   List<DonationRegisterDTO> donationRegisterDTOList;
   DonationPrompt donationPrompt;
+  DonationRegisterParticipationListHandler donationRegisterParticipationListHandler;
 
   public DonationBoardApplyDetailHandler(
       List<DonationBoardDTO> donationBoardDTOList,
       List<DonationRegisterDTO> donationRegisterDTOList,
-      DonationPrompt donationPrompt) {
+      DonationPrompt donationPrompt,
+      DonationRegisterParticipationListHandler donationRegisterParticipationListHandler) {
     super(donationBoardDTOList);
     this.donationRegisterDTOList = donationRegisterDTOList;
     this.donationPrompt = donationPrompt;
+    this.donationRegisterParticipationListHandler = donationRegisterParticipationListHandler;
   }
 
 
@@ -30,6 +33,11 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
     //    int no = Prompt.inputInt("번호? ");
 
     DonationBoardDTO donationBoardDTO = donationPrompt.promptDonation();
+
+    if (donationBoardDTO == null) {
+      System.out.println("모금함 상세보기를 취소하셨습니다.");
+      return;
+    }
 
     if (donationBoardDTO.isChecked() == false) {
       System.out.println();
@@ -45,6 +53,11 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
       System.out.printf("첨부파일: %s\n", donationBoardDTO.getFileUpload());
       System.out.printf("시작일: %s\n", donationBoardDTO.getRegisteredStartDate());
       System.out.printf("종료일: %s\n", donationBoardDTO.getRegisteredEndDate());
+      System.out.println();
+
+      donationRegisterParticipationListHandler.execute();
+
+
 
       System.out.println();
       String input = Prompt.inputString("해당 모금함에 기부하시겠습니까?(y/N) ");
@@ -52,28 +65,32 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
         System.out.println();
         System.out.println("[ 해당 모금함 기부를 취소하였습니다. ]");
         return;
-      } 
+      } else if (input.equalsIgnoreCase("y")) {
 
-      DonationRegisterDTO donationRegister = new DonationRegisterDTO();
+        DonationRegisterDTO donationRegister = new DonationRegisterDTO();
 
-      System.out.println();
+        System.out.println();
 
-      donationRegister.setNo(donationBoardDTO.getNo());
-      donationRegister.setSort(donationBoardDTO.getSort());
-      donationRegister.setDonationMoney(Prompt.inputInt("기부 금액: "));
-      donationRegister.setMyTotaldonationMoney(donationRegister.getDonationMoney());
-      donationRegister.setName(AuthLoginHandler.getLoginUser().getName());
-      donationRegister.setRegisterationNumber(Prompt.inputString("주민등록번호: "));
-      donationRegister.setBirthDate(Prompt.inputDate("생년월일(yyyy-mm-dd): "));
-      donationRegister.setTel(Prompt.inputString("연락처: "));
-      donationRegister.setEmail(Prompt.inputString("이메일: "));
-      donationRegister.setAddress(Prompt.inputString("주소: "));
-      donationRegister.setRegisteredDate(new Date(System.currentTimeMillis()));
+        donationRegister.setNo(donationBoardDTO.getNo());
+        donationRegister.setSort(donationBoardDTO.getSort());
+        donationRegister.setDonationMoney(Prompt.inputInt("기부 금액: "));
+        donationRegister.setMyTotaldonationMoney(donationRegister.getDonationMoney());
+        donationRegister.setName(AuthLoginHandler.getLoginUser().getName());
+        donationRegister.setRegisterationNumber(Prompt.inputString("주민등록번호: "));
+        donationRegister.setBirthDate(Prompt.inputDate("생년월일(yyyy-mm-dd): "));
+        donationRegister.setTel(Prompt.inputString("연락처: "));
+        donationRegister.setEmail(Prompt.inputString("이메일: "));
+        donationRegister.setAddress(Prompt.inputString("주소: "));
+        donationRegister.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-      donationRegisterDTOList.add(donationRegister);
+        donationRegisterDTOList.add(donationRegister);
 
-      System.out.println();
-      System.out.println("[기부가 완료되었습니다.]");
+        System.out.println();
+        System.out.println("[기부가 완료되었습니다.]");
+      } else {
+        System.out.println("다시 입력해주세요.");
+        return;
+      }
     }
 
   }

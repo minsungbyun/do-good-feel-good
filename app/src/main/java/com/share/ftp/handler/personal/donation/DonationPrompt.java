@@ -28,7 +28,6 @@ public class DonationPrompt {
       System.out.println();
       int donationBoardNo = Prompt.inputInt("모금함 번호 선택? (취소: 0) ");
       if (donationBoardNo == 0) {
-        System.out.println("모금함 상세보기를 취소하셨습니다.");
         return null;
       }
       DonationBoardDTO selectedDonation = findByNo(donationBoardNo);
