@@ -27,7 +27,6 @@ public class DonationRegisterParticipationListHandler extends AbstractDonationRe
 
     for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {
       for (DonationBoardDTO a : donationBoardDTOList) {
-        System.out.println();
         if (donationRegisterDTO.getNo() == a.getNo()) {
           System.out.printf("모금함번호: %d  분류: %s\n %s님, %s, %s\n", 
               donationRegisterDTO.getNo(), 
@@ -36,6 +35,8 @@ public class DonationRegisterParticipationListHandler extends AbstractDonationRe
               donationRegisterDTO.getDonationMoney(), 
               donationRegisterDTO.getRegisteredDate());
           System.out.println();
+        } else {
+          System.out.println("1");
         }
       }
     }

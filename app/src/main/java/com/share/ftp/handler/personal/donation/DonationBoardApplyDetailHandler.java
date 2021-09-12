@@ -58,7 +58,6 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
       donationRegisterParticipationListHandler.execute();
 
 
-
       System.out.println();
       String input = Prompt.inputString("해당 모금함에 기부하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("n") || input.length() == 0) {

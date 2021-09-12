@@ -2,11 +2,13 @@ package com.share.ftp.domain.personal;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import com.share.ftp.domain.join.JoinDTO;
 
 @SuppressWarnings("serial")
 public class DonationRegisterDTO implements Serializable{
-  private int no;
 
   private String children = "아동";
   private String teen = "청소년";
@@ -15,7 +17,9 @@ public class DonationRegisterDTO implements Serializable{
   private String animal = "동물";
   private String environmental = "환경";
   private String other = "기타";
+  private String sort;
 
+  private int no;
   private int donationMoney;
   private int myTotaldonationMoney;
   private String name;
@@ -25,25 +29,24 @@ public class DonationRegisterDTO implements Serializable{
   private String email;
   private String address;
   private Date registeredDate;
-  private String sort;
-
+  private List<JoinDTO> members = new ArrayList<>();
 
 
 
   @Override
   public String toString() {
-    return "DonationRegisterDTO [no=" + no + ", children=" + children + ", teen=" + teen
-        + ", elder=" + elder + ", handicappedPerson=" + handicappedPerson + ", animal=" + animal
-        + ", environmental=" + environmental + ", other=" + other + ", donationMoney="
+    return "DonationRegisterDTO [children=" + children + ", teen=" + teen + ", elder=" + elder
+        + ", handicappedPerson=" + handicappedPerson + ", animal=" + animal + ", environmental="
+        + environmental + ", other=" + other + ", sort=" + sort + ", no=" + no + ", donationMoney="
         + donationMoney + ", myTotaldonationMoney=" + myTotaldonationMoney + ", name=" + name
         + ", registerationNumber=" + registerationNumber + ", birthDate=" + birthDate + ", tel="
         + tel + ", email=" + email + ", address=" + address + ", registeredDate=" + registeredDate
-        + ", sort=" + sort + "]";
+        + ", members=" + members + "]";
   }
   @Override
   public int hashCode() {
     return Objects.hash(address, animal, birthDate, children, donationMoney, elder, email,
-        environmental, handicappedPerson, myTotaldonationMoney, name, no, other,
+        environmental, handicappedPerson, members, myTotaldonationMoney, name, no, other,
         registerationNumber, registeredDate, sort, teen, tel);
   }
   @Override
@@ -60,17 +63,12 @@ public class DonationRegisterDTO implements Serializable{
         && donationMoney == other.donationMoney && Objects.equals(elder, other.elder)
         && Objects.equals(email, other.email) && Objects.equals(environmental, other.environmental)
         && Objects.equals(handicappedPerson, other.handicappedPerson)
+        && Objects.equals(members, other.members)
         && myTotaldonationMoney == other.myTotaldonationMoney && Objects.equals(name, other.name)
         && no == other.no && Objects.equals(this.other, other.other)
         && Objects.equals(registerationNumber, other.registerationNumber)
         && Objects.equals(registeredDate, other.registeredDate) && Objects.equals(sort, other.sort)
         && Objects.equals(teen, other.teen) && Objects.equals(tel, other.tel);
-  }
-  public int getNo() {
-    return no;
-  }
-  public void setNo(int no) {
-    this.no = no;
   }
   public String getChildren() {
     return children;
@@ -113,6 +111,18 @@ public class DonationRegisterDTO implements Serializable{
   }
   public void setOther(String other) {
     this.other = other;
+  }
+  public String getSort() {
+    return sort;
+  }
+  public void setSort(String sort) {
+    this.sort = sort;
+  }
+  public int getNo() {
+    return no;
+  }
+  public void setNo(int no) {
+    this.no = no;
   }
   public int getDonationMoney() {
     return donationMoney;
@@ -168,13 +178,31 @@ public class DonationRegisterDTO implements Serializable{
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
-  public String getSort() {
-    return sort;
+  public List<JoinDTO> getMembers() {
+    return members;
   }
-  public void setSort(String sort) {
-    this.sort = sort;
+  public void setMembers(List<JoinDTO> members) {
+    this.members = members;
   }
 
+  public void addMembers(JoinDTO member) {
+    this.members.add(member);
+  }
+
+
+  public String getMemberNames() {
+    if (members == null) {
+      return "";
+    }
+    StringBuilder names = new StringBuilder();
+    for (JoinDTO joinDTO : members) {
+      if (names.length() > 0) {
+        names.append("\n");
+      }
+      names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
+    }
+    return names.toString();
+  }
 
 
 }
