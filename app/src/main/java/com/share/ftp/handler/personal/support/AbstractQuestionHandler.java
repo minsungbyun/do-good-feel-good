@@ -1,12 +1,8 @@
 package com.share.ftp.handler.personal.support;
 
 import java.util.List;
-<<<<<<< HEAD
-import com.share.ftp.domain.personal.DonationRegisterDTO;
-import com.share.ftp.domain.personal.MyQuestionListDTO;
-=======
+
 import com.share.ftp.domain.personal.QuestionListDTO;
->>>>>>> e81082abfa584f50c5d3afcfffbb43e28e8f7be6
 import com.share.ftp.handler.Command;
 import com.share.util.Prompt;
 
@@ -18,7 +14,6 @@ public abstract class AbstractQuestionHandler implements Command {
     this.myQuestionListDTOList = myQuestionListDTOList;
   }
 
-<<<<<<< HEAD
   protected static String getSortLabel(int sort) {
     // [1.함께해요 문의] [2.나눔이야기 문의] [3.모금함 문의]
     // [4.챌린지 문의] [5.사이트 이용 문의] [6.기타]");
@@ -97,18 +92,18 @@ public abstract class AbstractQuestionHandler implements Command {
 
   protected MyQuestionListDTO findByNo(int no) {
     for (MyQuestionListDTO myQuestionListDTO : myQuestionListDTOList) {
-=======
-  protected QuestionListDTO findByNo(int no) {
-    for (QuestionListDTO myQuestionListDTO : myQuestionListDTOList) {
->>>>>>> e81082abfa584f50c5d3afcfffbb43e28e8f7be6
-      if (myQuestionListDTO.getNo() == no) {
-        return myQuestionListDTO;
+      =======
+          protected QuestionListDTO findByNo(int no) {
+        for (QuestionListDTO myQuestionListDTO : myQuestionListDTOList) {
+          >>>>>>> e81082abfa584f50c5d3afcfffbb43e28e8f7be6
+          if (myQuestionListDTO.getNo() == no) {
+            return myQuestionListDTO;
+          }
+        }
+        return null;
       }
-    }
-    return null;
-  }
 
-}
+    }
 
 
 
