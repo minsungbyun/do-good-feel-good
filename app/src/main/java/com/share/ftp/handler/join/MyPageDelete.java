@@ -40,7 +40,6 @@ public class MyPageDelete extends AbstractJoinHandler {
       return;
     }
 
-
     AuthLoginHandler.loginUser = null; // 로그인 끊는다.
     AuthLoginHandler.userAccessLevel = Menu.ACCESS_LOGOUT;
     joinDTOList.remove(joinDTO); // 회원 제거한다.
@@ -51,33 +50,20 @@ public class MyPageDelete extends AbstractJoinHandler {
     return; 
   }
 
-  //  private JoinDTO findByPassword(int password) {
-  //    for (JoinDTO joinDTO : joinDTOList) {
-  //      if (joinDTO.getPassword() == password) {
-  //        return joinDTO;
-  //      }
-  //    }
-  //    return null;
-  //  }
 }
 
 
 
-//  public void joinSite() {
-//    System.out.println("가입하기");
+//  private JoinDTO findByPassword(int password) {
+//    for (JoinDTO joinDTO : joinDTOList) {
+//      if (joinDTO.getPassword() == password) {
+//        return joinDTO;
+//      }
+//    }
+//    return null;
 //  }
-//
-//  public void idCheck() {
-//    System.out.println("ID중복확인");
-//  }
-//
-//  public void telCheck() {
-//    System.out.println("휴대전화인증");
-//  }
-//
-//  public void findAddress() {
-//    System.out.println("우편번호검색");
-//  }
+
+
 
 
 

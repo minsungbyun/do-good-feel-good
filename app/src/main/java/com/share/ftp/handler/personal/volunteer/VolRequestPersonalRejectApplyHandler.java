@@ -16,12 +16,11 @@ public class VolRequestPersonalRejectApplyHandler extends AbstractVolRequestPers
 
   }
 
-
-  // 해당 봉사 신청서를 반려한다.
   @Override
   public void execute() {
     System.out.println();
     System.out.println("[  개인봉사신청서 반려  ]");
+    System.out.println();
 
     int no = Prompt.inputInt("봉사번호? ");
 
@@ -39,21 +38,11 @@ public class VolRequestPersonalRejectApplyHandler extends AbstractVolRequestPers
       return;
     }
 
-    personalRequestDTO.setChecked(false);
+    //    personalRequestDTO.setChecked(false);
     personalRequestDTO.setIsSigned("반려됨");
-
-    // 기존 리스트 복사
 
     personalRequestRejectDTOList.add(personalRequestDTO);
 
-
-    //    for (int i = personalRequestIndex + 1; i < this.size; i++) {
-    //      this.personalRequestsDTO[i - 1] = this.personalRequestsDTO[i];
-    //    }
-    //    this.personalRequestsDTO[--this.size] = null;
-
-    System.out.println("[  해당 봉사신청을 반려하였습니다. ]");
+    System.out.println("[  ✔️ 해당 봉사신청을 반려하였습니다. ]");
   }
-
-
 }

@@ -2,40 +2,61 @@ package com.share.ftp.handler.personal.volunteer;
 
 import java.util.List;
 import com.share.ftp.domain.personal.PersonalRequestDTO;
+import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
 public class VolRequestPersonalDeleteHandler extends AbstractVolRequestPersonalHandler { // 개인 봉사신청 양식 쓰는 곳
 
-  List<PersonalRequestDTO> personalSelectedList;
+
+
   public VolRequestPersonalDeleteHandler(
       List<PersonalRequestDTO> personalRequestDTOList,
       List<PersonalRequestDTO> personalRequestApplyDTOList,
-      List<PersonalRequestDTO> personalRequestRejectDTOList,
-      List<PersonalRequestDTO> personalSelectedList) {
+      List<PersonalRequestDTO> personalRequestRejectDTOList) {
 
     super(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList);
-    this.personalSelectedList = personalSelectedList;
   }
 
-
-  // 해당 봉사 신청서를 삭제한다.
   @Override
   public void execute() {
     System.out.println();
     System.out.println("[  개인봉사신청서 삭제  ]");
+    System.out.println();
 
-    int no = Prompt.inputInt("봉사번호? ");
+    for (PersonalRequestDTO personalRequestApplyDTO : personalRequestApplyDTOList) {
+      if (personalRequestApplyDTO.getOwner().getName().equals(AuthLoginHandler.getLoginUser().getName())) {
+        System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
 
-    PersonalRequestDTO personalRequestDTO = findByVol(no);
+            personalRequestApplyDTO.getVolNo(),      
+            personalRequestApplyDTO.getVolTitle(),     
+            personalRequestApplyDTO.getOwner().getName(), 
+            personalRequestApplyDTO.getVolSort(), 
+            personalRequestApplyDTO.getVolTel(),
+            personalRequestApplyDTO.getVolEmail(),
+            personalRequestApplyDTO.getVolStartDate(),
+            personalRequestApplyDTO.getVolEndDate(),
+            personalRequestApplyDTO.getVolStartTime(),
+            personalRequestApplyDTO.getVolEndTime(),
+            //            personalRequestApplyDTO.getVolList(),
+            personalRequestApplyDTO.getVolLimitNum(),
+            personalRequestApplyDTO.getVolContent(),
+            personalRequestApplyDTO.getVolFileUpload(),
+            personalRequestApplyDTO.getIsSigned()
+            );
+      } else {
+        System.out.println();
+        System.out.println("[  현재 승인된 봉사목록이 없습니다. ]");
+        return;
 
-    if (personalRequestDTO == null) {
-      System.out.println("[  해당 번호의 개인봉사신청서가 없습니다.  ]");
-      return;
+      }
     }
 
+    int volNo = Prompt.inputInt("삭제 할 봉사번호? ");
+
+    PersonalRequestDTO personalRequestDTO = findByVol(volNo);
 
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+    if (!input.equals("y") || input.length() == 0) {
       System.out.println("[  해당 봉사신청 삭제를 취소하였습니다.  ]");
       return;
     }
@@ -43,18 +64,8 @@ public class VolRequestPersonalDeleteHandler extends AbstractVolRequestPersonalH
     personalRequestDTOList.remove(personalRequestDTO);
     personalRequestApplyDTOList.remove(personalRequestDTO);
     personalRequestRejectDTOList.remove(personalRequestDTO);
-    personalSelectedList.remove(personalRequestDTO);
-
-
-
-
-    //    for (int i = personalRequestIndex + 1; i < this.size; i++) {
-    //      this.personalRequestsDTO[i - 1] = this.personalRequestsDTO[i];
-    //    }
-    //    this.personalRequestsDTO[--this.size] = null;
 
     System.out.println("[  해당 봉사신청을 삭제하였습니다. ]");
   }
-
 
 }
