@@ -1,6 +1,7 @@
 package com.share.ftp.handler.personal.volunteer;
 
 import java.util.List;
+import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.personal.PersonalRequestDTO;
 import com.share.ftp.handler.Command;
 
@@ -66,15 +67,9 @@ public abstract class AbstractVolRequestPersonalHandler implements Command { // 
   //
   //  }
 
-
-
-
-
-
-
   protected PersonalRequestDTO findByVol(int no) {
     for (PersonalRequestDTO personalRequestDTO : personalRequestDTOList) {
-      if (personalRequestDTO.getNo() == no) {
+      if (personalRequestDTO.getVolNo() == no) {
         return personalRequestDTO;
       }
     }
@@ -83,61 +78,62 @@ public abstract class AbstractVolRequestPersonalHandler implements Command { // 
 
   protected PersonalRequestDTO findByApplyVol(int no) {
     for (PersonalRequestDTO personalRequestDTO : personalRequestApplyDTOList) {
-      if (personalRequestDTO.getNo() == no) {
+      if (personalRequestDTO.getVolNo() == no) {
         return personalRequestDTO;
       }
     }
     return null;
   }
 
-  public PersonalRequestDTO validOwner(int no) {
+  public boolean validOwner(JoinDTO owner) {
     for (PersonalRequestDTO personalRequestDTO : personalRequestApplyDTOList) {
-      if (personalRequestDTO.getNo() == no) {
-        return personalRequestDTO;
+      if (personalRequestDTO.getOwner() == owner) {
+        return true;
       }
     }
-    return null;
+    return false;
   }
-
-
-
-  //  protected GeneralRequestDTO findByVol(int no) {
-  //    for (GeneralRequestDTO generalRequestDTO : generalRequestDTOList) {
-  //      if (generalRequestDTO.getNo() == no) {
-  //        return generalRequestDTO;
-  //      }
-  //    }
-  //    return null;
-  //
-  //  }
-
-  //  private int indexOf(int no) {
-  //    for (int i = 0; i < this.size; i++) {
-  //      if (this.personalRequestsDTO[i].getNo() == no) {
-  //        return i;
-  //      }
-  //    }
-  //    return -1;
-  //  }
-  //
-  //  public String getReturnMessage() {
-  //    for (int i = 0; i < this.size; i++) {
-  //      if (this.personalRequestsDTO[i] == null) {
-  //        return ""; 
-  //      }
-  //    }
-  //    return null;
-  //  }
-
-  //  private PersonalRequestDTO findByVol(int no) {
-  //    for (int i = 0; i < this.size; i++) {
-  //      if (personalRequestsDTO[i].getNo() == no) {
-  //        return personalRequestsDTO[i];
-  //      }
-  //    }
-  //    return null;
-  //
-  //  }
-
-
 }
+
+
+
+//  protected GeneralRequestDTO findByVol(int no) {
+//    for (GeneralRequestDTO generalRequestDTO : generalRequestDTOList) {
+//      if (generalRequestDTO.getNo() == no) {
+//        return generalRequestDTO;
+//      }
+//    }
+//    return null;
+//
+//  }
+
+//  private int indexOf(int no) {
+//    for (int i = 0; i < this.size; i++) {
+//      if (this.personalRequestsDTO[i].getNo() == no) {
+//        return i;
+//      }
+//    }
+//    return -1;
+//  }
+//
+//  public String getReturnMessage() {
+//    for (int i = 0; i < this.size; i++) {
+//      if (this.personalRequestsDTO[i] == null) {
+//        return ""; 
+//      }
+//    }
+//    return null;
+//  }
+
+//  private PersonalRequestDTO findByVol(int no) {
+//    for (int i = 0; i < this.size; i++) {
+//      if (personalRequestsDTO[i].getNo() == no) {
+//        return personalRequestsDTO[i];
+//      }
+//    }
+//    return null;
+//
+//  }
+
+
+

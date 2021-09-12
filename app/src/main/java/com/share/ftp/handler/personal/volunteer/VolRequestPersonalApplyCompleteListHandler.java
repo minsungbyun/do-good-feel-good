@@ -19,12 +19,12 @@ public class VolRequestPersonalApplyCompleteListHandler extends AbstractVolReque
   public void execute() {
     System.out.println();
     System.out.println("[  나의 봉사 신청서 목록  ]");
+    System.out.println();
 
     if (personalRequestDTOList.isEmpty()) {
       System.out.println("[  현재 등록된 봉사목록이 없습니다. ]");
       return;
     }
-
 
     for (PersonalRequestDTO personalRequestDTO : personalRequestDTOList) {
       System.out.printf("번호: %d\n"
@@ -37,33 +37,30 @@ public class VolRequestPersonalApplyCompleteListHandler extends AbstractVolReque
           + "봉사종료기간: %s\n"
           + "봉사시작시간: %s\n"
           + "봉사종료시간: %s\n"
-          + "봉사목록: %s\n"
+          //          + "봉사목록: %s\n"
           + "봉사인원: %d\n"
           + "봉사내용: %s\n"
           + "첨부파일: %s\n"
           + "승인여부: %s \n\n", 
 
-          personalRequestDTO.getNo(), 
-          personalRequestDTO.getTitle(), 
+          personalRequestDTO.getVolNo(), 
+          personalRequestDTO.getVolTitle(), 
           personalRequestDTO.getOwner().getName(), 
-          personalRequestDTO.getSort(), 
-          personalRequestDTO.getTel(),
-          personalRequestDTO.getEmail(),
+          personalRequestDTO.getVolSort(), 
+          personalRequestDTO.getVolTel(),
+          personalRequestDTO.getVolEmail(),
           personalRequestDTO.getVolStartDate(),
           personalRequestDTO.getVolEndDate(),
           personalRequestDTO.getVolStartTime(),
           personalRequestDTO.getVolEndTime(),
-          personalRequestDTO.getVolList(),
-          personalRequestDTO.getJoinNum(),
-          personalRequestDTO.getContent(),
-          personalRequestDTO.getFileUpload(),
+          //          personalRequestDTO.getVolList(),
+          personalRequestDTO.getVolLimitNum(),
+          personalRequestDTO.getVolContent(),
+          personalRequestDTO.getVolFileUpload(),
           //          personalRequestDTO.isChecked(),
           personalRequestDTO.getIsSigned()
-          //          this.personalRequestRejectDTO[i].getIsSigned()
           );
     }
   }
-
-
 
 }

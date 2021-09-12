@@ -2,6 +2,7 @@ package com.share.ftp.domain.personal;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
@@ -10,37 +11,33 @@ import com.share.ftp.domain.join.JoinDTO;
 public class PersonalRequestDTO implements Serializable {
 
 
-  private int no;
-  private String title;
-  private String name;
+  private int volNo;
+  private String volTitle;
+  private String volName;
   private JoinDTO owner; // 나중에 JoinDTO 변경 예정
-  private String userId;
-  private String sort;
-  private String tel;
-  private String email;
+  private String ownerId;
+  private String volSort;
+  private String volTel;
+  private String volEmail;
   private Date volStartDate;
   private Date volEndDate;
   private String volStartTime;
   private String volEndTime;
-  private String volList;
-  private int joinNum;
-  private String content;
-  private String fileUpload;
+  //  private String volList; // 봉사 api 지금은 필요없을 것 같아 닫아놓음
+  private int volLimitNum;
+  private String volContent;
+  private String volFileUpload;
   private boolean isPersonal;
   private boolean isOrg;
-  private boolean isChecked;
   private String isSigned = "승인대기"; // 관리자 승인 여부확인
-  private Date volSubmitTime;
-  private boolean isJoin; // 참여여부 확인
-  private List<JoinDTO> members; // 참여한 멤버들
-  private List<JoinDTO> members1; // 참여한 멤버들
-  private List<JoinDTO> members2; // 참여한 멤버들
-  private List<JoinDTO> members3; // 참여한 멤버들
-  private int joinCount; // 최초 주최자 1명
-  private int totalJoinCount = 1; // 참여 총 횟수
-  private int totalJoinCount1 = 1; // 참여 총 횟수
-  private int totalJoinCount2 = 1; // 참여 총 횟수
-  private int totalJoinCount3 = 1; // 참여 총 횟수
+  private Date volSubmitTime; // 봉사 신청서 제출 시간
+  private List<JoinDTO> members = new ArrayList<>(); // 봉사 참여한 멤버들
+  private int totalJoinCount = 1; // 참여 총 횟수 (주최자는 미리 포함)
+
+
+
+
+
 
 
 
@@ -53,11 +50,25 @@ public class PersonalRequestDTO implements Serializable {
 
 
   @Override
-  public int hashCode() {
-    return Objects.hash(content, email, fileUpload, isChecked, isJoin, isOrg, isPersonal, isSigned,
-        joinCount, joinNum, members, name, no, owner, sort, tel, title, userId, volEndDate,
-        volEndTime, volList, volStartDate, volStartTime, volSubmitTime);
+  public String toString() {
+    return "PersonalRequestDTO [volNo=" + volNo + ", volTitle=" + volTitle + ", volName=" + volName
+        + ", owner=" + owner + ", ownerId=" + ownerId + ", volSort=" + volSort + ", volTel="
+        + volTel + ", volEmail=" + volEmail + ", volStartDate=" + volStartDate + ", volEndDate="
+        + volEndDate + ", volStartTime=" + volStartTime + ", volEndTime=" + volEndTime
+        + ", volLimitNum=" + volLimitNum + ", volContent=" + volContent + ", volFileUpload="
+        + volFileUpload + ", isPersonal=" + isPersonal + ", isOrg=" + isOrg + ", isSigned="
+        + isSigned + ", volSubmitTime=" + volSubmitTime + ", members=" + members
+        + ", totalJoinCount=" + totalJoinCount + "]";
   }
+
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(isOrg, isPersonal, isSigned, members, owner, ownerId, totalJoinCount,
+        volContent, volEmail, volEndDate, volEndTime, volFileUpload, volLimitNum, volName, volNo,
+        volSort, volStartDate, volStartTime, volSubmitTime, volTel, volTitle);
+  }
+
 
   @Override
   public boolean equals(Object obj) {
@@ -68,48 +79,52 @@ public class PersonalRequestDTO implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     PersonalRequestDTO other = (PersonalRequestDTO) obj;
-    return Objects.equals(content, other.content) && Objects.equals(email, other.email)
-        && Objects.equals(fileUpload, other.fileUpload) && isChecked == other.isChecked
-        && isJoin == other.isJoin && isOrg == other.isOrg && isPersonal == other.isPersonal
-        && Objects.equals(isSigned, other.isSigned) && joinCount == other.joinCount
-        && joinNum == other.joinNum && Objects.equals(members, other.members)
-        && Objects.equals(name, other.name) && no == other.no && Objects.equals(owner, other.owner)
-        && Objects.equals(sort, other.sort) && Objects.equals(tel, other.tel)
-        && Objects.equals(title, other.title) && Objects.equals(userId, other.userId)
-        && Objects.equals(volEndDate, other.volEndDate)
-        && Objects.equals(volEndTime, other.volEndTime) && Objects.equals(volList, other.volList)
+    return isOrg == other.isOrg && isPersonal == other.isPersonal
+        && Objects.equals(isSigned, other.isSigned) && Objects.equals(members, other.members)
+        && Objects.equals(owner, other.owner) && Objects.equals(ownerId, other.ownerId)
+        && totalJoinCount == other.totalJoinCount && Objects.equals(volContent, other.volContent)
+        && Objects.equals(volEmail, other.volEmail) && Objects.equals(volEndDate, other.volEndDate)
+        && Objects.equals(volEndTime, other.volEndTime)
+        && Objects.equals(volFileUpload, other.volFileUpload) && volLimitNum == other.volLimitNum
+        && Objects.equals(volName, other.volName) && volNo == other.volNo
+        && Objects.equals(volSort, other.volSort)
         && Objects.equals(volStartDate, other.volStartDate)
         && Objects.equals(volStartTime, other.volStartTime)
-        && Objects.equals(volSubmitTime, other.volSubmitTime);
-  }
-
-  public int getNo() {
-    return no;
+        && Objects.equals(volSubmitTime, other.volSubmitTime)
+        && Objects.equals(volTel, other.volTel) && Objects.equals(volTitle, other.volTitle);
   }
 
 
-  public void setNo(int no) {
-    this.no = no;
+
+
+
+  public int getVolNo() {
+    return volNo;
   }
 
 
-  public String getTitle() {
-    return title;
+  public void setVolNo(int volNo) {
+    this.volNo = volNo;
   }
 
 
-  public void setTitle(String title) {
-    this.title = title;
+  public String getVolTitle() {
+    return volTitle;
   }
 
 
-  public String getName() {
-    return name;
+  public void setVolTitle(String volTitle) {
+    this.volTitle = volTitle;
   }
 
 
-  public void setName(String name) {
-    this.name = name;
+  public String getVolName() {
+    return volName;
+  }
+
+
+  public void setVolName(String volName) {
+    this.volName = volName;
   }
 
 
@@ -123,43 +138,45 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-  public String getUserId() {
-    return userId;
+  public String getOwnerId() {
+    return ownerId;
   }
 
 
-  public void setUserId(String userId) {
-    this.userId = userId;
+  public void setOwnerId(String ownerId) {
+    this.ownerId = ownerId;
   }
 
 
-  public String getSort() {
-    return sort;
+  public String getVolSort() {
+    return volSort;
   }
 
 
-  public void setSort(String sort) {
-    this.sort = sort;
+  public void setVolSort(String volSort) {
+    this.volSort = volSort;
   }
 
 
-  public String getTel() {
-    return tel;
+  public String getVolTel() {
+    return volTel;
   }
 
 
-  public void setTel(String tel) {
-    this.tel = tel;
+  public void setVolTel(String volTel) {
+    this.volTel = volTel;
   }
 
 
-  public String getEmail() {
-    return email;
+  public String getVolEmail() {
+    return volEmail;
   }
 
-  public void setEmail(String email) {
-    this.email = email;
+
+  public void setVolEmail(String volEmail) {
+    this.volEmail = volEmail;
   }
+
 
   public Date getVolStartDate() {
     return volStartDate;
@@ -201,43 +218,33 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-  public String getVolList() {
-    return volList;
+  public int getVolLimitNum() {
+    return volLimitNum;
   }
 
 
-  public void setVolList(String volList) {
-    this.volList = volList;
+  public void setVolLimitNum(int volLimitNum) {
+    this.volLimitNum = volLimitNum;
   }
 
 
-  public int getJoinNum() {
-    return joinNum;
+  public String getVolContent() {
+    return volContent;
   }
 
 
-  public void setJoinNum(int joinNum) {
-    this.joinNum = joinNum;
+  public void setVolContent(String volContent) {
+    this.volContent = volContent;
   }
 
 
-  public String getContent() {
-    return content;
+  public String getVolFileUpload() {
+    return volFileUpload;
   }
 
 
-  public void setContent(String content) {
-    this.content = content;
-  }
-
-
-  public String getFileUpload() {
-    return fileUpload;
-  }
-
-
-  public void setFileUpload(String fileUpload) {
-    this.fileUpload = fileUpload;
+  public void setVolFileUpload(String volFileUpload) {
+    this.volFileUpload = volFileUpload;
   }
 
 
@@ -261,46 +268,9 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-  public boolean isChecked() {
-    return isChecked;
-  }
-
-
-
-
-
-
-
-
-
-
-
-  public void setChecked(boolean isChecked) {
-    this.isChecked = isChecked;
-  }
-
-
-
-
-
-
-
-
-
-
-
   public String getIsSigned() {
     return isSigned;
   }
-
-
-
-
-
-
-
-
-
 
 
   public void setIsSigned(String isSigned) {
@@ -308,69 +278,14 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
-
-
-
   public Date getVolSubmitTime() {
     return volSubmitTime;
   }
 
 
-
-
-
-
-
-
-
-
-
   public void setVolSubmitTime(Date volSubmitTime) {
     this.volSubmitTime = volSubmitTime;
   }
-
-
-
-
-
-
-
-
-
-
-
-  public boolean isJoin() {
-    return isJoin;
-  }
-
-
-
-
-
-
-
-
-
-
-
-  public void setJoin(boolean isJoin) {
-    this.isJoin = isJoin;
-  }
-
-
-
-
-
-
-
-
-
 
 
   public List<JoinDTO> getMembers() {
@@ -383,185 +298,38 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
-
-
-
-  public List<JoinDTO> getMembers1() {
-    return members1;
-  }
-
-  public void setMembers1(List<JoinDTO> members1) {
-    this.members1 = members1;
-  }
-
-  public List<JoinDTO> getMembers2() {
-    return members2;
-  }
-
-  public void setMembers2(List<JoinDTO> members2) {
-    this.members2 = members2;
-  }
-
-  public List<JoinDTO> getMembers3() {
-    return members3;
-  }
-
-  public void setMembers3(List<JoinDTO> members3) {
-    this.members3 = members3;
-  }
-
-  public int getJoinCount() {
-    return joinCount;
-  }
-
-
-  public void setJoinCount(int joinCount) {
-    this.joinCount = joinCount;
-  }
-
-
-
-
   public int getTotalJoinCount() {
     return totalJoinCount;
   }
+
 
   public void setTotalJoinCount(int totalJoinCount) {
     this.totalJoinCount = totalJoinCount;
   }
 
 
-
-
-
-  public int getTotalJoinCount1() {
-    return totalJoinCount1;
+  public void addMembers(JoinDTO member) {
+    this.members.add(member);
   }
 
-  public void setTotalJoinCount1(int totalJoinCount1) {
-    this.totalJoinCount1 = totalJoinCount1;
+  public void removeMembers(JoinDTO member) {
+    this.members.remove(member);
   }
 
-  public int getTotalJoinCount2() {
-    return totalJoinCount2;
-  }
 
-  public void setTotalJoinCount2(int totalJoinCount2) {
-    this.totalJoinCount2 = totalJoinCount2;
-  }
-
-  public int getTotalJoinCount3() {
-    return totalJoinCount3;
-  }
-
-  public void setTotalJoinCount3(int totalJoinCount3) {
-    this.totalJoinCount3 = totalJoinCount3;
-  }
-
-  public  String getMemberNames() {
-
+  public String getMemberNames() {
     if (members == null) {
       return "";
     }
-
     StringBuilder names = new StringBuilder();
-
     for (JoinDTO joinDTO : members) {
       if (names.length() > 0) {
         names.append("\n");
       }
       names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
     }
-
     return names.toString();
   }
-
-  public  String getMemberNames1() {
-
-    if (members1 == null) {
-      return "";
-    }
-
-    StringBuilder names = new StringBuilder();
-
-    for (JoinDTO joinDTO : members1) {
-      if (names.length() > 0) {
-        names.append("\n");
-      }
-      names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
-    }
-
-    return names.toString();
-  }
-
-  public  String getMemberNames2() {
-
-    if (members2 == null) {
-      return "";
-    }
-
-    StringBuilder names = new StringBuilder();
-
-    for (JoinDTO joinDTO : members2) {
-      if (names.length() > 0) {
-        names.append("\n");
-      }
-      names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
-    }
-
-    return names.toString();
-  }
-
-  public  String getMemberNames3() {
-
-    if (members3 == null) {
-      return "";
-    }
-
-    StringBuilder names = new StringBuilder();
-
-    for (JoinDTO joinDTO : members3) {
-      if (names.length() > 0) {
-        names.append("\n");
-      }
-      names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
-    }
-
-    return names.toString();
-  }
-
-
-
-
-  //    String memberInfo = "";
-  //    for (JoinDTO joinDTO : this.members) {
-  //      if (joinDTO.getNo() > 0) {
-  //        memberInfo = ",";
-  //      }
-  //      memberInfo += System.out.printf("%s(%s) " ,joinDTO.getId(),joinDTO.getName());
-  //    }
-  //    return memberInfo.toString();
-  //
-  //
-  //  StringBuilder names = new StringBuilder();
-  //  
-  //  for (JoinDTO joinDTO : this.members) {
-  //    if (names.length() > 0) {
-  //      names.append(",");
-  //    }
-  //    names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
-  //    
-  //  }
-  //  
-  //  return names.toString();
-  //}
-
 
 
 

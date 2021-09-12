@@ -18,17 +18,17 @@ import com.share.ftp.domain.admin.NoticeDTO;
 import com.share.ftp.domain.admin.QuestionDTO;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.personal.ApproveOrgDTO;
+import com.share.ftp.domain.personal.ChallengeJoinDTO;
+import com.share.ftp.domain.personal.ChallengeQuestionDTO;
+import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.domain.personal.CommReviewDTO;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
-import com.share.ftp.domain.personal.MyChallengeJoinDTO;
-import com.share.ftp.domain.personal.MyChallengeQuestionDTO;
-import com.share.ftp.domain.personal.MyChallengeReviewDTO;
 import com.share.ftp.domain.personal.MyProfileDTO;
-import com.share.ftp.domain.personal.MyQuestionListDTO;
 import com.share.ftp.domain.personal.OrgRequestDTO;
 import com.share.ftp.domain.personal.PersonalRequestDTO;
+import com.share.ftp.domain.personal.QuestionListDTO;
 import com.share.ftp.domain.personal.VolListDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.admin.AdminChallengeAddHandler;
@@ -104,6 +104,7 @@ import com.share.ftp.handler.personal.donation.DonationPrompt;
 import com.share.ftp.handler.personal.donation.DonationRegisterAddHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterMyListHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterParticipationHandler;
+import com.share.ftp.handler.personal.donation.DonationRegisterParticipationListHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterTotalMoneyHandler;
 import com.share.ftp.handler.personal.mypage.MyBoardDeleteHandler;
 import com.share.ftp.handler.personal.mypage.MyBoardDetailHandler;
@@ -154,7 +155,7 @@ public class App {
   List<VolListDTO> volListDTOList = new ArrayList<>();
 
   // 개인, 기관 공통 도메인
-  //    List<GeneralRequestDTO> generalRequestDTOList = new ArrayList<>();
+  //  List<GeneralRequestDTO> generalRequestDTOList = new ArrayList<>();
   //  List<GeneralRequestDTO> personalRequestApplyDTOList = new ArrayList<>();
   //  List<GeneralRequestDTO> personalRequestRejectDTOList = new ArrayList<>();
   //  List<GeneralRequestDTO> orgRequestDTOApplyList = new ArrayList<>();
@@ -164,22 +165,20 @@ public class App {
   List<PersonalRequestDTO> personalRequestDTOList = new ArrayList<>();
   List<PersonalRequestDTO> personalRequestApplyDTOList = new ArrayList<>();
   List<PersonalRequestDTO> personalRequestRejectDTOList = new ArrayList<>();
-  List<PersonalRequestDTO> personalSelectedList = new ArrayList<>();
 
   // 기관 봉사신청 관련 도메인
   List<OrgRequestDTO> orgRequestDTOList = new ArrayList<>();
   List<OrgRequestDTO> orgRequestApplyDTOList = new ArrayList<>();
   List<OrgRequestDTO> orgRequestRejectDTOList = new ArrayList<>();
-  List<OrgRequestDTO> orgSelectedList = new ArrayList<>();
 
   // 소통해요 도메인(값)
   List<CommBoardDTO> commBoardDTOList = new ArrayList<>();
   List<CommReviewDTO> commReviewDTOList = new ArrayList<>();
 
   // 챌린지 도메인(값)
-  List<MyChallengeJoinDTO> myChallengeJoinDTOList = new ArrayList<>();
-  List<MyChallengeQuestionDTO> myChallengeQuestionDTOList = new ArrayList<>();
-  List<MyChallengeReviewDTO> myChallengeReviewDTOList = new ArrayList<>();
+  List<ChallengeJoinDTO> myChallengeJoinDTOList = new ArrayList<>();
+  List<ChallengeQuestionDTO> myChallengeQuestionDTOList = new ArrayList<>();
+  List<ChallengeReviewDTO> myChallengeReviewDTOList = new ArrayList<>();
 
   // 모금함 개설 신청 관련 도메인(값)
   List<DonationBoardDTO> donationBoardDTOList = new ArrayList<>();
@@ -192,7 +191,7 @@ public class App {
 
   // 마이페이지 도메인(값)
   List<MyProfileDTO> myProfileDTOList = new ArrayList<>();
-  List<MyQuestionListDTO> myQuestionListDTOList = new ArrayList<>();
+  List<QuestionListDTO> myQuestionListDTOList = new ArrayList<>();
 
   // 관리자 도메인(값)
   List<ChallengeDTO> challengeDTOList = new ArrayList<>();
@@ -237,7 +236,7 @@ public class App {
 
   VolRequestPersonalAppliedListDetailHandler volRequestPersonalAppliedListDetailHandler =
       new VolRequestPersonalAppliedListDetailHandler
-      (personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList,personalSelectedList);
+      (personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList);
 
   VolRequestOrgAppliedListDetailHandler volRequestOrgAppliedListDetailHandler =
       new VolRequestOrgAppliedListDetailHandler
@@ -254,7 +253,7 @@ public class App {
   //봉사참여자목록
   VolDoJoinHandler volDoJoinHandler = 
       new VolDoJoinHandler
-      (personalSelectedList,volRequestPersonalAppliedListDetailHandler,personalRequestApplyDTOList);
+      (personalRequestApplyDTOList, volRequestPersonalAppliedListDetailHandler);
 
   VolJoinDetailHandler volJoinDetailHandler = 
       new VolJoinDetailHandler
@@ -267,6 +266,8 @@ public class App {
 
   DonationPrompt donationPrompt = new DonationPrompt(donationBoardDTOList);
 
+
+  DonationRegisterParticipationListHandler donationRegisterParticipationListHandler = new DonationRegisterParticipationListHandler(donationRegisterDTOList, donationBoardDTOList);
 
   public static void main(String[] args) {
 
@@ -291,16 +292,16 @@ public class App {
     commands.put("/volRequestPersonal/apply", new VolRequestPersonalApplyHandler(personalRequestDTOList,joinDTOList));
     commands.put("/volRequestPersonal/applyList", new VolRequestPersonalApplyListHandler(personalRequestDTOList));
     commands.put("/volRequestPersonal/applyCompleteList", new VolRequestPersonalApplyCompleteListHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
-    commands.put("/volRequestPersonal/acceptApply", new VolRequestPersonalAcceptApplyHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList,personalSelectedList));
+    commands.put("/volRequestPersonal/acceptApply", new VolRequestPersonalAcceptApplyHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
     commands.put("/volRequestPersonal/rejectApply", new VolRequestPersonalRejectApplyHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
     commands.put("/volRequestPersonal/appliedList", new VolRequestPersonalAppliedListHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
     commands.put("/volRequestPersonal/rejectedList", new VolRequestPersonalRejectedListHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
-    commands.put("/volRequestPersonal/delete", new VolRequestPersonalDeleteHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList,personalSelectedList));
+    commands.put("/volRequestPersonal/delete", new VolRequestPersonalDeleteHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
     commands.put("/volRequestPersonal/bookmark", new VolRequestPersonalBookmarkHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
     commands.put("/volRequest/totalApprovedList", new VolRequestTotalApprovedListHandler(volRequestPersonalAppliedListHandler, volRequestOrgAppliedListHandler));
     commands.put("/volJoin/detail", new VolJoinDetailHandler(volRequestPersonalAppliedListDetailHandler, volRequestOrgAppliedListDetailHandler,volRequestTotalApprovedListHandler,volDoJoinHandler));
-    commands.put("/volDoJoin/detail", new VolDoJoinHandler(personalSelectedList,volRequestPersonalAppliedListDetailHandler,personalRequestApplyDTOList));
-    commands.put("/volRequest/delete", new VolRequestDeleteHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList,personalSelectedList));
+    commands.put("/volDoJoin/detail", new VolDoJoinHandler(personalRequestApplyDTOList, volRequestPersonalAppliedListDetailHandler));
+    commands.put("/volRequest/delete", new VolRequestDeleteHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
 
     //함께해요 (기관) + 마이페이지
     commands.put("/volRequestOrg/apply", new VolRequestOrgApplyHandler(orgRequestDTOList,joinDTOList));
@@ -362,7 +363,7 @@ public class App {
     commands.put("/donationBoard/acceptApply", new DonationBoardAcceptApplyHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
     commands.put("/donationBoard/rejectApply", new DonationBoardRejectApplyHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
     commands.put("/donationBoard/rejectedList", new DonationBoardRejectedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
-    commands.put("/donationBoard/applyDetail", new DonationBoardApplyDetailHandler(donationBoardDTOList, donationRegisterDTOList, donationPrompt));
+    commands.put("/donationBoard/applyDetail", new DonationBoardApplyDetailHandler(donationBoardDTOList, donationRegisterDTOList, donationPrompt, donationRegisterParticipationListHandler));
     commands.put("/adminDonationBoard/applyDetail", new DonationBoardAdminApplyDetailHandler(donationBoardDTOList, donationRegisterDTOList, donationPrompt));
 
     // 모금함 (기부하기)
@@ -451,23 +452,10 @@ public class App {
     loadPersonalRequest();
     loadPersonalRequestApply();
     loadPersonalRequestReject();
-    loadPersonalSelected();
 
     loadOrgRequest();
     loadOrgRequestApply();
     loadOrgRequestReject();
-    //
-    //    loadCommBoardDTO();
-    //    loadCommReviewDTO();
-    //
-    //    loadDonationBoards();
-    //    loadDonationRegisters();
-    //    loadQuestion();
-    //
-    //    loadChallengeReviews();
-    //    loadChallengeQuestions();
-    //
-    //    loadQuestion();
 
     loadCommBoard();
     loadCommReview();
@@ -490,7 +478,6 @@ public class App {
     savePersonalRequest();
     savePersonalRequestApply();
     savePersonalRequestReject();
-    savePersonalSelected();
 
     saveOrgRequest();
     saveOrgRequestApply();
@@ -612,40 +599,6 @@ public class App {
   }
 
   @SuppressWarnings("unchecked")
-  private void loadPersonalSelected() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("personalSelected.data"))) {
-
-      personalSelectedList.addAll((List<PersonalRequestDTO>) in.readObject());
-
-      System.out.println("봉사 참여 로딩 완료!");
-
-    } catch (Exception e) {
-      System.out.println("봉사 참여 하는 중 오류 발생!");
-      e.printStackTrace();
-    }
-
-  }
-
-  private void savePersonalSelected() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("personalSelected.data"))) {
-
-      out.writeObject(personalSelectedList);
-
-      System.out.println("봉사 참여 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("봉사 참여 하는 중 오류 발생!");
-      e.printStackTrace();
-    }
-
-
-
-
-  }
-
-  @SuppressWarnings("unchecked")
 
   private void loadCommBoard() {
     try (ObjectInputStream in = new ObjectInputStream(
@@ -741,7 +694,7 @@ public class App {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("myChallengeReview.data"))) {
 
-      myChallengeReviewDTOList.addAll((List<MyChallengeReviewDTO>) in.readObject());
+      myChallengeReviewDTOList.addAll((List<ChallengeReviewDTO>) in.readObject());
 
       System.out.println("참여인증&댓글 로딩 완료!");
 
@@ -769,7 +722,7 @@ public class App {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("myChallengeQuestion.data"))) {
 
-      myChallengeQuestionDTOList.addAll((List<MyChallengeQuestionDTO>) in.readObject());
+      myChallengeQuestionDTOList.addAll((List<ChallengeQuestionDTO>) in.readObject());
 
       System.out.println("챌린지 문의글 로딩 완료!");
 
@@ -990,7 +943,7 @@ public class App {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("question.data"))) {
 
-      myQuestionListDTOList.addAll((List<MyQuestionListDTO>) in.readObject());
+      myQuestionListDTOList.addAll((List<QuestionListDTO>) in.readObject());
 
       System.out.println("게시글 데이터 로딩 완료!");
 
