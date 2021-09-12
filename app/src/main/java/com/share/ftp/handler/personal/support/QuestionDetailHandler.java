@@ -24,19 +24,26 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
       return;
     }
 
-    if (myQuestionListDTO.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
-      System.out.println("본인이 작성한 글만 확인할 수 있습니다.");
+    if (myQuestionListDTO.getOwner().getId() == (AuthLoginHandler.getLoginUser().getId()) ||
+        AuthLoginHandler.getLoginUser().getId().equals("admin")) {
+
+      System.out.printf("번호: %s\n", myQuestionListDTO.getNo());
+      System.out.printf("제목: %s\n", myQuestionListDTO.getTitle());
+      System.out.printf("아이디: %s\n", myQuestionListDTO.getOwner().getId());
+      System.out.printf("내용: %s\n", myQuestionListDTO.getContent());
+      System.out.printf("첨부파일: %s\n", myQuestionListDTO.getFileUpload());
+      System.out.printf("등록일: %s\n", myQuestionListDTO.getRegisteredDate());
+
+      myQuestionListDTO.setViewCount(myQuestionListDTO.getViewCount() + 1);
+      System.out.printf("조회수: %d\n", myQuestionListDTO.getViewCount());
       return;
     }
 
-    System.out.printf("번호: %s\n", myQuestionListDTO.getNo());
-    System.out.printf("제목: %s\n", myQuestionListDTO.getTitle());
-    System.out.printf("아이디: %s\n", myQuestionListDTO.getOwner().getId());
-    System.out.printf("내용: %s\n", myQuestionListDTO.getContent());
-    System.out.printf("첨부파일: %s\n", myQuestionListDTO.getFileUpload());
-    System.out.printf("등록일: %s\n", myQuestionListDTO.getRegisteredDate());
+    //    if (myQuestionListDTO.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
+    //      System.out.println("본인이 작성한 글만 확인할 수 있습니다.");
+    //      return;
+    //    }
 
-    myQuestionListDTO.setViewCount(myQuestionListDTO.getViewCount() + 1);
-    System.out.printf("조회수: %d\n", myQuestionListDTO.getViewCount());
+
   }
 }
