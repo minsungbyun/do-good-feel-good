@@ -1,18 +1,18 @@
 package com.share.ftp.handler.personal;
 
-import com.share.ftp.domain.personal.MyChallengeQuestionDTO;
+import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 import com.share.util.Prompt;
 
 public class ChallengeQuestionHandler {
 	  static final int MAX_LENGTH = 100;
 
-	  MyChallengeQuestionDTO[] myChallengeQuestions = new MyChallengeQuestionDTO[MAX_LENGTH];
+	  ChallengeQuestionDTO[] myChallengeQuestions = new ChallengeQuestionDTO[MAX_LENGTH];
 	  int size = 0;
 
 	  public void add() {
 	    System.out.println("[문의하기 등록]");
 
-	    MyChallengeQuestionDTO myChallengeQuestion = new MyChallengeQuestionDTO();
+	    ChallengeQuestionDTO myChallengeQuestion = new ChallengeQuestionDTO();
 
 	    myChallengeQuestion.setNo(Prompt.inputInt("번호: "));
 	    myChallengeQuestion.setMemberId(Prompt.inputString("아이디: "));
@@ -34,7 +34,7 @@ public class ChallengeQuestionHandler {
 	    System.out.println("[문의 상세보기]");
 	    int no = Prompt.inputInt("번호? ");
 
-	    MyChallengeQuestionDTO myChallengeQuestion = findByNo(no);
+	    ChallengeQuestionDTO myChallengeQuestion = findByNo(no);
 
 	    if (myChallengeQuestion == null) {
 	      System.out.println("해당 번호의 문의가 없습니다.");
@@ -49,7 +49,7 @@ public class ChallengeQuestionHandler {
 	    System.out.println("[문의 변경]");
 	    int no = Prompt.inputInt("번호? ");
 
-	    MyChallengeQuestionDTO myChallengeQuestion = findByNo(no);
+	    ChallengeQuestionDTO myChallengeQuestion = findByNo(no);
 
 	    if (myChallengeQuestion == null) {
 	      System.out.println("해당 번호의 문의가 없습니다.");
@@ -93,7 +93,7 @@ public class ChallengeQuestionHandler {
 	    System.out.println("문의하기를 삭제하였습니다.");
 	  }
 
-  private MyChallengeQuestionDTO findByNo(int no) {
+  private ChallengeQuestionDTO findByNo(int no) {
     for (int i = 0; i < this.size; i++) {
       if (this.myChallengeQuestions[i].getNo() == no) {
         return this.myChallengeQuestions[i];

@@ -1,12 +1,12 @@
 package com.share.ftp.handler.personal.challenge;
 
 import java.util.List;
-import com.share.ftp.domain.personal.MyChallengeReviewDTO;
+import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.util.Prompt;
 
 public class ChallengeReviewSearchHandler extends AbstractChallengeReviewHandler {
 
-  public ChallengeReviewSearchHandler(List<MyChallengeReviewDTO> myChallengeReviewDTOList) {
+  public ChallengeReviewSearchHandler(List<ChallengeReviewDTO> myChallengeReviewDTOList) {
     super(myChallengeReviewDTOList);
   }
 
@@ -15,7 +15,7 @@ public class ChallengeReviewSearchHandler extends AbstractChallengeReviewHandler
 
     String input = Prompt.inputString("검색어? ");
 
-    for (MyChallengeReviewDTO myChallengeReviewDTO : myChallengeReviewDTOList) {
+    for (ChallengeReviewDTO myChallengeReviewDTO : myChallengeReviewDTOList) {
       if (!myChallengeReviewDTO.getMemberId().contains(input) &&
           !myChallengeReviewDTO.getContent().contains(input)) {
         continue;

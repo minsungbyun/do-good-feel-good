@@ -8,75 +8,29 @@ import com.share.util.Prompt;
 
 public class JoinAddHandler extends AbstractJoinHandler {
 
+  int uniqueNum; // 개인 고유 번호
 
   public JoinAddHandler(List<JoinDTO> joinDTOList) {
     super(joinDTOList);
 
-    // 로그인 테스드를 위한 데이터
-
-    // 관리자
-
-
-    //    // 개인회원
-    //    JoinDTO testUser = new JoinDTO();
-    //    testUser.setId("aaa");
-    //    testUser.setName("행복이");
-    //    testUser.setEmail("aaa@test.com");
-    //    testUser.setPassword("111");
-    //    testUser.setTel("010-2222-2222");
-    //    testUser.setAddress("no");
-    //    testUser.setRegisterDate(new Date(System.currentTimeMillis()));
-    //    testUser.setPersonal(true);
-    //
-    //    joinDTOList.add(testUser);
-    //
-    //    // 기관회원
-    //    testUser = new JoinDTO();
-    //    testUser.setId("bbb");
-    //    testUser.setName("test2");
-    //    testUser.setEmail("bbb");
-    //    testUser.setPassword("111");
-    //    testUser.setTel("010-3333-3333");
-    //    testUser.setAddress("no");
-    //    testUser.setRegisterDate(new Date(System.currentTimeMillis()));
-    //    testUser.setOrg(true);
-    //    //    AuthLoginHandler.loginUser = testUser;
-    //    AuthLoginHandler.userAccessLevel = Menu.ACCESS_ORG | Menu.ACCESS_LOGOUT | Menu.ACCESS_MEMBER_ADMIN;
-    //
-    //    joinDTOList.add(testUser);
-    //
-    //    testUser = new JoinDTO();
-    //    testUser.setId("object");
-    //    testUser.setName("자바최고조상");
-    //    testUser.setEmail("object@java.com");
-    //    testUser.setPassword("111");
-    //    testUser.setTel("010-4444-4444");
-    //    testUser.setAddress("모두의집");
-    //    testUser.setRegisterDate(new Date(System.currentTimeMillis()));
-    //    testUser.setPersonal(true);
-    //    //    AuthLoginHandler.loginUser = testUser;
-    //    AuthLoginHandler.userAccessLevel = Menu.ACCESS_PERSONAL | Menu.ACCESS_LOGOUT | Menu.ACCESS_MEMBER_ADMIN;
-
-    //    joinDTOList.add(testUser);
-
   }
 
-
-  // 회원 가입하기
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("[회원 가입]");
+    System.out.println("[ 회원 가입 ]");
 
     JoinDTO joinDTO = new JoinDTO();
+
+
 
     // 아이디 유효성검사
     while (true) {
 
       joinDTO.setId(Prompt.inputString("아이디? "));
 
-      Boolean vaildId = validId(joinDTO.getId());
-      if (vaildId == true) {
+
+      if (validId(joinDTO.getId())) {
         System.out.println("[  이미 존재하는 아이디입니다. ]");
         System.out.println("[  다시 입력해주세요! ]");
       } else {
@@ -91,8 +45,7 @@ public class JoinAddHandler extends AbstractJoinHandler {
 
       joinDTO.setName(Prompt.inputString("이름? "));
 
-      Boolean vaildName = validName(joinDTO.getName());
-      if (vaildName == true) {
+      if (validName(joinDTO.getName())) {
         System.out.println("[  이미 존재하는 이름입니다. ]");
         System.out.println("[  다시 입력해주세요! ]");
       } else {
@@ -102,8 +55,6 @@ public class JoinAddHandler extends AbstractJoinHandler {
 
     joinDTO.setBirthdate(Prompt.inputDate("생년월일? "));
     joinDTO.setTel(Prompt.inputString("전화? "));
-
-
 
     while (true) {
       joinDTO.setEmail(Prompt.inputString("이메일? "));
@@ -118,7 +69,7 @@ public class JoinAddHandler extends AbstractJoinHandler {
       System.out.println("[  해당 이메일로 인증번호가 전송되었습니다. ]");
       System.out.println();
 
-      int authNum = Prompt.inputInt("인증번호 입력 >");
+      int authNum = Prompt.inputInt("인증번호 입력 > ");
 
       if (authNum == 1004) {
         System.out.println("[  인증이 정상적으로 완료되었습니다!  ]");
@@ -126,7 +77,6 @@ public class JoinAddHandler extends AbstractJoinHandler {
         break;
       } else {
         System.out.println("잘못 입력하셨습니다.");
-        continue;
       }
     }
 
@@ -154,9 +104,11 @@ public class JoinAddHandler extends AbstractJoinHandler {
 
       } else {
         System.out.println("존재하지 않는 유형입니다. 다시입력해주세요");
-        continue;
       }
     }
+
+    // 개인 고유번호 부여
+    joinDTO.setNo(++uniqueNum);
 
     joinDTOList.add(joinDTO);
     System.out.println();

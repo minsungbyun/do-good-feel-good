@@ -7,7 +7,7 @@ import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
 @SuppressWarnings("serial")
-public class MyChallengeReviewDTO implements Serializable {
+public class ChallengeReviewDTO implements Serializable {
   public int no;
   public String content;
   public String memberId;
@@ -35,7 +35,7 @@ public class MyChallengeReviewDTO implements Serializable {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    MyChallengeReviewDTO other = (MyChallengeReviewDTO) obj;
+    ChallengeReviewDTO other = (ChallengeReviewDTO) obj;
     return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
         && Objects.equals(memberId, other.memberId) && no == other.no
         && Objects.equals(registeredDate, other.registeredDate);

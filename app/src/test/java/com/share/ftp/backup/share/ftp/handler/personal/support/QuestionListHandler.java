@@ -1,11 +1,11 @@
 package com.share.ftp.handler.personal.support;
 
 import java.util.List;
-import com.share.ftp.domain.personal.MyQuestionListDTO;
+import com.share.ftp.domain.personal.QuestionListDTO;
 
 public class QuestionListHandler extends AbstractQuestionHandler {
 
-  public QuestionListHandler(List<MyQuestionListDTO> myQuestionListDTOList) {
+  public QuestionListHandler(List<QuestionListDTO> myQuestionListDTOList) {
     super (myQuestionListDTOList);
   }
 
@@ -13,7 +13,7 @@ public class QuestionListHandler extends AbstractQuestionHandler {
     System.out.println();
     System.out.println("[고객센터/문의하기/문의하기 목록]");
 
-    for (MyQuestionListDTO myQuestionListDTO : myQuestionListDTOList) {
+    for (QuestionListDTO myQuestionListDTO : myQuestionListDTOList) {
 
       System.out.printf("%d, %s, %s, %s, %s, %s, %d\n", 
           myQuestionListDTO.getNo(), 

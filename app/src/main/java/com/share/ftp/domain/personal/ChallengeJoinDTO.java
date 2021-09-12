@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.share.ftp.domain.join.JoinDTO;
 
-public class MyChallengeJoinDTO {
+public class ChallengeJoinDTO {
   private String userId;
   private JoinDTO joiner;
   public Date registeredDate;

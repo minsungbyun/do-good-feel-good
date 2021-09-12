@@ -1,30 +1,29 @@
 package com.share.ftp.handler.personal.challenge;
 
 import java.util.List;
-
-import com.share.ftp.domain.personal.MyChallengeReviewDTO;
+import com.share.ftp.domain.personal.ChallengeReviewDTO;
 
 public class ChallengeReviewListHandler extends AbstractChallengeReviewHandler {
 
-  public ChallengeReviewListHandler(List<MyChallengeReviewDTO> myChallengeReviewDTOList) {
-    super(myChallengeReviewDTOList);
+  public ChallengeReviewListHandler(List<ChallengeReviewDTO> ChallengeReviewDTOList) {
+    super(ChallengeReviewDTOList);
   }
 
   @Override
   public void execute() {
     System.out.println("[참여인증&댓글 목록]");
-    
-    if (myChallengeReviewDTOList.isEmpty()) {
+
+    if (ChallengeReviewDTOList.isEmpty()) {
       System.out.println("참여인증&댓글이 없습니다.");
       return;
     }
-    for (MyChallengeReviewDTO myChallengeReviewDTO : myChallengeReviewDTOList) {
+    for (ChallengeReviewDTO ChallengeReviewDTO : ChallengeReviewDTOList) {
       System.out.printf("%d, %s, %s, %s, %s\n", 
-          myChallengeReviewDTO.getNo(), 
-          myChallengeReviewDTO.getOwner().getId(),
-          myChallengeReviewDTO.getContent(),
-          myChallengeReviewDTO.getFileUpload(),
-          myChallengeReviewDTO.getRegisteredDate());
+          ChallengeReviewDTO.getNo(), 
+          ChallengeReviewDTO.getOwner().getId(),
+          ChallengeReviewDTO.getContent(),
+          ChallengeReviewDTO.getFileUpload(),
+          ChallengeReviewDTO.getRegisteredDate());
     }
   }
 }

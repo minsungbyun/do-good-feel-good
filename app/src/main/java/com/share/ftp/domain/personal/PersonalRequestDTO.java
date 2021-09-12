@@ -2,6 +2,7 @@ package com.share.ftp.domain.personal;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
@@ -32,15 +33,11 @@ public class PersonalRequestDTO implements Serializable {
   private String isSigned = "승인대기"; // 관리자 승인 여부확인
   private Date volSubmitTime;
   private boolean isJoin; // 참여여부 확인
-  private List<JoinDTO> members; // 참여한 멤버들
-  private List<JoinDTO> members1; // 참여한 멤버들
-  private List<JoinDTO> members2; // 참여한 멤버들
-  private List<JoinDTO> members3; // 참여한 멤버들
-  private int joinCount; // 최초 주최자 1명
+  private List<JoinDTO> members = new ArrayList<>(); // 참여한 멤버들
   private int totalJoinCount = 1; // 참여 총 횟수
-  private int totalJoinCount1 = 1; // 참여 총 횟수
-  private int totalJoinCount2 = 1; // 참여 총 횟수
-  private int totalJoinCount3 = 1; // 참여 총 횟수
+
+
+
 
 
 
@@ -55,9 +52,10 @@ public class PersonalRequestDTO implements Serializable {
   @Override
   public int hashCode() {
     return Objects.hash(content, email, fileUpload, isChecked, isJoin, isOrg, isPersonal, isSigned,
-        joinCount, joinNum, members, name, no, owner, sort, tel, title, userId, volEndDate,
+        joinNum, members, name, no, owner, sort, tel, title, totalJoinCount, userId, volEndDate,
         volEndTime, volList, volStartDate, volStartTime, volSubmitTime);
   }
+
 
   @Override
   public boolean equals(Object obj) {
@@ -71,17 +69,33 @@ public class PersonalRequestDTO implements Serializable {
     return Objects.equals(content, other.content) && Objects.equals(email, other.email)
         && Objects.equals(fileUpload, other.fileUpload) && isChecked == other.isChecked
         && isJoin == other.isJoin && isOrg == other.isOrg && isPersonal == other.isPersonal
-        && Objects.equals(isSigned, other.isSigned) && joinCount == other.joinCount
-        && joinNum == other.joinNum && Objects.equals(members, other.members)
-        && Objects.equals(name, other.name) && no == other.no && Objects.equals(owner, other.owner)
-        && Objects.equals(sort, other.sort) && Objects.equals(tel, other.tel)
-        && Objects.equals(title, other.title) && Objects.equals(userId, other.userId)
+        && Objects.equals(isSigned, other.isSigned) && joinNum == other.joinNum
+        && Objects.equals(members, other.members) && Objects.equals(name, other.name)
+        && no == other.no && Objects.equals(owner, other.owner) && Objects.equals(sort, other.sort)
+        && Objects.equals(tel, other.tel) && Objects.equals(title, other.title)
+        && totalJoinCount == other.totalJoinCount && Objects.equals(userId, other.userId)
         && Objects.equals(volEndDate, other.volEndDate)
         && Objects.equals(volEndTime, other.volEndTime) && Objects.equals(volList, other.volList)
         && Objects.equals(volStartDate, other.volStartDate)
         && Objects.equals(volStartTime, other.volStartTime)
         && Objects.equals(volSubmitTime, other.volSubmitTime);
   }
+
+
+  @Override
+  public String toString() {
+    return "PersonalRequestDTO [no=" + no + ", title=" + title + ", name=" + name + ", owner="
+        + owner + ", userId=" + userId + ", sort=" + sort + ", tel=" + tel + ", email=" + email
+        + ", volStartDate=" + volStartDate + ", volEndDate=" + volEndDate + ", volStartTime="
+        + volStartTime + ", volEndTime=" + volEndTime + ", volList=" + volList + ", joinNum="
+        + joinNum + ", content=" + content + ", fileUpload=" + fileUpload + ", isPersonal="
+        + isPersonal + ", isOrg=" + isOrg + ", isChecked=" + isChecked + ", isSigned=" + isSigned
+        + ", volSubmitTime=" + volSubmitTime + ", isJoin=" + isJoin + ", members=" + members
+        + ", totalJoinCount=" + totalJoinCount + "]";
+  }
+
+
+
 
   public int getNo() {
     return no;
@@ -157,9 +171,11 @@ public class PersonalRequestDTO implements Serializable {
     return email;
   }
 
+
   public void setEmail(String email) {
     this.email = email;
   }
+
 
   public Date getVolStartDate() {
     return volStartDate;
@@ -266,27 +282,9 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
-
-
-
   public void setChecked(boolean isChecked) {
     this.isChecked = isChecked;
   }
-
-
-
-
-
-
-
-
-
 
 
   public String getIsSigned() {
@@ -294,27 +292,9 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
-
-
-
   public void setIsSigned(String isSigned) {
     this.isSigned = isSigned;
   }
-
-
-
-
-
-
-
-
-
 
 
   public Date getVolSubmitTime() {
@@ -322,27 +302,9 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
-
-
-
   public void setVolSubmitTime(Date volSubmitTime) {
     this.volSubmitTime = volSubmitTime;
   }
-
-
-
-
-
-
-
-
-
 
 
   public boolean isJoin() {
@@ -350,27 +312,9 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
-
-
-
   public void setJoin(boolean isJoin) {
     this.isJoin = isJoin;
   }
-
-
-
-
-
-
-
-
-
 
 
   public List<JoinDTO> getMembers() {
@@ -383,185 +327,34 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-
-
-
-
-
-
-
-
-
-  public List<JoinDTO> getMembers1() {
-    return members1;
-  }
-
-  public void setMembers1(List<JoinDTO> members1) {
-    this.members1 = members1;
-  }
-
-  public List<JoinDTO> getMembers2() {
-    return members2;
-  }
-
-  public void setMembers2(List<JoinDTO> members2) {
-    this.members2 = members2;
-  }
-
-  public List<JoinDTO> getMembers3() {
-    return members3;
-  }
-
-  public void setMembers3(List<JoinDTO> members3) {
-    this.members3 = members3;
-  }
-
-  public int getJoinCount() {
-    return joinCount;
-  }
-
-
-  public void setJoinCount(int joinCount) {
-    this.joinCount = joinCount;
-  }
-
-
-
-
   public int getTotalJoinCount() {
     return totalJoinCount;
   }
+
 
   public void setTotalJoinCount(int totalJoinCount) {
     this.totalJoinCount = totalJoinCount;
   }
 
 
-
-
-
-  public int getTotalJoinCount1() {
-    return totalJoinCount1;
+  public void addMembers(JoinDTO member) {
+    this.members.add(member);
   }
 
-  public void setTotalJoinCount1(int totalJoinCount1) {
-    this.totalJoinCount1 = totalJoinCount1;
-  }
 
-  public int getTotalJoinCount2() {
-    return totalJoinCount2;
-  }
-
-  public void setTotalJoinCount2(int totalJoinCount2) {
-    this.totalJoinCount2 = totalJoinCount2;
-  }
-
-  public int getTotalJoinCount3() {
-    return totalJoinCount3;
-  }
-
-  public void setTotalJoinCount3(int totalJoinCount3) {
-    this.totalJoinCount3 = totalJoinCount3;
-  }
-
-  public  String getMemberNames() {
-
+  public String getMemberNames() {
     if (members == null) {
       return "";
     }
-
     StringBuilder names = new StringBuilder();
-
     for (JoinDTO joinDTO : members) {
       if (names.length() > 0) {
         names.append("\n");
       }
       names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
     }
-
     return names.toString();
   }
-
-  public  String getMemberNames1() {
-
-    if (members1 == null) {
-      return "";
-    }
-
-    StringBuilder names = new StringBuilder();
-
-    for (JoinDTO joinDTO : members1) {
-      if (names.length() > 0) {
-        names.append("\n");
-      }
-      names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
-    }
-
-    return names.toString();
-  }
-
-  public  String getMemberNames2() {
-
-    if (members2 == null) {
-      return "";
-    }
-
-    StringBuilder names = new StringBuilder();
-
-    for (JoinDTO joinDTO : members2) {
-      if (names.length() > 0) {
-        names.append("\n");
-      }
-      names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
-    }
-
-    return names.toString();
-  }
-
-  public  String getMemberNames3() {
-
-    if (members3 == null) {
-      return "";
-    }
-
-    StringBuilder names = new StringBuilder();
-
-    for (JoinDTO joinDTO : members3) {
-      if (names.length() > 0) {
-        names.append("\n");
-      }
-      names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
-    }
-
-    return names.toString();
-  }
-
-
-
-
-  //    String memberInfo = "";
-  //    for (JoinDTO joinDTO : this.members) {
-  //      if (joinDTO.getNo() > 0) {
-  //        memberInfo = ",";
-  //      }
-  //      memberInfo += System.out.printf("%s(%s) " ,joinDTO.getId(),joinDTO.getName());
-  //    }
-  //    return memberInfo.toString();
-  //
-  //
-  //  StringBuilder names = new StringBuilder();
-  //  
-  //  for (JoinDTO joinDTO : this.members) {
-  //    if (names.length() > 0) {
-  //      names.append(",");
-  //    }
-  //    names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
-  //    
-  //  }
-  //  
-  //  return names.toString();
-  //}
-
 
 
 

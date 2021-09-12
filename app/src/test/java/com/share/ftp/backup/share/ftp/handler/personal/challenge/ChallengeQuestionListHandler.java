@@ -1,19 +1,19 @@
 package com.share.ftp.handler.personal.challenge;
 
 import java.util.List;
-import com.share.ftp.domain.personal.MyChallengeQuestionDTO;
+import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 
 public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandler {
 
 
-  public ChallengeQuestionListHandler(List<MyChallengeQuestionDTO> myChallengeQuestionDTOList) {
+  public ChallengeQuestionListHandler(List<ChallengeQuestionDTO> myChallengeQuestionDTOList) {
     super(myChallengeQuestionDTOList);
   }
 
   @Override
   public void execute() {
     System.out.println("[문의 목록]");
-    MyChallengeQuestionDTO[] myChallengeQuestionDTOs = new MyChallengeQuestionDTO[myChallengeQuestionDTOList.size()];
+    ChallengeQuestionDTO[] myChallengeQuestionDTOs = new ChallengeQuestionDTO[myChallengeQuestionDTOList.size()];
     myChallengeQuestionDTOList.toArray(myChallengeQuestionDTOs);
     
     if (myChallengeQuestionDTOList.isEmpty()) {
@@ -21,7 +21,7 @@ public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandl
       return;
     }
     
-    for (MyChallengeQuestionDTO myChallengeQuestionDTO : myChallengeQuestionDTOs) {
+    for (ChallengeQuestionDTO myChallengeQuestionDTO : myChallengeQuestionDTOs) {
       System.out.printf("%s, %s\n", 
           myChallengeQuestionDTO.getMemberId(), 
           myChallengeQuestionDTO.getContent());

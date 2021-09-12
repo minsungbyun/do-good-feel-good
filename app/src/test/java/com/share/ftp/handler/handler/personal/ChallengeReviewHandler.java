@@ -1,19 +1,19 @@
 package com.share.ftp.handler.personal;
 
 import java.sql.Date;
-import com.share.ftp.domain.personal.MyChallengeReviewDTO;
+import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.util.Prompt;
 
 public class ChallengeReviewHandler {
   static final int MAX_LENGTH = 100;
 
-  MyChallengeReviewDTO[] myChallengeReviews = new MyChallengeReviewDTO[MAX_LENGTH];
+  ChallengeReviewDTO[] myChallengeReviews = new ChallengeReviewDTO[MAX_LENGTH];
   int size = 0;
 
   public void add() {
     System.out.println("[참여인증&댓글 등록]");
 
-    MyChallengeReviewDTO myChallengeReview = new MyChallengeReviewDTO();
+    ChallengeReviewDTO myChallengeReview = new ChallengeReviewDTO();
 
     myChallengeReview.setNo(Prompt.inputInt("번호: "));
     myChallengeReview.setMemberId(Prompt.inputString("아이디: "));
@@ -40,7 +40,7 @@ public class ChallengeReviewHandler {
     System.out.println("[참여인증&댓글 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    MyChallengeReviewDTO myChallengeReview = findByNo(no);
+    ChallengeReviewDTO myChallengeReview = findByNo(no);
 
     if (myChallengeReview == null) {
       System.out.println("해당 번호의 참여인증&댓글이 없습니다.");
@@ -57,7 +57,7 @@ public class ChallengeReviewHandler {
     System.out.println("[참여인증&댓글 변경]");
     int no = Prompt.inputInt("번호? ");
 
-    MyChallengeReviewDTO myChallengeReview = findByNo(no);
+    ChallengeReviewDTO myChallengeReview = findByNo(no);
 
     if (myChallengeReview == null) {
       System.out.println("해당 번호의 참여인증&댓글이 없습니다.");
@@ -103,7 +103,7 @@ public class ChallengeReviewHandler {
     System.out.println("참여인증&댓글을 삭제하였습니다.");
   }
 
-  private MyChallengeReviewDTO findByNo(int no) {
+  private ChallengeReviewDTO findByNo(int no) {
     for (int i = 0; i < this.size; i++) {
       if (this.myChallengeReviews[i].getNo() == no) {
         return this.myChallengeReviews[i];

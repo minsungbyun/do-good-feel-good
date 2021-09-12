@@ -1,20 +1,20 @@
 package com.share.ftp.handler.guest;
 
 import java.sql.Date;
-import com.share.ftp.domain.personal.MyQuestionListDTO;
+import com.share.ftp.domain.personal.QuestionListDTO;
 import com.share.util.Prompt;
 
 public class QuestionListHandler {
 
   static final int MAX_LENGTH = 5;
-  MyQuestionListDTO[] myQuestionLists = new MyQuestionListDTO[MAX_LENGTH];
+  QuestionListDTO[] myQuestionLists = new QuestionListDTO[MAX_LENGTH];
   int size = 0;
 
   public void addQuestionlist() {
 
     System.out.println("[게시글 등록하기]");
 
-    MyQuestionListDTO myQuestionList = new MyQuestionListDTO();
+    QuestionListDTO myQuestionList = new QuestionListDTO();
 
     myQuestionList.setNo(Prompt.inputInt("번호? "));
     myQuestionList.setTitle(Prompt.inputString("제목? "));
@@ -45,7 +45,7 @@ public class QuestionListHandler {
     System.out.println("[게시글 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    MyQuestionListDTO myQuestionList = findByNo(no);
+    QuestionListDTO myQuestionList = findByNo(no);
 
     if (myQuestionList == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -65,7 +65,7 @@ public class QuestionListHandler {
     System.out.println("[게시글 수정하기]");
     int no = Prompt.inputInt("번호? ");
 
-    MyQuestionListDTO myQuestionList = findByNo(no);
+    QuestionListDTO myQuestionList = findByNo(no);
 
 
     if (myQuestionList == null) {
@@ -112,7 +112,7 @@ public class QuestionListHandler {
     System.out.println("게시글을 삭제하였습니다.");
   }
 
-  private MyQuestionListDTO findByNo(int no) {
+  private QuestionListDTO findByNo(int no) {
     for (int i = 0; i < this.size; i++) {
       if (this.myQuestionLists[i].getNo() == no) {
         return this.myQuestionLists[i];
