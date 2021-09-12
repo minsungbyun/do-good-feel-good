@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.support;
 
 import java.util.List;
-
+import com.share.ftp.domain.personal.DonationRegisterDTO;
 import com.share.ftp.domain.personal.QuestionListDTO;
 import com.share.ftp.handler.Command;
 import com.share.util.Prompt;
@@ -92,18 +92,14 @@ public abstract class AbstractQuestionHandler implements Command {
 
   protected MyQuestionListDTO findByNo(int no) {
     for (MyQuestionListDTO myQuestionListDTO : myQuestionListDTOList) {
-      =======
-          protected QuestionListDTO findByNo(int no) {
-        for (QuestionListDTO myQuestionListDTO : myQuestionListDTOList) {
-          >>>>>>> e81082abfa584f50c5d3afcfffbb43e28e8f7be6
-          if (myQuestionListDTO.getNo() == no) {
-            return myQuestionListDTO;
-          }
-        }
-        return null;
+      if (myQuestionListDTO.getNo() == no) {
+        return myQuestionListDTO;
       }
-
     }
+    return null;
+  }
+
+}
 
 
 
