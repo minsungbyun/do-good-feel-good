@@ -30,22 +30,22 @@ public class VolRequestPersonalAppliedListHandler extends AbstractVolRequestPers
 
 
     for (PersonalRequestDTO personalRequestApplyDTO : personalRequestApplyDTOList) {
-      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
+      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
 
-          personalRequestApplyDTO.getNo(),      
-          personalRequestApplyDTO.getTitle(),     
+          personalRequestApplyDTO.getVolNo(),      
+          personalRequestApplyDTO.getVolTitle(),     
           personalRequestApplyDTO.getOwner().getName(), 
-          personalRequestApplyDTO.getSort(), 
-          personalRequestApplyDTO.getTel(),
-          personalRequestApplyDTO.getEmail(),
+          personalRequestApplyDTO.getVolSort(), 
+          personalRequestApplyDTO.getVolTel(),
+          personalRequestApplyDTO.getVolEmail(),
           personalRequestApplyDTO.getVolStartDate(),
           personalRequestApplyDTO.getVolEndDate(),
           personalRequestApplyDTO.getVolStartTime(),
           personalRequestApplyDTO.getVolEndTime(),
-          personalRequestApplyDTO.getVolList(),
-          personalRequestApplyDTO.getJoinNum(),
-          personalRequestApplyDTO.getContent(),
-          personalRequestApplyDTO.getFileUpload(),
+          //          personalRequestApplyDTO.getVolList(),
+          personalRequestApplyDTO.getVolLimitNum(),
+          personalRequestApplyDTO.getVolContent(),
+          personalRequestApplyDTO.getVolFileUpload(),
           //          personalRequestApplyDTO.isChecked(),
           personalRequestApplyDTO.getIsSigned()
           //          this.personalRequestRejectDTO[i].getIsSigned()

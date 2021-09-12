@@ -15,8 +15,6 @@ public class MyPersonalRejectedVolHandler extends AbstractVolRequestPersonalHand
     super(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList);
   }
 
-
-
   @Override
   public void execute() {
     System.out.println();
@@ -29,29 +27,28 @@ public class MyPersonalRejectedVolHandler extends AbstractVolRequestPersonalHand
 
     for (PersonalRequestDTO personalRequestRejectDTO : personalRequestRejectDTOList) {
       if (personalRequestRejectDTO.getOwner().getName().equals(AuthLoginHandler.getLoginUser().getName())) {
-        System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
-            personalRequestRejectDTO.getNo(),      
-            personalRequestRejectDTO.getTitle(),     
+        System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
+            personalRequestRejectDTO.getVolNo(),      
+            personalRequestRejectDTO.getVolTitle(),     
             personalRequestRejectDTO.getOwner().getName(), 
-            //          personalRequestRejectDTO.getName(), 
-            personalRequestRejectDTO.getSort(), 
-            personalRequestRejectDTO.getTel(),
-            personalRequestRejectDTO.getEmail(),
+            personalRequestRejectDTO.getVolSort(), 
+            personalRequestRejectDTO.getVolTel(),
+            personalRequestRejectDTO.getVolEmail(),
             personalRequestRejectDTO.getVolStartDate(),
             personalRequestRejectDTO.getVolEndDate(),
             personalRequestRejectDTO.getVolStartTime(),
             personalRequestRejectDTO.getVolEndTime(),
-            personalRequestRejectDTO.getVolList(),
-            personalRequestRejectDTO.getJoinNum(),
-            personalRequestRejectDTO.getContent(),
-            personalRequestRejectDTO.getFileUpload(),
-            //          personalRequestRejectDTO.isChecked()
+            //            personalRequestRejectDTO.getVolList(),
+            personalRequestRejectDTO.getVolLimitNum(),
+            personalRequestRejectDTO.getVolContent(),
+            personalRequestRejectDTO.getVolFileUpload(),
             personalRequestRejectDTO.getIsSigned()
-            //          this.personalRequestRejectDTO[i].getIsSigned()
             );
+      } else {
+        System.out.println();
+        System.out.println("[  현재 반려된 봉사목록이 없습니다. ]");
+        return;
       }
     }
   }
-
-
 }

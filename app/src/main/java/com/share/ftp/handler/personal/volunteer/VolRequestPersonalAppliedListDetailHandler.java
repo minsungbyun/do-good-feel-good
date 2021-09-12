@@ -7,7 +7,6 @@ import com.share.util.Prompt;
 
 public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolRequestPersonalHandler { // 개인 봉사신청 양식 쓰는 곳
 
-  int volNo;
 
   public VolRequestPersonalAppliedListDetailHandler(
       List<PersonalRequestDTO> personalRequestDTOList,
@@ -23,7 +22,7 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
     System.out.println("[  봉사 참여  ]");
     System.out.println(" ▶ 참여를 원하는 봉사번호를 입력해주세요 ");
     System.out.println();
-    volNo = Prompt.inputInt("봉사번호 > ");
+    int volNo = Prompt.inputInt("봉사번호 > ");
 
     PersonalRequestDTO personalRequestApplyDTO = findByApplyVol(volNo);
 
@@ -32,7 +31,6 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
       System.out.println("[  ⛔ 존재하지 않는 봉사입니다 ⛔ ]");
     }
 
-    // 봉사 관련 내역들
     System.out.printf("봉사번호: %d\n"
         + "봉사제목: %s\n"
         + "주최자: %s\n"
@@ -43,25 +41,26 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
         + "봉사종료기간: %s\n"
         + "봉사시작시간: %s\n"
         + "봉사종료시간: %s\n"
-        + "봉사목록: %s\n"
-        + "봉사인원: %d\n"
+        //        + "봉사목록: %s\n"
+        + "봉사인원: %d명  /  %d명\n"
         + "봉사내용: %s\n"
         + "첨부파일: %s\n\n",
 
-        personalRequestApplyDTO.getNo(),      
-        personalRequestApplyDTO.getTitle(),     
+        personalRequestApplyDTO.getVolNo(),      
+        personalRequestApplyDTO.getVolTitle(),     
         personalRequestApplyDTO.getOwner().getName(), 
-        personalRequestApplyDTO.getSort(), 
-        personalRequestApplyDTO.getTel(),
-        personalRequestApplyDTO.getEmail(),
+        personalRequestApplyDTO.getVolSort(), 
+        personalRequestApplyDTO.getVolTel(),
+        personalRequestApplyDTO.getVolEmail(),
         personalRequestApplyDTO.getVolStartDate(),
         personalRequestApplyDTO.getVolEndDate(),
         personalRequestApplyDTO.getVolStartTime(),
         personalRequestApplyDTO.getVolEndTime(),
-        personalRequestApplyDTO.getVolList(),
-        personalRequestApplyDTO.getJoinNum(),
-        personalRequestApplyDTO.getContent(),
-        personalRequestApplyDTO.getFileUpload()
+        //        personalRequestApplyDTO.getVolList(),
+        personalRequestApplyDTO.getTotalJoinCount(),
+        personalRequestApplyDTO.getVolLimitNum(),
+        personalRequestApplyDTO.getVolContent(),
+        personalRequestApplyDTO.getVolFileUpload()
         );
 
     String input = Prompt.inputString("해당 봉사활동을 참가하시겠습니까?(y/N) ");
@@ -172,7 +171,7 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
 =======
 >>>>>>> 818a38be46257fdff0a5a49f83496ff6d5d83edb
     // 봉사인원 유효성 검사
-    if (personalRequestApplyDTO.getTotalJoinCount() == personalRequestApplyDTO.getJoinNum()) {
+    if (personalRequestApplyDTO.getTotalJoinCount() == personalRequestApplyDTO.getVolLimitNum()) {
       System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
       return;
     }
@@ -196,9 +195,24 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
     count += 1;
     personalRequestApplyDTO.setTotalJoinCount(count); 
 
-    System.out.println("[  봉사참여가 완료되었습니다. ]");
+    System.out.println("[  ✔️ 봉사참여가 완료되었습니다. ]");
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //    if (no == 1) {
 //      if (m1.contains(AuthLoginHandler.getLoginUser())) {
 //        System.out.println("이미 봉사참여를 하셨습니다!");

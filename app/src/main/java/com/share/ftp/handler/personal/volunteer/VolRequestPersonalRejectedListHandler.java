@@ -14,8 +14,6 @@ public class VolRequestPersonalRejectedListHandler extends AbstractVolRequestPer
     super(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList);
   }
 
-
-
   @Override
   public void execute() {
     System.out.println();
@@ -27,28 +25,24 @@ public class VolRequestPersonalRejectedListHandler extends AbstractVolRequestPer
     }
 
     for (PersonalRequestDTO personalRequestRejectDTO : personalRequestRejectDTOList) {
-      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
-          personalRequestRejectDTO.getNo(),      
-          personalRequestRejectDTO.getTitle(),     
+      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
+          personalRequestRejectDTO.getVolNo(),      
+          personalRequestRejectDTO.getVolTitle(),     
           personalRequestRejectDTO.getOwner().getName(), 
-          //          personalRequestRejectDTO.getName(), 
-          personalRequestRejectDTO.getSort(), 
-          personalRequestRejectDTO.getTel(),
-          personalRequestRejectDTO.getEmail(),
+          personalRequestRejectDTO.getVolSort(), 
+          personalRequestRejectDTO.getVolTel(),
+          personalRequestRejectDTO.getVolEmail(),
           personalRequestRejectDTO.getVolStartDate(),
           personalRequestRejectDTO.getVolEndDate(),
           personalRequestRejectDTO.getVolStartTime(),
           personalRequestRejectDTO.getVolEndTime(),
-          personalRequestRejectDTO.getVolList(),
-          personalRequestRejectDTO.getJoinNum(),
-          personalRequestRejectDTO.getContent(),
-          personalRequestRejectDTO.getFileUpload(),
+          //          personalRequestRejectDTO.getVolList(),
+          personalRequestRejectDTO.getVolLimitNum(),
+          personalRequestRejectDTO.getVolContent(),
+          personalRequestRejectDTO.getVolFileUpload(),
           //          personalRequestRejectDTO.isChecked()
           personalRequestRejectDTO.getIsSigned()
-          //          this.personalRequestRejectDTO[i].getIsSigned()
           );
     }
   }
-
-
 }
