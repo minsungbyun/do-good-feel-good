@@ -8,7 +8,7 @@ import com.share.util.Prompt;
 
 public class DonationBoardApplyHandler extends AbstractDonationBoardHandler {
 
-  int no = 1;
+  int no;
   List<JoinDTO> joinDTOList;
 
   public DonationBoardApplyHandler(
@@ -101,7 +101,8 @@ public class DonationBoardApplyHandler extends AbstractDonationBoardHandler {
         donationBoardDTO.setOrg(true);
         donationBoardDTO.setChecked(false);
         donationBoardDTO.getIsSigned();
-        donationBoardDTO.setNo(no++);
+        donationBoardDTO.setNo(++no);
+        donationBoardDTO.addMembers(AuthLoginHandler.getLoginUser());
 
 
         donationBoardDTOList.add(donationBoardDTO);

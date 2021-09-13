@@ -2,10 +2,15 @@ package com.share.ftp.domain.personal;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import com.share.ftp.domain.join.JoinDTO;
 
 @SuppressWarnings("serial")
 public class DonationBoardDTO implements Serializable {
+
+
   private int no;
 
   private String sort;
@@ -26,6 +31,8 @@ public class DonationBoardDTO implements Serializable {
   private boolean isOrg;
   private boolean isChecked;
   private String isSigned = "승인대기";
+  private List<JoinDTO> members = new ArrayList<>();
+
 
 
   @Override
@@ -36,13 +43,13 @@ public class DonationBoardDTO implements Serializable {
         + ", leader=" + leader + ", content=" + content + ", fileUpload=" + fileUpload
         + ", registeredStartDate=" + registeredStartDate + ", registeredEndDate="
         + registeredEndDate + ", isOrg=" + isOrg + ", isChecked=" + isChecked + ", isSigned="
-        + isSigned + "]";
+        + isSigned + ", members=" + members + "]";
   }
   @Override
   public int hashCode() {
     return Objects.hash(animal, children, content, elder, environmental, fileUpload,
-        handicappedPerson, isChecked, isOrg, isSigned, leader, no, other, registeredEndDate,
-        registeredStartDate, sort, teen, title);
+        handicappedPerson, isChecked, isOrg, isSigned, leader, members, no, other,
+        registeredEndDate, registeredStartDate, sort, teen, title);
   }
   @Override
   public boolean equals(Object obj) {
@@ -60,7 +67,8 @@ public class DonationBoardDTO implements Serializable {
         && Objects.equals(handicappedPerson, other.handicappedPerson)
         && isChecked == other.isChecked && isOrg == other.isOrg
         && Objects.equals(isSigned, other.isSigned) && Objects.equals(leader, other.leader)
-        && no == other.no && Objects.equals(this.other, other.other)
+        && Objects.equals(members, other.members) && no == other.no
+        && Objects.equals(this.other, other.other)
         && Objects.equals(registeredEndDate, other.registeredEndDate)
         && Objects.equals(registeredStartDate, other.registeredStartDate)
         && Objects.equals(sort, other.sort) && Objects.equals(teen, other.teen)
@@ -174,4 +182,36 @@ public class DonationBoardDTO implements Serializable {
   public void setIsSigned(String isSigned) {
     this.isSigned = isSigned;
   }
+  public List<JoinDTO> getMembers() {
+    return members;
+  }
+  public void setMembers(List<JoinDTO> members) {
+    this.members = members;
+  }
+
+  public void addMembers(JoinDTO member) {
+    this.members.add(member);
+  }
+
+  public void removeMembers(JoinDTO member) {
+    this.members.remove(member);
+  }
+
+  public String getMemberNames() {
+    if (members == null) {
+      return "";
+    }
+    StringBuilder names = new StringBuilder();
+    for (JoinDTO joinDTO : members) {
+      if (names.length() > 0) {
+        names.append("\n");
+      }
+      names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
+    }
+    return names.toString();
+  }
+
+
+
+
 }
