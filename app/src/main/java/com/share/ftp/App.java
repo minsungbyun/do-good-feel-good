@@ -120,17 +120,16 @@ import com.share.ftp.handler.personal.support.QuestionUpdateHandler;
 import com.share.ftp.handler.personal.volunteer.MyPersonalAppliedVolDetailHandler;
 import com.share.ftp.handler.personal.volunteer.MyPersonalAppliedVolHandler;
 import com.share.ftp.handler.personal.volunteer.MyPersonalRejectedVolHandler;
-import com.share.ftp.handler.personal.volunteer.VolDoJoinHandler;
-import com.share.ftp.handler.personal.volunteer.VolJoinDetailHandler;
+import com.share.ftp.handler.personal.volunteer.VolDoJoinListHandler;
 import com.share.ftp.handler.personal.volunteer.VolRequestDeleteHandler;
 import com.share.ftp.handler.personal.volunteer.VolRequestPersonalAcceptApplyHandler;
-import com.share.ftp.handler.personal.volunteer.VolRequestPersonalAppliedListDetailHandler;
 import com.share.ftp.handler.personal.volunteer.VolRequestPersonalAppliedListHandler;
 import com.share.ftp.handler.personal.volunteer.VolRequestPersonalApplyCompleteListHandler;
 import com.share.ftp.handler.personal.volunteer.VolRequestPersonalApplyHandler;
 import com.share.ftp.handler.personal.volunteer.VolRequestPersonalApplyListHandler;
 import com.share.ftp.handler.personal.volunteer.VolRequestPersonalBookmarkHandler;
 import com.share.ftp.handler.personal.volunteer.VolRequestPersonalDeleteHandler;
+import com.share.ftp.handler.personal.volunteer.VolRequestPersonalDoJoinHandler;
 import com.share.ftp.handler.personal.volunteer.VolRequestPersonalRejectApplyHandler;
 import com.share.ftp.handler.personal.volunteer.VolRequestPersonalRejectedListHandler;
 import com.share.ftp.handler.personal.volunteer.VolRequestTotalApprovedListHandler;
@@ -234,8 +233,8 @@ public class App {
 
   PersonalRequestDTO personalRequestDTO = new PersonalRequestDTO();
 
-  VolRequestPersonalAppliedListDetailHandler volRequestPersonalAppliedListDetailHandler =
-      new VolRequestPersonalAppliedListDetailHandler
+  VolRequestPersonalDoJoinHandler volRequestPersonalAppliedListDetailHandler =
+      new VolRequestPersonalDoJoinHandler
       (personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList);
 
   VolRequestOrgAppliedListDetailHandler volRequestOrgAppliedListDetailHandler =
@@ -251,13 +250,10 @@ public class App {
       (volRequestPersonalAppliedListHandler,volRequestOrgAppliedListHandler);
 
   //봉사참여자목록
-  VolDoJoinHandler volDoJoinHandler = 
-      new VolDoJoinHandler
+  VolDoJoinListHandler volDoJoinHandler = 
+      new VolDoJoinListHandler
       (personalRequestApplyDTOList, volRequestPersonalAppliedListDetailHandler);
 
-  VolJoinDetailHandler volJoinDetailHandler = 
-      new VolJoinDetailHandler
-      (volRequestPersonalAppliedListDetailHandler,volRequestOrgAppliedListDetailHandler,volRequestTotalApprovedListHandler,volDoJoinHandler);
 
 
   // 모금함 개설 승인된 목록 Handler
@@ -299,8 +295,8 @@ public class App {
     commands.put("/volRequestPersonal/delete", new VolRequestPersonalDeleteHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
     commands.put("/volRequestPersonal/bookmark", new VolRequestPersonalBookmarkHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
     commands.put("/volRequest/totalApprovedList", new VolRequestTotalApprovedListHandler(volRequestPersonalAppliedListHandler, volRequestOrgAppliedListHandler));
-    commands.put("/volJoin/detail", new VolJoinDetailHandler(volRequestPersonalAppliedListDetailHandler, volRequestOrgAppliedListDetailHandler,volRequestTotalApprovedListHandler,volDoJoinHandler));
-    commands.put("/volDoJoin/detail", new VolDoJoinHandler(personalRequestApplyDTOList, volRequestPersonalAppliedListDetailHandler));
+    commands.put("/volDoJoinPersonal/add", new VolRequestPersonalDoJoinHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
+    commands.put("/volDoJoin/list", new VolDoJoinListHandler(personalRequestApplyDTOList, volRequestPersonalAppliedListDetailHandler));
     commands.put("/volRequest/delete", new VolRequestDeleteHandler(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList));
 
     //함께해요 (기관) + 마이페이지
@@ -448,27 +444,27 @@ public class App {
   public void service() {
 
     loadJoins();
-
-    loadPersonalRequest();
-    loadPersonalRequestApply();
-    loadPersonalRequestReject();
-
-    loadOrgRequest();
-    loadOrgRequestApply();
-    loadOrgRequestReject();
-
-    loadCommBoard();
-    loadCommReview();
-
-    loadAdminChellengeAdd();
-
-    loadChallengeReviews();
-    loadChallengeQuestions();
-
-    loadDonationBoards();
-    loadDonationRegisters();
-
-    loadQuestion();
+    //
+    //    loadPersonalRequest();
+    //    loadPersonalRequestApply();
+    //    loadPersonalRequestReject();
+    //
+    //    loadOrgRequest();
+    //    loadOrgRequestApply();
+    //    loadOrgRequestReject();
+    //
+    //    loadCommBoard();
+    //    loadCommReview();
+    //
+    //    loadAdminChellengeAdd();
+    //
+    //    loadChallengeReviews();
+    //    loadChallengeQuestions();
+    //
+    //    loadDonationBoards();
+    //    loadDonationRegisters();
+    //
+    //    loadQuestion();
 
     createMenu().execute();
     Prompt.close();
@@ -985,14 +981,15 @@ public class App {
 
 
     // 함께해요
-    mainMenuGroup.add(createDoVolMenu());
+    MenuGroup doVolMenu = new MenuGroup("함께해요");
+    mainMenuGroup.add(doVolMenu);
 
-    //    doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volRequestPersonal/apply"));
-    //    doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volRequestOrg/apply")); 
-    //    doVolMenu.add(new MenuItem("전체인증봉사리스트","/volRequest/totalApprovedList")); 
-    //    doVolMenu.add(new MenuItem("전체인증봉사세부사항", ACCESS_MEMBER,"/volRequestPersonal/appliedList"));
-    //    doVolMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
 
+    doVolMenu.add(new MenuItem("개인봉사신청양식(개인주최자)", ACCESS_PERSONAL, "/volRequestPersonal/apply"));
+    doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volRequestOrg/apply")); 
+    doVolMenu.add(new MenuItem("전체인증봉사리스트","/volRequest/totalApprovedList")); 
+    doVolMenu.add(createVolJoinMenu()); // 봉사 참여하기
+    doVolMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
 
     // 소통해요
     MenuGroup CommunityMenu = new MenuGroup("소통해요");
@@ -1084,19 +1081,48 @@ public class App {
 
 
 
-  //   함께해요 중복으로 인해서 메서드로 빼지 않습니다.
-  private Menu createDoVolMenu() {
-    MenuGroup doVolMenu = new MenuGroup("함께해요");
+  private Menu createVolJoinMenu() {
+    MenuGroup volJoinMenu = new MenuGroup("봉사참여하기");
 
-    doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volRequestPersonal/apply"));
-    doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volRequestOrg/apply")); 
-    doVolMenu.add(new MenuItem("전체인증봉사리스트","/volRequest/totalApprovedList")); 
-    doVolMenu.add(new MenuItem("전체인증봉사세부사항", ACCESS_MEMBER,"/volJoin/detail"));
-    doVolMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
+    volJoinMenu.add(new MenuItem("개인봉사참여","/volDoJoinPersonal/add")); 
+    volJoinMenu.add(new MenuItem("기관봉사참여","/volRequest/totalApprovedList")); 
+    volJoinMenu.add(new MenuItem("참여자정보보기","/volDoJoin/list")); 
+    volJoinMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
+    volJoinMenu.add(createVolReviewMenu());
+    volJoinMenu.add(createVolQuestionMenu()); 
 
-
-    return doVolMenu;
+    return volJoinMenu;
   }
+
+
+  private Menu createVolReviewMenu() {
+    MenuGroup volReview = new MenuGroup("참여인증&댓글");
+    volReview.add(new MenuItem("봉사 참여인증 등록", ACCESS_MEMBER, "/volJoinReview/add"));
+    volReview.add(new MenuItem("봉사 참여인증 목록", "/volJoinReview/list"));
+    volReview.add(new MenuItem("봉사 참여인증 수정", ACCESS_MEMBER,"/volJoinReview/update"));
+    volReview.add(new MenuItem("봉사 참여인증 삭제", ACCESS_MEMBER,"/volJoinReview/delete"));
+    volReview.add(new MenuItem("봉사 참여인증 검색", "/volJoinReview/search"));
+
+    return volReview;
+  }
+
+
+  private Menu createVolQuestionMenu() {
+    MenuGroup VolQuestion = new MenuGroup("문의하기");
+
+    VolQuestion.add(new MenuItem("문의 등록", ACCESS_MEMBER, "/volQuestion/add"));
+    VolQuestion.add(new MenuItem("문의 목록",  "/volQuestion/list"));
+    VolQuestion.add(new MenuItem("문의 상세보기", ACCESS_MEMBER,"/volQuestion/detail"));
+    VolQuestion.add(new MenuItem("문의 수정", ACCESS_MEMBER, "/volQuestion/update"));
+    VolQuestion.add(new MenuItem("문의 삭제", ACCESS_MEMBER, "/volQuestion/delete"));
+    VolQuestion.add(new MenuItem("문의 검색",  "/volQuestion/search"));
+
+    return VolQuestion;
+  }
+
+
+
+
 
   private Menu createReviewMenu() {
     MenuGroup reviewMenu = new MenuGroup("나눔 이야기");
@@ -1228,8 +1254,8 @@ public class App {
     myVolunteer.add(new MenuItem("승인된 봉사내역",ACCESS_ORG,"/volRequestOrg/appliedList"));    
     myVolunteer.add(new MenuItem("반려된 봉사내역",ACCESS_PERSONAL,"/myPersonal/rejected"));    
     myVolunteer.add(new MenuItem("반려된 봉사내역",ACCESS_ORG,"/volRequestOrg/rejectedList"));    
-    myVolunteer.add(new MenuItem("개인봉사삭제",ACCESS_PERSONAL,"/volRequestPersonal/delete"));    
-    myVolunteer.add(new MenuItem("봉사취소하기",ACCESS_MEMBER,"/volRequest/delete"));    
+    myVolunteer.add(new MenuItem("개인봉사 삭제",ACCESS_PERSONAL,"/volRequestPersonal/delete"));    
+    myVolunteer.add(new MenuItem("참여한봉사 취소하기",ACCESS_MEMBER,"/volRequest/delete"));    
     myVolunteer.add(new MenuItem("찜한봉사",ACCESS_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
 
     return myVolunteer;

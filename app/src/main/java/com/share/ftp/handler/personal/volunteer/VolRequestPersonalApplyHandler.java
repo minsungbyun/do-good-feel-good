@@ -1,9 +1,17 @@
 package com.share.ftp.handler.personal.volunteer;
 
+import static  com.share.ftp.domain.personal.PersonalRequestDTO.ANIMAL;
+import static  com.share.ftp.domain.personal.PersonalRequestDTO.CHILDREN;
+import static  com.share.ftp.domain.personal.PersonalRequestDTO.ELDER;
+import static  com.share.ftp.domain.personal.PersonalRequestDTO.ENVIRONMENT;
+import static  com.share.ftp.domain.personal.PersonalRequestDTO.HANDICAPPED;
+import static  com.share.ftp.domain.personal.PersonalRequestDTO.OTHER;
+import static  com.share.ftp.domain.personal.PersonalRequestDTO.TEEN;
+import static  com.share.ftp.domain.personal.PersonalRequestDTO.UNTACT;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
-import com.share.ftp.domain.personal.PersonalRequestDTO;
+import  com.share.ftp.domain.personal.PersonalRequestDTO;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
@@ -39,12 +47,39 @@ public class VolRequestPersonalApplyHandler extends AbstractVolRequestPersonalHa
 
         PersonalRequestDTO personalRequestDTO = new PersonalRequestDTO();
 
-        personalRequestDTO.setVolNo(++volNo);
         personalRequestDTO.setVolTitle(Prompt.inputString("제목 ▶ "));
         personalRequestDTO.setOwner(joinDTO);
         personalRequestDTO.setOwnerId(joinDTO.getId());
         personalRequestDTO.setVolName(joinDTO.getName());
-        personalRequestDTO.setVolSort(Prompt.inputString("분류 ▶ "));
+        System.out.println();
+
+        System.out.println(" ▶ 봉사 분류 ");
+        System.out.println();
+
+        System.out.print("[1 ▶ 비대면] ");
+        System.out.print("[2 ▶ 아동  ] ");
+        System.out.print("[3 ▶ 청소년] ");
+        System.out.print("[4 ▶ 노인  ]\n");
+        System.out.print("[5 ▶ 장애인] ");
+        System.out.print("[6 ▶ 동물  ] ");
+        System.out.print("[7 ▶ 환경  ] ");
+        System.out.print("[8 ▶ 기타  ]\n ");
+        System.out.println();
+
+        int input = Prompt.inputInt("분류 ▶ ");
+
+        switch (input) {
+          case 1: personalRequestDTO.setVolSort(UNTACT);        break;
+          case 2: personalRequestDTO.setVolSort(CHILDREN);      break;
+          case 3: personalRequestDTO.setVolSort(TEEN);          break;
+          case 4: personalRequestDTO.setVolSort(ELDER);         break;
+          case 5: personalRequestDTO.setVolSort(HANDICAPPED);   break;
+          case 6: personalRequestDTO.setVolSort(ANIMAL);        break;
+          case 7: personalRequestDTO.setVolSort(ENVIRONMENT);   break;
+          case 8: personalRequestDTO.setVolSort(OTHER);         break;
+          default: System.out.println("올바른 번호를 입력해주세요"); continue;
+        }
+
         personalRequestDTO.setVolTel(Prompt.inputString("전화번호 ▶ "));
         personalRequestDTO.setVolEmail(Prompt.inputString("이메일 ▶ ")); 
         personalRequestDTO.setVolStartDate(Prompt.inputDate("봉사시작기간(yyyy-mm-dd) ▶ "));
@@ -60,6 +95,8 @@ public class VolRequestPersonalApplyHandler extends AbstractVolRequestPersonalHa
         //        personalRequestDTO.setChecked(false);
         personalRequestDTO.getIsSigned();
 
+
+        personalRequestDTO.setVolNo(++volNo);
 
         personalRequestDTOList.add(personalRequestDTO);
 

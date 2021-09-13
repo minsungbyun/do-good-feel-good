@@ -10,11 +10,19 @@ import com.share.ftp.domain.join.JoinDTO;
 @SuppressWarnings("serial")
 public class PersonalRequestDTO implements Serializable {
 
+  public static final String UNTACT       = "비대면";
+  public static final String CHILDREN     = "아동";
+  public static final String TEEN         = "청소년";
+  public static final String ELDER        = "노인";
+  public static final String HANDICAPPED  = "장애인";
+  public static final String ANIMAL       = "동물";
+  public static final String ENVIRONMENT  = "환경";
+  public static final String OTHER        = "기타";
 
   private int volNo;
   private String volTitle;
   private String volName;
-  private JoinDTO owner; // 나중에 JoinDTO 변경 예정
+  private JoinDTO owner; // 주최자
   private String ownerId;
   private String volSort;
   private String volTel;
@@ -24,26 +32,14 @@ public class PersonalRequestDTO implements Serializable {
   private String volStartTime;
   private String volEndTime;
   //  private String volList; // 봉사 api 지금은 필요없을 것 같아 닫아놓음
-  private int volLimitNum;
+  private int volLimitNum; // 총 정원
   private String volContent;
   private String volFileUpload;
-  private boolean isPersonal;
-  private boolean isOrg;
+  private boolean isPersonal; // true 개인 , false 기관
   private String isSigned = "승인대기"; // 관리자 승인 여부확인
   private Date volSubmitTime; // 봉사 신청서 제출 시간
   private List<JoinDTO> members = new ArrayList<>(); // 봉사 참여한 멤버들
-  private int totalJoinCount = 1; // 참여 총 횟수 (주최자는 미리 포함)
-
-
-
-
-
-
-
-
-
-
-
+  private int totalJoinCount = 1; // 현재 참여 인원 (주최자는 미리 포함)
 
 
 
@@ -56,7 +52,7 @@ public class PersonalRequestDTO implements Serializable {
         + volTel + ", volEmail=" + volEmail + ", volStartDate=" + volStartDate + ", volEndDate="
         + volEndDate + ", volStartTime=" + volStartTime + ", volEndTime=" + volEndTime
         + ", volLimitNum=" + volLimitNum + ", volContent=" + volContent + ", volFileUpload="
-        + volFileUpload + ", isPersonal=" + isPersonal + ", isOrg=" + isOrg + ", isSigned="
+        + volFileUpload + ", isPersonal=" + isPersonal +  ", isSigned="
         + isSigned + ", volSubmitTime=" + volSubmitTime + ", members=" + members
         + ", totalJoinCount=" + totalJoinCount + "]";
   }
@@ -64,7 +60,7 @@ public class PersonalRequestDTO implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(isOrg, isPersonal, isSigned, members, owner, ownerId, totalJoinCount,
+    return Objects.hash( isPersonal, isSigned, members, owner, ownerId, totalJoinCount,
         volContent, volEmail, volEndDate, volEndTime, volFileUpload, volLimitNum, volName, volNo,
         volSort, volStartDate, volStartTime, volSubmitTime, volTel, volTitle);
   }
@@ -79,7 +75,7 @@ public class PersonalRequestDTO implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     PersonalRequestDTO other = (PersonalRequestDTO) obj;
-    return isOrg == other.isOrg && isPersonal == other.isPersonal
+    return isPersonal == other.isPersonal
         && Objects.equals(isSigned, other.isSigned) && Objects.equals(members, other.members)
         && Objects.equals(owner, other.owner) && Objects.equals(ownerId, other.ownerId)
         && totalJoinCount == other.totalJoinCount && Objects.equals(volContent, other.volContent)
@@ -258,14 +254,7 @@ public class PersonalRequestDTO implements Serializable {
   }
 
 
-  public boolean isOrg() {
-    return isOrg;
-  }
 
-
-  public void setOrg(boolean isOrg) {
-    this.isOrg = isOrg;
-  }
 
 
   public String getIsSigned() {

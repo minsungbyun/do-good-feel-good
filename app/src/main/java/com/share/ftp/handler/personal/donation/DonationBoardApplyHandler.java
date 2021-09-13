@@ -65,13 +65,16 @@ public class DonationBoardApplyHandler extends AbstractDonationBoardHandler {
         int input = Prompt.inputInt("> ");
 
 
+
+
+
         if (input == 0) {
           System.out.println("모금함 개설 신청을 취소하셨습니다.");
           return;
         } else if (input == 1) {
           donationBoardDTO.setSort(donationBoardDTO.getChildren());
         } else if (input == 2) {
-          donationBoardDTO.setSort(donationBoardDTO.getChildren());
+          donationBoardDTO.setSort(donationBoardDTO.getTeen());
         } else if (input == 3) {
           donationBoardDTO.setSort(donationBoardDTO.getElder());
         } else if (input == 4) {

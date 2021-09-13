@@ -11,7 +11,7 @@ public class DonationBoardDTO implements Serializable {
   private String sort;
   private String children = "아동";
   private String teen = "청소년";
-  private String elder = "어르신";
+  private String elder = "노인";
   private String handicappedPerson = "장애인";
   private String animal = "동물";
   private String environmental = "환경";
