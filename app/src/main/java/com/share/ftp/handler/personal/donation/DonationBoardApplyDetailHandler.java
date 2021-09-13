@@ -12,17 +12,16 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
 
   List<DonationRegisterDTO> donationRegisterDTOList;
   DonationPrompt donationPrompt;
-  DonationRegisterParticipationListHandler donationRegisterParticipationListHandler;
+  //  DonationRegisterParticipationListHandler donationRegisterParticipationListHandler;
 
   public DonationBoardApplyDetailHandler(
       List<DonationBoardDTO> donationBoardDTOList,
       List<DonationRegisterDTO> donationRegisterDTOList,
-      DonationPrompt donationPrompt,
-      DonationRegisterParticipationListHandler donationRegisterParticipationListHandler) {
+      DonationPrompt donationPrompt) {
     super(donationBoardDTOList);
     this.donationRegisterDTOList = donationRegisterDTOList;
     this.donationPrompt = donationPrompt;
-    this.donationRegisterParticipationListHandler = donationRegisterParticipationListHandler;
+
   }
 
 
@@ -54,8 +53,24 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
       System.out.printf("시작일: %s\n", donationBoardDTO.getRegisteredStartDate());
       System.out.printf("종료일: %s\n", donationBoardDTO.getRegisteredEndDate());
       System.out.println();
+      System.out.println("모금함 기부 참여자: ");
 
-      donationRegisterParticipationListHandler.execute();
+
+      if (donationRegisterDTOList.isEmpty()) {
+        System.out.println("[  현재 참여된 기부 내역이 없습니다. ]");
+      }
+
+      for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {
+        if (donationRegisterDTO.getNo() == donationBoardDTO.getNo()) {
+          System.out.printf("[ %s님, %d원, %s ]\n", 
+              donationRegisterDTO.getName(), 
+              donationRegisterDTO.getDonationMoney(), 
+              donationRegisterDTO.getRegisteredDate());
+        }
+      }
+
+
+      //      donationRegisterParticipationListHandler.execute();
 
 
       System.out.println();
@@ -81,6 +96,8 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
         donationRegister.setEmail(Prompt.inputString("이메일: "));
         donationRegister.setAddress(Prompt.inputString("주소: "));
         donationRegister.setRegisteredDate(new Date(System.currentTimeMillis()));
+        donationRegister.addMembers(AuthLoginHandler.getLoginUser());
+
 
         donationRegisterDTOList.add(donationRegister);
 
@@ -91,7 +108,6 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
         return;
       }
     }
-
   }
 }
 

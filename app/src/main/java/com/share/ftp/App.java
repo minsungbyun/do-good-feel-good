@@ -104,7 +104,6 @@ import com.share.ftp.handler.personal.donation.DonationPrompt;
 import com.share.ftp.handler.personal.donation.DonationRegisterAddHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterMyListHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterParticipationHandler;
-import com.share.ftp.handler.personal.donation.DonationRegisterParticipationListHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterTotalMoneyHandler;
 import com.share.ftp.handler.personal.mypage.MyBoardDeleteHandler;
 import com.share.ftp.handler.personal.mypage.MyBoardDetailHandler;
@@ -264,10 +263,10 @@ public class App {
   DonationBoardAppliedListHandler donationBoardAppliedListHandler =
       new DonationBoardAppliedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList);
 
-  DonationPrompt donationPrompt = new DonationPrompt(donationBoardDTOList);
+  DonationPrompt donationPrompt = new DonationPrompt(donationBoardDTOList, donationRegisterDTOList);
 
 
-  DonationRegisterParticipationListHandler donationRegisterParticipationListHandler = new DonationRegisterParticipationListHandler(donationRegisterDTOList, donationBoardDTOList);
+  //  DonationRegisterParticipationListHandler donationRegisterParticipationListHandler = new DonationRegisterParticipationListHandler(donationRegisterDTOList, donationBoardDTOList);
 
   public static void main(String[] args) {
 
@@ -363,7 +362,7 @@ public class App {
     commands.put("/donationBoard/acceptApply", new DonationBoardAcceptApplyHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
     commands.put("/donationBoard/rejectApply", new DonationBoardRejectApplyHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
     commands.put("/donationBoard/rejectedList", new DonationBoardRejectedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
-    commands.put("/donationBoard/applyDetail", new DonationBoardApplyDetailHandler(donationBoardDTOList, donationRegisterDTOList, donationPrompt, donationRegisterParticipationListHandler));
+    commands.put("/donationBoard/applyDetail", new DonationBoardApplyDetailHandler(donationBoardDTOList, donationRegisterDTOList, donationPrompt));
     commands.put("/adminDonationBoard/applyDetail", new DonationBoardAdminApplyDetailHandler(donationBoardDTOList, donationRegisterDTOList, donationPrompt));
 
     // 모금함 (기부하기)

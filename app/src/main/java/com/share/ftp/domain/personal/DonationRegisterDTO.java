@@ -189,6 +189,9 @@ public class DonationRegisterDTO implements Serializable{
     this.members.add(member);
   }
 
+  public void removeMembers(JoinDTO member) {
+    this.members.remove(member);
+  }
 
   public String getMemberNames() {
     if (members == null) {
