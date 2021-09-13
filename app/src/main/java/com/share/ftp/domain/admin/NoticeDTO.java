@@ -1,10 +1,12 @@
 package com.share.ftp.domain.admin;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
-public class NoticeDTO {
+@SuppressWarnings("serial")
+public class NoticeDTO implements Serializable{
 
   private int boardNo;
   private String adminId;

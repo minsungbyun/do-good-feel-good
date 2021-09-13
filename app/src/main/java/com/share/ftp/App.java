@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.share.ftp.domain.admin.ChallengeDTO;
+import com.share.ftp.domain.admin.CommentDTO;
 import com.share.ftp.domain.admin.NoticeDTO;
 import com.share.ftp.domain.admin.QuestionDTO;
 import com.share.ftp.domain.join.JoinDTO;
@@ -43,11 +44,6 @@ import com.share.ftp.handler.admin.AdminNoticeDetailHandler;
 import com.share.ftp.handler.admin.AdminNoticeListHandler;
 import com.share.ftp.handler.admin.AdminNoticeSearchHandler;
 import com.share.ftp.handler.admin.AdminNoticeUpdateHandler;
-import com.share.ftp.handler.admin.AdminQuestionAddHandler;
-import com.share.ftp.handler.admin.AdminQuestionDeleteHandler;
-import com.share.ftp.handler.admin.AdminQuestionDetailHandler;
-import com.share.ftp.handler.admin.AdminQuestionListHandler;
-import com.share.ftp.handler.admin.AdminQuestionUpdateHandler;
 import com.share.ftp.handler.join.AuthChangeUserInfoHandler;
 import com.share.ftp.handler.join.AuthDisplayUserInfoHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -116,6 +112,7 @@ import com.share.ftp.handler.personal.support.QuestionAddHandler;
 import com.share.ftp.handler.personal.support.QuestionDeleteHandler;
 import com.share.ftp.handler.personal.support.QuestionDetailHandler;
 import com.share.ftp.handler.personal.support.QuestionListHandler;
+import com.share.ftp.handler.personal.support.QuestionSearchHandler;
 import com.share.ftp.handler.personal.support.QuestionUpdateHandler;
 import com.share.ftp.handler.personal.volunteer.MyPersonalAppliedVolDetailHandler;
 import com.share.ftp.handler.personal.volunteer.MyPersonalAppliedVolHandler;
@@ -198,6 +195,9 @@ public class App {
   List<NoticeDTO> noticeDTOList = new ArrayList<>();
   List<QuestionDTO> questionDTOList = new ArrayList<>();
   List<ApproveOrgDTO> approveOrgDTOList = new ArrayList<>();
+
+  //댓글 도메인
+  List<CommentDTO> commentDTOList = new ArrayList<>();
 
   // 메뉴 객체 컨트롤(Map)
   HashMap<String,Command> commands = new HashMap<>();
@@ -377,7 +377,7 @@ public class App {
     commands.put("/question/detail", new QuestionDetailHandler(myQuestionListDTOList));
     commands.put("/question/update", new QuestionUpdateHandler(myQuestionListDTOList));
     commands.put("/question/delete", new QuestionDeleteHandler(myQuestionListDTOList));
-    commands.put("/question/search", new QuestionDeleteHandler(myQuestionListDTOList));
+    commands.put("/question/search", new QuestionSearchHandler(myQuestionListDTOList));
 
     // 마이페이지
     commands.put("/myPage/info", new MyPageInfoHandler(joinDTOList)); // 내정보 수정
@@ -416,12 +416,12 @@ public class App {
     commands.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDTOList));
     commands.put("/adminNotice/search", new AdminNoticeSearchHandler(noticeDTOList));
 
-    // 관리자 문의사항
-    commands.put("/adminAsk/add", new AdminQuestionAddHandler(questionDTOList));
-    commands.put("/adminAsk/list", new AdminQuestionListHandler(questionDTOList));
-    commands.put("/adminAsk/detail", new AdminQuestionDetailHandler(questionDTOList));
-    commands.put("/adminAsk/update", new AdminQuestionUpdateHandler(questionDTOList));
-    commands.put("/adminAsk/delete", new AdminQuestionDeleteHandler(questionDTOList));
+    //    // 관리자 문의사항
+    //    commands.put("/adminAsk/add", new AdminQuestionAddHandler(questionDTOList));
+    //    commands.put("/adminAsk/list", new AdminQuestionListHandler(questionDTOList));
+    //    commands.put("/adminAsk/detail", new AdminQuestionDetailHandler(questionDTOList));
+    //    commands.put("/adminAsk/update", new AdminQuestionUpdateHandler(questionDTOList));
+    //    commands.put("/adminAsk/delete", new AdminQuestionDeleteHandler(questionDTOList));
 
     // 관리자 챌린지
     commands.put("/adminChallenge/add", new AdminChallengeAddHandler(challengeDTOList));
@@ -1064,7 +1064,6 @@ public class App {
     adminMenu.add(createAdminDonationMenu());    // 기부관리
     adminMenu.add(createAdminVolMenu());         // 봉사관리
     adminMenu.add(createAdminNoticeMenu());      // 공지사항관리
-    // 관리자 공지사항 관리 => 회원 createNoticeMenu 부분과 기능 겹침. 삭제 고려
     adminMenu.add(createAdminAskMenu());         // 문의사항관리
     adminMenu.add(createAdminChallengeMenu());   // 챌린지관리
     adminMenu.add(createAdminApproveInfoMenu()); // 기관승인관리
@@ -1177,12 +1176,13 @@ public class App {
     ask.add(new MenuItem("등록", ACCESS_MEMBER,"/question/add"));
     ask.add(new MenuItem("목록", ACCESS_MEMBER_ADMIN, "/question/list"));
     ask.add(new MenuItem("상세보기", ACCESS_MEMBER_ADMIN, "/question/detail"));
-    ask.add(new MenuItem("변경",ACCESS_MEMBER,"/question/update"));
-    ask.add(new MenuItem("삭제",Menu.ACCESS_MEMBER, "/question/delete"));
-    ask.add(new MenuItem("검색", "question/search"));
+    ask.add(new MenuItem("변경", ACCESS_MEMBER,"/question/update"));
+    ask.add(new MenuItem("삭제", ACCESS_MEMBER, "/question/delete"));
+    ask.add(new MenuItem("검색", "/question/search"));
 
     return ask;
   }
+
 
   // 마이페이지
 
@@ -1304,11 +1304,12 @@ public class App {
   private Menu createAdminAskMenu() {
     MenuGroup adminAskInfo = new MenuGroup("문의사항 관리", ACCESS_ADMIN);
 
-    adminAskInfo.add(new MenuItem("문의사항 등록","/adminAsk/add"));
-    adminAskInfo.add(new MenuItem("문의사항 목록","/adminAsk/list"));
-    adminAskInfo.add(new MenuItem("문의사항 상세보기","/adminAsk/detail"));
-    adminAskInfo.add(new MenuItem("문의사항 변경","/adminAsk/update"));
-    adminAskInfo.add(new MenuItem("문의사항 삭제","/adminAsk/delete"));
+    //    adminAskInfo.add(new MenuItem("문의사항 등록","/adminAsk/add"));
+    adminAskInfo.add(new MenuItem("문의사항 목록","/question/list"));
+    adminAskInfo.add(new MenuItem("문의사항 상세보기","/question/detail"));
+    adminAskInfo.add(new MenuItem("문의사항 변경","/question/update"));
+    adminAskInfo.add(new MenuItem("문의사항 삭제","/question/delete"));
+    adminAskInfo.add(new MenuItem("문의사항 검색","/question/search"));
 
     return adminAskInfo;
   }

@@ -27,23 +27,29 @@ public class QuestionDeleteHandler extends AbstractQuestionHandler {
           return;
         }
 
+        if (myQuestionListDTO.getOwner().getId() == (AuthLoginHandler.getLoginUser().getId()) ||
+            AuthLoginHandler.getLoginUser().getId().equals("admin")) {
+
+          String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
+          if (input.equalsIgnoreCase("n") /*|| input.length() == 0 */) {
+            System.out.println("게시글 삭제를 취소하였습니다.");
+            return;
+          } else if(input.equals("y")) {
+            System.out.println("게시글을 삭제하였습니다.");
+            myQuestionListDTOList.remove(myQuestionListDTO);
+            return;
+          } else  {
+            System.out.println("y 또는 n을 입력하세요.");
+            continue;  
+          } 
+
+        }
+
         if (myQuestionListDTO.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
           System.out.println("삭제 권한이 없습니다.");
           return;
         }
 
-        String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
-        if (input.equalsIgnoreCase("n") /*|| input.length() == 0 */) {
-          System.out.println("게시글 삭제를 취소하였습니다.");
-          return;
-        } else if(input.equals("y")) {
-          System.out.println("게시글을 삭제하였습니다.");
-          myQuestionListDTOList.remove(myQuestionListDTO);
-          return;
-        } else  {
-          System.out.println("y 또는 n을 입력하세요.");
-          continue;  
-        } 
 
       } catch (Throwable e) {
 
