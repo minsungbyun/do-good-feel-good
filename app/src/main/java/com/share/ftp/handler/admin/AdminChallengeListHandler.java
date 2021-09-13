@@ -18,7 +18,6 @@ public class AdminChallengeListHandler extends AbstractAdminChallengeHandler {
           challengeDTO.getNo(), 
           //          challengeDTO.getAdminId(), 
           challengeDTO.getTitle(), 
-          challengeDTO.getContent(), 
           challengeDTO.getFileUpload(), 
           challengeDTO.getRegisteredDate());
     }

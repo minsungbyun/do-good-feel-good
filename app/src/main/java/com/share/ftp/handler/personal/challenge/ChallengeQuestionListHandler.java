@@ -6,23 +6,23 @@ import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandler {
 
 
-  public ChallengeQuestionListHandler(List<ChallengeQuestionDTO> ChallengeQuestionDTOList) {
-    super(ChallengeQuestionDTOList);
+  public ChallengeQuestionListHandler(List<ChallengeQuestionDTO> challengeQuestionDTOList) {
+    super(challengeQuestionDTOList);
   }
 
   @Override
   public void execute() {
     System.out.println("[문의 목록]");
 
-    if (ChallengeQuestionDTOList.isEmpty()) {
+    if (challengeQuestionDTOList.isEmpty()) {
       System.out.println("문의가 없습니다.");
       return;
     }
 
-    for (ChallengeQuestionDTO ChallengeQuestionDTO : ChallengeQuestionDTOList) {
+    for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
       System.out.printf("%s, %s\n", 
-          ChallengeQuestionDTO.getOwner().getId(),
-          ChallengeQuestionDTO.getTitle());
+          challengeQuestionDTO.getOwner().getId(),
+          challengeQuestionDTO.getTitle());
     }
   }
 }
