@@ -371,14 +371,6 @@ public class App {
     commands.put("/donationRegister/participation", new DonationRegisterParticipationHandler(donationRegisterDTOList));
     commands.put("/donationRegister/totalMoney", new DonationRegisterTotalMoneyHandler(donationRegisterDTOList));
 
-    //    // 고객센터 공지사항 (개인+ 관리자)
-    //    commands.put("/notice/add", new NoticeAddHandler(noticeDTOList));
-    //    commands.put("/notice/list", new NoitceListHandler(noticeDTOList));
-    //    commands.put("/notice/detail", new NoticeDetailHandler(noticeDTOList));
-    //    commands.put("/notice/update", new NoticeUpdateHandler(noticeDTOList));
-    //    commands.put("/notice/delete", new NoticeDeleteHandler(noticeDTOList));
-    //    commands.put("/notice/search", new NoticeSearchHandler(noticeDTOList));
-
     // 고객센터 문의사항
     commands.put("/question/add", new QuestionAddHandler(myQuestionListDTOList));
     commands.put("/question/list", new QuestionListHandler(myQuestionListDTOList));
@@ -416,7 +408,7 @@ public class App {
     commands.put("/join/detail", new JoinDetailHandler(joinDTOList)); // 가입회원 상세보기 (관리자연결)
     commands.put("/join/delete", new AdminMemberDeleteHandler());
 
-    // 관리자 공지사항
+    // 관리자 공지사항 (개인 + 관리자)
     commands.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDTOList));
     commands.put("/adminNotice/list", new AdminNoticeListHandler(noticeDTOList));
     commands.put("/adminNotice/detail", new AdminNoticeDetailHandler(noticeDTOList));
@@ -1179,23 +1171,6 @@ public class App {
 
     return doDonationMenu;
   }
-
-
-
-
-  //  private Menu createNoticeMenu() {
-  //    MenuGroup notice = new MenuGroup("공지사항");
-  //    //    notice.add(new MenuItem("등록",ACCESS_ADMIN,"/notice/add"));
-  //    notice.add(new MenuItem("목록", "/adminNotice/list"));
-  //    notice.add(new MenuItem("상세보기", "/adminNotice/detail"));
-  //    notice.add(new MenuItem("목록", "/notice/list"));
-  //    notice.add(new MenuItem("상세보기", "/notice/detail"));
-  //    //    notice.add(new MenuItem("변경",ACCESS_ADMIN,"/notice/update"));
-  //    //    notice.add(new MenuItem("삭제",ACCESS_ADMIN, "/notice/delete"));
-  //    notice.add(new MenuItem("검색", "/notice/search"));
-  //
-  //    return notice;
-  //  }
 
   private Menu createAskMenu() {
     MenuGroup ask = new MenuGroup("문의하기");

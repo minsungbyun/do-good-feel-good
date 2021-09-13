@@ -23,7 +23,7 @@ public class AdminNoticeSearchHandler extends AbstractAdminNoticeHandler {
         continue;
       }
       System.out.printf("%d, %s, %s, %s, %s, %s\n", 
-          noticeDTO.getNo(), 
+          noticeDTO.getBoardNo(), 
           noticeDTO.getAdmin().getId(), 
           noticeDTO.getTitle(), 
           noticeDTO.getContent(), 

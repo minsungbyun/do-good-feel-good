@@ -16,7 +16,7 @@ public class QuestionListHandler {
 
     QuestionListDTO myQuestionList = new QuestionListDTO();
 
-    myQuestionList.setNo(Prompt.inputInt("번호? "));
+    myQuestionList.setBoardNo(Prompt.inputInt("번호? "));
     myQuestionList.setTitle(Prompt.inputString("제목? "));
     myQuestionList.setPassword(Prompt.inputInt("비밀번호? "));
     myQuestionList.setContent(Prompt.inputString("내용? "));
@@ -30,7 +30,7 @@ public class QuestionListHandler {
     System.out.println("[게시글 목록]");
     for (int i = 0; i < this.size; i++) {
       System.out.printf("%d, %s, %s, %d, %s, %s, %s, %d\n", 
-          this.myQuestionLists[i].getNo(), 
+          this.myQuestionLists[i].getBoardNo(), 
           this.myQuestionLists[i].getTitle(), 
           this.myQuestionLists[i].getMemberld(),
           this.myQuestionLists[i].getContent(),
@@ -43,9 +43,9 @@ public class QuestionListHandler {
 
   public void detailQuestion() {
     System.out.println("[게시글 상세보기]");
-    int no = Prompt.inputInt("번호? ");
+    int boardNo = Prompt.inputInt("번호? ");
 
-    QuestionListDTO myQuestionList = findByNo(no);
+    QuestionListDTO myQuestionList = findByNo(boardNo);
 
     if (myQuestionList == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -63,9 +63,9 @@ public class QuestionListHandler {
 
   public void updateQuestion() {
     System.out.println("[게시글 수정하기]");
-    int no = Prompt.inputInt("번호? ");
+    int boardNo = Prompt.inputInt("번호? ");
 
-    QuestionListDTO myQuestionList = findByNo(no);
+    QuestionListDTO myQuestionList = findByNo(boardNo);
 
 
     if (myQuestionList == null) {
@@ -89,9 +89,9 @@ public class QuestionListHandler {
 
   public void deleteQuestion() {
     System.out.println("[게시글 삭제]");
-    int no = Prompt.inputInt("번호? ");
+    int boardNo = Prompt.inputInt("번호? ");
 
-    int index = indexOf(no);
+    int index = indexOf(boardNo);
 
     if (index == -1) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -112,18 +112,18 @@ public class QuestionListHandler {
     System.out.println("게시글을 삭제하였습니다.");
   }
 
-  private QuestionListDTO findByNo(int no) {
+  private QuestionListDTO findByNo(int boardNo) {
     for (int i = 0; i < this.size; i++) {
-      if (this.myQuestionLists[i].getNo() == no) {
+      if (this.myQuestionLists[i].getBoardNo() == boardNo) {
         return this.myQuestionLists[i];
       }
     }
     return null;
   }
 
-  private int indexOf(int no) {
+  private int indexOf(int boardNo) {
     for (int i = 0; i < this.size; i++) {
-      if (this.myQuestionLists[i].getNo() == no) {
+      if (this.myQuestionLists[i].getBoardNo() == boardNo) {
         return i;
       }
     }

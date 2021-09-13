@@ -8,6 +8,7 @@ import com.share.util.Prompt;
 
 public class AdminNoticeAddHandler extends AbstractAdminNoticeHandler {
 
+  int boardNo;
 
   public AdminNoticeAddHandler(List<NoticeDTO> noticeDTOList) {
     super(noticeDTOList);
@@ -18,12 +19,12 @@ public class AdminNoticeAddHandler extends AbstractAdminNoticeHandler {
 
     NoticeDTO noticeDTO = new NoticeDTO();
 
-    noticeDTO.setNo(Prompt.inputInt("번호? ")); 
     noticeDTO.setAdmin(AuthLoginHandler.getLoginUser());
     noticeDTO.setTitle(Prompt.inputString("제목? "));
     noticeDTO.setContent(Prompt.inputString("내용? ")); 
     noticeDTO.setFileUpload(Prompt.inputString("첨부파일? ")); 
     noticeDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
+    noticeDTO.setBoardNo(++boardNo);
 
 
     noticeDTOList.add(noticeDTO);

@@ -15,9 +15,9 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
 
     System.out.println();
     System.out.println("[고객센터/문의하기/상세보기]");
-    int no = Prompt.inputInt("번호? ");
+    int boardNo = Prompt.inputInt("번호? ");
 
-    QuestionListDTO myQuestionListDTO = findByNo(no);
+    QuestionListDTO myQuestionListDTO = findByNo(boardNo);
 
     if (myQuestionListDTO == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -27,7 +27,8 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
     if (myQuestionListDTO.getOwner().getId() == (AuthLoginHandler.getLoginUser().getId()) ||
         AuthLoginHandler.getLoginUser().getId().equals("admin")) {
 
-      System.out.printf("번호: %s\n", myQuestionListDTO.getNo());
+      System.out.printf("번호: %s\n", myQuestionListDTO.getBoardNo());
+      System.out.printf("문의분야: %s\n", myQuestionListDTO.getSort());
       System.out.printf("제목: %s\n", myQuestionListDTO.getTitle());
       System.out.printf("아이디: %s\n", myQuestionListDTO.getOwner().getId());
       System.out.printf("내용: %s\n", myQuestionListDTO.getContent());
@@ -39,10 +40,10 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
       return;
     }
 
-    //    if (myQuestionListDTO.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
-    //      System.out.println("본인이 작성한 글만 확인할 수 있습니다.");
-    //      return;
-    //    }
+    if (myQuestionListDTO.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
+      System.out.println("본인이 작성한 글만 확인할 수 있습니다.");
+      return;
+    }
 
 
   }
