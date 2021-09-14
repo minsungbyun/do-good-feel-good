@@ -7,7 +7,7 @@ import com.share.util.Prompt;
 
 public class ChallengeQuestionAddHandler extends AbstractChallengeQuestionHandler {
 
-  int no; // 번호 자동부여
+  int reviewNo; // 번호 자동부여
 
   public ChallengeQuestionAddHandler(List<ChallengeQuestionDTO> challengeQuestionDTOList) {
     super(challengeQuestionDTOList);
@@ -23,7 +23,7 @@ public class ChallengeQuestionAddHandler extends AbstractChallengeQuestionHandle
     challengeQuestionDTO.setContent(Prompt.inputString("내용: "));
 
     challengeQuestionDTO.setOwner(AuthLoginHandler.getLoginUser());
-    challengeQuestionDTO.setNo(++no); // 번호 자동부여
+    challengeQuestionDTO.setNo(++reviewNo); // 번호 자동부여
 
     challengeQuestionDTOList.add(challengeQuestionDTO);
 

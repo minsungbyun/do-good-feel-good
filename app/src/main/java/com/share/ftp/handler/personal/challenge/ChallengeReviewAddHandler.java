@@ -2,7 +2,6 @@ package com.share.ftp.handler.personal.challenge;
 
 import java.sql.Date;
 import java.util.List;
-
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -10,10 +9,10 @@ import com.share.util.Prompt;
 
 public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
 
-  int no; // 번호 자동부여
+  int reviewNo; // 번호 자동부여
 
   public ChallengeReviewAddHandler(List<ChallengeReviewDTO> challengeReviewDTOList,
-        List<ChallengeDTO> challengeDTOList) {
+      List<ChallengeDTO> challengeDTOList) {
     super(challengeReviewDTOList, challengeDTOList);
   }
 
@@ -28,13 +27,14 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
 
 
     if (challengeDTO == null) {
-      System.out.println("존재하지 않는 챌린지입니다");
+      System.out.println();
+      System.out.println("해당 챌린지가 없습니다!");
     }
 
     System.out.printf("챌린지 번호: %d\n"
         + "챌린지 제목: %s\n"
-//        + "챌린지 시작기간: %s\n"
-//        + "챌린지 종료기간: %s\n"
+        //        + "챌린지 시작기간: %s\n"
+        //        + "챌린지 종료기간: %s\n"
         + "챌린지 내용: %s\n"
         + "첨부파일: %s\n"
         + "등록날짜: %s\n\n",
@@ -49,6 +49,7 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
 
     String input = Prompt.inputString("해당 챌린지에 참여인증&댓글등록을 하시겠습니까?(y/N) ");
     if (!input.equals("y") || input.length() == 0) {
+      System.out.println();
       System.out.println("해당 챌린지 참여를 취소하였습니다.");
       return;
     }
@@ -61,7 +62,7 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
     challengeReviewDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     challengeReviewDTO.setOwner(AuthLoginHandler.getLoginUser());
-    challengeReviewDTO.setNo(++no); // 번호 자동부여
+    challengeReviewDTO.setNo(++reviewNo); // 번호 자동부여
 
     challengeReviewDTOList.add(challengeReviewDTO);
 

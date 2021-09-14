@@ -1,7 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
 import java.util.List;
-
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.util.Prompt;
@@ -9,7 +8,7 @@ import com.share.util.Prompt;
 public class ChallengeReviewListHandler extends AbstractChallengeReviewHandler {
 
   public ChallengeReviewListHandler(List<ChallengeReviewDTO> challengeReviewDTOList,
-        List<ChallengeDTO> challengeDTOList) {
+      List<ChallengeDTO> challengeDTOList) {
     super(challengeReviewDTOList, challengeDTOList);
   }
 
@@ -34,15 +33,15 @@ public class ChallengeReviewListHandler extends AbstractChallengeReviewHandler {
       return;
     }
     for (ChallengeReviewDTO challengeReviewDTO : challengeReviewDTOList) {
-    	if (challengeReviewDTO.getNo() == challengeNo) {
-      System.out.printf("%d, %s, %s, %s, %s\n", 
-          challengeReviewDTO.getNo(), 
-          challengeReviewDTO.getOwner().getId(),
-          challengeReviewDTO.getContent(),
-          challengeReviewDTO.getFileUpload(),
-          challengeReviewDTO.getRegisteredDate());
-    }
+      if (challengeReviewDTO.getNo() == challengeNo) {
+        System.out.printf("%d, %s, %s, %s, %s\n", 
+            challengeReviewDTO.getNo(), 
+            challengeReviewDTO.getOwner().getId(),
+            challengeReviewDTO.getContent(),
+            challengeReviewDTO.getFileUpload(),
+            challengeReviewDTO.getRegisteredDate());
+      }
     }
   }
-  }
+}
 

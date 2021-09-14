@@ -1,7 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
 import java.util.List;
-
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.util.Prompt;
 
@@ -15,7 +14,7 @@ public class ChallengePrompt {
 
   public ChallengeDTO promptChallenge() {
     System.out.println();
-    System.out.println("챌린지목록:");
+    System.out.println("챌린지 목록:");
 
     for (ChallengeDTO challengeDTO : challengeDTOList) {
       if (challengeDTO.isChecked() == true) {
@@ -31,11 +30,11 @@ public class ChallengePrompt {
       if (challengeNo == 0) {
         return null;
       }
-    ChallengeDTO selectChallenge = findByNo(challengeNo);
-    if (selectChallenge != null) {
-      return selectChallenge;
-    }
-    System.out.println("챌린지 번호가 옳지 않습니다.");
+      ChallengeDTO selectChallenge = findByNo(challengeNo);
+      if (selectChallenge != null) {
+        return selectChallenge;
+      }
+      System.out.println("챌린지 번호가 옳지 않습니다.");
     }
   }
   protected ChallengeDTO findByNo(int no) {
