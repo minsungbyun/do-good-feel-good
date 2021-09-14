@@ -1,18 +1,18 @@
 package com.share.ftp.handler.personal.volunteer;
 
 import java.util.List;
-import com.share.ftp.domain.personal.PersonalRequestDTO;
+import com.share.ftp.domain.personal.GeneralRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.util.Prompt;
 
-public class VolDoJoinListHandler implements Command {
+public class VolGeneralDoJoinListHandler implements Command {
 
 
-  List<PersonalRequestDTO> personalRequestApplyDTOList;
-  VolRequestPersonalDoJoinHandler volRequestPersonalAppliedListDetailHandler;
+  List<GeneralRequestDTO> personalRequestApplyDTOList;
+  VolGeneralDoJoinHandler volRequestPersonalAppliedListDetailHandler;
 
-  public VolDoJoinListHandler(List<PersonalRequestDTO> personalRequestApplyDTOList,
-      VolRequestPersonalDoJoinHandler volRequestPersonalAppliedListDetailHandler) {
+  public VolGeneralDoJoinListHandler(List<GeneralRequestDTO> personalRequestApplyDTOList,
+      VolGeneralDoJoinHandler volRequestPersonalAppliedListDetailHandler) {
 
     this.personalRequestApplyDTOList = personalRequestApplyDTOList;
     this.volRequestPersonalAppliedListDetailHandler = volRequestPersonalAppliedListDetailHandler;
@@ -29,7 +29,7 @@ public class VolDoJoinListHandler implements Command {
     int volNo = Prompt.inputInt("봉사번호 > ");
     System.out.println();
 
-    PersonalRequestDTO volJoinList = findByVol(volNo); 
+    GeneralRequestDTO volJoinList = findByVol(volNo); 
 
     if (volJoinList == null) {
       System.out.println("해당 봉사가 없습니다.");
@@ -48,10 +48,12 @@ public class VolDoJoinListHandler implements Command {
         volJoinList.getOwnerId(), // 주최자 아이디
         volJoinList.getOwner().getName(), // 주최자 이룸
         volJoinList.getMemberNames());
+
+
   }
 
-  private PersonalRequestDTO findByVol(int no) {
-    for (PersonalRequestDTO volJoinList : personalRequestApplyDTOList) {
+  private GeneralRequestDTO findByVol(int no) {
+    for (GeneralRequestDTO volJoinList : personalRequestApplyDTOList) {
       if (volJoinList.getVolNo() == no) {
         return volJoinList;
       }

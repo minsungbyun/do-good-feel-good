@@ -8,10 +8,10 @@ import com.share.util.Prompt;
 
 public class JoinAddHandler extends AbstractJoinHandler {
 
-  int uniqueNum; // 개인 고유 번호
 
   public JoinAddHandler(List<JoinDTO> joinDTOList) {
     super(joinDTOList);
+
 
   }
 
@@ -108,14 +108,23 @@ public class JoinAddHandler extends AbstractJoinHandler {
     }
 
     // 개인 고유번호 부여
-    joinDTO.setNo(++uniqueNum);
+    joinDTO.setNo(getNextNum());
+
 
     joinDTOList.add(joinDTO);
     System.out.println();
     System.out.println("회원가입이 정상적으로 완료되었습니다.");
+
   }
 
+  private int getNextNum() {
+    if (joinDTOList.size() > 0) {
 
+      return joinDTOList.get(joinDTOList.size() - 1).getNo();
+    } else {
+      return 1;
+    }
+  }
 
   private boolean validId(String id) {
     for (JoinDTO joinDTO : joinDTOList) {

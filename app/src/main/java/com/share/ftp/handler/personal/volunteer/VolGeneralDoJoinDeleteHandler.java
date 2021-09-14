@@ -1,16 +1,16 @@
 package com.share.ftp.handler.personal.volunteer;
 
 import java.util.List;
-import com.share.ftp.domain.personal.PersonalRequestDTO;
+import com.share.ftp.domain.personal.GeneralRequestDTO;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class VolRequestDeleteHandler extends AbstractVolRequestPersonalHandler { // 개인 봉사신청 양식 쓰는 곳
+public class VolGeneralDoJoinDeleteHandler extends AbstractVolGeneralHandler { // 개인 봉사신청 양식 쓰는 곳
 
-  public VolRequestDeleteHandler(
-      List<PersonalRequestDTO> personalRequestDTOList,
-      List<PersonalRequestDTO> personalRequestApplyDTOList,
-      List<PersonalRequestDTO> personalRequestRejectDTOList) {
+  public VolGeneralDoJoinDeleteHandler(
+      List<GeneralRequestDTO> personalRequestDTOList,
+      List<GeneralRequestDTO> personalRequestApplyDTOList,
+      List<GeneralRequestDTO> personalRequestRejectDTOList) {
 
     super(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList);
   }
@@ -24,7 +24,7 @@ public class VolRequestDeleteHandler extends AbstractVolRequestPersonalHandler {
 
     int volNo = Prompt.inputInt("봉사번호? ");
 
-    PersonalRequestDTO rejectVolNo = findByApplyVol(volNo);
+    GeneralRequestDTO rejectVolNo = findByApplyVol(volNo);
 
     if (rejectVolNo == null) {
       System.out.println("[  해당 번호의 봉사가 없습니다.  ]");
