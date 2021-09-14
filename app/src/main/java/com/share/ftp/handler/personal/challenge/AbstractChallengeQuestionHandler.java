@@ -6,14 +6,14 @@ import com.share.ftp.handler.Command;
 
 public abstract class AbstractChallengeQuestionHandler  implements Command {
 
-  protected List<ChallengeQuestionDTO> ChallengeQuestionDTOList;
+  protected List<ChallengeQuestionDTO> challengeQuestionDTOList;
 
-  public AbstractChallengeQuestionHandler(List<ChallengeQuestionDTO> ChallengeQuestionDTOList) {
-    this.ChallengeQuestionDTOList = ChallengeQuestionDTOList;
+  public AbstractChallengeQuestionHandler(List<ChallengeQuestionDTO> challengeQuestionDTOList) {
+    this.challengeQuestionDTOList = challengeQuestionDTOList;
   }
 
   protected ChallengeQuestionDTO findByNo(int no) {
-    ChallengeQuestionDTO[] arr = ChallengeQuestionDTOList.toArray(new ChallengeQuestionDTO[0]);
+    ChallengeQuestionDTO[] arr = challengeQuestionDTOList.toArray(new ChallengeQuestionDTO[0]);
     for (ChallengeQuestionDTO ChallengeQuestionDTO : arr) {
       if (ChallengeQuestionDTO.getNo() == no) {
         return ChallengeQuestionDTO;

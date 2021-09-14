@@ -7,24 +7,25 @@ import com.share.util.Prompt;
 
 public class ChallengeQuestionAddHandler extends AbstractChallengeQuestionHandler {
 
+  int no; // 번호 자동부여
 
-  public ChallengeQuestionAddHandler(List<ChallengeQuestionDTO> ChallengeQuestionDTOList) {
-    super(ChallengeQuestionDTOList);
+  public ChallengeQuestionAddHandler(List<ChallengeQuestionDTO> challengeQuestionDTOList) {
+    super(challengeQuestionDTOList);
   }
 
   @Override
   public void execute() {
     System.out.println("[문의 등록]");
 
-    ChallengeQuestionDTO ChallengeQuestionDTO = new ChallengeQuestionDTO();
+    ChallengeQuestionDTO challengeQuestionDTO = new ChallengeQuestionDTO();
 
-    ChallengeQuestionDTO.setNo(Prompt.inputInt("번호: "));
-    ChallengeQuestionDTO.setTitle(Prompt.inputString("제목: "));
-    ChallengeQuestionDTO.setContent(Prompt.inputString("내용: "));
+    challengeQuestionDTO.setTitle(Prompt.inputString("제목: "));
+    challengeQuestionDTO.setContent(Prompt.inputString("내용: "));
 
-    ChallengeQuestionDTO.setOwner(AuthLoginHandler.getLoginUser());
+    challengeQuestionDTO.setOwner(AuthLoginHandler.getLoginUser());
+    challengeQuestionDTO.setNo(++no); // 번호 자동부여
 
-    ChallengeQuestionDTOList.add(ChallengeQuestionDTO);
+    challengeQuestionDTOList.add(challengeQuestionDTO);
 
     System.out.println();
     System.out.println("문의 등록이 완료되었습니다.");

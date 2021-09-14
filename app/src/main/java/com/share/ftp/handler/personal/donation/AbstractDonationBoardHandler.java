@@ -15,6 +15,9 @@ public abstract class AbstractDonationBoardHandler implements Command {
   // 모금함 개설 신청내역 반려 리스트
   protected List<DonationBoardDTO> donationBoardRejectDTOList;
 
+  // 마이페이지 리스트
+  //  protected List<JoinDTO> joinDTOList;
+
   public AbstractDonationBoardHandler(List<DonationBoardDTO> donationBoardDTOList) {
     this.donationBoardDTOList = donationBoardDTOList;
   }
@@ -28,6 +31,18 @@ public abstract class AbstractDonationBoardHandler implements Command {
     this.donationBoardApplyDTOList = donationBoardApplyDTOList;
     this.donationBoardRejectDTOList = donationBoardRejectDTOList;
   }
+
+  //  public AbstractDonationBoardHandler(
+  //      List<DonationBoardDTO> donationBoardDTOList,
+  //      List<DonationBoardDTO> donationBoardApplyDTOList,
+  //      List<DonationBoardDTO> donationBoardRejectDTOList,
+  //      List<JoinDTO> joinDTOList) {
+  //
+  //    this(donationBoardDTOList);
+  //    this.donationBoardApplyDTOList = donationBoardApplyDTOList;
+  //    this.donationBoardRejectDTOList = donationBoardRejectDTOList;
+  //    this.joinDTOList = joinDTOList;
+  //  }
 
   protected DonationBoardDTO findByDonationApply(int no) {
     for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {

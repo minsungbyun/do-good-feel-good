@@ -6,9 +6,9 @@ import com.share.ftp.handler.Command;
 
 public abstract class AbstractChallengeJoinHandler implements Command {
 
-  protected List<ChallengeJoinDTO> ChallengeJoinDTOList;
+  protected List<ChallengeJoinDTO> challengeJoinDTOList;
 
-  public AbstractChallengeJoinHandler(List<ChallengeJoinDTO> ChallengeJoinDTOList) {
-    this.ChallengeJoinDTOList = ChallengeJoinDTOList;
+  public AbstractChallengeJoinHandler(List<ChallengeJoinDTO> challengeJoinDTOList) {
+    this.challengeJoinDTOList = challengeJoinDTOList;
   }
 }

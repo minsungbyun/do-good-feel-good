@@ -1,33 +1,26 @@
 package com.share.ftp.handler.personal.volunteer;
 
 import com.share.ftp.handler.Command;
-import com.share.ftp.handler.personal.volunteerOrg.VolRequestOrgAppliedListHandler;
 
-public class VolRequestTotalApprovedListDetailHandler implements Command { // 개인 봉사신청 양식 쓰는 곳
+public class VolGeneralTotalApprovedListHandler implements Command { // 개인 봉사신청 양식 쓰는 곳
 
-  VolRequestPersonalAppliedListHandler volRequestPersonalAppliedListHandler;
-  VolRequestOrgAppliedListHandler volRequestOrgAppliedListHandler;
+  VolGeneralRequestAppliedListHandler volGeneralRequestAppliedListHandler;
 
+  public VolGeneralTotalApprovedListHandler(
+      VolGeneralRequestAppliedListHandler volGeneralRequestAppliedListHandler) {
 
-  public VolRequestTotalApprovedListDetailHandler(
-      VolRequestPersonalAppliedListHandler volRequestPersonalAppliedListHandler,
-      VolRequestOrgAppliedListHandler volRequestOrgAppliedListHandler) {
-
-    this.volRequestPersonalAppliedListHandler = volRequestPersonalAppliedListHandler;
-    this.volRequestOrgAppliedListHandler = volRequestOrgAppliedListHandler;
-
+    this.volGeneralRequestAppliedListHandler = volGeneralRequestAppliedListHandler;
   }
 
   @Override
   public void execute() {
     System.out.println();
 
-    // 인증받은 봉사 중 1개를 선택해서 세부사항을 본다.
-    // 선택 > 참여자현황 / 신청하기 / 세부설명(봉사정보,위치) / 문의사항 
+    System.out.println("▶ 전체봉사승인 목록");
 
-    System.out.println("[  전체봉사승인 목록  ]");
-    volRequestPersonalAppliedListHandler.execute();
-    volRequestOrgAppliedListHandler.execute();
+    volGeneralRequestAppliedListHandler.execute();
+    //    volRequestOrgAppliedListHandler.execute();
+
   }
 }
 

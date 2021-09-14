@@ -5,7 +5,9 @@ import java.sql.Date;
 import java.util.Objects;
 
 @SuppressWarnings("serial")
-public class JoinDTO implements Serializable{
+public class JoinDTO implements Serializable {
+
+
   private int no;
   private String id;
   private String password;

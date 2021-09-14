@@ -2,44 +2,41 @@ package com.share.ftp.domain.personal;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
 import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
 @SuppressWarnings("serial")
 public class ChallengeReviewDTO implements Serializable {
-  public int no;
-  public String content;
-  public String memberId;
-  public String fileUpload;
-  public Date registeredDate;
+  private int no;
+  private int reviewNo;
+  private String content;
+  private String fileUpload;
+  private Date registeredDate;
   private JoinDTO owner;
-  private List<JoinDTO> joinDTO;
 
   @Override
   public String toString() {
-	return "MyChallengeReviewDTO [no=" + no + ", content=" + content + ", memberId=" + memberId + ", fileUpload="
-		+ fileUpload + ", registeredDate=" + registeredDate + ", owner=" + owner + ", joinDTO=" + joinDTO + "]";
+	return "ChallengeReviewDTO [no=" + no + ", content=" + content + ", fileUpload=" + fileUpload + ", registeredDate="
+		+ registeredDate + ", owner=" + owner + "]";
 }
 
 @Override
   public int hashCode() {
-    return Objects.hash(content, fileUpload, memberId, no, registeredDate);
+    return Objects.hash(content, fileUpload, no, owner, registeredDate);
   }
 
   @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    ChallengeReviewDTO other = (ChallengeReviewDTO) obj;
-    return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
-        && Objects.equals(memberId, other.memberId) && no == other.no
-        && Objects.equals(registeredDate, other.registeredDate);
-  }
+public boolean equals(Object obj) {
+	if (this == obj)
+		return true;
+	if (obj == null)
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	ChallengeReviewDTO other = (ChallengeReviewDTO) obj;
+	return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload) && no == other.no
+			&& Objects.equals(owner, other.owner) && Objects.equals(registeredDate, other.registeredDate);
+}
 
 
   public int getNo() {
@@ -53,12 +50,6 @@ public class ChallengeReviewDTO implements Serializable {
   }
   public void setContent(String content) {
     this.content = content;
-  }
-  public String getMemberId() {
-    return memberId;
-  }
-  public void setMemberId(String memberId) {
-    this.memberId = memberId;
   }
   public String getFileUpload() {
     return fileUpload;
@@ -78,10 +69,11 @@ public class ChallengeReviewDTO implements Serializable {
   public void setOwner(JoinDTO owner) {
 	this.owner = owner;
 }
-public List<JoinDTO> getJoinDTO() {
-	return joinDTO;
+  public int getReviewNo() {
+    return reviewNo;
   }
-  public void setJoinDTO(List<JoinDTO> joinDTO) {
-	this.joinDTO = joinDTO;
+  public void setReviewNo(int reviewNo) {
+    this.reviewNo = reviewNo;
   }
+
 }

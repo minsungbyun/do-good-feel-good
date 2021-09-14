@@ -1,17 +1,17 @@
 package com.share.ftp.handler.personal.volunteer;
 
 import java.util.List;
-import com.share.ftp.domain.personal.PersonalRequestDTO;
+import com.share.ftp.domain.personal.GeneralRequestDTO;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolRequestPersonalHandler { // 개인 봉사신청 양식 쓰는 곳
+public class VolGeneralDoJoinHandler extends AbstractVolGeneralHandler { // 개인 봉사신청 양식 쓰는 곳
 
 
-  public VolRequestPersonalAppliedListDetailHandler(
-      List<PersonalRequestDTO> personalRequestDTOList,
-      List<PersonalRequestDTO> personalRequestApplyDTOList,
-      List<PersonalRequestDTO> personalRequestRejectDTOList) {
+  public VolGeneralDoJoinHandler(
+      List<GeneralRequestDTO> personalRequestDTOList,
+      List<GeneralRequestDTO> personalRequestApplyDTOList,
+      List<GeneralRequestDTO> personalRequestRejectDTOList) {
 
     super(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList);
   }
@@ -24,11 +24,12 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
     System.out.println();
     int volNo = Prompt.inputInt("봉사번호 > ");
 
-    PersonalRequestDTO personalRequestApplyDTO = findByApplyVol(volNo);
+    GeneralRequestDTO personalRequestApplyDTO = findByApplyVol(volNo);
 
 
     if (personalRequestApplyDTO == null) {
       System.out.println("[  ⛔ 존재하지 않는 봉사입니다 ⛔ ]");
+      return;
     }
 
     System.out.printf("봉사번호: %d\n"
@@ -49,7 +50,7 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
         personalRequestApplyDTO.getVolNo(),      
         personalRequestApplyDTO.getVolTitle(),     
         personalRequestApplyDTO.getOwner().getName(), 
-        personalRequestApplyDTO.getVolSort(), 
+        personalRequestApplyDTO.getVolType(), 
         personalRequestApplyDTO.getVolTel(),
         personalRequestApplyDTO.getVolEmail(),
         personalRequestApplyDTO.getVolStartDate(),

@@ -1,17 +1,17 @@
 package com.share.ftp.handler.personal.volunteer;
 
 import java.util.List;
-import com.share.ftp.domain.personal.PersonalRequestDTO;
+import com.share.ftp.domain.personal.GeneralRequestDTO;
 import com.share.util.Prompt;
 
-public class VolRequestPersonalAcceptApplyHandler extends AbstractVolRequestPersonalHandler { // 개인 봉사신청 양식 쓰는 곳
+public class VolGeneralRequestAcceptHandler extends AbstractVolGeneralHandler { // 개인 봉사신청 양식 쓰는 곳
 
-  public VolRequestPersonalAcceptApplyHandler(
-      List<PersonalRequestDTO> personalRequestDTOList,
-      List<PersonalRequestDTO> personalRequestApplyDTOList,
-      List<PersonalRequestDTO> personalRequestRejectDTOList) {
+  public VolGeneralRequestAcceptHandler(
+      List<GeneralRequestDTO> generalRequestDTOList,
+      List<GeneralRequestDTO> generalRequestApplyDTOList,
+      List<GeneralRequestDTO> generalRequestRejectDTOList) {
 
-    super(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList);
+    super(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList);
   }
 
 
@@ -19,14 +19,14 @@ public class VolRequestPersonalAcceptApplyHandler extends AbstractVolRequestPers
   public void execute() {
 
     System.out.println();
-    System.out.println("[개인봉사신청서 승인]");
+    System.out.println("[  개인봉사신청서 승인  ]");
     System.out.println();
     int no = Prompt.inputInt("번호? ");
     System.out.println();
 
-    PersonalRequestDTO personalRequestDTO = findByVol(no);
+    GeneralRequestDTO generalRequestDTO = findByVol(no);
 
-    if (personalRequestDTO == null) {
+    if (generalRequestDTO == null) {
       System.out.println("해당 번호의 개인봉사신청서가 없습니다.");
       return;
     }
@@ -37,10 +37,10 @@ public class VolRequestPersonalAcceptApplyHandler extends AbstractVolRequestPers
       return;
     }
 
-    personalRequestDTO.setIsSigned("승인됨");
-    personalRequestDTO.addMembers(personalRequestDTO.getOwner());
+    generalRequestDTO.setIsSigned("승인됨");
+    generalRequestDTO.addMembers(generalRequestDTO.getOwner());
 
-    personalRequestApplyDTOList.add(personalRequestDTO);
+    generalRequestApplyDTOList.add(generalRequestDTO);
 
     System.out.println("[  ✔️ 해당 봉사신청을 승인하였습니다. ]");
   }

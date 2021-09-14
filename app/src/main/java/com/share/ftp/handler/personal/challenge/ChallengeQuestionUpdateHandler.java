@@ -8,8 +8,8 @@ import com.share.util.Prompt;
 public class ChallengeQuestionUpdateHandler extends AbstractChallengeQuestionHandler {
 
 
-  public ChallengeQuestionUpdateHandler(List<ChallengeQuestionDTO> ChallengeQuestionDTOList) {
-    super(ChallengeQuestionDTOList);
+  public ChallengeQuestionUpdateHandler(List<ChallengeQuestionDTO> challengeQuestionDTOList) {
+    super(challengeQuestionDTOList);
   }
 
   @Override
@@ -18,20 +18,20 @@ public class ChallengeQuestionUpdateHandler extends AbstractChallengeQuestionHan
       System.out.println("[문의 수정]");
       int no = Prompt.inputInt("번호? ");
 
-      ChallengeQuestionDTO ChallengeQuestion = findByNo(no);
+      ChallengeQuestionDTO challengeQuestion = findByNo(no);
 
       try {
-        if (ChallengeQuestion == null) {
+        if (challengeQuestion == null) {
           System.out.println("해당 번호의 문의가 없습니다.");
           return;
         }
 
-        if (ChallengeQuestion.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
+        if (challengeQuestion.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
           System.out.println("변경 권한이 없습니다.");
           return;
         }
 
-        String content = Prompt.inputString(String.format("내용(%s)? ", ChallengeQuestion.getContent()));
+        String content = Prompt.inputString(String.format("내용(%s)? ", challengeQuestion.getContent()));
 
         String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
         if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -39,7 +39,7 @@ public class ChallengeQuestionUpdateHandler extends AbstractChallengeQuestionHan
           return;
         } else if (input.equals("y")) {
           System.out.println("문의를 수정하였습니다.");
-          ChallengeQuestion.setContent(content);
+          challengeQuestion.setContent(content);
           return;
         } else {
           System.out.println("y 또는 n을 입력하세요.");
