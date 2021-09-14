@@ -55,6 +55,7 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
 
     ChallengeReviewDTO challengeReviewDTO = new ChallengeReviewDTO();
 
+    challengeReviewDTO.setNo(challengeDTO.getNo());
     challengeReviewDTO.setContent(Prompt.inputString("내용: "));
     challengeReviewDTO.setFileUpload(Prompt.inputString("파일첨부: "));
     challengeReviewDTO.setRegisteredDate(new Date(System.currentTimeMillis()));

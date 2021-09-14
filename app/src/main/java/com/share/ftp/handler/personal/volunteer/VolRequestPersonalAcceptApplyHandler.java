@@ -19,7 +19,7 @@ public class VolRequestPersonalAcceptApplyHandler extends AbstractVolRequestPers
   public void execute() {
 
     System.out.println();
-    System.out.println("[개인봉사신청서 승인]");
+    System.out.println("[  개인봉사신청서 승인  ]");
     System.out.println();
     int no = Prompt.inputInt("번호? ");
     System.out.println();

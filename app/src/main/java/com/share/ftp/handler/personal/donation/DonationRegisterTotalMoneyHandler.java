@@ -14,8 +14,10 @@ public class DonationRegisterTotalMoneyHandler extends AbstractDonationRegisterH
 
     for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {
       total += donationRegisterDTO.getDonationMoney();
+      break;
     }
-    System.out.printf("기부 총 금액 : %d\n", total);
+    int a = total;
+    System.out.printf("기부 총 금액 : %d\n", a);
   }
 }
 

@@ -1,6 +1,7 @@
 package com.share.ftp.handler.personal.volunteer;
 
 import java.util.List;
+import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.personal.PersonalRequestDTO;
 import com.share.ftp.handler.join.AuthLoginHandler;
 
@@ -20,13 +21,19 @@ public class MyPersonalRejectedVolHandler extends AbstractVolRequestPersonalHand
     System.out.println();
     System.out.println("[  개인봉사반려 목록  ]");
 
+
+    JoinDTO loginUser = AuthLoginHandler.getLoginUser();
+
     if (personalRequestRejectDTOList.isEmpty()) {
+      System.out.println();
       System.out.println("[  현재 반려된 봉사목록이 없습니다. ]");
       return;
     }
 
+
+
     for (PersonalRequestDTO personalRequestRejectDTO : personalRequestRejectDTOList) {
-      if (personalRequestRejectDTO.getOwner().getName().equals(AuthLoginHandler.getLoginUser().getName())) {
+      if (personalRequestRejectDTO.getOwner().getName().equals(loginUser.getName())) {
         System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
             personalRequestRejectDTO.getVolNo(),      
             personalRequestRejectDTO.getVolTitle(),     

@@ -7,10 +7,11 @@ import com.share.ftp.domain.join.JoinDTO;
 
 @SuppressWarnings("serial")
 public class ChallengeReviewDTO implements Serializable {
-  public int no;
-  public String content;
-  public String fileUpload;
-  public Date registeredDate;
+  private int no;
+  private int reviewNo;
+  private String content;
+  private String fileUpload;
+  private Date registeredDate;
   private JoinDTO owner;
 
   @Override
@@ -68,4 +69,11 @@ public boolean equals(Object obj) {
   public void setOwner(JoinDTO owner) {
 	this.owner = owner;
 }
+  public int getReviewNo() {
+    return reviewNo;
+  }
+  public void setReviewNo(int reviewNo) {
+    this.reviewNo = reviewNo;
+  }
+
 }

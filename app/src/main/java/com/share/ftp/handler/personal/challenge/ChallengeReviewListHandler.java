@@ -34,6 +34,7 @@ public class ChallengeReviewListHandler extends AbstractChallengeReviewHandler {
       return;
     }
     for (ChallengeReviewDTO challengeReviewDTO : challengeReviewDTOList) {
+    	if (challengeReviewDTO.getNo() == challengeNo) {
       System.out.printf("%d, %s, %s, %s, %s\n", 
           challengeReviewDTO.getNo(), 
           challengeReviewDTO.getOwner().getId(),
@@ -41,5 +42,7 @@ public class ChallengeReviewListHandler extends AbstractChallengeReviewHandler {
           challengeReviewDTO.getFileUpload(),
           challengeReviewDTO.getRegisteredDate());
     }
+    }
   }
-}
+  }
+

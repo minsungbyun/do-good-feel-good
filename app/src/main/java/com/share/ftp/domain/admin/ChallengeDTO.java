@@ -18,6 +18,7 @@ public class ChallengeDTO implements Serializable{
   private String fileUpload;
   private Date registeredDate;
   private int viewCount;
+  private boolean isChecked;
   private List<JoinDTO> members = new ArrayList<>();  // 관리자가 등록한 챌린지에 참여한 멤버
 
   @Override
@@ -114,6 +115,11 @@ public boolean equals(Object obj) {
     }
     return names.toString();
   }
-
+  public boolean isChecked() {
+    return isChecked;
+  }
+  public void setChecked(boolean isChecked) {
+    this.isChecked = isChecked;
+  }
 
 }

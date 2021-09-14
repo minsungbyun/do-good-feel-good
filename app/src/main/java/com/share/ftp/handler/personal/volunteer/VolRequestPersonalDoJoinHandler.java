@@ -5,10 +5,10 @@ import com.share.ftp.domain.personal.PersonalRequestDTO;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolRequestPersonalHandler { // 개인 봉사신청 양식 쓰는 곳
+public class VolRequestPersonalDoJoinHandler extends AbstractVolRequestPersonalHandler { // 개인 봉사신청 양식 쓰는 곳
 
 
-  public VolRequestPersonalAppliedListDetailHandler(
+  public VolRequestPersonalDoJoinHandler(
       List<PersonalRequestDTO> personalRequestDTOList,
       List<PersonalRequestDTO> personalRequestApplyDTOList,
       List<PersonalRequestDTO> personalRequestRejectDTOList) {
@@ -29,6 +29,7 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
 
     if (personalRequestApplyDTO == null) {
       System.out.println("[  ⛔ 존재하지 않는 봉사입니다 ⛔ ]");
+      return;
     }
 
     System.out.printf("봉사번호: %d\n"

@@ -5,14 +5,14 @@ import com.share.ftp.domain.personal.PersonalRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.util.Prompt;
 
-public class VolDoJoinHandler implements Command {
+public class VolDoJoinListHandler implements Command {
 
 
   List<PersonalRequestDTO> personalRequestApplyDTOList;
-  VolRequestPersonalAppliedListDetailHandler volRequestPersonalAppliedListDetailHandler;
+  VolRequestPersonalDoJoinHandler volRequestPersonalAppliedListDetailHandler;
 
-  public VolDoJoinHandler(List<PersonalRequestDTO> personalRequestApplyDTOList,
-      VolRequestPersonalAppliedListDetailHandler volRequestPersonalAppliedListDetailHandler) {
+  public VolDoJoinListHandler(List<PersonalRequestDTO> personalRequestApplyDTOList,
+      VolRequestPersonalDoJoinHandler volRequestPersonalAppliedListDetailHandler) {
 
     this.personalRequestApplyDTOList = personalRequestApplyDTOList;
     this.volRequestPersonalAppliedListDetailHandler = volRequestPersonalAppliedListDetailHandler;

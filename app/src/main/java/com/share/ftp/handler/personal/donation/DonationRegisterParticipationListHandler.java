@@ -22,12 +22,11 @@ public class DonationRegisterParticipationListHandler extends AbstractDonationRe
     if (donationRegisterDTOList.isEmpty()) {
       System.out.println("[  현재 참여된 기부 내역이 없습니다. ]");
       return;
-    }
+    } 
 
 
-    for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {
-      for (DonationBoardDTO a : donationBoardDTOList) {
-        System.out.println();
+    for (DonationBoardDTO a : donationBoardDTOList) {
+      for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {
         if (donationRegisterDTO.getNo() == a.getNo()) {
           System.out.printf("모금함번호: %d  분류: %s\n %s님, %s, %s\n", 
               donationRegisterDTO.getNo(), 
@@ -36,11 +35,17 @@ public class DonationRegisterParticipationListHandler extends AbstractDonationRe
               donationRegisterDTO.getDonationMoney(), 
               donationRegisterDTO.getRegisteredDate());
           System.out.println();
+          return;
+        } else {
+          System.out.println();
+          System.out.println("[  현재 참여된 기부 내역이 없습니다. ]");
+          return;
         }
       }
     }
   }
 }
+
 
 
 
