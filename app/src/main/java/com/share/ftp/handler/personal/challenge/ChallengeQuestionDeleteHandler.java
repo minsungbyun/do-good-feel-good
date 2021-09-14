@@ -8,8 +8,8 @@ import com.share.util.Prompt;
 public class ChallengeQuestionDeleteHandler extends AbstractChallengeQuestionHandler {
 
 
-  public ChallengeQuestionDeleteHandler(List<ChallengeQuestionDTO> ChallengeQuestionDTOList) {
-    super(ChallengeQuestionDTOList);
+  public ChallengeQuestionDeleteHandler(List<ChallengeQuestionDTO> challengeQuestionDTOList) {
+    super(challengeQuestionDTOList);
   }
 
   @Override
@@ -18,15 +18,15 @@ public class ChallengeQuestionDeleteHandler extends AbstractChallengeQuestionHan
       System.out.println("[문의 삭제]");
       int no = Prompt.inputInt("번호? ");
 
-      ChallengeQuestionDTO ChallengeQuestion = findByNo(no);
+      ChallengeQuestionDTO challengeQuestion = findByNo(no);
 
       try {
-        if (ChallengeQuestion == null) {
+        if (challengeQuestion == null) {
           System.out.println("해당 번호의 문의가 없습니다.");
           return;
         }
 
-        if (ChallengeQuestion.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
+        if (challengeQuestion.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
           System.out.println("삭제 권한이 없습니다.");
           return;
         }
@@ -37,7 +37,7 @@ public class ChallengeQuestionDeleteHandler extends AbstractChallengeQuestionHan
           return;
         } else if (input.equals("y")) {
           System.out.println("참여인증&댓글을 삭제하였습니다.");
-          ChallengeQuestionDTOList.remove(ChallengeQuestion);
+          challengeQuestionDTOList.remove(challengeQuestion);
           return;
         } else {
           System.out.println("y 또는 n을 입력하세요.");
