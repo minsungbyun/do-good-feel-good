@@ -1,7 +1,6 @@
 package com.share.ftp.domain.personal;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
@@ -11,13 +10,11 @@ public class ChallengeQuestionDTO implements Serializable {
   public String title;
   public String content;
   private JoinDTO owner;
-  private List<JoinDTO> joinDTO;
 
   @Override
   public String toString() {
-    return "ChallengeQuestionDTO [no=" + no + ", memberId=" + title + ", content=" + content + ", owner=" + owner
-        + ", joinDTO=" + joinDTO + "]";
-  }
+    return "ChallengeQuestionDTO [no=" + no + ", title=" + title + ", content=" + content + ", owner=" + owner + "]";
+}
 
   @Override
   public int hashCode() {
@@ -60,11 +57,5 @@ public class ChallengeQuestionDTO implements Serializable {
   }
   public void setOwner(JoinDTO owner) {
     this.owner = owner;
-  }
-  public List<JoinDTO> getJoinDTO() {
-    return joinDTO;
-  }
-  public void setJoinDTO(List<JoinDTO> joinDTO) {
-    this.joinDTO = joinDTO;
   }
 }

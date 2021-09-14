@@ -174,9 +174,9 @@ public class App {
   List<CommReviewDTO> commReviewDTOList = new ArrayList<>();
 
   // 챌린지 도메인(값)
-  List<ChallengeJoinDTO> myChallengeJoinDTOList = new ArrayList<>();
-  List<ChallengeQuestionDTO> myChallengeQuestionDTOList = new ArrayList<>();
-  List<ChallengeReviewDTO> myChallengeReviewDTOList = new ArrayList<>();
+  List<ChallengeJoinDTO> challengeJoinDTOList = new ArrayList<>();
+  List<ChallengeQuestionDTO> challengeQuestionDTOList = new ArrayList<>();
+  List<ChallengeReviewDTO> challengeReviewDTOList = new ArrayList<>();
 
   // 모금함 개설 신청 관련 도메인(값)
   List<DonationBoardDTO> donationBoardDTOList = new ArrayList<>();
@@ -255,6 +255,12 @@ public class App {
 
 
 
+  // 챌린지 참여자 목록
+  ChallengeJoinHandler challengeJoinHandler =
+      new ChallengeJoinHandler
+      (challengeDTOList);
+
+
   // 모금함 개설 승인된 목록 Handler
   DonationBoardAppliedListHandler donationBoardAppliedListHandler =
       new DonationBoardAppliedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList);
@@ -326,25 +332,26 @@ public class App {
     commands.put("/commReview/delete", new CommReviewDeleteHandler(commReviewDTOList));
 
     // 챌린지
-    commands.put("adminChallenge/detail", new AdminChallengeDetailHandler(challengeDTOList));  // 챌린지 상세정보
-    commands.put("/challengeJoin/join", new ChallengeJoinHandler(myChallengeJoinDTOList));  // 참여하기(구현중..)
-    commands.put("/challengeJoin/list", new ChallengeJoinListHandler(myChallengeJoinDTOList));  // 참여자목록(구현중..)
+    commands.put("/adminChallenge/list", new AdminChallengeListHandler(challengeDTOList));  // 챌린지 목록
+    commands.put("/adminChallenge/detail", new AdminChallengeDetailHandler(challengeDTOList));  // 챌린지 상세정보
+    commands.put("/challengeJoin/join", new ChallengeJoinHandler(challengeDTOList));  // 참여하기(구현중..)
+    commands.put("/challengeJoin/list", new ChallengeJoinListHandler(challengeDTOList, challengeJoinHandler));  // 참여자목록(구현중..)
 
     // 챌린지 참여인증&댓글
-    commands.put("/challengeReview/add", new ChallengeReviewAddHandler(myChallengeReviewDTOList));
-    commands.put("/challengeReview/list", new ChallengeReviewListHandler(myChallengeReviewDTOList));
+    commands.put("/challengeReview/add", new ChallengeReviewAddHandler(challengeReviewDTOList, challengeDTOList));
+    commands.put("/challengeReview/list", new ChallengeReviewListHandler(challengeReviewDTOList, challengeDTOList));
     //    commands.put("/challengeReview/detail", new ChallengeReviewDetailHandler(myChallengeReviewDTOList));
-    commands.put("/challengeReview/update", new ChallengeReviewUpdateHandler(myChallengeReviewDTOList));
-    commands.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(myChallengeReviewDTOList));
-    commands.put("/challengeReview/search", new ChallengeReviewSearchHandler(myChallengeReviewDTOList));
+    commands.put("/challengeReview/update", new ChallengeReviewUpdateHandler(challengeReviewDTOList, challengeDTOList));
+    commands.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(challengeReviewDTOList, challengeDTOList));
+    commands.put("/challengeReview/search", new ChallengeReviewSearchHandler(challengeReviewDTOList, challengeDTOList));
 
     // 챌린지 문의하기
-    commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(myChallengeQuestionDTOList));
-    commands.put("/challengeQuestion/list", new ChallengeQuestionListHandler(myChallengeQuestionDTOList));
-    commands.put("/challengeQuestion/detail", new ChallengeQuestionDetailHandler(myChallengeQuestionDTOList));
-    commands.put("/challengeQuestion/update", new ChallengeQuestionUpdateHandler(myChallengeQuestionDTOList));
-    commands.put("/challengeQuestion/delete", new ChallengeQuestionDeleteHandler(myChallengeQuestionDTOList));
-    commands.put("/challengeQuestion/search", new ChallengeQuestionSearchHandler(myChallengeQuestionDTOList));
+    commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(challengeQuestionDTOList));
+    commands.put("/challengeQuestion/list", new ChallengeQuestionListHandler(challengeQuestionDTOList));
+    commands.put("/challengeQuestion/detail", new ChallengeQuestionDetailHandler(challengeQuestionDTOList));
+    commands.put("/challengeQuestion/update", new ChallengeQuestionUpdateHandler(challengeQuestionDTOList));
+    commands.put("/challengeQuestion/delete", new ChallengeQuestionDeleteHandler(challengeQuestionDTOList));
+    commands.put("/challengeQuestion/search", new ChallengeQuestionSearchHandler(challengeQuestionDTOList));
 
     // 챌린지 랭킹
     commands.put("/ranking/list", new RankingHandler());  //전체랭킹(구현예정)
@@ -455,7 +462,7 @@ public class App {
     //    loadCommBoard();
     //    loadCommReview();
     //
-    //    loadAdminChellengeAdd();
+        loadAdminChellengeAdd();
     //
     //    loadChallengeReviews();
     //    loadChallengeQuestions();
@@ -689,7 +696,7 @@ public class App {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("myChallengeReview.data"))) {
 
-      myChallengeReviewDTOList.addAll((List<ChallengeReviewDTO>) in.readObject());
+      challengeReviewDTOList.addAll((List<ChallengeReviewDTO>) in.readObject());
 
       System.out.println("참여인증&댓글 로딩 완료!");
 
@@ -703,7 +710,7 @@ public class App {
     try (ObjectOutputStream out = new ObjectOutputStream(
         new FileOutputStream("myChallengeReview.data"))) {
 
-      out.writeObject(myChallengeReviewDTOList);
+      out.writeObject(challengeReviewDTOList);
 
       System.out.println("참여인증&댓글 저장 완료!");
 
@@ -717,7 +724,7 @@ public class App {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("myChallengeQuestion.data"))) {
 
-      myChallengeQuestionDTOList.addAll((List<ChallengeQuestionDTO>) in.readObject());
+      challengeQuestionDTOList.addAll((List<ChallengeQuestionDTO>) in.readObject());
 
       System.out.println("챌린지 문의글 로딩 완료!");
 
@@ -731,7 +738,7 @@ public class App {
     try (ObjectOutputStream out = new ObjectOutputStream(
         new FileOutputStream("myChallengeQuestion.data"))) {
 
-      out.writeObject(myChallengeQuestionDTOList);
+      out.writeObject(challengeQuestionDTOList);
 
       System.out.println("챌린지 문의글 저장 완료!");
 
@@ -1008,20 +1015,22 @@ public class App {
     //    MenuGroup challengeListMenu = new MenuGroup("챌린지 목록");
     //    monthlyChallengeMenu.add(challengeListMenu);
 
-    MenuGroup challengeDetailMenu = new MenuGroup("챌린지 상세보기");
-    monthlyChallengeMenu.add(challengeDetailMenu); 
+    //    MenuGroup challengeDetailMenu = new MenuGroup("챌린지 상세보기");
+    //    monthlyChallengeMenu.add(challengeDetailMenu); 
 
     //    MenuGroup showChallengeDetailHandler = new MenuGroup("상세정보");  // 구현예정
     //    challengeDetailMenu.add(showChallengeDetailHandler);
 
-    challengeDetailMenu.add(new MenuItem("상세정보", "adminChallenge/detail"));
+    monthlyChallengeMenu.add(new MenuItem("챌린지 목록", "/adminChallenge/list"));
 
-    challengeDetailMenu.add(new MenuItem("참여하기", ACCESS_MEMBER, "/challengeJoin/join"));
+    monthlyChallengeMenu.add(new MenuItem("챌린지 상세정보", "/adminChallenge/detail"));
 
-    challengeDetailMenu.add(new MenuItem("참여자 목록", ACCESS_MEMBER, "/challengeJoin/list"));
+    monthlyChallengeMenu.add(new MenuItem("참여하기", ACCESS_MEMBER, "/challengeJoin/join"));
 
-    challengeDetailMenu.add(createChallengeReviewMenu()); // 참여인증&댓글
-    challengeDetailMenu.add(createChallengeQuestionMenu()); // 문의하기
+    monthlyChallengeMenu.add(new MenuItem("참여자 목록", ACCESS_MEMBER, "/challengeJoin/list"));
+
+    monthlyChallengeMenu.add(createChallengeReviewMenu()); // 참여인증&댓글
+    monthlyChallengeMenu.add(createChallengeQuestionMenu()); // 문의하기
 
     challengeMenu.add(createMonthlyRankingMenu()); // 이달의 랭킹
 
