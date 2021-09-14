@@ -1,25 +1,25 @@
 package com.share.ftp.handler.personal.volunteer;
 
 import java.util.List;
-import com.share.ftp.domain.personal.PersonalRequestDTO;
+import com.share.ftp.domain.personal.GeneralRequestDTO;
 
-public class VolRequestPersonalBookmarkHandler extends AbstractVolRequestPersonalHandler { // 개인 봉사신청 양식 쓰는 곳
+public class VolGeneralRequestBookmarkHandler extends AbstractVolGeneralHandler { // 개인 봉사신청 양식 쓰는 곳
 
 
   // 개인 전체 리스트
-  List<PersonalRequestDTO> personalRequestDTOList;
+  List<GeneralRequestDTO> personalRequestDTOList;
   // 개인 봉사 승인 리스트
-  List<PersonalRequestDTO> personalRequestApplyDTOList;
+  List<GeneralRequestDTO> personalRequestApplyDTOList;
   //  List<PersonalRequestApplyDTO> personalRequestApplyDTOList;
   // 개인 봉사 반려 리스트
-  List<PersonalRequestDTO> personalRequestRejectDTOList;
+  List<GeneralRequestDTO> personalRequestRejectDTOList;
   //  List<PersonalRequestRejectDTO> personalRequestRejectDTOList;
 
 
-  public VolRequestPersonalBookmarkHandler(
-      List<PersonalRequestDTO> personalRequestDTOList,
-      List<PersonalRequestDTO> personalRequestApplyDTOList,
-      List<PersonalRequestDTO> personalRequestRejectDTOList) {
+  public VolGeneralRequestBookmarkHandler(
+      List<GeneralRequestDTO> personalRequestDTOList,
+      List<GeneralRequestDTO> personalRequestApplyDTOList,
+      List<GeneralRequestDTO> personalRequestRejectDTOList) {
 
     super(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList);
 

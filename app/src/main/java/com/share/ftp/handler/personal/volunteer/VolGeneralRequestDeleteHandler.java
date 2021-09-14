@@ -1,19 +1,19 @@
 package com.share.ftp.handler.personal.volunteer;
 
 import java.util.List;
-import com.share.ftp.domain.personal.PersonalRequestDTO;
+import com.share.ftp.domain.personal.GeneralRequestDTO;
 import com.share.util.Prompt;
 
-public class VolRequestPersonalDeleteHandler extends AbstractVolRequestPersonalHandler { // 개인 봉사신청 양식 쓰는 곳
+public class VolGeneralRequestDeleteHandler extends AbstractVolGeneralHandler { // 개인 봉사신청 양식 쓰는 곳
 
 
 
-  public VolRequestPersonalDeleteHandler(
-      List<PersonalRequestDTO> personalRequestDTOList,
-      List<PersonalRequestDTO> personalRequestApplyDTOList,
-      List<PersonalRequestDTO> personalRequestRejectDTOList) {
+  public VolGeneralRequestDeleteHandler(
+      List<GeneralRequestDTO> generalRequestDTOList,
+      List<GeneralRequestDTO> generalRequestApplyDTOList,
+      List<GeneralRequestDTO> generalRequestRejectDTOList) {
 
-    super(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList);
+    super(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList);
   }
 
   @Override
@@ -52,7 +52,7 @@ public class VolRequestPersonalDeleteHandler extends AbstractVolRequestPersonalH
 
     int volNo = Prompt.inputInt("삭제 할 봉사번호? ");
 
-    PersonalRequestDTO personalRequestDTO = findByVol(volNo);
+    GeneralRequestDTO generalRequestDTO = findByVol(volNo);
 
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
     if (!input.equals("y") || input.length() == 0) {
@@ -60,9 +60,9 @@ public class VolRequestPersonalDeleteHandler extends AbstractVolRequestPersonalH
       return;
     }
 
-    personalRequestDTOList.remove(personalRequestDTO);
-    personalRequestApplyDTOList.remove(personalRequestDTO);
-    personalRequestRejectDTOList.remove(personalRequestDTO);
+    generalRequestDTOList.remove(generalRequestDTO);
+    generalRequestApplyDTOList.remove(generalRequestDTO);
+    generalRequestRejectDTOList.remove(generalRequestDTO);
 
     System.out.println("[  해당 봉사신청을 삭제하였습니다. ]");
   }
