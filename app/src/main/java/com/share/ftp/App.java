@@ -351,7 +351,7 @@ public class App {
     commands.put("/myRanking/list", new MyRankingHandler()); //나의랭킹(구현예정)
 
     // 모금함 (개설신청하기, 개설목록, 승인, 반려)
-    commands.put("/donationBoard/list", new DonationBoardListHandler(donationBoardAppliedListHandler));
+    commands.put("/donationBoard/list", new DonationBoardListHandler(donationBoardDTOList));
     commands.put("/donationBoard/apply", new DonationBoardApplyHandler(donationBoardDTOList, joinDTOList));
     commands.put("/donationBoard/applyList", new DonationBoardApplyListHandler(donationBoardDTOList));
     commands.put("/donationBoard/appliedList", new DonationBoardAppliedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
