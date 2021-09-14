@@ -47,10 +47,7 @@ public class DonationBoardRejectedListHandler extends AbstractDonationBoardHandl
           System.out.println("[  현재 반려된 모금함 개설목록이 없습니다. ]");
           return;
         }
-      }  else {
-        System.out.println();
-        System.out.println("[  현재 반려된 모금함 개설목록이 없습니다. ]");
-        return;
+
       }
     }
   }

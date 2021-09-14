@@ -1,31 +1,31 @@
 package com.share.ftp.handler.personal.volunteer;
 
-import static  com.share.ftp.domain.personal.PersonalRequestDTO.ANIMAL;
-import static  com.share.ftp.domain.personal.PersonalRequestDTO.CHILDREN;
-import static  com.share.ftp.domain.personal.PersonalRequestDTO.ELDER;
-import static  com.share.ftp.domain.personal.PersonalRequestDTO.ENVIRONMENT;
-import static  com.share.ftp.domain.personal.PersonalRequestDTO.HANDICAPPED;
-import static  com.share.ftp.domain.personal.PersonalRequestDTO.OTHER;
-import static  com.share.ftp.domain.personal.PersonalRequestDTO.TEEN;
-import static  com.share.ftp.domain.personal.PersonalRequestDTO.UNTACT;
+import static com.share.ftp.handler.personal.volunteer.General.type.ANIMAL;
+import static com.share.ftp.handler.personal.volunteer.General.type.CHILDREN;
+import static com.share.ftp.handler.personal.volunteer.General.type.ELDER;
+import static com.share.ftp.handler.personal.volunteer.General.type.ENVIRONMENT;
+import static com.share.ftp.handler.personal.volunteer.General.type.HANDICAPPED;
+import static com.share.ftp.handler.personal.volunteer.General.type.OTHER;
+import static com.share.ftp.handler.personal.volunteer.General.type.TEEN;
+import static com.share.ftp.handler.personal.volunteer.General.type.UNTACT;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
-import  com.share.ftp.domain.personal.PersonalRequestDTO;
+import  com.share.ftp.domain.personal.GeneralRequestDTO;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class VolRequestPersonalApplyHandler extends AbstractVolRequestPersonalHandler { // 개인 봉사신청 양식 쓰는 곳
+public class VolGeneralRequestApplyHandler extends AbstractVolGeneralHandler { // 개인 봉사신청 양식 쓰는 곳
 
 
   int volNo;  // 봉사 번호 자동 부여
   List<JoinDTO> joinDTOList;
 
-  public VolRequestPersonalApplyHandler(
-      List<PersonalRequestDTO> personalRequestDTOList,
+  public VolGeneralRequestApplyHandler(
+      List<GeneralRequestDTO> generalRequestDTOList,
       List<JoinDTO> joinDTOList) {
 
-    super(personalRequestDTOList);
+    super(generalRequestDTOList);
     this.joinDTOList = joinDTOList;
   }
 
@@ -45,12 +45,12 @@ public class VolRequestPersonalApplyHandler extends AbstractVolRequestPersonalHa
     while (true) {
       try {
 
-        PersonalRequestDTO personalRequestDTO = new PersonalRequestDTO();
+        GeneralRequestDTO generalRequestDTO = new GeneralRequestDTO();
 
-        personalRequestDTO.setVolTitle(Prompt.inputString("제목 ▶ "));
-        personalRequestDTO.setOwner(joinDTO);
-        personalRequestDTO.setOwnerId(joinDTO.getId());
-        personalRequestDTO.setVolName(joinDTO.getName());
+        generalRequestDTO.setVolTitle(Prompt.inputString("제목 ▶ "));
+        generalRequestDTO.setOwner(joinDTO);
+        generalRequestDTO.setOwnerId(joinDTO.getId());
+        generalRequestDTO.setVolName(joinDTO.getName());
         System.out.println();
 
         System.out.println(" ▶ 봉사 분류 ");
@@ -69,36 +69,36 @@ public class VolRequestPersonalApplyHandler extends AbstractVolRequestPersonalHa
         int input = Prompt.inputInt("분류 ▶ ");
 
         switch (input) {
-          case 1: personalRequestDTO.setVolSort(UNTACT);        break;
-          case 2: personalRequestDTO.setVolSort(CHILDREN);      break;
-          case 3: personalRequestDTO.setVolSort(TEEN);          break;
-          case 4: personalRequestDTO.setVolSort(ELDER);         break;
-          case 5: personalRequestDTO.setVolSort(HANDICAPPED);   break;
-          case 6: personalRequestDTO.setVolSort(ANIMAL);        break;
-          case 7: personalRequestDTO.setVolSort(ENVIRONMENT);   break;
-          case 8: personalRequestDTO.setVolSort(OTHER);         break;
+          case 1: generalRequestDTO.setVolType(UNTACT);        break;
+          case 2: generalRequestDTO.setVolType(CHILDREN);      break;
+          case 3: generalRequestDTO.setVolType(TEEN);          break;
+          case 4: generalRequestDTO.setVolType(ELDER);         break;
+          case 5: generalRequestDTO.setVolType(HANDICAPPED);   break;
+          case 6: generalRequestDTO.setVolType(ANIMAL);        break;
+          case 7: generalRequestDTO.setVolType(ENVIRONMENT);   break;
+          case 8: generalRequestDTO.setVolType(OTHER);         break;
           default: System.out.println("올바른 번호를 입력해주세요"); continue;
         }
 
-        personalRequestDTO.setVolTel(Prompt.inputString("전화번호 ▶ "));
-        personalRequestDTO.setVolEmail(Prompt.inputString("이메일 ▶ ")); 
-        personalRequestDTO.setVolStartDate(Prompt.inputDate("봉사시작기간(yyyy-mm-dd) ▶ "));
-        personalRequestDTO.setVolEndDate(Prompt.inputDate("봉사종료기간(yyyy-mm-dd) ▶ ")); 
-        personalRequestDTO.setVolStartTime(Prompt.inputString("봉사시작시간 ▶ ")); 
-        personalRequestDTO.setVolEndTime(Prompt.inputString("봉사종료시간 ▶ ")); 
+        generalRequestDTO.setVolTel(Prompt.inputString("전화번호 ▶ "));
+        generalRequestDTO.setVolEmail(Prompt.inputString("이메일 ▶ ")); 
+        generalRequestDTO.setVolStartDate(Prompt.inputDate("봉사시작기간(yyyy-mm-dd) ▶ "));
+        generalRequestDTO.setVolEndDate(Prompt.inputDate("봉사종료기간(yyyy-mm-dd) ▶ ")); 
+        generalRequestDTO.setVolStartTime(Prompt.inputString("봉사시작시간 ▶ ")); 
+        generalRequestDTO.setVolEndTime(Prompt.inputString("봉사종료시간 ▶ ")); 
         //        personalRequestDTO.setVolList(Prompt.inputString("봉사목록 ▶ ")); 
-        personalRequestDTO.setVolLimitNum(Prompt.inputInt("봉사인원 ▶ "));
-        personalRequestDTO.setVolContent(Prompt.inputString("내용 ▶ ")); 
-        personalRequestDTO.setVolSubmitTime(new Date(System.currentTimeMillis())); 
-        personalRequestDTO.setVolFileUpload(Prompt.inputString("파일 ▶ ")); 
-        personalRequestDTO.setPersonal(true);
+        generalRequestDTO.setVolLimitNum(Prompt.inputInt("봉사인원 ▶ "));
+        generalRequestDTO.setVolContent(Prompt.inputString("내용 ▶ ")); 
+        generalRequestDTO.setVolSubmitTime(new Date(System.currentTimeMillis())); 
+        generalRequestDTO.setVolFileUpload(Prompt.inputString("파일 ▶ ")); 
+        generalRequestDTO.setPersonal(true);
         //        personalRequestDTO.setChecked(false);
-        personalRequestDTO.getIsSigned();
+        generalRequestDTO.getIsSigned();
 
 
-        personalRequestDTO.setVolNo(++volNo);
+        generalRequestDTO.setVolNo(++volNo);
 
-        personalRequestDTOList.add(personalRequestDTO);
+        generalRequestDTOList.add(generalRequestDTO);
 
       } catch (NumberFormatException e) {
         System.out.println("--------------------------------------------------------------");
