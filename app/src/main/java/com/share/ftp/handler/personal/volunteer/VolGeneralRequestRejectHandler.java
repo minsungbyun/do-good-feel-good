@@ -19,15 +19,15 @@ public class VolGeneralRequestRejectHandler extends AbstractVolGeneralHandler { 
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("[  개인봉사신청서 반려  ]");
+    System.out.println("[  봉사신청서 반려  ]");
     System.out.println();
 
-    int no = Prompt.inputInt("봉사번호? ");
+    int no = Prompt.inputInt("봉사번호 ▶ ");
 
     GeneralRequestDTO generalRequestDTO = findByVol(no);
 
     if (generalRequestDTO == null) {
-      System.out.println("[  해당 번호의 개인봉사신청서가 없습니다.  ]");
+      System.out.println("[  해당 번호의 봉사신청서가 없습니다.  ]");
       return;
     }
 
@@ -38,7 +38,6 @@ public class VolGeneralRequestRejectHandler extends AbstractVolGeneralHandler { 
       return;
     }
 
-    //    personalRequestDTO.setChecked(false);
     generalRequestDTO.setIsSigned("반려됨");
 
     generalRequestRejectDTOList.add(generalRequestDTO);

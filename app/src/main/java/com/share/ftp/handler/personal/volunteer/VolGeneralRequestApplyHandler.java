@@ -1,5 +1,7 @@
 package com.share.ftp.handler.personal.volunteer;
 
+import static com.share.ftp.handler.personal.volunteer.General.member.ORG;
+import static com.share.ftp.handler.personal.volunteer.General.member.PERSONAL;
 import static com.share.ftp.handler.personal.volunteer.General.type.ANIMAL;
 import static com.share.ftp.handler.personal.volunteer.General.type.CHILDREN;
 import static com.share.ftp.handler.personal.volunteer.General.type.ELDER;
@@ -16,9 +18,7 @@ import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
 public class VolGeneralRequestApplyHandler extends AbstractVolGeneralHandler { // 개인 봉사신청 양식 쓰는 곳
-
-
-  int volNo;  // 봉사 번호 자동 부여
+  //  int volNo;  // 봉사 번호 자동 부여
   List<JoinDTO> joinDTOList;
 
   public VolGeneralRequestApplyHandler(
@@ -29,14 +29,12 @@ public class VolGeneralRequestApplyHandler extends AbstractVolGeneralHandler { /
     this.joinDTOList = joinDTOList;
   }
 
-
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("[  개인봉사활동 양식  ]");
+    System.out.println("[  봉사활동 양식  ]");
 
     JoinDTO joinDTO = AuthLoginHandler.getLoginUser();
-
 
     if (joinDTO == null) {
       System.out.println("[  ⛔ 로그인 후 사용가능합니다 ⛔  ]");
@@ -47,13 +45,36 @@ public class VolGeneralRequestApplyHandler extends AbstractVolGeneralHandler { /
 
         GeneralRequestDTO generalRequestDTO = new GeneralRequestDTO();
 
+        while (true) {
+          System.out.println(" ▶ 번호를 선택해주세요");
+          System.out.println();
+          System.out.println(" ▶ 1. 개인봉사신청");
+          System.out.println(" ▶ 2. 기관봉사신청");
+          System.out.println();
+
+          int num = Prompt.inputInt("번호입력 ▶ ");
+
+          switch (num) {
+            case 1: generalRequestDTO.setMemberType(PERSONAL);          break;
+            case 2: generalRequestDTO.setMemberType(ORG);               break;
+            default: System.out.println("올바를 숫자를 입력해주세요."); continue;
+          }
+
+          if (AuthLoginHandler.getLoginUser().getType() != generalRequestDTO.getMemberType()) {
+            System.out.println("당신은 해당 유형봉사를 신청 할 수 없습니다.");
+            System.out.println("개인회원인지 기관회원인지 확인하세요!");
+            continue;
+          }
+          break;
+        }
+
         generalRequestDTO.setVolTitle(Prompt.inputString("제목 ▶ "));
         generalRequestDTO.setOwner(joinDTO);
         generalRequestDTO.setOwnerId(joinDTO.getId());
         generalRequestDTO.setVolName(joinDTO.getName());
         System.out.println();
 
-        System.out.println(" ▶ 봉사 분류 ");
+        System.out.println(" ▶ 봉사 유형 ");
         System.out.println();
 
         System.out.print("[1 ▶ 비대면] ");
@@ -66,7 +87,7 @@ public class VolGeneralRequestApplyHandler extends AbstractVolGeneralHandler { /
         System.out.print("[8 ▶ 기타  ]\n ");
         System.out.println();
 
-        int input = Prompt.inputInt("분류 ▶ ");
+        int input = Prompt.inputInt("유형 ▶ ");
 
         switch (input) {
           case 1: generalRequestDTO.setVolType(UNTACT);        break;
@@ -91,12 +112,10 @@ public class VolGeneralRequestApplyHandler extends AbstractVolGeneralHandler { /
         generalRequestDTO.setVolContent(Prompt.inputString("내용 ▶ ")); 
         generalRequestDTO.setVolSubmitTime(new Date(System.currentTimeMillis())); 
         generalRequestDTO.setVolFileUpload(Prompt.inputString("파일 ▶ ")); 
-        generalRequestDTO.setPersonal(true);
-        //        personalRequestDTO.setChecked(false);
         generalRequestDTO.getIsSigned();
 
 
-        generalRequestDTO.setVolNo(++volNo);
+        generalRequestDTO.setVolNo(getNextNum());
 
         generalRequestDTOList.add(generalRequestDTO);
 
@@ -118,8 +137,9 @@ public class VolGeneralRequestApplyHandler extends AbstractVolGeneralHandler { /
 
     System.out.println("[  ✔️ 개인봉사신청이 정상적으로 완료되었습니다.  ]");
   }
-}
 
+
+}
 
 
 

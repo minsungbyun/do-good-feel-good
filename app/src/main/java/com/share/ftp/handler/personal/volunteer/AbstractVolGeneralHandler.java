@@ -7,7 +7,6 @@ import com.share.ftp.handler.Command;
 
 public abstract class AbstractVolGeneralHandler implements Command { // 개인 봉사신청 양식 쓰는 곳
 
-
   protected List<GeneralRequestDTO> generalRequestDTOList;
   protected List<GeneralRequestDTO> generalRequestApplyDTOList;
   protected List<GeneralRequestDTO> generalRequestRejectDTOList;
@@ -26,8 +25,14 @@ public abstract class AbstractVolGeneralHandler implements Command { // 개인 �
     this.generalRequestRejectDTOList = generalRequestRejectDTOList;
   }
 
-
-
+  // 마지막 봉사 번호를 알아낸다.
+  protected int getNextNum() {
+    if (generalRequestDTOList.size() > 0) {
+      return generalRequestDTOList.get(generalRequestDTOList.size() - 1).getVolNo() + 1;
+    } else {
+      return 1;
+    }
+  } 
 
   protected GeneralRequestDTO findByVol(int no) {
     for (GeneralRequestDTO generalRequestDTO : generalRequestDTOList) {
@@ -56,8 +61,6 @@ public abstract class AbstractVolGeneralHandler implements Command { // 개인 �
     return false;
   }
 }
-
-
 
 //  protected GeneralRequestDTO findByVol(int no) {
 //    for (GeneralRequestDTO generalRequestDTO : generalRequestDTOList) {

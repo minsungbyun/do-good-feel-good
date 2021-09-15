@@ -4,11 +4,15 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
-@SuppressWarnings("serial")
+
 public class JoinDTO implements Serializable {
 
+  private static final long serialVersionUID = 2397935818210730479L;
 
   private int no;
+  private int type; // 1. 개인, 2. 기관, 3. 그룹
+  private int point; // 유저 포인트
+  private int authNum = 1004; 
   private String id;
   private String password;
   private String name;
@@ -17,14 +21,18 @@ public class JoinDTO implements Serializable {
   private String email;
   private String address;
   private Date registerDate;
-  private boolean isAdmin;
-  private boolean isPersonal;
-  private boolean isOrg;
-  private int authNum = 1004; // getter setter 만 적용했음
+  private String level; // 유저등급
+  @Override
+  public String toString() {
+    return "JoinDTO [no=" + no + ", type=" + type + ", point=" + point + ", authNum=" + authNum
+        + ", id=" + id + ", password=" + password + ", name=" + name + ", birthdate=" + birthdate
+        + ", tel=" + tel + ", email=" + email + ", address=" + address + ", registerDate="
+        + registerDate + ", level=" + level + "]";
+  }
   @Override
   public int hashCode() {
-    return Objects.hash(address, authNum, birthdate, email, id, isAdmin, isOrg, isPersonal, name,
-        no, password, registerDate, tel);
+    return Objects.hash(address, authNum, birthdate, email, id, level, name, no, password, point,
+        registerDate, tel, type);
   }
   @Override
   public boolean equals(Object obj) {
@@ -37,23 +45,35 @@ public class JoinDTO implements Serializable {
     JoinDTO other = (JoinDTO) obj;
     return Objects.equals(address, other.address) && authNum == other.authNum
         && Objects.equals(birthdate, other.birthdate) && Objects.equals(email, other.email)
-        && Objects.equals(id, other.id) && isAdmin == other.isAdmin && isOrg == other.isOrg
-        && isPersonal == other.isPersonal && Objects.equals(name, other.name) && no == other.no
-        && Objects.equals(password, other.password)
-        && Objects.equals(registerDate, other.registerDate) && Objects.equals(tel, other.tel);
-  }
-  @Override
-  public String toString() {
-    return "JoinDTO [no=" + no + ", id=" + id + ", password=" + password + ", name=" + name
-        + ", birthdate=" + birthdate + ", tel=" + tel + ", email=" + email + ", address=" + address
-        + ", registerDate=" + registerDate + ", isAdmin=" + isAdmin + ", isPersonal=" + isPersonal
-        + ", isOrg=" + isOrg + ", authNum=" + authNum + "]";
+        && Objects.equals(id, other.id) && Objects.equals(level, other.level)
+        && Objects.equals(name, other.name) && no == other.no
+        && Objects.equals(password, other.password) && point == other.point
+        && Objects.equals(registerDate, other.registerDate) && Objects.equals(tel, other.tel)
+        && type == other.type;
   }
   public int getNo() {
     return no;
   }
   public void setNo(int no) {
     this.no = no;
+  }
+  public int getType() {
+    return type;
+  }
+  public void setType(int type) {
+    this.type = type;
+  }
+  public int getPoint() {
+    return point;
+  }
+  public void setPoint(int point) {
+    this.point = point;
+  }
+  public int getAuthNum() {
+    return authNum;
+  }
+  public void setAuthNum(int authNum) {
+    this.authNum = authNum;
   }
   public String getId() {
     return id;
@@ -103,31 +123,12 @@ public class JoinDTO implements Serializable {
   public void setRegisterDate(Date registerDate) {
     this.registerDate = registerDate;
   }
-  public boolean isAdmin() {
-    return isAdmin;
+  public String getLevel() {
+    return level;
   }
-  public void setAdmin(boolean isAdmin) {
-    this.isAdmin = isAdmin;
+  public void setLevel(String level) {
+    this.level = level;
   }
-  public boolean isPersonal() {
-    return isPersonal;
-  }
-  public void setPersonal(boolean isPersonal) {
-    this.isPersonal = isPersonal;
-  }
-  public boolean isOrg() {
-    return isOrg;
-  }
-  public void setOrg(boolean isOrg) {
-    this.isOrg = isOrg;
-  }
-  public int getAuthNum() {
-    return authNum;
-  }
-  public void setAuthNum(int authNum) {
-    this.authNum = authNum;
-  }
-
 
 
 
