@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.share.ftp.domain.admin.ChallengeDTO;
-import com.share.ftp.domain.admin.CommentDTO;
 import com.share.ftp.domain.admin.NoticeDTO;
 import com.share.ftp.domain.admin.QuestionDTO;
 import com.share.ftp.domain.join.JoinDTO;
@@ -197,7 +196,7 @@ public class App {
   List<ApproveOrgDTO> approveOrgDTOList = new ArrayList<>();
 
   //댓글 도메인
-  List<CommentDTO> commentDTOList = new ArrayList<>();
+  //  List<CommentDTO> commentDTOList = new ArrayList<>();
 
   // 메뉴 객체 컨트롤(Map)
   HashMap<String,Command> commands = new HashMap<>();
@@ -1042,7 +1041,7 @@ public class App {
     MenuGroup supportMenu = new MenuGroup("고객센터");
     mainMenuGroup.add(supportMenu);
 
-    supportMenu.add(createAdminNoticeMenu());      // 공지사항
+    supportMenu.add(createNoticeMenu());      // 공지사항
     supportMenu.add(createAskMenu());         // 문의하기
 
     // 마이페이지
@@ -1171,6 +1170,19 @@ public class App {
     return doDonationMenu;
   }
 
+  private Menu createNoticeMenu() {
+    MenuGroup noticeMenu = new MenuGroup("공지사항");
+
+    noticeMenu.add(new MenuItem("공지사항 등록",ACCESS_ADMIN,"/adminNotice/add"));
+    noticeMenu.add(new MenuItem("공지사항 목록","/adminNotice/list"));
+    noticeMenu.add(new MenuItem("공지사항 상세보기","/adminNotice/detail"));
+    noticeMenu.add(new MenuItem("공지사항 변경",ACCESS_ADMIN,"/adminNotice/update"));
+    noticeMenu.add(new MenuItem("공지사항 삭제",ACCESS_ADMIN,"/adminNotice/delete"));
+    noticeMenu.add(new MenuItem("공지사항 검색","/adminNotice/search"));
+
+    return noticeMenu;
+  }
+
   private Menu createAskMenu() {
     MenuGroup ask = new MenuGroup("문의하기");
     ask.add(new MenuItem("등록", ACCESS_MEMBER,"/question/add"));
@@ -1289,7 +1301,7 @@ public class App {
   }
 
   private Menu createAdminNoticeMenu() {
-    MenuGroup adminNoticeMenu = new MenuGroup("공지사항");
+    MenuGroup adminNoticeMenu = new MenuGroup("공지사항 관리");
 
     adminNoticeMenu.add(new MenuItem("공지사항 등록",ACCESS_ADMIN,"/adminNotice/add"));
     adminNoticeMenu.add(new MenuItem("공지사항 목록","/adminNotice/list"));
