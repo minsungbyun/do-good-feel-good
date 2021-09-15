@@ -14,9 +14,10 @@ public class JoinListHandler extends AbstractJoinHandler {
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("[회원 목록]");
+    System.out.println("[ 회원 목록 ]");
     for (JoinDTO joinDTO : joinDTOList) {
-      System.out.printf("%s, %s, %s, %s, %s\n", 
+      System.out.printf("%d, %s, %s, %s, %s, %s, %s\n", 
+          joinDTO.getNo(), 
           joinDTO.getId(), 
           joinDTO.getPassword(), 
           joinDTO.getTel(), 

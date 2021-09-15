@@ -1,14 +1,16 @@
 package com.share.ftp.handler.personal.support;
 
 import java.util.List;
+import com.share.ftp.domain.admin.CommentDTO;
 import com.share.ftp.domain.personal.QuestionListDTO;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
 public class QuestionDetailHandler extends AbstractQuestionHandler {
 
-  public QuestionDetailHandler(List<QuestionListDTO> myQuestionListDTOList) {
-    super (myQuestionListDTOList);
+  public QuestionDetailHandler(List<QuestionListDTO> myQuestionListDTOList,
+      List<CommentDTO> commentDTOList) {
+    super (myQuestionListDTOList, commentDTOList);
   }
 
   public void execute() {

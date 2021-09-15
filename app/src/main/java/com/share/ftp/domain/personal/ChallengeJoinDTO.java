@@ -1,7 +1,6 @@
 package com.share.ftp.domain.personal;
 
 import java.sql.Date;
-import java.util.List;
 
 import com.share.ftp.domain.join.JoinDTO;
 
@@ -9,13 +8,11 @@ public class ChallengeJoinDTO {
   private String userId;
   private JoinDTO joiner;
   public Date registeredDate;
-  private List<JoinDTO> members;
 
   @Override
   public String toString() {
-    return "MyChallengeJoinDTO [userId=" + userId + ", joiner=" + joiner + ", registeredDate=" + registeredDate
-            + ", members=" + members + "]";
-  }
+    return "ChallengeJoinDTO [userId=" + userId + ", joiner=" + joiner + ", registeredDate=" + registeredDate + "]";
+}
 
 
   public String getUserId() {
@@ -35,11 +32,5 @@ public class ChallengeJoinDTO {
   }
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
-  }
-  public List<JoinDTO> getMembers() {
-    return members;
-  }
-  public void setMembers(List<JoinDTO> members) {
-    this.members = members;
   }
 }

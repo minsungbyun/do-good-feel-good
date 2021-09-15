@@ -19,7 +19,7 @@ public class AdminNoticeUpdateHandler extends AbstractAdminNoticeHandler {
     NoticeDTO noticeDTO = findByNo(boardNo);
 
     if (noticeDTO == null) {
-      System.out.println("해당 번호의 공지사항이 없습니다.");
+      System.out.println("해당 번호의 게시물이 없습니다.");
       return;
     }
 
@@ -29,7 +29,7 @@ public class AdminNoticeUpdateHandler extends AbstractAdminNoticeHandler {
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("공지사항 변경을 취소하였습니다.");
+      System.out.println("게시물 변경을 취소하였습니다.");
       return;
     }
 
@@ -37,7 +37,7 @@ public class AdminNoticeUpdateHandler extends AbstractAdminNoticeHandler {
     noticeDTO.setContent(content);
     noticeDTO.setFileUpload(fileUpload);
 
-    System.out.println("공지사항을 변경하였습니다.");
+    System.out.println("게시물을 변경하였습니다.");
   }
 
 

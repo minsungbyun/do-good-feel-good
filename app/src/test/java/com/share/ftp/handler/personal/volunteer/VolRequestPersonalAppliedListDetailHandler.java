@@ -77,6 +77,7 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
     }
 
 
+<<<<<<< HEAD:app/src/main/java/com/share/ftp/handler/personal/volunteer/VolRequestPersonalAppliedListDetailHandler.java
     // 봉사인원 유효성 검사
     //    if (personalRequestApplyDTO.getTotalJoinCount() == personalRequestApplyDTO.getJoinNum()) {
     //      System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
@@ -94,6 +95,89 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
     //    personalRequestApplyDTO.setMembers(members); // 참여 멤버 등록
 
 
+=======
+    //    // 봉사인원 유효성 검사
+    //    if (personalRequestApplyDTO.getTotalJoinCount() == personalRequestApplyDTO.getJoinNum()) {
+    //      System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
+    //      return;
+
+    if (no == 1) {
+      if (m1.contains(AuthLoginHandler.getLoginUser())) {
+        System.out.println("이미 봉사참여를 하셨습니다!");
+        return; 
+      } 
+
+      if (personalRequestApplyDTO.getTotalJoinCount1() == personalRequestApplyDTO.getJoinNum()) {
+        System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
+        return;
+      }
+
+      m1.add(AuthLoginHandler.getLoginUser());
+
+
+      if (m1.contains(personalRequestApplyDTO.getOwner())) {
+        m1.remove(personalRequestApplyDTO.getOwner());
+      }
+
+      personalRequestApplyDTO.setMembers1(m1);
+
+      int joinCounts = personalRequestApplyDTO.getTotalJoinCount1(); 
+      joinCounts += 1;
+
+      personalRequestApplyDTO.setTotalJoinCount1(joinCounts);
+
+    } else if (no == 2 ) {
+
+      if (m2.contains(AuthLoginHandler.getLoginUser())) {
+        System.out.println("이미 봉사참여를 하셨습니다!");
+        return; 
+      } 
+
+      if (personalRequestApplyDTO.getTotalJoinCount2() == personalRequestApplyDTO.getJoinNum()) {
+        System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
+        return;
+      }
+
+      m2.add(AuthLoginHandler.getLoginUser());
+
+      if (m2.contains(personalRequestApplyDTO.getOwner())) {
+        m2.remove(personalRequestApplyDTO.getOwner());
+      }
+
+      personalRequestApplyDTO.setMembers2(m2);
+
+
+      int joinCount2 = personalRequestApplyDTO.getTotalJoinCount2(); 
+      joinCount2 += 1;
+
+      personalRequestApplyDTO.setTotalJoinCount2(joinCount2);
+
+    } else if (no == 3) {
+
+
+      if (m3.contains(AuthLoginHandler.getLoginUser())) {
+        System.out.println("이미 봉사참여를 하셨습니다!");
+        return; 
+      } 
+
+      if (personalRequestApplyDTO.getTotalJoinCount3() == personalRequestApplyDTO.getJoinNum()) {
+        System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
+        return;
+      }
+      m3.add(AuthLoginHandler.getLoginUser());
+
+      if (m3.contains(personalRequestApplyDTO.getOwner())) {
+        m3.remove(personalRequestApplyDTO.getOwner());
+      }
+
+      personalRequestApplyDTO.setMembers3(m3);
+      int joinCount3 = personalRequestApplyDTO.getTotalJoinCount3(); 
+      joinCount3 += 1;
+
+      personalRequestApplyDTO.setTotalJoinCount3(joinCount3);
+
+    }
+>>>>>>> b7670332bfdfca336ca97027b5dd1a82d3a90832:app/src/test/java/com/share/ftp/handler/personal/volunteer/VolRequestPersonalAppliedListDetailHandler.java
 
     //    //    findByName(no);
     //    if (members.contains(AuthLoginHandler.getLoginUser())) {

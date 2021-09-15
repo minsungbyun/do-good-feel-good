@@ -19,7 +19,7 @@ public class AdminNoticeDetailHandler extends AbstractAdminNoticeHandler {
     NoticeDTO noticeDTO = findByNo(boardNo);
 
     if (noticeDTO == null) {
-      System.out.println("해당 번호의 회원이 없습니다.");
+      System.out.println("해당 번호의 게시물이 없습니다.");
       return;
     }
 

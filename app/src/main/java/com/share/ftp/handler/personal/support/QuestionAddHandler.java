@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.support;
 
 import java.sql.Date;
 import java.util.List;
+import com.share.ftp.domain.admin.CommentDTO;
 import com.share.ftp.domain.personal.QuestionListDTO;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
@@ -10,8 +11,9 @@ public class QuestionAddHandler extends AbstractQuestionHandler {
 
   int boardNo;
 
-  public QuestionAddHandler(List<QuestionListDTO> myQuestionListDTOList) {
-    super (myQuestionListDTOList);
+  public QuestionAddHandler(List<QuestionListDTO> myQuestionListDTOList,
+      List<CommentDTO> commentDTOList) {
+    super (myQuestionListDTOList, commentDTOList);
   }
 
   public void execute() {
