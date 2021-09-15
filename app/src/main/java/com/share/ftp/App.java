@@ -144,22 +144,10 @@ public class App {
   // 함께해요 도메인(값)
   List<VolListDTO> volListDTOList = new ArrayList<>();
 
-  // 개인, 기관 공통 도메인
-  //  List<GeneralRequestDTO> generalRequestDTOList = new ArrayList<>();
-  //  List<GeneralRequestDTO> personalRequestApplyDTOList = new ArrayList<>();
-  //  List<GeneralRequestDTO> personalRequestRejectDTOList = new ArrayList<>();
-  //  List<GeneralRequestDTO> orgRequestDTOApplyList = new ArrayList<>();
-  //  List<GeneralRequestDTO> orgRequestDTORejectList = new ArrayList<>();
-
-  // 개인 봉사신청 관련 도메인
+  // 개인, 기관 봉사 도메인
   List<GeneralRequestDTO> generalRequestDTOList = new ArrayList<>();
   List<GeneralRequestDTO> generalRequestApplyDTOList = new ArrayList<>();
   List<GeneralRequestDTO> generalRequestRejectDTOList = new ArrayList<>();
-
-  // 기관 봉사신청 관련 도메인
-  //  List<OrgRequestDTO> orgRequestDTOList = new ArrayList<>();
-  //  List<OrgRequestDTO> orgRequestApplyDTOList = new ArrayList<>();
-  //  List<OrgRequestDTO> orgRequestRejectDTOList = new ArrayList<>();
 
   // 소통해요 도메인(값)
   List<CommBoardDTO> commBoardDTOList = new ArrayList<>();
@@ -282,20 +270,20 @@ public class App {
     commands.put("/join/searchEmailId", new JoinSearchEmailIdHandler(joinDTOList)); // 이메일로 아이디 찾기
     commands.put("/join/searchPassword", new JoinSearchPasswordHandler(joinDTOList)); // 비밀번호 찾기
 
-    //함께해요 (개인) + 마이페이지
-    commands.put("/volRequestPersonal/apply", new VolGeneralRequestApplyHandler(generalRequestDTOList,joinDTOList));
-    commands.put("/volRequestPersonal/applyList", new VolGeneralRequestApplyListHandler(generalRequestDTOList));
-    commands.put("/volRequestPersonal/applyCompleteList", new VolGeneralRequestApplyCompleteHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
-    commands.put("/volRequestPersonal/acceptApply", new VolGeneralRequestAcceptHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
-    commands.put("/volRequestPersonal/rejectApply", new VolGeneralRequestRejectHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
-    commands.put("/volRequestPersonal/appliedList", new VolGeneralRequestAppliedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
-    commands.put("/volRequestPersonal/rejectedList", new VolGeneralRequestRejectedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
-    commands.put("/volRequestPersonal/delete", new VolGeneralRequestDeleteHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
-    commands.put("/volRequestPersonal/bookmark", new VolGeneralRequestBookmarkHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
-    commands.put("/volRequest/totalApprovedList", new VolGeneralTotalApprovedListHandler(volGeneralRequestAppliedListHandler));
-    commands.put("/volDoJoinPersonal/add", new VolGeneralDoJoinHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
-    commands.put("/volDoJoin/list", new VolGeneralDoJoinListHandler(generalRequestApplyDTOList, volRequestPersonalAppliedListDetailHandler));
-    commands.put("/volRequest/delete", new VolGeneralDoJoinDeleteHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+
+    commands.put("/volGeneralRequest/apply", new VolGeneralRequestApplyHandler(generalRequestDTOList,joinDTOList));
+    commands.put("/volGeneralRequest/applyList", new VolGeneralRequestApplyListHandler(generalRequestDTOList));
+    commands.put("/volGeneralRequest/applyCompleteList", new VolGeneralRequestApplyCompleteHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+    commands.put("/volGeneralRequest/acceptApply", new VolGeneralRequestAcceptHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+    commands.put("/volGeneralRequest/rejectApply", new VolGeneralRequestRejectHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+    commands.put("/volGeneralRequest/appliedList", new VolGeneralRequestAppliedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+    commands.put("/volGeneralRequest/rejectedList", new VolGeneralRequestRejectedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+    commands.put("/volGeneralRequest/delete", new VolGeneralRequestDeleteHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+    commands.put("/volGeneralRequest/bookmark", new VolGeneralRequestBookmarkHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+    commands.put("/volGeneralRequest/totalApprovedList", new VolGeneralTotalApprovedListHandler(volGeneralRequestAppliedListHandler));
+    commands.put("/volGeneralDoJoin/add", new VolGeneralDoJoinHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+    commands.put("/volGeneralDoJoin/list", new VolGeneralDoJoinListHandler(generalRequestApplyDTOList, volRequestPersonalAppliedListDetailHandler));
+    commands.put("/volGeneralDoJoin/delete", new VolGeneralDoJoinDeleteHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
 
     //함께해요 (기관) + 마이페이지
     //    commands.put("/volRequestOrg/apply", new VolRequestOrgApplyHandler(orgRequestDTOList,joinDTOList));
@@ -386,9 +374,9 @@ public class App {
     commands.put("/myPage/info", new MyPageInfoHandler(joinDTOList)); // 내정보 수정
     commands.put("/myPage/delete", new MyPageDelete(joinDTOList)); // 회원탈퇴
 
-    commands.put("/myPersonal/applied", new MyAppliedVolHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
-    commands.put("/myPersonal/appliedDetail", new MyAppliedVolDetailHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
-    commands.put("/myPersonal/rejected", new MyRejectedVolHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+    commands.put("/myVol/applied", new MyAppliedVolHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+    commands.put("/myVol/appliedDetail", new MyAppliedVolDetailHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+    commands.put("/myVol/rejected", new MyRejectedVolHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
 
 
     commands.put("/myBoard/list", new MyBoardListHandler()); // 나의게시글 목록
@@ -444,6 +432,13 @@ public class App {
 
     loadJoins();
     //
+
+
+    //    loadGeneralRequest();
+    //    loadGeneralRequestApply();
+    //    loadGeneralRequestReject();
+    //
+
     //    loadPersonalRequest();
     //    loadPersonalRequestApply();
     //    loadPersonalRequestReject();
@@ -470,9 +465,13 @@ public class App {
 
     saveJoins();
 
-    savePersonalRequest();
-    savePersonalRequestApply();
-    savePersonalRequestReject();
+    saveGeneralRequest();
+    saveGeneralRequestApply();
+    saveGeneralRequestReject();
+
+    //    savePersonalRequest();
+    //    savePersonalRequestApply();
+    //    savePersonalRequestReject();
 
     //    saveOrgRequest();
     //    saveOrgRequestApply();
@@ -500,11 +499,14 @@ public class App {
   }
 
   @SuppressWarnings("unchecked")
-  private void loadPersonalRequest() {
+  private void loadGeneralRequest() {
     try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("personalRequest.data"))) {
+        new FileInputStream("generalRequest.data"))) {
 
       generalRequestDTOList.addAll((List<GeneralRequestDTO>) in.readObject());
+
+
+
 
       System.out.println("봉사 신청서 로딩 완료!");
 
@@ -515,9 +517,9 @@ public class App {
   }
 
 
-  private void savePersonalRequest() {
+  private void saveGeneralRequest() {
     try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("personalRequest.data"))) {
+        new FileOutputStream("generalRequest.data"))) {
 
 
 
@@ -533,9 +535,9 @@ public class App {
   }
 
   @SuppressWarnings("unchecked")
-  private void loadPersonalRequestApply() {
+  private void loadGeneralRequestApply() {
     try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("personalRequestApply.data"))) {
+        new FileInputStream("generalRequestApply.data"))) {
 
       generalRequestApplyDTOList.addAll((List<GeneralRequestDTO>) in.readObject());
 
@@ -549,9 +551,9 @@ public class App {
 
   }
 
-  private void savePersonalRequestApply() {
+  private void saveGeneralRequestApply() {
     try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("personalRequestApply.data"))) {
+        new FileOutputStream("generalRequestApply.data"))) {
 
       out.writeObject(generalRequestApplyDTOList);
 
@@ -565,9 +567,9 @@ public class App {
   }
 
   @SuppressWarnings("unchecked")
-  private void loadPersonalRequestReject() {
+  private void loadGeneralRequestReject() {
     try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("personalRequestReject.data"))) {
+        new FileInputStream("generalRequestReject.data"))) {
 
       generalRequestRejectDTOList.addAll((List<GeneralRequestDTO>) in.readObject());
 
@@ -580,9 +582,9 @@ public class App {
 
   }
 
-  private void savePersonalRequestReject() {
+  private void saveGeneralRequestReject() {
     try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("personalRequestReject.data"))) {
+        new FileOutputStream("generalRequestReject.data"))) {
 
       out.writeObject(generalRequestRejectDTOList);
 
@@ -815,21 +817,22 @@ public class App {
             new FileInputStream("join.data"))) {
 
       joinDTOList.addAll((List<JoinDTO>) in.readObject());
+      //
 
-      for (int i = 0; i < joinDTOList.size(); i++) {
-
-        //        if (joinDTOList.size() > 0) {
-        //          joinDTOList.get(i).setNo(i + 1);
-        //
-        //        }
-        //
-
-        System.out.println("멤버별 고유번호 = " +  joinDTOList.get(i).getNo());
-
-
-      }
-      System.out.println("멤버리스트의 사이즈 크기 = " +  joinDTOList.size());
-
+      //
+      //      for (int i = 0; i < joinDTOList.size(); i++) {
+      //
+      //        if (joinDTOList.size() > 0) {
+      //          joinDTOList.get(i).setNo(i + 1);
+      //
+      //        }
+      //
+      //
+      //        System.out.println("멤버별 고유번호 = " +  joinDTOList.get(i).getNo());
+      //
+      //      }
+      //      System.out.println("멤버리스트의 사이즈 크기 = " +  joinDTOList.size());
+      //      //
 
 
       System.out.println("회원가입 로딩 완료!");
@@ -1002,11 +1005,11 @@ public class App {
     mainMenuGroup.add(doVolMenu);
 
 
-    doVolMenu.add(new MenuItem("개인봉사신청양식(개인주최자)", ACCESS_PERSONAL, "/volRequestPersonal/apply"));
-    doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volRequestOrg/apply")); 
-    doVolMenu.add(new MenuItem("전체인증봉사리스트","/volRequest/totalApprovedList")); 
+    doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volGeneralRequest/apply"));
+    doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volGeneralRequest/apply")); 
+    doVolMenu.add(new MenuItem("전체인증봉사리스트","/volGeneralRequest/totalApprovedList")); 
     doVolMenu.add(createVolJoinMenu()); // 봉사 참여하기
-    doVolMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
+    doVolMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volGeneralRequest/bookmark")); // 구현예정
 
     // 소통해요
     MenuGroup CommunityMenu = new MenuGroup("소통해요");
@@ -1103,10 +1106,10 @@ public class App {
   private Menu createVolJoinMenu() {
     MenuGroup volJoinMenu = new MenuGroup("봉사참여하기");
 
-    volJoinMenu.add(new MenuItem("개인봉사참여","/volDoJoinPersonal/add")); 
-    volJoinMenu.add(new MenuItem("기관봉사참여","/volRequest/totalApprovedList")); 
+    volJoinMenu.add(new MenuItem("개인봉사참여",ACCESS_PERSONAL,"/volDoJoin/add")); 
+    volJoinMenu.add(new MenuItem("기관봉사참여",ACCESS_ORG,"/volDoJoin/add")); 
     volJoinMenu.add(new MenuItem("참여자정보보기","/volDoJoin/list")); 
-    volJoinMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
+    volJoinMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volGeneralRequest/bookmark")); // 구현예정
     volJoinMenu.add(createVolReviewMenu());
     volJoinMenu.add(createVolQuestionMenu()); 
 
@@ -1267,15 +1270,15 @@ public class App {
   private Menu createMyVolunteerMenu() {
     MenuGroup myVolunteer = new MenuGroup("나의 봉사");
 
-    myVolunteer.add(new MenuItem("나의 봉사신청서 확인",ACCESS_PERSONAL,"/myPersonal/appliedDetail")); 
-    myVolunteer.add(new MenuItem("나의 봉사신청서 확인",ACCESS_ORG,"/volRequestOrg/applyCompleteList")); // 보완필요
-    myVolunteer.add(new MenuItem("승인된 봉사내역",ACCESS_PERSONAL,"/myPersonal/applied"));    
-    myVolunteer.add(new MenuItem("승인된 봉사내역",ACCESS_ORG,"/volRequestOrg/appliedList"));    
-    myVolunteer.add(new MenuItem("반려된 봉사내역",ACCESS_PERSONAL,"/myPersonal/rejected"));    
-    myVolunteer.add(new MenuItem("반려된 봉사내역",ACCESS_ORG,"/volRequestOrg/rejectedList"));    
-    myVolunteer.add(new MenuItem("개인봉사 삭제",ACCESS_PERSONAL,"/volRequestPersonal/delete"));    
-    myVolunteer.add(new MenuItem("참여한봉사 취소하기",ACCESS_MEMBER,"/volRequest/delete"));    
-    myVolunteer.add(new MenuItem("찜한봉사",ACCESS_MEMBER,"/volRequestPersonal/bookmark")); // 구현예정
+    myVolunteer.add(new MenuItem("나의 봉사신청서 확인",ACCESS_PERSONAL,"/myVol/appliedDetail")); 
+    myVolunteer.add(new MenuItem("나의 봉사신청서 확인",ACCESS_ORG,"/myVol/appliedDetail")); // 보완필요
+    myVolunteer.add(new MenuItem("승인된 봉사내역",ACCESS_PERSONAL,"/myVol/applied"));    
+    myVolunteer.add(new MenuItem("승인된 봉사내역",ACCESS_ORG,"/myVol/applied"));    
+    myVolunteer.add(new MenuItem("반려된 봉사내역",ACCESS_PERSONAL,"/myVol/rejected"));    
+    myVolunteer.add(new MenuItem("반려된 봉사내역",ACCESS_ORG,"/myVol/rejected"));    
+    myVolunteer.add(new MenuItem("개인봉사 삭제",ACCESS_PERSONAL,"/volGeneralRequest/delete"));    
+    myVolunteer.add(new MenuItem("참여한봉사 취소하기",ACCESS_MEMBER,"/volGeneralDoJoin/delete"));    
+    myVolunteer.add(new MenuItem("찜한봉사",ACCESS_MEMBER,"/volGeneralRequest/bookmark")); // 구현예정
 
     return myVolunteer;
   }
@@ -1347,13 +1350,13 @@ public class App {
   private Menu createAdminVolMenu() {
     MenuGroup adminVolMenu = new MenuGroup("봉사활동 관리", ACCESS_ADMIN);
 
-    adminVolMenu.add(new MenuItem("개인봉사신청내역","/volRequestPersonal/applyList"));
-    adminVolMenu.add(new MenuItem("기관봉사신청내역","/volRequestPersonal/bookmark")); // 구현예정
-    adminVolMenu.add(new MenuItem("개인봉사승인하기","/volRequestPersonal/acceptApply"));
-    adminVolMenu.add(new MenuItem("기관봉사승인하기","/volRequestOrg/acceptApply")); // 구현예정
-    adminVolMenu.add(new MenuItem("개인봉사반려하기","/volRequestPersonal/rejectApply"));
-    adminVolMenu.add(new MenuItem("기관봉사반려하기","/volRequestPersonal/bookmark")); // 구현예정
-    adminVolMenu.add(new MenuItem("개인봉사삭제하기","/volRequestPersonal/delete"));
+    adminVolMenu.add(new MenuItem("개인봉사신청내역","/volGeneralRequest/applyList"));
+    adminVolMenu.add(new MenuItem("기관봉사신청내역","/volGeneralRequest/applyList")); // 구현예정
+    adminVolMenu.add(new MenuItem("개인봉사승인하기","/volGeneralRequest/acceptApply"));
+    adminVolMenu.add(new MenuItem("기관봉사승인하기","/volGeneralRequest/acceptApply")); // 구현예정
+    adminVolMenu.add(new MenuItem("개인봉사반려하기","/volGeneralRequest/rejectApply"));
+    adminVolMenu.add(new MenuItem("기관봉사반려하기","/volGeneralRequest/rejectApply")); // 구현예정
+    adminVolMenu.add(new MenuItem("개인봉사삭제하기","/volGeneralRequest/delete"));
 
     return adminVolMenu;
   }

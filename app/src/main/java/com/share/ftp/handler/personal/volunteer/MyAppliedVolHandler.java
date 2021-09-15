@@ -20,7 +20,7 @@ public class MyAppliedVolHandler extends AbstractVolGeneralHandler { // 개인 �
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("[ 개인봉사승인 목록 ]");
+    System.out.println("[ 봉사승인 목록 ]");
 
     JoinDTO loginUser = AuthLoginHandler.getLoginUser();
 
@@ -32,9 +32,10 @@ public class MyAppliedVolHandler extends AbstractVolGeneralHandler { // 개인 �
 
     for (GeneralRequestDTO generalRequestApplyDTO : generalRequestApplyDTOList) {
       if (generalRequestApplyDTO.getOwner().getName().equals(loginUser.getName())) {
-        System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
+        System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
 
             generalRequestApplyDTO.getVolNo(),      
+            generalRequestApplyDTO.getMemberType(),      
             generalRequestApplyDTO.getVolTitle(),     
             generalRequestApplyDTO.getOwner().getName(), 
             generalRequestApplyDTO.getVolType(), 

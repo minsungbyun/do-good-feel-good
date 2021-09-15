@@ -1,10 +1,17 @@
 package com.share.ftp.handler.join;
 
+import static com.share.ftp.handler.personal.volunteer.General.member.ORG;
+import static com.share.ftp.handler.personal.volunteer.General.member.PERSONAL;
+import static com.share.menu.Menu.ACCESS_ADMIN;
+import static com.share.menu.Menu.ACCESS_LOGOUT;
+import static com.share.menu.Menu.ACCESS_MEMBER;
+import static com.share.menu.Menu.ACCESS_MEMBER_ADMIN;
+import static com.share.menu.Menu.ACCESS_ORG;
+import static com.share.menu.Menu.ACCESS_PERSONAL;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
-import com.share.menu.Menu;
 import com.share.util.Prompt;
 
 public class AuthLoginHandler implements Command {
@@ -13,7 +20,7 @@ public class AuthLoginHandler implements Command {
 
   public static JoinDTO loginUser;
 
-  static int userAccessLevel = Menu.ACCESS_LOGOUT;
+  static int userAccessLevel = ACCESS_LOGOUT;
 
   public static JoinDTO getLoginUser() {
     return loginUser;
@@ -45,10 +52,9 @@ public class AuthLoginHandler implements Command {
       admin.setTel("010-1111-1111");
       admin.setAddress("no");
       admin.setRegisterDate(new Date(System.currentTimeMillis()));
-      admin.setAdmin(true);
 
       loginUser = admin;
-      userAccessLevel = Menu.ACCESS_ADMIN | Menu.ACCESS_MEMBER_ADMIN;
+      userAccessLevel = ACCESS_ADMIN | ACCESS_MEMBER_ADMIN;
       return;
     } 
 
@@ -59,13 +65,13 @@ public class AuthLoginHandler implements Command {
     if (joinDTO == null) {
       System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");
       return;
-    } else if (joinDTO.isPersonal() == true) {
-      userAccessLevel = Menu.ACCESS_MEMBER | Menu.ACCESS_PERSONAL | Menu.ACCESS_MEMBER_ADMIN;
+    } else if (joinDTO.getType() == PERSONAL) {
+      userAccessLevel = ACCESS_MEMBER | ACCESS_PERSONAL | ACCESS_MEMBER_ADMIN;
 
       System.out.printf("[  %s님 환영합니다!  ]\n", joinDTO.getName());
 
-    } else if (joinDTO.isOrg() == true) {
-      userAccessLevel = Menu.ACCESS_MEMBER | Menu.ACCESS_ORG | Menu.ACCESS_MEMBER_ADMIN;
+    } else if (joinDTO.getType() == ORG) {
+      userAccessLevel = ACCESS_MEMBER | ACCESS_ORG | ACCESS_MEMBER_ADMIN;
 
       System.out.printf("[  %s님 환영합니다!  ]\n", joinDTO.getName());
     }

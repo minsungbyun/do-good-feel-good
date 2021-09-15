@@ -15,7 +15,7 @@ public class VolGeneralRequestApplyListHandler extends AbstractVolGeneralHandler
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("[  개인봉사신청 목록  ]");
+    System.out.println("[  봉사신청 목록  ]");
 
     if (generalRequestDTOList.isEmpty()) {
       System.out.println("[  현재 등록된 봉사목록이 없습니다. ]");
@@ -24,6 +24,7 @@ public class VolGeneralRequestApplyListHandler extends AbstractVolGeneralHandler
 
     for (GeneralRequestDTO generalRequestDTO : generalRequestDTOList) {
       System.out.printf("번호: %d\n"
+          + "봉사유형: %s\n"
           + "봉사제목: %s\n"
           + "주최자: %s\n"
           + "봉사분류: %s\n"
@@ -40,9 +41,9 @@ public class VolGeneralRequestApplyListHandler extends AbstractVolGeneralHandler
           + "승인여부: %s \n\n", 
 
           generalRequestDTO.getVolNo(), 
+          generalRequestDTO.getMemberType(), 
           generalRequestDTO.getVolTitle(), 
           generalRequestDTO.getOwner().getName(), 
-          //          personalRequestDTO.getName(), 
           generalRequestDTO.getVolType(), 
           generalRequestDTO.getVolTel(),
           generalRequestDTO.getVolEmail(),
@@ -54,7 +55,6 @@ public class VolGeneralRequestApplyListHandler extends AbstractVolGeneralHandler
           generalRequestDTO.getVolLimitNum(),
           generalRequestDTO.getVolContent(),
           generalRequestDTO.getVolFileUpload(),
-          //          personalRequestDTO.isChecked(),
           generalRequestDTO.getIsSigned()
           );
     }

@@ -1,5 +1,7 @@
 package com.share.ftp.handler.personal.volunteer;
 
+import static com.share.ftp.handler.personal.volunteer.General.member.ORG;
+import static com.share.ftp.handler.personal.volunteer.General.member.PERSONAL;
 import java.util.List;
 import com.share.ftp.domain.personal.GeneralRequestDTO;
 
@@ -18,7 +20,7 @@ public class VolGeneralRequestAppliedListHandler extends AbstractVolGeneralHandl
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("[ 개인봉사승인 목록 ]");
+    System.out.println("[ 봉사승인 목록 ]");
 
 
     if (generalRequestApplyDTOList.isEmpty()) {
@@ -27,29 +29,67 @@ public class VolGeneralRequestAppliedListHandler extends AbstractVolGeneralHandl
     }
 
 
-
-
     for (GeneralRequestDTO generalRequestApplyDTO : generalRequestApplyDTOList) {
-      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
 
-          generalRequestApplyDTO.getVolNo(),      
-          generalRequestApplyDTO.getVolTitle(),     
-          generalRequestApplyDTO.getOwner().getName(), 
-          generalRequestApplyDTO.getVolType(), 
-          generalRequestApplyDTO.getVolTel(),
-          generalRequestApplyDTO.getVolEmail(),
-          generalRequestApplyDTO.getVolStartDate(),
-          generalRequestApplyDTO.getVolEndDate(),
-          generalRequestApplyDTO.getVolStartTime(),
-          generalRequestApplyDTO.getVolEndTime(),
-          //          personalRequestApplyDTO.getVolList(),
-          generalRequestApplyDTO.getVolLimitNum(),
-          generalRequestApplyDTO.getVolContent(),
-          generalRequestApplyDTO.getVolFileUpload(),
-          //          personalRequestApplyDTO.isChecked(),
-          generalRequestApplyDTO.getIsSigned()
-          //          this.personalRequestRejectDTO[i].getIsSigned()
-          );
+
+      if (generalRequestApplyDTO.getMemberType() == PERSONAL) {
+
+        System.out.println(" [ 개인 봉사활동 ] ");
+
+        System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
+
+            generalRequestApplyDTO.getVolNo(),      
+            generalRequestApplyDTO.getVolTitle(),     
+            generalRequestApplyDTO.getOwner().getName(), 
+            generalRequestApplyDTO.getVolType(), 
+            generalRequestApplyDTO.getVolTel(),
+            generalRequestApplyDTO.getVolEmail(),
+            generalRequestApplyDTO.getVolStartDate(),
+            generalRequestApplyDTO.getVolEndDate(),
+            generalRequestApplyDTO.getVolStartTime(),
+            generalRequestApplyDTO.getVolEndTime(),
+            //          personalRequestApplyDTO.getVolList(),
+            generalRequestApplyDTO.getVolLimitNum(),
+            generalRequestApplyDTO.getVolContent(),
+            generalRequestApplyDTO.getVolFileUpload(),
+            //          personalRequestApplyDTO.isChecked(),
+            generalRequestApplyDTO.getIsSigned()
+            //          this.personalRequestRejectDTO[i].getIsSigned()
+            );
+      } else {
+        System.out.println("현재 등록된 봉사활동이 없습니다.");
+        return;
+      } 
+
+      if (generalRequestApplyDTO.getMemberType() == ORG) {
+
+        System.out.println(" [ 기관 봉사활동 ] ");
+
+        System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
+
+            generalRequestApplyDTO.getVolNo(),      
+            generalRequestApplyDTO.getVolTitle(),     
+            generalRequestApplyDTO.getOwner().getName(), 
+            generalRequestApplyDTO.getVolType(), 
+            generalRequestApplyDTO.getVolTel(),
+            generalRequestApplyDTO.getVolEmail(),
+            generalRequestApplyDTO.getVolStartDate(),
+            generalRequestApplyDTO.getVolEndDate(),
+            generalRequestApplyDTO.getVolStartTime(),
+            generalRequestApplyDTO.getVolEndTime(),
+            //          personalRequestApplyDTO.getVolList(),
+            generalRequestApplyDTO.getVolLimitNum(),
+            generalRequestApplyDTO.getVolContent(),
+            generalRequestApplyDTO.getVolFileUpload(),
+            //          personalRequestApplyDTO.isChecked(),
+            generalRequestApplyDTO.getIsSigned()
+            //          this.personalRequestRejectDTO[i].getIsSigned()
+            );
+
+      } else {
+        System.out.println("현재 등록된 봉사활동이 없습니다.");
+        return;
+      }
     }
   }
 

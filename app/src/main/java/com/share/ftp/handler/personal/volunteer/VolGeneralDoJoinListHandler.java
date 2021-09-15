@@ -8,14 +8,14 @@ import com.share.util.Prompt;
 public class VolGeneralDoJoinListHandler implements Command {
 
 
-  List<GeneralRequestDTO> personalRequestApplyDTOList;
-  VolGeneralDoJoinHandler volRequestPersonalAppliedListDetailHandler;
+  List<GeneralRequestDTO> generalRequestApplyDTOList;
+  VolGeneralDoJoinHandler VolgeneralDoJoinHandler;
 
-  public VolGeneralDoJoinListHandler(List<GeneralRequestDTO> personalRequestApplyDTOList,
-      VolGeneralDoJoinHandler volRequestPersonalAppliedListDetailHandler) {
+  public VolGeneralDoJoinListHandler(List<GeneralRequestDTO> generalRequestApplyDTOList,
+      VolGeneralDoJoinHandler VolgeneralDoJoinHandler) {
 
-    this.personalRequestApplyDTOList = personalRequestApplyDTOList;
-    this.volRequestPersonalAppliedListDetailHandler = volRequestPersonalAppliedListDetailHandler;
+    this.generalRequestApplyDTOList = generalRequestApplyDTOList;
+    this.VolgeneralDoJoinHandler = VolgeneralDoJoinHandler;
   }
 
   @Override
@@ -53,7 +53,7 @@ public class VolGeneralDoJoinListHandler implements Command {
   }
 
   private GeneralRequestDTO findByVol(int no) {
-    for (GeneralRequestDTO volJoinList : personalRequestApplyDTOList) {
+    for (GeneralRequestDTO volJoinList : generalRequestApplyDTOList) {
       if (volJoinList.getVolNo() == no) {
         return volJoinList;
       }
