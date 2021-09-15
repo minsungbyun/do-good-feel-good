@@ -8,7 +8,6 @@ import com.share.util.Prompt;
 
 public class DonationBoardApplyHandler extends AbstractDonationBoardHandler {
 
-  int no;
   List<JoinDTO> joinDTOList;
 
   public DonationBoardApplyHandler(
@@ -101,7 +100,7 @@ public class DonationBoardApplyHandler extends AbstractDonationBoardHandler {
         donationBoardDTO.setOrg(true);
         donationBoardDTO.setChecked(false);
         donationBoardDTO.getIsSigned();
-        donationBoardDTO.setNo(++no);
+        donationBoardDTO.setNo(getNextNum());
         donationBoardDTO.addMembers(AuthLoginHandler.getLoginUser());
 
 
@@ -125,6 +124,14 @@ public class DonationBoardApplyHandler extends AbstractDonationBoardHandler {
 
     System.out.println("모금함 개설신청이 완료되었습니다.");
 
+  }
+
+  private int getNextNum() {
+    if (donationBoardDTOList.size() > 0) {
+      return donationBoardDTOList.get(donationBoardDTOList.size() - 1).getNo() + 1;
+    } else {
+      return 1;
+    }
   }
 }
 

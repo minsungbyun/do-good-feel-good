@@ -460,8 +460,8 @@ public class App {
     //    loadChallengeReviews();
     //    loadChallengeQuestions();
     //
-    //    loadDonationBoards();
-    //    loadDonationRegisters();
+    loadDonationBoards();
+    loadDonationRegisters();
     //
     //    loadQuestion();
 
@@ -816,20 +816,21 @@ public class App {
 
       joinDTOList.addAll((List<JoinDTO>) in.readObject());
 
-      System.out.println("----------------------------------");
-
-      System.out.println("확인용!");
       for (int i = 0; i < joinDTOList.size(); i++) {
         joinDTOList.get(i).setNo(i + 1);
 
-        System.out.println("인덱스 i  = " + i);
-        System.out.println("각 사용자의 no = "+ joinDTOList.get(i).getNo());
+        //        if (joinDTOList.size() > 0) {
+        //          joinDTOList.get(i).setNo(i + 1);
+        //
+        //        }
+        //
+
+        System.out.println("멤버별 고유번호 = " +  joinDTOList.get(i).getNo());
+
 
       }
-      System.out.println("joinDTOList.size()  = " + joinDTOList.size());
+      System.out.println("멤버리스트의 사이즈 크기 = " +  joinDTOList.size());
 
-
-      System.out.println("----------------------------------");
 
       System.out.println("회원가입 로딩 완료!");
 

@@ -13,6 +13,7 @@ public class JoinAddHandler extends AbstractJoinHandler {
     super(joinDTOList);
 
 
+
   }
 
   @Override
@@ -117,9 +118,27 @@ public class JoinAddHandler extends AbstractJoinHandler {
 
   }
 
+
+
+
+  //  private int getNextNum() {
+  //    // 마지막 번호를 알아야한다.
+  //    int lastNum = 0;
+  //    for (int i = 0; i < joinDTOList.size(); i++) {
+  //
+  //      if (joinDTOList.size() > 0) {
+  //        joinDTOList.get(i).setNo(i + 1);
+  //        lastNum = i + 2;
+  //      } else {
+  //        return 1;
+  //      }
+  //    }
+  //    return lastNum;
+  //
+  //  }
+
   private int getNextNum() {
     if (joinDTOList.size() > 0) {
-
       return joinDTOList.get(joinDTOList.size() - 1).getNo() + 1;
     } else {
       return 1;

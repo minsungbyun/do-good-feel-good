@@ -31,6 +31,9 @@ public abstract class AbstractCommBoardHandler implements Command {
   //
   //
   //
+
+
+
   //    CommBoardCommentDTO commBoardCommentDTO = new CommBoardCommentDTO();
   //
   //    commBoardCommentDTO.setCommentText(Prompt.inputString("댓글 내용 : "));
