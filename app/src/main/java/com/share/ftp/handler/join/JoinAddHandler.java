@@ -120,7 +120,7 @@ public class JoinAddHandler extends AbstractJoinHandler {
   private int getNextNum() {
     if (joinDTOList.size() > 0) {
 
-      return joinDTOList.get(joinDTOList.size() - 1).getNo();
+      return joinDTOList.get(joinDTOList.size() - 1).getNo() + 1;
     } else {
       return 1;
     }

@@ -455,7 +455,7 @@ public class App {
     //    loadCommBoard();
     //    loadCommReview();
     //
-        loadAdminChellengeAdd();
+    loadAdminChellengeAdd();
     //
     //    loadChallengeReviews();
     //    loadChallengeQuestions();
@@ -820,12 +820,14 @@ public class App {
 
       System.out.println("확인용!");
       for (int i = 0; i < joinDTOList.size(); i++) {
+        joinDTOList.get(i).setNo(i + 1);
 
         System.out.println("인덱스 i  = " + i);
         System.out.println("각 사용자의 no = "+ joinDTOList.get(i).getNo());
 
       }
       System.out.println("joinDTOList.size()  = " + joinDTOList.size());
+
 
       System.out.println("----------------------------------");
 
