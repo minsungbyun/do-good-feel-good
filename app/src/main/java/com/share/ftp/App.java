@@ -21,6 +21,7 @@ import com.share.ftp.domain.personal.ApproveOrgDTO;
 import com.share.ftp.domain.personal.ChallengeJoinDTO;
 import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
+import com.share.ftp.domain.personal.CommBoardCommentDTO;
 import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.domain.personal.CommReviewDTO;
 import com.share.ftp.domain.personal.DonationBoardDTO;
@@ -163,6 +164,7 @@ public class App {
   // 소통해요 도메인(값)
   List<CommBoardDTO> commBoardDTOList = new ArrayList<>();
   List<CommReviewDTO> commReviewDTOList = new ArrayList<>();
+  List<CommBoardCommentDTO> commBoardCommentDTOList = new ArrayList<>();
 
   // 챌린지 도메인(값)
   List<ChallengeJoinDTO> challengeJoinDTOList = new ArrayList<>();
@@ -305,12 +307,12 @@ public class App {
     //    commands.put("/volRequestOrg/rejectedList", new VolRequestOrgRejectedListHandler(orgRequestDTOList, orgRequestApplyDTOList, orgRequestRejectDTOList));
 
     // 소통해요 나눔이야기
-    commands.put("/commBoard/add", new CommBoardAddHandler(commBoardDTOList));
-    commands.put("/commBoard/list", new CommBoardListHandler(commBoardDTOList));
-    commands.put("/commBoard/detail", new CommBoardDetailHandler(commBoardDTOList));
-    commands.put("/commBoard/update", new CommBoardUpdateHandler(commBoardDTOList));
-    commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList));
-    commands.put("/commBoard/search", new CommBoardSearchHandler(commBoardDTOList));
+    commands.put("/commBoard/add", new CommBoardAddHandler(commBoardDTOList, commBoardCommentDTOList));
+    commands.put("/commBoard/list", new CommBoardListHandler(commBoardDTOList, commBoardCommentDTOList));
+    commands.put("/commBoard/detail", new CommBoardDetailHandler(commBoardDTOList, commBoardCommentDTOList));
+    commands.put("/commBoard/update", new CommBoardUpdateHandler(commBoardDTOList, commBoardCommentDTOList));
+    commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList, commBoardCommentDTOList));
+    commands.put("/commBoard/search", new CommBoardSearchHandler(commBoardDTOList, commBoardCommentDTOList));
 
     // 소통해요 나눔이야기 BEST
     commands.put("/commBest/list", new CommBestListHandler(commBoardDTOList));
@@ -453,7 +455,7 @@ public class App {
     //    loadCommBoard();
     //    loadCommReview();
     //
-        loadAdminChellengeAdd();
+    loadAdminChellengeAdd();
     //
     //    loadChallengeReviews();
     //    loadChallengeQuestions();
@@ -630,7 +632,7 @@ public class App {
 
       commReviewDTOList.addAll((List<CommReviewDTO>) in.readObject());
 
-      System.out.println("게시글 로딩 완료!");
+      System.out.println("한줄후기 로딩 완료!");
 
     } catch (Exception e) {
       System.out.println("파일에서 게시글을 읽어 오는 중 오류 발생!");
@@ -814,18 +816,21 @@ public class App {
 
       joinDTOList.addAll((List<JoinDTO>) in.readObject());
 
-      System.out.println("----------------------------------");
-
-      System.out.println("확인용!");
       for (int i = 0; i < joinDTOList.size(); i++) {
 
-        System.out.println("인덱스 i  = " + i);
-        System.out.println("각 사용자의 no = "+ joinDTOList.get(i).getNo());
+        //        if (joinDTOList.size() > 0) {
+        //          joinDTOList.get(i).setNo(i + 1);
+        //
+        //        }
+        //
+
+        System.out.println("멤버별 고유번호 = " +  joinDTOList.get(i).getNo());
+
 
       }
-      System.out.println("joinDTOList.size()  = " + joinDTOList.size());
+      System.out.println("멤버리스트의 사이즈 크기 = " +  joinDTOList.size());
 
-      System.out.println("----------------------------------");
+
 
       System.out.println("회원가입 로딩 완료!");
 
@@ -1141,12 +1146,12 @@ public class App {
   private Menu createReviewMenu() {
     MenuGroup reviewMenu = new MenuGroup("나눔 이야기");
 
-    reviewMenu.add(new MenuItem("등록", ACCESS_MEMBER, "/commBoard/add"));
+    reviewMenu.add(new MenuItem("등록", ACCESS_MEMBER_ADMIN, "/commBoard/add"));
     reviewMenu.add(new MenuItem("목록","/commBoard/list"));
     reviewMenu.add(new MenuItem("상세보기","/commBoard/detail"));
-    reviewMenu.add(new MenuItem("변경", ACCESS_MEMBER,"/commBoard/update"));
-    reviewMenu.add(new MenuItem("삭제",ACCESS_MEMBER,"/commBoard/delete"));
-    reviewMenu.add(new MenuItem("검색",ACCESS_MEMBER,"/commBoard/search"));
+    reviewMenu.add(new MenuItem("변경", ACCESS_MEMBER_ADMIN,"/commBoard/update"));
+    reviewMenu.add(new MenuItem("삭제",ACCESS_MEMBER_ADMIN,"/commBoard/delete"));
+    reviewMenu.add(new MenuItem("검색",ACCESS_MEMBER_ADMIN,"/commBoard/search"));
 
     return reviewMenu;
   }
@@ -1163,11 +1168,11 @@ public class App {
   private Menu createShortReviewMenu() {
     MenuGroup shortReviewMenu = new MenuGroup("한 줄 후기");
 
-    shortReviewMenu.add(new MenuItem("등록", ACCESS_MEMBER, "/commReview/add"));
+    shortReviewMenu.add(new MenuItem("등록", ACCESS_MEMBER_ADMIN, "/commReview/add"));
     shortReviewMenu.add(new MenuItem("목록", "/commReview/list")); 
-    shortReviewMenu.add(new MenuItem("수정", ACCESS_MEMBER, "/commReview/update")); 
-    shortReviewMenu.add(new MenuItem("삭제", ACCESS_MEMBER, "/commReview/delete")); 
-    shortReviewMenu.add(new MenuItem("검색",ACCESS_MEMBER,"/commReview/search"));
+    shortReviewMenu.add(new MenuItem("수정", ACCESS_MEMBER_ADMIN, "/commReview/update")); 
+    shortReviewMenu.add(new MenuItem("삭제", ACCESS_MEMBER_ADMIN, "/commReview/delete")); 
+    shortReviewMenu.add(new MenuItem("검색",ACCESS_MEMBER_ADMIN,"/commReview/search"));
 
 
     return shortReviewMenu;
