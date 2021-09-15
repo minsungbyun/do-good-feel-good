@@ -6,8 +6,8 @@ import com.share.util.Prompt;
 
 public class ChallengeQuestionSearchHandler extends AbstractChallengeQuestionHandler {
 
-  public ChallengeQuestionSearchHandler(List<ChallengeQuestionDTO> ChallengeQuestionDTOList) {
-    super(ChallengeQuestionDTOList);
+  public ChallengeQuestionSearchHandler(List<ChallengeQuestionDTO> challengeQuestionDTOList) {
+    super(challengeQuestionDTOList);
   }
 
   @Override
@@ -15,15 +15,15 @@ public class ChallengeQuestionSearchHandler extends AbstractChallengeQuestionHan
 
     String input = Prompt.inputString("검색어? ");
 
-    for (ChallengeQuestionDTO ChallengeQuestionDTO : ChallengeQuestionDTOList) {
-      if (!ChallengeQuestionDTO.getOwner().getId().contains(input) &&
-          !ChallengeQuestionDTO.getContent().contains(input)) {
+    for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
+      if (!challengeQuestionDTO.getOwner().getId().contains(input) &&
+          !challengeQuestionDTO.getContent().contains(input)) {
         continue;
       }
       System.out.printf("%s, %s, %s\n", 
-          ChallengeQuestionDTO.getNo(), 
-          ChallengeQuestionDTO.getOwner().getId(),
-          ChallengeQuestionDTO.getContent());
+          challengeQuestionDTO.getNo(), 
+          challengeQuestionDTO.getOwner().getId(),
+          challengeQuestionDTO.getContent());
     }
   }
 }

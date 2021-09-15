@@ -111,10 +111,14 @@ public class JoinAddHandler extends AbstractJoinHandler {
     // 개인 고유번호 부여
     joinDTO.setNo(getNextNum());
 
+
     joinDTOList.add(joinDTO);
     System.out.println();
     System.out.println("회원가입이 정상적으로 완료되었습니다.");
+
   }
+
+
 
 
   //  private int getNextNum() {
@@ -140,7 +144,6 @@ public class JoinAddHandler extends AbstractJoinHandler {
       return 1;
     }
   }
-
 
   private boolean validId(String id) {
     for (JoinDTO joinDTO : joinDTOList) {
