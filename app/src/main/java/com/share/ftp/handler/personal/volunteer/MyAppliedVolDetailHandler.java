@@ -20,10 +20,15 @@ public class MyAppliedVolDetailHandler extends AbstractVolGeneralHandler { // �
     System.out.println();
     System.out.println("[  나의 봉사 신청서 목록  ]");
 
+    if (generalRequestDTOList.isEmpty()) {
+      System.out.println("[  봉사 신청서가 없습니다. ]");
+    }
+
 
     for (GeneralRequestDTO generalRequestDTO : generalRequestDTOList) {
       if (generalRequestDTO.getOwner().getName().equals(AuthLoginHandler.getLoginUser().getName())) {
         System.out.printf("번호: %d\n"
+            + "봉사유형: %s\n"
             + "봉사제목: %s\n"
             + "주최자: %s\n"
             + "봉사분류: %s\n"
@@ -40,6 +45,7 @@ public class MyAppliedVolDetailHandler extends AbstractVolGeneralHandler { // �
             + "승인여부: %s \n\n", 
 
             generalRequestDTO.getVolNo(), 
+            generalRequestDTO.getMemberType(), 
             generalRequestDTO.getVolTitle(), 
             generalRequestDTO.getOwner().getName(), 
             generalRequestDTO.getVolType(), 

@@ -5,15 +5,15 @@ import com.share.ftp.domain.personal.GeneralRequestDTO;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class VolGeneralDoJoinHandler extends AbstractVolGeneralHandler { // 개인 봉사신청 양식 쓰는 곳
+public class VolGeneralDoJoinHandler extends AbstractVolGeneralHandler { 
 
 
   public VolGeneralDoJoinHandler(
-      List<GeneralRequestDTO> personalRequestDTOList,
-      List<GeneralRequestDTO> personalRequestApplyDTOList,
-      List<GeneralRequestDTO> personalRequestRejectDTOList) {
+      List<GeneralRequestDTO> generalRequestDTOList,
+      List<GeneralRequestDTO> generalRequestApplyDTOList,
+      List<GeneralRequestDTO> generalRequestRejectDTOList) {
 
-    super(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList);
+    super(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList);
   }
 
   @Override
@@ -22,17 +22,18 @@ public class VolGeneralDoJoinHandler extends AbstractVolGeneralHandler { // 개�
     System.out.println("[  봉사 참여  ]");
     System.out.println(" ▶ 참여를 원하는 봉사번호를 입력해주세요 ");
     System.out.println();
-    int volNo = Prompt.inputInt("봉사번호 > ");
+    int volNo = Prompt.inputInt("봉사번호 ▶ ");
 
-    GeneralRequestDTO personalRequestApplyDTO = findByApplyVol(volNo);
+    GeneralRequestDTO generalRequestApplyDTO = findByApplyVol(volNo);
 
 
-    if (personalRequestApplyDTO == null) {
+    if (generalRequestApplyDTO == null) {
       System.out.println("[  ⛔ 존재하지 않는 봉사입니다 ⛔ ]");
       return;
     }
 
     System.out.printf("봉사번호: %d\n"
+        + "봉사유형: %s\n"
         + "봉사제목: %s\n"
         + "주최자: %s\n"
         + "봉사분류: %s\n"
@@ -47,21 +48,22 @@ public class VolGeneralDoJoinHandler extends AbstractVolGeneralHandler { // 개�
         + "봉사내용: %s\n"
         + "첨부파일: %s\n\n",
 
-        personalRequestApplyDTO.getVolNo(),      
-        personalRequestApplyDTO.getVolTitle(),     
-        personalRequestApplyDTO.getOwner().getName(), 
-        personalRequestApplyDTO.getVolType(), 
-        personalRequestApplyDTO.getVolTel(),
-        personalRequestApplyDTO.getVolEmail(),
-        personalRequestApplyDTO.getVolStartDate(),
-        personalRequestApplyDTO.getVolEndDate(),
-        personalRequestApplyDTO.getVolStartTime(),
-        personalRequestApplyDTO.getVolEndTime(),
+        generalRequestApplyDTO.getVolNo(),      
+        generalRequestApplyDTO.getMemberType(),      
+        generalRequestApplyDTO.getVolTitle(),     
+        generalRequestApplyDTO.getOwner().getName(), 
+        generalRequestApplyDTO.getVolType(), 
+        generalRequestApplyDTO.getVolTel(),
+        generalRequestApplyDTO.getVolEmail(),
+        generalRequestApplyDTO.getVolStartDate(),
+        generalRequestApplyDTO.getVolEndDate(),
+        generalRequestApplyDTO.getVolStartTime(),
+        generalRequestApplyDTO.getVolEndTime(),
         //        personalRequestApplyDTO.getVolList(),
-        personalRequestApplyDTO.getTotalJoinCount(),
-        personalRequestApplyDTO.getVolLimitNum(),
-        personalRequestApplyDTO.getVolContent(),
-        personalRequestApplyDTO.getVolFileUpload()
+        generalRequestApplyDTO.getTotalJoinCount(),
+        generalRequestApplyDTO.getVolLimitNum(),
+        generalRequestApplyDTO.getVolContent(),
+        generalRequestApplyDTO.getVolFileUpload()
         );
 
     String input = Prompt.inputString("해당 봉사활동을 참가하시겠습니까?(y/N) ");
@@ -71,230 +73,40 @@ public class VolGeneralDoJoinHandler extends AbstractVolGeneralHandler { // 개�
     }
 
     // 주최자 유효성검사
-    if (personalRequestApplyDTO.getOwner().getName().
+    if (generalRequestApplyDTO.getOwner().getName().
         equals(AuthLoginHandler.getLoginUser().getName())) {
       System.out.println("당신은 이미 주최자입니다!");
       return;
     }
 
-
-    //    // 봉사인원 유효성 검사
-    //    if (personalRequestApplyDTO.getTotalJoinCount() == personalRequestApplyDTO.getJoinNum()) {
-    //      System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
-    //      return;
-
-    //    if (no == 1) {
-    //      if (m1.contains(AuthLoginHandler.getLoginUser())) {
-    //        System.out.println("이미 봉사참여를 하셨습니다!");
-    //        return; 
-    //      } 
-    //
-    //      if (personalRequestApplyDTO.getTotalJoinCount1() == personalRequestApplyDTO.getJoinNum()) {
-    //        System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
-    //        return;
-    //      }
-    //
-    //      m1.add(AuthLoginHandler.getLoginUser());
-    //
-    //
-    //      if (m1.contains(personalRequestApplyDTO.getOwner())) {
-    //        m1.remove(personalRequestApplyDTO.getOwner());
-    //      }
-    //
-    //      personalRequestApplyDTO.setMembers1(m1);
-    //
-    //      int joinCounts = personalRequestApplyDTO.getTotalJoinCount1(); 
-    //      joinCounts += 1;
-    //
-    //      personalRequestApplyDTO.setTotalJoinCount1(joinCounts);
-    //
-    //    } else if (no == 2 ) {
-    //
-    //      if (m2.contains(AuthLoginHandler.getLoginUser())) {
-    //        System.out.println("이미 봉사참여를 하셨습니다!");
-    //        return; 
-    //      } 
-    //
-    //      if (personalRequestApplyDTO.getTotalJoinCount2() == personalRequestApplyDTO.getJoinNum()) {
-    //        System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
-    //        return;
-    //      }
-    //
-    //      m2.add(AuthLoginHandler.getLoginUser());
-    //
-    //      if (m2.contains(personalRequestApplyDTO.getOwner())) {
-    //        m2.remove(personalRequestApplyDTO.getOwner());
-    //      }
-    //
-    //      personalRequestApplyDTO.setMembers2(m2);
-    //
-    //
-    //      int joinCount2 = personalRequestApplyDTO.getTotalJoinCount2(); 
-    //      joinCount2 += 1;
-    //
-    //      personalRequestApplyDTO.setTotalJoinCount2(joinCount2);
-    //
-    //    } else if (no == 3) {
-    //
-    //
-    //      if (m3.contains(AuthLoginHandler.getLoginUser())) {
-    //        System.out.println("이미 봉사참여를 하셨습니다!");
-    //        return; 
-    //      } 
-    //
-    //      if (personalRequestApplyDTO.getTotalJoinCount3() == personalRequestApplyDTO.getJoinNum()) {
-    //        System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
-    //        return;
-    //      }
-    //      m3.add(AuthLoginHandler.getLoginUser());
-    //
-    //      if (m3.contains(personalRequestApplyDTO.getOwner())) {
-    //        m3.remove(personalRequestApplyDTO.getOwner());
-    //      }
-    //
-    //      personalRequestApplyDTO.setMembers3(m3);
-    //      int joinCount3 = personalRequestApplyDTO.getTotalJoinCount3(); 
-    //      joinCount3 += 1;
-    //
-    //      personalRequestApplyDTO.setTotalJoinCount3(joinCount3);
-    //
-    //    }
-
-    //    //    findByName(no);
-    //    if (members.contains(AuthLoginHandler.getLoginUser())) {
-    //      System.out.println("이미 봉사참여를 하셨습니다!");
-    //      return; 
-    //    } 
-    //    System.out.println("유효성 검사 전");
-    //    System.out.println("member객체의 사이즈:"+ members.size());
-
     // 봉사인원 유효성 검사
-    if (personalRequestApplyDTO.getTotalJoinCount() == personalRequestApplyDTO.getVolLimitNum()) {
+    if (generalRequestApplyDTO.getTotalJoinCount() == generalRequestApplyDTO.getVolLimitNum()) {
       System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
       return;
     }
 
-
-    if (personalRequestApplyDTO.getMembers().contains(AuthLoginHandler.getLoginUser())) {
+    if (generalRequestApplyDTO.getMembers().contains(AuthLoginHandler.getLoginUser())) {
       System.out.println("이미 봉사참여를 하셨습니다!");
       return;
     } 
 
     // 출력할 멤버 list에 추가시킨다
-    personalRequestApplyDTO.addMembers(AuthLoginHandler.getLoginUser());
+    generalRequestApplyDTO.addMembers(AuthLoginHandler.getLoginUser());
 
     // 주최자 이름이 멤버 출력하는데 포함되어 있다면 제거
-    if (personalRequestApplyDTO.getMembers().contains(personalRequestApplyDTO.getOwner())) {
-      personalRequestApplyDTO.getMembers().remove(personalRequestApplyDTO.getOwner());
+    if (generalRequestApplyDTO.getMembers().contains(generalRequestApplyDTO.getOwner())) {
+      generalRequestApplyDTO.getMembers().remove(generalRequestApplyDTO.getOwner());
     }
 
     // 총 참여 인원(주최자1명 포함)을 누적시킨다.
-    int count = personalRequestApplyDTO.getTotalJoinCount();
+    int count = generalRequestApplyDTO.getTotalJoinCount();
     count += 1;
-    personalRequestApplyDTO.setTotalJoinCount(count); 
+    generalRequestApplyDTO.setTotalJoinCount(count); 
 
     System.out.println("[  ✔️ 봉사참여가 완료되었습니다. ]");
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    if (no == 1) {
-//      if (m1.contains(AuthLoginHandler.getLoginUser())) {
-//        System.out.println("이미 봉사참여를 하셨습니다!");
-//        return; 
-//      } 
-//
-//      if (personalRequestApplyDTO.getTotalJoinCount1() == personalRequestApplyDTO.getJoinNum()) {
-//        System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
-//        return;
-//      }
-//
-//      m1.add(AuthLoginHandler.getLoginUser());
-//
-//
-//      if (m1.contains(personalRequestApplyDTO.getOwner())) {
-//        m1.remove(personalRequestApplyDTO.getOwner());
-//      }
-//
-//      personalRequestApplyDTO.setMembers1(m1);
-//
-//      int joinCounts = personalRequestApplyDTO.getTotalJoinCount1(); 
-//      joinCounts += 1;
-//
-//      personalRequestApplyDTO.setTotalJoinCount1(joinCounts);
-//
-//    } else if (no == 2 ) {
-//
-//      if (m2.contains(AuthLoginHandler.getLoginUser())) {
-//        System.out.println("이미 봉사참여를 하셨습니다!");
-//        return; 
-//      } 
-//
-//      if (personalRequestApplyDTO.getTotalJoinCount2() == personalRequestApplyDTO.getJoinNum()) {
-//        System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
-//        return;
-//      }
-//
-//      m2.add(AuthLoginHandler.getLoginUser());
-//
-//      if (m2.contains(personalRequestApplyDTO.getOwner())) {
-//        m2.remove(personalRequestApplyDTO.getOwner());
-//      }
-//
-//      personalRequestApplyDTO.setMembers2(m2);
-//
-//
-//      int joinCount2 = personalRequestApplyDTO.getTotalJoinCount2(); 
-//      joinCount2 += 1;
-//
-//      personalRequestApplyDTO.setTotalJoinCount2(joinCount2);
-//
-//    } else if (no == 3) {
-//
-//
-//      if (m3.contains(AuthLoginHandler.getLoginUser())) {
-//        System.out.println("이미 봉사참여를 하셨습니다!");
-//        return; 
-//      } 
-//
-//      if (personalRequestApplyDTO.getTotalJoinCount3() == personalRequestApplyDTO.getJoinNum()) {
-//        System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
-//        return;
-//      }
-//      m3.add(AuthLoginHandler.getLoginUser());
-//
-//      if (m3.contains(personalRequestApplyDTO.getOwner())) {
-//        m3.remove(personalRequestApplyDTO.getOwner());
-//      }
-//
-//      personalRequestApplyDTO.setMembers3(m3);
-//      int joinCount3 = personalRequestApplyDTO.getTotalJoinCount3(); 
-//      joinCount3 += 1;
-//
-//      personalRequestApplyDTO.setTotalJoinCount3(joinCount3);
-//
-//    }
-
-//    //    findByName(no);
-//    if (members.contains(AuthLoginHandler.getLoginUser())) {
-//      System.out.println("이미 봉사참여를 하셨습니다!");
-//      return; 
-//    } 
-//    System.out.println("유효성 검사 전");
-//    System.out.println("member객체의 사이즈:"+ members.size());
 
 // 봉사인원 유효성 검사
 //    if (personalRequestApplyDTO.getTotalJoinCount() == personalRequestApplyDTO.getJoinNum()) {

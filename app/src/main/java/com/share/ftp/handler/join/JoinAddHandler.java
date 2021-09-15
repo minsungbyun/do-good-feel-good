@@ -3,17 +3,14 @@ package com.share.ftp.handler.join;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.handler.personal.volunteer.General;
 import com.share.menu.Menu;
 import com.share.util.Prompt;
 
 public class JoinAddHandler extends AbstractJoinHandler {
 
-
   public JoinAddHandler(List<JoinDTO> joinDTOList) {
     super(joinDTOList);
-
-
-
   }
 
   @Override
@@ -22,8 +19,6 @@ public class JoinAddHandler extends AbstractJoinHandler {
     System.out.println("[ 회원 가입 ]");
 
     JoinDTO joinDTO = new JoinDTO();
-
-
 
     // 아이디 유효성검사
     while (true) {
@@ -94,12 +89,12 @@ public class JoinAddHandler extends AbstractJoinHandler {
       int no = Prompt.inputInt("회원유형 선택 > ");
 
       if (no == 1) {
-        joinDTO.setPersonal(true);
+        joinDTO.setType(General.member.PERSONAL);
         AuthLoginHandler.userAccessLevel = Menu.ACCESS_PERSONAL | Menu.ACCESS_LOGOUT | Menu.ACCESS_MEMBER_ADMIN;
         break;
 
       } else if (no == 2){
-        joinDTO.setOrg(true);
+        joinDTO.setType(General.member.ORG);
         AuthLoginHandler.userAccessLevel = Menu.ACCESS_ORG | Menu.ACCESS_LOGOUT | Menu.ACCESS_MEMBER_ADMIN;
         break;
 
@@ -108,7 +103,7 @@ public class JoinAddHandler extends AbstractJoinHandler {
       }
     }
 
-    // 개인 고유번호 부여
+    // 고유회원번호 부여
     joinDTO.setNo(getNextNum());
 
 
@@ -163,25 +158,3 @@ public class JoinAddHandler extends AbstractJoinHandler {
     return false;
   }
 }
-
-
-
-//  public void joinSite() {
-//    System.out.println("가입하기");
-//  }
-//
-//  public void idCheck() {
-//    System.out.println("ID중복확인");
-//  }
-//
-//  public void telCheck() {
-//    System.out.println("휴대전화인증");
-//  }
-//
-//  public void findAddress() {
-//    System.out.println("우편번호검색");
-//  }
-
-
-
-
