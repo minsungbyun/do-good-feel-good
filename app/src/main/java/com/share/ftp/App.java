@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.share.ftp.domain.admin.ChallengeDTO;
-import com.share.ftp.domain.admin.CommentDTO;
 import com.share.ftp.domain.admin.NoticeDTO;
 import com.share.ftp.domain.admin.QuestionDTO;
 import com.share.ftp.domain.join.JoinDTO;
@@ -174,7 +173,6 @@ public class App {
   List<NoticeDTO> noticeDTOList = new ArrayList<>();
   List<QuestionDTO> questionDTOList = new ArrayList<>();
   List<ApproveOrgDTO> approveOrgDTOList = new ArrayList<>();
-  List<CommentDTO> commentDTOList = new ArrayList<>();
 
   //댓글 도메인
   //  List<CommentDTO> commentDTOList = new ArrayList<>();
@@ -356,12 +354,12 @@ public class App {
     commands.put("/donationRegister/totalMoney", new DonationRegisterTotalMoneyHandler(donationRegisterDTOList));
 
     // 고객센터 문의사항
-    commands.put("/question/add", new QuestionAddHandler(myQuestionListDTOList, commentDTOList));
-    commands.put("/question/list", new QuestionListHandler(myQuestionListDTOList, commentDTOList));
-    commands.put("/question/detail", new QuestionDetailHandler(myQuestionListDTOList, commentDTOList));
-    commands.put("/question/update", new QuestionUpdateHandler(myQuestionListDTOList, commentDTOList));
-    commands.put("/question/delete", new QuestionDeleteHandler(myQuestionListDTOList, commentDTOList));
-    commands.put("/question/search", new QuestionSearchHandler(myQuestionListDTOList, commentDTOList));
+    commands.put("/question/add", new QuestionAddHandler(myQuestionListDTOList));
+    commands.put("/question/list", new QuestionListHandler(myQuestionListDTOList));
+    commands.put("/question/detail", new QuestionDetailHandler(myQuestionListDTOList));
+    commands.put("/question/update", new QuestionUpdateHandler(myQuestionListDTOList));
+    commands.put("/question/delete", new QuestionDeleteHandler(myQuestionListDTOList));
+    commands.put("/question/search", new QuestionSearchHandler(myQuestionListDTOList));
 
     // 마이페이지
     commands.put("/myPage/info", new MyPageInfoHandler(joinDTOList)); // 내정보 수정

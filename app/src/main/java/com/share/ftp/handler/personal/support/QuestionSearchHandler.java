@@ -1,15 +1,13 @@
 package com.share.ftp.handler.personal.support;
 
 import java.util.List;
-import com.share.ftp.domain.admin.CommentDTO;
 import com.share.ftp.domain.personal.QuestionListDTO;
 import com.share.util.Prompt;
 
 public class QuestionSearchHandler extends AbstractQuestionHandler {
 
-  public QuestionSearchHandler(List<QuestionListDTO> myQuestionListDTOList,
-      List<CommentDTO> commentDTOList) {
-    super(myQuestionListDTOList, commentDTOList);
+  public QuestionSearchHandler(List<QuestionListDTO> myQuestionListDTOList) {
+    super(myQuestionListDTOList);
   }
 
   @Override

@@ -1,16 +1,14 @@
 package com.share.ftp.handler.personal.support;
 
 import java.util.List;
-import com.share.ftp.domain.admin.CommentDTO;
 import com.share.ftp.domain.personal.QuestionListDTO;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
 public class QuestionUpdateHandler extends AbstractQuestionHandler {
 
-  public QuestionUpdateHandler(List<QuestionListDTO> myQuestionListDTOList,
-      List<CommentDTO> commentDTOList) {
-    super (myQuestionListDTOList, commentDTOList);
+  public QuestionUpdateHandler(List<QuestionListDTO> myQuestionListDTOList) {
+    super (myQuestionListDTOList);
   }
 
   public void execute() {
@@ -55,11 +53,4 @@ public class QuestionUpdateHandler extends AbstractQuestionHandler {
     }
   }
 
-  private int getBoardNo() {
-    if (myQuestionListDTOList.size() > 0) {
-      return myQuestionListDTOList.get(myQuestionListDTOList.size() - 1).getNo() + 1;
-    } else {
-      return 1;
-    }
-  }
 }
