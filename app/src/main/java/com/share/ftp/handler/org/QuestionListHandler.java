@@ -17,7 +17,7 @@ public class QuestionListHandler {
 
     QuestionListDTO myQuestionList = new QuestionListDTO();
 
-    myQuestionList.setNo(Prompt.inputInt("번호? "));
+    myQuestionList.setBoardNo(Prompt.inputInt("번호? "));
     myQuestionList.setTitle(Prompt.inputString("제목? "));
     myQuestionList.setPassword(Prompt.inputInt("비밀번호? "));
     myQuestionList.setContent(Prompt.inputString("내용? "));
@@ -31,7 +31,7 @@ public class QuestionListHandler {
     System.out.println("[게시글 목록]");
     for (int i = 0; i < this.size; i++) {
       System.out.printf("%d, %s, %s, %s, %d, %d\n", 
-          this.myQuestionLists[i].getNo(), 
+          this.myQuestionLists[i].getBoardNo(), 
           this.myQuestionLists[i].getTitle(), 
           this.myQuestionLists[i].getMemberld(),
           this.myQuestionLists[i].getContent(),
@@ -114,7 +114,7 @@ public class QuestionListHandler {
 
   private QuestionListDTO findByNo(int no) {
     for (int i = 0; i < this.size; i++) {
-      if (this.myQuestionLists[i].getNo() == no) {
+      if (this.myQuestionLists[i].getBoardNo() == no) {
         return this.myQuestionLists[i];
       }
     }
@@ -123,7 +123,7 @@ public class QuestionListHandler {
 
   private int indexOf(int no) {
     for (int i = 0; i < this.size; i++) {
-      if (this.myQuestionLists[i].getNo() == no) {
+      if (this.myQuestionLists[i].getBoardNo() == no) {
         return i;
       }
     }

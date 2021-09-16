@@ -13,7 +13,7 @@ public class AdminNoticeSearchHandler extends AbstractAdminNoticeHandler {
 
   @Override
   public void execute() {
-    System.out.println("[공지사항 목록]");
+    System.out.println("[공지사항 검색]");
 
     String input = Prompt.inputString("검색어? ");
 
@@ -23,7 +23,7 @@ public class AdminNoticeSearchHandler extends AbstractAdminNoticeHandler {
         continue;
       }
       System.out.printf("%d, %s, %s, %s, %s, %s\n", 
-          noticeDTO.getNo(), 
+          noticeDTO.getBoardNo(), 
           noticeDTO.getAdmin().getId(), 
           noticeDTO.getTitle(), 
           noticeDTO.getContent(), 

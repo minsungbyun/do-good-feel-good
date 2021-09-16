@@ -8,7 +8,7 @@ import com.share.ftp.domain.join.JoinDTO;
 @SuppressWarnings("serial")
 public class QuestionListDTO implements Serializable {
 
-  private int no;
+  private int boardNo;
   private String title;
   private String memberld;
   private int password;
@@ -19,20 +19,22 @@ public class QuestionListDTO implements Serializable {
   private int viewCount;
   private JoinDTO Owner;
 
-  @Override
-  public String toString() {
-    return "QuestionListDTO [no=" + no + ", title=" + title + ", memberld=" + memberld
-        + ", password=" + password + ", writer=" + writer + ", content=" + content + ", fileUpload="
-        + fileUpload + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount
-        + ", Owner=" + Owner + "]";
-  }
+  private String sort;
+  private String volunteerAsk = "함께해요 문의";
+  private String commuityAsk = "나눔이야기 문의";
+  private String donationAsk = "모금함 문의";
+  private String challengeAsk = "챌린지 문의";
+  private String siteAsk = "사이트이용 문의";
+  private String otherAsk = "기타 문의";
+
+
 
   @Override
   public int hashCode() {
-    return Objects.hash(Owner, content, fileUpload, memberld, no, password, registeredDate, title,
-        viewCount, writer);
+    return Objects.hash(Owner, boardNo, challengeAsk, commuityAsk, content, donationAsk, fileUpload,
+        memberld, otherAsk, password, registeredDate, siteAsk, sort, title, viewCount, volunteerAsk,
+        writer);
   }
-
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -42,27 +44,31 @@ public class QuestionListDTO implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     QuestionListDTO other = (QuestionListDTO) obj;
-    return Objects.equals(Owner, other.Owner) && Objects.equals(content, other.content)
+    return Objects.equals(Owner, other.Owner) && boardNo == other.boardNo
+        && Objects.equals(challengeAsk, other.challengeAsk)
+        && Objects.equals(commuityAsk, other.commuityAsk) && Objects.equals(content, other.content)
+        && Objects.equals(donationAsk, other.donationAsk)
         && Objects.equals(fileUpload, other.fileUpload) && Objects.equals(memberld, other.memberld)
-        && no == other.no && password == other.password
+        && Objects.equals(otherAsk, other.otherAsk) && password == other.password
         && Objects.equals(registeredDate, other.registeredDate)
+        && Objects.equals(siteAsk, other.siteAsk) && Objects.equals(sort, other.sort)
         && Objects.equals(title, other.title) && viewCount == other.viewCount
-        && Objects.equals(writer, other.writer);
+        && Objects.equals(volunteerAsk, other.volunteerAsk) && Objects.equals(writer, other.writer);
   }
-
-  public JoinDTO getOwner() {
-    return Owner;
+  @Override
+  public String toString() {
+    return "QuestionListDTO [boardNo=" + boardNo + ", title=" + title + ", memberld=" + memberld
+        + ", password=" + password + ", writer=" + writer + ", content=" + content + ", fileUpload="
+        + fileUpload + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount
+        + ", Owner=" + Owner + ", sort=" + sort + ", volunteerAsk=" + volunteerAsk
+        + ", commuityAsk=" + commuityAsk + ", donationAsk=" + donationAsk + ", challengeAsk="
+        + challengeAsk + ", siteAsk=" + siteAsk + ", otherAsk=" + otherAsk + "]";
   }
-
-  public void setOwner(JoinDTO owner) {
-    Owner = owner;
+  public int getBoardNo() {
+    return boardNo;
   }
-
-  public int getNo() {
-    return no;
-  }
-  public void setNo(int no) {
-    this.no = no;
+  public void setBoardNo(int boardNo) {
+    this.boardNo = boardNo;
   }
   public String getTitle() {
     return title;
@@ -112,6 +118,55 @@ public class QuestionListDTO implements Serializable {
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
+  public JoinDTO getOwner() {
+    return Owner;
+  }
+  public void setOwner(JoinDTO owner) {
+    Owner = owner;
+  }
+  public String getSort() {
+    return sort;
+  }
+  public void setSort(String sort) {
+    this.sort = sort;
+  }
+  public String getVolunteerAsk() {
+    return volunteerAsk;
+  }
+  public void setVolunteerAsk(String volunteerAsk) {
+    this.volunteerAsk = volunteerAsk;
+  }
+  public String getCommuityAsk() {
+    return commuityAsk;
+  }
+  public void setCommuityAsk(String commuityAsk) {
+    this.commuityAsk = commuityAsk;
+  }
+  public String getDonationAsk() {
+    return donationAsk;
+  }
+  public void setDonationAsk(String donationAsk) {
+    this.donationAsk = donationAsk;
+  }
+  public String getChallengeAsk() {
+    return challengeAsk;
+  }
+  public void setChallengeAsk(String challengeAsk) {
+    this.challengeAsk = challengeAsk;
+  }
+  public String getSiteAsk() {
+    return siteAsk;
+  }
+  public void setSiteAsk(String siteAsk) {
+    this.siteAsk = siteAsk;
+  }
+  public String getOtherAsk() {
+    return otherAsk;
+  }
+  public void setOtherAsk(String otherAsk) {
+    this.otherAsk = otherAsk;
+  }
+
 
 
 

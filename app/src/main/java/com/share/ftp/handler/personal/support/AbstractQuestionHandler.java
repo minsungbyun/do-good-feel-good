@@ -12,9 +12,9 @@ public abstract class AbstractQuestionHandler implements Command {
     this.myQuestionListDTOList = myQuestionListDTOList;
   }
 
-  protected QuestionListDTO findByNo(int no) {
+  protected QuestionListDTO findByNo(int boardNo) {
     for (QuestionListDTO myQuestionListDTO : myQuestionListDTOList) {
-      if (myQuestionListDTO.getNo() == no) {
+      if (myQuestionListDTO.getBoardNo() == boardNo) {
         return myQuestionListDTO;
       }
     }
