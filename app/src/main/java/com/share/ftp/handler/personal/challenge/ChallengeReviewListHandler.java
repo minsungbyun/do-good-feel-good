@@ -15,7 +15,7 @@ public class ChallengeReviewListHandler extends AbstractChallengeReviewHandler {
   @Override
   public void execute() {
     System.out.println("[참여인증&댓글 목록]");
-    System.out.println(" ▶ 참여인증&댓글 목록을 확인하고 싶은 챌린지 번호를 입력해주세요.");
+    System.out.println(" ▶ 챌린지 번호를 입력해주세요.");
     System.out.println();
 
     int challengeNo = Prompt.inputInt("챌린지 번호: ");
@@ -34,8 +34,9 @@ public class ChallengeReviewListHandler extends AbstractChallengeReviewHandler {
     }
     for (ChallengeReviewDTO challengeReviewDTO : challengeReviewDTOList) {
       if (challengeReviewDTO.getNo() == challengeNo) {
-        System.out.printf("%d, %s, %s, %s, %s\n", 
-            challengeReviewDTO.getNo(), 
+        System.out.printf("%d, %d, %s, %s, %s, %s\n", 
+            challengeReviewDTO.getNo(),
+            challengeReviewDTO.getReviewNo(),
             challengeReviewDTO.getOwner().getId(),
             challengeReviewDTO.getContent(),
             challengeReviewDTO.getFileUpload(),

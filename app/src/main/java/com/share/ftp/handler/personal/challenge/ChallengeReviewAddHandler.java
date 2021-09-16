@@ -9,7 +9,6 @@ import com.share.util.Prompt;
 
 public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
 
-  int reviewNo; // 번호 자동부여
 
   public ChallengeReviewAddHandler(List<ChallengeReviewDTO> challengeReviewDTOList,
       List<ChallengeDTO> challengeDTOList) {
@@ -19,7 +18,7 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
   @Override
   public void execute() {
     System.out.println("[참여인증&댓글 등록]");
-    System.out.println(" ▶ 참여인증&댓글등록을 원하는 챌린지 번호를 입력해주세요 ");
+    System.out.println(" ▶ 챌린지 번호를 입력해주세요 ");
     System.out.println();
     int challengeNo = Prompt.inputInt("챌린지 번호: ");
 
@@ -62,12 +61,12 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
     challengeReviewDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     challengeReviewDTO.setOwner(AuthLoginHandler.getLoginUser());
-    challengeReviewDTO.setNo(++reviewNo); // 번호 자동부여
+
+    challengeReviewDTO.setReviewNo(getNextNum());
 
     challengeReviewDTOList.add(challengeReviewDTO);
 
     System.out.println();
     System.out.println("참여인증&댓글이 등록이 완료되었습니다.");
   }
-
 }

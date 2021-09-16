@@ -139,10 +139,6 @@ public class JoinAddHandler extends AbstractJoinHandler {
 
   private int getNextNum() {
     if (joinDTOList.size() > 0) {
-<<<<<<< HEAD
-
-=======
->>>>>>> b7670332bfdfca336ca97027b5dd1a82d3a90832
       return joinDTOList.get(joinDTOList.size() - 1).getNo() + 1;
     } else {
       return 1;

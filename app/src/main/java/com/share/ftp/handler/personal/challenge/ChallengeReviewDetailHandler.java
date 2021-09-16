@@ -1,7 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
 import java.util.List;
-
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.util.Prompt;
@@ -9,11 +8,11 @@ import com.share.util.Prompt;
 public class ChallengeReviewDetailHandler extends AbstractChallengeReviewHandler {
 
   public ChallengeReviewDetailHandler(List<ChallengeReviewDTO> challengeReviewDTOList,
-        List<ChallengeDTO> challengeDTOList) {
+      List<ChallengeDTO> challengeDTOList) {
     super(challengeReviewDTOList, challengeDTOList);
   }
 
-
+  /////////////// 현재 사용안함 ///////////////////
   @Override
   public void execute() {
     System.out.println("[참여인증&댓글 상세보기]");

@@ -7,7 +7,6 @@ import com.share.util.Prompt;
 
 public class AdminChallengeAddHandler extends AbstractAdminChallengeHandler {
 
-  int no; // 번호 자동부여
 
   public AdminChallengeAddHandler(List<ChallengeDTO> challengeDTOList) {
     super(challengeDTOList);
@@ -26,7 +25,7 @@ public class AdminChallengeAddHandler extends AbstractAdminChallengeHandler {
     challengeDTO.setFileUpload(Prompt.inputString("첨부파일? ")); 
     challengeDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    challengeDTO.setNo(++no); // 번호 자동부여
+    challengeDTO.setNo(getNextNum()); // 챌린지 고유번호 부여
 
     challengeDTOList.add(challengeDTO);
 
