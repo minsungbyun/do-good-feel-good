@@ -448,10 +448,10 @@ public class App {
     //    loadCommBoard();
     //    loadCommReview();
     //
-    loadObjects("challengeDTO.json", challengeDTOList, ChallengeDTO.class);
+    //    loadObjects("challengeDTO.json", challengeDTOList, ChallengeDTO.class);
     //
-    loadObjects("challengeReviewDTO.json", challengeReviewDTOList, ChallengeReviewDTO.class);
-    loadObjects("challengeQuestionDTO.json", challengeQuestionDTOList, ChallengeQuestionDTO.class);
+    //    loadObjects("challengeReviewDTO.json", challengeReviewDTOList, ChallengeReviewDTO.class);
+    //    loadObjects("challengeQuestionDTO.json", challengeQuestionDTOList, ChallengeQuestionDTO.class);
     //
     //    loadDonationBoards();
     //    loadDonationRegisters();
