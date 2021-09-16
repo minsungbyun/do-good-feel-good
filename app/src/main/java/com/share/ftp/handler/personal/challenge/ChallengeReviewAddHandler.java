@@ -51,10 +51,10 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
       return;
     }
 
-    if (challengeDTO.getMemberNames() != AuthLoginHandler.getLoginUser().getName()) {
-      System.out.println("챌린지 참여한 회원만 등록이 가능합니다!");
-      return;
-    }
+    //    if (challengeDTO.getMemberNames() != AuthLoginHandler.getLoginUser().getName()) {
+    //      System.out.println("챌린지 참여한 회원만 등록이 가능합니다!");
+    //      return;
+    //    }
 
     ChallengeReviewDTO challengeReviewDTO = new ChallengeReviewDTO();
 
@@ -65,8 +65,12 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
 
     challengeReviewDTO.setOwner(AuthLoginHandler.getLoginUser());
 
-    challengeReviewDTO.setReviewNo(getNextNum());
-
+    if (challengeReviewDTO.getNo() == challengeDTO.getNo()) {
+      challengeReviewDTO.setReviewNo(1);
+      System.out.println("초기화!");
+    } else {
+      challengeReviewDTO.setReviewNo(getNextNum());
+    }
     challengeReviewDTOList.add(challengeReviewDTO);
 
     System.out.println();
