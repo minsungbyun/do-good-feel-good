@@ -24,12 +24,9 @@ public abstract class AbstractCommBoardHandler implements Command {
     return null;
   }
 
-<<<<<<< HEAD
   //  에러 걸려서 주석좀 막을게 !! 에러 걸려서 주석좀 막을게 !! 에러 걸려서 주석좀 막을게 !! 
   //  에러 걸려서 주석좀 막을게 !! 에러 걸려서 주석좀 막을게 !! 에러 걸려서 주석좀 막을게 !!
 
-=======
->>>>>>> e96fc3db51bbe975e56711c981e95db549c161e3
   //  protected void addComment(CommBoardDTO commBoardDTOList) {
   //    System.out.println();
   //    System.out.println("▶ 댓글 등록");
@@ -37,12 +34,9 @@ public abstract class AbstractCommBoardHandler implements Command {
   //
   //
   //
-<<<<<<< HEAD
-=======
 
 
 
->>>>>>> e96fc3db51bbe975e56711c981e95db549c161e3
   //    CommBoardCommentDTO commBoardCommentDTO = new CommBoardCommentDTO();
   //
   //    commBoardCommentDTO.setCommentText(Prompt.inputString("댓글 내용 : "));

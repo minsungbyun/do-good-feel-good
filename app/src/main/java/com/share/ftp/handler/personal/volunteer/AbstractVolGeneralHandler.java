@@ -43,6 +43,24 @@ public abstract class AbstractVolGeneralHandler implements Command { // 개인 �
     return null;
   }
 
+  protected boolean validPersonalVol() {
+    for (GeneralRequestDTO generalRequestDTO : generalRequestDTOList) {
+      if (generalRequestDTO.getMemberType() == General.member.PERSONAL) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  protected boolean validOrgVol() {
+    for (GeneralRequestDTO generalRequestDTO : generalRequestDTOList) {
+      if (generalRequestDTO.getMemberType() == General.member.ORG) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   protected GeneralRequestDTO findByApplyVol(int no) {
     for (GeneralRequestDTO generalRequestDTO : generalRequestApplyDTOList) {
       if (generalRequestDTO.getVolNo() == no) {
