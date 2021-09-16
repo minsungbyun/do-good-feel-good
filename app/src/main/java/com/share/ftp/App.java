@@ -332,12 +332,12 @@ public class App {
     commands.put("/challengeReview/search", new ChallengeReviewSearchHandler(challengeReviewDTOList, challengeDTOList));
 
     // 챌린지 문의하기
-    commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(challengeQuestionDTOList));
-    commands.put("/challengeQuestion/list", new ChallengeQuestionListHandler(challengeQuestionDTOList));
-    commands.put("/challengeQuestion/detail", new ChallengeQuestionDetailHandler(challengeQuestionDTOList));
-    commands.put("/challengeQuestion/update", new ChallengeQuestionUpdateHandler(challengeQuestionDTOList));
-    commands.put("/challengeQuestion/delete", new ChallengeQuestionDeleteHandler(challengeQuestionDTOList));
-    commands.put("/challengeQuestion/search", new ChallengeQuestionSearchHandler(challengeQuestionDTOList));
+    commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(challengeQuestionDTOList, challengeDTOList));
+    commands.put("/challengeQuestion/list", new ChallengeQuestionListHandler(challengeQuestionDTOList, challengeDTOList));
+    commands.put("/challengeQuestion/detail", new ChallengeQuestionDetailHandler(challengeQuestionDTOList, challengeDTOList));
+    commands.put("/challengeQuestion/update", new ChallengeQuestionUpdateHandler(challengeQuestionDTOList, challengeDTOList));
+    commands.put("/challengeQuestion/delete", new ChallengeQuestionDeleteHandler(challengeQuestionDTOList, challengeDTOList));
+    commands.put("/challengeQuestion/search", new ChallengeQuestionSearchHandler(challengeQuestionDTOList, challengeDTOList));
 
     // 챌린지 랭킹
     commands.put("/ranking/list", new RankingHandler());  //전체랭킹(구현예정)
@@ -450,10 +450,10 @@ public class App {
     //    loadCommBoard();
     //    loadCommReview();
     //
-    //    loadAdminChellengeAdd();
+    //    loadObjects("challengeDTO.json", challengeDTOList, ChallengeDTO.class);
     //
-    //    loadChallengeReviews();
-    //    loadChallengeQuestions();
+    //    loadObjects("challengeReviewDTO.json", challengeReviewDTOList, ChallengeReviewDTO.class);
+    //    loadObjects("challengeQuestionDTO.json", challengeQuestionDTOList, ChallengeQuestionDTO.class);
     //
     //    loadDonationBoards();
     //    loadDonationRegisters();
@@ -486,7 +486,7 @@ public class App {
     //    saveCommBoard();
     //    saveCommReview();
 
-    //    saveAdminChellengeAdd();
+    saveObjects("challengeDTO.json", challengeDTOList);
     //
     //    saveDonationBoards();
     //    saveDonationRegisters();
@@ -495,8 +495,8 @@ public class App {
     //
     //    saveQuestion();
     //
-    //    saveChallengeReviews();
-    //    saveChallengeQuestions();
+    saveObjects("challengeReviewDTO.json", challengeReviewDTOList);
+    saveObjects("challengeQuestionDTO.json", challengeQuestionDTOList);
     //
     //    saveDonationBoards();
     //    saveDonationRegisters();

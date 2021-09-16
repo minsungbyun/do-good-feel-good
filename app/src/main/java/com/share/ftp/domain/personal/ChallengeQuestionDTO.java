@@ -6,19 +6,21 @@ import com.share.ftp.domain.join.JoinDTO;
 
 @SuppressWarnings("serial")
 public class ChallengeQuestionDTO implements Serializable {
-  public int no;
-  public String title;
-  public String content;
+  private int no;
+  private int questionNo;
+  private String title;
+  private String content;
   private JoinDTO owner;
 
   @Override
   public String toString() {
-    return "ChallengeQuestionDTO [no=" + no + ", title=" + title + ", content=" + content + ", owner=" + owner + "]";
-}
+    return "ChallengeQuestionDTO [no=" + no + ", title=" + title + ", content=" + content
+        + ", owner=" + owner + ", questionNo=" + questionNo + "]";
+  }
 
   @Override
   public int hashCode() {
-    return Objects.hash(content, title, no);
+    return Objects.hash(content, no, owner, questionNo, title);
   }
 
   @Override
@@ -30,8 +32,9 @@ public class ChallengeQuestionDTO implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     ChallengeQuestionDTO other = (ChallengeQuestionDTO) obj;
-    return Objects.equals(content, other.content) && Objects.equals(title, other.title)
-        && no == other.no;
+    return Objects.equals(content, other.content) && no == other.no
+        && Objects.equals(owner, other.owner) && questionNo == other.questionNo
+        && Objects.equals(title, other.title);
   }
 
   public int getNo() {
@@ -39,6 +42,12 @@ public class ChallengeQuestionDTO implements Serializable {
   }
   public void setNo(int no) {
     this.no = no;
+  }
+  public int getQuestionNo() {
+    return questionNo;
+  }
+  public void setQuestionNo(int questionNo) {
+    this.questionNo = questionNo;
   }
   public String getTitle() {
     return title;

@@ -1,7 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
 import java.util.List;
-
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.ftp.handler.Command;
@@ -12,7 +11,7 @@ public abstract class AbstractChallengeReviewHandler implements Command {
   protected List<ChallengeDTO> challengeDTOList;
 
   public AbstractChallengeReviewHandler(List<ChallengeReviewDTO> challengeReviewDTOList,
-        List<ChallengeDTO> challengeDTOList) {
+      List<ChallengeDTO> challengeDTOList) {
     this.challengeReviewDTOList = challengeReviewDTOList;
     this.challengeDTOList = challengeDTOList;
   }
@@ -20,7 +19,7 @@ public abstract class AbstractChallengeReviewHandler implements Command {
   protected ChallengeReviewDTO findByReviewNo(int no) {
     ChallengeReviewDTO[] arr = challengeReviewDTOList.toArray(new ChallengeReviewDTO[0]);
     for (ChallengeReviewDTO challengeReviewDTO : arr) {
-      if (challengeReviewDTO.getNo() == no) {
+      if (challengeReviewDTO.getReviewNo() == no) {
         return challengeReviewDTO;
       }
     }
@@ -33,6 +32,13 @@ public abstract class AbstractChallengeReviewHandler implements Command {
       }
     }
     return null;
+  }
+  protected int getNextNum() {
+    if (challengeReviewDTOList.size() > 0) {
+      return challengeReviewDTOList.get(challengeReviewDTOList.size() - 1).getReviewNo() + 1;
+    } else {
+      return 1;
+    }
   }
 
 }

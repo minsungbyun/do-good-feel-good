@@ -1,7 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
 import java.util.List;
-
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -10,7 +9,7 @@ import com.share.util.Prompt;
 public class ChallengeReviewUpdateHandler extends AbstractChallengeReviewHandler {
 
   public ChallengeReviewUpdateHandler(List<ChallengeReviewDTO> challengeReviewDTOList,
-        List<ChallengeDTO> challengeDTOList) {
+      List<ChallengeDTO> challengeDTOList) {
     super(challengeReviewDTOList, challengeDTOList);
   }
 
@@ -18,7 +17,7 @@ public class ChallengeReviewUpdateHandler extends AbstractChallengeReviewHandler
   public void execute() {
     while (true) {
       System.out.println("[참여인증&댓글 수정]");
-      System.out.println(" ▶ 참여인증&댓글수정을 원하는 챌린지 번호를 입력해주세요 ");
+      System.out.println(" ▶ 챌린지 번호를 입력해주세요 ");
       System.out.println();
       int challengeNo = Prompt.inputInt("챌린지 번호: ");
 
@@ -28,7 +27,7 @@ public class ChallengeReviewUpdateHandler extends AbstractChallengeReviewHandler
       if (challengeDTO == null) {
         System.out.println("존재하지 않는 챌린지입니다");
       }
-      
+
       int updateNo = Prompt.inputInt("번호? ");
 
       ChallengeReviewDTO challengeReviewDTO = findByReviewNo(updateNo);

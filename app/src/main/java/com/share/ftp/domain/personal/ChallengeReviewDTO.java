@@ -16,27 +16,27 @@ public class ChallengeReviewDTO implements Serializable {
 
   @Override
   public String toString() {
-	return "ChallengeReviewDTO [no=" + no + ", content=" + content + ", fileUpload=" + fileUpload + ", registeredDate="
-		+ registeredDate + ", owner=" + owner + "]";
-}
+    return "ChallengeReviewDTO [no=" + no + ", content=" + content + ", fileUpload=" + fileUpload + ", registeredDate="
+        + registeredDate + ", owner=" + owner + "]";
+  }
 
-@Override
+  @Override
   public int hashCode() {
     return Objects.hash(content, fileUpload, no, owner, registeredDate);
   }
 
   @Override
-public boolean equals(Object obj) {
-	if (this == obj)
-		return true;
-	if (obj == null)
-		return false;
-	if (getClass() != obj.getClass())
-		return false;
-	ChallengeReviewDTO other = (ChallengeReviewDTO) obj;
-	return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload) && no == other.no
-			&& Objects.equals(owner, other.owner) && Objects.equals(registeredDate, other.registeredDate);
-}
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    ChallengeReviewDTO other = (ChallengeReviewDTO) obj;
+    return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload) && no == other.no
+        && Objects.equals(owner, other.owner) && Objects.equals(registeredDate, other.registeredDate);
+  }
 
 
   public int getNo() {
@@ -44,6 +44,12 @@ public boolean equals(Object obj) {
   }
   public void setNo(int no) {
     this.no = no;
+  }
+  public int getReviewNo() {
+    return reviewNo;
+  }
+  public void setReviewNo(int reviewNo) {
+    this.reviewNo = reviewNo;
   }
   public String getContent() {
     return content;
@@ -64,16 +70,10 @@ public boolean equals(Object obj) {
     this.registeredDate = registeredDate;
   }
   public JoinDTO getOwner() {
-	return owner;
-}
-  public void setOwner(JoinDTO owner) {
-	this.owner = owner;
-}
-  public int getReviewNo() {
-    return reviewNo;
+    return owner;
   }
-  public void setReviewNo(int reviewNo) {
-    this.reviewNo = reviewNo;
+  public void setOwner(JoinDTO owner) {
+    this.owner = owner;
   }
 
 }

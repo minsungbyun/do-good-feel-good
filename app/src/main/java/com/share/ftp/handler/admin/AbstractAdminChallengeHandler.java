@@ -19,4 +19,11 @@ public abstract class AbstractAdminChallengeHandler implements Command {
     }
     return null;
   }
+  protected int getNextNum() {
+    if (challengeDTOList.size() > 0) {
+      return challengeDTOList.get(challengeDTOList.size() - 1).getNo() + 1;
+    } else {
+      return 1;
+    }
+  }
 }
