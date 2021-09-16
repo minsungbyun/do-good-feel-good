@@ -455,7 +455,7 @@ public class App {
     //    loadCommBoard();
     //    loadCommReview();
     //
-        loadAdminChellengeAdd();
+    loadAdminChellengeAdd();
     //
     //    loadChallengeReviews();
     //    loadChallengeQuestions();
