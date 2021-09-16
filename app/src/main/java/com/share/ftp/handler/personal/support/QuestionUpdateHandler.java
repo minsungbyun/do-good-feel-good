@@ -17,9 +17,9 @@ public class QuestionUpdateHandler extends AbstractQuestionHandler {
 
       System.out.println();
       System.out.println("[메인/고객센터/문의하기/게시글 수정]");
-      int boardNo = Prompt.inputInt("번호? ");
+      int no = Prompt.inputInt("번호? ");
 
-      QuestionListDTO myQuestionListDTO = findByNo(boardNo);
+      QuestionListDTO myQuestionListDTO = findByNo(no);
 
       try {
         if (myQuestionListDTO == null) {

@@ -16,7 +16,7 @@ public class QuestionListHandler extends AbstractQuestionHandler {
     for (QuestionListDTO myQuestionListDTO : myQuestionListDTOList) {
 
       System.out.printf("%d, %s, %s, %s, %s, %s, %s, %d\n", 
-          myQuestionListDTO.getBoardNo(),
+          myQuestionListDTO.getNo(),
           myQuestionListDTO.getSort(),
           myQuestionListDTO.getTitle(), 
           myQuestionListDTO.getContent(),

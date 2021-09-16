@@ -7,17 +7,26 @@ import com.share.ftp.handler.Command;
 public abstract class AbstractAdminNoticeHandler implements Command {
 
   protected List<NoticeDTO> noticeDTOList;
+
   public AbstractAdminNoticeHandler(List<NoticeDTO> noticeDTOList) {
     this.noticeDTOList = noticeDTOList;
   }
 
-  protected NoticeDTO findByNo(int boardNo) {
+  protected NoticeDTO findByNo(int no) {
     for (NoticeDTO noticeDTO : noticeDTOList) {
-      if (noticeDTO.getBoardNo() == boardNo) {
+      if (noticeDTO.getNo() == no) {
         return noticeDTO;
       }
     }
     return null;
+  }
+
+  protected int getNextNum() {
+    if (noticeDTOList.size() > 0) {
+      return noticeDTOList.get(noticeDTOList.size() - 1).getNo() + 1;
+    } else {
+      return 1;
+    }
   }
 
 

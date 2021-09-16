@@ -12,9 +12,9 @@ public abstract class AbstractNoticeHandler implements Command {
     this.noticeDTOList = noticeDTOList;
   }
 
-  protected NoticeDTO findByNo(int boardNo) {
+  protected NoticeDTO findByNo(int no) {
     for (NoticeDTO noticeDTO : noticeDTOList) {
-      if (noticeDTO.getBoardNo() == boardNo) {
+      if (noticeDTO.getNo() == no) {
         return noticeDTO;
       }
     }
