@@ -8,11 +8,11 @@ import com.share.util.Prompt;
 public class VolGeneralDoJoinDeleteHandler extends AbstractVolGeneralHandler { // 개인 봉사신청 양식 쓰는 곳
 
   public VolGeneralDoJoinDeleteHandler(
-      List<GeneralRequestDTO> personalRequestDTOList,
-      List<GeneralRequestDTO> personalRequestApplyDTOList,
-      List<GeneralRequestDTO> personalRequestRejectDTOList) {
+      List<GeneralRequestDTO> generalRequestDTOList,
+      List<GeneralRequestDTO> generalRequestApplyDTOList,
+      List<GeneralRequestDTO> generalRequestRejectDTOList) {
 
-    super(personalRequestDTOList, personalRequestApplyDTOList, personalRequestRejectDTOList);
+    super(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList);
   }
 
 
@@ -21,6 +21,20 @@ public class VolGeneralDoJoinDeleteHandler extends AbstractVolGeneralHandler { /
   public void execute() {
     System.out.println();
     System.out.println("[  봉사 참여 취소하기  ]");
+
+    if (generalRequestApplyDTOList.isEmpty()) {
+      System.out.println("봉사 신청서가 없습니다.");
+      return;
+    }
+
+    for (int i = 0; i < generalRequestApplyDTOList.size(); i++) {
+
+      if (!generalRequestApplyDTOList.get(i).getOwner().getName().equals(AuthLoginHandler.getLoginUser().getName())) {
+        System.out.println("봉사신청서가 없습니다.");
+        return;
+      }
+    }
+
 
     int volNo = Prompt.inputInt("봉사번호? ");
 

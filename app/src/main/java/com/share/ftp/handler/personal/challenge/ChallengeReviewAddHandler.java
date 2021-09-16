@@ -30,15 +30,13 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
       System.out.println("해당 챌린지가 없습니다!");
     }
 
-    System.out.printf("챌린지 번호: %d\n"
-        + "챌린지 제목: %s\n"
+    System.out.printf("챌린지 제목: %s\n"
         //        + "챌린지 시작기간: %s\n"
         //        + "챌린지 종료기간: %s\n"
         + "챌린지 내용: %s\n"
         + "첨부파일: %s\n"
         + "등록날짜: %s\n\n",
 
-        challengeDTO.getNo(),      
         challengeDTO.getTitle(),     
         //challengeDTO.getStartDate(),  // 시작날짜
         //challengeDTO.getEndDate(),  // 끝나는 날짜

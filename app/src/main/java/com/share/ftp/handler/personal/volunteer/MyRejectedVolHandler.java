@@ -19,7 +19,7 @@ public class MyRejectedVolHandler extends AbstractVolGeneralHandler {
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("[  개인봉사반려 목록  ]");
+    System.out.println("[  봉사반려 목록  ]");
 
 
     JoinDTO loginUser = AuthLoginHandler.getLoginUser();
@@ -34,8 +34,9 @@ public class MyRejectedVolHandler extends AbstractVolGeneralHandler {
 
     for (GeneralRequestDTO generalRequestRejectDTO : generalRequestRejectDTOList) {
       if (generalRequestRejectDTO.getOwner().getName().equals(loginUser.getName())) {
-        System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
+        System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
             generalRequestRejectDTO.getVolNo(),      
+            generalRequestRejectDTO.getMemberType(),      
             generalRequestRejectDTO.getVolTitle(),     
             generalRequestRejectDTO.getOwner().getName(), 
             generalRequestRejectDTO.getVolType(), 

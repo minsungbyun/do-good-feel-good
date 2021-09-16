@@ -58,16 +58,23 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
 
       if (donationRegisterDTOList.isEmpty()) {
         System.out.println("[  현재 참여된 기부 내역이 없습니다. ]");
+      } else {
+        for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {
+          if (donationRegisterDTO.getNo() == donationBoardDTO.getNo()) {
+            System.out.printf("[ %s님, %d원, %s ]\n", 
+                donationRegisterDTO.getName(), 
+                donationRegisterDTO.getDonationMoney(), 
+                donationRegisterDTO.getRegisteredDate());
+          } 
+        } 
       }
 
-      for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {
-        if (donationRegisterDTO.getNo() == donationBoardDTO.getNo()) {
-          System.out.printf("[ %s님, %d원, %s ]\n", 
-              donationRegisterDTO.getName(), 
-              donationRegisterDTO.getDonationMoney(), 
-              donationRegisterDTO.getRegisteredDate());
-        }
-      }
+      //      if (donationRegisterDTOList.size() > 0 && ) {
+      //        
+      //          System.out.println("[  현재 참여된 기부 내역이 없습니다. ]");
+      //        
+      //      }
+
 
 
       //      donationRegisterParticipationListHandler.execute();

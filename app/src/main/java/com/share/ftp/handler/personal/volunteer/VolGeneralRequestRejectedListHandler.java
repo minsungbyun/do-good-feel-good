@@ -17,7 +17,7 @@ public class VolGeneralRequestRejectedListHandler extends AbstractVolGeneralHand
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("[  개인봉사반려 목록  ]");
+    System.out.println("[  봉사반려 목록  ]");
 
     if (generalRequestRejectDTOList.isEmpty()) {
       System.out.println("[  현재 반려된 봉사목록이 없습니다. ]");
@@ -25,8 +25,9 @@ public class VolGeneralRequestRejectedListHandler extends AbstractVolGeneralHand
     }
 
     for (GeneralRequestDTO generalRequestRejectDTO : generalRequestRejectDTOList) {
-      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
+      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
           generalRequestRejectDTO.getVolNo(),      
+          generalRequestRejectDTO.getMemberType(),      
           generalRequestRejectDTO.getVolTitle(),     
           generalRequestRejectDTO.getOwner().getName(), 
           generalRequestRejectDTO.getVolType(), 
@@ -40,7 +41,6 @@ public class VolGeneralRequestRejectedListHandler extends AbstractVolGeneralHand
           generalRequestRejectDTO.getVolLimitNum(),
           generalRequestRejectDTO.getVolContent(),
           generalRequestRejectDTO.getVolFileUpload(),
-          //          personalRequestRejectDTO.isChecked()
           generalRequestRejectDTO.getIsSigned()
           );
     }
