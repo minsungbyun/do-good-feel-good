@@ -1,13 +1,13 @@
 package com.share.ftp.handler.personal.volunteer;
 
-import static com.share.ftp.handler.personal.volunteer.General.member.PERSONAL;
+import static com.share.ftp.handler.personal.volunteer.General.member.ORG;
 import java.util.List;
 import com.share.ftp.domain.personal.GeneralRequestDTO;
 
-public class VolGeneralRequestApplyListHandler extends AbstractVolGeneralHandler { // 개인 봉사신청 양식 쓰는 곳
+public class VolOrgRequestApplyListHandler extends AbstractVolGeneralHandler { // 개인 봉사신청 양식 쓰는 곳
 
 
-  public VolGeneralRequestApplyListHandler(
+  public VolOrgRequestApplyListHandler(
       List<GeneralRequestDTO> generalRequestDTOList) {
 
     super(generalRequestDTOList);
@@ -16,7 +16,7 @@ public class VolGeneralRequestApplyListHandler extends AbstractVolGeneralHandler
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("[  봉사신청 목록  ]");
+    System.out.println("[  기관 봉사신청 목록  ]");
 
     if (generalRequestDTOList.isEmpty()) {
       System.out.println("[  현재 등록된 봉사목록이 없습니다. ]");
@@ -25,7 +25,7 @@ public class VolGeneralRequestApplyListHandler extends AbstractVolGeneralHandler
 
     for (GeneralRequestDTO generalRequestDTO : generalRequestDTOList) {
 
-      if (generalRequestDTO.getMemberType() == PERSONAL) {
+      if (generalRequestDTO.getMemberType() == ORG) {
         System.out.printf("번호: %d\n"
             + "봉사유형: %s\n"
             + "봉사제목: %s\n"
