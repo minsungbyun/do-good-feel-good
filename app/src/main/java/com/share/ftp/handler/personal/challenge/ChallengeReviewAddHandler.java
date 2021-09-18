@@ -51,10 +51,11 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
       return;
     }
 
-    //    if (challengeDTO.getMemberNames() != AuthLoginHandler.getLoginUser().getName()) {
-    //      System.out.println("챌린지 참여한 회원만 등록이 가능합니다!");
-    //      return;
-    //    }
+
+    if (!challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
+      System.out.println("챌린지 참여한 회원만 등록이 가능합니다!");
+      return;
+    }
 
     ChallengeReviewDTO challengeReviewDTO = new ChallengeReviewDTO();
 
@@ -65,22 +66,6 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
 
     challengeReviewDTO.setOwner(AuthLoginHandler.getLoginUser());
 
-
-
-    //    int count = challengeReviewDTOList.get(challengeReviewDTO.getNo() - 1).getReviewNo();
-
-    // 각 챌린지에서 댓글이 비었을 때 초기값 1설정 이후에는 1씩 증가
-
-    //    if (challengeReviewDTOList.isEmpty()) {
-    //
-    //    }
-
-    //    if (challengeDTO.getNo() == challengeReviewDTO.getNo()) {
-    //      challengeReviewDTO.setReviewNo(1);
-    //      System.out.println("초기화");
-    //    } else {
-    //      challengeReviewDTO.setReviewNo(getNextNum());
-    //    }
 
     System.out.println("챌린지 번호 = " + challengeDTO.getNo());
 
@@ -93,13 +78,6 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
     challengeDTO.setReviewCount(challengeReviewDTO.getReviewNo());
     System.out.println("challengeDTO.getReviewCount() = " + challengeDTO.getReviewCount());
 
-
-    //    challengeReviewDTO.setReviewNo(getNextNum());
-
-    //      challengeReviewDTO.setReviewNo(1);
-    //    challengeReviewDTO.setReviewNo(getNextNum(challengeDTO.getNo(),challengeReviewDTO));
-    //    System.out.println("challengeReviewDTO.getNo() = " + challengeReviewDTO.getNo());
-    //    System.out.println("challengeReviewDTO.getReviewNo() = " + challengeReviewDTO.getReviewNo());
 
     challengeReviewDTOList.add(challengeReviewDTO);
     System.out.println("총 댓글 개수 = " + challengeReviewDTOList.size());
