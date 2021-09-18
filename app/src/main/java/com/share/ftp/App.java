@@ -464,6 +464,8 @@ public class App {
     //    loadOrgRequestReject();
     //
     //    loadCommBoard();
+    loadObjects("commBoardDTO.json", commBoardDTOList, CommBoardDTO.class);
+    loadObjects("commReviewDTO.json", commReviewDTOList, CommReviewDTO.class);
     //    loadCommReview();
     //
     loadObjects("challengeDTO.json", challengeDTOList, ChallengeDTO.class);
@@ -508,6 +510,10 @@ public class App {
     //
     //
     //    saveAdminChellengeAdd();
+
+    saveObjects("commBoardDTO.json", commBoardDTOList);
+    saveObjects("commReviewDTO.json", commReviewDTOList);
+
 
     saveObjects("challengeDTO.json", challengeDTOList);
     //
