@@ -40,5 +40,26 @@ public abstract class AbstractChallengeReviewHandler implements Command {
       return 1;
     }
   }
+  protected int getNextNum(int challengeNo,ChallengeReviewDTO challengeReviewDTO) {
+    if (challengeReviewDTOList.isEmpty()) {
+      System.out.println("처음");
+      return 1;
+    }
+
+    if ((challengeReviewDTO.getReviewNo() != 1) && (challengeDTOList.get(challengeNo - 1).getNo() == challengeNo)  /*( challengeDTOList.get(challengeNo - 1).getReviewCount() == 0)*/) {
+      challengeDTOList.get(challengeNo - 1).setReviewCount(challengeReviewDTO.getReviewNo());
+      return challengeDTOList.get(challengeNo - 1).getReviewCount() + 1;
+
+    } else {
+      System.out.println("각 게시판 처음은 1");
+      return 1;
+    }
+
+    //    if (challengeReviewDTOList.size() > 0) {
+    //      return challengeReviewDTOList.get(challengeNo - 1).getReviewNo() + 1;
+    //    } else {
+    //      return 1;
+    //    }
+  }
 
 }

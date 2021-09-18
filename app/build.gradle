@@ -26,6 +26,13 @@ repositories {
 
 dependencies {
     implementation 'com.google.code.gson:gson:2.8.8'
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    
+>>>>>>> b4b21b86e3762893c7702245f702191b1e36ea14
+=======
+>>>>>>> 461e4202563e92865937d7866e49f67a4cb41352
     // Use JUnit test framework.
     testImplementation 'junit:junit:4.13.2'
 

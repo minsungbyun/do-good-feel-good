@@ -24,6 +24,9 @@ public abstract class AbstractCommBoardHandler implements Command {
     return null;
   }
 
+  //  에러 걸려서 주석좀 막을게 !! 에러 걸려서 주석좀 막을게 !! 에러 걸려서 주석좀 막을게 !! 
+  //  에러 걸려서 주석좀 막을게 !! 에러 걸려서 주석좀 막을게 !! 에러 걸려서 주석좀 막을게 !!
+
   //  protected void addComment(CommBoardDTO commBoardDTOList) {
   //    System.out.println();
   //    System.out.println("▶ 댓글 등록");

@@ -5,13 +5,15 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
 import com.share.ftp.domain.join.JoinDTO;
 
-@SuppressWarnings("serial")
+
 public class ChallengeDTO implements Serializable{
 
+
+  private static final long serialVersionUID = 1L;
   private int no;
+  private int reviewCount;
   private JoinDTO admin;
   private String title;
   private String content;
@@ -27,19 +29,19 @@ public class ChallengeDTO implements Serializable{
   }
 
   @Override
-public boolean equals(Object obj) {
-	if (this == obj)
-		return true;
-	if (obj == null)
-		return false;
-	if (getClass() != obj.getClass())
-		return false;
-	ChallengeDTO other = (ChallengeDTO) obj;
-	return Objects.equals(admin, other.admin) && Objects.equals(content, other.content)
-			&& Objects.equals(fileUpload, other.fileUpload) && Objects.equals(members, other.members) && no == other.no
-			&& Objects.equals(registeredDate, other.registeredDate) && Objects.equals(title, other.title)
-			&& viewCount == other.viewCount;
-}
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    ChallengeDTO other = (ChallengeDTO) obj;
+    return Objects.equals(admin, other.admin) && Objects.equals(content, other.content)
+        && Objects.equals(fileUpload, other.fileUpload) && Objects.equals(members, other.members) && no == other.no
+        && Objects.equals(registeredDate, other.registeredDate) && Objects.equals(title, other.title)
+        && viewCount == other.viewCount;
+  }
 
   @Override
   public String toString() {
@@ -58,10 +60,10 @@ public boolean equals(Object obj) {
     return title;
   }
   public JoinDTO getAdmin() {
-	  return admin;
+    return admin;
   }
   public void setAdmin(JoinDTO admin) {
-	  this.admin = admin;
+    this.admin = admin;
   }
   public void setTitle(String title) {
     this.title = title;
@@ -96,6 +98,17 @@ public boolean equals(Object obj) {
   public void setMembers(List<JoinDTO> members) {
     this.members = members;
   }
+
+
+
+  public int getReviewCount() {
+    return reviewCount;
+  }
+
+  public void setReviewCount(int reviewCount) {
+    this.reviewCount = reviewCount;
+  }
+
   public void addMembers(JoinDTO member) {
     this.members.add(member);
   }

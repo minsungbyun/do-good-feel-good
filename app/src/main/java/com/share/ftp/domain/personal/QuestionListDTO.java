@@ -11,7 +11,7 @@ public class QuestionListDTO implements Serializable {
   private int No;
   private String title;
   private String memberld;
-  private String password;
+  private int password;
   private String writer;
   private String content;
   private String fileUpload;
@@ -81,10 +81,10 @@ public class QuestionListDTO implements Serializable {
   public void setMemberld(String memberld) {
     this.memberld = memberld;
   }
-  public String getPassword() {
+  public int getPassword() {
     return password;
   }
-  public void setPassword(String password) {
+  public void setPassword(int password) {
     this.password = password;
   }
   public String getWriter() {

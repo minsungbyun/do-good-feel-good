@@ -92,7 +92,6 @@ public class VolGeneralDoJoinHandler extends AbstractVolGeneralHandler {
 
     // 출력할 멤버 list에 추가시킨다
     generalRequestApplyDTO.addMembers(AuthLoginHandler.getLoginUser());
-
     // 주최자 이름이 멤버 출력하는데 포함되어 있다면 제거
     if (generalRequestApplyDTO.getMembers().contains(generalRequestApplyDTO.getOwner())) {
       generalRequestApplyDTO.getMembers().remove(generalRequestApplyDTO.getOwner());

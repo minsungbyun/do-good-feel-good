@@ -5,8 +5,10 @@ import com.share.ftp.domain.personal.DonationRegisterDTO;
 
 public class DonationRegisterMyTotalMoneyHandler extends AbstractDonationRegisterHandler {
 
+
   public DonationRegisterMyTotalMoneyHandler(List<DonationRegisterDTO> donationRegisterDTOList) {
     super(donationRegisterDTOList);
+
   }
 
   @Override

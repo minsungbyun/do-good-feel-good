@@ -65,11 +65,33 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
 
     challengeReviewDTO.setOwner(AuthLoginHandler.getLoginUser());
 
-    challengeReviewDTO.setReviewNo(getNextNum());
+
+    System.out.println("챌린지 번호 = " + challengeDTO.getNo());
+
+    if (challengeDTO.getReviewCount() == 0) {
+      challengeReviewDTO.setReviewNo(1);
+      System.out.println("각 챌린지의 첫 댓글입니다");
+    } else {
+      challengeReviewDTO.setReviewNo(getNextNum());
+    }
+    challengeDTO.setReviewCount(challengeReviewDTO.getReviewNo());
+    System.out.println("challengeDTO.getReviewCount() = " + challengeDTO.getReviewCount());
+
+
+    //    challengeReviewDTO.setReviewNo(getNextNum());
+
+    //      challengeReviewDTO.setReviewNo(1);
+    //    challengeReviewDTO.setReviewNo(getNextNum(challengeDTO.getNo(),challengeReviewDTO));
+    //    System.out.println("challengeReviewDTO.getNo() = " + challengeReviewDTO.getNo());
+    //    System.out.println("challengeReviewDTO.getReviewNo() = " + challengeReviewDTO.getReviewNo());
 
     challengeReviewDTOList.add(challengeReviewDTO);
+    System.out.println("총 댓글 개수 = " + challengeReviewDTOList.size());
 
     System.out.println();
     System.out.println("참여인증&댓글이 등록이 완료되었습니다.");
   }
+
+
+
 }

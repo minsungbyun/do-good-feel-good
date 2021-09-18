@@ -4,12 +4,15 @@ import com.share.ftp.handler.Command;
 
 public class VolGeneralTotalApprovedListHandler implements Command { // 개인 봉사신청 양식 쓰는 곳
 
-  VolGeneralRequestAppliedListHandler volGeneralRequestAppliedListHandler;
+  VolPersonalRequestAppliedListHandler volPersonalRequestAppliedListHandler;
+  VolOrgRequestAppliedListHandler volOrgRequestAppliedListHandler;
 
   public VolGeneralTotalApprovedListHandler(
-      VolGeneralRequestAppliedListHandler volGeneralRequestAppliedListHandler) {
+      VolPersonalRequestAppliedListHandler volPersonalRequestAppliedListHandler,
+      VolOrgRequestAppliedListHandler volOrgRequestAppliedListHandler) {
 
-    this.volGeneralRequestAppliedListHandler = volGeneralRequestAppliedListHandler;
+    this.volPersonalRequestAppliedListHandler = volPersonalRequestAppliedListHandler;
+    this.volOrgRequestAppliedListHandler = volOrgRequestAppliedListHandler;
   }
 
   @Override
@@ -18,8 +21,8 @@ public class VolGeneralTotalApprovedListHandler implements Command { // 개인 �
 
     System.out.println("▶ 전체봉사승인 목록");
 
-    volGeneralRequestAppliedListHandler.execute();
-    //    volRequestOrgAppliedListHandler.execute();
+    volPersonalRequestAppliedListHandler.execute();
+    volOrgRequestAppliedListHandler.execute();
 
   }
 }

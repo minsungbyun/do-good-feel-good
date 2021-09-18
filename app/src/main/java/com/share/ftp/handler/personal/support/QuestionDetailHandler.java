@@ -24,7 +24,7 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
       return;
     }
 
-    if (myQuestionListDTO.getOwner().getId() == (AuthLoginHandler.getLoginUser().getId()) ||
+    if ((myQuestionListDTO.getOwner().getId() == AuthLoginHandler.getLoginUser().getId()) ||
         AuthLoginHandler.getLoginUser().getId().equals("admin")) {
 
       System.out.printf("번호: %s\n", myQuestionListDTO.getNo());

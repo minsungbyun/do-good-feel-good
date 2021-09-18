@@ -20,28 +20,73 @@ public class VolGeneralRequestAcceptHandler extends AbstractVolGeneralHandler { 
     System.out.println();
     System.out.println("[  봉사신청서 승인  ]");
     System.out.println();
-    int no = Prompt.inputInt("번호 ▶ ");
-    System.out.println();
 
-    GeneralRequestDTO generalRequestDTO = findByVol(no);
+    if (generalRequestDTOList.isEmpty()) {
+      System.out.println("승인할 봉사 신청서가 없습니다!");
 
-    if (generalRequestDTO == null) {
-      System.out.println("해당 번호의 봉사신청서가 없습니다.");
+    }
+
+
+    if(validPersonalVol()) {
+
+      int no = Prompt.inputInt("번호 ▶ ");
+      System.out.println();
+
+      GeneralRequestDTO generalRequestDTO = findByVol(no);
+
+      if (generalRequestDTO == null) {
+        System.out.println("해당 번호의 봉사신청서가 없습니다.");
+        return;
+      }
+
+      String input = Prompt.inputString("정말 승인하시겠습니까?(y/N) ");
+      if (!input.equals("y") || input.length() == 0) {
+        System.out.println("[  해당 봉사신청 승인을 취소하였습니다. ]");
+        return;
+      }
+
+      generalRequestDTO.setIsSigned("승인됨");
+      generalRequestDTO.addMembers(generalRequestDTO.getOwner());
+
+      generalRequestApplyDTOList.add(generalRequestDTO);
+
+      System.out.println("[  ✔️ 해당 봉사신청을 승인하였습니다. ]");
+
+    } else if (validOrgVol()) {
+
+      int no = Prompt.inputInt("번호 ▶ ");
+      System.out.println();
+
+      GeneralRequestDTO generalRequestDTO = findByVol(no);
+
+      if (generalRequestDTO == null) {
+        System.out.println("해당 번호의 봉사신청서가 없습니다.");
+        return;
+      }
+
+      String input = Prompt.inputString("정말 승인하시겠습니까?(y/N) ");
+      if (!input.equals("y") || input.length() == 0) {
+        System.out.println("[  해당 봉사신청 승인을 취소하였습니다. ]");
+        return;
+      }
+
+      generalRequestDTO.setIsSigned("승인됨");
+      generalRequestDTO.addMembers(generalRequestDTO.getOwner());
+
+      generalRequestApplyDTOList.add(generalRequestDTO);
+
+      System.out.println("[  ✔️ 해당 봉사신청을 승인하였습니다. ]");
+    } else {
+      System.out.println("해당 번호의 봉사는 없습니다.");
       return;
     }
 
-    String input = Prompt.inputString("정말 승인하시겠습니까?(y/N) ");
-    if (!input.equals("y") || input.length() == 0) {
-      System.out.println("[  해당 봉사신청 참여를 취소하였습니다. ]");
-      return;
-    }
 
-    generalRequestDTO.setIsSigned("승인됨");
-    generalRequestDTO.addMembers(generalRequestDTO.getOwner());
 
-    generalRequestApplyDTOList.add(generalRequestDTO);
 
-    System.out.println("[  ✔️ 해당 봉사신청을 승인하였습니다. ]");
+
+
+
   }
 }
 

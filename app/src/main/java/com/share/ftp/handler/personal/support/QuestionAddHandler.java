@@ -51,7 +51,7 @@ public class QuestionAddHandler extends AbstractQuestionHandler {
         myQuestionListDTO.setTitle(Prompt.inputString("제목? "));
         myQuestionListDTO.setContent(Prompt.inputString("내용? "));
         myQuestionListDTO.setOwner(AuthLoginHandler.getLoginUser());
-        myQuestionListDTO.setPassword(Prompt.inputString("비밀번호? "));
+        myQuestionListDTO.setPassword(Prompt.inputInt("비밀번호? "));
         myQuestionListDTO.setFileUpload(Prompt.inputString("파일첨부? "));
         myQuestionListDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 
