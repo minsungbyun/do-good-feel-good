@@ -12,12 +12,8 @@ public class DonationRegisterTotalMoneyHandler extends AbstractDonationRegisterH
   @Override
   public void execute() {
 
-    for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {
-      total += donationRegisterDTO.getDonationMoney();
-      break;
-    }
-    int a = total;
-    System.out.printf("기부 총 금액 : %d\n", a);
+    System.out.printf("기부 총 금액 : %d\n", DonationRegisterDTO.totalDonationMoney);
+
   }
 }
 

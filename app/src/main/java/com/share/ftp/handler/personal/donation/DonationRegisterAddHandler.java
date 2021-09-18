@@ -91,6 +91,7 @@ public class DonationRegisterAddHandler extends AbstractDonationRegisterHandler 
       }
 
       donationRegister.setDonationMoney(Prompt.inputInt("기부 금액 ▶ "));
+      donationRegister.addDonationMoney(donationRegister.getDonationMoney());
       donationRegister.setMyTotaldonationMoney(donationRegister.getDonationMoney());
       donationRegister.setName(AuthLoginHandler.getLoginUser().getName());
       donationRegister.setRegisterationNumber(Prompt.inputString("주민등록번호 ▶ "));

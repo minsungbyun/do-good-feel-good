@@ -69,16 +69,40 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
 
     //    int count = challengeReviewDTOList.get(challengeReviewDTO.getNo() - 1).getReviewNo();
 
+    // 각 챌린지에서 댓글이 비었을 때 초기값 1설정 이후에는 1씩 증가
 
+    //    if (challengeReviewDTOList.isEmpty()) {
+    //
+    //    }
 
+    //    if (challengeDTO.getNo() == challengeReviewDTO.getNo()) {
     //      challengeReviewDTO.setReviewNo(1);
-    challengeReviewDTO.setReviewNo(getNextNum(challengeDTO.getNo(),challengeReviewDTO));
-    System.out.println("challengeDTO.getNo() = " + challengeDTO.getNo());
-    System.out.println("challengeReviewDTO.getNo() = " + challengeReviewDTO.getNo());
-    System.out.println("challengeReviewDTO.getReviewNo() = " + challengeReviewDTO.getReviewNo());
+    //      System.out.println("초기화");
+    //    } else {
+    //      challengeReviewDTO.setReviewNo(getNextNum());
+    //    }
+
+    System.out.println("챌린지 번호 = " + challengeDTO.getNo());
+
+    if (challengeDTO.getReviewCount() == 0) {
+      challengeReviewDTO.setReviewNo(1);
+      System.out.println("각 챌린지의 첫 댓글입니다");
+    } else {
+      challengeReviewDTO.setReviewNo(getNextNum());
+    }
+    challengeDTO.setReviewCount(challengeReviewDTO.getReviewNo());
     System.out.println("challengeDTO.getReviewCount() = " + challengeDTO.getReviewCount());
 
+
+    //    challengeReviewDTO.setReviewNo(getNextNum());
+
+    //      challengeReviewDTO.setReviewNo(1);
+    //    challengeReviewDTO.setReviewNo(getNextNum(challengeDTO.getNo(),challengeReviewDTO));
+    //    System.out.println("challengeReviewDTO.getNo() = " + challengeReviewDTO.getNo());
+    //    System.out.println("challengeReviewDTO.getReviewNo() = " + challengeReviewDTO.getReviewNo());
+
     challengeReviewDTOList.add(challengeReviewDTO);
+    System.out.println("총 댓글 개수 = " + challengeReviewDTOList.size());
 
     System.out.println();
     System.out.println("참여인증&댓글이 등록이 완료되었습니다.");

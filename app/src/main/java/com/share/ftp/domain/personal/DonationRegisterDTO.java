@@ -7,8 +7,12 @@ import java.util.List;
 import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
-@SuppressWarnings("serial")
+
 public class DonationRegisterDTO implements Serializable{
+
+
+  private static final long serialVersionUID = 1L;
+
 
   private String children = "아동";
   private String teen = "청소년";
@@ -21,6 +25,7 @@ public class DonationRegisterDTO implements Serializable{
 
   private int no;
   private int donationMoney;
+  public static int totalDonationMoney;
   private int myTotaldonationMoney;
   private String name;
   private String registerationNumber;
@@ -184,6 +189,22 @@ public class DonationRegisterDTO implements Serializable{
   public void setMembers(List<JoinDTO> members) {
     this.members = members;
   }
+
+
+
+
+
+  public int getTotalDonationMoney() {
+    return totalDonationMoney;
+  }
+  public void setTotalDonationMoney(int totalDonationMoney) {
+    this.totalDonationMoney = totalDonationMoney;
+  }
+
+  public void addDonationMoney(int donationMoney) {
+    this.totalDonationMoney += donationMoney;
+  }
+
 
   public void addMembers(JoinDTO member) {
     this.members.add(member);

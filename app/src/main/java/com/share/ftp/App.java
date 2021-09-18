@@ -134,6 +134,10 @@ import com.share.ftp.handler.personal.volunteer.VolGeneralRequestDeleteHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestRejectHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestRejectedListHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralTotalApprovedListHandler;
+import com.share.ftp.handler.personal.volunteer.VolOrgRequestAppliedListHandler;
+import com.share.ftp.handler.personal.volunteer.VolOrgRequestApplyListHandler;
+import com.share.ftp.handler.personal.volunteer.VolPersonalRequestAppliedListHandler;
+import com.share.ftp.handler.personal.volunteer.VolPersonalRequestApplyListHandler;
 import com.share.menu.Menu;
 import com.share.menu.MenuGroup;
 import com.share.util.Prompt;
@@ -230,15 +234,19 @@ public class App {
 
   // 함께해요 봉사 세부사항 Handler
 
-  VolGeneralTotalApprovedListHandler volRequestTotalApprovedListHandler =
-      new VolGeneralTotalApprovedListHandler
-      (volGeneralRequestAppliedListHandler);
+  VolPersonalRequestAppliedListHandler volPersonalRequestAppliedListHandler = new VolPersonalRequestAppliedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList);
+  VolOrgRequestAppliedListHandler volOrgRequestAppliedListHandler = new VolOrgRequestAppliedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList);
+
+
 
   //봉사참여자목록
   VolGeneralDoJoinListHandler volDoJoinHandler = 
       new VolGeneralDoJoinListHandler
       (generalRequestApplyDTOList, volRequestPersonalAppliedListDetailHandler);
 
+
+
+  DonationRegisterDTO donationRegisterDTO = new DonationRegisterDTO();
 
 
   // 챌린지 참여자 목록
@@ -278,14 +286,18 @@ public class App {
 
     commands.put("/volGeneralRequest/apply", new VolGeneralRequestApplyHandler(generalRequestDTOList,joinDTOList));
     commands.put("/volGeneralRequest/applyList", new VolGeneralRequestApplyListHandler(generalRequestDTOList));
+    commands.put("/volPersonalRequest/applyList", new VolPersonalRequestApplyListHandler(generalRequestDTOList));
+    commands.put("/volOrgRequest/applyList", new VolOrgRequestApplyListHandler(generalRequestDTOList));
     commands.put("/volGeneralRequest/applyCompleteList", new VolGeneralRequestApplyCompleteHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     commands.put("/volGeneralRequest/acceptApply", new VolGeneralRequestAcceptHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     commands.put("/volGeneralRequest/rejectApply", new VolGeneralRequestRejectHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     commands.put("/volGeneralRequest/appliedList", new VolGeneralRequestAppliedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+    commands.put("/volPersonalRequest/appliedList", new VolPersonalRequestAppliedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+    commands.put("/volOrgRequest/appliedList", new VolOrgRequestAppliedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     commands.put("/volGeneralRequest/rejectedList", new VolGeneralRequestRejectedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     commands.put("/volGeneralRequest/delete", new VolGeneralRequestDeleteHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     commands.put("/volGeneralRequest/bookmark", new VolGeneralRequestBookmarkHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
-    commands.put("/volGeneralRequest/totalApprovedList", new VolGeneralTotalApprovedListHandler(volGeneralRequestAppliedListHandler));
+    commands.put("/volGeneralRequest/totalApprovedList", new VolGeneralTotalApprovedListHandler(volPersonalRequestAppliedListHandler,volOrgRequestAppliedListHandler));
     commands.put("/volGeneralDoJoin/add", new VolGeneralDoJoinHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     commands.put("/volGeneralDoJoin/list", new VolGeneralDoJoinListHandler(generalRequestApplyDTOList, volRequestPersonalAppliedListDetailHandler));
     commands.put("/volGeneralDoJoin/delete", new VolGeneralDoJoinDeleteHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
@@ -1450,8 +1462,8 @@ public class App {
   private Menu createAdminVolMenu() {
     MenuGroup adminVolMenu = new MenuGroup("봉사활동 관리", ACCESS_ADMIN);
 
-    adminVolMenu.add(new MenuItem("개인봉사신청내역","/volGeneralRequest/applyList"));
-    adminVolMenu.add(new MenuItem("기관봉사신청내역","/volGeneralRequest/applyList")); // 구현예정
+    adminVolMenu.add(new MenuItem("개인봉사신청내역","/volPersonalRequest/applyList"));
+    adminVolMenu.add(new MenuItem("기관봉사신청내역","/volOrgRequest/applyList")); // 구현예정
     adminVolMenu.add(new MenuItem("개인봉사승인하기","/volGeneralRequest/acceptApply"));
     adminVolMenu.add(new MenuItem("기관봉사승인하기","/volGeneralRequest/acceptApply")); // 구현예정
     adminVolMenu.add(new MenuItem("개인봉사반려하기","/volGeneralRequest/rejectApply"));
