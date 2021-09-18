@@ -19,13 +19,13 @@ public class QuestionSearchHandler extends AbstractQuestionHandler {
     for (QuestionListDTO myQuestionListDTO : myQuestionListDTOList) {
       if (!myQuestionListDTO.getTitle().contains(input) &&
           !myQuestionListDTO.getContent().contains(input) &&
-          !myQuestionListDTO.getWriter().contains(input)) {
+          !myQuestionListDTO.getOwner().getId().contains(input)) {
         continue;
       }
       System.out.printf("%d, %s, %s, %s, %d\n", 
-          myQuestionListDTO.getNo(), 
+          myQuestionListDTO.getBoardNo(), 
           myQuestionListDTO.getTitle(), 
-          myQuestionListDTO.getWriter(),
+          myQuestionListDTO.getOwner().getId(),
           myQuestionListDTO.getRegisteredDate(),
           myQuestionListDTO.getViewCount()); 
     }

@@ -77,6 +77,25 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
     }
 
 
+<<<<<<< HEAD:app/src/main/java/com/share/ftp/handler/personal/volunteer/VolRequestPersonalAppliedListDetailHandler.java
+    // 봉사인원 유효성 검사
+    //    if (personalRequestApplyDTO.getTotalJoinCount() == personalRequestApplyDTO.getJoinNum()) {
+    //      System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
+    //      return;
+    //    }
+    //    System.out.println("멤버추가시키기 전");
+    //    System.out.println("member객체의 사이즈:"+ members.size());
+    //
+    //    if (!members.contains(AuthLoginHandler.getLoginUser())) {
+    //      members.add(AuthLoginHandler.getLoginUser());
+    //    }
+    //
+    //    System.out.println("멤버추가 시킨 후");
+    //    System.out.println("member객체의 사이즈:"+ members.size());
+    //    personalRequestApplyDTO.setMembers(members); // 참여 멤버 등록
+
+
+=======
     //    // 봉사인원 유효성 검사
     //    if (personalRequestApplyDTO.getTotalJoinCount() == personalRequestApplyDTO.getJoinNum()) {
     //      System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
@@ -158,6 +177,7 @@ public class VolRequestPersonalAppliedListDetailHandler extends AbstractVolReque
       personalRequestApplyDTO.setTotalJoinCount3(joinCount3);
 
     }
+>>>>>>> b7670332bfdfca336ca97027b5dd1a82d3a90832:app/src/test/java/com/share/ftp/handler/personal/volunteer/VolRequestPersonalAppliedListDetailHandler.java
 
     //    //    findByName(no);
     //    if (members.contains(AuthLoginHandler.getLoginUser())) {

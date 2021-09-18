@@ -49,11 +49,6 @@ import com.share.ftp.handler.admin.AdminNoticeDetailHandler;
 import com.share.ftp.handler.admin.AdminNoticeListHandler;
 import com.share.ftp.handler.admin.AdminNoticeSearchHandler;
 import com.share.ftp.handler.admin.AdminNoticeUpdateHandler;
-import com.share.ftp.handler.admin.AdminQuestionAddHandler;
-import com.share.ftp.handler.admin.AdminQuestionDeleteHandler;
-import com.share.ftp.handler.admin.AdminQuestionDetailHandler;
-import com.share.ftp.handler.admin.AdminQuestionListHandler;
-import com.share.ftp.handler.admin.AdminQuestionUpdateHandler;
 import com.share.ftp.handler.join.AuthChangeUserInfoHandler;
 import com.share.ftp.handler.join.AuthDisplayUserInfoHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -121,6 +116,7 @@ import com.share.ftp.handler.personal.support.QuestionAddHandler;
 import com.share.ftp.handler.personal.support.QuestionDeleteHandler;
 import com.share.ftp.handler.personal.support.QuestionDetailHandler;
 import com.share.ftp.handler.personal.support.QuestionListHandler;
+import com.share.ftp.handler.personal.support.QuestionSearchHandler;
 import com.share.ftp.handler.personal.support.QuestionUpdateHandler;
 import com.share.ftp.handler.personal.volunteer.MyAppliedVolDetailHandler;
 import com.share.ftp.handler.personal.volunteer.MyAppliedVolHandler;
@@ -183,6 +179,9 @@ public class App {
   List<NoticeDTO> noticeDTOList = new ArrayList<>();
   List<QuestionDTO> questionDTOList = new ArrayList<>();
   List<ApproveOrgDTO> approveOrgDTOList = new ArrayList<>();
+
+  //댓글 도메인
+  //  List<CommentDTO> commentDTOList = new ArrayList<>();
 
   // 메뉴 객체 컨트롤(Map)
   HashMap<String,Command> commands = new HashMap<>();
@@ -333,12 +332,12 @@ public class App {
     commands.put("/challengeReview/search", new ChallengeReviewSearchHandler(challengeReviewDTOList, challengeDTOList));
 
     // 챌린지 문의하기
-    commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(challengeQuestionDTOList));
-    commands.put("/challengeQuestion/list", new ChallengeQuestionListHandler(challengeQuestionDTOList));
-    commands.put("/challengeQuestion/detail", new ChallengeQuestionDetailHandler(challengeQuestionDTOList));
-    commands.put("/challengeQuestion/update", new ChallengeQuestionUpdateHandler(challengeQuestionDTOList));
-    commands.put("/challengeQuestion/delete", new ChallengeQuestionDeleteHandler(challengeQuestionDTOList));
-    commands.put("/challengeQuestion/search", new ChallengeQuestionSearchHandler(challengeQuestionDTOList));
+    commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(challengeQuestionDTOList, challengeDTOList));
+    commands.put("/challengeQuestion/list", new ChallengeQuestionListHandler(challengeQuestionDTOList, challengeDTOList));
+    commands.put("/challengeQuestion/detail", new ChallengeQuestionDetailHandler(challengeQuestionDTOList, challengeDTOList));
+    commands.put("/challengeQuestion/update", new ChallengeQuestionUpdateHandler(challengeQuestionDTOList, challengeDTOList));
+    commands.put("/challengeQuestion/delete", new ChallengeQuestionDeleteHandler(challengeQuestionDTOList, challengeDTOList));
+    commands.put("/challengeQuestion/search", new ChallengeQuestionSearchHandler(challengeQuestionDTOList, challengeDTOList));
 
     // 챌린지 랭킹
     commands.put("/ranking/list", new RankingHandler());  //전체랭킹(구현예정)
@@ -360,21 +359,13 @@ public class App {
     commands.put("/donationRegister/participation", new DonationRegisterParticipationHandler(donationRegisterDTOList));
     commands.put("/donationRegister/totalMoney", new DonationRegisterTotalMoneyHandler(donationRegisterDTOList));
 
-    //    // 고객센터 공지사항 (개인+ 관리자)
-    //    commands.put("/notice/add", new NoticeAddHandler(noticeDTOList));
-    //    commands.put("/notice/list", new NoitceListHandler(noticeDTOList));
-    //    commands.put("/notice/detail", new NoticeDetailHandler(noticeDTOList));
-    //    commands.put("/notice/update", new NoticeUpdateHandler(noticeDTOList));
-    //    commands.put("/notice/delete", new NoticeDeleteHandler(noticeDTOList));
-    //    commands.put("/notice/search", new NoticeSearchHandler(noticeDTOList));
-
     // 고객센터 문의사항
     commands.put("/question/add", new QuestionAddHandler(myQuestionListDTOList));
     commands.put("/question/list", new QuestionListHandler(myQuestionListDTOList));
     commands.put("/question/detail", new QuestionDetailHandler(myQuestionListDTOList));
     commands.put("/question/update", new QuestionUpdateHandler(myQuestionListDTOList));
     commands.put("/question/delete", new QuestionDeleteHandler(myQuestionListDTOList));
-    commands.put("/question/search", new QuestionDeleteHandler(myQuestionListDTOList));
+    commands.put("/question/search", new QuestionSearchHandler(myQuestionListDTOList));
 
     // 마이페이지
     commands.put("/myPage/info", new MyPageInfoHandler(joinDTOList)); // 내정보 수정
@@ -405,7 +396,7 @@ public class App {
     commands.put("/join/detail", new JoinDetailHandler(joinDTOList)); // 가입회원 상세보기 (관리자연결)
     commands.put("/join/delete", new AdminMemberDeleteHandler());
 
-    // 관리자 공지사항 관리
+    // 관리자 공지사항 (개인 + 관리자)
     commands.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDTOList));
     commands.put("/adminNotice/list", new AdminNoticeListHandler(noticeDTOList));
     commands.put("/adminNotice/detail", new AdminNoticeDetailHandler(noticeDTOList));
@@ -413,12 +404,12 @@ public class App {
     commands.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDTOList));
     commands.put("/adminNotice/search", new AdminNoticeSearchHandler(noticeDTOList));
 
-    // 관리자 문의사항
-    commands.put("/adminAsk/add", new AdminQuestionAddHandler(questionDTOList));
-    commands.put("/adminAsk/list", new AdminQuestionListHandler(questionDTOList));
-    commands.put("/adminAsk/detail", new AdminQuestionDetailHandler(questionDTOList));
-    commands.put("/adminAsk/update", new AdminQuestionUpdateHandler(questionDTOList));
-    commands.put("/adminAsk/delete", new AdminQuestionDeleteHandler(questionDTOList));
+    //    // 관리자 문의사항
+    //    commands.put("/adminAsk/add", new AdminQuestionAddHandler(questionDTOList));
+    //    commands.put("/adminAsk/list", new AdminQuestionListHandler(questionDTOList));
+    //    commands.put("/adminAsk/detail", new AdminQuestionDetailHandler(questionDTOList));
+    //    commands.put("/adminAsk/update", new AdminQuestionUpdateHandler(questionDTOList));
+    //    commands.put("/adminAsk/delete", new AdminQuestionDeleteHandler(questionDTOList));
 
     // 관리자 챌린지
     commands.put("/adminChallenge/add", new AdminChallengeAddHandler(challengeDTOList));
@@ -461,10 +452,10 @@ public class App {
     //    loadCommBoard();
     //    loadCommReview();
     //
-    //    loadAdminChellengeAdd();
+    loadObjects("challengeDTO.json", challengeDTOList, ChallengeDTO.class);
     //
-    //    loadChallengeReviews();
-    //    loadChallengeQuestions();
+    loadObjects("challengeReviewDTO.json", challengeReviewDTOList, ChallengeReviewDTO.class);
+    loadObjects("challengeQuestionDTO.json", challengeQuestionDTOList, ChallengeQuestionDTO.class);
     //
     //    loadDonationBoards();
     //    loadDonationRegisters();
@@ -501,6 +492,8 @@ public class App {
     //
     //
     //    saveAdminChellengeAdd();
+
+    saveObjects("challengeDTO.json", challengeDTOList);
     //
     //    saveDonationBoards();
     //    saveDonationRegisters();
@@ -509,8 +502,8 @@ public class App {
     //
     //    saveQuestion();
     //
-    //    saveChallengeReviews();
-    //    saveChallengeQuestions();
+    saveObjects("challengeReviewDTO.json", challengeReviewDTOList);
+    saveObjects("challengeQuestionDTO.json", challengeQuestionDTOList);
     //
     //    saveDonationBoards();
     //    saveDonationRegisters();
@@ -1056,12 +1049,42 @@ public class App {
   //
   //      out.writeObject(myQuestionListDTOList);
   //
+  //      System.out.println("문의글 데이터 저장 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("문의글 데이터를 파일에 저장 중 오류 발생!");
+  //    }
+  //  }
+
+  //  @SuppressWarnings("unchecked")
+  //  private void loadQuestion() {
+  //    try (ObjectInputStream in = new ObjectInputStream(
+  //        new FileInputStream("question.data"))) {
+  //
+  //      myQuestionListDTOList.addAll((List<QuestionListDTO>) in.readObject());
+  //
+  //      System.out.println("게시글 데이터 로딩 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("파일에서 게시글 데이터를 읽어 오는 중 오류 발생!");
+  //
+  //    }
+  //  }
+  //
+  //
+  //  private void saveQuestion() {
+  //    try (ObjectOutputStream out = new ObjectOutputStream(
+  //        new FileOutputStream("question.data"))) {
+  //
+  //      out.writeObject(myQuestionListDTOList);
+  //
   //      System.out.println("게시글 데이터 저장 완료!");
   //
   //    } catch (Exception e) {
   //      System.out.println("게시글 데이터를 파일에 저장 중 오류 발생!");
   //    }
   //  }
+
 
   Menu createMenu() {
 
@@ -1149,7 +1172,7 @@ public class App {
     MenuGroup supportMenu = new MenuGroup("고객센터");
     mainMenuGroup.add(supportMenu);
 
-    supportMenu.add(createAdminNoticeMenu());      // 공지사항
+    supportMenu.add(createNoticeMenu());      // 공지사항
     supportMenu.add(createAskMenu());         // 문의하기
 
     // 마이페이지
@@ -1171,7 +1194,6 @@ public class App {
     adminMenu.add(createAdminDonationMenu());    // 기부관리
     adminMenu.add(createAdminVolMenu());         // 봉사관리
     adminMenu.add(createAdminNoticeMenu());      // 공지사항관리
-    // 관리자 공지사항 관리 => 회원 createNoticeMenu 부분과 기능 겹침. 삭제 고려
     adminMenu.add(createAdminAskMenu());         // 문의사항관리
     adminMenu.add(createAdminChallengeMenu());   // 챌린지관리
     adminMenu.add(createAdminApproveInfoMenu()); // 기관승인관리
@@ -1308,34 +1330,31 @@ public class App {
     return doDonationMenu;
   }
 
+  private Menu createNoticeMenu() {
+    MenuGroup noticeMenu = new MenuGroup("공지사항");
 
+    noticeMenu.add(new MenuItem("공지사항 등록",ACCESS_ADMIN,"/adminNotice/add"));
+    noticeMenu.add(new MenuItem("공지사항 목록","/adminNotice/list"));
+    noticeMenu.add(new MenuItem("공지사항 상세보기","/adminNotice/detail"));
+    noticeMenu.add(new MenuItem("공지사항 변경",ACCESS_ADMIN,"/adminNotice/update"));
+    noticeMenu.add(new MenuItem("공지사항 삭제",ACCESS_ADMIN,"/adminNotice/delete"));
+    noticeMenu.add(new MenuItem("공지사항 검색","/adminNotice/search"));
 
-
-  //  private Menu createNoticeMenu() {
-  //    MenuGroup notice = new MenuGroup("공지사항");
-  //    //    notice.add(new MenuItem("등록",ACCESS_ADMIN,"/notice/add"));
-  //    notice.add(new MenuItem("목록", "/adminNotice/list"));
-  //    notice.add(new MenuItem("상세보기", "/adminNotice/detail"));
-  //    notice.add(new MenuItem("목록", "/notice/list"));
-  //    notice.add(new MenuItem("상세보기", "/notice/detail"));
-  //    //    notice.add(new MenuItem("변경",ACCESS_ADMIN,"/notice/update"));
-  //    //    notice.add(new MenuItem("삭제",ACCESS_ADMIN, "/notice/delete"));
-  //    notice.add(new MenuItem("검색", "/notice/search"));
-  //
-  //    return notice;
-  //  }
+    return noticeMenu;
+  }
 
   private Menu createAskMenu() {
     MenuGroup ask = new MenuGroup("문의하기");
     ask.add(new MenuItem("등록", ACCESS_MEMBER,"/question/add"));
-    ask.add(new MenuItem("목록", "/question/list"));
-    ask.add(new MenuItem("상세보기", "/question/detail"));
-    ask.add(new MenuItem("변경",ACCESS_MEMBER,"/question/update"));
-    ask.add(new MenuItem("삭제",Menu.ACCESS_MEMBER, "/question/delete"));
-    ask.add(new MenuItem("검색", "question/search"));
+    ask.add(new MenuItem("목록", ACCESS_MEMBER_ADMIN, "/question/list"));
+    ask.add(new MenuItem("상세보기", ACCESS_MEMBER_ADMIN, "/question/detail"));
+    ask.add(new MenuItem("변경", ACCESS_MEMBER,"/question/update"));
+    ask.add(new MenuItem("삭제", ACCESS_MEMBER, "/question/delete"));
+    ask.add(new MenuItem("검색", "/question/search"));
 
     return ask;
   }
+
 
   // 마이페이지
 
@@ -1443,7 +1462,7 @@ public class App {
   }
 
   private Menu createAdminNoticeMenu() {
-    MenuGroup adminNoticeMenu = new MenuGroup("공지사항");
+    MenuGroup adminNoticeMenu = new MenuGroup("공지사항 관리");
 
     adminNoticeMenu.add(new MenuItem("공지사항 등록",ACCESS_ADMIN,"/adminNotice/add"));
     adminNoticeMenu.add(new MenuItem("공지사항 목록","/adminNotice/list"));
@@ -1458,11 +1477,12 @@ public class App {
   private Menu createAdminAskMenu() {
     MenuGroup adminAskInfo = new MenuGroup("문의사항 관리", ACCESS_ADMIN);
 
-    adminAskInfo.add(new MenuItem("문의사항 등록","/adminAsk/add"));
-    adminAskInfo.add(new MenuItem("문의사항 목록","/adminAsk/list"));
-    adminAskInfo.add(new MenuItem("문의사항 상세보기","/adminAsk/detail"));
-    adminAskInfo.add(new MenuItem("문의사항 변경","/adminAsk/update"));
-    adminAskInfo.add(new MenuItem("문의사항 삭제","/adminAsk/delete"));
+    //    adminAskInfo.add(new MenuItem("문의사항 등록","/adminAsk/add"));
+    adminAskInfo.add(new MenuItem("문의사항 목록","/question/list"));
+    adminAskInfo.add(new MenuItem("문의사항 상세보기","/question/detail"));
+    adminAskInfo.add(new MenuItem("문의사항 변경","/question/update"));
+    adminAskInfo.add(new MenuItem("문의사항 삭제","/question/delete"));
+    adminAskInfo.add(new MenuItem("문의사항 검색","/question/search"));
 
     return adminAskInfo;
   }

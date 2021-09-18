@@ -1,7 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
 import java.util.List;
-
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.util.Prompt;
@@ -9,13 +8,14 @@ import com.share.util.Prompt;
 public class ChallengeReviewSearchHandler extends AbstractChallengeReviewHandler {
 
   public ChallengeReviewSearchHandler(List<ChallengeReviewDTO> challengeReviewDTOList,
-        List<ChallengeDTO> challengeDTOList) {
+      List<ChallengeDTO> challengeDTOList) {
     super(challengeReviewDTOList, challengeDTOList);
   }
 
   @Override
   public void execute() {
-    System.out.println(" ▶ 참여인증&댓글을 검색하고 싶은 챌린지 번호를 입력해주세요.");
+    System.out.println("[참여인증&댓글 검색");
+    System.out.println(" ▶ 챌린지 번호를 입력해주세요.");
     System.out.println();
 
     int challengeNo = Prompt.inputInt("챌린지 번호: ");
