@@ -429,8 +429,8 @@ public class App {
 
 
     loadObjects("joinDTO.json", joinDTOList, JoinDTO.class);
-    loadObjects("noticeDTO.json", noticeDTOList, NoticeDTO.class);
-    loadObjects("questionListDTO.json", myQuestionListDTOList, QuestionListDTO.class);
+    //    loadObjects("noticeDTO.json", noticeDTOList, NoticeDTO.class);
+    //    loadObjects("questionListDTO.json", myQuestionListDTOList, QuestionListDTO.class);
 
     //    loadJoins();
 
@@ -450,10 +450,10 @@ public class App {
     //    loadCommBoard();
     //    loadCommReview();
     //
-    //    loadObjects("challengeDTO.json", challengeDTOList, ChallengeDTO.class);
+    loadObjects("challengeDTO.json", challengeDTOList, ChallengeDTO.class);
     //
-    //    loadObjects("challengeReviewDTO.json", challengeReviewDTOList, ChallengeReviewDTO.class);
-    //    loadObjects("challengeQuestionDTO.json", challengeQuestionDTOList, ChallengeQuestionDTO.class);
+    loadObjects("challengeReviewDTO.json", challengeReviewDTOList, ChallengeReviewDTO.class);
+    loadObjects("challengeQuestionDTO.json", challengeQuestionDTOList, ChallengeQuestionDTO.class);
     //
     //    loadDonationBoards();
     //    loadDonationRegisters();
