@@ -1,9 +1,11 @@
 package com.share.ftp.handler.personal.community;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.share.ftp.domain.personal.CommBoardDTO;
 
 public class CommBestListHandler extends AbstractCommBestHandler /*implements Comparable<CommBoardDTO>*/ {
+
 
   public CommBestListHandler(List<CommBoardDTO> commBoardDTOList) {
     super(commBoardDTOList);
@@ -11,12 +13,21 @@ public class CommBestListHandler extends AbstractCommBestHandler /*implements Co
 
   @Override
   public void execute() {
+    //
+    //    int max =  commBoardDTOList.get(0).getViewCount();
+    //
+    //    for (int i = 0; i < commBoardDTOList.size(); i++) {
+    //      if (max < commBoardDTOList.get(i).getViewCount()) {
+    //        max = commBoardDTOList.get(i).getViewCount();
+    //      }
+    //    }
+    //    System.out.println("최대 조회수는? = " + max);
 
     //  System.out.println("[소통해요/나눔이야기Best/목록]");
 
 
     //  List<CommBoardDTO> commBoardDTOList;
-    int max = 0;
+
     //    
     //    for (CommBoardDTO commBoardDTO : commBoardDTOList) {
     //      System.out.printf("%d번 게시글 조회수 : %d\n", commBoardDTO.getCommNo(), commBoardDTO.getViewCount());
@@ -24,24 +35,59 @@ public class CommBestListHandler extends AbstractCommBestHandler /*implements Co
     //      // 1. 조회수가 가장 높은 것을 뽑는다.;
     //      
     //    }
+    //   1   6     10
+    int add = 1;
+    ArrayList<Integer> rank = new ArrayList<>();
+    rank.add(add);
+    rank.add(add);
+    rank.add(add);
 
+    int maxNo = commBoardDTOList.get(0).getCommNo();
+    int max = commBoardDTOList.get(0).getViewCount();
+    CommBoardDTO commBoardDTO = commBoardDTOList.get(0);
 
     for (int i = 0; i < commBoardDTOList.size(); i++) {
-      max = commBoardDTOList.get(0).getViewCount();
-      //      System.out.printf("현재 가장 높은 조회수는 %d 게시물의 %d 입니다.",commBoardDTOList.get(i).getCommNo(),commBoardDTOList.get(i).getViewCount());
-      if (max < commBoardDTOList.get(i).getViewCount()) {
-        max = commBoardDTOList.get(i).getViewCount();
-      } 
+      //      rank.set(i,1);
+      for (int j = 0; j < commBoardDTOList.size(); j++) {
+
+        if (commBoardDTOList.get(i).getViewCount() < commBoardDTOList.get(j).getViewCount()) {  
+          rank.set(i,add++);
+          max = commBoardDTOList.get(i).getViewCount();
+          //         max = commBoardDTOList.get(i).getViewCount();
+          //         maxNo = commBoardDTOList.get(i).getCommNo();
+          //         commBoardDTO = commBoardDTOList.get(i);
+        }
+        System.out.println("등수" + rank.get(i));
+        System.out.println("가장 높은 조회수는? : " + max);
+      }
+
+
     }
 
-    System.out.println("가장 높은 조회수는? : " + max);
+    for (int i = 0; i < commBoardDTOList.size(); i++) {
+      System.out.println("등수" + rank.get(i));
+    }
 
 
-    //    Comparator<CommBoardDTO> comparator = Comparator.comparing(CommBoardDTO::getViewCount);
-    //    //CommBoardDTO minObject = commBoardDTOList.stream().min(comparator).get();
-    //    CommBoardDTO maxObject = commBoardDTOList.stream().max(comparator).get();
-    //    System.out.println("가장높은조회수 " + maxObject);
-    // System.out.println("Min Object " + minObject);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //        Comparator<CommBoardDTO> comparator = Comparator.comparing(CommBoardDTO::getViewCount);
+    //        //CommBoardDTO minObject = commBoardDTOList.stream().min(comparator).get();
+    //        CommBoardDTO maxObject = commBoardDTOList.stream().max(comparator).get();
+    //        System.out.println("가장높은조회수 " + maxObject);
+    //     System.out.println("Min Object " + minObject);
 
 
 
