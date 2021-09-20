@@ -70,12 +70,16 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
     System.out.println("챌린지 번호 = " + challengeDTO.getNo());
 
     if (challengeDTO.getReviewCount() == 0) {
-      challengeReviewDTO.setReviewNo(1);
+      challengeDTO.setReviewCount(1);
       System.out.println("각 챌린지의 첫 댓글입니다");
     } else {
-      challengeReviewDTO.setReviewNo(getNextNum());
+      challengeDTO.setReviewCount(getNextNum1(challengeDTO));
+      //      challengeReviewDTO.setReviewNo(getNextNum2()); // 해당 챌린지 리뷰의 마지막 번호기억 + 1
+      System.out.println("현재 댓글의 번호는? (challengeReviewDTO.getReviewNo()) " + challengeReviewDTO.getReviewNo());
+      System.out.println("현재 댓글의 번호는? (challengeDTO.getReviewCount()) " + challengeDTO.getReviewCount());
     }
-    challengeDTO.setReviewCount(challengeReviewDTO.getReviewNo());
+    //    challengeDTO.setReviewCount(challengeReviewDTO.getReviewNo());
+    challengeReviewDTO.setReviewNo(challengeDTO.getReviewCount()); // 해당 챌린지 리뷰의 마지막 번호기억 + 1
     System.out.println("challengeDTO.getReviewCount() = " + challengeDTO.getReviewCount());
 
 

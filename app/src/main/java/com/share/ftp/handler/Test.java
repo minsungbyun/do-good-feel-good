@@ -21,12 +21,12 @@ public class Test {
     names2.add("d");
     names2.add("e");
     names2.add("f");
-
-    System.out.println( names2.get(0).equals("박성준"));
-    System.out.println( names2.get(1).equals("박성준"));
-    System.out.println( names2.get(1).equals("d"));
-    System.out.println( names2.get(2).equals("e"));
-    System.out.println( names2.get(3).equals("f"));
+    System.out.println("지금 테스트한 것");
+    System.out.println( names2.get(0).equals("박성준")); // true
+    System.out.println( names2.get(1).equals("박성준")); // false
+    System.out.println( names2.get(1).equals("d")); //true
+    System.out.println( names2.get(2).equals("e")); //true
+    System.out.println( names2.get(3).equals("f")); //true
     System.out.println("--------------------------------");
 
     System.out.println( names2.contains("박성준"));
@@ -38,11 +38,12 @@ public class Test {
     System.out.println("배열의 갯수 : "+ names2.size());
 
     System.out.println("---------------------------------");
+    System.out.println("배열 테스트");
 
     String[] names3 = {"박성준","d","e","f"};
 
-    System.out.println(names3[0].equals("박성준"));
-    System.out.println(names3[1].equals("박성준"));
+    System.out.println(names3[0].equals("박성준")); // true
+    System.out.println(names3[1].equals("박성준")); // false
 
     System.out.println("---------------------------------");
 

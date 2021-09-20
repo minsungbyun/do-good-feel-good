@@ -40,6 +40,20 @@ public abstract class AbstractChallengeReviewHandler implements Command {
       return 1;
     }
   }
+  protected int getNextNum1(ChallengeDTO challengeDTO) {
+    if (challengeReviewDTOList.size() > 0) {
+      return challengeDTO.getReviewCount() + 1;
+    } else {
+      return 1;
+    }
+  }
+  protected int getNextNum2() {
+    if (challengeDTOList.size() > 0) {
+      return challengeDTOList.get(challengeReviewDTOList.size() - 1).getReviewCount() + 1;
+    } else {
+      return 1;
+    }
+  }
   protected int getNextNum(int challengeNo,ChallengeReviewDTO challengeReviewDTO) {
     if (challengeReviewDTOList.isEmpty()) {
       System.out.println("처음");
