@@ -79,7 +79,6 @@ public class VolGeneralDoJoinHandler extends AbstractVolGeneralHandler {
       return;
     }
 
-
     // 봉사인원 유효성 검사
     if (generalRequestApplyDTO.getTotalJoinCount() == generalRequestApplyDTO.getVolLimitNum()) {
       System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");

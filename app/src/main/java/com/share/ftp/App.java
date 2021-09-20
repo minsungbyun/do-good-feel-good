@@ -441,6 +441,8 @@ public class App {
 
 
     loadObjects("joinDTO.json", joinDTOList, JoinDTO.class);
+    //    loadObjects("noticeDTO.json", noticeDTOList, NoticeDTO.class);
+    //    loadObjects("questionListDTO.json", myQuestionListDTOList, QuestionListDTO.class);
 
     //    loadObjects("generalRequest.json", generalRequestDTOList, GeneralRequestDTO.class);
     //    loadObjects("generalRequestApply.json", generalRequestApplyDTOList, GeneralRequestDTO.class);
@@ -482,6 +484,8 @@ public class App {
 
 
     saveObjects("joinDTO.json", joinDTOList);
+    saveObjects("noticeDTO.json", noticeDTOList);
+    saveObjects("questionListDTO.json", myQuestionListDTOList);
 
     saveObjects("generalRequest.json", generalRequestDTOList);
     saveObjects("generalRequestApply.json", generalRequestApplyDTOList);

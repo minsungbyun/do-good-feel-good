@@ -8,7 +8,7 @@ import com.share.ftp.domain.join.JoinDTO;
 @SuppressWarnings("serial")
 public class NoticeDTO implements Serializable{
 
-  private int boardNo;
+  private int no;
   private String adminId;
   private String title;
   private String content;
@@ -20,7 +20,7 @@ public class NoticeDTO implements Serializable{
 
   @Override
   public int hashCode() {
-    return Objects.hash(admin, adminId, boardNo, content, fileUpload, registeredDate, title,
+    return Objects.hash(admin, adminId, no, content, fileUpload, registeredDate, title,
         viewCount);
   }
   @Override
@@ -33,22 +33,22 @@ public class NoticeDTO implements Serializable{
       return false;
     NoticeDTO other = (NoticeDTO) obj;
     return Objects.equals(admin, other.admin) && Objects.equals(adminId, other.adminId)
-        && boardNo == other.boardNo && Objects.equals(content, other.content)
+        && no == other.no && Objects.equals(content, other.content)
         && Objects.equals(fileUpload, other.fileUpload)
         && Objects.equals(registeredDate, other.registeredDate)
         && Objects.equals(title, other.title) && viewCount == other.viewCount;
   }
   @Override
   public String toString() {
-    return "NoticeDTO [boardNo=" + boardNo + ", adminId=" + adminId + ", title=" + title
+    return "NoticeDTO [no=" + no + ", adminId=" + adminId + ", title=" + title
         + ", content=" + content + ", admin=" + admin + ", fileUpload=" + fileUpload
         + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount + "]";
   }
-  public int getBoardNo() {
-    return boardNo;
+  public int getNo() {
+    return no;
   }
-  public void setBoardNo(int boardNo) {
-    this.boardNo = boardNo;
+  public void setNo(int no) {
+    this.no = no;
   }
   public String getAdminId() {
     return adminId;

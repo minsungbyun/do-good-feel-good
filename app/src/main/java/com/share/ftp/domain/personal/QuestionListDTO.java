@@ -8,7 +8,7 @@ import com.share.ftp.domain.join.JoinDTO;
 @SuppressWarnings("serial")
 public class QuestionListDTO implements Serializable {
 
-  private int boardNo;
+  private int No;
   private String title;
   private String memberld;
   private int password;
@@ -28,10 +28,9 @@ public class QuestionListDTO implements Serializable {
   private String otherAsk = "기타 문의";
 
 
-
   @Override
   public int hashCode() {
-    return Objects.hash(Owner, boardNo, challengeAsk, commuityAsk, content, donationAsk, fileUpload,
+    return Objects.hash(No, Owner, challengeAsk, commuityAsk, content, donationAsk, fileUpload,
         memberld, otherAsk, password, registeredDate, siteAsk, sort, title, viewCount, volunteerAsk,
         writer);
   }
@@ -44,7 +43,7 @@ public class QuestionListDTO implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     QuestionListDTO other = (QuestionListDTO) obj;
-    return Objects.equals(Owner, other.Owner) && boardNo == other.boardNo
+    return No == other.No && Objects.equals(Owner, other.Owner)
         && Objects.equals(challengeAsk, other.challengeAsk)
         && Objects.equals(commuityAsk, other.commuityAsk) && Objects.equals(content, other.content)
         && Objects.equals(donationAsk, other.donationAsk)
@@ -57,18 +56,18 @@ public class QuestionListDTO implements Serializable {
   }
   @Override
   public String toString() {
-    return "QuestionListDTO [boardNo=" + boardNo + ", title=" + title + ", memberld=" + memberld
+    return "QuestionListDTO [No=" + No + ", title=" + title + ", memberld=" + memberld
         + ", password=" + password + ", writer=" + writer + ", content=" + content + ", fileUpload="
         + fileUpload + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount
         + ", Owner=" + Owner + ", sort=" + sort + ", volunteerAsk=" + volunteerAsk
         + ", commuityAsk=" + commuityAsk + ", donationAsk=" + donationAsk + ", challengeAsk="
         + challengeAsk + ", siteAsk=" + siteAsk + ", otherAsk=" + otherAsk + "]";
   }
-  public int getBoardNo() {
-    return boardNo;
+  public int getNo() {
+    return No;
   }
-  public void setBoardNo(int boardNo) {
-    this.boardNo = boardNo;
+  public void setNo(int no) {
+    No = no;
   }
   public String getTitle() {
     return title;

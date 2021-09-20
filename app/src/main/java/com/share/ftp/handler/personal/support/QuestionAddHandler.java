@@ -8,8 +8,6 @@ import com.share.util.Prompt;
 
 public class QuestionAddHandler extends AbstractQuestionHandler {
 
-  int boardNo;
-
   public QuestionAddHandler(List<QuestionListDTO> myQuestionListDTOList) {
     super (myQuestionListDTOList);
   }
@@ -53,9 +51,12 @@ public class QuestionAddHandler extends AbstractQuestionHandler {
         myQuestionListDTO.setTitle(Prompt.inputString("제목? "));
         myQuestionListDTO.setContent(Prompt.inputString("내용? "));
         myQuestionListDTO.setOwner(AuthLoginHandler.getLoginUser());
+        myQuestionListDTO.setPassword(Prompt.inputInt("비밀번호? "));
         myQuestionListDTO.setFileUpload(Prompt.inputString("파일첨부? "));
         myQuestionListDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
-        myQuestionListDTO.setBoardNo(++boardNo);
+
+        // 고유회원번호 부여
+        myQuestionListDTO.setNo(getNextNum());
 
         myQuestionListDTOList.add(myQuestionListDTO);
 
@@ -86,5 +87,7 @@ public class QuestionAddHandler extends AbstractQuestionHandler {
     //
     //    myQuestionListDTOList.add(myQuestionListDTO);
   }
+
+
 
 }

@@ -14,9 +14,9 @@ public class AdminNoticeUpdateHandler extends AbstractAdminNoticeHandler {
 
   public void execute() {
     System.out.println("[공지사항 변경]");
-    int boardNo = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호? ");
 
-    NoticeDTO noticeDTO = findByNo(boardNo);
+    NoticeDTO noticeDTO = findByNo(no);
 
     if (noticeDTO == null) {
       System.out.println("해당 번호의 게시물이 없습니다.");

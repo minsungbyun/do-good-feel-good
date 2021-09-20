@@ -23,7 +23,7 @@ public class QuestionSearchHandler extends AbstractQuestionHandler {
         continue;
       }
       System.out.printf("%d, %s, %s, %s, %d\n", 
-          myQuestionListDTO.getBoardNo(), 
+          myQuestionListDTO.getNo(), 
           myQuestionListDTO.getTitle(), 
           myQuestionListDTO.getOwner().getId(),
           myQuestionListDTO.getRegisteredDate(),
