@@ -17,9 +17,12 @@ public class General {
   public static class member {
 
     public static final int PERSONAL = 1;
-    public static final int ORG      = 2;
-    public static final int GROUP    = 3;
+    public static final int AUTH_PERSONAL = 2;
+    public static final int ORG      = 3;
+    public static final int GROUP    = 4;
   }
+
+
 
 
 }
