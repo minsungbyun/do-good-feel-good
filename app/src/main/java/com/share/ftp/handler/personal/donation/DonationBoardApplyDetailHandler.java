@@ -1,5 +1,7 @@
 package com.share.ftp.handler.personal.donation;
 
+import static com.share.ftp.handler.personal.volunteer.General.check.Applied;
+import static com.share.ftp.handler.personal.volunteer.General.check.Rejected;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.personal.DonationBoardDTO;
@@ -39,11 +41,11 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
       return;
     }
 
-    if (donationBoardDTO.isChecked() == false) {
+    if (donationBoardDTO.getIsSigned().equals(Rejected)) {
       System.out.println();
       System.out.println("해당 번호의 모금함 개설 신청내역이 없습니다.");
       return;
-    } else if (donationBoardDTO.isChecked() == true) {
+    } else if (donationBoardDTO.getIsSigned().equals(Applied)) {
       System.out.println();
       System.out.printf("개설번호: %s\n", donationBoardDTO.getNo());
       System.out.printf("개설분류: %s\n", donationBoardDTO.getSort());

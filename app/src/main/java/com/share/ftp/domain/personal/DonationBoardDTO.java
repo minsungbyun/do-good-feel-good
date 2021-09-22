@@ -30,7 +30,7 @@ public class DonationBoardDTO implements Serializable {
   private Date registeredEndDate;
   private boolean isOrg;
   private boolean isChecked;
-  private String isSigned = "승인대기";
+  private String isSigned;
   private List<JoinDTO> members = new ArrayList<>();
 
 

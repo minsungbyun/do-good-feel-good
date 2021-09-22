@@ -8,7 +8,7 @@ import com.share.ftp.domain.join.JoinDTO;
 @SuppressWarnings("serial")
 public class QuestionListDTO implements Serializable {
 
-  private int No;
+  private int no;
   private String title;
   private String memberld;
   private int password;
@@ -30,9 +30,9 @@ public class QuestionListDTO implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(No, Owner, challengeAsk, commuityAsk, content, donationAsk, fileUpload,
-        memberld, otherAsk, password, registeredDate, siteAsk, sort, title, viewCount, volunteerAsk,
-        writer);
+    return Objects.hash(Owner, challengeAsk, commuityAsk, content, donationAsk, fileUpload,
+        memberld, no, otherAsk, password, registeredDate, siteAsk, sort, title, viewCount,
+        volunteerAsk, writer);
   }
   @Override
   public boolean equals(Object obj) {
@@ -43,12 +43,11 @@ public class QuestionListDTO implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     QuestionListDTO other = (QuestionListDTO) obj;
-    return No == other.No && Objects.equals(Owner, other.Owner)
-        && Objects.equals(challengeAsk, other.challengeAsk)
+    return Objects.equals(Owner, other.Owner) && Objects.equals(challengeAsk, other.challengeAsk)
         && Objects.equals(commuityAsk, other.commuityAsk) && Objects.equals(content, other.content)
         && Objects.equals(donationAsk, other.donationAsk)
         && Objects.equals(fileUpload, other.fileUpload) && Objects.equals(memberld, other.memberld)
-        && Objects.equals(otherAsk, other.otherAsk) && password == other.password
+        && no == other.no && Objects.equals(otherAsk, other.otherAsk) && password == other.password
         && Objects.equals(registeredDate, other.registeredDate)
         && Objects.equals(siteAsk, other.siteAsk) && Objects.equals(sort, other.sort)
         && Objects.equals(title, other.title) && viewCount == other.viewCount
@@ -56,7 +55,7 @@ public class QuestionListDTO implements Serializable {
   }
   @Override
   public String toString() {
-    return "QuestionListDTO [No=" + No + ", title=" + title + ", memberld=" + memberld
+    return "QuestionListDTO [no=" + no + ", title=" + title + ", memberld=" + memberld
         + ", password=" + password + ", writer=" + writer + ", content=" + content + ", fileUpload="
         + fileUpload + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount
         + ", Owner=" + Owner + ", sort=" + sort + ", volunteerAsk=" + volunteerAsk
@@ -64,10 +63,10 @@ public class QuestionListDTO implements Serializable {
         + challengeAsk + ", siteAsk=" + siteAsk + ", otherAsk=" + otherAsk + "]";
   }
   public int getNo() {
-    return No;
+    return no;
   }
   public void setNo(int no) {
-    No = no;
+    this.no = no;
   }
   public String getTitle() {
     return title;
@@ -165,7 +164,6 @@ public class QuestionListDTO implements Serializable {
   public void setOtherAsk(String otherAsk) {
     this.otherAsk = otherAsk;
   }
-
 
 
 

@@ -1,5 +1,6 @@
 package com.share.ftp.handler.personal.donation;
 
+import static com.share.ftp.handler.personal.volunteer.General.check.Applied;
 import java.util.List;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
@@ -21,7 +22,7 @@ public class DonationPrompt {
     System.out.println("모금함목록:");
 
     for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
-      if (donationBoardDTO.isChecked() == true) {
+      if (donationBoardDTO.getIsSigned().equals(Applied)) {
         System.out.println();
         System.out.printf("  [ %d. %s ]\n", donationBoardDTO.getNo(), donationBoardDTO.getTitle());
       }

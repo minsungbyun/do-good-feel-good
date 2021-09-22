@@ -50,6 +50,7 @@ import com.share.ftp.handler.admin.AdminNoticeDetailHandler;
 import com.share.ftp.handler.admin.AdminNoticeListHandler;
 import com.share.ftp.handler.admin.AdminNoticeSearchHandler;
 import com.share.ftp.handler.admin.AdminNoticeUpdateHandler;
+import com.share.ftp.handler.admin.AdminQuestionAddHandler;
 import com.share.ftp.handler.join.AuthChangeUserInfoHandler;
 import com.share.ftp.handler.join.AuthDisplayUserInfoHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -435,12 +436,12 @@ public class App {
     commands.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDTOList));
     commands.put("/adminNotice/search", new AdminNoticeSearchHandler(noticeDTOList));
 
-    //    // 관리자 문의사항
-    //    commands.put("/adminAsk/add", new AdminQuestionAddHandler(questionDTOList));
-    //    commands.put("/adminAsk/list", new AdminQuestionListHandler(questionDTOList));
-    //    commands.put("/adminAsk/detail", new AdminQuestionDetailHandler(questionDTOList));
-    //    commands.put("/adminAsk/update", new AdminQuestionUpdateHandler(questionDTOList));
-    //    commands.put("/adminAsk/delete", new AdminQuestionDeleteHandler(questionDTOList));
+    // 관리자 문의사항
+    commands.put("/adminAsk/add", new AdminQuestionAddHandler(questionDTOList));
+    //        commands.put("/adminAsk/list", new AdminQuestionListHandler(myQuestionListDTOList));
+    //        commands.put("/adminAsk/detail", new AdminQuestionDetailHandler(myQuestionListDTOList));
+    //        commands.put("/adminAsk/update", new AdminQuestionUpdateHandler(myQuestionListDTOList));
+    //        commands.put("/adminAsk/delete", new AdminQuestionDeleteHandler(myQuestionListDTOList));
 
     // 관리자 챌린지
     commands.put("/adminChallenge/add", new AdminChallengeAddHandler(challengeDTOList));
@@ -965,8 +966,8 @@ public class App {
 
     adminDonationMenu.add(new MenuItem("모금함 개설 신청내역 목록", "/donationBoard/applyList"));
     adminDonationMenu.add(new MenuItem("모금함 개설 신청내역 상세보기", "/adminDonationBoard/applyDetail"));
-    adminDonationMenu.add(new MenuItem("모금함 개설 승인하기", "/donationBoard/acceptApply"));
-    adminDonationMenu.add(new MenuItem("모금함 개설 반려하기", "/donationBoard/rejectApply"));
+    //    adminDonationMenu.add(new MenuItem("모금함 개설 승인하기", "/donationBoard/acceptApply"));
+    //    adminDonationMenu.add(new MenuItem("모금함 개설 반려하기", "/donationBoard/rejectApply"));
 
     return adminDonationMenu;
   }
@@ -1001,12 +1002,12 @@ public class App {
   private Menu createAdminAskMenu() {
     MenuGroup adminAskInfo = new MenuGroup("문의사항 관리", ACCESS_ADMIN);
 
-    //    adminAskInfo.add(new MenuItem("문의사항 등록","/adminAsk/add"));
-    adminAskInfo.add(new MenuItem("문의사항 목록","/question/list"));
-    adminAskInfo.add(new MenuItem("문의사항 상세보기","/question/detail"));
-    adminAskInfo.add(new MenuItem("문의사항 변경","/question/update"));
-    adminAskInfo.add(new MenuItem("문의사항 삭제","/question/delete"));
-    adminAskInfo.add(new MenuItem("문의사항 검색","/question/search"));
+    adminAskInfo.add(new MenuItem("문의사항 등록","/adminAsk/add"));
+    //    adminAskInfo.add(new MenuItem("문의사항 목록","/question/list"));
+    //    adminAskInfo.add(new MenuItem("문의사항 상세보기","/question/detail"));
+    //    adminAskInfo.add(new MenuItem("문의사항 변경","/question/update"));
+    //    adminAskInfo.add(new MenuItem("문의사항 삭제","/question/delete"));
+    //    adminAskInfo.add(new MenuItem("문의사항 검색","/question/search"));
 
     return adminAskInfo;
   }

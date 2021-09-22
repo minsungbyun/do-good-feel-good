@@ -49,7 +49,7 @@ public class ChallengeQuestionAddHandler extends AbstractChallengeQuestionHandle
     String input = Prompt.inputString("해당 챌린지에 문의등록을 하시겠습니까?(y/N) ");
     if (!input.equals("y") || input.length() == 0) {
       System.out.println();
-      System.out.println("해당 챌린지 참여를 취소하였습니다.");
+      System.out.println("해당 챌린지에 문의등록을 취소하였습니다.");
       return;
     }
 

@@ -1,5 +1,13 @@
 package com.share.ftp.handler.personal.donation;
 
+import static com.share.ftp.handler.personal.volunteer.General.check.Waiting;
+import static com.share.ftp.handler.personal.volunteer.General.type.ANIMAL;
+import static com.share.ftp.handler.personal.volunteer.General.type.CHILDREN;
+import static com.share.ftp.handler.personal.volunteer.General.type.ELDER;
+import static com.share.ftp.handler.personal.volunteer.General.type.ENVIRONMENT;
+import static com.share.ftp.handler.personal.volunteer.General.type.HANDICAPPED;
+import static com.share.ftp.handler.personal.volunteer.General.type.OTHER;
+import static com.share.ftp.handler.personal.volunteer.General.type.TEEN;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.personal.DonationBoardDTO;
@@ -57,34 +65,30 @@ public class DonationBoardApplyHandler extends AbstractDonationBoardHandler {
         System.out.println("[0: 선택안함]");
         System.out.println("[1: 아동]");
         System.out.println("[2: 청소년]");
-        System.out.println("[3: 어르신]");
+        System.out.println("[3: 노인]");
         System.out.println("[4: 장애인]");
         System.out.println("[5: 동물]");
         System.out.println("[6: 환경]");
         System.out.println("[7: 기타]");
         int input = Prompt.inputInt("> ");
 
-
-
-
-
         if (input == 0) {
           System.out.println("모금함 개설 신청을 취소하셨습니다.");
           return;
         } else if (input == 1) {
-          donationBoardDTO.setSort(donationBoardDTO.getChildren());
+          donationBoardDTO.setSort(CHILDREN);
         } else if (input == 2) {
-          donationBoardDTO.setSort(donationBoardDTO.getTeen());
+          donationBoardDTO.setSort(TEEN);
         } else if (input == 3) {
-          donationBoardDTO.setSort(donationBoardDTO.getElder());
+          donationBoardDTO.setSort(ELDER);
         } else if (input == 4) {
-          donationBoardDTO.setSort(donationBoardDTO.getHandicappedPerson());
+          donationBoardDTO.setSort(HANDICAPPED);
         } else if (input == 5) {
-          donationBoardDTO.setSort(donationBoardDTO.getAnimal());
+          donationBoardDTO.setSort(ANIMAL);
         } else if (input == 6) {
-          donationBoardDTO.setSort(donationBoardDTO.getEnvironmental());
+          donationBoardDTO.setSort(ENVIRONMENT);
         } else if (input == 7) {
-          donationBoardDTO.setSort(donationBoardDTO.getOther());
+          donationBoardDTO.setSort(OTHER);
         } else {
           System.out.println(" [ 양식에 있는 번호를 입력해주세요. ] ");
           return;
@@ -98,11 +102,9 @@ public class DonationBoardApplyHandler extends AbstractDonationBoardHandler {
         donationBoardDTO.setFileUpload(Prompt.inputString("첨부파일 ▶ "));
         donationBoardDTO.setRegisteredStartDate(Prompt.inputDate("시작일(yyyy-mm-dd) ▶ "));
         donationBoardDTO.setRegisteredEndDate(Prompt.inputDate("종료일(yyyy-mm-dd) ▶ "));
-        donationBoardDTO.setOrg(true);
-        donationBoardDTO.setChecked(false);
-        donationBoardDTO.getIsSigned();
+        donationBoardDTO.setIsSigned(Waiting);
         donationBoardDTO.setNo(getNextNum());
-        donationBoardDTO.addMembers(AuthLoginHandler.getLoginUser());
+        //        donationBoardDTO.addMembers(AuthLoginHandler.getLoginUser());
 
 
         donationBoardDTOList.add(donationBoardDTO);

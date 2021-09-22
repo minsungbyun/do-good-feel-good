@@ -1,20 +1,25 @@
 package com.share.ftp.domain.admin;
 
+import java.io.Serializable;
+import java.sql.Date;
 import java.util.Objects;
 
-public class QuestionDTO {
+@SuppressWarnings("serial")
+public class QuestionDTO implements Serializable {
 
   private int no;
   private int adminId;
   private String title;
   private String content;
+  private String fileUpload;
+  private Date registerDate;
+  private int viewCount;
 
 
   @Override
   public int hashCode() {
-    return Objects.hash(adminId, content, no, title);
+    return Objects.hash(adminId, content, fileUpload, no, registerDate, title, viewCount);
   }
-
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -24,16 +29,17 @@ public class QuestionDTO {
     if (getClass() != obj.getClass())
       return false;
     QuestionDTO other = (QuestionDTO) obj;
-    return adminId == other.adminId && Objects.equals(content, other.content) && no == other.no
-        && Objects.equals(title, other.title);
+    return adminId == other.adminId && Objects.equals(content, other.content)
+        && Objects.equals(fileUpload, other.fileUpload) && no == other.no
+        && Objects.equals(registerDate, other.registerDate) && Objects.equals(title, other.title)
+        && viewCount == other.viewCount;
   }
-
   @Override
   public String toString() {
     return "QuestionDTO [no=" + no + ", adminId=" + adminId + ", title=" + title + ", content="
-        + content + "]";
+        + content + ", fileUpload=" + fileUpload + ", registerDate=" + registerDate + ", viewCount="
+        + viewCount + "]";
   }
-
   public int getNo() {
     return no;
   }
@@ -57,6 +63,24 @@ public class QuestionDTO {
   }
   public void setContent(String content) {
     this.content = content;
+  }
+  public String getFileUpload() {
+    return fileUpload;
+  }
+  public void setFileUpload(String fileUpload) {
+    this.fileUpload = fileUpload;
+  }
+  public Date getRegisterDate() {
+    return registerDate;
+  }
+  public void setRegisterDate(Date registerDate) {
+    this.registerDate = registerDate;
+  }
+  public int getViewCount() {
+    return viewCount;
+  }
+  public void setViewCount(int viewCount) {
+    this.viewCount = viewCount;
   }
 
 

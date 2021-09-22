@@ -22,6 +22,12 @@ public class General {
     public static final int GROUP    = 4;
   }
 
+  public static class check {
+    public static final String Waiting    = "승인대기";
+    public static final String Applied    = "승인됨";
+    public static final String Rejected   = "반려됨";
+  }
+
 
 
 
