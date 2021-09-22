@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.admin.NoticeDTO;
+import com.share.ftp.domain.admin.QuestionDTO;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.personal.ApproveOrgDTO;
 import com.share.ftp.domain.personal.ChallengeJoinDTO;
@@ -182,7 +183,7 @@ public class App {
   // 관리자 도메인(값)
   List<ChallengeDTO> challengeDTOList = new ArrayList<>();
   List<NoticeDTO> noticeDTOList = new ArrayList<>();
-  //  List<QuestionDTO> questionDTOList = new ArrayList<>();
+  List<QuestionDTO> questionDTOList = new ArrayList<>();
   List<ApproveOrgDTO> approveOrgDTOList = new ArrayList<>();
 
   //댓글 도메인
@@ -423,7 +424,7 @@ public class App {
     commands.put("/adminNotice/search", new AdminNoticeSearchHandler(noticeDTOList));
 
     // 관리자 문의사항
-    commands.put("/adminAsk/add", new AdminQuestionAddHandler(myQuestionListDTOList));
+    commands.put("/adminAsk/add", new AdminQuestionAddHandler(questionDTOList));
     //        commands.put("/adminAsk/list", new AdminQuestionListHandler(myQuestionListDTOList));
     //        commands.put("/adminAsk/detail", new AdminQuestionDetailHandler(myQuestionListDTOList));
     //        commands.put("/adminAsk/update", new AdminQuestionUpdateHandler(myQuestionListDTOList));
