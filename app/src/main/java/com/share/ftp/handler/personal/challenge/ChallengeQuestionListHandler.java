@@ -37,9 +37,12 @@ public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandl
 
     for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
       if (challengeQuestionDTO.getNo() == challengeNo) {
-        System.out.printf("%s, %s\n", 
+        System.out.printf("%d, %d, %s, %s, %s\n", 
+            challengeQuestionDTO.getNo(),
+            challengeQuestionDTO.getQuestionNo(),
             challengeQuestionDTO.getOwner().getId(),
-            challengeQuestionDTO.getTitle());
+            challengeQuestionDTO.getTitle(),
+            challengeQuestionDTO.getRegisteredDate());
       }
     }
   }

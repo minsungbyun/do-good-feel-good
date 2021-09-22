@@ -1518,11 +1518,11 @@ public class App {
   private Menu createAdminChallengeMenu() {
     MenuGroup adminChallengeInfo = new MenuGroup("챌린지 관리");
 
-    adminChallengeInfo.add(new MenuItem("챌린지 등록","/adminChallenge/add"));
+    adminChallengeInfo.add(new MenuItem("챌린지 등록",ACCESS_ADMIN,"/adminChallenge/add"));
     adminChallengeInfo.add(new MenuItem("챌린지 목록","/adminChallenge/list"));
     adminChallengeInfo.add(new MenuItem("챌린지 상세보기","/adminChallenge/detail"));
-    adminChallengeInfo.add(new MenuItem("챌린지 변경","/adminChallenge/update"));
-    adminChallengeInfo.add(new MenuItem("챌린지 삭제","/adminChallenge/delete"));
+    adminChallengeInfo.add(new MenuItem("챌린지 변경",ACCESS_ADMIN,"/adminChallenge/update"));
+    adminChallengeInfo.add(new MenuItem("챌린지 삭제",ACCESS_ADMIN,"/adminChallenge/delete"));
 
     return adminChallengeInfo;
   }

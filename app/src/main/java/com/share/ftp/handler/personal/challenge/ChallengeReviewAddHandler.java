@@ -74,7 +74,7 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
       challengeDTO.setReviewCount(1);
       System.out.println("각 챌린지의 첫 댓글입니다");
     } else {
-      challengeDTO.setReviewCount(getNextNum1(challengeDTO));
+      challengeDTO.setReviewCount(getNextReviewNum(challengeDTO));
       //      challengeReviewDTO.setReviewNo(getNextNum2()); // 해당 챌린지 리뷰의 마지막 번호기억 + 1
       System.out.println("현재 댓글의 번호는? (challengeReviewDTO.getReviewNo()) " + challengeReviewDTO.getReviewNo());
       System.out.println("현재 댓글의 번호는? (challengeDTO.getReviewCount()) " + challengeDTO.getReviewCount());

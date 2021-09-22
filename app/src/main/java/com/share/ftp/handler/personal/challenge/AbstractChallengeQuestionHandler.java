@@ -33,10 +33,39 @@ public abstract class AbstractChallengeQuestionHandler  implements Command {
     }
     return null;
   }
-  private int getNextNum() {
+  protected int getNextNum() {
     if (challengeQuestionDTOList.size() > 0) {
-      return challengeQuestionDTOList.get(challengeQuestionDTOList.size() - 1).getNo() + 1;
+      return challengeQuestionDTOList.get(challengeQuestionDTOList.size() - 1).getQuestionNo() + 1;
     } else {
+      return 1;
+    }
+  }
+  protected int getNextQuestionNum(ChallengeDTO challengeDTO) {
+    if (challengeQuestionDTOList.size() > 0) {
+      return challengeDTO.getQuestionCount() + 1;
+    } else {
+      return 1;
+    }
+  }
+  protected int getNextNum2() {
+    if (challengeDTOList.size() > 0) {
+      return challengeDTOList.get(challengeQuestionDTOList.size() - 1).getQuestionCount() + 1;
+    } else {
+      return 1;
+    }
+  }
+  protected int getNextNum(int challengeNo,ChallengeQuestionDTO challengeQuestionDTO) {
+    if (challengeQuestionDTOList.isEmpty()) {
+      System.out.println("처음");
+      return 1;
+    }
+
+    if ((challengeQuestionDTO.getQuestionNo() != 1) && (challengeDTOList.get(challengeNo - 1).getNo() == challengeNo)  /*( challengeDTOList.get(challengeNo - 1).getReviewCount() == 0)*/) {
+      challengeDTOList.get(challengeNo - 1).setQuestionCount(challengeQuestionDTO.getQuestionNo());
+      return challengeDTOList.get(challengeNo - 1).getQuestionCount() + 1;
+
+    } else {
+      System.out.println("각 게시판 처음은 1");
       return 1;
     }
   }
