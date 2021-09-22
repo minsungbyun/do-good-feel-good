@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.volunteerOrg;
 
 import java.util.List;
 import com.share.ftp.domain.personal.OrgRequestDTO;
+import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
 public class VolRequestOrgRejectApplyHandler extends AbstractVolRequestOrgHandler { // 개인 봉사신청 양식 쓰는 곳
@@ -19,7 +20,7 @@ public class VolRequestOrgRejectApplyHandler extends AbstractVolRequestOrgHandle
 
   // 해당 봉사 신청서를 반려한다.
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("[  기관봉사신청서 반려  ]");
 

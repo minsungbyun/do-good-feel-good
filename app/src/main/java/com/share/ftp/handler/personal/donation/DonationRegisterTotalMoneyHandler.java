@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.donation;
 
 import java.util.List;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
+import com.share.ftp.handler.CommandRequest;
 
 public class DonationRegisterTotalMoneyHandler extends AbstractDonationRegisterHandler {
 
@@ -10,7 +11,7 @@ public class DonationRegisterTotalMoneyHandler extends AbstractDonationRegisterH
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
 
     System.out.printf("기부 총 금액 : %d\n", DonationRegisterDTO.totalDonationMoney);
 

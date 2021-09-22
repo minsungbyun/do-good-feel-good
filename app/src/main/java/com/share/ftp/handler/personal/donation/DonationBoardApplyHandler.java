@@ -3,6 +3,7 @@ package com.share.ftp.handler.personal.donation;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.personal.DonationBoardDTO;
+import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
@@ -35,7 +36,7 @@ public class DonationBoardApplyHandler extends AbstractDonationBoardHandler {
 
   // 모금함 개설 신청(기관)
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
 
     JoinDTO joinDTO = AuthLoginHandler.getLoginUser();
 

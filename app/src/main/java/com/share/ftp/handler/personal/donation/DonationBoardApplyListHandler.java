@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.donation;
 
 import java.util.List;
 import com.share.ftp.domain.personal.DonationBoardDTO;
+import com.share.ftp.handler.CommandRequest;
 
 public class DonationBoardApplyListHandler extends AbstractDonationBoardHandler {
 
@@ -13,7 +14,7 @@ public class DonationBoardApplyListHandler extends AbstractDonationBoardHandler 
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
 
     System.out.println();
     System.out.println("[모금함 개설 신청서 목록]");

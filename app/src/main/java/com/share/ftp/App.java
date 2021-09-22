@@ -37,6 +37,7 @@ import com.share.ftp.domain.personal.MyProfileDTO;
 import com.share.ftp.domain.personal.QuestionListDTO;
 import com.share.ftp.domain.personal.VolListDTO;
 import com.share.ftp.handler.Command;
+import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.admin.AdminChallengeAddHandler;
 import com.share.ftp.handler.admin.AdminChallengeDeleteHandler;
 import com.share.ftp.handler.admin.AdminChallengeDetailHandler;
@@ -206,7 +207,12 @@ public class App {
     @Override
     public void execute() {
       Command command = commands.get(menuId);
-      command.execute();
+      try {
+        command.execute(new CommandRequest(commands));
+      } catch(Exception e) {
+        System.out.printf("%s 명령을 실행하는 중 오류 발생!\n", menuId);
+        e.printStackTrace();
+      }
     }
   }
 
@@ -265,9 +271,9 @@ public class App {
   //  DonationRegisterParticipationListHandler donationRegisterParticipationListHandler = new DonationRegisterParticipationListHandler(donationRegisterDTOList, donationBoardDTOList);
 
   public static void main(String[] args) {
-
     App app = new App(); 
     app.service();
+
   }
 
   public App() {
@@ -437,7 +443,7 @@ public class App {
   }
 
 
-  public void service() {
+  void service() {
 
 
     loadObjects("joinDTO.json", joinDTOList, JoinDTO.class);
@@ -1533,4 +1539,5 @@ public class App {
   }
 
 }
+
 

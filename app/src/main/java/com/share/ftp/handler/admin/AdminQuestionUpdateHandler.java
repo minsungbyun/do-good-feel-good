@@ -2,6 +2,7 @@ package com.share.ftp.handler.admin;
 
 import java.util.List;
 import com.share.ftp.domain.admin.QuestionDTO;
+import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
 public class AdminQuestionUpdateHandler extends AbstractAdminQuestionHandler {
@@ -11,7 +12,7 @@ public class AdminQuestionUpdateHandler extends AbstractAdminQuestionHandler {
     super(questionDTOList);
   }
 
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[문의사항 변경]");
     int no = Prompt.inputInt("번호? ");
 

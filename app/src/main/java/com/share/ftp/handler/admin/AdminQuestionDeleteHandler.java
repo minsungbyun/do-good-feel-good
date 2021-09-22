@@ -2,6 +2,7 @@ package com.share.ftp.handler.admin;
 
 import java.util.List;
 import com.share.ftp.domain.admin.QuestionDTO;
+import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
 public class AdminQuestionDeleteHandler extends AbstractAdminQuestionHandler {
@@ -13,7 +14,7 @@ public class AdminQuestionDeleteHandler extends AbstractAdminQuestionHandler {
   }
 
 
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[게시글 삭제]");
     int no = Prompt.inputInt("번호? ");
 

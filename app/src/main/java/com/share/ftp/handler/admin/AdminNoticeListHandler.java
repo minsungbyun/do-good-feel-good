@@ -2,6 +2,7 @@ package com.share.ftp.handler.admin;
 
 import java.util.List;
 import com.share.ftp.domain.admin.NoticeDTO;
+import com.share.ftp.handler.CommandRequest;
 
 public class AdminNoticeListHandler extends AbstractAdminNoticeHandler {
 
@@ -13,7 +14,7 @@ public class AdminNoticeListHandler extends AbstractAdminNoticeHandler {
 
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[공지사항 목록]");
 
     for (NoticeDTO noticeDTO : noticeDTOList) {

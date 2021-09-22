@@ -2,13 +2,14 @@ package com.share.ftp.handler.join;
 
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
+import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
 public class AuthChangeUserInfoHandler implements Command{
 
   // 마이페이지의 나의정보수정
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("[회원 변경]");
 

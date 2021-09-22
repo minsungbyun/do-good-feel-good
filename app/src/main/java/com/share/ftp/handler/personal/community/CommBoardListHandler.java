@@ -3,6 +3,7 @@ package com.share.ftp.handler.personal.community;
 import java.util.List;
 import com.share.ftp.domain.personal.CommBoardCommentDTO;
 import com.share.ftp.domain.personal.CommBoardDTO;
+import com.share.ftp.handler.CommandRequest;
 
 public class CommBoardListHandler extends AbstractCommBoardHandler {
 
@@ -12,7 +13,7 @@ public class CommBoardListHandler extends AbstractCommBoardHandler {
 
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
 
     System.out.println();
     System.out.println("[  메인/소통해요/나눔이야기/목록  ]");

@@ -3,6 +3,7 @@ package com.share.ftp.handler.admin;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.admin.NoticeDTO;
+import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
@@ -12,7 +13,7 @@ public class AdminNoticeAddHandler extends AbstractAdminNoticeHandler {
     super(noticeDTOList);
   }
 
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[공지사항 등록]");
 
     NoticeDTO noticeDTO = new NoticeDTO();

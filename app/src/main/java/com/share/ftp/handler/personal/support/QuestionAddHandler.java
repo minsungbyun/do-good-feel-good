@@ -3,6 +3,7 @@ package com.share.ftp.handler.personal.support;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.personal.QuestionListDTO;
+import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
@@ -12,7 +13,7 @@ public class QuestionAddHandler extends AbstractQuestionHandler {
     super (myQuestionListDTOList);
   }
 
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
 
     while (true) {
       try {
