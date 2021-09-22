@@ -12,11 +12,12 @@ public class AdminNoticeDeleteHandler extends AbstractAdminNoticeHandler {
     super(noticeDTOList);
   }
 
+  @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[공지사항 삭제]");
-    int boardNo = Prompt.inputInt("번호? ");
+    int no = (int) request.getAttribute("no"); 
 
-    NoticeDTO noticeDTO = findByNo(boardNo);
+    NoticeDTO noticeDTO = findByNo(no);
 
     if (noticeDTO == null) {
       System.out.println("해당 번호의 게시물이 없습니다.");

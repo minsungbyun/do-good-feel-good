@@ -19,17 +19,25 @@ public class ChallengeDTO implements Serializable{
   private String content;
   private String fileUpload;
   private Date registeredDate;
+  private Date startDate;
+  private Date endDate;
   private int viewCount;
   private int questionCount;
+  private int totalJoinCount;
   private boolean isChecked;
   private List<JoinDTO> members = new ArrayList<>();  // 관리자가 등록한 챌린지에 참여한 멤버
 
+
+
+
+
+
+
   @Override
   public int hashCode() {
-    return Objects.hash(admin, content, fileUpload, isChecked, members, no, questionCount,
-        registeredDate, reviewCount, title, viewCount);
+    return Objects.hash(admin, content, endDate, fileUpload, isChecked, members, no, questionCount,
+        registeredDate, reviewCount, startDate, title, totalJoinCount, viewCount);
   }
-
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -40,21 +48,21 @@ public class ChallengeDTO implements Serializable{
       return false;
     ChallengeDTO other = (ChallengeDTO) obj;
     return Objects.equals(admin, other.admin) && Objects.equals(content, other.content)
-        && Objects.equals(fileUpload, other.fileUpload) && isChecked == other.isChecked
-        && Objects.equals(members, other.members) && no == other.no
+        && Objects.equals(endDate, other.endDate) && Objects.equals(fileUpload, other.fileUpload)
+        && isChecked == other.isChecked && Objects.equals(members, other.members) && no == other.no
         && questionCount == other.questionCount
         && Objects.equals(registeredDate, other.registeredDate) && reviewCount == other.reviewCount
-        && Objects.equals(title, other.title) && viewCount == other.viewCount;
+        && Objects.equals(startDate, other.startDate) && Objects.equals(title, other.title)
+        && totalJoinCount == other.totalJoinCount && viewCount == other.viewCount;
   }
-
   @Override
   public String toString() {
     return "ChallengeDTO [no=" + no + ", reviewCount=" + reviewCount + ", admin=" + admin
         + ", title=" + title + ", content=" + content + ", fileUpload=" + fileUpload
-        + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount + ", questionCount="
-        + questionCount + ", isChecked=" + isChecked + ", members=" + members + "]";
+        + ", registeredDate=" + registeredDate + ", startDate=" + startDate + ", endDate=" + endDate
+        + ", viewCount=" + viewCount + ", questionCount=" + questionCount + ", totalJoinCount="
+        + totalJoinCount + ", isChecked=" + isChecked + ", members=" + members + "]";
   }
-
   public int getNo() {
     return no;
   }
@@ -122,6 +130,32 @@ public class ChallengeDTO implements Serializable{
     this.questionCount = questionCount;
   }
 
+
+
+
+
+
+  public Date getStartDate() {
+    return startDate;
+  }
+  public void setStartDate(Date startDate) {
+    this.startDate = startDate;
+  }
+  public Date getEndDate() {
+    return endDate;
+  }
+  public void setEndDate(Date endDate) {
+    this.endDate = endDate;
+  }
+
+
+
+  public int getTotalJoinCount() {
+    return totalJoinCount;
+  }
+  public void setTotalJoinCount(int totalJoinCount) {
+    this.totalJoinCount = totalJoinCount;
+  }
   public void addMembers(JoinDTO member) {
     this.members.add(member);
   }

@@ -1,14 +1,15 @@
-package com.share.ftp.handler.admin;
+package com.share.ftp.handler.personal.challenge;
 
 import java.util.List;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.handler.CommandRequest;
+import com.share.ftp.handler.admin.AbstractAdminChallengeHandler;
 import com.share.util.Prompt;
 
-public class AdminChallengeDetailHandler extends AbstractAdminChallengeHandler {
+public class ChallengeDetailHandler extends AbstractAdminChallengeHandler {
 
 
-  public AdminChallengeDetailHandler(List<ChallengeDTO> challengeDTOList) {
+  public ChallengeDetailHandler(List<ChallengeDTO> challengeDTOList) {
     super(challengeDTOList);
   }
 
@@ -41,18 +42,18 @@ public class AdminChallengeDetailHandler extends AbstractAdminChallengeHandler {
 
     while (true) {
       System.out.println();
-      String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
+      System.out.println("1번: 참여하기");
+      System.out.println("2번: 참여자 목록");
+      System.out.println("3번: 참여인증&댓글");
+      System.out.println("4번: 문의하기");
+      System.out.println("0번: 이전");
+      int input = Prompt.inputInt("번호 입력 > ");
       switch (input) {
-        case "U":
-        case "u":
-          request.getRequestDispatcher("/adminChallenge/update").forward(request);
-          return;
-        case "D":
-        case "d":
-          request.getRequestDispatcher("/adminChallenge/delete").forward(request);
-          return;
-        case "0":
-          return;
+        case 1: request.getRequestDispatcher("/challengeJoin/join").forward(request); break;
+        case 2: request.getRequestDispatcher("/challengeJoin/list").forward(request); break;
+        case 3: request.getRequestDispatcher("/challengeReview/connect").forward(request); break;
+        case 4: request.getRequestDispatcher("/challengeQuestion/connect").forward(request); break;
+        case 0: return;
         default:
           System.out.println("명령어가 올바르지 않습니다!");
       }

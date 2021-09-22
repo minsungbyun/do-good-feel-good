@@ -16,10 +16,9 @@ public class ChallengeQuestionSearchHandler extends AbstractChallengeQuestionHan
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[문의 검색]");
-    System.out.println(" ▶ 챌린지 번호를 입력해주세요.");
     System.out.println();
 
-    int challengeNo = Prompt.inputInt("챌린지 번호: ");
+    int challengeNo = (int) request.getAttribute("no");
     System.out.println();
 
     ChallengeDTO challengeList = findByChallengeNo(challengeNo); 
@@ -33,13 +32,15 @@ public class ChallengeQuestionSearchHandler extends AbstractChallengeQuestionHan
 
     for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
       if (!challengeQuestionDTO.getOwner().getId().contains(input) &&
-          !challengeQuestionDTO.getContent().contains(input)) {
+          !challengeQuestionDTO.getTitle().contains(input)) {
         continue;
       }
-      System.out.printf("%s, %s, %s\n", 
-          challengeQuestionDTO.getNo(), 
+      System.out.printf("%d, %d, %s, %s, %s\n", 
+          challengeQuestionDTO.getNo(),
+          challengeQuestionDTO.getQuestionNo(),
           challengeQuestionDTO.getOwner().getId(),
-          challengeQuestionDTO.getContent());
+          challengeQuestionDTO.getTitle(),
+          challengeQuestionDTO.getRegisteredDate());
     }
   }
 }

@@ -16,15 +16,32 @@ public abstract class AbstractChallengeQuestionHandler  implements Command {
     this.challengeDTOList = challengeDTOList;
   }
 
+  //  protected ChallengeQuestionDTO findByQuestionNo(int no) {
+  //    ChallengeQuestionDTO[] arr = challengeQuestionDTOList.toArray(new ChallengeQuestionDTO[0]);
+  //    for (ChallengeQuestionDTO ChallengeQuestionDTO : arr) {
+  //      if (ChallengeQuestionDTO.getNo() == no) {
+  //        return ChallengeQuestionDTO;
+  //      }
+  //    }
+  //    return null;
+  //  }
+
+
+
   protected ChallengeQuestionDTO findByQuestionNo(int no) {
-    ChallengeQuestionDTO[] arr = challengeQuestionDTOList.toArray(new ChallengeQuestionDTO[0]);
-    for (ChallengeQuestionDTO ChallengeQuestionDTO : arr) {
-      if (ChallengeQuestionDTO.getNo() == no) {
+    for (ChallengeQuestionDTO ChallengeQuestionDTO : challengeQuestionDTOList) {
+      if (ChallengeQuestionDTO.getQuestionNo() == no) {
         return ChallengeQuestionDTO;
       }
     }
     return null;
   }
+
+
+
+
+
+
   protected ChallengeDTO findByChallengeNo(int no) {
     for (ChallengeDTO challengeDTO : challengeDTOList) {
       if (challengeDTO.getNo() == no) {

@@ -21,9 +21,8 @@ public class ChallengeJoinHandler extends AbstractAdminChallengeHandler {
 
     System.out.println();
     System.out.println("[챌린지 참여]");
-    System.out.println(" ▶ 참여를 원하는 챌린지 번호를 입력해주세요 ");
     System.out.println();
-    int no = Prompt.inputInt("챌린지 번호: ");
+    int no = (int) request.getAttribute("no");
 
     ChallengeDTO challengeDTO = findByNo(no);
 
@@ -82,9 +81,9 @@ public class ChallengeJoinHandler extends AbstractAdminChallengeHandler {
     //    }
 
     //    // 총 참여 인원(주최자1명 포함)을 누적시킨다.
-    //    int count = challengeDTO.getTotalJoinCount();
-    //    count += 1;
-    //    challengeDTO.setTotalJoinCount(count); 
+    int count = challengeDTO.getTotalJoinCount();
+    count += 1;
+    challengeDTO.setTotalJoinCount(count); 
 
     System.out.println("챌린지 참여가 완료되었습니다.");
   }

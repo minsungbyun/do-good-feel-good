@@ -15,12 +15,16 @@ public class AdminChallengeListHandler extends AbstractAdminChallengeHandler {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[챌린지 목록]");
     for (ChallengeDTO challengeDTO : challengeDTOList) {
-      System.out.printf("%d, %s, %s, %s\n", 
+      System.out.printf("%d, %s[%d], %s, %d, %s ~ %s\n", 
           challengeDTO.getNo(), 
           //          challengeDTO.getAdminId(), 
           challengeDTO.getTitle(), 
-          challengeDTO.getFileUpload(), 
-          challengeDTO.getRegisteredDate());
+          challengeDTO.getReviewCount(), 
+          challengeDTO.getAdmin().getName(),
+          challengeDTO.getTotalJoinCount(),
+          //          challengeDTO.getFileUpload(), 
+          challengeDTO.getStartDate(),
+          challengeDTO.getEndDate());
     }
   }
 }

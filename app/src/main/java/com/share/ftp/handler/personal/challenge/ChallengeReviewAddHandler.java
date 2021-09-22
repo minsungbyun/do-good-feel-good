@@ -19,9 +19,8 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[참여인증&댓글 등록]");
-    System.out.println(" ▶ 챌린지 번호를 입력해주세요 ");
     System.out.println();
-    int challengeNo = Prompt.inputInt("챌린지 번호: ");
+    int challengeNo = (int) request.getAttribute("no");
 
     ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
 
@@ -31,24 +30,24 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
       System.out.println("해당 챌린지가 없습니다!");
     }
 
-    System.out.printf("챌린지 제목: %s\n"
-        //        + "챌린지 시작기간: %s\n"
-        //        + "챌린지 종료기간: %s\n"
-        + "챌린지 내용: %s\n"
-        + "첨부파일: %s\n"
-        + "등록날짜: %s\n\n",
-
-        challengeDTO.getTitle(),     
-        //challengeDTO.getStartDate(),  // 시작날짜
-        //challengeDTO.getEndDate(),  // 끝나는 날짜
-        challengeDTO.getContent(),
-        challengeDTO.getFileUpload(),
-        challengeDTO.getRegisteredDate());
+    //    System.out.printf("챌린지 제목: %s\n"
+    //        //        + "챌린지 시작기간: %s\n"
+    //        //        + "챌린지 종료기간: %s\n"
+    //        + "챌린지 내용: %s\n"
+    //        + "첨부파일: %s\n"
+    //        + "등록날짜: %s\n\n",
+    //
+    //        challengeDTO.getTitle(),     
+    //        //challengeDTO.getStartDate(),  // 시작날짜
+    //        //challengeDTO.getEndDate(),  // 끝나는 날짜
+    //        challengeDTO.getContent(),
+    //        challengeDTO.getFileUpload(),
+    //        challengeDTO.getRegisteredDate());
 
     String input = Prompt.inputString("해당 챌린지에 참여인증&댓글등록을 하시겠습니까?(y/N) ");
     if (!input.equals("y") || input.length() == 0) {
       System.out.println();
-      System.out.println("해당 챌린지 참여를 취소하였습니다.");
+      System.out.println("댓글 등록이 취소되었습니다.");
       return;
     }
 
@@ -72,20 +71,20 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
 
     if (challengeDTO.getReviewCount() == 0) {
       challengeDTO.setReviewCount(1);
-      System.out.println("각 챌린지의 첫 댓글입니다");
+      //      System.out.println("각 챌린지의 첫 댓글입니다");
     } else {
       challengeDTO.setReviewCount(getNextReviewNum(challengeDTO));
       //      challengeReviewDTO.setReviewNo(getNextNum2()); // 해당 챌린지 리뷰의 마지막 번호기억 + 1
-      System.out.println("현재 댓글의 번호는? (challengeReviewDTO.getReviewNo()) " + challengeReviewDTO.getReviewNo());
-      System.out.println("현재 댓글의 번호는? (challengeDTO.getReviewCount()) " + challengeDTO.getReviewCount());
+      //      System.out.println("현재 댓글의 번호는? (challengeReviewDTO.getReviewNo()) " + challengeReviewDTO.getReviewNo());
+      //      System.out.println("현재 댓글의 번호는? (challengeDTO.getReviewCount()) " + challengeDTO.getReviewCount());
     }
     //    challengeDTO.setReviewCount(challengeReviewDTO.getReviewNo());
     challengeReviewDTO.setReviewNo(challengeDTO.getReviewCount()); // 해당 챌린지 리뷰의 마지막 번호기억 + 1
-    System.out.println("challengeDTO.getReviewCount() = " + challengeDTO.getReviewCount());
+    //    System.out.println("challengeDTO.getReviewCount() = " + challengeDTO.getReviewCount());
 
 
     challengeReviewDTOList.add(challengeReviewDTO);
-    System.out.println("총 댓글 개수 = " + challengeReviewDTOList.size());
+    //    System.out.println("총 댓글 개수 = " + challengeReviewDTOList.size());
 
     System.out.println();
     System.out.println("참여인증&댓글이 등록이 완료되었습니다.");
