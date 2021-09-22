@@ -32,15 +32,15 @@ public class ChallengeReviewDeleteHandler extends AbstractChallengeReviewHandler
 
       int deleteNo = Prompt.inputInt("번호? ");
 
-      ChallengeReviewDTO challengeReview = findByReviewNo(deleteNo);
+      ChallengeReviewDTO challengeReviewDTO = findByReviewNo(deleteNo);
 
       try {
-        if (challengeReview == null) {
+        if (challengeReviewDTO == null) {
           System.out.println("해당 번호의 참여인증&댓글이 없습니다.");
           return;
         }
 
-        if (challengeReview.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
+        if (!challengeReviewDTO.getOwner().getId().contains(AuthLoginHandler.getLoginUser().getId())) {
           System.out.println("삭제 권한이 없습니다.");
           return;
         }
@@ -51,7 +51,7 @@ public class ChallengeReviewDeleteHandler extends AbstractChallengeReviewHandler
           return;
         } else if (input.equals("y")) {
           System.out.println("참여인증&댓글을 삭제하였습니다.");
-          challengeReviewDTOList.remove(challengeReview);
+          challengeReviewDTOList.remove(challengeReviewDTO);
           return;
         } else {
           System.out.println("y 또는 n을 입력하세요.");

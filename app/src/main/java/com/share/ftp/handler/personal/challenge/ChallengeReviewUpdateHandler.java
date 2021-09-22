@@ -38,7 +38,7 @@ public class ChallengeReviewUpdateHandler extends AbstractChallengeReviewHandler
           return;
         }
 
-        if (challengeReviewDTO.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
+        if (!challengeReviewDTO.getOwner().getId().contains(AuthLoginHandler.getLoginUser().getId())) {
           System.out.println("변경 권한이 없습니다.");
           return;
         }

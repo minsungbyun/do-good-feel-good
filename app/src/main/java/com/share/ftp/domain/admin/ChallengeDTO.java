@@ -20,12 +20,14 @@ public class ChallengeDTO implements Serializable{
   private String fileUpload;
   private Date registeredDate;
   private int viewCount;
+  private int questionCount;
   private boolean isChecked;
   private List<JoinDTO> members = new ArrayList<>();  // 관리자가 등록한 챌린지에 참여한 멤버
 
   @Override
   public int hashCode() {
-    return Objects.hash(admin, content, fileUpload, members, no, registeredDate, title, viewCount);
+    return Objects.hash(admin, content, fileUpload, isChecked, members, no, questionCount,
+        registeredDate, reviewCount, title, viewCount);
   }
 
   @Override
@@ -38,16 +40,19 @@ public class ChallengeDTO implements Serializable{
       return false;
     ChallengeDTO other = (ChallengeDTO) obj;
     return Objects.equals(admin, other.admin) && Objects.equals(content, other.content)
-        && Objects.equals(fileUpload, other.fileUpload) && Objects.equals(members, other.members) && no == other.no
-        && Objects.equals(registeredDate, other.registeredDate) && Objects.equals(title, other.title)
-        && viewCount == other.viewCount;
+        && Objects.equals(fileUpload, other.fileUpload) && isChecked == other.isChecked
+        && Objects.equals(members, other.members) && no == other.no
+        && questionCount == other.questionCount
+        && Objects.equals(registeredDate, other.registeredDate) && reviewCount == other.reviewCount
+        && Objects.equals(title, other.title) && viewCount == other.viewCount;
   }
 
   @Override
   public String toString() {
-    return "ChallengeDTO [no=" + no + ", admin=" + admin + ", title=" + title + ", content=" + content + ", fileUpload="
-        + fileUpload + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount + ", members=" + members
-        + "]";
+    return "ChallengeDTO [no=" + no + ", reviewCount=" + reviewCount + ", admin=" + admin
+        + ", title=" + title + ", content=" + content + ", fileUpload=" + fileUpload
+        + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount + ", questionCount="
+        + questionCount + ", isChecked=" + isChecked + ", members=" + members + "]";
   }
 
   public int getNo() {
@@ -107,6 +112,14 @@ public class ChallengeDTO implements Serializable{
 
   public void setReviewCount(int reviewCount) {
     this.reviewCount = reviewCount;
+  }
+
+  public int getQuestionCount() {
+    return questionCount;
+  }
+
+  public void setQuestionCount(int questionCount) {
+    this.questionCount = questionCount;
   }
 
   public void addMembers(JoinDTO member) {

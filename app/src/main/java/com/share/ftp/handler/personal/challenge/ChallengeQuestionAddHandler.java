@@ -62,6 +62,19 @@ public class ChallengeQuestionAddHandler extends AbstractChallengeQuestionHandle
 
     //    challengeQuestionDTO.setNo(getNextNum());
 
+    if (challengeDTO.getQuestionCount() == 0) {
+      challengeDTO.setQuestionCount(1);
+      System.out.println("각 챌린지의 첫 댓글입니다");
+    } else {
+      //      challengeDTO.setQuestionCount(getNextNum1(challengeDTO));
+      //      challengeReviewDTO.setReviewNo(getNextNum2()); // 해당 챌린지 리뷰의 마지막 번호기억 + 1
+      System.out.println("현재 댓글의 번호는? (challengeReviewDTO.getQuestionNo()) " + challengeQuestionDTO.getQuestionNo());
+      System.out.println("현재 댓글의 번호는? (challengeDTO.getQuestionCount()) " + challengeDTO.getQuestionCount());
+    }
+    //    challengeDTO.setReviewCount(challengeReviewDTO.getReviewNo());
+    challengeQuestionDTO.setQuestionNo(challengeDTO.getQuestionCount()); // 해당 챌린지 리뷰의 마지막 번호기억 + 1
+    System.out.println("challengeDTO.getQuestionCount() = " + challengeDTO.getQuestionCount());
+
     challengeQuestionDTOList.add(challengeQuestionDTO);
 
     System.out.println();
