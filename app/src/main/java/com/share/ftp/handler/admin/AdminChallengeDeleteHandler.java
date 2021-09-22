@@ -12,9 +12,10 @@ public class AdminChallengeDeleteHandler extends AbstractAdminChallengeHandler {
     super(challengeDTOList);
   }
 
+  @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[챌린지 삭제]");
-    int no = Prompt.inputInt("번호? ");
+    int no = (int) request.getAttribute("no"); 
 
     ChallengeDTO challengeDTO = findByNo(no);
 
