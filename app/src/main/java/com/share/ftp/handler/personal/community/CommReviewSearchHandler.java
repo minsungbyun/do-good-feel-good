@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.community;
 
 import java.util.List;
 import com.share.ftp.domain.personal.CommReviewDTO;
+import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
 public class CommReviewSearchHandler extends AbstractCommReviewHandler {
@@ -11,7 +12,7 @@ public class CommReviewSearchHandler extends AbstractCommReviewHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     String input = Prompt.inputString("[  검색어를 입력하세요.  ]");
 
     for(CommReviewDTO commReviewDTO : commReviewDTOList) {

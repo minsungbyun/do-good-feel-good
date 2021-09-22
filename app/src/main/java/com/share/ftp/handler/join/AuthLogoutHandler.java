@@ -1,12 +1,13 @@
 package com.share.ftp.handler.join;
 
 import com.share.ftp.handler.Command;
+import com.share.ftp.handler.CommandRequest;
 import com.share.menu.Menu;
 
 public class AuthLogoutHandler implements Command {
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("[로그아웃]");
 

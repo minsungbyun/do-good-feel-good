@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.volunteer;
 
 import java.util.List;
 import com.share.ftp.domain.personal.GeneralRequestDTO;
+import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
@@ -18,7 +19,7 @@ public class VolGeneralDoJoinDeleteHandler extends AbstractVolGeneralHandler { /
 
   // 해당 봉사 신청서를 삭제한다.
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("[  봉사 참여 취소하기  ]");
 

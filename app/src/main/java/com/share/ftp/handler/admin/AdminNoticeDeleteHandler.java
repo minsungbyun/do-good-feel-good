@@ -2,6 +2,7 @@ package com.share.ftp.handler.admin;
 
 import java.util.List;
 import com.share.ftp.domain.admin.NoticeDTO;
+import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
 public class AdminNoticeDeleteHandler extends AbstractAdminNoticeHandler {
@@ -11,7 +12,7 @@ public class AdminNoticeDeleteHandler extends AbstractAdminNoticeHandler {
     super(noticeDTOList);
   }
 
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[공지사항 삭제]");
     int boardNo = Prompt.inputInt("번호? ");
 

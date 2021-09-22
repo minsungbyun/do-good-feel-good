@@ -2,6 +2,7 @@ package com.share.ftp.handler.admin;
 
 import java.util.List;
 import com.share.ftp.domain.admin.NoticeDTO;
+import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
 public class AdminNoticeSearchHandler extends AbstractAdminNoticeHandler {
@@ -12,7 +13,7 @@ public class AdminNoticeSearchHandler extends AbstractAdminNoticeHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[공지사항 검색]");
 
     String input = Prompt.inputString("검색어? ");

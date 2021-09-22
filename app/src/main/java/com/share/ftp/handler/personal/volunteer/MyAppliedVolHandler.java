@@ -3,6 +3,7 @@ package com.share.ftp.handler.personal.volunteer;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.personal.GeneralRequestDTO;
+import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 
 public class MyAppliedVolHandler extends AbstractVolGeneralHandler { // 개인 봉사신청 양식 쓰는 곳
@@ -18,7 +19,7 @@ public class MyAppliedVolHandler extends AbstractVolGeneralHandler { // 개인 �
 
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("[ 봉사승인 목록 ]");
 

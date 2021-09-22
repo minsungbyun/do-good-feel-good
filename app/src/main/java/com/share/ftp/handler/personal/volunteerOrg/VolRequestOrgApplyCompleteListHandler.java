@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.volunteerOrg;
 
 import java.util.List;
 import com.share.ftp.domain.personal.OrgRequestDTO;
+import com.share.ftp.handler.CommandRequest;
 
 public class VolRequestOrgApplyCompleteListHandler extends AbstractVolRequestOrgHandler { // 개인 봉사신청 양식 쓰는 곳
 
@@ -16,7 +17,7 @@ public class VolRequestOrgApplyCompleteListHandler extends AbstractVolRequestOrg
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("[  기관 봉사 신청서 목록  ]");
 

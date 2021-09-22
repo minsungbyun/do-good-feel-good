@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.volunteer;
 
 import java.util.List;
 import com.share.ftp.domain.personal.GeneralRequestDTO;
+import com.share.ftp.handler.CommandRequest;
 
 public class VolGeneralRequestBookmarkHandler extends AbstractVolGeneralHandler { // 개인 봉사신청 양식 쓰는 곳
 
@@ -28,7 +29,7 @@ public class VolGeneralRequestBookmarkHandler extends AbstractVolGeneralHandler 
 
   // 함께해요 - 찜한 목록(마이페이지 연동 예정) 북마크
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
 
     // 인증받은 봉사 리스트 중 내가 선택한 번호의 봉사 리스트를
     // 새로운 배열(리스트)에 담아서 마이페이지에서 보여준다.

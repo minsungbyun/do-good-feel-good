@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.support;
 
 import java.util.List;
 import com.share.ftp.domain.personal.QuestionListDTO;
+import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
 public class QuestionSearchHandler extends AbstractQuestionHandler {
@@ -11,7 +12,7 @@ public class QuestionSearchHandler extends AbstractQuestionHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[고객센터/문의하기/문의하기 검색]");
 
     String input = Prompt.inputString("검색어? ");

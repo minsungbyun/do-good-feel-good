@@ -2,6 +2,7 @@ package com.share.ftp.handler.join;
 
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
 public class JoinSearchEmailIdHandler extends AbstractJoinHandler {
@@ -13,7 +14,7 @@ public class JoinSearchEmailIdHandler extends AbstractJoinHandler {
 
   // 아이디찾기 -> 이메일을 통해 찾는다.
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("[이메일을 입력해주세요.]");
     String email = Prompt.inputString("이메일? ");

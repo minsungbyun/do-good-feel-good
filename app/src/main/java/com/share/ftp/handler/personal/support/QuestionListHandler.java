@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.support;
 
 import java.util.List;
 import com.share.ftp.domain.personal.QuestionListDTO;
+import com.share.ftp.handler.CommandRequest;
 
 public class QuestionListHandler extends AbstractQuestionHandler {
 
@@ -9,7 +10,7 @@ public class QuestionListHandler extends AbstractQuestionHandler {
     super (myQuestionListDTOList);
   }
 
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("[고객센터/문의하기/문의하기 목록]");
 
