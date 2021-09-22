@@ -15,14 +15,22 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
 
     System.out.println();
     System.out.println("[고객센터/문의하기/상세보기]");
-    int no = Prompt.inputInt("번호? ");
+    System.out.println("비밀번호를 입력해주세요.");
+    System.out.println();
 
-    QuestionListDTO myQuestionListDTO = findByNo(no);
+    int passwoard = Prompt.inputInt("비밀번호: ");
+    System.out.println();
+    
+    if (myQuestionListDTO.getPassword == )
+      
+//    int no = Prompt.inputInt("번호? ");
+//
+//    QuestionListDTO myQuestionListDTO = findByNo(no);
 
-    if (myQuestionListDTO == null) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
-      return;
-    }
+//    if (myQuestionListDTO == null) {
+//      System.out.println("해당 번호의 게시글이 없습니다.");
+//      return;
+//    }
 
     if ((myQuestionListDTO.getOwner().getId() == AuthLoginHandler.getLoginUser().getId()) ||
         AuthLoginHandler.getLoginUser().getId().equals("admin")) {
