@@ -3,6 +3,7 @@ package com.share.ftp.handler.personal.community;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.personal.CommReviewDTO;
+import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
@@ -15,7 +16,7 @@ public class CommReviewAddHandler extends AbstractCommReviewHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
 
     System.out.println();
     System.out.println("[  소통해요/ 한줄후기/ 등록  ]");

@@ -3,6 +3,7 @@ package com.share.ftp.handler.admin;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.admin.ChallengeDTO;
+import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
 public class AdminChallengeAddHandler extends AbstractAdminChallengeHandler {
@@ -14,7 +15,7 @@ public class AdminChallengeAddHandler extends AbstractAdminChallengeHandler {
 
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[챌린지 등록]");
 
     ChallengeDTO challengeDTO = new ChallengeDTO();

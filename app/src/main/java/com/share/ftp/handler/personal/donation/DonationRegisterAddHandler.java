@@ -5,6 +5,7 @@ import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
+import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
@@ -24,7 +25,7 @@ public class DonationRegisterAddHandler extends AbstractDonationRegisterHandler 
 
   // 모금함 기부하기
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
 
     JoinDTO joinDTO = AuthLoginHandler.getLoginUser();
 

@@ -1,6 +1,7 @@
 package com.share.ftp.handler.personal.volunteer;
 
 import com.share.ftp.handler.Command;
+import com.share.ftp.handler.CommandRequest;
 
 public class VolGeneralTotalApprovedListHandler implements Command { // 개인 봉사신청 양식 쓰는 곳
 
@@ -16,7 +17,7 @@ public class VolGeneralTotalApprovedListHandler implements Command { // 개인 �
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
 
     System.out.println("▶ 전체봉사승인 목록");

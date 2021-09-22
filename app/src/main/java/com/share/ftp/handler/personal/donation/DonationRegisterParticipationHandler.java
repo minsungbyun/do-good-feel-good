@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.donation;
 
 import java.util.List;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
+import com.share.ftp.handler.CommandRequest;
 
 public class DonationRegisterParticipationHandler extends AbstractDonationRegisterHandler { // 모금함 기부하기 양식 쓰는곳
 
@@ -12,7 +13,7 @@ public class DonationRegisterParticipationHandler extends AbstractDonationRegist
 
   // 모금함 기부 참여내역
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[모금함 기부 참여내역]");
 
     if (donationRegisterDTOList.isEmpty()) {

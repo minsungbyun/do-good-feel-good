@@ -2,6 +2,7 @@ package com.share.ftp.handler.join;
 
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
 public class MyPageInfoHandler extends AbstractJoinHandler {
@@ -13,7 +14,7 @@ public class MyPageInfoHandler extends AbstractJoinHandler {
 
   // 마이페이지 나의 정보 수정 -> 비밀번호 입력시 변경가능
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("[회원 변경]");
     String password = Prompt.inputString("비밀번호? ");

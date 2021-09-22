@@ -2,6 +2,7 @@ package com.share.ftp.handler.join;
 
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
 public class JoinDetailHandler extends AbstractJoinHandler {
@@ -13,7 +14,7 @@ public class JoinDetailHandler extends AbstractJoinHandler {
 
   //가입회원 상세보기 (관리자가 가입한 회원의 상세정보를을 볼 수 있다) => 관리자 연결
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("[  회원 상세보기  ]");
     String id = Prompt.inputString("아이디? "); 

@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.volunteer;
 
 import java.util.List;
 import com.share.ftp.domain.personal.GeneralRequestDTO;
+import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
@@ -17,7 +18,7 @@ public class VolGeneralDoJoinHandler extends AbstractVolGeneralHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("[  봉사 참여  ]");
     System.out.println(" ▶ 참여를 원하는 봉사번호를 입력해주세요 ");

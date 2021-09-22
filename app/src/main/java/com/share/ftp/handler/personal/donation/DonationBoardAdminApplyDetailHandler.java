@@ -3,6 +3,7 @@ package com.share.ftp.handler.personal.donation;
 import java.util.List;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
+import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
 public class DonationBoardAdminApplyDetailHandler extends AbstractDonationBoardHandler {
@@ -23,7 +24,7 @@ public class DonationBoardAdminApplyDetailHandler extends AbstractDonationBoardH
 
   // 모금함 개설 신청내역 상세보기 -> 관리자에게 전달
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[모금함 개설 신청내역 상세보기]");
     int no = Prompt.inputInt("번호? ");
 

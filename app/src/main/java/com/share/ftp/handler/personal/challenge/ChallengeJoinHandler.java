@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.challenge;
 
 import java.util.List;
 import com.share.ftp.domain.admin.ChallengeDTO;
+import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.admin.AbstractAdminChallengeHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
@@ -16,7 +17,7 @@ public class ChallengeJoinHandler extends AbstractAdminChallengeHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
 
     System.out.println();
     System.out.println("[챌린지 참여]");
