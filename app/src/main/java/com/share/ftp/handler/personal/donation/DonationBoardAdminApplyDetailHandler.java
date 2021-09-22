@@ -46,6 +46,26 @@ public class DonationBoardAdminApplyDetailHandler extends AbstractDonationBoardH
     System.out.printf("종료일: %s\n", donationBoardDTO.getRegisteredEndDate());
     System.out.printf("승인여부: %s\n", donationBoardDTO.getIsSigned());
 
+    request.setAttribute("no", no); 
+
+    while (true) {
+      String input = Prompt.inputString("승인(U), 반려(D), 이전(0)>");
+      switch (input) {
+        case "U":
+        case "u":
+          request.getRequestDispatcher("/donationBoard/acceptApply").forward(request);
+          return;
+        case "D":
+        case "d":
+          request.getRequestDispatcher("/donationBoard/rejectApply").forward(request);
+          return;
+        case "0":
+          return;
+        default:
+          System.out.println("명령어가 올바르지 않습니다!");
+      }
+    }
+
   }
 
 }

@@ -18,11 +18,9 @@ public class ChallengeQuestionDetailHandler extends AbstractChallengeQuestionHan
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[문의 상세보기]");
-    System.out.println(" ▶ 챌린지 번호를 입력해주세요.");
     System.out.println();
 
-    int challengeNo = Prompt.inputInt("챌린지 번호: ");
-    System.out.println();
+    int challengeNo = (int) request.getAttribute("no");
 
     ChallengeDTO challengeList = findByChallengeNo(challengeNo); 
 
@@ -31,16 +29,16 @@ public class ChallengeQuestionDetailHandler extends AbstractChallengeQuestionHan
       return;
     }
 
-    int detailNo = Prompt.inputInt("번호? ");
+    int questionNo = Prompt.inputInt("번호? ");
 
-    ChallengeQuestionDTO challengeQuestion = findByQuestionNo(detailNo);
+    ChallengeQuestionDTO challengeQuestion = findByQuestionNo(questionNo);
 
     if (challengeQuestion == null) {
       System.out.println("해당 번호의 문의가 없습니다.");
       return;
     }
 
-    if (challengeQuestion.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
+    if (!challengeQuestion.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
       System.out.println("읽을 권한이 없습니다.");
       return;
     }
@@ -50,6 +48,27 @@ public class ChallengeQuestionDetailHandler extends AbstractChallengeQuestionHan
         System.out.printf("아이디: %s\n", challengeQuestion.getOwner().getId());
         System.out.printf("제목: %s\n", challengeQuestion.getTitle());
         System.out.printf("내용: %s\n", challengeQuestion.getContent());
+        System.out.printf("등록날짜: %s\n", challengeQuestion.getRegisteredDate());
+      }
+    }
+
+    System.out.println();
+
+    request.setAttribute("questionNo", questionNo); 
+
+
+    while (true) {
+      System.out.println();
+      System.out.println("1번: 문의 변경");
+      System.out.println("2번: 문의 삭제");
+      System.out.println("0번: 이전");
+      int input = Prompt.inputInt("번호 입력 > ");
+      switch (input) {
+        case 1: request.getRequestDispatcher("/challengeQuestion/update").forward(request); return;
+        case 2: request.getRequestDispatcher("/challengeQuestion/delete").forward(request); return;
+        case 0: return;
+        default:
+          System.out.println("명령어가 올바르지 않습니다!");
       }
     }
   }

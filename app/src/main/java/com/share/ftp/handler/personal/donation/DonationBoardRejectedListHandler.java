@@ -1,5 +1,6 @@
 package com.share.ftp.handler.personal.donation;
 
+import static com.share.ftp.handler.personal.volunteer.General.check.Rejected;
 import java.util.List;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.handler.CommandRequest;
@@ -22,15 +23,17 @@ public class DonationBoardRejectedListHandler extends AbstractDonationBoardHandl
     System.out.println();
     System.out.println("[모금함 개설 반려 목록]");
 
-    if (donationBoardDTOList.isEmpty()) {
+    if (donationBoardRejectDTOList.isEmpty()) {
       System.out.println();
-      System.out.println("[ 현재 반려된 모금함 개설목록이 없습니다. ]");
+      System.out.println("[ 1현재 반려된 모금함 개설목록이 없습니다. ]");
       return;
     } 
 
-    for (DonationBoardDTO donationBoardRejectDTO : donationBoardDTOList) {
-      if (AuthLoginHandler.getLoginUser().getName().equals(donationBoardRejectDTO.getLeader())) {
-        if (donationBoardRejectDTO.getIsSigned().equals("반려됨")) {
+    for (DonationBoardDTO donationBoardRejectDTO : donationBoardRejectDTOList) {
+
+      if (donationBoardRejectDTO.getIsSigned().equals(Rejected)) {
+        if (donationBoardRejectDTO.getLeader().equals(AuthLoginHandler.getLoginUser().getName())) {
+
           System.out.printf("개설번호: %d\n모금함 분류: %s\n제목: %s\n주최자: %s\n내용: %s\n첨부파일: %s\n"
               + "개설기간: %s ~ %s\n승인여부: %s\n", 
               donationBoardRejectDTO.getNo(), 
@@ -45,10 +48,13 @@ public class DonationBoardRejectedListHandler extends AbstractDonationBoardHandl
           System.out.println("--------------------------------------------------------------");
         } else {
           System.out.println();
-          System.out.println("[  현재 반려된 모금함 개설목록이 없습니다. ]");
+          System.out.println("[  2현재 반려된 모금함 개설목록이 없습니다. ]");
           return;
-        }
-
+        } 
+      } else {
+        System.out.println();
+        System.out.println("[  2현재 반려된 모금함 개설목록이 없습니다. ]");
+        return;
       }
     }
   }
