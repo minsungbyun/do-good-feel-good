@@ -17,10 +17,9 @@ public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandl
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[문의 목록]");
-    System.out.println(" ▶ 챌린지 번호를 입력해주세요.");
     System.out.println();
 
-    int challengeNo = Prompt.inputInt("챌린지 번호: ");
+    int challengeNo = (int) request.getAttribute("no");
     System.out.println();
 
     ChallengeDTO challengeList = findByChallengeNo(challengeNo); 
@@ -37,10 +36,28 @@ public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandl
 
     for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
       if (challengeQuestionDTO.getNo() == challengeNo) {
-        System.out.printf("%s, %s\n", 
+        System.out.printf("%d, %d, %s, %s, %s\n", 
+            challengeQuestionDTO.getNo(),
+            challengeQuestionDTO.getQuestionNo(),
             challengeQuestionDTO.getOwner().getId(),
-            challengeQuestionDTO.getTitle());
+            challengeQuestionDTO.getTitle(),
+            challengeQuestionDTO.getRegisteredDate());
       }
     }
+
+    while (true) {
+      System.out.println();
+      System.out.println("1번: 문의 검색");
+      System.out.println("0번: 이전");
+      int input = Prompt.inputInt("번호 입력 > ");
+      switch (input) {
+        case 1: request.getRequestDispatcher("/challengeQuestion/search").forward(request); break;
+        case 0: return;
+        default:
+          System.out.println("명령어가 올바르지 않습니다!");
+      }
+    }
+
+
   }
 }

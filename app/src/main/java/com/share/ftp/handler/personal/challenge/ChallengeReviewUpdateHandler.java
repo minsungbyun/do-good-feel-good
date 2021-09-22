@@ -18,18 +18,18 @@ public class ChallengeReviewUpdateHandler extends AbstractChallengeReviewHandler
   public void execute(CommandRequest request) throws Exception {
     while (true) {
       System.out.println("[참여인증&댓글 수정]");
-      System.out.println(" ▶ 챌린지 번호를 입력해주세요 ");
-      System.out.println();
-      int challengeNo = Prompt.inputInt("챌린지 번호: ");
+      //      System.out.println(" ▶ 챌린지 번호를 입력해주세요 ");
+      //      System.out.println();
+      //      int challengeNo = (int) request.getAttribute("no");
+      //
+      //      ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
+      //
+      //
+      //      if (challengeDTO == null) {
+      //        System.out.println("존재하지 않는 챌린지입니다");
+      //      }
 
-      ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
-
-
-      if (challengeDTO == null) {
-        System.out.println("존재하지 않는 챌린지입니다");
-      }
-
-      int updateNo = Prompt.inputInt("번호? ");
+      int updateNo = (int) request.getAttribute("reviewNo");
 
       ChallengeReviewDTO challengeReviewDTO = findByReviewNo(updateNo);
 
@@ -39,7 +39,7 @@ public class ChallengeReviewUpdateHandler extends AbstractChallengeReviewHandler
           return;
         }
 
-        if (challengeReviewDTO.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
+        if (!challengeReviewDTO.getOwner().getId().contains(AuthLoginHandler.getLoginUser().getId())) {
           System.out.println("변경 권한이 없습니다.");
           return;
         }
@@ -55,7 +55,7 @@ public class ChallengeReviewUpdateHandler extends AbstractChallengeReviewHandler
           System.out.println("참여인증&댓글을 수정하였습니다.");
           challengeReviewDTO.setContent(content);
           challengeReviewDTO.setFileUpload(fileUpload);
-          return;
+
         } else {
           System.out.println("y 또는 n을 입력하세요.");
           continue;

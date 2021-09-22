@@ -64,15 +64,18 @@ import com.share.ftp.handler.join.MyPageDelete;
 import com.share.ftp.handler.join.MyPageInfoHandler;
 import com.share.ftp.handler.org.MyVolApplyListHandler;
 import com.share.ftp.handler.org.MyVolApproveListHandler;
+import com.share.ftp.handler.personal.challenge.ChallengeDetailHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeJoinHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeJoinListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionAddHandler;
+import com.share.ftp.handler.personal.challenge.ChallengeQuestionConnectHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionDeleteHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionDetailHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionSearchHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionUpdateHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewAddHandler;
+import com.share.ftp.handler.personal.challenge.ChallengeReviewConnectHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewDeleteHandler;
 //import com.share.ftp.handler.personal.challenge.ChallengeReviewDetailHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewListHandler;
@@ -187,6 +190,14 @@ public class App {
 
   //댓글 도메인
   //  List<CommentDTO> commentDTOList = new ArrayList<>();
+
+
+  // HashMap
+  HashMap<String,Command> challengeReviewMap = new HashMap<>();
+
+
+
+
 
   // 메뉴 객체 컨트롤(Map)
   HashMap<String,Command> commands = new HashMap<>();
@@ -344,10 +355,11 @@ public class App {
     // 챌린지 참여인증&댓글
     commands.put("/challengeReview/add", new ChallengeReviewAddHandler(challengeReviewDTOList, challengeDTOList));
     commands.put("/challengeReview/list", new ChallengeReviewListHandler(challengeReviewDTOList, challengeDTOList));
-    //    commands.put("/challengeReview/detail", new ChallengeReviewDetailHandler(myChallengeReviewDTOList));
+    commands.put("/challengeReview/detail", new ChallengeDetailHandler(challengeDTOList));
     commands.put("/challengeReview/update", new ChallengeReviewUpdateHandler(challengeReviewDTOList, challengeDTOList));
     commands.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(challengeReviewDTOList, challengeDTOList));
     commands.put("/challengeReview/search", new ChallengeReviewSearchHandler(challengeReviewDTOList, challengeDTOList));
+    commands.put("/challengeReview/connect", new ChallengeReviewConnectHandler());
 
     // 챌린지 문의하기
     commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(challengeQuestionDTOList, challengeDTOList));
@@ -356,6 +368,7 @@ public class App {
     commands.put("/challengeQuestion/update", new ChallengeQuestionUpdateHandler(challengeQuestionDTOList, challengeDTOList));
     commands.put("/challengeQuestion/delete", new ChallengeQuestionDeleteHandler(challengeQuestionDTOList, challengeDTOList));
     commands.put("/challengeQuestion/search", new ChallengeQuestionSearchHandler(challengeQuestionDTOList, challengeDTOList));
+    commands.put("/challengeQuestion/connect", new ChallengeQuestionConnectHandler());
 
     // 챌린지 랭킹
     commands.put("/ranking/list", new RankingHandler());  //전체랭킹(구현예정)
@@ -438,6 +451,15 @@ public class App {
 
 
     // 관리자 기관승인
+
+
+    challengeReviewMap.put("/challengeReview/add", new ChallengeReviewAddHandler(challengeReviewDTOList, challengeDTOList));
+    challengeReviewMap.put("/challengeReview/list", new ChallengeReviewListHandler(challengeReviewDTOList, challengeDTOList));
+    //    challengeReviewMap.put("/challengeReview/detail", new ChallengeReviewDetailHandler(myChallengeReviewDTOList));
+    challengeReviewMap.put("/challengeReview/update", new ChallengeReviewUpdateHandler(challengeReviewDTOList, challengeDTOList));
+    challengeReviewMap.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(challengeReviewDTOList, challengeDTOList));
+    challengeReviewMap.put("/challengeReview/search", new ChallengeReviewSearchHandler(challengeReviewDTOList, challengeDTOList));
+
 
 
   }
@@ -561,6 +583,9 @@ public class App {
       // JSON 데이터로 읽어온 목록을 파라미터로 받은 List 에 저장한다.
       list.addAll(collection);
 
+
+
+
       System.out.printf("%s 데이터 로딩 완료!\n", filepath);
 
     } catch (Exception e) {
@@ -639,14 +664,14 @@ public class App {
 
     monthlyChallengeMenu.add(new MenuItem("챌린지 목록", "/adminChallenge/list"));
 
-    monthlyChallengeMenu.add(new MenuItem("챌린지 상세정보", "/adminChallenge/detail"));
+    monthlyChallengeMenu.add(new MenuItem("챌린지 상세정보", "/challengeReview/detail"));
 
-    monthlyChallengeMenu.add(new MenuItem("참여하기", ACCESS_MEMBER, "/challengeJoin/join"));
-
-    monthlyChallengeMenu.add(new MenuItem("참여자 목록", ACCESS_MEMBER, "/challengeJoin/list"));
-
-    monthlyChallengeMenu.add(createChallengeReviewMenu()); // 참여인증&댓글
-    monthlyChallengeMenu.add(createChallengeQuestionMenu()); // 문의하기
+    //    monthlyChallengeMenu.add(new MenuItem("참여하기", ACCESS_MEMBER, "/challengeJoin/join"));
+    //
+    //    monthlyChallengeMenu.add(new MenuItem("참여자 목록", ACCESS_MEMBER, "/challengeJoin/list"));
+    //
+    //    monthlyChallengeMenu.add(createChallengeReviewMenu()); // 참여인증&댓글
+    //    monthlyChallengeMenu.add(createChallengeQuestionMenu()); // 문의하기
 
     challengeMenu.add(createMonthlyRankingMenu()); // 이달의 랭킹
 
@@ -783,7 +808,7 @@ public class App {
   }
 
 
-  private Menu createChallengeReviewMenu() {
+  public  Menu createChallengeReviewMenu() {
     MenuGroup ChallengeReview = new MenuGroup("참여인증&댓글");
     ChallengeReview.add(new MenuItem("참여인증&댓글 등록", ACCESS_MEMBER, "/challengeReview/add"));
     ChallengeReview.add(new MenuItem("참여인증&댓글 목록", "/challengeReview/list"));
@@ -989,7 +1014,7 @@ public class App {
   private Menu createAdminChallengeMenu() {
     MenuGroup adminChallengeInfo = new MenuGroup("챌린지 관리");
 
-    adminChallengeInfo.add(new MenuItem("챌린지 등록","/adminChallenge/add"));
+    adminChallengeInfo.add(new MenuItem("챌린지 등록",ACCESS_ADMIN,"/adminChallenge/add"));
     adminChallengeInfo.add(new MenuItem("챌린지 목록","/adminChallenge/list"));
     adminChallengeInfo.add(new MenuItem("챌린지 상세보기","/adminChallenge/detail"));
     //    adminChallengeInfo.add(new MenuItem("챌린지 변경","/adminChallenge/update"));

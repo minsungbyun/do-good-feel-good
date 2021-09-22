@@ -1,6 +1,7 @@
 package com.share.ftp.domain.personal;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
@@ -10,17 +11,18 @@ public class ChallengeQuestionDTO implements Serializable {
   private int questionNo;
   private String title;
   private String content;
+  private Date registeredDate;
   private JoinDTO owner;
 
   @Override
   public String toString() {
-    return "ChallengeQuestionDTO [no=" + no + ", title=" + title + ", content=" + content
-        + ", owner=" + owner + ", questionNo=" + questionNo + "]";
+    return "ChallengeQuestionDTO [no=" + no + ", questionNo=" + questionNo + ", title=" + title
+        + ", content=" + content + ", registeredDate=" + registeredDate + ", owner=" + owner + "]";
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(content, no, owner, questionNo, title);
+    return Objects.hash(content, no, owner, questionNo, registeredDate, title);
   }
 
   @Override
@@ -34,6 +36,7 @@ public class ChallengeQuestionDTO implements Serializable {
     ChallengeQuestionDTO other = (ChallengeQuestionDTO) obj;
     return Objects.equals(content, other.content) && no == other.no
         && Objects.equals(owner, other.owner) && questionNo == other.questionNo
+        && Objects.equals(registeredDate, other.registeredDate)
         && Objects.equals(title, other.title);
   }
 
@@ -60,6 +63,12 @@ public class ChallengeQuestionDTO implements Serializable {
   }
   public void setContent(String content) {
     this.content = content;
+  }
+  public Date getRegisteredDate() {
+    return registeredDate;
+  }
+  public void setRegisteredDate(Date registeredDate) {
+    this.registeredDate = registeredDate;
   }
   public JoinDTO getOwner() {
     return owner;

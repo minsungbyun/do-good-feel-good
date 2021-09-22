@@ -40,7 +40,7 @@ public abstract class AbstractChallengeReviewHandler implements Command {
       return 1;
     }
   }
-  protected int getNextNum1(ChallengeDTO challengeDTO) {
+  protected int getNextReviewNum(ChallengeDTO challengeDTO) {
     if (challengeReviewDTOList.size() > 0) {
       return challengeDTO.getReviewCount() + 1;
     } else {

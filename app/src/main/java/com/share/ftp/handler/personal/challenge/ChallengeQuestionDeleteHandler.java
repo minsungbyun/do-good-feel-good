@@ -19,10 +19,9 @@ public class ChallengeQuestionDeleteHandler extends AbstractChallengeQuestionHan
   public void execute(CommandRequest request) throws Exception {
     while (true) {
       System.out.println("[문의 삭제]");
-      System.out.println(" ▶ 챌린지 번호를 입력해주세요.");
       System.out.println();
 
-      int challengeNo = Prompt.inputInt("챌린지 번호: ");
+      int challengeNo = (int) request.getAttribute("no");
       System.out.println();
 
       ChallengeDTO challengeList = findByChallengeNo(challengeNo); 
@@ -32,7 +31,7 @@ public class ChallengeQuestionDeleteHandler extends AbstractChallengeQuestionHan
         return;
       }
 
-      int deleteNo = Prompt.inputInt("번호? ");
+      int deleteNo = (int) request.getAttribute("questionNo");
 
       ChallengeQuestionDTO challengeQuestion = findByQuestionNo(deleteNo);
 
@@ -42,7 +41,7 @@ public class ChallengeQuestionDeleteHandler extends AbstractChallengeQuestionHan
           return;
         }
 
-        if (challengeQuestion.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
+        if (!challengeQuestion.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
           System.out.println("삭제 권한이 없습니다.");
           return;
         }
@@ -54,12 +53,14 @@ public class ChallengeQuestionDeleteHandler extends AbstractChallengeQuestionHan
         } else if (input.equals("y")) {
           System.out.println("참여인증&댓글을 삭제하였습니다.");
           challengeQuestionDTOList.remove(challengeQuestion);
-          return;
+
         } else {
           System.out.println("y 또는 n을 입력하세요.");
           continue;
         } 
-      } catch (Throwable e) {
+      } catch (Exception e) {
+        e.printStackTrace();
+
       }
     }
   }
