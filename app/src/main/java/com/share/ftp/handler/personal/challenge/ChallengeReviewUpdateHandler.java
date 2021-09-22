@@ -55,7 +55,7 @@ public class ChallengeReviewUpdateHandler extends AbstractChallengeReviewHandler
           System.out.println("참여인증&댓글을 수정하였습니다.");
           challengeReviewDTO.setContent(content);
           challengeReviewDTO.setFileUpload(fileUpload);
-
+          return;
         } else {
           System.out.println("y 또는 n을 입력하세요.");
           continue;

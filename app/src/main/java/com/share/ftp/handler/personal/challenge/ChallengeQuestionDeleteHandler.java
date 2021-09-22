@@ -53,7 +53,7 @@ public class ChallengeQuestionDeleteHandler extends AbstractChallengeQuestionHan
         } else if (input.equals("y")) {
           System.out.println("참여인증&댓글을 삭제하였습니다.");
           challengeQuestionDTOList.remove(challengeQuestion);
-
+          return;
         } else {
           System.out.println("y 또는 n을 입력하세요.");
           continue;
