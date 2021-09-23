@@ -14,13 +14,13 @@ public class DonationBoardDTO implements Serializable {
   private int no;
 
   private String sort;
-  private String children = "아동";
-  private String teen = "청소년";
-  private String elder = "노인";
-  private String handicappedPerson = "장애인";
-  private String animal = "동물";
-  private String environmental = "환경";
-  private String other = "기타";
+  //  private String children = "아동";
+  //  private String teen = "청소년";
+  //  private String elder = "노인";
+  //  private String handicappedPerson = "장애인";
+  //  private String animal = "동물";
+  //  private String environmental = "환경";
+  //  private String other = "기타";
 
   private String title;
   private String leader;
@@ -28,8 +28,8 @@ public class DonationBoardDTO implements Serializable {
   private String fileUpload;
   private Date registeredStartDate;
   private Date registeredEndDate;
-  private boolean isOrg;
-  private boolean isChecked;
+  //  private boolean isOrg;
+  //  private boolean isChecked;
   private String isSigned;
   private List<JoinDTO> members = new ArrayList<>();
 
@@ -37,19 +37,15 @@ public class DonationBoardDTO implements Serializable {
 
   @Override
   public String toString() {
-    return "DonationBoardDTO [no=" + no + ", sort=" + sort + ", children=" + children + ", teen="
-        + teen + ", elder=" + elder + ", handicappedPerson=" + handicappedPerson + ", animal="
-        + animal + ", environmental=" + environmental + ", other=" + other + ", title=" + title
-        + ", leader=" + leader + ", content=" + content + ", fileUpload=" + fileUpload
-        + ", registeredStartDate=" + registeredStartDate + ", registeredEndDate="
-        + registeredEndDate + ", isOrg=" + isOrg + ", isChecked=" + isChecked + ", isSigned="
+    return "DonationBoardDTO [no=" + no + ", sort=" + sort + ", title=" + title + ", leader="
+        + leader + ", content=" + content + ", fileUpload=" + fileUpload + ", registeredStartDate="
+        + registeredStartDate + ", registeredEndDate=" + registeredEndDate + ", isSigned="
         + isSigned + ", members=" + members + "]";
   }
   @Override
   public int hashCode() {
-    return Objects.hash(animal, children, content, elder, environmental, fileUpload,
-        handicappedPerson, isChecked, isOrg, isSigned, leader, members, no, other,
-        registeredEndDate, registeredStartDate, sort, teen, title);
+    return Objects.hash(content, fileUpload, isSigned, leader, members, no, registeredEndDate,
+        registeredStartDate, sort, title);
   }
   @Override
   public boolean equals(Object obj) {
@@ -60,19 +56,12 @@ public class DonationBoardDTO implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     DonationBoardDTO other = (DonationBoardDTO) obj;
-    return Objects.equals(animal, other.animal) && Objects.equals(children, other.children)
-        && Objects.equals(content, other.content) && Objects.equals(elder, other.elder)
-        && Objects.equals(environmental, other.environmental)
-        && Objects.equals(fileUpload, other.fileUpload)
-        && Objects.equals(handicappedPerson, other.handicappedPerson)
-        && isChecked == other.isChecked && isOrg == other.isOrg
+    return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
         && Objects.equals(isSigned, other.isSigned) && Objects.equals(leader, other.leader)
         && Objects.equals(members, other.members) && no == other.no
-        && Objects.equals(this.other, other.other)
         && Objects.equals(registeredEndDate, other.registeredEndDate)
         && Objects.equals(registeredStartDate, other.registeredStartDate)
-        && Objects.equals(sort, other.sort) && Objects.equals(teen, other.teen)
-        && Objects.equals(title, other.title);
+        && Objects.equals(sort, other.sort) && Objects.equals(title, other.title);
   }
   public int getNo() {
     return no;
@@ -85,48 +74,6 @@ public class DonationBoardDTO implements Serializable {
   }
   public void setSort(String sort) {
     this.sort = sort;
-  }
-  public String getChildren() {
-    return children;
-  }
-  public void setChildren(String children) {
-    this.children = children;
-  }
-  public String getTeen() {
-    return teen;
-  }
-  public void setTeen(String teen) {
-    this.teen = teen;
-  }
-  public String getElder() {
-    return elder;
-  }
-  public void setElder(String elder) {
-    this.elder = elder;
-  }
-  public String getHandicappedPerson() {
-    return handicappedPerson;
-  }
-  public void setHandicappedPerson(String handicappedPerson) {
-    this.handicappedPerson = handicappedPerson;
-  }
-  public String getAnimal() {
-    return animal;
-  }
-  public void setAnimal(String animal) {
-    this.animal = animal;
-  }
-  public String getEnvironmental() {
-    return environmental;
-  }
-  public void setEnvironmental(String environmental) {
-    this.environmental = environmental;
-  }
-  public String getOther() {
-    return other;
-  }
-  public void setOther(String other) {
-    this.other = other;
   }
   public String getTitle() {
     return title;
@@ -163,18 +110,6 @@ public class DonationBoardDTO implements Serializable {
   }
   public void setRegisteredEndDate(Date registeredEndDate) {
     this.registeredEndDate = registeredEndDate;
-  }
-  public boolean isOrg() {
-    return isOrg;
-  }
-  public void setOrg(boolean isOrg) {
-    this.isOrg = isOrg;
-  }
-  public boolean isChecked() {
-    return isChecked;
-  }
-  public void setChecked(boolean isChecked) {
-    this.isChecked = isChecked;
   }
   public String getIsSigned() {
     return isSigned;

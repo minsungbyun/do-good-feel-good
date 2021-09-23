@@ -25,18 +25,28 @@ public class ChallengeDTO implements Serializable{
   private int questionCount;
   private int totalJoinCount;
   private boolean isChecked;
+  private int like;
+  private ChallengeDTO wish;
   private List<JoinDTO> members = new ArrayList<>();  // 관리자가 등록한 챌린지에 참여한 멤버
 
 
 
 
 
-
-
+  @Override
+  public String toString() {
+    return "ChallengeDTO [no=" + no + ", reviewCount=" + reviewCount + ", admin=" + admin
+        + ", title=" + title + ", content=" + content + ", fileUpload=" + fileUpload
+        + ", registeredDate=" + registeredDate + ", startDate=" + startDate + ", endDate=" + endDate
+        + ", viewCount=" + viewCount + ", questionCount=" + questionCount + ", totalJoinCount="
+        + totalJoinCount + ", isChecked=" + isChecked + ", like=" + like + ", wish=" + wish
+        + ", members=" + members + "]";
+  }
   @Override
   public int hashCode() {
-    return Objects.hash(admin, content, endDate, fileUpload, isChecked, members, no, questionCount,
-        registeredDate, reviewCount, startDate, title, totalJoinCount, viewCount);
+    return Objects.hash(admin, content, endDate, fileUpload, isChecked, like, members, no,
+        questionCount, registeredDate, reviewCount, startDate, title, totalJoinCount, viewCount,
+        wish);
   }
   @Override
   public boolean equals(Object obj) {
@@ -49,19 +59,26 @@ public class ChallengeDTO implements Serializable{
     ChallengeDTO other = (ChallengeDTO) obj;
     return Objects.equals(admin, other.admin) && Objects.equals(content, other.content)
         && Objects.equals(endDate, other.endDate) && Objects.equals(fileUpload, other.fileUpload)
-        && isChecked == other.isChecked && Objects.equals(members, other.members) && no == other.no
+        && isChecked == other.isChecked && like == other.like
+        && Objects.equals(members, other.members) && no == other.no
         && questionCount == other.questionCount
         && Objects.equals(registeredDate, other.registeredDate) && reviewCount == other.reviewCount
         && Objects.equals(startDate, other.startDate) && Objects.equals(title, other.title)
-        && totalJoinCount == other.totalJoinCount && viewCount == other.viewCount;
+        && totalJoinCount == other.totalJoinCount && viewCount == other.viewCount
+        && Objects.equals(wish, other.wish);
   }
-  @Override
-  public String toString() {
-    return "ChallengeDTO [no=" + no + ", reviewCount=" + reviewCount + ", admin=" + admin
-        + ", title=" + title + ", content=" + content + ", fileUpload=" + fileUpload
-        + ", registeredDate=" + registeredDate + ", startDate=" + startDate + ", endDate=" + endDate
-        + ", viewCount=" + viewCount + ", questionCount=" + questionCount + ", totalJoinCount="
-        + totalJoinCount + ", isChecked=" + isChecked + ", members=" + members + "]";
+
+  public ChallengeDTO getWish() {
+    return wish;
+  }
+  public void setWish(ChallengeDTO wish) {
+    this.wish = wish;
+  }
+  public int getLike() {
+    return like;
+  }
+  public void setLike(int like) {
+    this.like = like;
   }
   public int getNo() {
     return no;

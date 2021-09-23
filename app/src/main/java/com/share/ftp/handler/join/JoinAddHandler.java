@@ -91,12 +91,12 @@ public class JoinAddHandler extends AbstractJoinHandler {
 
       if (no == 1) {
         joinDTO.setType(General.member.PERSONAL);
-        AuthLoginHandler.userAccessLevel = Menu.ACCESS_PERSONAL | Menu.ACCESS_LOGOUT | Menu.ACCESS_MEMBER_ADMIN;
+        AuthLoginHandler.userAccessLevel = Menu.ACCESS_PERSONAL | Menu.ACCESS_LOGOUT;
         break;
 
       } else if (no == 2){
         joinDTO.setType(General.member.ORG);
-        AuthLoginHandler.userAccessLevel = Menu.ACCESS_ORG | Menu.ACCESS_LOGOUT | Menu.ACCESS_MEMBER_ADMIN;
+        AuthLoginHandler.userAccessLevel = Menu.ACCESS_ORG | Menu.ACCESS_LOGOUT;
         break;
 
       } else {
