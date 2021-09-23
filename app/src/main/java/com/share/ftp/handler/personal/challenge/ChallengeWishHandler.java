@@ -16,7 +16,7 @@ public class ChallengeWishHandler extends AbstractAdminChallengeHandler {
   @Override
   public void execute(CommandRequest request) throws Exception {
     while (true) {
-      System.out.println("[  ❤ LIKE ❤  ]");
+      System.out.println("[  🎈 WISH 🎈  ]");
       System.out.println();
 
       int no = (int) request.getAttribute("no");
@@ -26,13 +26,13 @@ public class ChallengeWishHandler extends AbstractAdminChallengeHandler {
 
 
 
-      String input = Prompt.inputString("[  ♡ 공감이 되셨다면 좋아요를 눌러주세요(y/N) ♡ ] ");
+      String input = Prompt.inputString("[  🎈 관심 챌린지로 추가하시겠습니까?(y/N) 🎈 ] ");
       if (input.equalsIgnoreCase("n") || input.length() == 0) {
-        System.out.println("[  ❌ 좋아요 취소❌  ]");
+        System.out.println("[  ❌ WISH 취소❌  ]");
         return;
       } else if (input.equals("y")) {
-        System.out.println("[  ❤ LIKE ❤  ]");
-        challengeList.setLike(challengeList.getLike() + 1);
+        System.out.println("[  🎈 WISH 🎈  ]");
+        challengeList.setWish(challengeList);
         return;
       } else {
         System.out.println("y 또는 n을 입력하세요.");

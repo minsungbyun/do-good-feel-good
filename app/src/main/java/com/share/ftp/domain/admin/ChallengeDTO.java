@@ -26,8 +26,9 @@ public class ChallengeDTO implements Serializable{
   private int totalJoinCount;
   private boolean isChecked;
   private int like;
-  private int wish;
+  private ChallengeDTO wish;
   private List<JoinDTO> members = new ArrayList<>();  // 관리자가 등록한 챌린지에 참여한 멤버
+
 
 
 
@@ -64,19 +65,20 @@ public class ChallengeDTO implements Serializable{
         && Objects.equals(registeredDate, other.registeredDate) && reviewCount == other.reviewCount
         && Objects.equals(startDate, other.startDate) && Objects.equals(title, other.title)
         && totalJoinCount == other.totalJoinCount && viewCount == other.viewCount
-        && wish == other.wish;
+        && Objects.equals(wish, other.wish);
+  }
+
+  public ChallengeDTO getWish() {
+    return wish;
+  }
+  public void setWish(ChallengeDTO wish) {
+    this.wish = wish;
   }
   public int getLike() {
     return like;
   }
   public void setLike(int like) {
     this.like = like;
-  }
-  public int getWish() {
-    return wish;
-  }
-  public void setWish(int wish) {
-    this.wish = wish;
   }
   public int getNo() {
     return no;
