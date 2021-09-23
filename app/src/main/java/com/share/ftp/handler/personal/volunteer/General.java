@@ -28,6 +28,11 @@ public class General {
     public static final String Rejected   = "반려됨";
   }
 
+  public static class point {
+    public static final int CHALLENGE_POINT = 100;
+    public static final int CHALLENGE_REVIEWPOINT = 10;
+  }
+
 
 
 

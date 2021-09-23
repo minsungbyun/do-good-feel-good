@@ -17,7 +17,7 @@ public class ChallengeReviewUpdateHandler extends AbstractChallengeReviewHandler
   @Override
   public void execute(CommandRequest request) throws Exception {
     while (true) {
-      System.out.println("[참여인증&댓글 수정]");
+      System.out.println("[ 참여인증&댓글 수정 ]");
       //      System.out.println(" ▶ 챌린지 번호를 입력해주세요 ");
       //      System.out.println();
       //      int challengeNo = (int) request.getAttribute("no");
@@ -49,9 +49,11 @@ public class ChallengeReviewUpdateHandler extends AbstractChallengeReviewHandler
 
         String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
         if (input.equalsIgnoreCase("n") || input.length() == 0) {
+          System.out.println();
           System.out.println("참여인증&댓글 수정을 취소하였습니다.");
           return;
         } else if (input.equals("y")) {
+          System.out.println();
           System.out.println("참여인증&댓글을 수정하였습니다.");
           challengeReviewDTO.setContent(content);
           challengeReviewDTO.setFileUpload(fileUpload);

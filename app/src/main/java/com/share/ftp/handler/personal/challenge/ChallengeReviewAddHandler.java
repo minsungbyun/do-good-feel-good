@@ -1,5 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
+import static com.share.ftp.handler.personal.volunteer.General.point.CHALLENGE_REVIEWPOINT;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.admin.ChallengeDTO;
@@ -18,7 +19,7 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[참여인증&댓글 등록]");
+    System.out.println("[ 참여인증&댓글 등록 ]");
     System.out.println();
     int challengeNo = (int) request.getAttribute("no");
 
@@ -44,7 +45,8 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
     //        challengeDTO.getFileUpload(),
     //        challengeDTO.getRegisteredDate());
 
-    String input = Prompt.inputString("해당 챌린지에 참여인증&댓글등록을 하시겠습니까?(y/N) ");
+    String input = Prompt.inputString("해당 챌린지에 참여인증&댓글등록을 하시겠습니까? (y/N) ");
+    System.out.println();
     if (!input.equals("y") || input.length() == 0) {
       System.out.println();
       System.out.println("댓글 등록이 취소되었습니다.");
@@ -60,14 +62,14 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
     ChallengeReviewDTO challengeReviewDTO = new ChallengeReviewDTO();
 
     challengeReviewDTO.setNo(challengeDTO.getNo());
-    challengeReviewDTO.setContent(Prompt.inputString("내용: "));
-    challengeReviewDTO.setFileUpload(Prompt.inputString("파일첨부: "));
+    challengeReviewDTO.setContent(Prompt.inputString("내용 ▶ "));
+    challengeReviewDTO.setFileUpload(Prompt.inputString("파일첨부 ▶ "));
     challengeReviewDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     challengeReviewDTO.setOwner(AuthLoginHandler.getLoginUser());
 
 
-    System.out.println("챌린지 번호 = " + challengeDTO.getNo());
+    //    System.out.println("챌린지 번호 = " + challengeDTO.getNo());
 
     if (challengeDTO.getReviewCount() == 0) {
       challengeDTO.setReviewCount(1);
@@ -81,6 +83,8 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
     //    challengeDTO.setReviewCount(challengeReviewDTO.getReviewNo());
     challengeReviewDTO.setReviewNo(challengeDTO.getReviewCount()); // 해당 챌린지 리뷰의 마지막 번호기억 + 1
     //    System.out.println("challengeDTO.getReviewCount() = " + challengeDTO.getReviewCount());
+
+    AuthLoginHandler.getLoginUser().setPoint(AuthLoginHandler.getLoginUser().getPoint() + CHALLENGE_REVIEWPOINT);
 
 
     challengeReviewDTOList.add(challengeReviewDTO);

@@ -17,7 +17,7 @@ public class ChallengeQuestionDetailHandler extends AbstractChallengeQuestionHan
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[문의 상세보기]");
+    System.out.println("[ 문의 상세보기 ]");
     System.out.println();
 
     int challengeNo = (int) request.getAttribute("no");
@@ -29,7 +29,7 @@ public class ChallengeQuestionDetailHandler extends AbstractChallengeQuestionHan
       return;
     }
 
-    int questionNo = Prompt.inputInt("번호? ");
+    int questionNo = Prompt.inputInt("문의 번호를 입력해주세요 ▶ ");
 
     ChallengeQuestionDTO challengeQuestion = findByQuestionNo(questionNo);
 
@@ -45,10 +45,10 @@ public class ChallengeQuestionDetailHandler extends AbstractChallengeQuestionHan
 
     for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
       if (challengeQuestionDTO.getNo() == challengeNo) {
-        System.out.printf("아이디: %s\n", challengeQuestion.getOwner().getId());
-        System.out.printf("제목: %s\n", challengeQuestion.getTitle());
-        System.out.printf("내용: %s\n", challengeQuestion.getContent());
-        System.out.printf("등록날짜: %s\n", challengeQuestion.getRegisteredDate());
+        System.out.printf("아이디 ▶ %s\n", challengeQuestion.getOwner().getId());
+        System.out.printf("제목 ▶ %s\n", challengeQuestion.getTitle());
+        System.out.printf("내용 ▶ %s\n", challengeQuestion.getContent());
+        System.out.printf("등록날짜 ▶ %s\n", challengeQuestion.getRegisteredDate());
       }
     }
 
@@ -59,10 +59,10 @@ public class ChallengeQuestionDetailHandler extends AbstractChallengeQuestionHan
 
     while (true) {
       System.out.println();
-      System.out.println("1번: 문의 변경");
-      System.out.println("2번: 문의 삭제");
-      System.out.println("0번: 이전");
-      int input = Prompt.inputInt("번호 입력 > ");
+      System.out.println("1번 ▶ 문의 변경");
+      System.out.println("2번 ▶ 문의 삭제");
+      System.out.println("0번 ▶ 이전");
+      int input = Prompt.inputInt("번호 입력 ▶ ");
       switch (input) {
         case 1: request.getRequestDispatcher("/challengeQuestion/update").forward(request); return;
         case 2: request.getRequestDispatcher("/challengeQuestion/delete").forward(request); return;

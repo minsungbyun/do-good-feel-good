@@ -1,5 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
+import static com.share.ftp.handler.personal.volunteer.General.point.CHALLENGE_POINT;
 import java.util.List;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.handler.CommandRequest;
@@ -20,32 +21,38 @@ public class ChallengeJoinHandler extends AbstractAdminChallengeHandler {
   public void execute(CommandRequest request) throws Exception {
 
     System.out.println();
-    System.out.println("[챌린지 참여]");
+    System.out.println("[ 챌린지 참여 ]");
     System.out.println();
     int no = (int) request.getAttribute("no");
 
     ChallengeDTO challengeDTO = findByNo(no);
 
-
     if (challengeDTO == null) {
       System.out.println("존재하지 않는 챌린지입니다");
     }
 
-    System.out.printf("챌린지 번호: %d\n"
-        + "챌린지 제목: %s\n"
-        //        + "챌린지 시작기간: %s\n"
-        //        + "챌린지 종료기간: %s\n"
-        + "챌린지 내용: %s\n"
-        + "첨부파일: %s\n"
-        + "등록날짜: %s\n\n",
 
-        challengeDTO.getNo(),      
-        challengeDTO.getTitle(),     
-        //challengeDTO.getStartDate(),  // 시작날짜
-        //challengeDTO.getEndDate(),  // 끝나는 날짜
-        challengeDTO.getContent(),
-        challengeDTO.getFileUpload(),
+    System.out.printf("챌린지 번호 ▶ %d\n"
+        +"제목[댓글] ▶ %s[%d]\n"
+        +"작성자 ▶ %s\n"
+        +"참여인원 ▶ %d\n"
+        +"참여기간 ▶ %s ~ %s\n"
+        //        +"남은시간 ▶ %d\n"
+        +"등록날짜 ▶ %s\n\n",
+
+        challengeDTO.getNo(), 
+        //          challengeDTO.getAdminId(), 
+        challengeDTO.getTitle(), 
+        challengeDTO.getReviewCount(), 
+        challengeDTO.getAdmin().getName(),
+        challengeDTO.getTotalJoinCount(),
+        //          challengeDTO.getFileUpload(), 
+        challengeDTO.getStartDate(),
+        challengeDTO.getEndDate(),
+        //        (((challengeDTO.getEndDate().getTime() - challengeDTO.getStartDate().getTime()) / (1000*60*60)) % 24),
+        //        (challengeDTO.getEndDate().getTime() - challengeDTO.getStartDate().getTime() ),
         challengeDTO.getRegisteredDate());
+
 
     String input = Prompt.inputString("해당 챌린지에 참가하시겠습니까?(y/N) ");
     if (!input.equals("y") || input.length() == 0) {
@@ -79,6 +86,11 @@ public class ChallengeJoinHandler extends AbstractAdminChallengeHandler {
     //    if (challengeDTO.getMembers().contains(challengeDTO.getOwner())) {
     //      challengeDTO.getMembers().remove(challengeDTO.getOwner());
     //    }
+
+    // 포인트 부여 (참여 100포인트)
+    AuthLoginHandler.getLoginUser().setPoint(AuthLoginHandler.getLoginUser().getPoint() + CHALLENGE_POINT);
+
+
 
     //    // 총 참여 인원(주최자1명 포함)을 누적시킨다.
     int count = challengeDTO.getTotalJoinCount();
