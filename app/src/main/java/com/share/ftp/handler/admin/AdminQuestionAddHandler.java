@@ -12,13 +12,17 @@ public class AdminQuestionAddHandler extends AbstractAdminQuestionHandler {
   }
 
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[문의사항 등록]");
+    System.out.println("[문의사항 답글]");
 
     QuestionDTO questionDTO = new QuestionDTO();
 
-    questionDTO.setAdminId(Prompt.inputInt("관리자ID: "));
     questionDTO.setTitle(Prompt.inputString("제목: "));
     questionDTO.setContent(Prompt.inputString("내용: "));
+    //    questionDTO.setOwner(AuthLoginHandler.getLoginUser());
+    questionDTO.setFileUpload(Prompt.inputString("파일첨부: "));
+    //    questionDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    questionDTO.setNo(getNextNum());
 
     questionDTOList.add(questionDTO);
   }

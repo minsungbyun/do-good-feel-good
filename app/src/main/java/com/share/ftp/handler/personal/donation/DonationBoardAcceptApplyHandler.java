@@ -1,5 +1,6 @@
 package com.share.ftp.handler.personal.donation;
 
+import static com.share.ftp.handler.personal.volunteer.General.check.Applied;
 import java.util.List;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.handler.CommandRequest;
@@ -20,7 +21,7 @@ public class DonationBoardAcceptApplyHandler extends AbstractDonationBoardHandle
     System.out.println();
     System.out.println("[모금함 개설신청서 승인]");
 
-    int no = Prompt.inputInt("개설번호? ");
+    int no = (int) request.getAttribute("no");
 
     DonationBoardDTO donationBoardDTO = findByDonationApply(no);
 
@@ -35,8 +36,7 @@ public class DonationBoardAcceptApplyHandler extends AbstractDonationBoardHandle
       return;
     }
 
-    donationBoardDTO.setChecked(true);
-    donationBoardDTO.setIsSigned("승인됨");
+    donationBoardDTO.setIsSigned(Applied);
 
     for (DonationBoardDTO donationBoardApplyDTO : donationBoardDTOList) {
       donationBoardApplyDTOList.add(donationBoardApplyDTO);

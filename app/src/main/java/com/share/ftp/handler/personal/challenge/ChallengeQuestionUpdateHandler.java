@@ -19,9 +19,8 @@ public class ChallengeQuestionUpdateHandler extends AbstractChallengeQuestionHan
   public void execute(CommandRequest request) throws Exception {
     while (true) {
       System.out.println("[문의 수정]");
-      System.out.println(" ▶ 챌린지 번호를 입력해주세요 ");
       System.out.println();
-      int challengeNo = Prompt.inputInt("챌린지 번호: ");
+      int challengeNo = (int) request.getAttribute("no");
 
       ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
 
@@ -30,7 +29,7 @@ public class ChallengeQuestionUpdateHandler extends AbstractChallengeQuestionHan
         System.out.println("존재하지 않는 챌린지입니다");
       }
 
-      int updateNo = Prompt.inputInt("번호? ");
+      int updateNo = (int) request.getAttribute("questionNo");
 
       ChallengeQuestionDTO challengeQuestion = findByQuestionNo(updateNo);
 
@@ -40,11 +39,12 @@ public class ChallengeQuestionUpdateHandler extends AbstractChallengeQuestionHan
           return;
         }
 
-        if (challengeQuestion.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
+        if (!challengeQuestion.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
           System.out.println("변경 권한이 없습니다.");
           return;
         }
 
+        String title = Prompt.inputString(String.format("제목(%s)? ", challengeQuestion.getTitle()));
         String content = Prompt.inputString(String.format("내용(%s)? ", challengeQuestion.getContent()));
 
         String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
@@ -53,13 +53,15 @@ public class ChallengeQuestionUpdateHandler extends AbstractChallengeQuestionHan
           return;
         } else if (input.equals("y")) {
           System.out.println("문의를 수정하였습니다.");
+          challengeQuestion.setTitle(title);
           challengeQuestion.setContent(content);
           return;
         } else {
           System.out.println("y 또는 n을 입력하세요.");
           continue;
         } 
-      } catch (Throwable e) {
+      } catch (Exception e) {
+        e.printStackTrace();
       }
     }
   }

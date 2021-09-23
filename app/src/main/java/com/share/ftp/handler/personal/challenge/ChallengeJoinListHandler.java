@@ -5,7 +5,6 @@ import com.share.ftp.domain.admin.ChallengeDTO;
 //import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
-import com.share.util.Prompt;
 
 public class ChallengeJoinListHandler implements Command {
 
@@ -25,10 +24,8 @@ public class ChallengeJoinListHandler implements Command {
     System.out.println();
     System.out.println("[챌린지 참여자 목록]");
     System.out.println();
-    System.out.println(" ▶ 참여인원을 확인하고 싶은 챌린지 번호를 입력해주세요.");
-    System.out.println();
 
-    int no = Prompt.inputInt("챌린지 번호: ");
+    int no = (int) request.getAttribute("no");
     System.out.println();
 
     ChallengeDTO challengeJoinList = findByNo(no); 

@@ -12,7 +12,7 @@ public class QuestionAddHandler extends AbstractQuestionHandler {
   public QuestionAddHandler(List<QuestionListDTO> myQuestionListDTOList) {
     super (myQuestionListDTOList);
   }
-
+  @Override
   public void execute(CommandRequest request) throws Exception {
 
     while (true) {
@@ -62,9 +62,9 @@ public class QuestionAddHandler extends AbstractQuestionHandler {
         myQuestionListDTOList.add(myQuestionListDTO);
 
       } catch (NumberFormatException e) {
-        System.out.println("--------------------------------------------------------------");
+        System.out.println("------------------------------------");
         System.out.println("문의 분야를 선택해주세요.");
-        System.out.println("--------------------------------------------------------------");
+        System.out.println("------------------------------------");
         continue;
       }
 

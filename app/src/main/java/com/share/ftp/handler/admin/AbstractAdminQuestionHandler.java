@@ -14,13 +14,20 @@ public abstract class AbstractAdminQuestionHandler implements Command {
 
 
   protected QuestionDTO findByNo(int no) {
-    QuestionDTO[] arr = questionDTOList.toArray(new QuestionDTO[0]);
-    for (QuestionDTO questionDTO : arr) {
+    for (QuestionDTO questionDTO : questionDTOList) {
       if (questionDTO.getNo() == no) {
         return questionDTO;
       }
     }
     return null;
+  }
+
+  protected int getNextNum() {
+    if (questionDTOList.size() > 0) {
+      return questionDTOList.get(questionDTOList.size() - 1).getNo() + 1;
+    } else {
+      return 1;
+    }
   }
 
 }
