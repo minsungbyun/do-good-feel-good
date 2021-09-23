@@ -192,13 +192,8 @@ public class App {
   //댓글 도메인
   //  List<CommentDTO> commentDTOList = new ArrayList<>();
 
-
   // HashMap
   HashMap<String,Command> challengeReviewMap = new HashMap<>();
-
-
-
-
 
   // 메뉴 객체 컨트롤(Map)
   HashMap<String,Command> commands = new HashMap<>();
@@ -248,30 +243,22 @@ public class App {
   //      new VolRequestOrgAppliedListDetailHandler
   //      (orgRequestDTOList, orgRequestApplyDTOList, orgRequestRejectDTOList);
 
-
-
   // 함께해요 봉사 세부사항 Handler
 
   VolPersonalRequestAppliedListHandler volPersonalRequestAppliedListHandler = new VolPersonalRequestAppliedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList);
   VolOrgRequestAppliedListHandler volOrgRequestAppliedListHandler = new VolOrgRequestAppliedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList);
-
-
 
   //봉사참여자목록
   VolGeneralDoJoinListHandler volDoJoinHandler = 
       new VolGeneralDoJoinListHandler
       (generalRequestApplyDTOList, volRequestPersonalAppliedListDetailHandler);
 
-
-
   DonationRegisterDTO donationRegisterDTO = new DonationRegisterDTO();
-
 
   // 챌린지 참여자 목록
   ChallengeJoinHandler challengeJoinHandler =
       new ChallengeJoinHandler
       (challengeDTOList);
-
 
   // 모금함 개설 승인된 목록 Handler
   DonationBoardAppliedListHandler donationBoardAppliedListHandler =
@@ -285,7 +272,6 @@ public class App {
   public static void main(String[] args) {
     App app = new App(); 
     app.service();
-
   }
 
   public App() {
@@ -300,7 +286,6 @@ public class App {
     commands.put("/join/searchTelId", new JoinSearchTelIdHandler(joinDTOList)); // 폰번호로 아이디 찾기
     commands.put("/join/searchEmailId", new JoinSearchEmailIdHandler(joinDTOList)); // 이메일로 아이디 찾기
     commands.put("/join/searchPassword", new JoinSearchPasswordHandler(joinDTOList)); // 비밀번호 찾기
-
 
     commands.put("/volGeneralRequest/apply", new VolGeneralRequestApplyHandler(generalRequestDTOList,joinDTOList));
     commands.put("/volGeneralRequest/applyList", new VolGeneralRequestApplyListHandler(generalRequestDTOList));
@@ -450,9 +435,7 @@ public class App {
     commands.put("/adminChallenge/update", new AdminChallengeUpdateHandler(challengeDTOList));
     commands.put("/adminChallenge/delete", new AdminChallengeDeleteHandler(challengeDTOList));
 
-
     // 관리자 기관승인
-
 
     challengeReviewMap.put("/challengeReview/add", new ChallengeReviewAddHandler(challengeReviewDTOList, challengeDTOList));
     challengeReviewMap.put("/challengeReview/list", new ChallengeReviewListHandler(challengeReviewDTOList, challengeDTOList));
@@ -460,11 +443,7 @@ public class App {
     challengeReviewMap.put("/challengeReview/update", new ChallengeReviewUpdateHandler(challengeReviewDTOList, challengeDTOList));
     challengeReviewMap.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(challengeReviewDTOList, challengeDTOList));
     challengeReviewMap.put("/challengeReview/search", new ChallengeReviewSearchHandler(challengeReviewDTOList, challengeDTOList));
-
-
-
   }
-
 
   void service() {
 

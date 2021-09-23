@@ -35,10 +35,13 @@ public class ChallengeDetailHandler extends AbstractAdminChallengeHandler {
 
     //    for (ChallengeDTO challengeDTO : challengeDTOList) {
     System.out.println();
-    System.out.printf("제목 ▶ %s\n", challengeDTO.getTitle());
+    System.out.printf("제목▶ %s\n", challengeDTO.getTitle());
     System.out.printf("내용▶ %s\n", challengeDTO.getContent());
-    System.out.printf("첨부파일 ▶ %s\n", challengeDTO.getFileUpload());
-    System.out.printf("등록일 ▶ %s\n", challengeDTO.getRegisteredDate());
+    System.out.printf("댓글수▶ %d\n", challengeDTO.getReviewCount());
+    System.out.printf("참여자수▶ %d\n", challengeDTO.getTotalJoinCount());
+    System.out.printf("첨부파일▶ %s\n", challengeDTO.getFileUpload());
+    System.out.printf("시작일▶ %s\n", challengeDTO.getStartDate());
+    System.out.printf("종료일▶ %s\n", challengeDTO.getEndDate());
 
     while (true) {
       System.out.println();
