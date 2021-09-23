@@ -47,7 +47,7 @@ public class ChallengeDetailHandler extends AbstractAdminChallengeHandler {
       System.out.println("3번: 참여인증&댓글");
       System.out.println("4번: 문의하기");
       System.out.println("5번: 좋아요♡");
-      System.out.println("6번: 찜하기★");
+      System.out.println("6번: 찜하기🎈");
       System.out.println("0번: 이전");
       int input = Prompt.inputInt("번호 입력 > ");
       switch (input) {
