@@ -84,9 +84,9 @@ import com.share.ftp.handler.personal.challenge.ChallengeReviewListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewSearchHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewUpdateHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeWishHandler;
-import com.share.ftp.handler.personal.challenge.MyChallengeBookmarkHandler;
 import com.share.ftp.handler.personal.challenge.MyChallengeDetailHandler;
 import com.share.ftp.handler.personal.challenge.MyChallengeListHandler;
+import com.share.ftp.handler.personal.challenge.MyChallengeWishHandler;
 import com.share.ftp.handler.personal.challenge.MyRankingHandler;
 import com.share.ftp.handler.personal.challenge.RankingHandler;
 import com.share.ftp.handler.personal.community.CommBestDetailHandler;
@@ -416,7 +416,7 @@ public class App {
 
     commands.put("/myChallenge/list", new MyChallengeListHandler(challengeDTOList));
     commands.put("/myChallenge/detail", new MyChallengeDetailHandler(challengeDTOList));
-    commands.put("/myChallenge/bookmark", new MyChallengeBookmarkHandler(challengeDTOList));
+    commands.put("/myChallenge/wish", new MyChallengeWishHandler(challengeDTOList));
 
 
     commands.put("/myBoard/list", new MyBoardListHandler()); // 나의게시글 목록
@@ -727,7 +727,7 @@ public class App {
     MyPageMenu.add(createMyProfileMenu());    // 회원정보
     MyPageMenu.add(createMyVolunteerMenu());  // 나의봉사
     MyPageMenu.add(createMyBoardMenu());      // 나의게시글
-    MyPageMenu.add(createMyChallengeMenu());      // 나의챌린지
+    MyPageMenu.add(createMyChallengeMenu());    // 나의챌린지
     MyPageMenu.add(createMyPointMenu());      // 나의포인트
     MyPageMenu.add(createMyDonationMenu());   // 나의모금함
     MyPageMenu.add(createOrgApprovewMenu());  // 기관승인신청
@@ -945,7 +945,7 @@ public class App {
     MenuGroup myChallenge = new MenuGroup("나의 챌린지"); // 구현예정
     myChallenge.add(new MenuItem("나의챌린지 목록","/myChallenge/list"));
     myChallenge.add(new MenuItem("나의챌린지 상세보기","/myChallenge/detail"));
-    myChallenge.add(new MenuItem("나의챌린지 찜한목록","/myChallenge/bookmark"));
+    myChallenge.add(new MenuItem("나의챌린지 찜한목록","/myChallenge/wish"));
 
     return myChallenge;
   }

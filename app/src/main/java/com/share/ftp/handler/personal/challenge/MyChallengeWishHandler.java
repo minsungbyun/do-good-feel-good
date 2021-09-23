@@ -5,9 +5,9 @@ import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.admin.AbstractAdminChallengeHandler;
 
-public class MyChallengeBookmarkHandler extends AbstractAdminChallengeHandler {
+public class MyChallengeWishHandler extends AbstractAdminChallengeHandler {
 
-  public MyChallengeBookmarkHandler(List<ChallengeDTO> challengeDTOList) {
+  public MyChallengeWishHandler(List<ChallengeDTO> challengeDTOList) {
     super(challengeDTOList);
   }
 
