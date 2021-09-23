@@ -29,6 +29,16 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
       System.out.println();
       System.out.println("해당 챌린지가 없습니다!");
     }
+    
+    for (ChallengeReviewDTO challengeReviewDTO : challengeReviewDTOList) {
+      if (challengeReviewDTO.getOwner().equals(AuthLoginHandler.getLoginUser())) {
+        System.out.println("이미 참여하셨습니다.");
+        return;
+      } else {
+        continue;
+      }
+    }
+    
 
     //    System.out.printf("챌린지 제목: %s\n"
     //        //        + "챌린지 시작기간: %s\n"
