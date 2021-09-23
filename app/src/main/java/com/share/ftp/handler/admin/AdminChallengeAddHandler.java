@@ -26,8 +26,21 @@ public class AdminChallengeAddHandler extends AbstractAdminChallengeHandler {
     challengeDTO.setContent(Prompt.inputString("내용? ")); 
     challengeDTO.setFileUpload(Prompt.inputString("첨부파일? ")); 
     challengeDTO.setAdmin(AuthLoginHandler.getLoginUser());
-    challengeDTO.setStartDate(Prompt.inputDate("시작일? "));
-    challengeDTO.setEndDate(Prompt.inputDate("종료일? "));
+
+    while (true) {
+      challengeDTO.setStartDate(Prompt.inputDate("시작일? "));
+      challengeDTO.setEndDate(Prompt.inputDate("종료일? "));
+
+      if (challengeDTO.getStartDate().compareTo(challengeDTO.getEndDate()) > 0) {
+        System.out.println("시작일이 종료일보다 클 수 없습니다 올바른 날짜를 입력해주세요!");
+      } else if (challengeDTO.getStartDate().compareTo(challengeDTO.getEndDate()) == 0) {
+        System.out.println("시작일과 종료일은 같을 수 없습니다.");
+      } else {
+        break;
+      }
+
+    }
+
     challengeDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     challengeDTO.setNo(getNextNum()); // 챌린지 고유번호 부여
