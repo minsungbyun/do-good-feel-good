@@ -38,18 +38,20 @@ public class ChallengeQuestionDetailHandler extends AbstractChallengeQuestionHan
       return;
     }
 
-    if (!challengeQuestion.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
-      System.out.println("읽을 권한이 없습니다.");
-      return;
-    }
 
-    for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
-      if (challengeQuestionDTO.getNo() == challengeNo) {
-        System.out.printf("아이디 ▶ %s\n", challengeQuestion.getOwner().getId());
-        System.out.printf("제목 ▶ %s\n", challengeQuestion.getTitle());
-        System.out.printf("내용 ▶ %s\n", challengeQuestion.getContent());
-        System.out.printf("등록날짜 ▶ %s\n", challengeQuestion.getRegisteredDate());
+    if ((challengeQuestion.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
+        AuthLoginHandler.getLoginUser().getId().equals("admin")) {
+      for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
+        if (challengeQuestionDTO.getNo() == challengeNo) {
+          System.out.printf("아이디: %s\n", challengeQuestion.getOwner().getId());
+          System.out.printf("제목: %s\n", challengeQuestion.getTitle());
+          System.out.printf("내용: %s\n", challengeQuestion.getContent());
+          System.out.printf("등록날짜: %s\n", challengeQuestion.getRegisteredDate());
+        } 
       }
+    } else {
+      System.out.println("본인이 작성한 글만 확인할 수 있습니다.");
+      return;
     }
 
     System.out.println();
@@ -73,3 +75,4 @@ public class ChallengeQuestionDetailHandler extends AbstractChallengeQuestionHan
     }
   }
 }
+
