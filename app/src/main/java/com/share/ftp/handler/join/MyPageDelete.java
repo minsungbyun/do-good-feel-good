@@ -50,7 +50,6 @@ public class MyPageDelete extends AbstractJoinHandler {
 
     return; 
   }
-
 }
 
 

@@ -4,7 +4,6 @@ import java.util.List;
 import com.share.ftp.domain.personal.CommBoardCommentDTO;
 import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.handler.CommandRequest;
-import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
 public class CommBoardUpdateHandler extends AbstractCommBoardHandler {
@@ -19,7 +18,7 @@ public class CommBoardUpdateHandler extends AbstractCommBoardHandler {
     while (true) {
       System.out.println();
       System.out.println("[  메인/소통해요/나눔이야기/게시글변경  ]");
-      int no = Prompt.inputInt("[  번호?  ]");
+      int no = (int) request.getAttribute("no");
 
       CommBoardDTO commBoardDTO = findByNo(no);
 
@@ -29,10 +28,6 @@ public class CommBoardUpdateHandler extends AbstractCommBoardHandler {
         return;
       }
 
-      if (commBoardDTO.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
-        System.out.println("[  변경 권한이 없습니다.  ]");
-        return;
-      }
 
       String title = Prompt.inputString(String.format("제목(%s)? ", commBoardDTO.getTitle()));
       String content = Prompt.inputString(String.format("내용(%s)? ", commBoardDTO.getContent()));

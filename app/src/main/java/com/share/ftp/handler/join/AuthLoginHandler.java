@@ -21,7 +21,7 @@ public class AuthLoginHandler implements Command {
 
   public static JoinDTO loginUser;
 
-  static int userAccessLevel = ACCESS_LOGOUT;
+  public static int userAccessLevel = ACCESS_LOGOUT;
 
   public static JoinDTO getLoginUser() {
     return loginUser;

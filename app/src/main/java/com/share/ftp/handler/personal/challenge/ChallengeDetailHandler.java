@@ -49,6 +49,8 @@ public class ChallengeDetailHandler extends AbstractAdminChallengeHandler {
       System.out.println("2번: 참여자 목록");
       System.out.println("3번: 참여인증&댓글");
       System.out.println("4번: 문의하기");
+      System.out.println("5번: 좋아요♡");
+      System.out.println("6번: 찜하기🎈");
       System.out.println("0번: 이전");
       int input = Prompt.inputInt("번호 입력 > ");
       switch (input) {
@@ -56,6 +58,8 @@ public class ChallengeDetailHandler extends AbstractAdminChallengeHandler {
         case 2: request.getRequestDispatcher("/challengeJoin/list").forward(request); break;
         case 3: request.getRequestDispatcher("/challengeReview/connect").forward(request); break;
         case 4: request.getRequestDispatcher("/challengeQuestion/connect").forward(request); break;
+        case 5: request.getRequestDispatcher("/challengeDetail/like").forward(request); break;
+        case 6: request.getRequestDispatcher("/challengeDetail/wish").forward(request); break;
         case 0: return;
         default:
           System.out.println("명령어가 올바르지 않습니다!");
