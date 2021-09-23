@@ -68,6 +68,7 @@ import com.share.ftp.handler.org.MyVolApproveListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeDetailHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeJoinHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeJoinListHandler;
+import com.share.ftp.handler.personal.challenge.ChallengeLikeHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionAddHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionConnectHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionDeleteHandler;
@@ -82,6 +83,7 @@ import com.share.ftp.handler.personal.challenge.ChallengeReviewDeleteHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewSearchHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewUpdateHandler;
+import com.share.ftp.handler.personal.challenge.ChallengeWishHandler;
 import com.share.ftp.handler.personal.challenge.MyChallengeBookmarkHandler;
 import com.share.ftp.handler.personal.challenge.MyChallengeDetailHandler;
 import com.share.ftp.handler.personal.challenge.MyChallengeListHandler;
@@ -355,6 +357,8 @@ public class App {
     commands.put("/adminChallenge/detail", new AdminChallengeDetailHandler(challengeDTOList));  // 챌린지 상세정보
     commands.put("/challengeJoin/join", new ChallengeJoinHandler(challengeDTOList));  // 참여하기(구현중..)
     commands.put("/challengeJoin/list", new ChallengeJoinListHandler(challengeDTOList, challengeJoinHandler));  // 참여자목록(구현중..)
+    commands.put("/challengeDetail/like", new ChallengeLikeHandler(challengeDTOList));  // 참여자목록(구현중..)
+    commands.put("/challengeDetail/wish", new ChallengeWishHandler(challengeDTOList));  // 참여자목록(구현중..)
 
     // 챌린지 참여인증&댓글
     commands.put("/challengeReview/add", new ChallengeReviewAddHandler(challengeReviewDTOList, challengeDTOList));

@@ -4,7 +4,6 @@ import java.util.List;
 import com.share.ftp.domain.personal.CommBoardCommentDTO;
 import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.handler.CommandRequest;
-import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
 public class CommBoardDeleteHandler extends AbstractCommBoardHandler {
@@ -20,7 +19,7 @@ public class CommBoardDeleteHandler extends AbstractCommBoardHandler {
 
       System.out.println();
       System.out.println("[  메인/소통해요/나눔이야기/게시글삭제  ]");
-      int no = Prompt.inputInt("[  번호?  ]");
+      int no = (int) request.getAttribute("no");
 
       CommBoardDTO commBoardDTO = findByNo(no);
 
@@ -31,10 +30,10 @@ public class CommBoardDeleteHandler extends AbstractCommBoardHandler {
           return;
         }
 
-        if (commBoardDTO.getOwner().getId() != AuthLoginHandler.getLoginUser().getId() /*|| commBoardDTO.getOwner().getId() != "admin"*/ )   {
-          System.out.println("[  삭제 권한이 없습니다.  ]");
-          return;
-        }
+        //        if (commBoardDTO.getOwner().getId() != AuthLoginHandler.getLoginUser().getId() /*|| commBoardDTO.getOwner().getId() != "admin"*/ )   {
+        //          System.out.println("[  삭제 권한이 없습니다.  ]");
+        //          return;
+        //        }
 
         String input = Prompt.inputString("[  정말 삭제하시겠습니까?(y/N)  ]");
         if (input.equalsIgnoreCase("n") /*|| input.length() == 0 */) {
