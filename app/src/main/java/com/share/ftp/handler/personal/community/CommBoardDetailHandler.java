@@ -10,7 +10,10 @@ import com.share.util.Prompt;
 
 public class CommBoardDetailHandler extends AbstractCommBoardHandler {
 
-  public CommBoardDetailHandler(List<CommBoardDTO> commBoardDTOList, List<CommBoardCommentDTO> commBoardCommentDTOList) {
+
+  public CommBoardDetailHandler(
+      List<CommBoardDTO> commBoardDTOList, 
+      List<CommBoardCommentDTO> commBoardCommentDTOList) {
     super(commBoardDTOList, commBoardCommentDTOList);
   }
 
@@ -48,13 +51,10 @@ public class CommBoardDetailHandler extends AbstractCommBoardHandler {
 
       JoinDTO loginUser = AuthLoginHandler.getLoginUser(); 
 
-      if (loginUser!= null) {
-        Like();
-
-      }
-
-
-
+      //      if (loginUser!= null) {
+      //        Like();
+      //
+      //      }
       if (commBoardDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
         while (true) {
           String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
@@ -74,30 +74,51 @@ public class CommBoardDetailHandler extends AbstractCommBoardHandler {
           }
         } 
       } 
+
+      if (loginUser!= null) {
+        String input = Prompt.inputString("[  ♡ 공감이 되셨다면 좋아요를 눌러주세요(y/N) ♡ ]");
+
+
+        if (input.equalsIgnoreCase("n"))  {
+          System.out.println("[  ❌ 좋아요 취소❌  ]");
+          return;
+        } else if(input.equalsIgnoreCase("y")) {
+          commBoardDTO.setLike(commBoardDTO.getLike() +1);
+          System.out.println("[  ❤ LIKE ❤  ]");
+          return;
+        }
+
+        else {
+          System.out.println("[  y 또는 n을 입력하세요.  ]");
+          return;
+        }
+
+      }
+
     }
   }
 
-  private void Like() {
-
-    CommBoardDTO commBoardDTO = new CommBoardDTO();
-
-    String input = Prompt.inputString("[  ♡ 공감이 되셨다면 좋아요를 눌러주세요(y/N) ♡ ]");
-
-
-    if (input.equalsIgnoreCase("n"))  {
-      System.out.println("[  ❌ 좋아요 취소❌  ]");
-      return;
-    } else if(input.equalsIgnoreCase("y")) {
-      commBoardDTO.setLike(commBoardDTO.getLike() +1);
-      System.out.println("[  ❤ LIKE ❤  ]");
-      return;
-    }
-
-    else {
-      System.out.println("[  y 또는 n을 입력하세요.  ]");
-      return;
-    }
-  }
+  //  private void Like() {
+  //
+  //    // CommBoardDTO commBoardDTO = new CommBoardDTO();
+  //
+  //    String input = Prompt.inputString("[  ♡ 공감이 되셨다면 좋아요를 눌러주세요(y/N) ♡ ]");
+  //
+  //
+  //    if (input.equalsIgnoreCase("n"))  {
+  //      System.out.println("[  ❌ 좋아요 취소❌  ]");
+  //      return;
+  //    } else if(input.equalsIgnoreCase("y")) {
+  //      commBoardDTO.setLike(commBoardDTO.getLike() +1);
+  //      System.out.println("[  ❤ LIKE ❤  ]");
+  //      return;
+  //    }
+  //
+  //    else {
+  //      System.out.println("[  y 또는 n을 입력하세요.  ]");
+  //      return;
+  //    }
+  //  }
 
 }
 
