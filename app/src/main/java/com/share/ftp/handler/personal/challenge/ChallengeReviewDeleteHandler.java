@@ -17,6 +17,7 @@ public class ChallengeReviewDeleteHandler extends AbstractChallengeReviewHandler
   @Override
   public void execute(CommandRequest request) throws Exception {
     while (true) {
+      System.out.println();
       System.out.println("[ 참여인증&댓글 삭제 ]");
       System.out.println();
       //
@@ -31,6 +32,8 @@ public class ChallengeReviewDeleteHandler extends AbstractChallengeReviewHandler
       //      }
 
       int deleteNo = (int) request.getAttribute("reviewNo");
+
+      ChallengeDTO challengeDTO = findByChallengeNo(deleteNo);
 
       ChallengeReviewDTO challengeReviewDTO = findByReviewNo(deleteNo);
 
@@ -53,7 +56,10 @@ public class ChallengeReviewDeleteHandler extends AbstractChallengeReviewHandler
         } else if (input.equals("y")) {
           System.out.println();
           System.out.println("참여인증&댓글을 삭제하였습니다.");
+
+          challengeDTO.removeReviewer(AuthLoginHandler.getLoginUser());
           challengeReviewDTOList.remove(challengeReviewDTO);
+
           return;
         } else {
           System.out.println("y 또는 n을 입력하세요.");
