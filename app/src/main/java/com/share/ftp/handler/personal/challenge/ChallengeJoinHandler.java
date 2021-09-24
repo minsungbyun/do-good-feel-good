@@ -1,6 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
-import static com.share.ftp.handler.personal.volunteer.General.point.CHALLENGE_POINT;
+import static com.share.util.General.point.CHALLENGE_POINT;
 import java.util.List;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.handler.CommandRequest;

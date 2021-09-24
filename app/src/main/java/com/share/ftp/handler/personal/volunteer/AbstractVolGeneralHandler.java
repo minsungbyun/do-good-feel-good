@@ -4,6 +4,7 @@ import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.personal.GeneralRequestDTO;
 import com.share.ftp.handler.Command;
+import com.share.util.General;
 
 public abstract class AbstractVolGeneralHandler implements Command { // 개인 봉사신청 양식 쓰는 곳
 
