@@ -16,11 +16,11 @@ public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandl
 
   @Override
   public void execute(CommandRequest request) throws Exception {
+    System.out.println();
     System.out.println("[문의 목록]");
     System.out.println();
 
     int challengeNo = (int) request.getAttribute("no");
-    System.out.println();
 
     ChallengeDTO challengeList = findByChallengeNo(challengeNo); 
 
