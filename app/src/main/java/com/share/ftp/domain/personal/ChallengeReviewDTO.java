@@ -20,6 +20,10 @@ public class ChallengeReviewDTO implements Serializable {
 
 
 
+
+
+
+
   @Override
   public String toString() {
     return "ChallengeReviewDTO [no=" + no + ", reviewNo=" + reviewNo + ", point=" + point
@@ -85,6 +89,11 @@ public class ChallengeReviewDTO implements Serializable {
   public void setPoint(int point) {
     this.point = point;
   }
+
+
+
+
+
 
 
 }

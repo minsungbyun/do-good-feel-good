@@ -44,6 +44,7 @@ public class ChallengeDetailHandler extends AbstractAdminChallengeHandler {
     System.out.printf("첨부파일 ▶ %s\n", challengeDTO.getFileUpload());
     System.out.printf("시작일 ▶ %s\n", challengeDTO.getStartDate());
     System.out.printf("종료일 ▶ %s\n", challengeDTO.getEndDate());
+    System.out.printf("남은시간 ▶ %d시간 남았습니다.\n",  (((challengeDTO.getEndDate().getTime() - challengeDTO.getStartDate().getTime()) / (1000*60*60))));
 
     while (true) {
       System.out.println();
