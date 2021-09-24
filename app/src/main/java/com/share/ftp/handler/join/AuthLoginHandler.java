@@ -1,13 +1,13 @@
 package com.share.ftp.handler.join;
 
-import static com.share.ftp.handler.personal.volunteer.General.member.ORG;
-import static com.share.ftp.handler.personal.volunteer.General.member.PERSONAL;
 import static com.share.menu.Menu.ACCESS_ADMIN;
 import static com.share.menu.Menu.ACCESS_LOGOUT;
 import static com.share.menu.Menu.ACCESS_MEMBER;
 import static com.share.menu.Menu.ACCESS_MEMBER_ADMIN;
 import static com.share.menu.Menu.ACCESS_ORG;
 import static com.share.menu.Menu.ACCESS_PERSONAL;
+import static com.share.util.General.member.ORG;
+import static com.share.util.General.member.PERSONAL;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;

@@ -1,6 +1,6 @@
 package com.share.ftp.handler.personal.donation;
 
-import static com.share.ftp.handler.personal.volunteer.General.check.Rejected;
+import static com.share.util.General.check.Rejected;
 import java.util.List;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.handler.CommandRequest;
@@ -38,9 +38,7 @@ public class DonationBoardRejectApplyHandler extends AbstractDonationBoardHandle
 
     donationBoardDTO.setIsSigned(Rejected);
 
-    for (DonationBoardDTO donationBoardRejectDTO : donationBoardDTOList) {
-      donationBoardRejectDTOList.add(donationBoardRejectDTO);
-    }
+    donationBoardRejectDTOList.add(donationBoardDTO);
 
     System.out.println("해당 모금함 개설신청을 반려하였습니다.");
 

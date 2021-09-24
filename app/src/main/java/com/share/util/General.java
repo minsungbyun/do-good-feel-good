@@ -1,4 +1,4 @@
-package com.share.ftp.handler.personal.volunteer;
+package com.share.util;
 
 public class General {
 

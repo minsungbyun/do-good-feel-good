@@ -492,11 +492,10 @@ public class App {
     //
     loadObjects("challengeReviewDTO.json", challengeReviewDTOList, ChallengeReviewDTO.class);
     loadObjects("challengeQuestionDTO.json", challengeQuestionDTOList, ChallengeQuestionDTO.class);
-    //
-    //    loadDonationBoards();
-    //    loadDonationRegisters();
-    //
-    //    loadQuestion();
+
+
+    loadObjects("donationBoardDTO.json", donationBoardDTOList, DonationBoardDTO.class);
+    loadObjects("donationRegisterDTO.json", donationRegisterDTOList, DonationRegisterDTO.class);
 
 
     System.out.println("oooo                                                    \r\n"
@@ -562,19 +561,12 @@ public class App {
 
 
     saveObjects("challengeDTO.json", challengeDTOList);
-    //
-    //    saveDonationBoards();
-    //    saveDonationRegisters();
-    //    saveDonationBoards();
-    //    saveDonationRegisters();
-    //
-    //    saveQuestion();
-    //
     saveObjects("challengeReviewDTO.json", challengeReviewDTOList);
     saveObjects("challengeQuestionDTO.json", challengeQuestionDTOList);
-    //
-    //    saveDonationBoards();
-    //    saveDonationRegisters();
+
+
+    saveObjects("donationBoardDTO.json", donationBoardDTOList);
+    saveObjects("donationRegisterDTO.json", donationRegisterDTOList);
 
   }
 
@@ -696,20 +688,8 @@ public class App {
 
 
     // 모금함
-    MenuGroup DonationMenu = new MenuGroup("모금함");
-    mainMenuGroup.add(DonationMenu);
+    mainMenuGroup.add(createDonationMenu());
 
-    DonationMenu.add(new MenuItem("전체 기부금 내역", "/donationRegister/totalMoney"));
-    DonationMenu.add(new MenuItem("모금함 개설신청", ACCESS_ORG, "/donationBoard/apply"));
-
-    MenuGroup doDonationListMenu = new MenuGroup("모금함목록");
-    DonationMenu.add(new MenuItem("모금함목록","/donationBoard/list"));
-
-    doDonationListMenu.add(new MenuItem("모금함 상세보기", "/donationBoard/applyDetail"));
-    doDonationListMenu.add(new MenuItem("기부하기", ACCESS_MEMBER, "/donationRegister/add"));
-    doDonationListMenu.add(new MenuItem("참여내역", "/donationRegister/participation"));
-
-    DonationMenu.add(createDonationDetailMenu()); // 모금함 상세보기
 
     // 고객센터
     MenuGroup supportMenu = new MenuGroup("고객센터");
@@ -869,15 +849,19 @@ public class App {
     return monthlyRankingMenu;
   }
 
+  private Menu createDonationMenu() {
+    MenuGroup donationMenu = new MenuGroup("모금함");
 
-  private Menu createDonationDetailMenu() {
-    MenuGroup doDonationMenu = new MenuGroup("모금함 상세보기");
-    doDonationMenu.add(new MenuItem("모금함 상세보기", "/donationBoard/applyDetail"));
-    doDonationMenu.add(new MenuItem("기부하기", ACCESS_MEMBER, "/donationRegister/add"));
-    doDonationMenu.add(new MenuItem("참여내역", "/donationRegister/participation"));
+    donationMenu.add(new MenuItem("전체 기부금 내역", "/donationRegister/totalMoney"));
+    donationMenu.add(new MenuItem("모금함 개설신청", ACCESS_ORG, "/donationBoard/apply"));
+    donationMenu.add(new MenuItem("모금함목록","/donationBoard/list"));
+    donationMenu.add(new MenuItem("모금함 상세보기", "/donationBoard/applyDetail"));
+    donationMenu.add(new MenuItem("기부하기", ACCESS_MEMBER, "/donationRegister/add"));
+    donationMenu.add(new MenuItem("기부 참여내역", "/donationRegister/participation"));
 
-    return doDonationMenu;
+    return donationMenu;
   }
+
 
   private Menu createNoticeMenu() {
     MenuGroup noticeMenu = new MenuGroup("공지사항");

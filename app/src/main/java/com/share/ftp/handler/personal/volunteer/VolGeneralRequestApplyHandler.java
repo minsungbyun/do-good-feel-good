@@ -1,15 +1,15 @@
 package com.share.ftp.handler.personal.volunteer;
 
-import static com.share.ftp.handler.personal.volunteer.General.member.ORG;
-import static com.share.ftp.handler.personal.volunteer.General.member.PERSONAL;
-import static com.share.ftp.handler.personal.volunteer.General.type.ANIMAL;
-import static com.share.ftp.handler.personal.volunteer.General.type.CHILDREN;
-import static com.share.ftp.handler.personal.volunteer.General.type.ELDER;
-import static com.share.ftp.handler.personal.volunteer.General.type.ENVIRONMENT;
-import static com.share.ftp.handler.personal.volunteer.General.type.HANDICAPPED;
-import static com.share.ftp.handler.personal.volunteer.General.type.OTHER;
-import static com.share.ftp.handler.personal.volunteer.General.type.TEEN;
-import static com.share.ftp.handler.personal.volunteer.General.type.UNTACT;
+import static com.share.util.General.member.ORG;
+import static com.share.util.General.member.PERSONAL;
+import static com.share.util.General.type.ANIMAL;
+import static com.share.util.General.type.CHILDREN;
+import static com.share.util.General.type.ELDER;
+import static com.share.util.General.type.ENVIRONMENT;
+import static com.share.util.General.type.HANDICAPPED;
+import static com.share.util.General.type.OTHER;
+import static com.share.util.General.type.TEEN;
+import static com.share.util.General.type.UNTACT;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;

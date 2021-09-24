@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.donation;
 
-import static com.share.ftp.handler.personal.volunteer.General.check.Applied;
-import static com.share.ftp.handler.personal.volunteer.General.check.Rejected;
+import static com.share.util.General.check.Applied;
+import static com.share.util.General.check.Rejected;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.personal.DonationBoardDTO;
@@ -37,7 +37,8 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
     DonationBoardDTO donationBoardDTO = donationPrompt.promptDonation();
 
     if (donationBoardDTO == null) {
-      System.out.println("모금함 상세보기를 취소하셨습니다.");
+      System.out.println();
+      System.out.println("[ 모금함 상세보기를 취소하셨습니다. ]");
       return;
     }
 
@@ -107,8 +108,9 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
         donationRegister.setAddress(Prompt.inputString("주소: "));
         donationRegister.setRegisteredDate(new Date(System.currentTimeMillis()));
         donationRegister.addMembers(AuthLoginHandler.getLoginUser());
+        donationRegister.addMyTotaldonationMoney(donationRegister.getDonationMoney());
 
-
+        DonationRegisterDTO.totalDonationMoney += donationRegister.getDonationMoney();
         donationRegisterDTOList.add(donationRegister);
 
         System.out.println();
