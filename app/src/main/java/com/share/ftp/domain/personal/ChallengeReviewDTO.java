@@ -5,26 +5,31 @@ import java.sql.Date;
 import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
-@SuppressWarnings("serial")
+
 public class ChallengeReviewDTO implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   private int no;
   private int reviewNo;
+  private int point;
   private String content;
   private String fileUpload;
   private Date registeredDate;
   private JoinDTO owner;
 
+
+
+
   @Override
   public String toString() {
-    return "ChallengeReviewDTO [no=" + no + ", content=" + content + ", fileUpload=" + fileUpload + ", registeredDate="
+    return "ChallengeReviewDTO [no=" + no + ", reviewNo=" + reviewNo + ", point=" + point
+        + ", content=" + content + ", fileUpload=" + fileUpload + ", registeredDate="
         + registeredDate + ", owner=" + owner + "]";
   }
-
   @Override
   public int hashCode() {
-    return Objects.hash(content, fileUpload, no, owner, registeredDate);
+    return Objects.hash(content, fileUpload, no, owner, point, registeredDate, reviewNo);
   }
-
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -34,11 +39,10 @@ public class ChallengeReviewDTO implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     ChallengeReviewDTO other = (ChallengeReviewDTO) obj;
-    return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload) && no == other.no
-        && Objects.equals(owner, other.owner) && Objects.equals(registeredDate, other.registeredDate);
+    return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
+        && no == other.no && Objects.equals(owner, other.owner) && point == other.point
+        && Objects.equals(registeredDate, other.registeredDate) && reviewNo == other.reviewNo;
   }
-
-
   public int getNo() {
     return no;
   }
@@ -75,5 +79,12 @@ public class ChallengeReviewDTO implements Serializable {
   public void setOwner(JoinDTO owner) {
     this.owner = owner;
   }
+  public int getPoint() {
+    return point;
+  }
+  public void setPoint(int point) {
+    this.point = point;
+  }
+
 
 }

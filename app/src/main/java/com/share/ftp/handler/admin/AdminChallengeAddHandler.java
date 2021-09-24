@@ -17,7 +17,7 @@ public class AdminChallengeAddHandler extends AbstractAdminChallengeHandler {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[챌린지 등록]");
+    System.out.println("[ 챌린지 등록 ]");
 
     ChallengeDTO challengeDTO = new ChallengeDTO();
 
@@ -32,9 +32,9 @@ public class AdminChallengeAddHandler extends AbstractAdminChallengeHandler {
       challengeDTO.setEndDate(Prompt.inputDate("종료일? "));
 
       if (challengeDTO.getStartDate().compareTo(challengeDTO.getEndDate()) > 0) {
-        System.out.println("시작일이 종료일보다 클 수 없습니다 올바른 날짜를 입력해주세요!");
+        System.out.println("종료일을 지난 시작일은 존재하지 않습니다. 올바른 날짜를 입력해주세요!");
       } else if (challengeDTO.getStartDate().compareTo(challengeDTO.getEndDate()) == 0) {
-        System.out.println("시작일과 종료일은 같을 수 없습니다.");
+        System.out.println("시작일과 종료일은 같을 수 없습니다. 올바른 날짜를 입력해주세요!");
       } else {
         break;
       }
@@ -46,7 +46,7 @@ public class AdminChallengeAddHandler extends AbstractAdminChallengeHandler {
     challengeDTO.setNo(getNextNum()); // 챌린지 고유번호 부여
 
     challengeDTOList.add(challengeDTO);
-
+    System.out.println();
     System.out.println("챌린지가 정상적으로 등록되었습니다.");
   }
 }

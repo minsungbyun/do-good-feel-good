@@ -28,9 +28,11 @@ public class ChallengeLikeHandler extends AbstractAdminChallengeHandler {
 
       String input = Prompt.inputString("[  ♡ 공감이 되셨다면 좋아요를 눌러주세요(y/N) ♡ ] ");
       if (input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println();
         System.out.println("[  ❌ 좋아요 취소❌  ]");
         return;
       } else if (input.equals("y")) {
+        System.out.println();
         System.out.println("[  ❤ LIKE ❤  ]");
         challengeList.setLike(challengeList.getLike() + 1);
         return;

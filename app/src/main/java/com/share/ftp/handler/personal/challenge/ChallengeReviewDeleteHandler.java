@@ -17,7 +17,7 @@ public class ChallengeReviewDeleteHandler extends AbstractChallengeReviewHandler
   @Override
   public void execute(CommandRequest request) throws Exception {
     while (true) {
-      System.out.println("[참여인증&댓글 삭제]");
+      System.out.println("[ 참여인증&댓글 삭제 ]");
       System.out.println();
       //
       //      int challengeNo = (int) request.getAttribute("no");
@@ -47,9 +47,11 @@ public class ChallengeReviewDeleteHandler extends AbstractChallengeReviewHandler
 
         String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
         if (input.equalsIgnoreCase("n") || input.length() == 0) {
+          System.out.println();
           System.out.println("참여인증&댓글 삭제를 취소하였습니다.");
           return;
         } else if (input.equals("y")) {
+          System.out.println();
           System.out.println("참여인증&댓글을 삭제하였습니다.");
           challengeReviewDTOList.remove(challengeReviewDTO);
           return;

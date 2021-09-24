@@ -14,7 +14,7 @@ public class AdminChallengeDeleteHandler extends AbstractAdminChallengeHandler {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[챌린지 삭제]");
+    System.out.println("[ 챌린지 삭제 ]");
     int no = (int) request.getAttribute("no"); 
 
     ChallengeDTO challengeDTO = findByNo(no);
@@ -27,11 +27,12 @@ public class AdminChallengeDeleteHandler extends AbstractAdminChallengeHandler {
 
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("공지사항삭제를 취소하였습니다.");
+      System.out.println("공지사항 삭제를 취소하였습니다.");
       return;
     }
 
     challengeDTOList.remove(challengeDTO);
+    System.out.println();
 
     System.out.println("챌린지를 삭제하였습니다.");
   }

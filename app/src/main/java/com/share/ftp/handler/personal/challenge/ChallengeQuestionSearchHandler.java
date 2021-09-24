@@ -15,7 +15,7 @@ public class ChallengeQuestionSearchHandler extends AbstractChallengeQuestionHan
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[문의 검색]");
+    System.out.println("[ 문의 검색 ]");
     System.out.println();
 
     int challengeNo = (int) request.getAttribute("no");
@@ -28,7 +28,7 @@ public class ChallengeQuestionSearchHandler extends AbstractChallengeQuestionHan
       return;
     }
 
-    String input = Prompt.inputString("검색어? ");
+    String input = Prompt.inputString("검색어를 입력해주세요 ▶ ");
 
     for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
       if (!challengeQuestionDTO.getOwner().getId().contains(input) &&

@@ -121,7 +121,7 @@ import com.share.ftp.handler.personal.mypage.MyBoardDetailHandler;
 import com.share.ftp.handler.personal.mypage.MyBoardListHandler;
 import com.share.ftp.handler.personal.mypage.MyBoardUpdateHandler;
 import com.share.ftp.handler.personal.mypage.MyDonationHandler;
-import com.share.ftp.handler.personal.mypage.MyPointHandler;
+import com.share.ftp.handler.personal.mypage.MyPointListHandler;
 import com.share.ftp.handler.personal.support.QuestionAddHandler;
 import com.share.ftp.handler.personal.support.QuestionDeleteHandler;
 import com.share.ftp.handler.personal.support.QuestionDetailHandler;
@@ -409,7 +409,7 @@ public class App {
     commands.put("/myBoard/update", new MyBoardUpdateHandler()); // 나의게시글 목록
     commands.put("/myBoard/delete", new MyBoardDeleteHandler()); // 나의게시글 목록
 
-    commands.put("myPoint/list", new MyPointHandler()); // 나의포인트 
+    commands.put("myPoint/list", new MyPointListHandler()); // 나의포인트 
 
     commands.put("/orgMyVol/apply", new MyVolApplyListHandler()); // 기관 마이페이지 승인신청 
     commands.put("/orgMyVol/approve", new MyVolApproveListHandler()); // 기관 마이페이지 승인조회
@@ -457,17 +457,6 @@ public class App {
   }
 
   void service() {
-    System.out.println("oooo                                                    \r\n"
-        + "`888                                                    \r\n"
-        + " 888 .oo.    .oooo.   oo.ooooo.  oo.ooooo.  oooo    ooo \r\n"
-        + " 888P\"Y88b  `P  )88b   888' `88b  888' `88b  `88.  .8'  \r\n"
-        + " 888   888   .oP\"888   888   888  888   888   `88..8'   \r\n"
-        + " 888   888  d8(  888   888   888  888   888    `888'    \r\n"
-        + "o888o o888o `Y888\"\"8o  888bod8P'  888bod8P'     .8'     \r\n"
-        + "                       888        888       .o..P'      \r\n"
-        + "                      o888o      o888o      `Y8P'       \r\n"
-        + "                                                        ");
-
 
     loadObjects("joinDTO.json", joinDTOList, JoinDTO.class);
     //    loadObjects("noticeDTO.json", noticeDTOList, NoticeDTO.class);
@@ -505,6 +494,32 @@ public class App {
 
     loadObjects("donationBoardDTO.json", donationBoardDTOList, DonationBoardDTO.class);
     loadObjects("donationRegisterDTO.json", donationRegisterDTOList, DonationRegisterDTO.class);
+
+
+    System.out.println("oooo                                                    \r\n"
+        + "`888                                                    \r\n"
+        + " 888 .oo.    .oooo.   oo.ooooo.  oo.ooooo.  oooo    ooo \r\n"
+        + " 888P\"Y88b  `P  )88b   888' `88b  888' `88b  `88.  .8'  \r\n"
+        + " 888   888   .oP\"888   888   888  888   888   `88..8'   \r\n"
+        + " 888   888  d8(  888   888   888  888   888    `888'    \r\n"
+        + "o888o o888o `Y888\"\"8o  888bod8P'  888bod8P'     .8'     \r\n"
+        + "                       888        888       .o..P'      \r\n"
+        + "                      o888o      o888o      `Y8P'       \r\n"
+        + "                                                        ");
+    System.out.println();
+    System.out.println("     .d8888. db   db  .d8b.  d8888b. d88888b \r\n"
+        + "     88'  YP 88   88 d8' `8b 88  `8D 88'     \r\n"
+        + "     `8bo.   88ooo88 88ooo88 88oobY' 88ooooo \r\n"
+        + "       `Y8b. 88~~~88 88~~~88 88`8b   88~~~~~ \r\n"
+        + "     db   8D 88   88 88   88 88 `88. 88.     \r\n"
+        + "     `8888Y' YP   YP YP   YP 88   YD Y88888P ");
+
+    System.out.println();
+
+
+    System.out.println();
+
+
 
     createMenu().execute();
     Prompt.close();
@@ -620,6 +635,7 @@ public class App {
     mainMenuGroup.add(new MenuItem("로그아웃", ACCESS_MEMBER_ADMIN, "/auth/logout"));
 
 
+
     // 함께해요
     MenuGroup doVolMenu = new MenuGroup("함께해요");
     mainMenuGroup.add(doVolMenu);
@@ -716,7 +732,12 @@ public class App {
     adminMenu.add(createAdminChallengeMenu());   // 챌린지관리
     adminMenu.add(createAdminApproveInfoMenu()); // 기관승인관리
 
+    mainMenuGroup.add(new MenuItem("탈퇴", ACCESS_MEMBER, "/myPage/delete"));
+
     return mainMenuGroup;
+
+
+
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////
