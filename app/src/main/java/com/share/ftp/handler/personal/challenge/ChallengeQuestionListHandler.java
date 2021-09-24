@@ -16,12 +16,7 @@ public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandl
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-<<<<<<< HEAD
-    System.out.println();
-    System.out.println("[문의 목록]");
-=======
     System.out.println("[ 문의 목록 ]");
->>>>>>> 651e8fdf960ffb85e02900c212e19ee06c60c37e
     System.out.println();
 
     int challengeNo = (int) request.getAttribute("no");
