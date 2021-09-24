@@ -11,6 +11,7 @@ public class MyChallengeWishHandler extends AbstractAdminChallengeHandler {
     super(challengeDTOList);
   }
 
+  @Override
   public void execute(CommandRequest request) throws Exception {
 
   }

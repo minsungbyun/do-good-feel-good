@@ -38,9 +38,7 @@ public class DonationBoardAcceptApplyHandler extends AbstractDonationBoardHandle
 
     donationBoardDTO.setIsSigned(Applied);
 
-    for (DonationBoardDTO donationBoardApplyDTO : donationBoardDTOList) {
-      donationBoardApplyDTOList.add(donationBoardApplyDTO);
-    }
+    donationBoardApplyDTOList.add(donationBoardDTO);
 
     System.out.println("해당 모금함 개설신청을 승인하였습니다.");
 

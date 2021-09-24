@@ -107,6 +107,8 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
         donationRegister.setAddress(Prompt.inputString("주소: "));
         donationRegister.setRegisteredDate(new Date(System.currentTimeMillis()));
         donationRegister.addMembers(AuthLoginHandler.getLoginUser());
+        donationRegister.addDonationMoney(donationRegister.getDonationMoney());
+        donationRegister.addMyTotaldonationMoney(donationRegister.getDonationMoney());
 
 
         donationRegisterDTOList.add(donationRegister);

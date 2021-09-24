@@ -501,11 +501,10 @@ public class App {
     //
     loadObjects("challengeReviewDTO.json", challengeReviewDTOList, ChallengeReviewDTO.class);
     loadObjects("challengeQuestionDTO.json", challengeQuestionDTOList, ChallengeQuestionDTO.class);
-    //
-    //    loadDonationBoards();
-    //    loadDonationRegisters();
-    //
-    //    loadQuestion();
+
+
+    loadObjects("donationBoardDTO.json", donationBoardDTOList, DonationBoardDTO.class);
+    loadObjects("donationRegisterDTO.json", donationRegisterDTOList, DonationRegisterDTO.class);
 
     createMenu().execute();
     Prompt.close();
@@ -545,19 +544,12 @@ public class App {
 
 
     saveObjects("challengeDTO.json", challengeDTOList);
-    //
-    //    saveDonationBoards();
-    //    saveDonationRegisters();
-    //    saveDonationBoards();
-    //    saveDonationRegisters();
-    //
-    //    saveQuestion();
-    //
     saveObjects("challengeReviewDTO.json", challengeReviewDTOList);
     saveObjects("challengeQuestionDTO.json", challengeQuestionDTOList);
-    //
-    //    saveDonationBoards();
-    //    saveDonationRegisters();
+
+
+    saveObjects("donationBoardDTO.json", donationBoardDTOList);
+    saveObjects("donationRegisterDTO.json", donationRegisterDTOList);
 
   }
 
