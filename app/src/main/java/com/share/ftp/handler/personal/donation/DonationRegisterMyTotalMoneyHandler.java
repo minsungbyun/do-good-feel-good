@@ -15,10 +15,7 @@ public class DonationRegisterMyTotalMoneyHandler extends AbstractDonationRegiste
   @Override
   public void execute(CommandRequest request) throws Exception {
 
-    for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {
-      total += donationRegisterDTO.getDonationMoney();
-    }
-    System.out.printf("기부 총 금액 : %d\n", total);
+    System.out.printf("기부 총 금액 : %d\n", DonationRegisterDTO.myTotaldonationMoney);
   }
 }
 

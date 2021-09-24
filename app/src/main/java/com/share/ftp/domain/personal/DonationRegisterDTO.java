@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.handler.join.AuthLoginHandler;
 
 
 public class DonationRegisterDTO implements Serializable{
@@ -26,7 +27,7 @@ public class DonationRegisterDTO implements Serializable{
   private int no;
   private int donationMoney;
   public static int totalDonationMoney;
-  private int myTotaldonationMoney;
+  public static int myTotaldonationMoney;
   private String name;
   private String registerationNumber;
   private Date birthDate;
@@ -139,8 +140,16 @@ public class DonationRegisterDTO implements Serializable{
     return myTotaldonationMoney;
   }
   public void setMyTotaldonationMoney(int myTotaldonationMoney) {
-    this.myTotaldonationMoney = myTotaldonationMoney;
+    if (AuthLoginHandler.getLoginUser().getName().equals(name)) {
+      this.myTotaldonationMoney = myTotaldonationMoney;
+    }
   }
+  public void addMyTotaldonationMoney(int myDonationMoney) {
+    if (AuthLoginHandler.getLoginUser().getName().equals(name)) {
+      this.myTotaldonationMoney += myDonationMoney;
+    }
+  }
+
   public String getName() {
     return name;
   }

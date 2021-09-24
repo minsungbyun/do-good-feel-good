@@ -34,7 +34,7 @@ public class DonationRegisterMyListHandler extends AbstractDonationRegisterHandl
     for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {
       if (AuthLoginHandler.getLoginUser().getName().equals(donationRegisterDTO.getName())) {
 
-        total += donationRegisterDTO.getMyTotaldonationMoney();
+        System.out.printf("기부 총 금액 : %d\n", DonationRegisterDTO.myTotaldonationMoney);
 
       } else {
         total = 0;
@@ -45,7 +45,7 @@ public class DonationRegisterMyListHandler extends AbstractDonationRegisterHandl
       return;
     } else {
       System.out.println();
-      System.out.printf("나의 기부 총 금액 : %d\n", total);
+      System.out.printf("나의 기부 총 금액 : %d\n", DonationRegisterDTO.myTotaldonationMoney);
       return;
     }
   }

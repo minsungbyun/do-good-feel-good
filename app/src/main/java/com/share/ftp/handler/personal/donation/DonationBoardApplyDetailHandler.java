@@ -37,7 +37,8 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
     DonationBoardDTO donationBoardDTO = donationPrompt.promptDonation();
 
     if (donationBoardDTO == null) {
-      System.out.println("모금함 상세보기를 취소하셨습니다.");
+      System.out.println();
+      System.out.println("[ 모금함 상세보기를 취소하셨습니다. ]");
       return;
     }
 
@@ -107,6 +108,8 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
         donationRegister.setAddress(Prompt.inputString("주소: "));
         donationRegister.setRegisteredDate(new Date(System.currentTimeMillis()));
         donationRegister.addMembers(AuthLoginHandler.getLoginUser());
+        donationRegister.addDonationMoney(donationRegister.getDonationMoney());
+        donationRegister.addMyTotaldonationMoney(donationRegister.getDonationMoney());
 
 
         donationRegisterDTOList.add(donationRegister);

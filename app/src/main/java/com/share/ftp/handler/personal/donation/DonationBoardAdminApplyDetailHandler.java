@@ -49,7 +49,8 @@ public class DonationBoardAdminApplyDetailHandler extends AbstractDonationBoardH
     request.setAttribute("no", no); 
 
     while (true) {
-      String input = Prompt.inputString("승인(U), 반려(D), 이전(0)>");
+      System.out.println();
+      String input = Prompt.inputString("[승인(U), 반려(D), 이전(0)]>");
       switch (input) {
         case "U":
         case "u":

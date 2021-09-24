@@ -12,8 +12,8 @@ public class DonationRegisterTotalMoneyHandler extends AbstractDonationRegisterH
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-
-    System.out.printf("기부 총 금액 : %d\n", DonationRegisterDTO.totalDonationMoney);
+    System.out.println();
+    System.out.printf("[ 기부 총 금액 : %d원 ]\n", DonationRegisterDTO.totalDonationMoney);
 
   }
 }

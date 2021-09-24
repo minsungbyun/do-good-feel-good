@@ -25,7 +25,7 @@ public class DonationBoardRejectedListHandler extends AbstractDonationBoardHandl
 
     if (donationBoardRejectDTOList.isEmpty()) {
       System.out.println();
-      System.out.println("[ 1현재 반려된 모금함 개설목록이 없습니다. ]");
+      System.out.println("[ 현재 반려된 모금함 개설목록이 없습니다. ]");
       return;
     } 
 
@@ -48,12 +48,12 @@ public class DonationBoardRejectedListHandler extends AbstractDonationBoardHandl
           System.out.println("--------------------------------------------------------------");
         } else {
           System.out.println();
-          System.out.println("[  2현재 반려된 모금함 개설목록이 없습니다. ]");
+          System.out.println("[  현재 반려된 모금함 개설목록이 없습니다. ]");
           return;
         } 
       } else {
         System.out.println();
-        System.out.println("[  2현재 반려된 모금함 개설목록이 없습니다. ]");
+        System.out.println("[  현재 반려된 모금함 개설목록이 없습니다. ]");
         return;
       }
     }

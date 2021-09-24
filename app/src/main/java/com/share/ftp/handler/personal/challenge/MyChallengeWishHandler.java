@@ -12,6 +12,7 @@ public class MyChallengeWishHandler extends AbstractAdminChallengeHandler {
     super(challengeDTOList);
   }
 
+  @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[ 나의 찜한목록 ]");
     for (ChallengeDTO challengeDTO : challengeDTOList) {

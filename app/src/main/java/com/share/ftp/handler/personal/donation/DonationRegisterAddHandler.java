@@ -101,6 +101,8 @@ public class DonationRegisterAddHandler extends AbstractDonationRegisterHandler 
       donationRegister.setEmail(Prompt.inputString("이메일 ▶ "));
       donationRegister.setAddress(Prompt.inputString("주소 ▶ "));
       donationRegister.setRegisteredDate(new Date(System.currentTimeMillis()));
+      donationRegister.addDonationMoney(donationRegister.getDonationMoney());
+      donationRegister.addMyTotaldonationMoney(donationRegister.getDonationMoney());
 
       donationRegisterDTOList.add(donationRegister);
 
