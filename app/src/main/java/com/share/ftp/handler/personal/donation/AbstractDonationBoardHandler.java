@@ -32,17 +32,6 @@ public abstract class AbstractDonationBoardHandler implements Command {
     this.donationBoardRejectDTOList = donationBoardRejectDTOList;
   }
 
-  //  public AbstractDonationBoardHandler(
-  //      List<DonationBoardDTO> donationBoardDTOList,
-  //      List<DonationBoardDTO> donationBoardApplyDTOList,
-  //      List<DonationBoardDTO> donationBoardRejectDTOList,
-  //      List<JoinDTO> joinDTOList) {
-  //
-  //    this(donationBoardDTOList);
-  //    this.donationBoardApplyDTOList = donationBoardApplyDTOList;
-  //    this.donationBoardRejectDTOList = donationBoardRejectDTOList;
-  //    this.joinDTOList = joinDTOList;
-  //  }
 
   protected DonationBoardDTO findByDonationApply(int no) {
     for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {

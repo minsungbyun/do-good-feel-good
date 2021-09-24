@@ -14,12 +14,11 @@ public class DonationRegisterDTO implements Serializable{
   private static final long serialVersionUID = 1L;
 
 
-  private String sort;
   private int no;
   private int donationMoney;
   public static int totalDonationMoney;
-  public static int myTotaldonationMoney;
   private String name;
+  private String sort;
   private String registerationNumber;
   private Date birthDate;
   private String tel;
@@ -33,8 +32,8 @@ public class DonationRegisterDTO implements Serializable{
 
   @Override
   public String toString() {
-    return "DonationRegisterDTO [sort=" + sort + ", no=" + no + ", donationMoney=" + donationMoney
-        + ", name=" + name + ", registerationNumber=" + registerationNumber + ", birthDate="
+    return "DonationRegisterDTO [no=" + no + ", donationMoney=" + donationMoney + ", name=" + name
+        + ", sort=" + sort + ", registerationNumber=" + registerationNumber + ", birthDate="
         + birthDate + ", tel=" + tel + ", email=" + email + ", address=" + address
         + ", registeredDate=" + registeredDate + ", members=" + members + "]";
   }
@@ -77,16 +76,6 @@ public class DonationRegisterDTO implements Serializable{
   }
   public void setDonationMoney(int donationMoney) {
     this.donationMoney = donationMoney;
-  }
-  public int getMyTotaldonationMoney() {
-    return myTotaldonationMoney;
-  }
-  public void setMyTotaldonationMoney(int myTotaldonationMoney) {
-    this.myTotaldonationMoney = myTotaldonationMoney;
-  }
-
-  public void addMyTotaldonationMoney(int myDonationMoney) {
-    this.myTotaldonationMoney += myDonationMoney;
   }
 
   public String getName() {
@@ -137,23 +126,6 @@ public class DonationRegisterDTO implements Serializable{
   public void setMembers(List<JoinDTO> members) {
     this.members = members;
   }
-
-
-
-
-
-  public int getTotalDonationMoney() {
-    return totalDonationMoney;
-  }
-  public void setTotalDonationMoney(int totalDonationMoney) {
-    this.totalDonationMoney = totalDonationMoney;
-  }
-
-  public void addDonationMoney(int donationMoney) {
-    this.totalDonationMoney += donationMoney;
-  }
-
-
   public void addMembers(JoinDTO member) {
     this.members.add(member);
   }

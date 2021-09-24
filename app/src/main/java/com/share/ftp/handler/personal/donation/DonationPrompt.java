@@ -25,11 +25,7 @@ public class DonationPrompt {
       if (donationBoardDTO.getIsSigned().equals(Applied)) {
         System.out.println();
         System.out.printf("  [ %d. %s ]\n", donationBoardDTO.getNo(), donationBoardDTO.getTitle());
-      } else {
-        System.out.println();
-        System.out.println("[ 승인된 모금함이 없습니다. ]");
-        break;
-      }
+      } 
     }
 
 

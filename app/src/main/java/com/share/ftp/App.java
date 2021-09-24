@@ -855,11 +855,11 @@ public class App {
     MenuGroup donationMenu = new MenuGroup("모금함");
 
     donationMenu.add(new MenuItem("전체 기부금 내역", "/donationRegister/totalMoney"));
-    donationMenu.add(new MenuItem("모금함 개설신청", ACCESS_ORG, "/donationBoard/apply"));
     donationMenu.add(new MenuItem("모금함목록","/donationBoard/list"));
     donationMenu.add(new MenuItem("모금함 상세보기", "/donationBoard/applyDetail"));
     donationMenu.add(new MenuItem("기부하기", ACCESS_MEMBER, "/donationRegister/add"));
     donationMenu.add(new MenuItem("기부 참여내역", "/donationRegister/participation"));
+    donationMenu.add(new MenuItem("모금함 개설신청", ACCESS_ORG, "/donationBoard/apply"));
 
     return donationMenu;
   }
