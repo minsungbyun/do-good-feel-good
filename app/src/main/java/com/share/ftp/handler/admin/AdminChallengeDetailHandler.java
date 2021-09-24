@@ -18,7 +18,7 @@ public class AdminChallengeDetailHandler extends AbstractAdminChallengeHandler {
     System.out.println("[챌린지 상세보기]");
 
     System.out.println();
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("챌린지 번호를 입력해주세요 ▶ ");
 
     ChallengeDTO challengeDTO = findByNo(no);
 
@@ -33,25 +33,42 @@ public class AdminChallengeDetailHandler extends AbstractAdminChallengeHandler {
     // System.out.printf("관리자 아이디: %s\n", challengeDTO.getAdminId());
 
     //    for (ChallengeDTO challengeDTO : challengeDTOList) {
-    System.out.println();
-    System.out.printf("제목 ▶ %s\n", challengeDTO.getTitle());
-    System.out.printf("내용▶ %s\n", challengeDTO.getContent());
-    System.out.printf("첨부파일 ▶ %s\n", challengeDTO.getFileUpload());
-    System.out.printf("등록일 ▶ %s\n", challengeDTO.getRegisteredDate());
+    //    System.out.println();
+    //    System.out.printf("제목 ▶ %s\n", challengeDTO.getTitle());
+    //    System.out.printf("내용▶ %s\n", challengeDTO.getContent());
+    //    System.out.printf("첨부파일 ▶ %s\n", challengeDTO.getFileUpload());
+    //    System.out.printf("등록일 ▶ %s\n", challengeDTO.getRegisteredDate());
+
+    System.out.printf("챌린지 번호 ▶ %d\n "
+        + "제목[댓글] ▶ %s[%d]\n "
+        + "작성자 ▶ %s\n "
+        + "참여인원 ▶ %d\n "
+        + "참여기간 ▶ %s ~ %s\n", 
+        challengeDTO.getNo(), 
+        //          challengeDTO.getAdminId(), 
+        challengeDTO.getTitle(), 
+        challengeDTO.getReviewCount(), 
+        challengeDTO.getAdmin().getName(),
+        challengeDTO.getTotalJoinCount(),
+        //          challengeDTO.getFileUpload(), 
+        challengeDTO.getStartDate(),
+        challengeDTO.getEndDate());
 
     while (true) {
       System.out.println();
-      String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
+      System.out.println("1번 ▶ 챌린지 등록");
+      System.out.println("2번 ▶ 챌린지 목록");
+      System.out.println("0번 ▶ 이전");
+
+      int input = Prompt.inputInt("번호 입력 ▶ ");
       switch (input) {
-        case "U":
-        case "u":
+        case 1:
           request.getRequestDispatcher("/adminChallenge/update").forward(request);
           return;
-        case "D":
-        case "d":
+        case 2:
           request.getRequestDispatcher("/adminChallenge/delete").forward(request);
           return;
-        case "0":
+        case 0:
           return;
         default:
           System.out.println("명령어가 올바르지 않습니다!");

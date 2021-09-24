@@ -13,7 +13,8 @@ public class AdminChallengeListHandler extends AbstractAdminChallengeHandler {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[챌린지 목록]");
+    System.out.println();
+    System.out.println("[ 챌린지 목록 ]");
     for (ChallengeDTO challengeDTO : challengeDTOList) {
       System.out.printf("%d, %s[%d], %s, %d, %s ~ %s\n", 
           challengeDTO.getNo(), 

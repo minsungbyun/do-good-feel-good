@@ -22,7 +22,7 @@ public class ChallengeJoinListHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
-    System.out.println("[챌린지 참여자 목록]");
+    System.out.println("[ 챌린지 참여자 목록 ]");
     System.out.println();
 
     int no = (int) request.getAttribute("no");
@@ -40,9 +40,9 @@ public class ChallengeJoinListHandler implements Command {
     //      challengeJoinList.getMembers().remove(challengeJoinList.getAdmin());
     //    }
 
-    System.out.printf("챌린지 제목: %s\n           [  챌린지 참여자명  ]\n\n%s\n",
+    System.out.printf("챌린지 제목 ▶ %s\n참가인원 ▶ %s명\n\n           [  챌린지 참여자명  ]\n\n%s\n",
         challengeJoinList.getTitle(),
-        //        challengeJoinList.getTotalJoinCount(),
+        challengeJoinList.getTotalJoinCount(),
         challengeJoinList.getMemberNames());
   }
 

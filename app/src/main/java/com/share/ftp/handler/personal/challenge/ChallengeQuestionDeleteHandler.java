@@ -18,7 +18,7 @@ public class ChallengeQuestionDeleteHandler extends AbstractChallengeQuestionHan
   @Override
   public void execute(CommandRequest request) throws Exception {
     while (true) {
-      System.out.println("[문의 삭제]");
+      System.out.println("[ 문의 삭제 ]");
       System.out.println();
 
       int challengeNo = (int) request.getAttribute("no");

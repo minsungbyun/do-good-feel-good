@@ -18,7 +18,7 @@ public class ChallengeQuestionAddHandler extends AbstractChallengeQuestionHandle
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[문의 등록]");
+    System.out.println("[ 문의 등록 ]");
     System.out.println();
     int challengeNo = (int) request.getAttribute("no");
 
@@ -81,7 +81,7 @@ public class ChallengeQuestionAddHandler extends AbstractChallengeQuestionHandle
     }
     //    challengeDTO.setReviewCount(challengeReviewDTO.getReviewNo());
     challengeQuestionDTO.setQuestionNo(challengeDTO.getQuestionCount()); // 해당 챌린지 문의의 마지막 번호기억 + 1
-    System.out.println("challengeDTO.getQuestionCount() = " + challengeDTO.getQuestionCount());
+    //    System.out.println("challengeDTO.getQuestionCount() = " + challengeDTO.getQuestionCount());
 
     challengeQuestionDTOList.add(challengeQuestionDTO);
 

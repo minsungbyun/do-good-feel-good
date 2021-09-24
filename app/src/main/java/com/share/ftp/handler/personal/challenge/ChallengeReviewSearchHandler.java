@@ -15,11 +15,10 @@ public class ChallengeReviewSearchHandler extends AbstractChallengeReviewHandler
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[참여인증&댓글 검색");
-    System.out.println(" ▶ 챌린지 번호를 입력해주세요.");
+    System.out.println("[ 참여인증&댓글 검색 ]");
     System.out.println();
 
-    int challengeNo = Prompt.inputInt("챌린지 번호: ");
+    int challengeNo = Prompt.inputInt("챌린지 번호를 입력해주세요 ▶ ");
     System.out.println();
 
     ChallengeDTO challengeList = findByChallengeNo(challengeNo); 
@@ -29,7 +28,7 @@ public class ChallengeReviewSearchHandler extends AbstractChallengeReviewHandler
       return;
     }
 
-    String input = Prompt.inputString("검색어? ");
+    String input = Prompt.inputString("검색어를 입력해주세요 ▶ ");
 
     for (ChallengeReviewDTO challengeReviewDTO : challengeReviewDTOList) {
       if (!challengeReviewDTO.getOwner().getId().contains(input) &&

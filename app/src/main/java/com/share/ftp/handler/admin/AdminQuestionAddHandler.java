@@ -12,7 +12,7 @@ public class AdminQuestionAddHandler extends AbstractAdminQuestionHandler {
   }
 
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[문의사항 답글]");
+    System.out.println("[ 문의사항 답글 ]");
 
     QuestionDTO questionDTO = new QuestionDTO();
 

@@ -16,7 +16,7 @@ public class MyChallengeDetailHandler extends AbstractAdminChallengeHandler {
 
     System.out.println("[ 나의 챌린지 상세보기 ]");
     System.out.println();
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("챌린지 번호를 입력해주세요 ▶ ");
 
     ChallengeDTO challengeDTO = findByNo(no);
 
