@@ -21,10 +21,10 @@ public class TestHa {
     System.out.println(date1.getTime());
     System.out.println(date2.getTime());
 
-    System.out.println((date2.getTime() - date1.getTime())/(1000*60*60));
+    System.out.println(((date2.getTime() - date1.getTime()) / 1000) / (24*60*60));
 
-    System.out.println((int)((date1.getTime() / (1000*60*60)) % 24));
-    System.out.println((int)((date2.getTime() / (1000*60*60)) % 24));
+    //    System.out.println((int)((date1.getTime() / (1000*60*60)) % 24));
+    //    System.out.println((int)((date2.getTime() / (1000*60*60)) % 24));
 
 
 
