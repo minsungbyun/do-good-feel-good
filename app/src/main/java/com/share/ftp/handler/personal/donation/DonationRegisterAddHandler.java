@@ -52,35 +52,35 @@ public class DonationRegisterAddHandler extends AbstractDonationRegisterHandler 
       System.out.println("[7: 기타]");
       int input = Prompt.inputInt("> ");
 
-
-      if (input == 0) {
-        System.out.println("[ 기부를 취소하셨습니다. ]");
-        return;
-      } else if (input == 1) {
-        System.out.printf("기부목록: %s\n", donationRegister.getChildren());
-        donationRegister.setSort(donationRegister.getChildren());
-      } else if (input == 2) {
-        System.out.printf("기부목록: %s\n", donationRegister.getTeen());
-        donationRegister.setSort(donationRegister.getTeen());
-      } else if (input == 3) {
-        System.out.printf("기부목록: %s\n", donationRegister.getElder());
-        donationRegister.setSort(donationRegister.getElder());
-      } else if (input == 4) {
-        System.out.printf("기부목록: %s\n", donationRegister.getHandicappedPerson());
-        donationRegister.setSort(donationRegister.getHandicappedPerson());
-      } else if (input == 5) {
-        System.out.printf("기부목록: %s\n", donationRegister.getAnimal());
-        donationRegister.setSort(donationRegister.getAnimal());
-      } else if (input == 6) {
-        System.out.printf("기부목록: %s\n", donationRegister.getEnvironmental());
-        donationRegister.setSort(donationRegister.getEnvironmental());
-      } else if (input == 7) {
-        System.out.printf("기부목록: %s\n", donationRegister.getOther());
-        donationRegister.setSort(donationRegister.getOther());
-      } else {
-        System.out.println(" [ 양식에 있는 번호를 입력해주세요. ] ");
-        return;
-      }
+      //
+      //      if (input == 0) {
+      //        System.out.println("[ 기부를 취소하셨습니다. ]");
+      //        return;
+      //      } else if (input == 1) {
+      //        System.out.printf("기부목록: %s\n", donationRegister.getChildren());
+      //        donationRegister.setSort(donationRegister.getChildren());
+      //      } else if (input == 2) {
+      //        System.out.printf("기부목록: %s\n", donationRegister.getTeen());
+      //        donationRegister.setSort(donationRegister.getTeen());
+      //      } else if (input == 3) {
+      //        System.out.printf("기부목록: %s\n", donationRegister.getElder());
+      //        donationRegister.setSort(donationRegister.getElder());
+      //      } else if (input == 4) {
+      //        System.out.printf("기부목록: %s\n", donationRegister.getHandicappedPerson());
+      //        donationRegister.setSort(donationRegister.getHandicappedPerson());
+      //      } else if (input == 5) {
+      //        System.out.printf("기부목록: %s\n", donationRegister.getAnimal());
+      //        donationRegister.setSort(donationRegister.getAnimal());
+      //      } else if (input == 6) {
+      //        System.out.printf("기부목록: %s\n", donationRegister.getEnvironmental());
+      //        donationRegister.setSort(donationRegister.getEnvironmental());
+      //      } else if (input == 7) {
+      //        System.out.printf("기부목록: %s\n", donationRegister.getOther());
+      //        donationRegister.setSort(donationRegister.getOther());
+      //      } else {
+      //        System.out.println(" [ 양식에 있는 번호를 입력해주세요. ] ");
+      //        return;
+      //      }
 
       for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
         if (input == donationBoardDTO.getNo()) {
@@ -92,8 +92,6 @@ public class DonationRegisterAddHandler extends AbstractDonationRegisterHandler 
       }
 
       donationRegister.setDonationMoney(Prompt.inputInt("기부 금액 ▶ "));
-      donationRegister.addDonationMoney(donationRegister.getDonationMoney());
-      donationRegister.setMyTotaldonationMoney(donationRegister.getDonationMoney());
       donationRegister.setName(AuthLoginHandler.getLoginUser().getName());
       donationRegister.setRegisterationNumber(Prompt.inputString("주민등록번호 ▶ "));
       donationRegister.setBirthDate(Prompt.inputDate("생년월일(yyyy-mm-dd) ▶ "));
@@ -101,9 +99,12 @@ public class DonationRegisterAddHandler extends AbstractDonationRegisterHandler 
       donationRegister.setEmail(Prompt.inputString("이메일 ▶ "));
       donationRegister.setAddress(Prompt.inputString("주소 ▶ "));
       donationRegister.setRegisteredDate(new Date(System.currentTimeMillis()));
-      donationRegister.addDonationMoney(donationRegister.getDonationMoney());
-      donationRegister.addMyTotaldonationMoney(donationRegister.getDonationMoney());
 
+      int myDonationMoney = AuthLoginHandler.getLoginUser().getDonationMoney();
+      myDonationMoney += donationRegister.getDonationMoney();
+      AuthLoginHandler.getLoginUser().setDonationMoney(myDonationMoney);
+
+      DonationRegisterDTO.totalDonationMoney += donationRegister.getDonationMoney();
       donationRegisterDTOList.add(donationRegister);
 
       System.out.println("[기부가 완료되었습니다.]");
