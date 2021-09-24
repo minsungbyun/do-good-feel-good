@@ -6,27 +6,27 @@ import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
 @SuppressWarnings("serial")
-public class CommBoardCommentDTO implements Serializable {
+public class CommBoardReplyDTO implements Serializable {
 
-  private int commCommentNo;
+  private int commReplyNo;
   private String Commentid;
   private String Commentcontent;
   private Date registeredDate;
   private JoinDTO owner;
 
 
-
   @Override
   public String toString() {
-    return "CommBoardCommentDTO [commCommentNo=" + commCommentNo + ", Commentid=" + Commentid
+    return "CommBoardReplyDTO [commReplyNo=" + commReplyNo + ", Commentid=" + Commentid
         + ", Commentcontent=" + Commentcontent + ", registeredDate=" + registeredDate + ", owner="
         + owner + "]";
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(Commentcontent, Commentid, commCommentNo, owner, registeredDate);
+    return Objects.hash(Commentcontent, Commentid, commReplyNo, owner, registeredDate);
   }
+
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -35,17 +35,17 @@ public class CommBoardCommentDTO implements Serializable {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    CommBoardCommentDTO other = (CommBoardCommentDTO) obj;
+    CommBoardReplyDTO other = (CommBoardReplyDTO) obj;
     return Objects.equals(Commentcontent, other.Commentcontent)
-        && Objects.equals(Commentid, other.Commentid) && commCommentNo == other.commCommentNo
+        && Objects.equals(Commentid, other.Commentid) && commReplyNo == other.commReplyNo
         && Objects.equals(owner, other.owner)
         && Objects.equals(registeredDate, other.registeredDate);
   }
-  public int getCommCommentNo() {
-    return commCommentNo;
+  public int getCommReplyNo() {
+    return commReplyNo;
   }
-  public void setCommCommentNo(int commCommentNo) {
-    this.commCommentNo = commCommentNo;
+  public void setCommReplyNo(int commReplyNo) {
+    this.commReplyNo = commReplyNo;
   }
   public String getCommentid() {
     return Commentid;
@@ -75,5 +75,3 @@ public class CommBoardCommentDTO implements Serializable {
 
 
 }
-
-
