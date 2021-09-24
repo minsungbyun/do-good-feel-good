@@ -40,6 +40,10 @@ public class DonationBoardListHandler extends AbstractDonationBoardHandler {
             //          donationBoardDTO.isChecked());
             donationBoardDTO.getIsSigned());
         System.out.println("--------------------------------------------------------------");
+      } else {
+        System.out.println();
+        System.out.println("[  현재 승인된 모금함 개설목록이 없습니다. ]");
+        return;
       }
     }
     //    else {

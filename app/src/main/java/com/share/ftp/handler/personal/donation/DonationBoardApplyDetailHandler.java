@@ -37,7 +37,8 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
     DonationBoardDTO donationBoardDTO = donationPrompt.promptDonation();
 
     if (donationBoardDTO == null) {
-      System.out.println("모금함 상세보기를 취소하셨습니다.");
+      System.out.println();
+      System.out.println("[ 모금함 상세보기를 취소하셨습니다. ]");
       return;
     }
 

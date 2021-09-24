@@ -19,7 +19,7 @@ public class CommBoardDTO implements Serializable/*, Comparable<CommBoardDTO> */
   private JoinDTO owner;
   private int like;
   private int viewCount;
-  private List<CommBoardCommentDTO> commentList;
+  private List<CommBoardReplyDTO> commentList;
 
 
   @Override
@@ -112,10 +112,10 @@ public class CommBoardDTO implements Serializable/*, Comparable<CommBoardDTO> */
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
-  public List<CommBoardCommentDTO> getComment() {
+  public List<CommBoardReplyDTO> getComment() {
     return commentList;
   }
-  public void setComment(List<CommBoardCommentDTO> comment) {
+  public void setComment(List<CommBoardReplyDTO> comment) {
     this.commentList = comment;
   }
 }

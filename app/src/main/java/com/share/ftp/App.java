@@ -27,8 +27,8 @@ import com.share.ftp.domain.personal.ApproveOrgDTO;
 import com.share.ftp.domain.personal.ChallengeJoinDTO;
 import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
-import com.share.ftp.domain.personal.CommBoardCommentDTO;
 import com.share.ftp.domain.personal.CommBoardDTO;
+import com.share.ftp.domain.personal.CommBoardReplyDTO;
 import com.share.ftp.domain.personal.CommReviewDTO;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
@@ -94,7 +94,9 @@ import com.share.ftp.handler.personal.community.CommBestListHandler;
 import com.share.ftp.handler.personal.community.CommBoardAddHandler;
 import com.share.ftp.handler.personal.community.CommBoardDeleteHandler;
 import com.share.ftp.handler.personal.community.CommBoardDetailHandler;
+import com.share.ftp.handler.personal.community.CommBoardLikeHandler;
 import com.share.ftp.handler.personal.community.CommBoardListHandler;
+import com.share.ftp.handler.personal.community.CommBoardReplyConnectHandler;
 import com.share.ftp.handler.personal.community.CommBoardSearchHandler;
 import com.share.ftp.handler.personal.community.CommBoardUpdateHandler;
 import com.share.ftp.handler.personal.community.CommReviewAddHandler;
@@ -168,7 +170,7 @@ public class App {
   // 소통해요 도메인(값)
   List<CommBoardDTO> commBoardDTOList = new ArrayList<>();
   List<CommReviewDTO> commReviewDTOList = new ArrayList<>();
-  List<CommBoardCommentDTO> commBoardCommentDTOList = new ArrayList<>();
+  List<CommBoardReplyDTO> commBoardCommentDTOList = new ArrayList<>();
 
   // 챌린지 도메인(값)
   List<ChallengeJoinDTO> challengeJoinDTOList = new ArrayList<>();
@@ -326,6 +328,8 @@ public class App {
     commands.put("/commBoard/update", new CommBoardUpdateHandler(commBoardDTOList, commBoardCommentDTOList));
     commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList, commBoardCommentDTOList));
     commands.put("/commBoard/search", new CommBoardSearchHandler(commBoardDTOList, commBoardCommentDTOList));
+    commands.put("/commBoard/like", new CommBoardLikeHandler(commBoardDTOList, commBoardCommentDTOList)); 
+    commands.put("/commBoard/connect", new CommBoardReplyConnectHandler());
 
     // 소통해요 나눔이야기 BEST
     commands.put("/commBest/list", new CommBestListHandler(commBoardDTOList));
@@ -686,20 +690,8 @@ public class App {
 
 
     // 모금함
-    MenuGroup DonationMenu = new MenuGroup("모금함");
-    mainMenuGroup.add(DonationMenu);
+    mainMenuGroup.add(createDonationMenu());
 
-    DonationMenu.add(new MenuItem("전체 기부금 내역", "/donationRegister/totalMoney"));
-    DonationMenu.add(new MenuItem("모금함 개설신청", ACCESS_ORG, "/donationBoard/apply"));
-
-    MenuGroup doDonationListMenu = new MenuGroup("모금함목록");
-    DonationMenu.add(new MenuItem("모금함목록","/donationBoard/list"));
-
-    doDonationListMenu.add(new MenuItem("모금함 상세보기", "/donationBoard/applyDetail"));
-    doDonationListMenu.add(new MenuItem("기부하기", ACCESS_MEMBER, "/donationRegister/add"));
-    doDonationListMenu.add(new MenuItem("참여내역", "/donationRegister/participation"));
-
-    DonationMenu.add(createDonationDetailMenu()); // 모금함 상세보기
 
     // 고객센터
     MenuGroup supportMenu = new MenuGroup("고객센터");
@@ -859,15 +851,19 @@ public class App {
     return monthlyRankingMenu;
   }
 
+  private Menu createDonationMenu() {
+    MenuGroup donationMenu = new MenuGroup("모금함");
 
-  private Menu createDonationDetailMenu() {
-    MenuGroup doDonationMenu = new MenuGroup("모금함 상세보기");
-    doDonationMenu.add(new MenuItem("모금함 상세보기", "/donationBoard/applyDetail"));
-    doDonationMenu.add(new MenuItem("기부하기", ACCESS_MEMBER, "/donationRegister/add"));
-    doDonationMenu.add(new MenuItem("참여내역", "/donationRegister/participation"));
+    donationMenu.add(new MenuItem("전체 기부금 내역", "/donationRegister/totalMoney"));
+    donationMenu.add(new MenuItem("모금함 개설신청", ACCESS_ORG, "/donationBoard/apply"));
+    donationMenu.add(new MenuItem("모금함목록","/donationBoard/list"));
+    donationMenu.add(new MenuItem("모금함 상세보기", "/donationBoard/applyDetail"));
+    donationMenu.add(new MenuItem("기부하기", ACCESS_MEMBER, "/donationRegister/add"));
+    donationMenu.add(new MenuItem("기부 참여내역", "/donationRegister/participation"));
 
-    return doDonationMenu;
+    return donationMenu;
   }
+
 
   private Menu createNoticeMenu() {
     MenuGroup noticeMenu = new MenuGroup("공지사항");
