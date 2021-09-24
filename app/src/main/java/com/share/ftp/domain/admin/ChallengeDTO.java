@@ -14,6 +14,7 @@ public class ChallengeDTO implements Serializable{
   private static final long serialVersionUID = 1L;
   private int no;
   private int reviewCount;
+  private int point;
   private JoinDTO admin;
   private String title;
   private String content;
@@ -26,7 +27,7 @@ public class ChallengeDTO implements Serializable{
   private int totalJoinCount;
   private boolean isChecked;
   private int like;
-  private ChallengeDTO wish;
+  private JoinDTO wish;
   private List<JoinDTO> members = new ArrayList<>();  // 관리자가 등록한 챌린지에 참여한 멤버
 
 
@@ -34,17 +35,8 @@ public class ChallengeDTO implements Serializable{
 
 
   @Override
-  public String toString() {
-    return "ChallengeDTO [no=" + no + ", reviewCount=" + reviewCount + ", admin=" + admin
-        + ", title=" + title + ", content=" + content + ", fileUpload=" + fileUpload
-        + ", registeredDate=" + registeredDate + ", startDate=" + startDate + ", endDate=" + endDate
-        + ", viewCount=" + viewCount + ", questionCount=" + questionCount + ", totalJoinCount="
-        + totalJoinCount + ", isChecked=" + isChecked + ", like=" + like + ", wish=" + wish
-        + ", members=" + members + "]";
-  }
-  @Override
   public int hashCode() {
-    return Objects.hash(admin, content, endDate, fileUpload, isChecked, like, members, no,
+    return Objects.hash(admin, content, endDate, fileUpload, isChecked, like, members, no, point,
         questionCount, registeredDate, reviewCount, startDate, title, totalJoinCount, viewCount,
         wish);
   }
@@ -60,18 +52,26 @@ public class ChallengeDTO implements Serializable{
     return Objects.equals(admin, other.admin) && Objects.equals(content, other.content)
         && Objects.equals(endDate, other.endDate) && Objects.equals(fileUpload, other.fileUpload)
         && isChecked == other.isChecked && like == other.like
-        && Objects.equals(members, other.members) && no == other.no
+        && Objects.equals(members, other.members) && no == other.no && point == other.point
         && questionCount == other.questionCount
         && Objects.equals(registeredDate, other.registeredDate) && reviewCount == other.reviewCount
         && Objects.equals(startDate, other.startDate) && Objects.equals(title, other.title)
         && totalJoinCount == other.totalJoinCount && viewCount == other.viewCount
         && Objects.equals(wish, other.wish);
   }
-
-  public ChallengeDTO getWish() {
+  @Override
+  public String toString() {
+    return "ChallengeDTO [no=" + no + ", reviewCount=" + reviewCount + ", point=" + point
+        + ", admin=" + admin + ", title=" + title + ", content=" + content + ", fileUpload="
+        + fileUpload + ", registeredDate=" + registeredDate + ", startDate=" + startDate
+        + ", endDate=" + endDate + ", viewCount=" + viewCount + ", questionCount=" + questionCount
+        + ", totalJoinCount=" + totalJoinCount + ", isChecked=" + isChecked + ", like=" + like
+        + ", wish=" + wish + ", members=" + members + "]";
+  }
+  public JoinDTO getWish() {
     return wish;
   }
-  public void setWish(ChallengeDTO wish) {
+  public void setWish(JoinDTO wish) {
     this.wish = wish;
   }
   public int getLike() {
@@ -131,6 +131,14 @@ public class ChallengeDTO implements Serializable{
 
 
 
+
+
+  public int getPoint() {
+    return point;
+  }
+  public void setPoint(int point) {
+    this.point = point;
+  }
   public int getReviewCount() {
     return reviewCount;
   }

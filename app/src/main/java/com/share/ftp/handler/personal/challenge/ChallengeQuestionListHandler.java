@@ -16,8 +16,12 @@ public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandl
 
   @Override
   public void execute(CommandRequest request) throws Exception {
+<<<<<<< HEAD
     System.out.println();
     System.out.println("[문의 목록]");
+=======
+    System.out.println("[ 문의 목록 ]");
+>>>>>>> 651e8fdf960ffb85e02900c212e19ee06c60c37e
     System.out.println();
 
     int challengeNo = (int) request.getAttribute("no");
@@ -47,9 +51,9 @@ public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandl
 
     while (true) {
       System.out.println();
-      System.out.println("1번: 문의 검색");
-      System.out.println("0번: 이전");
-      int input = Prompt.inputInt("번호 입력 > ");
+      System.out.println("1번 ▶ 문의 검색");
+      System.out.println("0번 ▶ 이전");
+      int input = Prompt.inputInt("번호 입력 ▶ ");
       switch (input) {
         case 1: request.getRequestDispatcher("/challengeQuestion/search").forward(request); break;
         case 0: return;
