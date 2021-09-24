@@ -56,6 +56,7 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
       System.out.printf("첨부파일: %s\n", donationBoardDTO.getFileUpload());
       System.out.printf("시작일: %s\n", donationBoardDTO.getRegisteredStartDate());
       System.out.printf("종료일: %s\n", donationBoardDTO.getRegisteredEndDate());
+      System.out.printf("목표금액: %d원\n", donationBoardDTO.getMoneyTarget());
       System.out.println();
       System.out.println("모금함 기부 참여자: ");
 
@@ -72,17 +73,6 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
           } 
         } 
       }
-
-      //      if (donationRegisterDTOList.size() > 0 && ) {
-      //        
-      //          System.out.println("[  현재 참여된 기부 내역이 없습니다. ]");
-      //        
-      //      }
-
-
-
-      //      donationRegisterParticipationListHandler.execute();
-
 
       System.out.println();
       String input = Prompt.inputString("해당 모금함에 기부하시겠습니까?(y/N) ");

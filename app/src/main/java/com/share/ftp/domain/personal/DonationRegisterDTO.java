@@ -13,6 +13,7 @@ public class DonationRegisterDTO implements Serializable{
 
   private static final long serialVersionUID = 1L;
 
+
   private int no;
   private int donationMoney;
   public static int totalDonationMoney;
@@ -25,6 +26,8 @@ public class DonationRegisterDTO implements Serializable{
   private String address;
   private Date registeredDate;
   private List<JoinDTO> members = new ArrayList<>();
+
+
 
 
   @Override
@@ -55,6 +58,7 @@ public class DonationRegisterDTO implements Serializable{
         && Objects.equals(registeredDate, other.registeredDate) && Objects.equals(sort, other.sort)
         && Objects.equals(tel, other.tel);
   }
+
   public String getSort() {
     return sort;
   }
