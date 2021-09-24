@@ -13,8 +13,9 @@ public class MyChallengeListHandler extends AbstractAdminChallengeHandler {
   }
 
   // 챌린지에 참가한 회원이면 리스트를 보여준다.
+  @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("번호 제목[댓글] 작성자 참여인원  참여기간   ");
+    //    System.out.println("번호 제목[댓글] 작성자 참여인원  참여기간   ");
     for (ChallengeDTO challengeDTO : challengeDTOList) {
       if (challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getName())) {
         System.out.printf("%d, %s[%d], %s, %d, %s ~ %s\n", 

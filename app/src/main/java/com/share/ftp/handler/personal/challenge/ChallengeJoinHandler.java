@@ -37,7 +37,7 @@ public class ChallengeJoinHandler extends AbstractAdminChallengeHandler {
         +"작성자 ▶ %s\n"
         +"참여인원 ▶ %d\n"
         +"참여기간 ▶ %s ~ %s\n"
-        //        +"남은시간 ▶ %d\n"
+        +"남은일수 ▶ %d일 남았습니다.\n"
         +"등록날짜 ▶ %s\n\n",
 
         challengeDTO.getNo(), 
@@ -49,7 +49,7 @@ public class ChallengeJoinHandler extends AbstractAdminChallengeHandler {
         //          challengeDTO.getFileUpload(), 
         challengeDTO.getStartDate(),
         challengeDTO.getEndDate(),
-        //        (((challengeDTO.getEndDate().getTime() - challengeDTO.getStartDate().getTime()) / (1000*60*60)) % 24),
+        ((((challengeDTO.getEndDate().getTime() - challengeDTO.getStartDate().getTime()) / 1000)) / (24*60*60)),
         //        (challengeDTO.getEndDate().getTime() - challengeDTO.getStartDate().getTime() ),
         challengeDTO.getRegisteredDate());
 
