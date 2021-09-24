@@ -69,7 +69,7 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
     request.setAttribute("no", no);
 
     while (true) {
-      String input = Prompt.inputString("변경(U), 삭제(D), 답글달기(A), 이전(0)>");
+      String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
       switch (input) {
         case "U":
         case "u":
@@ -79,10 +79,10 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
         case "d":
           request.getRequestDispatcher("/question/delete").forward(request);
           return;
-        case "A":
-        case "a":
-          request.getRequestDispatcher("/adminAsk/add").forward(request);
-          return;
+          //        case "A":
+          //        case "a":
+          //          request.getRequestDispatcher("/adminAsk/add").forward(request);
+          //          return;
         case "0":
           return;
         default:
