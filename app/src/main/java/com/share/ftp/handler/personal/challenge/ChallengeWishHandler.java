@@ -33,7 +33,7 @@ public class ChallengeWishHandler extends AbstractAdminChallengeHandler {
         return;
       } else if (input.equals("y")) {
         System.out.println();
-        System.out.println("[  🎈 WISH 🎈  ]");
+        System.out.println("[  🎈 관심 챌린지로 등록되었습니다. 🎈  ]");
         challengeList.setWish(AuthLoginHandler.getLoginUser());
         return;
       } else {
