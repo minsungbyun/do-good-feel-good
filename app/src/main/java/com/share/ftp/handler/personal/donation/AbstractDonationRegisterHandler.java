@@ -49,45 +49,6 @@ public abstract class AbstractDonationRegisterHandler implements Command { // �
 
   } 
 
-  public DonationRegisterDTO promptProject() {
-    System.out.println("기부분류:");
-    for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {
-      System.out.printf(" [1. %s]\n [2. %s]\n [3. %s]\n [4. %s]\n [5. %s]\n [6. %s]\n [7. %s]\n", 
-          donationRegisterDTO.getChildren(), 
-          donationRegisterDTO.getTeen(),
-          donationRegisterDTO.getElder(),
-          donationRegisterDTO.getHandicappedPerson(),
-          donationRegisterDTO.getAnimal(),
-          donationRegisterDTO.getEnvironmental(),
-          donationRegisterDTO.getOther());
-    }
-    while (true) {
-      int projectNo = Prompt.inputInt("기부 분류 선택? (취소: 0) ");
-      if (projectNo == 0) {
-        return null;
-      } else if (projectNo == 1) {
-        System.out.println("아동");
-      } else if (projectNo == 2) {
-        System.out.println("청소년");
-      } else if (projectNo == 3) {
-        System.out.println("어르신");
-      } else if (projectNo == 4) {
-        System.out.println("장애인");
-      } else if (projectNo == 5) {
-        System.out.println("장애인");
-      } else if (projectNo == 6) {
-        System.out.println("동물");
-      } else if (projectNo == 7) {
-        System.out.println("기타");
-      }
-
-      DonationRegisterDTO selectedProject = findByNo(projectNo);
-      if (selectedProject != null) {
-        return selectedProject;
-      }
-      System.out.println("프로젝트 번호가 옳지 않습니다.");
-    }
-  }
 
   protected DonationRegisterDTO findByNo(int no) {
     for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {

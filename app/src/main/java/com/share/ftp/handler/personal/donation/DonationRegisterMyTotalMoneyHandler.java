@@ -16,6 +16,8 @@ public class DonationRegisterMyTotalMoneyHandler extends AbstractDonationRegiste
   public void execute(CommandRequest request) throws Exception {
 
     System.out.printf("기부 총 금액 : %d\n", DonationRegisterDTO.myTotaldonationMoney);
+
+    System.out.printf("기부 총 금액 : %d\n", DonationRegisterDTO.myTotaldonationMoney);
   }
 }
 

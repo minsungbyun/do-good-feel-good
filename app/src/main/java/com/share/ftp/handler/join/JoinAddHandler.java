@@ -4,8 +4,8 @@ import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.CommandRequest;
-import com.share.ftp.handler.personal.volunteer.General;
 import com.share.menu.Menu;
+import com.share.util.General;
 import com.share.util.Prompt;
 
 public class JoinAddHandler extends AbstractJoinHandler {

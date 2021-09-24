@@ -1,6 +1,6 @@
 package com.share.ftp.handler.personal.donation;
 
-import static com.share.ftp.handler.personal.volunteer.General.check.Rejected;
+import static com.share.util.General.check.Rejected;
 import java.util.List;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.handler.CommandRequest;

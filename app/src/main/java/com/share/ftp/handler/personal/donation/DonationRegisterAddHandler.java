@@ -92,8 +92,6 @@ public class DonationRegisterAddHandler extends AbstractDonationRegisterHandler 
       }
 
       donationRegister.setDonationMoney(Prompt.inputInt("기부 금액 ▶ "));
-      donationRegister.addDonationMoney(donationRegister.getDonationMoney());
-      donationRegister.setMyTotaldonationMoney(donationRegister.getDonationMoney());
       donationRegister.setName(AuthLoginHandler.getLoginUser().getName());
       donationRegister.setRegisterationNumber(Prompt.inputString("주민등록번호 ▶ "));
       donationRegister.setBirthDate(Prompt.inputDate("생년월일(yyyy-mm-dd) ▶ "));
@@ -102,8 +100,11 @@ public class DonationRegisterAddHandler extends AbstractDonationRegisterHandler 
       donationRegister.setAddress(Prompt.inputString("주소 ▶ "));
       donationRegister.setRegisteredDate(new Date(System.currentTimeMillis()));
       donationRegister.addDonationMoney(donationRegister.getDonationMoney());
-      donationRegister.addMyTotaldonationMoney(donationRegister.getDonationMoney());
 
+      if (AuthLoginHandler.getLoginUser().getName().equals(donationRegister.getName())) {
+        //        donationRegister.setMyTotaldonationMoney(donationRegister.getDonationMoney());
+        donationRegister.addMyTotaldonationMoney(donationRegister.getDonationMoney());
+      }
       donationRegisterDTOList.add(donationRegister);
 
       System.out.println("[기부가 완료되었습니다.]");
