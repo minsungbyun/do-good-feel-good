@@ -482,10 +482,10 @@ public class App {
     //    loadOrgRequestReject();
     //
     //    loadCommBoard();
-    loadObjects("commBoardDTO.json", commBoardDTOList, CommBoardDTO.class);
-    loadObjects("commReviewDTO.json", commReviewDTOList, CommReviewDTO.class);
-    //    loadCommReview();
-    //
+    //    loadObjects("commBoardDTO.json", commBoardDTOList, CommBoardDTO.class);
+    //    loadObjects("commReviewDTO.json", commReviewDTOList, CommReviewDTO.class);
+    //    //    loadCommReview();
+    //    //
     loadObjects("challengeDTO.json", challengeDTOList, ChallengeDTO.class);
     //
     loadObjects("challengeReviewDTO.json", challengeReviewDTOList, ChallengeReviewDTO.class);
