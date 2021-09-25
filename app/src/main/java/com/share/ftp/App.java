@@ -339,7 +339,7 @@ public class App {
     commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList, commBoardReplyDTOList));
     commands.put("/commBoard/search", new CommBoardSearchHandler(commBoardDTOList, commBoardReplyDTOList));
     commands.put("/commBoard/like", new CommBoardLikeHandler(commBoardDTOList, commBoardReplyDTOList)); 
-<<<<<<< HEAD
+
 
     // 소통해요 댓글
     commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler());
@@ -347,9 +347,8 @@ public class App {
     commands.put("/commBoardReply/list", new CommBoardReplyListHandler(commBoardDTOList, commBoardReplyDTOList));
     commands.put("/commBoardReply/update", new CommBoardReplyUpdateHandler(commBoardDTOList, commBoardReplyDTOList));
     commands.put("/commBoardReply/delete", new CommBoardReplyDeleteHandler(commBoardDTOList, commBoardReplyDTOList));
-=======
+
     commands.put("/commBoard/connect", new CommBoardReplyConnectHandler());
->>>>>>> 96ccc5501aa36961677264452e417155c16b2c3d
 
     // 소통해요 나눔이야기 BEST
     commands.put("/commBest/list", new CommBestListHandler(commBoardDTOList));
@@ -501,7 +500,7 @@ public class App {
     params.put("myQuestionListDTOList", myQuestionListDTOList);
     params.put("challengeDTOList", challengeDTOList);
     params.put("noticeDTOList", noticeDTOList);
-    params.put("questionDTOList", questionDTOList);
+    //    params.put("questionDTOList", questionDTOList);
     params.put("approveOrgDTOList", approveOrgDTOList);
 
     for (ApplicationContextListener listener : listeners) {
@@ -530,7 +529,7 @@ public class App {
     params.put("myQuestionListDTOList", myQuestionListDTOList);
     params.put("challengeDTOList", challengeDTOList);
     params.put("noticeDTOList", noticeDTOList);
-    params.put("questionDTOList", questionDTOList);
+    //    params.put("questionDTOList", questionDTOList);
     params.put("approveOrgDTOList", approveOrgDTOList);
 
     for (ApplicationContextListener listener : listeners) {
@@ -953,15 +952,16 @@ public class App {
   private Menu createAdminAskMenu() {
     MenuGroup adminAskInfo = new MenuGroup("문의사항 관리", ACCESS_ADMIN);
 
-    adminAskInfo.add(new MenuItem("문의사항 등록","/adminAsk/add"));
-    //    adminAskInfo.add(new MenuItem("문의사항 목록","/question/list"));
-    //    adminAskInfo.add(new MenuItem("문의사항 상세보기","/question/detail"));
-    //    adminAskInfo.add(new MenuItem("문의사항 변경","/question/update"));
-    //    adminAskInfo.add(new MenuItem("문의사항 삭제","/question/delete"));
-    //    adminAskInfo.add(new MenuItem("문의사항 검색","/question/search"));
+    adminAskInfo.add(new MenuItem("문의사항 등록","/question/add"));
+    adminAskInfo.add(new MenuItem("문의사항 목록","/question/list"));
+    adminAskInfo.add(new MenuItem("문의사항 상세보기","/question/detail"));
+    adminAskInfo.add(new MenuItem("문의사항 변경","/question/update"));
+    adminAskInfo.add(new MenuItem("문의사항 삭제","/question/delete"));
+    adminAskInfo.add(new MenuItem("문의사항 검색","/question/search"));
 
     return adminAskInfo;
   }
+
 
   private Menu createAdminChallengeMenu() {
     MenuGroup adminChallengeInfo = new MenuGroup("챌린지 관리");

@@ -5,9 +5,9 @@ import java.sql.Date;
 import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
-@SuppressWarnings("serial")
 public class NoticeDTO implements Serializable{
 
+  private static final long serialVersionUID = 1L;
   private int no;
   private String adminId;
   private String title;
