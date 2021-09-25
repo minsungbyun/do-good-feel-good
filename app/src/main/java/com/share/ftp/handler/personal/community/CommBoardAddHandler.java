@@ -2,18 +2,18 @@ package com.share.ftp.handler.personal.community;
 
 import java.sql.Date;
 import java.util.List;
-import com.share.ftp.domain.personal.CommBoardReplyDTO;
 import com.share.ftp.domain.personal.CommBoardDTO;
+import com.share.ftp.domain.personal.CommBoardReplyDTO;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
 public class CommBoardAddHandler extends AbstractCommBoardHandler {
 
-  int commNo; // 나눔이야기 게시글 번호 자동 부여
-
-  public CommBoardAddHandler(List<CommBoardDTO> commBoardDTOList, List<CommBoardReplyDTO> commBoardCommentDTOList) {
-    super(commBoardDTOList, commBoardCommentDTOList);
+  public CommBoardAddHandler(
+      List<CommBoardDTO> commBoardDTOList, 
+      List<CommBoardReplyDTO> commBoardReplyDTOList) {
+    super(commBoardDTOList, commBoardReplyDTOList);
   }
 
   @Override
@@ -30,8 +30,9 @@ public class CommBoardAddHandler extends AbstractCommBoardHandler {
     // commBoardDTO.setPassword(Prompt.inputString("비밀번호 ▶ "));
     commBoardDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
     commBoardDTO.setOwner(AuthLoginHandler.getLoginUser());
-    commBoardDTO.setCommNo(++commNo);
     // System.out.println(commNo); 게시글 넘버 확인0
+
+    commBoardDTO.setCommNo(getNextNum());
 
     commBoardDTOList.add(commBoardDTO);
 

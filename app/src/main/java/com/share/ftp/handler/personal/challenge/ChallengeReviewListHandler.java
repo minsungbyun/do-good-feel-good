@@ -9,8 +9,6 @@ import com.share.util.Prompt;
 
 public class ChallengeReviewListHandler extends AbstractChallengeReviewHandler {
 
-
-
   public ChallengeReviewListHandler(List<ChallengeReviewDTO> challengeReviewDTOList,
       List<ChallengeDTO> challengeDTOList) {
     super(challengeReviewDTOList, challengeDTOList);
@@ -34,6 +32,7 @@ public class ChallengeReviewListHandler extends AbstractChallengeReviewHandler {
       System.out.println("참여인증&댓글이 없습니다.");
       return;
     }
+
     for (ChallengeReviewDTO challengeReviewDTO : challengeReviewDTOList) {
       if (challengeReviewDTO.getNo() == challengeNo) {
         System.out.printf("%d, %d, %s, %s, %s, %s\n", 

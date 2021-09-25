@@ -87,7 +87,11 @@ import com.share.ftp.handler.personal.community.CommBoardDeleteHandler;
 import com.share.ftp.handler.personal.community.CommBoardDetailHandler;
 import com.share.ftp.handler.personal.community.CommBoardLikeHandler;
 import com.share.ftp.handler.personal.community.CommBoardListHandler;
+import com.share.ftp.handler.personal.community.CommBoardReplyAddHandler;
 import com.share.ftp.handler.personal.community.CommBoardReplyConnectHandler;
+import com.share.ftp.handler.personal.community.CommBoardReplyDeleteHandler;
+import com.share.ftp.handler.personal.community.CommBoardReplyListHandler;
+import com.share.ftp.handler.personal.community.CommBoardReplyUpdateHandler;
 import com.share.ftp.handler.personal.community.CommBoardSearchHandler;
 import com.share.ftp.handler.personal.community.CommBoardUpdateHandler;
 import com.share.ftp.handler.personal.community.CommReviewAddHandler;
@@ -189,8 +193,6 @@ public class App {
   List<QuestionDTO> questionDTOList = new ArrayList<>();
   List<ApproveOrgDTO> approveOrgDTOList = new ArrayList<>();
 
-  //댓글 도메인
-  //  List<CommentDTO> commentDTOList = new ArrayList<>();
 
   // HashMap
   HashMap<String,Command> challengeReviewMap = new HashMap<>();
@@ -339,7 +341,17 @@ public class App {
     commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList, commBoardReplyDTOList));
     commands.put("/commBoard/search", new CommBoardSearchHandler(commBoardDTOList, commBoardReplyDTOList));
     commands.put("/commBoard/like", new CommBoardLikeHandler(commBoardDTOList, commBoardReplyDTOList)); 
+<<<<<<< HEAD
+
+    // 소통해요 댓글
+    commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler());
+    commands.put("/commBoardReply/add", new CommBoardReplyAddHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoardReply/list", new CommBoardReplyListHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoardReply/update", new CommBoardReplyUpdateHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoardReply/delete", new CommBoardReplyDeleteHandler(commBoardDTOList, commBoardReplyDTOList));
+=======
     commands.put("/commBoard/connect", new CommBoardReplyConnectHandler());
+>>>>>>> 96ccc5501aa36961677264452e417155c16b2c3d
 
     // 소통해요 나눔이야기 BEST
     commands.put("/commBest/list", new CommBestListHandler(commBoardDTOList));
