@@ -45,7 +45,10 @@ public class ChallengeDetailHandler extends AbstractAdminChallengeHandler {
     System.out.printf("시작일 ▶ %s\n", challengeDTO.getStartDate());
     System.out.printf("종료일 ▶ %s\n", challengeDTO.getEndDate());
     System.out.printf("챌린지기간 ▶ %d일\n",  ((((challengeDTO.getEndDate().getTime() - challengeDTO.getStartDate().getTime()) / 1000)) / (24*60*60)));
-    System.out.printf("남은일수 ▶ %d일 남았습니다.\n",   ((((challengeDTO.getEndDate().getTime() - System.currentTimeMillis()) / 1000)) / (24*60*60)));
+    //    System.out.printf("남은일수 ▶ %d일 남았습니다.\n",   ((((challengeDTO.getEndDate().getTime() - System.currentTimeMillis()) / 1000)) / (24*60*60)));
+    System.out.printf(getRemainTime(challengeDTO.getEndDate().getTime() - System.currentTimeMillis()));
+    System.out.println();
+
 
     while (true) {
       System.out.println();
@@ -70,4 +73,9 @@ public class ChallengeDetailHandler extends AbstractAdminChallengeHandler {
       }
     }
   }
+
+
+
+
+
 }
