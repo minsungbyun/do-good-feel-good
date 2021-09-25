@@ -11,41 +11,29 @@ public class DonationBoardDTO implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
+  private int moneyTarget;
   private int no;
-
   private String sort;
-  //  private String children = "아동";
-  //  private String teen = "청소년";
-  //  private String elder = "노인";
-  //  private String handicappedPerson = "장애인";
-  //  private String animal = "동물";
-  //  private String environmental = "환경";
-  //  private String other = "기타";
-
   private String title;
   private String leader;
   private String content;
   private String fileUpload;
   private Date registeredStartDate;
   private Date registeredEndDate;
-  //  private boolean isOrg;
-  //  private boolean isChecked;
   private String isSigned;
   private List<JoinDTO> members = new ArrayList<>();
 
-
-
   @Override
   public String toString() {
-    return "DonationBoardDTO [no=" + no + ", sort=" + sort + ", title=" + title + ", leader="
-        + leader + ", content=" + content + ", fileUpload=" + fileUpload + ", registeredStartDate="
-        + registeredStartDate + ", registeredEndDate=" + registeredEndDate + ", isSigned="
-        + isSigned + ", members=" + members + "]";
+    return "DonationBoardDTO [moneyTarget=" + moneyTarget + ", no=" + no + ", sort=" + sort
+        + ", title=" + title + ", leader=" + leader + ", content=" + content + ", fileUpload="
+        + fileUpload + ", registeredStartDate=" + registeredStartDate + ", registeredEndDate="
+        + registeredEndDate + ", isSigned=" + isSigned + ", members=" + members + "]";
   }
   @Override
   public int hashCode() {
-    return Objects.hash(content, fileUpload, isSigned, leader, members, no, registeredEndDate,
-        registeredStartDate, sort, title);
+    return Objects.hash(content, fileUpload, isSigned, leader, members, moneyTarget, no,
+        registeredEndDate, registeredStartDate, sort, title);
   }
   @Override
   public boolean equals(Object obj) {
@@ -58,10 +46,16 @@ public class DonationBoardDTO implements Serializable {
     DonationBoardDTO other = (DonationBoardDTO) obj;
     return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
         && Objects.equals(isSigned, other.isSigned) && Objects.equals(leader, other.leader)
-        && Objects.equals(members, other.members) && no == other.no
-        && Objects.equals(registeredEndDate, other.registeredEndDate)
+        && Objects.equals(members, other.members) && moneyTarget == other.moneyTarget
+        && no == other.no && Objects.equals(registeredEndDate, other.registeredEndDate)
         && Objects.equals(registeredStartDate, other.registeredStartDate)
         && Objects.equals(sort, other.sort) && Objects.equals(title, other.title);
+  }
+  public int getMoneyTarget() {
+    return moneyTarget;
+  }
+  public void setMoneyTarget(int moneyTarget) {
+    this.moneyTarget = moneyTarget;
   }
   public int getNo() {
     return no;
