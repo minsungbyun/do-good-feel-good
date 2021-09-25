@@ -8,7 +8,8 @@ public abstract class AbstractCommReviewHandler implements Command {
 
   protected List<CommReviewDTO> commReviewDTOList;
 
-  public AbstractCommReviewHandler(List<CommReviewDTO> commReviewDTOList) {
+  public AbstractCommReviewHandler(
+      List<CommReviewDTO> commReviewDTOList) {
     this.commReviewDTOList = commReviewDTOList;
   }
 

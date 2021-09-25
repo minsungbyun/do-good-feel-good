@@ -1,14 +1,16 @@
 package com.share.ftp.handler.personal.community;
 
 import java.util.List;
-import com.share.ftp.domain.personal.CommBoardReplyDTO;
 import com.share.ftp.domain.personal.CommBoardDTO;
+import com.share.ftp.domain.personal.CommBoardReplyDTO;
 import com.share.ftp.handler.CommandRequest;
 
 public class CommBoardListHandler extends AbstractCommBoardHandler {
 
-  public CommBoardListHandler(List<CommBoardDTO> commBoardDTOList, List<CommBoardReplyDTO> commBoardCommentDTOList) {
-    super(commBoardDTOList, commBoardCommentDTOList);
+  public CommBoardListHandler(
+      List<CommBoardDTO> commBoardDTOList, 
+      List<CommBoardReplyDTO> commBoardReplyDTOList) {
+    super(commBoardDTOList, commBoardReplyDTOList);
   }
 
 

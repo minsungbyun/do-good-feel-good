@@ -6,19 +6,10 @@ import static com.share.menu.Menu.ACCESS_MEMBER;
 import static com.share.menu.Menu.ACCESS_MEMBER_ADMIN;
 import static com.share.menu.Menu.ACCESS_ORG;
 import static com.share.menu.Menu.ACCESS_PERSONAL;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.lang.reflect.Type;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.share.context.ApplicationContextListener;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.admin.NoticeDTO;
 import com.share.ftp.domain.join.JoinDTO;
@@ -94,7 +85,11 @@ import com.share.ftp.handler.personal.community.CommBoardDeleteHandler;
 import com.share.ftp.handler.personal.community.CommBoardDetailHandler;
 import com.share.ftp.handler.personal.community.CommBoardLikeHandler;
 import com.share.ftp.handler.personal.community.CommBoardListHandler;
+import com.share.ftp.handler.personal.community.CommBoardReplyAddHandler;
 import com.share.ftp.handler.personal.community.CommBoardReplyConnectHandler;
+import com.share.ftp.handler.personal.community.CommBoardReplyDeleteHandler;
+import com.share.ftp.handler.personal.community.CommBoardReplyListHandler;
+import com.share.ftp.handler.personal.community.CommBoardReplyUpdateHandler;
 import com.share.ftp.handler.personal.community.CommBoardSearchHandler;
 import com.share.ftp.handler.personal.community.CommBoardUpdateHandler;
 import com.share.ftp.handler.personal.community.CommReviewAddHandler;
@@ -148,6 +143,8 @@ import com.share.ftp.handler.personal.volunteer.VolOrgRequestAppliedListHandler;
 import com.share.ftp.handler.personal.volunteer.VolOrgRequestApplyListHandler;
 import com.share.ftp.handler.personal.volunteer.VolPersonalRequestAppliedListHandler;
 import com.share.ftp.handler.personal.volunteer.VolPersonalRequestApplyListHandler;
+import com.share.ftp.listener.AppInitListener;
+import com.share.ftp.listener.FileListener;
 import com.share.menu.Menu;
 import com.share.menu.MenuGroup;
 import com.share.util.Prompt;
@@ -168,7 +165,7 @@ public class App {
   // 소통해요 도메인(값)
   List<CommBoardDTO> commBoardDTOList = new ArrayList<>();
   List<CommReviewDTO> commReviewDTOList = new ArrayList<>();
-  List<CommBoardReplyDTO> commBoardCommentDTOList = new ArrayList<>();
+  List<CommBoardReplyDTO> commBoardReplyDTOList = new ArrayList<>();
 
   // 챌린지 도메인(값)
   List<ChallengeJoinDTO> challengeJoinDTOList = new ArrayList<>();
@@ -194,14 +191,25 @@ public class App {
   //  List<QuestionDTO> questionDTOList = new ArrayList<>();
   List<ApproveOrgDTO> approveOrgDTOList = new ArrayList<>();
 
-  //댓글 도메인
-  //  List<CommentDTO> commentDTOList = new ArrayList<>();
 
   // HashMap
   HashMap<String,Command> challengeReviewMap = new HashMap<>();
 
   // 메뉴 객체 컨트롤(Map)
   HashMap<String,Command> commands = new HashMap<>();
+
+  // => 옵저버(리스너) 목록
+  List<ApplicationContextListener> listeners = new ArrayList<>();
+
+  // => 옵저버(리스너)를 등록하는 메서드
+  public void addApplicationContextListener(ApplicationContextListener listener) {
+    this.listeners.add(listener);
+  }
+
+  // => 옵저버(리스너)를 제거하는 메서드
+  public void removeApplicationContextListener(ApplicationContextListener listener) {
+    this.listeners.remove(listener);
+  }
 
   class MenuItem extends Menu {
 
@@ -276,6 +284,10 @@ public class App {
 
   public static void main(String[] args) {
     App app = new App(); 
+
+    app.addApplicationContextListener(new AppInitListener());
+    app.addApplicationContextListener(new FileListener());
+
     app.service();
   }
 
@@ -320,14 +332,24 @@ public class App {
     //    commands.put("/volRequestOrg/rejectedList", new VolRequestOrgRejectedListHandler(orgRequestDTOList, orgRequestApplyDTOList, orgRequestRejectDTOList));
 
     // 소통해요 나눔이야기
-    commands.put("/commBoard/add", new CommBoardAddHandler(commBoardDTOList, commBoardCommentDTOList));
-    commands.put("/commBoard/list", new CommBoardListHandler(commBoardDTOList, commBoardCommentDTOList));
-    commands.put("/commBoard/detail", new CommBoardDetailHandler(commBoardDTOList, commBoardCommentDTOList));
-    commands.put("/commBoard/update", new CommBoardUpdateHandler(commBoardDTOList, commBoardCommentDTOList));
-    commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList, commBoardCommentDTOList));
-    commands.put("/commBoard/search", new CommBoardSearchHandler(commBoardDTOList, commBoardCommentDTOList));
-    commands.put("/commBoard/like", new CommBoardLikeHandler(commBoardDTOList, commBoardCommentDTOList)); 
+    commands.put("/commBoard/add", new CommBoardAddHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoard/list", new CommBoardListHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoard/detail", new CommBoardDetailHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoard/update", new CommBoardUpdateHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoard/search", new CommBoardSearchHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoard/like", new CommBoardLikeHandler(commBoardDTOList, commBoardReplyDTOList)); 
+<<<<<<< HEAD
+
+    // 소통해요 댓글
+    commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler());
+    commands.put("/commBoardReply/add", new CommBoardReplyAddHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoardReply/list", new CommBoardReplyListHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoardReply/update", new CommBoardReplyUpdateHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoardReply/delete", new CommBoardReplyDeleteHandler(commBoardDTOList, commBoardReplyDTOList));
+=======
     commands.put("/commBoard/connect", new CommBoardReplyConnectHandler());
+>>>>>>> 96ccc5501aa36961677264452e417155c16b2c3d
 
     // 소통해요 나눔이야기 BEST
     commands.put("/commBest/list", new CommBestListHandler(commBoardDTOList));
@@ -458,166 +480,78 @@ public class App {
     challengeReviewMap.put("/challengeReview/search", new ChallengeReviewSearchHandler(challengeReviewDTOList, challengeDTOList));
   }
 
+  private void notifyOnApplicationStarted() {
+    HashMap<String, Object> params = new HashMap<>();
+    params.put("joinDTOList", joinDTOList);
+    params.put("volListDTOList", volListDTOList);
+    params.put("generalRequestDTOList", generalRequestDTOList);
+    params.put("generalRequestApplyDTOList", generalRequestApplyDTOList);
+    params.put("generalRequestRejectDTOList", generalRequestRejectDTOList);
+    params.put("commBoardDTOList", commBoardDTOList);
+    params.put("commReviewDTOList", commReviewDTOList);
+    params.put("commBoardReplyDTOList", commBoardReplyDTOList);
+    params.put("challengeJoinDTOList", challengeJoinDTOList);
+    params.put("challengeQuestionDTOList", challengeQuestionDTOList);
+    params.put("challengeReviewDTOList", challengeReviewDTOList);
+    params.put("donationBoardDTOList", donationBoardDTOList);
+    params.put("donationBoardApplyDTOList", donationBoardApplyDTOList);
+    params.put("donationBoardRejectDTOList", donationBoardRejectDTOList);
+    params.put("donationRegisterDTOList", donationRegisterDTOList);
+    params.put("myProfileDTOList", myProfileDTOList);
+    params.put("myQuestionListDTOList", myQuestionListDTOList);
+    params.put("challengeDTOList", challengeDTOList);
+    params.put("noticeDTOList", noticeDTOList);
+    params.put("questionDTOList", questionDTOList);
+    params.put("approveOrgDTOList", approveOrgDTOList);
+
+    for (ApplicationContextListener listener : listeners) {
+      listener.contextInitialized(params);
+    }
+  }
+
+  private void notifyOnApplicationEnded() {
+    HashMap<String, Object> params = new HashMap<>();
+    params.put("joinDTOList", joinDTOList);
+    params.put("volListDTOList", volListDTOList);
+    params.put("generalRequestDTOList", generalRequestDTOList);
+    params.put("generalRequestApplyDTOList", generalRequestApplyDTOList);
+    params.put("generalRequestRejectDTOList", generalRequestRejectDTOList);
+    params.put("commBoardDTOList", commBoardDTOList);
+    params.put("commReviewDTOList", commReviewDTOList);
+    params.put("commBoardReplyDTOList", commBoardReplyDTOList);
+    params.put("challengeJoinDTOList", challengeJoinDTOList);
+    params.put("challengeQuestionDTOList", challengeQuestionDTOList);
+    params.put("challengeReviewDTOList", challengeReviewDTOList);
+    params.put("donationBoardDTOList", donationBoardDTOList);
+    params.put("donationBoardApplyDTOList", donationBoardApplyDTOList);
+    params.put("donationBoardRejectDTOList", donationBoardRejectDTOList);
+    params.put("donationRegisterDTOList", donationRegisterDTOList);
+    params.put("myProfileDTOList", myProfileDTOList);
+    params.put("myQuestionListDTOList", myQuestionListDTOList);
+    params.put("challengeDTOList", challengeDTOList);
+    params.put("noticeDTOList", noticeDTOList);
+    params.put("questionDTOList", questionDTOList);
+    params.put("approveOrgDTOList", approveOrgDTOList);
+
+    for (ApplicationContextListener listener : listeners) {
+      listener.contextDestroyed(params);
+    }
+  }
+
   void service() {
 
-    loadObjects("joinDTO.json", joinDTOList, JoinDTO.class);
-    //    loadObjects("noticeDTO.json", noticeDTOList, NoticeDTO.class);
-    //    loadObjects("questionListDTO.json", myQuestionListDTOList, QuestionListDTO.class);
-
-    //    loadObjects("generalRequest.json", generalRequestDTOList, GeneralRequestDTO.class);
-    //    loadObjects("generalRequestApply.json", generalRequestApplyDTOList, GeneralRequestDTO.class);
-    //    loadObjects("generalRequestReject.json", generalRequestRejectDTOList, GeneralRequestDTO.class);
-
-    //    loadJoins();
-
-    //    loadGeneralRequest();
-    //    loadGeneralRequestApply();
-    //    loadGeneralRequestReject();
-    //
-
-    //    loadPersonalRequest();
-    //    loadPersonalRequestApply();
-    //    loadPersonalRequestReject();
-    //
-    //    loadOrgRequest();
-    //    loadOrgRequestApply();
-    //    loadOrgRequestReject();
-    //
-    //    loadCommBoard();
-    loadObjects("commBoardDTO.json", commBoardDTOList, CommBoardDTO.class);
-    loadObjects("commReviewDTO.json", commReviewDTOList, CommReviewDTO.class);
-    //    loadCommReview();
-    //
-    loadObjects("challengeDTO.json", challengeDTOList, ChallengeDTO.class);
-    //
-    loadObjects("challengeReviewDTO.json", challengeReviewDTOList, ChallengeReviewDTO.class);
-    loadObjects("challengeQuestionDTO.json", challengeQuestionDTOList, ChallengeQuestionDTO.class);
-
-
-    loadObjects("donationBoardDTO.json", donationBoardDTOList, DonationBoardDTO.class);
-    loadObjects("donationRegisterDTO.json", donationRegisterDTOList, DonationRegisterDTO.class);
-
-
-    System.out.println("oooo                                                    \r\n"
-        + "`888                                                    \r\n"
-        + " 888 .oo.    .oooo.   oo.ooooo.  oo.ooooo.  oooo    ooo \r\n"
-        + " 888P\"Y88b  `P  )88b   888' `88b  888' `88b  `88.  .8'  \r\n"
-        + " 888   888   .oP\"888   888   888  888   888   `88..8'   \r\n"
-        + " 888   888  d8(  888   888   888  888   888    `888'    \r\n"
-        + "o888o o888o `Y888\"\"8o  888bod8P'  888bod8P'     .8'     \r\n"
-        + "                       888        888       .o..P'      \r\n"
-        + "                      o888o      o888o      `Y8P'       \r\n"
-        + "                                                        ");
-    System.out.println();
-    System.out.println("     .d8888. db   db  .d8b.  d8888b. d88888b \r\n"
-        + "     88'  YP 88   88 d8' `8b 88  `8D 88'     \r\n"
-        + "     `8bo.   88ooo88 88ooo88 88oobY' 88ooooo \r\n"
-        + "       `Y8b. 88~~~88 88~~~88 88`8b   88~~~~~ \r\n"
-        + "     db   8D 88   88 88   88 88 `88. 88.     \r\n"
-        + "     `8888Y' YP   YP YP   YP 88   YD Y88888P ");
-
-    System.out.println();
-
-
-    System.out.println();
-
-
+    notifyOnApplicationStarted();
 
     createMenu().execute();
     Prompt.close();
 
-
-
-    saveObjects("joinDTO.json", joinDTOList);
-    saveObjects("noticeDTO.json", noticeDTOList);
-    saveObjects("questionListDTO.json", myQuestionListDTOList);
-
-    saveObjects("generalRequest.json", generalRequestDTOList);
-    saveObjects("generalRequestApply.json", generalRequestApplyDTOList);
-    saveObjects("generalRequestReject.json", generalRequestRejectDTOList);
-
-    //    saveJoins();
-    //
-    //    saveGeneralRequest();
-    //    saveGeneralRequestApply();
-    //    saveGeneralRequestReject();
-
-    //    savePersonalRequest();
-    //    savePersonalRequestApply();
-    //    savePersonalRequestReject();
-
-    //    saveOrgRequest();
-    //    saveOrgRequestApply();
-    //    saveOrgRequestReject();
-
-    //    saveCommBoard();
-    //    saveCommReview();
-    //
-    //
-    //    saveAdminChellengeAdd();
-
-    saveObjects("commBoardDTO.json", commBoardDTOList);
-    saveObjects("commReviewDTO.json", commReviewDTOList);
-
-
-    saveObjects("challengeDTO.json", challengeDTOList);
-    saveObjects("challengeReviewDTO.json", challengeReviewDTOList);
-    saveObjects("challengeQuestionDTO.json", challengeQuestionDTOList);
-
-
-    saveObjects("donationBoardDTO.json", donationBoardDTOList);
-    saveObjects("donationRegisterDTO.json", donationRegisterDTOList);
+    notifyOnApplicationEnded();
 
   }
 
-  private <E> void loadObjects(
-      String filepath, // 데이터를 읽어 올 파일 경오
-      List<E> list, // 로딩한 데이터를 객체로 만든 후 저장할 목록
-      Class<E> domainType // 생성할 객체의 타입정보
-      ) {
-
-    // CSV 형식으로 저장된 게시글 데이터를 파일에서 읽어 객체에 담는다.
-    try (BufferedReader in = new BufferedReader(
-        new FileReader(filepath, Charset.forName("UTF-8")))) {
-
-      StringBuilder strBuilder = new StringBuilder();
-      String str;
-      while((str = in.readLine()) != null) { // 파일 전체를 읽는다.
-        strBuilder.append(str);
-      }
-
-      // StringBuilder로 읽어 온 JSON 문자열을 객체로 바꾼다.
-      Type type = TypeToken.getParameterized(Collection.class, domainType).getType();
-      Collection<E> collection = new Gson().fromJson(strBuilder.toString(), type);
-
-      // JSON 데이터로 읽어온 목록을 파라미터로 받은 List 에 저장한다.
-      list.addAll(collection);
 
 
 
-
-      System.out.printf("%s 데이터 로딩 완료!\n", filepath);
-
-    } catch (Exception e) {
-      System.out.printf("%s 데이터 로딩 오류!\n", filepath);
-    }
-  }
-
-  // 객체를 JSON 형식으로 저장한다.
-  private void saveObjects(String filepath, List<?> list) {
-    try (PrintWriter out = new PrintWriter(
-        new BufferedWriter(
-            new FileWriter(filepath, Charset.forName("UTF-8"))))) {
-
-      out.print(new Gson().toJson(list));
-
-      System.out.printf("%s 데이터 출력 완료!\n", filepath);
-
-    } catch (Exception e) {
-      System.out.printf("%s 데이터 출력 오류!\n", filepath);
-      e.printStackTrace();
-    }
-  }
 
 
   Menu createMenu() {
@@ -853,11 +787,11 @@ public class App {
     MenuGroup donationMenu = new MenuGroup("모금함");
 
     donationMenu.add(new MenuItem("전체 기부금 내역", "/donationRegister/totalMoney"));
-    donationMenu.add(new MenuItem("모금함 개설신청", ACCESS_ORG, "/donationBoard/apply"));
     donationMenu.add(new MenuItem("모금함목록","/donationBoard/list"));
     donationMenu.add(new MenuItem("모금함 상세보기", "/donationBoard/applyDetail"));
     donationMenu.add(new MenuItem("기부하기", ACCESS_MEMBER, "/donationRegister/add"));
     donationMenu.add(new MenuItem("기부 참여내역", "/donationRegister/participation"));
+    donationMenu.add(new MenuItem("모금함 개설신청", ACCESS_ORG, "/donationBoard/apply"));
 
     return donationMenu;
   }

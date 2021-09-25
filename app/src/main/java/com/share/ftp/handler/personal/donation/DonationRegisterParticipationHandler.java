@@ -24,7 +24,6 @@ public class DonationRegisterParticipationHandler extends AbstractDonationRegist
     }
 
     for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {
-      System.out.println();
       System.out.printf("[모금함번호: %d, 기부분류: %s, %s님, %s원, 기부날짜: %s]\n", 
           donationRegisterDTO.getNo(), 
           donationRegisterDTO.getSort(), 

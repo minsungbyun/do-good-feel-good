@@ -10,6 +10,7 @@ import com.share.ftp.domain.join.JoinDTO;
 public class CommBoardDTO implements Serializable/*, Comparable<CommBoardDTO> */{
 
   private int commNo;
+  private int replyCount;
   private String title;
   private String id;
   private String content;
@@ -24,17 +25,18 @@ public class CommBoardDTO implements Serializable/*, Comparable<CommBoardDTO> */
 
   @Override
   public String toString() {
-    return "CommBoardDTO [commNo=" + commNo + ", title=" + title + ", id=" + id + ", content="
-        + content + ", fileUpload=" + fileUpload + ", password=" + password + ", registeredDate="
-        + registeredDate + ", owner=" + owner + ", like=" + like + ", viewCount=" + viewCount
-        + ", comment=" + commentList + "]";
+    return "CommBoardDTO [commNo=" + commNo + ", replyCount=" + replyCount + ", title=" + title
+        + ", id=" + id + ", content=" + content + ", fileUpload=" + fileUpload + ", password="
+        + password + ", registeredDate=" + registeredDate + ", owner=" + owner + ", like=" + like
+        + ", viewCount=" + viewCount + ", commentList=" + commentList + "]";
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(commNo, commentList, content, fileUpload, id, like, owner, password,
-        registeredDate, title, viewCount);
+        registeredDate, replyCount, title, viewCount);
   }
+
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -48,7 +50,7 @@ public class CommBoardDTO implements Serializable/*, Comparable<CommBoardDTO> */
         && Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
         && Objects.equals(id, other.id) && like == other.like && Objects.equals(owner, other.owner)
         && Objects.equals(password, other.password)
-        && Objects.equals(registeredDate, other.registeredDate)
+        && Objects.equals(registeredDate, other.registeredDate) && replyCount == other.replyCount
         && Objects.equals(title, other.title) && viewCount == other.viewCount;
   }
 
@@ -57,6 +59,12 @@ public class CommBoardDTO implements Serializable/*, Comparable<CommBoardDTO> */
   }
   public void setCommNo(int commNo) {
     this.commNo = commNo;
+  }
+  public int getReplyCount() {
+    return replyCount;
+  }
+  public void setReplyCount(int replyCount) {
+    this.replyCount = replyCount;
   }
   public String getTitle() {
     return title;
@@ -112,12 +120,11 @@ public class CommBoardDTO implements Serializable/*, Comparable<CommBoardDTO> */
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
-  public List<CommBoardReplyDTO> getComment() {
+  public List<CommBoardReplyDTO> getCommentList() {
     return commentList;
   }
-  public void setComment(List<CommBoardReplyDTO> comment) {
-    this.commentList = comment;
+  public void setCommentList(List<CommBoardReplyDTO> commentList) {
+    this.commentList = commentList;
   }
 }
-
 

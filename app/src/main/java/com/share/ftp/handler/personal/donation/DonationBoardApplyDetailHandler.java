@@ -56,6 +56,7 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
       System.out.printf("첨부파일: %s\n", donationBoardDTO.getFileUpload());
       System.out.printf("시작일: %s\n", donationBoardDTO.getRegisteredStartDate());
       System.out.printf("종료일: %s\n", donationBoardDTO.getRegisteredEndDate());
+      System.out.printf("목표금액: %d원\n", donationBoardDTO.getMoneyTarget());
       System.out.println();
       System.out.println("모금함 기부 참여자: ");
 
@@ -73,17 +74,6 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
         } 
       }
 
-      //      if (donationRegisterDTOList.size() > 0 && ) {
-      //        
-      //          System.out.println("[  현재 참여된 기부 내역이 없습니다. ]");
-      //        
-      //      }
-
-
-
-      //      donationRegisterParticipationListHandler.execute();
-
-
       System.out.println();
       String input = Prompt.inputString("해당 모금함에 기부하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -99,7 +89,6 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
         donationRegister.setNo(donationBoardDTO.getNo());
         donationRegister.setSort(donationBoardDTO.getSort());
         donationRegister.setDonationMoney(Prompt.inputInt("기부 금액: "));
-        donationRegister.setMyTotaldonationMoney(donationRegister.getDonationMoney());
         donationRegister.setName(AuthLoginHandler.getLoginUser().getName());
         donationRegister.setRegisterationNumber(Prompt.inputString("주민등록번호: "));
         donationRegister.setBirthDate(Prompt.inputDate("생년월일(yyyy-mm-dd): "));
@@ -108,7 +97,11 @@ public class DonationBoardApplyDetailHandler extends AbstractDonationBoardHandle
         donationRegister.setAddress(Prompt.inputString("주소: "));
         donationRegister.setRegisteredDate(new Date(System.currentTimeMillis()));
         donationRegister.addMembers(AuthLoginHandler.getLoginUser());
-        donationRegister.addMyTotaldonationMoney(donationRegister.getDonationMoney());
+
+        int myDonationMoney = AuthLoginHandler.getLoginUser().getDonationMoney();
+        myDonationMoney += donationRegister.getDonationMoney();
+        AuthLoginHandler.getLoginUser().setDonationMoney(myDonationMoney);
+
 
         DonationRegisterDTO.totalDonationMoney += donationRegister.getDonationMoney();
         donationRegisterDTOList.add(donationRegister);
