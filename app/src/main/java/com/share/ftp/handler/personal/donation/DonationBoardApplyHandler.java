@@ -1,13 +1,13 @@
 package com.share.ftp.handler.personal.donation;
 
-import static com.share.ftp.handler.personal.volunteer.General.check.Waiting;
-import static com.share.ftp.handler.personal.volunteer.General.type.ANIMAL;
-import static com.share.ftp.handler.personal.volunteer.General.type.CHILDREN;
-import static com.share.ftp.handler.personal.volunteer.General.type.ELDER;
-import static com.share.ftp.handler.personal.volunteer.General.type.ENVIRONMENT;
-import static com.share.ftp.handler.personal.volunteer.General.type.HANDICAPPED;
-import static com.share.ftp.handler.personal.volunteer.General.type.OTHER;
-import static com.share.ftp.handler.personal.volunteer.General.type.TEEN;
+import static com.share.util.General.check.Waiting;
+import static com.share.util.General.type.ANIMAL;
+import static com.share.util.General.type.CHILDREN;
+import static com.share.util.General.type.ELDER;
+import static com.share.util.General.type.ENVIRONMENT;
+import static com.share.util.General.type.HANDICAPPED;
+import static com.share.util.General.type.OTHER;
+import static com.share.util.General.type.TEEN;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.personal.DonationBoardDTO;

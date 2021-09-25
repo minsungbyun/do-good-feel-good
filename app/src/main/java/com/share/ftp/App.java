@@ -27,8 +27,8 @@ import com.share.ftp.domain.personal.ApproveOrgDTO;
 import com.share.ftp.domain.personal.ChallengeJoinDTO;
 import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
-import com.share.ftp.domain.personal.CommBoardCommentDTO;
 import com.share.ftp.domain.personal.CommBoardDTO;
+import com.share.ftp.domain.personal.CommBoardReplyDTO;
 import com.share.ftp.domain.personal.CommReviewDTO;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
@@ -94,7 +94,9 @@ import com.share.ftp.handler.personal.community.CommBestListHandler;
 import com.share.ftp.handler.personal.community.CommBoardAddHandler;
 import com.share.ftp.handler.personal.community.CommBoardDeleteHandler;
 import com.share.ftp.handler.personal.community.CommBoardDetailHandler;
+import com.share.ftp.handler.personal.community.CommBoardLikeHandler;
 import com.share.ftp.handler.personal.community.CommBoardListHandler;
+import com.share.ftp.handler.personal.community.CommBoardReplyConnectHandler;
 import com.share.ftp.handler.personal.community.CommBoardSearchHandler;
 import com.share.ftp.handler.personal.community.CommBoardUpdateHandler;
 import com.share.ftp.handler.personal.community.CommReviewAddHandler;
@@ -168,7 +170,7 @@ public class App {
   // 소통해요 도메인(값)
   List<CommBoardDTO> commBoardDTOList = new ArrayList<>();
   List<CommReviewDTO> commReviewDTOList = new ArrayList<>();
-  List<CommBoardCommentDTO> commBoardCommentDTOList = new ArrayList<>();
+  List<CommBoardReplyDTO> commBoardCommentDTOList = new ArrayList<>();
 
   // 챌린지 도메인(값)
   List<ChallengeJoinDTO> challengeJoinDTOList = new ArrayList<>();
@@ -326,6 +328,8 @@ public class App {
     commands.put("/commBoard/update", new CommBoardUpdateHandler(commBoardDTOList, commBoardCommentDTOList));
     commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList, commBoardCommentDTOList));
     commands.put("/commBoard/search", new CommBoardSearchHandler(commBoardDTOList, commBoardCommentDTOList));
+    commands.put("/commBoard/like", new CommBoardLikeHandler(commBoardDTOList, commBoardCommentDTOList)); 
+    commands.put("/commBoard/connect", new CommBoardReplyConnectHandler());
 
     // 소통해요 나눔이야기 BEST
     commands.put("/commBest/list", new CommBestListHandler(commBoardDTOList));
@@ -1051,6 +1055,7 @@ public class App {
     adminChallengeInfo.add(new MenuItem("챌린지 상세보기","/adminChallenge/detail"));
     //    adminChallengeInfo.add(new MenuItem("챌린지 변경","/adminChallenge/update"));
     //    adminChallengeInfo.add(new MenuItem("챌린지 삭제","/adminChallenge/delete"));
+    //    adminChallengeInfo.add(new MenuItem("챌린지 문의답글 등록","/adminChallengeQuestion/add"));
 
     return adminChallengeInfo;
   }
