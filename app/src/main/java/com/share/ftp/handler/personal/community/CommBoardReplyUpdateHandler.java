@@ -22,7 +22,7 @@ public class CommBoardReplyUpdateHandler extends AbstractCommBoardReplyHandler {
       System.out.println("[  메인/소통해요/나눔이야기/댓글 변경  ]");
       int no = (int) request.getAttribute("no");
 
-      CommBoardReplyDTO commBoardReplyDTO = findByNo(no);
+      CommBoardReplyDTO commBoardReplyDTO = findByReplyNo(no);
 
 
       if (commBoardReplyDTO == null) {

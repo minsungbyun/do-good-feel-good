@@ -39,7 +39,9 @@ public class ChallengeQuestionUpdateHandler extends AbstractChallengeQuestionHan
           return;
         }
 
-        if (!challengeQuestion.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+        if ((challengeQuestion.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
+            AuthLoginHandler.getLoginUser().getId().equals("admin")) {
+        } else {
           System.out.println("변경 권한이 없습니다.");
           return;
         }
