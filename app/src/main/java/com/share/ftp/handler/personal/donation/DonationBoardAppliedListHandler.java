@@ -34,7 +34,7 @@ public class DonationBoardAppliedListHandler extends AbstractDonationBoardHandle
           donationBoardApplyDTO.getLeader().equals(AuthLoginHandler.getLoginUser().getName())) {
 
         System.out.printf("개설번호: %d\n모금함 분류: %s\n제목: %s\n주최자: %s\n내용: %s\n첨부파일: %s\n"
-            + "개설기간: %s ~ %s\n승인여부: %s\n",
+            + "개설기간: %s ~ %s\n목표금액: %d원\n승인여부: %s\n",
             donationBoardApplyDTO.getNo(), 
             donationBoardApplyDTO.getSort(), 
             donationBoardApplyDTO.getTitle(), 
@@ -43,6 +43,7 @@ public class DonationBoardAppliedListHandler extends AbstractDonationBoardHandle
             donationBoardApplyDTO.getFileUpload(), 
             donationBoardApplyDTO.getRegisteredStartDate(),
             donationBoardApplyDTO.getRegisteredEndDate(),
+            donationBoardApplyDTO.getMoneyTarget(),
             //          donationBoardDTO.isChecked());
             donationBoardApplyDTO.getIsSigned());
         System.out.println("--------------------------------------------------------------");

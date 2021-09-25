@@ -25,8 +25,10 @@ public class DonationPrompt {
       if (donationBoardDTO.getIsSigned().equals(Applied)) {
         System.out.println();
         System.out.printf("  [ %d. %s ]\n", donationBoardDTO.getNo(), donationBoardDTO.getTitle());
-      }
+      } 
     }
+
+
     while (true) {
 
 

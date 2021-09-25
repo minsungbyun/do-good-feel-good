@@ -25,7 +25,7 @@ public class DonationBoardRejectedListHandler extends AbstractDonationBoardHandl
 
     if (donationBoardRejectDTOList.isEmpty()) {
       System.out.println();
-      System.out.println("[ 1현재 반려된 모금함 개설목록이 없습니다. ]");
+      System.out.println("[ 현재 반려된 모금함 개설목록이 없습니다. ]");
       return;
     } 
 
@@ -35,7 +35,7 @@ public class DonationBoardRejectedListHandler extends AbstractDonationBoardHandl
         if (donationBoardRejectDTO.getLeader().equals(AuthLoginHandler.getLoginUser().getName())) {
 
           System.out.printf("개설번호: %d\n모금함 분류: %s\n제목: %s\n주최자: %s\n내용: %s\n첨부파일: %s\n"
-              + "개설기간: %s ~ %s\n승인여부: %s\n", 
+              + "개설기간: %s ~ %s\n목표금액: %d원\n승인여부: %s\n", 
               donationBoardRejectDTO.getNo(), 
               donationBoardRejectDTO.getSort(), 
               donationBoardRejectDTO.getTitle(), 
@@ -44,16 +44,17 @@ public class DonationBoardRejectedListHandler extends AbstractDonationBoardHandl
               donationBoardRejectDTO.getFileUpload(), 
               donationBoardRejectDTO.getRegisteredStartDate(),
               donationBoardRejectDTO.getRegisteredEndDate(),
+              donationBoardRejectDTO.getMoneyTarget(),
               donationBoardRejectDTO.getIsSigned());
           System.out.println("--------------------------------------------------------------");
         } else {
           System.out.println();
-          System.out.println("[  2현재 반려된 모금함 개설목록이 없습니다. ]");
+          System.out.println("[  현재 반려된 모금함 개설목록이 없습니다. ]");
           return;
         } 
       } else {
         System.out.println();
-        System.out.println("[  2현재 반려된 모금함 개설목록이 없습니다. ]");
+        System.out.println("[  현재 반려된 모금함 개설목록이 없습니다. ]");
         return;
       }
     }

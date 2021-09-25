@@ -25,12 +25,15 @@ public class DonationBoardAdminApplyDetailHandler extends AbstractDonationBoardH
   // 모금함 개설 신청내역 상세보기 -> 관리자에게 전달
   @Override
   public void execute(CommandRequest request) throws Exception {
+    System.out.println();
     System.out.println("[모금함 개설 신청내역 상세보기]");
+    System.out.println();
     int no = Prompt.inputInt("번호? ");
 
     DonationBoardDTO donationBoardDTO = findByDonationApply(no);
 
     if (donationBoardDTO == null) {
+      System.out.println();
       System.out.println("해당 번호의 모금함 개설 신청내역이 없습니다.");
       return;
     }
@@ -44,12 +47,14 @@ public class DonationBoardAdminApplyDetailHandler extends AbstractDonationBoardH
     System.out.printf("첨부파일: %s\n", donationBoardDTO.getFileUpload());
     System.out.printf("시작일: %s\n", donationBoardDTO.getRegisteredStartDate());
     System.out.printf("종료일: %s\n", donationBoardDTO.getRegisteredEndDate());
+    System.out.printf("목표금액: %d원\n", donationBoardDTO.getMoneyTarget());
     System.out.printf("승인여부: %s\n", donationBoardDTO.getIsSigned());
 
     request.setAttribute("no", no); 
 
     while (true) {
-      String input = Prompt.inputString("승인(U), 반려(D), 이전(0)>");
+      System.out.println();
+      String input = Prompt.inputString("[승인(U), 반려(D), 이전(0)]>");
       switch (input) {
         case "U":
         case "u":
