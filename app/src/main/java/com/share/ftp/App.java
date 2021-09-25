@@ -12,7 +12,6 @@ import java.util.List;
 import com.share.context.ApplicationContextListener;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.admin.NoticeDTO;
-import com.share.ftp.domain.admin.QuestionDTO;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.personal.ApproveOrgDTO;
 import com.share.ftp.domain.personal.ChallengeJoinDTO;
@@ -33,6 +32,8 @@ import com.share.ftp.handler.admin.AdminChallengeAddHandler;
 import com.share.ftp.handler.admin.AdminChallengeDeleteHandler;
 import com.share.ftp.handler.admin.AdminChallengeDetailHandler;
 import com.share.ftp.handler.admin.AdminChallengeListHandler;
+import com.share.ftp.handler.admin.AdminChallengeQuestionDetailHandler;
+import com.share.ftp.handler.admin.AdminChallengeReplyAddHandler;
 import com.share.ftp.handler.admin.AdminChallengeUpdateHandler;
 import com.share.ftp.handler.admin.AdminMemberDeleteHandler;
 import com.share.ftp.handler.admin.AdminNoticeAddHandler;
@@ -41,7 +42,6 @@ import com.share.ftp.handler.admin.AdminNoticeDetailHandler;
 import com.share.ftp.handler.admin.AdminNoticeListHandler;
 import com.share.ftp.handler.admin.AdminNoticeSearchHandler;
 import com.share.ftp.handler.admin.AdminNoticeUpdateHandler;
-import com.share.ftp.handler.admin.AdminQuestionAddHandler;
 import com.share.ftp.handler.join.AuthChangeUserInfoHandler;
 import com.share.ftp.handler.join.AuthDisplayUserInfoHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -190,7 +190,7 @@ public class App {
   // 관리자 도메인(값)
   List<ChallengeDTO> challengeDTOList = new ArrayList<>();
   List<NoticeDTO> noticeDTOList = new ArrayList<>();
-  List<QuestionDTO> questionDTOList = new ArrayList<>();
+  //  List<QuestionDTO> questionDTOList = new ArrayList<>();
   List<ApproveOrgDTO> approveOrgDTOList = new ArrayList<>();
 
 
@@ -342,6 +342,7 @@ public class App {
     commands.put("/commBoard/search", new CommBoardSearchHandler(commBoardDTOList, commBoardReplyDTOList));
     commands.put("/commBoard/like", new CommBoardLikeHandler(commBoardDTOList, commBoardReplyDTOList)); 
 
+
     // 소통해요 댓글
     commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler());
     commands.put("/commBoardReply/add", new CommBoardReplyAddHandler(commBoardDTOList, commBoardReplyDTOList));
@@ -456,7 +457,7 @@ public class App {
     commands.put("/adminNotice/search", new AdminNoticeSearchHandler(noticeDTOList));
 
     // 관리자 문의사항
-    commands.put("/adminAsk/add", new AdminQuestionAddHandler(questionDTOList));
+    //    commands.put("/adminAsk/add", new AdminQuestionAddHandler(questionDTOList));
     //        commands.put("/adminAsk/list", new AdminQuestionListHandler(myQuestionListDTOList));
     //        commands.put("/adminAsk/detail", new AdminQuestionDetailHandler(myQuestionListDTOList));
     //        commands.put("/adminAsk/update", new AdminQuestionUpdateHandler(myQuestionListDTOList));
@@ -468,6 +469,8 @@ public class App {
     commands.put("/adminChallenge/detail", new AdminChallengeDetailHandler(challengeDTOList));
     commands.put("/adminChallenge/update", new AdminChallengeUpdateHandler(challengeDTOList));
     commands.put("/adminChallenge/delete", new AdminChallengeDeleteHandler(challengeDTOList));
+    commands.put("/adminChallenge/QuestionDetail", new AdminChallengeQuestionDetailHandler(challengeQuestionDTOList, challengeDTOList));
+    commands.put("/adminChallenge/replyAdd", new AdminChallengeReplyAddHandler(challengeQuestionDTOList, challengeDTOList));
 
     // 관리자 기관승인
 
@@ -500,7 +503,7 @@ public class App {
     params.put("myQuestionListDTOList", myQuestionListDTOList);
     params.put("challengeDTOList", challengeDTOList);
     params.put("noticeDTOList", noticeDTOList);
-    params.put("questionDTOList", questionDTOList);
+    //    params.put("questionDTOList", questionDTOList);
     params.put("approveOrgDTOList", approveOrgDTOList);
 
     for (ApplicationContextListener listener : listeners) {
@@ -529,7 +532,7 @@ public class App {
     params.put("myQuestionListDTOList", myQuestionListDTOList);
     params.put("challengeDTOList", challengeDTOList);
     params.put("noticeDTOList", noticeDTOList);
-    params.put("questionDTOList", questionDTOList);
+    //    params.put("questionDTOList", questionDTOList);
     params.put("approveOrgDTOList", approveOrgDTOList);
 
     for (ApplicationContextListener listener : listeners) {
@@ -952,15 +955,16 @@ public class App {
   private Menu createAdminAskMenu() {
     MenuGroup adminAskInfo = new MenuGroup("문의사항 관리", ACCESS_ADMIN);
 
-    adminAskInfo.add(new MenuItem("문의사항 등록","/adminAsk/add"));
-    //    adminAskInfo.add(new MenuItem("문의사항 목록","/question/list"));
-    //    adminAskInfo.add(new MenuItem("문의사항 상세보기","/question/detail"));
-    //    adminAskInfo.add(new MenuItem("문의사항 변경","/question/update"));
-    //    adminAskInfo.add(new MenuItem("문의사항 삭제","/question/delete"));
-    //    adminAskInfo.add(new MenuItem("문의사항 검색","/question/search"));
+    adminAskInfo.add(new MenuItem("문의사항 등록","/question/add"));
+    adminAskInfo.add(new MenuItem("문의사항 목록","/question/list"));
+    adminAskInfo.add(new MenuItem("문의사항 상세보기","/question/detail"));
+    adminAskInfo.add(new MenuItem("문의사항 변경","/question/update"));
+    adminAskInfo.add(new MenuItem("문의사항 삭제","/question/delete"));
+    adminAskInfo.add(new MenuItem("문의사항 검색","/question/search"));
 
     return adminAskInfo;
   }
+
 
   private Menu createAdminChallengeMenu() {
     MenuGroup adminChallengeInfo = new MenuGroup("챌린지 관리");
@@ -970,6 +974,7 @@ public class App {
     adminChallengeInfo.add(new MenuItem("챌린지 상세보기","/adminChallenge/detail"));
     //    adminChallengeInfo.add(new MenuItem("챌린지 변경","/adminChallenge/update"));
     //    adminChallengeInfo.add(new MenuItem("챌린지 삭제","/adminChallenge/delete"));
+    //    adminChallengeInfo.add(new MenuItem("챌린지 문의답글 등록","/adminChallengeQuestion/add"));
 
     return adminChallengeInfo;
   }
@@ -986,5 +991,4 @@ public class App {
   }
 
 }
-
 

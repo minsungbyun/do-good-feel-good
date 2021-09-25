@@ -12,6 +12,7 @@ public class QuestionListDTO implements Serializable {
   private String title;
   private String memberld;
   private int password;
+  private String qnaType;
   private String writer;
   private String content;
   private String fileUpload;
@@ -19,20 +20,10 @@ public class QuestionListDTO implements Serializable {
   private int viewCount;
   private JoinDTO Owner;
 
-  private String sort;
-  private String volunteerAsk = "함께해요 문의";
-  private String commuityAsk = "나눔이야기 문의";
-  private String donationAsk = "모금함 문의";
-  private String challengeAsk = "챌린지 문의";
-  private String siteAsk = "사이트이용 문의";
-  private String otherAsk = "기타 문의";
-
-
   @Override
   public int hashCode() {
-    return Objects.hash(Owner, challengeAsk, commuityAsk, content, donationAsk, fileUpload,
-        memberld, no, otherAsk, password, registeredDate, siteAsk, sort, title, viewCount,
-        volunteerAsk, writer);
+    return Objects.hash(Owner, content, fileUpload, memberld, no, password, qnaType, registeredDate,
+        title, viewCount, writer);
   }
   @Override
   public boolean equals(Object obj) {
@@ -43,24 +34,19 @@ public class QuestionListDTO implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     QuestionListDTO other = (QuestionListDTO) obj;
-    return Objects.equals(Owner, other.Owner) && Objects.equals(challengeAsk, other.challengeAsk)
-        && Objects.equals(commuityAsk, other.commuityAsk) && Objects.equals(content, other.content)
-        && Objects.equals(donationAsk, other.donationAsk)
+    return Objects.equals(Owner, other.Owner) && Objects.equals(content, other.content)
         && Objects.equals(fileUpload, other.fileUpload) && Objects.equals(memberld, other.memberld)
-        && no == other.no && Objects.equals(otherAsk, other.otherAsk) && password == other.password
+        && no == other.no && password == other.password && Objects.equals(qnaType, other.qnaType)
         && Objects.equals(registeredDate, other.registeredDate)
-        && Objects.equals(siteAsk, other.siteAsk) && Objects.equals(sort, other.sort)
         && Objects.equals(title, other.title) && viewCount == other.viewCount
-        && Objects.equals(volunteerAsk, other.volunteerAsk) && Objects.equals(writer, other.writer);
+        && Objects.equals(writer, other.writer);
   }
   @Override
   public String toString() {
     return "QuestionListDTO [no=" + no + ", title=" + title + ", memberld=" + memberld
-        + ", password=" + password + ", writer=" + writer + ", content=" + content + ", fileUpload="
-        + fileUpload + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount
-        + ", Owner=" + Owner + ", sort=" + sort + ", volunteerAsk=" + volunteerAsk
-        + ", commuityAsk=" + commuityAsk + ", donationAsk=" + donationAsk + ", challengeAsk="
-        + challengeAsk + ", siteAsk=" + siteAsk + ", otherAsk=" + otherAsk + "]";
+        + ", password=" + password + ", qnaType=" + qnaType + ", writer=" + writer + ", content="
+        + content + ", fileUpload=" + fileUpload + ", registeredDate=" + registeredDate
+        + ", viewCount=" + viewCount + ", Owner=" + Owner + "]";
   }
   public int getNo() {
     return no;
@@ -85,6 +71,12 @@ public class QuestionListDTO implements Serializable {
   }
   public void setPassword(int password) {
     this.password = password;
+  }
+  public String getQnaType() {
+    return qnaType;
+  }
+  public void setQnaType(String qnaType) {
+    this.qnaType = qnaType;
   }
   public String getWriter() {
     return writer;
@@ -122,49 +114,6 @@ public class QuestionListDTO implements Serializable {
   public void setOwner(JoinDTO owner) {
     Owner = owner;
   }
-  public String getSort() {
-    return sort;
-  }
-  public void setSort(String sort) {
-    this.sort = sort;
-  }
-  public String getVolunteerAsk() {
-    return volunteerAsk;
-  }
-  public void setVolunteerAsk(String volunteerAsk) {
-    this.volunteerAsk = volunteerAsk;
-  }
-  public String getCommuityAsk() {
-    return commuityAsk;
-  }
-  public void setCommuityAsk(String commuityAsk) {
-    this.commuityAsk = commuityAsk;
-  }
-  public String getDonationAsk() {
-    return donationAsk;
-  }
-  public void setDonationAsk(String donationAsk) {
-    this.donationAsk = donationAsk;
-  }
-  public String getChallengeAsk() {
-    return challengeAsk;
-  }
-  public void setChallengeAsk(String challengeAsk) {
-    this.challengeAsk = challengeAsk;
-  }
-  public String getSiteAsk() {
-    return siteAsk;
-  }
-  public void setSiteAsk(String siteAsk) {
-    this.siteAsk = siteAsk;
-  }
-  public String getOtherAsk() {
-    return otherAsk;
-  }
-  public void setOtherAsk(String otherAsk) {
-    this.otherAsk = otherAsk;
-  }
-
 
 
 }

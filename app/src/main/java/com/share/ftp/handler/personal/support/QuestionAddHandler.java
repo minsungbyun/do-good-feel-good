@@ -1,5 +1,11 @@
 package com.share.ftp.handler.personal.support;
 
+import static com.share.util.General.questionType.CHALLENGEASK;
+import static com.share.util.General.questionType.COMMUITYASK;
+import static com.share.util.General.questionType.DONATIONASK;
+import static com.share.util.General.questionType.OTHERASK;
+import static com.share.util.General.questionType.SITEASK;
+import static com.share.util.General.questionType.VOLUNTEERASK;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.personal.QuestionListDTO;
@@ -30,24 +36,20 @@ public class QuestionAddHandler extends AbstractQuestionHandler {
         System.out.println("[5. 사이트이용 문의]");
         System.out.println("[6. 기타 문의]");
         System.out.println("[0. 이전]");
+
         int input = Prompt.inputInt("> ");
 
-        if (input == 0) {
-          return;
-        } else if (input == 1) {
-          myQuestionListDTO.setSort(myQuestionListDTO.getVolunteerAsk());
-        } else if (input == 2) {
-          myQuestionListDTO.setSort(myQuestionListDTO.getCommuityAsk());
-        } else if (input == 3) {
-          myQuestionListDTO.setSort(myQuestionListDTO.getDonationAsk());
-        } else if (input == 4) {
-          myQuestionListDTO.setSort(myQuestionListDTO.getChallengeAsk());
-        } else if (input == 5) {
-          myQuestionListDTO.setSort(myQuestionListDTO.getSiteAsk());
-        } else if (input == 6) {
-          myQuestionListDTO.setSort(myQuestionListDTO.getOtherAsk()); 
-          return;
+        switch(input) {
+          case 1: myQuestionListDTO.setQnaType(VOLUNTEERASK);   break;
+          case 2: myQuestionListDTO.setQnaType(COMMUITYASK);   break;
+          case 3: myQuestionListDTO.setQnaType(DONATIONASK);   break;
+          case 4: myQuestionListDTO.setQnaType(CHALLENGEASK);   break;
+          case 5: myQuestionListDTO.setQnaType(SITEASK);   break;
+          case 6: myQuestionListDTO.setQnaType(OTHERASK);   break;
+          default: System.out.println("올바른 번호를 입력해주세요"); continue;
         }
+
+
 
         myQuestionListDTO.setTitle(Prompt.inputString("제목? "));
         myQuestionListDTO.setContent(Prompt.inputString("내용? "));
