@@ -35,7 +35,7 @@ public class FileListener implements ApplicationContextListener {
 
   @SuppressWarnings("unchecked")
   @Override
-  public void contextDestroyed(Map<String, Object> params) {
+  public void contextInitialized(Map<String, Object> params) {
 
     List<JoinDTO> joinDTOList = (List<JoinDTO>) params.get("joinDTOList");
 
@@ -107,7 +107,7 @@ public class FileListener implements ApplicationContextListener {
 
   @SuppressWarnings("unchecked")
   @Override
-  public void contextInitialized(Map<String, Object> params) {
+  public void contextDestroyed(Map<String, Object> params) {
 
     List<JoinDTO> joinDTOList = (List<JoinDTO>) params.get("joinDTOList");
 
