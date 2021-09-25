@@ -11,6 +11,25 @@ public abstract class AbstractAdminChallengeHandler implements Command {
     this.challengeDTOList = challengeDTOList;
   }
 
+  protected String getRemainTime(long millis) {
+
+    int sec = (int) millis / 1000;
+    int min = sec / 60;
+    int hour = min / 60;
+    int day = (int) (millis / 1000) / (24 * 60 * 60);
+
+    hour = hour % 24; 
+    sec = sec % 60;
+    min = min % 60;
+
+    return String.format("남은시간 ▶ %d일 %d시간 %d분 %d초 남았습니다\n", day, hour, min, sec);
+  }
+
+
+
+
+
+
   protected ChallengeDTO findByNo(int no) {
     for (ChallengeDTO challengeDTO : challengeDTOList) {
       if (challengeDTO.getNo() == no) {
