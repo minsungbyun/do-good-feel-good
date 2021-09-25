@@ -6,10 +6,10 @@ import com.share.ftp.domain.personal.CommBoardReplyDTO;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
-public class CommBoardDeleteHandler extends AbstractCommBoardHandler {
+public class CommBoardReplyDeleteHandler extends AbstractCommBoardReplyHandler {
 
 
-  public CommBoardDeleteHandler(
+  public CommBoardReplyDeleteHandler(
       List<CommBoardDTO> commBoardDTOList, 
       List<CommBoardReplyDTO> commBoardReplyDTOList) {
     super(commBoardDTOList, commBoardReplyDTOList);
@@ -20,15 +20,15 @@ public class CommBoardDeleteHandler extends AbstractCommBoardHandler {
     while (true) {
 
       System.out.println();
-      System.out.println("[  메인/소통해요/나눔이야기/게시글삭제  ]");
+      System.out.println("[  메인/소통해요/나눔이야기/댓글 삭제  ]");
       int no = (int) request.getAttribute("no");
 
-      CommBoardDTO commBoardDTO = findByNo(no);
+      CommBoardReplyDTO commBoardReplyDTO = findByNo(no);
 
       try {
 
-        if (commBoardDTO == null) {
-          System.out.println("[ 해당 번호의 게시글이 없습니다.  ]");
+        if (commBoardReplyDTO == null) {
+          System.out.println("[ 해당 번호의 댓글이 없습니다.  ]");
           return;
         }
 
@@ -44,7 +44,7 @@ public class CommBoardDeleteHandler extends AbstractCommBoardHandler {
 
         } else if(input.equals("y")) {
           System.out.println("[  ✔️ 게시글을 삭제하였습니다.  ]");
-          commBoardDTOList.remove(commBoardDTO);
+          commBoardReplyDTOList.remove(commBoardReplyDTO);
           return;
         }
 

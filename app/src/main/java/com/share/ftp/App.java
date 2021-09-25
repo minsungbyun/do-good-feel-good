@@ -96,7 +96,11 @@ import com.share.ftp.handler.personal.community.CommBoardDeleteHandler;
 import com.share.ftp.handler.personal.community.CommBoardDetailHandler;
 import com.share.ftp.handler.personal.community.CommBoardLikeHandler;
 import com.share.ftp.handler.personal.community.CommBoardListHandler;
+import com.share.ftp.handler.personal.community.CommBoardReplyAddHandler;
 import com.share.ftp.handler.personal.community.CommBoardReplyConnectHandler;
+import com.share.ftp.handler.personal.community.CommBoardReplyDeleteHandler;
+import com.share.ftp.handler.personal.community.CommBoardReplyListHandler;
+import com.share.ftp.handler.personal.community.CommBoardReplyUpdateHandler;
 import com.share.ftp.handler.personal.community.CommBoardSearchHandler;
 import com.share.ftp.handler.personal.community.CommBoardUpdateHandler;
 import com.share.ftp.handler.personal.community.CommReviewAddHandler;
@@ -170,7 +174,7 @@ public class App {
   // 소통해요 도메인(값)
   List<CommBoardDTO> commBoardDTOList = new ArrayList<>();
   List<CommReviewDTO> commReviewDTOList = new ArrayList<>();
-  List<CommBoardReplyDTO> commBoardCommentDTOList = new ArrayList<>();
+  List<CommBoardReplyDTO> commBoardReplyDTOList = new ArrayList<>();
 
   // 챌린지 도메인(값)
   List<ChallengeJoinDTO> challengeJoinDTOList = new ArrayList<>();
@@ -196,8 +200,6 @@ public class App {
   List<QuestionDTO> questionDTOList = new ArrayList<>();
   List<ApproveOrgDTO> approveOrgDTOList = new ArrayList<>();
 
-  //댓글 도메인
-  //  List<CommentDTO> commentDTOList = new ArrayList<>();
 
   // HashMap
   HashMap<String,Command> challengeReviewMap = new HashMap<>();
@@ -322,14 +324,20 @@ public class App {
     //    commands.put("/volRequestOrg/rejectedList", new VolRequestOrgRejectedListHandler(orgRequestDTOList, orgRequestApplyDTOList, orgRequestRejectDTOList));
 
     // 소통해요 나눔이야기
-    commands.put("/commBoard/add", new CommBoardAddHandler(commBoardDTOList, commBoardCommentDTOList));
-    commands.put("/commBoard/list", new CommBoardListHandler(commBoardDTOList, commBoardCommentDTOList));
-    commands.put("/commBoard/detail", new CommBoardDetailHandler(commBoardDTOList, commBoardCommentDTOList));
-    commands.put("/commBoard/update", new CommBoardUpdateHandler(commBoardDTOList, commBoardCommentDTOList));
-    commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList, commBoardCommentDTOList));
-    commands.put("/commBoard/search", new CommBoardSearchHandler(commBoardDTOList, commBoardCommentDTOList));
-    commands.put("/commBoard/like", new CommBoardLikeHandler(commBoardDTOList, commBoardCommentDTOList)); 
-    commands.put("/commBoard/connect", new CommBoardReplyConnectHandler());
+    commands.put("/commBoard/add", new CommBoardAddHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoard/list", new CommBoardListHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoard/detail", new CommBoardDetailHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoard/update", new CommBoardUpdateHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoard/search", new CommBoardSearchHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoard/like", new CommBoardLikeHandler(commBoardDTOList, commBoardReplyDTOList)); 
+
+    // 소통해요 댓글
+    commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler());
+    commands.put("/commBoardReply/add", new CommBoardReplyAddHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoardReply/list", new CommBoardReplyListHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoardReply/update", new CommBoardReplyUpdateHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoardReply/delete", new CommBoardReplyDeleteHandler(commBoardDTOList, commBoardReplyDTOList));
 
     // 소통해요 나눔이야기 BEST
     commands.put("/commBest/list", new CommBestListHandler(commBoardDTOList));
