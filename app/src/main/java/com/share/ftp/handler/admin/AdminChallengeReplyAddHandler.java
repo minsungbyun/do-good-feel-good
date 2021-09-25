@@ -2,7 +2,6 @@ package com.share.ftp.handler.admin;
 
 import java.sql.Date;
 import java.util.List;
-import com.share.ftp.domain.admin.AdminChallengeQuestionDTO;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 import com.share.ftp.handler.CommandRequest;
@@ -10,9 +9,9 @@ import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.ftp.handler.personal.challenge.AbstractChallengeQuestionHandler;
 import com.share.util.Prompt;
 
-public class AdminChallengeQuestionAddHandler extends AbstractChallengeQuestionHandler {
+public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHandler {
 
-  public AdminChallengeQuestionAddHandler(List<ChallengeQuestionDTO> challengeQuestionDTOList,
+  public AdminChallengeReplyAddHandler(List<ChallengeQuestionDTO> challengeQuestionDTOList,
       List<ChallengeDTO> challengeDTOList) {
     super(challengeQuestionDTOList, challengeDTOList);
   }
@@ -26,33 +25,27 @@ public class AdminChallengeQuestionAddHandler extends AbstractChallengeQuestionH
     ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
 
 
-    //    if (challengeDTO == null) {
-    //      System.out.println();
-    //      System.out.println("해당 챌린지가 없습니다!");
-    //    }
 
-
-    int challengeQuestionNo = (int) request.getAttribute("no");
-
-    ChallengeQuestionDTO challengeQuestionDTO = findByQuestionNo(challengeQuestionNo);
-
-    String input = Prompt.inputString("해당 문의에 답글등록을 하시겠습니까?(y/N) ");
+    String input = Prompt.inputString("해당 챌린지에 문의답글 등록을 하시겠습니까?(y/N) ");
     if (!input.equals("y") || input.length() == 0) {
       System.out.println();
-      System.out.println("해당 챌린지에 문의등록을 취소하였습니다.");
+      System.out.println("해당 챌린지에 문의답글 등록을 취소하였습니다.");
       return;
     }
 
 
-    AdminChallengeQuestionDTO adminChallengeQuestionDTO = new AdminChallengeQuestionDTO();
+    //    if (!challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
+    //      System.out.println("챌린지 참여한 회원만 등록이 가능합니다!");
+    //      return;
+    //    }
 
-    adminChallengeQuestionDTO.setNo(challengeDTO.getNo());
-    adminChallengeQuestionDTO.setNo(challengeQuestionNo);
-    adminChallengeQuestionDTO.setTitle(Prompt.inputString("제목: "));
-    adminChallengeQuestionDTO.setContent(Prompt.inputString("내용: "));
-    adminChallengeQuestionDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
+    ChallengeQuestionDTO challengeQuestionDTO = new ChallengeQuestionDTO();
 
-    adminChallengeQuestionDTO.setOwner(AuthLoginHandler.getLoginUser());
+    //    challengeQuestionDTO.setNo(challengeDTO.getNo());
+    challengeQuestionDTO.setContent(Prompt.inputString("내용: "));
+    challengeQuestionDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    challengeQuestionDTO.setOwner(AuthLoginHandler.getLoginUser());
 
     //    challengeQuestionDTO.setNo(getNextNum());
 
@@ -72,6 +65,6 @@ public class AdminChallengeQuestionAddHandler extends AbstractChallengeQuestionH
     challengeQuestionDTOList.add(challengeQuestionDTO);
 
     System.out.println();
-    System.out.println("문의 등록이 완료되었습니다.");
+    System.out.println("문의답글 등록이 완료되었습니다.");
   }
 }

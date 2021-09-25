@@ -74,7 +74,7 @@ public class AdminChallengeDetailHandler extends AbstractAdminChallengeHandler {
           request.getRequestDispatcher("/challengeQuestion/list").forward(request);
           return;
         case 4:
-          request.getRequestDispatcher("/challengeQuestion/detail").forward(request);
+          request.getRequestDispatcher("/adminChallenge/QuestionDetail").forward(request);
           return;
         case 0:
           return;

@@ -34,12 +34,21 @@ public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandl
     }
 
     for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
-      if (challengeQuestionDTO.getNo() == challengeNo) {
+      if (challengeQuestionDTO.getNo() == challengeNo && !challengeQuestionDTO.getOwner().getId().equals("admin")) {
         System.out.printf("%d, %d, %s, %s, %s\n", 
             challengeQuestionDTO.getNo(),
             challengeQuestionDTO.getQuestionNo(),
             challengeQuestionDTO.getOwner().getId(),
             challengeQuestionDTO.getTitle(),
+            challengeQuestionDTO.getRegisteredDate());
+      }
+    }
+
+    for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
+      if (challengeQuestionDTO.getOwner().getId().equals("admin")) {
+        System.out.printf("관리자답글 :  %s, %s, %s\n", 
+            challengeQuestionDTO.getOwner().getId(),
+            challengeQuestionDTO.getContent(),
             challengeQuestionDTO.getRegisteredDate());
       }
     }
