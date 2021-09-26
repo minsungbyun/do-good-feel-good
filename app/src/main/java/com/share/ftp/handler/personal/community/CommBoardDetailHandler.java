@@ -44,9 +44,15 @@ public class CommBoardDetailHandler extends AbstractCommBoardHandler {
       commBoardDTO.setViewCount(commBoardDTO.getViewCount() + 1);
       System.out.printf("조회수 ▶ %d\n", commBoardDTO.getViewCount());
       System.out.printf("좋아요♡  %d\n", commBoardDTO.getLike());
+      System.out.printf("댓글수  %d\n", commBoardDTO.getReplyCount());
       System.out.println();
 
       JoinDTO loginUser = AuthLoginHandler.getLoginUser(); 
+
+      if (loginUser == null) {
+        //      System.out.println("로그인 해주세요.");
+        return;
+      }
 
       if (commBoardDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
 

@@ -92,7 +92,7 @@ public class FileListener implements ApplicationContextListener {
     //    loadCommBoard();
     loadObjects("commBoardDTO.json", commBoardDTOList, CommBoardDTO.class);
     loadObjects("commReviewDTO.json", commReviewDTOList, CommReviewDTO.class);
-    //    loadCommReview();
+    loadObjects("commBoardReplyDTO.json", commBoardReplyDTOList, CommBoardReplyDTO.class);
     //
     loadObjects("challengeDTO.json", challengeDTOList, ChallengeDTO.class);
     //
@@ -168,6 +168,7 @@ public class FileListener implements ApplicationContextListener {
 
     saveObjects("commBoardDTO.json", commBoardDTOList);
     saveObjects("commReviewDTO.json", commReviewDTOList);
+    saveObjects("commBoardReplyDTO.json", commBoardReplyDTOList);
 
 
     saveObjects("challengeDTO.json", challengeDTOList);

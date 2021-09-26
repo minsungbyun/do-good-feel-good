@@ -18,12 +18,12 @@ public class VolGeneralTotalApprovedListHandler implements Command { // 개인 �
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println();
-
-    System.out.println("▶ 전체봉사승인 목록");
-
-    volPersonalRequestAppliedListHandler.execute();
-    volOrgRequestAppliedListHandler.execute();
+    //    System.out.println();
+    //
+    //    System.out.println("▶ 전체봉사승인 목록");
+    //
+    //    volPersonalRequestAppliedListHandler.execute();
+    //    volOrgRequestAppliedListHandler.execute();
 
   }
 }
