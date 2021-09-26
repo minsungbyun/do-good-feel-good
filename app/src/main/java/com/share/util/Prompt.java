@@ -10,10 +10,10 @@ import static com.share.util.General.level.LEVEL_C;
 import static com.share.util.General.level.LEVEL_D;
 import static com.share.util.General.level.LEVEL_E;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import com.share.ftp.domain.join.JoinComparator;
 import com.share.ftp.domain.join.JoinDTO;
 
 public class Prompt {
@@ -108,41 +108,55 @@ public class Prompt {
   // 현재 로그인 한 회원의 포인트를 비교해서 나열함
   public static void getUserRank(List<JoinDTO> allUser) {
 
-    List<Integer> point = new ArrayList<>();
+    JoinComparator comp = new JoinComparator();
 
-    for (JoinDTO loginUser : allUser) {
-      point.add(loginUser.getPoint());
+    for(JoinDTO loginUser : allUser) {
+      System.out.printf("포인트 : %d , 유저 이름 : %s\n",loginUser.getPoint(), loginUser.getName());
+    }
+
+    Collections.sort(allUser, comp);
+
+    System.out.println("-----------------------------------------------------------------");
+    for(JoinDTO loginUser : allUser) {
+      System.out.printf("포인트 : %d , 유저 이름 : %s\n",loginUser.getPoint(), loginUser.getName());
     }
 
 
+    //    List<Integer> point = new ArrayList<>();
+    //
+    //    for (JoinDTO loginUser : allUser) {
+    //      point.add(loginUser.getPoint());
+    //    }
+    //
+    //
+    //        System.out.println("정렬 전");
+    //        for (JoinDTO loginUser : allUser) {
+    //          System.out.printf("포인트 : %d , 유저 이름 : %s\n ",loginUser.getPoint(), loginUser.getName());
+    //          // 포인트 비교
+    //        }
+    //
     //    System.out.println("정렬 전");
-    //    for (JoinDTO loginUser : allUser) {
-    //      System.out.printf("포인트 : %d , 유저 이름 : %s\n ",loginUser.getPoint(), loginUser.getName());
+    //    for (Integer loginUser : point) {
+    //      System.out.printf("포인트 : %d \n", loginUser);
     //      // 포인트 비교
     //    }
-
-    System.out.println("정렬 전");
-    for (Integer loginUser : point) {
-      System.out.printf("포인트 : %d \n", loginUser);
-      // 포인트 비교
-    }
-
-    Collections.sort(point);
-    Collections.reverse(point);
-
-    System.out.println();
-
-    System.out.println("정렬 후");
-    for (Integer loginUser : point) {
-      System.out.printf("포인트 : %d \n", loginUser);
-      // 포인트 비교
-    }
-
+    //
+    //    Collections.sort(point);
+    //    Collections.reverse(point);
+    //
+    //    System.out.println();
+    //
     //    System.out.println("정렬 후");
-    //    for (JoinDTO loginUser : allUser) {
+    //    for (Integer loginUser : point) {
+    //      System.out.printf("포인트 : %d \n", loginUser);
     //      // 포인트 비교
-    //      System.out.printf("포인트 : %d , 유저 이름 : %s\n ",loginUser.getPoint(), loginUser.getName());
     //    }
+    //
+    //        System.out.println("정렬 후");
+    //        for (JoinDTO loginUser : allUser) {
+    //          // 포인트 비교
+    //          System.out.printf("포인트 : %d , 유저 이름 : %s\n ",loginUser.getPoint(), loginUser.getName());
+    //        }
 
   }
 
