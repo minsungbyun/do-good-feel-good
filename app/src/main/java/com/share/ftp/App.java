@@ -341,10 +341,6 @@ public class App {
     commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList, commBoardReplyDTOList));
     commands.put("/commBoard/search", new CommBoardSearchHandler(commBoardDTOList, commBoardReplyDTOList));
     commands.put("/commBoard/like", new CommBoardLikeHandler(commBoardDTOList, commBoardReplyDTOList)); 
-<<<<<<< HEAD
-=======
-
->>>>>>> 3169028fa754e1de7861b1b1f9acfc0bc375a2a9
 
     // 소통해요 댓글
     commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler());
@@ -436,7 +432,7 @@ public class App {
     commands.put("/myBoard/update", new MyBoardUpdateHandler()); // 나의게시글 목록
     commands.put("/myBoard/delete", new MyBoardDeleteHandler()); // 나의게시글 목록
 
-    commands.put("myPoint/list", new MyPointListHandler()); // 나의포인트 
+    commands.put("myPoint/list", new MyPointListHandler(joinDTOList)); // 나의포인트 
 
     commands.put("/orgMyVol/apply", new MyVolApplyListHandler()); // 기관 마이페이지 승인신청 
     commands.put("/orgMyVol/approve", new MyVolApproveListHandler()); // 기관 마이페이지 승인조회
