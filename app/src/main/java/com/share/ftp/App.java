@@ -341,10 +341,6 @@ public class App {
     commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList, commBoardReplyDTOList));
     commands.put("/commBoard/search", new CommBoardSearchHandler(commBoardDTOList, commBoardReplyDTOList));
     commands.put("/commBoard/like", new CommBoardLikeHandler(commBoardDTOList, commBoardReplyDTOList)); 
-<<<<<<< HEAD
-=======
-
->>>>>>> 3169028fa754e1de7861b1b1f9acfc0bc375a2a9
 
     // 소통해요 댓글
     commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler());
