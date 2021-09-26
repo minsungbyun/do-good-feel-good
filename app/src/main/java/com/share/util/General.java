@@ -46,6 +46,14 @@ public class General {
     public static final String LEVEL_E = "e등급";
   }
 
+  public static class questionType {
+    public static final String VOLUNTEERASK   = "함께해요 문의";
+    public static final String COMMUITYASK    = "나눔이야기 문의";
+    public static final String DONATIONASK    = "모금함 문의";
+    public static final String CHALLENGEASK   = "챌린지 문의";
+    public static final String SITEASK        = "사이트이용 문의";
+    public static final String OTHERASK       = "기타 문의";
+  }
 
 
 
