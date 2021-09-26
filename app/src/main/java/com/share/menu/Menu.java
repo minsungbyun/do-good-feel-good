@@ -44,7 +44,7 @@ public abstract class Menu {
   int accessScope;
 
   public Menu(String title) {
-    this(title, ACCESS_LOGOUT | ACCESS_PERSONAL | ACCESS_ORG  | ACCESS_MEMBER | ACCESS_ADMIN | ACCESS_MEMBER_ADMIN);
+    this(title, ACCESS_LOGOUT | ACCESS_PERSONAL | ACCESS_ORG  | ACCESS_MEMBER );
   }
 
   public Menu(String title, int accessScope) {
