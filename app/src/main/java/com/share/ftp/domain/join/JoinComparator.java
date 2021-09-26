@@ -4,14 +4,16 @@ import java.util.Comparator;
 
 public class JoinComparator implements Comparator<JoinDTO> {
   @Override
-  public int compare(JoinDTO o1, JoinDTO o2) {
-    int frist = Integer.valueOf(o1.getPoint());
-    int second = Integer.valueOf(o2.getPoint());
+  public int compare(JoinDTO firstPoint, JoinDTO secondPoint) {
+    int first = firstPoint.getPoint();
+    int second = secondPoint.getPoint();
 
-    if (frist > second) {
+    if (first > second) {
       return -1;
-    } else if (frist < second) {
+
+    } else if (first < second) {
       return 1;
+
     } else {
       return 0;
     }
