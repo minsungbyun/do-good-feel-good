@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.Objects;
 
 
-public class JoinDTO implements Serializable, Comparable<JoinDTO> {
+public class JoinDTO implements Serializable {
 
   private static final long serialVersionUID = 2397935818210730479L;
 
@@ -24,12 +24,9 @@ public class JoinDTO implements Serializable, Comparable<JoinDTO> {
   private Date registerDate;
   private String level; // 유저등급
 
-  @Override
-  public int compareTo(JoinDTO o) {
-    // TODO Auto-generated method stub
 
-    return 0;
-  }
+
+
 
 
 
