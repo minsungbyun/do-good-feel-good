@@ -30,23 +30,39 @@ public class General {
   }
 
   public static class point {
-
+    // 기준 같이 정할 것 
     public static final int VOLUNTEER_POINT         = 100;
     public static final int VOLUNTEER_REVIEWPOINT   = 10;
+
+    public static final int COMMUNITY_POINT         = 10;
+    public static final int COMMUNITY_REVIEWPOINT   = 1;
+
     public static final int CHALLENGE_POINT         = 100;
     public static final int CHALLENGE_REVIEWPOINT   = 10;
+
+    public static final int DONATION_POINT          = 100;
+    public static final int DONATION_REVIEWPOINT    = 10;
+
   }
 
   public static class level {
+    // 기준 같이 정할 것 
+    public static final String LEVEL_A  = "a등급";
+    public static final String LEVEL_B  = "b등급";
+    public static final String LEVEL_C  = "c등급";
+    public static final String LEVEL_D  = "d등급";
+    public static final String LEVEL_E  = "e등급";
 
-    public static final String LEVEL_A = "a등급";
-    public static final String LEVEL_B = "b등급";
-    public static final String LEVEL_C = "c등급";
-    public static final String LEVEL_D = "d등급";
-    public static final String LEVEL_E = "e등급";
+    public static final int FROM_B_TO_A  = 4000;
+    public static final int FROM_C_TO_B  = 3000;
+    public static final int FROM_D_TO_C  = 2000;
+    public static final int FROM_E_TO_D  = 1000;
+
+
   }
 
   public static class questionType {
+
     public static final String VOLUNTEERASK   = "함께해요 문의";
     public static final String COMMUITYASK    = "나눔이야기 문의";
     public static final String DONATIONASK    = "모금함 문의";
