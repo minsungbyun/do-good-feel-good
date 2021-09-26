@@ -16,13 +16,13 @@ public class QuestionListHandler extends AbstractQuestionHandler {
 
     for (QuestionListDTO myQuestionListDTO : myQuestionListDTOList) {
 
-      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %d\n", 
+      System.out.printf("%d, %s, %s, %s, %s, %d\n", 
           myQuestionListDTO.getNo(),
-          myQuestionListDTO.getSort(),
+          myQuestionListDTO.getQnaType(),
           myQuestionListDTO.getTitle(), 
-          myQuestionListDTO.getContent(),
+          //          myQuestionListDTO.getContent(),
           myQuestionListDTO.getOwner().getId(),
-          myQuestionListDTO.getFileUpload(),
+          //          myQuestionListDTO.getFileUpload(),
           myQuestionListDTO.getRegisteredDate(),
           myQuestionListDTO.getViewCount());
     }

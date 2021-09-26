@@ -23,7 +23,7 @@ public class CommBoardReplyDeleteHandler extends AbstractCommBoardReplyHandler {
       System.out.println("[  메인/소통해요/나눔이야기/댓글 삭제  ]");
       int no = (int) request.getAttribute("no");
 
-      CommBoardReplyDTO commBoardReplyDTO = findByNo(no);
+      CommBoardReplyDTO commBoardReplyDTO = findByReplyNo(no);
 
       try {
 

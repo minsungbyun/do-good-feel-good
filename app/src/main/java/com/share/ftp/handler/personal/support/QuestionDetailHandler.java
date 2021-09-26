@@ -34,14 +34,13 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
     //    System.out.println();
     //    if (myQuestionListDTO.getPassword == )
 
-    if ((myQuestionListDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
-        AuthLoginHandler.getLoginUser().getId().equals("admin")) {
 
-      int passwoard = Prompt.inputInt("비밀번호: ");
-      if (passwoard == myQuestionListDTO.getPassword()) {
+    while (true) {
+
+      if (AuthLoginHandler.getLoginUser().getId().equals("admin")) {
 
         System.out.printf("번호: %s\n", myQuestionListDTO.getNo());
-        System.out.printf("문의분야: %s\n", myQuestionListDTO.getSort());
+        System.out.printf("문의분야: %s\n", myQuestionListDTO.getQnaType());
         System.out.printf("제목: %s\n", myQuestionListDTO.getTitle());
         System.out.printf("아이디: %s\n", myQuestionListDTO.getOwner().getId());
         System.out.printf("내용: %s\n", myQuestionListDTO.getContent());
@@ -50,15 +49,43 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
 
         myQuestionListDTO.setViewCount(myQuestionListDTO.getViewCount() + 1);
         System.out.printf("조회수: %d\n", myQuestionListDTO.getViewCount());
+        break;
 
-      } else {
-        System.out.println("본인이 작성한 글만 확인할 수 있습니다.");
-        return;
+      } else if (AuthLoginHandler.getLoginUser().getId().equals(myQuestionListDTO.getOwner().getId())) {
+
+        int passwoard = Prompt.inputInt("비밀번호: ");
+
+
+        if (passwoard == myQuestionListDTO.getPassword()) {
+
+          System.out.printf("번호: %s\n", myQuestionListDTO.getNo());
+          System.out.printf("문의분야: %s\n", myQuestionListDTO.getQnaType());
+          System.out.printf("제목: %s\n", myQuestionListDTO.getTitle());
+          System.out.printf("아이디: %s\n", myQuestionListDTO.getOwner().getId());
+          System.out.printf("내용: %s\n", myQuestionListDTO.getContent());
+          System.out.printf("첨부파일: %s\n", myQuestionListDTO.getFileUpload());
+          System.out.printf("등록일: %s\n", myQuestionListDTO.getRegisteredDate());
+
+          myQuestionListDTO.setViewCount(myQuestionListDTO.getViewCount() + 1);
+          System.out.printf("조회수: %d\n", myQuestionListDTO.getViewCount());
+          break;
+
+        } else {
+          System.out.println("비밀번호를 다시 입력해주세요.");
+
+        }
       }
-    } else {
-      System.out.println("본인이 작성한 글만 확인할 수 있습니다.");
-      return;
+
     }
+
+
+
+
+
+
+
+
+
 
     //    if (myQuestionListDTO.getOwner().getId() != AuthLoginHandler.getLoginUser().getId() ||
     //        !AuthLoginHandler.getLoginUser().getId().equals("admin")) {
@@ -69,7 +96,7 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
     request.setAttribute("no", no);
 
     while (true) {
-      String input = Prompt.inputString("변경(U), 삭제(D), 답글달기(A), 이전(0)>");
+      String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
       switch (input) {
         case "U":
         case "u":
@@ -79,10 +106,10 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
         case "d":
           request.getRequestDispatcher("/question/delete").forward(request);
           return;
-        case "A":
-        case "a":
-          request.getRequestDispatcher("/adminAsk/add").forward(request);
-          return;
+          //        case "A":
+          //        case "a":
+          //          request.getRequestDispatcher("/adminAsk/add").forward(request);
+          //          return;
         case "0":
           return;
         default:

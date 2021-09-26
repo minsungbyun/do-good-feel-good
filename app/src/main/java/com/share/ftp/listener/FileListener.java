@@ -15,7 +15,6 @@ import com.google.gson.reflect.TypeToken;
 import com.share.context.ApplicationContextListener;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.admin.NoticeDTO;
-import com.share.ftp.domain.admin.QuestionDTO;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.personal.ApproveOrgDTO;
 import com.share.ftp.domain.personal.ChallengeJoinDTO;
@@ -63,13 +62,13 @@ public class FileListener implements ApplicationContextListener {
 
     List<ChallengeDTO> challengeDTOList = (List<ChallengeDTO>) params.get("challengeDTOList");
     List<NoticeDTO> noticeDTOList = (List<NoticeDTO>) params.get("noticeDTOList");
-    List<QuestionDTO> questionDTOList = (List<QuestionDTO>) params.get("questionDTOList");
+    //    List<QuestionDTO> questionDTOList = (List<QuestionDTO>) params.get("questionDTOList");
     List<ApproveOrgDTO> approveOrgDTOList = (List<ApproveOrgDTO>) params.get("approveOrgDTOList");
 
 
     loadObjects("joinDTO.json", joinDTOList, JoinDTO.class);
     //    loadObjects("noticeDTO.json", noticeDTOList, NoticeDTO.class);
-    //    loadObjects("questionListDTO.json", myQuestionListDTOList, QuestionListDTO.class);
+    loadObjects("questionListDTO.json", myQuestionListDTOList, QuestionListDTO.class);
 
     //    loadObjects("generalRequest.json", generalRequestDTOList, GeneralRequestDTO.class);
     //    loadObjects("generalRequestApply.json", generalRequestApplyDTOList, GeneralRequestDTO.class);
@@ -135,7 +134,7 @@ public class FileListener implements ApplicationContextListener {
 
     List<ChallengeDTO> challengeDTOList = (List<ChallengeDTO>) params.get("challengeDTOList");
     List<NoticeDTO> noticeDTOList = (List<NoticeDTO>) params.get("noticeDTOList");
-    List<QuestionDTO> questionDTOList = (List<QuestionDTO>) params.get("questionDTOList");
+    //    List<QuestionDTO> questionDTOList = (List<QuestionDTO>) params.get("questionDTOList");
     List<ApproveOrgDTO> approveOrgDTOList = (List<ApproveOrgDTO>) params.get("approveOrgDTOList");
 
 

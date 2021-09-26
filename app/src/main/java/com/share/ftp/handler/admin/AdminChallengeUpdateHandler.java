@@ -1,5 +1,6 @@
 package com.share.ftp.handler.admin;
 
+import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.handler.CommandRequest;
@@ -26,6 +27,8 @@ public class AdminChallengeUpdateHandler extends AbstractAdminChallengeHandler {
     String title = Prompt.inputString("제목(" + challengeDTO.getTitle() + ")? ");
     String content = Prompt.inputString("내용(" + challengeDTO.getContent() + ")? ");
     String fileUpload = Prompt.inputString("첨부파일(" + challengeDTO.getFileUpload() + ")? ");
+    Date startDate = Prompt.inputDate("시작일(" + challengeDTO.getStartDate() + ")? ");
+    Date endDate = Prompt.inputDate("종료일(" + challengeDTO.getEndDate() + ")? ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -36,6 +39,8 @@ public class AdminChallengeUpdateHandler extends AbstractAdminChallengeHandler {
     challengeDTO.setTitle(title);
     challengeDTO.setContent(content);
     challengeDTO.setFileUpload(fileUpload);
+    challengeDTO.setStartDate(startDate);
+    challengeDTO.setEndDate(endDate);
 
     System.out.println("챌린지를 변경하였습니다.");
   }
