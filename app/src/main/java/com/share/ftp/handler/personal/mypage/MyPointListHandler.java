@@ -50,7 +50,8 @@ public class MyPointListHandler implements Command {
     System.out.println("-----------------------------------------------");
 
 
-    Prompt.getUserRank(joinDTOList);
+    //    Prompt.getUserRank(joinDTOList);
+    Prompt.printUserRank(joinDTOList);
 
 
   }
