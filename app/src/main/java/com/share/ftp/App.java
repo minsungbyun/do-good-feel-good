@@ -906,9 +906,9 @@ public class App {
   private Menu createAdminMemberMenu() {
     MenuGroup adminMemberMenu = new MenuGroup("회원정보 관리", ACCESS_ADMIN);
 
-    adminMemberMenu.add(new MenuItem("회원목록", "/join/list"));
-    adminMemberMenu.add(new MenuItem("가입회원 상세보기", "/join/detail"));
-    adminMemberMenu.add(new MenuItem("회원추방","/adminMember/list"));
+    adminMemberMenu.add(new MenuItem("회원목록",ACCESS_ADMIN, "/join/list"));
+    adminMemberMenu.add(new MenuItem("가입회원 상세보기", ACCESS_ADMIN,"/join/detail"));
+    adminMemberMenu.add(new MenuItem("회원추방",ACCESS_ADMIN,"/adminMember/list"));
 
     return adminMemberMenu;
   }
@@ -916,8 +916,8 @@ public class App {
   private Menu createAdminDonationMenu() {
     MenuGroup adminDonationMenu = new MenuGroup("모금함 관리" ,ACCESS_ADMIN);
 
-    adminDonationMenu.add(new MenuItem("모금함 개설 신청내역 목록", "/donationBoard/applyList"));
-    adminDonationMenu.add(new MenuItem("모금함 개설 신청내역 상세보기", "/adminDonationBoard/applyDetail"));
+    adminDonationMenu.add(new MenuItem("모금함 개설 신청내역 목록",ACCESS_ADMIN, "/donationBoard/applyList"));
+    adminDonationMenu.add(new MenuItem("모금함 개설 신청내역 상세보기",ACCESS_ADMIN, "/adminDonationBoard/applyDetail"));
     //    adminDonationMenu.add(new MenuItem("모금함 개설 승인하기", "/donationBoard/acceptApply"));
     //    adminDonationMenu.add(new MenuItem("모금함 개설 반려하기", "/donationBoard/rejectApply"));
 
@@ -927,13 +927,13 @@ public class App {
   private Menu createAdminVolMenu() {
     MenuGroup adminVolMenu = new MenuGroup("봉사활동 관리", ACCESS_ADMIN);
 
-    adminVolMenu.add(new MenuItem("개인봉사신청내역","/volPersonalRequest/applyList"));
-    adminVolMenu.add(new MenuItem("기관봉사신청내역","/volOrgRequest/applyList")); // 구현예정
-    adminVolMenu.add(new MenuItem("개인봉사승인하기","/volGeneralRequest/acceptApply"));
-    adminVolMenu.add(new MenuItem("기관봉사승인하기","/volGeneralRequest/acceptApply")); // 구현예정
-    adminVolMenu.add(new MenuItem("개인봉사반려하기","/volGeneralRequest/rejectApply"));
-    adminVolMenu.add(new MenuItem("기관봉사반려하기","/volGeneralRequest/rejectApply")); // 구현예정
-    adminVolMenu.add(new MenuItem("개인봉사삭제하기","/volGeneralRequest/delete"));
+    adminVolMenu.add(new MenuItem("개인봉사신청내역",ACCESS_ADMIN,"/volPersonalRequest/applyList"));
+    adminVolMenu.add(new MenuItem("기관봉사신청내역",ACCESS_ADMIN,"/volOrgRequest/applyList")); // 구현예정
+    adminVolMenu.add(new MenuItem("개인봉사승인하기",ACCESS_ADMIN,"/volGeneralRequest/acceptApply"));
+    adminVolMenu.add(new MenuItem("기관봉사승인하기",ACCESS_ADMIN,"/volGeneralRequest/acceptApply")); // 구현예정
+    adminVolMenu.add(new MenuItem("개인봉사반려하기",ACCESS_ADMIN,"/volGeneralRequest/rejectApply"));
+    adminVolMenu.add(new MenuItem("기관봉사반려하기",ACCESS_ADMIN,"/volGeneralRequest/rejectApply")); // 구현예정
+    adminVolMenu.add(new MenuItem("개인봉사삭제하기",ACCESS_ADMIN,"/volGeneralRequest/delete"));
 
     return adminVolMenu;
   }
@@ -942,11 +942,11 @@ public class App {
     MenuGroup adminNoticeMenu = new MenuGroup("공지사항 관리", ACCESS_ADMIN);
 
     adminNoticeMenu.add(new MenuItem("공지사항 등록",ACCESS_ADMIN,"/adminNotice/add"));
-    adminNoticeMenu.add(new MenuItem("공지사항 목록","/adminNotice/list"));
-    adminNoticeMenu.add(new MenuItem("공지사항 상세보기","/adminNotice/detail"));
+    adminNoticeMenu.add(new MenuItem("공지사항 목록",ACCESS_ADMIN,"/adminNotice/list"));
+    adminNoticeMenu.add(new MenuItem("공지사항 상세보기",ACCESS_ADMIN,"/adminNotice/detail"));
     //    adminNoticeMenu.add(new MenuItem("공지사항 변경",ACCESS_ADMIN,"/adminNotice/update"));
     //    adminNoticeMenu.add(new MenuItem("공지사항 삭제",ACCESS_ADMIN,"/adminNotice/delete"));
-    adminNoticeMenu.add(new MenuItem("공지사항 검색","/adminNotice/search"));
+    adminNoticeMenu.add(new MenuItem("공지사항 검색",ACCESS_ADMIN,"/adminNotice/search"));
 
     return adminNoticeMenu;
   }
@@ -954,12 +954,12 @@ public class App {
   private Menu createAdminAskMenu() {
     MenuGroup adminAskInfo = new MenuGroup("문의사항 관리", ACCESS_ADMIN);
 
-    adminAskInfo.add(new MenuItem("문의사항 등록","/question/add"));
-    adminAskInfo.add(new MenuItem("문의사항 목록","/question/list"));
-    adminAskInfo.add(new MenuItem("문의사항 상세보기","/question/detail"));
-    adminAskInfo.add(new MenuItem("문의사항 변경","/question/update"));
-    adminAskInfo.add(new MenuItem("문의사항 삭제","/question/delete"));
-    adminAskInfo.add(new MenuItem("문의사항 검색","/question/search"));
+    adminAskInfo.add(new MenuItem("문의사항 등록",ACCESS_ADMIN,"/question/add"));
+    adminAskInfo.add(new MenuItem("문의사항 목록",ACCESS_ADMIN,"/question/list"));
+    adminAskInfo.add(new MenuItem("문의사항 상세보기",ACCESS_ADMIN,"/question/detail"));
+    adminAskInfo.add(new MenuItem("문의사항 변경",ACCESS_ADMIN,"/question/update"));
+    adminAskInfo.add(new MenuItem("문의사항 삭제",ACCESS_ADMIN,"/question/delete"));
+    adminAskInfo.add(new MenuItem("문의사항 검색",ACCESS_ADMIN,"/question/search"));
 
     return adminAskInfo;
   }
@@ -969,8 +969,8 @@ public class App {
     MenuGroup adminChallengeInfo = new MenuGroup("챌린지 관리", ACCESS_ADMIN);
 
     adminChallengeInfo.add(new MenuItem("챌린지 등록",ACCESS_ADMIN,"/adminChallenge/add"));
-    adminChallengeInfo.add(new MenuItem("챌린지 목록","/adminChallenge/list"));
-    adminChallengeInfo.add(new MenuItem("챌린지 상세보기","/adminChallenge/detail"));
+    adminChallengeInfo.add(new MenuItem("챌린지 목록",ACCESS_ADMIN,"/adminChallenge/list"));
+    adminChallengeInfo.add(new MenuItem("챌린지 상세보기",ACCESS_ADMIN,"/adminChallenge/detail"));
     //    adminChallengeInfo.add(new MenuItem("챌린지 변경","/adminChallenge/update"));
     //    adminChallengeInfo.add(new MenuItem("챌린지 삭제","/adminChallenge/delete"));
     //    adminChallengeInfo.add(new MenuItem("챌린지 문의답글 등록","/adminChallengeQuestion/add"));
@@ -981,10 +981,10 @@ public class App {
   private Menu createAdminApproveInfoMenu() {
     MenuGroup adminApproveInfo = new MenuGroup("기관 승인", ACCESS_ADMIN);
 
-    adminApproveInfo.add(new MenuItem("기관승인신청 목록","/adminChallenge/list"));
-    adminApproveInfo.add(new MenuItem("기관승인신청 내용","/adminChallenge/detail"));
-    adminApproveInfo.add(new MenuItem("기관승인신청 변경","/adminChallenge/update"));
-    adminApproveInfo.add(new MenuItem("기관승인신청 삭제","/adminChallenge/delete"));
+    adminApproveInfo.add(new MenuItem("기관승인신청 목록",ACCESS_ADMIN,"/adminChallenge/list"));
+    adminApproveInfo.add(new MenuItem("기관승인신청 내용",ACCESS_ADMIN,"/adminChallenge/detail"));
+    adminApproveInfo.add(new MenuItem("기관승인신청 변경",ACCESS_ADMIN,"/adminChallenge/update"));
+    adminApproveInfo.add(new MenuItem("기관승인신청 삭제",ACCESS_ADMIN,"/adminChallenge/delete"));
 
     return adminApproveInfo;
   }
