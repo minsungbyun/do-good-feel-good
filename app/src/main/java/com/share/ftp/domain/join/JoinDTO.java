@@ -12,7 +12,8 @@ public class JoinDTO implements Serializable {
   private int no;
   private int type; // 1. 개인, 2. 기관, 3. 그룹
   private int point; // 유저 포인트
-  private int rank = 1; // 유저 랭킹
+  private int rank; // 유저 랭킹
+  private int finalRank; // 유저 랭킹
   private int donationMoney; // 유저 기부금액
   private int authNum = 1004; 
   private int adminPassword = -1;
@@ -156,11 +157,19 @@ public class JoinDTO implements Serializable {
   public void setRank(int rank) {
     this.rank = rank;
   }
+<<<<<<< HEAD
   public int getAdminPassword() {
     return adminPassword;
   }
   public void setAdminPassword(int adminPassword) {
     this.adminPassword = adminPassword;
+=======
+  public int getFinalRank() {
+    return finalRank;
+  }
+  public void setFinalRank(int finalRank) {
+    this.finalRank = finalRank;
+>>>>>>> 7ab55cbd572f64badafe79abc6e4d58ca5a220f1
   }
 
 

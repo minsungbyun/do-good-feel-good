@@ -10,7 +10,6 @@ import static com.share.util.General.level.LEVEL_C;
 import static com.share.util.General.level.LEVEL_D;
 import static com.share.util.General.level.LEVEL_E;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
@@ -56,7 +55,7 @@ public class Prompt {
   public static String getUserLevel(JoinDTO loginUser) {
 
     int userPoint = loginUser.getPoint();
-    //    
+
     if (userPoint < 0) {
       return "오류가 발생했습니다! 존재하지 않는 포인트입니다.";
 
@@ -103,28 +102,23 @@ public class Prompt {
     return needPoint;
   }
 
-
   public static List<JoinDTO> getUserRank(List<JoinDTO> allUser) {
 
     List<JoinDTO> pointList = getUserPointList(allUser);
 
     for (int i = 0; i < pointList.size(); i++) {
       for (int j = 0; j < pointList.size(); j++) {
-
         if (pointList.get(i).getPoint() < pointList.get(j).getPoint()) {  
           pointList.get(i).setRank(pointList.get(i).getRank() + 1);
         }
       }
-      //      System.out.printf("이름 : %s, 등수 : %d\n", pointList.get(i).getName(),pointList.get(i).getRank());
     }
 
+    for (int i = 0; i < pointList.size(); i++) {
+      pointList.get(i).setFinalRank(pointList.get(i).getRank());
+    }
 
-    List<JoinDTO> userRank = new ArrayList<>();
-
-    userRank.addAll(pointList);
-
-
-    return userRank;
+    return pointList;
   }
 
 
@@ -132,38 +126,28 @@ public class Prompt {
 
     List<JoinDTO> userRank = getUserRank(allUser);
 
-    //    List<JoinDTO> printRank = new ArrayList<>();
-    //    printRank = userRank;
     for (JoinDTO loginUser : userRank) {
-
-      System.out.printf("이름 : %s 포인트 : %d점 등수 : %d등\n" , loginUser.getName(),  loginUser.getPoint(), loginUser.getRank());
+      System.out.printf("이름 : %s 포인트 : %d점 등수 : %d등\n" , loginUser.getName(),  loginUser.getPoint(), loginUser.getFinalRank());
     }
-
-
   }
 
+  public static int printIndividualUserRank(JoinDTO loginUser) {
+    return loginUser.getFinalRank();
+  }
 
   // 현재 로그인 한 회원의 포인트를 비교해서 나열함
   public static List<JoinDTO> getUserPointList(List<JoinDTO> allUser) {
 
     JoinComparator userPointComp = new JoinComparator();
 
-    for(JoinDTO loginUser : allUser) {
-      System.out.printf("유저 이름 : %s\n포인트 : %d\n", loginUser.getName(), loginUser.getPoint());
-      System.out.println();
-    }
-
     Collections.sort(allUser, userPointComp);
 
-    System.out.println("-----------------------------------------------------------------");
     for(JoinDTO loginUser : allUser) {
       loginUser.setRank(1);
-      System.out.printf("유저 이름 : %s\n포인트 : %d\n", loginUser.getName(), loginUser.getPoint());
+      //    System.out.printf("유저 이름 : %s\n포인트 : %d\n", loginUser.getName(), loginUser.getPoint());
       System.out.println();
     }
-
     return allUser;
-
   }
 }
 

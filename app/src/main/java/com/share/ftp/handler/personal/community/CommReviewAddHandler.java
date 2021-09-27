@@ -10,7 +10,6 @@ import com.share.util.Prompt;
 public class CommReviewAddHandler extends AbstractCommReviewHandler {
 
 
-  int commReviewNo;
   public CommReviewAddHandler(List<CommReviewDTO> commReviewDTOList) {
     super(commReviewDTOList);
   }
@@ -23,7 +22,7 @@ public class CommReviewAddHandler extends AbstractCommReviewHandler {
 
     CommReviewDTO commReviewDTO = new CommReviewDTO();
 
-    commReviewDTO.setNo(++commReviewNo);
+    commReviewDTO.setNo(getNextNum());
     commReviewDTO.setContent(Prompt.inputString("내용  ▶ "));
     commReviewDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
     commReviewDTO.setOwner(AuthLoginHandler.getLoginUser());
