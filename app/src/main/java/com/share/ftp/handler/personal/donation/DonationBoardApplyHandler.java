@@ -99,7 +99,7 @@ public class DonationBoardApplyHandler extends AbstractDonationBoardHandler {
         donationBoardDTO.setTitle(Prompt.inputString("제목 ▶"));
         donationBoardDTO.setLeader(AuthLoginHandler.getLoginUser().getName());
         donationBoardDTO.setContent(Prompt.inputString("내용 ▶ "));
-        donationBoardDTO.setMoneyTarget(Prompt.inputInt("목표금액 ▶ "));
+        donationBoardDTO.setMoneyTarget(Prompt.inputLong("목표금액 ▶ "));
         donationBoardDTO.setFileUpload(Prompt.inputString("첨부파일 ▶ "));
 
         while (true) {

@@ -1,6 +1,7 @@
 package com.share.ftp.handler.personal.donation;
 
 import static com.share.util.General.check.Applied;
+import java.text.DecimalFormat;
 import java.util.List;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.handler.CommandRequest;
@@ -20,6 +21,9 @@ public class DonationBoardAppliedListHandler extends AbstractDonationBoardHandle
   @Override
   public void execute(CommandRequest request) throws Exception {
 
+    DecimalFormat formatter = new DecimalFormat("###,###,###");
+
+
     System.out.println();
     System.out.println("[모금함 개설 승인 목록]");
 
@@ -34,7 +38,7 @@ public class DonationBoardAppliedListHandler extends AbstractDonationBoardHandle
           donationBoardApplyDTO.getLeader().equals(AuthLoginHandler.getLoginUser().getName())) {
 
         System.out.printf("개설번호: %d\n모금함 분류: %s\n제목: %s\n주최자: %s\n내용: %s\n첨부파일: %s\n"
-            + "개설기간: %s ~ %s\n목표금액: %d원\n승인여부: %s\n",
+            + "개설기간: %s ~ %s\n목표금액: %s원\n승인여부: %s\n",
             donationBoardApplyDTO.getNo(), 
             donationBoardApplyDTO.getSort(), 
             donationBoardApplyDTO.getTitle(), 
@@ -43,8 +47,7 @@ public class DonationBoardAppliedListHandler extends AbstractDonationBoardHandle
             donationBoardApplyDTO.getFileUpload(), 
             donationBoardApplyDTO.getRegisteredStartDate(),
             donationBoardApplyDTO.getRegisteredEndDate(),
-            donationBoardApplyDTO.getMoneyTarget(),
-            //          donationBoardDTO.isChecked());
+            formatter.format(donationBoardApplyDTO.getMoneyTarget()),
             donationBoardApplyDTO.getIsSigned());
         System.out.println("--------------------------------------------------------------");
 

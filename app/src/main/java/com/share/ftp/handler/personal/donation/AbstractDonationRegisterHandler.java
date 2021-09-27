@@ -7,7 +7,6 @@ import com.share.ftp.handler.Command;
 public abstract class AbstractDonationRegisterHandler implements Command { // 모금함 기부하기 양식 쓰는곳
 
   List<DonationRegisterDTO> donationRegisterDTOList;
-  int total;
 
   public AbstractDonationRegisterHandler(List<DonationRegisterDTO> donationRegisterDTOList) {
     this.donationRegisterDTOList = donationRegisterDTOList;
