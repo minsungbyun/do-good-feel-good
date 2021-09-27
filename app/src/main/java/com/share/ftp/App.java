@@ -78,8 +78,6 @@ import com.share.ftp.handler.personal.challenge.ChallengeWishHandler;
 import com.share.ftp.handler.personal.challenge.MyChallengeDetailHandler;
 import com.share.ftp.handler.personal.challenge.MyChallengeListHandler;
 import com.share.ftp.handler.personal.challenge.MyChallengeWishHandler;
-import com.share.ftp.handler.personal.challenge.MyRankingHandler;
-import com.share.ftp.handler.personal.challenge.RankingHandler;
 import com.share.ftp.handler.personal.community.CommBestDetailHandler;
 import com.share.ftp.handler.personal.community.CommBestListHandler;
 import com.share.ftp.handler.personal.community.CommBoardAddHandler;
@@ -390,8 +388,8 @@ public class App {
     commands.put("/challengeQuestion/connect", new ChallengeQuestionConnectHandler());
 
     // 챌린지 랭킹
-    commands.put("/ranking/list", new RankingHandler());  //전체랭킹(구현예정)
-    commands.put("/myRanking/list", new MyRankingHandler()); //나의랭킹(구현예정)
+    //    commands.put("/ranking/list", new RankingHandler());  //전체랭킹(구현예정)
+    //    commands.put("/myRanking/list", new MyRankingHandler()); //나의랭킹(구현예정)
 
     // 모금함 (개설신청하기, 개설목록, 승인, 반려)
     commands.put("/donationBoard/list", new DonationBoardListHandler(donationBoardDTOList));
@@ -662,6 +660,7 @@ public class App {
     mainMenuGroup.add(createAdminAskMenu());         // 문의사항관리
     mainMenuGroup.add(createAdminChallengeMenu());   // 챌린지관리
     mainMenuGroup.add(createAdminApproveInfoMenu()); // 기관승인관리
+    mainMenuGroup.add(createAdminCommMenu()); // 커뮤니티 관리
 
     mainMenuGroup.add(new MenuItem("탈퇴하기", ACCESS_MEMBER, "/myPage/delete"));
 
@@ -724,8 +723,8 @@ public class App {
     reviewMenu.add(new MenuItem("등록", ACCESS_MEMBER_ADMIN, "/commBoard/add"));
     reviewMenu.add(new MenuItem("목록","/commBoard/list"));
     reviewMenu.add(new MenuItem("상세보기","/commBoard/detail"));
-    reviewMenu.add(new MenuItem("변경", ACCESS_MEMBER_ADMIN,"/commBoard/update"));
-    reviewMenu.add(new MenuItem("삭제",ACCESS_MEMBER_ADMIN,"/commBoard/delete"));
+    //    reviewMenu.add(new MenuItem("변경", ACCESS_MEMBER_ADMIN,"/commBoard/update"));
+    //    reviewMenu.add(new MenuItem("삭제",ACCESS_MEMBER_ADMIN,"/commBoard/delete"));
     reviewMenu.add(new MenuItem("검색",ACCESS_MEMBER_ADMIN,"/commBoard/search"));
 
     return reviewMenu;
@@ -743,10 +742,10 @@ public class App {
   private Menu createShortReviewMenu() {
     MenuGroup shortReviewMenu = new MenuGroup("한 줄 후기");
 
-    shortReviewMenu.add(new MenuItem("등록", ACCESS_MEMBER_ADMIN, "/commReview/add"));
     shortReviewMenu.add(new MenuItem("목록", "/commReview/list")); 
-    shortReviewMenu.add(new MenuItem("수정", ACCESS_MEMBER_ADMIN, "/commReview/update")); 
-    shortReviewMenu.add(new MenuItem("삭제", ACCESS_MEMBER_ADMIN, "/commReview/delete")); 
+
+    //    shortReviewMenu.add(new MenuItem("변경", ACCESS_MEMBER_ADMIN, "/commReview/update")); 
+    //    shortReviewMenu.add(new MenuItem("삭제", ACCESS_MEMBER_ADMIN, "/commReview/delete")); 
     shortReviewMenu.add(new MenuItem("검색",ACCESS_MEMBER_ADMIN,"/commReview/search"));
 
 
@@ -993,6 +992,16 @@ public class App {
     adminApproveInfo.add(new MenuItem("기관승인신청 삭제",ACCESS_ADMIN,"/adminChallenge/delete"));
 
     return adminApproveInfo;
+  }
+  private Menu createAdminCommMenu() {
+    MenuGroup adminCommInfo = new MenuGroup("커뮤니티 관리", ACCESS_ADMIN);
+
+    adminCommInfo.add(new MenuItem("등록", ACCESS_MEMBER_ADMIN, "/commReview/add"));
+    adminCommInfo.add(new MenuItem("수정", ACCESS_MEMBER_ADMIN, "/commReview/update")); 
+    adminCommInfo.add(new MenuItem("삭제", ACCESS_MEMBER_ADMIN, "/commReview/delete")); 
+    adminCommInfo.add(new MenuItem("검색",ACCESS_MEMBER_ADMIN,"/commReview/search"));
+
+    return adminCommInfo;
   }
 
 }
