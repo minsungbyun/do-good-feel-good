@@ -21,10 +21,16 @@ public abstract class AbstractCommReviewHandler implements Command {
     }
     return null;
   }
+
+
+  protected int getNextNum() {
+    if (commReviewDTOList.size() > 0) {
+      return commReviewDTOList.get(commReviewDTOList.size() -1).getNo() +1;
+    } else {
+      return 1;
+    }
+  }
 }
-
-
-
 
 
 
