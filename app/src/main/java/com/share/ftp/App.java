@@ -437,7 +437,7 @@ public class App {
     commands.put("/myBoard/update", new MyBoardUpdateHandler()); // 나의게시글 목록
     commands.put("/myBoard/delete", new MyBoardDeleteHandler()); // 나의게시글 목록
 
-    commands.put("myPoint/list", new MyPointListHandler()); // 나의포인트 
+    commands.put("myPoint/list", new MyPointListHandler(joinDTOList)); // 나의포인트 
 
     commands.put("/orgMyVol/apply", new MyVolApplyListHandler()); // 기관 마이페이지 승인신청 
     commands.put("/orgMyVol/approve", new MyVolApproveListHandler()); // 기관 마이페이지 승인조회
@@ -651,18 +651,18 @@ public class App {
     MyPageMenu.add(new MenuItem("탈퇴", ACCESS_MEMBER, "/myPage/delete")); 
 
     // 관리자
-    MenuGroup adminMenu = new MenuGroup("관리자", ACCESS_ADMIN);
-    mainMenuGroup.add(adminMenu);
+    //    MenuGroup adminMenu = new MenuGroup("관리자", ACCESS_ADMIN);
+    //    mainMenuGroup.add(adminMenu);
 
-    adminMenu.add(createAdminMemberMenu());      // 회원관리
-    adminMenu.add(createAdminDonationMenu());    // 기부관리
-    adminMenu.add(createAdminVolMenu());         // 봉사관리
-    adminMenu.add(createAdminNoticeMenu());      // 공지사항관리
-    adminMenu.add(createAdminAskMenu());         // 문의사항관리
-    adminMenu.add(createAdminChallengeMenu());   // 챌린지관리
-    adminMenu.add(createAdminApproveInfoMenu()); // 기관승인관리
+    mainMenuGroup.add(createAdminMemberMenu());      // 회원관리
+    mainMenuGroup.add(createAdminDonationMenu());    // 기부관리
+    mainMenuGroup.add(createAdminVolMenu());         // 봉사관리
+    mainMenuGroup.add(createAdminNoticeMenu());      // 공지사항관리
+    mainMenuGroup.add(createAdminAskMenu());         // 문의사항관리
+    mainMenuGroup.add(createAdminChallengeMenu());   // 챌린지관리
+    mainMenuGroup.add(createAdminApproveInfoMenu()); // 기관승인관리
 
-    mainMenuGroup.add(new MenuItem("탈퇴", ACCESS_MEMBER, "/myPage/delete"));
+    mainMenuGroup.add(new MenuItem("탈퇴하기", ACCESS_MEMBER, "/myPage/delete"));
 
     return mainMenuGroup;
 
@@ -944,7 +944,7 @@ public class App {
   }
 
   private Menu createAdminNoticeMenu() {
-    MenuGroup adminNoticeMenu = new MenuGroup("공지사항 관리");
+    MenuGroup adminNoticeMenu = new MenuGroup("공지사항 관리", ACCESS_ADMIN);
 
     adminNoticeMenu.add(new MenuItem("공지사항 등록",ACCESS_ADMIN,"/adminNotice/add"));
     adminNoticeMenu.add(new MenuItem("공지사항 목록","/adminNotice/list"));
@@ -971,7 +971,7 @@ public class App {
 
 
   private Menu createAdminChallengeMenu() {
-    MenuGroup adminChallengeInfo = new MenuGroup("챌린지 관리");
+    MenuGroup adminChallengeInfo = new MenuGroup("챌린지 관리", ACCESS_ADMIN);
 
     adminChallengeInfo.add(new MenuItem("챌린지 등록",ACCESS_ADMIN,"/adminChallenge/add"));
     adminChallengeInfo.add(new MenuItem("챌린지 목록","/adminChallenge/list"));

@@ -1,11 +1,21 @@
 package com.share.ftp.handler.personal.mypage;
 
+import static com.share.util.Prompt.getUserLevel;
+import static com.share.util.Prompt.getUserPoint;
+import static com.share.util.Prompt.getUserRemainPoint;
+import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
+import com.share.util.Prompt;
 
 public class MyPointListHandler implements Command {
+
+  List<JoinDTO> joinDTOList;
+  public MyPointListHandler(List<JoinDTO> joinDTOList) {
+    this.joinDTOList = joinDTOList;
+  }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -27,9 +37,23 @@ public class MyPointListHandler implements Command {
         + "           |___/  |_|                     ");
 
     System.out.println();
-    System.out.printf("[  당신의 현재 포인트는 %d점 입니다. ]\n", loginUser.getPoint());
-    System.out.println( "[  축하합니다! 당신의 랭킹은 1등입니다. ]"); // 구현예정
-    System.out.println( "[  다음 등급까지 1000point 남았습니다. ]"); // 구현예정
+    System.out.println("-----------------------------------------------");
+    System.out.println();
+    System.out.printf("▶ 당신의 현재 포인트는 %d점 입니다. \n", getUserPoint(loginUser));
+    System.out.println();
+    System.out.printf("▶ 당신의 현재 등급은 %s입니다. \n", getUserLevel(loginUser)); 
+    System.out.println();
+    System.out.printf("▶ 다음 등급까지 %d point 남았습니다. ", getUserRemainPoint(loginUser)); // 구현예정
+    System.out.println();
+    System.out.println("▶ 축하합니다! 당신의 랭킹은 1등입니다. "); // 구현예정
+    System.out.println();
+    System.out.println("-----------------------------------------------");
+
+
+    //    Prompt.getUserRank(joinDTOList);
+    Prompt.printUserRank(joinDTOList);
+
+
   }
 }
 
