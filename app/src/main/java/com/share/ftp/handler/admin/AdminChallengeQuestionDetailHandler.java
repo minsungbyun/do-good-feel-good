@@ -10,8 +10,8 @@ import com.share.util.Prompt;
 
 public class AdminChallengeQuestionDetailHandler extends AbstractChallengeQuestionHandler {
   public AdminChallengeQuestionDetailHandler(List<ChallengeQuestionDTO> challengeQuestionDTOList,
-      List<ChallengeDTO> challengeDTOList) {
-    super(challengeQuestionDTOList, challengeDTOList);
+      List<ChallengeDTO> challengeDTOList, List<ChallengeQuestionDTO> challengeReplyList) {
+    super(challengeQuestionDTOList, challengeDTOList, challengeReplyList);
   }
 
   @Override
@@ -46,6 +46,14 @@ public class AdminChallengeQuestionDetailHandler extends AbstractChallengeQuesti
           System.out.printf("제목: %s\n", challengeQuestion.getTitle());
           System.out.printf("내용: %s\n", challengeQuestion.getContent());
           System.out.printf("등록날짜: %s\n", challengeQuestion.getRegisteredDate());
+
+          for (ChallengeQuestionDTO challengeReply : challengeReplyList) {
+            if (challengeReply.getNo() == questionNo) {
+              System.out.printf("아이디: %s\n", challengeReply.getOwner().getId());
+              System.out.printf("내용: %s\n", challengeReply.getContent());
+              System.out.printf("등록날짜: %s\n", challengeReply.getRegisteredDate());
+            }
+          }
         } 
       }
     } else {

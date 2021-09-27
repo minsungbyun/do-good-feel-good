@@ -9,11 +9,13 @@ public abstract class AbstractChallengeQuestionHandler  implements Command {
 
   protected List<ChallengeQuestionDTO> challengeQuestionDTOList;
   protected List<ChallengeDTO> challengeDTOList;
+  protected List<ChallengeQuestionDTO> challengeReplyList;
 
   public AbstractChallengeQuestionHandler(List<ChallengeQuestionDTO> challengeQuestionDTOList,
-      List<ChallengeDTO> challengeDTOList) {
+      List<ChallengeDTO> challengeDTOList, List<ChallengeQuestionDTO> challengeReplyList) {
     this.challengeQuestionDTOList = challengeQuestionDTOList;
     this.challengeDTOList = challengeDTOList;
+    this.challengeReplyList = challengeReplyList;
   }
 
 
@@ -46,6 +48,14 @@ public abstract class AbstractChallengeQuestionHandler  implements Command {
   protected int getNextQuestionNum(ChallengeDTO challengeDTO) {
     if (challengeQuestionDTOList.size() > 0) {
       return challengeDTO.getQuestionCount() + 1;
+    } else {
+      return 1;
+    }
+  }
+
+  protected int getNextReplyNum(ChallengeQuestionDTO challengeQuestionDTO) {
+    if (challengeReplyList.size() > 0) {
+      return challengeQuestionDTO.getReplyCount() + 1;
     } else {
       return 1;
     }

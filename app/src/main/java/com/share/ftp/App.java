@@ -174,6 +174,7 @@ public class App {
   List<ChallengeJoinDTO> challengeJoinDTOList = new ArrayList<>();
   List<ChallengeQuestionDTO> challengeQuestionDTOList = new ArrayList<>();
   List<ChallengeReviewDTO> challengeReviewDTOList = new ArrayList<>();
+  List<ChallengeQuestionDTO> challengeReplyList = new ArrayList<>();
 
   // 모금함 개설 신청 관련 도메인(값)
   List<DonationBoardDTO> donationBoardDTOList = new ArrayList<>();
@@ -380,12 +381,12 @@ public class App {
     commands.put("/challengeReview/connect", new ChallengeReviewConnectHandler());
 
     // 챌린지 문의하기
-    commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(challengeQuestionDTOList, challengeDTOList));
-    commands.put("/challengeQuestion/list", new ChallengeQuestionListHandler(challengeQuestionDTOList, challengeDTOList));
-    commands.put("/challengeQuestion/detail", new ChallengeQuestionDetailHandler(challengeQuestionDTOList, challengeDTOList));
-    commands.put("/challengeQuestion/update", new ChallengeQuestionUpdateHandler(challengeQuestionDTOList, challengeDTOList));
-    commands.put("/challengeQuestion/delete", new ChallengeQuestionDeleteHandler(challengeQuestionDTOList, challengeDTOList));
-    commands.put("/challengeQuestion/search", new ChallengeQuestionSearchHandler(challengeQuestionDTOList, challengeDTOList));
+    commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
+    commands.put("/challengeQuestion/list", new ChallengeQuestionListHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
+    commands.put("/challengeQuestion/detail", new ChallengeQuestionDetailHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
+    commands.put("/challengeQuestion/update", new ChallengeQuestionUpdateHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
+    commands.put("/challengeQuestion/delete", new ChallengeQuestionDeleteHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
+    commands.put("/challengeQuestion/search", new ChallengeQuestionSearchHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
     commands.put("/challengeQuestion/connect", new ChallengeQuestionConnectHandler());
 
     // 챌린지 랭킹
@@ -473,8 +474,8 @@ public class App {
     commands.put("/adminChallenge/detail", new AdminChallengeDetailHandler(challengeDTOList));
     commands.put("/adminChallenge/update", new AdminChallengeUpdateHandler(challengeDTOList));
     commands.put("/adminChallenge/delete", new AdminChallengeDeleteHandler(challengeDTOList));
-    commands.put("/adminChallenge/QuestionDetail", new AdminChallengeQuestionDetailHandler(challengeQuestionDTOList, challengeDTOList));
-    commands.put("/adminChallenge/replyAdd", new AdminChallengeReplyAddHandler(challengeQuestionDTOList, challengeDTOList));
+    commands.put("/adminChallenge/QuestionDetail", new AdminChallengeQuestionDetailHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
+    commands.put("/adminChallenge/replyAdd", new AdminChallengeReplyAddHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
 
     // 관리자 기관승인
 
