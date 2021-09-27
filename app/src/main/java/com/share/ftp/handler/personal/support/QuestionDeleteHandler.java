@@ -19,7 +19,9 @@ public class QuestionDeleteHandler extends AbstractQuestionHandler {
 
       System.out.println();
       System.out.println("[고객센터/문의하기/문의하기 삭제]");
-      int no = Prompt.inputInt("번호? ");
+      //      int no = Prompt.inputInt("번호? ");
+
+      int no = (int) request.getAttribute("no");
 
       QuestionListDTO myQuestionListDTO = findByNo(no);
 

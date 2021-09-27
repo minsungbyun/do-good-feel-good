@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import com.share.ftp.domain.join.JoinComparator;
 import com.share.ftp.domain.join.JoinDTO;
 
 public class Prompt {
@@ -103,50 +104,149 @@ public class Prompt {
   }
 
 
+  public static List<JoinDTO> getUserRank(List<JoinDTO> allUser) {
 
+    List<JoinDTO> pointList = getUserPointList(allUser);
 
-  // 현재 로그인 한 회원의 포인트를 비교해서 나열함
-  public static void getUserRank(List<JoinDTO> allUser) {
+    for (int i = 0; i < pointList.size(); i++) {
+      for (int j = 0; j < pointList.size(); j++) {
 
-    List<Integer> point = new ArrayList<>();
-
-    for (JoinDTO loginUser : allUser) {
-      point.add(loginUser.getPoint());
+        if (pointList.get(i).getPoint() < pointList.get(j).getPoint()) {  
+          pointList.get(i).setRank(pointList.get(i).getRank() + 1);
+        }
+      }
+      //      System.out.printf("이름 : %s, 등수 : %d\n", pointList.get(i).getName(),pointList.get(i).getRank());
     }
 
 
-    //    System.out.println("정렬 전");
-    //    for (JoinDTO loginUser : allUser) {
-    //      System.out.printf("포인트 : %d , 유저 이름 : %s\n ",loginUser.getPoint(), loginUser.getName());
-    //      // 포인트 비교
-    //    }
+    List<JoinDTO> userRank = new ArrayList<>();
 
-    System.out.println("정렬 전");
-    for (Integer loginUser : point) {
-      System.out.printf("포인트 : %d \n", loginUser);
-      // 포인트 비교
+    userRank.addAll(pointList);
+
+
+    return userRank;
+  }
+
+
+  public static void printUserRank(List<JoinDTO> allUser) {
+
+    List<JoinDTO> userRank = getUserRank(allUser);
+
+    //    List<JoinDTO> printRank = new ArrayList<>();
+    //    printRank = userRank;
+    for (JoinDTO loginUser : userRank) {
+
+      System.out.printf("이름 : %s 포인트 : %d점 등수 : %d등\n" , loginUser.getName(),  loginUser.getPoint(), loginUser.getRank());
     }
 
-    Collections.sort(point);
-    Collections.reverse(point);
-
-    System.out.println();
-
-    System.out.println("정렬 후");
-    for (Integer loginUser : point) {
-      System.out.printf("포인트 : %d \n", loginUser);
-      // 포인트 비교
-    }
-
-    //    System.out.println("정렬 후");
-    //    for (JoinDTO loginUser : allUser) {
-    //      // 포인트 비교
-    //      System.out.printf("포인트 : %d , 유저 이름 : %s\n ",loginUser.getPoint(), loginUser.getName());
-    //    }
 
   }
 
+
+  // 현재 로그인 한 회원의 포인트를 비교해서 나열함
+  public static List<JoinDTO> getUserPointList(List<JoinDTO> allUser) {
+
+    JoinComparator userPointComp = new JoinComparator();
+
+    for(JoinDTO loginUser : allUser) {
+      System.out.printf("유저 이름 : %s\n포인트 : %d\n", loginUser.getName(), loginUser.getPoint());
+      System.out.println();
+    }
+
+    Collections.sort(allUser, userPointComp);
+
+    System.out.println("-----------------------------------------------------------------");
+    for(JoinDTO loginUser : allUser) {
+      loginUser.setRank(1);
+      System.out.printf("유저 이름 : %s\n포인트 : %d\n", loginUser.getName(), loginUser.getPoint());
+      System.out.println();
+    }
+
+    return allUser;
+
+  }
 }
+
+
+
+// map으로 구현
+
+//    System.out.println("정렬 전");
+//    for (String loginUser : name) {
+//      System.out.printf("이름 : %s \n", loginUser);
+//      // 포인트 비교
+//    }
+
+//    Collections.sort(allUser, Collections.reverseOrder());
+//    Collections.sort(name, Collections.reverseOrder());
+//    Collections.sort(point, Collections.reverseOrder());
+//    Collections.reverse(point);
+
+//    System.out.println();
+
+//    System.out.println("정렬 후");
+//    for (Integer loginUser : point) {
+//      System.out.printf("포인트 : %d \n", loginUser);
+//    }
+//    HashMap<String,Integer> map = new HashMap<>();
+//
+//    for (Integer loginUser : point) {
+//      for (JoinDTO user : allUser) {
+//        if (loginUser == user.getPoint()) {
+//          map.put(user.getName(), user.getPoint());
+//          //          System.out.printf("이름 : %s , 포인트 : %d \n", user.getName() ,loginUser);
+//        }
+//      }
+
+
+//    List<Integer> point = new ArrayList<>();
+//
+//    for (JoinDTO loginUser : allUser) {
+//      point.add(loginUser.getPoint());
+//    }
+//
+//
+//        System.out.println("정렬 전");
+//        for (JoinDTO loginUser : allUser) {
+//          System.out.printf("포인트 : %d , 유저 이름 : %s\n ",loginUser.getPoint(), loginUser.getName());
+//          // 포인트 비교
+//        }
+//
+//    System.out.println("정렬 전");
+//    for (Integer loginUser : point) {
+//      System.out.printf("포인트 : %d \n", loginUser);
+//      // 포인트 비교
+//    }
+//
+//    Collections.sort(point);
+//    Collections.reverse(point);
+//
+//    System.out.println();
+//
+//    System.out.println("정렬 후");
+//    for (Integer loginUser : point) {
+//      System.out.printf("포인트 : %d \n", loginUser);
+//      // 포인트 비교
+//    }
+//
+//        System.out.println("정렬 후");
+//        for (JoinDTO loginUser : allUser) {
+//          // 포인트 비교
+//          System.out.printf("포인트 : %d , 유저 이름 : %s\n ",loginUser.getPoint(), loginUser.getName());
+//        }
+
+//    HashMap<String,Integer> map = new HashMap<>();
+//
+//    for (JoinDTO loginUser : allUser) {
+//      map.put(loginUser.getName(), null);
+//    }
+//
+//
+//    for (Entry<String, Integer> entry : map.entrySet()) {
+//      System.out.println("[유저이름]:" + entry.getKey() + " [유저포인트]:" + entry.getValue());
+//    }
+
+
 
 
 
