@@ -22,7 +22,8 @@ public class QuestionAddHandler extends AbstractQuestionHandler {
   public void execute(CommandRequest request) throws Exception {
 
     while (true) {
-      try {
+
+      if (!AuthLoginHandler.getLoginUser().getId().equals("admin")) {
 
         QuestionListDTO myQuestionListDTO = new QuestionListDTO();
 
@@ -47,9 +48,8 @@ public class QuestionAddHandler extends AbstractQuestionHandler {
           case 5: myQuestionListDTO.setQnaType(SITEASK);   break;
           case 6: myQuestionListDTO.setQnaType(OTHERASK);   break;
           default: System.out.println("올바른 번호를 입력해주세요"); continue;
+
         }
-
-
 
         myQuestionListDTO.setTitle(Prompt.inputString("제목? "));
         myQuestionListDTO.setContent(Prompt.inputString("내용? "));
@@ -62,35 +62,36 @@ public class QuestionAddHandler extends AbstractQuestionHandler {
         myQuestionListDTO.setNo(getNextNum());
 
         myQuestionListDTOList.add(myQuestionListDTO);
+        break;
 
-      } catch (NumberFormatException e) {
-        System.out.println("------------------------------------");
-        System.out.println("문의 분야를 선택해주세요.");
-        System.out.println("------------------------------------");
-        continue;
+      } else if (AuthLoginHandler.getLoginUser().getId().equals("admin")) {
+
+        QuestionListDTO myQuestionListDTO = new QuestionListDTO();
+
+        myQuestionListDTO.setTitle(Prompt.inputString("제목? "));
+        myQuestionListDTO.setContent(Prompt.inputString("내용? "));
+        myQuestionListDTO.setOwner(AuthLoginHandler.getLoginUser());
+        //        myQuestionListDTO.setPassword(Prompt.inputInt("비밀번호? "));
+        myQuestionListDTO.setFileUpload(Prompt.inputString("파일첨부? "));
+        myQuestionListDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+        myQuestionListDTO.setNo(getNextNum());
+
+        myQuestionListDTOList.add(myQuestionListDTO);
+
+        break;
       }
 
 
-      break;
     }
 
 
-    //    System.out.println();
-    //    System.out.println("[고객센터/문의하기/문의하기 등록]");
-    //
-    //
-    //    QuestionListDTO myQuestionListDTO = new QuestionListDTO();
-    //
-    //    myQuestionListDTO.setTitle(Prompt.inputString("제목? "));
-    //    myQuestionListDTO.setContent(Prompt.inputString("내용? "));
-    //    myQuestionListDTO.setOwner(AuthLoginHandler.getLoginUser());
-    //    myQuestionListDTO.setFileUpload(Prompt.inputString("파일첨부? "));
-    //    myQuestionListDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
-    //    myQuestionListDTO.setBoardNo(++boardNo);
-    //
-    //    myQuestionListDTOList.add(myQuestionListDTO);
   }
-
-
-
 }
+//      } catch (NumberFormatException e) {
+//        System.out.println("------------------------------------");
+//        System.out.println("문의 분야를 선택해주세요.");
+//        System.out.println("------------------------------------");
+//        continue;
+//      }
+//      break;
