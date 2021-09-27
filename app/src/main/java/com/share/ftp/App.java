@@ -117,6 +117,7 @@ import com.share.ftp.handler.personal.mypage.MyBoardListHandler;
 import com.share.ftp.handler.personal.mypage.MyBoardUpdateHandler;
 import com.share.ftp.handler.personal.mypage.MyDonationHandler;
 import com.share.ftp.handler.personal.mypage.MyPointListHandler;
+import com.share.ftp.handler.personal.support.AdminQuestionConnectHandler;
 import com.share.ftp.handler.personal.support.QuestionAddHandler;
 import com.share.ftp.handler.personal.support.QuestionDeleteHandler;
 import com.share.ftp.handler.personal.support.QuestionDetailHandler;
@@ -346,6 +347,7 @@ public class App {
     commands.put("/commBoardReply/list", new CommBoardReplyListHandler(commBoardDTOList, commBoardReplyDTOList));
     commands.put("/commBoardReply/update", new CommBoardReplyUpdateHandler(commBoardDTOList, commBoardReplyDTOList));
     commands.put("/commBoardReply/delete", new CommBoardReplyDeleteHandler(commBoardDTOList, commBoardReplyDTOList));
+
     commands.put("/commBoard/connect", new CommBoardReplyConnectHandler());
 
     // 소통해요 나눔이야기 BEST
@@ -412,6 +414,9 @@ public class App {
     commands.put("/question/delete", new QuestionDeleteHandler(myQuestionListDTOList));
     commands.put("/question/search", new QuestionSearchHandler(myQuestionListDTOList));
 
+    commands.put("/adminQuestion/connect", new AdminQuestionConnectHandler());
+    //    commands.put("/adminQuestion/add", new AdminQuestionAddHandler(myQuestionListDTOList));
+
     // 마이페이지
     commands.put("/myPage/info", new MyPageInfoHandler(joinDTOList)); // 내정보 수정
     commands.put("/myPage/delete", new MyPageDelete(joinDTOList)); // 회원탈퇴
@@ -454,7 +459,7 @@ public class App {
     commands.put("/adminNotice/search", new AdminNoticeSearchHandler(noticeDTOList));
 
     // 관리자 문의사항
-    //    commands.put("/adminAsk/add", new AdminQuestionAddHandler(questionDTOList));
+
     //        commands.put("/adminAsk/list", new AdminQuestionListHandler(myQuestionListDTOList));
     //        commands.put("/adminAsk/detail", new AdminQuestionDetailHandler(myQuestionListDTOList));
     //        commands.put("/adminAsk/update", new AdminQuestionUpdateHandler(myQuestionListDTOList));
@@ -716,8 +721,8 @@ public class App {
     reviewMenu.add(new MenuItem("등록", ACCESS_MEMBER_ADMIN, "/commBoard/add"));
     reviewMenu.add(new MenuItem("목록","/commBoard/list"));
     reviewMenu.add(new MenuItem("상세보기","/commBoard/detail"));
-    reviewMenu.add(new MenuItem("변경", ACCESS_MEMBER_ADMIN,"/commBoard/update"));
-    reviewMenu.add(new MenuItem("삭제",ACCESS_MEMBER_ADMIN,"/commBoard/delete"));
+    //    reviewMenu.add(new MenuItem("변경", ACCESS_MEMBER_ADMIN,"/commBoard/update"));
+    //    reviewMenu.add(new MenuItem("삭제",ACCESS_MEMBER_ADMIN,"/commBoard/delete"));
     reviewMenu.add(new MenuItem("검색",ACCESS_MEMBER_ADMIN,"/commBoard/search"));
 
     return reviewMenu;
@@ -737,8 +742,8 @@ public class App {
 
     shortReviewMenu.add(new MenuItem("등록", ACCESS_MEMBER_ADMIN, "/commReview/add"));
     shortReviewMenu.add(new MenuItem("목록", "/commReview/list")); 
-    shortReviewMenu.add(new MenuItem("수정", ACCESS_MEMBER_ADMIN, "/commReview/update")); 
-    shortReviewMenu.add(new MenuItem("삭제", ACCESS_MEMBER_ADMIN, "/commReview/delete")); 
+    //    shortReviewMenu.add(new MenuItem("변경", ACCESS_MEMBER_ADMIN, "/commReview/update")); 
+    //    shortReviewMenu.add(new MenuItem("삭제", ACCESS_MEMBER_ADMIN, "/commReview/delete")); 
     shortReviewMenu.add(new MenuItem("검색",ACCESS_MEMBER_ADMIN,"/commReview/search"));
 
 
@@ -799,11 +804,11 @@ public class App {
   private Menu createNoticeMenu() {
     MenuGroup noticeMenu = new MenuGroup("공지사항");
 
-    noticeMenu.add(new MenuItem("공지사항 등록",ACCESS_ADMIN,"/adminNotice/add"));
+    noticeMenu.add(new MenuItem("공지사항 등록", ACCESS_ADMIN,"/adminNotice/add"));
     noticeMenu.add(new MenuItem("공지사항 목록","/adminNotice/list"));
     noticeMenu.add(new MenuItem("공지사항 상세보기","/adminNotice/detail"));
-    noticeMenu.add(new MenuItem("공지사항 변경",ACCESS_ADMIN,"/adminNotice/update"));
-    noticeMenu.add(new MenuItem("공지사항 삭제",ACCESS_ADMIN,"/adminNotice/delete"));
+    //    noticeMenu.add(new MenuItem("공지사항 변경",ACCESS_ADMIN,"/adminNotice/update"));
+    //    noticeMenu.add(new MenuItem("공지사항 삭제",ACCESS_ADMIN,"/adminNotice/delete"));
     noticeMenu.add(new MenuItem("공지사항 검색","/adminNotice/search"));
 
     return noticeMenu;
@@ -812,10 +817,10 @@ public class App {
   private Menu createAskMenu() {
     MenuGroup ask = new MenuGroup("문의하기");
     ask.add(new MenuItem("등록", ACCESS_MEMBER,"/question/add"));
-    ask.add(new MenuItem("목록", ACCESS_MEMBER_ADMIN, "/question/list"));
+    ask.add(new MenuItem("목록", "/question/list"));
     ask.add(new MenuItem("상세보기", ACCESS_MEMBER_ADMIN, "/question/detail"));
-    ask.add(new MenuItem("변경", ACCESS_MEMBER,"/question/update"));
-    ask.add(new MenuItem("삭제", ACCESS_MEMBER, "/question/delete"));
+    //    ask.add(new MenuItem("변경", ACCESS_MEMBER,"/question/update"));
+    //    ask.add(new MenuItem("삭제", ACCESS_MEMBER, "/question/delete"));
     ask.add(new MenuItem("검색", "/question/search"));
 
     return ask;
@@ -952,11 +957,11 @@ public class App {
   private Menu createAdminAskMenu() {
     MenuGroup adminAskInfo = new MenuGroup("문의사항 관리", ACCESS_ADMIN);
 
-    adminAskInfo.add(new MenuItem("문의사항 등록",ACCESS_ADMIN,"/question/add"));
+    //    adminAskInfo.add(new MenuItem("문의사항 등록",ACCESS_ADMIN,"/question/add"));
     adminAskInfo.add(new MenuItem("문의사항 목록",ACCESS_ADMIN,"/question/list"));
     adminAskInfo.add(new MenuItem("문의사항 상세보기",ACCESS_ADMIN,"/question/detail"));
-    adminAskInfo.add(new MenuItem("문의사항 변경",ACCESS_ADMIN,"/question/update"));
-    adminAskInfo.add(new MenuItem("문의사항 삭제",ACCESS_ADMIN,"/question/delete"));
+    //    adminAskInfo.add(new MenuItem("문의사항 변경",ACCESS_ADMIN,"/question/update"));
+    //    adminAskInfo.add(new MenuItem("문의사항 삭제",ACCESS_ADMIN,"/question/delete"));
     adminAskInfo.add(new MenuItem("문의사항 검색",ACCESS_ADMIN,"/question/search"));
 
     return adminAskInfo;

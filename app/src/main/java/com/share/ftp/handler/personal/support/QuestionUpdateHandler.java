@@ -19,7 +19,7 @@ public class QuestionUpdateHandler extends AbstractQuestionHandler {
 
       System.out.println();
       System.out.println("[메인/고객센터/문의하기/게시글 수정]");
-      int no = Prompt.inputInt("번호? ");
+      int no = (int)request.getAttribute("no");
 
       QuestionListDTO myQuestionListDTO = findByNo(no);
 
@@ -36,6 +36,7 @@ public class QuestionUpdateHandler extends AbstractQuestionHandler {
 
         String title = Prompt.inputString(String.format("제목(%s)? ", myQuestionListDTO.getTitle()));
         String content = Prompt.inputString(String.format("내용(%s)? ", myQuestionListDTO.getContent()));
+        String fileUpload = Prompt.inputString(String.format("파일첨부(%s)? ", myQuestionListDTO.getFileUpload()));
 
         String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
         if (input.equalsIgnoreCase("n") /*|| input.length() == 0*/) {
