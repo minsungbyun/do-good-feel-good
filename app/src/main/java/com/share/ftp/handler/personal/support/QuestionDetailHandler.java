@@ -27,14 +27,6 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
       return;
     }
 
-    //  System.out.println("비밀번호를 입력해주세요.");
-    //    System.out.println();
-    //
-    //    int passwoard = Prompt.inputInt("비밀번호: ");
-    //    System.out.println();
-    //    if (myQuestionListDTO.getPassword == )
-
-
     while (true) {
 
       if (AuthLoginHandler.getLoginUser().getId().equals("admin")) {
@@ -71,69 +63,66 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
           break;
 
         } else {
+          System.out.println();
           System.out.println("비밀번호를 다시 입력해주세요.");
 
         }
+      } else if (myQuestionListDTO.getOwner().getId() != AuthLoginHandler.getLoginUser().getId() ||
+          !AuthLoginHandler.getLoginUser().getId().equals("admin")) {
+        System.out.println("본인이 작성한 글만 확인할 수 있습니다.");
+        return;
       }
 
     }
 
 
+    if (myQuestionListDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
 
+      request.setAttribute("no", no);
 
-
-
-
-
-
-
-    //    if (myQuestionListDTO.getOwner().getId() != AuthLoginHandler.getLoginUser().getId() ||
-    //        !AuthLoginHandler.getLoginUser().getId().equals("admin")) {
-    //      System.out.println("본인이 작성한 글만 확인할 수 있습니다.");
-    //      return;
-    //    }
-
-    request.setAttribute("no", no);
-
-    while (true) {
-      String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
-      switch (input) {
-        case "U":
-        case "u":
-          request.getRequestDispatcher("/question/update").forward(request);
-          return;
-        case "D":
-        case "d":
-          request.getRequestDispatcher("/question/delete").forward(request);
-          return;
-          //        case "A":
-          //        case "a":
-          //          request.getRequestDispatcher("/adminAsk/add").forward(request);
-          //          return;
-        case "0":
-          return;
-        default:
-          System.out.println("명령어가 올바르지 않습니다!");
+      while (true) {
+        String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
+        switch (input) {
+          case "U":
+          case "u":
+            request.getRequestDispatcher("/question/update").forward(request);
+            return;
+          case "D":
+          case "d":
+            request.getRequestDispatcher("/question/delete").forward(request);
+            return;
+          case "0":
+            return;
+          default:
+            System.out.println("명령어가 올바르지 않습니다!");
+        }
       }
     }
 
-    //    while (true) {
-    //      String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
-    //      switch (input) {
-    //        case "U":
-    //        case "u":
-    //          request.getRequestDispatcher("/question/update").forward(request);
-    //          return;
-    //        case "D":
-    //        case "d":
-    //          request.getRequestDispatcher("/question/delete").forward(request);
-    //          return;
-    //        case "0":
-    //          return;
-    //        default:
-    //          System.out.println("명령어가 올바르지 않습니다!");
-    //      }
-    //    }
+    if (AuthLoginHandler.getLoginUser().getId().equals("admin")) {
+      request.setAttribute("no", no);
+
+      while (true) {
+        String input = Prompt.inputString("변경(U), 삭제(D), 답글(A), 이전(0)>");
+        switch (input) {
+          case "U":
+          case "u":
+            request.getRequestDispatcher("/question/update").forward(request);
+          case "D":
+          case "d":
+            request.getRequestDispatcher("/question/delete").forward(request);
+            return;
+          case "A":
+          case "a":
+            request.getRequestDispatcher("/adminQuestion/connect").forward(request);
+            return;
+          case "0":
+            return;
+          default:
+            System.out.println("명령어가 올바르지 않습니다!");
+        }
+      }
+    }
 
   } 
 

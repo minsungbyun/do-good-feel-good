@@ -18,13 +18,13 @@ public class AdminNoticeListHandler extends AbstractAdminNoticeHandler {
     System.out.println("[공지사항 목록]");
 
     for (NoticeDTO noticeDTO : noticeDTOList) {
-      System.out.printf("%d, %s, %s, %s, %s, %s\n", 
+      System.out.printf("%d, %s, %s, %s, %s, %d\n", 
           noticeDTO.getNo(), 
           noticeDTO.getAdmin().getId(), 
           noticeDTO.getTitle(), 
           noticeDTO.getContent(), 
-          noticeDTO.getFileUpload(), 
-          noticeDTO.getRegisteredDate());
+          noticeDTO.getRegisteredDate(), 
+          noticeDTO.getViewCount());
     }
   }
 }

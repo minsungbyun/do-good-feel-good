@@ -3,6 +3,7 @@ package com.share.ftp.handler.personal.mypage;
 import static com.share.util.Prompt.getUserLevel;
 import static com.share.util.Prompt.getUserPoint;
 import static com.share.util.Prompt.getUserRemainPoint;
+import static com.share.util.Prompt.printIndividualUserRank;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
@@ -43,15 +44,14 @@ public class MyPointListHandler implements Command {
     System.out.println();
     System.out.printf("▶ 당신의 현재 등급은 %s입니다. \n", getUserLevel(loginUser)); 
     System.out.println();
-    System.out.printf("▶ 다음 등급까지 %d point 남았습니다. ", getUserRemainPoint(loginUser)); // 구현예정
+    System.out.printf("▶ 다음 등급까지 %d point 남았습니다. ", getUserRemainPoint(loginUser)); 
     System.out.println();
-    System.out.println("▶ 축하합니다! 당신의 랭킹은 1등입니다. "); // 구현예정
+    System.out.printf("▶ 축하합니다! 당신의 랭킹은 %d등입니다. ",printIndividualUserRank(loginUser)); 
     System.out.println();
     System.out.println("-----------------------------------------------");
 
 
-    //    Prompt.getUserRank(joinDTOList);
-    Prompt.printUserRank(joinDTOList);
+    Prompt.printUserRank(joinDTOList); // 랭킹 리스트 (이달의 랭킹으로 이동 예정)
 
 
   }

@@ -5,9 +5,10 @@ import java.sql.Date;
 import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
-@SuppressWarnings("serial")
+
 public class QuestionListDTO implements Serializable {
 
+  private static final long serialVersionUID = 1L;
   private int no;
   private String title;
   private String memberld;
