@@ -103,8 +103,11 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
       request.setAttribute("no", no);
 
       while (true) {
-        String input = Prompt.inputString("삭제(D), 답글(A), 이전(0)>");
+        String input = Prompt.inputString("변경(U), 삭제(D), 답글(A), 이전(0)>");
         switch (input) {
+          case "U":
+          case "u":
+            request.getRequestDispatcher("/question/update").forward(request);
           case "D":
           case "d":
             request.getRequestDispatcher("/question/delete").forward(request);
