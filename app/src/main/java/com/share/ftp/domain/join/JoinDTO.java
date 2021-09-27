@@ -15,6 +15,7 @@ public class JoinDTO implements Serializable {
   private int rank = 1; // 유저 랭킹
   private int donationMoney; // 유저 기부금액
   private int authNum = 1004; 
+  private int adminPassword = -1;
   private String id;
   private String password;
   private String name;
@@ -33,18 +34,11 @@ public class JoinDTO implements Serializable {
 
 
 
-  @Override
-  public String toString() {
-    return "JoinDTO [no=" + no + ", type=" + type + ", point=" + point + ", rank=" + rank
-        + ", donationMoney=" + donationMoney + ", authNum=" + authNum + ", id=" + id + ", password="
-        + password + ", name=" + name + ", birthdate=" + birthdate + ", tel=" + tel + ", email="
-        + email + ", address=" + address + ", registerDate=" + registerDate + ", level=" + level
-        + "]";
-  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(address, authNum, birthdate, donationMoney, email, id, level, name, no,
-        password, point, rank, registerDate, tel, type);
+    return Objects.hash(address, adminPassword, authNum, birthdate, donationMoney, email, id, level,
+        name, no, password, point, rank, registerDate, tel, type);
   }
   @Override
   public boolean equals(Object obj) {
@@ -55,15 +49,23 @@ public class JoinDTO implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     JoinDTO other = (JoinDTO) obj;
-    return Objects.equals(address, other.address) && authNum == other.authNum
-        && Objects.equals(birthdate, other.birthdate) && donationMoney == other.donationMoney
-        && Objects.equals(email, other.email) && Objects.equals(id, other.id)
-        && Objects.equals(level, other.level) && Objects.equals(name, other.name) && no == other.no
+    return Objects.equals(address, other.address) && adminPassword == other.adminPassword
+        && authNum == other.authNum && Objects.equals(birthdate, other.birthdate)
+        && donationMoney == other.donationMoney && Objects.equals(email, other.email)
+        && Objects.equals(id, other.id) && Objects.equals(level, other.level)
+        && Objects.equals(name, other.name) && no == other.no
         && Objects.equals(password, other.password) && point == other.point && rank == other.rank
         && Objects.equals(registerDate, other.registerDate) && Objects.equals(tel, other.tel)
         && type == other.type;
   }
-
+  @Override
+  public String toString() {
+    return "JoinDTO [no=" + no + ", type=" + type + ", point=" + point + ", rank=" + rank
+        + ", donationMoney=" + donationMoney + ", authNum=" + authNum + ", adminPassword="
+        + adminPassword + ", id=" + id + ", password=" + password + ", name=" + name
+        + ", birthdate=" + birthdate + ", tel=" + tel + ", email=" + email + ", address=" + address
+        + ", registerDate=" + registerDate + ", level=" + level + "]";
+  }
   public int getNo() {
     return no;
   }
@@ -153,6 +155,12 @@ public class JoinDTO implements Serializable {
   }
   public void setRank(int rank) {
     this.rank = rank;
+  }
+  public int getAdminPassword() {
+    return adminPassword;
+  }
+  public void setAdminPassword(int adminPassword) {
+    this.adminPassword = adminPassword;
   }
 
 

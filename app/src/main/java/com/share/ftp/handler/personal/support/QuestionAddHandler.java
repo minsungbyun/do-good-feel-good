@@ -21,70 +21,43 @@ public class QuestionAddHandler extends AbstractQuestionHandler {
   @Override
   public void execute(CommandRequest request) throws Exception {
 
-    while (true) {
+    QuestionListDTO myQuestionListDTO = new QuestionListDTO();
 
-      if (!AuthLoginHandler.getLoginUser().getId().equals("admin")) {
+    System.out.println();
+    System.out.println("문의하려는 분야를 선택해주세요.");
 
-        QuestionListDTO myQuestionListDTO = new QuestionListDTO();
+    System.out.println("[1. 함께해요 문의]");
+    System.out.println("[2. 나눔이야기 문의]");
+    System.out.println("[3. 모금함 문의]");
+    System.out.println("[4. 챌린지 문의]");
+    System.out.println("[5. 사이트이용 문의]");
+    System.out.println("[6. 기타 문의]");
+    System.out.println("[0. 이전]");
 
-        System.out.println();
-        System.out.println("문의하려는 분야를 선택해주세요.");
+    int input = Prompt.inputInt("문의분야 > ");
 
-        System.out.println("[1. 함께해요 문의]");
-        System.out.println("[2. 나눔이야기 문의]");
-        System.out.println("[3. 모금함 문의]");
-        System.out.println("[4. 챌린지 문의]");
-        System.out.println("[5. 사이트이용 문의]");
-        System.out.println("[6. 기타 문의]");
-        System.out.println("[0. 이전]");
-
-        int input = Prompt.inputInt("> ");
-
-        switch(input) {
-          case 1: myQuestionListDTO.setQnaType(VOLUNTEERASK);   break;
-          case 2: myQuestionListDTO.setQnaType(COMMUITYASK);   break;
-          case 3: myQuestionListDTO.setQnaType(DONATIONASK);   break;
-          case 4: myQuestionListDTO.setQnaType(CHALLENGEASK);   break;
-          case 5: myQuestionListDTO.setQnaType(SITEASK);   break;
-          case 6: myQuestionListDTO.setQnaType(OTHERASK);   break;
-          default: System.out.println("올바른 번호를 입력해주세요"); continue;
-
-        }
-
-        myQuestionListDTO.setTitle(Prompt.inputString("제목? "));
-        myQuestionListDTO.setContent(Prompt.inputString("내용? "));
-        myQuestionListDTO.setOwner(AuthLoginHandler.getLoginUser());
-        myQuestionListDTO.setPassword(Prompt.inputInt("비밀번호? "));
-        myQuestionListDTO.setFileUpload(Prompt.inputString("파일첨부? "));
-        myQuestionListDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
-
-        // 고유회원번호 부여
-        myQuestionListDTO.setNo(getNextNum());
-
-        myQuestionListDTOList.add(myQuestionListDTO);
-        break;
-
-      } else if (AuthLoginHandler.getLoginUser().getId().equals("admin")) {
-
-        QuestionListDTO myQuestionListDTO = new QuestionListDTO();
-
-        myQuestionListDTO.setTitle(Prompt.inputString("제목? "));
-        myQuestionListDTO.setContent(Prompt.inputString("내용? "));
-        myQuestionListDTO.setOwner(AuthLoginHandler.getLoginUser());
-        //        myQuestionListDTO.setPassword(Prompt.inputInt("비밀번호? "));
-        myQuestionListDTO.setFileUpload(Prompt.inputString("파일첨부? "));
-        myQuestionListDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
-
-        myQuestionListDTO.setNo(getNextNum());
-
-        myQuestionListDTOList.add(myQuestionListDTO);
-
-        break;
-      }
-
+    switch(input) {
+      case 1: myQuestionListDTO.setQnaType(VOLUNTEERASK);    break;
+      case 2: myQuestionListDTO.setQnaType(COMMUITYASK);     break;
+      case 3: myQuestionListDTO.setQnaType(DONATIONASK);     break;
+      case 4: myQuestionListDTO.setQnaType(CHALLENGEASK);    break;
+      case 5: myQuestionListDTO.setQnaType(SITEASK);         break;
+      case 6: myQuestionListDTO.setQnaType(OTHERASK);        break;
+      default: System.out.println("올바른 번호를 입력해주세요"); 
 
     }
 
+    myQuestionListDTO.setTitle(Prompt.inputString("제목? "));
+    myQuestionListDTO.setContent(Prompt.inputString("내용? "));
+    myQuestionListDTO.setOwner(AuthLoginHandler.getLoginUser());
+    myQuestionListDTO.setPassword(Prompt.inputInt("비밀번호? "));
+    myQuestionListDTO.setFileUpload(Prompt.inputString("파일첨부? "));
+    myQuestionListDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    // 고유회원번호 부여
+    myQuestionListDTO.setNo(getNextNum());
+
+    myQuestionListDTOList.add(myQuestionListDTO);
 
   }
 }
