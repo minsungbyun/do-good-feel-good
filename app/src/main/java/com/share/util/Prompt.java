@@ -157,6 +157,7 @@ public class Prompt {
 
     System.out.println("-----------------------------------------------------------------");
     for(JoinDTO loginUser : allUser) {
+      loginUser.setRank(1);
       System.out.printf("유저 이름 : %s\n포인트 : %d\n", loginUser.getName(), loginUser.getPoint());
       System.out.println();
     }
