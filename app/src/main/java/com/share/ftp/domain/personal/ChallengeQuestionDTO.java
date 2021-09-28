@@ -13,16 +13,18 @@ public class ChallengeQuestionDTO implements Serializable {
   private String content;
   private Date registeredDate;
   private JoinDTO owner;
+  private int replyCount;
 
   @Override
   public String toString() {
     return "ChallengeQuestionDTO [no=" + no + ", questionNo=" + questionNo + ", title=" + title
-        + ", content=" + content + ", registeredDate=" + registeredDate + ", owner=" + owner + "]";
+        + ", content=" + content + ", registeredDate=" + registeredDate + ", owner=" + owner
+        + ", replyCount=" + replyCount + "]";
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(content, no, owner, questionNo, registeredDate, title);
+    return Objects.hash(content, no, owner, questionNo, registeredDate, replyCount, title);
   }
 
   @Override
@@ -36,7 +38,7 @@ public class ChallengeQuestionDTO implements Serializable {
     ChallengeQuestionDTO other = (ChallengeQuestionDTO) obj;
     return Objects.equals(content, other.content) && no == other.no
         && Objects.equals(owner, other.owner) && questionNo == other.questionNo
-        && Objects.equals(registeredDate, other.registeredDate)
+        && Objects.equals(registeredDate, other.registeredDate) && replyCount == other.replyCount
         && Objects.equals(title, other.title);
   }
 
@@ -75,5 +77,11 @@ public class ChallengeQuestionDTO implements Serializable {
   }
   public void setOwner(JoinDTO owner) {
     this.owner = owner;
+  }
+  public int getReplyCount() {
+    return replyCount;
+  }
+  public void setReplyCount(int replyCount) {
+    this.replyCount = replyCount;
   }
 }

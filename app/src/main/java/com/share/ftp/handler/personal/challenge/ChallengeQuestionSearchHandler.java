@@ -9,8 +9,8 @@ import com.share.util.Prompt;
 public class ChallengeQuestionSearchHandler extends AbstractChallengeQuestionHandler {
 
   public ChallengeQuestionSearchHandler(List<ChallengeQuestionDTO> challengeQuestionDTOList,
-      List<ChallengeDTO> challengeDTOList) {
-    super(challengeQuestionDTOList, challengeDTOList);
+      List<ChallengeDTO> challengeDTOList, List<ChallengeQuestionDTO> challengeReplyList) {
+    super(challengeQuestionDTOList, challengeDTOList, challengeReplyList);
   }
 
   @Override

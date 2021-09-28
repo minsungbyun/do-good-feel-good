@@ -45,10 +45,10 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
 
       } else if (AuthLoginHandler.getLoginUser().getId().equals(myQuestionListDTO.getOwner().getId())) {
 
-        int passwoard = Prompt.inputInt("비밀번호: ");
+        int password = Prompt.inputInt("비밀번호: ");
 
 
-        if (passwoard == myQuestionListDTO.getPassword()) {
+        if (password == myQuestionListDTO.getPassword()) {
 
           System.out.printf("번호: %s\n", myQuestionListDTO.getNo());
           System.out.printf("문의분야: %s\n", myQuestionListDTO.getQnaType());

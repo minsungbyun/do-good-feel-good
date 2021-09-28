@@ -10,8 +10,8 @@ public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandl
 
 
   public ChallengeQuestionListHandler(List<ChallengeQuestionDTO> challengeQuestionDTOList,
-      List<ChallengeDTO> challengeDTOList) {
-    super(challengeQuestionDTOList, challengeDTOList);
+      List<ChallengeDTO> challengeDTOList, List<ChallengeQuestionDTO> challengeReplyList) {
+    super(challengeQuestionDTOList, challengeDTOList, challengeReplyList);
   }
 
   @Override

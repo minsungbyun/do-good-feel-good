@@ -22,6 +22,10 @@ public class DonationRegisterMyListHandler extends AbstractDonationRegisterHandl
     System.out.println();
     System.out.println("[나의 기부 내역]");
 
+    if (AuthLoginHandler.getLoginUser().getDonationMoney() == 0) {
+      System.out.println();
+      System.out.println("[ 나의 기부 내역이 없습니다. ]");
+    }
 
 
     for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {
@@ -33,8 +37,10 @@ public class DonationRegisterMyListHandler extends AbstractDonationRegisterHandl
 
       } 
     }
+
     System.out.println();
-    System.out.printf("나의 기부 총 금액 %d원", AuthLoginHandler.getLoginUser().getDonationMoney());
+    System.out.printf("[ 나의 기부 총 금액 %d원 ]", AuthLoginHandler.getLoginUser().getDonationMoney());
+    System.out.println();
 
   }
 }
