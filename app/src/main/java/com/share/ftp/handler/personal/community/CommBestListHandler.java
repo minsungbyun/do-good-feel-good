@@ -6,7 +6,7 @@ import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.handler.BestTest;
 import com.share.ftp.handler.CommandRequest;
 
-public class CommBestListHandler extends AbstractCommBestHandler /*implements Comparable<CommBoardDTO>*/ {
+public class CommBestListHandler extends AbstractCommBestHandler {
 
 
   public CommBestListHandler(List<CommBoardDTO> commBoardDTOList) {
@@ -16,30 +16,10 @@ public class CommBestListHandler extends AbstractCommBestHandler /*implements Co
   @Override
   public void execute(CommandRequest request) throws Exception {
 
+    System.out.println();
+    System.out.println("[  나눔이야기 BEST 목록  ]");
+
     BestTest.getUserPointList(commBoardDTOList);
-    //
-    //    int max =  commBoardDTOList.get(0).getViewCount();
-    //
-    //    for (int i = 0; i < commBoardDTOList.size(); i++) {
-    //      if (max < commBoardDTOList.get(i).getViewCount()) {
-    //        max = commBoardDTOList.get(i).getViewCount();
-    //      }
-    //    }
-    //    System.out.println("최대 조회수는? = " + max);
-
-    //  System.out.println("[소통해요/나눔이야기Best/목록]");
-
-
-    //  List<CommBoardDTO> commBoardDTOList;
-
-    //    
-    //    for (CommBoardDTO commBoardDTO : commBoardDTOList) {
-    //      System.out.printf("%d번 게시글 조회수 : %d\n", commBoardDTO.getCommNo(), commBoardDTO.getViewCount());
-    //      // 조회수가 높은 것부터 순서대로 출력(내림차순 정렬)
-    //      // 1. 조회수가 가장 높은 것을 뽑는다.;
-    //      
-    //    }
-    //   1   6     10
     int add = 1;
     ArrayList<Integer> rank = new ArrayList<>();
     rank.add(add);
@@ -77,6 +57,29 @@ public class CommBestListHandler extends AbstractCommBestHandler /*implements Co
 
 
 
+    //
+    //    int max =  commBoardDTOList.get(0).getViewCount();
+    //
+    //    for (int i = 0; i < commBoardDTOList.size(); i++) {
+    //      if (max < commBoardDTOList.get(i).getViewCount()) {
+    //        max = commBoardDTOList.get(i).getViewCount();
+    //      }
+    //    }
+    //    System.out.println("최대 조회수는? = " + max);
+
+    //  System.out.println("[소통해요/나눔이야기Best/목록]");
+
+
+    //  List<CommBoardDTO> commBoardDTOList;
+
+    //    
+    //    for (CommBoardDTO commBoardDTO : commBoardDTOList) {
+    //      System.out.printf("%d번 게시글 조회수 : %d\n", commBoardDTO.getCommNo(), commBoardDTO.getViewCount());
+    //      // 조회수가 높은 것부터 순서대로 출력(내림차순 정렬)
+    //      // 1. 조회수가 가장 높은 것을 뽑는다.;
+    //      
+    //    }
+    //   1   6     10
 
 
 
