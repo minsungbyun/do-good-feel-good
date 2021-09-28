@@ -37,6 +37,7 @@ public class MyPointListHandler implements Command {
         + "|_| |_| |_|\\__, | | .__/ \\___/|_|_| |_|\\__|\r\n"
         + "           |___/  |_|                     ");
 
+    Prompt.printUserRank(joinDTOList); // 랭킹 리스트 (이달의 랭킹으로 이동 예정)
     System.out.println();
     System.out.println("-----------------------------------------------");
     System.out.println();
@@ -51,7 +52,6 @@ public class MyPointListHandler implements Command {
     System.out.println("-----------------------------------------------");
 
 
-    Prompt.printUserRank(joinDTOList); // 랭킹 리스트 (이달의 랭킹으로 이동 예정)
 
 
   }
