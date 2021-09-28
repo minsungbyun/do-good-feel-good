@@ -157,19 +157,17 @@ public class JoinDTO implements Serializable {
   public void setRank(int rank) {
     this.rank = rank;
   }
-<<<<<<< HEAD
   public int getAdminPassword() {
     return adminPassword;
   }
   public void setAdminPassword(int adminPassword) {
     this.adminPassword = adminPassword;
-=======
+  }
   public int getFinalRank() {
     return finalRank;
   }
   public void setFinalRank(int finalRank) {
     this.finalRank = finalRank;
->>>>>>> 7ab55cbd572f64badafe79abc6e4d58ca5a220f1
   }
 
 

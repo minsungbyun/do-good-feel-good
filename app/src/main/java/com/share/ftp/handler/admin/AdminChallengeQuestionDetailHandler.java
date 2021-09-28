@@ -49,8 +49,10 @@ public class AdminChallengeQuestionDetailHandler extends AbstractChallengeQuesti
 
           for (ChallengeQuestionDTO challengeReply : challengeReplyList) {
             if (challengeReply.getNo() == questionNo) {
-              System.out.printf("아이디: %s\n", challengeReply.getOwner().getId());
-              System.out.printf("내용: %s\n", challengeReply.getContent());
+              System.out.println();
+              System.out.println();
+              System.out.printf("아이디: %s  ", challengeReply.getOwner().getId());
+              System.out.printf("내용: %s  ", challengeReply.getContent());
               System.out.printf("등록날짜: %s\n", challengeReply.getRegisteredDate());
             }
           }

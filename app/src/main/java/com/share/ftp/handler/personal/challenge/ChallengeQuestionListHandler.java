@@ -44,22 +44,28 @@ public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandl
       }
     }
 
-    for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
-      if (challengeQuestionDTO.getOwner().getId().equals("admin")) {
-        System.out.printf("관리자답글 :  %s, %s, %s\n", 
-            challengeQuestionDTO.getOwner().getId(),
-            challengeQuestionDTO.getContent(),
-            challengeQuestionDTO.getRegisteredDate());
+    for (ChallengeQuestionDTO challengeReply : challengeReplyList) {
+      if (challengeReply.getOwner().getId().equals("admin")) {
+        System.out.printf("관리자 :  %s, %s, %s\n", 
+            challengeReply.getOwner().getId(),
+            challengeReply.getContent(),
+            challengeReply.getRegisteredDate());
       }
     }
 
     while (true) {
       System.out.println();
-      System.out.println("1번 ▶ 문의 검색");
+      System.out.println("1번 ▶ 문의 등록");
+      System.out.println("2번 ▶ 문의 변경");
+      System.out.println("3번 ▶ 문의 삭제");
+      System.out.println("4번 ▶ 문의 검색");
       System.out.println("0번 ▶ 이전");
       int input = Prompt.inputInt("번호 입력 ▶ ");
       switch (input) {
-        case 1: request.getRequestDispatcher("/challengeQuestion/search").forward(request); break;
+        case 1: request.getRequestDispatcher("/challengeQuestion/add").forward(request); break;
+        case 2: request.getRequestDispatcher("/challengeQuestion/update").forward(request); break;
+        case 3: request.getRequestDispatcher("/challengeQuestion/delete").forward(request); break;
+        case 4: request.getRequestDispatcher("/challengeQuestion/search").forward(request); break;
         case 0: return;
         default:
           System.out.println("명령어가 올바르지 않습니다!");
