@@ -21,26 +21,27 @@ public class DonationBoardAcceptApplyHandler extends AbstractDonationBoardHandle
     System.out.println();
     System.out.println("[모금함 개설신청서 승인]");
 
-    int no = (int) request.getAttribute("no");
+    DonationBoardDTO donationBoardAdminDTO = (DonationBoardDTO) request.getAttribute("donationBoardAdminDTO");
 
-    DonationBoardDTO donationBoardDTO = findByDonationApply(no);
-
-    if (donationBoardDTO == null) {
-      System.out.println("해당 번호의 모금함 개설신청서가 없습니다.");
+    if (donationBoardAdminDTO == null) {
+      System.out.println();
+      System.out.println("[ 해당 번호의 모금함 개설신청서가 없습니다. ]");
       return;
     }
 
+    System.out.println();
     String input = Prompt.inputString("정말 승인하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("해당 모금함 개설신청 승인을 취소하였습니다.");
+      System.out.println();
+      System.out.println("[ 해당 모금함 개설신청 승인을 취소하였습니다. ]");
       return;
     }
 
-    donationBoardDTO.setIsSigned(Applied);
+    donationBoardAdminDTO.setIsSigned(Applied);
 
-    donationBoardApplyDTOList.add(donationBoardDTO);
-
-    System.out.println("해당 모금함 개설신청을 승인하였습니다.");
+    donationBoardApplyDTOList.add(donationBoardAdminDTO);
+    System.out.println();
+    System.out.println("[ 해당 모금함 개설신청을 승인하였습니다. ]");
 
 
   }

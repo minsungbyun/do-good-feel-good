@@ -1,6 +1,7 @@
 package com.share.ftp.handler.personal.donation;
 
 import static com.share.util.General.check.Rejected;
+import java.text.DecimalFormat;
 import java.util.List;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.handler.CommandRequest;
@@ -19,6 +20,9 @@ public class DonationBoardRejectedListHandler extends AbstractDonationBoardHandl
 
   @Override
   public void execute(CommandRequest request) throws Exception {
+
+    DecimalFormat formatter = new DecimalFormat("###,###,###");
+
 
     System.out.println();
     System.out.println("[모금함 개설 반려 목록]");
@@ -44,7 +48,7 @@ public class DonationBoardRejectedListHandler extends AbstractDonationBoardHandl
               donationBoardRejectDTO.getFileUpload(), 
               donationBoardRejectDTO.getRegisteredStartDate(),
               donationBoardRejectDTO.getRegisteredEndDate(),
-              donationBoardRejectDTO.getMoneyTarget(),
+              formatter.format(donationBoardRejectDTO.getMoneyTarget()),
               donationBoardRejectDTO.getIsSigned());
           System.out.println("--------------------------------------------------------------");
         } else {

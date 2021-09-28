@@ -96,6 +96,7 @@ import com.share.ftp.handler.personal.community.CommReviewAddHandler;
 import com.share.ftp.handler.personal.community.CommReviewDeleteHandler;
 import com.share.ftp.handler.personal.community.CommReviewListHandler;
 import com.share.ftp.handler.personal.community.CommReviewUpdateHandler;
+import com.share.ftp.handler.personal.donation.DonationAdminPrompt;
 import com.share.ftp.handler.personal.donation.DonationBoardAcceptApplyHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardAdminApplyDetailHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardAppliedListHandler;
@@ -103,7 +104,9 @@ import com.share.ftp.handler.personal.donation.DonationBoardApplyCompleteListHan
 import com.share.ftp.handler.personal.donation.DonationBoardApplyDetailHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardApplyHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardApplyListHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardDetailRegisterAddHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardListHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardRegisterListHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardRejectApplyHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardRejectedListHandler;
 import com.share.ftp.handler.personal.donation.DonationPrompt;
@@ -280,6 +283,7 @@ public class App {
       new DonationBoardAppliedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList);
 
   DonationPrompt donationPrompt = new DonationPrompt(donationBoardDTOList, donationRegisterDTOList);
+  DonationAdminPrompt donationAdminPrompt = new DonationAdminPrompt(donationBoardDTOList, donationRegisterDTOList);
 
 
   //  DonationRegisterParticipationListHandler donationRegisterParticipationListHandler = new DonationRegisterParticipationListHandler(donationRegisterDTOList, donationBoardDTOList);
@@ -400,12 +404,15 @@ public class App {
     commands.put("/donationBoard/rejectApply", new DonationBoardRejectApplyHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
     commands.put("/donationBoard/rejectedList", new DonationBoardRejectedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
     commands.put("/donationBoard/applyDetail", new DonationBoardApplyDetailHandler(donationBoardDTOList, donationRegisterDTOList, donationPrompt));
-    commands.put("/adminDonationBoard/applyDetail", new DonationBoardAdminApplyDetailHandler(donationBoardDTOList, donationRegisterDTOList, donationPrompt));
+    commands.put("/adminDonationBoard/applyDetail", new DonationBoardAdminApplyDetailHandler(donationBoardDTOList, donationAdminPrompt));
 
     // 모금함 (기부하기)
     commands.put("/donationRegister/add", new DonationRegisterAddHandler(donationRegisterDTOList, joinDTOList, donationBoardDTOList));
     commands.put("/donationRegister/participation", new DonationRegisterParticipationHandler(donationRegisterDTOList));
     commands.put("/donationRegister/totalMoney", new DonationRegisterTotalMoneyHandler(donationRegisterDTOList));
+
+    commands.put("/donationBoardRegister/list", new DonationBoardRegisterListHandler(donationRegisterDTOList));
+    commands.put("/donationBoardDetailRegister/add", new DonationBoardDetailRegisterAddHandler(donationRegisterDTOList, joinDTOList, donationBoardDTOList));
 
     // 고객센터 문의사항
     commands.put("/question/add", new QuestionAddHandler(myQuestionListDTOList));
@@ -793,10 +800,10 @@ public class App {
     MenuGroup donationMenu = new MenuGroup("모금함");
 
     donationMenu.add(new MenuItem("전체 기부금 내역", "/donationRegister/totalMoney"));
+    donationMenu.add(new MenuItem("전체 기부 참여내역", "/donationRegister/participation"));
     donationMenu.add(new MenuItem("모금함목록","/donationBoard/list"));
     donationMenu.add(new MenuItem("모금함 상세보기", "/donationBoard/applyDetail"));
-    donationMenu.add(new MenuItem("기부하기", ACCESS_MEMBER, "/donationRegister/add"));
-    donationMenu.add(new MenuItem("기부 참여내역", "/donationRegister/participation"));
+    //    donationMenu.add(new MenuItem("기부하기", ACCESS_MEMBER, "/donationRegister/add"));
     donationMenu.add(new MenuItem("모금함 개설신청", ACCESS_ORG, "/donationBoard/apply"));
 
     return donationMenu;

@@ -133,7 +133,7 @@ public class DonationRegisterAddHandler extends AbstractDonationRegisterHandler 
         System.out.println("--------------------------------------------------------------");
         System.out.println("올바른 숫자를 입력하세요");
         System.out.println("--------------------------------------------------------------");
-
+        continue;
       } catch (Exception e) {
         System.out.println("--------------------------------------------------------------");
         //      System.out.printf("오류 발생: %s\n", e.getClass().getName());
