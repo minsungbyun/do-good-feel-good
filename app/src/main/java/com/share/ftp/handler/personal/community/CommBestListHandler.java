@@ -3,6 +3,7 @@ package com.share.ftp.handler.personal.community;
 import java.util.ArrayList;
 import java.util.List;
 import com.share.ftp.domain.personal.CommBoardDTO;
+import com.share.ftp.handler.BestTest;
 import com.share.ftp.handler.CommandRequest;
 
 public class CommBestListHandler extends AbstractCommBestHandler /*implements Comparable<CommBoardDTO>*/ {
@@ -14,6 +15,8 @@ public class CommBestListHandler extends AbstractCommBestHandler /*implements Co
 
   @Override
   public void execute(CommandRequest request) throws Exception {
+
+    BestTest.getUserPointList(commBoardDTOList);
     //
     //    int max =  commBoardDTOList.get(0).getViewCount();
     //
