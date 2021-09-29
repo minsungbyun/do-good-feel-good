@@ -14,6 +14,7 @@ import com.share.util.Prompt;
 public class MyPointListHandler implements Command {
 
   List<JoinDTO> joinDTOList;
+
   public MyPointListHandler(List<JoinDTO> joinDTOList) {
     this.joinDTOList = joinDTOList;
   }

@@ -21,7 +21,8 @@ public class CommBoardDTO implements Serializable/*, Comparable<CommBoardDTO> */
   private JoinDTO owner;
   private int like;
   private int viewCount;
-  private int bestRank;
+  private int rank;
+  private int bestRank; // 게시글 랭킹
 
   private List<CommBoardReplyDTO> commentList;
   private List<JoinDTO> likeMembers = new ArrayList<>();
@@ -31,16 +32,15 @@ public class CommBoardDTO implements Serializable/*, Comparable<CommBoardDTO> */
     return "CommBoardDTO [commNo=" + commNo + ", replyCount=" + replyCount + ", title=" + title
         + ", id=" + id + ", content=" + content + ", fileUpload=" + fileUpload + ", password="
         + password + ", registeredDate=" + registeredDate + ", owner=" + owner + ", like=" + like
-        + ", viewCount=" + viewCount + ", bestRank=" + bestRank + ", commentList=" + commentList
-        + ", likeMembers=" + likeMembers + "]";
+        + ", viewCount=" + viewCount + ", rank=" + rank + ", bestRank=" + bestRank
+        + ", commentList=" + commentList + ", likeMembers=" + likeMembers + "]";
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(bestRank, commNo, commentList, content, fileUpload, id, like, likeMembers,
-        owner, password, registeredDate, replyCount, title, viewCount);
+        owner, password, rank, registeredDate, replyCount, title, viewCount);
   }
-
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -55,122 +55,101 @@ public class CommBoardDTO implements Serializable/*, Comparable<CommBoardDTO> */
         && Objects.equals(fileUpload, other.fileUpload) && Objects.equals(id, other.id)
         && like == other.like && Objects.equals(likeMembers, other.likeMembers)
         && Objects.equals(owner, other.owner) && Objects.equals(password, other.password)
-        && Objects.equals(registeredDate, other.registeredDate) && replyCount == other.replyCount
-        && Objects.equals(title, other.title) && viewCount == other.viewCount;
+        && rank == other.rank && Objects.equals(registeredDate, other.registeredDate)
+        && replyCount == other.replyCount && Objects.equals(title, other.title)
+        && viewCount == other.viewCount;
   }
 
   public int getCommNo() {
     return commNo;
   }
-
   public void setCommNo(int commNo) {
     this.commNo = commNo;
   }
-
   public int getReplyCount() {
     return replyCount;
   }
-
   public void setReplyCount(int replyCount) {
     this.replyCount = replyCount;
   }
-
   public String getTitle() {
     return title;
   }
-
   public void setTitle(String title) {
     this.title = title;
   }
-
   public String getId() {
     return id;
   }
-
   public void setId(String id) {
     this.id = id;
   }
-
   public String getContent() {
     return content;
   }
-
   public void setContent(String content) {
     this.content = content;
   }
-
   public String getFileUpload() {
     return fileUpload;
   }
-
   public void setFileUpload(String fileUpload) {
     this.fileUpload = fileUpload;
   }
-
   public String getPassword() {
     return password;
   }
-
   public void setPassword(String password) {
     this.password = password;
   }
-
   public Date getRegisteredDate() {
     return registeredDate;
   }
-
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
-
   public JoinDTO getOwner() {
     return owner;
   }
-
   public void setOwner(JoinDTO owner) {
     this.owner = owner;
   }
-
   public int getLike() {
     return like;
   }
-
   public void setLike(int like) {
     this.like = like;
   }
-
   public int getViewCount() {
     return viewCount;
   }
-
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
-
+  public int getRank() {
+    return rank;
+  }
+  public void setRank(int rank) {
+    this.rank = rank;
+  }
   public int getBestRank() {
     return bestRank;
   }
-
   public void setBestRank(int bestRank) {
     this.bestRank = bestRank;
   }
-
   public List<CommBoardReplyDTO> getCommentList() {
     return commentList;
   }
-
   public void setCommentList(List<CommBoardReplyDTO> commentList) {
     this.commentList = commentList;
   }
-
   public List<JoinDTO> getLikeMembers() {
     return likeMembers;
   }
-
   public void setLikeMembers(List<JoinDTO> likeMembers) {
     this.likeMembers = likeMembers;
   }
-
   public void addLikeMember(JoinDTO likeMember) {
     this.likeMembers.add(likeMember);
   }

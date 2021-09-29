@@ -6,8 +6,8 @@ public class CommBestComparator implements Comparator<CommBoardDTO> {
 
   @Override
   public int compare(CommBoardDTO firstCommBoard, CommBoardDTO secondCommBoard) {
-    int first = firstCommBoard.getViewCount();
-    int second = secondCommBoard.getViewCount();
+    int first = firstCommBoard.getLike();
+    int second = secondCommBoard.getLike();
 
     if (first > second) {
       return -1;

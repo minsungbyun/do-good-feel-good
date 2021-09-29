@@ -4,59 +4,66 @@ import java.util.Collections;
 import java.util.List;
 import com.share.ftp.domain.personal.CommBestComparator;
 import com.share.ftp.domain.personal.CommBoardDTO;
+import com.share.ftp.domain.personal.CommBoardReplyDTO;
 
-public class BestTest {
+public class BestTest implements Command {
 
-  public static void main(String[] args) {
-    // TODO Auto-generated method stub
+  //  public static void main(String[] args) {
+  //
+  //  }
+
+  public BestTest(
+      List<CommBoardDTO> commBoardDTOList,
+      List<CommBoardReplyDTO> commBoardReplyDTOList) {
 
   }
 
-  public static List<CommBoardDTO> getUserRank(List<CommBoardDTO> allUser) {
 
-    List<CommBoardDTO> pointList = getUserPointList(allUser);
+  public static List<CommBoardDTO> getLikeRank(List<CommBoardDTO> allBoards) {
 
-    for (int i = 0; i < pointList.size(); i++) {
-      for (int j = 0; j < pointList.size(); j++) {
-        if (pointList.get(i).getViewCount() < pointList.get(j).getViewCount()) {  
-          pointList.get(i).setViewCount(pointList.get(i).getBestRank() + 1);
+    List<CommBoardDTO> commBoardList = getCommBestList(allBoards);
+
+    for (int i = 0; i < commBoardList.size(); i++) {
+      for (int j = 0; j < commBoardList.size(); j++) {
+        if (commBoardList.get(i).getLike() < commBoardList.get(j).getLike()) {  
+          commBoardList.get(i).setRank(commBoardList.get(i).getRank() + 1);
         }
       }
     }
 
-    for (int i = 0; i < pointList.size(); i++) {
-      pointList.get(i).setFinalRank(pointList.get(i).getBestRank());
+    for (int i = 0; i < commBoardList.size(); i++) {
+      commBoardList.get(i).setBestRank(commBoardList.get(i).getRank());
     }
 
-    return pointList;
+    return commBoardList;
   }
 
 
-  public static void printUserRank(List<CommBoardDTO> allUser) {
+  public static void printBestRank(List<CommBoardDTO> allBoards) {
 
-    List<CommBoardDTO> userRank = getUserRank(allUser);
+    List<CommBoardDTO> likeRank = getLikeRank(allBoards);
 
-    for (CommBoardDTO loginUser : userRank) {
-      //      System.out.printf("이름 : %s 내용 : %s점 등수 : %d등\n" , loginUser.getOwner(),  loginUser.getContent(), loginUser.getLike());
+    for (CommBoardDTO commBoard : likeRank) {
+      System.out.printf
+      ("작성자 : %s 제목 : %s 좋아요수 : %d\n" , 
+          commBoard.getOwner(),  commBoard.getTitle(), commBoard.getLike());
     }
-  }
-
-  public static int printIndividualUserRank(CommBoardDTO loginUser) {
-    return loginUser.getLike();
   }
 
   // 현재 로그인 한 회원의 포인트를 비교해서 나열함
-  public static List<CommBoardDTO> getUserPointList(List<CommBoardDTO> allUser) {
+  public static List<CommBoardDTO> getCommBestList(List<CommBoardDTO> allBoards) {
 
-    CommBestComparator userPointComp = new CommBestComparator();
+    CommBestComparator boardscomp = new CommBestComparator();
 
-    Collections.sort(allUser, userPointComp);
+    Collections.sort(allBoards, boardscomp);
 
-    for(CommBoardDTO loginUser : allUser) {
-      System.out.printf("이름 : %s 내용 : %s점 등수 : %d등\n" , loginUser.getOwner(),  loginUser.getContent(), loginUser.getLike());
+    for(CommBoardDTO commBoard : allBoards) {
+      System.out.printf
+      ("작성자 : %s 제목 : %s 좋아요수 : %d\n" , 
+          commBoard.getOwner(),  commBoard.getTitle(), commBoard.getLike());
       System.out.println();
     }
-    return allUser;
+    return allBoards;
   }
 }
 

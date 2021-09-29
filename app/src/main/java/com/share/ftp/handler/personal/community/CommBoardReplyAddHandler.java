@@ -30,13 +30,6 @@ public class CommBoardReplyAddHandler extends AbstractCommBoardReplyHandler {
       System.out.println("해당 게시글이 없습니다!");
     }
 
-    String input = Prompt.inputString("해당 게시글에 댓글 등록을 하시겠습니까? (y/N) ");
-    System.out.println();
-    if (!input.equals("y") || input.length() == 0) {
-      System.out.println();
-      System.out.println("댓글 등록이 취소되었습니다.");
-      return;
-    }
 
     CommBoardReplyDTO commBoardReplyDTO = new CommBoardReplyDTO();
 
@@ -59,10 +52,18 @@ public class CommBoardReplyAddHandler extends AbstractCommBoardReplyHandler {
 
     commBoardReplyDTO.setCommReplyNo(commBoardDTO.getReplyCount()); 
 
-    commBoardReplyDTOList.add(commBoardReplyDTO);
-
+    String input = Prompt.inputString("해당 게시글에 댓글 등록을 하시겠습니까? (y/N) ");
     System.out.println();
-    System.out.println("[  ✔️ 게시글 등록이 완료되었습니다.  ]");
-  }
+    if (!input.equals("y") || input.length() == 0) {
+      System.out.println();
+      System.out.println("댓글 등록이 취소되었습니다.");
+      return;
+    } else if (input.equalsIgnoreCase("y")) {
 
+      commBoardReplyDTOList.add(commBoardReplyDTO);
+
+      System.out.println();
+      System.out.println("[  ✔️ 게시글 등록이 완료되었습니다.  ]");
+    }
+  }
 }
