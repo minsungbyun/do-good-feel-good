@@ -9,3 +9,5 @@
 
 rootProject.name = 'happy-share'
 include('app')
+include('app-client')
+include('app-server')

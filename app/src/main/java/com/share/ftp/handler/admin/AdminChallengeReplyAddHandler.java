@@ -18,11 +18,13 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
 
   @Override
   public void execute(CommandRequest request) throws Exception {
+    System.out.println();
     System.out.println("[ 문의답글 등록 ]");
     System.out.println();
     //    int challengeNo = (int) request.getAttribute("no");
     //
     //    ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
+
 
     int questionNo = (int) request.getAttribute("no");
     ChallengeQuestionDTO challengeQuestion = findByQuestionNo(questionNo);
