@@ -33,6 +33,10 @@ public class Prompt {
     return Integer.parseInt(inputString(title));
   }
 
+  public static long inputLong(String title) {
+    return Long.parseLong(inputString(title));
+  }
+
   public static Date inputDate(String title) {
     return Date.valueOf(inputString(title));
   }

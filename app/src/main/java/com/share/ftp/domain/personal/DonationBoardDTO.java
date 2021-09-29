@@ -11,7 +11,7 @@ public class DonationBoardDTO implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  private int moneyTarget;
+  private long moneyTarget;
   private int no;
   private String sort;
   private String title;
@@ -22,6 +22,8 @@ public class DonationBoardDTO implements Serializable {
   private Date registeredEndDate;
   private String isSigned;
   private List<JoinDTO> members = new ArrayList<>();
+
+
 
   @Override
   public String toString() {
@@ -51,10 +53,11 @@ public class DonationBoardDTO implements Serializable {
         && Objects.equals(registeredStartDate, other.registeredStartDate)
         && Objects.equals(sort, other.sort) && Objects.equals(title, other.title);
   }
-  public int getMoneyTarget() {
+
+  public long getMoneyTarget() {
     return moneyTarget;
   }
-  public void setMoneyTarget(int moneyTarget) {
+  public void setMoneyTarget(long moneyTarget) {
     this.moneyTarget = moneyTarget;
   }
   public int getNo() {

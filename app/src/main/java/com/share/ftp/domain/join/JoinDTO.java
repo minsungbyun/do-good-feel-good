@@ -175,14 +175,4 @@ public class JoinDTO implements Serializable {
 
 
 
-
-
-
-
-
-
-
-
-
-
 }

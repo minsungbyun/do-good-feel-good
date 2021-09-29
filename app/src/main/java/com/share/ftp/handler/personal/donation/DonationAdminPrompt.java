@@ -1,17 +1,17 @@
 package com.share.ftp.handler.personal.donation;
 
-import static com.share.util.General.check.Applied;
+import static com.share.util.General.check.Waiting;
 import java.util.List;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
 import com.share.util.Prompt;
 
-public class DonationPrompt {
+public class DonationAdminPrompt {
 
-  protected List<DonationBoardDTO> donationBoardDTOList;
+  List<DonationBoardDTO> donationBoardDTOList;
   List<DonationRegisterDTO> donationRegisterDTOList;
 
-  public DonationPrompt(List<DonationBoardDTO> donationBoardDTOList,
+  public DonationAdminPrompt(List<DonationBoardDTO> donationBoardDTOList,
       List<DonationRegisterDTO> donationRegisterDTOList) {
     this.donationBoardDTOList = donationBoardDTOList;
     this.donationRegisterDTOList = donationRegisterDTOList;
@@ -21,8 +21,9 @@ public class DonationPrompt {
     System.out.println();
     System.out.println("모금함목록:");
 
+
     for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
-      if (donationBoardDTO.getIsSigned().equals(Applied)) {
+      if (donationBoardDTO.getIsSigned().equals(Waiting)) {
         System.out.println();
         System.out.printf("  [ %d. %s ]\n", donationBoardDTO.getNo(), donationBoardDTO.getTitle());
       } 
