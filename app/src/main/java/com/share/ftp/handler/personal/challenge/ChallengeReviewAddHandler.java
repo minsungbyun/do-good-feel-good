@@ -32,16 +32,14 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
       System.out.println();
       System.out.println("해당 챌린지가 없습니다!");
     }
-    
-    for (ChallengeReviewDTO challengeReviewDTO : challengeReviewDTOList) {
-      if (challengeReviewDTO.getOwner().equals(AuthLoginHandler.getLoginUser())) {
-        System.out.println("이미 참여하셨습니다.");
-        return;
-      } else {
-        continue;
-      }
-    }
-    
+
+    //    for (ChallengeReviewDTO challengeReviewDTO : challengeReviewDTOList) {
+    //      if (challengeReviewDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+    //        System.out.println("이미 참여하셨습니다.");
+    //        return;
+    //      } 
+    //    }
+
 
     //    System.out.printf("챌린지 제목: %s\n"
     //        //        + "챌린지 시작기간: %s\n"
@@ -56,14 +54,6 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
     //        challengeDTO.getContent(),
     //        challengeDTO.getFileUpload(),
     //        challengeDTO.getRegisteredDate());
-
-    String input = Prompt.inputString("해당 챌린지에 참여인증&댓글등록을 하시겠습니까? (y/N) ");
-    System.out.println();
-    if (!input.equals("y") || input.length() == 0) {
-      System.out.println();
-      System.out.println("댓글 등록이 취소되었습니다.");
-      return;
-    }
 
 
     if (!challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
@@ -84,7 +74,6 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
     challengeReviewDTO.setContent(Prompt.inputString("내용 ▶ "));
     challengeReviewDTO.setFileUpload(Prompt.inputString("파일첨부 ▶ "));
     challengeReviewDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
-
     challengeReviewDTO.setOwner(AuthLoginHandler.getLoginUser());
 
 
@@ -104,19 +93,34 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
     //    System.out.println("challengeDTO.getReviewCount() = " + challengeDTO.getReviewCount());
 
 
-    // 포인트 적립 (10포인트)
-    AuthLoginHandler.getLoginUser().setPoint(AuthLoginHandler.getLoginUser().getPoint() + CHALLENGE_REVIEWPOINT);
 
-    // 리뷰어 등록
-    challengeDTO.addReviewer(AuthLoginHandler.getLoginUser());
+    while (true) {
+      String input = Prompt.inputString("해당 챌린지에 참여인증&댓글등록을 하시겠습니까? (y/N) ");
+      System.out.println();
+      if (input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println();
+        System.out.println("댓글 등록이 취소되었습니다.");
+        return;
 
-    challengeReviewDTOList.add(challengeReviewDTO);
-    //    System.out.println("총 댓글 개수 = " + challengeReviewDTOList.size());
+      } else if (input.equalsIgnoreCase("y")) {
 
-    System.out.println();
-    System.out.println("참여인증&댓글이 등록이 완료되었습니다.");
+        // 포인트 적립 (10포인트)
+        AuthLoginHandler.getLoginUser().setPoint(AuthLoginHandler.getLoginUser().getPoint() + CHALLENGE_REVIEWPOINT);
+
+        // 리뷰어 등록
+        challengeDTO.addReviewer(AuthLoginHandler.getLoginUser());
+
+        challengeReviewDTOList.add(challengeReviewDTO);
+        //    System.out.println("총 댓글 개수 = " + challengeReviewDTOList.size());
+
+        System.out.println();
+        System.out.println("참여인증&댓글이 등록이 완료되었습니다.");
+        break;
+
+      } else {
+        System.out.println("다시입력해주세요");
+
+      }
+    }
   }
-
-
-
 }

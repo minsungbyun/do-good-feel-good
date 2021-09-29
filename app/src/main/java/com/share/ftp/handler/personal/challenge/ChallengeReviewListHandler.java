@@ -21,13 +21,6 @@ public class ChallengeReviewListHandler extends AbstractChallengeReviewHandler {
 
     int challengeNo = (int) request.getAttribute("no");
 
-    ChallengeDTO challengeList = findByChallengeNo(challengeNo); 
-
-    if (challengeList == null) {
-      System.out.println("해당 챌린지가 없습니다.");
-      return;
-    }
-
     if (challengeReviewDTOList.isEmpty()) {
       System.out.println("참여인증&댓글이 없습니다.");
       return;
