@@ -25,7 +25,7 @@ public class CommReviewListHandler extends AbstractCommReviewHandler {
 
     for (CommReviewDTO commReviewDTO : commReviewDTOList) {
       System.out.printf("%d, %s, %s, %s\n", 
-          commReviewDTO.getNo(), 
+          commReviewDTO.getCommReviewNo(), 
           commReviewDTO.getOwner().getId(), 
           commReviewDTO.getContent(),
           commReviewDTO.getRegisteredDate());
