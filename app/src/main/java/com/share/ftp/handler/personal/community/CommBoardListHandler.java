@@ -27,20 +27,19 @@ public class CommBoardListHandler extends AbstractCommBoardHandler {
 
     for(CommBoardDTO commBoardDTO : commBoardDTOList) {
 
-      System.out.printf("%d, %s[%d], %s, %s, %s, %s, %d, %d\n", 
+      System.out.printf("%d, %s[%d], %s, %s, %s, %d, %d\n", 
           // AuthLoginHandler.loginUser.getId(),
           commBoardDTO.getCommNo(), 
           commBoardDTO.getTitle(), 
           commBoardDTO.getReplyCount(),
           commBoardDTO.getOwner().getId(),
-          commBoardDTO.getContent(),
+          // commBoardDTO.getContent(),
           commBoardDTO.getFileUpload(),
           //commBoardDTO.getPassword(),
           commBoardDTO.getRegisteredDate(), 
           commBoardDTO.getViewCount(),
           commBoardDTO.getLike());
     }
-
   }
 }
 

@@ -22,7 +22,7 @@ public class CommReviewAddHandler extends AbstractCommReviewHandler {
 
     CommReviewDTO commReviewDTO = new CommReviewDTO();
 
-    commReviewDTO.setNo(getNextNum());
+    commReviewDTO.setCommReviewNo(getNextNum());
     commReviewDTO.setContent(Prompt.inputString("내용  ▶ "));
     commReviewDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
     commReviewDTO.setOwner(AuthLoginHandler.getLoginUser());
