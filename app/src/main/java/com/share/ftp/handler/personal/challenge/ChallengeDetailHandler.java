@@ -64,7 +64,7 @@ public class ChallengeDetailHandler extends AbstractAdminChallengeHandler {
         case 1: request.getRequestDispatcher("/challengeJoin/join").forward(request); break;
         case 2: request.getRequestDispatcher("/challengeJoin/list").forward(request); break;
         case 3: request.getRequestDispatcher("/challengeReview/connect").forward(request); break;
-        case 4: request.getRequestDispatcher("/challengeQuestion/connect").forward(request); break;
+        case 4: request.getRequestDispatcher("/challengeQuestion/list").forward(request); break;
         //        case 5: request.getRequestDispatcher("/challengeDetail/like").forward(request); break;
         case 5: request.getRequestDispatcher("/challengeDetail/wish").forward(request); break;
         case 0: return;

@@ -21,22 +21,13 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
     System.out.println();
     System.out.println("[ 문의답글 등록 ]");
     System.out.println();
-    //    int challengeNo = (int) request.getAttribute("no");
-    //
-    //    ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
+    int challengeNo = (int) request.getAttribute("no");
+
+    ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
 
 
     int questionNo = (int) request.getAttribute("no");
     ChallengeQuestionDTO challengeQuestion = findByQuestionNo(questionNo);
-
-
-    String input = Prompt.inputString("해당 문의에 답글 등록을 하시겠습니까?(y/N) ");
-    if (!input.equals("y") || input.length() == 0) {
-      System.out.println();
-      System.out.println("해당 문의에 답글 등록을 취소하였습니다.");
-      return;
-    }
-
 
     //    if (!challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
     //      System.out.println("챌린지 참여한 회원만 등록이 가능합니다!");
@@ -45,7 +36,7 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
 
     ChallengeQuestionDTO challengeReply = new ChallengeQuestionDTO();
 
-    challengeReply.setNo(challengeQuestion.getNo());
+    challengeReply.setNo(challengeDTO.getNo());
     challengeReply.setContent(Prompt.inputString("내용: "));
     challengeReply.setRegisteredDate(new Date(System.currentTimeMillis()));
 
@@ -66,7 +57,15 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
     challengeReply.setQuestionNo(challengeQuestion.getReplyCount()); // 해당 챌린지 문의의 마지막 번호기억 + 1
     //    System.out.println("challengeDTO.getQuestionCount() = " + challengeDTO.getQuestionCount());
 
-    challengeReplyList.add(challengeReply);
+    String input = Prompt.inputString("해당 문의에 답글 등록을 하시겠습니까?(y/N) ");
+    if (!input.equals("y") || input.length() == 0) {
+      System.out.println();
+      System.out.println("해당 문의에 답글 등록을 취소하였습니다.");
+      return;
+    }
+
+    challengeQuestionDTOList.add(challengeQuestion.getQuestionNo(), challengeReply);
+    //    challengeQuestionDTOList.add(challengeReply);
 
     System.out.println();
     System.out.println("문의답글 등록이 완료되었습니다.");
