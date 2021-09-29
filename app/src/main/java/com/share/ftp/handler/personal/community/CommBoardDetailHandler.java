@@ -25,7 +25,7 @@ public class CommBoardDetailHandler extends AbstractCommBoardHandler {
       System.out.println("[  소통해요/ 나눔이야기/ 상세보기  ]");
       System.out.println();
 
-      int no = Prompt.inputInt("번호? ");
+      int no = Prompt.inputInt("번호? ▶ ");
 
       CommBoardDTO commBoardDTO = findByNo(no);
 

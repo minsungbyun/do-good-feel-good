@@ -59,7 +59,6 @@ public class AdminChallengeDetailHandler extends AbstractAdminChallengeHandler {
       System.out.println("1번 ▶ 챌린지 수정");
       System.out.println("2번 ▶ 챌린지 삭제");
       System.out.println("3번 ▶ 등록문의 목록");
-      System.out.println("4번 ▶ 등록문의 상세보기");
       System.out.println("0번 ▶ 이전");
 
       int input = Prompt.inputInt("번호 입력 ▶ ");
@@ -71,11 +70,8 @@ public class AdminChallengeDetailHandler extends AbstractAdminChallengeHandler {
           request.getRequestDispatcher("/adminChallenge/delete").forward(request);
           return;
         case 3:
-          request.getRequestDispatcher("/challengeQuestion/list").forward(request);
-          return;
-        case 4:
-          request.getRequestDispatcher("/adminChallenge/QuestionDetail").forward(request);
-          return;
+          request.getRequestDispatcher("/adminChallenge/QuestionList").forward(request);
+          break;
         case 0:
           return;
         default:

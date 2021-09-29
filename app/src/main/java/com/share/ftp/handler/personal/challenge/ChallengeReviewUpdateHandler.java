@@ -18,20 +18,13 @@ public class ChallengeReviewUpdateHandler extends AbstractChallengeReviewHandler
   public void execute(CommandRequest request) throws Exception {
     while (true) {
       System.out.println("[ 참여인증&댓글 수정 ]");
-      //      System.out.println(" ▶ 챌린지 번호를 입력해주세요 ");
-      //      System.out.println();
-      //      int challengeNo = (int) request.getAttribute("no");
-      //
-      //      ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
-      //
-      //
-      //      if (challengeDTO == null) {
-      //        System.out.println("존재하지 않는 챌린지입니다");
-      //      }
+
+      int challengeNo = (int) request.getAttribute("no");
+      ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
 
       int updateNo = (int) request.getAttribute("reviewNo");
 
-      ChallengeReviewDTO challengeReviewDTO = findByReviewNo(updateNo);
+      ChallengeReviewDTO challengeReviewDTO = findByReviewNo(updateNo,challengeDTO);
 
       try {
         if (challengeReviewDTO == null) {

@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Scanner;
 import com.share.ftp.domain.join.JoinComparator;
 import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.domain.personal.CommBestComparator;
+import com.share.ftp.domain.personal.CommBoardDTO;
 
 public class Prompt {
 
@@ -153,7 +155,61 @@ public class Prompt {
     }
     return allUser;
   }
+  // }
+
+  public static List<CommBoardDTO> getLikeRank(List<CommBoardDTO> allBoards) {
+
+    List<CommBoardDTO> commBoardList = getCommBestList(allBoards);
+
+    for (int i = 0; i < commBoardList.size(); i++) {
+      for (int j = 0; j < commBoardList.size(); j++) {
+        if (commBoardList.get(i).getLike() < commBoardList.get(j).getLike()) {  
+          commBoardList.get(i).setRank(commBoardList.get(i).getRank() + 1);
+        }
+      }
+    }
+
+    for (int i = 0; i < commBoardList.size(); i++) {
+      commBoardList.get(i).setBestRank(commBoardList.get(i).getRank());
+    }
+
+    return commBoardList;
+  }
+
+
+  public static void printBestRank(List<CommBoardDTO> allBoards) {
+
+    List<CommBoardDTO> likeRank = getLikeRank(allBoards);
+
+    for (CommBoardDTO commBoard : likeRank) {
+      System.out.printf
+      ("작성자 : %s 제목 : %s 좋아요수 : %d\n" , 
+          commBoard.getOwner().getId(),  commBoard.getTitle(), commBoard.getLike());
+    }
+  }
+
+  // 수정이 필요합니다!
+  public static List<CommBoardDTO> getCommBestList(List<CommBoardDTO> allBoards) {
+
+    CommBestComparator boardscomp = new CommBestComparator();
+
+    Collections.sort(allBoards, boardscomp);
+
+    for(CommBoardDTO commBoard : allBoards) {
+      System.out.printf
+      ("작성자 : %s 제목 : %s 좋아요수 : %d\n" , 
+          commBoard.getOwner(),  commBoard.getTitle(), commBoard.getLike());
+      System.out.println();
+    }
+    return allBoards;
+  }
 }
+
+
+
+
+
+
 
 
 

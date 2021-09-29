@@ -16,6 +16,17 @@ public abstract class AbstractChallengeReviewHandler implements Command {
     this.challengeDTOList = challengeDTOList;
   }
 
+  protected ChallengeReviewDTO findByReviewNo(int no, ChallengeDTO challengeNo) {
+    for (ChallengeReviewDTO challengeReviewDTO : challengeReviewDTOList) {
+      if (challengeNo.getNo() == challengeReviewDTO.getNo()) {
+        if (challengeReviewDTO.getReviewNo() == no) {
+          return challengeReviewDTO;
+        }
+      }
+    }
+    return null;
+  }
+
   protected ChallengeReviewDTO findByReviewNo(int no) {
     for (ChallengeReviewDTO challengeReviewDTO : challengeReviewDTOList) {
       if (challengeReviewDTO.getReviewNo() == no) {

@@ -16,50 +16,47 @@ public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandl
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[ 문의 목록 ]");
-    System.out.println();
-
-    int challengeNo = (int) request.getAttribute("no");
-
-    ChallengeDTO challengeList = findByChallengeNo(challengeNo); 
-
-    if (challengeList == null) {
-      System.out.println("해당 챌린지가 없습니다.");
-      return;
-    }
-
-    if (challengeQuestionDTOList.isEmpty()) {
-      System.out.println("문의가 없습니다.");
-      return;
-    }
-
-    for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
-      if (challengeQuestionDTO.getNo() == challengeNo && !challengeQuestionDTO.getOwner().getId().equals("admin")) {
-        System.out.printf("%d, %d, %s, %s, %s\n", 
-            challengeQuestionDTO.getNo(),
-            challengeQuestionDTO.getQuestionNo(),
-            challengeQuestionDTO.getOwner().getId(),
-            challengeQuestionDTO.getTitle(),
-            challengeQuestionDTO.getRegisteredDate());
-      }
-    }
-
-    for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
-      if (challengeQuestionDTO.getOwner().getId().equals("admin")) {
-        System.out.printf("관리자답글 :  %s, %s, %s\n", 
-            challengeQuestionDTO.getOwner().getId(),
-            challengeQuestionDTO.getContent(),
-            challengeQuestionDTO.getRegisteredDate());
-      }
-    }
-
     while (true) {
       System.out.println();
-      System.out.println("1번 ▶ 문의 검색");
+      System.out.println("[ 문의 목록 ]");
+      System.out.println();
+
+      int challengeNo = (int) request.getAttribute("no");
+
+      if (challengeQuestionDTOList.isEmpty()) {
+        System.out.println("문의가 없습니다.");
+      }
+
+      for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
+        if (challengeQuestionDTO.getNo() == challengeNo && !challengeQuestionDTO.getOwner().getId().equals("admin")) {
+          System.out.printf("%d, %d, %s, %s, %s\n", 
+              challengeQuestionDTO.getNo(),
+              challengeQuestionDTO.getQuestionNo(),
+              challengeQuestionDTO.getOwner().getId(),
+              challengeQuestionDTO.getTitle(),
+              challengeQuestionDTO.getRegisteredDate());
+        }
+      }
+
+      for (ChallengeQuestionDTO challengeReply : challengeReplyList) {
+        if (challengeReply.getOwner().getId().equals("admin")) {
+          System.out.printf("관리자 :  %s, %s, %s\n", 
+              challengeReply.getOwner().getId(),
+              challengeReply.getContent(),
+              challengeReply.getRegisteredDate());
+        }
+      }
+
+      System.out.println();
+      System.out.println("1번 ▶ 문의 등록");
+      System.out.println("2번 ▶ 문의 변경, 삭제");
+      System.out.println("3번 ▶ 문의 검색");
       System.out.println("0번 ▶ 이전");
       int input = Prompt.inputInt("번호 입력 ▶ ");
       switch (input) {
-        case 1: request.getRequestDispatcher("/challengeQuestion/search").forward(request); break;
+        case 1: request.getRequestDispatcher("/challengeQuestion/add").forward(request); break;
+        case 2: request.getRequestDispatcher("/challengeQuestion/connect").forward(request); break;
+        case 3: request.getRequestDispatcher("/challengeQuestion/search").forward(request); break;
         case 0: return;
         default:
           System.out.println("명령어가 올바르지 않습니다!");

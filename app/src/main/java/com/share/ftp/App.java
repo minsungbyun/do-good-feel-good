@@ -32,8 +32,9 @@ import com.share.ftp.handler.admin.AdminChallengeAddHandler;
 import com.share.ftp.handler.admin.AdminChallengeDeleteHandler;
 import com.share.ftp.handler.admin.AdminChallengeDetailHandler;
 import com.share.ftp.handler.admin.AdminChallengeListHandler;
-import com.share.ftp.handler.admin.AdminChallengeQuestionDetailHandler;
+import com.share.ftp.handler.admin.AdminChallengeQuestionListHandler;
 import com.share.ftp.handler.admin.AdminChallengeReplyAddHandler;
+import com.share.ftp.handler.admin.AdminChallengeReplyConnectlHandler;
 import com.share.ftp.handler.admin.AdminChallengeUpdateHandler;
 import com.share.ftp.handler.admin.AdminMemberDeleteHandler;
 import com.share.ftp.handler.admin.AdminNoticeAddHandler;
@@ -64,14 +65,12 @@ import com.share.ftp.handler.personal.challenge.ChallengeLikeHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionAddHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionConnectHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionDeleteHandler;
-import com.share.ftp.handler.personal.challenge.ChallengeQuestionDetailHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionSearchHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionUpdateHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewAddHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewConnectHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewDeleteHandler;
-//import com.share.ftp.handler.personal.challenge.ChallengeReviewDetailHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewSearchHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewUpdateHandler;
@@ -386,11 +385,11 @@ public class App {
     // 챌린지 문의하기
     commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
     commands.put("/challengeQuestion/list", new ChallengeQuestionListHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
-    commands.put("/challengeQuestion/detail", new ChallengeQuestionDetailHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
+    //    commands.put("/challengeQuestion/detail", new ChallengeQuestionDetailHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
     commands.put("/challengeQuestion/update", new ChallengeQuestionUpdateHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
     commands.put("/challengeQuestion/delete", new ChallengeQuestionDeleteHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
     commands.put("/challengeQuestion/search", new ChallengeQuestionSearchHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
-    commands.put("/challengeQuestion/connect", new ChallengeQuestionConnectHandler());
+    commands.put("/challengeQuestion/connect", new ChallengeQuestionConnectHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
 
     // 챌린지 랭킹
     //    commands.put("/ranking/list", new RankingHandler());  //전체랭킹(구현예정)
@@ -480,8 +479,9 @@ public class App {
     commands.put("/adminChallenge/detail", new AdminChallengeDetailHandler(challengeDTOList));
     commands.put("/adminChallenge/update", new AdminChallengeUpdateHandler(challengeDTOList));
     commands.put("/adminChallenge/delete", new AdminChallengeDeleteHandler(challengeDTOList));
-    commands.put("/adminChallenge/QuestionDetail", new AdminChallengeQuestionDetailHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
-    commands.put("/adminChallenge/replyAdd", new AdminChallengeReplyAddHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
+    commands.put("/adminChallenge/QuestionList", new AdminChallengeQuestionListHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
+    commands.put("/adminChallenge/replyAdd", new AdminChallengeReplyAddHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList)); // 챌린지 답글 등록
+    commands.put("/adminChallenge/replyConnect", new AdminChallengeReplyConnectlHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList)); // 챌린지 답글 등록, 변경, 삭제 연결
 
     // 관리자 기관승인
 

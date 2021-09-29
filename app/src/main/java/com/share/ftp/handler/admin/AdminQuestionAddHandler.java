@@ -32,7 +32,7 @@ public class AdminQuestionAddHandler extends AbstractAdminQuestionHandler {
 
     myQuestionListDTO.setNo(getNextNum());
 
-    myQuestionListDTOList.add(,myQuestionListDTO);
+    //    myQuestionListDTOList.add(,myQuestionListDTO);
 
 
   }

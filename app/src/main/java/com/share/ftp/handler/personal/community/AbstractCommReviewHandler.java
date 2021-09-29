@@ -15,7 +15,7 @@ public abstract class AbstractCommReviewHandler implements Command {
 
   protected CommReviewDTO findByNo(int no) {
     for(CommReviewDTO commReviewDTO : commReviewDTOList) {
-      if(commReviewDTO.getNo() == no) {
+      if(commReviewDTO.getCommReviewNo() == no) {
         return commReviewDTO;
       }
     }
@@ -25,7 +25,7 @@ public abstract class AbstractCommReviewHandler implements Command {
 
   protected int getNextNum() {
     if (commReviewDTOList.size() > 0) {
-      return commReviewDTOList.get(commReviewDTOList.size() -1).getNo() +1;
+      return commReviewDTOList.get(commReviewDTOList.size() -1).getCommReviewNo() +1;
     } else {
       return 1;
     }

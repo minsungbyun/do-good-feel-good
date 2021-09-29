@@ -21,6 +21,9 @@ public class CommBoardDTO implements Serializable/*, Comparable<CommBoardDTO> */
   private JoinDTO owner;
   private int like;
   private int viewCount;
+  private int rank;
+  private int bestRank; // 게시글 랭킹
+
   private List<CommBoardReplyDTO> commentList;
   private List<JoinDTO> likeMembers = new ArrayList<>();
 
@@ -29,16 +32,15 @@ public class CommBoardDTO implements Serializable/*, Comparable<CommBoardDTO> */
     return "CommBoardDTO [commNo=" + commNo + ", replyCount=" + replyCount + ", title=" + title
         + ", id=" + id + ", content=" + content + ", fileUpload=" + fileUpload + ", password="
         + password + ", registeredDate=" + registeredDate + ", owner=" + owner + ", like=" + like
-        + ", viewCount=" + viewCount + ", commentList=" + commentList + ", likeMember=" + likeMembers
-        + "]";
+        + ", viewCount=" + viewCount + ", rank=" + rank + ", bestRank=" + bestRank
+        + ", commentList=" + commentList + ", likeMembers=" + likeMembers + "]";
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(commNo, commentList, content, fileUpload, id, like, likeMembers, owner,
-        password, registeredDate, replyCount, title, viewCount);
+    return Objects.hash(bestRank, commNo, commentList, content, fileUpload, id, like, likeMembers,
+        owner, password, rank, registeredDate, replyCount, title, viewCount);
   }
-
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -48,14 +50,16 @@ public class CommBoardDTO implements Serializable/*, Comparable<CommBoardDTO> */
     if (getClass() != obj.getClass())
       return false;
     CommBoardDTO other = (CommBoardDTO) obj;
-    return commNo == other.commNo && Objects.equals(commentList, other.commentList)
-        && Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
-        && Objects.equals(id, other.id) && like == other.like
-        && Objects.equals(likeMembers, other.likeMembers) && Objects.equals(owner, other.owner)
-        && Objects.equals(password, other.password)
-        && Objects.equals(registeredDate, other.registeredDate) && replyCount == other.replyCount
-        && Objects.equals(title, other.title) && viewCount == other.viewCount;
+    return bestRank == other.bestRank && commNo == other.commNo
+        && Objects.equals(commentList, other.commentList) && Objects.equals(content, other.content)
+        && Objects.equals(fileUpload, other.fileUpload) && Objects.equals(id, other.id)
+        && like == other.like && Objects.equals(likeMembers, other.likeMembers)
+        && Objects.equals(owner, other.owner) && Objects.equals(password, other.password)
+        && rank == other.rank && Objects.equals(registeredDate, other.registeredDate)
+        && replyCount == other.replyCount && Objects.equals(title, other.title)
+        && viewCount == other.viewCount;
   }
+
   public int getCommNo() {
     return commNo;
   }
@@ -122,21 +126,30 @@ public class CommBoardDTO implements Serializable/*, Comparable<CommBoardDTO> */
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
+  public int getRank() {
+    return rank;
+  }
+  public void setRank(int rank) {
+    this.rank = rank;
+  }
+  public int getBestRank() {
+    return bestRank;
+  }
+  public void setBestRank(int bestRank) {
+    this.bestRank = bestRank;
+  }
   public List<CommBoardReplyDTO> getCommentList() {
     return commentList;
   }
   public void setCommentList(List<CommBoardReplyDTO> commentList) {
     this.commentList = commentList;
   }
-
   public List<JoinDTO> getLikeMembers() {
     return likeMembers;
   }
-
   public void setLikeMembers(List<JoinDTO> likeMembers) {
     this.likeMembers = likeMembers;
   }
-
   public void addLikeMember(JoinDTO likeMember) {
     this.likeMembers.add(likeMember);
   }
@@ -144,7 +157,5 @@ public class CommBoardDTO implements Serializable/*, Comparable<CommBoardDTO> */
   public void removeLikeMember(JoinDTO likeMember) {
     this.likeMembers.remove(likeMember);
   }
-
-
 }
 
