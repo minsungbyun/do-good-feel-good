@@ -42,7 +42,9 @@ public class ChallengeReviewDeleteHandler extends AbstractChallengeReviewHandler
         return;
       }
 
-      if (!challengeReviewDTO.getOwner().getId().contains(AuthLoginHandler.getLoginUser().getId())) {
+      if ((challengeReviewDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
+          AuthLoginHandler.getLoginUser().getId().equals("admin")) {
+      } else {
         System.out.println("삭제 권한이 없습니다.");
         return;
       }
@@ -56,7 +58,7 @@ public class ChallengeReviewDeleteHandler extends AbstractChallengeReviewHandler
         } else if (input.equals("y")) {
           System.out.println();
           System.out.println("참여인증&댓글을 삭제하였습니다.");
-
+          challengeDTO.setReviewCount(challengeDTO.getReviewCount() - 1);
           AuthLoginHandler.getLoginUser().setPoint(AuthLoginHandler.getLoginUser().getPoint() - CHALLENGE_REVIEWPOINT);
           challengeDTO.removeReviewer(AuthLoginHandler.getLoginUser());
           challengeReviewDTOList.remove(challengeReviewDTO);

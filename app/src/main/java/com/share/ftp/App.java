@@ -35,6 +35,8 @@ import com.share.ftp.handler.admin.AdminChallengeListHandler;
 import com.share.ftp.handler.admin.AdminChallengeQuestionListHandler;
 import com.share.ftp.handler.admin.AdminChallengeReplyAddHandler;
 import com.share.ftp.handler.admin.AdminChallengeReplyConnectlHandler;
+import com.share.ftp.handler.admin.AdminChallengeReplyDeleteHandler;
+import com.share.ftp.handler.admin.AdminChallengeReplyUpdateHandler;
 import com.share.ftp.handler.admin.AdminChallengeUpdateHandler;
 import com.share.ftp.handler.admin.AdminMemberDeleteHandler;
 import com.share.ftp.handler.admin.AdminNoticeAddHandler;
@@ -367,16 +369,15 @@ public class App {
 
     // 챌린지
     commands.put("/adminChallenge/list", new AdminChallengeListHandler(challengeDTOList));  // 챌린지 목록
-    commands.put("/adminChallenge/detail", new AdminChallengeDetailHandler(challengeDTOList));  // 챌린지 상세정보
-    commands.put("/challengeJoin/join", new ChallengeJoinHandler(challengeDTOList));  // 참여하기(구현중..)
-    commands.put("/challengeJoin/list", new ChallengeJoinListHandler(challengeDTOList, challengeJoinHandler));  // 참여자목록(구현중..)
-    commands.put("/challengeDetail/like", new ChallengeLikeHandler(challengeDTOList));  // 참여자목록(구현중..)
-    commands.put("/challengeDetail/wish", new ChallengeWishHandler(challengeDTOList));  // 참여자목록(구현중..)
+    commands.put("/challenge/detail", new ChallengeDetailHandler(challengeDTOList)); // 챌린지 상세정보
+    commands.put("/challengeJoin/join", new ChallengeJoinHandler(challengeDTOList));  // 참여하기
+    commands.put("/challengeJoin/list", new ChallengeJoinListHandler(challengeDTOList, challengeJoinHandler));  // 참여자목록
+    commands.put("/challengeDetail/like", new ChallengeLikeHandler(challengeDTOList));  // 챌린지 좋아요 기능(사용안함)
+    commands.put("/challengeDetail/wish", new ChallengeWishHandler(challengeDTOList));  // 관심 챌린지 등록(찜하기)
 
     // 챌린지 참여인증&댓글
     commands.put("/challengeReview/add", new ChallengeReviewAddHandler(challengeReviewDTOList, challengeDTOList));
     commands.put("/challengeReview/list", new ChallengeReviewListHandler(challengeReviewDTOList, challengeDTOList));
-    commands.put("/challengeReview/detail", new ChallengeDetailHandler(challengeDTOList));
     commands.put("/challengeReview/update", new ChallengeReviewUpdateHandler(challengeReviewDTOList, challengeDTOList));
     commands.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(challengeReviewDTOList, challengeDTOList));
     commands.put("/challengeReview/search", new ChallengeReviewSearchHandler(challengeReviewDTOList, challengeDTOList));
@@ -481,6 +482,8 @@ public class App {
     commands.put("/adminChallenge/delete", new AdminChallengeDeleteHandler(challengeDTOList));
     commands.put("/adminChallenge/QuestionList", new AdminChallengeQuestionListHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
     commands.put("/adminChallenge/replyAdd", new AdminChallengeReplyAddHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList)); // 챌린지 답글 등록
+    commands.put("/adminChallenge/replyUpdate", new AdminChallengeReplyUpdateHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList)); // 챌린지 답글 변경
+    commands.put("/adminChallenge/replyDelete", new AdminChallengeReplyDeleteHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList)); // 챌린지 답글 삭제
     commands.put("/adminChallenge/replyConnect", new AdminChallengeReplyConnectlHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList)); // 챌린지 답글 등록, 변경, 삭제 연결
 
     // 관리자 기관승인
@@ -617,7 +620,7 @@ public class App {
 
     monthlyChallengeMenu.add(new MenuItem("챌린지 목록", "/adminChallenge/list"));
 
-    monthlyChallengeMenu.add(new MenuItem("챌린지 상세정보", "/challengeReview/detail"));
+    monthlyChallengeMenu.add(new MenuItem("챌린지 상세정보", "/challenge/detail"));
 
     //    monthlyChallengeMenu.add(new MenuItem("참여하기", ACCESS_MEMBER, "/challengeJoin/join"));
     //
