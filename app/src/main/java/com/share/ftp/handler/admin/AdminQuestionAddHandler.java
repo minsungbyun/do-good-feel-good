@@ -1,6 +1,5 @@
 package com.share.ftp.handler.admin;
 
-import static com.share.util.General.questionType.DONATIONASK;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.personal.QuestionListDTO;
@@ -20,11 +19,15 @@ public class AdminQuestionAddHandler extends AbstractAdminQuestionHandler {
     System.out.println();
     System.out.println("[ 관리자 답글 ]");
 
+    int questionNo = (int) request.getAttribute("no");
+
+    QuestionListDTO memberQuestionDTO = findByNo(questionNo); 
+
     QuestionListDTO myQuestionListDTO = new QuestionListDTO();
 
     myQuestionListDTO.setTitle(Prompt.inputString("제목? "));
     myQuestionListDTO.setContent(Prompt.inputString("내용? "));
-    myQuestionListDTO.setQnaType(DONATIONASK);
+    myQuestionListDTO.setQnaType(memberQuestionDTO.getQnaType());
     myQuestionListDTO.setOwner(AuthLoginHandler.getLoginUser());
     myQuestionListDTO.setPassword(AuthLoginHandler.getLoginUser().getAdminPassword());
     myQuestionListDTO.setFileUpload(Prompt.inputString("파일첨부? "));
@@ -32,7 +35,7 @@ public class AdminQuestionAddHandler extends AbstractAdminQuestionHandler {
 
     myQuestionListDTO.setNo(getNextNum());
 
-    //    myQuestionListDTOList.add(,myQuestionListDTO);
+    myQuestionListDTOList.add(myQuestionListDTO);
 
 
   }
