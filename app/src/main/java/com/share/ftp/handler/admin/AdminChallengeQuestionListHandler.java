@@ -17,6 +17,7 @@ public class AdminChallengeQuestionListHandler extends AbstractChallengeQuestion
   public void execute(CommandRequest request) throws Exception {
     while (true) {
       int challengeNo = (int) request.getAttribute("no");
+      ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
 
       System.out.println();
       System.out.printf("[ %d번 챌린지 문의 목록 ]", challengeNo);
@@ -24,9 +25,10 @@ public class AdminChallengeQuestionListHandler extends AbstractChallengeQuestion
 
 
 
-      if (challengeQuestionDTOList.isEmpty()) {
-        System.out.println("문의가 없습니다.");
-        return;
+      if (challengeDTO.getQuestionCount() == 0 || challengeQuestionDTOList.isEmpty()) {
+        System.out.println("문의댓글이 없습니다!");
+        System.out.println();
+
       }
 
       for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
@@ -37,10 +39,7 @@ public class AdminChallengeQuestionListHandler extends AbstractChallengeQuestion
               challengeQuestionDTO.getOwner().getId(),
               challengeQuestionDTO.getContent(),
               challengeQuestionDTO.getRegisteredDate());
-        } else {
-          System.out.println("문의가 없습니다.");
-          return;
-        }
+        } 
       }
 
       //      for (ChallengeQuestionDTO challengeReply : challengeReplyList) {
@@ -55,17 +54,15 @@ public class AdminChallengeQuestionListHandler extends AbstractChallengeQuestion
       //      }
 
       System.out.println();
-      System.out.println("1번 ▶ 답글 등록");
-      System.out.println("2번 ▶ 답글 변경, 삭제");
-      System.out.println("3번 ▶ 문의 변경, 삭제");
-      System.out.println("4번 ▶ 문의 검색");
+      System.out.println("1번 ▶ 답글 등록, 변경, 삭제");
+      System.out.println("2번 ▶ 문의 변경, 삭제");
+      System.out.println("3번 ▶ 문의 검색");
       System.out.println("0번 ▶ 이전");
       int input = Prompt.inputInt("번호 입력 ▶ ");
       switch (input) {
-        case 1: request.getRequestDispatcher("/adminChallenge/replyAdd").forward(request); break;
-        case 2: request.getRequestDispatcher("/adminChallenge/replyConnect").forward(request); break;
-        case 3: request.getRequestDispatcher("/challengeQuestion/connect").forward(request); break;
-        case 4: request.getRequestDispatcher("/challengeQuestion/search").forward(request); break;
+        case 1: request.getRequestDispatcher("/adminChallenge/replyConnect").forward(request); break;
+        case 2: request.getRequestDispatcher("/challengeQuestion/connect").forward(request); break;
+        case 3: request.getRequestDispatcher("/challengeQuestion/search").forward(request); break;
         case 0: return;
         default:
           System.out.println("명령어가 올바르지 않습니다!");

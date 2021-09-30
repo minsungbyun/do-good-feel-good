@@ -18,7 +18,7 @@ public class AdminChallengeReplyConnectlHandler extends AbstractChallengeQuestio
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
-    System.out.println("[ 답글 변경, 삭제 ]");
+    System.out.println("[ 답글 등록, 변경, 삭제 ]");
     System.out.println();
 
     int challengeNo = (int) request.getAttribute("no");
@@ -61,13 +61,15 @@ public class AdminChallengeReplyConnectlHandler extends AbstractChallengeQuestio
 
     while (true) {
       System.out.println();
-      System.out.println("1번 ▶ 답글 변경");
-      System.out.println("2번 ▶ 답글 삭제");
+      System.out.println("1번 ▶ 답글 등록");
+      System.out.println("2번 ▶ 답글 변경");
+      System.out.println("3번 ▶ 답글 삭제");
       System.out.println("0번 ▶ 이전");
       int input = Prompt.inputInt("번호 입력 ▶ ");
       switch (input) {
-        case 1: request.getRequestDispatcher("/adminChallenge/replyUpdate").forward(request); return;
-        case 2: request.getRequestDispatcher("/adminChallenge/replyDelete").forward(request); return;
+        case 1: request.getRequestDispatcher("/adminChallenge/replyAdd").forward(request); return;
+        case 2: request.getRequestDispatcher("/adminChallenge/replyUpdate").forward(request); return;
+        case 3: request.getRequestDispatcher("/adminChallenge/replyDelete").forward(request); return;
         case 0: return;
         default:
           System.out.println("명령어가 올바르지 않습니다!");
