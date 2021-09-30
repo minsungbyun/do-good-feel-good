@@ -14,6 +14,11 @@ public class AdminQuestionConnectHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
 
+    int adminNo = (int) request.getAttribute("no");
+
+    request.setAttribute("adminNo", adminNo);
+
+
     while (true) {
       System.out.println();
       System.out.println("1: 답글 등록");
@@ -27,9 +32,9 @@ public class AdminQuestionConnectHandler implements Command {
       int input = Prompt.inputInt("번호 입력 > ");
       switch (input) {
         case 1: request.getRequestDispatcher("/adminQuestion/add").forward(request);
-        break;
+        return;
         case 2: request.getRequestDispatcher("/question/list").forward(request);
-        break;
+        return;
         //        case 3: request.getRequestDispatcher("/question/detail").forward(request);
         //        break;
         //        case 4: request.getRequestDispatcher("/question/update").forward(request);

@@ -10,6 +10,7 @@ public class QuestionListHandler extends AbstractQuestionHandler {
     super (myQuestionListDTOList);
   }
 
+  @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("[고객센터/문의하기/문의하기 목록]");
