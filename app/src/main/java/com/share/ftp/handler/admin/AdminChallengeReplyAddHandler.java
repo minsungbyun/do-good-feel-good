@@ -26,26 +26,32 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
     ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
 
 
-    ChallengeQuestionDTO challengeReply = new ChallengeQuestionDTO();
+    int questionNo = (int) request.getAttribute("questionNo");
+    ChallengeQuestionDTO detailNo = findByQuestionNo(questionNo);
 
-    challengeReply.setNo(challengeDTO.getNo());
-    challengeReply.setContent(Prompt.inputString("내용: "));
-    challengeReply.setRegisteredDate(new Date(System.currentTimeMillis()));
+    //    if (!challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
+    //      System.out.println("챌린지 참여한 회원만 등록이 가능합니다!");
+    //      return;
+    //    }
 
-    challengeReply.setOwner(AuthLoginHandler.getLoginUser());
+    ChallengeQuestionDTO challengeQuestionDTO = new ChallengeQuestionDTO();
+
+    challengeQuestionDTO.setNo(challengeDTO.getNo());
+    challengeQuestionDTO.setContent(Prompt.inputString("내용: "));
+    challengeQuestionDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    challengeQuestionDTO.setOwner(AuthLoginHandler.getLoginUser());
 
 
-    if (challengeDTO.getQuestionCount() == 0) {
-      challengeDTO.setQuestionCount(1);
-      //      System.out.println("각 챌린지의 첫 문의입니다");
-    } else {
-      challengeDTO.setQuestionCount(getNextQuestionNum(challengeDTO));
-      //      challengeReviewDTO.setReviewNo(getNextNum2()); // 해당 챌린지 문의의 마지막 번호기억 + 1
-      //      System.out.println("현재 문의의 번호는? (challengeReviewDTO.getQuestionNo()) " + challengeQuestionDTO.getQuestionNo());
-      //      System.out.println("현재 문의의 번호는? (challengeDTO.getQuestionCount()) " + challengeDTO.getQuestionCount());
-    }
+
+
+    challengeDTO.setQuestionCount(getNextQuestionNum(challengeDTO));
+    //      challengeReviewDTO.setReviewNo(getNextNum2()); // 해당 챌린지 문의의 마지막 번호기억 + 1
+    //      System.out.println("현재 문의의 번호는? (challengeReviewDTO.getQuestionNo()) " + challengeQuestionDTO.getQuestionNo());
+    //      System.out.println("현재 문의의 번호는? (challengeDTO.getQuestionCount()) " + challengeDTO.getQuestionCount());
+
     //    challengeDTO.setReviewCount(challengeReviewDTO.getReviewNo());
-    challengeReply.setQuestionNo(challengeDTO.getQuestionCount()); // 해당 챌린지 문의의 마지막 번호기억 + 1
+    challengeQuestionDTO.setQuestionNo(challengeDTO.getQuestionCount()); // 해당 챌린지 문의의 마지막 번호기억 + 1
     //    System.out.println("challengeDTO.getQuestionCount() = " + challengeDTO.getQuestionCount());
 
     String input = Prompt.inputString("해당 문의에 답글 등록을 하시겠습니까?(y/N) ");
@@ -55,7 +61,10 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
       return;
     }
 
-    challengeQuestionDTOList.add(challengeReply);
+
+    int b = indexOf(detailNo.getQuestionNo());
+
+    challengeQuestionDTOList.add(b + 1, challengeQuestionDTO);
     //    challengeQuestionDTOList.add(challengeReply);
 
     System.out.println();
