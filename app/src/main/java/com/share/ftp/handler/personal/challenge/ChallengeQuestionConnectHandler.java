@@ -20,7 +20,7 @@ public class ChallengeQuestionConnectHandler extends AbstractChallengeQuestionHa
     System.out.println("[ 문의 변경, 삭제 ]");
     System.out.println();
 
-    int challengeNo = (int) request.getAttribute("no");
+    int challengeNo = (int) request.getAttribute("challengeNo");
 
     ChallengeDTO challengeList = findByChallengeNo(challengeNo); 
 
@@ -38,13 +38,19 @@ public class ChallengeQuestionConnectHandler extends AbstractChallengeQuestionHa
       return;
     }
 
+    if (challengeQuestion.getContent().equals("삭제된 댓글입니다")) {
+      System.out.println();
+      System.out.println("이미 삭제 된 댓글입니다!");
+      return;
+
+    }
+
 
     if ((challengeQuestion.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
         AuthLoginHandler.getLoginUser().getId().equals("admin")) {
       //      for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
       if (challengeQuestion.getNo() == challengeNo) {
         System.out.printf("아이디: %s\n", challengeQuestion.getOwner().getId());
-        System.out.printf("제목: %s\n", challengeQuestion.getTitle());
         System.out.printf("내용: %s\n", challengeQuestion.getContent());
         System.out.printf("등록날짜: %s\n", challengeQuestion.getRegisteredDate());
       } else {

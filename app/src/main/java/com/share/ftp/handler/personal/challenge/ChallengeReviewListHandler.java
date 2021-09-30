@@ -19,7 +19,7 @@ public class ChallengeReviewListHandler extends AbstractChallengeReviewHandler {
     System.out.println("[ 참여인증&댓글 목록 ]");
     System.out.println();
 
-    int challengeNo = (int) request.getAttribute("no");
+    int challengeNo = (int) request.getAttribute("challengeNo");
 
     if (challengeReviewDTOList.isEmpty()) {
       System.out.println("참여인증&댓글이 없습니다.");

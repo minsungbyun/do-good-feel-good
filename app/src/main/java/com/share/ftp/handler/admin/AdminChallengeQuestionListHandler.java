@@ -16,13 +16,25 @@ public class AdminChallengeQuestionListHandler extends AbstractChallengeQuestion
   @Override
   public void execute(CommandRequest request) throws Exception {
     while (true) {
+      int challengeNo = (int) request.getAttribute("challengeNo");
+
+      //      ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
+
+      int questionNo = (int) request.getAttribute("questionNo");
+      ChallengeQuestionDTO detailNo = findByQuestionNo(questionNo);
+
       System.out.println();
-      System.out.println("[ 문의 목록 ]");
+      System.out.printf("[ %d번 챌린지 문의 목록 ]", challengeNo);
       System.out.println();
 
-      int challengeNo = (int) request.getAttribute("no");
+
 
       if (challengeQuestionDTOList.isEmpty()) {
+        System.out.println("문의가 없습니다.");
+        return;
+      }
+
+      if (detailNo == null) {
         System.out.println("문의가 없습니다.");
         return;
       }
@@ -35,10 +47,7 @@ public class AdminChallengeQuestionListHandler extends AbstractChallengeQuestion
               challengeQuestionDTO.getOwner().getId(),
               challengeQuestionDTO.getContent(),
               challengeQuestionDTO.getRegisteredDate());
-        } else {
-          System.out.println("문의가 없습니다.");
-          return;
-        }
+        } 
       }
 
       //      for (ChallengeQuestionDTO challengeReply : challengeReplyList) {

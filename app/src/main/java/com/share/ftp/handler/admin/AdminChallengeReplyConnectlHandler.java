@@ -21,7 +21,7 @@ public class AdminChallengeReplyConnectlHandler extends AbstractChallengeQuestio
     System.out.println("[ 답글 등록, 변경, 삭제 ]");
     System.out.println();
 
-    int challengeNo = (int) request.getAttribute("no");
+    int challengeNo = (int) request.getAttribute("challengeNo");
 
     ChallengeDTO challengeList = findByChallengeNo(challengeNo); 
 

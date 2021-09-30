@@ -20,7 +20,7 @@ public class ChallengeQuestionAddHandler extends AbstractChallengeQuestionHandle
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[ 문의 등록 ]");
     System.out.println();
-    int challengeNo = (int) request.getAttribute("no");
+    int challengeNo = (int) request.getAttribute("challengeNo");
 
     ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
 
@@ -46,14 +46,6 @@ public class ChallengeQuestionAddHandler extends AbstractChallengeQuestionHandle
     //        challengeDTO.getFileUpload(),
     //        challengeDTO.getRegisteredDate());
 
-    String input = Prompt.inputString("해당 챌린지에 문의등록을 하시겠습니까?(y/N) ");
-    if (!input.equals("y") || input.length() == 0) {
-      System.out.println();
-      System.out.println("해당 챌린지에 문의등록을 취소하였습니다.");
-      return;
-    }
-
-
     if (!challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
       System.out.println("챌린지 참여한 회원만 등록이 가능합니다!");
       return;
@@ -62,7 +54,6 @@ public class ChallengeQuestionAddHandler extends AbstractChallengeQuestionHandle
     ChallengeQuestionDTO challengeQuestionDTO = new ChallengeQuestionDTO();
 
     challengeQuestionDTO.setNo(challengeDTO.getNo());
-    challengeQuestionDTO.setTitle(Prompt.inputString("제목: "));
     challengeQuestionDTO.setContent(Prompt.inputString("내용: "));
     challengeQuestionDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 
@@ -82,6 +73,14 @@ public class ChallengeQuestionAddHandler extends AbstractChallengeQuestionHandle
     //    challengeDTO.setReviewCount(challengeReviewDTO.getReviewNo());
     challengeQuestionDTO.setQuestionNo(challengeDTO.getQuestionCount()); // 해당 챌린지 문의의 마지막 번호기억 + 1
     //    System.out.println("challengeDTO.getQuestionCount() = " + challengeDTO.getQuestionCount());
+
+
+    String input = Prompt.inputString("해당 챌린지에 문의등록을 하시겠습니까?(y/N) ");
+    if (!input.equals("y") || input.length() == 0) {
+      System.out.println();
+      System.out.println("해당 챌린지에 문의등록을 취소하였습니다.");
+      return;
+    }
 
     challengeQuestionDTOList.add(challengeQuestionDTO);
 

@@ -155,7 +155,7 @@ public class Prompt {
     }
     return allUser;
   }
-  // }
+
 
   public static List<CommBoardDTO> getLikeRank(List<CommBoardDTO> allBoards) {
 
@@ -204,6 +204,7 @@ public class Prompt {
     return allBoards;
   }
 }
+
 
 
 

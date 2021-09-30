@@ -34,6 +34,14 @@ public class ChallengeReviewConnectHandler extends AbstractChallengeReviewHandle
       return;
     }
 
+
+    //    if (challengeReviewDTO.getContent().equals("삭제된 댓글입니다")) {
+    //      System.out.println();
+    //      System.out.println("이미 삭제 된 댓글입니다!");
+    //      return;
+    //
+    //    }
+
     if (!challengeReviewDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
       System.out.println("변경 권한이 없습니다.");
       return;
