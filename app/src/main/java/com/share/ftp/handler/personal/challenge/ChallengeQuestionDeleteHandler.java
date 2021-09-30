@@ -24,7 +24,7 @@ public class ChallengeQuestionDeleteHandler extends AbstractChallengeQuestionHan
       System.out.println("[ 문의 삭제 ]");
       System.out.println();
 
-      int challengeNo = (int) request.getAttribute("no");
+      int challengeNo = (int) request.getAttribute("challengeNo");
 
       ChallengeDTO challengeList = findByChallengeNo(challengeNo); 
 
@@ -35,7 +35,7 @@ public class ChallengeQuestionDeleteHandler extends AbstractChallengeQuestionHan
 
       int deleteNo = (int) request.getAttribute("questionNo");
 
-      ChallengeQuestionDTO challengeQuestion = findByQuestionNo(deleteNo);
+      ChallengeQuestionDTO challengeQuestion = findByQuestionNo(deleteNo, challengeList);
 
       try {
         if (challengeQuestion == null) {

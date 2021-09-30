@@ -72,13 +72,15 @@ public abstract class AbstractChallengeQuestionHandler  implements Command {
     }
   }
 
-  protected int indexOf(int questionNo) {
+  protected int indexOf(int questionNo, ChallengeQuestionDTO challengeQuestionDTO) {
     for (int i = 0; i < challengeQuestionDTOList.size(); i++) {
-      if (challengeQuestionDTOList.get(i).getQuestionNo() == questionNo) {
-        return i;
+      if (challengeQuestionDTOList.get(i).getNo() == challengeQuestionDTO.getNo()) {
+        if (challengeQuestionDTOList.get(i).getQuestionNo() == questionNo) {
+          return i;
+        }
       }
     }
     return -1;
   }
-
 }
+
