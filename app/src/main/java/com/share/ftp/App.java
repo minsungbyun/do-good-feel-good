@@ -78,6 +78,7 @@ import com.share.ftp.handler.personal.challenge.ChallengeWishHandler;
 import com.share.ftp.handler.personal.challenge.MyChallengeDetailHandler;
 import com.share.ftp.handler.personal.challenge.MyChallengeListHandler;
 import com.share.ftp.handler.personal.challenge.MyChallengeWishHandler;
+import com.share.ftp.handler.personal.challenge.RankingHandler;
 import com.share.ftp.handler.personal.community.CommBestDetailHandler;
 import com.share.ftp.handler.personal.community.CommBestListHandler;
 import com.share.ftp.handler.personal.community.CommBoardAddHandler;
@@ -120,6 +121,7 @@ import com.share.ftp.handler.personal.mypage.MyBoardListHandler;
 import com.share.ftp.handler.personal.mypage.MyBoardUpdateHandler;
 import com.share.ftp.handler.personal.mypage.MyDonationHandler;
 import com.share.ftp.handler.personal.mypage.MyPointListHandler;
+import com.share.ftp.handler.personal.mypage.MyRankingHandler;
 import com.share.ftp.handler.personal.support.AdminQuestionConnectHandler;
 import com.share.ftp.handler.personal.support.QuestionAddHandler;
 import com.share.ftp.handler.personal.support.QuestionDeleteHandler;
@@ -392,8 +394,8 @@ public class App {
     commands.put("/challengeQuestion/connect", new ChallengeQuestionConnectHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
 
     // 챌린지 랭킹
-    //    commands.put("/ranking/list", new RankingHandler());  //전체랭킹(구현예정)
-    //    commands.put("/myRanking/list", new MyRankingHandler()); //나의랭킹(구현예정)
+    commands.put("/ranking/list", new RankingHandler(joinDTOList));  //전체랭킹(구현예정)
+    commands.put("/myRanking/list", new MyRankingHandler(joinDTOList)); //나의랭킹(구현예정)
 
     // 모금함 (개설신청하기, 개설목록, 승인, 반려)
     commands.put("/donationBoard/list", new DonationBoardListHandler(donationBoardDTOList));
