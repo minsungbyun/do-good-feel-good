@@ -25,6 +25,7 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
 
     ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
 
+
     int questionNo = (int) request.getAttribute("questionNo");
     ChallengeQuestionDTO detailNo = findByQuestionNo(questionNo);
 
@@ -41,8 +42,14 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
 
     challengeQuestionDTO.setOwner(AuthLoginHandler.getLoginUser());
 
-    //    challengeQuestionDTO.setNo(getNextNum());
 
+
+    String input = Prompt.inputString("해당 문의에 답글 등록을 하시겠습니까?(y/N) ");
+    if (!input.equals("y") || input.length() == 0) {
+      System.out.println();
+      System.out.println("해당 문의에 답글 등록을 취소하였습니다.");
+      return;
+    }
 
     challengeDTO.setQuestionCount(getNextQuestionNum(challengeDTO));
     //      challengeReviewDTO.setReviewNo(getNextNum2()); // 해당 챌린지 문의의 마지막 번호기억 + 1
@@ -53,12 +60,6 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
     challengeQuestionDTO.setQuestionNo(challengeDTO.getQuestionCount()); // 해당 챌린지 문의의 마지막 번호기억 + 1
     //    System.out.println("challengeDTO.getQuestionCount() = " + challengeDTO.getQuestionCount());
 
-    String input = Prompt.inputString("해당 문의에 답글 등록을 하시겠습니까?(y/N) ");
-    if (!input.equals("y") || input.length() == 0) {
-      System.out.println();
-      System.out.println("해당 문의에 답글 등록을 취소하였습니다.");
-      return;
-    }
 
     int b = indexOf(detailNo.getQuestionNo());
 
