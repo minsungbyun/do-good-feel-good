@@ -56,7 +56,7 @@ public class ChallengeReviewDeleteHandler extends AbstractChallengeReviewHandler
         } else if (input.equals("y")) {
           System.out.println();
           System.out.println("참여인증&댓글을 삭제하였습니다.");
-
+          challengeDTO.setReviewCount(challengeDTO.getReviewCount() - 1);
           AuthLoginHandler.getLoginUser().setPoint(AuthLoginHandler.getLoginUser().getPoint() - CHALLENGE_REVIEWPOINT);
           challengeDTO.removeReviewer(AuthLoginHandler.getLoginUser());
           challengeReviewDTOList.remove(challengeReviewDTO);

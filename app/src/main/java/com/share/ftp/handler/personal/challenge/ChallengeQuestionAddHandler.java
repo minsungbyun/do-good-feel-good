@@ -54,7 +54,6 @@ public class ChallengeQuestionAddHandler extends AbstractChallengeQuestionHandle
     ChallengeQuestionDTO challengeQuestionDTO = new ChallengeQuestionDTO();
 
     challengeQuestionDTO.setNo(challengeDTO.getNo());
-    challengeQuestionDTO.setTitle(Prompt.inputString("제목: "));
     challengeQuestionDTO.setContent(Prompt.inputString("내용: "));
     challengeQuestionDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 
