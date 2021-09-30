@@ -32,7 +32,7 @@ public class AdminChallengeReplyConnectlHandler extends AbstractChallengeQuestio
 
     int questionNo = Prompt.inputInt("문의 번호를 입력해주세요 ▶ ");
 
-    ChallengeQuestionDTO challengeQuestion = findByQuestionNo(questionNo);
+    ChallengeQuestionDTO challengeQuestion = findByQuestionNo(questionNo, challengeList);
 
     if (challengeQuestion == null) {
       System.out.println("해당 번호의 문의가 없습니다.");

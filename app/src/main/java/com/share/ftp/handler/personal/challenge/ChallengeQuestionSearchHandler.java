@@ -18,11 +18,13 @@ public class ChallengeQuestionSearchHandler extends AbstractChallengeQuestionHan
     System.out.println();
     System.out.println("[ 문의 검색 ]");
     System.out.println();
+    int challengeNo = (int) request.getAttribute("challengeNo");
+    ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
 
     int questionNo = (int) request.getAttribute("questionNo");
     System.out.println();
 
-    ChallengeQuestionDTO challengeQuestion = findByQuestionNo(questionNo); 
+    ChallengeQuestionDTO challengeQuestion = findByQuestionNo(questionNo, challengeDTO); 
 
     if (challengeQuestion == null) {
       System.out.println("문의 내용이 없습니다.");

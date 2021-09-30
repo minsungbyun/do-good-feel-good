@@ -47,16 +47,16 @@ public class General {
 
   public static class level {
     // 기준 같이 정할 것 
-    public static final String LEVEL_A  = "a등급";
-    public static final String LEVEL_B  = "b등급";
-    public static final String LEVEL_C  = "c등급";
-    public static final String LEVEL_D  = "d등급";
-    public static final String LEVEL_E  = "e등급";
+    public static final String LEVEL_A  = "A등급";
+    public static final String LEVEL_B  = "B등급";
+    public static final String LEVEL_C  = "C등급";
+    public static final String LEVEL_D  = "D등급";
+    public static final String LEVEL_E  = "E등급";
 
-    public static final int FROM_B_TO_A  = 4000;
-    public static final int FROM_C_TO_B  = 3000;
-    public static final int FROM_D_TO_C  = 2000;
-    public static final int FROM_E_TO_D  = 1000;
+    public static final int FROM_B_TO_A  = 500;
+    public static final int FROM_C_TO_B  = 400;
+    public static final int FROM_D_TO_C  = 300;
+    public static final int FROM_E_TO_D  = 200;
 
 
   }
