@@ -37,6 +37,17 @@ public abstract class AbstractChallengeQuestionHandler  implements Command {
     return null;
   }
 
+  protected ChallengeQuestionDTO findByQuestionNo(int no, ChallengeDTO challengeNo) {
+    for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
+      if (challengeNo.getNo() == challengeQuestionDTO.getNo()) {
+        if (challengeQuestionDTO.getQuestionNo() == no) {
+          return challengeQuestionDTO;
+        }
+      }
+    }
+    return null;
+  }
+
   protected int getNextNum() {
     if (challengeQuestionDTOList.size() > 0) {
       return challengeQuestionDTOList.get(challengeQuestionDTOList.size() - 1).getQuestionNo() + 1;
@@ -59,6 +70,15 @@ public abstract class AbstractChallengeQuestionHandler  implements Command {
     } else {
       return 1;
     }
+  }
+
+  protected int indexOf(int questionNo) {
+    for (int i = 0; i < challengeQuestionDTOList.size(); i++) {
+      if (challengeQuestionDTOList.get(i).getQuestionNo() == questionNo) {
+        return i;
+      }
+    }
+    return -1;
   }
 
 }
