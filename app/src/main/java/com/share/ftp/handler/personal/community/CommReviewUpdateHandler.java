@@ -20,9 +20,9 @@ public class CommReviewUpdateHandler extends AbstractCommReviewHandler {
 
       System.out.println();
       System.out.println("[  소통해요/ 한줄후기/ 변경  ]");
-      int no = Prompt.inputInt("번호? ");
+      int commReviewNo = Prompt.inputInt("번호? ");
 
-      CommReviewDTO commReviewDTO = findByNo(no);
+      CommReviewDTO commReviewDTO = findByNo(commReviewNo);
 
       try {
 

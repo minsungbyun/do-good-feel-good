@@ -30,7 +30,9 @@ public class RankingHandler implements Command {
         + "                                                                 \"Y88888P'  \r\n"
         + "                                                                            ");
 
-    System.out.println();
+
+    System.out.println("    랭킹  아이디        포인트");
+    System.out.println("   ==============================");
     Prompt.printUserRank(joinDTOList);     
   }
 

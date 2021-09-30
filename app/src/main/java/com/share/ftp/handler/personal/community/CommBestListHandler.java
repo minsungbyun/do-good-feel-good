@@ -4,7 +4,6 @@ import java.util.List;
 import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
-import com.share.util.Prompt;
 
 public class CommBestListHandler implements Command {
 
@@ -20,7 +19,7 @@ public class CommBestListHandler implements Command {
     System.out.println();
     System.out.println("[  나눔이야기 BEST 목록  ]");
 
-    Prompt.printBestRank(commBoardDTOList);
+    // Prompt.printBestRank(commBoardDTOList);
 
   }
 }

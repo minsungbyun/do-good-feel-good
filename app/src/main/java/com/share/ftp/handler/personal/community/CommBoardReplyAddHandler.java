@@ -21,10 +21,12 @@ public class CommBoardReplyAddHandler extends AbstractCommBoardReplyHandler {
 
     System.out.println();
     System.out.println("[  나눔이야기 댓글 등록  ]");
+    System.out.println();
 
-    int commBoardNo = (int) request.getAttribute("no");
+    int commNo = (int) request.getAttribute("commNo");
 
-    CommBoardDTO commBoardDTO = findByCommBoardNo(commBoardNo);
+    CommBoardDTO commBoardDTO = findByCommBoardNo(commNo);
+
     if (commBoardDTO == null) {
       System.out.println();
       System.out.println("해당 게시글이 없습니다!");
@@ -34,11 +36,11 @@ public class CommBoardReplyAddHandler extends AbstractCommBoardReplyHandler {
     CommBoardReplyDTO commBoardReplyDTO = new CommBoardReplyDTO();
 
     commBoardReplyDTO.setCommNo(commBoardDTO.getCommNo());
-    // commBoardReplyDTO.setCommReplyNo(getNextNum());
     commBoardReplyDTO.setCommentcontent(Prompt.inputString("내용 ▶ "));
-    // commBoardReplyDTO.setPassword(Prompt.inputString("비밀번호 ▶ "));
     commBoardReplyDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
     commBoardReplyDTO.setOwner(AuthLoginHandler.getLoginUser());
+    // commBoardReplyDTO.setCommReplyNo(getNextNum());
+    // commBoardReplyDTO.setPassword(Prompt.inputString("비밀번호 ▶ "));
 
     if (commBoardDTO.getReplyCount() == 0) {
       commBoardDTO.setReplyCount(1);
@@ -52,18 +54,25 @@ public class CommBoardReplyAddHandler extends AbstractCommBoardReplyHandler {
 
     commBoardReplyDTO.setCommReplyNo(commBoardDTO.getReplyCount()); 
 
-    String input = Prompt.inputString("해당 게시글에 댓글 등록을 하시겠습니까? (y/N) ");
-    System.out.println();
-    if (!input.equals("y") || input.length() == 0) {
+    while (true) {
+      String input = Prompt.inputString("해당 게시글에 댓글 등록을 하시겠습니까? (y/N) ");
       System.out.println();
-      System.out.println("댓글 등록이 취소되었습니다.");
-      return;
-    } else if (input.equalsIgnoreCase("y")) {
+      if (!input.equals("y") || input.length() == 0) {
+        System.out.println();
+        System.out.println("댓글 등록이 취소되었습니다.");
+        return;
 
-      commBoardReplyDTOList.add(commBoardReplyDTO);
+      } else if (input.equalsIgnoreCase("y")) {
 
-      System.out.println();
-      System.out.println("[  ✔️ 게시글 등록이 완료되었습니다.  ]");
+        commBoardReplyDTOList.add(commBoardReplyDTO);
+
+        System.out.println();
+        System.out.println("[  ✔️ 댓글 등록이 완료되었습니다.  ]");
+        break;
+
+      } else {
+        System.out.println("다시 입력해주세요.");
+      }
     }
   }
 }
