@@ -17,7 +17,7 @@ public class ChallengeQuestionConnectHandler extends AbstractChallengeQuestionHa
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("문의 변경, 삭제");
+    System.out.println("[ 문의 변경, 삭제 ]");
     System.out.println();
 
     int challengeNo = (int) request.getAttribute("no");
