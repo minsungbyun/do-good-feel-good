@@ -50,14 +50,17 @@ public class QuestionAddHandler extends AbstractQuestionHandler {
     myQuestionListDTO.setTitle(Prompt.inputString("제목? "));
     myQuestionListDTO.setContent(Prompt.inputString("내용? "));
     myQuestionListDTO.setOwner(AuthLoginHandler.getLoginUser());
-    myQuestionListDTO.setPassword(Prompt.inputInt("비밀번호? "));
     myQuestionListDTO.setFileUpload(Prompt.inputString("파일첨부? "));
     myQuestionListDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
+    myQuestionListDTO.setPassword(Prompt.inputInt("비밀번호? "));
 
     // 고유회원번호 부여
     myQuestionListDTO.setNo(getNextNum());
 
     myQuestionListDTOList.add(myQuestionListDTO);
+
+    System.out.println();
+    System.out.println("게시글 등록이 완료 되었습니다.");
 
   }
 }
