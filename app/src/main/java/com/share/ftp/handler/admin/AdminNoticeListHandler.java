@@ -11,18 +11,15 @@ public class AdminNoticeListHandler extends AbstractAdminNoticeHandler {
     super(noticeDTOList);
   }
 
-
-
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[공지사항 목록]");
 
     for (NoticeDTO noticeDTO : noticeDTOList) {
-      System.out.printf("%d, %s, %s, %s, %s, %d\n", 
+      System.out.printf("%d, %s, %s, %s, %d\n", 
           noticeDTO.getNo(), 
           noticeDTO.getAdmin().getId(), 
           noticeDTO.getTitle(), 
-          noticeDTO.getContent(), 
           noticeDTO.getRegisteredDate(), 
           noticeDTO.getViewCount());
     }

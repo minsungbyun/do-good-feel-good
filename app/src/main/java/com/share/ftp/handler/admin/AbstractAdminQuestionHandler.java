@@ -29,30 +29,6 @@ public abstract class AbstractAdminQuestionHandler implements Command {
       return 1;
     }
   }
-  // 에러나서 주석 막아놓음!
 
-  //  protected List<QuestionDTO> questionDTOList;
-  //
-  //  public AbstractAdminQuestionHandler(List<QuestionDTO> questionDTOList) {
-  //    this.questionDTOList = questionDTOList;
-  //  }
-  //
-  //
-  //  protected QuestionDTO findByNo(int no) {
-  //    for (QuestionDTO questionDTO : questionDTOList) {
-  //      if (questionDTO.getNo() == no) {
-  //        return questionDTO;
-  //      }
-  //    }
-  //    return null;
-  //  }
-  //
-  //  protected int getNextNum() {
-  //    if (questionDTOList.size() > 0) {
-  //      return questionDTOList.get(questionDTOList.size() - 1).getNo() + 1;
-  //    } else {
-  //      return 1;
-  //    }
-  //  }
 
 }

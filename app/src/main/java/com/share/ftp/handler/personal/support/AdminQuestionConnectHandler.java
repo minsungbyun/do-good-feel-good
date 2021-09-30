@@ -16,8 +16,8 @@ public class AdminQuestionConnectHandler implements Command {
 
     while (true) {
       System.out.println();
-      System.out.println("1번: 답글 등록");
-      System.out.println("2번: 답글 목록");
+      System.out.println("1: 답글 등록");
+      System.out.println("2: 답글 목록");
       //      System.out.println("3번 ▶ 답글 상세보기");
       //      System.out.println("4번 ▶ 답글 수정");
       //      System.out.println("5번 ▶ 답글 삭제");
@@ -26,7 +26,7 @@ public class AdminQuestionConnectHandler implements Command {
       System.out.println();
       int input = Prompt.inputInt("번호 입력 > ");
       switch (input) {
-        case 1: request.getRequestDispatcher("/question/add").forward(request);
+        case 1: request.getRequestDispatcher("/adminQuestion/add").forward(request);
         break;
         case 2: request.getRequestDispatcher("/question/list").forward(request);
         break;

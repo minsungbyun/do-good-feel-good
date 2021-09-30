@@ -18,11 +18,7 @@ public class AdminQuestionAddHandler extends AbstractAdminQuestionHandler {
   public void execute(CommandRequest request) throws Exception {
 
     System.out.println();
-    System.out.println("[ 관리자 답글 추가 ]");
-
-
-
-
+    System.out.println("[ 관리자 답글 ]");
 
     QuestionListDTO myQuestionListDTO = new QuestionListDTO();
 
@@ -36,7 +32,7 @@ public class AdminQuestionAddHandler extends AbstractAdminQuestionHandler {
 
     myQuestionListDTO.setNo(getNextNum());
 
-    myQuestionListDTOList.add(myQuestionListDTO);
+    //    myQuestionListDTOList.add(,myQuestionListDTO);
 
 
   }

@@ -43,6 +43,7 @@ import com.share.ftp.handler.admin.AdminNoticeDetailHandler;
 import com.share.ftp.handler.admin.AdminNoticeListHandler;
 import com.share.ftp.handler.admin.AdminNoticeSearchHandler;
 import com.share.ftp.handler.admin.AdminNoticeUpdateHandler;
+import com.share.ftp.handler.admin.AdminQuestionAddHandler;
 import com.share.ftp.handler.join.AuthChangeUserInfoHandler;
 import com.share.ftp.handler.join.AuthDisplayUserInfoHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -467,7 +468,7 @@ public class App {
 
     // 관리자 문의사항
 
-    //        commands.put("/adminAsk/list", new AdminQuestionListHandler(myQuestionListDTOList));
+    commands.put("/adminQuestion/add", new AdminQuestionAddHandler(myQuestionListDTOList));
     //        commands.put("/adminAsk/detail", new AdminQuestionDetailHandler(myQuestionListDTOList));
     //        commands.put("/adminAsk/update", new AdminQuestionUpdateHandler(myQuestionListDTOList));
     //        commands.put("/adminAsk/delete", new AdminQuestionDeleteHandler(myQuestionListDTOList));
@@ -561,11 +562,6 @@ public class App {
 
   }
 
-
-
-
-
-
   Menu createMenu() {
 
     MenuGroup mainMenuGroup = new MenuGroup("*행복하Share*");
@@ -642,7 +638,7 @@ public class App {
     mainMenuGroup.add(supportMenu);
 
     supportMenu.add(createNoticeMenu());      // 공지사항
-    supportMenu.add(createAskMenu());         // 문의하기
+    supportMenu.add(createQuestionMenu());         // 문의하기
 
     // 마이페이지
     MenuGroup MyPageMenu = new MenuGroup("마이페이지", ACCESS_MEMBER);
@@ -823,16 +819,16 @@ public class App {
     return noticeMenu;
   }
 
-  private Menu createAskMenu() {
-    MenuGroup ask = new MenuGroup("문의하기");
-    ask.add(new MenuItem("등록", ACCESS_MEMBER,"/question/add"));
-    ask.add(new MenuItem("목록", "/question/list"));
-    ask.add(new MenuItem("상세보기", ACCESS_MEMBER_ADMIN, "/question/detail"));
+  private Menu createQuestionMenu() {
+    MenuGroup question = new MenuGroup("문의하기");
+    question.add(new MenuItem("등록", ACCESS_MEMBER,"/question/add"));
+    question.add(new MenuItem("목록", "/question/list"));
+    question.add(new MenuItem("상세보기", ACCESS_MEMBER_ADMIN, "/question/detail"));
     //    ask.add(new MenuItem("변경", ACCESS_MEMBER,"/question/update"));
     //    ask.add(new MenuItem("삭제", ACCESS_MEMBER, "/question/delete"));
-    ask.add(new MenuItem("검색", "/question/search"));
+    question.add(new MenuItem("검색", "/question/search"));
 
-    return ask;
+    return question;
   }
 
 
