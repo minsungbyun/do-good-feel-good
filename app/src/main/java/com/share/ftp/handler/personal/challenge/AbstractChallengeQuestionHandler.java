@@ -18,6 +18,16 @@ public abstract class AbstractChallengeQuestionHandler  implements Command {
     this.challengeReplyList = challengeReplyList;
   }
 
+  protected ChallengeQuestionDTO findByQuestionNo(int no, ChallengeDTO challengeNo) {
+    for (ChallengeQuestionDTO ChallengeQuestionDTO : challengeQuestionDTOList) {
+      if (challengeNo.getNo() == ChallengeQuestionDTO.getNo()) {
+        if (ChallengeQuestionDTO.getQuestionNo() == no) {
+          return ChallengeQuestionDTO;
+        }
+      }
+    }
+    return null;
+  }
 
   protected ChallengeQuestionDTO findByQuestionNo(int no) {
     for (ChallengeQuestionDTO ChallengeQuestionDTO : challengeQuestionDTOList) {
@@ -36,6 +46,7 @@ public abstract class AbstractChallengeQuestionHandler  implements Command {
     }
     return null;
   }
+
 
   protected int getNextNum() {
     if (challengeQuestionDTOList.size() > 0) {
@@ -59,6 +70,15 @@ public abstract class AbstractChallengeQuestionHandler  implements Command {
     } else {
       return 1;
     }
+  }
+
+  protected int indexOf(int questionNo) {
+    for (int i = 0; i < challengeQuestionDTOList.size(); i++) {
+      if (challengeQuestionDTOList.get(i).getQuestionNo() == questionNo) {
+        return i;
+      }
+    }
+    return -1;
   }
 
 }

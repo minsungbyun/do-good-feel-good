@@ -7,9 +7,17 @@ import com.share.ftp.handler.Command;
 public abstract class AbstractAdminQuestionHandler implements Command {
 
   protected List<QuestionListDTO> myQuestionListDTOList;
+  protected List<QuestionListDTO> adminQuestionDTOList;
 
   public AbstractAdminQuestionHandler(List<QuestionListDTO> myQuestionListDTOList) {
     this.myQuestionListDTOList = myQuestionListDTOList;
+  }
+  public AbstractAdminQuestionHandler(
+      List<QuestionListDTO> myQuestionListDTOList,
+      List<QuestionListDTO> adminQuestionDTOList) {
+
+    this.myQuestionListDTOList = myQuestionListDTOList;
+    this.adminQuestionDTOList = adminQuestionDTOList;
   }
 
 
@@ -28,6 +36,15 @@ public abstract class AbstractAdminQuestionHandler implements Command {
     } else {
       return 1;
     }
+  }
+
+  protected int indexOf(int adminNo) {
+    for (int i = 0; i < myQuestionListDTOList.size(); i++) {
+      if (myQuestionListDTOList.get(i).getNo() == adminNo) {
+        return i;
+      }
+    }
+    return -1;
   }
 
 
