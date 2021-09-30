@@ -37,6 +37,7 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
     ChallengeQuestionDTO challengeQuestionDTO = new ChallengeQuestionDTO();
 
     challengeQuestionDTO.setNo(challengeDTO.getNo());
+    challengeQuestionDTO.setQuestionNo(detailNo.getQuestionNo());
     challengeQuestionDTO.setContent(Prompt.inputString("내용: "));
     challengeQuestionDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 
@@ -61,9 +62,10 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
     //    System.out.println("challengeDTO.getQuestionCount() = " + challengeDTO.getQuestionCount());
 
 
-    int b = indexOf(detailNo.getQuestionNo());
+    //    int b = indexOf(detailNo.getQuestionNo());
 
-    challengeQuestionDTOList.add(b + 1, challengeQuestionDTO);
+    //    challengeQuestionDTOList.add(b + 1, challengeQuestionDTO);
+    challengeQuestionDTOList.add(challengeQuestionDTO);
     //    challengeQuestionDTOList.add(challengeReply);
 
     System.out.println();

@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Scanner;
 import com.share.ftp.domain.join.JoinComparator;
 import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.handler.join.AuthLoginHandler;
 
 public class Prompt {
 
@@ -63,19 +64,19 @@ public class Prompt {
     if (userPoint < 0) {
       return "오류가 발생했습니다! 존재하지 않는 포인트입니다.";
 
-    } else if (0 <= userPoint && userPoint < 1000) {
+    } else if (0 <= userPoint && userPoint < FROM_E_TO_D) {
       loginUser.setLevel(LEVEL_E);
 
-    } else if (1000 <= userPoint && userPoint < 2000) {
+    } else if (FROM_E_TO_D <= userPoint && userPoint < FROM_D_TO_C) {
       loginUser.setLevel(LEVEL_D);
 
-    } else if (2000 <= userPoint && userPoint < 3000) {
+    } else if (FROM_D_TO_C <= userPoint && userPoint < FROM_C_TO_B) {
       loginUser.setLevel(LEVEL_C);
 
-    } else if (3000 <= userPoint && userPoint < 4000) {
+    } else if (FROM_C_TO_B <= userPoint && userPoint < FROM_B_TO_A) {
       loginUser.setLevel(LEVEL_B);
 
-    } else if (userPoint >= 4000) {
+    } else if (userPoint >= FROM_B_TO_A) {
       loginUser.setLevel(LEVEL_A);
     }
 
@@ -90,16 +91,16 @@ public class Prompt {
     if (userPoint < 0) {
       return -1;
 
-    } else if (0 <= userPoint && userPoint < 1000) {
+    } else if (0 <= userPoint && userPoint < FROM_E_TO_D) {
       needPoint = FROM_E_TO_D - userPoint;
 
-    } else if (1000 <= userPoint && userPoint < 2000) {
+    } else if (FROM_D_TO_C <= userPoint && userPoint < FROM_D_TO_C) {
       needPoint = FROM_D_TO_C - userPoint;
 
-    } else if (2000 <= userPoint && userPoint < 3000) {
+    } else if (FROM_D_TO_C <= userPoint && userPoint < FROM_C_TO_B) {
       needPoint = FROM_C_TO_B - userPoint;
 
-    } else if (3000 <= userPoint && userPoint < 4000) {
+    } else if (FROM_C_TO_B <= userPoint && userPoint < FROM_B_TO_A) {
       needPoint = FROM_B_TO_A - userPoint;
 
     } 
@@ -131,8 +132,20 @@ public class Prompt {
     List<JoinDTO> userRank = getUserRank(allUser);
 
     for (JoinDTO loginUser : userRank) {
-      System.out.printf("이름 : %s 포인트 : %d점 등수 : %d등\n" , loginUser.getName(),  loginUser.getPoint(), loginUser.getFinalRank());
+      System.out.printf("     %d등  %-10s   [%5d점]\n" , loginUser.getFinalRank(), loginUser.getId(), loginUser.getPoint());
     }
+  }
+
+  public static int printMyRank(List<JoinDTO> allUser) {
+
+    List<JoinDTO> userRank = getUserRank(allUser);
+
+    for (JoinDTO loginUser : userRank) {
+      if (loginUser.getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+        return loginUser.getFinalRank();
+      }
+    }
+    return -1;
   }
 
   public static int printIndividualUserRank(JoinDTO loginUser) {
@@ -149,7 +162,6 @@ public class Prompt {
     for(JoinDTO loginUser : allUser) {
       loginUser.setRank(1);
       //    System.out.printf("유저 이름 : %s\n포인트 : %d\n", loginUser.getName(), loginUser.getPoint());
-      System.out.println();
     }
     return allUser;
   }
@@ -186,11 +198,11 @@ public class Prompt {
   //    }
   //  }
   //
-  //  // 수정이 필요합니다!
-  //  public static List<CommBoardDTO> getCommBestList(List<CommBoardDTO> allBoards) {
-  //
-  //    CommBestComparator boardscomp = new CommBestComparator();
-  //
+  //    // 수정이 필요합니다!
+  //    public static List<CommBoardDTO> getCommBestList(List<CommBoardDTO> allBoards) {
+  //  
+  //      CommBestComparator boardscomp = new CommBestComparator();
+  //  
   //    Collections.sort(allBoards, boardscomp);
   //
   //    for(CommBoardDTO commBoard : allBoards) {
