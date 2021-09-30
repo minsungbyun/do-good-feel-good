@@ -44,7 +44,6 @@ public class ChallengeQuestionConnectHandler extends AbstractChallengeQuestionHa
       //      for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
       if (challengeQuestion.getNo() == challengeNo) {
         System.out.printf("아이디: %s\n", challengeQuestion.getOwner().getId());
-        System.out.printf("제목: %s\n", challengeQuestion.getTitle());
         System.out.printf("내용: %s\n", challengeQuestion.getContent());
         System.out.printf("등록날짜: %s\n", challengeQuestion.getRegisteredDate());
       } else {

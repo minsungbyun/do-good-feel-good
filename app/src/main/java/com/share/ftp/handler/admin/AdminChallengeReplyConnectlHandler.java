@@ -69,7 +69,7 @@ public class AdminChallengeReplyConnectlHandler extends AbstractChallengeQuestio
       int input = Prompt.inputInt("번호 입력 ▶ ");
       switch (input) {
         case 1: request.getRequestDispatcher("/adminChallenge/replyAdd").forward(request); return;
-        case 2: request.getRequestDispatcher("/challengeQuestion/delete").forward(request); return;
+        case 2: request.getRequestDispatcher("/challengeQuestion/update").forward(request); return;
         case 3: request.getRequestDispatcher("/challengeQuestion/delete").forward(request); return;
         case 0: return;
         default:

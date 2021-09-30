@@ -33,7 +33,7 @@ public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandl
               challengeQuestionDTO.getNo(),
               challengeQuestionDTO.getQuestionNo(),
               challengeQuestionDTO.getOwner().getId(),
-              challengeQuestionDTO.getTitle(),
+              challengeQuestionDTO.getContent(),
               challengeQuestionDTO.getRegisteredDate());
         }
       }
@@ -41,6 +41,8 @@ public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandl
       for (ChallengeQuestionDTO challengeReply : challengeReplyList) {
         if (challengeReply.getOwner().getId().equals("admin")) {
           System.out.printf("관리자 :  %s, %s, %s\n", 
+              challengeReply.getNo(),
+              challengeReply.getQuestionNo(),
               challengeReply.getOwner().getId(),
               challengeReply.getContent(),
               challengeReply.getRegisteredDate());

@@ -46,7 +46,6 @@ public class ChallengeQuestionUpdateHandler extends AbstractChallengeQuestionHan
           return;
         }
 
-        String title = Prompt.inputString(String.format("제목(%s)? ", challengeQuestion.getTitle()));
         String content = Prompt.inputString(String.format("내용(%s)? ", challengeQuestion.getContent()));
 
         String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
@@ -55,7 +54,6 @@ public class ChallengeQuestionUpdateHandler extends AbstractChallengeQuestionHan
           return;
         } else if (input.equals("y")) {
           System.out.println("문의를 수정하였습니다.");
-          challengeQuestion.setTitle(title);
           challengeQuestion.setContent(content);
           return;
         } else {

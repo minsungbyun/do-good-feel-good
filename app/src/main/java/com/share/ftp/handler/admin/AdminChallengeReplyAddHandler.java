@@ -26,7 +26,7 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
     ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
 
 
-    int questionNo = (int) request.getAttribute("no");
+    int questionNo = (int) request.getAttribute("questionNo");
     ChallengeQuestionDTO challengeQuestion = findByQuestionNo(questionNo);
 
     //    if (!challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
