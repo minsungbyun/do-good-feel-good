@@ -34,11 +34,11 @@ public class CommBoardReplyAddHandler extends AbstractCommBoardReplyHandler {
     CommBoardReplyDTO commBoardReplyDTO = new CommBoardReplyDTO();
 
     commBoardReplyDTO.setCommNo(commBoardDTO.getCommNo());
-    // commBoardReplyDTO.setCommReplyNo(getNextNum());
     commBoardReplyDTO.setCommentcontent(Prompt.inputString("내용 ▶ "));
-    // commBoardReplyDTO.setPassword(Prompt.inputString("비밀번호 ▶ "));
     commBoardReplyDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
     commBoardReplyDTO.setOwner(AuthLoginHandler.getLoginUser());
+    // commBoardReplyDTO.setCommReplyNo(getNextNum());
+    // commBoardReplyDTO.setPassword(Prompt.inputString("비밀번호 ▶ "));
 
     if (commBoardDTO.getReplyCount() == 0) {
       commBoardDTO.setReplyCount(1);
@@ -51,6 +51,7 @@ public class CommBoardReplyAddHandler extends AbstractCommBoardReplyHandler {
     }
 
     commBoardReplyDTO.setCommReplyNo(commBoardDTO.getReplyCount()); 
+
 
     String input = Prompt.inputString("해당 게시글에 댓글 등록을 하시겠습니까? (y/N) ");
     System.out.println();

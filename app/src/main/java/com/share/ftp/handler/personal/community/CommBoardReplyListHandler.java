@@ -42,8 +42,8 @@ public class CommBoardReplyListHandler extends AbstractCommBoardReplyHandler {
             commBoardReplyDTO.getCommReplyNo(), 
             commBoardReplyDTO.getOwner().getId(),
             commBoardReplyDTO.getCommentcontent(),
-            //commBoardReplyDTO.getCommReplyPassword(),
             commBoardReplyDTO.getRegisteredDate());
+        //commBoardReplyDTO.getCommReplyPassword(),
       }
     }
     System.out.println();
