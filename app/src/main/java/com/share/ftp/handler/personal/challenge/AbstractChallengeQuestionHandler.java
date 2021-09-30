@@ -47,16 +47,6 @@ public abstract class AbstractChallengeQuestionHandler  implements Command {
     return null;
   }
 
-  protected ChallengeQuestionDTO findByQuestionNo(int no, ChallengeDTO challengeNo) {
-    for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
-      if (challengeNo.getNo() == challengeQuestionDTO.getNo()) {
-        if (challengeQuestionDTO.getQuestionNo() == no) {
-          return challengeQuestionDTO;
-        }
-      }
-    }
-    return null;
-  }
 
   protected int getNextNum() {
     if (challengeQuestionDTOList.size() > 0) {
