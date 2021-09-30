@@ -18,6 +18,16 @@ public abstract class AbstractChallengeQuestionHandler  implements Command {
     this.challengeReplyList = challengeReplyList;
   }
 
+  protected ChallengeQuestionDTO findByQuestionNo(int no, ChallengeDTO challengeNo) {
+    for (ChallengeQuestionDTO ChallengeQuestionDTO : challengeQuestionDTOList) {
+      if (challengeNo.getNo() == ChallengeQuestionDTO.getNo()) {
+        if (ChallengeQuestionDTO.getQuestionNo() == no) {
+          return ChallengeQuestionDTO;
+        }
+      }
+    }
+    return null;
+  }
 
   protected ChallengeQuestionDTO findByQuestionNo(int no) {
     for (ChallengeQuestionDTO ChallengeQuestionDTO : challengeQuestionDTOList) {
