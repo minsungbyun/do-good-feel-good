@@ -24,10 +24,10 @@ public class CommBoardLikeHandler extends AbstractCommBoardHandler {
       System.out.println("[  ❤ LIKE ❤  ]");
       System.out.println();
 
-      int no = (int) request.getAttribute("no");
+      int commNo = (int) request.getAttribute("commNo");
       System.out.println();
 
-      CommBoardDTO commBoard = findByNo(no); 
+      CommBoardDTO commBoard = findByNo(commNo); 
 
 
 

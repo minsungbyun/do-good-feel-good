@@ -347,13 +347,13 @@ public class App {
     commands.put("/commBoard/like", new CommBoardLikeHandler(commBoardDTOList, commBoardReplyDTOList)); 
 
     // 소통해요 댓글
-    commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler());
+    commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler(commBoardDTOList, commBoardReplyDTOList));
     commands.put("/commBoardReply/add", new CommBoardReplyAddHandler(commBoardDTOList, commBoardReplyDTOList));
     commands.put("/commBoardReply/list", new CommBoardReplyListHandler(commBoardDTOList, commBoardReplyDTOList));
     commands.put("/commBoardReply/update", new CommBoardReplyUpdateHandler(commBoardDTOList, commBoardReplyDTOList));
     commands.put("/commBoardReply/delete", new CommBoardReplyDeleteHandler(commBoardDTOList, commBoardReplyDTOList));
 
-    commands.put("/commBoard/connect", new CommBoardReplyConnectHandler());
+    // commands.put("/commBoard/connect", new CommBoardReplyConnectHandler());
 
     // 소통해요 나눔이야기 BEST
     commands.put("/commBest/list", new CommBestListHandler(commBoardDTOList));

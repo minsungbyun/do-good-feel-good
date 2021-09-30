@@ -31,13 +31,13 @@ public class CommReviewListHandler extends AbstractCommReviewHandler {
           commReviewDTO.getRegisteredDate());
 
       System.out.println();
-      int reviewNo = Prompt.inputInt("변경, 삭제하고자 하는 후기 번호를 입력해주세요 (이전: 0) ▶ ");
+      int commReviewNo = Prompt.inputInt("변경, 삭제하고자 하는 후기 번호를 입력해주세요 (이전: 0) ▶ ");
 
-      if (reviewNo == 0) {
+      if (commReviewNo == 0) {
         return;
       }
 
-      CommReviewDTO commReview = findByNo(reviewNo);
+      CommReviewDTO commReview = findByNo(commReviewNo);
 
       if (commReview == null) {
         System.out.println("해당 번호의 후기가 없습니다.");
@@ -49,7 +49,7 @@ public class CommReviewListHandler extends AbstractCommReviewHandler {
         return;  
       }
 
-      request.setAttribute("reviewNo", reviewNo);
+      request.setAttribute("commReviewNo", commReviewNo);
 
       while (true) {
         String input = Prompt.inputString ("변경(U), 삭제(D), 이전(0) ▶ ");
@@ -61,7 +61,7 @@ public class CommReviewListHandler extends AbstractCommReviewHandler {
 
           case "D":
           case "d":
-            request.getRequestDispatcher("commBoard/Delete").forward(request);
+            request.getRequestDispatcher("/commReview/Delete").forward(request);
             return;
 
           case "0":
