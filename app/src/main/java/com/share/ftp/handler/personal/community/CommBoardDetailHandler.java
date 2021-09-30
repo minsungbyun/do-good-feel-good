@@ -22,18 +22,18 @@ public class CommBoardDetailHandler extends AbstractCommBoardHandler {
 
     while(true) {
       System.out.println();
-      System.out.println("[  소통해요/ 나눔이야기/ 상세보기  ]");
+      System.out.println("[  나눔이야기/ 상세보기  ]");
       System.out.println();
 
-      int no = Prompt.inputInt("번호? ▶ ");
+      int commNo = Prompt.inputInt("게시글 번호를 입력해주세요 ▶ ");
 
-      CommBoardDTO commBoardDTO = findByNo(no);
+      CommBoardDTO commBoardDTO = findByNo(commNo);
 
       if (commBoardDTO == null) {
         System.out.println("[  해당 게시글이 없습니다.  ]");
         return;
       }
-      //AuthLoginHandler.loginUser.getId(),
+      request.setAttribute("commNo", commNo); 
 
       System.out.printf("아이디 ▶ %s\n", commBoardDTO.getOwner().getId());
       System.out.printf("번호 ▶ %s\n", commBoardDTO.getCommNo());
@@ -56,7 +56,7 @@ public class CommBoardDetailHandler extends AbstractCommBoardHandler {
 
       if (commBoardDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
 
-        request.setAttribute("no", no);
+        request.setAttribute("commNo", commNo);
 
         while (true) {
           String input = Prompt.inputString("변경(U), 삭제(D), 댓글(R), 이전(0)>");
@@ -71,7 +71,7 @@ public class CommBoardDetailHandler extends AbstractCommBoardHandler {
               return;
             case "R":
             case "r":
-              request.getRequestDispatcher("/commBoardReply/connect").forward(request);
+              request.getRequestDispatcher("/commBoardReply/list").forward(request);
               return;
             case "0":
               return;
@@ -83,7 +83,7 @@ public class CommBoardDetailHandler extends AbstractCommBoardHandler {
 
       if (loginUser!= null) {
 
-        request.setAttribute("no", no);
+        request.setAttribute("commNo", commNo);
 
         while (true) {
           String input = Prompt.inputString("좋아요(L), 댓글(R), 이전(0)>");
@@ -94,7 +94,7 @@ public class CommBoardDetailHandler extends AbstractCommBoardHandler {
               return;
             case "R":
             case "r":
-              request.getRequestDispatcher("/commBoardReply/connect").forward(request);
+              request.getRequestDispatcher("/commBoardReply/list").forward(request);
               return;
             case "0":
               return;

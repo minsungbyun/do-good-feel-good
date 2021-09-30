@@ -17,6 +17,17 @@ public abstract class AbstractCommBoardReplyHandler implements Command {
     this.commBoardReplyDTOList = commBoardReplyDTOList;
   }
 
+  protected CommBoardReplyDTO findByReplyNo(int no, CommBoardDTO commBoardNo) {
+    for (CommBoardReplyDTO commBoardReplyDTO : commBoardReplyDTOList) {
+      if (commBoardNo.getCommNo() == commBoardReplyDTO.getCommNo()) {
+        if (commBoardReplyDTO.getCommReplyNo() == no) {
+          return commBoardReplyDTO;
+        }
+      }
+    }
+    return null;
+  }
+
   protected CommBoardReplyDTO findByReplyNo(int no) {
     for(CommBoardReplyDTO commBoardReplyDTO : commBoardReplyDTOList) {
       if (commBoardReplyDTO.getCommReplyNo() == no) {
