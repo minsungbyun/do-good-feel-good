@@ -27,7 +27,7 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
 
 
     int questionNo = (int) request.getAttribute("questionNo");
-    ChallengeQuestionDTO detailNo = findByQuestionNo(questionNo);
+    ChallengeQuestionDTO detailNo = findByQuestionNo(questionNo,challengeDTO);
 
     //    if (!challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
     //      System.out.println("챌린지 참여한 회원만 등록이 가능합니다!");
