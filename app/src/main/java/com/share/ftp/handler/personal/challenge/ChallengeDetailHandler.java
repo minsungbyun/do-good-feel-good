@@ -19,16 +19,16 @@ public class ChallengeDetailHandler extends AbstractAdminChallengeHandler {
     System.out.println("[챌린지 상세보기]");
 
     System.out.println();
-    int no = Prompt.inputInt("챌린지 번호를 입력해주세요 ▶ ");
+    int challengeNo = Prompt.inputInt("챌린지 번호를 입력해주세요 ▶ ");
 
-    ChallengeDTO challengeDTO = findByNo(no);
+    ChallengeDTO challengeDTO = findByNo(challengeNo);
 
     if (challengeDTO == null) {
       System.out.println("해당 번호의 챌린지가 없습니다.");
       return;
     }
 
-    request.setAttribute("no", no); 
+    request.setAttribute("challengeNo", challengeNo); 
 
     //    System.out.printf("번호: %d\n", challengeDTO.getNo());
     // System.out.printf("관리자 아이디: %s\n", challengeDTO.getAdminId());

@@ -82,5 +82,5 @@ public abstract class AbstractChallengeQuestionHandler  implements Command {
     }
     return -1;
   }
-
 }
+

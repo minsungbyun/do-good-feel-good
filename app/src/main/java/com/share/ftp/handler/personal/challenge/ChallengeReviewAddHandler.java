@@ -23,7 +23,7 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
     System.out.println();
     System.out.println("[ 참여인증&댓글 등록 ]");
     System.out.println();
-    int challengeNo = (int) request.getAttribute("no");
+    int challengeNo = (int) request.getAttribute("challengeNo");
 
     ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
 

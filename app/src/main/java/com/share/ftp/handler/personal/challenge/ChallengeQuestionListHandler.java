@@ -17,7 +17,7 @@ public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandl
   @Override
   public void execute(CommandRequest request) throws Exception {
     while (true) {
-      int challengeNo = (int) request.getAttribute("no");
+      int challengeNo = (int) request.getAttribute("challengeNo");
       ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
 
       System.out.println();
