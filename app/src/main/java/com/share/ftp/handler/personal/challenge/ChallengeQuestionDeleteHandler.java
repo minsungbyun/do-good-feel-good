@@ -52,6 +52,8 @@ public class ChallengeQuestionDeleteHandler extends AbstractChallengeQuestionHan
           return;
         } else if (input.equals("y")) {
           System.out.println("참여인증&댓글을 삭제하였습니다.");
+
+          challengeQuestion.setQuestionNo(challengeQuestion.getQuestionNo() - 1);
           challengeQuestionDTOList.remove(challengeQuestion);
           return;
         } else {

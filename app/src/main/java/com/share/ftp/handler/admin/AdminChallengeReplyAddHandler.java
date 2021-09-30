@@ -26,14 +26,6 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
     ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
 
 
-    int questionNo = (int) request.getAttribute("no");
-    ChallengeQuestionDTO challengeQuestion = findByQuestionNo(questionNo);
-
-    //    if (!challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
-    //      System.out.println("챌린지 참여한 회원만 등록이 가능합니다!");
-    //      return;
-    //    }
-
     ChallengeQuestionDTO challengeReply = new ChallengeQuestionDTO();
 
     challengeReply.setNo(challengeDTO.getNo());
@@ -42,19 +34,18 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
 
     challengeReply.setOwner(AuthLoginHandler.getLoginUser());
 
-    //    challengeQuestionDTO.setNo(getNextNum());
 
-    if (challengeQuestion.getReplyCount() == 0) {
-      challengeQuestion.setReplyCount(1);
+    if (challengeDTO.getQuestionCount() == 0) {
+      challengeDTO.setQuestionCount(1);
       //      System.out.println("각 챌린지의 첫 문의입니다");
     } else {
-      challengeQuestion.setReplyCount(getNextReplyNum(challengeQuestion));
+      challengeDTO.setQuestionCount(getNextQuestionNum(challengeDTO));
       //      challengeReviewDTO.setReviewNo(getNextNum2()); // 해당 챌린지 문의의 마지막 번호기억 + 1
       //      System.out.println("현재 문의의 번호는? (challengeReviewDTO.getQuestionNo()) " + challengeQuestionDTO.getQuestionNo());
       //      System.out.println("현재 문의의 번호는? (challengeDTO.getQuestionCount()) " + challengeDTO.getQuestionCount());
     }
     //    challengeDTO.setReviewCount(challengeReviewDTO.getReviewNo());
-    challengeReply.setQuestionNo(challengeQuestion.getReplyCount()); // 해당 챌린지 문의의 마지막 번호기억 + 1
+    challengeReply.setQuestionNo(challengeDTO.getQuestionCount()); // 해당 챌린지 문의의 마지막 번호기억 + 1
     //    System.out.println("challengeDTO.getQuestionCount() = " + challengeDTO.getQuestionCount());
 
     String input = Prompt.inputString("해당 문의에 답글 등록을 하시겠습니까?(y/N) ");
@@ -64,7 +55,7 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
       return;
     }
 
-    challengeQuestionDTOList.add(challengeQuestion.getQuestionNo(), challengeReply);
+    challengeQuestionDTOList.add(challengeReply);
     //    challengeQuestionDTOList.add(challengeReply);
 
     System.out.println();
