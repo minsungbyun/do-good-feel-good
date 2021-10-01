@@ -40,9 +40,9 @@ public class AdminChallengeDetailHandler extends AbstractAdminChallengeHandler {
     //    System.out.printf("등록일 ▶ %s\n", challengeDTO.getRegisteredDate());
 
     System.out.printf("챌린지 번호 ▶ %d\n "
-        + "제목[댓글] ▶ %s[%d]\n "
-        + "작성자 ▶ %s\n "
-        + "참여인원 ▶ %d\n "
+        + "제목[댓글] ▶ %s[%d]\n"
+        + "작성자 ▶ %s\n"
+        + "참여인원 ▶ %d\n"
         + "참여기간 ▶ %s ~ %s\n", 
         challengeDTO.getNo(), 
         //          challengeDTO.getAdminId(), 

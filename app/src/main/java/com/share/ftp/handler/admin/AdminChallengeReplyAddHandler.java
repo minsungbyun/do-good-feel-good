@@ -69,6 +69,14 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
 
     //    challengeQuestionDTOList.add(challengeReply);
 
+    int i = 1;
+    for (ChallengeQuestionDTO question : challengeQuestionDTOList) {
+      if (question.getNo() == challengeNo) {
+        question.setQuestionNo(i++);
+
+      }
+    }
+
     System.out.println();
     System.out.println("문의답글 등록이 완료되었습니다.");
   }

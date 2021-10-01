@@ -44,6 +44,8 @@ public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandl
           challengeDTO.getStartDate(),
           challengeDTO.getEndDate());
 
+
+
       System.out.println();
       System.out.println("---------------------------------------------------------");
       System.out.println();

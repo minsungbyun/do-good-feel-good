@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Scanner;
 import com.share.ftp.domain.join.JoinComparator;
 import com.share.ftp.domain.join.JoinDTO;
-import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 import com.share.ftp.handler.join.AuthLoginHandler;
 
 public class Prompt {
@@ -167,24 +166,25 @@ public class Prompt {
     return allUser;
   }
 
-  public static List<ChallengeQuestionDTO> sortQuestionNo(ChallengeQuestionDTO challengeQuestionDTO, List<ChallengeQuestionDTO> questionList) {
 
-    for (int i = 0; i < questionList.size(); i++) {
-      for (int j = 0; j < questionList.size(); j++) {
-        if (questionList.get(i).getNo() == challengeQuestionDTO.getNo()) {
-          questionList.get(j).setQuestionNo(j + 1);
-        }
-      }
+  //  public static List<ChallengeQuestionDTO> sortQuestionNo(int challengeNo,ChallengeQuestionDTO challengeQuestionDTO, List<ChallengeQuestionDTO> questionList) {
+  //
+  //    for (int i = 0; i < questionList.size(); i++) {
+  //      if (questionList.get(i).getNo() == challengeQuestionDTO.getNo()) {
+  //        i = 0;
+  //        questionList.get(i).setQuestionNo(i + 1);
+  //      }
+  //
+  //    }
+  //
+  //
+  //    //    QuestionComparator questionComp = new QuestionComparator();
+  //    //
+  //    //    Collections.sort(questionList, questionComp);
+  //
+  //    return questionList;
+  //  }
 
-    }
-
-
-    //    QuestionComparator questionComp = new QuestionComparator();
-    //
-    //    Collections.sort(questionList, questionComp);
-
-    return questionList;
-  }
   // }
 
   //  public static List<CommBoardDTO> getLikeRank(List<CommBoardDTO> allBoards) {
