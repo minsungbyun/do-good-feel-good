@@ -25,7 +25,7 @@ public class ChallengeJoinListHandler implements Command {
     System.out.println("[ 챌린지 참여자 목록 ]");
     System.out.println();
 
-    int no = (int) request.getAttribute("no");
+    int no = (int) request.getAttribute("challengeNo");
     System.out.println();
 
     ChallengeDTO challengeJoinList = findByNo(no); 

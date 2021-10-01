@@ -20,7 +20,7 @@ public class ChallengeQuestionAddHandler extends AbstractChallengeQuestionHandle
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[ 문의 등록 ]");
     System.out.println();
-    int challengeNo = (int) request.getAttribute("no");
+    int challengeNo = (int) request.getAttribute("challengeNo");
 
     ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
 

@@ -20,7 +20,7 @@ public class AdminChallengeReplyUpdateHandler extends AbstractChallengeQuestionH
     while (true) {
       System.out.println("[ 문의답글 수정 ]");
       System.out.println();
-      int challengeNo = (int) request.getAttribute("no");
+      int challengeNo = (int) request.getAttribute("challengeNo");
 
       ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
 

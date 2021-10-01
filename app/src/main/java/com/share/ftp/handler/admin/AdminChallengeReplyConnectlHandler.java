@@ -18,10 +18,10 @@ public class AdminChallengeReplyConnectlHandler extends AbstractChallengeQuestio
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
-    System.out.println("[ 답글 등록, 변경, 삭제 ]");
+    System.out.println("[ 답글 변경, 삭제 ]");
     System.out.println();
 
-    int challengeNo = (int) request.getAttribute("no");
+    int challengeNo = (int) request.getAttribute("challengeNo");
 
     ChallengeDTO challengeList = findByChallengeNo(challengeNo); 
 
@@ -30,15 +30,19 @@ public class AdminChallengeReplyConnectlHandler extends AbstractChallengeQuestio
       return;
     }
 
-    int questionNo = Prompt.inputInt("문의 번호를 입력해주세요 ▶ ");
+    int questionNo = Prompt.inputInt("문의답글 번호를 입력해주세요 ▶ ");
 
-    ChallengeQuestionDTO challengeQuestion = findByQuestionNo(questionNo);
+    ChallengeQuestionDTO challengeQuestion = findByQuestionNo(questionNo, challengeList);
 
     if (challengeQuestion == null) {
-      System.out.println("해당 번호의 문의가 없습니다.");
+      System.out.println("해당 번호의 답글문의가 없습니다.");
       return;
     }
 
+    if (!challengeQuestion.getOwner().getId().equals("admin")) {
+      System.out.println("관리자가 작성한 답글번호를 입력해주세요!");
+      return;
+    }
 
     if ((challengeQuestion.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
         AuthLoginHandler.getLoginUser().getId().equals("admin")) {
@@ -49,9 +53,6 @@ public class AdminChallengeReplyConnectlHandler extends AbstractChallengeQuestio
         System.out.printf("등록날짜: %s\n", challengeQuestion.getRegisteredDate());
       } 
       //      }
-    } else {
-      System.out.println("본인이 작성한 글만 확인할 수 있습니다.");
-      return;
     }
 
     System.out.println();
@@ -61,15 +62,13 @@ public class AdminChallengeReplyConnectlHandler extends AbstractChallengeQuestio
 
     while (true) {
       System.out.println();
-      System.out.println("1번 ▶ 답글 등록");
-      System.out.println("2번 ▶ 답글 변경");
-      System.out.println("3번 ▶ 답글 삭제");
+      System.out.println("1번 ▶ 답글 변경");
+      System.out.println("2번 ▶ 답글 삭제");
       System.out.println("0번 ▶ 이전");
       int input = Prompt.inputInt("번호 입력 ▶ ");
       switch (input) {
-        case 1: request.getRequestDispatcher("/adminChallenge/replyAdd").forward(request); return;
-        case 2: request.getRequestDispatcher("/adminChallenge/replyUpdate").forward(request); return;
-        case 3: request.getRequestDispatcher("/adminChallenge/replyDelete").forward(request); return;
+        case 1: request.getRequestDispatcher("/adminChallenge/replyUpdate").forward(request); return;
+        case 2: request.getRequestDispatcher("/adminChallenge/replyDelete").forward(request); return;
         case 0: return;
         default:
           System.out.println("명령어가 올바르지 않습니다!");

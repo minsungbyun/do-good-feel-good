@@ -24,7 +24,7 @@ public class AdminChallengeReplyDeleteHandler extends AbstractChallengeQuestionH
       System.out.println("[ 문의답글 삭제 ]");
       System.out.println();
 
-      int challengeNo = (int) request.getAttribute("no");
+      int challengeNo = (int) request.getAttribute("challengeNo");
 
       ChallengeDTO challengeList = findByChallengeNo(challengeNo); 
 

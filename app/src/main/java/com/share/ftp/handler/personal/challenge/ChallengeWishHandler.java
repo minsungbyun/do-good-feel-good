@@ -20,7 +20,7 @@ public class ChallengeWishHandler extends AbstractAdminChallengeHandler {
       System.out.println("[  🎈 WISH 🎈  ]");
       System.out.println();
 
-      int no = (int) request.getAttribute("no");
+      int no = (int) request.getAttribute("challengeNo");
 
       ChallengeDTO challengeList = findByNo(no); 
 

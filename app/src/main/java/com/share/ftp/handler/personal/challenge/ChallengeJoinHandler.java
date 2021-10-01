@@ -23,7 +23,7 @@ public class ChallengeJoinHandler extends AbstractAdminChallengeHandler {
     System.out.println();
     System.out.println("[ 챌린지 참여 ]");
     System.out.println();
-    int no = (int) request.getAttribute("no");
+    int no = (int) request.getAttribute("challengeNo");
 
     ChallengeDTO challengeDTO = findByNo(no);
 
