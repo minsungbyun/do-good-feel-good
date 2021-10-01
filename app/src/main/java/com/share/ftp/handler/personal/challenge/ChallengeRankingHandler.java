@@ -6,11 +6,11 @@ import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
-public class RankingHandler implements Command {
+public class ChallengeRankingHandler implements Command {
 
   List<JoinDTO> joinDTOList;
 
-  public RankingHandler(List<JoinDTO> joinDTOList) {
+  public ChallengeRankingHandler(List<JoinDTO> joinDTOList) {
     this.joinDTOList = joinDTOList;
   }
 

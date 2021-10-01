@@ -44,6 +44,8 @@ public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandl
           challengeDTO.getStartDate(),
           challengeDTO.getEndDate());
 
+
+
       System.out.println();
       System.out.println("---------------------------------------------------------");
       System.out.println();
@@ -54,6 +56,7 @@ public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandl
         System.out.println("문의댓글이 없습니다!");
         System.out.println();
       }
+
 
       for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
         if (challengeQuestionDTO.getNo() == challengeNo) {
