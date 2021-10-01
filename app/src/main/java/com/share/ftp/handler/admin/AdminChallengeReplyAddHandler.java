@@ -34,6 +34,11 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
     //      return;
     //    }
 
+    if (detailNo.getContent().equals("삭제된 댓글입니다")) {
+      System.out.println("이미 삭제 된 댓글입니다!");
+      return;
+    }
+
     ChallengeQuestionDTO challengeQuestionDTO = new ChallengeQuestionDTO();
 
     challengeQuestionDTO.setNo(challengeDTO.getNo());
@@ -42,7 +47,6 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
     challengeQuestionDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     challengeQuestionDTO.setOwner(AuthLoginHandler.getLoginUser());
-
 
 
     String input = Prompt.inputString("해당 문의에 답글 등록을 하시겠습니까?(y/N) ");
