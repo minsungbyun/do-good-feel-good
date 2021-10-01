@@ -35,7 +35,7 @@ public class AdminChallengeReplyDeleteHandler extends AbstractChallengeQuestionH
 
       int deleteNo = (int) request.getAttribute("questionNo");
 
-      ChallengeQuestionDTO challengeQuestion = findByQuestionNo(deleteNo);
+      ChallengeQuestionDTO challengeQuestion = findByQuestionNo(deleteNo, challengeList);
 
       try {
         if (challengeQuestion == null) {

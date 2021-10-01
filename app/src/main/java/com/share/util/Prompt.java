@@ -165,6 +165,25 @@ public class Prompt {
     }
     return allUser;
   }
+
+  //  public static List<ChallengeQuestionDTO> sortQuestionNo(int challengeNo,ChallengeQuestionDTO challengeQuestionDTO, List<ChallengeQuestionDTO> questionList) {
+  //
+  //    for (int i = 0; i < questionList.size(); i++) {
+  //      if (questionList.get(i).getNo() == challengeQuestionDTO.getNo()) {
+  //        i = 0;
+  //        questionList.get(i).setQuestionNo(i + 1);
+  //      }
+  //
+  //    }
+  //
+  //
+  //    //    QuestionComparator questionComp = new QuestionComparator();
+  //    //
+  //    //    Collections.sort(questionList, questionComp);
+  //
+  //    return questionList;
+  //  }
+
   // }
 
   //  public static List<CommBoardDTO> getLikeRank(List<CommBoardDTO> allBoards) {

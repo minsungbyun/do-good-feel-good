@@ -31,7 +31,7 @@ public class AdminChallengeReplyUpdateHandler extends AbstractChallengeQuestionH
 
       int updateNo = (int) request.getAttribute("questionNo");
 
-      ChallengeQuestionDTO challengeQuestion = findByQuestionNo(updateNo);
+      ChallengeQuestionDTO challengeQuestion = findByQuestionNo(updateNo, challengeDTO);
 
       try {
         if (challengeQuestion == null) {
