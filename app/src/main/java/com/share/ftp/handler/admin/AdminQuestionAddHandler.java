@@ -20,11 +20,7 @@ public class AdminQuestionAddHandler extends AbstractAdminQuestionHandler {
     System.out.println("[ 관리자 답글 추가 ]");
 
     int questionNo = (int) request.getAttribute("adminNo");
-
     QuestionListDTO adminQuestionListDTO = findByNo(questionNo);
-
-
-
 
     QuestionListDTO myQuestionListDTO = new QuestionListDTO();
 
@@ -42,8 +38,6 @@ public class AdminQuestionAddHandler extends AbstractAdminQuestionHandler {
 
 
     myQuestionListDTOList.add(a + 1, myQuestionListDTO);
-
-
 
   }
 
