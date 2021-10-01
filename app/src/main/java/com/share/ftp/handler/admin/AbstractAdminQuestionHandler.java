@@ -7,19 +7,18 @@ import com.share.ftp.handler.Command;
 public abstract class AbstractAdminQuestionHandler implements Command {
 
   protected List<QuestionListDTO> myQuestionListDTOList;
-  protected List<QuestionListDTO> adminQuestionDTOList;
+  //  protected List<QuestionListDTO> adminQuestionDTOList;
 
   public AbstractAdminQuestionHandler(List<QuestionListDTO> myQuestionListDTOList) {
     this.myQuestionListDTOList = myQuestionListDTOList;
   }
-  public AbstractAdminQuestionHandler(
-      List<QuestionListDTO> myQuestionListDTOList,
-      List<QuestionListDTO> adminQuestionDTOList) {
-
-    this.myQuestionListDTOList = myQuestionListDTOList;
-    this.adminQuestionDTOList = adminQuestionDTOList;
-  }
-
+  //  public AbstractAdminQuestionHandler(
+  //      List<QuestionListDTO> myQuestionListDTOList,
+  //      List<QuestionListDTO> adminQuestionDTOList) {
+  //
+  //    this.myQuestionListDTOList = myQuestionListDTOList;
+  //    this.adminQuestionDTOList = adminQuestionDTOList;
+  //  }
 
   protected QuestionListDTO findByNo(int no) {
     for (QuestionListDTO myQuestionListDTO : myQuestionListDTOList) {
