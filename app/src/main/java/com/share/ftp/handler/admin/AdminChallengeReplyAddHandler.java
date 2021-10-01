@@ -65,6 +65,8 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
     int b = indexOf(detailNo.getQuestionNo(), challengeQuestionDTO);
 
     challengeQuestionDTOList.add(b + 1, challengeQuestionDTO);
+
+
     //    challengeQuestionDTOList.add(challengeReply);
 
     System.out.println();

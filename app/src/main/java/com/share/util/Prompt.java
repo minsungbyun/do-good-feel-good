@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Scanner;
 import com.share.ftp.domain.join.JoinComparator;
 import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 import com.share.ftp.handler.join.AuthLoginHandler;
 
 public class Prompt {
@@ -164,6 +165,25 @@ public class Prompt {
       //    System.out.printf("유저 이름 : %s\n포인트 : %d\n", loginUser.getName(), loginUser.getPoint());
     }
     return allUser;
+  }
+
+  public static List<ChallengeQuestionDTO> sortQuestionNo(ChallengeQuestionDTO challengeQuestionDTO, List<ChallengeQuestionDTO> questionList) {
+
+    for (int i = 0; i < questionList.size(); i++) {
+      for (int j = 0; j < questionList.size(); j++) {
+        if (questionList.get(i).getNo() == challengeQuestionDTO.getNo()) {
+          questionList.get(j).setQuestionNo(j + 1);
+        }
+      }
+
+    }
+
+
+    //    QuestionComparator questionComp = new QuestionComparator();
+    //
+    //    Collections.sort(questionList, questionComp);
+
+    return questionList;
   }
   // }
 

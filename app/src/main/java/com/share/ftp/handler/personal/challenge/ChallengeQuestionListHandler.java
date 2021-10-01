@@ -56,6 +56,7 @@ public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandl
 
       }
 
+
       for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
         if (challengeQuestionDTO.getNo() == challengeNo) {
           System.out.printf("%d, %s, %s, %s\n", 
