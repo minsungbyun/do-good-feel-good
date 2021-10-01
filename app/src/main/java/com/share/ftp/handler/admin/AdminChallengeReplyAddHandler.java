@@ -26,7 +26,7 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
     ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
 
 
-    int questionNo = (int) request.getAttribute("questionNo");
+    int questionNo = Prompt.inputInt("문의 번호를 입력해주세요 ▶ ");
     ChallengeQuestionDTO detailNo = findByQuestionNo(questionNo, challengeDTO);
 
     //    if (!challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
@@ -37,6 +37,7 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
     ChallengeQuestionDTO challengeQuestionDTO = new ChallengeQuestionDTO();
 
     challengeQuestionDTO.setNo(challengeDTO.getNo());
+    challengeQuestionDTO.setQuestionNo(detailNo.getQuestionNo());
     challengeQuestionDTO.setContent(Prompt.inputString("내용: "));
     challengeQuestionDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 

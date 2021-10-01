@@ -42,7 +42,9 @@ public class ChallengeReviewDeleteHandler extends AbstractChallengeReviewHandler
         return;
       }
 
-      if (!challengeReviewDTO.getOwner().getId().contains(AuthLoginHandler.getLoginUser().getId())) {
+      if ((challengeReviewDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
+          AuthLoginHandler.getLoginUser().getId().equals("admin")) {
+      } else {
         System.out.println("삭제 권한이 없습니다.");
         return;
       }
