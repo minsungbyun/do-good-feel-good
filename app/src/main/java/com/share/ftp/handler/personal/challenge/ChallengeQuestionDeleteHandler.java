@@ -61,7 +61,7 @@ public class ChallengeQuestionDeleteHandler extends AbstractChallengeQuestionHan
 
         } else if (input.equals("y")) {
           System.out.println("해당 문의사항을 삭제하였습니다.");
-          challengeList.setQuestionCount(challengeList.getQuestionCount());
+          challengeList.setQuestionCount(challengeList.getQuestionCount() - 1);
           challengeQuestion.setContent("삭제된 댓글입니다");
 
 
