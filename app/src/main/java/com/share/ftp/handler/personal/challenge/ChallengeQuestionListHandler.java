@@ -53,7 +53,6 @@ public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandl
       if (challengeDTO.getQuestionCount() == 0 || challengeQuestionDTOList.isEmpty()) {
         System.out.println("문의댓글이 없습니다!");
         System.out.println();
-
       }
 
       for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {

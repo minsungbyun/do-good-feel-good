@@ -36,7 +36,6 @@ public class AdminQuestionAddHandler extends AbstractAdminQuestionHandler {
 
     int a = indexOf(adminQuestionListDTO.getNo());
 
-
     myQuestionListDTOList.add(a + 1, myQuestionListDTO);
 
   }
