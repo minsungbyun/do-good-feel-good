@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Scanner;
 import com.share.ftp.domain.join.JoinComparator;
 import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.handler.join.AuthLoginHandler;
 
 public class Prompt {
 
@@ -31,6 +32,10 @@ public class Prompt {
 
   public static int inputInt(String title) {
     return Integer.parseInt(inputString(title));
+  }
+
+  public static long inputLong(String title) {
+    return Long.parseLong(inputString(title));
   }
 
   public static Date inputDate(String title) {
@@ -55,23 +60,23 @@ public class Prompt {
   public static String getUserLevel(JoinDTO loginUser) {
 
     int userPoint = loginUser.getPoint();
-    //    
+
     if (userPoint < 0) {
       return "오류가 발생했습니다! 존재하지 않는 포인트입니다.";
 
-    } else if (0 <= userPoint && userPoint < 1000) {
+    } else if (0 <= userPoint && userPoint < FROM_E_TO_D) {
       loginUser.setLevel(LEVEL_E);
 
-    } else if (1000 <= userPoint && userPoint < 2000) {
+    } else if (FROM_E_TO_D <= userPoint && userPoint < FROM_D_TO_C) {
       loginUser.setLevel(LEVEL_D);
 
-    } else if (2000 <= userPoint && userPoint < 3000) {
+    } else if (FROM_D_TO_C <= userPoint && userPoint < FROM_C_TO_B) {
       loginUser.setLevel(LEVEL_C);
 
-    } else if (3000 <= userPoint && userPoint < 4000) {
+    } else if (FROM_C_TO_B <= userPoint && userPoint < FROM_B_TO_A) {
       loginUser.setLevel(LEVEL_B);
 
-    } else if (userPoint >= 4000) {
+    } else if (userPoint >= FROM_B_TO_A) {
       loginUser.setLevel(LEVEL_A);
     }
 
@@ -86,22 +91,21 @@ public class Prompt {
     if (userPoint < 0) {
       return -1;
 
-    } else if (0 <= userPoint && userPoint < 1000) {
+    } else if (0 <= userPoint && userPoint < FROM_E_TO_D) {
       needPoint = FROM_E_TO_D - userPoint;
 
-    } else if (1000 <= userPoint && userPoint < 2000) {
+    } else if (FROM_D_TO_C <= userPoint && userPoint < FROM_D_TO_C) {
       needPoint = FROM_D_TO_C - userPoint;
 
-    } else if (2000 <= userPoint && userPoint < 3000) {
+    } else if (FROM_D_TO_C <= userPoint && userPoint < FROM_C_TO_B) {
       needPoint = FROM_C_TO_B - userPoint;
 
-    } else if (3000 <= userPoint && userPoint < 4000) {
+    } else if (FROM_C_TO_B <= userPoint && userPoint < FROM_B_TO_A) {
       needPoint = FROM_B_TO_A - userPoint;
 
     } 
     return needPoint;
   }
-
 
   public static List<JoinDTO> getUserRank(List<JoinDTO> allUser) {
 
@@ -112,19 +116,15 @@ public class Prompt {
 
     for (int i = 0; i < pointList.size(); i++) {
       for (int j = 0; j < pointList.size(); j++) {
-
         if (pointList.get(i).getPoint() < pointList.get(j).getPoint()) {  
           pointList.get(i).setRank(pointList.get(i).getRank() + 1);
         }
       }
-      System.out.printf("이름 : %s, 등수 : %d\n", pointList.get(i).getName(), pointList.get(i).getRank());
     }
 
-    //
-    //    List<JoinDTO> userRank = new ArrayList<>();
-    //
-    //    userRank.addAll(pointList);
-    //
+    for (int i = 0; i < pointList.size(); i++) {
+      pointList.get(i).setFinalRank(pointList.get(i).getRank());
+    }
 
     return pointList;
   }
@@ -134,39 +134,117 @@ public class Prompt {
 
     List<JoinDTO> userRank = getUserRank(allUser);
 
-    //    List<JoinDTO> printRank = new ArrayList<>();
-    //    printRank = userRank;
     for (JoinDTO loginUser : userRank) {
 
-      System.out.printf("이름 : %s 포인트 : %d점 등수 : %d등\n" , loginUser.getName(),  loginUser.getPoint(), loginUser.getRank() + 1);
+      System.out.printf("     %d등  %-10s   [%5d점]\n" , loginUser.getFinalRank(), loginUser.getId(), loginUser.getPoint());
     }
-
-
   }
 
+  public static int printMyRank(List<JoinDTO> allUser) {
+
+    List<JoinDTO> userRank = getUserRank(allUser);
+
+    for (JoinDTO loginUser : userRank) {
+      if (loginUser.getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+        return loginUser.getFinalRank();
+      }
+    }
+    return -1;
+  }
+
+  public static int printIndividualUserRank(JoinDTO loginUser) {
+    return loginUser.getFinalRank();
+  }
 
   // 현재 로그인 한 회원의 포인트를 비교해서 나열함
   public static List<JoinDTO> getUserPointList(List<JoinDTO> allUser) {
 
     JoinComparator userPointComp = new JoinComparator();
 
-    for(JoinDTO loginUser : allUser) {
-      System.out.printf("유저 이름 : %s\n포인트 : %d\n", loginUser.getName(), loginUser.getPoint());
-      System.out.println();
-    }
-
     Collections.sort(allUser, userPointComp);
 
-    System.out.println("-----------------------------------------------------------------");
     for(JoinDTO loginUser : allUser) {
-      System.out.printf("유저 이름 : %s\n포인트 : %d\n", loginUser.getName(), loginUser.getPoint());
-      System.out.println();
+      loginUser.setRank(1);
+      //    System.out.printf("유저 이름 : %s\n포인트 : %d\n", loginUser.getName(), loginUser.getPoint());
     }
-
     return allUser;
-
   }
+
+
+  //  public static List<ChallengeQuestionDTO> sortQuestionNo(int challengeNo,ChallengeQuestionDTO challengeQuestionDTO, List<ChallengeQuestionDTO> questionList) {
+  //
+  //    for (int i = 0; i < questionList.size(); i++) {
+  //      if (questionList.get(i).getNo() == challengeQuestionDTO.getNo()) {
+  //        i = 0;
+  //        questionList.get(i).setQuestionNo(i + 1);
+  //      }
+  //
+  //    }
+  //
+  //
+  //    //    QuestionComparator questionComp = new QuestionComparator();
+  //    //
+  //    //    Collections.sort(questionList, questionComp);
+  //
+  //    return questionList;
+  //  }
+
+  // }
+
+  //  public static List<CommBoardDTO> getLikeRank(List<CommBoardDTO> allBoards) {
+  //
+  //    List<CommBoardDTO> commBoardList = getCommBestList(allBoards);
+  //
+  //    for (int i = 0; i < commBoardList.size(); i++) {
+  //      for (int j = 0; j < commBoardList.size(); j++) {
+  //        if (commBoardList.get(i).getLike() < commBoardList.get(j).getLike()) {  
+  //          commBoardList.get(i).setRank(commBoardList.get(i).getRank() + 1);
+  //        }
+  //      }
+  //    }
+  //
+  //    for (int i = 0; i < commBoardList.size(); i++) {
+  //      commBoardList.get(i).setBestRank(commBoardList.get(i).getRank());
+  //    }
+  //
+  //    return commBoardList;
+  //  }
+  //
+  //
+  //  public static void printBestRank(List<CommBoardDTO> allBoards) {
+  //
+  //    List<CommBoardDTO> likeRank = getLikeRank(allBoards);
+  //
+  //    for (CommBoardDTO commBoard : likeRank) {
+  //      System.out.printf
+  //      ("작성자 : %s 제목 : %s 좋아요수 : %d\n" , 
+  //          commBoard.getOwner().getId(),  commBoard.getTitle(), commBoard.getLike());
+  //    }
+  //  }
+  //
+  //    // 수정이 필요합니다!
+  //    public static List<CommBoardDTO> getCommBestList(List<CommBoardDTO> allBoards) {
+  //  
+  //      CommBestComparator boardscomp = new CommBestComparator();
+  //  
+  //    Collections.sort(allBoards, boardscomp);
+  //
+  //    for(CommBoardDTO commBoard : allBoards) {
+  //      System.out.printf
+  //      ("작성자 : %s 제목 : %s 좋아요수 : %d\n" , 
+  //          commBoard.getOwner(),  commBoard.getTitle(), commBoard.getLike());
+  //      System.out.println();
+  //    }
+  //    return allBoards;
+  //  }
 }
+
+
+
+
+
+
+
 
 
 

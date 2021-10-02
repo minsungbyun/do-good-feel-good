@@ -13,8 +13,10 @@ public class JoinDTO implements Serializable {
   private int type; // 1. 개인, 2. 기관, 3. 그룹
   private int point; // 유저 포인트
   private int rank = 1; // 유저 랭킹
+  private int finalRank; // 유저 랭킹
   private int donationMoney; // 유저 기부금액
   private int authNum = 1004; 
+  private int adminPassword = -1;
   private String id;
   private String password;
   private String name;
@@ -35,10 +37,11 @@ public class JoinDTO implements Serializable {
         + email + ", address=" + address + ", registerDate=" + registerDate + ", level=" + level
         + "]";
   }
+
   @Override
   public int hashCode() {
-    return Objects.hash(address, authNum, birthdate, donationMoney, email, id, level, name, no,
-        password, point, rank, registerDate, tel, type);
+    return Objects.hash(address, adminPassword, authNum, birthdate, donationMoney, email, id, level,
+        name, no, password, point, rank, registerDate, tel, type);
   }
   @Override
   public boolean equals(Object obj) {
@@ -49,14 +52,16 @@ public class JoinDTO implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     JoinDTO other = (JoinDTO) obj;
-    return Objects.equals(address, other.address) && authNum == other.authNum
-        && Objects.equals(birthdate, other.birthdate) && donationMoney == other.donationMoney
-        && Objects.equals(email, other.email) && Objects.equals(id, other.id)
-        && Objects.equals(level, other.level) && Objects.equals(name, other.name) && no == other.no
+    return Objects.equals(address, other.address) && adminPassword == other.adminPassword
+        && authNum == other.authNum && Objects.equals(birthdate, other.birthdate)
+        && donationMoney == other.donationMoney && Objects.equals(email, other.email)
+        && Objects.equals(id, other.id) && Objects.equals(level, other.level)
+        && Objects.equals(name, other.name) && no == other.no
         && Objects.equals(password, other.password) && point == other.point && rank == other.rank
         && Objects.equals(registerDate, other.registerDate) && Objects.equals(tel, other.tel)
         && type == other.type;
   }
+
   public int getNo() {
     return no;
   }
@@ -148,15 +153,20 @@ public class JoinDTO implements Serializable {
     this.rank = rank;
   }
 
+  public int getAdminPassword() {
+    return adminPassword;
+  }
+  public void setAdminPassword(int adminPassword) {
+    this.adminPassword = adminPassword;
+  }
 
+  public int getFinalRank() {
+    return finalRank;
+  }
+  public void setFinalRank(int finalRank) {
+    this.finalRank = finalRank;
 
-
-
-
-
-
-
-
+  }
 
 
 

@@ -15,6 +15,9 @@ public class CommBestDetailHandler extends AbstractCommBestHandler {
     System.out.println();
     System.out.println("[  소통해요/나눔이야기Best/상세보기  ]");
 
+    //    CommBestComparator commBestComparator = new CommBestComparator();
+
+
 
 
     //    //  전체 목록중에서 조회수가 가장 높은 3개
