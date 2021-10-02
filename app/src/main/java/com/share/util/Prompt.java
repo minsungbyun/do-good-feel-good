@@ -10,7 +10,6 @@ import static com.share.util.General.level.LEVEL_C;
 import static com.share.util.General.level.LEVEL_D;
 import static com.share.util.General.level.LEVEL_E;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
@@ -108,6 +107,9 @@ public class Prompt {
 
     List<JoinDTO> pointList = getUserPointList(allUser);
 
+
+
+
     for (int i = 0; i < pointList.size(); i++) {
       for (int j = 0; j < pointList.size(); j++) {
 
@@ -115,16 +117,16 @@ public class Prompt {
           pointList.get(i).setRank(pointList.get(i).getRank() + 1);
         }
       }
-      //      System.out.printf("이름 : %s, 등수 : %d\n", pointList.get(i).getName(),pointList.get(i).getRank());
+      System.out.printf("이름 : %s, 등수 : %d\n", pointList.get(i).getName(), pointList.get(i).getRank());
     }
 
+    //
+    //    List<JoinDTO> userRank = new ArrayList<>();
+    //
+    //    userRank.addAll(pointList);
+    //
 
-    List<JoinDTO> userRank = new ArrayList<>();
-
-    userRank.addAll(pointList);
-
-
-    return userRank;
+    return pointList;
   }
 
 
@@ -136,7 +138,7 @@ public class Prompt {
     //    printRank = userRank;
     for (JoinDTO loginUser : userRank) {
 
-      System.out.printf("이름 : %s 포인트 : %d점 등수 : %d등\n" , loginUser.getName(),  loginUser.getPoint(), loginUser.getRank());
+      System.out.printf("이름 : %s 포인트 : %d점 등수 : %d등\n" , loginUser.getName(),  loginUser.getPoint(), loginUser.getRank() + 1);
     }
 
 

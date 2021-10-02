@@ -27,12 +27,6 @@ public class JoinDTO implements Serializable {
 
 
 
-
-
-
-
-
-
   @Override
   public String toString() {
     return "JoinDTO [no=" + no + ", type=" + type + ", point=" + point + ", rank=" + rank
@@ -63,7 +57,6 @@ public class JoinDTO implements Serializable {
         && Objects.equals(registerDate, other.registerDate) && Objects.equals(tel, other.tel)
         && type == other.type;
   }
-
   public int getNo() {
     return no;
   }
