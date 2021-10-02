@@ -305,7 +305,7 @@ public class ClientApp {
     commands.put("/auth/displayUserInfo", new AuthDisplayUserInfoHandler()); // 마이페이지 나의정보수정
 
     //회원가입
-    commands.put("/join/add", new JoinAddHandler(joinDTOList)); // 회원가입
+    commands.put("/join/add", new JoinAddHandler(requestAgent)); // 회원가입
     commands.put("/join/searchTelId", new JoinSearchTelIdHandler(joinDTOList)); // 폰번호로 아이디 찾기
     commands.put("/join/searchEmailId", new JoinSearchEmailIdHandler(joinDTOList)); // 이메일로 아이디 찾기
     commands.put("/join/searchPassword", new JoinSearchPasswordHandler(joinDTOList)); // 비밀번호 찾기

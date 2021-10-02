@@ -35,21 +35,29 @@ public class JoinAddHandler implements Command {
       params.put("validId", joinDTO.getId());
 
       requestAgent.request("join.validId", params);
-    }
 
+      if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+        System.out.println("이미 존재하는 아이디입니다. 다시 입력해주세요!");
+
+      } else {
+        joinDTO = requestAgent.getObject(JoinDTO.class);
+        break;
+
+      }
+    }
 
     joinDTO.setPassword(Prompt.inputString("비밀번호? "));
 
     // 이름 유효성검사
 
+    while (true) {
+      joinDTO.setName(Prompt.inputString("이름? "));
 
-    joinDTO.setName(Prompt.inputString("이름? "));
-
-    HashMap<String,String> params = new HashMap<>();
-    params.put("validName", joinDTO.getName());
-
-    requestAgent.request("join.valid", params);
-
+      if (!(joinDTO.getName().length() == 0)) {
+        break;
+      }
+      System.out.println("이름을 입력하세요");
+    }
 
 
     joinDTO.setBirthdate(Prompt.inputDate("생년월일? "));
@@ -107,12 +115,25 @@ public class JoinAddHandler implements Command {
     }
 
     // 고유회원번호 부여
-    joinDTO.setNo(getNextNum());
+    HashMap<String,Integer> params = new HashMap<>();
+    params.put("getNextNum", joinDTO.getNo());
+
+    requestAgent.request("join.getNextNum", params);
+
+    joinDTO = requestAgent.getObject(JoinDTO.class);
+
+    joinDTO.getNo(); // 실험용 
+
+    requestAgent.request("join.insert", joinDTO);
 
 
-    joinDTOList.add(joinDTO);
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+
+      System.out.println("회원가입이 정상적으로 완료되었습니다.");
+    } else {
+      System.out.println("회원가입에 실패했습니다!");
+    }
     System.out.println();
-    System.out.println("회원가입이 정상적으로 완료되었습니다.");
 
   }
 
@@ -135,30 +156,6 @@ public class JoinAddHandler implements Command {
   //
   //  }
 
-  private int getNextNum() {
-    if (joinDTOList.size() > 0) {
 
-      return joinDTOList.get(joinDTOList.size() - 1).getNo() + 1;
-    } else {
-      return 1;
-    }
-  }
 
-  private boolean validId(String id) {
-    for (JoinDTO joinDTO : joinDTOList) {
-      if (joinDTO.getId().contains(id)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  private boolean validName(String name) {
-    for (JoinDTO joinDTO : joinDTOList) {
-      if (!(joinDTO.getName().length() == 0)) {
-        return true;
-      }
-    }
-    return false;
-  }
 }

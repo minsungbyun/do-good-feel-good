@@ -5,9 +5,11 @@ import com.share.ftp.server.DataProcessor;
 import com.share.ftp.server.Request;
 import com.share.ftp.server.Response;
 
-public class JoinDTOTable extends JsonDataTable<JoinDTO> implements DataProcessor {
+public class JoinTable extends JsonDataTable<JoinDTO> implements DataProcessor {
 
-  public JoinDTOTable() {
+  JoinDTO loginUser;
+
+  public JoinTable() {
     super("join.json",JoinDTO.class);
   }
 
@@ -15,9 +17,12 @@ public class JoinDTOTable extends JsonDataTable<JoinDTO> implements DataProcesso
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
       case "join.insert": insert(request, response); break;
+      //      case "join.update": insert(request, response); break;
+      //      case "join.delete": insert(request, response); break;
+      //      case "join.findAll": insert(request, response); break;
       case "join.selectOneByIdPassword" : selectOneByIdPassword(request,response); break;
       case "join.validId": validId(request, response); break;
-      case "join.validName": validName(request, response); break;
+      case "join.getNextNum": getNextNum(request, response); break;
 
     }
 
@@ -70,20 +75,30 @@ public class JoinDTOTable extends JsonDataTable<JoinDTO> implements DataProcesso
     }
   }
 
-  private void validName(Request request, Response response) throws Exception {
-    String name = request.getParameter("validName");
+  private void getNextNum(Request request, Response response) throws Exception {
+    int no = Integer.parseInt(request.getParameter("getNextNum"));
 
 
-
-    if (!(name.length() == 0)) {
-      response.setStatus(Response.SUCCESS);
-      response.setValue();
-
+    if (list.size() > 0) {
+      no = list.get(list.size() - 1).getNo() + 1;
     } else {
+      no = 1;
+    }
+
+    loginUser.setNo(no);
+
+    if (no == 1) {
       response.setStatus(Response.FAIL);
       response.setValue(loginUser);
+    } else {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(loginUser);
+
     }
+
   }
+
+
 
 
 
