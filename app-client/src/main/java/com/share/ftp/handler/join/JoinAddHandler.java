@@ -1,17 +1,22 @@
 package com.share.ftp.handler.join;
 
 import java.sql.Date;
-import java.util.List;
+import java.util.HashMap;
 import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
+import com.share.ftp.request.RequestAgent;
 import com.share.menu.Menu;
 import com.share.util.General;
 import com.share.util.Prompt;
 
-public class JoinAddHandler extends AbstractJoinHandler {
+public class JoinAddHandler implements Command {
 
-  public JoinAddHandler(List<JoinDTO> joinDTOList) {
-    super(joinDTOList);
+  RequestAgent requestAgent;
+
+  public JoinAddHandler(RequestAgent requestAgent) {
+
+    this.requestAgent = requestAgent;
   }
 
   @Override
@@ -26,29 +31,26 @@ public class JoinAddHandler extends AbstractJoinHandler {
 
       joinDTO.setId(Prompt.inputString("아이디? "));
 
+      HashMap<String,String> params = new HashMap<>();
+      params.put("validId", joinDTO.getId());
 
-      if (validId(joinDTO.getId())) {
-        System.out.println("[  이미 존재하는 아이디입니다. ]");
-        System.out.println("[  다시 입력해주세요! ]");
-      } else {
-        break;
-      }
+      requestAgent.request("join.validId", params);
     }
+
 
     joinDTO.setPassword(Prompt.inputString("비밀번호? "));
 
     // 이름 유효성검사
-    while (true) {
 
-      joinDTO.setName(Prompt.inputString("이름? "));
 
-      if (validName(joinDTO.getName())) {
-        System.out.println("[  이미 존재하는 이름입니다. ]");
-        System.out.println("[  다시 입력해주세요! ]");
-      } else {
-        break;
-      }
-    }
+    joinDTO.setName(Prompt.inputString("이름? "));
+
+    HashMap<String,String> params = new HashMap<>();
+    params.put("validName", joinDTO.getName());
+
+    requestAgent.request("join.valid", params);
+
+
 
     joinDTO.setBirthdate(Prompt.inputDate("생년월일? "));
     joinDTO.setTel(Prompt.inputString("전화? "));
@@ -153,7 +155,7 @@ public class JoinAddHandler extends AbstractJoinHandler {
 
   private boolean validName(String name) {
     for (JoinDTO joinDTO : joinDTOList) {
-      if (joinDTO.getName().contains(name)) {
+      if (!(joinDTO.getName().length() == 0)) {
         return true;
       }
     }

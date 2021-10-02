@@ -153,11 +153,14 @@ import com.share.ftp.handler.personal.volunteer.VolPersonalRequestAppliedListHan
 import com.share.ftp.handler.personal.volunteer.VolPersonalRequestApplyListHandler;
 import com.share.ftp.listener.AppInitListener;
 import com.share.ftp.listener.FileListener;
+import com.share.ftp.request.RequestAgent;
 import com.share.menu.Menu;
 import com.share.menu.MenuGroup;
 import com.share.util.Prompt;
 
 public class ClientApp {
+
+  RequestAgent requestAgent;
 
   List<JoinDTO> joinDTOList = new ArrayList<>();
   // 회원가입 도메인(값)
@@ -293,9 +296,10 @@ public class ClientApp {
   //  DonationRegisterParticipationListHandler donationRegisterParticipationListHandler = new DonationRegisterParticipationListHandler(donationRegisterDTOList, donationBoardDTOList);
 
 
-  public ClientApp() {
+  public ClientApp() throws Exception {
+    requestAgent = new RequestAgent("127.0.0.1", 8888);
     //로그인, 로그아웃
-    commands.put("/auth/login", new AuthLoginHandler(joinDTOList)); // 로그인
+    commands.put("/auth/login", new AuthLoginHandler(requestAgent)); // 로그인
     commands.put("/auth/logout", new AuthLogoutHandler()); // 로그아웃
     commands.put("/auth/changeUserInfo", new AuthChangeUserInfoHandler()); // 마이페이지 나의정보
     commands.put("/auth/displayUserInfo", new AuthDisplayUserInfoHandler()); // 마이페이지 나의정보수정
@@ -1005,7 +1009,7 @@ public class ClientApp {
   }
 
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
 
     ClientApp app = new ClientApp(); 
     app.addApplicationContextListener(new AppInitListener());
