@@ -9,15 +9,16 @@ import static com.share.menu.Menu.ACCESS_PERSONAL;
 import static com.share.util.General.member.ORG;
 import static com.share.util.General.member.PERSONAL;
 import java.sql.Date;
-import java.util.List;
+import java.util.HashMap;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
+import com.share.ftp.request.RequestAgent;
 import com.share.util.Prompt;
 
 public class AuthLoginHandler implements Command {
 
-  List<JoinDTO> joinDTOList;
+  RequestAgent requestAgent;
 
   public static JoinDTO loginUser;
 
@@ -31,8 +32,8 @@ public class AuthLoginHandler implements Command {
     return userAccessLevel;
   }
 
-  public AuthLoginHandler(List<JoinDTO> joinDTOList) {
-    this.joinDTOList = joinDTOList;
+  public AuthLoginHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   @Override
@@ -59,48 +60,32 @@ public class AuthLoginHandler implements Command {
       return;
     } 
 
+    HashMap<String,String> params = new HashMap<>();
+    params.put("loginId", id);
+    params.put("loginPassword", password);
 
-    JoinDTO joinDTO = findByMember(id, password);
+    requestAgent.request("join.selectOneByIdPassword", params);
 
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
 
-    if (joinDTO == null) {
-      System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");
-      return;
-    } else if (joinDTO.getType() == PERSONAL) {
-      userAccessLevel = ACCESS_MEMBER | ACCESS_PERSONAL | ACCESS_MEMBER_ADMIN;
+      JoinDTO joinDTO = requestAgent.getObject(JoinDTO.class);
 
-      System.out.printf("[  %s님 환영합니다!  ]\n", joinDTO.getName());
+      if (joinDTO == null) {
+        System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");
+        return;
+      } else if (joinDTO.getType() == PERSONAL) {
+        userAccessLevel = ACCESS_MEMBER | ACCESS_PERSONAL | ACCESS_MEMBER_ADMIN;
 
-    } else if (joinDTO.getType() == ORG) {
-      userAccessLevel = ACCESS_MEMBER | ACCESS_ORG | ACCESS_MEMBER_ADMIN;
+        System.out.printf("[  %s님 환영합니다!  ]\n", joinDTO.getName());
 
-      System.out.printf("[  %s님 환영합니다!  ]\n", joinDTO.getName());
-    }
+      } else if (joinDTO.getType() == ORG) {
+        userAccessLevel = ACCESS_MEMBER | ACCESS_ORG | ACCESS_MEMBER_ADMIN;
 
-    loginUser = joinDTO;
-
-    //      userAccessLevel = Menu.ACCESS_MEMBER;
-  }
-
-
-
-  private JoinDTO findByMember(String id, String password) {
-    for (JoinDTO joinDTO : joinDTOList) {
-      if (joinDTO.getId().equals(id) && 
-          joinDTO.getPassword().equals(password)) {
-        return joinDTO;
+        System.out.printf("[  %s님 환영합니다!  ]\n", joinDTO.getName());
       }
-    }
-    return null;
-  }
 
-  public static JoinDTO findByName(String name) {
-
-    if (loginUser.getName().equals(name)) { 
-      return loginUser;
-    }
-
-    return null;
+      loginUser = joinDTO;
+    } 
   }
 }
 
