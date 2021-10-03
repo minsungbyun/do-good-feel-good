@@ -16,8 +16,8 @@ public class QuestionListHandler extends AbstractQuestionHandler {
     System.out.println("[고객센터/문의하기/문의하기 목록]");
 
     if (myQuestionListDTOList.isEmpty()) {
-      System.out.println("게시글이 없습니다.");
       System.out.println();
+      System.out.println("작성된 게시글이 없습니다.");
     }
 
     for (QuestionListDTO myQuestionListDTO : myQuestionListDTOList) {
