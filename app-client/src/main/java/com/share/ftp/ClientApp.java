@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.share.context.ApplicationContextListener;
+import com.share.ftp.dao.JoinDao;
+import com.share.ftp.dao.impl.NetJoinDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.admin.NoticeDTO;
 import com.share.ftp.domain.join.JoinDTO;
@@ -297,7 +299,13 @@ public class ClientApp {
 
 
   public ClientApp() throws Exception {
+
+
     requestAgent = new RequestAgent("127.0.0.1", 8888);
+
+    JoinDao netJoinDao = new NetJoinDao(requestAgent);
+
+
     //로그인, 로그아웃
     commands.put("/auth/login", new AuthLoginHandler(requestAgent)); // 로그인
     commands.put("/auth/logout", new AuthLogoutHandler()); // 로그아웃

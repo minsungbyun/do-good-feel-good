@@ -111,6 +111,9 @@ public class Prompt {
 
     List<JoinDTO> pointList = getUserPointList(allUser);
 
+
+
+
     for (int i = 0; i < pointList.size(); i++) {
       for (int j = 0; j < pointList.size(); j++) {
         if (pointList.get(i).getPoint() < pointList.get(j).getPoint()) {  
@@ -132,6 +135,7 @@ public class Prompt {
     List<JoinDTO> userRank = getUserRank(allUser);
 
     for (JoinDTO loginUser : userRank) {
+
       System.out.printf("     %d등  %-10s   [%5d점]\n" , loginUser.getFinalRank(), loginUser.getId(), loginUser.getPoint());
     }
   }

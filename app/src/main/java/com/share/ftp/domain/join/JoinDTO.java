@@ -29,12 +29,14 @@ public class JoinDTO implements Serializable {
 
 
 
-
-
-
-
-
-
+  @Override
+  public String toString() {
+    return "JoinDTO [no=" + no + ", type=" + type + ", point=" + point + ", rank=" + rank
+        + ", donationMoney=" + donationMoney + ", authNum=" + authNum + ", id=" + id + ", password="
+        + password + ", name=" + name + ", birthdate=" + birthdate + ", tel=" + tel + ", email="
+        + email + ", address=" + address + ", registerDate=" + registerDate + ", level=" + level
+        + "]";
+  }
 
   @Override
   public int hashCode() {
@@ -59,14 +61,7 @@ public class JoinDTO implements Serializable {
         && Objects.equals(registerDate, other.registerDate) && Objects.equals(tel, other.tel)
         && type == other.type;
   }
-  @Override
-  public String toString() {
-    return "JoinDTO [no=" + no + ", type=" + type + ", point=" + point + ", rank=" + rank
-        + ", donationMoney=" + donationMoney + ", authNum=" + authNum + ", adminPassword="
-        + adminPassword + ", id=" + id + ", password=" + password + ", name=" + name
-        + ", birthdate=" + birthdate + ", tel=" + tel + ", email=" + email + ", address=" + address
-        + ", registerDate=" + registerDate + ", level=" + level + "]";
-  }
+
   public int getNo() {
     return no;
   }
