@@ -48,18 +48,18 @@ import com.share.ftp.handler.admin.AdminNoticeListHandler;
 import com.share.ftp.handler.admin.AdminNoticeSearchHandler;
 import com.share.ftp.handler.admin.AdminNoticeUpdateHandler;
 import com.share.ftp.handler.admin.AdminQuestionAddHandler;
-import com.share.ftp.handler.join.AuthChangeUserInfoHandler;
-import com.share.ftp.handler.join.AuthDisplayUserInfoHandler;
+import com.share.ftp.handler.join.AuthDisplayUserHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.ftp.handler.join.AuthLogoutHandler;
+import com.share.ftp.handler.join.AuthUpdateUserHandler;
 import com.share.ftp.handler.join.JoinAddHandler;
 import com.share.ftp.handler.join.JoinDetailHandler;
 import com.share.ftp.handler.join.JoinListHandler;
 import com.share.ftp.handler.join.JoinSearchEmailIdHandler;
 import com.share.ftp.handler.join.JoinSearchPasswordHandler;
 import com.share.ftp.handler.join.JoinSearchTelIdHandler;
-import com.share.ftp.handler.join.MyPageDelete;
-import com.share.ftp.handler.join.MyPageInfoHandler;
+import com.share.ftp.handler.join.MyPageDeleteUserHandler;
+import com.share.ftp.handler.join.MyPageUpdateUserHandler;
 import com.share.ftp.handler.org.MyVolApplyListHandler;
 import com.share.ftp.handler.org.MyVolApproveListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeDetailHandler;
@@ -165,8 +165,6 @@ public class ClientApp {
   RequestAgent requestAgent;
 
   List<JoinDTO> joinDTOList = new ArrayList<>();
-  // 회원가입 도메인(값)
-  //  List<JoinDTO> members = new ArrayList<>();
   // 함께해요 도메인(값)
   List<VolListDTO> volListDTOList = new ArrayList<>();
 
@@ -300,23 +298,22 @@ public class ClientApp {
 
   public ClientApp() throws Exception {
 
-
     requestAgent = new RequestAgent("127.0.0.1", 8888);
 
     JoinDao netJoinDao = new NetJoinDao(requestAgent);
 
 
     //로그인, 로그아웃
-    commands.put("/auth/login", new AuthLoginHandler(requestAgent)); // 로그인
+    commands.put("/auth/login", new AuthLoginHandler(netJoinDao)); // 로그인
     commands.put("/auth/logout", new AuthLogoutHandler()); // 로그아웃
-    commands.put("/auth/changeUserInfo", new AuthChangeUserInfoHandler()); // 마이페이지 나의정보
-    commands.put("/auth/displayUserInfo", new AuthDisplayUserInfoHandler()); // 마이페이지 나의정보수정
+    commands.put("/auth/changeUserInfo", new AuthUpdateUserHandler()); // 마이페이지 나의정보
+    commands.put("/auth/displayUserInfo", new AuthDisplayUserHandler()); // 마이페이지 나의정보수정
 
     //회원가입
-    commands.put("/join/add", new JoinAddHandler(requestAgent)); // 회원가입
-    commands.put("/join/searchTelId", new JoinSearchTelIdHandler(joinDTOList)); // 폰번호로 아이디 찾기
-    commands.put("/join/searchEmailId", new JoinSearchEmailIdHandler(joinDTOList)); // 이메일로 아이디 찾기
-    commands.put("/join/searchPassword", new JoinSearchPasswordHandler(joinDTOList)); // 비밀번호 찾기
+    commands.put("/join/add", new JoinAddHandler(netJoinDao)); // 회원가입
+    commands.put("/join/searchTelId", new JoinSearchTelIdHandler(netJoinDao)); // 폰번호로 아이디 찾기
+    commands.put("/join/searchEmailId", new JoinSearchEmailIdHandler(netJoinDao)); // 이메일로 아이디 찾기
+    commands.put("/join/searchPassword", new JoinSearchPasswordHandler(netJoinDao)); // 비밀번호 찾기
 
     commands.put("/volGeneralRequest/apply", new VolGeneralRequestApplyHandler(generalRequestDTOList,joinDTOList));
     commands.put("/volGeneralRequest/applyList", new VolGeneralRequestApplyListHandler(generalRequestDTOList));
@@ -433,8 +430,8 @@ public class ClientApp {
     //    commands.put("/adminQuestion/add", new AdminQuestionAddHandler(myQuestionListDTOList));
 
     // 마이페이지
-    commands.put("/myPage/info", new MyPageInfoHandler(joinDTOList)); // 내정보 수정
-    commands.put("/myPage/delete", new MyPageDelete(joinDTOList)); // 회원탈퇴
+    commands.put("/myPage/info", new MyPageUpdateUserHandler(netJoinDao)); // 내정보 수정
+    commands.put("/myPage/delete", new MyPageDeleteUserHandler(netJoinDao)); // 회원탈퇴
 
     commands.put("/myVol/applied", new MyAppliedVolHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     commands.put("/myVol/appliedDetail", new MyAppliedVolDetailHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
@@ -461,8 +458,8 @@ public class ClientApp {
     // 관리자
 
     // 관리자 회원정보 조회
-    commands.put("/join/list", new JoinListHandler(joinDTOList)); // 관리자가 회원 목록을 조회
-    commands.put("/join/detail", new JoinDetailHandler(joinDTOList)); // 가입회원 상세보기 (관리자연결)
+    commands.put("/join/list", new JoinListHandler(netJoinDao)); // 관리자가 회원 목록을 조회
+    commands.put("/join/detail", new JoinDetailHandler(netJoinDao)); // 가입회원 상세보기 (관리자연결)
     commands.put("/join/delete", new AdminMemberDeleteHandler());
 
     // 관리자 공지사항 (개인 + 관리자)

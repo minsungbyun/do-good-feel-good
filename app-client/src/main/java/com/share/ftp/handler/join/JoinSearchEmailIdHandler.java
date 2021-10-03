@@ -1,14 +1,17 @@
 package com.share.ftp.handler.join;
 
-import java.util.List;
+import com.share.ftp.dao.JoinDao;
 import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
-public class JoinSearchEmailIdHandler extends AbstractJoinHandler {
+public class JoinSearchEmailIdHandler implements Command {
 
-  public JoinSearchEmailIdHandler(List<JoinDTO> joinDTOList) {
-    super(joinDTOList);
+  JoinDao joinDao;
+
+  public JoinSearchEmailIdHandler(JoinDao joinDao) {
+    this.joinDao = joinDao;
 
   }
 
@@ -17,16 +20,17 @@ public class JoinSearchEmailIdHandler extends AbstractJoinHandler {
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("[이메일을 입력해주세요.]");
-    String email = Prompt.inputString("이메일? ");
+    String userEmail = Prompt.inputString("이메일? ");
 
-    JoinDTO joinDTOEmail = findByEmail(email);
+    JoinDTO loginUserEmail = joinDao.selectOneByEmail(userEmail);
 
-    if (joinDTOEmail == null) {
+    if (loginUserEmail  == null) {
       System.out.println("일치하는 이메일이 없습니다.");
       return;
+
     } else {
       System.out.println();
-      System.out.printf("아이디: [ %s ]\n", joinDTOEmail.getId());
+      System.out.printf("아이디: [ %s ]\n", loginUserEmail.getId());
       return;
     }
   }

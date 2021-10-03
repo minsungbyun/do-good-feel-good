@@ -11,8 +11,12 @@ public interface JoinDao {
   List<JoinDTO> findAll() throws Exception;               // 회원 목록
   void update(JoinDTO joinDTO) throws Exception;          // 회원 수정
   void delete(JoinDTO joinDTO) throws Exception;          // 회원 삭제
-  List<JoinDTO> selectOneByIdPassword() throws Exception; // 로그인 유효성 검사
-  List<JoinDTO> validId() throws Exception;               // 아이디 유효성 검사
-  List<JoinDTO> getNextNum() throws Exception;            // 회원 고유번호 지정
+  JoinDTO selectOneByIdPassword(String userId, String userPassword) throws Exception; // 로그인 유효성 검사
+  JoinDTO selectOneByIdEmail(String userId, String userEmail) throws Exception; // 로그인 유효성 검사
+  JoinDTO selectOneByUser(String userId, String userPassword) throws Exception; // 회원정보 상세보기
+  JoinDTO selectOneByEmail(String userEmail) throws Exception; // 회원정보 상세보기
+  JoinDTO selectOneByTel(String userTel) throws Exception; // 회원정보 상세보기
+  JoinDTO validId(JoinDTO joinDTO) throws Exception;               // 아이디 유효성 검사
+  int getNextNum() throws Exception;            // 회원 고유번호 지정
 
 }

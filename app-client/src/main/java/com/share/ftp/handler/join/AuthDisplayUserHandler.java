@@ -1,30 +1,20 @@
 package com.share.ftp.handler.join;
 
-import com.share.ftp.dao.JoinDao;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
-import com.share.util.Prompt;
 
-public class JoinDetailHandler implements Command {
+public class AuthDisplayUserHandler implements Command {
 
-  JoinDao joinDao;
 
-  public JoinDetailHandler(JoinDao joinDao) {
-    this.joinDao = joinDao;
-  }
-
+  // 마이페이지의 나의정보보기
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println();
-    System.out.println("[  회원 상세보기  ]");
-    String userId = Prompt.inputString("아이디? "); 
-    String userPassword = Prompt.inputString("비밀번호? ");
 
-    JoinDTO loginUser = joinDao.selectOneByUser(userId, userPassword);
+    JoinDTO loginUser = AuthLoginHandler.getLoginUser();
 
     if (loginUser == null) {
-      System.out.println("해당 아이디와 비밀번호가 일치하지 않습니다.");
+      System.out.println("로그인 하지 않았습니다.");
       return;
     }
     System.out.println();
@@ -45,9 +35,6 @@ public class JoinDetailHandler implements Command {
 
     }
     System.out.printf("▶ 등록일: %s\n", loginUser.getRegisterDate());
-
   }
 }
-
-
 

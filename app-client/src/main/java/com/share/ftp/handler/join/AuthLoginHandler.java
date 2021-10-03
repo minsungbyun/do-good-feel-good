@@ -9,16 +9,19 @@ import static com.share.menu.Menu.ACCESS_PERSONAL;
 import static com.share.util.General.member.ORG;
 import static com.share.util.General.member.PERSONAL;
 import java.sql.Date;
-import java.util.HashMap;
+import com.share.ftp.dao.JoinDao;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
-import com.share.ftp.request.RequestAgent;
 import com.share.util.Prompt;
 
 public class AuthLoginHandler implements Command {
 
-  RequestAgent requestAgent;
+  JoinDao joinDao;
+
+  public AuthLoginHandler(JoinDao joinDao) {
+    this.joinDao = joinDao;
+  }
 
   public static JoinDTO loginUser;
 
@@ -32,20 +35,16 @@ public class AuthLoginHandler implements Command {
     return userAccessLevel;
   }
 
-  public AuthLoginHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
-  }
-
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
-    System.out.println("[로그인]");
+    System.out.println("[ Happy-Share Login Page]");
 
-    String id = Prompt.inputString("아이디? ");
-    String password = Prompt.inputString("비밀번호? ");
+    String userId = Prompt.inputString("Id : ");
+    String userPassword = Prompt.inputString("Password : ");
     System.out.println();
 
-    if (id.equals("admin") && password.equals("111")) {
+    if (userId.equals("admin") && userPassword.equals("111")) {
       JoinDTO admin = new JoinDTO();
       admin.setId("admin");
       admin.setName("관리자");
@@ -60,32 +59,26 @@ public class AuthLoginHandler implements Command {
       return;
     } 
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("loginId", id);
-    params.put("loginPassword", password);
+    JoinDTO joinDTO = joinDao.selectOneByIdPassword(userId, userPassword);
 
-    requestAgent.request("join.selectOneByIdPassword", params);
+    System.out.println("회원 주소 =" + joinDTO);
 
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
 
-      JoinDTO joinDTO = requestAgent.getObject(JoinDTO.class);
+    if (joinDTO == null) {
+      System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");
+      return;
+    } else if (joinDTO.getType() == PERSONAL) {
+      userAccessLevel = ACCESS_MEMBER | ACCESS_PERSONAL | ACCESS_MEMBER_ADMIN;
 
-      if (joinDTO == null) {
-        System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");
-        return;
-      } else if (joinDTO.getType() == PERSONAL) {
-        userAccessLevel = ACCESS_MEMBER | ACCESS_PERSONAL | ACCESS_MEMBER_ADMIN;
+      System.out.printf("[  %s님 환영합니다!  ]\n", joinDTO.getName());
 
-        System.out.printf("[  %s님 환영합니다!  ]\n", joinDTO.getName());
+    } else if (joinDTO.getType() == ORG) {
+      userAccessLevel = ACCESS_MEMBER | ACCESS_ORG | ACCESS_MEMBER_ADMIN;
 
-      } else if (joinDTO.getType() == ORG) {
-        userAccessLevel = ACCESS_MEMBER | ACCESS_ORG | ACCESS_MEMBER_ADMIN;
+      System.out.printf("[  %s님 환영합니다!  ]\n", joinDTO.getName());
+    }
 
-        System.out.printf("[  %s님 환영합니다!  ]\n", joinDTO.getName());
-      }
-
-      loginUser = joinDTO;
-    } 
-  }
+    loginUser = joinDTO;
+  } 
 }
 

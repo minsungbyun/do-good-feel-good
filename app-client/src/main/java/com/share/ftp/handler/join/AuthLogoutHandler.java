@@ -9,11 +9,11 @@ public class AuthLogoutHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
-    System.out.println("[로그아웃]");
+    //    System.out.println("[ 로그아웃 ]");
 
     AuthLoginHandler.loginUser = null;
     AuthLoginHandler.userAccessLevel = Menu.ACCESS_LOGOUT;
-    System.out.println("로그아웃 하였습니다.");
+    System.out.println("[  로그아웃 하였습니다! ]");
   }
 }
 
