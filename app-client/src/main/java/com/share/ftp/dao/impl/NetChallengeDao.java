@@ -7,6 +7,8 @@ import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
+import com.share.ftp.domain.personal.ChallengeQuestionDTO;
+import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.request.RequestAgent;
 
 public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, ChallengeQuestionDao {
@@ -32,7 +34,7 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
   }
 
   @Override
-  public List<ChallengeDTO> findAll() throws Exception {
+  public List<ChallengeDTO> findChallengeAll() throws Exception {
 
     requestAgent.request("challenge.selectList", null);
 
@@ -106,6 +108,81 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
     ChallengeDTO challengeDTO = requestAgent.getObject(ChallengeDTO.class);
 
     return challengeDTO.getRemainTime();
+  }
+
+  @Override
+  public void insert(ChallengeQuestionDTO addChallengeQuestion) throws Exception {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void delete(ChallengeQuestionDTO challengeQuestion) throws Exception {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public List<ChallengeQuestionDTO> findByKeyword(String keyword) throws Exception {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public ChallengeQuestionDTO findByChallengeQuestionNo(int challengeQuestionNo,
+      ChallengeDTO challengeNo) throws Exception {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public int getNextQuestionNum(ChallengeDTO challengeDTO) throws Exception {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  @Override
+  public int indexOf(int challengeQuestionNo, ChallengeQuestionDTO challengeQuestionDTO)
+      throws Exception {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  @Override
+  public void insertAdmin(int index, ChallengeQuestionDTO challengeQuestionDTO) throws Exception {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void sortChallengeQuestion() throws Exception {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void insert(ChallengeReviewDTO addChallengeReview) throws Exception {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public int getNextReviewNum(ChallengeDTO challengeDTO) throws Exception {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  @Override
+  public ChallengeReviewDTO findByChallengeReviewNo(int challengeReviewNo, ChallengeDTO challengeNo)
+      throws Exception {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public boolean isEmpty() throws Exception {
+    // TODO Auto-generated method stub
+    return false;
   }
 
 
