@@ -1,4 +1,4 @@
-package com.share.ftp.server;
+package com.share.server;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

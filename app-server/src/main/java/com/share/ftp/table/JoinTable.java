@@ -1,9 +1,9 @@
 package com.share.ftp.table;
 
 import com.share.ftp.domain.join.JoinDTO;
-import com.share.ftp.server.DataProcessor;
-import com.share.ftp.server.Request;
-import com.share.ftp.server.Response;
+import com.share.server.DataProcessor;
+import com.share.server.Request;
+import com.share.server.Response;
 
 public class JoinTable extends JsonDataTable<JoinDTO> implements DataProcessor {
 

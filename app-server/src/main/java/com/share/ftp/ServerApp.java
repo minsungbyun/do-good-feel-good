@@ -3,8 +3,9 @@ package com.share.ftp;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
-import com.share.ftp.server.DataProcessor;
-import com.share.ftp.server.RequestProcessor;
+import com.share.ftp.table.JoinTable;
+import com.share.server.DataProcessor;
+import com.share.server.RequestProcessor;
 
 public class ServerApp {
 
@@ -20,6 +21,8 @@ public class ServerApp {
     HashMap<String,DataProcessor> dataProcessorMap = new HashMap<String,DataProcessor>();
 
     // => 데이터 처리 담당자를 등록한다.
+    dataProcessorMap.put("join.", new JoinTable());
+
     //    dataProcessorMap.put("board.", new BoardTable());
     //    dataProcessorMap.put("member.", new MemberTable());
     //    dataProcessorMap.put("project.", new ProjectTable());

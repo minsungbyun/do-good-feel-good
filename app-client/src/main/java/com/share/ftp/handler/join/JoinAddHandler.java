@@ -5,8 +5,8 @@ import java.util.HashMap;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
-import com.share.ftp.request.RequestAgent;
 import com.share.menu.Menu;
+import com.share.request.RequestAgent;
 import com.share.util.General;
 import com.share.util.Prompt;
 

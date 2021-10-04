@@ -153,9 +153,9 @@ import com.share.ftp.handler.personal.volunteer.VolPersonalRequestAppliedListHan
 import com.share.ftp.handler.personal.volunteer.VolPersonalRequestApplyListHandler;
 import com.share.ftp.listener.AppInitListener;
 import com.share.ftp.listener.FileListener;
-import com.share.ftp.request.RequestAgent;
 import com.share.menu.Menu;
 import com.share.menu.MenuGroup;
+import com.share.request.RequestAgent;
 import com.share.util.Prompt;
 
 public class ClientApp {
