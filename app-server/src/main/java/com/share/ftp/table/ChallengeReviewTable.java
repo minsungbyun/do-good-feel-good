@@ -1,30 +1,30 @@
 package com.share.ftp.table;
 
-import com.share.ftp.domain.admin.ChallengeDTO;
+import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.server.DataProcessor;
 import com.share.server.Request;
 import com.share.server.Response;
 
-public class ChallengeTable extends JsonDataTable<ChallengeDTO> implements DataProcessor {
+public class ChallengeReviewTable extends JsonDataTable<ChallengeReviewDTO> implements DataProcessor {
 
-  public ChallengeTable() {
-    super("challenge.json",ChallengeDTO.class);
+  public ChallengeReviewTable() {
+    super("challengeReview.json",ChallengeReviewDTO.class);
   }
 
   @Override
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
-      case "challenge.insert": insert(request, response); break;
-      case "challenge.selectList": selectList(request, response); break;
-      case "challenge.selectOne": selectOne(request, response); break;
-      case "challenge.update": update(request, response); break;
-      case "challenge.delete": delete(request, response); break;
-      case "challenge.getNextNum": getNextNum(request, response); break;
+      case "challengeReview.insert": insert(request, response); break;
+      case "challengeReview.selectList": selectList(request, response); break;
+      case "challengeReview.selectOne": selectOne(request, response); break;
+      case "challengeReview.update": update(request, response); break;
+      case "challengeReview.delete": delete(request, response); break;
+      case "challengeReview.getNextNum": getNextNum(request, response); break;
     }
   }
 
   private void insert(Request request, Response response) throws Exception {
-    ChallengeDTO challenge = request.getObject(ChallengeDTO.class);
+    ChallengeReviewDTO challenge = request.getObject(ChallengeReviewDTO.class);
     System.out.println(challenge);
     list.add(challenge);
     response.setStatus(Response.SUCCESS);
@@ -37,27 +37,27 @@ public class ChallengeTable extends JsonDataTable<ChallengeDTO> implements DataP
 
 
   private void selectOne(Request request, Response response) throws Exception {
-    int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
+    int challengeReviewNo = Integer.parseInt(request.getParameter("challengeNo"));
 
-    ChallengeDTO challengeDTO = null;
-    for (ChallengeDTO challengeList : list) {
-      if (challengeList.getNo() == challengeNo) {
-        challengeDTO = challengeList; 
+    ChallengeReviewDTO challengeReviewDTO = null;
+    for (ChallengeReviewDTO challengeList : list) {
+      if (challengeList.getNo() == challengeReviewNo) {
+        challengeReviewDTO = challengeList; 
       }
     }
 
-    if (challengeDTO == null) {
+    if (challengeReviewDTO == null) {
       response.setStatus(Response.FAIL);
       response.setValue("해당 챌린지가 없습니다!");
       return;
     }
 
     response.setStatus(Response.SUCCESS);
-    response.setValue(challengeDTO);
+    response.setValue(challengeReviewDTO);
   }
 
   private void update(Request request, Response response) throws Exception {
-    ChallengeDTO updateChallenge = request.getObject(ChallengeDTO.class);
+    ChallengeReviewDTO updateChallenge = request.getObject(ChallengeReviewDTO.class);
 
     int index = indexOf(updateChallenge.getNo());
 
@@ -66,7 +66,7 @@ public class ChallengeTable extends JsonDataTable<ChallengeDTO> implements DataP
   }
 
   private void delete(Request request, Response response) throws Exception {
-    ChallengeDTO deleteChallenge = request.getObject(ChallengeDTO.class);
+    ChallengeReviewDTO deleteChallenge = request.getObject(ChallengeReviewDTO.class);
 
     list.remove(deleteChallenge);
     response.setStatus(Response.SUCCESS);
@@ -74,7 +74,7 @@ public class ChallengeTable extends JsonDataTable<ChallengeDTO> implements DataP
 
 
   private void getNextNum(Request request, Response response) throws Exception {
-    ChallengeDTO challenge = new ChallengeDTO();
+    ChallengeReviewDTO challenge = new ChallengeReviewDTO();
 
     challenge.setNo(getLastNum());
 

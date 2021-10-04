@@ -53,11 +53,8 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
   }
 
   @Override
-  public void delete(int deleteChallengeNo) throws Exception {
-    HashMap<String,String> params = new HashMap<>();
-    params.put("deleteChallengeNo", String.valueOf(deleteChallengeNo));
-
-    requestAgent.request("challenge.delete", params);
+  public void delete(ChallengeDTO deleteChallenge) throws Exception {
+    requestAgent.request("challenge.delete", deleteChallenge);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("챌린지 삭제 실패!");
@@ -94,19 +91,22 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
   }
 
   @Override
-  public String getRemainTime(long millis) throws Exception {
-    HashMap<String,String> params = new HashMap<>();
-    params.put("getRemainTime", String.valueOf(millis));
+  public String getRemainTime(long millis) {
 
-    requestAgent.request("challenge.getRemainTime", params);
+    long sec =  millis / 1000;
+    long min = sec / 60;
+    long hour = min / 60;
+    long day = (millis / 1000) / (24 * 60 * 60);
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      return null;
-    }
-    ChallengeDTO challengeDTO = requestAgent.getObject(ChallengeDTO.class);
+    hour = hour % 24; 
+    sec = sec % 60;
+    min = min % 60;
 
-    return challengeDTO.getRemainTime();
+    return String.format("남은시간 ▶ %d일 %d시간 %d분 %d초 남았습니다\n", day, hour, min, sec);
   }
+
+
+
 
 
 
