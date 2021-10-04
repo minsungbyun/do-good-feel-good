@@ -1,17 +1,19 @@
 package com.share.ftp.handler.admin;
 
 import java.sql.Date;
-import java.util.List;
+import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class AdminChallengeAddHandler extends AbstractAdminChallengeHandler {
+public class AdminChallengeAddHandler implements Command {
 
+  ChallengeDao challengeDao;
 
-  public AdminChallengeAddHandler(List<ChallengeDTO> challengeDTOList) {
-    super(challengeDTOList);
+  public AdminChallengeAddHandler(ChallengeDao challengeDao) {
+    this.challengeDao = challengeDao;
   }
 
 
@@ -43,9 +45,10 @@ public class AdminChallengeAddHandler extends AbstractAdminChallengeHandler {
 
     challengeDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    challengeDTO.setNo(getNextNum()); // 챌린지 고유번호 부여
+    challengeDTO.setNo(challengeDao.getNextNum()); // 챌린지 고유번호 부여
 
-    challengeDTOList.add(challengeDTO);
+
+    challengeDao.insert(challengeDTO);
     System.out.println();
     System.out.println("챌린지가 정상적으로 등록되었습니다.");
   }

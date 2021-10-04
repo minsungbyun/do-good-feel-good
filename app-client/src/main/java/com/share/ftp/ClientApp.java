@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.share.context.ApplicationContextListener;
+import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.JoinDao;
+import com.share.ftp.dao.impl.NetChallengeDao;
 import com.share.ftp.dao.impl.NetJoinDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.admin.NoticeDTO;
@@ -301,6 +303,7 @@ public class ClientApp {
     requestAgent = new RequestAgent("127.0.0.1", 8888);
 
     JoinDao netJoinDao = new NetJoinDao(requestAgent);
+    ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
 
 
     //로그인, 로그아웃
@@ -371,7 +374,7 @@ public class ClientApp {
     commands.put("/commReview/delete", new CommReviewDeleteHandler(commReviewDTOList));
 
     // 챌린지
-    commands.put("/adminChallenge/list", new AdminChallengeListHandler(challengeDTOList));  // 챌린지 목록
+    commands.put("/adminChallenge/list", new AdminChallengeListHandler(netChallengeDao));  // 챌린지 목록
     commands.put("/challenge/detail", new ChallengeDetailHandler(challengeDTOList)); // 챌린지 상세정보
     commands.put("/challengeJoin/join", new ChallengeJoinHandler(challengeDTOList));  // 참여하기
     commands.put("/challengeJoin/list", new ChallengeJoinListHandler(challengeDTOList, challengeJoinHandler));  // 참여자목록
@@ -478,8 +481,8 @@ public class ClientApp {
     //        commands.put("/adminAsk/delete", new AdminQuestionDeleteHandler(myQuestionListDTOList));
 
     // 관리자 챌린지
-    commands.put("/adminChallenge/add", new AdminChallengeAddHandler(challengeDTOList));
-    commands.put("/adminChallenge/list", new AdminChallengeListHandler(challengeDTOList));
+    commands.put("/adminChallenge/add", new AdminChallengeAddHandler(netChallengeDao));
+    commands.put("/adminChallenge/list", new AdminChallengeListHandler(netChallengeDao));
     commands.put("/adminChallenge/detail", new AdminChallengeDetailHandler(challengeDTOList));
     commands.put("/adminChallenge/update", new AdminChallengeUpdateHandler(challengeDTOList));
     commands.put("/adminChallenge/delete", new AdminChallengeDeleteHandler(challengeDTOList));
