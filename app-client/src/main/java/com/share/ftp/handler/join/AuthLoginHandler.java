@@ -59,26 +59,23 @@ public class AuthLoginHandler implements Command {
       return;
     } 
 
-    JoinDTO joinDTO = joinDao.selectOneByIdPassword(userId, userPassword);
+    JoinDTO user = joinDao.selectOneByIdPassword(userId, userPassword);
 
-    System.out.println("회원 주소 =" + joinDTO);
-
-
-    if (joinDTO == null) {
+    if (user == null) {
       System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");
       return;
-    } else if (joinDTO.getType() == PERSONAL) {
+    } else if (user.getType() == PERSONAL) {
       userAccessLevel = ACCESS_MEMBER | ACCESS_PERSONAL | ACCESS_MEMBER_ADMIN;
 
-      System.out.printf("[  %s님 환영합니다!  ]\n", joinDTO.getName());
+      System.out.printf("[  %s님 환영합니다!  ]\n", user.getName());
 
-    } else if (joinDTO.getType() == ORG) {
+    } else if (user.getType() == ORG) {
       userAccessLevel = ACCESS_MEMBER | ACCESS_ORG | ACCESS_MEMBER_ADMIN;
 
-      System.out.printf("[  %s님 환영합니다!  ]\n", joinDTO.getName());
+      System.out.printf("[  %s님 환영합니다!  ]\n", user.getName());
     }
 
-    loginUser = joinDTO;
+    loginUser = user;
   } 
 }
 

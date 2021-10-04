@@ -1,4 +1,4 @@
-package com.share.ftp.handler;
+package com.share.ftp.handler.test;
 
 import java.util.Scanner;
 

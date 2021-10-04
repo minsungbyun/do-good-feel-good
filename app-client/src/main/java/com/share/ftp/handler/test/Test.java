@@ -1,4 +1,4 @@
-package com.share.ftp.handler;
+package com.share.ftp.handler.test;
 
 public class Test {
   public static void main(String[] args) {
