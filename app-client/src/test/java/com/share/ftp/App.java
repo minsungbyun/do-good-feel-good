@@ -42,8 +42,8 @@ import com.share.ftp.handler.admin.AdminNoticeDetailHandler;
 import com.share.ftp.handler.admin.AdminNoticeListHandler;
 import com.share.ftp.handler.admin.AdminNoticeSearchHandler;
 import com.share.ftp.handler.admin.AdminNoticeUpdateHandler;
-import com.share.ftp.handler.join.AuthChangeUserInfoHandler;
-import com.share.ftp.handler.join.AuthDisplayUserInfoHandler;
+import com.share.ftp.handler.join.AuthUpdateUserHandler;
+import com.share.ftp.handler.join.AuthDisplayUserHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.ftp.handler.join.AuthLogoutHandler;
 import com.share.ftp.handler.join.JoinAddHandler;
@@ -52,8 +52,8 @@ import com.share.ftp.handler.join.JoinListHandler;
 import com.share.ftp.handler.join.JoinSearchEmailIdHandler;
 import com.share.ftp.handler.join.JoinSearchPasswordHandler;
 import com.share.ftp.handler.join.JoinSearchTelIdHandler;
-import com.share.ftp.handler.join.MyPageDelete;
-import com.share.ftp.handler.join.MyPageInfoHandler;
+import com.share.ftp.handler.join.MyPageDeleteUserHandler;
+import com.share.ftp.handler.join.MyPageUpdateUserHandler;
 import com.share.ftp.handler.org.MyVolApplyListHandler;
 import com.share.ftp.handler.org.MyVolApproveListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeDetailHandler;
@@ -301,8 +301,8 @@ public class App {
     //로그인, 로그아웃
     commands.put("/auth/login", new AuthLoginHandler(joinDTOList)); // 로그인
     commands.put("/auth/logout", new AuthLogoutHandler()); // 로그아웃
-    commands.put("/auth/changeUserInfo", new AuthChangeUserInfoHandler()); // 마이페이지 나의정보
-    commands.put("/auth/displayUserInfo", new AuthDisplayUserInfoHandler()); // 마이페이지 나의정보수정
+    commands.put("/auth/changeUserInfo", new AuthUpdateUserHandler()); // 마이페이지 나의정보
+    commands.put("/auth/displayUserInfo", new AuthDisplayUserHandler()); // 마이페이지 나의정보수정
 
     //회원가입
     commands.put("/join/add", new JoinAddHandler(joinDTOList)); // 회원가입
@@ -426,8 +426,8 @@ public class App {
     //    commands.put("/adminQuestion/add", new AdminQuestionAddHandler(myQuestionListDTOList));
 
     // 마이페이지
-    commands.put("/myPage/info", new MyPageInfoHandler(joinDTOList)); // 내정보 수정
-    commands.put("/myPage/delete", new MyPageDelete(joinDTOList)); // 회원탈퇴
+    commands.put("/myPage/info", new MyPageUpdateUserHandler(joinDTOList)); // 내정보 수정
+    commands.put("/myPage/delete", new MyPageDeleteUserHandler(joinDTOList)); // 회원탈퇴
 
     commands.put("/myVol/applied", new MyAppliedVolHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     commands.put("/myVol/appliedDetail", new MyAppliedVolDetailHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));

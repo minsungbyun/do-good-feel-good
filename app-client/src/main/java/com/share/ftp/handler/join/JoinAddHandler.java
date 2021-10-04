@@ -1,7 +1,7 @@
 package com.share.ftp.handler.join;
 
 import java.sql.Date;
-import java.util.HashMap;
+import com.share.ftp.dao.JoinDao;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -12,11 +12,10 @@ import com.share.util.Prompt;
 
 public class JoinAddHandler implements Command {
 
-  RequestAgent requestAgent;
+  JoinDao joinDao;
 
-  public JoinAddHandler(RequestAgent requestAgent) {
-
-    this.requestAgent = requestAgent;
+  public JoinAddHandler(JoinDao joinDao) {
+    this.joinDao = joinDao;
   }
 
   @Override
@@ -25,40 +24,40 @@ public class JoinAddHandler implements Command {
     System.out.println("[ 회원 가입 ]");
 
     JoinDTO joinDTO = new JoinDTO();
+    System.out.println(joinDTO);
 
     // 아이디 유효성검사
     while (true) {
+      System.out.println(joinDTO);
 
       joinDTO.setId(Prompt.inputString("아이디? "));
+      System.out.println("1번");
 
-      HashMap<String,String> params = new HashMap<>();
-      params.put("validId", joinDTO.getId());
+      JoinDTO user = joinDao.validId(joinDTO);
+      System.out.println("아이디 = "+user);
+      System.out.println("2번");
 
-      requestAgent.request("join.validId", params);
-
-      if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-        System.out.println("이미 존재하는 아이디입니다. 다시 입력해주세요!");
-
-      } else {
-        joinDTO = requestAgent.getObject(JoinDTO.class);
+      if (user == joinDTO) {
+        joinDTO.setId(user.getId());
+        System.out.println("해당 아이디는 사용이 가능합니다!");
         break;
-
+      } else {
+        System.out.println("이미 존재하는 아이디입니다!");
       }
+      System.out.println("3번");
     }
 
     joinDTO.setPassword(Prompt.inputString("비밀번호? "));
 
     // 이름 유효성검사
-
     while (true) {
       joinDTO.setName(Prompt.inputString("이름? "));
 
       if (!(joinDTO.getName().length() == 0)) {
         break;
       }
-      System.out.println("이름을 입력하세요");
+      System.out.println("이름을 다시 입력해주세요!");
     }
-
 
     joinDTO.setBirthdate(Prompt.inputDate("생년월일? "));
     joinDTO.setTel(Prompt.inputString("전화? "));
@@ -87,7 +86,6 @@ public class JoinAddHandler implements Command {
       }
     }
 
-
     joinDTO.setAddress(Prompt.inputString("주소? "));
     joinDTO.setRegisterDate(new Date(System.currentTimeMillis()));
     System.out.println();
@@ -115,47 +113,11 @@ public class JoinAddHandler implements Command {
     }
 
     // 고유회원번호 부여
-    HashMap<String,Integer> params = new HashMap<>();
-    params.put("getNextNum", joinDTO.getNo());
+    joinDTO.setNo(joinDao.getNextNum());
 
-    requestAgent.request("join.getNextNum", params);
+    joinDao.insert(joinDTO);
 
-    joinDTO = requestAgent.getObject(JoinDTO.class);
-
-    joinDTO.getNo(); // 실험용 
-
-    requestAgent.request("join.insert", joinDTO);
-
-
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-
-      System.out.println("회원가입이 정상적으로 완료되었습니다.");
-    } else {
-      System.out.println("회원가입에 실패했습니다!");
-    }
     System.out.println();
-
   }
-
-
-
-
-  //  private int getNextNum() {
-  //    // 마지막 번호를 알아야한다.
-  //    int lastNum = 0;
-  //    for (int i = 0; i < joinDTOList.size(); i++) {
-  //
-  //      if (joinDTOList.size() > 0) {
-  //        joinDTOList.get(i).setNo(i + 1);
-  //        lastNum = i + 2;
-  //      } else {
-  //        return 1;
-  //      }
-  //    }
-  //    return lastNum;
-  //
-  //  }
-
-
 
 }

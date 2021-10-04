@@ -1,17 +1,18 @@
 package com.share.ftp.handler.join;
 
-import java.util.List;
+import com.share.ftp.dao.JoinDao;
 import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.menu.Menu;
 import com.share.util.Prompt;
 
-public class MyPageDelete extends AbstractJoinHandler {
+public class MyPageDeleteUserHandler implements Command {
 
+  JoinDao joinDao;
 
-  public MyPageDelete(List<JoinDTO> joinDTOList) {
-    super(joinDTOList);
-
+  public MyPageDeleteUserHandler(JoinDao joinDao) {
+    this.joinDao = joinDao;
   }
 
   @Override
@@ -24,12 +25,12 @@ public class MyPageDelete extends AbstractJoinHandler {
       System.out.println("로그인 후 이용가능합니다.");
     }
 
-    String id = Prompt.inputString("아이디? ");
-    String password = Prompt.inputString("비밀번호? ");
+    String userId = Prompt.inputString("아이디? ");
+    String userPassword = Prompt.inputString("비밀번호? ");
 
-    JoinDTO joinDTO = findByIdPassword(id, password);
+    JoinDTO loginUser = joinDao.selectOneByIdPassword(userId, userPassword);
 
-    if (joinDTO == null) {
+    if (loginUser == null) {
       System.out.println("해당 회원은 존재하지 않습니다.");
       return;
     }
@@ -43,7 +44,8 @@ public class MyPageDelete extends AbstractJoinHandler {
 
     AuthLoginHandler.loginUser = null; // 로그인 끊는다.
     AuthLoginHandler.userAccessLevel = Menu.ACCESS_LOGOUT;
-    joinDTOList.remove(joinDTO); // 회원 제거한다.
+
+    joinDao.delete(loginUser);
 
     System.out.println("");
     System.out.println("[  그동안 행복하share를 이용해주셔서 감사했습니다.  ]");
@@ -51,20 +53,3 @@ public class MyPageDelete extends AbstractJoinHandler {
     return; 
   }
 }
-
-
-
-//  private JoinDTO findByPassword(int password) {
-//    for (JoinDTO joinDTO : joinDTOList) {
-//      if (joinDTO.getPassword() == password) {
-//        return joinDTO;
-//      }
-//    }
-//    return null;
-//  }
-
-
-
-
-
-

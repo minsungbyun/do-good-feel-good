@@ -1,17 +1,18 @@
 package com.share.ftp.handler.join;
 
+import java.sql.Date;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
-public class AuthChangeUserInfoHandler implements Command{
+public class AuthUpdateUserHandler implements Command{
 
   // 마이페이지의 나의정보수정
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
-    System.out.println("[회원 변경]");
+    System.out.println("[ 회원정보 변경 ]");
 
     JoinDTO loginUser = AuthLoginHandler.getLoginUser();
 
@@ -20,7 +21,7 @@ public class AuthChangeUserInfoHandler implements Command{
       return;
     }
 
-    String name = Prompt.inputString("이름(" + loginUser.getName()  + ")? ");
+    Date birthdate = Prompt.inputDate("생년월일(" + loginUser.getBirthdate()  + ")? ");
     String tel = Prompt.inputString("전화(" + loginUser.getTel() + ")? ");
     String email = Prompt.inputString("이메일(" + loginUser.getEmail() + ")? ");
     String adress = Prompt.inputString("주소(" + loginUser.getAddress() + ")? ");
@@ -32,13 +33,13 @@ public class AuthChangeUserInfoHandler implements Command{
       return;
     }
 
-    loginUser.setName(name);
+    loginUser.setBirthdate(birthdate);
     loginUser.setTel(tel);
     loginUser.setEmail(email);
     loginUser.setAddress(adress);
     loginUser.setPassword(passwords);
 
-    System.out.println("회원정보가 수정되었습니다.");
+    System.out.println("[ 회원정보가 정상적으로 수정되었습니다. ]");
   }
 }
 

@@ -36,7 +36,7 @@ public class RequestProcessor extends Thread {
       Request request = new Request(command, in.readLine());
       Response response = new Response();
 
-      if (command.equalsIgnoreCase("quit")) {
+      if (command.equalsIgnoreCase("quit") || command.equalsIgnoreCase("exit")) {
         response.setStatus(Response.SUCCESS);
         response.setValue("goodbye");
         sendResult(response, out);
