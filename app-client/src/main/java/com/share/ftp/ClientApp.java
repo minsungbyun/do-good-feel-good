@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.share.context.ApplicationContextListener;
+import com.share.ftp.dao.CommBoardDao;
 import com.share.ftp.dao.JoinDao;
+import com.share.ftp.dao.impl.NetCommBoardDao;
 import com.share.ftp.dao.impl.NetJoinDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.admin.NoticeDTO;
@@ -298,9 +300,10 @@ public class ClientApp {
 
   public ClientApp() throws Exception {
 
-    requestAgent = new RequestAgent("127.0.0.1", 8888);
+    requestAgent = new RequestAgent("192.168.0.157", 8888);
 
     JoinDao netJoinDao = new NetJoinDao(requestAgent);
+    CommBoardDao netCommBoardDao = new NetCommBoardDao(requestAgent);
 
 
     //로그인, 로그아웃
@@ -343,13 +346,13 @@ public class ClientApp {
     //    commands.put("/volRequestOrg/rejectedList", new VolRequestOrgRejectedListHandler(orgRequestDTOList, orgRequestApplyDTOList, orgRequestRejectDTOList));
 
     // 소통해요 나눔이야기
-    commands.put("/commBoard/add", new CommBoardAddHandler(commBoardDTOList, commBoardReplyDTOList));
-    commands.put("/commBoard/list", new CommBoardListHandler(commBoardDTOList, commBoardReplyDTOList));
-    commands.put("/commBoard/detail", new CommBoardDetailHandler(commBoardDTOList, commBoardReplyDTOList));
-    commands.put("/commBoard/update", new CommBoardUpdateHandler(commBoardDTOList, commBoardReplyDTOList));
-    commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList, commBoardReplyDTOList));
-    commands.put("/commBoard/search", new CommBoardSearchHandler(commBoardDTOList, commBoardReplyDTOList));
-    commands.put("/commBoard/like", new CommBoardLikeHandler(commBoardDTOList, commBoardReplyDTOList)); 
+    commands.put("/commBoard/add", new CommBoardAddHandler(netCommBoardDao));
+    commands.put("/commBoard/list", new CommBoardListHandler(netCommBoardDao));
+    commands.put("/commBoard/detail", new CommBoardDetailHandler(netCommBoardDao));
+    commands.put("/commBoard/update", new CommBoardUpdateHandler(netCommBoardDao));
+    commands.put("/commBoard/delete", new CommBoardDeleteHandler(netCommBoardDao));
+    commands.put("/commBoard/search", new CommBoardSearchHandler(netCommBoardDao));
+    commands.put("/commBoard/like", new CommBoardLikeHandler(netCommBoardDao)); 
 
     // 소통해요 댓글
     commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler(commBoardDTOList, commBoardReplyDTOList));

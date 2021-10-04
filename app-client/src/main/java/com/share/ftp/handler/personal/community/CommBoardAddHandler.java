@@ -2,21 +2,21 @@ package com.share.ftp.handler.personal.community;
 
 import java.sql.Date;
 import java.util.List;
+import com.share.ftp.dao.CommBoardDao;
 import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.domain.personal.CommBoardReplyDTO;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class CommBoardAddHandler extends AbstractCommBoardHandler {
+public class CommBoardAddHandler implements Command {
 
-  public CommBoardAddHandler(
-      List<CommBoardDTO> commBoardDTOList, 
-      List<CommBoardReplyDTO> commBoardReplyDTOList) {
-    super(commBoardDTOList, commBoardReplyDTOList);
+  CommBoardDao commBoardao;
+
+  public CommBoardAddHandler(CommBoardDao commBoardao) {
+    this.commBoardao = commBoardao;
   }
 
-  @Override
   public void execute(CommandRequest request) throws Exception {
 
     System.out.println();
@@ -35,6 +35,8 @@ public class CommBoardAddHandler extends AbstractCommBoardHandler {
     commBoardDTO.setCommNo(getNextNum());
 
     commBoardDTOList.add(commBoardDTO);
+
+    commBoardao.insert(commBoardDTO)
 
     System.out.println();
     System.out.println("[  ✔️ 게시글 등록이 완료되었습니다.  ]");
