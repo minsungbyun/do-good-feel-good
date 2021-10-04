@@ -24,11 +24,6 @@ public abstract class AbstractAdminChallengeHandler implements Command {
     return String.format("남은시간 ▶ %d일 %d시간 %d분 %d초 남았습니다\n", day, hour, min, sec);
   }
 
-
-
-
-
-
   protected ChallengeDTO findByNo(int no) {
     for (ChallengeDTO challengeDTO : challengeDTOList) {
       if (challengeDTO.getNo() == no) {
