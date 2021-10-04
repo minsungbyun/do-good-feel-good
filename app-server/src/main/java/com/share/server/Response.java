@@ -1,4 +1,4 @@
-package com.share.ftp.server;
+package com.share.server;
 
 // 역할
 // - 클라이언트에게 응답할 정보를 보관하는 일을 한다.

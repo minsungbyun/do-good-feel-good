@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import com.share.ftp.dao.JoinDao;
 import com.share.ftp.domain.join.JoinDTO;
-import com.share.ftp.request.RequestAgent;
+import com.share.request.RequestAgent;
 
 //역할
 //- 로그인 데이터를 서버를 통해 관리한다.
@@ -68,14 +68,12 @@ public class NetJoinDao implements JoinDao {
 
     requestAgent.request("join.validId", joinDTO);
 
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;
 
     } else {
       return requestAgent.getObject(JoinDTO.class);
-
     }
-
   }
 
 

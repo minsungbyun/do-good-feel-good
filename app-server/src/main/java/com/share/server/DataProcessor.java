@@ -1,4 +1,4 @@
-package com.share.ftp.server;
+package com.share.server;
 // 역할
 // - 데이터를 처리하는 객체 사용법을 정의한다.
 //

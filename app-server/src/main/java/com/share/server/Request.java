@@ -1,4 +1,4 @@
-package com.share.ftp.server;
+package com.share.server;
 
 import java.util.Map;
 import com.google.gson.Gson;

@@ -20,6 +20,7 @@ public class AuthDisplayUserHandler implements Command {
     System.out.println();
     System.out.printf("[ %s님의 정보입니다 ]\n", loginUser.getName());
 
+    System.out.printf("▶ 개인 고유번호(나중 삭제): %d\n",   loginUser.getNo());
     System.out.printf("▶ 아이디: %s\n",   loginUser.getId());
     System.out.printf("▶ 이름: %s\n",     loginUser.getName());
     System.out.printf("▶ 생년월일: %s\n", loginUser.getBirthdate());

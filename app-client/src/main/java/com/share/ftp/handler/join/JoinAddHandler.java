@@ -6,7 +6,6 @@ import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.menu.Menu;
-import com.share.request.RequestAgent;
 import com.share.util.General;
 import com.share.util.Prompt;
 
@@ -26,7 +25,7 @@ public class JoinAddHandler implements Command {
     JoinDTO joinDTO = new JoinDTO();
     System.out.println(joinDTO);
 
-    // 아이디 유효성검사
+    //    아이디 유효성검사
     while (true) {
       System.out.println(joinDTO);
 
@@ -34,22 +33,20 @@ public class JoinAddHandler implements Command {
       System.out.println("1번");
 
       JoinDTO user = joinDao.validId(joinDTO);
-      System.out.println("아이디 = "+user);
-      System.out.println("2번");
+      //      System.out.println("아이디 = "+user);
+      //      System.out.println("2번");
 
-      if (user == joinDTO) {
-        joinDTO.setId(user.getId());
-        System.out.println("해당 아이디는 사용이 가능합니다!");
+      if (user != null) {
+        System.out.println("사용가능한 아이디입니다.");
         break;
-      } else {
-        System.out.println("이미 존재하는 아이디입니다!");
       }
-      System.out.println("3번");
+
+      System.out.println("해당 아이디는 중복되는 아이디입니다.");
+      //      System.out.println("3번");
     }
 
     joinDTO.setPassword(Prompt.inputString("비밀번호? "));
 
-    // 이름 유효성검사
     while (true) {
       joinDTO.setName(Prompt.inputString("이름? "));
 
