@@ -1,20 +1,19 @@
 package com.share.ftp.handler.personal.challenge;
 
 import static com.share.util.General.point.CHALLENGE_POINT;
-import java.util.List;
+import com.share.ftp.dao.ChallengeJoinDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
-import com.share.ftp.handler.admin.AbstractAdminChallengeHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class ChallengeJoinHandler extends AbstractAdminChallengeHandler {
+public class ChallengeJoinHandler implements Command {
 
+  ChallengeJoinDao challengeJoinDao;
 
-  public ChallengeJoinHandler(
-      List<ChallengeDTO> challengeDTOList) {
-
-    super(challengeDTOList);
+  public ChallengeJoinHandler(ChallengeJoinDao challengeJoinDao) {
+    this.challengeJoinDao = challengeJoinDao;
   }
 
   @Override
