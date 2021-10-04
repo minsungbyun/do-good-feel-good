@@ -13,6 +13,7 @@ import com.share.context.ApplicationContextListener;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.JoinDao;
 import com.share.ftp.dao.impl.NetChallengeDao;
+import com.share.ftp.dao.impl.NetChallengeJoinDao;
 import com.share.ftp.dao.impl.NetJoinDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.admin.NoticeDTO;
@@ -282,10 +283,10 @@ public class ClientApp {
 
   DonationRegisterDTO donationRegisterDTO = new DonationRegisterDTO();
 
-  // 챌린지 참여자 목록
-  ChallengeJoinHandler challengeJoinHandler =
-      new ChallengeJoinHandler
-      (challengeDTOList);
+  //  // 챌린지 참여자 목록
+  //  ChallengeJoinHandler challengeJoinHandler =
+  //      new ChallengeJoinHandler
+  //      (challengeDTOList);
 
   // 모금함 개설 승인된 목록 Handler
   DonationBoardAppliedListHandler donationBoardAppliedListHandler =
@@ -304,6 +305,7 @@ public class ClientApp {
 
     JoinDao netJoinDao = new NetJoinDao(requestAgent);
     ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
+    NetChallengeJoinDao challengeJoinDao = new NetChallengeJoinDao(requestAgent);
 
 
     //로그인, 로그아웃
@@ -375,9 +377,9 @@ public class ClientApp {
 
     // 챌린지
     commands.put("/adminChallenge/list", new AdminChallengeListHandler(netChallengeDao));  // 챌린지 목록
-    commands.put("/challenge/detail", new ChallengeDetailHandler(challengeDTOList)); // 챌린지 상세정보
-    commands.put("/challengeJoin/join", new ChallengeJoinHandler(challengeDTOList));  // 참여하기
-    commands.put("/challengeJoin/list", new ChallengeJoinListHandler(challengeDTOList, challengeJoinHandler));  // 참여자목록
+    commands.put("/challenge/detail", new ChallengeDetailHandler(netChallengeDao)); // 챌린지 상세정보
+    commands.put("/challengeJoin/join", new ChallengeJoinHandler(challengeJoinDao, netChallengeDao));  // 참여하기
+    commands.put("/challengeJoin/list", new ChallengeJoinListHandler(challengeJoinDao, netChallengeDao));  // 참여자목록
     commands.put("/challengeDetail/like", new ChallengeLikeHandler(challengeDTOList));  // 챌린지 좋아요 기능(사용안함)
     commands.put("/challengeDetail/wish", new ChallengeWishHandler(challengeDTOList));  // 관심 챌린지 등록(찜하기)
 

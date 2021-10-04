@@ -1,6 +1,7 @@
 package com.share.ftp.handler.personal.challenge;
 
 import static com.share.util.General.point.CHALLENGE_POINT;
+import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.ChallengeJoinDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.handler.Command;
@@ -11,9 +12,11 @@ import com.share.util.Prompt;
 public class ChallengeJoinHandler implements Command {
 
   ChallengeJoinDao challengeJoinDao;
+  ChallengeDao challengeDao;
 
-  public ChallengeJoinHandler(ChallengeJoinDao challengeJoinDao) {
+  public ChallengeJoinHandler(ChallengeJoinDao challengeJoinDao, ChallengeDao challengeDao) {
     this.challengeJoinDao = challengeJoinDao;
+    this.challengeDao = challengeDao;
   }
 
   @Override
@@ -22,9 +25,9 @@ public class ChallengeJoinHandler implements Command {
     System.out.println();
     System.out.println("[ 챌린지 참여 ]");
     System.out.println();
-    int no = (int) request.getAttribute("challengeNo");
+    int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeDTO = findByNo(no);
+    ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
 
     if (challengeDTO == null) {
       System.out.println("존재하지 않는 챌린지입니다");
@@ -37,7 +40,7 @@ public class ChallengeJoinHandler implements Command {
         +"참여인원 ▶ %d\n"
         +"참여기간 ▶ %s ~ %s\n"
         +"챌린지기간 ▶ %d일\n"
-        + getRemainTime(challengeDTO.getEndDate().getTime() - System.currentTimeMillis())
+        + challengeDao.getRemainTime(challengeDTO.getEndDate().getTime() - System.currentTimeMillis())
         +"등록날짜 ▶ %s\n\n",
 
         challengeDTO.getNo(), 
@@ -97,6 +100,8 @@ public class ChallengeJoinHandler implements Command {
     int count = challengeDTO.getTotalJoinCount();
     count += 1;
     challengeDTO.setTotalJoinCount(count); 
+
+    challengeJoinDao.insert(challengeDTO);
 
     System.out.println("챌린지 참여가 완료되었습니다.");
   }
