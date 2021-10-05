@@ -35,11 +35,13 @@ public class MenuGroup extends Menu {
   }
   static PrevMenu prevMenu = new PrevMenu();
 
-  // 생성자를 정의하지 않으면 컴파일러가 기본 생성자를 자동으로 추가해 준다.
-  // 문제는 컴파일러가 추가한 기본 생성자는 수퍼 클래스의 기본 생성자를 호출하기 때문에
-  // 컴파일 오류가 발생한다. 
-  // Menu 클래스에는 기본 생성자가 없다. 
-  // 따라서 개발자가 직접 생성자를 정의해야 한다.
+  //메뉴 목록을 출력할 때 출력 여부를 결정할 객체를 보관한다.
+  MenuFilter menuFilter;
+
+  public void setMenuFilter(MenuFilter menuFilter) {
+    this.menuFilter = menuFilter;
+  }
+
   public MenuGroup(String title) {
     super(title);
   }
@@ -62,19 +64,17 @@ public class MenuGroup extends Menu {
     this.prevMenuTitle = prevMenuTitle;
   }
 
-  // MenuGroup이 포함하는 하위 Menu를 다룰 수 있도록 메서드를 정의한다.
   public void add(Menu child) {
     childs.add(child);
   }
 
-  // 배열에 들어 있는 Menu 객체를 찾아 제거한다.
   public Menu remove(Menu child) {
     if (childs.remove(child)) 
       return child;
     return null;
   }
 
-  @Override // 컴파일러에게 오버라이딩을 제대로 하는지 조사해 달라고 요구한다.
+  @Override 
   public void execute() {
 
     // 현재 실행하는 메뉴를 스택에 보관한다.
@@ -110,15 +110,6 @@ public class MenuGroup extends Menu {
         System.out.println("올바른 숫자를 입력해주세요");
         e.printStackTrace();
       }
-
-      //    } catch (Exception e) {
-      //        // try 블록 안에 있는 코드를 실행하다가 예외가 발생하면
-      //        // 다음 문장을 실행한 후 시스템을 멈추지 않고 실행을 계속한다.
-      //        System.out.println("--------------------------------------------------------------");
-      //        System.out.printf("오류 발생: %s\n", e.getClass().getName());
-      //        e.printStackTrace();
-      //        System.out.println("--------------------------------------------------------------");
-      //      }
     }
   }
 
@@ -156,9 +147,11 @@ public class MenuGroup extends Menu {
     System.out.println();
 
     for (Menu menu : childs) {
-      if ((menu.accessScope & AuthLoginHandler.getUserAccessLevel()) > 0 ) {
-        menuList.add(menu);
+      if (menuFilter != null && !menuFilter.accept(menu)) {
+        //      if ((menu.accessScope & AuthLoginHandler.getUserAccessLevel()) > 0 ) {
+        continue;        
       } 
+      menuList.add(menu);
     } 
     return menuList;
   }
@@ -188,14 +181,12 @@ public class MenuGroup extends Menu {
     }
 
     if (menuNo == 0 && !disablePrevMenu) {
-      return prevMenu; // 호출한 쪽에 '이전 메뉴' 선택을 알리게 위해 
+      return prevMenu; // 호출한 쪽에 '이전 메뉴' 선택을 알리기 위해 
     } 
 
     return menuList.get(menuNo - 1);
 
-
   }
-
 }
 
 

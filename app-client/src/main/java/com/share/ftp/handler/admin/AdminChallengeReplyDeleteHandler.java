@@ -56,11 +56,11 @@ public class AdminChallengeReplyDeleteHandler extends AbstractChallengeQuestionH
         } else if (input.equals("y")) {
           System.out.println("해당 문의답글을 삭제하였습니다.");
           challengeList.setQuestionCount(challengeList.getQuestionCount() - 1);
-          challengeQuestion.setContent("삭제된 답글입니다");
+          //          challengeQuestion.setContent("삭제된 답글입니다");
 
 
           //          challengeQuestion.setQuestionNo(challengeQuestion.getQuestionNo() - 1);
-          //          challengeQuestionDTOList.remove(challengeQuestion);
+          challengeQuestionDTOList.remove(challengeQuestion);
           return;
         } else {
           System.out.println("y 또는 n을 입력하세요.");

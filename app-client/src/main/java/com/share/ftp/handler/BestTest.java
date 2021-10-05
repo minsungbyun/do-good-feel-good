@@ -17,7 +17,11 @@ public class BestTest implements Command {
       List<CommBoardReplyDTO> commBoardReplyDTOList) {
 
   }
+  @Override
+  public void execute(CommandRequest request) throws Exception {
+    // TODO Auto-generated method stub
 
+  }
 
   public static List<CommBoardDTO> getLikeRank(List<CommBoardDTO> allBoards) {
 

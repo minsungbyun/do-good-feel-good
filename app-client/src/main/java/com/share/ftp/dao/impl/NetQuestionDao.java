@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.share.ftp.dao.QuestionDao;
-import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.QuestionListDTO;
 import com.share.request.RequestAgent;
 
@@ -19,8 +18,8 @@ public class NetQuestionDao implements QuestionDao {
   }
 
   @Override
-  public void insert(QuestionListDTO myQuestionListDTO) throws Exception {
-    requestAgent.request("question.insert", myQuestionListDTO);
+  public void insert(QuestionListDTO question) throws Exception {
+    requestAgent.request("question.insert", question);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("게시글 등록 실패!");
     }
@@ -29,6 +28,7 @@ public class NetQuestionDao implements QuestionDao {
   @Override
   public List<QuestionListDTO> findAll() throws Exception {
     requestAgent.request("question.selectList", null);
+
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("게시글 목록 조회 실패!");
     }
@@ -50,11 +50,11 @@ public class NetQuestionDao implements QuestionDao {
   }
 
   @Override
-  public QuestionListDTO findByNo(int no) throws Exception {
+  public QuestionListDTO findByNo(int questionNo) throws Exception {
     HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    params.put("questionNo", String.valueOf(questionNo));
 
-    requestAgent.request("board.selectOne", params);
+    requestAgent.request("question.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;
@@ -64,8 +64,8 @@ public class NetQuestionDao implements QuestionDao {
   }
 
   @Override
-  public void update(Board board) throws Exception {
-    requestAgent.request("board.update", board);
+  public void update(QuestionListDTO updateQuestion) throws Exception {
+    requestAgent.request("question.update", updateQuestion);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("게시글 변경 실패!");
@@ -73,11 +73,10 @@ public class NetQuestionDao implements QuestionDao {
   }
 
   @Override
-  public void delete(int no) throws Exception {
+  public void delete(int questionNo) throws Exception {
     HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
-
-    requestAgent.request("board.delete", params);
+    params.put("questionNo", String.valueOf(questionNo));
+    requestAgent.request("question.delete", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("게시글 삭제 실패!");
@@ -86,15 +85,15 @@ public class NetQuestionDao implements QuestionDao {
   @Override
   public int getNextNum() throws Exception {
 
-    requestAgent.request("challenge.getNextNum", null);
+    requestAgent.request("question.getNextNum", null);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("고유번호 부여 중 오류 발생!");
     }
-    ChallengeDTO challengeDTO = requestAgent.getObject(ChallengeDTO.class);
+    QuestionListDTO questionDTO = requestAgent.getObject(QuestionListDTO.class);
 
 
-    return challengeDTO.getNo();
+    return questionDTO.getNo();
   }
 }
 

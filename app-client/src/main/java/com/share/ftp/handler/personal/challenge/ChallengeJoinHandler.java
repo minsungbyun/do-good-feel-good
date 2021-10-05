@@ -1,20 +1,19 @@
 package com.share.ftp.handler.personal.challenge;
 
 import static com.share.util.General.point.CHALLENGE_POINT;
-import java.util.List;
+import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
-import com.share.ftp.handler.admin.AbstractAdminChallengeHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class ChallengeJoinHandler extends AbstractAdminChallengeHandler {
+public class ChallengeJoinHandler implements Command {
 
+  ChallengeDao challengeDao;
 
-  public ChallengeJoinHandler(
-      List<ChallengeDTO> challengeDTOList) {
-
-    super(challengeDTOList);
+  public ChallengeJoinHandler(ChallengeDao challengeDao) {
+    this.challengeDao = challengeDao;
   }
 
   @Override
@@ -23,9 +22,9 @@ public class ChallengeJoinHandler extends AbstractAdminChallengeHandler {
     System.out.println();
     System.out.println("[ 챌린지 참여 ]");
     System.out.println();
-    int no = (int) request.getAttribute("challengeNo");
+    int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeDTO = findByNo(no);
+    ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
 
     if (challengeDTO == null) {
       System.out.println("존재하지 않는 챌린지입니다");
@@ -38,7 +37,7 @@ public class ChallengeJoinHandler extends AbstractAdminChallengeHandler {
         +"참여인원 ▶ %d\n"
         +"참여기간 ▶ %s ~ %s\n"
         +"챌린지기간 ▶ %d일\n"
-        + getRemainTime(challengeDTO.getEndDate().getTime() - System.currentTimeMillis())
+        + challengeDao.getRemainTime(challengeDTO.getEndDate().getTime() - System.currentTimeMillis())
         +"등록날짜 ▶ %s\n\n",
 
         challengeDTO.getNo(), 
@@ -99,48 +98,13 @@ public class ChallengeJoinHandler extends AbstractAdminChallengeHandler {
     count += 1;
     challengeDTO.setTotalJoinCount(count); 
 
-    System.out.println("챌린지 참여가 완료되었습니다.");
+    System.out.println("[  챌린지 참여가 완료되었습니다. ]");
   }
-}
-////  ChallengeJoinListHandler challengeJoinListHandler;
-//  
-//  public ChallengeJoinHandler(List<ChallengeJoinDTO> ChallengeJoinDTOList /*ChallengeJoinListHandler challengeJoinListHandler*/) {
-//    super(ChallengeJoinDTOList);
-////    this.challengeJoinListHandler = challengeJoinListHandler
-//  }
-//
-//  @Override
-//  public void execute() {
-//    while (true) {
-//    System.out.println("[참여하기]");
-//
-//    ChallengeJoinDTO ChallengeJoinDTO = new ChallengeJoinDTO();
-//
-//    try {
-//
-//    String input = Prompt.inputString("정말 참여하시겠습니까?(y/N) ");
-//    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-//      System.out.println("챌린지 참여를 취소하였습니다.");
-//      return;
-//    } else if (input.equals("y")) {
-////        if (ChallengeJoinDTO.getJoiner().getId().equalsIgnoreCase(AuthLoginHandler.getLoginUser().getId())) {
-////      System.out.println("챌린지 참여를 완료하였습니다.");
-//      ChallengeJoinDTO.setJoiner(AuthLoginHandler.getLoginUser());
-//      ChallengeJoinDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
-//      ChallengeJoinDTOList.add(ChallengeJoinDTO);
-//      return;
-////      } else if (ChallengeJoinDTO.getJoiner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
-////        System.out.println("이미 참여가 완료되었습니다.");
-////        return;
-////      }
-//    } else {
-//      System.out.println("y 또는 n을 입력하세요.");
-//      continue;
-//    }
-//    } catch (Throwable e) {
-//  }
-//  }
-//  }
 
-//}
+
+
+}
+
+
+
 

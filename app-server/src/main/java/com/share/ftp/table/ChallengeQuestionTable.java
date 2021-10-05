@@ -1,30 +1,30 @@
 package com.share.ftp.table;
 
-import com.share.ftp.domain.admin.ChallengeDTO;
+import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 import com.share.server.DataProcessor;
 import com.share.server.Request;
 import com.share.server.Response;
 
-public class ChallengeTable extends JsonDataTable<ChallengeDTO> implements DataProcessor {
+public class ChallengeQuestionTable extends JsonDataTable<ChallengeQuestionDTO> implements DataProcessor {
 
-  public ChallengeTable() {
-    super("challenge.json",ChallengeDTO.class);
+  public ChallengeQuestionTable() {
+    super("challengeQuestion.json",ChallengeQuestionDTO.class);
   }
 
   @Override
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
-      case "challenge.insert": insert(request, response); break;
-      case "challenge.selectList": selectList(request, response); break;
-      case "challenge.selectOne": selectOne(request, response); break;
-      case "challenge.update": update(request, response); break;
-      case "challenge.delete": delete(request, response); break;
-      case "challenge.getNextNum": getNextNum(request, response); break;
+      case "challengeQuestion.insert": insert(request, response); break;
+      case "challengeQuestion.selectList": selectList(request, response); break;
+      case "challengeQuestion.selectOne": selectOne(request, response); break;
+      case "challengeQuestion.update": update(request, response); break;
+      case "challengeQuestion.delete": delete(request, response); break;
+      case "challengeQuestion.getNextNum": getNextNum(request, response); break;
     }
   }
 
   private void insert(Request request, Response response) throws Exception {
-    ChallengeDTO challenge = request.getObject(ChallengeDTO.class);
+    ChallengeQuestionDTO challenge = request.getObject(ChallengeQuestionDTO.class);
     System.out.println(challenge);
     list.add(challenge);
     response.setStatus(Response.SUCCESS);
@@ -39,8 +39,8 @@ public class ChallengeTable extends JsonDataTable<ChallengeDTO> implements DataP
   private void selectOne(Request request, Response response) throws Exception {
     int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
 
-    ChallengeDTO challengeDTO = null;
-    for (ChallengeDTO challengeList : list) {
+    ChallengeQuestionDTO challengeDTO = null;
+    for (ChallengeQuestionDTO challengeList : list) {
       if (challengeList.getNo() == challengeNo) {
         challengeDTO = challengeList; 
       }
@@ -57,7 +57,7 @@ public class ChallengeTable extends JsonDataTable<ChallengeDTO> implements DataP
   }
 
   private void update(Request request, Response response) throws Exception {
-    ChallengeDTO updateChallenge = request.getObject(ChallengeDTO.class);
+    ChallengeQuestionDTO updateChallenge = request.getObject(ChallengeQuestionDTO.class);
 
     int index = indexOf(updateChallenge.getNo());
 
@@ -66,7 +66,7 @@ public class ChallengeTable extends JsonDataTable<ChallengeDTO> implements DataP
   }
 
   private void delete(Request request, Response response) throws Exception {
-    ChallengeDTO deleteChallenge = request.getObject(ChallengeDTO.class);
+    ChallengeQuestionDTO deleteChallenge = request.getObject(ChallengeQuestionDTO.class);
 
     list.remove(deleteChallenge);
     response.setStatus(Response.SUCCESS);
@@ -74,7 +74,7 @@ public class ChallengeTable extends JsonDataTable<ChallengeDTO> implements DataP
 
 
   private void getNextNum(Request request, Response response) throws Exception {
-    ChallengeDTO challenge = new ChallengeDTO();
+    ChallengeQuestionDTO challenge = new ChallengeQuestionDTO();
 
     challenge.setNo(getLastNum());
 
