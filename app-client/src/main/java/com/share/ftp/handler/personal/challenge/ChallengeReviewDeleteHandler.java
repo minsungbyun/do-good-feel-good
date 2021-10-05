@@ -67,7 +67,7 @@ public class ChallengeReviewDeleteHandler implements Command {
           challengeDTO.setReviewCount(challengeDTO.getReviewCount() - 1);
           AuthLoginHandler.getLoginUser().setPoint(AuthLoginHandler.getLoginUser().getPoint() - CHALLENGE_REVIEWPOINT);
           challengeDTO.removeReviewer(AuthLoginHandler.getLoginUser());
-          challengeReviewDao.delete(challengeReviewDTO);
+          challengeReviewDao.deleteReview(challengeReviewDTO);
           return;
 
         } else {

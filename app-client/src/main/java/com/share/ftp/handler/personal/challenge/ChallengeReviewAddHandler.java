@@ -115,7 +115,7 @@ public class ChallengeReviewAddHandler implements Command {
         // 리뷰어 등록
         challengeDTO.addReviewer(AuthLoginHandler.getLoginUser());
 
-        challengeReviewDao.insert(challengeReviewDTO);
+        challengeReviewDao.insertReview(challengeReviewDTO);
         //    System.out.println("총 댓글 개수 = " + challengeReviewDTOList.size());
 
         System.out.println();

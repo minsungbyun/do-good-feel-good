@@ -24,12 +24,8 @@ public class ServerApp {
     // => 데이터 처리 담당자를 등록한다.
     dataProcessorMap.put("join.", new JoinTable());
     dataProcessorMap.put("challenge.", new ChallengeTable());
+    dataProcessorMap.put("challengeReview.", new ChallengeTable());
 
-    //    dataProcessorMap.put("board.", new BoardTable());
-    //    dataProcessorMap.put("member.", new MemberTable());
-    //    dataProcessorMap.put("project.", new ProjectTable());
-    //        dataProcessorMap.put("member.", new MemberTable());
-    //        dataProcessorMap.put("project.", new ProjectTable());
 
     while (true) {
       Socket socket = serverSocket.accept();
