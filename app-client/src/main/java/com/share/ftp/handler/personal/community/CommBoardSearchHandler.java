@@ -17,11 +17,13 @@ public class CommBoardSearchHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    String input = Prompt.inputString("[  검색어를 입력하세요!  ");
+    System.out.println("[ 게시글 검색 ]");
 
-    Collection<CommBoardDTO> CommBoardDTOList = commBoardDao.findByKeyword(input);
+    String input = Prompt.inputString("검색어?  ");
 
-    for(CommBoardDTO commBoardDTO : CommBoardDTOList) {
+    Collection<CommBoardDTO> commBoardDTOList = commBoardDao.findByKeyword(input);
+
+    for(CommBoardDTO commBoardDTO : commBoardDTOList) {
       if(!commBoardDTO.getTitle().contains(input) &&
           !commBoardDTO.getContent().contains(input)) {
         continue;

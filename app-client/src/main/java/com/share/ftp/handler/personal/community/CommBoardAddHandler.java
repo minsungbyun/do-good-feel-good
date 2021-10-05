@@ -20,7 +20,7 @@ public class CommBoardAddHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
 
     System.out.println();
-    System.out.println("[  메인/소통해요/나눔이야기/등록  ]");
+    System.out.println("[  나눔이야기 등록  ]");
 
     CommBoardDTO commBoardDTO = new CommBoardDTO();
 

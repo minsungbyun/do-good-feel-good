@@ -30,6 +30,7 @@ public class CommBoardTable extends JsonDataTable<CommBoardDTO> implements DataP
 
   private void insert(Request request, Response response) throws Exception {
     CommBoardDTO commBoardDTO = request.getObject(CommBoardDTO.class);
+    System.out.println(commBoardDTO);
     list.add(commBoardDTO);
     response.setStatus(Response.SUCCESS);
   }
@@ -57,7 +58,7 @@ public class CommBoardTable extends JsonDataTable<CommBoardDTO> implements DataP
 
 
   private void selectOne(Request request, Response response) throws Exception {
-    int commNo = Integer.parseInt(request.getParameter("no"));
+    int commNo = Integer.parseInt(request.getParameter("commNo"));
     CommBoardDTO commBoardDTO = findByCommNo(commNo);
 
     if (commBoardDTO != null) {

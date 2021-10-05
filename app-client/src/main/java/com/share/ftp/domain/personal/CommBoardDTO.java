@@ -8,7 +8,7 @@ import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
 @SuppressWarnings("serial")
-public class CommBoardDTO implements Serializable/*, Comparable<CommBoardDTO> */{
+public class CommBoardDTO implements Serializable {
 
   private int commNo;
   private int replyCount;

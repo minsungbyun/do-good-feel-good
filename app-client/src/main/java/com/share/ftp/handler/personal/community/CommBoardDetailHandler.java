@@ -12,8 +12,8 @@ public class CommBoardDetailHandler implements Command {
 
   CommBoardDao commBoardDao;
 
-  public CommBoardDetailHandler(CommBoardDao commBoardDao) {
-    this.commBoardDao =  commBoardDao;
+  public CommBoardDetailHandler (CommBoardDao commBoardDao) {
+    this.commBoardDao = commBoardDao;
   }
 
   @Override
