@@ -14,29 +14,29 @@ public class ChallengeReviewTable extends JsonDataTable<ChallengeReviewDTO> impl
   @Override
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
-      case "challengeReview.insert": insert(request, response); break;
-      case "challengeReview.selectList": selectList(request, response); break;
-      case "challengeReview.selectOne": selectOne(request, response); break;
-      case "challengeReview.update": update(request, response); break;
-      case "challengeReview.delete": delete(request, response); break;
-      case "challengeReview.getNextNum": getNextNum(request, response); break;
+      case "challengeReview.insert": insertReview(request, response); break;
+      case "challengeReview.selectList": selectReviewList(request, response); break;
+      case "challengeReview.selectOne": selectReviewOne(request, response); break;
+      case "challengeReview.update": updateReview(request, response); break;
+      case "challengeReview.delete": deleteReview(request, response); break;
+      case "challengeReview.getNextNum": getNextReivewNum(request, response); break;
     }
   }
 
-  private void insert(Request request, Response response) throws Exception {
+  private void insertReview(Request request, Response response) throws Exception {
     ChallengeReviewDTO challenge = request.getObject(ChallengeReviewDTO.class);
     System.out.println(challenge);
     list.add(challenge);
     response.setStatus(Response.SUCCESS);
   }
 
-  private void selectList(Request request, Response response) throws Exception {
+  private void selectReviewList(Request request, Response response) throws Exception {
     response.setStatus(Response.SUCCESS);
     response.setValue(list);
   }
 
 
-  private void selectOne(Request request, Response response) throws Exception {
+  private void selectReviewOne(Request request, Response response) throws Exception {
     int challengeReviewNo = Integer.parseInt(request.getParameter("challengeNo"));
 
     ChallengeReviewDTO challengeReviewDTO = null;
@@ -56,7 +56,7 @@ public class ChallengeReviewTable extends JsonDataTable<ChallengeReviewDTO> impl
     response.setValue(challengeReviewDTO);
   }
 
-  private void update(Request request, Response response) throws Exception {
+  private void updateReview(Request request, Response response) throws Exception {
     ChallengeReviewDTO updateChallenge = request.getObject(ChallengeReviewDTO.class);
 
     int index = indexOf(updateChallenge.getNo());
@@ -65,7 +65,7 @@ public class ChallengeReviewTable extends JsonDataTable<ChallengeReviewDTO> impl
     response.setStatus(Response.SUCCESS);
   }
 
-  private void delete(Request request, Response response) throws Exception {
+  private void deleteReview(Request request, Response response) throws Exception {
     ChallengeReviewDTO deleteChallenge = request.getObject(ChallengeReviewDTO.class);
 
     list.remove(deleteChallenge);
@@ -73,7 +73,7 @@ public class ChallengeReviewTable extends JsonDataTable<ChallengeReviewDTO> impl
   }
 
 
-  private void getNextNum(Request request, Response response) throws Exception {
+  private void getNextReivewNum(Request request, Response response) throws Exception {
     ChallengeReviewDTO challenge = new ChallengeReviewDTO();
 
     challenge.setNo(getLastNum());

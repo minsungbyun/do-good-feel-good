@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import com.share.context.ApplicationContextListener;
 import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.dao.JoinDao;
 import com.share.ftp.dao.impl.NetChallengeDao;
 import com.share.ftp.dao.impl.NetJoinDao;
@@ -353,6 +354,7 @@ public class ClientApp {
 
     JoinDao netJoinDao = new NetJoinDao(requestAgent);
     ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
+    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
 
 
     //로그인, 로그아웃
@@ -439,7 +441,7 @@ public class ClientApp {
     //    commands.put("/challengeReview/connect", new ChallengeReviewConnectHandler(challengeReviewDTOList, challengeDTOList));
 
     // 챌린지 문의하기
-    commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
+    commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(netChallengeQuestionDao));
     commands.put("/challengeQuestion/list", new ChallengeQuestionListHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
     //    commands.put("/challengeQuestion/detail", new ChallengeQuestionDetailHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
     commands.put("/challengeQuestion/update", new ChallengeQuestionUpdateHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));

@@ -3,10 +3,15 @@ package com.share.ftp.domain.personal;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
+import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.join.JoinDTO;
 
-@SuppressWarnings("serial")
-public class ChallengeQuestionDTO implements Serializable {
+
+public class ChallengeQuestionDTO extends ChallengeDTO implements Serializable {
+
+
+  private static final long serialVersionUID = 1L;
+
   private int no;
   private int questionNo;
   private String title;
