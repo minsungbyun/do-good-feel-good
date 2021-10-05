@@ -119,14 +119,16 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
   }
 
   @Override
-  public void updateQuestion(ChallengeQuestionDTO updateChallengeQuestion) throws Exception {
+  public void updateQuestion(int challengeNo, ChallengeQuestionDTO updateChallengeQuestion) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("challengeNo", String.valueOf(challengeNo));
+    params.put("updateChallengeQuestion", new Gson().toJson(updateChallengeQuestion));
 
-    requestAgent.request("challengeQuestion.update", updateChallengeQuestion);
+    requestAgent.request("challengeQuestion.update", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("챌린지 문의 변경 실패!");
     }
-
   }
 
   @Override
@@ -140,9 +142,11 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
   }
 
   @Override
-  public void deleteQuestion(int deleteChallengeQuestionNo) throws Exception {
+  public void deleteQuestion(int challengeNo, ChallengeQuestionDTO deleteChallengeQuestion) throws Exception {
     HashMap<String,String> params = new HashMap<>();
-    params.put("deleteChallengeQuestionNo", String.valueOf(deleteChallengeQuestionNo));
+    params.put("challengeNo", String.valueOf(challengeNo));
+    params.put("deleteChallengeQuestion", new Gson().toJson(deleteChallengeQuestion));
+
 
     requestAgent.request("challengeQuestion.deleteIndex", params);
 
@@ -169,11 +173,11 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
 
 
   @Override
-  public ChallengeQuestionDTO findByChallengeQuestionNo(int challengeQuestionNo,ChallengeDTO challengeNo) throws Exception {
+  public ChallengeQuestionDTO findByChallengeQuestionNo(int challengeNo, int challengeQuestionNo) throws Exception {
 
     HashMap<String,String> params = new HashMap<>();
+    params.put("challengeNo", String.valueOf(challengeNo));
     params.put("challengeQuestionNo", String.valueOf(challengeQuestionNo));
-    params.put("challengeNo", new Gson().toJson(ChallengeDTO.class));
     requestAgent.request("challengeQuestion.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
@@ -254,7 +258,7 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
     return null;
   }
 
-
+  // 다른 클래스 만들어서 static 메서드로 뺄 예정
   @Override
   public String getRemainTime(long millis) {
 
