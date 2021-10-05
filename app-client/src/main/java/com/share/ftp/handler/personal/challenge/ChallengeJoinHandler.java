@@ -75,7 +75,7 @@ public class ChallengeJoinHandler implements Command {
     //    }
 
 
-    if (challengeDTO.getMembers().contains(AuthLoginHandler.getLoginUser())) {
+    if (challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId())) {
       System.out.println("이미 챌린지 참여를 하셨습니다!");
       return;
     } 

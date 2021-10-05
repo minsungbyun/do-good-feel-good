@@ -1,18 +1,22 @@
 package com.share.ftp.handler.personal.challenge;
 
-import java.util.List;
-import com.share.ftp.domain.admin.ChallengeDTO;
+import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class ChallengeReviewConnectHandler extends AbstractChallengeReviewHandler {
+public class ChallengeReviewConnectHandler implements Command {
 
+  ChallengeReviewDao challengeReviewDao;
+  ChallengeDao challengeDao;
 
-  public ChallengeReviewConnectHandler(List<ChallengeReviewDTO> challengeReviewDTOList,
-      List<ChallengeDTO> challengeDTOList) {
-    super(challengeReviewDTOList, challengeDTOList);
+  public ChallengeReviewConnectHandler(ChallengeReviewDao challengeReviewDao,
+      ChallengeDao challengeDao) {
+    this.challengeReviewDao = challengeReviewDao;
+    this.challengeDao = challengeDao;
   }
 
   @Override
@@ -21,13 +25,15 @@ public class ChallengeReviewConnectHandler extends AbstractChallengeReviewHandle
     System.out.println("[ 참여인증&댓글 변경, 삭제]");
     System.out.println();
 
+    int challengeNo = (int) request.getAttribute("challengeNo");
+
     int reviewNo = Prompt.inputInt("댓글 번호를 입력해주세요 ▶ ");
 
     //    if (reviewNo == 0) {
     //      return;
     //    }
 
-    ChallengeReviewDTO challengeReviewDTO = findByReviewNo(reviewNo);
+    ChallengeReviewDTO challengeReviewDTO = challengeReviewDao.findByChallengeReviewNo(reviewNo);
 
     if (challengeReviewDTO == null) {
       System.out.println("해당 번호의 참여인증&댓글이 없습니다.");
