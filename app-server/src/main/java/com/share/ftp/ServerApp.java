@@ -29,12 +29,11 @@ public class ServerApp {
 
     dataProcessorMap.put("challenge.", new ChallengeTable());
 
-
     //    dataProcessorMap.put("board.", new BoardTable());
     //    dataProcessorMap.put("member.", new MemberTable());
     //    dataProcessorMap.put("project.", new ProjectTable());
-    //        dataProcessorMap.put("member.", new MemberTable());
-    //        dataProcessorMap.put("project.", new ProjectTable());
+    //      dataProcessorMap.put("member.", new MemberTable());
+    //      dataProcessorMap.put("project.", new ProjectTable());
 
     while (true) {
       Socket socket = serverSocket.accept();

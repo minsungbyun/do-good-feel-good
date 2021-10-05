@@ -18,8 +18,8 @@ public class NetQuestionDao implements QuestionDao {
   }
 
   @Override
-  public void insert(QuestionListDTO question) throws Exception {
-    requestAgent.request("question.insert", question);
+  public void insert(QuestionListDTO questionListDTO) throws Exception {
+    requestAgent.request("question.insert", questionListDTO);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("게시글 등록 실패!");
     }
@@ -90,10 +90,10 @@ public class NetQuestionDao implements QuestionDao {
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("고유번호 부여 중 오류 발생!");
     }
-    QuestionListDTO questionDTO = requestAgent.getObject(QuestionListDTO.class);
+    QuestionListDTO questionListDTO = requestAgent.getObject(QuestionListDTO.class);
 
 
-    return questionDTO.getNo();
+    return questionListDTO.getNo();
   }
 }
 

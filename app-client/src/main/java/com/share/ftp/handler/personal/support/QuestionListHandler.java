@@ -1,5 +1,6 @@
 package com.share.ftp.handler.personal.support;
 
+import java.util.Collection;
 import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.domain.personal.QuestionListDTO;
 import com.share.ftp.handler.Command;
@@ -18,22 +19,24 @@ public class QuestionListHandler implements Command {
     System.out.println();
     System.out.println("[고객센터/문의하기/문의하기 목록]");
 
+    Collection<QuestionListDTO> questionList = questionDao.findAll();
+
     if (questionList.isEmpty()) {
       System.out.println("게시글이 없습니다.");
       System.out.println();
     }
 
-    for (QuestionListDTO myQuestionListDTO : questionList) {
+    for (QuestionListDTO questionListDTO : questionList) {
 
       System.out.printf("%d, %s, %s, %s, %s, %d\n", 
-          myQuestionListDTO.getNo(),
-          myQuestionListDTO.getQnaType(),
-          myQuestionListDTO.getTitle(), 
+          questionListDTO.getNo(),
+          questionListDTO.getQnaType(),
+          questionListDTO.getTitle(), 
           //          myQuestionListDTO.getContent(),
-          myQuestionListDTO.getOwner().getId(),
+          questionListDTO.getOwner().getId(),
           //          myQuestionListDTO.getFileUpload(),
-          myQuestionListDTO.getRegisteredDate(),
-          myQuestionListDTO.getViewCount());
+          questionListDTO.getRegisteredDate(),
+          questionListDTO.getViewCount());
     }
   }
 

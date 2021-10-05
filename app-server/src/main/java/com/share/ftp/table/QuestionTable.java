@@ -18,11 +18,11 @@ public class QuestionTable extends JsonDataTable<QuestionListDTO> implements Dat
     switch (request.getCommand() ) {
       case "question.insert": insert(request, response); break;
       case "question.selectList": selectList(request, response); break;
-      case "qeustion.selectListByKeyword": selectListByKeyword(request, response); break;
-      case "qeustion.selectOne": selectOne(request, response); break;
-      case "qeustion.update": update(request, response); break;
-      case "qeustion.delete": delete(request, response); break;
-      case "qeustion.getNextNum": getNextNum(request, response); break;
+      case "question.selectListByKeyword": selectListByKeyword(request, response); break;
+      case "question.selectOne": selectOne(request, response); break;
+      case "question.update": update(request, response); break;
+      case "question.delete": delete(request, response); break;
+      case "question.getNextNum": getNextNum(request, response); break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");

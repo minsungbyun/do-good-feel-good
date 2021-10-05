@@ -21,7 +21,7 @@ public class QuestionSearchHandler implements Command {
 
     String input = Prompt.inputString("검색어? ");
 
-    Collection<QuestionListDTO> questionList = questionDao.findAll();
+    Collection<QuestionListDTO> questionList = questionDao.findByKeyword(input);
 
     for (QuestionListDTO questionListDTO : questionList) {
       if (!questionListDTO.getTitle().contains(input) &&
