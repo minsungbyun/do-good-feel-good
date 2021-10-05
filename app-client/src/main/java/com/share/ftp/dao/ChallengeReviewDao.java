@@ -8,7 +8,7 @@ public interface ChallengeReviewDao {
 
   // 챌린지 답글 관련
   void insert(ChallengeReviewDTO addChallengeReview) throws Exception;
-  List<ChallengeReviewDTO> findAll() throws Exception;      
+  List<ChallengeReviewDTO> findAllReview() throws Exception;      
   void update(ChallengeDTO updateChallengeReview) throws Exception;          
   void delete(int deleteChallengeReviewNo) throws Exception; 
 

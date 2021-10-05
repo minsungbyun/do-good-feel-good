@@ -8,8 +8,6 @@ import com.share.server.Response;
 
 public class CommBoardTable extends JsonDataTable<CommBoardDTO> implements DataProcessor {
 
-
-
   public CommBoardTable() {
     super("commBoard.json",CommBoardDTO.class);
   }
