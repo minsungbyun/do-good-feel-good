@@ -10,8 +10,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.share.context.ApplicationContextListener;
+import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.CommBoardDao;
 import com.share.ftp.dao.JoinDao;
+import com.share.ftp.dao.impl.NetChallengeDao;
 import com.share.ftp.dao.impl.NetCommBoardDao;
 import com.share.ftp.dao.impl.NetJoinDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
@@ -90,7 +92,6 @@ import com.share.ftp.handler.personal.community.CommBestListHandler;
 import com.share.ftp.handler.personal.community.CommBoardAddHandler;
 import com.share.ftp.handler.personal.community.CommBoardDeleteHandler;
 import com.share.ftp.handler.personal.community.CommBoardDetailHandler;
-import com.share.ftp.handler.personal.community.CommBoardLikeHandler;
 import com.share.ftp.handler.personal.community.CommBoardListHandler;
 import com.share.ftp.handler.personal.community.CommBoardReplyAddHandler;
 import com.share.ftp.handler.personal.community.CommBoardReplyConnectHandler;
@@ -158,6 +159,7 @@ import com.share.ftp.handler.personal.volunteer.VolPersonalRequestApplyListHandl
 import com.share.ftp.listener.AppInitListener;
 import com.share.ftp.listener.FileListener;
 import com.share.menu.Menu;
+import com.share.menu.MenuFilter;
 import com.share.menu.MenuGroup;
 import com.share.request.RequestAgent;
 import com.share.util.Prompt;
@@ -225,6 +227,68 @@ public class ClientApp {
     this.listeners.remove(listener);
   }
 
+  private void notifyOnApplicationStarted() {
+    HashMap<String, Object> params = new HashMap<>();
+    params.put("joinDTOList", joinDTOList);
+    params.put("volListDTOList", volListDTOList);
+    params.put("generalRequestDTOList", generalRequestDTOList);
+    params.put("generalRequestApplyDTOList", generalRequestApplyDTOList);
+    params.put("generalRequestRejectDTOList", generalRequestRejectDTOList);
+    params.put("commBoardDTOList", commBoardDTOList);
+    params.put("commReviewDTOList", commReviewDTOList);
+    params.put("commBoardReplyDTOList", commBoardReplyDTOList);
+    params.put("challengeJoinDTOList", challengeJoinDTOList);
+    params.put("challengeQuestionDTOList", challengeQuestionDTOList);
+    params.put("challengeReviewDTOList", challengeReviewDTOList);
+    params.put("donationBoardDTOList", donationBoardDTOList);
+    params.put("donationBoardApplyDTOList", donationBoardApplyDTOList);
+    params.put("donationBoardRejectDTOList", donationBoardRejectDTOList);
+    params.put("donationRegisterDTOList", donationRegisterDTOList);
+    params.put("myProfileDTOList", myProfileDTOList);
+    params.put("myQuestionListDTOList", myQuestionListDTOList);
+    params.put("challengeDTOList", challengeDTOList);
+    params.put("noticeDTOList", noticeDTOList);
+    //    params.put("questionDTOList", questionDTOList);
+    params.put("approveOrgDTOList", approveOrgDTOList);
+
+    for (ApplicationContextListener listener : listeners) {
+      listener.contextInitialized(params);
+    }
+  }
+
+  private void notifyOnApplicationEnded() {
+    HashMap<String, Object> params = new HashMap<>();
+    params.put("joinDTOList", joinDTOList);
+    params.put("volListDTOList", volListDTOList);
+    params.put("generalRequestDTOList", generalRequestDTOList);
+    params.put("generalRequestApplyDTOList", generalRequestApplyDTOList);
+    params.put("generalRequestRejectDTOList", generalRequestRejectDTOList);
+    params.put("commBoardDTOList", commBoardDTOList);
+    params.put("commReviewDTOList", commReviewDTOList);
+    params.put("commBoardReplyDTOList", commBoardReplyDTOList);
+    params.put("challengeJoinDTOList", challengeJoinDTOList);
+    params.put("challengeQuestionDTOList", challengeQuestionDTOList);
+    params.put("challengeReviewDTOList", challengeReviewDTOList);
+    params.put("donationBoardDTOList", donationBoardDTOList);
+    params.put("donationBoardApplyDTOList", donationBoardApplyDTOList);
+    params.put("donationBoardRejectDTOList", donationBoardRejectDTOList);
+    params.put("donationRegisterDTOList", donationRegisterDTOList);
+    params.put("myProfileDTOList", myProfileDTOList);
+    params.put("myQuestionListDTOList", myQuestionListDTOList);
+    params.put("challengeDTOList", challengeDTOList);
+    params.put("noticeDTOList", noticeDTOList);
+    //    params.put("questionDTOList", questionDTOList);
+    params.put("approveOrgDTOList", approveOrgDTOList);
+
+    for (ApplicationContextListener listener : listeners) {
+      listener.contextDestroyed(params);
+    }
+  }
+
+  //MenuGroup에서 사용할 필터를 정의한다.
+  MenuFilter menuFilter = menu -> (menu.getAccessScope() & AuthLoginHandler.getUserAccessLevel()) > 0;
+
+
   class MenuItem extends Menu {
 
     String menuId;
@@ -256,19 +320,11 @@ public class ClientApp {
       new VolGeneralRequestAppliedListHandler
       (generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList);
 
-  //  VolRequestOrgAppliedListHandler volRequestOrgAppliedListHandler = 
-  //      new VolRequestOrgAppliedListHandler
-  //      (orgRequestDTOList, orgRequestApplyDTOList, orgRequestRejectDTOList);
-
   GeneralRequestDTO personalRequestDTO = new GeneralRequestDTO();
 
   VolGeneralDoJoinHandler volRequestPersonalAppliedListDetailHandler =
       new VolGeneralDoJoinHandler
       (generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList);
-
-  //  VolRequestOrgAppliedListDetailHandler volRequestOrgAppliedListDetailHandler =
-  //      new VolRequestOrgAppliedListDetailHandler
-  //      (orgRequestDTOList, orgRequestApplyDTOList, orgRequestRejectDTOList);
 
   // 함께해요 봉사 세부사항 Handler
 
@@ -295,15 +351,13 @@ public class ClientApp {
   DonationAdminPrompt donationAdminPrompt = new DonationAdminPrompt(donationBoardDTOList, donationRegisterDTOList);
 
 
-  //  DonationRegisterParticipationListHandler donationRegisterParticipationListHandler = new DonationRegisterParticipationListHandler(donationRegisterDTOList, donationBoardDTOList);
-
-
   public ClientApp() throws Exception {
 
-    requestAgent = new RequestAgent("192.168.0.157", 8888);
+    requestAgent = new RequestAgent("127.0.0.1", 8888);
 
     JoinDao netJoinDao = new NetJoinDao(requestAgent);
     CommBoardDao netCommBoardDao = new NetCommBoardDao(requestAgent);
+    ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
 
 
     //로그인, 로그아웃
@@ -352,7 +406,7 @@ public class ClientApp {
     commands.put("/commBoard/update", new CommBoardUpdateHandler(netCommBoardDao));
     commands.put("/commBoard/delete", new CommBoardDeleteHandler(netCommBoardDao));
     commands.put("/commBoard/search", new CommBoardSearchHandler(netCommBoardDao));
-    commands.put("/commBoard/like", new CommBoardLikeHandler(netCommBoardDao)); 
+    // commands.put("/commBoard/like", new CommBoardLikeHandler(netCommBoardDao)); 
 
     // 소통해요 댓글
     commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler(commBoardDTOList, commBoardReplyDTOList));
@@ -374,7 +428,7 @@ public class ClientApp {
     commands.put("/commReview/delete", new CommReviewDeleteHandler(commReviewDTOList));
 
     // 챌린지
-    commands.put("/adminChallenge/list", new AdminChallengeListHandler(challengeDTOList));  // 챌린지 목록
+    commands.put("/adminChallenge/list", new AdminChallengeListHandler(netChallengeDao));  // 챌린지 목록
     commands.put("/challenge/detail", new ChallengeDetailHandler(challengeDTOList)); // 챌린지 상세정보
     commands.put("/challengeJoin/join", new ChallengeJoinHandler(challengeDTOList));  // 참여하기
     commands.put("/challengeJoin/list", new ChallengeJoinListHandler(challengeDTOList, challengeJoinHandler));  // 참여자목록
@@ -481,8 +535,8 @@ public class ClientApp {
     //        commands.put("/adminAsk/delete", new AdminQuestionDeleteHandler(myQuestionListDTOList));
 
     // 관리자 챌린지
-    commands.put("/adminChallenge/add", new AdminChallengeAddHandler(challengeDTOList));
-    commands.put("/adminChallenge/list", new AdminChallengeListHandler(challengeDTOList));
+    commands.put("/adminChallenge/add", new AdminChallengeAddHandler(netChallengeDao));
+    commands.put("/adminChallenge/list", new AdminChallengeListHandler(netChallengeDao));
     commands.put("/adminChallenge/detail", new AdminChallengeDetailHandler(challengeDTOList));
     commands.put("/adminChallenge/update", new AdminChallengeUpdateHandler(challengeDTOList));
     commands.put("/adminChallenge/delete", new AdminChallengeDeleteHandler(challengeDTOList));
@@ -502,63 +556,6 @@ public class ClientApp {
     challengeReviewMap.put("/challengeReview/search", new ChallengeReviewSearchHandler(challengeReviewDTOList, challengeDTOList));
   }
 
-  private void notifyOnApplicationStarted() {
-    HashMap<String, Object> params = new HashMap<>();
-    params.put("joinDTOList", joinDTOList);
-    params.put("volListDTOList", volListDTOList);
-    params.put("generalRequestDTOList", generalRequestDTOList);
-    params.put("generalRequestApplyDTOList", generalRequestApplyDTOList);
-    params.put("generalRequestRejectDTOList", generalRequestRejectDTOList);
-    params.put("commBoardDTOList", commBoardDTOList);
-    params.put("commReviewDTOList", commReviewDTOList);
-    params.put("commBoardReplyDTOList", commBoardReplyDTOList);
-    params.put("challengeJoinDTOList", challengeJoinDTOList);
-    params.put("challengeQuestionDTOList", challengeQuestionDTOList);
-    params.put("challengeReviewDTOList", challengeReviewDTOList);
-    params.put("donationBoardDTOList", donationBoardDTOList);
-    params.put("donationBoardApplyDTOList", donationBoardApplyDTOList);
-    params.put("donationBoardRejectDTOList", donationBoardRejectDTOList);
-    params.put("donationRegisterDTOList", donationRegisterDTOList);
-    params.put("myProfileDTOList", myProfileDTOList);
-    params.put("myQuestionListDTOList", myQuestionListDTOList);
-    params.put("challengeDTOList", challengeDTOList);
-    params.put("noticeDTOList", noticeDTOList);
-    //    params.put("questionDTOList", questionDTOList);
-    params.put("approveOrgDTOList", approveOrgDTOList);
-
-    for (ApplicationContextListener listener : listeners) {
-      listener.contextInitialized(params);
-    }
-  }
-
-  private void notifyOnApplicationEnded() {
-    HashMap<String, Object> params = new HashMap<>();
-    params.put("joinDTOList", joinDTOList);
-    params.put("volListDTOList", volListDTOList);
-    params.put("generalRequestDTOList", generalRequestDTOList);
-    params.put("generalRequestApplyDTOList", generalRequestApplyDTOList);
-    params.put("generalRequestRejectDTOList", generalRequestRejectDTOList);
-    params.put("commBoardDTOList", commBoardDTOList);
-    params.put("commReviewDTOList", commReviewDTOList);
-    params.put("commBoardReplyDTOList", commBoardReplyDTOList);
-    params.put("challengeJoinDTOList", challengeJoinDTOList);
-    params.put("challengeQuestionDTOList", challengeQuestionDTOList);
-    params.put("challengeReviewDTOList", challengeReviewDTOList);
-    params.put("donationBoardDTOList", donationBoardDTOList);
-    params.put("donationBoardApplyDTOList", donationBoardApplyDTOList);
-    params.put("donationBoardRejectDTOList", donationBoardRejectDTOList);
-    params.put("donationRegisterDTOList", donationRegisterDTOList);
-    params.put("myProfileDTOList", myProfileDTOList);
-    params.put("myQuestionListDTOList", myQuestionListDTOList);
-    params.put("challengeDTOList", challengeDTOList);
-    params.put("noticeDTOList", noticeDTOList);
-    //    params.put("questionDTOList", questionDTOList);
-    params.put("approveOrgDTOList", approveOrgDTOList);
-
-    for (ApplicationContextListener listener : listeners) {
-      listener.contextDestroyed(params);
-    }
-  }
 
   void service() {
 
@@ -574,6 +571,7 @@ public class ClientApp {
   Menu createMenu() {
 
     MenuGroup mainMenuGroup = new MenuGroup("*행복하Share*");
+    mainMenuGroup.setMenuFilter(menuFilter);
     mainMenuGroup.setPrevMenuTitle("종료");
 
     mainMenuGroup.add(new MenuItem("로그인", ACCESS_LOGOUT, "/auth/login"));
@@ -592,6 +590,7 @@ public class ClientApp {
     // 함께해요
     MenuGroup doVolMenu = new MenuGroup("함께해요");
     mainMenuGroup.add(doVolMenu);
+    doVolMenu.setMenuFilter(menuFilter);
 
 
     doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volGeneralRequest/apply"));
@@ -603,6 +602,7 @@ public class ClientApp {
     // 소통해요
     MenuGroup CommunityMenu = new MenuGroup("소통해요");
     mainMenuGroup.add(CommunityMenu);
+    CommunityMenu.setMenuFilter(menuFilter);
 
     CommunityMenu.add(createReviewMenu());      // 나눔이야기
     CommunityMenu.add(createBestReviewMenu());  // 나눔이야기BEST
@@ -611,9 +611,11 @@ public class ClientApp {
     // 챌린지
     MenuGroup challengeMenu = new MenuGroup("챌린지");
     mainMenuGroup.add(challengeMenu);
+    challengeMenu.setMenuFilter(menuFilter);
 
     MenuGroup monthlyChallengeMenu = new MenuGroup("이달의 챌린지");
     challengeMenu.add(monthlyChallengeMenu);
+    monthlyChallengeMenu.setMenuFilter(menuFilter);
 
     //    MenuGroup challengeListMenu = new MenuGroup("챌린지 목록");
     //    monthlyChallengeMenu.add(challengeListMenu);
@@ -645,6 +647,7 @@ public class ClientApp {
     // 고객센터
     MenuGroup supportMenu = new MenuGroup("고객센터");
     mainMenuGroup.add(supportMenu);
+    supportMenu.setMenuFilter(menuFilter);
 
     supportMenu.add(createNoticeMenu());      // 공지사항
     supportMenu.add(createQuestionMenu());         // 문의하기
@@ -652,6 +655,8 @@ public class ClientApp {
     // 마이페이지
     MenuGroup MyPageMenu = new MenuGroup("마이페이지", ACCESS_MEMBER);
     mainMenuGroup.add(MyPageMenu);
+    MyPageMenu.setMenuFilter(menuFilter);
+
     MyPageMenu.add(createMyProfileMenu());    // 회원정보
     MyPageMenu.add(createMyVolunteerMenu());  // 나의봉사
     MyPageMenu.add(createMyBoardMenu());      // 나의게시글
@@ -688,6 +693,7 @@ public class ClientApp {
 
   private Menu createVolJoinMenu() {
     MenuGroup volJoinMenu = new MenuGroup("봉사참여하기");
+    volJoinMenu.setMenuFilter(menuFilter);
 
     volJoinMenu.add(new MenuItem("개인봉사참여",ACCESS_PERSONAL,"/volDoJoin/add")); 
     volJoinMenu.add(new MenuItem("기관봉사참여",ACCESS_ORG,"/volDoJoin/add")); 
@@ -702,6 +708,7 @@ public class ClientApp {
 
   private Menu createVolReviewMenu() {
     MenuGroup volReview = new MenuGroup("참여인증&댓글");
+    volReview.setMenuFilter(menuFilter);
     volReview.add(new MenuItem("봉사 참여인증 등록", ACCESS_MEMBER, "/volJoinReview/add"));
     volReview.add(new MenuItem("봉사 참여인증 목록", "/volJoinReview/list"));
     volReview.add(new MenuItem("봉사 참여인증 수정", ACCESS_MEMBER,"/volJoinReview/update"));
@@ -714,6 +721,7 @@ public class ClientApp {
 
   private Menu createVolQuestionMenu() {
     MenuGroup VolQuestion = new MenuGroup("문의하기");
+    VolQuestion.setMenuFilter(menuFilter);
 
     VolQuestion.add(new MenuItem("문의 등록", ACCESS_MEMBER, "/volQuestion/add"));
     VolQuestion.add(new MenuItem("문의 목록",  "/volQuestion/list"));
@@ -731,6 +739,7 @@ public class ClientApp {
 
   private Menu createReviewMenu() {
     MenuGroup reviewMenu = new MenuGroup("나눔 이야기");
+    reviewMenu.setMenuFilter(menuFilter);
 
     reviewMenu.add(new MenuItem("등록", ACCESS_MEMBER_ADMIN, "/commBoard/add"));
     reviewMenu.add(new MenuItem("목록","/commBoard/list"));
@@ -744,6 +753,7 @@ public class ClientApp {
 
   private Menu createBestReviewMenu() {
     MenuGroup bestReviewMenu = new MenuGroup("나눔 이야기 BEST");
+    bestReviewMenu.setMenuFilter(menuFilter);
 
     bestReviewMenu.add(new MenuItem("목록","/commBest/list"));
     bestReviewMenu.add(new MenuItem("상세보기","/commBest/detail"));
@@ -753,6 +763,7 @@ public class ClientApp {
 
   private Menu createShortReviewMenu() {
     MenuGroup shortReviewMenu = new MenuGroup("한 줄 후기");
+    shortReviewMenu.setMenuFilter(menuFilter);
 
     shortReviewMenu.add(new MenuItem("목록", "/commReview/list")); 
 
@@ -767,6 +778,7 @@ public class ClientApp {
 
   public  Menu createChallengeReviewMenu() {
     MenuGroup ChallengeReview = new MenuGroup("참여인증&댓글");
+    ChallengeReview.setMenuFilter(menuFilter);
     ChallengeReview.add(new MenuItem("참여인증&댓글 등록", ACCESS_MEMBER, "/challengeReview/add"));
     ChallengeReview.add(new MenuItem("참여인증&댓글 목록", "/challengeReview/list"));
     //    ChallengeReview.add(new MenuItem("참여인증&댓글 상세보기", ACCESS_MEMBER,"/challengeReview/detail"));
@@ -781,6 +793,7 @@ public class ClientApp {
 
   private Menu createChallengeQuestionMenu() {
     MenuGroup ChallengeQuestion = new MenuGroup("문의하기");
+    ChallengeQuestion.setMenuFilter(menuFilter);
     ChallengeQuestion.add(new MenuItem("문의 등록", ACCESS_MEMBER, "/challengeQuestion/add"));
     ChallengeQuestion.add(new MenuItem("문의 목록",  "/challengeQuestion/list"));
     ChallengeQuestion.add(new MenuItem("문의 상세보기", ACCESS_MEMBER,"/challengeQuestion/detail"));
@@ -795,6 +808,7 @@ public class ClientApp {
 
   private Menu createMonthlyRankingMenu() {
     MenuGroup monthlyRankingMenu = new MenuGroup("이달의 랭킹");
+    monthlyRankingMenu.setMenuFilter(menuFilter);
     monthlyRankingMenu.add(new MenuItem("이달의 랭킹보기", "/ranking/list"));  //전체랭킹(구현예정)
     monthlyRankingMenu.add(new MenuItem("나의 랭킹보기", ACCESS_MEMBER, "/myRanking/list"));  //나의랭킹(구현예정)
 
@@ -803,6 +817,7 @@ public class ClientApp {
 
   private Menu createDonationMenu() {
     MenuGroup donationMenu = new MenuGroup("모금함");
+    donationMenu.setMenuFilter(menuFilter);
 
     donationMenu.add(new MenuItem("전체 기부금 내역", "/donationRegister/totalMoney"));
     donationMenu.add(new MenuItem("전체 기부 참여내역", "/donationRegister/participation"));
@@ -817,6 +832,7 @@ public class ClientApp {
 
   private Menu createNoticeMenu() {
     MenuGroup noticeMenu = new MenuGroup("공지사항");
+    noticeMenu.setMenuFilter(menuFilter);
 
     noticeMenu.add(new MenuItem("공지사항 등록", ACCESS_ADMIN,"/adminNotice/add"));
     noticeMenu.add(new MenuItem("공지사항 목록","/adminNotice/list"));
@@ -830,6 +846,7 @@ public class ClientApp {
 
   private Menu createQuestionMenu() {
     MenuGroup question = new MenuGroup("문의하기");
+    question.setMenuFilter(menuFilter);
     question.add(new MenuItem("등록", ACCESS_MEMBER,"/question/add"));
     question.add(new MenuItem("목록", "/question/list"));
     question.add(new MenuItem("상세보기", ACCESS_MEMBER_ADMIN, "/question/detail"));
@@ -845,6 +862,7 @@ public class ClientApp {
 
   private Menu createMyProfileMenu() {
     MenuGroup myProfile = new MenuGroup("회원정보", ACCESS_MEMBER);
+    myProfile.setMenuFilter(menuFilter);
     myProfile.add(new MenuItem("내 정보", "/auth/displayUserInfo"));
     myProfile.add(new MenuItem("내 정보 수정", "/auth/changeUserInfo"));
 
@@ -853,6 +871,7 @@ public class ClientApp {
 
   private Menu createMyVolunteerMenu() {
     MenuGroup myVolunteer = new MenuGroup("나의 봉사");
+    myVolunteer.setMenuFilter(menuFilter);
 
     myVolunteer.add(new MenuItem("나의 봉사신청서 확인",ACCESS_PERSONAL,"/myVol/appliedDetail")); 
     myVolunteer.add(new MenuItem("나의 봉사신청서 확인",ACCESS_ORG,"/myVol/appliedDetail")); // 보완필요
@@ -871,6 +890,7 @@ public class ClientApp {
   private Menu createMyBoardMenu() {
 
     MenuGroup myBoard = new MenuGroup("나의 게시글"); // 구현예정
+    myBoard.setMenuFilter(menuFilter);
     myBoard.add(new MenuItem("나의게시글 목록","/myBoard/list"));
     myBoard.add(new MenuItem("나의게시글 상세보기","/myBoard/detail"));
     myBoard.add(new MenuItem("나의게시글 수정","/myBoard/update"));
@@ -881,6 +901,7 @@ public class ClientApp {
   private Menu createMyChallengeMenu() {
 
     MenuGroup myChallenge = new MenuGroup("나의 챌린지"); // 구현예정
+    myChallenge.setMenuFilter(menuFilter);
     myChallenge.add(new MenuItem("나의챌린지 목록","/myChallenge/list"));
     myChallenge.add(new MenuItem("나의챌린지 상세보기","/myChallenge/detail"));
     myChallenge.add(new MenuItem("나의챌린지 찜한목록","/myChallenge/wish"));
@@ -891,6 +912,7 @@ public class ClientApp {
 
   private Menu createMyDonationMenu() {
     MenuGroup myDonation = new MenuGroup("나의 모금함"); 
+    myDonation.setMenuFilter(menuFilter);
     myDonation.add(new MenuItem("나의 모금함 개설신청서 확인", ACCESS_ORG, "/myDonation//applyCompleteList")); 
     myDonation.add(new MenuItem("나의 기부내역", ACCESS_MEMBER, "/myDonation/registerlist"));
     myDonation.add(new MenuItem("승인된 모금함 개설내역",ACCESS_ORG,"/donationBoard/appliedList")); 
@@ -901,6 +923,7 @@ public class ClientApp {
 
   private Menu createMyPointMenu() {
     MenuGroup myPoint = new MenuGroup("나의 포인트"); // 구현예정
+    myPoint.setMenuFilter(menuFilter);
     myPoint.add(new MenuItem("나의포인트확인","myPoint/list"));
 
     return myPoint;
@@ -909,6 +932,7 @@ public class ClientApp {
 
   private Menu createOrgApprovewMenu() {
     MenuGroup orgpprove = new MenuGroup("기관 승인 신청");
+    orgpprove.setMenuFilter(menuFilter);
 
     orgpprove.add(new MenuItem("승인 요청하기","/orgMyVol/apply"));
     orgpprove.add(new MenuItem("승인 현황보기","/orgMyVol/approve"));
@@ -922,6 +946,7 @@ public class ClientApp {
 
   private Menu createAdminMemberMenu() {
     MenuGroup adminMemberMenu = new MenuGroup("회원정보 관리", ACCESS_ADMIN);
+    adminMemberMenu.setMenuFilter(menuFilter);
 
     adminMemberMenu.add(new MenuItem("회원목록",ACCESS_ADMIN, "/join/list"));
     adminMemberMenu.add(new MenuItem("가입회원 상세보기", ACCESS_ADMIN,"/join/detail"));
@@ -932,6 +957,7 @@ public class ClientApp {
 
   private Menu createAdminDonationMenu() {
     MenuGroup adminDonationMenu = new MenuGroup("모금함 관리" ,ACCESS_ADMIN);
+    adminDonationMenu.setMenuFilter(menuFilter);
 
     adminDonationMenu.add(new MenuItem("모금함 개설 신청내역 목록",ACCESS_ADMIN, "/donationBoard/applyList"));
     adminDonationMenu.add(new MenuItem("모금함 개설 신청내역 상세보기",ACCESS_ADMIN, "/adminDonationBoard/applyDetail"));
@@ -943,6 +969,7 @@ public class ClientApp {
 
   private Menu createAdminVolMenu() {
     MenuGroup adminVolMenu = new MenuGroup("봉사활동 관리", ACCESS_ADMIN);
+    adminVolMenu.setMenuFilter(menuFilter);
 
     adminVolMenu.add(new MenuItem("개인봉사신청내역",ACCESS_ADMIN,"/volPersonalRequest/applyList"));
     adminVolMenu.add(new MenuItem("기관봉사신청내역",ACCESS_ADMIN,"/volOrgRequest/applyList")); // 구현예정
@@ -957,6 +984,7 @@ public class ClientApp {
 
   private Menu createAdminNoticeMenu() {
     MenuGroup adminNoticeMenu = new MenuGroup("공지사항 관리", ACCESS_ADMIN);
+    adminNoticeMenu.setMenuFilter(menuFilter);
 
     adminNoticeMenu.add(new MenuItem("공지사항 등록",ACCESS_ADMIN,"/adminNotice/add"));
     adminNoticeMenu.add(new MenuItem("공지사항 목록",ACCESS_ADMIN,"/adminNotice/list"));
@@ -970,6 +998,7 @@ public class ClientApp {
 
   private Menu createAdminAskMenu() {
     MenuGroup adminAskInfo = new MenuGroup("문의사항 관리", ACCESS_ADMIN);
+    adminAskInfo.setMenuFilter(menuFilter);
 
     //    adminAskInfo.add(new MenuItem("문의사항 등록",ACCESS_ADMIN,"/question/add"));
     adminAskInfo.add(new MenuItem("문의사항 목록",ACCESS_ADMIN,"/question/list"));
@@ -984,6 +1013,7 @@ public class ClientApp {
 
   private Menu createAdminChallengeMenu() {
     MenuGroup adminChallengeInfo = new MenuGroup("챌린지 관리", ACCESS_ADMIN);
+    adminChallengeInfo.setMenuFilter(menuFilter);
 
     adminChallengeInfo.add(new MenuItem("챌린지 등록",ACCESS_ADMIN,"/adminChallenge/add"));
     adminChallengeInfo.add(new MenuItem("챌린지 목록",ACCESS_ADMIN,"/adminChallenge/list"));
@@ -997,6 +1027,7 @@ public class ClientApp {
 
   private Menu createAdminApproveInfoMenu() {
     MenuGroup adminApproveInfo = new MenuGroup("기관 승인", ACCESS_ADMIN);
+    adminApproveInfo.setMenuFilter(menuFilter);
 
     adminApproveInfo.add(new MenuItem("기관승인신청 목록",ACCESS_ADMIN,"/adminChallenge/list"));
     adminApproveInfo.add(new MenuItem("기관승인신청 내용",ACCESS_ADMIN,"/adminChallenge/detail"));
@@ -1007,11 +1038,13 @@ public class ClientApp {
   }
   private Menu createAdminCommMenu() {
     MenuGroup adminCommInfo = new MenuGroup("커뮤니티 관리", ACCESS_ADMIN);
+    adminCommInfo.setMenuFilter(menuFilter);
 
-    adminCommInfo.add(new MenuItem("등록", ACCESS_MEMBER_ADMIN, "/commReview/add"));
-    adminCommInfo.add(new MenuItem("수정", ACCESS_MEMBER_ADMIN, "/commReview/update")); 
-    adminCommInfo.add(new MenuItem("삭제", ACCESS_MEMBER_ADMIN, "/commReview/delete")); 
-    adminCommInfo.add(new MenuItem("검색",ACCESS_MEMBER_ADMIN,"/commReview/search"));
+    adminCommInfo.add(new MenuItem("나눔이야기 목록", ACCESS_MEMBER_ADMIN, "/commBoard/list"));
+    adminCommInfo.add(new MenuItem("나눔이야기", ACCESS_MEMBER_ADMIN, "/commBoard/detail")); 
+    adminCommInfo.add(new MenuItem("나눔이야기 Best 상세보기", ACCESS_MEMBER_ADMIN, "/commBest/detail")); 
+    adminCommInfo.add(new MenuItem("한줄후기 목록",ACCESS_MEMBER_ADMIN,"/commReview/list"));
+
 
     return adminCommInfo;
   }

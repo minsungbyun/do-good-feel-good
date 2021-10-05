@@ -1,12 +1,12 @@
 package com.share.ftp.table;
 
-import com.share.ftp.domain.join.JoinDTO;
+import java.util.ArrayList;
 import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.server.DataProcessor;
 import com.share.server.Request;
 import com.share.server.Response;
 
-public class CommBoardTable extends JsonDataTable<JoinDTO> implements DataProcessor {
+public class CommBoardTable extends JsonDataTable<CommBoardDTO> implements DataProcessor {
 
 
 
@@ -41,14 +41,34 @@ public class CommBoardTable extends JsonDataTable<JoinDTO> implements DataProces
     response.setValue(list);
   }
 
-  private void selectListByKeyword(Request request, Response response) {
-    // TODO Auto-generated method stub
+  private void selectListByKeyword(Request request, Response response) throws Exception {
+    String keyword = request.getParameter("keyword");
 
+    ArrayList<CommBoardDTO> searchResult = new ArrayList<>();
+    for (CommBoardDTO commBoardDTO : list) {
+      if (!commBoardDTO.getTitle().contains(keyword) &&
+          !commBoardDTO.getContent().contains(keyword)) {
+        continue;
+      }
+      searchResult.add(commBoardDTO);
+    }
+
+    response.setStatus(Response.SUCCESS);
+    response.setValue(searchResult);
   }
 
-  private void selectOne(Request request, Response response) {
-    // TODO Auto-generated method stub
 
+  private void selectOne(Request request, Response response) throws Exception {
+    int commNo = Integer.parseInt(request.getParameter("no"));
+    CommBoardDTO commBoardDTO = findByCommNo(commNo);
+
+    if (commBoardDTO != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(commBoardDTO);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
+    }
   }
 
   private void update(Request request, Response response) {
@@ -57,9 +77,16 @@ public class CommBoardTable extends JsonDataTable<JoinDTO> implements DataProces
   }
 
   private void delete(Request request, Response response) throws Exception {
-    CommBoardDTO commBoardDTO = request.getObject(CommBoardDTO.class);
+    int no = Integer.parseInt(request.getParameter("commNo"));
+    int index = indexOf(no);
 
-    list.remove(commBoardDTO);
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
+      return;
+    }
+
+    list.remove(index);
     response.setStatus(Response.SUCCESS);
   }
 
@@ -74,10 +101,27 @@ public class CommBoardTable extends JsonDataTable<JoinDTO> implements DataProces
 
   private int getLastNum() {
     if (list.size() > 0) {
-      return list.get(list.size() - 1).getNo() + 1;
+      return list.get(list.size() - 1).getCommNo() + 1;
     } else {
       return 1;
     }
+  }
+  private CommBoardDTO findByCommNo(int no) {
+    for (CommBoardDTO commBoardDTO : list) {
+      if (commBoardDTO.getCommNo() == no) {
+        return commBoardDTO;
+      }
+    }
+    return null;
+  }
+
+  private int indexOf(int commBoardNo) {
+    for (int i = 0; i < list.size(); i++) {
+      if (list.get(i).getCommNo() == commBoardNo) {
+        return i;
+      }
+    }
+    return -1;
   }
 
 }

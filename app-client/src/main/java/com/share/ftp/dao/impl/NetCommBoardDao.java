@@ -1,45 +1,105 @@
 package com.share.ftp.dao.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import com.share.ftp.dao.CommBoardDao;
 import com.share.ftp.domain.personal.CommBoardDTO;
+import com.share.request.RequestAgent;
 
 public class NetCommBoardDao implements CommBoardDao {
 
-  @Override
-  public void insert(CommBoardDTO commBoardDTO) throws Exception {
+  RequestAgent requestAgent;
 
+  public NetCommBoardDao(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
+  }
+
+  @Override
+  public void insert(CommBoardDTO addCommBoard) throws Exception {
+    requestAgent.request("commBoard.insert", addCommBoard);
+
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      System.out.println("[ 게시글 등록이 정상적으로 완료되었습니다! ]");
+
+    } else {
+      throw new Exception("게시글 등록 실패!");
+    }
   }
 
   @Override
   public List<CommBoardDTO> findAll() throws Exception {
-    return null;
+
+    requestAgent.request("commBoard.selectList", null);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("게시글 목록 조회 실패!");
+    }
+    return new ArrayList<>(requestAgent.getObjects(CommBoardDTO.class));
   }
 
   @Override
-  public List<CommBoardDTO> findByKeyword(String keyword) throws Exception {
-    return null;
+  public List<CommBoardDTO> findByKeyword(String commBoardkeyword) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("commBoardKeyword", commBoardkeyword);
+    requestAgent.request("commBoardNo.selectListByKeyword", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("게시글 검색 실패!");
+    }
+
+    return new ArrayList<>(requestAgent.getObjects(CommBoardDTO.class));
   }
 
   @Override
-  public CommBoardDTO findByNo(int no) throws Exception {
-    return null;
+  public CommBoardDTO findByCommNo(int commBoardNo) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("commBoardNo", String.valueOf(commBoardNo));
+
+    requestAgent.request("commBoardNo.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      return null;
+    }
+
+    return requestAgent.getObject(CommBoardDTO.class);
+  }
+
+
+  @Override
+  public void update(CommBoardDTO updateCommBoard) throws Exception {
+    requestAgent.request("commBoardNo.update", updateCommBoard);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("게시글 변경 실패!");
+    }
+
   }
 
   @Override
-  public void update(CommBoardDTO commBoardDTO) throws Exception {
+  public void delete(int deleteCommBoardNo) throws Exception {
 
-  }
+    HashMap<String,String> params = new HashMap<>();
+    params.put("deleteCommBoardNo", String.valueOf(deleteCommBoardNo));
 
-  @Override
-  public void delete(int no) throws Exception {
+    requestAgent.request("commBoard.delete", params);
 
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("게시글 삭제 실패!");
+    }
   }
 
   @Override
   public int getNextNum() throws Exception {
-    // TODO Auto-generated method stub
-    return 0;
-  }
 
+    requestAgent.request("commBoard.getNextNum", null);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("게시글 번호 부여 중 오류 발생!");
+    }
+    CommBoardDTO commBoardDTO = requestAgent.getObject(CommBoardDTO.class);
+
+
+    return commBoardDTO.getCommNo();
+  }
 }

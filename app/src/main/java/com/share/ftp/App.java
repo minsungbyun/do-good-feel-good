@@ -70,6 +70,7 @@ import com.share.ftp.handler.personal.challenge.ChallengeQuestionDeleteHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionSearchHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionUpdateHandler;
+import com.share.ftp.handler.personal.challenge.ChallengeRankingHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewAddHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewConnectHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewDeleteHandler;
@@ -80,7 +81,6 @@ import com.share.ftp.handler.personal.challenge.ChallengeWishHandler;
 import com.share.ftp.handler.personal.challenge.MyChallengeDetailHandler;
 import com.share.ftp.handler.personal.challenge.MyChallengeListHandler;
 import com.share.ftp.handler.personal.challenge.MyChallengeWishHandler;
-import com.share.ftp.handler.personal.challenge.ChallengeRankingHandler;
 import com.share.ftp.handler.personal.community.CommBestDetailHandler;
 import com.share.ftp.handler.personal.community.CommBestListHandler;
 import com.share.ftp.handler.personal.community.CommBoardAddHandler;
@@ -1004,10 +1004,11 @@ public class App {
   private Menu createAdminCommMenu() {
     MenuGroup adminCommInfo = new MenuGroup("커뮤니티 관리", ACCESS_ADMIN);
 
-    adminCommInfo.add(new MenuItem("등록", ACCESS_MEMBER_ADMIN, "/commReview/add"));
-    adminCommInfo.add(new MenuItem("수정", ACCESS_MEMBER_ADMIN, "/commReview/update")); 
-    adminCommInfo.add(new MenuItem("삭제", ACCESS_MEMBER_ADMIN, "/commReview/delete")); 
-    adminCommInfo.add(new MenuItem("검색",ACCESS_MEMBER_ADMIN,"/commReview/search"));
+    adminCommInfo.add(new MenuItem("나눔이야기 목록", ACCESS_MEMBER_ADMIN, "/commBoard/list"));
+    adminCommInfo.add(new MenuItem("나눔이야기", ACCESS_MEMBER_ADMIN, "/commBoard/detail")); 
+    adminCommInfo.add(new MenuItem("나눔이야기 Best 상세보기", ACCESS_MEMBER_ADMIN, "/commBest/detail")); 
+    adminCommInfo.add(new MenuItem("한줄후기 목록",ACCESS_MEMBER_ADMIN,"/commReview/list"));
+
 
     return adminCommInfo;
   }

@@ -1,24 +1,27 @@
 package com.share.ftp.handler.personal.community;
 
-import java.util.List;
+import java.util.Collection;
+import com.share.ftp.dao.CommBoardDao;
 import com.share.ftp.domain.personal.CommBoardDTO;
-import com.share.ftp.domain.personal.CommBoardReplyDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
-public class CommBoardSearchHandler extends AbstractCommBoardHandler {
+public class CommBoardSearchHandler implements Command {
 
-  public CommBoardSearchHandler(
-      List<CommBoardDTO> commBoardDTOList, 
-      List<CommBoardReplyDTO> commBoardReplyDTOList) {
-    super(commBoardDTOList, commBoardReplyDTOList);
+  CommBoardDao commBoardDao;
+
+  public CommBoardSearchHandler(CommBoardDao commBoardDao) {
+    this.commBoardDao =  commBoardDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     String input = Prompt.inputString("[  검색어를 입력하세요!  ");
 
-    for(CommBoardDTO commBoardDTO : commBoardDTOList) {
+    Collection<CommBoardDTO> CommBoardDTOList = commBoardDao.findByKeyword(input);
+
+    for(CommBoardDTO commBoardDTO : CommBoardDTOList) {
       if(!commBoardDTO.getTitle().contains(input) &&
           !commBoardDTO.getContent().contains(input)) {
         continue;

@@ -1,20 +1,22 @@
 package com.share.ftp.handler.personal.community;
 
 import java.util.List;
+import com.share.ftp.dao.CommBoardDao;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.personal.CommBoardDTO;
-import com.share.ftp.domain.personal.CommBoardReplyDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class CommBoardDetailHandler extends AbstractCommBoardHandler {
+public class CommBoardDetailHandler implements Command {
 
+  List<CommBoardDTO> commBoardDTOList;    
 
-  public CommBoardDetailHandler(
-      List<CommBoardDTO> commBoardDTOList, 
-      List<CommBoardReplyDTO> commBoardReplyDTOList) {
-    super(commBoardDTOList, commBoardReplyDTOList);
+  CommBoardDao commBoardDao;
+
+  public CommBoardDetailHandler(CommBoardDao commBoardDao) {
+    this.commBoardDao =  commBoardDao;
   }
 
   @Override
@@ -27,13 +29,12 @@ public class CommBoardDetailHandler extends AbstractCommBoardHandler {
 
       int commNo = Prompt.inputInt("게시글 번호를 입력해주세요 ▶ ");
 
-      CommBoardDTO commBoardDTO = findByNo(commNo);
+      CommBoardDTO commBoardDTO = commBoardDao.findByCommNo(commNo);
 
       if (commBoardDTO == null) {
         System.out.println("[  해당 게시글이 없습니다.  ]");
         return;
       }
-      request.setAttribute("commNo", commNo); 
 
       System.out.printf("아이디 ▶ %s\n", commBoardDTO.getOwner().getId());
       System.out.printf("번호 ▶ %s\n", commBoardDTO.getCommNo());
@@ -47,10 +48,12 @@ public class CommBoardDetailHandler extends AbstractCommBoardHandler {
       System.out.printf("댓글수  %d\n", commBoardDTO.getReplyCount());
       System.out.println();
 
+      request.setAttribute("commNo", commNo); 
+
       JoinDTO loginUser = AuthLoginHandler.getLoginUser(); 
 
       if (loginUser == null) {
-        //      System.out.println("로그인 해주세요.");
+        System.out.println("로그인 해주세요.");
         return;
       }
 
