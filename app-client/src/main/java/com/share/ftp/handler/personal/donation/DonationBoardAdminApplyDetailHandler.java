@@ -1,17 +1,24 @@
 package com.share.ftp.handler.personal.donation;
 
 import java.text.DecimalFormat;
-import java.util.List;
+import java.util.Collection;
+import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.domain.personal.DonationBoardDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
-public class DonationBoardAdminApplyDetailHandler extends AbstractDonationBoardHandler {
+public class DonationBoardAdminApplyDetailHandler implements Command {
+
+  DonationBoardDao donationBoardDao;
+  DonationAdminPrompt donationAdminPrompt;
 
   public DonationBoardAdminApplyDetailHandler(
-      List<DonationBoardDTO> donationBoardDTOList,
+      DonationBoardDao donationBoardDao,
       DonationAdminPrompt donationAdminPrompt) {
-    super(donationBoardDTOList, donationAdminPrompt);
+
+    this.donationBoardDao = donationBoardDao;
+    this.donationAdminPrompt = donationAdminPrompt;
   }
 
 
@@ -20,17 +27,17 @@ public class DonationBoardAdminApplyDetailHandler extends AbstractDonationBoardH
   public void execute(CommandRequest request) throws Exception {
     DecimalFormat formatter = new DecimalFormat("###,###,###");
 
+    Collection<DonationBoardDTO> donationBoardList = donationBoardDao.findAll();
 
     System.out.println();
     System.out.println("[모금함 개설 신청내역 상세보기]");
     System.out.println();
-    if (donationBoardDTOList.isEmpty()) {
+    if (donationBoardList.isEmpty()) {
       System.out.println("[ 현재 등록된 모금함 개설목록이 없습니다. ]");
       return;
     }
 
     DonationBoardDTO donationBoardAdminDTO = donationAdminPrompt.promptDonation();
-
 
     if (donationBoardAdminDTO == null) {
       System.out.println();

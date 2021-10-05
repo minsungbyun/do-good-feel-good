@@ -4,6 +4,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 import com.share.ftp.table.ChallengeTable;
+import com.share.ftp.table.DonationBoardTable;
+import com.share.ftp.table.DonationRegisterTable;
 import com.share.ftp.table.JoinTable;
 import com.share.ftp.table.QuestionTable;
 import com.share.server.DataProcessor;
@@ -28,12 +30,17 @@ public class ServerApp {
     dataProcessorMap.put("question.", new QuestionTable());
 
     dataProcessorMap.put("challenge.", new ChallengeTable());
+    dataProcessorMap.put("donationBoard.", new DonationBoardTable());
+    dataProcessorMap.put("donationRegister.", new DonationRegisterTable());
 
+<<<<<<< HEAD
     //    dataProcessorMap.put("board.", new BoardTable());
     //    dataProcessorMap.put("member.", new MemberTable());
     //    dataProcessorMap.put("project.", new ProjectTable());
     //      dataProcessorMap.put("member.", new MemberTable());
     //      dataProcessorMap.put("project.", new ProjectTable());
+=======
+>>>>>>> 2577884e828543338d4c2fc2c4a00eea4628bf5b
 
     while (true) {
       Socket socket = serverSocket.accept();

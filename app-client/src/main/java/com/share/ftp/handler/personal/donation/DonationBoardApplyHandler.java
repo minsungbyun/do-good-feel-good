@@ -8,24 +8,20 @@ import static com.share.util.General.type.ENVIRONMENT;
 import static com.share.util.General.type.HANDICAPPED;
 import static com.share.util.General.type.OTHER;
 import static com.share.util.General.type.TEEN;
-import java.util.List;
+import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.personal.DonationBoardDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class DonationBoardApplyHandler extends AbstractDonationBoardHandler {
+public class DonationBoardApplyHandler implements Command {
 
-  List<JoinDTO> joinDTOList;
+  DonationBoardDao donationBoardDao;
 
-  public DonationBoardApplyHandler(
-      List<DonationBoardDTO> donationBoardDTOList,
-      List<JoinDTO> joinDTOList) {
-
-    super(donationBoardDTOList);
-    this.joinDTOList = joinDTOList;
-
+  public DonationBoardApplyHandler(DonationBoardDao donationBoardDao) {
+    this.donationBoardDao = donationBoardDao;
   }
 
   // 모금함 개설 신청(기관)
@@ -72,29 +68,6 @@ public class DonationBoardApplyHandler extends AbstractDonationBoardHandler {
           default: System.out.println(" [ 양식에 있는 번호를 입력해주세요. ] "); continue;
         }
 
-        //        if (input == 0) {
-        //          System.out.println("모금함 개설 신청을 취소하셨습니다.");
-        //          return;
-        //        } else if (input == 1) {
-        //          donationBoardDTO.setSort(CHILDREN);
-        //        } else if (input == 2) {
-        //          donationBoardDTO.setSort(TEEN);
-        //        } else if (input == 3) {
-        //          donationBoardDTO.setSort(ELDER);
-        //        } else if (input == 4) {
-        //          donationBoardDTO.setSort(HANDICAPPED);
-        //        } else if (input == 5) {
-        //          donationBoardDTO.setSort(ANIMAL);
-        //        } else if (input == 6) {
-        //          donationBoardDTO.setSort(ENVIRONMENT);
-        //        } else if (input == 7) {
-        //          donationBoardDTO.setSort(OTHER);
-        //        } else {
-        //          System.out.println(" [ 양식에 있는 번호를 입력해주세요. ] ");
-        //          return;
-        //        }
-
-
         System.out.println();
         donationBoardDTO.setTitle(Prompt.inputString("제목 ▶"));
         donationBoardDTO.setLeader(AuthLoginHandler.getLoginUser().getName());
@@ -117,11 +90,13 @@ public class DonationBoardApplyHandler extends AbstractDonationBoardHandler {
 
 
         donationBoardDTO.setIsSigned(Waiting);
-        donationBoardDTO.setNo(getNextNum());
+
+        donationBoardDTO.setNo(donationBoardDao.getNextNum());
         //        donationBoardDTO.addMembers(AuthLoginHandler.getLoginUser());
 
 
-        donationBoardDTOList.add(donationBoardDTO);
+
+        donationBoardDao.insert(donationBoardDTO);
 
       } catch (NumberFormatException e) {
         System.out.println("--------------------------------------------------------------");
@@ -142,14 +117,6 @@ public class DonationBoardApplyHandler extends AbstractDonationBoardHandler {
     System.out.println();
     System.out.println("[ 모금함 개설신청이 완료되었습니다. ]");
 
-  }
-
-  private int getNextNum() {
-    if (donationBoardDTOList.size() > 0) {
-      return donationBoardDTOList.get(donationBoardDTOList.size() - 1).getNo() + 1;
-    } else {
-      return 1;
-    }
   }
 }
 

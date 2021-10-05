@@ -1,18 +1,19 @@
 package com.share.ftp.handler.personal.donation;
 
-import java.util.List;
+import java.util.Collection;
+import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 
-public class DonationRegisterMyListHandler extends AbstractDonationRegisterHandler { // 모금함 기부하기 양식 쓰는곳
+public class DonationRegisterMyListHandler implements Command { // 모금함 기부하기 양식 쓰는곳
 
-  List<DonationRegisterDTO> donationMyRegisterDTOList;
+  DonationRegisterDao donationRegisterDao;
 
 
-  public DonationRegisterMyListHandler(List<DonationRegisterDTO> donationRegisterDTOList, List<DonationRegisterDTO> donationMyRegisterDTOList) {
-    super(donationRegisterDTOList);
-    this.donationMyRegisterDTOList = donationMyRegisterDTOList;
+  public DonationRegisterMyListHandler(DonationRegisterDao donationRegisterDao) {
+    this.donationRegisterDao = donationRegisterDao;
   }
 
 
@@ -27,8 +28,9 @@ public class DonationRegisterMyListHandler extends AbstractDonationRegisterHandl
       System.out.println("[ 나의 기부 내역이 없습니다. ]");
     }
 
+    Collection<DonationRegisterDTO> donationRegisterList = donationRegisterDao.findAll();
 
-    for (DonationRegisterDTO donationRegisterDTO : donationRegisterDTOList) {
+    for (DonationRegisterDTO donationRegisterDTO : donationRegisterList) {
 
       if (AuthLoginHandler.getLoginUser().getName().equals(donationRegisterDTO.getName())) {
         System.out.printf("[기부 분류: %s] [기부 금액: %s원]\n", 

@@ -8,26 +8,25 @@ import static com.share.util.General.type.HANDICAPPED;
 import static com.share.util.General.type.OTHER;
 import static com.share.util.General.type.TEEN;
 import java.sql.Date;
-import java.util.List;
+import java.util.Collection;
+import com.share.ftp.dao.DonationBoardDao;
+import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class DonationRegisterAddHandler extends AbstractDonationRegisterHandler { // 모금함 기부하기 양식 쓰는곳
+public class DonationRegisterAddHandler implements Command { // 모금함 기부하기 양식 쓰는곳
 
-  List<JoinDTO> joinDTOList;
-  List<DonationBoardDTO> donationBoardDTOList;
+  DonationRegisterDao donationRegisterDao;
+  DonationBoardDao donationBoardDao;
 
-  public DonationRegisterAddHandler(
-      List<DonationRegisterDTO> donationRegisterDTOList,
-      List<JoinDTO> joinDTOList,
-      List<DonationBoardDTO> donationBoardDTOList) {
-    super(donationRegisterDTOList);
-    this.joinDTOList = joinDTOList;
-    this.donationBoardDTOList = donationBoardDTOList;
+  public DonationRegisterAddHandler(DonationRegisterDao donationRegisterDao, DonationBoardDao donationBoardDao) {
+    this.donationRegisterDao = donationRegisterDao;
+    this.donationBoardDao = donationBoardDao;
   }
 
   // 모금함 기부하기
@@ -102,7 +101,9 @@ public class DonationRegisterAddHandler extends AbstractDonationRegisterHandler 
         //        return;
         //      }
 
-        for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
+        Collection<DonationBoardDTO> donationBoardList = donationBoardDao.findAll();
+
+        for (DonationBoardDTO donationBoardDTO : donationBoardList) {
           if (input == donationBoardDTO.getNo()) {
             donationRegister.setNo(donationBoardDTO.getNo());
           } else {
@@ -126,7 +127,7 @@ public class DonationRegisterAddHandler extends AbstractDonationRegisterHandler 
         AuthLoginHandler.getLoginUser().setDonationMoney(myDonationMoney);
 
         DonationRegisterDTO.totalDonationMoney += donationRegister.getDonationMoney();
-        donationRegisterDTOList.add(donationRegister);
+        donationRegisterDao.insert(donationRegister);
 
 
       } catch (NumberFormatException e) {

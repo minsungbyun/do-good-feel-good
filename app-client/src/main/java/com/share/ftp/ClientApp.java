@@ -11,9 +11,14 @@ import java.util.HashMap;
 import java.util.List;
 import com.share.context.ApplicationContextListener;
 import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeQuestionDao;
+import com.share.ftp.dao.DonationBoardDao;
+import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.dao.JoinDao;
 import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.dao.impl.NetChallengeDao;
+import com.share.ftp.dao.impl.NetDonationBoardDao;
+import com.share.ftp.dao.impl.NetDonationRegisterDao;
 import com.share.ftp.dao.impl.NetJoinDao;
 import com.share.ftp.dao.impl.NetQuestionDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
@@ -338,20 +343,24 @@ public class ClientApp {
 
 
   // 모금함 개설 승인된 목록 Handler
-  DonationBoardAppliedListHandler donationBoardAppliedListHandler =
-      new DonationBoardAppliedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList);
-
-  DonationPrompt donationPrompt = new DonationPrompt(donationBoardDTOList, donationRegisterDTOList);
-  DonationAdminPrompt donationAdminPrompt = new DonationAdminPrompt(donationBoardDTOList, donationRegisterDTOList);
+  //  DonationBoardAppliedListHandler donationBoardAppliedListHandler =
+  //      new DonationBoardAppliedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList);
+  //
+  //  DonationPrompt donationPrompt = new DonationPrompt(donationBoardDTOList, donationRegisterDTOList);
+  //  DonationAdminPrompt donationAdminPrompt = new DonationAdminPrompt(donationBoardDTOList, donationRegisterDTOList);
 
 
   public ClientApp() throws Exception {
 
-    requestAgent = new RequestAgent("127.0.0.1", 8888);
+    requestAgent = new RequestAgent("192.168.0.76", 8888);
 
     JoinDao netJoinDao = new NetJoinDao(requestAgent);
     ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
+<<<<<<< HEAD
     QuestionDao questionDao = new NetQuestionDao(requestAgent);
+=======
+    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
+>>>>>>> 2577884e828543338d4c2fc2c4a00eea4628bf5b
 
 
     //로그인, 로그아웃
@@ -438,7 +447,7 @@ public class ClientApp {
     //    commands.put("/challengeReview/connect", new ChallengeReviewConnectHandler(challengeReviewDTOList, challengeDTOList));
 
     // 챌린지 문의하기
-    commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
+    commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(netChallengeQuestionDao));
     commands.put("/challengeQuestion/list", new ChallengeQuestionListHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
     //    commands.put("/challengeQuestion/detail", new ChallengeQuestionDetailHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
     commands.put("/challengeQuestion/update", new ChallengeQuestionUpdateHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
@@ -451,23 +460,31 @@ public class ClientApp {
     commands.put("/myRanking/list", new MyRankingHandler(joinDTOList)); //나의랭킹(구현예정)
 
     // 모금함 (개설신청하기, 개설목록, 승인, 반려)
-    commands.put("/donationBoard/list", new DonationBoardListHandler(donationBoardDTOList));
-    commands.put("/donationBoard/apply", new DonationBoardApplyHandler(donationBoardDTOList, joinDTOList));
-    commands.put("/donationBoard/applyList", new DonationBoardApplyListHandler(donationBoardDTOList));
-    commands.put("/donationBoard/appliedList", new DonationBoardAppliedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
-    commands.put("/donationBoard/acceptApply", new DonationBoardAcceptApplyHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
-    commands.put("/donationBoard/rejectApply", new DonationBoardRejectApplyHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
-    commands.put("/donationBoard/rejectedList", new DonationBoardRejectedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
-    commands.put("/donationBoard/applyDetail", new DonationBoardApplyDetailHandler(donationBoardDTOList, donationRegisterDTOList, donationPrompt));
-    commands.put("/adminDonationBoard/applyDetail", new DonationBoardAdminApplyDetailHandler(donationBoardDTOList, donationAdminPrompt));
+
+    DonationBoardDao donationBoardDao = new NetDonationBoardDao(requestAgent);
+
+    DonationPrompt donationPrompt = new DonationPrompt(donationBoardDao);
+    DonationAdminPrompt donationAdminPrompt = new DonationAdminPrompt(donationBoardDao);
+
+    DonationRegisterDao donationRegisterDao = new NetDonationRegisterDao(requestAgent);
+
+    commands.put("/donationBoard/list", new DonationBoardListHandler(donationBoardDao));
+    commands.put("/donationBoard/apply", new DonationBoardApplyHandler(donationBoardDao));
+    commands.put("/donationBoard/applyList", new DonationBoardApplyListHandler(donationBoardDao));
+    commands.put("/donationBoard/appliedList", new DonationBoardAppliedListHandler(donationBoardDao));
+    commands.put("/donationBoard/acceptApply", new DonationBoardAcceptApplyHandler(donationBoardDao));
+    commands.put("/donationBoard/rejectApply", new DonationBoardRejectApplyHandler(donationBoardDao));
+    commands.put("/donationBoard/rejectedList", new DonationBoardRejectedListHandler(donationBoardDao));
+    commands.put("/donationBoard/applyDetail", new DonationBoardApplyDetailHandler(donationBoardDao, donationPrompt));
+    commands.put("/adminDonationBoard/applyDetail", new DonationBoardAdminApplyDetailHandler(donationBoardDao, donationAdminPrompt));
 
     // 모금함 (기부하기)
-    commands.put("/donationRegister/add", new DonationRegisterAddHandler(donationRegisterDTOList, joinDTOList, donationBoardDTOList));
-    commands.put("/donationRegister/participation", new DonationRegisterParticipationHandler(donationRegisterDTOList));
-    commands.put("/donationRegister/totalMoney", new DonationRegisterTotalMoneyHandler(donationRegisterDTOList));
+    commands.put("/donationRegister/add", new DonationRegisterAddHandler(donationRegisterDao, donationBoardDao));
+    commands.put("/donationRegister/participation", new DonationRegisterParticipationHandler(donationRegisterDao));
+    commands.put("/donationRegister/totalMoney", new DonationRegisterTotalMoneyHandler(donationRegisterDao));
 
-    commands.put("/donationBoardRegister/list", new DonationBoardRegisterListHandler(donationRegisterDTOList));
-    commands.put("/donationBoardDetailRegister/add", new DonationBoardDetailRegisterAddHandler(donationRegisterDTOList, joinDTOList, donationBoardDTOList));
+    commands.put("/donationBoardRegister/list", new DonationBoardRegisterListHandler(donationRegisterDao));
+    commands.put("/donationBoardDetailRegister/add", new DonationBoardDetailRegisterAddHandler(donationBoardDao, donationRegisterDao));
 
     // 고객센터 문의사항
     commands.put("/question/add", new QuestionAddHandler(questionDao));
@@ -503,8 +520,8 @@ public class ClientApp {
     commands.put("/orgMyVol/apply", new MyVolApplyListHandler()); // 기관 마이페이지 승인신청 
     commands.put("/orgMyVol/approve", new MyVolApproveListHandler()); // 기관 마이페이지 승인조회
     commands.put("/myDonation/list", new MyDonationHandler()); // 모금함
-    commands.put("/myDonation/registerlist", new DonationRegisterMyListHandler(donationRegisterDTOList, donationMyRegisterDTOList)); // 모금함
-    commands.put("/myDonation//applyCompleteList", new DonationBoardApplyCompleteListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList));
+    commands.put("/myDonation/registerlist", new DonationRegisterMyListHandler(donationRegisterDao)); // 모금함
+    commands.put("/myDonation//applyCompleteList", new DonationBoardApplyCompleteListHandler(donationBoardDao));
 
     // 관리자
 
