@@ -1,23 +1,25 @@
 package com.share.ftp.handler.admin;
 
-import java.util.List;
+import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
-public class AdminChallengeDeleteHandler extends AbstractAdminChallengeHandler {
+public class AdminChallengeDeleteHandler implements Command {
 
+  ChallengeDao challengeDao;
 
-  public AdminChallengeDeleteHandler(List<ChallengeDTO> challengeDTOList) {
-    super(challengeDTOList);
+  public AdminChallengeDeleteHandler(ChallengeDao challengeDao) {
+    this.challengeDao = challengeDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[ 챌린지 삭제 ]");
-    int no = (int) request.getAttribute("challengeNo"); 
+    int challengeNo = (int) request.getAttribute("challengeNo"); 
 
-    ChallengeDTO challengeDTO = findByNo(no);
+    ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
 
 
     if (challengeDTO == null) {
@@ -31,9 +33,9 @@ public class AdminChallengeDeleteHandler extends AbstractAdminChallengeHandler {
       return;
     }
 
-    challengeDTOList.remove(challengeDTO);
+    challengeDao.delete(challengeDTO);
     System.out.println();
 
-    System.out.println("챌린지를 삭제하였습니다.");
+    System.out.println("[  챌린지를 삭제하였습니다. ]");
   }
 }

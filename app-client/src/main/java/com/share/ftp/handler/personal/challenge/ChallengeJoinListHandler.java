@@ -1,6 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
-import java.util.List;
+import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 //import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
@@ -8,15 +8,10 @@ import com.share.ftp.handler.CommandRequest;
 
 public class ChallengeJoinListHandler implements Command {
 
+  ChallengeDao challengeDao;
 
-  List<ChallengeDTO> challengeDTOList;
-  ChallengeJoinHandler challengeJoinHandler;
-
-  public ChallengeJoinListHandler(List<ChallengeDTO> challengeDTOList,
-      ChallengeJoinHandler challengeJoinHandler) {
-
-    this.challengeDTOList = challengeDTOList;
-    this.challengeJoinHandler = challengeJoinHandler;
+  public ChallengeJoinListHandler(ChallengeDao challengeDao) {
+    this.challengeDao = challengeDao;
   }
 
   @Override
@@ -25,10 +20,10 @@ public class ChallengeJoinListHandler implements Command {
     System.out.println("[ 챌린지 참여자 목록 ]");
     System.out.println();
 
-    int no = (int) request.getAttribute("challengeNo");
+    int challengeNo = (int) request.getAttribute("challengeNo");
     System.out.println();
 
-    ChallengeDTO challengeJoinList = findByNo(no); 
+    ChallengeDTO challengeJoinList = challengeDao.findByChallengeNo(challengeNo); 
 
     if (challengeJoinList == null) {
       System.out.println("해당 챌린지가 없습니다.");
@@ -44,14 +39,5 @@ public class ChallengeJoinListHandler implements Command {
         challengeJoinList.getTitle(),
         challengeJoinList.getTotalJoinCount(),
         challengeJoinList.getMemberNames());
-  }
-
-  private ChallengeDTO findByNo(int no) {
-    for (ChallengeDTO challengeJoinList : challengeDTOList) {
-      if (challengeJoinList.getNo() == no) {
-        return challengeJoinList;
-      }
-    }
-    return null;
   }
 }

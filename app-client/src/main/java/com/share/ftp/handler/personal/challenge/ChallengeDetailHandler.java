@@ -1,16 +1,17 @@
 package com.share.ftp.handler.personal.challenge;
 
-import java.util.List;
+import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
-import com.share.ftp.handler.admin.AbstractAdminChallengeHandler;
 import com.share.util.Prompt;
 
-public class ChallengeDetailHandler extends AbstractAdminChallengeHandler {
+public class ChallengeDetailHandler implements Command {
 
+  ChallengeDao challengeDao;
 
-  public ChallengeDetailHandler(List<ChallengeDTO> challengeDTOList) {
-    super(challengeDTOList);
+  public ChallengeDetailHandler(ChallengeDao challengeDao) {
+    this.challengeDao = challengeDao;
   }
 
   @Override
@@ -21,7 +22,7 @@ public class ChallengeDetailHandler extends AbstractAdminChallengeHandler {
     System.out.println();
     int challengeNo = Prompt.inputInt("챌린지 번호를 입력해주세요 ▶ ");
 
-    ChallengeDTO challengeDTO = findByNo(challengeNo);
+    ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
 
     if (challengeDTO == null) {
       System.out.println("해당 번호의 챌린지가 없습니다.");
@@ -45,7 +46,7 @@ public class ChallengeDetailHandler extends AbstractAdminChallengeHandler {
     System.out.printf("시작일 ▶ %s\n", challengeDTO.getStartDate());
     System.out.printf("종료일 ▶ %s\n", challengeDTO.getEndDate());
     //    System.out.printf("남은일수 ▶ %d일 남았습니다.\n",   ((((challengeDTO.getEndDate().getTime() - System.currentTimeMillis()) / 1000)) / (24*60*60)));
-    System.out.printf(getRemainTime(challengeDTO.getEndDate().getTime() - System.currentTimeMillis()));
+    System.out.printf(challengeDao.getRemainTime(challengeDTO.getEndDate().getTime() - System.currentTimeMillis()));
     System.out.printf("챌린지기간 ▶ %d일\n",  ((((challengeDTO.getEndDate().getTime() - challengeDTO.getStartDate().getTime()) / 1000)) / (24*60*60)));
     System.out.println();
 
