@@ -1,7 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
 import com.share.ftp.dao.ChallengeDao;
-import com.share.ftp.dao.ChallengeJoinDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 //import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
@@ -9,13 +8,9 @@ import com.share.ftp.handler.CommandRequest;
 
 public class ChallengeJoinListHandler implements Command {
 
-  ChallengeJoinDao challengeJoinDao;
   ChallengeDao challengeDao;
 
-  public ChallengeJoinListHandler(ChallengeJoinDao challengeJoinDao,
-      ChallengeDao challengeDao) {
-
-    this.challengeJoinDao = challengeJoinDao;
+  public ChallengeJoinListHandler(ChallengeDao challengeDao) {
     this.challengeDao = challengeDao;
   }
 

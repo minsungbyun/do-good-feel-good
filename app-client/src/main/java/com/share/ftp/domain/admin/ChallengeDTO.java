@@ -238,4 +238,6 @@ public class ChallengeDTO implements Serializable{
     this.isChecked = isChecked;
   }
 
+
+
 }

@@ -8,7 +8,7 @@ public interface ChallengeQuestionDao {
 
   // 챌린지 문의사항 관련
   void insert(ChallengeQuestionDTO addChallengeQuestion) throws Exception;
-  List<ChallengeQuestionDTO> findAll() throws Exception;      
+  List<ChallengeQuestionDTO> findAllQuestion() throws Exception;      
   void update(ChallengeDTO updateChallengeQuestion) throws Exception;          
   void delete(int deleteChallengeQuestionNo) throws Exception; 
   void delete(ChallengeQuestionDTO challengeQuestion) throws Exception; 

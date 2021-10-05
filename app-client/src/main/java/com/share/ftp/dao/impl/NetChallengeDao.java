@@ -55,11 +55,8 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
   }
 
   @Override
-  public void delete(int deleteChallengeNo) throws Exception {
-    HashMap<String,String> params = new HashMap<>();
-    params.put("deleteChallengeNo", String.valueOf(deleteChallengeNo));
-
-    requestAgent.request("challenge.delete", params);
+  public void delete(ChallengeDTO deleteChallenge) throws Exception {
+    requestAgent.request("challenge.delete", deleteChallenge);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("챌린지 삭제 실패!");
@@ -96,30 +93,30 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
   }
 
   @Override
-  public String getRemainTime(long millis) throws Exception {
-    HashMap<String,String> params = new HashMap<>();
-    params.put("getRemainTime", String.valueOf(millis));
+  public String getRemainTime(long millis) {
 
-    requestAgent.request("challenge.getRemainTime", params);
+    long sec =  millis / 1000;
+    long min = sec / 60;
+    long hour = min / 60;
+    long day = (millis / 1000) / (24 * 60 * 60);
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      return null;
-    }
-    ChallengeDTO challengeDTO = requestAgent.getObject(ChallengeDTO.class);
+    hour = hour % 24; 
+    sec = sec % 60;
+    min = min % 60;
 
-    return challengeDTO.getRemainTime();
+    return String.format("남은시간 ▶ %d일 %d시간 %d분 %d초 남았습니다\n", day, hour, min, sec);
   }
 
   @Override
   public void insert(ChallengeQuestionDTO addChallengeQuestion) throws Exception {
     // TODO Auto-generated method stub
-    
+
   }
 
   @Override
   public void delete(ChallengeQuestionDTO challengeQuestion) throws Exception {
     // TODO Auto-generated method stub
-    
+
   }
 
   @Override
@@ -151,19 +148,19 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
   @Override
   public void insertAdmin(int index, ChallengeQuestionDTO challengeQuestionDTO) throws Exception {
     // TODO Auto-generated method stub
-    
+
   }
 
   @Override
   public void sortChallengeQuestion() throws Exception {
     // TODO Auto-generated method stub
-    
+
   }
 
   @Override
   public void insert(ChallengeReviewDTO addChallengeReview) throws Exception {
     // TODO Auto-generated method stub
-    
+
   }
 
   @Override
@@ -184,6 +181,27 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
     // TODO Auto-generated method stub
     return false;
   }
+
+  @Override
+  public List<ChallengeQuestionDTO> findAllQuestion() throws Exception {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public List<ChallengeReviewDTO> findAllReview() throws Exception {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public void delete(int deleteChallengeReviewNo) throws Exception {
+    // TODO Auto-generated method stub
+
+  }
+
+
+
 
 
 
