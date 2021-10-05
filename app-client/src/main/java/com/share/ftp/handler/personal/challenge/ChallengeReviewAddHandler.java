@@ -2,19 +2,24 @@ package com.share.ftp.handler.personal.challenge;
 
 import static com.share.util.General.point.CHALLENGE_REVIEWPOINT;
 import java.sql.Date;
-import java.util.List;
+import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
+public class ChallengeReviewAddHandler implements Command {
 
+  ChallengeReviewDao challengeReviewDao;
+  ChallengeDao challengeDao;
 
-  public ChallengeReviewAddHandler(List<ChallengeReviewDTO> challengeReviewDTOList,
-      List<ChallengeDTO> challengeDTOList) {
-    super(challengeReviewDTOList, challengeDTOList);
+  public ChallengeReviewAddHandler(ChallengeReviewDao challengeReviewDao,
+      ChallengeDao challengeDao) {
+    this.challengeReviewDao = challengeReviewDao;
+    this.challengeDao = challengeDao;
   }
 
   @Override
@@ -25,7 +30,7 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
     System.out.println();
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
+    ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
 
 
     if (challengeDTO == null) {
@@ -83,7 +88,7 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
       challengeDTO.setReviewCount(1);
       //      System.out.println("각 챌린지의 첫 댓글입니다");
     } else {
-      challengeDTO.setReviewCount(getNextReviewNum(challengeDTO));
+      challengeDTO.setReviewCount(challengeReviewDao.getNextReviewNum(challengeDTO));
       //      challengeReviewDTO.setReviewNo(getNextNum2()); // 해당 챌린지 리뷰의 마지막 번호기억 + 1
       //      System.out.println("현재 댓글의 번호는? (challengeReviewDTO.getReviewNo()) " + challengeReviewDTO.getReviewNo());
       //      System.out.println("현재 댓글의 번호는? (challengeDTO.getReviewCount()) " + challengeDTO.getReviewCount());
@@ -110,7 +115,7 @@ public class ChallengeReviewAddHandler extends AbstractChallengeReviewHandler {
         // 리뷰어 등록
         challengeDTO.addReviewer(AuthLoginHandler.getLoginUser());
 
-        challengeReviewDTOList.add(challengeReviewDTO);
+        challengeReviewDao.insert(challengeReviewDTO);
         //    System.out.println("총 댓글 개수 = " + challengeReviewDTOList.size());
 
         System.out.println();
