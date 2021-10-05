@@ -1,16 +1,21 @@
 package com.share.ftp.handler.personal.challenge;
 
-import java.util.List;
-import com.share.ftp.domain.admin.ChallengeDTO;
+import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
-public class ChallengeReviewListHandler extends AbstractChallengeReviewHandler {
+public class ChallengeReviewListHandler implements Command {
 
-  public ChallengeReviewListHandler(List<ChallengeReviewDTO> challengeReviewDTOList,
-      List<ChallengeDTO> challengeDTOList) {
-    super(challengeReviewDTOList, challengeDTOList);
+  ChallengeReviewDao challengeReviewDao;
+  ChallengeDao challengeDao;
+
+  public ChallengeReviewListHandler(ChallengeReviewDao challengeReviewDao,
+      ChallengeDao challengeDao) {
+    this.challengeReviewDao = challengeReviewDao;
+    this.challengeDao = challengeDao;
   }
 
   @Override
@@ -21,11 +26,11 @@ public class ChallengeReviewListHandler extends AbstractChallengeReviewHandler {
 
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    if (challengeReviewDTOList.isEmpty()) {
+    if (challengeReviewDao.isEmpty()) {
       System.out.println("참여인증&댓글이 없습니다.");
     }
 
-    for (ChallengeReviewDTO challengeReviewDTO : challengeReviewDTOList) {
+    for (ChallengeReviewDTO challengeReviewDTO : challengeReviewDao.findAllReview()) {
       if (challengeReviewDTO.getNo() == challengeNo) {
         System.out.printf("%d, %d, %s, %s, %s, %s\n", 
             challengeReviewDTO.getNo(),

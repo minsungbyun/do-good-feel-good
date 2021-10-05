@@ -75,10 +75,7 @@ import com.share.ftp.handler.personal.challenge.ChallengeQuestionListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionSearchHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionUpdateHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeRankingHandler;
-import com.share.ftp.handler.personal.challenge.ChallengeReviewAddHandler;
-import com.share.ftp.handler.personal.challenge.ChallengeReviewConnectHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewDeleteHandler;
-import com.share.ftp.handler.personal.challenge.ChallengeReviewListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewSearchHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewUpdateHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeWishHandler;
@@ -434,12 +431,12 @@ public class ClientApp {
     commands.put("/challengeDetail/wish", new ChallengeWishHandler(challengeDTOList));  // 관심 챌린지 등록(찜하기)
 
     // 챌린지 참여인증&댓글
-    commands.put("/challengeReview/add", new ChallengeReviewAddHandler(challengeReviewDTOList, challengeDTOList));
-    commands.put("/challengeReview/list", new ChallengeReviewListHandler(challengeReviewDTOList, challengeDTOList));
+    //    commands.put("/challengeReview/add", new ChallengeReviewAddHandler(netChallengeDao));
+    //    commands.put("/challengeReview/list", new ChallengeReviewListHandler(challengeReviewDTOList, challengeDTOList));
     commands.put("/challengeReview/update", new ChallengeReviewUpdateHandler(challengeReviewDTOList, challengeDTOList));
     commands.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(challengeReviewDTOList, challengeDTOList));
     commands.put("/challengeReview/search", new ChallengeReviewSearchHandler(challengeReviewDTOList, challengeDTOList));
-    commands.put("/challengeReview/connect", new ChallengeReviewConnectHandler(challengeReviewDTOList, challengeDTOList));
+    //    commands.put("/challengeReview/connect", new ChallengeReviewConnectHandler(challengeReviewDTOList, challengeDTOList));
 
     // 챌린지 문의하기
     commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
@@ -546,8 +543,8 @@ public class ClientApp {
 
     // 관리자 기관승인
 
-    challengeReviewMap.put("/challengeReview/add", new ChallengeReviewAddHandler(challengeReviewDTOList, challengeDTOList));
-    challengeReviewMap.put("/challengeReview/list", new ChallengeReviewListHandler(challengeReviewDTOList, challengeDTOList));
+    //    challengeReviewMap.put("/challengeReview/add", new ChallengeReviewAddHandler(netChallengeDao, challengeDTOList));
+    //    challengeReviewMap.put("/challengeReview/list", new ChallengeReviewListHandler(challengeReviewDTOList, challengeDTOList));
     //    challengeReviewMap.put("/challengeReview/detail", new ChallengeReviewDetailHandler(myChallengeReviewDTOList));
     challengeReviewMap.put("/challengeReview/update", new ChallengeReviewUpdateHandler(challengeReviewDTOList, challengeDTOList));
     challengeReviewMap.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(challengeReviewDTOList, challengeDTOList));
