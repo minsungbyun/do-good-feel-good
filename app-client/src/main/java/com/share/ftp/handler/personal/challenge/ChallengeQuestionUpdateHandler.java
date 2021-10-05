@@ -20,7 +20,7 @@ public class ChallengeQuestionUpdateHandler extends AbstractChallengeQuestionHan
     while (true) {
       System.out.println("[ 문의 수정 ]");
       System.out.println();
-      int challengeNo = (int) request.getAttribute("no");
+      int challengeNo = (int) request.getAttribute("challengeNo");
 
       ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
 
@@ -29,9 +29,9 @@ public class ChallengeQuestionUpdateHandler extends AbstractChallengeQuestionHan
         System.out.println("존재하지 않는 챌린지입니다");
       }
 
-      int updateNo = (int) request.getAttribute("questionNo");
+      int questionNo = (int) request.getAttribute("questionNo");
 
-      ChallengeQuestionDTO challengeQuestion = findByQuestionNo(updateNo);
+      ChallengeQuestionDTO challengeQuestion = findByQuestionNo(questionNo);
 
       try {
         if (challengeQuestion == null) {
