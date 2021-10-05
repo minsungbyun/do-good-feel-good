@@ -28,6 +28,7 @@ public class QuestionTable extends JsonDataTable<QuestionListDTO> implements Dat
         response.setValue("해당 명령을 지원하지 않습니다.");
     }
   }
+
   private void insert(Request request, Response response) throws Exception {
     QuestionListDTO question = request.getObject(QuestionListDTO.class);
     System.out.println(question);
@@ -47,7 +48,7 @@ public class QuestionTable extends JsonDataTable<QuestionListDTO> implements Dat
     for (QuestionListDTO questionListDTO : list) {
       if (!questionListDTO.getTitle().contains(keyword) &&
           !questionListDTO.getContent().contains(keyword) &&
-          !questionListDTO.getOwner.getId().contains(keyword)) {
+          !questionListDTO.getOwner().getId().contains(keyword)) {
         continue;
       }
       searchResult.add(questionListDTO);
@@ -99,6 +100,7 @@ public class QuestionTable extends JsonDataTable<QuestionListDTO> implements Dat
     list.remove(deleteQuestion);
     response.setStatus(Response.SUCCESS);
   }
+
   private void getNextNum(Request request, Response response) throws Exception {
     QuestionListDTO question = new QuestionListDTO();
 
@@ -114,6 +116,15 @@ public class QuestionTable extends JsonDataTable<QuestionListDTO> implements Dat
     } else {
       return 1;
     }
+  }
+
+  private QuestionListDTO findByNo(int questionNo) {
+    for (QuestionListDTO questionListDTO : list) {
+      if (questionListDTO.getNo() == questionNo) {
+        return questionListDTO;
+      }
+    }
+    return null;
   }
 
   private int indexOf(int no) {

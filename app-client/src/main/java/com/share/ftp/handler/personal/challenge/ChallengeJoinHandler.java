@@ -98,6 +98,8 @@ public class ChallengeJoinHandler implements Command {
     count += 1;
     challengeDTO.setTotalJoinCount(count); 
 
+    challengeDao.update(challengeDTO);
+
     System.out.println("[  챌린지 참여가 완료되었습니다. ]");
   }
 

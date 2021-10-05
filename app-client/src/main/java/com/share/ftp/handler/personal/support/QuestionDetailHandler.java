@@ -1,15 +1,18 @@
 package com.share.ftp.handler.personal.support;
 
-import java.util.List;
+import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.domain.personal.QuestionListDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class QuestionDetailHandler extends AbstractQuestionHandler {
+public class QuestionDetailHandler implements Command {
 
-  public QuestionDetailHandler(List<QuestionListDTO> myQuestionListDTOList) {
-    super (myQuestionListDTOList);
+  QuestionDao questionDao;
+
+  public QuestionDetailHandler(QuestionDao questionDao) {
+    this.questionDao = questionDao;
 
   }
   @Override
@@ -18,9 +21,9 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
     System.out.println();
     System.out.println("[고객센터/문의하기/상세보기]");
 
-    int no = Prompt.inputInt("번호? ");
+    int questionNo = Prompt.inputInt("번호? ");
 
-    QuestionListDTO myQuestionListDTO = findByNo(no);
+    QuestionListDTO myQuestionListDTO = questionDao.findByNo(questionNo);
 
     if (myQuestionListDTO == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -78,7 +81,7 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
 
     if (myQuestionListDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
 
-      request.setAttribute("no", no);
+      request.setAttribute("questionNo", questionNo);
 
       while (true) {
         String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
@@ -100,7 +103,7 @@ public class QuestionDetailHandler extends AbstractQuestionHandler {
     }
 
     if (AuthLoginHandler.getLoginUser().getId().equals("admin")) {
-      request.setAttribute("no", no);
+      request.setAttribute("questionNo", questionNo);
 
       while (true) {
         String input = Prompt.inputString("삭제(D), 답글(A), 이전(0)>");

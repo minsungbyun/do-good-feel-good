@@ -339,10 +339,6 @@ public class ClientApp {
 
   DonationRegisterDTO donationRegisterDTO = new DonationRegisterDTO();
 
-  // 챌린지 참여자 목록
-  //  ChallengeJoinHandler challengeJoinHandler =
-  //      new ChallengeJoinHandler
-  //      (challengeDTOList);
 
   // 모금함 개설 승인된 목록 Handler
   DonationBoardAppliedListHandler donationBoardAppliedListHandler =
@@ -430,7 +426,7 @@ public class ClientApp {
 
     // 챌린지
     commands.put("/adminChallenge/list", new AdminChallengeListHandler(netChallengeDao));  // 챌린지 목록
-    commands.put("/challenge/detail", new ChallengeDetailHandler(challengeDTOList)); // 챌린지 상세정보
+    commands.put("/challenge/detail", new ChallengeDetailHandler(netChallengeDao)); // 챌린지 상세정보
     commands.put("/challengeJoin/join", new ChallengeJoinHandler(netChallengeDao));  // 참여하기
     commands.put("/challengeJoin/list", new ChallengeJoinListHandler(netChallengeDao));  // 참여자목록
     commands.put("/challengeDetail/like", new ChallengeLikeHandler(challengeDTOList));  // 챌린지 좋아요 기능(사용안함)
@@ -478,11 +474,11 @@ public class ClientApp {
 
     // 고객센터 문의사항
     commands.put("/question/add", new QuestionAddHandler(questionDao));
-    commands.put("/question/list", new QuestionListHandler(myQuestionListDTOList));
-    commands.put("/question/detail", new QuestionDetailHandler(myQuestionListDTOList));
-    commands.put("/question/update", new QuestionUpdateHandler(myQuestionListDTOList));
-    commands.put("/question/delete", new QuestionDeleteHandler(myQuestionListDTOList));
-    commands.put("/question/search", new QuestionSearchHandler(myQuestionListDTOList));
+    commands.put("/question/list", new QuestionListHandler(questionDao));
+    commands.put("/question/detail", new QuestionDetailHandler(questionDao));
+    commands.put("/question/update", new QuestionUpdateHandler(questionDao));
+    commands.put("/question/delete", new QuestionDeleteHandler(questionDao));
+    commands.put("/question/search", new QuestionSearchHandler(questionDao));
 
     commands.put("/adminQuestion/connect", new AdminQuestionConnectHandler());
     //    commands.put("/adminQuestion/add", new AdminQuestionAddHandler(myQuestionListDTOList));

@@ -1,13 +1,16 @@
 package com.share.ftp.handler.personal.support;
 
-import java.util.List;
+import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.domain.personal.QuestionListDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 
-public class QuestionListHandler extends AbstractQuestionHandler {
+public class QuestionListHandler implements Command {
 
-  public QuestionListHandler(List<QuestionListDTO> myQuestionListDTOList) {
-    super (myQuestionListDTOList);
+  QuestionDao questionDao;
+
+  public QuestionListHandler(QuestionDao questionDao) {
+    this.questionDao = questionDao;
   }
 
   @Override
@@ -15,12 +18,12 @@ public class QuestionListHandler extends AbstractQuestionHandler {
     System.out.println();
     System.out.println("[고객센터/문의하기/문의하기 목록]");
 
-    if (myQuestionListDTOList.isEmpty()) {
+    if (questionList.isEmpty()) {
       System.out.println("게시글이 없습니다.");
       System.out.println();
     }
 
-    for (QuestionListDTO myQuestionListDTO : myQuestionListDTOList) {
+    for (QuestionListDTO myQuestionListDTO : questionList) {
 
       System.out.printf("%d, %s, %s, %s, %s, %d\n", 
           myQuestionListDTO.getNo(),
