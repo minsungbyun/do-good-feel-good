@@ -75,7 +75,9 @@ import com.share.ftp.handler.personal.challenge.ChallengeQuestionListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionSearchHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionUpdateHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeRankingHandler;
+import com.share.ftp.handler.personal.challenge.ChallengeReviewAddHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewDeleteHandler;
+import com.share.ftp.handler.personal.challenge.ChallengeReviewListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewSearchHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewUpdateHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeWishHandler;
@@ -431,8 +433,8 @@ public class ClientApp {
     commands.put("/challengeDetail/wish", new ChallengeWishHandler(challengeDTOList));  // 관심 챌린지 등록(찜하기)
 
     // 챌린지 참여인증&댓글
-    //    commands.put("/challengeReview/add", new ChallengeReviewAddHandler(netChallengeDao));
-    //    commands.put("/challengeReview/list", new ChallengeReviewListHandler(challengeReviewDTOList, challengeDTOList));
+    commands.put("/challengeReview/add", new ChallengeReviewAddHandler(netChallengeDao));
+    commands.put("/challengeReview/list", new ChallengeReviewListHandler(challengeReviewDTOList, challengeDTOList));
     commands.put("/challengeReview/update", new ChallengeReviewUpdateHandler(challengeReviewDTOList, challengeDTOList));
     commands.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(challengeReviewDTOList, challengeDTOList));
     commands.put("/challengeReview/search", new ChallengeReviewSearchHandler(challengeReviewDTOList, challengeDTOList));
@@ -532,7 +534,7 @@ public class ClientApp {
     // 관리자 챌린지
     commands.put("/adminChallenge/add", new AdminChallengeAddHandler(netChallengeDao));
     commands.put("/adminChallenge/list", new AdminChallengeListHandler(netChallengeDao));
-    commands.put("/adminChallenge/detail", new AdminChallengeDetailHandler(challengeDTOList));
+    commands.put("/adminChallenge/detail", new AdminChallengeDetailHandler(netChallengeDao));
     commands.put("/adminChallenge/update", new AdminChallengeUpdateHandler(netChallengeDao));
     commands.put("/adminChallenge/delete", new AdminChallengeDeleteHandler(netChallengeDao));
     commands.put("/adminChallenge/QuestionList", new AdminChallengeQuestionListHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));

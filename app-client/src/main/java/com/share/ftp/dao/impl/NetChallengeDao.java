@@ -159,21 +159,43 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
 
   @Override
   public void insert(ChallengeReviewDTO addChallengeReview) throws Exception {
-    // TODO Auto-generated method stub
+    requestAgent.request("challengeReview.insert", addChallengeReview);
+
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      System.out.println("[ 챌린지 등록이 정상적으로 완료되었습니다! ]");
+
+    } else {
+      throw new Exception("챌린지 등록 실패!");
+    }
 
   }
 
   @Override
   public int getNextReviewNum(ChallengeDTO challengeDTO) throws Exception {
-    // TODO Auto-generated method stub
-    return 0;
+    requestAgent.request("challengeReview.getNextNum", null);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("고유번호 부여 중 오류 발생!");
+    }
+    ChallengeReviewDTO challengeReviewDTO = requestAgent.getObject(ChallengeReviewDTO.class);
+
+
+    return challengeReviewDTO.getNo();
   }
 
   @Override
-  public ChallengeReviewDTO findByChallengeReviewNo(int challengeReviewNo, ChallengeDTO challengeNo)
+  public ChallengeReviewDTO findByChallengeReviewNo(int challengeReviewNo, ChallengeDTO challengeDTO)
       throws Exception {
-    // TODO Auto-generated method stub
-    return null;
+    HashMap<String,String> params = new HashMap<>();
+    params.put("challengeReviewNo", String.valueOf(challengeReviewNo));
+
+    requestAgent.request("challengeReview.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      return null;
+    }
+
+    return requestAgent.getObject(ChallengeReviewDTO.class);
   }
 
   @Override
@@ -195,10 +217,30 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
   }
 
   @Override
-  public void delete(int deleteChallengeReviewNo) throws Exception {
+  public void delete(ChallengeReviewDTO deleteChallengeReviewNo) throws Exception {
+    requestAgent.request("challengeReview.delete", deleteChallengeReviewNo);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("참여인증&댓글 삭제 실패!");
+    }    
+  }
+
+  @Override
+  public void update(ChallengeReviewDTO updateChallengeReview) throws Exception {
+    requestAgent.request("challengeReview.update", updateChallengeReview);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("참여인증&댓글 변경 실패!");
+    }
+
+  }
+
+  @Override
+  public void delete(int deleteChallengeQuestionNo) throws Exception {
     // TODO Auto-generated method stub
 
   }
+
 
 
 

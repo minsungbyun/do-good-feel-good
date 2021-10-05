@@ -1,17 +1,23 @@
 package com.share.ftp.handler.personal.challenge;
 
 import static com.share.util.General.point.CHALLENGE_REVIEWPOINT;
-import java.util.List;
+import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
-public class ChallengeReviewDeleteHandler extends AbstractChallengeReviewHandler {
+public class ChallengeReviewDeleteHandler implements Command {
 
-  public ChallengeReviewDeleteHandler(List<ChallengeReviewDTO> challengeReviewDTOList,
-      List<ChallengeDTO> challengeDTOList) {
-    super(challengeReviewDTOList, challengeDTOList);
+  ChallengeReviewDao challengeReviewDao;
+  ChallengeDao challengeDao;
+
+  public ChallengeReviewDeleteHandler(ChallengeReviewDao challengeReviewDao,
+      ChallengeDao challengeDao) {
+    this.challengeReviewDao = challengeReviewDao;
+    this.challengeDao = challengeDao;
   }
 
   @Override
@@ -31,10 +37,10 @@ public class ChallengeReviewDeleteHandler extends AbstractChallengeReviewHandler
       //        return;
       //      }
       int challengeNo = (int) request.getAttribute("no");
-      ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
+      ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
 
       int deleteNo = (int) request.getAttribute("reviewNo");
-      ChallengeReviewDTO challengeReviewDTO = findByReviewNo(deleteNo,challengeDTO);
+      ChallengeReviewDTO challengeReviewDTO = challengeReviewDao.findByChallengeReviewNo(deleteNo,challengeDTO);
 
 
       if (challengeReviewDTO == null) {
@@ -61,7 +67,7 @@ public class ChallengeReviewDeleteHandler extends AbstractChallengeReviewHandler
           challengeDTO.setReviewCount(challengeDTO.getReviewCount() - 1);
           AuthLoginHandler.getLoginUser().setPoint(AuthLoginHandler.getLoginUser().getPoint() - CHALLENGE_REVIEWPOINT);
           challengeDTO.removeReviewer(AuthLoginHandler.getLoginUser());
-          challengeReviewDTOList.remove(challengeReviewDTO);
+          challengeReviewDao.delete(challengeReviewDTO);
           return;
 
         } else {
