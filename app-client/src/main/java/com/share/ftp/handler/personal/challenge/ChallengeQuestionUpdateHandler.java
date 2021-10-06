@@ -1,18 +1,22 @@
 package com.share.ftp.handler.personal.challenge;
 
-import java.util.List;
+import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeQuestionDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class ChallengeQuestionUpdateHandler extends AbstractChallengeQuestionHandler {
+public class ChallengeQuestionUpdateHandler implements Command {
 
+  ChallengeDao challengeDao;
+  ChallengeQuestionDao challengeQuestionDao;
 
-  public ChallengeQuestionUpdateHandler(List<ChallengeQuestionDTO> challengeQuestionDTOList,
-      List<ChallengeDTO> challengeDTOList, List<ChallengeQuestionDTO> challengeReplyList) {
-    super(challengeQuestionDTOList, challengeDTOList, challengeReplyList);
+  public ChallengeQuestionUpdateHandler(ChallengeDao challengeDao, ChallengeQuestionDao challengeQuestionDao) {
+    this.challengeDao = challengeDao;
+    this.challengeQuestionDao = challengeQuestionDao;
   }
 
   @Override
@@ -22,7 +26,7 @@ public class ChallengeQuestionUpdateHandler extends AbstractChallengeQuestionHan
       System.out.println();
       int challengeNo = (int) request.getAttribute("challengeNo");
 
-      ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
+      ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
 
 
       if (challengeDTO == null) {
@@ -31,7 +35,7 @@ public class ChallengeQuestionUpdateHandler extends AbstractChallengeQuestionHan
 
       int questionNo = (int) request.getAttribute("questionNo");
 
-      ChallengeQuestionDTO challengeQuestion = findByQuestionNo(questionNo);
+      ChallengeQuestionDTO challengeQuestion = challengeQuestionDao.findByChallengeQuestionNo(challengeNo, questionNo);
 
       try {
         if (challengeQuestion == null) {
@@ -46,7 +50,11 @@ public class ChallengeQuestionUpdateHandler extends AbstractChallengeQuestionHan
           return;
         }
 
-        String content = Prompt.inputString(String.format("내용(%s)? ", challengeQuestion.getContent()));
+
+        ChallengeQuestionDTO updateChallengeQuestion = new ChallengeQuestionDTO();
+        updateChallengeQuestion = challengeQuestion;
+        updateChallengeQuestion.setContent(Prompt.inputString(String.format("내용(%s)? ", challengeQuestion.getContent())));
+        //        String content = Prompt.inputString(String.format("내용(%s)? ", challengeQuestion.getContent()));
 
         String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
         if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -54,7 +62,8 @@ public class ChallengeQuestionUpdateHandler extends AbstractChallengeQuestionHan
           return;
         } else if (input.equals("y")) {
           System.out.println("문의를 수정하였습니다.");
-          challengeQuestion.setContent(content);
+          challengeDao.update(updateChallengeQuestion);
+          //          challengeQuestion.setContent(content);
           return;
         } else {
           System.out.println("y 또는 n을 입력하세요.");

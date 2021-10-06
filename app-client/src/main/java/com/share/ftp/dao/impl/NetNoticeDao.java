@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.domain.admin.NoticeDTO;
-import com.share.ftp.domain.personal.QuestionListDTO;
 import com.share.request.RequestAgent;
 
 // 게시글 데이터를 서버를 통해 관리한다.
@@ -20,53 +19,53 @@ public class NetNoticeDao implements NoticeDao {
 
   @Override
   public void insert(NoticeDTO addNotice) throws Exception {
-    requestAgent.request("question.insert", addNotice);
+    requestAgent.request("notice.insert", addNotice);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("게시글 등록 실패!");
     }
   }
 
   @Override
-  public List<QuestionListDTO> findAll() throws Exception {
-    requestAgent.request("question.selectList", null);
+  public List<NoticeDTO> findAll() throws Exception {
+    requestAgent.request("notice.selectList", null);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("게시글 목록 조회 실패!");
     }
 
-    return new ArrayList<>(requestAgent.getObjects(QuestionListDTO.class));
+    return new ArrayList<>(requestAgent.getObjects(NoticeDTO.class));
   }
 
   @Override
-  public List<QuestionListDTO> findByKeyword(String keyword) throws Exception {
+  public List<NoticeDTO> findByKeyword(String keyword) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("keyword", keyword);
-    requestAgent.request("question.selectListByKeyword", params);
+    requestAgent.request("notice.selectListByKeyword", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("게시글 검색 실패!");
     }
 
-    return new ArrayList<>(requestAgent.getObjects(QuestionListDTO.class));
+    return new ArrayList<>(requestAgent.getObjects(NoticeDTO.class));
   }
 
   @Override
-  public QuestionListDTO findByNo(int questionNo) throws Exception {
+  public NoticeDTO findByNo(int noticeNo) throws Exception {
     HashMap<String,String> params = new HashMap<>();
-    params.put("questionNo", String.valueOf(questionNo));
+    params.put("noticeNo", String.valueOf(noticeNo));
 
-    requestAgent.request("question.selectOne", params);
+    requestAgent.request("notice.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;
     }
 
-    return requestAgent.getObject(QuestionListDTO.class);
+    return requestAgent.getObject(NoticeDTO.class);
   }
 
   @Override
-  public void update(QuestionListDTO updateQuestion) throws Exception {
-    requestAgent.request("question.update", updateQuestion);
+  public void update(NoticeDTO updateNotice) throws Exception {
+    requestAgent.request("notice.update", updateNotice);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("게시글 변경 실패!");
@@ -74,10 +73,10 @@ public class NetNoticeDao implements NoticeDao {
   }
 
   @Override
-  public void delete(int questionNo) throws Exception {
+  public void delete(int noticeNo) throws Exception {
     HashMap<String,String> params = new HashMap<>();
-    params.put("questionNo", String.valueOf(questionNo));
-    requestAgent.request("question.delete", params);
+    params.put("noticeNo", String.valueOf(noticeNo));
+    requestAgent.request("notice.delete", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("게시글 삭제 실패!");
@@ -86,15 +85,15 @@ public class NetNoticeDao implements NoticeDao {
   @Override
   public int getNextNum() throws Exception {
 
-    requestAgent.request("question.getNextNum", null);
+    requestAgent.request("notice.getNextNum", null);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("고유번호 부여 중 오류 발생!");
     }
-    QuestionListDTO questionListDTO = requestAgent.getObject(QuestionListDTO.class);
+    NoticeDTO noticeDTO = requestAgent.getObject(NoticeDTO.class);
 
 
-    return questionListDTO.getNo();
+    return noticeDTO.getNo();
   }
 }
 

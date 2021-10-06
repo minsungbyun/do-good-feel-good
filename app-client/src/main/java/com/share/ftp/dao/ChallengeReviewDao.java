@@ -6,14 +6,14 @@ import com.share.ftp.domain.personal.ChallengeReviewDTO;
 
 public interface ChallengeReviewDao {
 
-  // 챌린지 답글 관련
+  // 챌린지 참여인증&댓글 관련
   void insertReview(ChallengeReviewDTO addChallengeReview) throws Exception;
   List<ChallengeReviewDTO> findAllReview() throws Exception;      
-  void updateReview(ChallengeDTO updateChallengeReview) throws Exception;          
-  void deleteReview(int deleteChallengeReviewNo) throws Exception; 
+  void updateReview(ChallengeReviewDTO updateChallengeReview) throws Exception;          
+  void deleteReview(ChallengeReviewDTO deleteChallengeReviewNo) throws Exception; 
 
   int getNextReviewNum(ChallengeDTO challengeDTO) throws Exception;
-  ChallengeReviewDTO findByChallengeReviewNo(int challengeReviewNo, ChallengeDTO challengeNo) throws Exception;
+  ChallengeReviewDTO findByChallengeReviewNo(int challengeReviewNo, ChallengeDTO challengeDTO) throws Exception;
 
   //  boolean isEmpty() throws Exception;
 
