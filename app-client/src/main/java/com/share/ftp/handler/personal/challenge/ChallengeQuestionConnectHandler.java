@@ -1,18 +1,20 @@
 package com.share.ftp.handler.personal.challenge;
 
-import java.util.List;
+import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeQuestionDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class ChallengeQuestionConnectHandler extends AbstractChallengeQuestionHandler {
+public class ChallengeQuestionConnectHandler implements Command {
+
+  ChallengeDao challengeDao;
 
 
-  public ChallengeQuestionConnectHandler(List<ChallengeQuestionDTO> challengeQuestionDTOList,
-      List<ChallengeDTO> challengeDTOList, List<ChallengeQuestionDTO> challengeReplyList) {
-    super(challengeQuestionDTOList, challengeDTOList, challengeReplyList);
+  public ChallengeQuestionConnectHandler(ChallengeDao challengeDao) {
+    this.challengeDao = challengeDao;
   }
 
   @Override
@@ -22,7 +24,7 @@ public class ChallengeQuestionConnectHandler extends AbstractChallengeQuestionHa
 
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeList = findByChallengeNo(challengeNo); 
+    ChallengeDTO challengeList = challengeDao.findByChallengeNo(challengeNo); 
 
     if (challengeList == null) {
       System.out.println("해당 챌린지가 없습니다.");
@@ -31,7 +33,7 @@ public class ChallengeQuestionConnectHandler extends AbstractChallengeQuestionHa
 
     int questionNo = Prompt.inputInt("문의 번호를 입력해주세요 ▶ ");
 
-    ChallengeQuestionDTO challengeQuestion = findByQuestionNo(questionNo, challengeList);
+    ChallengeQuestionDTO challengeQuestion = challengeDao.findByChallengeQuestionNo(challengeNo, questionNo);
 
     if (challengeQuestion == null) {
       System.out.println("해당 번호의 문의가 없습니다.");

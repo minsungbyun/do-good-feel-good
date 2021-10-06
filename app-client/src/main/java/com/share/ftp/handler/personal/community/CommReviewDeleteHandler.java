@@ -1,15 +1,18 @@
 package com.share.ftp.handler.personal.community;
 
-import java.util.List;
+import com.share.ftp.dao.CommReviewDao;
 import com.share.ftp.domain.personal.CommReviewDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class CommReviewDeleteHandler extends AbstractCommReviewHandler{
+public class CommReviewDeleteHandler implements Command {
 
-  public CommReviewDeleteHandler(List<CommReviewDTO> commReviewDTOList) {
-    super(commReviewDTOList);
+  CommReviewDao commReviewDao;
+
+  public CommReviewDeleteHandler(CommReviewDao commReviewDao) {
+    this.commReviewDao = commReviewDao;
   }
 
   @Override
@@ -17,19 +20,19 @@ public class CommReviewDeleteHandler extends AbstractCommReviewHandler{
     while (true) {
 
       System.out.println();
-      System.out.println("[  소통해요/ 한줄후기/ 삭제  ]");
+      System.out.println("[  한 줄 후기 삭제  ]");
       int commReviewNo = Prompt.inputInt("[  번호?  ]");
 
-      CommReviewDTO commReviewDTO = findByNo(commReviewNo);
+      CommReviewDTO commReview = commReviewDao.findByCommReviewNo(commReviewNo);
 
       try {
 
-        if (commReviewDTO == null) {
+        if (commReview == null) {
           System.out.println("[  해당 번호의 게시글이 없습니다.  ]");
           return;
         }
 
-        if (commReviewDTO.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
+        if (commReview.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
           System.out.println("[  삭제 권한이 없습니다.  ]");
           return;
         }
@@ -41,7 +44,7 @@ public class CommReviewDeleteHandler extends AbstractCommReviewHandler{
 
         } else if(input.equals("y")) {
           System.out.println("[  ✔️ 게시글이 삭제 되었습니다. ]");
-          commReviewDTOList.remove(commReviewDTO);
+          commReviewDao.delete(commReviewNo);
           return;
         }
 

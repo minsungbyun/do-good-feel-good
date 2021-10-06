@@ -3,7 +3,11 @@ package com.share.ftp;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
+import com.share.ftp.table.ChallengeQuestionTable;
+import com.share.ftp.table.ChallengeReviewTable;
 import com.share.ftp.table.ChallengeTable;
+import com.share.ftp.table.CommBoardTable;
+import com.share.ftp.table.CommReviewTable;
 import com.share.ftp.table.DonationBoardTable;
 import com.share.ftp.table.DonationRegisterTable;
 import com.share.ftp.table.JoinTable;
@@ -26,8 +30,11 @@ public class ServerApp {
 
     // => 데이터 처리 담당자를 등록한다.
     dataProcessorMap.put("join.", new JoinTable());
-    dataProcessorMap.put("challenge.", new ChallengeTable());
-    dataProcessorMap.put("challengeReview.", new ChallengeTable());
+    dataProcessorMap.put("challengeReview.", new ChallengeReviewTable());
+    dataProcessorMap.put("challengeQuestion.", new ChallengeQuestionTable());
+
+    dataProcessorMap.put("commBoard.", new CommBoardTable());
+    dataProcessorMap.put("commReview.", new CommReviewTable());
 
     dataProcessorMap.put("question.", new QuestionTable());
 
@@ -35,6 +42,11 @@ public class ServerApp {
     dataProcessorMap.put("donationBoard.", new DonationBoardTable());
     dataProcessorMap.put("donationRegister.", new DonationRegisterTable());
 
+    //    dataProcessorMap.put("board.", new BoardTable());
+    //    dataProcessorMap.put("member.", new MemberTable());
+    //    dataProcessorMap.put("project.", new ProjectTable());
+    //      dataProcessorMap.put("member.", new MemberTable());
+    //      dataProcessorMap.put("project.", new ProjectTable());
 
     while (true) {
       Socket socket = serverSocket.accept();
