@@ -20,7 +20,7 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
     this.requestAgent = requestAgent;
   }
 
-  // 챌린지 관련 메서드
+  ///관리자 챌린지 등록관련 메서드//////////////////////////////////////////////////////////////
   @Override
   public void insert(ChallengeDTO addChallenge) throws Exception {
 
@@ -93,6 +93,7 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
     return requestAgent.getObject(ChallengeDTO.class);
   }
 
+  ///챌린지 문의하기///////////////////////////////////////////////////////////////////
 
   @Override
   public void insertQuestion(ChallengeQuestionDTO addChallengeQuestion) throws Exception {
@@ -119,14 +120,16 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
   }
 
   @Override
-  public void updateQuestion(ChallengeQuestionDTO updateChallengeQuestion) throws Exception {
+  public void updateQuestion(int challengeNo, ChallengeQuestionDTO updateChallengeQuestion) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("challengeNo", String.valueOf(challengeNo));
+    params.put("updateChallengeQuestion", new Gson().toJson(updateChallengeQuestion));
 
-    requestAgent.request("challengeQuestion.update", updateChallengeQuestion);
+    requestAgent.request("challengeQuestion.update", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("챌린지 문의 변경 실패!");
     }
-
   }
 
   @Override
@@ -140,9 +143,11 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
   }
 
   @Override
-  public void deleteQuestion(int deleteChallengeQuestionNo) throws Exception {
+  public void deleteQuestion(int challengeNo, ChallengeQuestionDTO deleteChallengeQuestion) throws Exception {
     HashMap<String,String> params = new HashMap<>();
-    params.put("deleteChallengeQuestionNo", String.valueOf(deleteChallengeQuestionNo));
+    params.put("challengeNo", String.valueOf(challengeNo));
+    params.put("deleteChallengeQuestion", new Gson().toJson(deleteChallengeQuestion));
+
 
     requestAgent.request("challengeQuestion.deleteIndex", params);
 
@@ -169,11 +174,11 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
 
 
   @Override
-  public ChallengeQuestionDTO findByChallengeQuestionNo(int challengeQuestionNo,ChallengeDTO challengeNo) throws Exception {
+  public ChallengeQuestionDTO findByChallengeQuestionNo(int challengeNo, int challengeQuestionNo) throws Exception {
 
     HashMap<String,String> params = new HashMap<>();
+    params.put("challengeNo", String.valueOf(challengeNo));
     params.put("challengeQuestionNo", String.valueOf(challengeQuestionNo));
-    params.put("challengeNo", new Gson().toJson(ChallengeDTO.class));
     requestAgent.request("challengeQuestion.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
@@ -216,45 +221,79 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
 
   }
 
+  ///챌린지 참여인증&댓글//////////////////////////////////////////////////////////////
+
   @Override
   public void insertReview(ChallengeReviewDTO addChallengeReview) throws Exception {
-    // TODO Auto-generated method stub
+    requestAgent.request("challengeReview.insert", addChallengeReview);
+
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      System.out.println("[ 챌린지 등록이 정상적으로 완료되었습니다! ]");
+
+    } else {
+      throw new Exception("챌린지 등록 실패!");
+    }
+
+  }
+
+  @Override
+  public int getNextReviewNum(ChallengeDTO challengeDTO) throws Exception {
+    requestAgent.request("challengeReview.getNextNum", null);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("고유번호 부여 중 오류 발생!");
+    }
+    ChallengeReviewDTO challengeReviewDTO = requestAgent.getObject(ChallengeReviewDTO.class);
+
+
+    return challengeReviewDTO.getNo();
+  }
+
+  @Override
+  public ChallengeReviewDTO findByChallengeReviewNo(int challengeReviewNo, ChallengeDTO challengeDTO)
+      throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("challengeReviewNo", String.valueOf(challengeReviewNo));
+
+    requestAgent.request("challengeReview.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      return null;
+    }
+
+    return requestAgent.getObject(ChallengeReviewDTO.class);
+  }
+
+  @Override
+  public void deleteReview(ChallengeReviewDTO deleteChallengeReviewNo) throws Exception {
+    requestAgent.request("challengeReview.delete", deleteChallengeReviewNo);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("참여인증&댓글 삭제 실패!");
+    }    
+  }
+
+  @Override
+  public void updateReview(ChallengeReviewDTO updateChallengeReview) throws Exception {
+    requestAgent.request("challengeReview.update", updateChallengeReview);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("참여인증&댓글 변경 실패!");
+    }
 
   }
 
   @Override
   public List<ChallengeReviewDTO> findAllReview() throws Exception {
-    // TODO Auto-generated method stub
-    return null;
+    requestAgent.request("challengeReview.selectList", null);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("참여인증&댓글 목록 조회 실패!");
+    }
+    return new ArrayList<>(requestAgent.getObjects(ChallengeReviewDTO.class));
   }
 
-  @Override
-  public void updateReview(ChallengeDTO updateChallengeReview) throws Exception {
-    // TODO Auto-generated method stub
-
-  }
-
-  @Override
-  public void deleteReview(int deleteChallengeReviewNo) throws Exception {
-    // TODO Auto-generated method stub
-
-  }
-
-
-  @Override
-  public int getNextReviewNum(ChallengeDTO challengeDTO) throws Exception {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  @Override
-  public ChallengeReviewDTO findByChallengeReviewNo(int challengeReviewNo, ChallengeDTO challengeNo)
-      throws Exception {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-
+  // 다른 클래스 만들어서 static 메서드로 뺄 예정
   @Override
   public String getRemainTime(long millis) {
 
@@ -275,6 +314,5 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
     // TODO Auto-generated method stub
     return null;
   }
-
 
 }

@@ -5,6 +5,7 @@ import java.net.Socket;
 import java.util.HashMap;
 import com.share.ftp.table.ChallengeTable;
 import com.share.ftp.table.CommBoardTable;
+import com.share.ftp.table.CommReviewTable;
 import com.share.ftp.table.DonationBoardTable;
 import com.share.ftp.table.DonationRegisterTable;
 import com.share.ftp.table.JoinTable;
@@ -27,9 +28,11 @@ public class ServerApp {
 
     // => 데이터 처리 담당자를 등록한다.
     dataProcessorMap.put("join.", new JoinTable());
+    dataProcessorMap.put("challenge.", new ChallengeTable());
+    dataProcessorMap.put("challengeReview.", new ChallengeTable());
 
     dataProcessorMap.put("commBoard.", new CommBoardTable());
-    dataProcessorMap.put("commReview.", new CommBoardTable());
+    dataProcessorMap.put("commReview.", new CommReviewTable());
 
     dataProcessorMap.put("question.", new QuestionTable());
 

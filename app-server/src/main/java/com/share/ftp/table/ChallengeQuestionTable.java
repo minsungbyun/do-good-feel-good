@@ -55,37 +55,37 @@ public class ChallengeQuestionTable extends JsonDataTable<ChallengeQuestionDTO> 
     response.setValue(searchResult);
   }
 
-
-
   private void selectQuestionOne(Request request, Response response) throws Exception {
+    int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
     int challengeQuestionNo = Integer.parseInt(request.getParameter("challengeQuestionNo"));
-    ChallengeDTO challengeNo = request.getObject(ChallengeDTO.class);
 
-    ChallengeQuestionDTO challenge = null;
+
+    ChallengeQuestionDTO selectChallenge = null;
     for (ChallengeQuestionDTO ChallengeQuestionDTO : list) {
-      if (challengeNo.getNo() == ChallengeQuestionDTO.getNo()) {
+      if (ChallengeQuestionDTO.getNo() == challengeNo) {
         if (ChallengeQuestionDTO.getQuestionNo() == challengeQuestionNo) {
-          challenge = ChallengeQuestionDTO;
+          selectChallenge = ChallengeQuestionDTO;
         }
       }
     }
 
-    if (challenge == null) {
+    if (selectChallenge == null) {
       response.setStatus(Response.FAIL);
       response.setValue("해당 챌린지문의가 없습니다!");
       return;
     }
 
     response.setStatus(Response.SUCCESS);
-    response.setValue(challenge);
+    response.setValue(selectChallenge);
   }
 
   private void updateQuestion(Request request, Response response) throws Exception {
-    ChallengeQuestionDTO updateChallenge = request.getObject(ChallengeQuestionDTO.class);
+    int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
+    ChallengeQuestionDTO updateChallengeQuestion = request.getObject(ChallengeQuestionDTO.class);
 
-    int index = indexOf(updateChallenge.getNo());
+    int index = indexOf(challengeNo, updateChallengeQuestion);
 
-    list.set(index, updateChallenge);
+    list.set(index, updateChallengeQuestion);
     response.setStatus(Response.SUCCESS);
   }
 
@@ -97,9 +97,11 @@ public class ChallengeQuestionTable extends JsonDataTable<ChallengeQuestionDTO> 
   }
 
   private void deleteQuestionByIndex(Request request, Response response) throws Exception {
-    int deleteChallengeQuestionNo = Integer.parseInt(request.getParameter("deleteChallengeQuestionNo"));
+    int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
+    ChallengeQuestionDTO deleteChallengeQuestion = request.getObject(ChallengeQuestionDTO.class);
 
-    int index = indexOf(deleteChallengeQuestionNo);
+
+    int index = indexOf(challengeNo, deleteChallengeQuestion);
 
     list.remove(index);
     response.setStatus(Response.SUCCESS);
@@ -127,8 +129,8 @@ public class ChallengeQuestionTable extends JsonDataTable<ChallengeQuestionDTO> 
 
   private int indexOf(int challengeNo, ChallengeQuestionDTO challengeQuestionDTO) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getNo() == challengeQuestionDTO.getNo()) {
-        if (list.get(i).getQuestionNo() == challengeNo) {
+      if (list.get(i).getNo() == challengeNo) {
+        if (list.get(i).getQuestionNo() == challengeQuestionDTO.getQuestionNo()) {
           return i;
         }
       }

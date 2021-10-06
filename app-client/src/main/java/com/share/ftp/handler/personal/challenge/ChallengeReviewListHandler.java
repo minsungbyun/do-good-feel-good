@@ -1,5 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
+import java.util.Collection;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
@@ -25,12 +26,15 @@ public class ChallengeReviewListHandler implements Command {
     System.out.println();
 
     int challengeNo = (int) request.getAttribute("challengeNo");
+    challengeDao.findByChallengeNo(challengeNo);
 
-    if (challengeReviewDao.isEmpty()) {
-      System.out.println("참여인증&댓글이 없습니다.");
-    }
+    //    if (challengeReviewDao.isEmpty()) {
+    //      System.out.println("참여인증&댓글이 없습니다.");
+    //    }
 
-    for (ChallengeReviewDTO challengeReviewDTO : challengeReviewDao.findAllReview()) {
+    Collection<ChallengeReviewDTO> challengeReviewList = challengeReviewDao.findAllReview();
+
+    for (ChallengeReviewDTO challengeReviewDTO : challengeReviewList) {
       if (challengeReviewDTO.getNo() == challengeNo) {
         System.out.printf("%d, %d, %s, %s, %s, %s\n", 
             challengeReviewDTO.getNo(),

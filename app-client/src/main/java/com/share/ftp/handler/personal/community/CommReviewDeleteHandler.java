@@ -23,7 +23,7 @@ public class CommReviewDeleteHandler implements Command {
       System.out.println("[  한 줄 후기 삭제  ]");
       int commReviewNo = Prompt.inputInt("[  번호?  ]");
 
-      CommReviewDTO commReview = commReviewDao.findBCommReviewNo(commReviewNo);
+      CommReviewDTO commReview = commReviewDao.findByCommReviewNo(commReviewNo);
 
       try {
 
