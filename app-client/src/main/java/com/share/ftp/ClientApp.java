@@ -79,7 +79,6 @@ import com.share.ftp.handler.personal.challenge.ChallengeQuestionAddHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionConnectHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionDeleteHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionListHandler;
-import com.share.ftp.handler.personal.challenge.ChallengeQuestionSearchHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionUpdateHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeRankingHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewDeleteHandler;
@@ -352,15 +351,12 @@ public class ClientApp {
 
   public ClientApp() throws Exception {
 
-    requestAgent = new RequestAgent("192.168.0.76", 8888);
+    requestAgent = new RequestAgent("127.0.0.1", 8888);
 
     JoinDao netJoinDao = new NetJoinDao(requestAgent);
     ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
-<<<<<<< HEAD
     QuestionDao questionDao = new NetQuestionDao(requestAgent);
-=======
     ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
->>>>>>> 2577884e828543338d4c2fc2c4a00eea4628bf5b
 
 
     //로그인, 로그아웃
@@ -448,12 +444,12 @@ public class ClientApp {
 
     // 챌린지 문의하기
     commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(netChallengeQuestionDao));
-    commands.put("/challengeQuestion/list", new ChallengeQuestionListHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
+    commands.put("/challengeQuestion/list", new ChallengeQuestionListHandler(netChallengeDao, netChallengeQuestionDao));
     //    commands.put("/challengeQuestion/detail", new ChallengeQuestionDetailHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
-    commands.put("/challengeQuestion/update", new ChallengeQuestionUpdateHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
-    commands.put("/challengeQuestion/delete", new ChallengeQuestionDeleteHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
-    commands.put("/challengeQuestion/search", new ChallengeQuestionSearchHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
-    commands.put("/challengeQuestion/connect", new ChallengeQuestionConnectHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
+    commands.put("/challengeQuestion/update", new ChallengeQuestionUpdateHandler(netChallengeDao, netChallengeQuestionDao));
+    commands.put("/challengeQuestion/delete", new ChallengeQuestionDeleteHandler(netChallengeDao, netChallengeQuestionDao));
+    //    commands.put("/challengeQuestion/search", new ChallengeQuestionSearchHandler(netChallengeDao, netChallengeQuestionDao));
+    commands.put("/challengeQuestion/connect", new ChallengeQuestionConnectHandler(netChallengeDao, netChallengeQuestionDao));
 
     // 챌린지 랭킹
     commands.put("/ranking/list", new ChallengeRankingHandler(joinDTOList));  //전체랭킹(구현예정)

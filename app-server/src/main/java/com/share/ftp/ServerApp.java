@@ -33,14 +33,6 @@ public class ServerApp {
     dataProcessorMap.put("donationBoard.", new DonationBoardTable());
     dataProcessorMap.put("donationRegister.", new DonationRegisterTable());
 
-<<<<<<< HEAD
-    //    dataProcessorMap.put("board.", new BoardTable());
-    //    dataProcessorMap.put("member.", new MemberTable());
-    //    dataProcessorMap.put("project.", new ProjectTable());
-    //      dataProcessorMap.put("member.", new MemberTable());
-    //      dataProcessorMap.put("project.", new ProjectTable());
-=======
->>>>>>> 2577884e828543338d4c2fc2c4a00eea4628bf5b
 
     while (true) {
       Socket socket = serverSocket.accept();

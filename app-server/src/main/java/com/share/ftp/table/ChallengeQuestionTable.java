@@ -34,6 +34,7 @@ public class ChallengeQuestionTable extends JsonDataTable<ChallengeQuestionDTO> 
   }
 
   private void selectQuestionList(Request request, Response response) throws Exception {
+
     response.setStatus(Response.SUCCESS);
     response.setValue(list);
   }

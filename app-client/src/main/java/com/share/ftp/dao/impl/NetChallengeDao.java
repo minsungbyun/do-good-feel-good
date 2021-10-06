@@ -105,14 +105,18 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
       throw new Exception("챌린지 문의 등록 실패!");
     }
 
+
+
   }
 
   @Override
   public List<ChallengeQuestionDTO> findAllQuestion() throws Exception {
 
+
     requestAgent.request("challengeQuestion.selectList", null);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("실패했어요");
       throw new Exception("챌린지 문의 목록 조회 실패!");
     }
     return new ArrayList<>(requestAgent.getObjects(ChallengeQuestionDTO.class));
@@ -201,6 +205,8 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
     return challenge.getQuestionCount();
   }
 
+
+
   @Override
   public int indexOf(int challengeQuestionNo, ChallengeQuestionDTO challengeQuestionDTO)
       throws Exception {
@@ -257,6 +263,15 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
     // TODO Auto-generated method stub
     return null;
   }
+
+  @Override
+  public ChallengeQuestionDTO findByChallengeQuestionNo(int challengeQuestionNo) throws Exception {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+
+
 
   // 다른 클래스 만들어서 static 메서드로 뺄 예정
   @Override
