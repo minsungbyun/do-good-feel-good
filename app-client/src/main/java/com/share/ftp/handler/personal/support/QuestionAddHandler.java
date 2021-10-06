@@ -7,21 +7,25 @@ import static com.share.util.General.questionType.OTHERASK;
 import static com.share.util.General.questionType.SITEASK;
 import static com.share.util.General.questionType.VOLUNTEERASK;
 import java.sql.Date;
-import java.util.List;
+import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.domain.personal.QuestionListDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class QuestionAddHandler extends AbstractQuestionHandler {
+public class QuestionAddHandler implements Command {
 
-  public QuestionAddHandler(List<QuestionListDTO> myQuestionListDTOList) {
-    super (myQuestionListDTOList);
+  QuestionDao questionDao;
+
+  public QuestionAddHandler(QuestionDao questionDao) {
+    this.questionDao = questionDao;
   }
+
   @Override
   public void execute(CommandRequest request) throws Exception {
 
-    QuestionListDTO myQuestionListDTO = new QuestionListDTO();
+    QuestionListDTO questionListDTO = new QuestionListDTO();
 
     System.out.println();
     System.out.println("문의하려는 분야를 선택해주세요.");
@@ -37,27 +41,27 @@ public class QuestionAddHandler extends AbstractQuestionHandler {
     int input = Prompt.inputInt("문의분야 > ");
 
     switch(input) {
-      case 1: myQuestionListDTO.setQnaType(VOLUNTEERASK);    break;
-      case 2: myQuestionListDTO.setQnaType(COMMUITYASK);     break;
-      case 3: myQuestionListDTO.setQnaType(DONATIONASK);     break;
-      case 4: myQuestionListDTO.setQnaType(CHALLENGEASK);    break;
-      case 5: myQuestionListDTO.setQnaType(SITEASK);         break;
-      case 6: myQuestionListDTO.setQnaType(OTHERASK);        break;
+      case 1: questionListDTO.setQnaType(VOLUNTEERASK);    break;
+      case 2: questionListDTO.setQnaType(COMMUITYASK);     break;
+      case 3: questionListDTO.setQnaType(DONATIONASK);     break;
+      case 4: questionListDTO.setQnaType(CHALLENGEASK);    break;
+      case 5: questionListDTO.setQnaType(SITEASK);         break;
+      case 6: questionListDTO.setQnaType(OTHERASK);        break;
       default: System.out.println("올바른 번호를 입력해주세요"); 
 
     }
 
-    myQuestionListDTO.setTitle(Prompt.inputString("제목? "));
-    myQuestionListDTO.setContent(Prompt.inputString("내용? "));
-    myQuestionListDTO.setOwner(AuthLoginHandler.getLoginUser());
-    myQuestionListDTO.setFileUpload(Prompt.inputString("파일첨부? "));
-    myQuestionListDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
-    myQuestionListDTO.setPassword(Prompt.inputInt("비밀번호? "));
+    questionListDTO.setTitle(Prompt.inputString("제목? "));
+    questionListDTO.setContent(Prompt.inputString("내용? "));
+    questionListDTO.setOwner(AuthLoginHandler.getLoginUser());
+    questionListDTO.setFileUpload(Prompt.inputString("파일첨부? "));
+    questionListDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
+    questionListDTO.setPassword(Prompt.inputInt("비밀번호? "));
 
     // 고유회원번호 부여
-    myQuestionListDTO.setNo(getNextNum());
+    questionListDTO.setNo(questionDao.getNextNum());
 
-    myQuestionListDTOList.add(myQuestionListDTO);
+    questionDao.insert(questionListDTO);
 
     System.out.println();
     System.out.println("게시글 등록이 완료 되었습니다.");

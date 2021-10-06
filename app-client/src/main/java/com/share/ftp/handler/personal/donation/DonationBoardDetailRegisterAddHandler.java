@@ -1,26 +1,26 @@
 package com.share.ftp.handler.personal.donation;
 
 import java.sql.Date;
-import java.util.List;
+import com.share.ftp.dao.DonationBoardDao;
+import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class DonationBoardDetailRegisterAddHandler extends AbstractDonationRegisterHandler { // 모금함 기부하기 양식 쓰는곳
+public class DonationBoardDetailRegisterAddHandler implements Command { // 모금함 기부하기 양식 쓰는곳
 
-  List<JoinDTO> joinDTOList;
-  List<DonationBoardDTO> donationBoardDTOList;
+  DonationBoardDao donationBoardDao;
+  DonationRegisterDao donationRegisterDao;
 
   public DonationBoardDetailRegisterAddHandler(
-      List<DonationRegisterDTO> donationRegisterDTOList,
-      List<JoinDTO> joinDTOList,
-      List<DonationBoardDTO> donationBoardDTOList) {
-    super(donationRegisterDTOList);
-    this.joinDTOList = joinDTOList;
-    this.donationBoardDTOList = donationBoardDTOList;
+      DonationBoardDao donationBoardDao,
+      DonationRegisterDao donationRegisterDao) {
+    this.donationBoardDao = donationBoardDao;
+    this.donationRegisterDao = donationRegisterDao;
   }
 
   // 모금함 기부하기
@@ -32,6 +32,8 @@ public class DonationBoardDetailRegisterAddHandler extends AbstractDonationRegis
     DonationRegisterDTO donationRegister = new DonationRegisterDTO();
 
     JoinDTO joinDTO = AuthLoginHandler.getLoginUser();
+
+    //    Collection<DonationBoardDTO> donationBoardList = donationBoardDao.findAll();
 
     if (joinDTO == null) {
       System.out.println();
@@ -61,7 +63,8 @@ public class DonationBoardDetailRegisterAddHandler extends AbstractDonationRegis
 
 
         DonationRegisterDTO.totalDonationMoney += donationRegister.getDonationMoney();
-        donationRegisterDTOList.add(donationRegister);
+
+        donationRegisterDao.insert(donationRegister);
 
       } catch (NumberFormatException e) {
         System.out.println("--------------------------------------------------------------");
