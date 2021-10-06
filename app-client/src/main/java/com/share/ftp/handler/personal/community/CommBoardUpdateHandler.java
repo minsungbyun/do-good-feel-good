@@ -1,17 +1,17 @@
 package com.share.ftp.handler.personal.community;
 
-import java.util.List;
+import com.share.ftp.dao.CommBoardDao;
 import com.share.ftp.domain.personal.CommBoardDTO;
-import com.share.ftp.domain.personal.CommBoardReplyDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
-public class CommBoardUpdateHandler extends AbstractCommBoardHandler {
+public class CommBoardUpdateHandler  implements Command {
 
-  public CommBoardUpdateHandler(
-      List<CommBoardDTO> commBoardDTOList, 
-      List<CommBoardReplyDTO> commBoardReplyDTOList) {
-    super(commBoardDTOList, commBoardReplyDTOList);
+  CommBoardDao commBoardDao;
+
+  public CommBoardUpdateHandler (CommBoardDao commBoardDao) {
+    this.commBoardDao =  commBoardDao;
   }
 
   @Override
@@ -19,11 +19,10 @@ public class CommBoardUpdateHandler extends AbstractCommBoardHandler {
 
     while (true) {
       System.out.println();
-      System.out.println("[  메인/소통해요/나눔이야기/게시글변경  ]");
+      System.out.println("[  나눔이야기 게시글변경  ]");
       int commNo = (int) request.getAttribute("commNo");
 
-      CommBoardDTO commBoardDTO = findByNo(commNo);
-
+      CommBoardDTO commBoardDTO = commBoardDao.findByCommNo(commNo);
 
       if (commBoardDTO == null) {
         System.out.println("[  해당 게시글이 없습니다.  ]");
@@ -43,10 +42,13 @@ public class CommBoardUpdateHandler extends AbstractCommBoardHandler {
         }
 
         else if(input.equals("y")) {
-          System.out.println("[  게시글을 변경하였습니다.  ]");
           commBoardDTO.setTitle(title);
           commBoardDTO.setContent(content);
           commBoardDTO.setFileUpload(fileUpload);
+
+          commBoardDao.update(commBoardDTO);
+
+          System.out.println("[  게시글을 변경하였습니다.  ]");
           return;
         }
 

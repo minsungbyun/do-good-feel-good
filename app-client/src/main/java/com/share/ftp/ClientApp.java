@@ -13,11 +13,15 @@ import com.share.context.ApplicationContextListener;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.dao.ChallengeReviewDao;
+import com.share.ftp.dao.CommBoardDao;
+import com.share.ftp.dao.CommReviewDao;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.dao.JoinDao;
 import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.dao.impl.NetChallengeDao;
+import com.share.ftp.dao.impl.NetCommBoardDao;
+import com.share.ftp.dao.impl.NetCommReviewDao;
 import com.share.ftp.dao.impl.NetDonationBoardDao;
 import com.share.ftp.dao.impl.NetDonationRegisterDao;
 import com.share.ftp.dao.impl.NetJoinDao;
@@ -95,7 +99,6 @@ import com.share.ftp.handler.personal.community.CommBestListHandler;
 import com.share.ftp.handler.personal.community.CommBoardAddHandler;
 import com.share.ftp.handler.personal.community.CommBoardDeleteHandler;
 import com.share.ftp.handler.personal.community.CommBoardDetailHandler;
-import com.share.ftp.handler.personal.community.CommBoardLikeHandler;
 import com.share.ftp.handler.personal.community.CommBoardListHandler;
 import com.share.ftp.handler.personal.community.CommBoardReplyAddHandler;
 import com.share.ftp.handler.personal.community.CommBoardReplyConnectHandler;
@@ -356,6 +359,8 @@ public class ClientApp {
     requestAgent = new RequestAgent("127.0.0.1", 8888);
 
     JoinDao netJoinDao = new NetJoinDao(requestAgent);
+    CommBoardDao netCommBoardDao = new NetCommBoardDao(requestAgent);
+    CommReviewDao netCommReviewDao = new NetCommReviewDao(requestAgent);
     ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
     QuestionDao questionDao = new NetQuestionDao(requestAgent);
     ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
@@ -403,13 +408,13 @@ public class ClientApp {
     //    commands.put("/volRequestOrg/rejectedList", new VolRequestOrgRejectedListHandler(orgRequestDTOList, orgRequestApplyDTOList, orgRequestRejectDTOList));
 
     // 소통해요 나눔이야기
-    commands.put("/commBoard/add", new CommBoardAddHandler(commBoardDTOList, commBoardReplyDTOList));
-    commands.put("/commBoard/list", new CommBoardListHandler(commBoardDTOList, commBoardReplyDTOList));
-    commands.put("/commBoard/detail", new CommBoardDetailHandler(commBoardDTOList, commBoardReplyDTOList));
-    commands.put("/commBoard/update", new CommBoardUpdateHandler(commBoardDTOList, commBoardReplyDTOList));
-    commands.put("/commBoard/delete", new CommBoardDeleteHandler(commBoardDTOList, commBoardReplyDTOList));
-    commands.put("/commBoard/search", new CommBoardSearchHandler(commBoardDTOList, commBoardReplyDTOList));
-    commands.put("/commBoard/like", new CommBoardLikeHandler(commBoardDTOList, commBoardReplyDTOList)); 
+    commands.put("/commBoard/add", new CommBoardAddHandler(netCommBoardDao));
+    commands.put("/commBoard/list", new CommBoardListHandler(netCommBoardDao));
+    commands.put("/commBoard/detail", new CommBoardDetailHandler(netCommBoardDao));
+    commands.put("/commBoard/update", new CommBoardUpdateHandler(netCommBoardDao));
+    commands.put("/commBoard/delete", new CommBoardDeleteHandler(netCommBoardDao));
+    commands.put("/commBoard/search", new CommBoardSearchHandler(netCommBoardDao));
+    // commands.put("/commBoard/like", new CommBoardLikeHandler(netCommBoardDao)); 
 
     // 소통해요 댓글
     commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler(commBoardDTOList, commBoardReplyDTOList));
@@ -425,10 +430,10 @@ public class ClientApp {
     commands.put("/commBest/detail", new CommBestDetailHandler(commBoardDTOList));
 
     // 소통해요 한줄후기
-    commands.put("/commReview/add", new CommReviewAddHandler(commReviewDTOList));
-    commands.put("/commReview/list", new CommReviewListHandler(commReviewDTOList));
-    commands.put("/commReview/update", new CommReviewUpdateHandler(commReviewDTOList));
-    commands.put("/commReview/delete", new CommReviewDeleteHandler(commReviewDTOList));
+    commands.put("/commReview/add", new CommReviewAddHandler(netCommReviewDao));
+    commands.put("/commReview/list", new CommReviewListHandler(netCommReviewDao));
+    commands.put("/commReview/update", new CommReviewUpdateHandler(netCommReviewDao));
+    commands.put("/commReview/delete", new CommReviewDeleteHandler(netCommReviewDao));
 
     // 챌린지
     commands.put("/adminChallenge/list", new AdminChallengeListHandler(netChallengeDao));  // 챌린지 목록
@@ -776,8 +781,8 @@ public class ClientApp {
     MenuGroup shortReviewMenu = new MenuGroup("한 줄 후기");
     shortReviewMenu.setMenuFilter(menuFilter);
 
+    shortReviewMenu.add(new MenuItem("등록", ACCESS_MEMBER_ADMIN, "/commReview/add"));
     shortReviewMenu.add(new MenuItem("목록", "/commReview/list")); 
-
     //    shortReviewMenu.add(new MenuItem("변경", ACCESS_MEMBER_ADMIN, "/commReview/update")); 
     //    shortReviewMenu.add(new MenuItem("삭제", ACCESS_MEMBER_ADMIN, "/commReview/delete")); 
     shortReviewMenu.add(new MenuItem("검색",ACCESS_MEMBER_ADMIN,"/commReview/search"));
@@ -1051,10 +1056,11 @@ public class ClientApp {
     MenuGroup adminCommInfo = new MenuGroup("커뮤니티 관리", ACCESS_ADMIN);
     adminCommInfo.setMenuFilter(menuFilter);
 
-    adminCommInfo.add(new MenuItem("등록", ACCESS_MEMBER_ADMIN, "/commReview/add"));
-    adminCommInfo.add(new MenuItem("수정", ACCESS_MEMBER_ADMIN, "/commReview/update")); 
-    adminCommInfo.add(new MenuItem("삭제", ACCESS_MEMBER_ADMIN, "/commReview/delete")); 
-    adminCommInfo.add(new MenuItem("검색",ACCESS_MEMBER_ADMIN,"/commReview/search"));
+    adminCommInfo.add(new MenuItem("나눔이야기 목록", ACCESS_MEMBER_ADMIN, "/commBoard/list"));
+    adminCommInfo.add(new MenuItem("나눔이야기", ACCESS_MEMBER_ADMIN, "/commBoard/detail")); 
+    adminCommInfo.add(new MenuItem("나눔이야기 Best 상세보기", ACCESS_MEMBER_ADMIN, "/commBest/detail")); 
+    adminCommInfo.add(new MenuItem("한줄후기 목록",ACCESS_MEMBER_ADMIN,"/commReview/list"));
+
 
     return adminCommInfo;
   }
