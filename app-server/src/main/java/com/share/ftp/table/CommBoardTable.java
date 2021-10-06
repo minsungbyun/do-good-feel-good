@@ -46,7 +46,8 @@ public class CommBoardTable extends JsonDataTable<CommBoardDTO> implements DataP
     ArrayList<CommBoardDTO> searchResult = new ArrayList<>();
     for (CommBoardDTO commBoardDTO : list) {
       if (!commBoardDTO.getTitle().contains(keyword) &&
-          !commBoardDTO.getContent().contains(keyword)) {
+          !commBoardDTO.getContent().contains(keyword) &&
+          !commBoardDTO.getOwner().getId().contains(keyword)){
         continue;
       }
       searchResult.add(commBoardDTO);
@@ -56,9 +57,8 @@ public class CommBoardTable extends JsonDataTable<CommBoardDTO> implements DataP
     response.setValue(searchResult);
   }
 
-
   private void selectOne(Request request, Response response) throws Exception {
-    int commNo = Integer.parseInt(request.getParameter("commNo"));
+    int commNo = Integer.parseInt(request.getParameter("commBoardNo"));
     CommBoardDTO commBoardDTO = findByCommNo(commNo);
 
     if (commBoardDTO != null) {
@@ -70,14 +70,25 @@ public class CommBoardTable extends JsonDataTable<CommBoardDTO> implements DataP
     }
   }
 
-  private void update(Request request, Response response) {
-    // TODO Auto-generated method stub
+  private void update(Request request, Response response) throws Exception {
+    CommBoardDTO updateCommBoard = request.getObject(CommBoardDTO.class);
 
+    int index = indexOf(updateCommBoard.getCommNo());
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
+      return;
+    }
+
+    list.set(index, updateCommBoard);
+    response.setStatus(Response.SUCCESS);
   }
 
   private void delete(Request request, Response response) throws Exception {
-    int no = Integer.parseInt(request.getParameter("commNo"));
-    int index = indexOf(no);
+    CommBoardDTO deleteCommBoard = request.getObject(CommBoardDTO.class);
+
+    int commNo = Integer.parseInt(request.getParameter("commNo"));
+    int index = indexOf(commNo);
 
     if (index == -1) {
       response.setStatus(Response.FAIL);
@@ -85,7 +96,7 @@ public class CommBoardTable extends JsonDataTable<CommBoardDTO> implements DataP
       return;
     }
 
-    list.remove(index);
+    list.remove(deleteCommBoard);
     response.setStatus(Response.SUCCESS);
   }
 
@@ -105,18 +116,18 @@ public class CommBoardTable extends JsonDataTable<CommBoardDTO> implements DataP
       return 1;
     }
   }
-  private CommBoardDTO findByCommNo(int no) {
+  private CommBoardDTO findByCommNo(int commNo) {
     for (CommBoardDTO commBoardDTO : list) {
-      if (commBoardDTO.getCommNo() == no) {
+      if (commBoardDTO.getCommNo() == commNo) {
         return commBoardDTO;
       }
     }
     return null;
   }
 
-  private int indexOf(int commBoardNo) {
+  private int indexOf(int commNo) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getCommNo() == commBoardNo) {
+      if (list.get(i).getCommNo() == commNo) {
         return i;
       }
     }

@@ -15,6 +15,11 @@ public class AdminNoticeListHandler extends AbstractAdminNoticeHandler {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[공지사항 목록]");
 
+    if (noticeDTOList.isEmpty()) {
+      System.out.println();
+      System.out.println("작성된 게시글이 없습니다.");
+    }
+
     for (NoticeDTO noticeDTO : noticeDTOList) {
       System.out.printf("%d, %s, %s, %s, %d\n", 
           noticeDTO.getNo(), 

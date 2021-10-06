@@ -1,28 +1,27 @@
 package com.share.ftp.handler.personal.donation;
 
 import static com.share.util.General.check.Waiting;
-import java.util.List;
+import java.util.Collection;
+import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.domain.personal.DonationBoardDTO;
-import com.share.ftp.domain.personal.DonationRegisterDTO;
 import com.share.util.Prompt;
 
 public class DonationAdminPrompt {
 
-  List<DonationBoardDTO> donationBoardDTOList;
-  List<DonationRegisterDTO> donationRegisterDTOList;
+  DonationBoardDao donationBoardDao;
 
-  public DonationAdminPrompt(List<DonationBoardDTO> donationBoardDTOList,
-      List<DonationRegisterDTO> donationRegisterDTOList) {
-    this.donationBoardDTOList = donationBoardDTOList;
-    this.donationRegisterDTOList = donationRegisterDTOList;
+  public DonationAdminPrompt(DonationBoardDao donationBoardDao) {
+    this.donationBoardDao = donationBoardDao;
   }
 
-  public DonationBoardDTO promptDonation() {
+  public DonationBoardDTO promptDonation() throws Exception {
     System.out.println();
     System.out.println("모금함목록:");
 
+    Collection<DonationBoardDTO> donationBoardList = donationBoardDao.findAll();
 
-    for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
+
+    for (DonationBoardDTO donationBoardDTO : donationBoardList) {
       if (donationBoardDTO.getIsSigned().equals(Waiting)) {
         System.out.println();
         System.out.printf("  [ %d. %s ]\n", donationBoardDTO.getNo(), donationBoardDTO.getTitle());
@@ -45,7 +44,7 @@ public class DonationAdminPrompt {
         //          donationRegisterDTO.setNo(donationBoardDTO.getNo());
         //        } 
         //      }
-        DonationBoardDTO selectedDonation = findByNo(donationBoardNo);
+        DonationBoardDTO selectedDonation = findByNo(donationBoardNo, donationBoardList);
         if (selectedDonation != null) {
           return selectedDonation;
         } 
@@ -70,8 +69,8 @@ public class DonationAdminPrompt {
     }
   }
 
-  protected DonationBoardDTO findByNo(int no) {
-    for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
+  protected DonationBoardDTO findByNo(int no, Collection<DonationBoardDTO> donationBoardList) throws Exception {
+    for (DonationBoardDTO donationBoardDTO : donationBoardList) {
       if (donationBoardDTO.getNo() == no) {
         return donationBoardDTO;
       }

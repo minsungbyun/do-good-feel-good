@@ -19,11 +19,10 @@ public class CommBoardUpdateHandler  implements Command {
 
     while (true) {
       System.out.println();
-      System.out.println("[  메인/소통해요/나눔이야기/게시글변경  ]");
+      System.out.println("[  나눔이야기 게시글변경  ]");
       int commNo = (int) request.getAttribute("commNo");
 
       CommBoardDTO commBoardDTO = commBoardDao.findByCommNo(commNo);
-
 
       if (commBoardDTO == null) {
         System.out.println("[  해당 게시글이 없습니다.  ]");

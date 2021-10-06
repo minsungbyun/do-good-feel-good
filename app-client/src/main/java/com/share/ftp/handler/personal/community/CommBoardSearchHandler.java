@@ -25,12 +25,16 @@ public class CommBoardSearchHandler implements Command {
 
     for(CommBoardDTO commBoardDTO : commBoardDTOList) {
       if(!commBoardDTO.getTitle().contains(input) &&
-          !commBoardDTO.getContent().contains(input)) {
+          !commBoardDTO.getContent().contains(input) &&
+          !commBoardDTO.getOwner().getId().contains(input)) {
         continue;
       }
 
+      System.out.printf("작성자 ▶ %s\n", commBoardDTO.getOwner().getId());
       System.out.printf("제목 ▶ %s\n", commBoardDTO.getTitle());
       System.out.printf("내용 ▶ %s\n", commBoardDTO.getContent());
+      System.out.printf("작성일 ▶ %s\n", commBoardDTO.getRegisteredDate());
+      System.out.printf("조회수 ▶ %d\n", commBoardDTO.getViewCount());
     }
   }
 }

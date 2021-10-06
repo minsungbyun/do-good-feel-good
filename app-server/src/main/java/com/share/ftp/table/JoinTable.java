@@ -156,39 +156,17 @@ public class JoinTable extends JsonDataTable<JoinDTO> implements DataProcessor {
   }
 
   private void validId(Request request, Response response) throws Exception {
-    //    String userId = request.getParameter("validId");
     JoinDTO loginUser = request.getObject(JoinDTO.class);
 
-    System.out.println("아이디 유효성 검사 하러 들어옴");
-    //    System.out.println("유효성 검사할 아이디 : "+ userId);
-    System.out.println("유효성 검사할 주소 : "+ loginUser);
-
-    //    JoinDTO existId = null;
-    //    System.out.println("exist : "+ existId);
-    //    System.out.println("loginUser.getId() : "+ loginUser.getId());
     for (JoinDTO user : list) {
       if (user.getId().equals(loginUser.getId())) {
         response.setStatus(Response.FAIL);
         response.setValue("이미 존재하는 아이디입니다. 다시 입력해주세요!");
-        //        existId = user;
         return;
       }
     }
     response.setStatus(Response.SUCCESS);
     response.setValue(loginUser);
-
-    //    System.out.println("아이디 유효성 검사 완료");
-    //    System.out.println("exist2 : "+ existId);
-    //    System.out.println("유효성 검사끝난 아이디 : "+ existId);
-    //
-    //    if (existId != null) {
-    //      response.setStatus(Response.SUCCESS);
-    //      response.setValue("이미 존재하는 아이디입니다. 다시 입력해주세요!");
-    //
-    //    } else {
-    //      response.setStatus(Response.FAIL);
-    //      response.setValue(loginUser);
-    //    }
   }
 
   private void getNextNum(Request request, Response response) throws Exception {

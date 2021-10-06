@@ -3,6 +3,7 @@ package com.share.ftp.dao.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import com.google.gson.Gson;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.dao.ChallengeReviewDao;
@@ -92,50 +93,108 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
     return requestAgent.getObject(ChallengeDTO.class);
   }
 
-  @Override
-  public String getRemainTime(long millis) {
-
-    long sec =  millis / 1000;
-    long min = sec / 60;
-    long hour = min / 60;
-    long day = (millis / 1000) / (24 * 60 * 60);
-
-    hour = hour % 24; 
-    sec = sec % 60;
-    min = min % 60;
-
-    return String.format("남은시간 ▶ %d일 %d시간 %d분 %d초 남았습니다\n", day, hour, min, sec);
-  }
 
   @Override
-  public void insert(ChallengeQuestionDTO addChallengeQuestion) throws Exception {
-    // TODO Auto-generated method stub
+  public void insertQuestion(ChallengeQuestionDTO addChallengeQuestion) throws Exception {
+    requestAgent.request("challengeQuestion.insert", addChallengeQuestion);
+
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      System.out.println("[ 챌린지 문의 등록이 정상적으로 완료되었습니다! ]");
+
+    } else {
+      throw new Exception("챌린지 문의 등록 실패!");
+    }
 
   }
 
   @Override
-  public void delete(ChallengeQuestionDTO challengeQuestion) throws Exception {
-    // TODO Auto-generated method stub
+  public List<ChallengeQuestionDTO> findAllQuestion() throws Exception {
+
+    requestAgent.request("challengeQuestion.selectList", null);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("챌린지 문의 목록 조회 실패!");
+    }
+    return new ArrayList<>(requestAgent.getObjects(ChallengeQuestionDTO.class));
+  }
+
+  @Override
+  public void updateQuestion(ChallengeQuestionDTO updateChallengeQuestion) throws Exception {
+
+    requestAgent.request("challengeQuestion.update", updateChallengeQuestion);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("챌린지 문의 변경 실패!");
+    }
 
   }
 
   @Override
-  public List<ChallengeQuestionDTO> findByKeyword(String keyword) throws Exception {
-    // TODO Auto-generated method stub
-    return null;
+  public void deleteQuestion(ChallengeQuestionDTO deleteChallengeQuestion) throws Exception {
+    requestAgent.request("challengeQuestion.delete", deleteChallengeQuestion);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("챌린지 문의 삭제 실패!");
+    }
+
   }
 
   @Override
-  public ChallengeQuestionDTO findByChallengeQuestionNo(int challengeQuestionNo,
-      ChallengeDTO challengeNo) throws Exception {
-    // TODO Auto-generated method stub
-    return null;
+  public void deleteQuestion(int deleteChallengeQuestionNo) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("deleteChallengeQuestionNo", String.valueOf(deleteChallengeQuestionNo));
+
+    requestAgent.request("challengeQuestion.deleteIndex", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("챌린지 문의 삭제 실패!");
+    }
+  }
+
+
+  @Override
+  public List<ChallengeQuestionDTO> findByQuestionKeyword(String questionKeyword) throws Exception {
+
+    HashMap<String,String> params = new HashMap<>();
+    params.put("challengeQuestionKeyword", questionKeyword);
+    requestAgent.request("challengeQuestion.selectListByKeyword", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("챌린지 문의 검색 실패!");
+    }
+
+    return new ArrayList<>(requestAgent.getObjects(ChallengeQuestionDTO.class));
+
+  }
+
+
+  @Override
+  public ChallengeQuestionDTO findByChallengeQuestionNo(int challengeQuestionNo,ChallengeDTO challengeNo) throws Exception {
+
+    HashMap<String,String> params = new HashMap<>();
+    params.put("challengeQuestionNo", String.valueOf(challengeQuestionNo));
+    params.put("challengeNo", new Gson().toJson(ChallengeDTO.class));
+    requestAgent.request("challengeQuestion.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      return null;
+    }
+
+    return requestAgent.getObject(ChallengeQuestionDTO.class);
+
   }
 
   @Override
   public int getNextQuestionNum(ChallengeDTO challengeDTO) throws Exception {
-    // TODO Auto-generated method stub
-    return 0;
+    requestAgent.request("challengeQuestion.getNextNum", challengeDTO);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      return 1;
+    }
+
+    ChallengeDTO challenge = requestAgent.getObject(ChallengeDTO.class);
+
+    return challenge.getQuestionCount();
   }
 
   @Override
@@ -158,10 +217,29 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
   }
 
   @Override
-  public void insert(ChallengeReviewDTO addChallengeReview) throws Exception {
+  public void insertReview(ChallengeReviewDTO addChallengeReview) throws Exception {
     // TODO Auto-generated method stub
 
   }
+
+  @Override
+  public List<ChallengeReviewDTO> findAllReview() throws Exception {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public void updateReview(ChallengeDTO updateChallengeReview) throws Exception {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void deleteReview(int deleteChallengeReviewNo) throws Exception {
+    // TODO Auto-generated method stub
+
+  }
+
 
   @Override
   public int getNextReviewNum(ChallengeDTO challengeDTO) throws Exception {
@@ -176,33 +254,27 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
     return null;
   }
 
+
   @Override
-  public boolean isEmpty() throws Exception {
-    // TODO Auto-generated method stub
-    return false;
+  public String getRemainTime(long millis) {
+
+    long sec =  millis / 1000;
+    long min = sec / 60;
+    long hour = min / 60;
+    long day = (millis / 1000) / (24 * 60 * 60);
+
+    hour = hour % 24; 
+    sec = sec % 60;
+    min = min % 60;
+
+    return String.format("남은시간 ▶ %d일 %d시간 %d분 %d초 남았습니다\n", day, hour, min, sec);
   }
 
   @Override
-  public List<ChallengeQuestionDTO> findAllQuestion() throws Exception {
+  public ChallengeQuestionDTO findByChallengeQuestionNo(int challengeQuestionNo) throws Exception {
     // TODO Auto-generated method stub
     return null;
   }
-
-  @Override
-  public List<ChallengeReviewDTO> findAllReview() throws Exception {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public void delete(int deleteChallengeReviewNo) throws Exception {
-    // TODO Auto-generated method stub
-
-  }
-
-
-
-
 
 
 }

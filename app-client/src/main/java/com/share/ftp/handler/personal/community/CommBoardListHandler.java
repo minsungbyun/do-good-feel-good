@@ -21,14 +21,19 @@ public class CommBoardListHandler implements Command {
     System.out.println("[  메인/소통해요/나눔이야기/목록  ]");
     System.out.println();
 
+    Collection<CommBoardDTO> commBoardDTOList = commBoardDao.findAll();
+
+    if (commBoardDTOList.isEmpty()) {
+      System.out.println("게시글이 없습니다.");
+      System.out.println();
+    }
 
     System.out.println("----------------------------------------------------");
     System.out.println("NO 제목 [댓글수]  작성자  작성일  조회 LIKE  첨부");
     System.out.println("-----------------------------------------------------");
 
-    Collection<CommBoardDTO> CommBoardDTOList = commBoardDao.findAll();
 
-    for(CommBoardDTO commBoardDTO : CommBoardDTOList) {
+    for(CommBoardDTO commBoardDTO : commBoardDTOList) {
 
       System.out.printf("%d, %s[%d], %s, %s, %d, %d, %s\n", 
           // AuthLoginHandler.loginUser.getId(),

@@ -7,6 +7,8 @@ import com.share.ftp.dao.CommBoardDao;
 import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.request.RequestAgent;
 
+// 게시글 데이터를 서버를 통해 관리한다.
+
 public class NetCommBoardDao implements CommBoardDao {
 
   RequestAgent requestAgent;
@@ -39,10 +41,10 @@ public class NetCommBoardDao implements CommBoardDao {
   }
 
   @Override
-  public List<CommBoardDTO> findByKeyword(String commBoardkeyword) throws Exception {
+  public List<CommBoardDTO> findByKeyword(String keyword) throws Exception {
     HashMap<String,String> params = new HashMap<>();
-    params.put("commBoardKeyword", commBoardkeyword);
-    requestAgent.request("commBoardNo.selectListByKeyword", params);
+    params.put("keyword", keyword);
+    requestAgent.request("commBoard.selectListByKeyword", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("게시글 검색 실패!");
@@ -56,7 +58,7 @@ public class NetCommBoardDao implements CommBoardDao {
     HashMap<String,String> params = new HashMap<>();
     params.put("commBoardNo", String.valueOf(commBoardNo));
 
-    requestAgent.request("commBoardNo.selectOne", params);
+    requestAgent.request("commBoard.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;
@@ -68,7 +70,7 @@ public class NetCommBoardDao implements CommBoardDao {
 
   @Override
   public void update(CommBoardDTO updateCommBoard) throws Exception {
-    requestAgent.request("commBoardNo.update", updateCommBoard);
+    requestAgent.request("commBoard.update", updateCommBoard);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("게시글 변경 실패!");

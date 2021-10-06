@@ -1,19 +1,19 @@
 package com.share.ftp.handler.personal.donation;
 
 import static com.share.util.General.check.Applied;
-import java.util.List;
+import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.domain.personal.DonationBoardDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
-public class DonationBoardAcceptApplyHandler extends AbstractDonationBoardHandler {
+public class DonationBoardAcceptApplyHandler implements Command {
 
-  public DonationBoardAcceptApplyHandler(
-      List<DonationBoardDTO> donationBoardDTOList,
-      List<DonationBoardDTO> donationBoardApplyDTOList,
-      List<DonationBoardDTO> donationBoardRejectDTOList) {
+  DonationBoardDao donationBoardDao;
 
-    super(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList);
+  public DonationBoardAcceptApplyHandler(DonationBoardDao donationBoardDao) {
+
+    this.donationBoardDao = donationBoardDao;
   }
 
   @Override
@@ -39,7 +39,8 @@ public class DonationBoardAcceptApplyHandler extends AbstractDonationBoardHandle
 
     donationBoardAdminDTO.setIsSigned(Applied);
 
-    donationBoardApplyDTOList.add(donationBoardAdminDTO);
+    donationBoardDao.update(donationBoardAdminDTO);
+
     System.out.println();
     System.out.println("[ 해당 모금함 개설신청을 승인하였습니다. ]");
 

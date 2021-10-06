@@ -1,20 +1,20 @@
 package com.share.ftp.handler.personal.donation;
 
 import java.text.DecimalFormat;
-import java.util.List;
+import java.util.Collection;
+import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.domain.personal.DonationBoardDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 
-public class DonationBoardApplyCompleteListHandler extends AbstractDonationBoardHandler {
+public class DonationBoardApplyCompleteListHandler implements Command {
 
+  DonationBoardDao donationBoardDao;
 
-  public DonationBoardApplyCompleteListHandler(
-      List<DonationBoardDTO> donationBoardDTOList,
-      List<DonationBoardDTO> donationBoardApplyDTOList,
-      List<DonationBoardDTO> donationBoardRejectDTOList) {
+  public DonationBoardApplyCompleteListHandler(DonationBoardDao donationBoardDao) {
 
-    super(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList);
+    this.donationBoardDao = donationBoardDao;
 
   }
 
@@ -23,17 +23,18 @@ public class DonationBoardApplyCompleteListHandler extends AbstractDonationBoard
 
     DecimalFormat formatter = new DecimalFormat("###,###,###");
 
+    Collection<DonationBoardDTO> donationBoardList = donationBoardDao.findAll();
 
     System.out.println();
     System.out.println("[나의 모금함 개설 신청서 목록]");
 
-    if (donationBoardDTOList.isEmpty()) {
+    if (donationBoardList.isEmpty()) {
       System.out.println();
       System.out.println("[ 현재 등록된 모금함 개설목록이 없습니다. ]");
       return;
     }
 
-    for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
+    for (DonationBoardDTO donationBoardDTO : donationBoardList) {
       if (donationBoardDTO.getLeader().equals(AuthLoginHandler.getLoginUser().getName())) {
         System.out.printf("개설번호: %d\n모금함 분류: %s\n제목: %s\n주최자: %s\n내용: %s\n첨부파일: %s\n"
             + "개설기간: %s ~ %s\n목표금액: %s원\n승인여부: %s\n", 
@@ -48,11 +49,12 @@ public class DonationBoardApplyCompleteListHandler extends AbstractDonationBoard
             formatter.format(donationBoardDTO.getMoneyTarget()),
             donationBoardDTO.getIsSigned());
         System.out.println("------------------------------------------");
-      } else {
-        System.out.println();
-        System.out.println("[ 현재 등록된 모금함 개설목록이 없습니다. ]");
-        return;
-      }
+      } 
+      //      else {
+      //        System.out.println();
+      //        System.out.println("[ 현재 등록된 모금함 개설목록이 없습니다. ]");
+      //        return;
+      //      }
     }
   }
 }
