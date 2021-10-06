@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import com.share.context.ApplicationContextListener;
 import com.share.ftp.dao.ChallengeDao;
-import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.dao.JoinDao;
@@ -81,9 +80,7 @@ import com.share.ftp.handler.personal.challenge.ChallengeQuestionDeleteHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionUpdateHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeRankingHandler;
-import com.share.ftp.handler.personal.challenge.ChallengeReviewDeleteHandler;
-import com.share.ftp.handler.personal.challenge.ChallengeReviewSearchHandler;
-import com.share.ftp.handler.personal.challenge.ChallengeReviewUpdateHandler;
+import com.share.ftp.handler.personal.challenge.ChallengeReviewListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeWishHandler;
 import com.share.ftp.handler.personal.challenge.MyChallengeDetailHandler;
 import com.share.ftp.handler.personal.challenge.MyChallengeListHandler;
@@ -356,7 +353,8 @@ public class ClientApp {
     JoinDao netJoinDao = new NetJoinDao(requestAgent);
     ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
     QuestionDao questionDao = new NetQuestionDao(requestAgent);
-    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
+    //    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
+    //    ChallengeReviewDao netChallengeReviewDao = new NetChallengeDao(requestAgent);
 
 
     //로그인, 로그아웃
@@ -435,21 +433,22 @@ public class ClientApp {
     commands.put("/challengeDetail/wish", new ChallengeWishHandler(challengeDTOList));  // 관심 챌린지 등록(찜하기)
 
     // 챌린지 참여인증&댓글
-    //    commands.put("/challengeReview/add", new ChallengeReviewAddHandler(netChallengeDao));
-    //    commands.put("/challengeReview/list", new ChallengeReviewListHandler(challengeReviewDTOList, challengeDTOList));
-    commands.put("/challengeReview/update", new ChallengeReviewUpdateHandler(challengeReviewDTOList, challengeDTOList));
-    commands.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(challengeReviewDTOList, challengeDTOList));
-    commands.put("/challengeReview/search", new ChallengeReviewSearchHandler(challengeReviewDTOList, challengeDTOList));
-    //    commands.put("/challengeReview/connect", new ChallengeReviewConnectHandler(challengeReviewDTOList, challengeDTOList));
+    //    commands.put("/challengeReview/add", new ChallengeReviewAddHandler(netChallengeReviewDao, netChallengeDao));
+    commands.put("/challengeReview/list", new ChallengeReviewListHandler(netChallengeDao));
+    //    commands.put("/challengeReview/update", new ChallengeReviewUpdateHandler(netChallengeDao, netChallengeReviewDao));
+    //    commands.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(netChallengeReviewDao, netChallengeDao));
+    //    //    commands.put("/challengeReview/search", new ChallengeReviewSearchHandler(netChallengeReviewDao, netChallengeDao));
+    //    commands.put("/challengeReview/connect", new ChallengeReviewConnectHandler(netChallengeReviewDao, netChallengeDao));
 
     // 챌린지 문의하기
-    commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(netChallengeQuestionDao));
-    commands.put("/challengeQuestion/list", new ChallengeQuestionListHandler(netChallengeDao, netChallengeQuestionDao));
+    commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(netChallengeDao));
+    commands.put("/challengeQuestion/list", new ChallengeQuestionListHandler(netChallengeDao));
     //    commands.put("/challengeQuestion/detail", new ChallengeQuestionDetailHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
-    commands.put("/challengeQuestion/update", new ChallengeQuestionUpdateHandler(netChallengeDao, netChallengeQuestionDao));
-    commands.put("/challengeQuestion/delete", new ChallengeQuestionDeleteHandler(netChallengeDao, netChallengeQuestionDao));
+    commands.put("/challengeQuestion/update", new ChallengeQuestionUpdateHandler(netChallengeDao));
+    commands.put("/challengeQuestion/delete", new ChallengeQuestionDeleteHandler(netChallengeDao));
     //    commands.put("/challengeQuestion/search", new ChallengeQuestionSearchHandler(netChallengeDao, netChallengeQuestionDao));
-    commands.put("/challengeQuestion/connect", new ChallengeQuestionConnectHandler(netChallengeDao, netChallengeQuestionDao));
+    commands.put("/challengeQuestion/connect", new ChallengeQuestionConnectHandler(netChallengeDao));
+
 
     // 챌린지 랭킹
     commands.put("/ranking/list", new ChallengeRankingHandler(joinDTOList));  //전체랭킹(구현예정)
@@ -544,7 +543,7 @@ public class ClientApp {
     // 관리자 챌린지
     commands.put("/adminChallenge/add", new AdminChallengeAddHandler(netChallengeDao));
     commands.put("/adminChallenge/list", new AdminChallengeListHandler(netChallengeDao));
-    commands.put("/adminChallenge/detail", new AdminChallengeDetailHandler(challengeDTOList));
+    commands.put("/adminChallenge/detail", new AdminChallengeDetailHandler(netChallengeDao));
     commands.put("/adminChallenge/update", new AdminChallengeUpdateHandler(netChallengeDao));
     commands.put("/adminChallenge/delete", new AdminChallengeDeleteHandler(netChallengeDao));
     commands.put("/adminChallenge/QuestionList", new AdminChallengeQuestionListHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
@@ -558,9 +557,9 @@ public class ClientApp {
     //    challengeReviewMap.put("/challengeReview/add", new ChallengeReviewAddHandler(netChallengeDao, challengeDTOList));
     //    challengeReviewMap.put("/challengeReview/list", new ChallengeReviewListHandler(challengeReviewDTOList, challengeDTOList));
     //    challengeReviewMap.put("/challengeReview/detail", new ChallengeReviewDetailHandler(myChallengeReviewDTOList));
-    challengeReviewMap.put("/challengeReview/update", new ChallengeReviewUpdateHandler(challengeReviewDTOList, challengeDTOList));
-    challengeReviewMap.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(challengeReviewDTOList, challengeDTOList));
-    challengeReviewMap.put("/challengeReview/search", new ChallengeReviewSearchHandler(challengeReviewDTOList, challengeDTOList));
+    //    challengeReviewMap.put("/challengeReview/update", new ChallengeReviewUpdateHandler(challengeReviewDTOList, challengeDTOList));
+    //    challengeReviewMap.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(challengeReviewDTOList, challengeDTOList));
+    //    challengeReviewMap.put("/challengeReview/search", new ChallengeReviewSearchHandler(challengeReviewDTOList, challengeDTOList));
   }
 
 

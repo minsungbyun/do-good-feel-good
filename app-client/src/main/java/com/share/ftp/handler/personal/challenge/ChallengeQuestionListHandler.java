@@ -2,7 +2,6 @@ package com.share.ftp.handler.personal.challenge;
 
 import java.util.Collection;
 import com.share.ftp.dao.ChallengeDao;
-import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
@@ -12,12 +11,10 @@ import com.share.util.Prompt;
 public class ChallengeQuestionListHandler implements Command {
 
   ChallengeDao challengeDao;
-  ChallengeQuestionDao challengeQuestionDao;
 
 
-  public ChallengeQuestionListHandler(ChallengeDao challengeDao,ChallengeQuestionDao challengeQuestionDao) {
+  public ChallengeQuestionListHandler(ChallengeDao challengeDao) {
     this.challengeDao = challengeDao;
-    this.challengeQuestionDao = challengeQuestionDao;
   }
 
   @Override
@@ -63,9 +60,10 @@ public class ChallengeQuestionListHandler implements Command {
         System.out.println();
       }
 
+      System.out.println("여기까지 오나? 1번");
 
-      Collection<ChallengeQuestionDTO> list = challengeQuestionDao.findAllQuestion();
-
+      Collection<ChallengeQuestionDTO> list = challengeDao.findAllQuestion();
+      System.out.println("여기까지 오나? 2번");
 
       for (ChallengeQuestionDTO challengeQuestionDTO : list) {
         if (challengeQuestionDTO.getNo() == challengeNo) {

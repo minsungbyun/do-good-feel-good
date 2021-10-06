@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.challenge;
 
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.ChallengeReviewDao;
+import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -27,13 +28,15 @@ public class ChallengeReviewConnectHandler implements Command {
 
     int challengeNo = (int) request.getAttribute("challengeNo");
 
+    ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
+
     int reviewNo = Prompt.inputInt("댓글 번호를 입력해주세요 ▶ ");
 
     //    if (reviewNo == 0) {
     //      return;
     //    }
 
-    ChallengeReviewDTO challengeReviewDTO = challengeReviewDao.findByChallengeReviewNo(reviewNo);
+    ChallengeReviewDTO challengeReviewDTO = challengeReviewDao.findByChallengeReviewNo(reviewNo, challengeDTO);
 
     if (challengeReviewDTO == null) {
       System.out.println("해당 번호의 참여인증&댓글이 없습니다.");
