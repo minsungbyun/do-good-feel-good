@@ -15,13 +15,13 @@ public class CommReviewTable extends JsonDataTable<CommReviewDTO> implements Dat
   @Override
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
-      case "commReivew.insert": insert(request, response); break;
-      case "commReivew.selectList": selectList(request, response); break;
-      case "commReivew.selectListByKeyword": selectListByKeyword(request, response); break;
-      case "commReivew.selectOne": selectOne(request, response); break;
-      case "commReivew.update": update(request, response); break;
-      case "commReivew.delete": delete(request, response); break;
-      case "commReivew.getNextNum": getNextNum(request, response); break;
+      case "commReview.insert": insert(request, response); break;
+      case "commReview.selectList": selectList(request, response); break;
+      case "commReview.selectListByKeyword": selectListByKeyword(request, response); break;
+      case "commReview.selectOne": selectOne(request, response); break;
+      case "commReview.update": update(request, response); break;
+      case "commReview.delete": delete(request, response); break;
+      case "commReview.getNextNum": getNextNum(request, response); break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -65,7 +65,7 @@ public class CommReviewTable extends JsonDataTable<CommReviewDTO> implements Dat
       response.setValue(commReviewDTO);
     } else {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 후기 찾을 수 없습니다.");
+      response.setValue("해당 번호의 후기를 찾을 수 없습니다.");
     }
   }
 
@@ -75,7 +75,7 @@ public class CommReviewTable extends JsonDataTable<CommReviewDTO> implements Dat
     int index = indexOf(updateCommReview.getCommReviewNo());
     if (index == -1) {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
+      response.setValue("해당 번호의 후기를 찾을 수 없습니다.");
       return;
     }
 
@@ -91,7 +91,7 @@ public class CommReviewTable extends JsonDataTable<CommReviewDTO> implements Dat
 
     if (index == -1) {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
+      response.setValue("해당 번호의 후기를 찾을 수 없습니다.");
       return;
     }
 
