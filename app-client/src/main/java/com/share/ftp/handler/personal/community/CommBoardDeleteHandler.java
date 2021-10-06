@@ -1,19 +1,19 @@
 package com.share.ftp.handler.personal.community;
 
-import java.util.List;
+import com.share.ftp.dao.CommBoardDao;
 import com.share.ftp.domain.personal.CommBoardDTO;
-import com.share.ftp.domain.personal.CommBoardReplyDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
-public class CommBoardDeleteHandler extends AbstractCommBoardHandler {
+public class CommBoardDeleteHandler implements Command {
 
+  CommBoardDao commBoardDao;
 
-  public CommBoardDeleteHandler(
-      List<CommBoardDTO> commBoardDTOList, 
-      List<CommBoardReplyDTO> commBoardReplyDTOList) {
-    super(commBoardDTOList, commBoardReplyDTOList);
+  public CommBoardDeleteHandler(CommBoardDao commBoardDao) {
+    this.commBoardDao =  commBoardDao;
   }
+
   @Override
   public void execute(CommandRequest request) throws Exception {
 
@@ -23,7 +23,7 @@ public class CommBoardDeleteHandler extends AbstractCommBoardHandler {
       System.out.println("[  메인/소통해요/나눔이야기/게시글삭제  ]");
       int commNo = (int) request.getAttribute("commNo");
 
-      CommBoardDTO commBoardDTO = findByNo(commNo);
+      CommBoardDTO commBoardDTO = commBoardDao.findByCommNo(commNo);
 
       try {
 
@@ -44,7 +44,7 @@ public class CommBoardDeleteHandler extends AbstractCommBoardHandler {
 
         } else if(input.equals("y")) {
           System.out.println("[  ✔️ 게시글을 삭제하였습니다.  ]");
-          commBoardDTOList.remove(commBoardDTO);
+          commBoardDao.delete(commNo);
           return;
         }
 

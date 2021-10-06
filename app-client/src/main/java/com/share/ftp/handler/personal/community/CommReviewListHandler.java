@@ -1,25 +1,31 @@
 package com.share.ftp.handler.personal.community;
 
-import java.util.List;
+import java.util.Collection;
+import com.share.ftp.dao.CommReviewDao;
 import com.share.ftp.domain.personal.CommReviewDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class CommReviewListHandler extends AbstractCommReviewHandler {
+public class CommReviewListHandler implements Command {
 
-  public CommReviewListHandler(List<CommReviewDTO> commReviewDTOList) {
-    super(commReviewDTOList);
+  CommReviewDao commReviewDao;
+
+  public CommReviewListHandler(CommReviewDao commReviewDao) {
+    this.commReviewDao = commReviewDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
+    System.out.println("[  한줄후기 목록  ]");
+    System.out.println();
 
-    System.out.println("[  소통해요/한줄후기/목록  ]");
+    Collection<CommReviewDTO> commReviewDTOList = commReviewDao.findAll();
 
     if (commReviewDTOList.isEmpty()) {
-      System.out.println("[  작성된 게시글이 없습니다.  ]");
+      System.out.println("[  작성된 후기가 없습니다.  ]");
       return;
     }
 
@@ -37,7 +43,7 @@ public class CommReviewListHandler extends AbstractCommReviewHandler {
         return;
       }
 
-      CommReviewDTO commReview = findByNo(commReviewNo);
+      CommReviewDTO commReview = commReviewDao.findByCommReviewNo(commReviewNo);
 
       if (commReview == null) {
         System.out.println("해당 번호의 후기가 없습니다.");

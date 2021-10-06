@@ -1,18 +1,18 @@
 package com.share.ftp.handler.personal.community;
 
-import java.util.List;
+import java.util.Collection;
+import com.share.ftp.dao.CommBoardDao;
 import com.share.ftp.domain.personal.CommBoardDTO;
-import com.share.ftp.domain.personal.CommBoardReplyDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 
-public class CommBoardListHandler extends AbstractCommBoardHandler {
+public class CommBoardListHandler implements Command {
 
-  public CommBoardListHandler(
-      List<CommBoardDTO> commBoardDTOList, 
-      List<CommBoardReplyDTO> commBoardReplyDTOList) {
-    super(commBoardDTOList, commBoardReplyDTOList);
+  CommBoardDao commBoardDao;
+
+  public CommBoardListHandler(CommBoardDao commBoardDao) {
+    this.commBoardDao =  commBoardDao;
   }
-
 
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -21,16 +21,19 @@ public class CommBoardListHandler extends AbstractCommBoardHandler {
     System.out.println("[  메인/소통해요/나눔이야기/목록  ]");
     System.out.println();
 
+    Collection<CommBoardDTO> commBoardDTOList = commBoardDao.findAll();
+
     if (commBoardDTOList.isEmpty()) {
-      System.out.println("[  작성된 게시글이 없습니다.  ]");
-      return;
+      System.out.println("게시글이 없습니다.");
+      System.out.println();
     }
 
-    System.out.println("------------------------------------------------------------------");
-    System.out.println("NO    제목 [댓글수]      작성자     작성일  조회 LIKE    첨부");
-    System.out.println("------------------------------------------------------------------");
-    for(CommBoardDTO commBoardDTO : commBoardDTOList) {
+    System.out.println("----------------------------------------------------");
+    System.out.println("NO 제목 [댓글수]  작성자  작성일  조회 LIKE  첨부");
+    System.out.println("-----------------------------------------------------");
 
+
+    for(CommBoardDTO commBoardDTO : commBoardDTOList) {
 
       System.out.printf("%d, %s[%d], %s, %s, %d, %d, %s\n", 
           // AuthLoginHandler.loginUser.getId(),
