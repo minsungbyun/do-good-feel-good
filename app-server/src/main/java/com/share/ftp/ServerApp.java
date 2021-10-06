@@ -3,6 +3,8 @@ package com.share.ftp;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
+import com.share.ftp.table.ChallengeQuestionTable;
+import com.share.ftp.table.ChallengeReviewTable;
 import com.share.ftp.table.ChallengeTable;
 import com.share.ftp.table.CommBoardTable;
 import com.share.ftp.table.CommReviewTable;
@@ -28,8 +30,8 @@ public class ServerApp {
 
     // => 데이터 처리 담당자를 등록한다.
     dataProcessorMap.put("join.", new JoinTable());
-    dataProcessorMap.put("challenge.", new ChallengeTable());
-    dataProcessorMap.put("challengeReview.", new ChallengeTable());
+    dataProcessorMap.put("challengeReview.", new ChallengeReviewTable());
+    dataProcessorMap.put("challengeQuestion.", new ChallengeQuestionTable());
 
     dataProcessorMap.put("commBoard.", new CommBoardTable());
     dataProcessorMap.put("commReview.", new CommReviewTable());

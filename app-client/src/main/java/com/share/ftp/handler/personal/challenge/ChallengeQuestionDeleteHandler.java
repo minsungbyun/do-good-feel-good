@@ -1,7 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
 import com.share.ftp.dao.ChallengeDao;
-import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
@@ -13,11 +12,9 @@ public class ChallengeQuestionDeleteHandler implements Command {
 
 
   ChallengeDao challengeDao;
-  ChallengeQuestionDao challengeQuestionDao;
 
-  public ChallengeQuestionDeleteHandler(ChallengeDao challengeDao, ChallengeQuestionDao challengeQuestionDao) {
+  public ChallengeQuestionDeleteHandler(ChallengeDao challengeDao) {
     this.challengeDao = challengeDao;
-    this.challengeQuestionDao = challengeQuestionDao;
   }
 
 
@@ -38,7 +35,7 @@ public class ChallengeQuestionDeleteHandler implements Command {
 
       int questionNo = (int) request.getAttribute("questionNo");
 
-      ChallengeQuestionDTO deleteChallengeQuestion = challengeQuestionDao.findByChallengeQuestionNo(challengeNo, questionNo);
+      ChallengeQuestionDTO deleteChallengeQuestion = challengeDao.findByChallengeQuestionNo(challengeNo, questionNo);
       try {
         if (deleteChallengeQuestion == null) {
           System.out.println("해당 번호의 문의가 없습니다.");
@@ -68,7 +65,7 @@ public class ChallengeQuestionDeleteHandler implements Command {
 
 
           deleteChallengeQuestion.setQuestionNo(deleteChallengeQuestion.getQuestionNo() - 1);
-          challengeQuestionDao.deleteQuestion(deleteChallengeQuestion);
+          challengeDao.deleteQuestion(deleteChallengeQuestion);
           return;
         } else {
           System.out.println("y 또는 n을 입력하세요.");

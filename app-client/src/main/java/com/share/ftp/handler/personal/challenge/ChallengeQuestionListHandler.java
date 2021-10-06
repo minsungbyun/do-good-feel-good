@@ -1,24 +1,27 @@
 package com.share.ftp.handler.personal.challenge;
 
-import java.util.List;
+import java.util.Collection;
+import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeQuestionDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
-public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandler {
+public class ChallengeQuestionListHandler implements Command {
+
+  ChallengeDao challengeDao;
 
 
-  public ChallengeQuestionListHandler(List<ChallengeQuestionDTO> challengeQuestionDTOList,
-      List<ChallengeDTO> challengeDTOList, List<ChallengeQuestionDTO> challengeReplyList) {
-    super(challengeQuestionDTOList, challengeDTOList, challengeReplyList);
+  public ChallengeQuestionListHandler(ChallengeDao challengeDao) {
+    this.challengeDao = challengeDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     while (true) {
       int challengeNo = (int) request.getAttribute("challengeNo");
-      ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
+      ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
 
       System.out.println();
       System.out.printf("[ %d번 챌린지 문의 목록 ]\n", challengeNo);
@@ -52,13 +55,17 @@ public class ChallengeQuestionListHandler extends AbstractChallengeQuestionHandl
       System.out.printf("[ 댓글 %d개 ]\n", challengeDTO.getQuestionCount());
 
 
-      if (challengeDTO.getQuestionCount() == 0 || challengeQuestionDTOList.isEmpty()) {
+      if (challengeDTO.getQuestionCount() == 0 /*|| challengeQuestionDTOList.isEmpty()*/) {
         System.out.println("문의댓글이 없습니다!");
         System.out.println();
       }
 
+      System.out.println("여기까지 오나? 1번");
 
-      for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
+      Collection<ChallengeQuestionDTO> list = challengeDao.findAllQuestion();
+      System.out.println("여기까지 오나? 2번");
+
+      for (ChallengeQuestionDTO challengeQuestionDTO : list) {
         if (challengeQuestionDTO.getNo() == challengeNo) {
           System.out.printf("%d, %s, %s, %s\n", 
               //              challengeQuestionDTO.getNo(),
