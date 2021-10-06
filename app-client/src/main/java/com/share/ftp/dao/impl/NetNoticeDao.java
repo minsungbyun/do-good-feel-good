@@ -3,23 +3,24 @@ package com.share.ftp.dao.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import com.share.ftp.dao.QuestionDao;
+import com.share.ftp.dao.NoticeDao;
+import com.share.ftp.domain.admin.NoticeDTO;
 import com.share.ftp.domain.personal.QuestionListDTO;
 import com.share.request.RequestAgent;
 
 // 게시글 데이터를 서버를 통해 관리한다.
 //
-public class NetQuestionDao implements QuestionDao {
+public class NetNoticeDao implements NoticeDao {
 
   RequestAgent requestAgent;
 
-  public NetQuestionDao(RequestAgent requestAgent) {
+  public NetNoticeDao(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 
   @Override
-  public void insert(QuestionListDTO addQuestion) throws Exception {
-    requestAgent.request("question.insert", addQuestion);
+  public void insert(NoticeDTO addNotice) throws Exception {
+    requestAgent.request("question.insert", addNotice);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("게시글 등록 실패!");
     }

@@ -127,9 +127,9 @@ public class QuestionTable extends JsonDataTable<QuestionListDTO> implements Dat
     return null;
   }
 
-  private int indexOf(int no) {
+  private int indexOf(int questionNo) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getNo() == no) {
+      if (list.get(i).getNo() == questionNo) {
         return i;
       }
     }

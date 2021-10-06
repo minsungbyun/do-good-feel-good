@@ -352,16 +352,12 @@ public class ClientApp {
 
   public ClientApp() throws Exception {
 
-    requestAgent = new RequestAgent("192.168.0.76", 8888);
+    requestAgent = new RequestAgent("127.0.0.1", 8888);
 
     JoinDao netJoinDao = new NetJoinDao(requestAgent);
     ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
-<<<<<<< HEAD
     QuestionDao questionDao = new NetQuestionDao(requestAgent);
-=======
     ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
->>>>>>> 2577884e828543338d4c2fc2c4a00eea4628bf5b
-
 
     //로그인, 로그아웃
     commands.put("/auth/login", new AuthLoginHandler(netJoinDao)); // 로그인
