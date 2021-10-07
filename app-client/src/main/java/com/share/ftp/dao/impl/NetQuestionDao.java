@@ -18,8 +18,8 @@ public class NetQuestionDao implements QuestionDao {
   }
 
   @Override
-  public void insert(QuestionListDTO questionListDTO) throws Exception {
-    requestAgent.request("question.insert", questionListDTO);
+  public void insert(QuestionListDTO addQuestion) throws Exception {
+    requestAgent.request("question.insert", addQuestion);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("게시글 등록 실패!");
     }

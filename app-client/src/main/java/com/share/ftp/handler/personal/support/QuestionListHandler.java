@@ -28,7 +28,7 @@ public class QuestionListHandler implements Command {
 
     for (QuestionListDTO questionListDTO : questionList) {
 
-      System.out.printf("%d, %s, %s, %s, %s, %d\n", 
+      System.out.printf("%d, %s, %s,　%s, %s, %d\n", 
           questionListDTO.getNo(),
           questionListDTO.getQnaType(),
           questionListDTO.getTitle(), 

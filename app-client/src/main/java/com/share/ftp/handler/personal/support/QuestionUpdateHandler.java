@@ -37,7 +37,6 @@ public class QuestionUpdateHandler implements Command {
           return;
         }
 
-
         QuestionListDTO updateQuestion = new QuestionListDTO();
 
         updateQuestion.setTitle(Prompt.inputString("제목(" + questionListDTO.getTitle() + ")? "));

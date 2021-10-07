@@ -1,28 +1,28 @@
 package com.share.ftp.table;
 
 import java.util.ArrayList;
-import com.share.ftp.domain.personal.QuestionListDTO;
+import com.share.ftp.domain.admin.NoticeDTO;
 import com.share.server.DataProcessor;
 import com.share.server.Request;
 import com.share.server.Response;
 
 // 게시글 데이터를 처리하는 일을 한다.
-public class QuestionTable extends JsonDataTable<QuestionListDTO> implements DataProcessor {
+public class NoticeTable extends JsonDataTable<NoticeDTO> implements DataProcessor {
 
-  public QuestionTable() {
-    super("question.json", QuestionListDTO.class);
+  public NoticeTable() {
+    super("notice.json",NoticeDTO.class);
   }
 
   @Override
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand() ) {
-      case "question.insert": insert(request, response); break;
-      case "question.selectList": selectList(request, response); break;
-      case "question.selectListByKeyword": selectListByKeyword(request, response); break;
-      case "question.selectOne": selectOne(request, response); break;
-      case "question.update": update(request, response); break;
-      case "question.delete": delete(request, response); break;
-      case "question.getNextNum": getNextNum(request, response); break;
+      case "notice.insert": insert(request, response); break;
+      case "notice.selectList": selectList(request, response); break;
+      case "notice.selectListByKeyword": selectListByKeyword(request, response); break;
+      case "notice.selectOne": selectOne(request, response); break;
+      case "notice.update": update(request, response); break;
+      case "notice.delete": delete(request, response); break;
+      case "notice.getNextNum": getNextNum(request, response); break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -30,9 +30,9 @@ public class QuestionTable extends JsonDataTable<QuestionListDTO> implements Dat
   }
 
   private void insert(Request request, Response response) throws Exception {
-    QuestionListDTO question = request.getObject(QuestionListDTO.class);
-    System.out.println(question);
-    list.add(question);
+    NoticeDTO noticeDTO = request.getObject(NoticeDTO.class);
+    System.out.println(noticeDTO);
+    list.add(noticeDTO);
     response.setStatus(Response.SUCCESS);
   }
 
@@ -44,14 +44,14 @@ public class QuestionTable extends JsonDataTable<QuestionListDTO> implements Dat
   private void selectListByKeyword(Request request, Response response) throws Exception {
     String keyword = request.getParameter("keyword");
 
-    ArrayList<QuestionListDTO> searchResult = new ArrayList<>();
-    for (QuestionListDTO questionListDTO : list) {
-      if (!questionListDTO.getTitle().contains(keyword) &&
-          !questionListDTO.getContent().contains(keyword) &&
-          !questionListDTO.getOwner().getId().contains(keyword)) {
+    ArrayList<NoticeDTO> searchResult = new ArrayList<>();
+    for (NoticeDTO noticeDTO : list) {
+      if (!noticeDTO.getTitle().contains(keyword) &&
+          !noticeDTO.getContent().contains(keyword) &&
+          !noticeDTO.getOwner().getId().contains(keyword)) {
         continue;
       }
-      searchResult.add(questionListDTO);
+      searchResult.add(noticeDTO);
     }
 
     response.setStatus(Response.SUCCESS);
@@ -59,12 +59,12 @@ public class QuestionTable extends JsonDataTable<QuestionListDTO> implements Dat
   }
 
   private void selectOne(Request request, Response response) throws Exception {
-    int questionNo = Integer.parseInt(request.getParameter("questionNo"));
-    QuestionListDTO questionListDTO = findByNo(questionNo);
+    int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+    NoticeDTO noticeDTO = findByNoticeNo(noticeNo);
 
-    if (questionListDTO != null) {
+    if (noticeDTO != null) {
       response.setStatus(Response.SUCCESS);
-      response.setValue(questionListDTO);
+      response.setValue(noticeDTO);
     } else {
       response.setStatus(Response.FAIL);
       response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
@@ -72,24 +72,26 @@ public class QuestionTable extends JsonDataTable<QuestionListDTO> implements Dat
   }
 
   private void update(Request request, Response response) throws Exception {
-    QuestionListDTO updateQuestion = request.getObject(QuestionListDTO.class);
+    NoticeDTO updateNotice = request.getObject(NoticeDTO.class);
 
-    int index = indexOf(updateQuestion.getNo());
+    int index = indexOf(updateNotice.getNo());
+
     if (index == -1) {
       response.setStatus(Response.FAIL);
       response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
       return;
     }
 
-    list.set(index, updateQuestion);
+    list.set(index, updateNotice);
     response.setStatus(Response.SUCCESS);
   }
 
   private void delete(Request request, Response response) throws Exception {
-    QuestionListDTO deleteQuestion = request.getObject(QuestionListDTO.class);
+    NoticeDTO deleteNotice = request.getObject(NoticeDTO.class);
 
-    int questionNo = Integer.parseInt(request.getParameter("questionNo"));
-    int index = indexOf(questionNo);
+    int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+
+    int index = indexOf(noticeNo);
 
     if (index == -1) {
       response.setStatus(Response.FAIL);
@@ -97,17 +99,17 @@ public class QuestionTable extends JsonDataTable<QuestionListDTO> implements Dat
       return;
     }
 
-    list.remove(deleteQuestion);
+    list.remove(deleteNotice);
     response.setStatus(Response.SUCCESS);
   }
 
   private void getNextNum(Request request, Response response) throws Exception {
-    QuestionListDTO question = new QuestionListDTO();
+    NoticeDTO noticeDTO = new NoticeDTO();
 
-    question.setNo(getLastNum());
+    noticeDTO.setNo(getLastNum());
 
     response.setStatus(Response.SUCCESS);
-    response.setValue(question);
+    response.setValue(noticeDTO);
   }
 
   private int getLastNum() {
@@ -118,18 +120,18 @@ public class QuestionTable extends JsonDataTable<QuestionListDTO> implements Dat
     }
   }
 
-  private QuestionListDTO findByNo(int questionNo) {
-    for (QuestionListDTO questionListDTO : list) {
-      if (questionListDTO.getNo() == questionNo) {
-        return questionListDTO;
+  private NoticeDTO findByNoticeNo(int noticeNo) {
+    for (NoticeDTO noticeDTO : list) {
+      if (noticeDTO.getNo() == noticeNo) {
+        return noticeDTO;
       }
     }
     return null;
   }
 
-  private int indexOf(int questionNo) {
+  private int indexOf(int noticeNo) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getNo() == questionNo) {
+      if (list.get(i).getNo() == noticeNo) {
         return i;
       }
     }

@@ -11,6 +11,7 @@ import com.share.ftp.table.CommReviewTable;
 import com.share.ftp.table.DonationBoardTable;
 import com.share.ftp.table.DonationRegisterTable;
 import com.share.ftp.table.JoinTable;
+import com.share.ftp.table.NoticeTable;
 import com.share.ftp.table.QuestionTable;
 import com.share.server.DataProcessor;
 import com.share.server.RequestProcessor;
@@ -34,6 +35,9 @@ public class ServerApp {
     dataProcessorMap.put("commBoard.", new CommBoardTable());
     dataProcessorMap.put("commReview.", new CommReviewTable());
 
+    dataProcessorMap.put("question.", new QuestionTable());
+    dataProcessorMap.put("notice.", new NoticeTable());
+
     dataProcessorMap.put("challenge.", new ChallengeTable());
     dataProcessorMap.put("challengeReview.", new ChallengeReviewTable());
     dataProcessorMap.put("challengeQuestion.", new ChallengeQuestionTable());
@@ -41,7 +45,6 @@ public class ServerApp {
     dataProcessorMap.put("donationBoard.", new DonationBoardTable());
     dataProcessorMap.put("donationRegister.", new DonationRegisterTable());
 
-    dataProcessorMap.put("question.", new QuestionTable());
 
     while (true) {
       Socket socket = serverSocket.accept();
