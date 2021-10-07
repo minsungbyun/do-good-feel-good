@@ -109,6 +109,7 @@ import com.share.ftp.handler.personal.community.CommBoardUpdateHandler;
 import com.share.ftp.handler.personal.community.CommReviewAddHandler;
 import com.share.ftp.handler.personal.community.CommReviewDeleteHandler;
 import com.share.ftp.handler.personal.community.CommReviewListHandler;
+import com.share.ftp.handler.personal.community.CommReviewSearchHandler;
 import com.share.ftp.handler.personal.community.CommReviewUpdateHandler;
 import com.share.ftp.handler.personal.donation.DonationAdminPrompt;
 import com.share.ftp.handler.personal.donation.DonationBoardAcceptApplyHandler;
@@ -432,6 +433,7 @@ public class ClientApp {
     commands.put("/commReview/list", new CommReviewListHandler(netCommReviewDao));
     commands.put("/commReview/update", new CommReviewUpdateHandler(netCommReviewDao));
     commands.put("/commReview/delete", new CommReviewDeleteHandler(netCommReviewDao));
+    commands.put("/commReview/search", new CommReviewSearchHandler(netCommReviewDao));
 
     // 챌린지
     commands.put("/adminChallenge/list", new AdminChallengeListHandler(netChallengeDao));  // 챌린지 목록
