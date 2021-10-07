@@ -5,18 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import com.google.gson.Gson;
 import com.share.ftp.dao.ChallengeDao;
-import com.share.ftp.dao.ChallengeQuestionDao;
-import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.request.RequestAgent;
 
-public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, ChallengeQuestionDao {
+public class NetChallengeQuestionDao implements ChallengeDao {
 
   RequestAgent requestAgent;
 
-  public NetChallengeDao(RequestAgent requestAgent) {
+  public NetChallengeQuestionDao(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 
@@ -113,11 +111,9 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
   @Override
   public List<ChallengeQuestionDTO> findAllQuestion() throws Exception {
 
-
     requestAgent.request("challengeQuestion.selectList", null);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("실패했어요");
       throw new Exception("챌린지 문의 목록 조회 실패!");
     }
     return new ArrayList<>(requestAgent.getObjects(ChallengeQuestionDTO.class));

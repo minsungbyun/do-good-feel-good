@@ -94,7 +94,7 @@ public class NetCommReviewDao implements CommReviewDao {
   @Override
   public int getNextNum() throws Exception {
 
-    requestAgent.request("commReivew.getNextNum", null);
+    requestAgent.request("commReview.getNextNum", null);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("한 줄 후기 번호 부여 중 오류 발생!");

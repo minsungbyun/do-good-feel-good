@@ -2,7 +2,6 @@ package com.share.ftp.table;
 
 import java.util.ArrayList;
 import com.share.ftp.domain.admin.NoticeDTO;
-import com.share.ftp.domain.personal.QuestionListDTO;
 import com.share.server.DataProcessor;
 import com.share.server.Request;
 import com.share.server.Response;
@@ -11,7 +10,7 @@ import com.share.server.Response;
 public class NoticeTable extends JsonDataTable<NoticeDTO> implements DataProcessor {
 
   public NoticeTable() {
-    super("notice.json", NoticeDTO.class);
+    super("notice.json",NoticeDTO.class);
   }
 
   @Override
@@ -31,9 +30,9 @@ public class NoticeTable extends JsonDataTable<NoticeDTO> implements DataProcess
   }
 
   private void insert(Request request, Response response) throws Exception {
-    NoticeDTO notice = request.getObject(NoticeDTO.class);
-    System.out.println(notice);
-    list.add(notice);
+    NoticeDTO noticeDTO = request.getObject(NoticeDTO.class);
+    System.out.println(noticeDTO);
+    list.add(noticeDTO);
     response.setStatus(Response.SUCCESS);
   }
 
@@ -46,13 +45,13 @@ public class NoticeTable extends JsonDataTable<NoticeDTO> implements DataProcess
     String keyword = request.getParameter("keyword");
 
     ArrayList<NoticeDTO> searchResult = new ArrayList<>();
-    for (NoticeDTO noticeList : list) {
-      if (!noticeList.getTitle().contains(keyword) &&
-          !noticeList.getContent().contains(keyword) &&
-          !noticeList.getOwner().getId().contains(keyword)) {
+    for (NoticeDTO noticeDTO : list) {
+      if (!noticeDTO.getTitle().contains(keyword) &&
+          !noticeDTO.getContent().contains(keyword) &&
+          !noticeDTO.getOwner().getId().contains(keyword)) {
         continue;
       }
-      searchResult.add(noticeList);
+      searchResult.add(noticeDTO);
     }
 
     response.setStatus(Response.SUCCESS);
@@ -61,7 +60,7 @@ public class NoticeTable extends JsonDataTable<NoticeDTO> implements DataProcess
 
   private void selectOne(Request request, Response response) throws Exception {
     int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
-    NoticeDTO noticeDTO = findByNo(noticeNo);
+    NoticeDTO noticeDTO = findByNoticeNo(noticeNo);
 
     if (noticeDTO != null) {
       response.setStatus(Response.SUCCESS);
@@ -76,6 +75,7 @@ public class NoticeTable extends JsonDataTable<NoticeDTO> implements DataProcess
     NoticeDTO updateNotice = request.getObject(NoticeDTO.class);
 
     int index = indexOf(updateNotice.getNo());
+
     if (index == -1) {
       response.setStatus(Response.FAIL);
       response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
@@ -90,6 +90,7 @@ public class NoticeTable extends JsonDataTable<NoticeDTO> implements DataProcess
     NoticeDTO deleteNotice = request.getObject(NoticeDTO.class);
 
     int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+
     int index = indexOf(noticeNo);
 
     if (index == -1) {
@@ -103,12 +104,12 @@ public class NoticeTable extends JsonDataTable<NoticeDTO> implements DataProcess
   }
 
   private void getNextNum(Request request, Response response) throws Exception {
-    QuestionListDTO question = new QuestionListDTO();
+    NoticeDTO noticeDTO = new NoticeDTO();
 
-    question.setNo(getLastNum());
+    noticeDTO.setNo(getLastNum());
 
     response.setStatus(Response.SUCCESS);
-    response.setValue(question);
+    response.setValue(noticeDTO);
   }
 
   private int getLastNum() {
@@ -119,7 +120,7 @@ public class NoticeTable extends JsonDataTable<NoticeDTO> implements DataProcess
     }
   }
 
-  private NoticeDTO findByNo(int noticeNo) {
+  private NoticeDTO findByNoticeNo(int noticeNo) {
     for (NoticeDTO noticeDTO : list) {
       if (noticeDTO.getNo() == noticeNo) {
         return noticeDTO;

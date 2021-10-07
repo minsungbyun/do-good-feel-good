@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.challenge;
 
 import java.sql.Date;
-import com.share.ftp.dao.ChallengeQuestionDao;
+import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
@@ -12,11 +12,11 @@ import com.share.util.Prompt;
 public class ChallengeQuestionAddHandler implements Command {
 
 
-  ChallengeQuestionDao challengeQustionDao;
+  ChallengeDao challengeDao;
 
 
-  public ChallengeQuestionAddHandler(ChallengeQuestionDao challengeQustionDao) {
-    this.challengeQustionDao = challengeQustionDao;
+  public ChallengeQuestionAddHandler(ChallengeDao challengeDao) {
+    this.challengeDao = challengeDao;
   }
 
   @Override
@@ -25,7 +25,7 @@ public class ChallengeQuestionAddHandler implements Command {
     System.out.println();
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeDTO = challengeQustionDao.findByChallengeQuestionNo(challengeNo);
+    ChallengeDTO challengeDTO = challengeDao.findByChallengeQuestionNo(challengeNo);
 
 
     if (challengeDTO == null) {
@@ -74,7 +74,7 @@ public class ChallengeQuestionAddHandler implements Command {
       challengeDTO.setQuestionCount(1);
       //      System.out.println("각 챌린지의 첫 문의입니다");
     } else {
-      challengeDTO.setQuestionCount(challengeQustionDao.getNextQuestionNum(challengeDTO)); 
+      challengeDTO.setQuestionCount(challengeDao.getNextQuestionNum(challengeDTO)); 
       //      challengeReviewDTO.setReviewNo(getNextNum2()); // 해당 챌린지 문의의 마지막 번호기억 + 1
       //      System.out.println("현재 문의의 번호는? (challengeReviewDTO.getQuestionNo()) " + challengeQuestionDTO.getQuestionNo());
       //      System.out.println("현재 문의의 번호는? (challengeDTO.getQuestionCount()) " + challengeDTO.getQuestionCount());
@@ -85,7 +85,7 @@ public class ChallengeQuestionAddHandler implements Command {
 
 
 
-    challengeQustionDao.insertQuestion(challengeQuestionDTO);
+    challengeDao.insertQuestion(challengeQuestionDTO);
 
     System.out.println();
     System.out.println("문의 등록이 완료되었습니다.");

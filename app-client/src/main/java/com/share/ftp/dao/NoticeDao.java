@@ -7,11 +7,11 @@ import com.share.ftp.domain.admin.NoticeDTO;
 public interface NoticeDao {
 
   void insert(NoticeDTO addNotice) throws Exception;
-  List<NoticeDTO> findAll() throws Exception;
-  List<NoticeDTO> findByKeyword(String keyword) throws Exception;
-  NoticeDTO findByNo(int noticeNo) throws Exception;
+  List<NoticeDTO> findNoticeAll() throws Exception;
+  List<NoticeDTO> findByKeyword(String noticeKeyword) throws Exception;
+  NoticeDTO findByNoticeNo(int noticeNo) throws Exception;
   void update(NoticeDTO updateNotice) throws Exception;
   void delete(int noticeNo) throws Exception;
-  int getNextNum() throws Exception; // 회원 고유번호 지정
+  int getNextNum() throws Exception;
 
 }

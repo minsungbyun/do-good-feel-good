@@ -12,11 +12,11 @@ import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.request.RequestAgent;
 
-public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, ChallengeQuestionDao {
+public class NetChallengeReviewDao implements ChallengeDao, ChallengeReviewDao, ChallengeQuestionDao {
 
   RequestAgent requestAgent;
 
-  public NetChallengeDao(RequestAgent requestAgent) {
+  public NetChallengeReviewDao(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 

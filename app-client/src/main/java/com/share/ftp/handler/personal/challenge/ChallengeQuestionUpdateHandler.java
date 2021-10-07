@@ -1,7 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
 import com.share.ftp.dao.ChallengeDao;
-import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
@@ -12,11 +11,9 @@ import com.share.util.Prompt;
 public class ChallengeQuestionUpdateHandler implements Command {
 
   ChallengeDao challengeDao;
-  ChallengeQuestionDao challengeQuestionDao;
 
-  public ChallengeQuestionUpdateHandler(ChallengeDao challengeDao, ChallengeQuestionDao challengeQuestionDao) {
+  public ChallengeQuestionUpdateHandler(ChallengeDao challengeDao) {
     this.challengeDao = challengeDao;
-    this.challengeQuestionDao = challengeQuestionDao;
   }
 
   @Override
@@ -35,7 +32,7 @@ public class ChallengeQuestionUpdateHandler implements Command {
 
       int questionNo = (int) request.getAttribute("questionNo");
 
-      ChallengeQuestionDTO challengeQuestion = challengeQuestionDao.findByChallengeQuestionNo(challengeNo, questionNo);
+      ChallengeQuestionDTO challengeQuestion = challengeDao.findByChallengeQuestionNo(challengeNo, questionNo);
 
       try {
         if (challengeQuestion == null) {

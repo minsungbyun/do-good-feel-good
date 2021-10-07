@@ -19,18 +19,23 @@ public class NetNoticeDao implements NoticeDao {
 
   @Override
   public void insert(NoticeDTO addNotice) throws Exception {
+
     requestAgent.request("notice.insert", addNotice);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("게시글 등록 실패!");
+
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      System.out.println("[ 게시글 등록이 정상적으로 완료되었습니다. ]");
+
+    } else {
+      throw new Exception("게시글 등록이 실패하였습니다.");
     }
   }
 
   @Override
-  public List<NoticeDTO> findAll() throws Exception {
+  public List<NoticeDTO> findNoticeAll() throws Exception {
     requestAgent.request("notice.selectList", null);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("게시글 목록 조회 실패!");
+      throw new Exception("게시글 목록 조회 실패하였습니다.");
     }
 
     return new ArrayList<>(requestAgent.getObjects(NoticeDTO.class));
@@ -43,14 +48,14 @@ public class NetNoticeDao implements NoticeDao {
     requestAgent.request("notice.selectListByKeyword", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("게시글 검색 실패!");
+      throw new Exception("게시글 검색이 실패하였습니다.");
     }
 
     return new ArrayList<>(requestAgent.getObjects(NoticeDTO.class));
   }
 
   @Override
-  public NoticeDTO findByNo(int noticeNo) throws Exception {
+  public NoticeDTO findByNoticeNo(int noticeNo) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("noticeNo", String.valueOf(noticeNo));
 
@@ -68,20 +73,21 @@ public class NetNoticeDao implements NoticeDao {
     requestAgent.request("notice.update", updateNotice);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("게시글 변경 실패!");
+      throw new Exception("게시글 변경이 실패하였습니다.");
     }
   }
 
   @Override
   public void delete(int noticeNo) throws Exception {
     HashMap<String,String> params = new HashMap<>();
-    params.put("noticeNo", String.valueOf(noticeNo));
+    params.put("notice", String.valueOf(noticeNo));
     requestAgent.request("notice.delete", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("게시글 삭제 실패!");
+      throw new Exception("게시글 삭제가 실패하였습니다.");
     }
   }
+
   @Override
   public int getNextNum() throws Exception {
 
