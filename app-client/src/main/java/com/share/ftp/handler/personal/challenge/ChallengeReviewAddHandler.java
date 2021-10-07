@@ -3,7 +3,6 @@ package com.share.ftp.handler.personal.challenge;
 import static com.share.util.General.point.CHALLENGE_REVIEWPOINT;
 import java.sql.Date;
 import com.share.ftp.dao.ChallengeDao;
-import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.ftp.handler.Command;
@@ -13,12 +12,9 @@ import com.share.util.Prompt;
 
 public class ChallengeReviewAddHandler implements Command {
 
-  ChallengeReviewDao challengeReviewDao;
   ChallengeDao challengeDao;
 
-  public ChallengeReviewAddHandler(ChallengeReviewDao challengeReviewDao,
-      ChallengeDao challengeDao) {
-    this.challengeReviewDao = challengeReviewDao;
+  public ChallengeReviewAddHandler(ChallengeDao challengeDao) {
     this.challengeDao = challengeDao;
   }
 
@@ -67,7 +63,7 @@ public class ChallengeReviewAddHandler implements Command {
     }
 
     // 리뷰어로 참여 한 경우 중복 참여 불가!
-    if (challengeDTO.getReviewers().contains(AuthLoginHandler.getLoginUser())) {
+    if (challengeDTO.getReviewerNames().contains(AuthLoginHandler.getLoginUser().getId())) {
       System.out.println("리뷰는 한 번만 작성할 수 있습니다!");
       return;
     }
@@ -88,7 +84,7 @@ public class ChallengeReviewAddHandler implements Command {
       challengeDTO.setReviewCount(1);
       //      System.out.println("각 챌린지의 첫 댓글입니다");
     } else {
-      challengeDTO.setReviewCount(challengeReviewDao.getNextReviewNum(challengeDTO));
+      challengeDTO.setReviewCount(challengeDao.getNextReviewNum(challengeDTO));
       //      challengeReviewDTO.setReviewNo(getNextNum2()); // 해당 챌린지 리뷰의 마지막 번호기억 + 1
       //      System.out.println("현재 댓글의 번호는? (challengeReviewDTO.getReviewNo()) " + challengeReviewDTO.getReviewNo());
       //      System.out.println("현재 댓글의 번호는? (challengeDTO.getReviewCount()) " + challengeDTO.getReviewCount());
@@ -115,7 +111,8 @@ public class ChallengeReviewAddHandler implements Command {
         // 리뷰어 등록
         challengeDTO.addReviewer(AuthLoginHandler.getLoginUser());
 
-        challengeReviewDao.insertReview(challengeReviewDTO);
+        challengeDao.update(challengeDTO);
+        challengeDao.insertReview(challengeReviewDTO);
         //    System.out.println("총 댓글 개수 = " + challengeReviewDTOList.size());
 
         System.out.println();

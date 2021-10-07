@@ -231,6 +231,19 @@ public class ChallengeDTO implements Serializable{
     }
     return names.toString();
   }
+  public String getReviewerNames() {
+    if (reviewers == null) {
+      return "";
+    }
+    StringBuilder names = new StringBuilder();
+    for (JoinDTO joinDTO : reviewers) {
+      if (names.length() > 0) {
+        names.append("\n");
+      }
+      names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
+    }
+    return names.toString();
+  }
   public boolean isChecked() {
     return isChecked;
   }

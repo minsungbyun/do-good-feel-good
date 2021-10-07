@@ -59,7 +59,7 @@ public class ChallengeQuestionUpdateHandler implements Command {
           return;
         } else if (input.equals("y")) {
           System.out.println("문의를 수정하였습니다.");
-          challengeDao.update(updateChallengeQuestion);
+          challengeDao.updateQuestion(challengeNo, updateChallengeQuestion);
           //          challengeQuestion.setContent(content);
           return;
         } else {
