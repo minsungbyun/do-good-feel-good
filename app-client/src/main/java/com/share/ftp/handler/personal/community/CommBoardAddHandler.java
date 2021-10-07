@@ -37,7 +37,7 @@ public class CommBoardAddHandler implements Command {
     communityDao.insert(commBoardDTO);
 
     System.out.println();
-    System.out.println("[  ✔️ 게시글 등록이 완료되었습니다.  ]");
+    System.out.println("[  게시글 등록이 완료되었습니다.  ]");
   }
 
 

@@ -80,12 +80,10 @@ public class NetCommunityDao implements CommunityDao {
   }
 
   @Override
-  public void delete(int deleteCommBoardNo) throws Exception {
-
-    HashMap<String,String> params = new HashMap<>();
-    params.put("deleteCommBoardNo", String.valueOf(deleteCommBoardNo));
-
-    requestAgent.request("commBoard.delete", params);
+  public void delete(CommBoardDTO deleteCommBoard) throws Exception {
+    requestAgent.request("commBoard.delete", deleteCommBoard);
+    // HashMap<String,String> params = new HashMap<>();
+    // params.put("deleteCommBoardNo", String.valueOf(commReviewNo));
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("게시글 삭제 실패!");
@@ -168,12 +166,8 @@ public class NetCommunityDao implements CommunityDao {
   }
 
   @Override
-  public void deleteCommeReview(int deleteCommReviewNo) throws Exception {
-
-    HashMap<String,String> params = new HashMap<>();
-    params.put("deleteCommReviewNo", String.valueOf(deleteCommReviewNo));
-
-    requestAgent.request("commReview.delete", params);
+  public void deleteCommeReview(CommReviewDTO deleteCommReview) throws Exception {
+    requestAgent.request("commReview.delete", deleteCommReview);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("한 줄 후기 삭제 실패!");
@@ -193,4 +187,6 @@ public class NetCommunityDao implements CommunityDao {
 
     return commReviewDTO.getCommReviewNo();
   }
+
+
 }

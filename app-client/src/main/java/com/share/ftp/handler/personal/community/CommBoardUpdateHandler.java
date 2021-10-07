@@ -29,36 +29,30 @@ public class CommBoardUpdateHandler  implements Command {
         return;
       }
 
+      CommBoardDTO updateCommBoard = new CommBoardDTO();
 
-      String title = Prompt.inputString(String.format("제목(%s)? ", commBoardDTO.getTitle()));
-      String content = Prompt.inputString(String.format("내용(%s)? ", commBoardDTO.getContent()));
-      String fileUpload = Prompt.inputString(String.format("첨부파일(%s)? ", commBoardDTO.getFileUpload()));
+      updateCommBoard.setTitle(Prompt.inputString("제목(" + commBoardDTO.getTitle() + ")? "));
+      updateCommBoard.setContent(Prompt.inputString("내용(" + commBoardDTO.getContent() + ")? "));
+      updateCommBoard.setFileUpload(Prompt.inputString("첨부파일(" + commBoardDTO.getFileUpload() + ")? "));
 
-      try {
-        String input = Prompt.inputString("[  정말 변경하시겠습니까?(y/N)  ]");
-        if (input.equalsIgnoreCase("n"))  {
-          System.out.println("[  게시글 변경을 취소하였습니다.  ]");
-          return;
-        }
-
-        else if(input.equals("y")) {
-          commBoardDTO.setTitle(title);
-          commBoardDTO.setContent(content);
-          commBoardDTO.setFileUpload(fileUpload);
-
-          communityDao.update(commBoardDTO);
-
-          System.out.println("[  게시글을 변경하였습니다.  ]");
-          return;
-        }
-
-        else {
-          System.out.println("[  y 또는 n을 입력하세요.  ]");
-          continue;
-        }
-      } catch (Throwable e) {
+      String input = Prompt.inputString("[  정말 변경하시겠습니까?(y/N)  ]");
+      if (input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println("[  게시글 변경을 취소하였습니다.  ]");
+        return;
       }
+
+      //        else if(input.equals("y")) {
+      //          commBoardDTO.setTitle(title);
+      //          commBoardDTO.setContent(content);
+      //          commBoardDTO.setFileUpload(fileUpload);
+
+      communityDao.update(commBoardDTO);
+
+      System.out.println("[  게시글을 변경하였습니다.  ]");
+      return;
     }
+
+
   }
 }
 

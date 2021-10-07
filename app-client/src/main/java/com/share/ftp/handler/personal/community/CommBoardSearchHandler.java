@@ -35,6 +35,8 @@ public class CommBoardSearchHandler implements Command {
       System.out.printf("내용 ▶ %s\n", commBoardDTO.getContent());
       System.out.printf("작성일 ▶ %s\n", commBoardDTO.getRegisteredDate());
       System.out.printf("조회수 ▶ %d\n", commBoardDTO.getViewCount());
+
+      System.out.println();
     }
   }
 }

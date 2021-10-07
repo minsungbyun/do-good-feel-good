@@ -32,7 +32,7 @@ public class CommReviewAddHandler implements Command {
     communityDao.insertReview(commReviewDTO);
 
     System.out.println();
-    System.out.println("[  ✔️ 후기가 등록 되었습니다. ]");
+    System.out.println("[  후기가 등록 되었습니다. ]");
   }
 }
 

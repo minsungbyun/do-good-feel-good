@@ -50,7 +50,7 @@ public class CommReviewUpdateHandler implements Command {
 
           communityDao.updateCommReview(commReviewDTO);
 
-          System.out.println("[  ✔️ 변경 되었습니다. ]");
+          System.out.println("[  변경 되었습니다. ]");
           return;
         }
 

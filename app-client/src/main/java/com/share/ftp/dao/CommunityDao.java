@@ -14,8 +14,8 @@ public interface CommunityDao {
   List<CommBoardDTO> findAll() throws Exception;
   List<CommBoardDTO> findByKeyword(String commBoardkeyword) throws Exception;
   CommBoardDTO findByCommNo(int commBoardNo) throws Exception;
-  void update(CommBoardDTO updatecommBoard) throws Exception;
-  void delete(int deleteCommBoard) throws Exception;
+  void update(CommBoardDTO updateCommBoard) throws Exception;
+  void delete(CommBoardDTO deleteCommBoard) throws Exception;
   int getNextNum() throws Exception;            // 게시글 번호 지정
   // like 관련 메서드 들어가야함 
 
@@ -25,9 +25,10 @@ public interface CommunityDao {
   List<CommReviewDTO> findAllCommReview() throws Exception;
   List<CommReviewDTO> findByCommReviewKeyword(String commReviewkeyword) throws Exception;
   CommReviewDTO findByCommReviewNo(int commReviewNo) throws Exception;
-  void updateCommReview(CommReviewDTO updatecommReview) throws Exception;
-  void deleteCommeReview(int deleteCommReview) throws Exception;
+  void updateCommReview(CommReviewDTO updateCommReview) throws Exception;
+  void deleteCommeReview(CommReviewDTO deleteCommReview) throws Exception;
   int getNextNumCommReview() throws Exception;            // 게시글 번호 지정
+
 
 
 }

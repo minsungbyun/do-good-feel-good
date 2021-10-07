@@ -74,11 +74,6 @@ public class CommBoardTable extends JsonDataTable<CommBoardDTO> implements DataP
     CommBoardDTO updateCommBoard = request.getObject(CommBoardDTO.class);
 
     int index = indexOf(updateCommBoard.getCommNo());
-    if (index == -1) {
-      response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
-      return;
-    }
 
     list.set(index, updateCommBoard);
     response.setStatus(Response.SUCCESS);
@@ -87,14 +82,14 @@ public class CommBoardTable extends JsonDataTable<CommBoardDTO> implements DataP
   private void delete(Request request, Response response) throws Exception {
     CommBoardDTO deleteCommBoard = request.getObject(CommBoardDTO.class);
 
-    int commNo = Integer.parseInt(request.getParameter("commNo"));
-    int index = indexOf(commNo);
-
-    if (index == -1) {
-      response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
-      return;
-    }
+    //    int commNo = Integer.parseInt(request.getParameter("commNo"));
+    //    int index = indexOf(commNo);
+    //
+    //    if (index == -1) {
+    //      response.setStatus(Response.FAIL);
+    //      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
+    //      return;
+    //    }
 
     list.remove(deleteCommBoard);
     response.setStatus(Response.SUCCESS);
