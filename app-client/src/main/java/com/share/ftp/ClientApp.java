@@ -83,7 +83,11 @@ import com.share.ftp.handler.personal.challenge.ChallengeQuestionDeleteHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionUpdateHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeRankingHandler;
+import com.share.ftp.handler.personal.challenge.ChallengeReviewAddHandler;
+import com.share.ftp.handler.personal.challenge.ChallengeReviewConnectHandler;
+import com.share.ftp.handler.personal.challenge.ChallengeReviewDeleteHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewListHandler;
+import com.share.ftp.handler.personal.challenge.ChallengeReviewUpdateHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeWishHandler;
 import com.share.ftp.handler.personal.challenge.MyChallengeDetailHandler;
 import com.share.ftp.handler.personal.challenge.MyChallengeListHandler;
@@ -104,6 +108,7 @@ import com.share.ftp.handler.personal.community.CommBoardUpdateHandler;
 import com.share.ftp.handler.personal.community.CommReviewAddHandler;
 import com.share.ftp.handler.personal.community.CommReviewDeleteHandler;
 import com.share.ftp.handler.personal.community.CommReviewListHandler;
+import com.share.ftp.handler.personal.community.CommReviewSearchHandler;
 import com.share.ftp.handler.personal.community.CommReviewUpdateHandler;
 import com.share.ftp.handler.personal.donation.DonationAdminPrompt;
 import com.share.ftp.handler.personal.donation.DonationBoardAcceptApplyHandler;
@@ -427,6 +432,7 @@ public class ClientApp {
     commands.put("/commReview/list", new CommReviewListHandler(netCommReviewDao));
     commands.put("/commReview/update", new CommReviewUpdateHandler(netCommReviewDao));
     commands.put("/commReview/delete", new CommReviewDeleteHandler(netCommReviewDao));
+    commands.put("/commReview/search", new CommReviewSearchHandler(netCommReviewDao));
 
     // 챌린지
     commands.put("/adminChallenge/list", new AdminChallengeListHandler(netChallengeDao));  // 챌린지 목록
@@ -437,12 +443,12 @@ public class ClientApp {
     commands.put("/challengeDetail/wish", new ChallengeWishHandler(netChallengeDao));  // 관심 챌린지 등록(찜하기)
 
     // 챌린지 참여인증&댓글
-    //    commands.put("/challengeReview/add", new ChallengeReviewAddHandler(netChallengeReviewDao, netChallengeDao));
+    commands.put("/challengeReview/add", new ChallengeReviewAddHandler(netChallengeDao));
     commands.put("/challengeReview/list", new ChallengeReviewListHandler(netChallengeDao));
-    //    commands.put("/challengeReview/update", new ChallengeReviewUpdateHandler(netChallengeDao, netChallengeReviewDao));
-    //    commands.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(netChallengeReviewDao, netChallengeDao));
-    //    //    commands.put("/challengeReview/search", new ChallengeReviewSearchHandler(netChallengeReviewDao, netChallengeDao));
-    //    commands.put("/challengeReview/connect", new ChallengeReviewConnectHandler(netChallengeReviewDao, netChallengeDao));
+    commands.put("/challengeReview/update", new ChallengeReviewUpdateHandler(netChallengeDao));
+    commands.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(netChallengeDao));
+    //    commands.put("/challengeReview/search", new ChallengeReviewSearchHandler(netChallengeReviewDao, netChallengeDao));
+    commands.put("/challengeReview/connect", new ChallengeReviewConnectHandler(netChallengeDao));
 
     // 챌린지 문의하기
     commands.put("/challengeQuestion/add", new ChallengeQuestionAddHandler(netChallengeDao));

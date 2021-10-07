@@ -254,11 +254,11 @@ public class NetChallengeDao implements ChallengeDao {
   }
 
   @Override
-  public ChallengeReviewDTO findByChallengeReviewNo(int challengeReviewNo, ChallengeDTO challengeDTO)
+  public ChallengeReviewDTO findByChallengeReviewNo(int challengeNo, int challengeReviewNo)
       throws Exception {
     HashMap<String,String> params = new HashMap<>();
-    params.put("challengeReviewNo", String.valueOf(challengeReviewNo));
-
+    params.put("challengeNo", String.valueOf(challengeNo));
+    params.put("reviewNo", String.valueOf(challengeReviewNo));
     requestAgent.request("challengeReview.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
@@ -266,6 +266,7 @@ public class NetChallengeDao implements ChallengeDao {
     }
 
     return requestAgent.getObject(ChallengeReviewDTO.class);
+
   }
 
   @Override

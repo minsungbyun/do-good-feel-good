@@ -2,7 +2,6 @@ package com.share.ftp.handler.personal.challenge;
 
 import static com.share.util.General.point.CHALLENGE_REVIEWPOINT;
 import com.share.ftp.dao.ChallengeDao;
-import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.ftp.handler.Command;
@@ -11,12 +10,9 @@ import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 public class ChallengeReviewDeleteHandler implements Command {
 
-  ChallengeReviewDao challengeReviewDao;
   ChallengeDao challengeDao;
 
-  public ChallengeReviewDeleteHandler(ChallengeReviewDao challengeReviewDao,
-      ChallengeDao challengeDao) {
-    this.challengeReviewDao = challengeReviewDao;
+  public ChallengeReviewDeleteHandler(ChallengeDao challengeDao) {
     this.challengeDao = challengeDao;
   }
 
@@ -36,11 +32,11 @@ public class ChallengeReviewDeleteHandler implements Command {
       //        System.out.println("해당 챌린지가 없습니다.");
       //        return;
       //      }
-      int challengeNo = (int) request.getAttribute("no");
+      int challengeNo = (int) request.getAttribute("challengeNo");
       ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
 
       int deleteNo = (int) request.getAttribute("reviewNo");
-      ChallengeReviewDTO challengeReviewDTO = challengeReviewDao.findByChallengeReviewNo(deleteNo,challengeDTO);
+      ChallengeReviewDTO challengeReviewDTO = challengeDao.findByChallengeReviewNo(challengeNo, deleteNo);
 
 
       if (challengeReviewDTO == null) {
@@ -66,8 +62,11 @@ public class ChallengeReviewDeleteHandler implements Command {
           System.out.println("참여인증&댓글을 삭제하였습니다.");
           challengeDTO.setReviewCount(challengeDTO.getReviewCount() - 1);
           AuthLoginHandler.getLoginUser().setPoint(AuthLoginHandler.getLoginUser().getPoint() - CHALLENGE_REVIEWPOINT);
-          challengeDTO.removeReviewer(AuthLoginHandler.getLoginUser());
-          challengeReviewDao.deleteReview(challengeReviewDTO);
+          if (challengeDTO.getReviewerNames().contains(AuthLoginHandler.getLoginUser().getId())) {
+
+          }
+          challengeDao.update(challengeDTO);
+          challengeDao.deleteReview(challengeReviewDTO);
           return;
 
         } else {
