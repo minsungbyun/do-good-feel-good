@@ -73,11 +73,6 @@ public class CommReviewTable extends JsonDataTable<CommReviewDTO> implements Dat
     CommReviewDTO updateCommReview = request.getObject(CommReviewDTO.class);
 
     int index = indexOf(updateCommReview.getCommReviewNo());
-    if (index == -1) {
-      response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 후기를 찾을 수 없습니다.");
-      return;
-    }
 
     list.set(index, updateCommReview);
     response.setStatus(Response.SUCCESS);
@@ -86,14 +81,14 @@ public class CommReviewTable extends JsonDataTable<CommReviewDTO> implements Dat
   private void delete(Request request, Response response) throws Exception {
     CommReviewDTO deleteCommReview = request.getObject(CommReviewDTO.class);
 
-    int commReviewNo = Integer.parseInt(request.getParameter("commReviewNo"));
-    int index = indexOf(commReviewNo);
-
-    if (index == -1) {
-      response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 후기를 찾을 수 없습니다.");
-      return;
-    }
+    //    int commReviewNo = Integer.parseInt(request.getParameter("commReviewNo"));
+    //    int index = indexOf(commReviewNo);
+    //
+    //    if (index == -1) {
+    //      response.setStatus(Response.FAIL);
+    //      response.setValue("해당 번호의 후기를 찾을 수 없습니다.");
+    //      return;
+    //    }
 
     list.remove(deleteCommReview);
     response.setStatus(Response.SUCCESS);

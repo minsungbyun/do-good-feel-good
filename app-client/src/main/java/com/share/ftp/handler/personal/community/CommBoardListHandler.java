@@ -1,17 +1,17 @@
 package com.share.ftp.handler.personal.community;
 
 import java.util.Collection;
-import com.share.ftp.dao.CommBoardDao;
+import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 
 public class CommBoardListHandler implements Command {
 
-  CommBoardDao commBoardDao;
+  CommunityDao communityDao;
 
-  public CommBoardListHandler(CommBoardDao commBoardDao) {
-    this.commBoardDao =  commBoardDao;
+  public CommBoardListHandler(CommunityDao communityDao) {
+    this.communityDao =  communityDao;
   }
 
   @Override
@@ -21,7 +21,7 @@ public class CommBoardListHandler implements Command {
     System.out.println("[  메인/소통해요/나눔이야기/목록  ]");
     System.out.println();
 
-    Collection<CommBoardDTO> commBoardDTOList = commBoardDao.findAll();
+    Collection<CommBoardDTO> commBoardDTOList = communityDao.findAll();
 
     if (commBoardDTOList.isEmpty()) {
       System.out.println("게시글이 없습니다.");

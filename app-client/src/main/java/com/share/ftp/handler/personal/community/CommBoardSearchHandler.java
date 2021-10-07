@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.community;
 
 import java.util.Collection;
-import com.share.ftp.dao.CommBoardDao;
+import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -9,10 +9,10 @@ import com.share.util.Prompt;
 
 public class CommBoardSearchHandler implements Command {
 
-  CommBoardDao commBoardDao;
+  CommunityDao communityDao;
 
-  public CommBoardSearchHandler(CommBoardDao commBoardDao) {
-    this.commBoardDao =  commBoardDao;
+  public CommBoardSearchHandler(CommunityDao communityDao) {
+    this.communityDao =  communityDao;
   }
 
   @Override
@@ -21,7 +21,7 @@ public class CommBoardSearchHandler implements Command {
 
     String input = Prompt.inputString("검색어?  ");
 
-    Collection<CommBoardDTO> commBoardDTOList = commBoardDao.findByKeyword(input);
+    Collection<CommBoardDTO> commBoardDTOList = communityDao.findByKeyword(input);
 
     for(CommBoardDTO commBoardDTO : commBoardDTOList) {
       if(!commBoardDTO.getTitle().contains(input) &&
@@ -35,6 +35,8 @@ public class CommBoardSearchHandler implements Command {
       System.out.printf("내용 ▶ %s\n", commBoardDTO.getContent());
       System.out.printf("작성일 ▶ %s\n", commBoardDTO.getRegisteredDate());
       System.out.printf("조회수 ▶ %d\n", commBoardDTO.getViewCount());
+
+      System.out.println();
     }
   }
 }

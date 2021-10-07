@@ -15,7 +15,7 @@ public class CommBestHandler {
     CommBoardDTO[] arr = commBoardHandler.chooseBoard();
 
     System.out.printf("%d, %s, %s, %s, %s, %d\n", 
-        arr[0].getNo(), 
+        arr[0].getCommNo(), 
         arr[0].getTitle(), 
         arr[0].getContent(),
         arr[0].getFileUpload(),

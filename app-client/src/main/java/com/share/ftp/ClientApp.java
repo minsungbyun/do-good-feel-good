@@ -11,15 +11,13 @@ import java.util.HashMap;
 import java.util.List;
 import com.share.context.ApplicationContextListener;
 import com.share.ftp.dao.ChallengeDao;
-import com.share.ftp.dao.CommBoardDao;
-import com.share.ftp.dao.CommReviewDao;
+import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.dao.JoinDao;
 import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.dao.impl.NetChallengeDao;
-import com.share.ftp.dao.impl.NetCommBoardDao;
-import com.share.ftp.dao.impl.NetCommReviewDao;
+import com.share.ftp.dao.impl.NetCommunityDao;
 import com.share.ftp.dao.impl.NetDonationBoardDao;
 import com.share.ftp.dao.impl.NetDonationRegisterDao;
 import com.share.ftp.dao.impl.NetJoinDao;
@@ -360,8 +358,7 @@ public class ClientApp {
 
 
     JoinDao netJoinDao = new NetJoinDao(requestAgent);
-    CommBoardDao netCommBoardDao = new NetCommBoardDao(requestAgent);
-    CommReviewDao netCommReviewDao = new NetCommReviewDao(requestAgent);
+    CommunityDao netCommunityDao = new NetCommunityDao(requestAgent);
     ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
     QuestionDao questionDao = new NetQuestionDao(requestAgent);
     //    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
@@ -409,13 +406,20 @@ public class ClientApp {
     //    commands.put("/volRequestOrg/rejectedList", new VolRequestOrgRejectedListHandler(orgRequestDTOList, orgRequestApplyDTOList, orgRequestRejectDTOList));
 
     // 소통해요 나눔이야기
-    commands.put("/commBoard/add", new CommBoardAddHandler(netCommBoardDao));
-    commands.put("/commBoard/list", new CommBoardListHandler(netCommBoardDao));
-    commands.put("/commBoard/detail", new CommBoardDetailHandler(netCommBoardDao));
-    commands.put("/commBoard/update", new CommBoardUpdateHandler(netCommBoardDao));
-    commands.put("/commBoard/delete", new CommBoardDeleteHandler(netCommBoardDao));
-    commands.put("/commBoard/search", new CommBoardSearchHandler(netCommBoardDao));
+    commands.put("/commBoard/add", new CommBoardAddHandler(netCommunityDao));
+    commands.put("/commBoard/list", new CommBoardListHandler(netCommunityDao));
+    commands.put("/commBoard/detail", new CommBoardDetailHandler(netCommunityDao));
+    commands.put("/commBoard/update", new CommBoardUpdateHandler(netCommunityDao));
+    commands.put("/commBoard/delete", new CommBoardDeleteHandler(netCommunityDao));
+    commands.put("/commBoard/search", new CommBoardSearchHandler(netCommunityDao));
     // commands.put("/commBoard/like", new CommBoardLikeHandler(netCommBoardDao)); 
+
+    // 소통해요 한줄후기
+    commands.put("/commReview/add", new CommReviewAddHandler(netCommunityDao));
+    commands.put("/commReview/list", new CommReviewListHandler(netCommunityDao));
+    commands.put("/commReview/update", new CommReviewUpdateHandler(netCommunityDao));
+    commands.put("/commReview/delete", new CommReviewDeleteHandler(netCommunityDao));
+    commands.put("/commReview/search", new CommReviewSearchHandler(netCommunityDao));
 
     // 소통해요 댓글
     commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler(commBoardDTOList, commBoardReplyDTOList));
@@ -429,13 +433,6 @@ public class ClientApp {
     // 소통해요 나눔이야기 BEST
     commands.put("/commBest/list", new CommBestListHandler(commBoardDTOList));
     commands.put("/commBest/detail", new CommBestDetailHandler(commBoardDTOList));
-
-    // 소통해요 한줄후기
-    commands.put("/commReview/add", new CommReviewAddHandler(netCommReviewDao));
-    commands.put("/commReview/list", new CommReviewListHandler(netCommReviewDao));
-    commands.put("/commReview/update", new CommReviewUpdateHandler(netCommReviewDao));
-    commands.put("/commReview/delete", new CommReviewDeleteHandler(netCommReviewDao));
-    commands.put("/commReview/search", new CommReviewSearchHandler(netCommReviewDao));
 
     // 챌린지
     commands.put("/adminChallenge/list", new AdminChallengeListHandler(netChallengeDao));  // 챌린지 목록

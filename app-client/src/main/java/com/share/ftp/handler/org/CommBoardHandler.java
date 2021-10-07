@@ -20,7 +20,7 @@ public class CommBoardHandler {
 
       CommBoardDTO commBoardDTO = new CommBoardDTO();
 
-      commBoardDTO.setNo(Prompt.inputInt("번호? "));
+      commBoardDTO.setCommNo(Prompt.inputInt("번호? "));
       commBoardDTO.setTitle(Prompt.inputString("제목? "));
       commBoardDTO.setContent(Prompt.inputString("내용? "));
       commBoardDTO.setFileUpload(Prompt.inputString("첨부파일? "));
@@ -41,7 +41,7 @@ public class CommBoardHandler {
     System.out.println("[소통해요/ 나눔이야기/ 목록]");
     for (int i = 0; i < this.size; i++) {
       System.out.printf("%d, %s, %s, %s, %s, %d\n", 
-          this.commBoardsDTO[i].getNo(), 
+          this.commBoardsDTO[i].getCommNo(), 
           this.commBoardsDTO[i].getTitle(), 
           this.commBoardsDTO[i].getContent(),
           this.commBoardsDTO[i].getFileUpload(),
@@ -63,7 +63,7 @@ public class CommBoardHandler {
       return;
     }
 
-    System.out.printf("번호: %s\n", commBoardDTO.getNo());
+    System.out.printf("번호: %s\n", commBoardDTO.getCommNo());
     System.out.printf("제목: %s\n", commBoardDTO.getTitle());
     System.out.printf("내용: %s\n", commBoardDTO.getContent());
     System.out.printf("작성자: %s\n", commBoardDTO.getFileUpload());
@@ -130,7 +130,7 @@ public class CommBoardHandler {
 
   private CommBoardDTO findByNo(int no) {
     for (int i = 0; i < this.size; i++) {
-      if(this.commBoardsDTO[i].getNo() == no) {
+      if(this.commBoardsDTO[i].getCommNo() == no) {
         return this.commBoardsDTO[i];
       }
     }
@@ -138,7 +138,7 @@ public class CommBoardHandler {
   }
   private int indexOf(int no) {
     for (int i = 0; i < this.size; i++) {
-      if (this.commBoardsDTO[i].getNo() == no) {
+      if (this.commBoardsDTO[i].getCommNo() == no) {
         return i;
       }
     }
