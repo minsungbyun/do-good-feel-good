@@ -234,10 +234,10 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
     requestAgent.request("challengeReview.insert", addChallengeReview);
 
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      System.out.println("[ 챌린지 등록이 정상적으로 완료되었습니다! ]");
+      System.out.println("[ 참여인증&댓글 등록이 정상적으로 완료되었습니다! ]");
 
     } else {
-      throw new Exception("챌린지 등록 실패!");
+      throw new Exception("참여인증&댓글 등록 실패!");
     }
 
   }
