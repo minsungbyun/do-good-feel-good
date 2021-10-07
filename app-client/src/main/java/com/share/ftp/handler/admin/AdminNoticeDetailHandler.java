@@ -1,39 +1,31 @@
 package com.share.ftp.handler.admin;
 
-import com.share.ftp.dao.NoticeDao;
+import java.util.List;
 import com.share.ftp.domain.admin.NoticeDTO;
 import com.share.ftp.domain.join.JoinDTO;
-import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class AdminNoticeDetailHandler implements Command {
+public class AdminNoticeDetailHandler extends AbstractAdminNoticeHandler {
 
-  NoticeDao noticeDao;
 
-  public AdminNoticeDetailHandler(NoticeDao noticeDao) {
-    this.noticeDao = noticeDao;
+  public AdminNoticeDetailHandler(List<NoticeDTO> noticeDTOList) {
+    super(noticeDTOList);
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println();
-    System.out.println("[ 공지사항 - 상세보기 ]");
-    System.out.println();
+    System.out.println("[공지사항 상세보기]");
+    int no = Prompt.inputInt("번호? ");
 
-    int noticeNo = Prompt.inputInt("번호 : ");
-
-    NoticeDTO noticeDTO = noticeDao.findByNoticeNo(noticeNo);
+    NoticeDTO noticeDTO = findByNo(no);
 
     if (noticeDTO == null) {
       System.out.println("해당 번호의 게시물이 없습니다.");
       return;
     }
 
-    request.setAttribute("noticeNo", noticeNo); 
-
-    System.out.println();
     System.out.printf("번호: %d\n", noticeDTO.getNo());
     System.out.printf("관리자 아이디: %s\n", noticeDTO.getAdmin().getId());
     System.out.printf("제목: %s\n", noticeDTO.getTitle());
@@ -47,7 +39,7 @@ public class AdminNoticeDetailHandler implements Command {
       return;
     }
 
-    request.setAttribute("noticeNo", noticeNo);
+    request.setAttribute("no", no);
 
     while (true) {
       String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");

@@ -1,26 +1,19 @@
 package com.share.ftp.handler.admin;
 
-import java.util.Collection;
-import com.share.ftp.dao.NoticeDao;
+import java.util.List;
 import com.share.ftp.domain.admin.NoticeDTO;
-import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 
-public class AdminNoticeListHandler implements Command {
+public class AdminNoticeListHandler extends AbstractAdminNoticeHandler {
 
-  NoticeDao noticeDao;
 
-  public AdminNoticeListHandler(NoticeDao noticeDao) {
-    this.noticeDao = noticeDao;
+  public AdminNoticeListHandler(List<NoticeDTO> noticeDTOList) {
+    super(noticeDTOList);
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println();
-    System.out.println("[공지사항 - 목록]");
-    System.out.println();
-
-    Collection<NoticeDTO> noticeDTOList = noticeDao.findNoticeAll();
+    System.out.println("[공지사항 목록]");
 
     if (noticeDTOList.isEmpty()) {
       System.out.println();
