@@ -25,7 +25,7 @@ public class ChallengeQuestionAddHandler implements Command {
     System.out.println();
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeDTO = challengeDao.findByChallengeQuestionNo(challengeNo);
+    ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
 
 
     if (challengeDTO == null) {

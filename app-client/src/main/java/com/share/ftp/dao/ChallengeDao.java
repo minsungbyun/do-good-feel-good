@@ -41,7 +41,7 @@ public interface ChallengeDao {
   void deleteReview(ChallengeReviewDTO deleteChallengeReviewNo) throws Exception; 
 
   int getNextReviewNum(ChallengeDTO challengeDTO) throws Exception;
-  ChallengeReviewDTO findByChallengeReviewNo(int challengeReviewNo, ChallengeDTO challengeDTO) throws Exception;
+  ChallengeReviewDTO findByChallengeReviewNo(int challengeNo, int challengeReviewNo) throws Exception;
 
 
 
