@@ -9,25 +9,24 @@ import com.share.ftp.domain.personal.CommReviewDTO;
 
 public interface CommunityDao {
 
-
   // 나눔이야기 게시판
-  void insert(CommBoardDTO commBoardDTO) throws Exception;
+  void insert(CommBoardDTO addcommBoard) throws Exception;
   List<CommBoardDTO> findAll() throws Exception;
   List<CommBoardDTO> findByKeyword(String commBoardkeyword) throws Exception;
   CommBoardDTO findByCommNo(int commBoardNo) throws Exception;
-  void update(CommBoardDTO commBoardDTO) throws Exception;
-  void delete(int deleteCommBoardNo) throws Exception;
+  void update(CommBoardDTO updatecommBoard) throws Exception;
+  void delete(int deleteCommBoard) throws Exception;
   int getNextNum() throws Exception;            // 게시글 번호 지정
   // like 관련 메서드 들어가야함 
 
 
   // 한 줄 후기 
-  void insertReview(CommReviewDTO commReviewDTO) throws Exception;
+  void insertReview(CommReviewDTO addcommReview) throws Exception;
   List<CommReviewDTO> findAllCommReview() throws Exception;
   List<CommReviewDTO> findByCommReviewKeyword(String commReviewkeyword) throws Exception;
   CommReviewDTO findByCommReviewNo(int commReviewNo) throws Exception;
-  void updateCommReview(CommReviewDTO commReviewDTO) throws Exception;
-  void deleteCommeReview(int deleteCommReviewNo) throws Exception;
+  void updateCommReview(CommReviewDTO updatecommReview) throws Exception;
+  void deleteCommeReview(int deleteCommReview) throws Exception;
   int getNextNumCommReview() throws Exception;            // 게시글 번호 지정
 
 

@@ -24,7 +24,7 @@ public class CommReviewAddHandler implements Command {
 
     CommReviewDTO commReviewDTO = new CommReviewDTO();
 
-    commReviewDTO.setCommReviewNo(communityDao.getNextNum());
+    commReviewDTO.setCommReviewNo(communityDao.getNextNumCommReview());
     commReviewDTO.setContent(Prompt.inputString("내용  ▶ "));
     commReviewDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
     commReviewDTO.setOwner(AuthLoginHandler.getLoginUser());
@@ -32,7 +32,7 @@ public class CommReviewAddHandler implements Command {
     communityDao.insertReview(commReviewDTO);
 
     System.out.println();
-    System.out.println("[  ✔️ 후기가 등록 되었습니다. mmu]");
+    System.out.println("[  ✔️ 후기가 등록 되었습니다. ]");
   }
 }
 

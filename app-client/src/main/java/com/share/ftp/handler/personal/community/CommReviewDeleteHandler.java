@@ -44,7 +44,7 @@ public class CommReviewDeleteHandler implements Command {
 
         } else if(input.equals("y")) {
           System.out.println("[  ✔️ 게시글이 삭제 되었습니다. ]");
-          communityDao.delete(commReviewNo);
+          communityDao.deleteCommeReview(commReviewNo);
           return;
         }
 

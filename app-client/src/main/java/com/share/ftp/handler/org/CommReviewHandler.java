@@ -18,7 +18,7 @@ public class CommReviewHandler {
 
     CommReviewDTO commReviewDTO = new CommReviewDTO();
 
-    commReviewDTO.setNo(Prompt.inputInt("번호? "));
+    commReviewDTO.setCommReviewNo(Prompt.inputInt("번호? "));
     commReviewDTO.setContent(Prompt.inputString("내용? "));
     commReviewDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 
@@ -30,7 +30,7 @@ public class CommReviewHandler {
     System.out.println("[소통해요/ 한줄후기/ 목록]");
     for (int i = 0; i < this.size; i++) {
       System.out.printf("%d, %s, %s\n", 
-          this.commReviewsDTO[i].getNo(), 
+          this.commReviewsDTO[i].getCommReviewNo(), 
           this.commReviewsDTO[i].getContent(),
           this.commReviewsDTO[i].getRegisteredDate()); 
     }
@@ -88,7 +88,7 @@ public class CommReviewHandler {
 
   private CommReviewDTO findByNo(int no) {
     for (int i = 0; i < this.size; i++) {
-      if(this.commReviewsDTO[i].getNo() == no) {
+      if(this.commReviewsDTO[i].getCommReviewNo() == no) {
         return this.commReviewsDTO[i];
       }
     }
@@ -96,7 +96,7 @@ public class CommReviewHandler {
   }
   private int indexOf(int no) {
     for (int i = 0; i < this.size; i++) {
-      if (this.commReviewsDTO[i].getNo() == no) {
+      if (this.commReviewsDTO[i].getCommReviewNo() == no) {
         return i;
       }
     }
