@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.community;
 
 import java.util.Collection;
-import com.share.ftp.dao.CommBoardDao;
+import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -9,9 +9,9 @@ import com.share.util.Prompt;
 
 public class CommBoardSearchHandler implements Command {
 
-  CommBoardDao commBoardDao;
+  CommunityDao commBoardDao;
 
-  public CommBoardSearchHandler(CommBoardDao commBoardDao) {
+  public CommBoardSearchHandler(CommunityDao commBoardDao) {
     this.commBoardDao =  commBoardDao;
   }
 

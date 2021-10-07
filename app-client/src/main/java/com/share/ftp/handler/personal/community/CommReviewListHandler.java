@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.community;
 
 import java.util.Collection;
-import com.share.ftp.dao.CommReviewDao;
+import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.domain.personal.CommReviewDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -10,10 +10,10 @@ import com.share.util.Prompt;
 
 public class CommReviewListHandler implements Command {
 
-  CommReviewDao commReviewDao;
+  CommunityDao communityDao;
 
-  public CommReviewListHandler(CommReviewDao commReviewDao) {
-    this.commReviewDao = commReviewDao;
+  public CommReviewListHandler(CommunityDao communityDao) {
+    this.communityDao = communityDao;
   }
 
   @Override
@@ -22,7 +22,7 @@ public class CommReviewListHandler implements Command {
     System.out.println("[  한줄후기 목록  ]");
     System.out.println();
 
-    Collection<CommReviewDTO> commReviewDTOList = commReviewDao.findAll();
+    Collection<CommReviewDTO> commReviewDTOList = communityDao.findAllCommReview();
 
     if (commReviewDTOList.isEmpty()) {
       System.out.println("[  작성된 후기가 없습니다.  ]");
@@ -43,7 +43,7 @@ public class CommReviewListHandler implements Command {
         return;
       }
 
-      CommReviewDTO commReview = commReviewDao.findByCommReviewNo(commReviewNo);
+      CommReviewDTO commReview = communityDao.findByCommReviewNo(commReviewNo);
 
       if (commReview == null) {
         System.out.println("해당 번호의 후기가 없습니다.");
