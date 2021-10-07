@@ -8,10 +8,10 @@ import com.share.util.Prompt;
 
 public class CommBoardUpdateHandler  implements Command {
 
-  CommunityDao commBoardDao;
+  CommunityDao communityDao;
 
-  public CommBoardUpdateHandler (CommunityDao commBoardDao) {
-    this.commBoardDao =  commBoardDao;
+  public CommBoardUpdateHandler (CommunityDao communityDao) {
+    this.communityDao =  communityDao;
   }
 
   @Override
@@ -22,7 +22,7 @@ public class CommBoardUpdateHandler  implements Command {
       System.out.println("[  나눔이야기 게시글변경  ]");
       int commNo = (int) request.getAttribute("commNo");
 
-      CommBoardDTO commBoardDTO = commBoardDao.findByCommNo(commNo);
+      CommBoardDTO commBoardDTO = communityDao.findByCommNo(commNo);
 
       if (commBoardDTO == null) {
         System.out.println("[  해당 게시글이 없습니다.  ]");
@@ -46,7 +46,7 @@ public class CommBoardUpdateHandler  implements Command {
           commBoardDTO.setContent(content);
           commBoardDTO.setFileUpload(fileUpload);
 
-          commBoardDao.update(commBoardDTO);
+          communityDao.update(commBoardDTO);
 
           System.out.println("[  게시글을 변경하였습니다.  ]");
           return;

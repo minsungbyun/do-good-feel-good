@@ -10,10 +10,10 @@ import com.share.util.Prompt;
 
 public class CommBoardAddHandler implements Command {
 
-  CommunityDao commBoardDao;
+  CommunityDao communityDao;
 
-  public CommBoardAddHandler(CommunityDao commBoardao) {
-    this.commBoardDao = commBoardao;
+  public CommBoardAddHandler(CommunityDao communityDao) {
+    this.communityDao =  communityDao;
   }
 
   @Override
@@ -32,9 +32,9 @@ public class CommBoardAddHandler implements Command {
     commBoardDTO.setOwner(AuthLoginHandler.getLoginUser());
     // System.out.println(commNo); 게시글 넘버 확인0
 
-    commBoardDTO.setCommNo(commBoardDao.getNextNum());
+    commBoardDTO.setCommNo(communityDao.getNextNum());
 
-    commBoardDao.insert(commBoardDTO);
+    communityDao.insert(commBoardDTO);
 
     System.out.println();
     System.out.println("[  ✔️ 게시글 등록이 완료되었습니다.  ]");

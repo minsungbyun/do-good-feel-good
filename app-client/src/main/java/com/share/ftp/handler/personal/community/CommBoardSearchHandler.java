@@ -9,10 +9,10 @@ import com.share.util.Prompt;
 
 public class CommBoardSearchHandler implements Command {
 
-  CommunityDao commBoardDao;
+  CommunityDao communityDao;
 
-  public CommBoardSearchHandler(CommunityDao commBoardDao) {
-    this.commBoardDao =  commBoardDao;
+  public CommBoardSearchHandler(CommunityDao communityDao) {
+    this.communityDao =  communityDao;
   }
 
   @Override
@@ -21,7 +21,7 @@ public class CommBoardSearchHandler implements Command {
 
     String input = Prompt.inputString("검색어?  ");
 
-    Collection<CommBoardDTO> commBoardDTOList = commBoardDao.findByKeyword(input);
+    Collection<CommBoardDTO> commBoardDTOList = communityDao.findByKeyword(input);
 
     for(CommBoardDTO commBoardDTO : commBoardDTOList) {
       if(!commBoardDTO.getTitle().contains(input) &&

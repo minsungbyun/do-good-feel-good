@@ -10,10 +10,10 @@ import com.share.util.Prompt;
 
 public class CommBoardDetailHandler implements Command {
 
-  CommunityDao commBoardDao;
+  CommunityDao communityDao;
 
-  public CommBoardDetailHandler (CommunityDao commBoardDao) {
-    this.commBoardDao = commBoardDao;
+  public CommBoardDetailHandler (CommunityDao communityDao) {
+    this.communityDao = communityDao;
   }
 
   @Override
@@ -26,7 +26,7 @@ public class CommBoardDetailHandler implements Command {
       System.out.println();
       int commNo = Prompt.inputInt("게시글 번호를 입력해주세요 ▶ ");
 
-      CommBoardDTO commBoardDTO = commBoardDao.findByCommNo(commNo);
+      CommBoardDTO commBoardDTO = communityDao.findByCommNo(commNo);
 
       if (commBoardDTO == null) {
         System.out.println("[  해당 게시글이 없습니다.  ]");
