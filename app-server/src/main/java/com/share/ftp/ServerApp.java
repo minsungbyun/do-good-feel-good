@@ -30,23 +30,18 @@ public class ServerApp {
 
     // => 데이터 처리 담당자를 등록한다.
     dataProcessorMap.put("join.", new JoinTable());
-    dataProcessorMap.put("challengeReview.", new ChallengeReviewTable());
-    dataProcessorMap.put("challengeQuestion.", new ChallengeQuestionTable());
 
     dataProcessorMap.put("commBoard.", new CommBoardTable());
     dataProcessorMap.put("commReview.", new CommReviewTable());
 
-    dataProcessorMap.put("question.", new QuestionTable());
-
     dataProcessorMap.put("challenge.", new ChallengeTable());
+    dataProcessorMap.put("challengeReview.", new ChallengeReviewTable());
+    dataProcessorMap.put("challengeQuestion.", new ChallengeQuestionTable());
+
     dataProcessorMap.put("donationBoard.", new DonationBoardTable());
     dataProcessorMap.put("donationRegister.", new DonationRegisterTable());
 
-    //    dataProcessorMap.put("board.", new BoardTable());
-    //    dataProcessorMap.put("member.", new MemberTable());
-    //    dataProcessorMap.put("project.", new ProjectTable());
-    //      dataProcessorMap.put("member.", new MemberTable());
-    //      dataProcessorMap.put("project.", new ProjectTable());
+    dataProcessorMap.put("question.", new QuestionTable());
 
     while (true) {
       Socket socket = serverSocket.accept();

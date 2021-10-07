@@ -5,14 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import com.google.gson.Gson;
 import com.share.ftp.dao.ChallengeDao;
-import com.share.ftp.dao.ChallengeQuestionDao;
-import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeQuestionDTO;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.request.RequestAgent;
 
-public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, ChallengeQuestionDao {
+public class NetChallengeDao implements ChallengeDao {
 
   RequestAgent requestAgent;
 
@@ -35,7 +33,7 @@ public class NetChallengeDao implements ChallengeDao, ChallengeReviewDao, Challe
   }
 
   @Override
-  public List<ChallengeDTO> findChallengeAll() throws Exception {
+  public List<ChallengeDTO> findAll() throws Exception {
 
     requestAgent.request("challenge.selectList", null);
 

@@ -20,7 +20,7 @@ public class AdminChallengeListHandler implements Command {
     System.out.println();
     System.out.println("[ 챌린지 목록 ]");
 
-    Collection<ChallengeDTO> challengeList = challengeDao.findChallengeAll();
+    Collection<ChallengeDTO> challengeList = challengeDao.findAll();
 
     for (ChallengeDTO challengeDTO : challengeList) {
       System.out.printf("%d, %s[%d], %s, %d, %s ~ %s\n", 

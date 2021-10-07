@@ -16,24 +16,24 @@ public class ChallengeQuestionTable extends JsonDataTable<ChallengeQuestionDTO> 
   @Override
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
-      case "challengeQuestion.insert": insertQuestion(request, response); break;
-      case "challengeQuestion.selectList": selectQuestionList(request, response); break;
+      case "challengeQuestion.insert": insert(request, response); break;
+      case "challengeQuestion.selectList": selectList(request, response); break;
       case "challengeQuestion.selectListKeyword": selectListKeyword(request, response); break;
-      case "challengeQuestion.selectOne": selectQuestionOne(request, response); break;
-      case "challengeQuestion.update": updateQuestion(request, response); break;
-      case "challengeQuestion.delete": deleteQuestion(request, response); break;
-      case "challengeQuestion.deleteIndex": deleteQuestionByIndex(request, response); break;
+      case "challengeQuestion.selectOne": selectOne(request, response); break;
+      case "challengeQuestion.update": update(request, response); break;
+      case "challengeQuestion.delete": delete(request, response); break;
+      case "challengeQuestion.deleteIndex": deleteIndex(request, response); break;
       case "challengeQuestion.getNextNum": getNextQuestionNum(request, response); break;
     }
   }
 
-  private void insertQuestion(Request request, Response response) throws Exception {
+  private void insert(Request request, Response response) throws Exception {
     ChallengeQuestionDTO challengeQuestion = request.getObject(ChallengeQuestionDTO.class);
     list.add(challengeQuestion);
     response.setStatus(Response.SUCCESS);
   }
 
-  private void selectQuestionList(Request request, Response response) throws Exception {
+  private void selectList(Request request, Response response) throws Exception {
 
     response.setStatus(Response.SUCCESS);
     response.setValue(list);
@@ -56,7 +56,7 @@ public class ChallengeQuestionTable extends JsonDataTable<ChallengeQuestionDTO> 
     response.setValue(searchResult);
   }
 
-  private void selectQuestionOne(Request request, Response response) throws Exception {
+  private void selectOne(Request request, Response response) throws Exception {
     int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
     int challengeQuestionNo = Integer.parseInt(request.getParameter("challengeQuestionNo"));
 
@@ -80,7 +80,7 @@ public class ChallengeQuestionTable extends JsonDataTable<ChallengeQuestionDTO> 
     response.setValue(selectChallenge);
   }
 
-  private void updateQuestion(Request request, Response response) throws Exception {
+  private void update(Request request, Response response) throws Exception {
     int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
     ChallengeQuestionDTO updateChallengeQuestion = request.getObject(ChallengeQuestionDTO.class);
 
@@ -90,14 +90,14 @@ public class ChallengeQuestionTable extends JsonDataTable<ChallengeQuestionDTO> 
     response.setStatus(Response.SUCCESS);
   }
 
-  private void deleteQuestion(Request request, Response response) throws Exception {
+  private void delete(Request request, Response response) throws Exception {
     ChallengeQuestionDTO deleteChallenge = request.getObject(ChallengeQuestionDTO.class);
 
     list.remove(deleteChallenge);
     response.setStatus(Response.SUCCESS);
   }
 
-  private void deleteQuestionByIndex(Request request, Response response) throws Exception {
+  private void deleteIndex(Request request, Response response) throws Exception {
     int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
     ChallengeQuestionDTO deleteChallengeQuestion = request.getObject(ChallengeQuestionDTO.class);
 
@@ -113,8 +113,9 @@ public class ChallengeQuestionTable extends JsonDataTable<ChallengeQuestionDTO> 
     ChallengeDTO challenge = request.getObject(ChallengeDTO.class);
 
     if (list.size() > 0) {
+      challenge.setQuestionCount(challenge.getQuestionCount() + 1);
       response.setStatus(Response.SUCCESS);
-      response.setValue(challenge.getQuestionCount() + 1);
+      response.setValue(challenge);
     } else {
       response.setStatus(Response.FAIL);
     }
@@ -130,7 +131,7 @@ public class ChallengeQuestionTable extends JsonDataTable<ChallengeQuestionDTO> 
 
   private int indexOf(int challengeNo, ChallengeQuestionDTO challengeQuestionDTO) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getNo() == challengeNo) {
+      if (list.get(i).getNo() == challengeQuestionDTO.getNo()) {
         if (list.get(i).getQuestionNo() == challengeQuestionDTO.getQuestionNo()) {
           return i;
         }

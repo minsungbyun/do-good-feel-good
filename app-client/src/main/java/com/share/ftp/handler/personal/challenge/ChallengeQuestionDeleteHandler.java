@@ -65,7 +65,7 @@ public class ChallengeQuestionDeleteHandler implements Command {
 
 
           deleteChallengeQuestion.setQuestionNo(deleteChallengeQuestion.getQuestionNo() - 1);
-          challengeDao.deleteQuestion(deleteChallengeQuestion);
+          challengeDao.deleteQuestion(challengeNo,deleteChallengeQuestion);
           return;
         } else {
           System.out.println("y 또는 n을 입력하세요.");

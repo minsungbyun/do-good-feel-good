@@ -77,7 +77,6 @@ import com.share.ftp.handler.org.MyVolApproveListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeDetailHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeJoinHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeJoinListHandler;
-import com.share.ftp.handler.personal.challenge.ChallengeLikeHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionAddHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionConnectHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionDeleteHandler;
@@ -434,8 +433,8 @@ public class ClientApp {
     commands.put("/challenge/detail", new ChallengeDetailHandler(netChallengeDao)); // 챌린지 상세정보
     commands.put("/challengeJoin/join", new ChallengeJoinHandler(netChallengeDao));  // 참여하기
     commands.put("/challengeJoin/list", new ChallengeJoinListHandler(netChallengeDao));  // 참여자목록
-    commands.put("/challengeDetail/like", new ChallengeLikeHandler(challengeDTOList));  // 챌린지 좋아요 기능(사용안함)
-    commands.put("/challengeDetail/wish", new ChallengeWishHandler(challengeDTOList));  // 관심 챌린지 등록(찜하기)
+    //    commands.put("/challengeDetail/like", new ChallengeLikeHandler(challengeDTOList));  // 챌린지 좋아요 기능(사용안함)
+    commands.put("/challengeDetail/wish", new ChallengeWishHandler(netChallengeDao));  // 관심 챌린지 등록(찜하기)
 
     // 챌린지 참여인증&댓글
     //    commands.put("/challengeReview/add", new ChallengeReviewAddHandler(netChallengeReviewDao, netChallengeDao));
@@ -551,7 +550,7 @@ public class ClientApp {
     commands.put("/adminChallenge/detail", new AdminChallengeDetailHandler(netChallengeDao));
     commands.put("/adminChallenge/update", new AdminChallengeUpdateHandler(netChallengeDao));
     commands.put("/adminChallenge/delete", new AdminChallengeDeleteHandler(netChallengeDao));
-    commands.put("/adminChallenge/QuestionList", new AdminChallengeQuestionListHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
+    commands.put("/adminChallenge/QuestionList", new AdminChallengeQuestionListHandler(netChallengeDao));
     commands.put("/adminChallenge/replyAdd", new AdminChallengeReplyAddHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList)); // 챌린지 답글 등록
     commands.put("/adminChallenge/replyUpdate", new AdminChallengeReplyUpdateHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList)); // 챌린지 답글 변경
     commands.put("/adminChallenge/replyDelete", new AdminChallengeReplyDeleteHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList)); // 챌린지 답글 삭제

@@ -1,16 +1,19 @@
 package com.share.ftp.handler.admin;
 
-import java.util.List;
+import java.util.Collection;
+import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeQuestionDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
-import com.share.ftp.handler.personal.challenge.AbstractChallengeQuestionHandler;
 import com.share.util.Prompt;
 
-public class AdminChallengeQuestionListHandler extends AbstractChallengeQuestionHandler {
-  public AdminChallengeQuestionListHandler(List<ChallengeQuestionDTO> challengeQuestionDTOList,
-      List<ChallengeDTO> challengeDTOList, List<ChallengeQuestionDTO> challengeReplyList) {
-    super(challengeQuestionDTOList, challengeDTOList, challengeReplyList);
+public class AdminChallengeQuestionListHandler implements Command {
+
+  ChallengeDao challengeDao;
+
+  public AdminChallengeQuestionListHandler(ChallengeDao challengeDao) {
+    this.challengeDao = challengeDao;
   }
 
   @Override
@@ -19,7 +22,7 @@ public class AdminChallengeQuestionListHandler extends AbstractChallengeQuestion
 
       int challengeNo = (int) request.getAttribute("challengeNo");
 
-      ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
+      ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
 
       //      int questionNo = (int) request.getAttribute("questionNo");
       //      ChallengeQuestionDTO detailNo = findByQuestionNo();
@@ -30,18 +33,15 @@ public class AdminChallengeQuestionListHandler extends AbstractChallengeQuestion
 
 
 
-      if (challengeDTO.getQuestionCount() == 0 || challengeQuestionDTOList.isEmpty()) {
+      if (challengeDTO.getQuestionCount() == 0 ) {
         System.out.println("문의댓글이 없습니다!");
         System.out.println();
 
       }
 
-      //      if (detailNo == null) {
-      //        System.out.println("문의가 없습니다.");
-      //        return;
-      //      }
+      Collection<ChallengeQuestionDTO> list = challengeDao.findAllQuestion();
 
-      for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
+      for (ChallengeQuestionDTO challengeQuestionDTO : list) {
         if (challengeQuestionDTO.getNo() == challengeNo) {
           System.out.printf("%d, %d, %s, %s, %s\n", 
               challengeQuestionDTO.getNo(),
