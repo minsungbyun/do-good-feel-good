@@ -1,26 +1,20 @@
 package com.share.ftp.handler.admin;
 
 import java.sql.Date;
-import com.share.ftp.dao.NoticeDao;
+import java.util.List;
 import com.share.ftp.domain.admin.NoticeDTO;
-import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class AdminNoticeAddHandler implements Command {
+public class AdminNoticeAddHandler extends AbstractAdminNoticeHandler {
 
-  NoticeDao noticeDao;
-
-  public AdminNoticeAddHandler(NoticeDao noticeDao) {
-    this.noticeDao = noticeDao;
+  public AdminNoticeAddHandler(List<NoticeDTO> noticeDTOList) {
+    super(noticeDTOList);
   }
 
-  @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println();
-    System.out.println("[ 공지사항 - 등록 ]");
-    System.out.println();
+    System.out.println("[공지사항 등록]");
 
     NoticeDTO noticeDTO = new NoticeDTO();
 
@@ -31,12 +25,9 @@ public class AdminNoticeAddHandler implements Command {
     noticeDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     // 고유회원번호 부여
-    noticeDTO.setNo(noticeDao.getNextNum());
+    noticeDTO.setNo(getNextNum());
 
-    noticeDao.insert(noticeDTO);
-
-    System.out.println();
-    System.out.println("공지사항 등록이 완료되었습니다.");
+    noticeDTOList.add(noticeDTO);
 
   }
 

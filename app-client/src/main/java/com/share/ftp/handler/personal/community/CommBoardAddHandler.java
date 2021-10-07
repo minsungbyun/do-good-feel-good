@@ -11,6 +11,7 @@ import com.share.util.Prompt;
 public class CommBoardAddHandler implements Command {
 
   CommBoardDao commBoardDao;
+
   public CommBoardAddHandler(CommBoardDao commBoardao) {
     this.commBoardDao = commBoardao;
   }

@@ -16,11 +16,11 @@ public class NoticeDTO implements Serializable{
   private String fileUpload;
   private Date registeredDate;
   private int viewCount;
-  private JoinDTO owner;
+
 
   @Override
   public int hashCode() {
-    return Objects.hash(admin, adminId, content, fileUpload, no, owner, registeredDate, title,
+    return Objects.hash(admin, adminId, no, content, fileUpload, registeredDate, title,
         viewCount);
   }
   @Override
@@ -33,16 +33,16 @@ public class NoticeDTO implements Serializable{
       return false;
     NoticeDTO other = (NoticeDTO) obj;
     return Objects.equals(admin, other.admin) && Objects.equals(adminId, other.adminId)
-        && Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
-        && no == other.no && Objects.equals(owner, other.owner)
+        && no == other.no && Objects.equals(content, other.content)
+        && Objects.equals(fileUpload, other.fileUpload)
         && Objects.equals(registeredDate, other.registeredDate)
         && Objects.equals(title, other.title) && viewCount == other.viewCount;
   }
   @Override
   public String toString() {
-    return "NoticeDTO [no=" + no + ", adminId=" + adminId + ", title=" + title + ", content="
-        + content + ", admin=" + admin + ", fileUpload=" + fileUpload + ", registeredDate="
-        + registeredDate + ", viewCount=" + viewCount + ", owner=" + owner + "]";
+    return "NoticeDTO [no=" + no + ", adminId=" + adminId + ", title=" + title
+        + ", content=" + content + ", admin=" + admin + ", fileUpload=" + fileUpload
+        + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount + "]";
   }
   public int getNo() {
     return no;
@@ -91,15 +91,6 @@ public class NoticeDTO implements Serializable{
   }
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
-  }
-  public JoinDTO getOwner() {
-    return owner;
-  }
-  public void setOwner(JoinDTO owner) {
-    this.owner = owner;
-  }
-  public static long getSerialversionuid() {
-    return serialVersionUID;
   }
 
 

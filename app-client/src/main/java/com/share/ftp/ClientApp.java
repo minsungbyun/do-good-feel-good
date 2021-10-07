@@ -16,7 +16,6 @@ import com.share.ftp.dao.CommReviewDao;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.dao.JoinDao;
-import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.dao.impl.NetChallengeDao;
 import com.share.ftp.dao.impl.NetCommBoardDao;
@@ -24,7 +23,6 @@ import com.share.ftp.dao.impl.NetCommReviewDao;
 import com.share.ftp.dao.impl.NetDonationBoardDao;
 import com.share.ftp.dao.impl.NetDonationRegisterDao;
 import com.share.ftp.dao.impl.NetJoinDao;
-import com.share.ftp.dao.impl.NetNoticeDao;
 import com.share.ftp.dao.impl.NetQuestionDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.admin.NoticeDTO;
@@ -170,6 +168,7 @@ import com.share.menu.Menu;
 import com.share.menu.MenuFilter;
 import com.share.menu.MenuGroup;
 import com.share.request.RequestAgent;
+import com.share.util.MemberHelper;
 import com.share.util.Prompt;
 
 public class ClientApp {
@@ -359,16 +358,16 @@ public class ClientApp {
 
     requestAgent = new RequestAgent("127.0.0.1", 8888);
 
+
     JoinDao netJoinDao = new NetJoinDao(requestAgent);
     CommBoardDao netCommBoardDao = new NetCommBoardDao(requestAgent);
     CommReviewDao netCommReviewDao = new NetCommReviewDao(requestAgent);
     ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
-    QuestionDao netQuestionDao = new NetQuestionDao(requestAgent);
-    NoticeDao netNoticeDao = new NetNoticeDao(requestAgent);
+    QuestionDao questionDao = new NetQuestionDao(requestAgent);
     //    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
     //    ChallengeReviewDao netChallengeReviewDao = new NetChallengeDao(requestAgent);
 
-
+    MemberHelper memberHelper = new MemberHelper();
 
     //로그인, 로그아웃
     commands.put("/auth/login", new AuthLoginHandler(netJoinDao)); // 로그인
@@ -465,8 +464,8 @@ public class ClientApp {
 
 
     // 챌린지 랭킹
-    commands.put("/ranking/list", new ChallengeRankingHandler(joinDTOList));  //전체랭킹(구현예정)
-    commands.put("/myRanking/list", new MyRankingHandler(joinDTOList)); //나의랭킹(구현예정)
+    commands.put("/ranking/list", new ChallengeRankingHandler(netJoinDao));  //전체랭킹(구현예정)
+    commands.put("/myRanking/list", new MyRankingHandler(netJoinDao)); //나의랭킹(구현예정)
 
     // 모금함 (개설신청하기, 개설목록, 승인, 반려)
 
@@ -496,12 +495,12 @@ public class ClientApp {
     commands.put("/donationBoardDetailRegister/add", new DonationBoardDetailRegisterAddHandler(donationBoardDao, donationRegisterDao));
 
     // 고객센터 문의사항
-    commands.put("/question/add", new QuestionAddHandler(netQuestionDao));
-    commands.put("/question/list", new QuestionListHandler(netQuestionDao));
-    commands.put("/question/detail", new QuestionDetailHandler(netQuestionDao));
-    commands.put("/question/update", new QuestionUpdateHandler(netQuestionDao));
-    commands.put("/question/delete", new QuestionDeleteHandler(netQuestionDao));
-    commands.put("/question/search", new QuestionSearchHandler(netQuestionDao));
+    commands.put("/question/add", new QuestionAddHandler(questionDao));
+    commands.put("/question/list", new QuestionListHandler(questionDao));
+    commands.put("/question/detail", new QuestionDetailHandler(questionDao));
+    commands.put("/question/update", new QuestionUpdateHandler(questionDao));
+    commands.put("/question/delete", new QuestionDeleteHandler(questionDao));
+    commands.put("/question/search", new QuestionSearchHandler(questionDao));
 
     commands.put("/adminQuestion/connect", new AdminQuestionConnectHandler());
     //    commands.put("/adminQuestion/add", new AdminQuestionAddHandler(myQuestionListDTOList));
@@ -540,12 +539,12 @@ public class ClientApp {
     commands.put("/join/delete", new AdminMemberDeleteHandler());
 
     // 관리자 공지사항 (개인 + 관리자)
-    commands.put("/adminNotice/add", new AdminNoticeAddHandler(netNoticeDao));
-    commands.put("/adminNotice/list", new AdminNoticeListHandler(netNoticeDao));
-    commands.put("/adminNotice/detail", new AdminNoticeDetailHandler(netNoticeDao));
-    commands.put("/adminNotice/update", new AdminNoticeUpdateHandler(netNoticeDao));
-    commands.put("/adminNotice/delete", new AdminNoticeDeleteHandler(netNoticeDao));
-    commands.put("/adminNotice/search", new AdminNoticeSearchHandler(netNoticeDao));
+    commands.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDTOList));
+    commands.put("/adminNotice/list", new AdminNoticeListHandler(noticeDTOList));
+    commands.put("/adminNotice/detail", new AdminNoticeDetailHandler(noticeDTOList));
+    commands.put("/adminNotice/update", new AdminNoticeUpdateHandler(noticeDTOList));
+    commands.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDTOList));
+    commands.put("/adminNotice/search", new AdminNoticeSearchHandler(noticeDTOList));
 
     // 관리자 문의사항
 
