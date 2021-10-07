@@ -19,11 +19,13 @@ public class QuestionListDTO implements Serializable {
   private String fileUpload;
   private Date registeredDate;
   private int viewCount;
-  private JoinDTO Owner;
+  private JoinDTO owner;
+
+
 
   @Override
   public int hashCode() {
-    return Objects.hash(Owner, content, fileUpload, memberld, no, password, qnaType, registeredDate,
+    return Objects.hash(content, fileUpload, memberld, no, owner, password, qnaType, registeredDate,
         title, viewCount, writer);
   }
   @Override
@@ -35,9 +37,10 @@ public class QuestionListDTO implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     QuestionListDTO other = (QuestionListDTO) obj;
-    return Objects.equals(Owner, other.Owner) && Objects.equals(content, other.content)
-        && Objects.equals(fileUpload, other.fileUpload) && Objects.equals(memberld, other.memberld)
-        && no == other.no && password == other.password && Objects.equals(qnaType, other.qnaType)
+    return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
+        && Objects.equals(memberld, other.memberld) && no == other.no
+        && Objects.equals(owner, other.owner) && password == other.password
+        && Objects.equals(qnaType, other.qnaType)
         && Objects.equals(registeredDate, other.registeredDate)
         && Objects.equals(title, other.title) && viewCount == other.viewCount
         && Objects.equals(writer, other.writer);
@@ -47,7 +50,7 @@ public class QuestionListDTO implements Serializable {
     return "QuestionListDTO [no=" + no + ", title=" + title + ", memberld=" + memberld
         + ", password=" + password + ", qnaType=" + qnaType + ", writer=" + writer + ", content="
         + content + ", fileUpload=" + fileUpload + ", registeredDate=" + registeredDate
-        + ", viewCount=" + viewCount + ", Owner=" + Owner + "]";
+        + ", viewCount=" + viewCount + ", owner=" + owner + "]";
   }
   public int getNo() {
     return no;
@@ -110,11 +113,15 @@ public class QuestionListDTO implements Serializable {
     this.viewCount = viewCount;
   }
   public JoinDTO getOwner() {
-    return Owner;
+    return owner;
   }
   public void setOwner(JoinDTO owner) {
-    Owner = owner;
+    this.owner = owner;
   }
+  public static long getSerialversionuid() {
+    return serialVersionUID;
+  }
+
 
 
 }
