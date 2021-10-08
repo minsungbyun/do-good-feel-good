@@ -1,6 +1,6 @@
 package com.share.ftp.handler.personal.community;
 
-import com.share.ftp.dao.CommReviewDao;
+import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.domain.personal.CommReviewDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -8,10 +8,10 @@ import com.share.util.Prompt;
 
 public class CommReviewUpdateHandler implements Command {
 
-  CommReviewDao commReviewDao;
+  CommunityDao communityDao;
 
-  public CommReviewUpdateHandler(CommReviewDao commReviewDao) {
-    this.commReviewDao = commReviewDao;
+  public CommReviewUpdateHandler(CommunityDao communityDao) {
+    this.communityDao = communityDao;
   }
 
 
@@ -24,7 +24,7 @@ public class CommReviewUpdateHandler implements Command {
       System.out.println("[  한 줄 후기 변경  ]");
       int commReviewNo = (int) request.getAttribute("commReviewNo");
 
-      CommReviewDTO commReviewDTO = commReviewDao.findByCommReviewNo(commReviewNo);
+      CommReviewDTO commReviewDTO = communityDao.findByCommReviewNo(commReviewNo);
 
 
       if (commReviewDTO == null) {
@@ -48,9 +48,9 @@ public class CommReviewUpdateHandler implements Command {
         } else if(input.equals("y")) {
           commReviewDTO.setContent(content);
 
-          commReviewDao.update(commReviewDTO);
+          communityDao.updateCommReview(commReviewDTO);
 
-          System.out.println("[  ✔️ 변경 되었습니다. ]");
+          System.out.println("[  변경 되었습니다. ]");
           return;
         }
 

@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.community;
 
 import java.sql.Date;
-import com.share.ftp.dao.CommBoardDao;
+import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -10,9 +10,10 @@ import com.share.util.Prompt;
 
 public class CommBoardAddHandler implements Command {
 
-  CommBoardDao commBoardDao;
-  public CommBoardAddHandler(CommBoardDao commBoardao) {
-    this.commBoardDao = commBoardao;
+  CommunityDao communityDao;
+
+  public CommBoardAddHandler(CommunityDao communityDao) {
+    this.communityDao =  communityDao;
   }
 
   @Override
@@ -31,12 +32,12 @@ public class CommBoardAddHandler implements Command {
     commBoardDTO.setOwner(AuthLoginHandler.getLoginUser());
     // System.out.println(commNo); 게시글 넘버 확인0
 
-    commBoardDTO.setCommNo(commBoardDao.getNextNum());
+    commBoardDTO.setCommNo(communityDao.getNextNum());
 
-    commBoardDao.insert(commBoardDTO);
+    communityDao.insert(commBoardDTO);
 
     System.out.println();
-    System.out.println("[  ✔️ 게시글 등록이 완료되었습니다.  ]");
+    System.out.println("[  게시글 등록이 완료되었습니다.  ]");
   }
 
 
