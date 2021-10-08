@@ -20,18 +20,10 @@ public class QuestionListDTO implements Serializable {
   private Date registeredDate;
   private int viewCount;
   private JoinDTO owner;
-<<<<<<< HEAD
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(owner, content, fileUpload, memberld, no, password, qnaType, registeredDate,
-=======
-
 
   @Override
   public int hashCode() {
     return Objects.hash(content, fileUpload, memberld, no, owner, password, qnaType, registeredDate,
->>>>>>> 09bcf928359bd79ebc13a3111af69d2b2a070810
         title, viewCount, writer);
   }
   @Override
@@ -43,32 +35,24 @@ public class QuestionListDTO implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     QuestionListDTO other = (QuestionListDTO) obj;
-<<<<<<< HEAD
-    return Objects.equals(owner, other.owner) && Objects.equals(content, other.content)
-        && Objects.equals(fileUpload, other.fileUpload) && Objects.equals(memberld, other.memberld)
-        && no == other.no && password == other.password && Objects.equals(qnaType, other.qnaType)
-=======
     return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
         && Objects.equals(memberld, other.memberld) && no == other.no
         && Objects.equals(owner, other.owner) && password == other.password
         && Objects.equals(qnaType, other.qnaType)
->>>>>>> 09bcf928359bd79ebc13a3111af69d2b2a070810
         && Objects.equals(registeredDate, other.registeredDate)
         && Objects.equals(title, other.title) && viewCount == other.viewCount
         && Objects.equals(writer, other.writer);
   }
+
 
   @Override
   public String toString() {
     return "QuestionListDTO [no=" + no + ", title=" + title + ", memberld=" + memberld
         + ", password=" + password + ", qnaType=" + qnaType + ", writer=" + writer + ", content="
         + content + ", fileUpload=" + fileUpload + ", registeredDate=" + registeredDate
-<<<<<<< HEAD
-        + ", viewCount=" + viewCount + ", Owner=" + owner + "]";
-=======
         + ", viewCount=" + viewCount + ", owner=" + owner + "]";
->>>>>>> 09bcf928359bd79ebc13a3111af69d2b2a070810
   }
+
   public int getNo() {
     return no;
   }
@@ -135,7 +119,5 @@ public class QuestionListDTO implements Serializable {
   public void setOwner(JoinDTO owner) {
     this.owner = owner;
   }
-
-
 
 }
