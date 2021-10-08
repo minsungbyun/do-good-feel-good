@@ -1,39 +1,33 @@
 package com.share.ftp.handler.admin;
 
-import com.share.ftp.dao.NoticeDao;
+import java.util.List;
 import com.share.ftp.domain.admin.NoticeDTO;
-import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
-public class AdminNoticeUpdateHandler implements Command {
+public class AdminNoticeUpdateHandler extends AbstractAdminNoticeHandler {
 
-  NoticeDao noticeDao;
 
-  public AdminNoticeUpdateHandler(NoticeDao noticeDao) {
-    this.noticeDao = noticeDao;
+  public AdminNoticeUpdateHandler(List<NoticeDTO> noticeDTOList) {
+    super(noticeDTOList);
   }
+
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println();
-    System.out.println("[공지사항 - 변경]");
-    System.out.println();
+    System.out.println("[공지사항 변경]");
+    int no = (int) request.getAttribute("no");
 
-    int noticeNo = (int) request.getAttribute("noticeNo");
-
-    NoticeDTO noticeDTO = noticeDao.findByNoticeNo(noticeNo);
+    NoticeDTO noticeDTO = findByNo(no);
 
     if (noticeDTO == null) {
       System.out.println("해당 번호의 게시물이 없습니다.");
       return;
     }
 
-    NoticeDTO updateNotice = new NoticeDTO();
-
-    updateNotice.setTitle(Prompt.inputString("제목(" + noticeDTO.getTitle() + ")? "));
-    updateNotice.setContent(Prompt.inputString("내용(" + noticeDTO.getContent() + ")? "));
-    updateNotice.setFileUpload(Prompt.inputString("첨부파일(" + noticeDTO.getFileUpload() + ")? "));
+    String title = Prompt.inputString("제목(" + noticeDTO.getTitle() + ")? ");
+    String content = Prompt.inputString("내용(" + noticeDTO.getContent() + ")? ");
+    String fileUpload = Prompt.inputString("첨부파일(" + noticeDTO.getFileUpload() + ")? ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -41,8 +35,9 @@ public class AdminNoticeUpdateHandler implements Command {
       return;
     }
 
-    noticeDao.update(updateNotice);
-    System.out.println();
+    noticeDTO.setTitle(title);
+    noticeDTO.setContent(content);
+    noticeDTO.setFileUpload(fileUpload);
 
     System.out.println("게시물을 변경하였습니다.");
   }

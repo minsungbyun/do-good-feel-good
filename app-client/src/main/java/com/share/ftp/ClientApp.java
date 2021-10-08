@@ -363,11 +363,10 @@ public class ClientApp {
     CommBoardDao netCommBoardDao = new NetCommBoardDao(requestAgent);
     CommReviewDao netCommReviewDao = new NetCommReviewDao(requestAgent);
     ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
-    QuestionDao netQuestionDao = new NetQuestionDao(requestAgent);
+    QuestionDao questionDao = new NetQuestionDao(requestAgent);
     NoticeDao netNoticeDao = new NetNoticeDao(requestAgent);
     //    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
     //    ChallengeReviewDao netChallengeReviewDao = new NetChallengeDao(requestAgent);
-
 
 
     //로그인, 로그아웃
@@ -496,12 +495,12 @@ public class ClientApp {
     commands.put("/donationBoardDetailRegister/add", new DonationBoardDetailRegisterAddHandler(donationBoardDao, donationRegisterDao));
 
     // 고객센터 문의사항
-    commands.put("/question/add", new QuestionAddHandler(netQuestionDao));
-    commands.put("/question/list", new QuestionListHandler(netQuestionDao));
-    commands.put("/question/detail", new QuestionDetailHandler(netQuestionDao));
-    commands.put("/question/update", new QuestionUpdateHandler(netQuestionDao));
-    commands.put("/question/delete", new QuestionDeleteHandler(netQuestionDao));
-    commands.put("/question/search", new QuestionSearchHandler(netQuestionDao));
+    commands.put("/question/add", new QuestionAddHandler(questionDao));
+    commands.put("/question/list", new QuestionListHandler(questionDao));
+    commands.put("/question/detail", new QuestionDetailHandler(questionDao));
+    commands.put("/question/update", new QuestionUpdateHandler(questionDao));
+    commands.put("/question/delete", new QuestionDeleteHandler(questionDao));
+    commands.put("/question/search", new QuestionSearchHandler(questionDao));
 
     commands.put("/adminQuestion/connect", new AdminQuestionConnectHandler());
     //    commands.put("/adminQuestion/add", new AdminQuestionAddHandler(myQuestionListDTOList));
