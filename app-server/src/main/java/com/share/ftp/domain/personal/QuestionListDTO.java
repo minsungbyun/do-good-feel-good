@@ -43,8 +43,6 @@ public class QuestionListDTO implements Serializable {
         && Objects.equals(title, other.title) && viewCount == other.viewCount
         && Objects.equals(writer, other.writer);
   }
-
-
   @Override
   public String toString() {
     return "QuestionListDTO [no=" + no + ", title=" + title + ", memberld=" + memberld
@@ -52,7 +50,6 @@ public class QuestionListDTO implements Serializable {
         + content + ", fileUpload=" + fileUpload + ", registeredDate=" + registeredDate
         + ", viewCount=" + viewCount + ", owner=" + owner + "]";
   }
-
   public int getNo() {
     return no;
   }
@@ -118,6 +115,9 @@ public class QuestionListDTO implements Serializable {
   }
   public void setOwner(JoinDTO owner) {
     this.owner = owner;
+  }
+  public static long getSerialversionuid() {
+    return serialVersionUID;
   }
 
 

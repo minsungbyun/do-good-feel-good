@@ -40,8 +40,8 @@ public class AdminChallengeUpdateHandler implements Command {
     }
 
     challengeDao.update(updateChallenge);
-    System.out.println();
 
+    System.out.println();
     System.out.println("[  챌린지를 변경하였습니다. ]");
   }
 }

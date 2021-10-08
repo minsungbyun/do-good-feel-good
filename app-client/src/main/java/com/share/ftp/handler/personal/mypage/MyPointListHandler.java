@@ -1,9 +1,9 @@
 package com.share.ftp.handler.personal.mypage;
 
-import static com.share.util.Prompt.getUserLevel;
-import static com.share.util.Prompt.getUserPoint;
-import static com.share.util.Prompt.getUserRemainPoint;
-import static com.share.util.Prompt.printMyRank;
+import static com.share.util.MemberHelper.getUserLevel;
+import static com.share.util.MemberHelper.getUserPoint;
+import static com.share.util.MemberHelper.getUserRemainPoint;
+import static com.share.util.MemberHelper.printMyRank;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;

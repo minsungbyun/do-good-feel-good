@@ -17,7 +17,7 @@ public class JoinTable extends JsonDataTable<JoinDTO> implements DataProcessor {
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
       case "join.insert": insert(request, response); break;
-      //      case "join.update": insert(request, response); break;
+      case "join.update": update(request, response); break;
       case "join.delete": delete(request, response); break;
       case "join.selectList": selectList(request, response); break;
       case "join.selectOneByIdPassword" : selectOneByIdPassword(request,response); break;
@@ -36,6 +36,19 @@ public class JoinTable extends JsonDataTable<JoinDTO> implements DataProcessor {
     JoinDTO loginUser = request.getObject(JoinDTO.class);
 
     list.add(loginUser);
+    response.setStatus(Response.SUCCESS);
+  }
+
+  private void update(Request request, Response response) throws Exception {
+    JoinDTO loginUser = request.getObject(JoinDTO.class);
+
+    int index = indexOf(loginUser.getNo());
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
+      return;
+    }
+    list.set(index, loginUser);
     response.setStatus(Response.SUCCESS);
   }
 
@@ -184,6 +197,15 @@ public class JoinTable extends JsonDataTable<JoinDTO> implements DataProcessor {
     } else {
       return 1;
     }
+  }
+
+  private int indexOf(int joinNo) {
+    for (int i = 0; i < list.size(); i++) {
+      if (list.get(i).getNo() == joinNo) {
+        return i;
+      }
+    }
+    return -1;
   }
 
 }

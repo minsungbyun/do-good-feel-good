@@ -44,9 +44,13 @@ public class NetJoinDao implements JoinDao {
 
   @Override
   public void update(JoinDTO joinDTO) throws Exception {
-    // TODO Auto-generated method stub
+    requestAgent.request("join.update", joinDTO);
 
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("회원 정보 변경 실패!");
+    }
   }
+
 
   @Override
   public void delete(JoinDTO loginUser) throws Exception {
@@ -169,6 +173,8 @@ public class NetJoinDao implements JoinDao {
 
     return requestAgent.getObject(JoinDTO.class);
   }
+
+
 
 
 

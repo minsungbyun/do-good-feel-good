@@ -17,7 +17,6 @@ public interface ChallengeDao {
   String getRemainTime(long millis) throws Exception;
   int getNextNum() throws Exception;       
 
-
   // 챌린지 문의사항 관련
   void insertQuestion(ChallengeQuestionDTO addChallengeQuestion) throws Exception;
   List<ChallengeQuestionDTO> findAllQuestion() throws Exception;      
@@ -25,7 +24,6 @@ public interface ChallengeDao {
   void deleteQuestion(int challengeNo, ChallengeQuestionDTO deleteChallengeQuestion) throws Exception; 
   void deleteQuestion(ChallengeQuestionDTO challengeQuestion) throws Exception; 
   List<ChallengeQuestionDTO> findByQuestionKeyword(String keyword) throws Exception;
-
 
   ChallengeQuestionDTO findByChallengeQuestionNo(int challengeNo, int challengeQuestionNo) throws Exception;
   ChallengeQuestionDTO findByChallengeQuestionNo(int challengeQuestionNo) throws Exception;

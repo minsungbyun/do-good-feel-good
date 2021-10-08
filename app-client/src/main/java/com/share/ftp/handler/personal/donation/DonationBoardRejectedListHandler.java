@@ -36,7 +36,6 @@ public class DonationBoardRejectedListHandler implements Command {
     } 
 
     for (DonationBoardDTO donationBoardRejectDTO : donationBoardDTOList) {
-
       if (donationBoardRejectDTO.getIsSigned().equals(Rejected) && 
           donationBoardRejectDTO.getLeader().equals(AuthLoginHandler.getLoginUser().getName())) {
 
@@ -53,13 +52,13 @@ public class DonationBoardRejectedListHandler implements Command {
             formatter.format(donationBoardRejectDTO.getMoneyTarget()),
             donationBoardRejectDTO.getIsSigned());
         System.out.println("--------------------------------------------------------------");
+
       } 
-      //      else if (!donationBoardRejectDTO.getIsSigned().equals(Rejected) && 
-      //          (!donationBoardRejectDTO.getLeader().equals(AuthLoginHandler.getLoginUser().getName()))) {
+      //      else if (!donationBoardRejectDTO.getLeader().equals(AuthLoginHandler.getLoginUser().getName())) {
       //        System.out.println();
       //        System.out.println("[  현재 반려된 모금함 개설목록이 없습니다. ]");
       //        return;
-      //      } 
+      //      }
     } 
   }
 }
