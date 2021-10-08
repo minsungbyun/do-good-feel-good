@@ -3,6 +3,7 @@ package com.share.ftp.handler.personal.donation;
 import java.sql.Date;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.dao.DonationRegisterDao;
+import com.share.ftp.dao.JoinDao;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.ftp.domain.personal.DonationRegisterDTO;
@@ -15,12 +16,15 @@ public class DonationBoardDetailRegisterAddHandler implements Command { // 모�
 
   DonationBoardDao donationBoardDao;
   DonationRegisterDao donationRegisterDao;
+  JoinDao joinDao;
 
   public DonationBoardDetailRegisterAddHandler(
       DonationBoardDao donationBoardDao,
-      DonationRegisterDao donationRegisterDao) {
+      DonationRegisterDao donationRegisterDao,
+      JoinDao joinDao) {
     this.donationBoardDao = donationBoardDao;
     this.donationRegisterDao = donationRegisterDao;
+    this.joinDao = joinDao;
   }
 
   // 모금함 기부하기
@@ -59,12 +63,14 @@ public class DonationBoardDetailRegisterAddHandler implements Command { // 모�
 
         int myDonationMoney = AuthLoginHandler.getLoginUser().getDonationMoney();
         myDonationMoney += donationRegister.getDonationMoney();
-        AuthLoginHandler.getLoginUser().setDonationMoney(myDonationMoney);
+        //        AuthLoginHandler.getLoginUser().setDonationMoney(myDonationMoney);
+        joinDTO.setDonationMoney(myDonationMoney);
 
 
         DonationRegisterDTO.totalDonationMoney += donationRegister.getDonationMoney();
 
         donationRegisterDao.insert(donationRegister);
+        joinDao.update(joinDTO);
 
       } catch (NumberFormatException e) {
         System.out.println("--------------------------------------------------------------");

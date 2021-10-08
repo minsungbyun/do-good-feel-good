@@ -489,7 +489,7 @@ public class ClientApp {
     commands.put("/donationRegister/totalMoney", new DonationRegisterTotalMoneyHandler(donationRegisterDao));
 
     commands.put("/donationBoardRegister/list", new DonationBoardRegisterListHandler(donationRegisterDao));
-    commands.put("/donationBoardDetailRegister/add", new DonationBoardDetailRegisterAddHandler(donationBoardDao, donationRegisterDao));
+    commands.put("/donationBoardDetailRegister/add", new DonationBoardDetailRegisterAddHandler(donationBoardDao, donationRegisterDao, netJoinDao));
 
     // 고객센터 문의사항
     commands.put("/question/add", new QuestionAddHandler(questionDao));

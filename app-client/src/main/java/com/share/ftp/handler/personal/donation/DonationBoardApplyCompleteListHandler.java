@@ -50,11 +50,11 @@ public class DonationBoardApplyCompleteListHandler implements Command {
             donationBoardDTO.getIsSigned());
         System.out.println("------------------------------------------");
       } 
-      //      else {
+      //      else if (!donationBoardDTO.getLeader().equals(AuthLoginHandler.getLoginUser().getName())) {
       //        System.out.println();
       //        System.out.println("[ 현재 등록된 모금함 개설목록이 없습니다. ]");
       //        return;
-      //      }
+      //      } 
     }
   }
 }
