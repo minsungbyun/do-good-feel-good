@@ -25,13 +25,6 @@ public class QuestionListDTO implements Serializable {
 
 
   @Override
-  public String toString() {
-    return "QuestionListDTO [no=" + no + ", title=" + title + ", memberld=" + memberld
-        + ", password=" + password + ", qnaType=" + qnaType + ", writer=" + writer + ", content="
-        + content + ", fileUpload=" + fileUpload + ", registeredDate=" + registeredDate
-        + ", viewCount=" + viewCount + ", owner=" + owner + "]";
-  }
-  @Override
   public int hashCode() {
     return Objects.hash(content, fileUpload, memberld, no, owner, password, qnaType, registeredDate,
         title, viewCount, writer);
@@ -52,6 +45,14 @@ public class QuestionListDTO implements Serializable {
         && Objects.equals(registeredDate, other.registeredDate)
         && Objects.equals(title, other.title) && viewCount == other.viewCount
         && Objects.equals(writer, other.writer);
+  }
+
+  @Override
+  public String toString() {
+    return "QuestionListDTO [no=" + no + ", title=" + title + ", memberld=" + memberld
+        + ", password=" + password + ", qnaType=" + qnaType + ", writer=" + writer + ", content="
+        + content + ", fileUpload=" + fileUpload + ", registeredDate=" + registeredDate
+        + ", viewCount=" + viewCount + ", owner=" + owner + "]";
   }
   public int getNo() {
     return no;
@@ -119,8 +120,4 @@ public class QuestionListDTO implements Serializable {
   public void setOwner(JoinDTO owner) {
     this.owner = owner;
   }
-
-
-
-
 }
