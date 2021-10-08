@@ -55,7 +55,10 @@ public class CommBoardDetailHandler implements Command {
         return;
       }
 
-      if (commBoardDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+      // if (commBoardDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+
+      if ((commBoardDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
+          AuthLoginHandler.getLoginUser().getId().equals("admin")) {
 
         request.setAttribute("commNo", commNo);
 
