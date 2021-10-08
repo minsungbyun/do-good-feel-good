@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.community;
 
 import java.util.Collection;
-import com.share.ftp.dao.CommBoardDao;
+import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.handler.Command;
@@ -11,10 +11,10 @@ import com.share.util.Prompt;
 
 public class CommBoardLikeHandler implements Command {
 
-  CommBoardDao commBoardDao;
+  CommunityDao communityDao;
 
-  public CommBoardLikeHandler(CommBoardDao commBoardDao) {
-    this.commBoardDao =  commBoardDao;
+  public CommBoardLikeHandler(CommunityDao communityDao) {
+    this.communityDao =  communityDao;
   }
 
   @Override
@@ -30,7 +30,7 @@ public class CommBoardLikeHandler implements Command {
 
       // CommBoardDTO commBoard = findByCommNo(commNo); 
 
-      Collection<CommBoardDTO> CommBoardDTOList = commBoardDao.findAll();
+      Collection<CommBoardDTO> CommBoardDTOList = communityDao.findAll();
 
 
       String input = Prompt.inputString("[  ♡ 공감이 되셨다면 좋아요를 눌러주세요(y/N) ♡ ] ");

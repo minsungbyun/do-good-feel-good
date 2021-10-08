@@ -1,6 +1,6 @@
 package com.share.ftp.handler.personal.community;
 
-import com.share.ftp.dao.CommBoardDao;
+import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.handler.Command;
@@ -10,10 +10,10 @@ import com.share.util.Prompt;
 
 public class CommBoardDetailHandler implements Command {
 
-  CommBoardDao commBoardDao;
+  CommunityDao communityDao;
 
-  public CommBoardDetailHandler (CommBoardDao commBoardDao) {
-    this.commBoardDao = commBoardDao;
+  public CommBoardDetailHandler (CommunityDao communityDao) {
+    this.communityDao = communityDao;
   }
 
   @Override
@@ -26,7 +26,7 @@ public class CommBoardDetailHandler implements Command {
       System.out.println();
       int commNo = Prompt.inputInt("게시글 번호를 입력해주세요 ▶ ");
 
-      CommBoardDTO commBoardDTO = commBoardDao.findByCommNo(commNo);
+      CommBoardDTO commBoardDTO = communityDao.findByCommNo(commNo);
 
       if (commBoardDTO == null) {
         System.out.println("[  해당 게시글이 없습니다.  ]");

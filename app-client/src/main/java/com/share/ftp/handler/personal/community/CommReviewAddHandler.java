@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.community;
 
 import java.sql.Date;
-import com.share.ftp.dao.CommReviewDao;
+import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.domain.personal.CommReviewDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -10,10 +10,10 @@ import com.share.util.Prompt;
 
 public class CommReviewAddHandler implements Command {
 
-  CommReviewDao commReviewDao;
+  CommunityDao communityDao;
 
-  public CommReviewAddHandler(CommReviewDao commReviewDao) {
-    this.commReviewDao = commReviewDao;
+  public CommReviewAddHandler(CommunityDao communityDao) {
+    this.communityDao = communityDao;
   }
 
   @Override
@@ -24,15 +24,15 @@ public class CommReviewAddHandler implements Command {
 
     CommReviewDTO commReviewDTO = new CommReviewDTO();
 
-    commReviewDTO.setCommReviewNo(commReviewDao.getNextNum());
+    commReviewDTO.setCommReviewNo(communityDao.getNextNumCommReview());
     commReviewDTO.setContent(Prompt.inputString("내용  ▶ "));
     commReviewDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
     commReviewDTO.setOwner(AuthLoginHandler.getLoginUser());
 
-    commReviewDao.insert(commReviewDTO);
+    communityDao.insertReview(commReviewDTO);
 
     System.out.println();
-    System.out.println("[  ✔️ 후기가 등록 되었습니다. ]");
+    System.out.println("[  후기가 등록 되었습니다. ]");
   }
 }
 

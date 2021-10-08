@@ -47,8 +47,8 @@ public class QuestionAddHandler implements Command {
       case 4: questionListDTO.setQnaType(CHALLENGEASK);    break;
       case 5: questionListDTO.setQnaType(SITEASK);         break;
       case 6: questionListDTO.setQnaType(OTHERASK);        break;
+      case 0: return;
       default: System.out.println("올바른 번호를 입력해주세요"); 
-
     }
 
     questionListDTO.setTitle(Prompt.inputString("제목? "));

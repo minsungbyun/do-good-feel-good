@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.community;
 
 import java.util.Collection;
-import com.share.ftp.dao.CommReviewDao;
+import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.domain.personal.CommReviewDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -9,17 +9,17 @@ import com.share.util.Prompt;
 
 public class CommReviewSearchHandler implements Command {
 
-  CommReviewDao commReviewDao;
+  CommunityDao communityDao;
 
-  public CommReviewSearchHandler(CommReviewDao commReviewDao) {
-    this.commReviewDao = commReviewDao;
+  public CommReviewSearchHandler(CommunityDao communityDao) {
+    this.communityDao = communityDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     String input = Prompt.inputString("[  검색어를 입력하세요.  ]");
 
-    Collection<CommReviewDTO> commReviewDTOList = commReviewDao.findByKeyword(input);
+    Collection<CommReviewDTO> commReviewDTOList = communityDao.findByCommReviewKeyword(input);
 
     for(CommReviewDTO commReviewDTO : commReviewDTOList) {
       if(!commReviewDTO.getContent().contains(input)) {

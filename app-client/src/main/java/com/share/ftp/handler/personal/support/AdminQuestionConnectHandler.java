@@ -6,18 +6,17 @@ import com.share.util.Prompt;
 
 public class AdminQuestionConnectHandler implements Command {
 
-
   public AdminQuestionConnectHandler() {
+
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
 
-    int adminNo = (int) request.getAttribute("no");
+    int questionNo = (int) request.getAttribute("questionNo");
 
-    request.setAttribute("adminNo", adminNo);
-
+    request.setAttribute("questionNo", questionNo);
 
     while (true) {
       System.out.println();
