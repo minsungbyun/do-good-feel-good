@@ -21,7 +21,7 @@ public class QuestionUpdateHandler implements Command {
     while (true) {
 
       System.out.println();
-      System.out.println("[메인/고객센터/문의하기/게시글 수정]");
+      System.out.println("[ 문의하기 - 수정 ]");
       int questionNo = (int)request.getAttribute("questionNo");
 
       QuestionListDTO questionListDTO = questionDao.findByNo(questionNo);
@@ -32,27 +32,37 @@ public class QuestionUpdateHandler implements Command {
           return;
         }
 
-        if (questionListDTO.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
-          System.out.println("삭제 권한이 없습니다.");
+        if (!questionListDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+          System.out.println("수정 권한이 없습니다.");
           return;
         }
 
+        //        if (questionListDTO.getOwner().getId() != AuthLoginHandler.getLoginUser().getId()) {
+        //          System.out.println("수정 권한이 없습니다.");
+        //          return;
+        //        }
 
-        QuestionListDTO updateQuestion = new QuestionListDTO();
-
-        updateQuestion.setTitle(Prompt.inputString("제목(" + questionListDTO.getTitle() + ")? "));
-        updateQuestion.setContent(Prompt.inputString("내용(" + questionListDTO.getContent() + ")? "));
-        updateQuestion.setFileUpload(Prompt.inputString("첨부파일(" + questionListDTO.getFileUpload() + ")? "));
+        String title = Prompt.inputString(String.format("제목(%s): ", questionListDTO.getTitle()));
+        String content = Prompt.inputString(String.format("내용(%s): ", questionListDTO.getTitle()));
+        String fileUpload = Prompt.inputString(String.format("첨부파일(%s): ", questionListDTO.getFileUpload()));
 
         String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
-        if (input.equalsIgnoreCase("n") /*|| input.length() == 0*/) {
+        if (input.equalsIgnoreCase("n") || input.length() == 0) {
+          System.out.println();
           System.out.println("게시글 수정을 취소하였습니다.");
           return;
-        } 
-        questionDao.update(updateQuestion);
-        System.out.println();
-
-        System.out.println("게시글 수정이 완료되었습니다.");
+        } else if (input.equals("y")) {
+          questionDao.update(questionListDTO);
+          System.out.println();
+          System.out.println("게시글 수정이 완료되었습니다.");
+          questionListDTO.setTitle(title);
+          questionListDTO.setContent(content);
+          questionListDTO.setFileUpload(fileUpload);
+          return;
+        } else {
+          System.out.println("y 또는 n을 입력하세요.");
+          continue;
+        }
       } catch (Throwable e) {
       }
     }

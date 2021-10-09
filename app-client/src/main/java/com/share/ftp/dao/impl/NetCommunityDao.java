@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.domain.personal.CommBoardDTO;
+import com.share.ftp.domain.personal.CommBoardReplyDTO;
 import com.share.ftp.domain.personal.CommReviewDTO;
 import com.share.request.RequestAgent;
 
@@ -91,6 +92,15 @@ public class NetCommunityDao implements CommunityDao {
   }
 
   @Override
+  public void like(CommBoardDTO likeCommBoard) throws Exception {
+    requestAgent.request("commBoard.like", likeCommBoard);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("좋아요 반영 실패!");
+    }
+  }
+
+  @Override
   public int getNextNum() throws Exception {
 
     requestAgent.request("commBoard.getNextNum", null);
@@ -103,6 +113,9 @@ public class NetCommunityDao implements CommunityDao {
 
     return commBoardDTO.getCommNo();
   }
+
+
+  // 한 줄 후기
 
   @Override
   public void insertReview(CommReviewDTO addCommReview) throws Exception {
@@ -186,6 +199,97 @@ public class NetCommunityDao implements CommunityDao {
 
 
     return commReviewDTO.getCommReviewNo();
+  }
+
+  // 나눔이야기 댓글
+
+  @Override
+  public void insertReply(CommBoardReplyDTO addcommReply) throws Exception {
+    requestAgent.request("commReply.insert", addcommReply);
+
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      System.out.println("[ 댓글 등록이 정상적으로 완료되었습니다! ]");
+
+    } else {
+      throw new Exception("댓글 등록 실패!");
+    }
+  }
+
+
+  @Override
+  public List<CommBoardReplyDTO> findAllCommReply() throws Exception {
+
+    requestAgent.request("commReply.selectList", null);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("댓글 목록 조회 실패!");
+    }
+    return new ArrayList<>(requestAgent.getObjects(CommBoardReplyDTO.class));
+  }
+
+
+  @Override
+  public List<CommBoardReplyDTO> findByCommReplyKeyword(String commReplyKeyword) throws Exception {
+
+    HashMap<String,String> params = new HashMap<>();
+    params.put("commReplykeyword", commReplyKeyword);
+    requestAgent.request("commReply.selectListByKeyword", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("댓글 검색 실패!");
+    }
+
+    return new ArrayList<>(requestAgent.getObjects(CommBoardReplyDTO.class));
+
+  }
+
+  @Override
+  public CommBoardReplyDTO findByCommReplyNo(int commReplywNo) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("commReplywNo", String.valueOf(commReplywNo));
+
+    requestAgent.request("commReplywNo.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      return null;
+    }
+
+    return requestAgent.getObject(CommBoardReplyDTO.class);
+  }
+
+
+  @Override
+  public void updateCommReply(CommBoardReplyDTO updateCommReply) throws Exception {
+    requestAgent.request("commReply.update", updateCommReply);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("한 줄 후기 변경 실패!");
+    }
+  }
+
+
+  @Override
+  public void deleteCommeReply(CommBoardReplyDTO deleteCommReply) throws Exception {
+    requestAgent.request("commReply.delete", deleteCommReply);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("한 줄 후기 삭제 실패!");
+    }
+  }
+
+
+  @Override
+  public int getNextNumCommReply() throws Exception {
+
+    requestAgent.request("commReply.getNextNum", null);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("한 줄 후기 번호 부여 중 오류 발생!");
+    }
+    CommBoardReplyDTO commBoardReplyDTO = requestAgent.getObject(CommBoardReplyDTO.class);
+
+
+    return commBoardReplyDTO.getCommReplyNo();
   }
 
 

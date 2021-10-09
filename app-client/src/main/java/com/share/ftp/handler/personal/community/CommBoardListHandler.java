@@ -29,14 +29,13 @@ public class CommBoardListHandler implements Command {
     }
 
     System.out.println("----------------------------------------------------");
-    System.out.println("NO 제목 [댓글수]  작성자  작성일  조회 LIKE  첨부");
+    System.out.println("NO 제목[댓글]  작성자  작성일  조회 LIKE  첨부");
     System.out.println("-----------------------------------------------------");
 
 
     for(CommBoardDTO commBoardDTO : commBoardDTOList) {
 
       System.out.printf("%d, %s[%d], %s, %s, %d, %d, %s\n", 
-          // AuthLoginHandler.loginUser.getId(),
           commBoardDTO.getCommNo(), 
           commBoardDTO.getTitle(), 
           commBoardDTO.getReplyCount(),

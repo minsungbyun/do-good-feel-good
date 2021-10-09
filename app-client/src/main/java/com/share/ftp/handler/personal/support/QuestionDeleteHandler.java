@@ -21,8 +21,7 @@ public class QuestionDeleteHandler implements Command {
     while (true) {
 
       System.out.println();
-      System.out.println("[고객센터/문의하기/문의하기 삭제]");
-      //      int no = Prompt.inputInt("번호? ");
+      System.out.println("[ 문의하기 - 삭제]");
 
       int questionNo = (int) request.getAttribute("questionNo");
 
@@ -34,7 +33,7 @@ public class QuestionDeleteHandler implements Command {
           return;
         }
 
-        if (questionListDTO.getOwner().getId() == (AuthLoginHandler.getLoginUser().getId()) ||
+        if (questionListDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId()) ||
             AuthLoginHandler.getLoginUser().getId().equals("admin")) {
 
           String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
@@ -42,11 +41,9 @@ public class QuestionDeleteHandler implements Command {
             System.out.println("게시글 삭제를 취소하였습니다.");
             return;
           } 
-
-          questionDao.delete(questionNo);
+          questionDao.delete(questionListDTO);
           System.out.println();
-
-          System.out.println("게시글을 삭제하였습니다.");
+          System.out.println("게시글을 삭제하였습니다."); 
         }
 
         //        if (QuestionListDTO == null) {

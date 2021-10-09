@@ -20,7 +20,8 @@ public class ChallengeQuestionDeleteHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    while (true) {
+    try {
+
       System.out.println("[ 문의 삭제 ]");
       System.out.println();
 
@@ -36,45 +37,43 @@ public class ChallengeQuestionDeleteHandler implements Command {
       int questionNo = (int) request.getAttribute("questionNo");
 
       ChallengeQuestionDTO deleteChallengeQuestion = challengeDao.findByChallengeQuestionNo(challengeNo, questionNo);
-      try {
-        if (deleteChallengeQuestion == null) {
-          System.out.println("해당 번호의 문의가 없습니다.");
-          return;
-        }
-
-        if ((deleteChallengeQuestion.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
-            AuthLoginHandler.getLoginUser().getId().equals("admin")) {
-        } else {
-          System.out.println("삭제 권한이 없습니다.");
-          return;
-        }
-
-        String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
-        if (input.equalsIgnoreCase("n") || input.length() == 0) {
-          System.out.println("문의 삭제를 취소하였습니다.");
-          return; 
-
-        } else if (deleteChallengeQuestion.getContent().equals("삭제된 댓글입니다")) {
-          System.out.println("이미 삭제 된 댓글입니다!");
-          return;
-
-        } else if (input.equals("y")) {
-          System.out.println("해당 문의사항을 삭제하였습니다.");
-          challenge.setQuestionCount(challenge.getQuestionCount() - 1);
-          //          deleteChallengeQuestion.setContent("삭제된 댓글입니다");
-
-
-          deleteChallengeQuestion.setQuestionNo(deleteChallengeQuestion.getQuestionNo() - 1);
-          challengeDao.deleteQuestion(challengeNo,deleteChallengeQuestion);
-          return;
-        } else {
-          System.out.println("y 또는 n을 입력하세요.");
-          continue;
-        } 
-      } catch (Exception e) {
-        e.printStackTrace();
-
+      if (deleteChallengeQuestion == null) {
+        System.out.println("해당 번호의 문의가 없습니다.");
+        return;
       }
+
+      if ((deleteChallengeQuestion.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
+          AuthLoginHandler.getLoginUser().getId().equals("admin")) {
+      } else {
+        System.out.println("삭제 권한이 없습니다.");
+        return;
+      }
+
+      String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
+      if (input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println("문의 삭제를 취소하였습니다.");
+        return; 
+
+      } else if (deleteChallengeQuestion.getContent().equals("삭제된 댓글입니다")) {
+        System.out.println("이미 삭제 된 댓글입니다!");
+        return;
+
+      } else if (input.equals("y")) {
+        System.out.println("해당 문의사항을 삭제하였습니다.");
+        challenge.setQuestionCount(challenge.getQuestionCount() - 1);
+        //          deleteChallengeQuestion.setContent("삭제된 댓글입니다");
+
+
+        deleteChallengeQuestion.setQuestionNo(deleteChallengeQuestion.getQuestionNo() - 1);
+        challengeDao.deleteQuestion(challengeNo,deleteChallengeQuestion);
+        //                  return;
+        //                } else {
+        //                  System.out.println("y 또는 n을 입력하세요.");
+        //                  continue;
+      } 
+    } catch (Exception e) {
+      e.printStackTrace();
+
     }
   }
 }

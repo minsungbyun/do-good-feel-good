@@ -14,6 +14,7 @@ public class CommBoardAddHandler implements Command {
 
   public CommBoardAddHandler(CommunityDao communityDao) {
     this.communityDao =  communityDao;
+
   }
 
   @Override

@@ -26,9 +26,11 @@ public class CommReviewSearchHandler implements Command {
         continue;
       }
 
+      System.out.println();
       System.out.printf("작성자 ▶ %s\n", commReviewDTO.getOwner().getId());
       System.out.printf("내용 ▶ %s\n", commReviewDTO.getContent());
       System.out.printf("작성일 ▶ %s\n", commReviewDTO.getRegisteredDate());
+      System.out.println();
     }
   }
 }

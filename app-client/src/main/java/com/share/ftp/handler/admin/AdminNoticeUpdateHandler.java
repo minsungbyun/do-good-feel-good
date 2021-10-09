@@ -15,7 +15,7 @@ public class AdminNoticeUpdateHandler extends AbstractAdminNoticeHandler {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[공지사항 변경]");
+    System.out.println("[공지사항 수정]");
     int no = (int) request.getAttribute("no");
 
     NoticeDTO noticeDTO = findByNo(no);

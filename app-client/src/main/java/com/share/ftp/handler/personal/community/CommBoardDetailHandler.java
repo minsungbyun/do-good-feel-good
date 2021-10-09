@@ -47,6 +47,7 @@ public class CommBoardDetailHandler implements Command {
       System.out.printf("댓글수  %d\n", commBoardDTO.getReplyCount());
       System.out.println();
 
+      communityDao.update(commBoardDTO);
 
       JoinDTO loginUser = AuthLoginHandler.getLoginUser(); 
 
@@ -55,7 +56,10 @@ public class CommBoardDetailHandler implements Command {
         return;
       }
 
-      if (commBoardDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+      // if (commBoardDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+
+      if ((commBoardDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
+          AuthLoginHandler.getLoginUser().getId().equals("admin")) {
 
         request.setAttribute("commNo", commNo);
 
