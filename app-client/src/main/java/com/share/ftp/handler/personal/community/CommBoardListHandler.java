@@ -29,7 +29,7 @@ public class CommBoardListHandler implements Command {
     }
 
     System.out.println("----------------------------------------------------");
-    System.out.println("NO 제목 [댓글수]  작성자  작성일  조회 LIKE  첨부");
+    System.out.println("NO 제목[댓글]  작성자  작성일  조회 LIKE  첨부");
     System.out.println("-----------------------------------------------------");
 
 

@@ -21,6 +21,7 @@ public class CommBoardTable extends JsonDataTable<CommBoardDTO> implements DataP
       case "commBoard.selectOne": selectOne(request, response); break;
       case "commBoard.update": update(request, response); break;
       case "commBoard.delete": delete(request, response); break;
+      case "commBoard.like": like(request, response); break;
       case "commBoard.getNextNum": getNextNum(request, response); break;
       default:
         response.setStatus(Response.FAIL);
@@ -92,6 +93,15 @@ public class CommBoardTable extends JsonDataTable<CommBoardDTO> implements DataP
     //    }
 
     list.remove(deleteCommBoard);
+    response.setStatus(Response.SUCCESS);
+  }
+
+  private void like(Request request, Response response) {
+    CommBoardDTO likeCommBoard = request.getObject(CommBoardDTO.class);
+
+    int index = indexOf(likeCommBoard.getCommNo());
+
+    list.set(index, likeCommBoard);
     response.setStatus(Response.SUCCESS);
   }
 
