@@ -62,7 +62,7 @@ public class ChallengeReviewDeleteHandler implements Command {
           System.out.println("참여인증&댓글을 삭제하였습니다.");
           challengeDTO.setReviewCount(challengeDTO.getReviewCount() - 1);
           AuthLoginHandler.getLoginUser().setPoint(AuthLoginHandler.getLoginUser().getPoint() - CHALLENGE_REVIEWPOINT);
-          challengeDTO.removeReviewer(AuthLoginHandler.getLoginUser());
+          challengeDTO.removeReviewer(AuthLoginHandler.getLoginUser()); // 리뷰어 삭제 테스트
           System.out.println(challengeDTO.getReviewerNames());
           challengeDao.update(challengeDTO);
           challengeDao.deleteReview(challengeReviewDTO);

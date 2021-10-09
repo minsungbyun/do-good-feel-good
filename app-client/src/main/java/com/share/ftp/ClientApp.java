@@ -512,9 +512,9 @@ public class ClientApp {
     commands.put("/myVol/appliedDetail", new MyAppliedVolDetailHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     commands.put("/myVol/rejected", new MyRejectedVolHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
 
-    commands.put("/myChallenge/list", new MyChallengeListHandler(challengeDTOList));
-    commands.put("/myChallenge/detail", new MyChallengeDetailHandler(challengeDTOList));
-    commands.put("/myChallenge/wish", new MyChallengeWishHandler(challengeDTOList));
+    commands.put("/myChallenge/list", new MyChallengeListHandler(netChallengeDao));
+    commands.put("/myChallenge/detail", new MyChallengeDetailHandler(netChallengeDao));
+    commands.put("/myChallenge/wish", new MyChallengeWishHandler(netChallengeDao));
 
 
     commands.put("/myBoard/list", new MyBoardListHandler()); // 나의게시글 목록

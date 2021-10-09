@@ -247,10 +247,10 @@ public class NetChallengeDao implements ChallengeDao {
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("고유번호 부여 중 오류 발생!");
     }
-    ChallengeReviewDTO challengeReviewDTO = requestAgent.getObject(ChallengeReviewDTO.class);
+    //    ChallengeReviewDTO challengeReviewDTO = requestAgent.getObject(ChallengeReviewDTO.class);
 
 
-    return challengeReviewDTO.getNo();
+    return challengeDTO.getReviewCount() + 1;
   }
 
   @Override

@@ -36,6 +36,7 @@ public class ChallengeWishHandler implements Command {
         System.out.println();
         System.out.println("[  🎈 관심 챌린지로 등록되었습니다. 🎈  ]");
         challengeList.setWish(AuthLoginHandler.getLoginUser());
+        challengeDao.update(challengeList);
         return;
       } else {
         System.out.println("y 또는 n을 입력하세요.");
