@@ -229,32 +229,23 @@ public class NetCommunityDao implements CommunityDao {
 
 
   @Override
-  public List<CommBoardReplyDTO> findByCommReplyKeyword(String commReplyKeyword) throws Exception {
-
+  public CommBoardReplyDTO findByCommReplyNo(int commBoardNo, int commReplywNo) throws Exception {
     HashMap<String,String> params = new HashMap<>();
-    params.put("commReplykeyword", commReplyKeyword);
-    requestAgent.request("commReply.selectListByKeyword", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("댓글 검색 실패!");
-    }
-
-    return new ArrayList<>(requestAgent.getObjects(CommBoardReplyDTO.class));
-
-  }
-
-  @Override
-  public CommBoardReplyDTO findByCommReplyNo(int commReplywNo) throws Exception {
-    HashMap<String,String> params = new HashMap<>();
+    params.put("commBoardNo", String.valueOf(commBoardNo));
     params.put("commReplywNo", String.valueOf(commReplywNo));
-
-    requestAgent.request("commReplywNo.selectOne", params);
+    requestAgent.request("commReply.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;
     }
 
     return requestAgent.getObject(CommBoardReplyDTO.class);
+  }
+
+
+  @Override
+  public CommBoardReplyDTO findByCommReplyNo(int commReplyNo) throws Exception {
+    return null;
   }
 
 
@@ -291,6 +282,8 @@ public class NetCommunityDao implements CommunityDao {
 
     return commBoardReplyDTO.getCommReplyNo();
   }
+
+
 
 
 }

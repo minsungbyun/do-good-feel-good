@@ -1,39 +1,36 @@
 package com.share.ftp.handler.personal.community;
 
-import java.util.List;
-import com.share.ftp.domain.personal.CommBoardDTO;
+import java.util.Collection;
+import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.domain.personal.CommBoardReplyDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
-public class CommBoardReplyListHandler extends AbstractCommBoardReplyHandler {
+public class CommBoardReplyListHandler implements Command {
 
-  public CommBoardReplyListHandler(
-      List<CommBoardDTO> commBoardDTOList,
-      List<CommBoardReplyDTO> commBoardReplyDTOList) {
-    super(commBoardDTOList, commBoardReplyDTOList);
+  CommunityDao communityDao;
+
+  public CommBoardReplyListHandler (CommunityDao communityDao) {
+    this.communityDao = communityDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
 
     System.out.println();
-    System.out.println("[  나눔이야기  / 댓글 목록  ]");
+    System.out.println("[  나눔이야기 댓글 목록  ]");
     System.out.println();
 
     int commNo = (int) request.getAttribute("commNo");
+    communityDao.findByCommNo(commNo);
 
-    //    CommBoardDTO commBoardDTOList = findByCommBoardNo(commBoardNo);
-    //
-    //    if (commBoardDTOList == null) {
-    //      System.out.println("작성된 게시글이 없습니다.");
-    //      return;
+    //    if (commBoardReplyDTO.isEmpty()) {
+    //      System.out.println("[  작성된 댓글이 없습니다.  ]");
+    //      //return;
     //    }
 
-    if (commBoardReplyDTOList.isEmpty()) {
-      System.out.println("[  작성된 댓글이 없습니다.  ]");
-      //return;
-    }
+    Collection<CommBoardReplyDTO> commBoardReplyDTOList = communityDao.findAllCommReply();
 
     for(CommBoardReplyDTO commBoardReplyDTO : commBoardReplyDTOList) {
       if (commBoardReplyDTO.getCommNo() == commNo) {

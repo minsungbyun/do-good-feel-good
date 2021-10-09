@@ -25,8 +25,8 @@ public interface CommunityDao {
   // 나눔이야기 게시판 댓글 
   void insertReply(CommBoardReplyDTO addcommReply) throws Exception;
   List<CommBoardReplyDTO> findAllCommReply() throws Exception;
-  List<CommBoardReplyDTO> findByCommReplyKeyword(String commReplyKeyword) throws Exception;
   CommBoardReplyDTO findByCommReplyNo(int commReplyNo) throws Exception;
+  CommBoardReplyDTO findByCommReplyNo(int commBoardNo, int commReplyNo) throws Exception;
   void updateCommReply(CommBoardReplyDTO updateCommReply) throws Exception;
   void deleteCommeReply(CommBoardReplyDTO deleteCommReply) throws Exception;
   int getNextNumCommReply() throws Exception;            // 게시글 번호 지정
@@ -40,7 +40,6 @@ public interface CommunityDao {
   void updateCommReview(CommReviewDTO updateCommReview) throws Exception;
   void deleteCommeReview(CommReviewDTO deleteCommReview) throws Exception;
   int getNextNumCommReview() throws Exception;            // 게시글 번호 지정
-
 
 
 }

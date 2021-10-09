@@ -6,6 +6,7 @@ import java.util.HashMap;
 import com.share.ftp.table.ChallengeQuestionTable;
 import com.share.ftp.table.ChallengeReviewTable;
 import com.share.ftp.table.ChallengeTable;
+import com.share.ftp.table.CommBoardReplyTable;
 import com.share.ftp.table.CommBoardTable;
 import com.share.ftp.table.CommReviewTable;
 import com.share.ftp.table.DonationBoardTable;
@@ -33,6 +34,7 @@ public class ServerApp {
 
     dataProcessorMap.put("commBoard.", new CommBoardTable());
     dataProcessorMap.put("commReview.", new CommReviewTable());
+    dataProcessorMap.put("commReply.", new CommBoardReplyTable());
 
     dataProcessorMap.put("challenge.", new ChallengeTable());
     dataProcessorMap.put("challengeReview.", new ChallengeReviewTable());

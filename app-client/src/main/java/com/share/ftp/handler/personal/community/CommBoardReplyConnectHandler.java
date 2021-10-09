@@ -1,19 +1,18 @@
 package com.share.ftp.handler.personal.community;
 
-import java.util.List;
-import com.share.ftp.domain.personal.CommBoardDTO;
+import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.domain.personal.CommBoardReplyDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class CommBoardReplyConnectHandler extends AbstractCommBoardReplyHandler {
+public class CommBoardReplyConnectHandler implements Command {
 
+  CommunityDao communityDao;
 
-  public CommBoardReplyConnectHandler(
-      List<CommBoardDTO> commBoardDTOList,
-      List<CommBoardReplyDTO> commBoardReplyDTOList) {
-    super(commBoardDTOList, commBoardReplyDTOList);
+  public CommBoardReplyConnectHandler (CommunityDao communityDao) {
+    this.communityDao = communityDao;
   }
 
   @Override
@@ -26,7 +25,7 @@ public class CommBoardReplyConnectHandler extends AbstractCommBoardReplyHandler 
     int replyNo = Prompt.inputInt("댓글 번호를 입력해주세요 ▶ ");
 
 
-    CommBoardReplyDTO commBoardReplyDTO = findByReplyNo(replyNo);
+    CommBoardReplyDTO commBoardReplyDTO = communityDao.findByCommReplyNo(replyNo);
 
 
     if (commBoardReplyDTO == null) {

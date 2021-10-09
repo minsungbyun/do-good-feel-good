@@ -424,11 +424,11 @@ public class ClientApp {
     commands.put("/commReview/search", new CommReviewSearchHandler(netCommunityDao));
 
     // 소통해요 댓글
-    commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler(commBoardDTOList, commBoardReplyDTOList));
-    commands.put("/commBoardReply/add", new CommBoardReplyAddHandler(commBoardDTOList, commBoardReplyDTOList));
-    commands.put("/commBoardReply/list", new CommBoardReplyListHandler(commBoardDTOList, commBoardReplyDTOList));
-    commands.put("/commBoardReply/update", new CommBoardReplyUpdateHandler(commBoardDTOList, commBoardReplyDTOList));
-    commands.put("/commBoardReply/delete", new CommBoardReplyDeleteHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler(netCommunityDao));
+    commands.put("/commBoardReply/add", new CommBoardReplyAddHandler(netCommunityDao));
+    commands.put("/commBoardReply/list", new CommBoardReplyListHandler(netCommunityDao));
+    commands.put("/commBoardReply/update", new CommBoardReplyUpdateHandler(netCommunityDao));
+    commands.put("/commBoardReply/delete", new CommBoardReplyDeleteHandler(netCommunityDao));
 
     // commands.put("/commBoard/connect", new CommBoardReplyConnectHandler());
 

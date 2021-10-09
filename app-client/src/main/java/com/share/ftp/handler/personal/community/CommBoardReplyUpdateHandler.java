@@ -1,18 +1,19 @@
 package com.share.ftp.handler.personal.community;
 
-import java.util.List;
+import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.domain.personal.CommBoardReplyDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class CommBoardReplyUpdateHandler extends AbstractCommBoardReplyHandler {
+public class CommBoardReplyUpdateHandler implements Command {
 
-  public CommBoardReplyUpdateHandler(
-      List<CommBoardDTO> commBoardDTOList, 
-      List<CommBoardReplyDTO> commBoardReplyDTOList) {
-    super(commBoardDTOList, commBoardReplyDTOList);
+  CommunityDao communityDao;
+
+  public CommBoardReplyUpdateHandler(CommunityDao communityDao) {
+    this.communityDao =  communityDao;
   }
 
   @Override
@@ -20,13 +21,13 @@ public class CommBoardReplyUpdateHandler extends AbstractCommBoardReplyHandler {
 
     while (true) {
       System.out.println();
-      System.out.println("[  나눔이야기/댓글 변경  ]");
+      System.out.println("[  나눔이야기 댓글 변경  ]");
 
       int commNo = (int) request.getAttribute("commNo");
-      CommBoardDTO commBoardDTO = findByCommBoardNo(commNo);
+      CommBoardDTO commBoardDTO = communityDao.findByCommNo(commNo);
 
-      int updateNo = (int) request.getAttribute("replyNo");
-      CommBoardReplyDTO commBoardReplyDTO = findByReplyNo(updateNo,commBoardDTO);
+      int updateNo = (int) request.getAttribute("commBoardReplyNo");
+      CommBoardReplyDTO commBoardReplyDTO = communityDao.findByCommReplyNo(commNo, updateNo);
 
       try {
         if (commBoardReplyDTO == null) {
@@ -53,11 +54,12 @@ public class CommBoardReplyUpdateHandler extends AbstractCommBoardReplyHandler {
           System.out.println();
           System.out.println("[  댓글을 변경하였습니다.  ]");
           commBoardReplyDTO.setCommentcontent(content);
+
+          communityDao.updateCommReply(commBoardReplyDTO);
+
           return;
 
-        } else {
-          System.out.println("[  y 또는 n을 입력하세요.  ]");
-          continue;
+
         } 
       } catch (Throwable e) {
       }
