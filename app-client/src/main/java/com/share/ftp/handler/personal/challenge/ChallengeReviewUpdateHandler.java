@@ -48,11 +48,11 @@ public class ChallengeReviewUpdateHandler implements Command {
           System.out.println("참여인증&댓글 수정을 취소하였습니다.");
           return;
         } else if (input.equals("y")) {
-          challengeDao.updateReview(challengeReviewDTO);
           System.out.println();
           System.out.println("참여인증&댓글을 수정하였습니다.");
           challengeReviewDTO.setContent(content);
           challengeReviewDTO.setFileUpload(fileUpload);
+          challengeDao.updateReview(challengeReviewDTO);
           return;
         } else {
           System.out.println("y 또는 n을 입력하세요.");

@@ -19,7 +19,7 @@ public class ChallengeReviewTable extends JsonDataTable<ChallengeReviewDTO> impl
       case "challengeReview.selectOne": selectReviewOne(request, response); break;
       case "challengeReview.update": updateReview(request, response); break;
       case "challengeReview.delete": deleteReview(request, response); break;
-      case "challengeReview.getNextNum": getNextReivewNum(request, response); break;
+      //      case "challengeReview.getNextNum": getNextReivewNum(request, response); break;
     }
   }
 
@@ -73,22 +73,22 @@ public class ChallengeReviewTable extends JsonDataTable<ChallengeReviewDTO> impl
   }
 
 
-  private void getNextReivewNum(Request request, Response response) throws Exception {
-    ChallengeReviewDTO challenge = new ChallengeReviewDTO();
-
-    challenge.setReviewNo(getLastNum());
-
-    response.setStatus(Response.SUCCESS);
-    response.setValue(challenge);
-  }
-
-  private int getLastNum() {
-    if (list.size() > 0) {
-      return list.get(list.size() - 1).getReviewNo() + 1;
-    } else {
-      return 1;
-    }
-  }
+  //  private void getNextReivewNum(Request request, Response response) throws Exception {
+  //    ChallengeReviewDTO challenge = new ChallengeReviewDTO();
+  //
+  //    challenge.setReviewNo(getLastNum());
+  //
+  //    response.setStatus(Response.SUCCESS);
+  //    response.setValue(challenge);
+  //  }
+  //
+  //  private int getLastNum() {
+  //    if (list.size() > 0) {
+  //      return list.get(list.size() - 1).getReviewNo() + 1;
+  //    } else {
+  //      return 1;
+  //    }
+  //  }
 
 
   private int indexOf(int no) {
