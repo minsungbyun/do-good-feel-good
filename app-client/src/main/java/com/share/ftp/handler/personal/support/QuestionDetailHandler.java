@@ -67,6 +67,7 @@ public class QuestionDetailHandler implements Command {
 
         } else {
           System.out.println();
+          System.out.println("비밀번호가 틀렸습니다.");
           System.out.println("비밀번호를 다시 입력해주세요.");
 
         }
