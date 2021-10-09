@@ -1,6 +1,5 @@
 package com.share.ftp.table;
 
-import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.server.DataProcessor;
 import com.share.server.Request;
@@ -77,7 +76,7 @@ public class ChallengeReviewTable extends JsonDataTable<ChallengeReviewDTO> impl
   private void getNextReivewNum(Request request, Response response) throws Exception {
     ChallengeReviewDTO challenge = new ChallengeReviewDTO();
 
-    challenge.setNo(getLastNum());
+    challenge.setReviewNo(getLastNum());
 
     response.setStatus(Response.SUCCESS);
     response.setValue(challenge);
