@@ -29,7 +29,7 @@ public class AdminChallengeDeleteHandler implements Command {
 
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("공지사항 삭제를 취소하였습니다.");
+      System.out.println("챌린지 삭제를 취소하였습니다.");
       return;
     }
 
