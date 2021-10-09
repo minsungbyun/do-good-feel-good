@@ -84,7 +84,7 @@ public class ChallengeReviewTable extends JsonDataTable<ChallengeReviewDTO> impl
 
   private int getLastNum() {
     if (list.size() > 0) {
-      return list.get(list.size() - 1).getNo() + 1;
+      return list.get(list.size() - 1).getReviewNo() + 1;
     } else {
       return 1;
     }

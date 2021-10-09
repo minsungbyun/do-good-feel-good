@@ -49,7 +49,6 @@ public class QuestionDeleteHandler implements Command {
 
       questionDao.delete(questionNo);
 
-      System.out.println();
       System.out.println("게시글을 삭제하였습니다."); 
 
       //        if (QuestionListDTO == null) {

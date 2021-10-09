@@ -1,23 +1,26 @@
 package com.share.ftp.handler.admin;
 
 import java.sql.Date;
-import java.util.List;
+import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.domain.personal.QuestionListDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class AdminQuestionAddHandler extends AbstractAdminQuestionHandler {
+public class AdminQuestionAddHandler implements Command {
 
-  public AdminQuestionAddHandler(List<QuestionListDTO> myQuestionListDTOList) {
-    super(myQuestionListDTOList);
+  QuestionDao questionDao;
+
+  public AdminQuestionAddHandler(QeustionDao questionDao) {
+    this.questionDao = questionDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
 
     System.out.println();
-    System.out.println("[ 관리자 답글 추가 ]");
+    System.out.println("[ 관리자 - 답글 추가]");
 
     int questionNo = (int) request.getAttribute("adminNo");
     QuestionListDTO adminQuestionListDTO = findByNo(questionNo);
