@@ -73,10 +73,11 @@ public class NetQuestionDao implements QuestionDao {
   }
 
   @Override
-  public void delete(QuestionListDTO deleteQuestion) throws Exception {
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("questionNo", String.valueOf(deleteQuestion));
-    requestAgent.request("question.delete", deleteQuestion);
+  public void delete(int questionNo) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("questionNo", String.valueOf(questionNo));
+
+    requestAgent.request("question.delete", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("게시글 삭제 실패!");

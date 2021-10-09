@@ -20,9 +20,9 @@ public class ChallengeQuestionDeleteHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-          try {
-      
-    System.out.println("[ 문의 삭제 ]");
+    try {
+
+      System.out.println("[ 문의 삭제 ]");
       System.out.println();
 
       int challengeNo = (int) request.getAttribute("challengeNo");
@@ -66,17 +66,18 @@ public class ChallengeQuestionDeleteHandler implements Command {
 
         deleteChallengeQuestion.setQuestionNo(deleteChallengeQuestion.getQuestionNo() - 1);
         challengeDao.deleteQuestion(challengeNo,deleteChallengeQuestion);
-//                  return;
-//                } else {
-//                  System.out.println("y 또는 n을 입력하세요.");
-//                  continue;
-//                } 
-              } catch (Exception e) {
-                e.printStackTrace();
-        
-              }
-            }
+        //                  return;
+        //                } else {
+        //                  System.out.println("y 또는 n을 입력하세요.");
+        //                  continue;
+        //                } 
+      } catch (Exception e) {
+        //                e.printStackTrace();
+
       }
     }
+  }
+}
+
 
 

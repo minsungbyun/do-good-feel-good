@@ -9,9 +9,9 @@ public interface QuestionDao {
   void insert(QuestionListDTO addQuestion) throws Exception;
   List<QuestionListDTO> findAll() throws Exception;
   List<QuestionListDTO> findByKeyword(String keyword) throws Exception;
-  QuestionListDTO findByNo(int QuestionNo) throws Exception;
+  QuestionListDTO findByNo(int questionNo) throws Exception;
   void update(QuestionListDTO updateQuestion) throws Exception;
-  void delete(QuestionListDTO deleteQuestion) throws Exception;
+  void delete(int questionNo) throws Exception;
   int getNextNum() throws Exception; // 회원 고유번호 지정
 
 }
