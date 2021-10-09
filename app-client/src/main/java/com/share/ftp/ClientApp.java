@@ -77,7 +77,6 @@ import com.share.ftp.handler.personal.challenge.ChallengeJoinHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeJoinListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionAddHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionConnectHandler;
-import com.share.ftp.handler.personal.challenge.ChallengeQuestionDeleteHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionUpdateHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeRankingHandler;
@@ -95,6 +94,7 @@ import com.share.ftp.handler.personal.community.CommBestListHandler;
 import com.share.ftp.handler.personal.community.CommBoardAddHandler;
 import com.share.ftp.handler.personal.community.CommBoardDeleteHandler;
 import com.share.ftp.handler.personal.community.CommBoardDetailHandler;
+import com.share.ftp.handler.personal.community.CommBoardLikeHandler;
 import com.share.ftp.handler.personal.community.CommBoardListHandler;
 import com.share.ftp.handler.personal.community.CommBoardReplyAddHandler;
 import com.share.ftp.handler.personal.community.CommBoardReplyConnectHandler;
@@ -414,7 +414,7 @@ public class ClientApp {
     commands.put("/commBoard/update", new CommBoardUpdateHandler(netCommunityDao));
     commands.put("/commBoard/delete", new CommBoardDeleteHandler(netCommunityDao));
     commands.put("/commBoard/search", new CommBoardSearchHandler(netCommunityDao));
-    // commands.put("/commBoard/like", new CommBoardLikeHandler(netCommBoardDao)); 
+    commands.put("/commBoard/like", new CommBoardLikeHandler(netCommunityDao)); 
 
     // 소통해요 한줄후기
     commands.put("/commReview/add", new CommReviewAddHandler(netCommunityDao));
@@ -457,7 +457,7 @@ public class ClientApp {
     commands.put("/challengeQuestion/list", new ChallengeQuestionListHandler(netChallengeDao));
     //    commands.put("/challengeQuestion/detail", new ChallengeQuestionDetailHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
     commands.put("/challengeQuestion/update", new ChallengeQuestionUpdateHandler(netChallengeDao));
-    commands.put("/challengeQuestion/delete", new ChallengeQuestionDeleteHandler(netChallengeDao));
+    // commands.put("/challengeQuestion/delete", new ChallengeQuestionDeleteHandler(netChallengeDao));
     //    commands.put("/challengeQuestion/search", new ChallengeQuestionSearchHandler(netChallengeDao, netChallengeQuestionDao));
     commands.put("/challengeQuestion/connect", new ChallengeQuestionConnectHandler(netChallengeDao));
 

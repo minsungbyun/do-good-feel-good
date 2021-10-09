@@ -2,6 +2,7 @@ package com.share.ftp.dao;
 
 import java.util.List;
 import com.share.ftp.domain.personal.CommBoardDTO;
+import com.share.ftp.domain.personal.CommBoardReplyDTO;
 import com.share.ftp.domain.personal.CommReviewDTO;
 
 //역할
@@ -9,15 +10,26 @@ import com.share.ftp.domain.personal.CommReviewDTO;
 
 public interface CommunityDao {
 
-  // 나눔이야기 게시판
+  // 나눔이야기 게시글
   void insert(CommBoardDTO addcommBoard) throws Exception;
   List<CommBoardDTO> findAll() throws Exception;
   List<CommBoardDTO> findByKeyword(String commBoardkeyword) throws Exception;
   CommBoardDTO findByCommNo(int commBoardNo) throws Exception;
   void update(CommBoardDTO updateCommBoard) throws Exception;
   void delete(CommBoardDTO deleteCommBoard) throws Exception;
+  void like(CommBoardDTO likeCommBoard) throws Exception;
   int getNextNum() throws Exception;            // 게시글 번호 지정
   // like 관련 메서드 들어가야함 
+
+
+  // 나눔이야기 게시판 댓글 
+  void insertReply(CommBoardReplyDTO addcommReply) throws Exception;
+  List<CommBoardReplyDTO> findAllCommReply() throws Exception;
+  List<CommBoardReplyDTO> findByCommReplyKeyword(String commReplyKeyword) throws Exception;
+  CommBoardReplyDTO findByCommReplyNo(int commReplyNo) throws Exception;
+  void updateCommReply(CommBoardReplyDTO updateCommReply) throws Exception;
+  void deleteCommeReply(CommBoardReplyDTO deleteCommReply) throws Exception;
+  int getNextNumCommReply() throws Exception;            // 게시글 번호 지정
 
 
   // 한 줄 후기 
