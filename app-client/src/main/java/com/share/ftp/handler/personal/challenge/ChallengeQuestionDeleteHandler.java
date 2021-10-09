@@ -70,12 +70,12 @@ public class ChallengeQuestionDeleteHandler implements Command {
         //                } else {
         //                  System.out.println("y 또는 n을 입력하세요.");
         //                  continue;
-
-      } 
+        //                } 
+      }
     } catch (Exception e) {
       e.printStackTrace();
-
 
     }
   }
 }
+
