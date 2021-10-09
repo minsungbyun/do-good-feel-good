@@ -85,8 +85,9 @@ public class QuestionTable extends JsonDataTable<QuestionListDTO> implements Dat
     response.setStatus(Response.SUCCESS);
   }
 
+
   private void delete(Request request, Response response) throws Exception {
-    QuestionListDTO deleteQuestion = request.getObject(QuestionListDTO.class);
+    //    QuestionListDTO deleteQuestion = request.getObject(QuestionListDTO.class);
 
     int questionNo = Integer.parseInt(request.getParameter("questionNo"));
     int index = indexOf(questionNo);
@@ -97,7 +98,7 @@ public class QuestionTable extends JsonDataTable<QuestionListDTO> implements Dat
       return;
     }
 
-    list.remove(deleteQuestion);
+    list.remove(index);
     response.setStatus(Response.SUCCESS);
   }
 

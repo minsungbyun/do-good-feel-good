@@ -1,5 +1,6 @@
 package com.share.ftp.table;
 
+import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.personal.ChallengeReviewDTO;
 import com.share.server.DataProcessor;
 import com.share.server.Request;
@@ -84,11 +85,12 @@ public class ChallengeReviewTable extends JsonDataTable<ChallengeReviewDTO> impl
 
   private int getLastNum() {
     if (list.size() > 0) {
-      return list.get(list.size() - 1).getNo() + 1;
+      return list.get(list.size() - 1).getReviewNo() + 1;
     } else {
       return 1;
     }
   }
+
 
   private int indexOf(int no) {
     for (int i = 0; i < list.size(); i++) {

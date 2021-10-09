@@ -1,24 +1,28 @@
 package com.share.ftp.handler.personal.challenge;
 
-import java.util.List;
+import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
-import com.share.ftp.handler.admin.AbstractAdminChallengeHandler;
 import com.share.util.Prompt;
 
-public class MyChallengeDetailHandler extends AbstractAdminChallengeHandler {
+public class MyChallengeDetailHandler implements Command {
 
-  public MyChallengeDetailHandler(List<ChallengeDTO> challengeDTOList) {
-    super(challengeDTOList);
+  ChallengeDao challengeDao;
+
+  public MyChallengeDetailHandler(ChallengeDao challengeDao) {
+    this.challengeDao = challengeDao;
   }
 
+
+  @Override
   public void execute(CommandRequest request) throws Exception {
 
     System.out.println("[ 나의 챌린지 상세보기 ]");
     System.out.println();
     int no = Prompt.inputInt("챌린지 번호를 입력해주세요 ▶ ");
 
-    ChallengeDTO challengeDTO = findByNo(no);
+    ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(no);
 
     if (challengeDTO == null) {
       System.out.println("해당 번호의 챌린지가 없습니다.");

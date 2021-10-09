@@ -47,6 +47,7 @@ public class CommBoardDetailHandler implements Command {
       System.out.printf("댓글수  %d\n", commBoardDTO.getReplyCount());
       System.out.println();
 
+      communityDao.update(commBoardDTO);
 
       JoinDTO loginUser = AuthLoginHandler.getLoginUser(); 
 
