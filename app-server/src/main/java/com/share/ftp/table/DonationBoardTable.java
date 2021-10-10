@@ -1,6 +1,6 @@
 package com.share.ftp.table;
 
-import java.text.DecimalFormat;
+import java.util.ArrayList;
 import com.share.ftp.domain.personal.DonationBoardDTO;
 import com.share.server.DataProcessor;
 import com.share.server.Request;
@@ -20,16 +20,11 @@ public class DonationBoardTable extends JsonDataTable<DonationBoardDTO> implemen
     switch (request.getCommand()) {
       case "donationBoard.insert": insert(request, response); break;
       case "donationBoard.selectList": selectList(request, response); break;
+      case "donationBoard.selectListByKeyword": selectListByKeyword(request, response); break;
       case "donationBoard.selectOne": selectOne(request, response); break;
       case "donationBoard.update": update(request, response); break;
       case "donationBoard.delete": delete(request, response); break;
       case "donationBoard.getNextNum": getNextNum(request, response); break;
-      case "donationBoard.printDonationBoard": printDonationBoard(request, response); break;
-      //      case "donationBoard.getRemainTime": getRemainTime(request, response); break;
-      //      case "donationBoard.findByNo": findByNo(request, response); break;
-      //      case "project.task.insert": insertTask(request, response); break;
-      //      case "project.task.update": updateTask(request, response); break;
-      //      case "project.task.delete": deleteTask(request, response); break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -45,6 +40,23 @@ public class DonationBoardTable extends JsonDataTable<DonationBoardDTO> implemen
   private void selectList(Request request, Response response) throws Exception {
     response.setStatus(Response.SUCCESS);
     response.setValue(list);
+  }
+
+  private void selectListByKeyword(Request request, Response response) throws Exception {
+    String keyword = request.getParameter("donationBoardKeyword");
+
+    ArrayList<DonationBoardDTO> searchResult = new ArrayList<>();
+    for (DonationBoardDTO donationBoardDTO : list) {
+      if (!donationBoardDTO.getTitle().contains(keyword) &&
+          !donationBoardDTO.getContent().contains(keyword) &&
+          !donationBoardDTO.getLeader().contains(keyword)) {
+        continue;
+      }
+      searchResult.add(donationBoardDTO);
+    }
+
+    response.setStatus(Response.SUCCESS);
+    response.setValue(searchResult);
   }
 
   private void selectOne(Request request, Response response) throws Exception {
@@ -122,112 +134,6 @@ public class DonationBoardTable extends JsonDataTable<DonationBoardDTO> implemen
       return 1;
     }
   }
-
-  private void printDonationBoard(Request request, Response response) throws Exception {
-
-    DecimalFormat formatter = new DecimalFormat("###,###,###");
-    DonationBoardDTO donationBoardDTO = request.getObject(DonationBoardDTO.class);
-
-    if (donationBoardDTO.getIsSigned().equals("반려됨")) {
-      System.out.println();
-      System.out.println("해당 번호의 모금함 개설 신청내역이 없습니다.");
-      return;
-    } else if (donationBoardDTO.getIsSigned().equals("승인됨")) {
-      System.out.println();
-      System.out.printf("개설번호: %s\n", donationBoardDTO.getNo());
-      System.out.printf("개설분류: %s\n", donationBoardDTO.getSort());
-      System.out.printf("제목: %s\n", donationBoardDTO.getTitle());
-      System.out.printf("주최자: %s\n", donationBoardDTO.getLeader());
-      System.out.printf("내용: %s\n", donationBoardDTO.getContent());
-      System.out.printf("첨부파일: %s\n", donationBoardDTO.getFileUpload());
-      System.out.printf("시작일: %s\n", donationBoardDTO.getRegisteredStartDate());
-      System.out.printf("종료일: %s\n", donationBoardDTO.getRegisteredEndDate());
-      System.out.printf("모금함기간 ▶ %d일\n",  ((((donationBoardDTO.getRegisteredEndDate().getTime() - donationBoardDTO.getRegisteredStartDate().getTime()) / 1000)) / (24*60*60)));
-      System.out.printf(getRemainTime(donationBoardDTO.getRegisteredEndDate().getTime() - System.currentTimeMillis()));
-      System.out.printf("목표금액: %s원\n", formatter.format(donationBoardDTO.getMoneyTarget()));
-      System.out.println();
-
-    } else {
-      System.out.println("해당 번호의 모금함 개설 신청내역이 없습니다.");
-      return;
-    }
-
-  }
-
-  private static String getRemainTime(long millis) {
-
-    long sec = millis / 1000;
-    long min = sec / 60;
-    long hour = min / 60;
-    long day = millis / 1000 / (24 * 60 * 60);
-
-    hour = hour % 24; 
-    sec = sec % 60;
-    min = min % 60;
-
-    return String.format("남은시간 ▶ %d일 %d시간 %d분 %d초 남았습니다\n", day, hour, min, sec);
-  }
-
-
-
-  //  private int getNextNum() {
-  //    if (donationBoardDTOList.size() > 0) {
-  //      return donationBoardDTOList.get(donationBoardDTOList.size() - 1).getNo() + 1;
-  //    } else {
-  //      return 1;
-  //    }
-  //  }
-
-  //  private void insertTask(Request request, Response response) throws Exception {
-  //    Task task = request.getObject(Task.class);
-  //    Project project = findByNo(task.getProject().getNo());
-  //    project.getTasks().add(task);
-  //    response.setStatus(Response.SUCCESS);
-  //  }
-  //
-  //  private void updateTask(Request request, Response response) throws Exception {
-  //    Task task = request.getObject(Task.class);
-  //    Project project = findByNo(task.getProject().getNo());
-  //
-  //    int index = indexOfTask(task.getNo(), project.getTasks());
-  //    if (index == -1) {
-  //      response.setStatus(Response.FAIL);
-  //      response.setValue("해당 번호의 작업을 찾을 수 없습니다.");
-  //      return;
-  //    }
-  //
-  //    project.getTasks().set(index, task);
-  //    response.setStatus(Response.SUCCESS);
-  //  }
-  //
-  //  private void deleteTask(Request request, Response response) throws Exception {
-  //    int taskNo = Integer.parseInt(request.getParameter("taskNo"));
-  //    int projectNo = Integer.parseInt(request.getParameter("projectNo"));
-  //
-  //    Project project = findByNo(projectNo);
-  //
-  //    int index = indexOfTask(taskNo, project.getTasks());
-  //    if (index == -1) {
-  //      response.setStatus(Response.FAIL);
-  //      response.setValue("해당 번호의 작업을 찾을 수 없습니다.");
-  //      return;
-  //    }
-  //
-  //    project.getTasks().remove(index);
-  //    response.setStatus(Response.SUCCESS);
-  //  }
-  //
-  //  private int indexOfTask(int taskNo, List<Task> taskList) {
-  //    for (int i = 0; i < taskList.size(); i++) {
-  //      if (taskList.get(i).getNo() == taskNo) {
-  //        return i;
-  //      }
-  //    }
-  //    return -1;
-  //  }
-
-
-
 }
 
 
