@@ -31,7 +31,7 @@ public class NetDonationBoardDao implements DonationBoardDao {
   public List<DonationBoardDTO> findAll() throws Exception {
     requestAgent.request("donationBoard.selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("모금함 개설 기부등록 데이터 저장 실패!");
+      throw new Exception("모금함 목록 조회 실패!");
     }
 
     return new ArrayList<>(requestAgent.getObjects(DonationBoardDTO.class));
@@ -41,11 +41,11 @@ public class NetDonationBoardDao implements DonationBoardDao {
   @Override
   public List<DonationBoardDTO> findByKeyword(String keyword) throws Exception {
     HashMap<String,String> params = new HashMap<>();
-    params.put("keyword", keyword);
-    requestAgent.request("donationBoard.selectList", null);
+    params.put("donationBoardKeyword", keyword);
+    requestAgent.request("donationBoard.selectListByKeyword", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("모금함 개설 기부등록 데이터 저장 실패!");
+      throw new Exception("모금함 검색 실패!");
     }
 
     return new ArrayList<>(requestAgent.getObjects(DonationBoardDTO.class));
@@ -70,7 +70,7 @@ public class NetDonationBoardDao implements DonationBoardDao {
     requestAgent.request("donationBoard.update", donationBoardDTO);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("모금함 개설 기부 변경 실패!");
+      throw new Exception("모금함 개설 변경 실패!");
     }
   }
 
@@ -82,7 +82,7 @@ public class NetDonationBoardDao implements DonationBoardDao {
     requestAgent.request("donationBoard.delete", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("모금함 개설 기부 삭제 실패!");
+      throw new Exception("모금함 개설 삭제 실패!");
     }
   }
 

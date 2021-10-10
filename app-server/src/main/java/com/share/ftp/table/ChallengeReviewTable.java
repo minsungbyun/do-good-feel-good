@@ -19,7 +19,7 @@ public class ChallengeReviewTable extends JsonDataTable<ChallengeReviewDTO> impl
       case "challengeReview.selectOne": selectReviewOne(request, response); break;
       case "challengeReview.update": updateReview(request, response); break;
       case "challengeReview.delete": deleteReview(request, response); break;
-      case "challengeReview.getNextNum": getNextReivewNum(request, response); break;
+      //      case "challengeReview.getNextNum": getNextReivewNum(request, response); break;
     }
   }
 
@@ -37,12 +37,15 @@ public class ChallengeReviewTable extends JsonDataTable<ChallengeReviewDTO> impl
 
 
   private void selectReviewOne(Request request, Response response) throws Exception {
-    int challengeReviewNo = Integer.parseInt(request.getParameter("challengeNo"));
+    int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
+    int challengeReviewNo = Integer.parseInt(request.getParameter("reviewNo"));
 
     ChallengeReviewDTO challengeReviewDTO = null;
     for (ChallengeReviewDTO challengeList : list) {
-      if (challengeList.getNo() == challengeReviewNo) {
-        challengeReviewDTO = challengeList; 
+      if (challengeList.getNo() == challengeNo) {
+        if (challengeList.getReviewNo() == challengeReviewNo) {
+          challengeReviewDTO = challengeList; 
+        }
       }
     }
 
@@ -59,7 +62,7 @@ public class ChallengeReviewTable extends JsonDataTable<ChallengeReviewDTO> impl
   private void updateReview(Request request, Response response) throws Exception {
     ChallengeReviewDTO updateChallenge = request.getObject(ChallengeReviewDTO.class);
 
-    int index = indexOf(updateChallenge.getNo());
+    int index = indexOf(updateChallenge.getReviewNo());
 
     list.set(index, updateChallenge);
     response.setStatus(Response.SUCCESS);
@@ -73,26 +76,27 @@ public class ChallengeReviewTable extends JsonDataTable<ChallengeReviewDTO> impl
   }
 
 
-  private void getNextReivewNum(Request request, Response response) throws Exception {
-    ChallengeReviewDTO challenge = new ChallengeReviewDTO();
+  //  private void getNextReivewNum(Request request, Response response) throws Exception {
+  //    ChallengeReviewDTO challenge = new ChallengeReviewDTO();
+  //
+  //    challenge.setReviewNo(getLastNum());
+  //
+  //    response.setStatus(Response.SUCCESS);
+  //    response.setValue(challenge);
+  //  }
+  //
+  //  private int getLastNum() {
+  //    if (list.size() > 0) {
+  //      return list.get(list.size() - 1).getReviewNo() + 1;
+  //    } else {
+  //      return 1;
+  //    }
+  //  }
 
-    challenge.setNo(getLastNum());
-
-    response.setStatus(Response.SUCCESS);
-    response.setValue(challenge);
-  }
-
-  private int getLastNum() {
-    if (list.size() > 0) {
-      return list.get(list.size() - 1).getReviewNo() + 1;
-    } else {
-      return 1;
-    }
-  }
 
   private int indexOf(int no) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getNo() == no) {
+      if (list.get(i).getReviewNo() == no) {
         return i;
       }
     }
