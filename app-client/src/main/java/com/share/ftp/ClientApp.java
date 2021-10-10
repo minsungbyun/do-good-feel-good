@@ -57,7 +57,6 @@ import com.share.ftp.handler.admin.AdminNoticeDetailHandler;
 import com.share.ftp.handler.admin.AdminNoticeListHandler;
 import com.share.ftp.handler.admin.AdminNoticeSearchHandler;
 import com.share.ftp.handler.admin.AdminNoticeUpdateHandler;
-import com.share.ftp.handler.admin.AdminQuestionAddHandler;
 import com.share.ftp.handler.join.AuthDisplayUserHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.ftp.handler.join.AuthLogoutHandler;
@@ -357,7 +356,7 @@ public class ClientApp {
     VolunteerDao netVolunteerDao = new NetVolunteerDao(requestAgent);
     CommunityDao netCommunityDao = new NetCommunityDao(requestAgent);
     ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
-    QuestionDao questionDao = new NetQuestionDao(requestAgent);
+    QuestionDao netQuestionDao = new NetQuestionDao(requestAgent);
     //    NoticeDao netNoticeDao = new NetNoticeDao(requestAgent);
     //    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
     //    ChallengeReviewDao netChallengeReviewDao = new NetChallengeDao(requestAgent);
@@ -492,12 +491,12 @@ public class ClientApp {
     commands.put("/donationBoardDetailRegister/add", new DonationBoardDetailRegisterAddHandler(donationBoardDao, donationRegisterDao, netJoinDao));
 
     // 고객센터 문의사항
-    commands.put("/question/add", new QuestionAddHandler(questionDao));
-    commands.put("/question/list", new QuestionListHandler(questionDao));
-    commands.put("/question/detail", new QuestionDetailHandler(questionDao));
-    commands.put("/question/update", new QuestionUpdateHandler(questionDao));
-    commands.put("/question/delete", new QuestionDeleteHandler(questionDao));
-    commands.put("/question/search", new QuestionSearchHandler(questionDao));
+    commands.put("/question/add", new QuestionAddHandler(netQuestionDao));
+    commands.put("/question/list", new QuestionListHandler(netQuestionDao));
+    commands.put("/question/detail", new QuestionDetailHandler(netQuestionDao));
+    commands.put("/question/update", new QuestionUpdateHandler(netQuestionDao));
+    commands.put("/question/delete", new QuestionDeleteHandler(netQuestionDao));
+    commands.put("/question/search", new QuestionSearchHandler(netQuestionDao));
 
     commands.put("/adminQuestion/connect", new AdminQuestionConnectHandler());
     //    commands.put("/adminQuestion/add", new AdminQuestionAddHandler(myQuestionListDTOList));
@@ -545,7 +544,7 @@ public class ClientApp {
 
     // 관리자 문의사항
 
-    commands.put("/adminQuestion/add", new AdminQuestionAddHandler(myQuestionListDTOList));
+    //    commands.put("/adminQuestion/add", new AdminQuestionAddHandler(netQuestionDao));
     //        commands.put("/adminAsk/detail", new AdminQuestionDetailHandler(myQuestionListDTOList));
     //        commands.put("/adminAsk/update", new AdminQuestionUpdateHandler(myQuestionListDTOList));
     //        commands.put("/adminAsk/delete", new AdminQuestionDeleteHandler(myQuestionListDTOList));

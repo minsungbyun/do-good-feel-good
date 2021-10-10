@@ -23,6 +23,11 @@ public class QuestionSearchHandler implements Command {
 
     Collection<QuestionListDTO> questionList = questionDao.findByKeyword(input);
 
+    if (questionList.isEmpty()) {
+      System.out.println();
+      System.out.println("검색된 게시글이 없습니다.");
+    }
+
     for (QuestionListDTO questionListDTO : questionList) {
       if (!questionListDTO.getTitle().contains(input) &&
           !questionListDTO.getContent().contains(input) &&
