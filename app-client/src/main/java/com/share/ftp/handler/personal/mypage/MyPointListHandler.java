@@ -1,5 +1,10 @@
 package com.share.ftp.handler.personal.mypage;
 
+import static com.share.util.MemberHelper.getUserLevel;
+import static com.share.util.MemberHelper.getUserPoint;
+import static com.share.util.MemberHelper.getUserRemainPoint;
+import static com.share.util.MemberHelper.printMyRank;
+>>>>>>> 5b32bd72f1aac7dcd7a8570f83e2ce6e6f3c35dc
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
