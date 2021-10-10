@@ -15,5 +15,4 @@ public class DonationBoardHandlerHelper {
 
     return String.format("남은시간 ▶ %d일 %d시간 %d분 %d초 남았습니다\n", day, hour, min, sec);
   }
-
 }
