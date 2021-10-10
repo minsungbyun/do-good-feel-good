@@ -2,7 +2,7 @@ package com.share.ftp.handler.personal.challenge;
 
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
-import com.share.ftp.domain.personal.ChallengeQuestionDTO;
+import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -70,12 +70,12 @@ public class ChallengeQuestionDeleteHandler implements Command {
         //                } else {
         //                  System.out.println("y 또는 n을 입력하세요.");
         //                  continue;
-
-      } 
+        //                } 
+      }
     } catch (Exception e) {
       e.printStackTrace();
-
 
     }
   }
 }
+

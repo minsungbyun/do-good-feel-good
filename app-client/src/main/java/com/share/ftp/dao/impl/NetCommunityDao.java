@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.share.ftp.dao.CommunityDao;
-import com.share.ftp.domain.personal.CommBoardDTO;
-import com.share.ftp.domain.personal.CommBoardReplyDTO;
-import com.share.ftp.domain.personal.CommReviewDTO;
+import com.share.ftp.domain.community.CommBoardDTO;
+import com.share.ftp.domain.community.CommBoardReplyDTO;
+import com.share.ftp.domain.community.CommReviewDTO;
 import com.share.request.RequestAgent;
 
 // 게시글 데이터를 서버를 통해 관리한다.

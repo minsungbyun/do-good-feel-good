@@ -1,7 +1,7 @@
 package com.share.ftp.handler.org;
 
 import java.sql.Date;
-import com.share.ftp.domain.personal.CommBoardDTO;
+import com.share.ftp.domain.community.CommBoardDTO;
 import com.share.util.Prompt;
 
 public class CommBoardHandler {

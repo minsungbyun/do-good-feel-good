@@ -1,7 +1,7 @@
 package com.share.ftp.handler.org;
 
 import java.sql.Date;
-import com.share.ftp.domain.personal.CommReviewDTO;
+import com.share.ftp.domain.community.CommReviewDTO;
 import com.share.util.Prompt;
 
 public class CommReviewHandler {

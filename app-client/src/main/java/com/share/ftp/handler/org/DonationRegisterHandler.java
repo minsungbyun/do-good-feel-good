@@ -1,6 +1,6 @@
 package com.share.ftp.handler.org;
 
-import com.share.ftp.domain.personal.DonationRegisterDTO;
+import com.share.ftp.domain.donation.DonationRegisterDTO;
 import com.share.util.Prompt;
 
 public class DonationRegisterHandler {

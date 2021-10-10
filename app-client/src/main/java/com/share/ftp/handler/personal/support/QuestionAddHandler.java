@@ -8,7 +8,7 @@ import static com.share.util.General.questionType.SITEASK;
 import static com.share.util.General.questionType.VOLUNTEERASK;
 import java.sql.Date;
 import com.share.ftp.dao.QuestionDao;
-import com.share.ftp.domain.personal.QuestionListDTO;
+import com.share.ftp.domain.support.QuestionListDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;

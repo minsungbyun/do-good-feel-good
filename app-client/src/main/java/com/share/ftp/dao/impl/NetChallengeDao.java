@@ -6,8 +6,8 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
-import com.share.ftp.domain.personal.ChallengeQuestionDTO;
-import com.share.ftp.domain.personal.ChallengeReviewDTO;
+import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
+import com.share.ftp.domain.challenge.ChallengeReviewDTO;
 import com.share.request.RequestAgent;
 
 public class NetChallengeDao implements ChallengeDao {
@@ -242,15 +242,15 @@ public class NetChallengeDao implements ChallengeDao {
 
   @Override
   public int getNextReviewNum(ChallengeDTO challengeDTO) throws Exception {
-    requestAgent.request("challengeReview.getNextNum", null);
+    //    requestAgent.request("challengeReview.getNextNum", null);
+    //
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      throw new Exception("고유번호 부여 중 오류 발생!");
+    //    }
+    //    ChallengeReviewDTO challengeReviewDTO = requestAgent.getObject(ChallengeReviewDTO.class);
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("고유번호 부여 중 오류 발생!");
-    }
-    ChallengeReviewDTO challengeReviewDTO = requestAgent.getObject(ChallengeReviewDTO.class);
 
-
-    return challengeReviewDTO.getNo();
+    return challengeDTO.getReviewCount() + 1;
   }
 
   @Override

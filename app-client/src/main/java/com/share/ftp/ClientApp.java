@@ -16,28 +16,28 @@ import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.dao.JoinDao;
 import com.share.ftp.dao.QuestionDao;
+import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.dao.impl.NetChallengeDao;
 import com.share.ftp.dao.impl.NetCommunityDao;
 import com.share.ftp.dao.impl.NetDonationBoardDao;
 import com.share.ftp.dao.impl.NetDonationRegisterDao;
 import com.share.ftp.dao.impl.NetJoinDao;
 import com.share.ftp.dao.impl.NetQuestionDao;
+import com.share.ftp.dao.impl.NetVolunteerDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.admin.NoticeDTO;
+import com.share.ftp.domain.challenge.ChallengeJoinDTO;
+import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
+import com.share.ftp.domain.challenge.ChallengeReviewDTO;
+import com.share.ftp.domain.community.CommBoardDTO;
+import com.share.ftp.domain.community.CommBoardReplyDTO;
+import com.share.ftp.domain.community.CommReviewDTO;
+import com.share.ftp.domain.donation.DonationBoardDTO;
+import com.share.ftp.domain.donation.DonationRegisterDTO;
 import com.share.ftp.domain.join.JoinDTO;
-import com.share.ftp.domain.personal.ApproveOrgDTO;
-import com.share.ftp.domain.personal.ChallengeJoinDTO;
-import com.share.ftp.domain.personal.ChallengeQuestionDTO;
-import com.share.ftp.domain.personal.ChallengeReviewDTO;
-import com.share.ftp.domain.personal.CommBoardDTO;
-import com.share.ftp.domain.personal.CommBoardReplyDTO;
-import com.share.ftp.domain.personal.CommReviewDTO;
-import com.share.ftp.domain.personal.DonationBoardDTO;
-import com.share.ftp.domain.personal.DonationRegisterDTO;
-import com.share.ftp.domain.personal.GeneralRequestDTO;
-import com.share.ftp.domain.personal.MyProfileDTO;
-import com.share.ftp.domain.personal.QuestionListDTO;
-import com.share.ftp.domain.personal.VolListDTO;
+import com.share.ftp.domain.mypage.MyProfileDTO;
+import com.share.ftp.domain.support.QuestionListDTO;
+import com.share.ftp.domain.volunteer.GeneralRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.admin.AdminChallengeAddHandler;
@@ -116,11 +116,15 @@ import com.share.ftp.handler.personal.donation.DonationBoardApplyCompleteListHan
 import com.share.ftp.handler.personal.donation.DonationBoardApplyDetailHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardApplyHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardApplyListHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardConnectHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardDeleteHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardDetailRegisterAddHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardListHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardRegisterListHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardRejectApplyHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardRejectedListHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardSearchHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardUpdateHandler;
 import com.share.ftp.handler.personal.donation.DonationPrompt;
 import com.share.ftp.handler.personal.donation.DonationRegisterAddHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterMyListHandler;
@@ -166,7 +170,6 @@ import com.share.menu.Menu;
 import com.share.menu.MenuFilter;
 import com.share.menu.MenuGroup;
 import com.share.request.RequestAgent;
-import com.share.util.MemberHelper;
 import com.share.util.Prompt;
 
 public class ClientApp {
@@ -175,7 +178,6 @@ public class ClientApp {
 
   List<JoinDTO> joinDTOList = new ArrayList<>();
   // 함께해요 도메인(값)
-  List<VolListDTO> volListDTOList = new ArrayList<>();
 
   // 개인, 기관 봉사 도메인
   List<GeneralRequestDTO> generalRequestDTOList = new ArrayList<>();
@@ -210,7 +212,6 @@ public class ClientApp {
   List<ChallengeDTO> challengeDTOList = new ArrayList<>();
   List<NoticeDTO> noticeDTOList = new ArrayList<>();
   //  List<QuestionDTO> questionDTOList = new ArrayList<>();
-  List<ApproveOrgDTO> approveOrgDTOList = new ArrayList<>();
 
 
   // HashMap
@@ -235,7 +236,6 @@ public class ClientApp {
   private void notifyOnApplicationStarted() {
     HashMap<String, Object> params = new HashMap<>();
     params.put("joinDTOList", joinDTOList);
-    params.put("volListDTOList", volListDTOList);
     params.put("generalRequestDTOList", generalRequestDTOList);
     params.put("generalRequestApplyDTOList", generalRequestApplyDTOList);
     params.put("generalRequestRejectDTOList", generalRequestRejectDTOList);
@@ -254,7 +254,6 @@ public class ClientApp {
     params.put("challengeDTOList", challengeDTOList);
     params.put("noticeDTOList", noticeDTOList);
     //    params.put("questionDTOList", questionDTOList);
-    params.put("approveOrgDTOList", approveOrgDTOList);
 
     for (ApplicationContextListener listener : listeners) {
       listener.contextInitialized(params);
@@ -264,7 +263,6 @@ public class ClientApp {
   private void notifyOnApplicationEnded() {
     HashMap<String, Object> params = new HashMap<>();
     params.put("joinDTOList", joinDTOList);
-    params.put("volListDTOList", volListDTOList);
     params.put("generalRequestDTOList", generalRequestDTOList);
     params.put("generalRequestApplyDTOList", generalRequestApplyDTOList);
     params.put("generalRequestRejectDTOList", generalRequestRejectDTOList);
@@ -283,7 +281,6 @@ public class ClientApp {
     params.put("challengeDTOList", challengeDTOList);
     params.put("noticeDTOList", noticeDTOList);
     //    params.put("questionDTOList", questionDTOList);
-    params.put("approveOrgDTOList", approveOrgDTOList);
 
     for (ApplicationContextListener listener : listeners) {
       listener.contextDestroyed(params);
@@ -325,7 +322,6 @@ public class ClientApp {
       new VolGeneralRequestAppliedListHandler
       (generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList);
 
-  GeneralRequestDTO personalRequestDTO = new GeneralRequestDTO();
 
   VolGeneralDoJoinHandler volRequestPersonalAppliedListDetailHandler =
       new VolGeneralDoJoinHandler
@@ -356,17 +352,15 @@ public class ClientApp {
 
     requestAgent = new RequestAgent("127.0.0.1", 8888);
 
-
     JoinDao netJoinDao = new NetJoinDao(requestAgent);
+
+    VolunteerDao netVolunteerDao = new NetVolunteerDao(requestAgent);
     CommunityDao netCommunityDao = new NetCommunityDao(requestAgent);
     ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
     QuestionDao questionDao = new NetQuestionDao(requestAgent);
     //    NoticeDao netNoticeDao = new NetNoticeDao(requestAgent);
     //    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
     //    ChallengeReviewDao netChallengeReviewDao = new NetChallengeDao(requestAgent);
-
-    MemberHelper memberHelper = new MemberHelper();
-
 
     //로그인, 로그아웃
     commands.put("/auth/login", new AuthLoginHandler(netJoinDao)); // 로그인
@@ -463,8 +457,8 @@ public class ClientApp {
 
 
     // 챌린지 랭킹
-    commands.put("/ranking/list", new ChallengeRankingHandler(netJoinDao));  //전체랭킹(구현예정)
-    commands.put("/myRanking/list", new MyRankingHandler(netJoinDao)); //나의랭킹(구현예정)
+    commands.put("/ranking/list", new ChallengeRankingHandler(netJoinDao));  
+    commands.put("/myRanking/list", new MyRankingHandler(netJoinDao)); 
 
     // 모금함 (개설신청하기, 개설목록, 승인, 반려)
 
@@ -476,7 +470,11 @@ public class ClientApp {
     DonationRegisterDao donationRegisterDao = new NetDonationRegisterDao(requestAgent);
 
     commands.put("/donationBoard/list", new DonationBoardListHandler(donationBoardDao));
+    commands.put("/donationBoard/connect", new DonationBoardConnectHandler(donationBoardDao));
+    commands.put("/donationBoard/update", new DonationBoardUpdateHandler(donationBoardDao));
+    commands.put("/donationBoard/delete", new DonationBoardDeleteHandler(donationBoardDao));
     commands.put("/donationBoard/apply", new DonationBoardApplyHandler(donationBoardDao));
+    commands.put("/donationBoard/search", new DonationBoardSearchHandler(donationBoardDao));
     commands.put("/donationBoard/applyList", new DonationBoardApplyListHandler(donationBoardDao));
     commands.put("/donationBoard/appliedList", new DonationBoardAppliedListHandler(donationBoardDao));
     commands.put("/donationBoard/acceptApply", new DonationBoardAcceptApplyHandler(donationBoardDao));
@@ -522,7 +520,7 @@ public class ClientApp {
     commands.put("/myBoard/update", new MyBoardUpdateHandler()); // 나의게시글 목록
     commands.put("/myBoard/delete", new MyBoardDeleteHandler()); // 나의게시글 목록
 
-    commands.put("myPoint/list", new MyPointListHandler(joinDTOList)); // 나의포인트 
+    commands.put("myPoint/list", new MyPointListHandler(netJoinDao)); // 나의포인트 
 
     commands.put("/orgMyVol/apply", new MyVolApplyListHandler()); // 기관 마이페이지 승인신청 
     commands.put("/orgMyVol/approve", new MyVolApproveListHandler()); // 기관 마이페이지 승인조회
@@ -841,7 +839,7 @@ public class ClientApp {
     donationMenu.add(new MenuItem("전체 기부 참여내역", "/donationRegister/participation"));
     donationMenu.add(new MenuItem("모금함목록","/donationBoard/list"));
     donationMenu.add(new MenuItem("모금함 상세보기", "/donationBoard/applyDetail"));
-    //    donationMenu.add(new MenuItem("기부하기", ACCESS_MEMBER, "/donationRegister/add"));
+    donationMenu.add(new MenuItem("모금함 검색", "/donationBoard/search"));
     donationMenu.add(new MenuItem("모금함 개설신청", ACCESS_ORG, "/donationBoard/apply"));
 
     return donationMenu;
@@ -931,8 +929,8 @@ public class ClientApp {
   private Menu createMyDonationMenu() {
     MenuGroup myDonation = new MenuGroup("나의 모금함"); 
     myDonation.setMenuFilter(menuFilter);
-    myDonation.add(new MenuItem("나의 모금함 개설신청서 확인", ACCESS_ORG, "/myDonation//applyCompleteList")); 
     myDonation.add(new MenuItem("나의 기부내역", ACCESS_MEMBER, "/myDonation/registerlist"));
+    myDonation.add(new MenuItem("나의 모금함 개설신청서 목록", ACCESS_ORG, "/myDonation//applyCompleteList")); 
     myDonation.add(new MenuItem("승인된 모금함 개설내역",ACCESS_ORG,"/donationBoard/appliedList")); 
     myDonation.add(new MenuItem("반려된 모금함 개설내역", ACCESS_ORG,"/donationBoard/rejectedList"));  
 

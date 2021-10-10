@@ -11,9 +11,9 @@ import java.sql.Date;
 import java.util.Collection;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.dao.DonationRegisterDao;
+import com.share.ftp.domain.donation.DonationBoardDTO;
+import com.share.ftp.domain.donation.DonationRegisterDTO;
 import com.share.ftp.domain.join.JoinDTO;
-import com.share.ftp.domain.personal.DonationBoardDTO;
-import com.share.ftp.domain.personal.DonationRegisterDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -71,35 +71,6 @@ public class DonationRegisterAddHandler implements Command { // 모금함 기부
           case 0: System.out.println("[ 기부를 취소하셨습니다. ]");      return;
           default: System.out.println(" [ 양식에 있는 번호를 입력해주세요. ] "); continue;
         }
-
-        //      if (input == 0) {
-        //        System.out.println("[ 기부를 취소하셨습니다. ]");
-        //        return;
-        //      } else if (input == 1) {
-        //        System.out.printf("기부목록: %s\n", CHILDREN);
-        //        donationRegister.setSort(CHILDREN);
-        //      } else if (input == 2) {
-        //        System.out.printf("기부목록: %s\n", TEEN);
-        //        donationRegister.setSort(TEEN);
-        //      } else if (input == 3) {
-        //        System.out.printf("기부목록: %s\n", ELDER);
-        //        donationRegister.setSort(ELDER);
-        //      } else if (input == 4) {
-        //        System.out.printf("기부목록: %s\n", HANDICAPPED);
-        //        donationRegister.setSort(HANDICAPPED);
-        //      } else if (input == 5) {
-        //        System.out.printf("기부목록: %s\n", ANIMAL);
-        //        donationRegister.setSort(ANIMAL);
-        //      } else if (input == 6) {
-        //        System.out.printf("기부목록: %s\n", ENVIRONMENT);
-        //        donationRegister.setSort(ENVIRONMENT);
-        //      } else if (input == 7) {
-        //        System.out.printf("기부목록: %s\n", OTHER);
-        //        donationRegister.setSort(OTHER);
-        //      } else {
-        //        System.out.println(" [ 양식에 있는 번호를 입력해주세요. ] ");
-        //        return;
-        //      }
 
         Collection<DonationBoardDTO> donationBoardList = donationBoardDao.findAll();
 

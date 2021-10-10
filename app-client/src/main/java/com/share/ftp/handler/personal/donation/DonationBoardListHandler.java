@@ -1,10 +1,11 @@
 package com.share.ftp.handler.personal.donation;
 
+import static com.share.ftp.handler.personal.donation.DonationBoardHandlerHelper.getRemainTime;
 import static com.share.util.General.check.Applied;
 import java.text.DecimalFormat;
 import java.util.Collection;
 import com.share.ftp.dao.DonationBoardDao;
-import com.share.ftp.domain.personal.DonationBoardDTO;
+import com.share.ftp.domain.donation.DonationBoardDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 
@@ -53,20 +54,6 @@ public class DonationBoardListHandler implements Command {
     //      System.out.println("[  현재 승인된 모금함 개설목록이 없습니다. ]");
     //      return;
     //    }
-  }
-
-  private static String getRemainTime(long millis) {
-
-    long sec = millis / 1000;
-    long min = sec / 60;
-    long hour = min / 60;
-    long day = millis / 1000 / (24 * 60 * 60);
-
-    hour = hour % 24; 
-    sec = sec % 60;
-    min = min % 60;
-
-    return String.format("남은시간 ▶ %d일 %d시간 %d분 %d초 남았습니다\n", day, hour, min, sec);
   }
 }
 

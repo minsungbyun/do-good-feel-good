@@ -3,10 +3,11 @@ package com.share.ftp.handler.personal.donation;
 import java.text.DecimalFormat;
 import java.util.Collection;
 import com.share.ftp.dao.DonationBoardDao;
-import com.share.ftp.domain.personal.DonationBoardDTO;
+import com.share.ftp.domain.donation.DonationBoardDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
+import com.share.util.Prompt;
 
 public class DonationBoardApplyCompleteListHandler implements Command {
 
@@ -55,6 +56,19 @@ public class DonationBoardApplyCompleteListHandler implements Command {
       //        System.out.println("[ 현재 등록된 모금함 개설목록이 없습니다. ]");
       //        return;
       //      } 
+    }
+
+
+    while (true) {
+      System.out.println();
+      System.out.println("1번 ▶ 모금함 변경, 삭제");
+      System.out.println("0번 ▶ 이전");
+      int input = Prompt.inputInt("번호 입력 ▶ ");
+      switch (input) {
+        case 1: request.getRequestDispatcher("/donationBoard/connect").forward(request);return;
+        case 0: return;
+        default: System.out.println("명령어가 올바르지 않습니다!");
+      }
     }
   }
 }

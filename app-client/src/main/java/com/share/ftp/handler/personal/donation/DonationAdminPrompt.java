@@ -3,7 +3,7 @@ package com.share.ftp.handler.personal.donation;
 import static com.share.util.General.check.Waiting;
 import java.util.Collection;
 import com.share.ftp.dao.DonationBoardDao;
-import com.share.ftp.domain.personal.DonationBoardDTO;
+import com.share.ftp.domain.donation.DonationBoardDTO;
 import com.share.util.Prompt;
 
 public class DonationAdminPrompt {

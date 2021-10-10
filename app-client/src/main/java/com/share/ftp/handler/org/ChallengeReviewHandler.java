@@ -1,7 +1,7 @@
 package com.share.ftp.handler.org;
 
 import java.sql.Date;
-import com.share.ftp.domain.personal.ChallengeReviewDTO;
+import com.share.ftp.domain.challenge.ChallengeReviewDTO;
 import com.share.util.Prompt;
 
 public class ChallengeReviewHandler {

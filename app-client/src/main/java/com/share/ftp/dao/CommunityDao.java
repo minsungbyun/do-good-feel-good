@@ -1,9 +1,9 @@
 package com.share.ftp.dao;
 
 import java.util.List;
-import com.share.ftp.domain.personal.CommBoardDTO;
-import com.share.ftp.domain.personal.CommBoardReplyDTO;
-import com.share.ftp.domain.personal.CommReviewDTO;
+import com.share.ftp.domain.community.CommBoardDTO;
+import com.share.ftp.domain.community.CommBoardReplyDTO;
+import com.share.ftp.domain.community.CommReviewDTO;
 
 //역할
 //- happyshare 나눔이야기(후기게시판)의 데이터를 처리하는 객체 사용법을 정의한다.

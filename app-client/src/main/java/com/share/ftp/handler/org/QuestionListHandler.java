@@ -1,7 +1,7 @@
 package com.share.ftp.handler.org;
 
 import java.sql.Date;
-import com.share.ftp.domain.personal.QuestionListDTO;
+import com.share.ftp.domain.support.QuestionListDTO;
 import com.share.util.Prompt;
 
 public class QuestionListHandler {

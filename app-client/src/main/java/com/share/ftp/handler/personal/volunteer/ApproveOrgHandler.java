@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.volunteer;
 
 import java.util.List;
-import com.share.ftp.domain.personal.ApproveOrgDTO;
+import com.share.ftp.domain.volunteer.ApproveOrgDTO;
 import com.share.util.Prompt;
 
 public class ApproveOrgHandler {

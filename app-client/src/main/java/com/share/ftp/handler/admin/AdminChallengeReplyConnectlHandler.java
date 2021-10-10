@@ -2,7 +2,7 @@ package com.share.ftp.handler.admin;
 
 import java.util.List;
 import com.share.ftp.domain.admin.ChallengeDTO;
-import com.share.ftp.domain.personal.ChallengeQuestionDTO;
+import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.ftp.handler.personal.challenge.AbstractChallengeQuestionHandler;

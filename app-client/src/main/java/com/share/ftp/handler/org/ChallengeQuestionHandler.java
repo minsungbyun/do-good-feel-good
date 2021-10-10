@@ -1,6 +1,6 @@
 package com.share.ftp.handler.org;
 
-import com.share.ftp.domain.personal.ChallengeQuestionDTO;
+import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.util.Prompt;
 
 public class ChallengeQuestionHandler {

@@ -2,7 +2,7 @@ package com.share.ftp.handler.personal.support;
 
 import java.util.Collection;
 import com.share.ftp.dao.QuestionDao;
-import com.share.ftp.domain.personal.QuestionListDTO;
+import com.share.ftp.domain.support.QuestionListDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;

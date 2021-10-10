@@ -2,7 +2,7 @@ package com.share.ftp.handler.admin;
 
 import java.sql.Date;
 import java.util.List;
-import com.share.ftp.domain.personal.QuestionListDTO;
+import com.share.ftp.domain.support.QuestionListDTO;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;

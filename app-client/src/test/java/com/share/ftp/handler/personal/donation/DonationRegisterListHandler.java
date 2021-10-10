@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.donation;
 
 import java.util.List;
-import com.share.ftp.domain.personal.DonationRegisterDTO;
+import com.share.ftp.domain.donation.DonationRegisterDTO;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 
