@@ -51,12 +51,12 @@ public class QuestionAddHandler implements Command {
       default: System.out.println("올바른 번호를 입력해주세요"); 
     }
 
-    questionListDTO.setTitle(Prompt.inputString("제목? "));
-    questionListDTO.setContent(Prompt.inputString("내용? "));
+    questionListDTO.setTitle(Prompt.inputString("제목: "));
+    questionListDTO.setContent(Prompt.inputString("내용: "));
     questionListDTO.setOwner(AuthLoginHandler.getLoginUser());
-    questionListDTO.setFileUpload(Prompt.inputString("파일첨부? "));
+    questionListDTO.setFileUpload(Prompt.inputString("파일첨부: "));
     questionListDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
-    questionListDTO.setPassword(Prompt.inputInt("비밀번호? "));
+    questionListDTO.setPassword(Prompt.inputInt("비밀번호: "));
 
     // 고유회원번호 부여
     questionListDTO.setNo(questionDao.getNextNum());

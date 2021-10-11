@@ -24,7 +24,7 @@ public class QuestionUpdateHandler implements Command {
       System.out.println("[ 문의하기 - 수정 ]");
       int questionNo = (int)request.getAttribute("questionNo");
 
-      QuestionListDTO questionListDTO = questionDao.findByNo(questionNo);
+      QuestionListDTO questionListDTO = questionDao.findByQuestionNo(questionNo);
 
       try {
         if (questionListDTO == null) {

@@ -1,1 +1,5 @@
+<<<<<<< HEAD
+[{"no":1,"type":1,"point":0,"rank":1,"finalRank":0,"donationMoney":0,"authNum":1004,"adminPassword":-1,"id":"test1","password":"1","name":"1","birthdate":"11월 11, 1111","tel":"010-1111-1111","email":"@.","address":"s","registerDate":"10월 8, 2021"},{"no":2,"type":1,"point":0,"rank":1,"finalRank":0,"donationMoney":0,"authNum":1004,"adminPassword":-1,"id":"happy","password":"1","name":"happyhappy","birthdate":"1월 1, 2001","tel":"02-111-1111","email":"happy@happy.com","address":"USA","registerDate":"10월 9, 2021"},{"no":3,"type":1,"point":0,"rank":1,"finalRank":0,"donationMoney":0,"authNum":1004,"adminPassword":-1,"id":"happy2","password":"1","name":"happy2","birthdate":"1월 1, 2000","tel":"1111","email":"happy2@happy.com","address":"Canada","registerDate":"10월 9, 2021"}]
+=======
 [{"no":1,"type":1,"point":0,"rank":1,"finalRank":0,"donationMoney":0,"authNum":1004,"adminPassword":-1,"id":"happy","password":"1","name":"happy","birthdate":"11월 11, 1111","tel":"1","email":"1@.","address":"USA","registerDate":"10월 11, 2021"}]
+>>>>>>> a70741a74103505ef6a3f402824278843dffc0a6

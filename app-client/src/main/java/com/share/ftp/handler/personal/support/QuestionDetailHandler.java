@@ -23,7 +23,7 @@ public class QuestionDetailHandler implements Command {
 
     int questionNo = Prompt.inputInt("번호? ");
 
-    QuestionListDTO questionListDTO = questionDao.findByNo(questionNo);
+    QuestionListDTO questionListDTO = questionDao.findByQuestionNo(questionNo);
 
     if (questionListDTO == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
