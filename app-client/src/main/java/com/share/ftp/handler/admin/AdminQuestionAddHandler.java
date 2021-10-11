@@ -43,7 +43,6 @@ public class AdminQuestionAddHandler extends AbstractAdminQuestionHandler {
 
 
 }
-=======
 //package com.share.ftp.handler.admin;
 //
 //import java.sql.Date;
@@ -92,4 +91,3 @@ public class AdminQuestionAddHandler extends AbstractAdminQuestionHandler {
 //
 //
 //}
->>>>>>> ee23094f06e052767075cc02c0aa8a23e7a966b1

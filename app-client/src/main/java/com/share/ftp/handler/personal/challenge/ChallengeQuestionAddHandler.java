@@ -27,7 +27,6 @@ public class ChallengeQuestionAddHandler implements Command {
 
     ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
 
-
     if (challengeDTO == null) {
       System.out.println();
       System.out.println("해당 챌린지가 없습니다!");
@@ -59,14 +58,11 @@ public class ChallengeQuestionAddHandler implements Command {
       System.out.println(challengeDTO.getQuestionCount());
     } else {
       challengeDTO.setQuestionCount(challengeDao.getNextQuestionNum(challengeDTO)); 
-      //      challengeReviewDTO.setReviewNo(getNextNum2()); // 해당 챌린지 문의의 마지막 번호기억 + 1
-      //      System.out.println("현재 문의의 번호는? (challengeReviewDTO.getQuestionNo()) " + challengeQuestionDTO.getQuestionNo());
-      System.out.println("현재 문의의 번호는? (challengeDTO.getQuestionCount()) " + challengeDTO.getQuestionCount());
     }
-    //    challengeDTO.setReviewCount(challengeReviewDTO.getReviewNo());
-    challengeQuestionDTO.setQuestionNo(challengeDTO.getQuestionCount()); // 해당 챌린지 문의의 마지막 번호기억 + 1
-    //    System.out.println("challengeDTO.getQuestionCount() = " + challengeDTO.getQuestionCount());
 
+    challengeQuestionDTO.setQuestionNo(challengeDTO.getQuestionCount());
+
+    challengeDao.update(challengeDTO);
     challengeDao.insertQuestion(challengeQuestionDTO);
 
     System.out.println();

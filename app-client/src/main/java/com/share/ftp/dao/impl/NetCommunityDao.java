@@ -244,12 +244,6 @@ public class NetCommunityDao implements CommunityDao {
 
 
   @Override
-  public CommBoardReplyDTO findByCommReplyNo(int commReplyNo) throws Exception {
-    return null;
-  }
-
-
-  @Override
   public void updateCommReply(CommBoardReplyDTO updateCommReply) throws Exception {
     requestAgent.request("commReply.update", updateCommReply);
 

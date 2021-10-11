@@ -22,21 +22,12 @@ public class ChallengeReviewDeleteHandler implements Command {
       System.out.println();
       System.out.println("[ 참여인증&댓글 삭제 ]");
       System.out.println();
-      //
-      //      int challengeNo = (int) request.getAttribute("no");
-      //      System.out.println();
-      //
-      //      ChallengeDTO challengeList = findByChallengeNo(challengeNo); 
-      //
-      //      if (challengeList == null) {
-      //        System.out.println("해당 챌린지가 없습니다.");
-      //        return;
-      //      }
+
       int challengeNo = (int) request.getAttribute("challengeNo");
       ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
 
-      int deleteNo = (int) request.getAttribute("reviewNo");
-      ChallengeReviewDTO challengeReviewDTO = challengeDao.findByChallengeReviewNo(challengeNo, deleteNo);
+      int challengeReviewNo = (int) request.getAttribute("challengeReviewNo");
+      ChallengeReviewDTO challengeReviewDTO = challengeDao.findByChallengeReviewNo(challengeNo, challengeReviewNo);
 
 
       if (challengeReviewDTO == null) {

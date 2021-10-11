@@ -14,15 +14,14 @@ public class MyChallengeDetailHandler implements Command {
     this.challengeDao = challengeDao;
   }
 
-
   @Override
   public void execute(CommandRequest request) throws Exception {
 
     System.out.println("[ 나의 챌린지 상세보기 ]");
     System.out.println();
-    int no = Prompt.inputInt("챌린지 번호를 입력해주세요 ▶ ");
+    int challengeNo = Prompt.inputInt("챌린지 번호를 입력해주세요 ▶ ");
 
-    ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(no);
+    ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
 
     if (challengeDTO == null) {
       System.out.println("해당 번호의 챌린지가 없습니다.");
@@ -44,9 +43,5 @@ public class MyChallengeDetailHandler implements Command {
         //          challengeDTO.getFileUpload(), 
         challengeDTO.getStartDate(),
         challengeDTO.getEndDate());
-
-
-
   }
-
 }
