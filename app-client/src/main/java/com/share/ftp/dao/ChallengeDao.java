@@ -25,9 +25,7 @@ public interface ChallengeDao {
   List<ChallengeQuestionDTO> findByQuestionKeyword(String keyword) throws Exception;
 
   ChallengeQuestionDTO findByChallengeQuestionNo(int challengeNo, int challengeQuestionNo) throws Exception;
-  ChallengeQuestionDTO findByChallengeQuestionNo(int challengeQuestionNo) throws Exception;
   int getNextQuestionNum(ChallengeDTO challenge) throws Exception;
-  int indexOf(int challengeQuestionNo, ChallengeQuestionDTO challengeQuestion) throws Exception;
   void insertAdmin(int index, ChallengeQuestionDTO challengeQuestion) throws Exception;
   void sortChallengeQuestion() throws Exception;
 

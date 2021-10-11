@@ -1,4 +1,4 @@
-package com.share.ftp.handler.personal.challenge;
+package com.share.ftp.handler.personal.mypage;
 
 import java.util.Collection;
 import com.share.ftp.dao.ChallengeDao;

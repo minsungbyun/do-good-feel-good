@@ -57,7 +57,7 @@ public class ChallengeQuestionUpdateHandler implements Command {
 
       } else {
         System.out.println("y 또는 n을 입력하세요.");
-        continue;
+
       } 
     }
   }

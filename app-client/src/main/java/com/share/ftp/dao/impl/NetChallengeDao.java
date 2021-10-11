@@ -173,25 +173,10 @@ public class NetChallengeDao implements ChallengeDao {
 
   @Override
   public int getNextQuestionNum(ChallengeDTO challengeDTO) throws Exception {
-    requestAgent.request("challengeQuestion.getNextNum", challengeDTO);
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      return 1;
-    }
-
-    ChallengeDTO challenge = requestAgent.getObject(ChallengeDTO.class);
-
-    return challenge.getQuestionCount();
+    return challengeDTO.getQuestionCount() + 1;
   }
 
-
-
-  @Override
-  public int indexOf(int challengeQuestionNo, ChallengeQuestionDTO challengeQuestionDTO)
-      throws Exception {
-    // TODO Auto-generated method stub
-    return 0;
-  }
 
   @Override
   public void insertAdmin(int index, ChallengeQuestionDTO challengeQuestionDTO) throws Exception {
@@ -217,7 +202,6 @@ public class NetChallengeDao implements ChallengeDao {
     } else {
       throw new Exception("참여인증&댓글 등록 실패!");
     }
-
   }
 
   // 나중에 따로 분리해야함
@@ -247,7 +231,6 @@ public class NetChallengeDao implements ChallengeDao {
     }
 
     return requestAgent.getObject(ChallengeReviewDTO.class);
-
   }
 
   @Override
@@ -266,7 +249,6 @@ public class NetChallengeDao implements ChallengeDao {
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("참여인증&댓글 변경 실패!");
     }
-
   }
 
   @Override
@@ -277,12 +259,6 @@ public class NetChallengeDao implements ChallengeDao {
       throw new Exception("참여인증&댓글 목록 조회 실패!");
     }
     return new ArrayList<>(requestAgent.getObjects(ChallengeReviewDTO.class));
-  }
-
-  @Override
-  public ChallengeQuestionDTO findByChallengeQuestionNo(int challengeQuestionNo) throws Exception {
-    // TODO Auto-generated method stub
-    return null;
   }
 
   // 다른 클래스 만들어서 static 메서드로 뺄 예정

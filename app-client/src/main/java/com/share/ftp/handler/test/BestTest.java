@@ -1,10 +1,12 @@
-package com.share.ftp.handler;
+package com.share.ftp.handler.test;
 
 import java.util.Collections;
 import java.util.List;
 import com.share.ftp.domain.community.CommBestComparator;
 import com.share.ftp.domain.community.CommBoardDTO;
 import com.share.ftp.domain.community.CommBoardReplyDTO;
+import com.share.ftp.handler.Command;
+import com.share.ftp.handler.CommandRequest;
 
 public class BestTest implements Command {
 

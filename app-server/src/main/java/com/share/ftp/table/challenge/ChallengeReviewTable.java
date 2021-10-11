@@ -20,7 +20,6 @@ public class ChallengeReviewTable extends JsonDataTable<ChallengeReviewDTO> impl
       case "challengeReview.selectOne": selectReviewOne(request, response); break;
       case "challengeReview.update": updateReview(request, response); break;
       case "challengeReview.delete": deleteReview(request, response); break;
-      //      case "challengeReview.getNextNum": getNextReivewNum(request, response); break;
     }
   }
 
@@ -91,5 +90,4 @@ public class ChallengeReviewTable extends JsonDataTable<ChallengeReviewDTO> impl
     }
     return -1;
   }
-
 }
