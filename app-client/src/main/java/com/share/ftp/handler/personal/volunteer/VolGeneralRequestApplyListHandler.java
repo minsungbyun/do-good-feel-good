@@ -3,7 +3,7 @@ package com.share.ftp.handler.personal.volunteer;
 import static com.share.util.General.member.ORG;
 import static com.share.util.General.member.PERSONAL;
 import java.util.List;
-import com.share.ftp.domain.personal.GeneralRequestDTO;
+import com.share.ftp.domain.volunteer.GeneralRequestDTO;
 import com.share.ftp.handler.CommandRequest;
 
 public class VolGeneralRequestApplyListHandler extends AbstractVolGeneralHandler { // 개인 봉사신청 양식 쓰는 곳

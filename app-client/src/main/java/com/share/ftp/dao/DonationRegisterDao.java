@@ -1,7 +1,7 @@
 package com.share.ftp.dao;
 
 import java.util.List;
-import com.share.ftp.domain.personal.DonationRegisterDTO;
+import com.share.ftp.domain.donation.DonationRegisterDTO;
 
 public interface DonationRegisterDao {
   void insert(DonationRegisterDTO donationRegisterDTO) throws Exception;

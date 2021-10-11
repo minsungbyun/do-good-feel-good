@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.volunteerOrg;
 
 import java.util.List;
-import com.share.ftp.domain.personal.OrgRequestDTO;
+import com.share.ftp.domain.volunteer.OrgRequestDTO;
 import com.share.ftp.handler.CommandRequest;
 
 public class VolRequestOrgApplyListHandler extends AbstractVolRequestOrgHandler { // 개인 봉사신청 양식 쓰는 곳

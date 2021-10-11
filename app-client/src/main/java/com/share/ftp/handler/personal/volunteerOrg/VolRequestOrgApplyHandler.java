@@ -3,7 +3,7 @@ package com.share.ftp.handler.personal.volunteerOrg;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
-import com.share.ftp.domain.personal.OrgRequestDTO;
+import com.share.ftp.domain.volunteer.OrgRequestDTO;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;

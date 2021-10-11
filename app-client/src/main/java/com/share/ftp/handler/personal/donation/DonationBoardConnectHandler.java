@@ -2,7 +2,7 @@ package com.share.ftp.handler.personal.donation;
 
 import java.text.DecimalFormat;
 import com.share.ftp.dao.DonationBoardDao;
-import com.share.ftp.domain.personal.DonationBoardDTO;
+import com.share.ftp.domain.donation.DonationBoardDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;

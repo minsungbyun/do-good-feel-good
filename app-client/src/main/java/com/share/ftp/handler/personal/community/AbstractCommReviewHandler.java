@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.community;
 
 import java.util.List;
-import com.share.ftp.domain.personal.CommReviewDTO;
+import com.share.ftp.domain.community.CommReviewDTO;
 import com.share.ftp.handler.Command;
 
 public abstract class AbstractCommReviewHandler implements Command {

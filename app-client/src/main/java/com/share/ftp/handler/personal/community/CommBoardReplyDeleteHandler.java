@@ -1,8 +1,8 @@
 package com.share.ftp.handler.personal.community;
 
 import com.share.ftp.dao.CommunityDao;
-import com.share.ftp.domain.personal.CommBoardDTO;
-import com.share.ftp.domain.personal.CommBoardReplyDTO;
+import com.share.ftp.domain.community.CommBoardDTO;
+import com.share.ftp.domain.community.CommBoardReplyDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -23,11 +23,11 @@ public class CommBoardReplyDeleteHandler implements Command {
       System.out.println();
       System.out.println("[  나눔이야기 댓글 삭제  ]");
 
-      int commNo = (int) request.getAttribute("commNo");
-      CommBoardDTO commBoardDTO = communityDao.findByCommNo(commNo);
+      int commBoardNo = (int) request.getAttribute("commBoardNo");
+      CommBoardDTO commBoardDTO = communityDao.findByCommNo(commBoardNo);
 
       int updateNo = (int) request.getAttribute("commBoardReplyNo");
-      CommBoardReplyDTO commBoardReplyDTO = communityDao.findByCommReplyNo(commNo, updateNo);
+      CommBoardReplyDTO commBoardReplyDTO = communityDao.findByCommReplyNo(commBoardNo, updateNo);
 
       try {
 

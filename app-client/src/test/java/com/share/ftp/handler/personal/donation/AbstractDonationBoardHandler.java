@@ -4,8 +4,8 @@ import static com.share.util.General.check.Applied;
 import static com.share.util.General.check.Rejected;
 import java.text.DecimalFormat;
 import java.util.List;
-import com.share.ftp.domain.personal.DonationBoardDTO;
-import com.share.ftp.domain.personal.DonationRegisterDTO;
+import com.share.ftp.domain.donation.DonationBoardDTO;
+import com.share.ftp.domain.donation.DonationRegisterDTO;
 import com.share.ftp.handler.Command;
 
 public abstract class AbstractDonationBoardHandler implements Command {

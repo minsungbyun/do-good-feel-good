@@ -2,9 +2,9 @@ package com.share.ftp.handler;
 
 import java.util.Collections;
 import java.util.List;
-import com.share.ftp.domain.personal.CommBestComparator;
-import com.share.ftp.domain.personal.CommBoardDTO;
-import com.share.ftp.domain.personal.CommBoardReplyDTO;
+import com.share.ftp.domain.community.CommBestComparator;
+import com.share.ftp.domain.community.CommBoardDTO;
+import com.share.ftp.domain.community.CommBoardReplyDTO;
 
 public class BestTest implements Command {
 

@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.community;
 
 import com.share.ftp.dao.CommunityDao;
-import com.share.ftp.domain.personal.CommBoardDTO;
+import com.share.ftp.domain.community.CommBoardDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;

@@ -2,8 +2,8 @@ package com.share.ftp.handler.personal.community;
 
 import java.sql.Date;
 import com.share.ftp.dao.CommunityDao;
-import com.share.ftp.domain.personal.CommBoardDTO;
-import com.share.ftp.domain.personal.CommBoardReplyDTO;
+import com.share.ftp.domain.community.CommBoardDTO;
+import com.share.ftp.domain.community.CommBoardReplyDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -24,9 +24,9 @@ public class CommBoardReplyAddHandler implements Command {
     System.out.println("[  나눔이야기 댓글 등록  ]");
     System.out.println();
 
-    int commNo = (int) request.getAttribute("commNo");
+    int commBoardNo = (int) request.getAttribute("commBoardNo");
 
-    CommBoardDTO commBoardDTO = communityDao.findByCommNo(commNo);
+    CommBoardDTO commBoardDTO = communityDao.findByCommNo(commBoardNo);
 
     if (commBoardDTO == null) {
       System.out.println();

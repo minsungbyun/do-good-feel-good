@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.share.ftp.dao.QuestionDao;
-import com.share.ftp.domain.personal.QuestionListDTO;
+import com.share.ftp.domain.support.QuestionListDTO;
 import com.share.request.RequestAgent;
 
 // 게시글 데이터를 서버를 통해 관리한다.

@@ -6,8 +6,8 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
-import com.share.ftp.domain.personal.ChallengeQuestionDTO;
-import com.share.ftp.domain.personal.ChallengeReviewDTO;
+import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
+import com.share.ftp.domain.challenge.ChallengeReviewDTO;
 import com.share.request.RequestAgent;
 
 public class NetChallengeDao implements ChallengeDao {

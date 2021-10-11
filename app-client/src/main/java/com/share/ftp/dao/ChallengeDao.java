@@ -2,8 +2,8 @@ package com.share.ftp.dao;
 
 import java.util.List;
 import com.share.ftp.domain.admin.ChallengeDTO;
-import com.share.ftp.domain.personal.ChallengeQuestionDTO;
-import com.share.ftp.domain.personal.ChallengeReviewDTO;
+import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
+import com.share.ftp.domain.challenge.ChallengeReviewDTO;
 
 public interface ChallengeDao {
 

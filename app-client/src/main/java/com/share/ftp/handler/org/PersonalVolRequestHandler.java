@@ -2,7 +2,7 @@ package com.share.ftp.handler.org;
 
 import java.sql.Date;
 import java.util.List;
-import com.share.ftp.domain.personal.GeneralRequestDTO;
+import com.share.ftp.domain.volunteer.GeneralRequestDTO;
 import com.share.util.Prompt;
 
 public class PersonalVolRequestHandler {

@@ -2,7 +2,7 @@ package com.share.ftp.handler.personal.challenge;
 
 import java.util.Collection;
 import com.share.ftp.dao.ChallengeDao;
-import com.share.ftp.domain.personal.ChallengeReviewDTO;
+import com.share.ftp.domain.challenge.ChallengeReviewDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;

@@ -15,20 +15,18 @@ import com.google.gson.reflect.TypeToken;
 import com.share.context.ApplicationContextListener;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.admin.NoticeDTO;
+import com.share.ftp.domain.challenge.ChallengeJoinDTO;
+import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
+import com.share.ftp.domain.challenge.ChallengeReviewDTO;
+import com.share.ftp.domain.community.CommBoardDTO;
+import com.share.ftp.domain.community.CommBoardReplyDTO;
+import com.share.ftp.domain.community.CommReviewDTO;
+import com.share.ftp.domain.donation.DonationBoardDTO;
+import com.share.ftp.domain.donation.DonationRegisterDTO;
 import com.share.ftp.domain.join.JoinDTO;
-import com.share.ftp.domain.personal.ApproveOrgDTO;
-import com.share.ftp.domain.personal.ChallengeJoinDTO;
-import com.share.ftp.domain.personal.ChallengeQuestionDTO;
-import com.share.ftp.domain.personal.ChallengeReviewDTO;
-import com.share.ftp.domain.personal.CommBoardDTO;
-import com.share.ftp.domain.personal.CommBoardReplyDTO;
-import com.share.ftp.domain.personal.CommReviewDTO;
-import com.share.ftp.domain.personal.DonationBoardDTO;
-import com.share.ftp.domain.personal.DonationRegisterDTO;
-import com.share.ftp.domain.personal.GeneralRequestDTO;
-import com.share.ftp.domain.personal.MyProfileDTO;
-import com.share.ftp.domain.personal.QuestionListDTO;
-import com.share.ftp.domain.personal.VolListDTO;
+import com.share.ftp.domain.mypage.MyProfileDTO;
+import com.share.ftp.domain.support.QuestionListDTO;
+import com.share.ftp.domain.volunteer.GeneralRequestDTO;
 
 public class FileListener implements ApplicationContextListener {
 
@@ -38,7 +36,7 @@ public class FileListener implements ApplicationContextListener {
 
     List<JoinDTO> joinDTOList = (List<JoinDTO>) params.get("joinDTOList");
 
-    List<VolListDTO> volListDTOList = (List<VolListDTO>) params.get("volListDTOList");
+    //    List<VolListDTO> volListDTOList = (List<VolListDTO>) params.get("volListDTOList");
 
     List<GeneralRequestDTO> generalRequestDTOList = (List<GeneralRequestDTO>) params.get("generalRequestDTOList");
     List<GeneralRequestDTO> generalRequestApplyDTOList = (List<GeneralRequestDTO>) params.get("generalRequestApplyDTOList");
@@ -63,7 +61,7 @@ public class FileListener implements ApplicationContextListener {
     List<ChallengeDTO> challengeDTOList = (List<ChallengeDTO>) params.get("challengeDTOList");
     List<NoticeDTO> noticeDTOList = (List<NoticeDTO>) params.get("noticeDTOList");
     //    List<QuestionDTO> questionDTOList = (List<QuestionDTO>) params.get("questionDTOList");
-    List<ApproveOrgDTO> approveOrgDTOList = (List<ApproveOrgDTO>) params.get("approveOrgDTOList");
+    //    List<ApproveOrgDTO> approveOrgDTOList = (List<ApproveOrgDTO>) params.get("approveOrgDTOList");
 
 
     loadObjects("joinDTO.json", joinDTOList, JoinDTO.class);
@@ -110,7 +108,7 @@ public class FileListener implements ApplicationContextListener {
 
     List<JoinDTO> joinDTOList = (List<JoinDTO>) params.get("joinDTOList");
 
-    List<VolListDTO> volListDTOList = (List<VolListDTO>) params.get("volListDTOList");
+    //    List<VolListDTO> volListDTOList = (List<VolListDTO>) params.get("volListDTOList");
 
     List<GeneralRequestDTO> generalRequestDTOList = (List<GeneralRequestDTO>) params.get("generalRequestDTOList");
     List<GeneralRequestDTO> generalRequestApplyDTOList = (List<GeneralRequestDTO>) params.get("generalRequestApplyDTOList");
@@ -135,7 +133,7 @@ public class FileListener implements ApplicationContextListener {
     List<ChallengeDTO> challengeDTOList = (List<ChallengeDTO>) params.get("challengeDTOList");
     List<NoticeDTO> noticeDTOList = (List<NoticeDTO>) params.get("noticeDTOList");
     //    List<QuestionDTO> questionDTOList = (List<QuestionDTO>) params.get("questionDTOList");
-    List<ApproveOrgDTO> approveOrgDTOList = (List<ApproveOrgDTO>) params.get("approveOrgDTOList");
+    //    List<ApproveOrgDTO> approveOrgDTOList = (List<ApproveOrgDTO>) params.get("approveOrgDTOList");
 
 
     saveObjects("joinDTO.json", joinDTOList);

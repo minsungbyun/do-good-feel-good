@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.share.ftp.dao.DonationBoardDao;
-import com.share.ftp.domain.personal.DonationBoardDTO;
+import com.share.ftp.domain.donation.DonationBoardDTO;
 import com.share.request.RequestAgent;
 
 // 역할

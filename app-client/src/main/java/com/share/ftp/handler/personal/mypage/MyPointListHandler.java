@@ -3,8 +3,9 @@ package com.share.ftp.handler.personal.mypage;
 import static com.share.util.MemberHelper.getUserLevel;
 import static com.share.util.MemberHelper.getUserPoint;
 import static com.share.util.MemberHelper.getUserRemainPoint;
-import static com.share.util.MemberHelper.printMyRank;
+import java.util.Collection;
 import java.util.List;
+import com.share.ftp.dao.JoinDao;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -12,14 +13,17 @@ import com.share.ftp.handler.join.AuthLoginHandler;
 
 public class MyPointListHandler implements Command {
 
-  List<JoinDTO> joinDTOList;
+  JoinDao joinDao;
 
-  public MyPointListHandler(List<JoinDTO> joinDTOList) {
-    this.joinDTOList = joinDTOList;
+  public MyPointListHandler(JoinDao joinDao) {
+    this.joinDao = joinDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
+
+    Collection<JoinDTO> joinList = joinDao.findAll();
+
 
     JoinDTO loginUser = AuthLoginHandler.getLoginUser();
 
@@ -47,13 +51,18 @@ public class MyPointListHandler implements Command {
     System.out.println();
     System.out.printf("▶ 다음 등급까지 %d point 남았습니다. ", getUserRemainPoint(loginUser)); 
     System.out.println();
-    System.out.printf("▶ 축하합니다! 당신의 랭킹은 %d등입니다. ", printMyRank(joinDTOList)); 
+    System.out.printf("▶ 축하합니다! 당신의 랭킹은 %d등입니다. ", printMyRank((List<JoinDTO>) joinList)); 
     System.out.println();
     System.out.println("-----------------------------------------------");
 
 
 
 
+  }
+
+  private Object printMyRank(List<JoinDTO> joinList) {
+    // TODO Auto-generated method stub
+    return null;
   }
 }
 

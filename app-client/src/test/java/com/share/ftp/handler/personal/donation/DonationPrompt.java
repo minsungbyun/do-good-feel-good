@@ -2,8 +2,8 @@ package com.share.ftp.handler.personal.donation;
 
 import static com.share.util.General.check.Applied;
 import java.util.List;
+import com.share.ftp.domain.donation.DonationRegisterDTO;
 import com.share.ftp.domain.personal.DonationBoardDTO;
-import com.share.ftp.domain.personal.DonationRegisterDTO;
 import com.share.util.Prompt;
 
 public class DonationPrompt {

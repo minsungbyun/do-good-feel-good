@@ -2,7 +2,7 @@ package com.share.ftp.handler.personal.community;
 
 import java.util.Collection;
 import com.share.ftp.dao.CommunityDao;
-import com.share.ftp.domain.personal.CommBoardReplyDTO;
+import com.share.ftp.domain.community.CommBoardReplyDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
@@ -22,8 +22,8 @@ public class CommBoardReplyListHandler implements Command {
     System.out.println("[  나눔이야기 댓글 목록  ]");
     System.out.println();
 
-    int commNo = (int) request.getAttribute("commNo");
-    communityDao.findByCommNo(commNo);
+    int commBoardNo = (int) request.getAttribute("commBoardNo");
+    communityDao.findByCommNo(commBoardNo);
 
     //    if (commBoardReplyDTO.isEmpty()) {
     //      System.out.println("[  작성된 댓글이 없습니다.  ]");
@@ -33,7 +33,7 @@ public class CommBoardReplyListHandler implements Command {
     Collection<CommBoardReplyDTO> commBoardReplyDTOList = communityDao.findAllCommReply();
 
     for(CommBoardReplyDTO commBoardReplyDTO : commBoardReplyDTOList) {
-      if (commBoardReplyDTO.getCommNo() == commNo) {
+      if (commBoardReplyDTO.getCommNo() == commBoardNo) {
         System.out.printf("%d, %d, %s, %s, %s\n", 
             commBoardReplyDTO.getCommNo(),
             commBoardReplyDTO.getCommReplyNo(), 

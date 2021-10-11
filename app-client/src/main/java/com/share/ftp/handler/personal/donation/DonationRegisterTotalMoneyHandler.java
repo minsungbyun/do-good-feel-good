@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.donation;
 
 import com.share.ftp.dao.DonationRegisterDao;
-import com.share.ftp.domain.personal.DonationRegisterDTO;
+import com.share.ftp.domain.donation.DonationRegisterDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 

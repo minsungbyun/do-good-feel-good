@@ -1,7 +1,7 @@
 package com.share.ftp.handler.admin;
 
 import java.util.List;
-import com.share.ftp.domain.personal.QuestionListDTO;
+import com.share.ftp.domain.support.QuestionListDTO;
 import com.share.ftp.handler.Command;
 
 public abstract class AbstractAdminQuestionHandler implements Command {

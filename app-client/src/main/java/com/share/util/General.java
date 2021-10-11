@@ -58,7 +58,6 @@ public class General {
     public static final int FROM_D_TO_C  = 300;
     public static final int FROM_E_TO_D  = 200;
 
-
   }
 
   public static class questionType {
@@ -69,6 +68,7 @@ public class General {
     public static final String CHALLENGEASK   = "챌린지 문의";
     public static final String SITEASK        = "사이트이용 문의";
     public static final String OTHERASK       = "기타 문의";
+
   }
 
 

@@ -1,6 +1,6 @@
 package com.share.ftp.handler.org;
 
-import com.share.ftp.domain.personal.CommBoardDTO;
+import com.share.ftp.domain.community.CommBoardDTO;
 
 public class CommBestHandler {
   CommBoardHandler commBoardHandler;
