@@ -10,7 +10,6 @@ public class AdminChallengeListHandler implements Command {
 
   ChallengeDao challengeDao;
 
-
   public AdminChallengeListHandler(ChallengeDao challengeDao) {
     this.challengeDao = challengeDao;
   }

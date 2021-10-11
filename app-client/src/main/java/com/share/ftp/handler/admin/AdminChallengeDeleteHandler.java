@@ -21,7 +21,6 @@ public class AdminChallengeDeleteHandler implements Command {
 
     ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
 
-
     if (challengeDTO == null) {
       System.out.println("해당 번호의 챌린지가 없습니다.");
       return;
@@ -30,12 +29,13 @@ public class AdminChallengeDeleteHandler implements Command {
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("챌린지 삭제를 취소하였습니다.");
-      return;
+      return; 
+
+    } else if (input.equalsIgnoreCase("y")) {
+      challengeDao.delete(challengeDTO);
+      System.out.println();
+
+      System.out.println("[  챌린지를 삭제하였습니다. ]");
     }
-
-    challengeDao.delete(challengeDTO);
-    System.out.println();
-
-    System.out.println("[  챌린지를 삭제하였습니다. ]");
   }
 }

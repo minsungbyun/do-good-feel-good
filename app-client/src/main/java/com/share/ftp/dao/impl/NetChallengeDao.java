@@ -3,6 +3,7 @@ package com.share.ftp.dao.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import com.google.gson.Gson;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
@@ -102,8 +103,35 @@ public class NetChallengeDao implements ChallengeDao {
     } else {
       throw new Exception("챌린지 문의 등록 실패!");
     }
+  }
+
+  @Override
+  public void insertAdmin(int ChallengeQuestionNo, ChallengeQuestionDTO addChallengeQuestion)
+      throws Exception {
+
+    HashMap<String,String> params = new HashMap<>();
+    params.put("ChallengeQuestionNo", String.valueOf(ChallengeQuestionNo));
+    params.put("addChallengeQuestion", new Gson().toJson(addChallengeQuestion));
+
+    requestAgent.request("challengeQuestion.insertAdmin", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      System.out.println("[ 챌린지 문의 등록이 정상적으로 완료되었습니다! ]");
+
+    } else {
+      throw new Exception("챌린지 문의 등록 실패!");
+    }
+  }
 
 
+  @Override
+  public void sortChallengeQuestion(ChallengeQuestionDTO sortChallengeQuestion) throws Exception {
+    requestAgent.request("challengeQuestion.sort", sortChallengeQuestion);
+
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+    } else {
+      throw new Exception("챌린지 문의 등록 실패!");
+    }
 
   }
 
@@ -177,18 +205,6 @@ public class NetChallengeDao implements ChallengeDao {
     return challengeDTO.getQuestionCount() + 1;
   }
 
-
-  @Override
-  public void insertAdmin(int index, ChallengeQuestionDTO challengeQuestionDTO) throws Exception {
-    // TODO Auto-generated method stub
-
-  }
-
-  @Override
-  public void sortChallengeQuestion() throws Exception {
-    // TODO Auto-generated method stub
-
-  }
 
   ///챌린지 참여인증&댓글//////////////////////////////////////////////////////////////
 
