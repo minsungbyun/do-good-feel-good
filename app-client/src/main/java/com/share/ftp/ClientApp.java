@@ -15,6 +15,7 @@ import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.dao.JoinDao;
+import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.dao.impl.NetChallengeDao;
@@ -22,6 +23,7 @@ import com.share.ftp.dao.impl.NetCommunityDao;
 import com.share.ftp.dao.impl.NetDonationBoardDao;
 import com.share.ftp.dao.impl.NetDonationRegisterDao;
 import com.share.ftp.dao.impl.NetJoinDao;
+import com.share.ftp.dao.impl.NetNoticeDao;
 import com.share.ftp.dao.impl.NetQuestionDao;
 import com.share.ftp.dao.impl.NetVolunteerDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
@@ -357,7 +359,7 @@ public class ClientApp {
     CommunityDao netCommunityDao = new NetCommunityDao(requestAgent);
     ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
     QuestionDao netQuestionDao = new NetQuestionDao(requestAgent);
-    //    NoticeDao netNoticeDao = new NetNoticeDao(requestAgent);
+    NoticeDao netNoticeDao = new NetNoticeDao(requestAgent);
     //    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
     //    ChallengeReviewDao netChallengeReviewDao = new NetChallengeDao(requestAgent);
 
@@ -535,12 +537,12 @@ public class ClientApp {
     commands.put("/join/delete", new AdminMemberDeleteHandler());
 
     // 관리자 공지사항 (개인 + 관리자)
-    commands.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDTOList));
-    commands.put("/adminNotice/list", new AdminNoticeListHandler(noticeDTOList));
-    commands.put("/adminNotice/detail", new AdminNoticeDetailHandler(noticeDTOList));
-    commands.put("/adminNotice/update", new AdminNoticeUpdateHandler(noticeDTOList));
-    commands.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDTOList));
-    commands.put("/adminNotice/search", new AdminNoticeSearchHandler(noticeDTOList));
+    commands.put("/adminNotice/add", new AdminNoticeAddHandler(netNoticeDao));
+    commands.put("/adminNotice/list", new AdminNoticeListHandler(netNoticeDao));
+    commands.put("/adminNotice/detail", new AdminNoticeDetailHandler(netNoticeDao));
+    commands.put("/adminNotice/update", new AdminNoticeUpdateHandler(netNoticeDao));
+    commands.put("/adminNotice/delete", new AdminNoticeDeleteHandler(netNoticeDao));
+    commands.put("/adminNotice/search", new AdminNoticeSearchHandler(netNoticeDao));
 
     // 관리자 문의사항
 

@@ -3,12 +3,7 @@ package com.share.ftp.handler.personal.mypage;
 import static com.share.util.MemberHelper.getUserLevel;
 import static com.share.util.MemberHelper.getUserPoint;
 import static com.share.util.MemberHelper.getUserRemainPoint;
-<<<<<<< HEAD
 import java.util.Collection;
-=======
-import static com.share.util.MemberHelper.printMyRank;
->>>>>>> 5b32bd72f1aac7dcd7a8570f83e2ce6e6f3c35dc
->>>>>>> ee23094f06e052767075cc02c0aa8a23e7a966b1
 import java.util.List;
 import com.share.ftp.dao.JoinDao;
 import com.share.ftp.domain.join.JoinDTO;

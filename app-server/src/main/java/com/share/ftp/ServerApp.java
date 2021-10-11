@@ -11,6 +11,7 @@ import com.share.ftp.table.community.CommReviewTable;
 import com.share.ftp.table.donation.DonationBoardTable;
 import com.share.ftp.table.donation.DonationRegisterTable;
 import com.share.ftp.table.join.JoinTable;
+import com.share.ftp.table.support.NoticeTable;
 import com.share.ftp.table.support.QuestionTable;
 import com.share.server.DataProcessor;
 import com.share.server.RequestProcessor;
@@ -41,6 +42,7 @@ public class ServerApp {
     dataProcessorMap.put("donationBoard.", new DonationBoardTable());
     dataProcessorMap.put("donationRegister.", new DonationRegisterTable());
 
+    dataProcessorMap.put("notic3.", new NoticeTable());
     dataProcessorMap.put("question.", new QuestionTable());
 
     while (true) {
