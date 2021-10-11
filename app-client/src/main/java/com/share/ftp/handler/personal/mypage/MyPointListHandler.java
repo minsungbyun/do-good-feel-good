@@ -3,6 +3,7 @@ package com.share.ftp.handler.personal.mypage;
 import static com.share.util.MemberHelper.getUserLevel;
 import static com.share.util.MemberHelper.getUserPoint;
 import static com.share.util.MemberHelper.getUserRemainPoint;
+import static com.share.util.MemberHelper.printMyRank;
 import java.util.Collection;
 import java.util.List;
 import com.share.ftp.dao.JoinDao;
@@ -55,14 +56,6 @@ public class MyPointListHandler implements Command {
     System.out.println();
     System.out.println("-----------------------------------------------");
 
-
-
-
-  }
-
-  private Object printMyRank(List<JoinDTO> joinList) {
-    // TODO Auto-generated method stub
-    return null;
   }
 }
 

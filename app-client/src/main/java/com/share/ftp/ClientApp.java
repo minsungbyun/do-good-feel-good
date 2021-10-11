@@ -164,7 +164,6 @@ import com.share.ftp.handler.personal.volunteer.VolOrgRequestApplyListHandler;
 import com.share.ftp.handler.personal.volunteer.VolPersonalRequestAppliedListHandler;
 import com.share.ftp.handler.personal.volunteer.VolPersonalRequestApplyListHandler;
 import com.share.ftp.listener.AppInitListener;
-import com.share.ftp.listener.FileListener;
 import com.share.menu.Menu;
 import com.share.menu.MenuFilter;
 import com.share.menu.MenuGroup;
@@ -233,56 +232,16 @@ public class ClientApp {
   }
 
   private void notifyOnApplicationStarted() {
-    HashMap<String, Object> params = new HashMap<>();
-    params.put("joinDTOList", joinDTOList);
-    params.put("generalRequestDTOList", generalRequestDTOList);
-    params.put("generalRequestApplyDTOList", generalRequestApplyDTOList);
-    params.put("generalRequestRejectDTOList", generalRequestRejectDTOList);
-    params.put("commBoardDTOList", commBoardDTOList);
-    params.put("commReviewDTOList", commReviewDTOList);
-    params.put("commBoardReplyDTOList", commBoardReplyDTOList);
-    params.put("challengeJoinDTOList", challengeJoinDTOList);
-    params.put("challengeQuestionDTOList", challengeQuestionDTOList);
-    params.put("challengeReviewDTOList", challengeReviewDTOList);
-    params.put("donationBoardDTOList", donationBoardDTOList);
-    params.put("donationBoardApplyDTOList", donationBoardApplyDTOList);
-    params.put("donationBoardRejectDTOList", donationBoardRejectDTOList);
-    params.put("donationRegisterDTOList", donationRegisterDTOList);
-    params.put("myProfileDTOList", myProfileDTOList);
-    params.put("myQuestionListDTOList", myQuestionListDTOList);
-    params.put("challengeDTOList", challengeDTOList);
-    params.put("noticeDTOList", noticeDTOList);
-    //    params.put("questionDTOList", questionDTOList);
 
     for (ApplicationContextListener listener : listeners) {
-      listener.contextInitialized(params);
+      listener.contextInitialized();
     }
   }
 
   private void notifyOnApplicationEnded() {
-    HashMap<String, Object> params = new HashMap<>();
-    params.put("joinDTOList", joinDTOList);
-    params.put("generalRequestDTOList", generalRequestDTOList);
-    params.put("generalRequestApplyDTOList", generalRequestApplyDTOList);
-    params.put("generalRequestRejectDTOList", generalRequestRejectDTOList);
-    params.put("commBoardDTOList", commBoardDTOList);
-    params.put("commReviewDTOList", commReviewDTOList);
-    params.put("commBoardReplyDTOList", commBoardReplyDTOList);
-    params.put("challengeJoinDTOList", challengeJoinDTOList);
-    params.put("challengeQuestionDTOList", challengeQuestionDTOList);
-    params.put("challengeReviewDTOList", challengeReviewDTOList);
-    params.put("donationBoardDTOList", donationBoardDTOList);
-    params.put("donationBoardApplyDTOList", donationBoardApplyDTOList);
-    params.put("donationBoardRejectDTOList", donationBoardRejectDTOList);
-    params.put("donationRegisterDTOList", donationRegisterDTOList);
-    params.put("myProfileDTOList", myProfileDTOList);
-    params.put("myQuestionListDTOList", myQuestionListDTOList);
-    params.put("challengeDTOList", challengeDTOList);
-    params.put("noticeDTOList", noticeDTOList);
-    //    params.put("questionDTOList", questionDTOList);
 
     for (ApplicationContextListener listener : listeners) {
-      listener.contextDestroyed(params);
+      listener.contextDestroyed();
     }
   }
 
@@ -1069,7 +1028,7 @@ public class ClientApp {
 
     ClientApp app = new ClientApp(); 
     app.addApplicationContextListener(new AppInitListener());
-    app.addApplicationContextListener(new FileListener());
+    //    app.addApplicationContextListener(new FileListener());
     app.service();
 
     Prompt.close();

@@ -17,7 +17,7 @@ public class ChallengeDetailHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
-    System.out.println("[챌린지 상세보기]");
+    System.out.println("[ 챌린지 상세보기 ]");
 
     System.out.println();
     int challengeNo = Prompt.inputInt("챌린지 번호를 입력해주세요 ▶ ");
@@ -31,11 +31,6 @@ public class ChallengeDetailHandler implements Command {
 
     request.setAttribute("challengeNo", challengeNo); 
 
-    //    System.out.printf("번호: %d\n", challengeDTO.getNo());
-    // System.out.printf("관리자 아이디: %s\n", challengeDTO.getAdminId());
-
-    //    for (ChallengeDTO challengeDTO : challengeDTOList) {
-
     System.out.println();
     System.out.printf("챌린지 번호 ▶ %d\n",  challengeDTO.getNo());
     System.out.printf("제목 ▶ %s\n", challengeDTO.getTitle());
@@ -45,12 +40,10 @@ public class ChallengeDetailHandler implements Command {
     System.out.printf("첨부파일 ▶ %s\n", challengeDTO.getFileUpload());
     System.out.printf("시작일 ▶ %s\n", challengeDTO.getStartDate());
     System.out.printf("종료일 ▶ %s\n", challengeDTO.getEndDate());
-    //    System.out.printf("남은일수 ▶ %d일 남았습니다.\n",   ((((challengeDTO.getEndDate().getTime() - System.currentTimeMillis()) / 1000)) / (24*60*60)));
-    System.out.printf(challengeDao.getRemainTime(challengeDTO.getEndDate().getTime() - System.currentTimeMillis()));
     System.out.printf("챌린지기간 ▶ %d일\n",  ((((challengeDTO.getEndDate().getTime() - challengeDTO.getStartDate().getTime()) / 1000)) / (24*60*60)));
+    System.out.printf(challengeDao.getRemainTime(challengeDTO.getEndDate().getTime() - System.currentTimeMillis()));
+    System.out.printf("등록날짜 ▶ %s\n", challengeDTO.getRegisteredDate());
     System.out.println();
-
-
 
     while (true) {
       System.out.println();
@@ -58,7 +51,6 @@ public class ChallengeDetailHandler implements Command {
       System.out.println("2번 ▶ 참여자 목록");
       System.out.println("3번 ▶ 참여인증&댓글");
       System.out.println("4번 ▶ 문의하기");
-      //      System.out.println("5번 ▶ 좋아요♡");
       System.out.println("5번 ▶ 찜하기🎈");
       System.out.println("0번 ▶ 이전");
       int input = Prompt.inputInt("번호 입력 ▶ ");
@@ -67,7 +59,6 @@ public class ChallengeDetailHandler implements Command {
         case 2: request.getRequestDispatcher("/challengeJoin/list").forward(request); break;
         case 3: request.getRequestDispatcher("/challengeReview/list").forward(request); break;
         case 4: request.getRequestDispatcher("/challengeQuestion/list").forward(request); break;
-        //        case 5: request.getRequestDispatcher("/challengeDetail/like").forward(request); break;
         case 5: request.getRequestDispatcher("/challengeDetail/wish").forward(request); break;
         case 0: return;
         default:

@@ -15,7 +15,6 @@ public class MyChallengeWishHandler implements Command {
     this.challengeDao = challengeDao;
   }
 
-
   @Override
   public void execute(CommandRequest request) throws Exception {
 
@@ -31,13 +30,9 @@ public class MyChallengeWishHandler implements Command {
             challengeDTO.getReviewCount(), 
             challengeDTO.getAdmin().getName(),
             challengeDTO.getTotalJoinCount(),
-            //          challengeDTO.getFileUpload(), 
             challengeDTO.getStartDate(),
             challengeDTO.getEndDate());
-
       }
     }
-
   }
-
 }
