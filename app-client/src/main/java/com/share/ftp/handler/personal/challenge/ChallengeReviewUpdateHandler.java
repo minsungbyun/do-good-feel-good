@@ -21,9 +21,9 @@ public class ChallengeReviewUpdateHandler implements Command {
 
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    int updateNo = (int) request.getAttribute("reviewNo");
+    int challengeReviewNo = (int) request.getAttribute("challengeReviewNo");
 
-    ChallengeReviewDTO challengeReviewDTO = challengeDao.findByChallengeReviewNo(challengeNo, updateNo);
+    ChallengeReviewDTO challengeReviewDTO = challengeDao.findByChallengeReviewNo(challengeNo, challengeReviewNo);
 
     if (challengeReviewDTO == null) {
       System.out.println("해당 번호의 참여인증&댓글이 없습니다.");
@@ -38,20 +38,27 @@ public class ChallengeReviewUpdateHandler implements Command {
     String content = Prompt.inputString(String.format("내용(%s)? ", challengeReviewDTO.getContent()));
     String fileUpload = Prompt.inputString(String.format("파일첨부(%s)? ", challengeReviewDTO.getFileUpload()));
 
-    String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println();
-      System.out.println("참여인증&댓글 수정을 취소하였습니다.");
-      return;
-    } else if (input.equals("y")) {
-      System.out.println();
-      System.out.println("참여인증&댓글을 수정하였습니다.");
-      challengeReviewDTO.setContent(content);
-      challengeReviewDTO.setFileUpload(fileUpload);
-      challengeDao.updateReview(challengeReviewDTO);
-      return;
-    } else {
-      System.out.println("y 또는 n을 입력하세요.");
-    } 
+    while (true) {
+      String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
+
+      if (input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println();
+        System.out.println("참여인증&댓글 수정을 취소하였습니다.");
+        return;
+
+      } else if (input.equalsIgnoreCase("y")) {
+        System.out.println();
+        challengeReviewDTO.setContent(content);
+        challengeReviewDTO.setFileUpload(fileUpload);
+        challengeDao.updateReview(challengeReviewDTO);
+
+        System.out.println("참여인증&댓글을 수정하였습니다.");
+        return;
+
+      } else {
+        System.out.println("y 또는 n을 입력하세요.");
+        continue;
+      } 
+    }
   }
 }

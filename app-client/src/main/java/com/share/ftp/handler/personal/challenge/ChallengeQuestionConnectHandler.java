@@ -1,7 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
 import com.share.ftp.dao.ChallengeDao;
-import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -11,7 +10,6 @@ import com.share.util.Prompt;
 public class ChallengeQuestionConnectHandler implements Command {
 
   ChallengeDao challengeDao;
-
 
   public ChallengeQuestionConnectHandler(ChallengeDao challengeDao) {
     this.challengeDao = challengeDao;
@@ -24,42 +22,22 @@ public class ChallengeQuestionConnectHandler implements Command {
 
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeList = challengeDao.findByChallengeNo(challengeNo); 
+    int challengeQuestionNo = Prompt.inputInt("문의 번호를 입력해주세요 ▶ ");
 
-    if (challengeList == null) {
-      System.out.println("해당 챌린지가 없습니다.");
-      return;
-    }
-
-    int questionNo = Prompt.inputInt("문의 번호를 입력해주세요 ▶ ");
-
-    ChallengeQuestionDTO challengeQuestion = challengeDao.findByChallengeQuestionNo(challengeNo, questionNo);
+    ChallengeQuestionDTO challengeQuestion = challengeDao.findByChallengeQuestionNo(challengeNo, challengeQuestionNo);
 
     if (challengeQuestion == null) {
       System.out.println("해당 번호의 문의가 없습니다.");
       return;
     }
 
-    if (challengeQuestion.getContent().equals("삭제된 댓글입니다")) {
-      System.out.println();
-      System.out.println("이미 삭제 된 댓글입니다!");
-      return;
-
-    }
-
-
     if ((challengeQuestion.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
         AuthLoginHandler.getLoginUser().getId().equals("admin")) {
-      //      for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
-      if (challengeQuestion.getNo() == challengeNo) {
-        System.out.printf("아이디: %s\n", challengeQuestion.getOwner().getId());
-        System.out.printf("내용: %s\n", challengeQuestion.getContent());
-        System.out.printf("등록날짜: %s\n", challengeQuestion.getRegisteredDate());
-      } else {
-        System.out.println("문의목록이 없습니다.");
-        return;
-      }
-      //      }
+
+      System.out.printf("아이디: %s\n", challengeQuestion.getOwner().getId());
+      System.out.printf("내용: %s\n", challengeQuestion.getContent());
+      System.out.printf("등록날짜: %s\n", challengeQuestion.getRegisteredDate());
+
     } else {
       System.out.println("본인이 작성한 글만 확인할 수 있습니다.");
       return;
@@ -67,8 +45,7 @@ public class ChallengeQuestionConnectHandler implements Command {
 
     System.out.println();
 
-    request.setAttribute("questionNo", questionNo); 
-
+    request.setAttribute("challengeQuestionNo", challengeQuestionNo); 
 
     while (true) {
       System.out.println();

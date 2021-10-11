@@ -3,7 +3,6 @@ package com.share.ftp.dao.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import com.google.gson.Gson;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
@@ -122,12 +121,9 @@ public class NetChallengeDao implements ChallengeDao {
   }
 
   @Override
-  public void updateQuestion(int challengeNo, ChallengeQuestionDTO updateChallengeQuestion) throws Exception {
-    HashMap<String,String> params = new HashMap<>();
-    params.put("challengeNo", String.valueOf(challengeNo));
-    params.put("updateChallengeQuestion", new Gson().toJson(updateChallengeQuestion));
+  public void updateQuestion(ChallengeQuestionDTO updateChallengeQuestion) throws Exception {
 
-    requestAgent.request("challengeQuestion.update", params);
+    requestAgent.request("challengeQuestion.update", updateChallengeQuestion);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("챌린지 문의 변경 실패!");
@@ -141,23 +137,7 @@ public class NetChallengeDao implements ChallengeDao {
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("챌린지 문의 삭제 실패!");
     }
-
   }
-
-  @Override
-  public void deleteQuestion(int challengeNo, ChallengeQuestionDTO deleteChallengeQuestion) throws Exception {
-    HashMap<String,String> params = new HashMap<>();
-    params.put("challengeNo", String.valueOf(challengeNo));
-    params.put("deleteChallengeQuestion", new Gson().toJson(deleteChallengeQuestion));
-
-
-    requestAgent.request("challengeQuestion.deleteIndex", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("챌린지 문의 삭제 실패!");
-    }
-  }
-
 
   @Override
   public List<ChallengeQuestionDTO> findByQuestionKeyword(String questionKeyword) throws Exception {
@@ -240,6 +220,7 @@ public class NetChallengeDao implements ChallengeDao {
 
   }
 
+  // 나중에 따로 분리해야함
   @Override
   public int getNextReviewNum(ChallengeDTO challengeDTO) throws Exception {
     //    requestAgent.request("challengeReview.getNextNum", null);
@@ -258,7 +239,7 @@ public class NetChallengeDao implements ChallengeDao {
       throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("challengeNo", String.valueOf(challengeNo));
-    params.put("reviewNo", String.valueOf(challengeReviewNo));
+    params.put("challengeReviewNo", String.valueOf(challengeReviewNo));
     requestAgent.request("challengeReview.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
@@ -304,9 +285,6 @@ public class NetChallengeDao implements ChallengeDao {
     return null;
   }
 
-
-
-
   // 다른 클래스 만들어서 static 메서드로 뺄 예정
   @Override
   public String getRemainTime(long millis) {
@@ -322,7 +300,4 @@ public class NetChallengeDao implements ChallengeDao {
 
     return String.format("남은시간 ▶ %d일 %d시간 %d분 %d초 남았습니다\n", day, hour, min, sec);
   }
-
-
-
 }
