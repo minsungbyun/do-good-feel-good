@@ -63,7 +63,7 @@ public class ChallengeReviewTable extends JsonDataTable<ChallengeReviewDTO> impl
   private void updateReview(Request request, Response response) throws Exception {
     ChallengeReviewDTO updateChallenge = request.getObject(ChallengeReviewDTO.class);
 
-    int index = indexOf(updateChallenge.getReviewNo());
+    int index = indexOf(updateChallenge.getNo() , updateChallenge.getReviewNo());
 
     list.set(index, updateChallenge);
     response.setStatus(Response.SUCCESS);
@@ -95,10 +95,12 @@ public class ChallengeReviewTable extends JsonDataTable<ChallengeReviewDTO> impl
   //  }
 
 
-  private int indexOf(int no) {
+  private int indexOf(int challengeNo, int challengeReviewNo) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getReviewNo() == no) {
-        return i;
+      if (list.get(i).getNo() == challengeNo) {
+        if (list.get(i).getReviewNo() == challengeReviewNo) {
+          return i;
+        }
       }
     }
     return -1;
