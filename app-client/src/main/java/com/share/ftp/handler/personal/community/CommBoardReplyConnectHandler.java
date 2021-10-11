@@ -1,6 +1,7 @@
 package com.share.ftp.handler.personal.community;
 
 import com.share.ftp.dao.CommunityDao;
+import com.share.ftp.domain.personal.CommBoardDTO;
 import com.share.ftp.domain.personal.CommBoardReplyDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -21,10 +22,10 @@ public class CommBoardReplyConnectHandler implements Command {
     System.out.println("[ 댓글 변경 / 삭제]");
     System.out.println();
 
+    int commNo = (int) request.getAttribute("commNo");
+    CommBoardDTO commBoardDTO = communityDao.findByCommNo(commNo);
 
     int replyNo = Prompt.inputInt("댓글 번호를 입력해주세요 ▶ ");
-
-
     CommBoardReplyDTO commBoardReplyDTO = communityDao.findByCommReplyNo(replyNo);
 
 

@@ -29,7 +29,7 @@ public interface CommunityDao {
   CommBoardReplyDTO findByCommReplyNo(int commBoardNo, int commReplyNo) throws Exception;
   void updateCommReply(CommBoardReplyDTO updateCommReply) throws Exception;
   void deleteCommeReply(CommBoardReplyDTO deleteCommReply) throws Exception;
-  int getNextNumCommReply() throws Exception;            // 게시글 번호 지정
+  int getNextNumCommReply(CommBoardDTO commBoardDTO) throws Exception;            // 게시글 번호 지정
 
 
   // 한 줄 후기 

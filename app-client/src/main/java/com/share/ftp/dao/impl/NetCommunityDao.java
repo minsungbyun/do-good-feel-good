@@ -270,20 +270,19 @@ public class NetCommunityDao implements CommunityDao {
 
 
   @Override
-  public int getNextNumCommReply() throws Exception {
+  public int getNextNumCommReply(CommBoardDTO commBoardDTO) throws Exception {
 
-    requestAgent.request("commReply.getNextNum", null);
+    //    requestAgent.request("commReply.getNextNum", null);
+    //
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      throw new Exception("한 줄 후기 번호 부여 중 오류 발생!");
+    //    }
+    //    CommBoardReplyDTO commBoardReplyDTO = requestAgent.getObject(CommBoardReplyDTO.class);
+    //
+    //
+    //    return commBoardReplyDTO.getCommReplyNo();
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("한 줄 후기 번호 부여 중 오류 발생!");
-    }
-    CommBoardReplyDTO commBoardReplyDTO = requestAgent.getObject(CommBoardReplyDTO.class);
+    return commBoardDTO.getReplyCount() +1;
 
-
-    return commBoardReplyDTO.getCommReplyNo();
   }
-
-
-
-
 }

@@ -57,7 +57,6 @@ import com.share.ftp.handler.admin.AdminNoticeDetailHandler;
 import com.share.ftp.handler.admin.AdminNoticeListHandler;
 import com.share.ftp.handler.admin.AdminNoticeSearchHandler;
 import com.share.ftp.handler.admin.AdminNoticeUpdateHandler;
-import com.share.ftp.handler.admin.AdminQuestionAddHandler;
 import com.share.ftp.handler.join.AuthDisplayUserHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.ftp.handler.join.AuthLogoutHandler;
@@ -116,11 +115,15 @@ import com.share.ftp.handler.personal.donation.DonationBoardApplyCompleteListHan
 import com.share.ftp.handler.personal.donation.DonationBoardApplyDetailHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardApplyHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardApplyListHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardConnectHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardDeleteHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardDetailRegisterAddHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardListHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardRegisterListHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardRejectApplyHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardRejectedListHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardSearchHandler;
+import com.share.ftp.handler.personal.donation.DonationBoardUpdateHandler;
 import com.share.ftp.handler.personal.donation.DonationPrompt;
 import com.share.ftp.handler.personal.donation.DonationRegisterAddHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterMyListHandler;
@@ -360,7 +363,7 @@ public class ClientApp {
     JoinDao netJoinDao = new NetJoinDao(requestAgent);
     CommunityDao netCommunityDao = new NetCommunityDao(requestAgent);
     ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
-    QuestionDao questionDao = new NetQuestionDao(requestAgent);
+    QuestionDao netQuestionDao = new NetQuestionDao(requestAgent);
     //    NoticeDao netNoticeDao = new NetNoticeDao(requestAgent);
     //    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
     //    ChallengeReviewDao netChallengeReviewDao = new NetChallengeDao(requestAgent);
@@ -476,7 +479,11 @@ public class ClientApp {
     DonationRegisterDao donationRegisterDao = new NetDonationRegisterDao(requestAgent);
 
     commands.put("/donationBoard/list", new DonationBoardListHandler(donationBoardDao));
+    commands.put("/donationBoard/connect", new DonationBoardConnectHandler(donationBoardDao));
+    commands.put("/donationBoard/update", new DonationBoardUpdateHandler(donationBoardDao));
+    commands.put("/donationBoard/delete", new DonationBoardDeleteHandler(donationBoardDao));
     commands.put("/donationBoard/apply", new DonationBoardApplyHandler(donationBoardDao));
+    commands.put("/donationBoard/search", new DonationBoardSearchHandler(donationBoardDao));
     commands.put("/donationBoard/applyList", new DonationBoardApplyListHandler(donationBoardDao));
     commands.put("/donationBoard/appliedList", new DonationBoardAppliedListHandler(donationBoardDao));
     commands.put("/donationBoard/acceptApply", new DonationBoardAcceptApplyHandler(donationBoardDao));
@@ -494,12 +501,12 @@ public class ClientApp {
     commands.put("/donationBoardDetailRegister/add", new DonationBoardDetailRegisterAddHandler(donationBoardDao, donationRegisterDao, netJoinDao));
 
     // 고객센터 문의사항
-    commands.put("/question/add", new QuestionAddHandler(questionDao));
-    commands.put("/question/list", new QuestionListHandler(questionDao));
-    commands.put("/question/detail", new QuestionDetailHandler(questionDao));
-    commands.put("/question/update", new QuestionUpdateHandler(questionDao));
-    commands.put("/question/delete", new QuestionDeleteHandler(questionDao));
-    commands.put("/question/search", new QuestionSearchHandler(questionDao));
+    commands.put("/question/add", new QuestionAddHandler(netQuestionDao));
+    commands.put("/question/list", new QuestionListHandler(netQuestionDao));
+    commands.put("/question/detail", new QuestionDetailHandler(netQuestionDao));
+    commands.put("/question/update", new QuestionUpdateHandler(netQuestionDao));
+    commands.put("/question/delete", new QuestionDeleteHandler(netQuestionDao));
+    commands.put("/question/search", new QuestionSearchHandler(netQuestionDao));
 
     commands.put("/adminQuestion/connect", new AdminQuestionConnectHandler());
     //    commands.put("/adminQuestion/add", new AdminQuestionAddHandler(myQuestionListDTOList));
@@ -547,7 +554,7 @@ public class ClientApp {
 
     // 관리자 문의사항
 
-    commands.put("/adminQuestion/add", new AdminQuestionAddHandler(myQuestionListDTOList));
+    //    commands.put("/adminQuestion/add", new AdminQuestionAddHandler(netQuestionDao));
     //        commands.put("/adminAsk/detail", new AdminQuestionDetailHandler(myQuestionListDTOList));
     //        commands.put("/adminAsk/update", new AdminQuestionUpdateHandler(myQuestionListDTOList));
     //        commands.put("/adminAsk/delete", new AdminQuestionDeleteHandler(myQuestionListDTOList));
@@ -841,7 +848,7 @@ public class ClientApp {
     donationMenu.add(new MenuItem("전체 기부 참여내역", "/donationRegister/participation"));
     donationMenu.add(new MenuItem("모금함목록","/donationBoard/list"));
     donationMenu.add(new MenuItem("모금함 상세보기", "/donationBoard/applyDetail"));
-    //    donationMenu.add(new MenuItem("기부하기", ACCESS_MEMBER, "/donationRegister/add"));
+    donationMenu.add(new MenuItem("모금함 검색", "/donationBoard/search"));
     donationMenu.add(new MenuItem("모금함 개설신청", ACCESS_ORG, "/donationBoard/apply"));
 
     return donationMenu;
@@ -931,8 +938,8 @@ public class ClientApp {
   private Menu createMyDonationMenu() {
     MenuGroup myDonation = new MenuGroup("나의 모금함"); 
     myDonation.setMenuFilter(menuFilter);
-    myDonation.add(new MenuItem("나의 모금함 개설신청서 확인", ACCESS_ORG, "/myDonation//applyCompleteList")); 
     myDonation.add(new MenuItem("나의 기부내역", ACCESS_MEMBER, "/myDonation/registerlist"));
+    myDonation.add(new MenuItem("나의 모금함 개설신청서 목록", ACCESS_ORG, "/myDonation//applyCompleteList")); 
     myDonation.add(new MenuItem("승인된 모금함 개설내역",ACCESS_ORG,"/donationBoard/appliedList")); 
     myDonation.add(new MenuItem("반려된 모금함 개설내역", ACCESS_ORG,"/donationBoard/rejectedList"));  
 

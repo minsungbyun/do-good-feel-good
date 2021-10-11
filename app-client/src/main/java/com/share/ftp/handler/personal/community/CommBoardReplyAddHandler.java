@@ -47,10 +47,7 @@ public class CommBoardReplyAddHandler implements Command {
       commBoardDTO.setReplyCount(1);
       //      System.out.println("각 게시글의 첫 댓글입니다");
     } else {
-      commBoardDTO.setReplyCount(communityDao.getNextNumCommReply());
-      //      challengeReviewDTO.setReviewNo(getNextNum2()); // 해당 게시글 리뷰의 마지막 번호기억 + 1
-      //      System.out.println("현재 댓글의 번호는? (commBoardReplyDTO.getReviewNo()) " + commBoardReplyDTO.getReplyNo());
-      //      System.out.println("현재 댓글의 번호는? (commBoardDTO.getReplyCount()) " + commBoardDTO.getReplyCount());
+      commBoardDTO.setReplyCount(communityDao.getNextNumCommReply(commBoardDTO));
     }
 
     commBoardReplyDTO.setCommReplyNo(commBoardDTO.getReplyCount()); 
@@ -65,6 +62,7 @@ public class CommBoardReplyAddHandler implements Command {
 
       } else if (input.equalsIgnoreCase("y")) {
 
+        communityDao.update(commBoardDTO);
         communityDao.insertReply(commBoardReplyDTO);
 
         System.out.println();

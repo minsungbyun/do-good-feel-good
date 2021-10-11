@@ -44,6 +44,8 @@ public class QuestionDetailHandler implements Command {
 
         questionListDTO.setViewCount(questionListDTO.getViewCount() + 1);
         System.out.printf("조회수: %d\n", questionListDTO.getViewCount());
+
+        questionDao.update(questionListDTO);
         break;
 
       } else if (AuthLoginHandler.getLoginUser().getId().equals(questionListDTO.getOwner().getId())) {
@@ -63,6 +65,8 @@ public class QuestionDetailHandler implements Command {
 
           questionListDTO.setViewCount(questionListDTO.getViewCount() + 1);
           System.out.printf("조회수: %d\n", questionListDTO.getViewCount());
+
+          questionDao.update(questionListDTO);
           break;
 
         } else {
