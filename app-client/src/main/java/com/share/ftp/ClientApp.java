@@ -76,6 +76,7 @@ import com.share.ftp.handler.personal.challenge.ChallengeJoinHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeJoinListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionAddHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionConnectHandler;
+import com.share.ftp.handler.personal.challenge.ChallengeQuestionDeleteHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeQuestionUpdateHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeRankingHandler;
@@ -85,9 +86,6 @@ import com.share.ftp.handler.personal.challenge.ChallengeReviewDeleteHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewUpdateHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeWishHandler;
-import com.share.ftp.handler.personal.challenge.MyChallengeDetailHandler;
-import com.share.ftp.handler.personal.challenge.MyChallengeListHandler;
-import com.share.ftp.handler.personal.challenge.MyChallengeWishHandler;
 import com.share.ftp.handler.personal.community.CommBestDetailHandler;
 import com.share.ftp.handler.personal.community.CommBestListHandler;
 import com.share.ftp.handler.personal.community.CommBoardAddHandler;
@@ -129,11 +127,9 @@ import com.share.ftp.handler.personal.donation.DonationRegisterAddHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterMyListHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterParticipationHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterTotalMoneyHandler;
-import com.share.ftp.handler.personal.mypage.MyBoardDeleteHandler;
-import com.share.ftp.handler.personal.mypage.MyBoardDetailHandler;
-import com.share.ftp.handler.personal.mypage.MyBoardListHandler;
-import com.share.ftp.handler.personal.mypage.MyBoardUpdateHandler;
-import com.share.ftp.handler.personal.mypage.MyDonationHandler;
+import com.share.ftp.handler.personal.mypage.MyChallengeDetailHandler;
+import com.share.ftp.handler.personal.mypage.MyChallengeListHandler;
+import com.share.ftp.handler.personal.mypage.MyChallengeWishHandler;
 import com.share.ftp.handler.personal.mypage.MyPointListHandler;
 import com.share.ftp.handler.personal.mypage.MyRankingHandler;
 import com.share.ftp.handler.personal.support.AdminQuestionConnectHandler;
@@ -376,17 +372,16 @@ public class ClientApp {
     commands.put("/commReview/search", new CommReviewSearchHandler(netCommunityDao));
 
     // 소통해요 댓글
-    commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler(commBoardDTOList, commBoardReplyDTOList));
-    commands.put("/commBoardReply/add", new CommBoardReplyAddHandler(commBoardDTOList, commBoardReplyDTOList));
-    commands.put("/commBoardReply/list", new CommBoardReplyListHandler(commBoardDTOList, commBoardReplyDTOList));
-    commands.put("/commBoardReply/update", new CommBoardReplyUpdateHandler(commBoardDTOList, commBoardReplyDTOList));
-    commands.put("/commBoardReply/delete", new CommBoardReplyDeleteHandler(commBoardDTOList, commBoardReplyDTOList));
+    commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler(netCommunityDao));
+    commands.put("/commBoardReply/add", new CommBoardReplyAddHandler(netCommunityDao));
+    commands.put("/commBoardReply/list", new CommBoardReplyListHandler(netCommunityDao));
+    commands.put("/commBoardReply/update", new CommBoardReplyUpdateHandler(netCommunityDao));
+    commands.put("/commBoardReply/delete", new CommBoardReplyDeleteHandler(netCommunityDao));
 
-    // commands.put("/commBoard/connect", new CommBoardReplyConnectHandler());
 
     // 소통해요 나눔이야기 BEST
-    commands.put("/commBest/list", new CommBestListHandler(commBoardDTOList));
-    commands.put("/commBest/detail", new CommBestDetailHandler(commBoardDTOList));
+    commands.put("/commBest/list", new CommBestListHandler(netCommunityDao));
+    commands.put("/commBest/detail", new CommBestDetailHandler(netCommunityDao));
 
     // 챌린지
     commands.put("/adminChallenge/list", new AdminChallengeListHandler(netChallengeDao));  // 챌린지 목록
@@ -409,7 +404,7 @@ public class ClientApp {
     commands.put("/challengeQuestion/list", new ChallengeQuestionListHandler(netChallengeDao));
     //    commands.put("/challengeQuestion/detail", new ChallengeQuestionDetailHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList));
     commands.put("/challengeQuestion/update", new ChallengeQuestionUpdateHandler(netChallengeDao));
-    // commands.put("/challengeQuestion/delete", new ChallengeQuestionDeleteHandler(netChallengeDao));
+    commands.put("/challengeQuestion/delete", new ChallengeQuestionDeleteHandler(netChallengeDao));
     //    commands.put("/challengeQuestion/search", new ChallengeQuestionSearchHandler(netChallengeDao, netChallengeQuestionDao));
     commands.put("/challengeQuestion/connect", new ChallengeQuestionConnectHandler(netChallengeDao));
 
@@ -472,17 +467,10 @@ public class ClientApp {
     commands.put("/myChallenge/detail", new MyChallengeDetailHandler(netChallengeDao));
     commands.put("/myChallenge/wish", new MyChallengeWishHandler(netChallengeDao));
 
-
-    commands.put("/myBoard/list", new MyBoardListHandler()); // 나의게시글 목록
-    commands.put("/myBoard/detail", new MyBoardDetailHandler()); // 나의게시글 목록
-    commands.put("/myBoard/update", new MyBoardUpdateHandler()); // 나의게시글 목록
-    commands.put("/myBoard/delete", new MyBoardDeleteHandler()); // 나의게시글 목록
-
     commands.put("myPoint/list", new MyPointListHandler(netJoinDao)); // 나의포인트 
 
     commands.put("/orgMyVol/apply", new MyVolApplyListHandler()); // 기관 마이페이지 승인신청 
     commands.put("/orgMyVol/approve", new MyVolApproveListHandler()); // 기관 마이페이지 승인조회
-    commands.put("/myDonation/list", new MyDonationHandler()); // 모금함
     commands.put("/myDonation/registerlist", new DonationRegisterMyListHandler(donationRegisterDao)); // 모금함
     commands.put("/myDonation//applyCompleteList", new DonationBoardApplyCompleteListHandler(donationBoardDao));
 

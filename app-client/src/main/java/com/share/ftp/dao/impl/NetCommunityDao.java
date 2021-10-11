@@ -229,26 +229,11 @@ public class NetCommunityDao implements CommunityDao {
 
 
   @Override
-  public List<CommBoardReplyDTO> findByCommReplyKeyword(String commReplyKeyword) throws Exception {
-
+  public CommBoardReplyDTO findByCommReplyNo(int commBoardNo, int commReplyNo) throws Exception {
     HashMap<String,String> params = new HashMap<>();
-    params.put("commReplykeyword", commReplyKeyword);
-    requestAgent.request("commReply.selectListByKeyword", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("댓글 검색 실패!");
-    }
-
-    return new ArrayList<>(requestAgent.getObjects(CommBoardReplyDTO.class));
-
-  }
-
-  @Override
-  public CommBoardReplyDTO findByCommReplyNo(int commReplywNo) throws Exception {
-    HashMap<String,String> params = new HashMap<>();
-    params.put("commReplywNo", String.valueOf(commReplywNo));
-
-    requestAgent.request("commReplywNo.selectOne", params);
+    params.put("commBoardNo", String.valueOf(commBoardNo));
+    params.put("commReplyNo", String.valueOf(commReplyNo));
+    requestAgent.request("commReply.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;
@@ -279,18 +264,19 @@ public class NetCommunityDao implements CommunityDao {
 
 
   @Override
-  public int getNextNumCommReply() throws Exception {
+  public int getNextNumCommReply(CommBoardDTO commBoardDTO) throws Exception {
 
-    requestAgent.request("commReply.getNextNum", null);
+    //    requestAgent.request("commReply.getNextNum", null);
+    //
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      throw new Exception("한 줄 후기 번호 부여 중 오류 발생!");
+    //    }
+    //    CommBoardReplyDTO commBoardReplyDTO = requestAgent.getObject(CommBoardReplyDTO.class);
+    //
+    //
+    //    return commBoardReplyDTO.getCommReplyNo();
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("한 줄 후기 번호 부여 중 오류 발생!");
-    }
-    CommBoardReplyDTO commBoardReplyDTO = requestAgent.getObject(CommBoardReplyDTO.class);
+    return commBoardDTO.getReplyCount() +1;
 
-
-    return commBoardReplyDTO.getCommReplyNo();
   }
-
-
 }

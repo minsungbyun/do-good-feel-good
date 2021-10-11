@@ -1,4 +1,4 @@
-package com.share.ftp.handler.personal.challenge;
+package com.share.ftp.handler.personal.mypage;
 
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;

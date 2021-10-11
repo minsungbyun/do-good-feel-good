@@ -1,7 +1,6 @@
 package com.share.ftp.table.challenge;
 
 import java.util.ArrayList;
-import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.ftp.table.JsonDataTable;
 import com.share.server.DataProcessor;
@@ -23,7 +22,6 @@ public class ChallengeQuestionTable extends JsonDataTable<ChallengeQuestionDTO> 
       case "challengeQuestion.selectOne": selectOne(request, response); break;
       case "challengeQuestion.update": update(request, response); break;
       case "challengeQuestion.delete": delete(request, response); break;
-      case "challengeQuestion.getNextNum": getNextQuestionNum(request, response); break;
     }
   }
 
@@ -91,17 +89,6 @@ public class ChallengeQuestionTable extends JsonDataTable<ChallengeQuestionDTO> 
     response.setStatus(Response.SUCCESS);
   }
 
-  private void getNextQuestionNum(Request request, Response response) throws Exception {
-    ChallengeDTO challenge = request.getObject(ChallengeDTO.class);
-
-    if (list.size() > 0) {
-      challenge.setQuestionCount(challenge.getQuestionCount() + 1);
-      response.setStatus(Response.SUCCESS);
-      response.setValue(challenge);
-    } else {
-      response.setStatus(Response.FAIL);
-    }
-  }
 
   private ChallengeQuestionDTO findByChallengeQuestionNo(int challengeNo, int challengeQuestionNo) {
     for (ChallengeQuestionDTO challengeQuestionList : list) {

@@ -22,22 +22,12 @@ public class ChallengeReviewDeleteHandler implements Command {
       System.out.println();
       System.out.println("[ 참여인증&댓글 삭제 ]");
       System.out.println();
-      //
-      //      int challengeNo = (int) request.getAttribute("no");
-      //      System.out.println();
-      //
-      //      ChallengeDTO challengeList = findByChallengeNo(challengeNo); 
-      //
-      //      if (challengeList == null) {
-      //        System.out.println("해당 챌린지가 없습니다.");
-      //        return;
-      //      }
+
       int challengeNo = (int) request.getAttribute("challengeNo");
       ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
 
-      int deleteNo = (int) request.getAttribute("reviewNo");
-      ChallengeReviewDTO challengeReviewDTO = challengeDao.findByChallengeReviewNo(challengeNo, deleteNo);
-
+      int challengeReviewNo = (int) request.getAttribute("challengeReviewNo");
+      ChallengeReviewDTO challengeReviewDTO = challengeDao.findByChallengeReviewNo(challengeNo, challengeReviewNo);
 
       if (challengeReviewDTO == null) {
         System.out.println("해당 번호의 참여인증&댓글이 없습니다.");
@@ -57,24 +47,23 @@ public class ChallengeReviewDeleteHandler implements Command {
           System.out.println();
           System.out.println("참여인증&댓글 삭제를 취소하였습니다.");
           return;
-        } else if (input.equals("y")) {
+
+        } else if (input.equalsIgnoreCase("y")) {
           System.out.println();
-          System.out.println("참여인증&댓글을 삭제하였습니다.");
           challengeDTO.setReviewCount(challengeDTO.getReviewCount() - 1);
           AuthLoginHandler.getLoginUser().setPoint(AuthLoginHandler.getLoginUser().getPoint() - CHALLENGE_REVIEWPOINT);
-          challengeDTO.removeReviewer(AuthLoginHandler.getLoginUser()); // 리뷰어 삭제 테스트
-          System.out.println(challengeDTO.getReviewerNames());
+          challengeDTO.removeReviewer(AuthLoginHandler.getLoginUser()); 
+
           challengeDao.update(challengeDTO);
           challengeDao.deleteReview(challengeReviewDTO);
+          System.out.println("참여인증&댓글을 삭제하였습니다.");
           return;
 
         } else {
           System.out.println("y 또는 n을 입력하세요.");
+
         }
-
       }
-
-
     }
   }
 }
