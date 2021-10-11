@@ -19,15 +19,15 @@ public interface ChallengeDao {
 
   // 챌린지 문의사항 관련
   void insertQuestion(ChallengeQuestionDTO addChallengeQuestion) throws Exception;
+  void insertAdmin(int ChallengeQuestionNo, ChallengeQuestionDTO addChallengeQuestion) throws Exception;
   List<ChallengeQuestionDTO> findAllQuestion() throws Exception;      
   void updateQuestion(ChallengeQuestionDTO updateChallengeQuestion) throws Exception;          
   void deleteQuestion(ChallengeQuestionDTO challengeQuestion) throws Exception; 
   List<ChallengeQuestionDTO> findByQuestionKeyword(String keyword) throws Exception;
+  void sortChallengeQuestion(ChallengeQuestionDTO sortChallengeQuestion) throws Exception;
 
   ChallengeQuestionDTO findByChallengeQuestionNo(int challengeNo, int challengeQuestionNo) throws Exception;
   int getNextQuestionNum(ChallengeDTO challenge) throws Exception;
-  void insertAdmin(int index, ChallengeQuestionDTO challengeQuestion) throws Exception;
-  void sortChallengeQuestion() throws Exception;
 
   // 챌린지 참여인증&댓글 관련
   void insertReview(ChallengeReviewDTO addChallengeReview) throws Exception;
