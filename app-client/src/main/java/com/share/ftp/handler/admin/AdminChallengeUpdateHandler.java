@@ -37,17 +37,18 @@ public class AdminChallengeUpdateHandler implements Command {
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("챌린지 변경을 취소하였습니다.");
       return;
+    } else if (input.equalsIgnoreCase("y")) {
+      challengeDTO.setTitle(title);
+      challengeDTO.setContent(content);
+      challengeDTO.setFileUpload(fileUpload);
+      challengeDTO.setStartDate(startDate);
+      challengeDTO.setEndDate(endDate);
+
+      challengeDao.update(challengeDTO);
+      System.out.println();
+
+      System.out.println();
+      System.out.println("[  챌린지를 변경하였습니다. ]");
     }
-    challengeDTO.setTitle(title);
-    challengeDTO.setContent(content);
-    challengeDTO.setFileUpload(fileUpload);
-    challengeDTO.setStartDate(startDate);
-    challengeDTO.setEndDate(endDate);
-
-    challengeDao.update(challengeDTO);
-    System.out.println();
-
-    System.out.println();
-    System.out.println("[  챌린지를 변경하였습니다. ]");
   }
 }
