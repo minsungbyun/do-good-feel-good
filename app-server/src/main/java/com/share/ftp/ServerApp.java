@@ -44,7 +44,7 @@ public class ServerApp {
     dataProcessorMap.put("donationBoard.", new DonationBoardTable());
     dataProcessorMap.put("donationRegister.", new DonationRegisterTable());
 
-    dataProcessorMap.put("notic3.", new NoticeTable());
+    dataProcessorMap.put("notice.", new NoticeTable());
     dataProcessorMap.put("question.", new QuestionTable());
 
     while (true) {

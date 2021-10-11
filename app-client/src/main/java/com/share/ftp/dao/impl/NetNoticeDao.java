@@ -79,9 +79,9 @@ public class NetNoticeDao implements NoticeDao {
   }
 
   @Override
-  public void delete(int notideNo) throws Exception {
+  public void delete(int noticeNo) throws Exception {
     HashMap<String,String> params = new HashMap<>();
-    params.put("notideNo", String.valueOf(notideNo));
+    params.put("noticeNo", String.valueOf(noticeNo));
 
     requestAgent.request("notice.delete", params);
 
@@ -95,9 +95,11 @@ public class NetNoticeDao implements NoticeDao {
 
     requestAgent.request("notice.getNextNum", null);
 
+
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("게시글 번호 부여 중 오류 발생!");
     }
+    System.out.println("확인");
     NoticeDTO noticeDTO = requestAgent.getObject(NoticeDTO.class);
 
 
