@@ -1,19 +1,18 @@
 package com.share.ftp.handler.personal.community;
 
-import java.util.List;
-import com.share.ftp.domain.community.CommBoardDTO;
+import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.domain.community.CommBoardReplyDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class CommBoardReplyConnectHandler extends AbstractCommBoardReplyHandler {
+public class CommBoardReplyConnectHandler implements Command {
 
+  CommunityDao communityDao;
 
-  public CommBoardReplyConnectHandler(
-      List<CommBoardDTO> commBoardDTOList,
-      List<CommBoardReplyDTO> commBoardReplyDTOList) {
-    super(commBoardDTOList, commBoardReplyDTOList);
+  public CommBoardReplyConnectHandler (CommunityDao communityDao) {
+    this.communityDao = communityDao;
   }
 
   @Override
@@ -22,11 +21,11 @@ public class CommBoardReplyConnectHandler extends AbstractCommBoardReplyHandler 
     System.out.println("[ 댓글 변경 / 삭제]");
     System.out.println();
 
+    int commBoardNo = (int) request.getAttribute("commBoardNo");
+    //    CommBoardDTO commBoardDTO = communityDao.findByCommNo(commNo);
 
-    int replyNo = Prompt.inputInt("댓글 번호를 입력해주세요 ▶ ");
-
-
-    CommBoardReplyDTO commBoardReplyDTO = findByReplyNo(replyNo);
+    int commBoardReplyNo = Prompt.inputInt("댓글 번호를 입력해주세요 ▶ ");
+    CommBoardReplyDTO commBoardReplyDTO = communityDao.findByCommReplyNo(commBoardNo, commBoardReplyNo);
 
 
     if (commBoardReplyDTO == null) {
@@ -39,7 +38,7 @@ public class CommBoardReplyConnectHandler extends AbstractCommBoardReplyHandler 
       return;
     }
 
-    request.setAttribute("replyNo", replyNo); 
+    request.setAttribute("commBoardReplyNo", commBoardReplyNo); 
 
     while (true) {
       System.out.println();

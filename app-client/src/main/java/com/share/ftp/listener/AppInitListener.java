@@ -1,12 +1,11 @@
 package com.share.ftp.listener;
 
-import java.util.Map;
 import com.share.context.ApplicationContextListener;
 
 public class AppInitListener implements ApplicationContextListener {
 
   @Override
-  public void contextInitialized(Map<String, Object> params) {
+  public void contextInitialized() {
     System.out.println("oooo                                                    \r\n"
         + "`888                                                    \r\n"
         + " 888 .oo.    .oooo.   oo.ooooo.  oo.ooooo.  oooo    ooo \r\n"
@@ -32,7 +31,7 @@ public class AppInitListener implements ApplicationContextListener {
 
   }
   @Override
-  public void contextDestroyed(Map<String, Object> params) {
+  public void contextDestroyed() {
     System.out.println("_________           ________________              \r\n"
         + "__  ____/_________________  /__  __ )____  ______ \r\n"
         + "_  / __ _  __ \\  __ \\  __  /__  __  |_  / / /  _ \\\r\n"

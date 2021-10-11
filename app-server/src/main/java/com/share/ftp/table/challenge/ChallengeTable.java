@@ -41,11 +41,8 @@ public class ChallengeTable extends JsonDataTable<ChallengeDTO> implements DataP
     int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
 
     ChallengeDTO challengeDTO = null;
-    for (ChallengeDTO challengeList : list) {
-      if (challengeList.getNo() == challengeNo) {
-        challengeDTO = challengeList; 
-      }
-    }
+
+    challengeDTO = findByChallengeNo(challengeNo);
 
     if (challengeDTO == null) {
       response.setStatus(Response.FAIL);
@@ -98,6 +95,15 @@ public class ChallengeTable extends JsonDataTable<ChallengeDTO> implements DataP
       }
     }
     return -1;
+  }
+
+  private ChallengeDTO findByChallengeNo(int challengeNo) {
+    for (ChallengeDTO challengeList : list) {
+      if (challengeList.getNo() == challengeNo) {
+        return challengeList; 
+      }
+    }
+    return null;
   }
 
 }

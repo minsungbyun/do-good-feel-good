@@ -1,7 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
 import com.share.ftp.dao.ChallengeDao;
-import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeReviewDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -24,36 +23,21 @@ public class ChallengeReviewConnectHandler implements Command {
 
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
+    int challengeReviewNo = Prompt.inputInt("댓글 번호를 입력해주세요 ▶ ");
 
-    int reviewNo = Prompt.inputInt("댓글 번호를 입력해주세요 ▶ ");
-
-    //    if (reviewNo == 0) {
-    //      return;
-    //    }
-
-    ChallengeReviewDTO challengeReviewDTO = challengeDao.findByChallengeReviewNo(challengeNo, reviewNo);
+    ChallengeReviewDTO challengeReviewDTO = challengeDao.findByChallengeReviewNo(challengeNo, challengeReviewNo);
 
     if (challengeReviewDTO == null) {
       System.out.println("해당 번호의 참여인증&댓글이 없습니다.");
       return;
     }
 
-
-    //    if (challengeReviewDTO.getContent().equals("삭제된 댓글입니다")) {
-    //      System.out.println();
-    //      System.out.println("이미 삭제 된 댓글입니다!");
-    //      return;
-    //
-    //    }
-
     if (!challengeReviewDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
       System.out.println("변경 권한이 없습니다.");
       return;
     }
 
-    request.setAttribute("reviewNo", reviewNo); 
-
+    request.setAttribute("challengeReviewNo", challengeReviewNo); 
 
     while (true) {
       System.out.println();

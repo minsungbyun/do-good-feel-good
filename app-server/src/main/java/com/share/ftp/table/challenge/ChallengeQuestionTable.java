@@ -1,7 +1,6 @@
 package com.share.ftp.table.challenge;
 
 import java.util.ArrayList;
-import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.ftp.table.JsonDataTable;
 import com.share.server.DataProcessor;
@@ -23,8 +22,6 @@ public class ChallengeQuestionTable extends JsonDataTable<ChallengeQuestionDTO> 
       case "challengeQuestion.selectOne": selectOne(request, response); break;
       case "challengeQuestion.update": update(request, response); break;
       case "challengeQuestion.delete": delete(request, response); break;
-      case "challengeQuestion.deleteIndex": deleteIndex(request, response); break;
-      case "challengeQuestion.getNextNum": getNextQuestionNum(request, response); break;
     }
   }
 
@@ -61,31 +58,25 @@ public class ChallengeQuestionTable extends JsonDataTable<ChallengeQuestionDTO> 
     int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
     int challengeQuestionNo = Integer.parseInt(request.getParameter("challengeQuestionNo"));
 
+    ChallengeQuestionDTO challengeQuestionDTO = null;
 
-    ChallengeQuestionDTO selectChallenge = null;
-    for (ChallengeQuestionDTO ChallengeQuestionDTO : list) {
-      if (ChallengeQuestionDTO.getNo() == challengeNo) {
-        if (ChallengeQuestionDTO.getQuestionNo() == challengeQuestionNo) {
-          selectChallenge = ChallengeQuestionDTO;
-        }
-      }
-    }
+    challengeQuestionDTO = findByChallengeQuestionNo(challengeNo, challengeQuestionNo);
 
-    if (selectChallenge == null) {
+    if (challengeQuestionDTO == null) {
       response.setStatus(Response.FAIL);
       response.setValue("해당 챌린지문의가 없습니다!");
       return;
     }
 
     response.setStatus(Response.SUCCESS);
-    response.setValue(selectChallenge);
+    response.setValue(challengeQuestionDTO);
   }
 
   private void update(Request request, Response response) throws Exception {
-    int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
+
     ChallengeQuestionDTO updateChallengeQuestion = request.getObject(ChallengeQuestionDTO.class);
 
-    int index = indexOf(challengeNo, updateChallengeQuestion);
+    int index = indexOf(updateChallengeQuestion.getNo(), updateChallengeQuestion.getQuestionNo());
 
     list.set(index, updateChallengeQuestion);
     response.setStatus(Response.SUCCESS);
@@ -98,42 +89,22 @@ public class ChallengeQuestionTable extends JsonDataTable<ChallengeQuestionDTO> 
     response.setStatus(Response.SUCCESS);
   }
 
-  private void deleteIndex(Request request, Response response) throws Exception {
-    int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
-    ChallengeQuestionDTO deleteChallengeQuestion = request.getObject(ChallengeQuestionDTO.class);
 
-
-    int index = indexOf(challengeNo, deleteChallengeQuestion);
-
-    list.remove(index);
-    response.setStatus(Response.SUCCESS);
-  }
-
-
-  private void getNextQuestionNum(Request request, Response response) throws Exception {
-    ChallengeDTO challenge = request.getObject(ChallengeDTO.class);
-
-    if (list.size() > 0) {
-      challenge.setQuestionCount(challenge.getQuestionCount() + 1);
-      response.setStatus(Response.SUCCESS);
-      response.setValue(challenge);
-    } else {
-      response.setStatus(Response.FAIL);
+  private ChallengeQuestionDTO findByChallengeQuestionNo(int challengeNo, int challengeQuestionNo) {
+    for (ChallengeQuestionDTO challengeQuestionList : list) {
+      if (challengeQuestionList.getNo() == challengeNo) {
+        if (challengeQuestionList.getQuestionNo() == challengeQuestionNo) {
+          return challengeQuestionList; 
+        }
+      }
     }
+    return null;
   }
 
-  //  private int getLastNum(ChallengeDTO challengeDTO) {
-  //    if (list.size() > 0) {
-  //      return challengeDTO.getQuestionCount() + 1;
-  //    } else {
-  //      return 1;
-  //    }
-  //  }
-
-  private int indexOf(int challengeNo, ChallengeQuestionDTO challengeQuestionDTO) {
+  private int indexOf(int challengeNo, int challengeQuestionNo) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getNo() == challengeQuestionDTO.getNo()) {
-        if (list.get(i).getQuestionNo() == challengeQuestionDTO.getQuestionNo()) {
+      if (list.get(i).getNo() == challengeNo) {
+        if (list.get(i).getQuestionNo() == challengeQuestionNo) {
           return i;
         }
       }

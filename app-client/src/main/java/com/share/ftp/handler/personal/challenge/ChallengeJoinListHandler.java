@@ -30,11 +30,6 @@ public class ChallengeJoinListHandler implements Command {
       return;
     }
 
-    // 관리자 이름이 있으면 제거 (따로 명시되게끔 설정함)
-    //    if (challengeJoinList.getMembers().contains(challengeJoinList.getAdmin())) {
-    //      challengeJoinList.getMembers().remove(challengeJoinList.getAdmin());
-    //    }
-
     System.out.printf("챌린지 제목 ▶ %s\n참가인원 ▶ %s명\n\n           [  챌린지 참여자명  ]\n\n%s\n",
         challengeJoinList.getTitle(),
         challengeJoinList.getTotalJoinCount(),

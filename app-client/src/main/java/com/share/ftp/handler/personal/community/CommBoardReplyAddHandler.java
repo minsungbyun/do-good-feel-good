@@ -1,19 +1,20 @@
 package com.share.ftp.handler.personal.community;
 
 import java.sql.Date;
-import java.util.List;
+import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.domain.community.CommBoardDTO;
 import com.share.ftp.domain.community.CommBoardReplyDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class CommBoardReplyAddHandler extends AbstractCommBoardReplyHandler {
+public class CommBoardReplyAddHandler implements Command {
 
-  public CommBoardReplyAddHandler(
-      List<CommBoardDTO> commBoardDTOList,
-      List<CommBoardReplyDTO> commBoardReplyDTOList) {
-    super(commBoardDTOList, commBoardReplyDTOList);
+  CommunityDao communityDao;
+
+  public CommBoardReplyAddHandler (CommunityDao communityDao) {
+    this.communityDao = communityDao;
   }
 
   @Override
@@ -23,9 +24,9 @@ public class CommBoardReplyAddHandler extends AbstractCommBoardReplyHandler {
     System.out.println("[  나눔이야기 댓글 등록  ]");
     System.out.println();
 
-    int commNo = (int) request.getAttribute("commNo");
+    int commBoardNo = (int) request.getAttribute("commBoardNo");
 
-    CommBoardDTO commBoardDTO = findByCommBoardNo(commNo);
+    CommBoardDTO commBoardDTO = communityDao.findByCommNo(commBoardNo);
 
     if (commBoardDTO == null) {
       System.out.println();
@@ -46,10 +47,7 @@ public class CommBoardReplyAddHandler extends AbstractCommBoardReplyHandler {
       commBoardDTO.setReplyCount(1);
       //      System.out.println("각 게시글의 첫 댓글입니다");
     } else {
-      commBoardDTO.setReplyCount(getNextReplyNum(commBoardDTO));
-      //      challengeReviewDTO.setReviewNo(getNextNum2()); // 해당 게시글 리뷰의 마지막 번호기억 + 1
-      //      System.out.println("현재 댓글의 번호는? (commBoardReplyDTO.getReviewNo()) " + commBoardReplyDTO.getReplyNo());
-      //      System.out.println("현재 댓글의 번호는? (commBoardDTO.getReplyCount()) " + commBoardDTO.getReplyCount());
+      commBoardDTO.setReplyCount(communityDao.getNextNumCommReply(commBoardDTO));
     }
 
     commBoardReplyDTO.setCommReplyNo(commBoardDTO.getReplyCount()); 
@@ -64,10 +62,11 @@ public class CommBoardReplyAddHandler extends AbstractCommBoardReplyHandler {
 
       } else if (input.equalsIgnoreCase("y")) {
 
-        commBoardReplyDTOList.add(commBoardReplyDTO);
+        communityDao.update(commBoardDTO);
+        communityDao.insertReply(commBoardReplyDTO);
 
         System.out.println();
-        System.out.println("[  ✔️ 댓글 등록이 완료되었습니다.  ]");
+        System.out.println("[  댓글 등록이 완료되었습니다.  ]");
         break;
 
       } else {
@@ -75,4 +74,6 @@ public class CommBoardReplyAddHandler extends AbstractCommBoardReplyHandler {
       }
     }
   }
+
+
 }
