@@ -1,19 +1,19 @@
 package com.share.ftp.handler.personal.community;
 
-import java.util.List;
+import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.domain.community.CommBoardDTO;
 import com.share.ftp.domain.community.CommBoardReplyDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class CommBoardReplyDeleteHandler extends AbstractCommBoardReplyHandler {
+public class CommBoardReplyDeleteHandler implements Command {
 
+  CommunityDao communityDao;
 
-  public CommBoardReplyDeleteHandler(
-      List<CommBoardDTO> commBoardDTOList, 
-      List<CommBoardReplyDTO> commBoardReplyDTOList) {
-    super(commBoardDTOList, commBoardReplyDTOList);
+  public CommBoardReplyDeleteHandler (CommunityDao communityDao) {
+    this.communityDao = communityDao;
   }
 
   @Override
@@ -21,13 +21,13 @@ public class CommBoardReplyDeleteHandler extends AbstractCommBoardReplyHandler {
 
     while (true) {
       System.out.println();
-      System.out.println("[  메인/소통해요/나눔이야기/댓글 삭제  ]");
+      System.out.println("[  나눔이야기 댓글 삭제  ]");
 
-      int commNo = (int) request.getAttribute("commNo");
-      CommBoardDTO commBoardDTO = findByCommBoardNo(commNo);
+      int commBoardNo = (int) request.getAttribute("commBoardNo");
+      CommBoardDTO commBoardDTO = communityDao.findByCommNo(commBoardNo);
 
-      int updateNo = (int) request.getAttribute("replyNo");
-      CommBoardReplyDTO commBoardReplyDTO = findByReplyNo(updateNo,commBoardDTO);
+      int updateNo = (int) request.getAttribute("commBoardReplyNo");
+      CommBoardReplyDTO commBoardReplyDTO = communityDao.findByCommReplyNo(commBoardNo, updateNo);
 
       try {
 
@@ -50,8 +50,11 @@ public class CommBoardReplyDeleteHandler extends AbstractCommBoardReplyHandler {
 
           } else if(input.equals("y")) {
             System.out.println();
-            System.out.println("[  ✔️ 댓글을 삭제하였습니다.  ]");
-            commBoardReplyDTOList.remove(commBoardReplyDTO);
+            System.out.println("[  댓글을 삭제하였습니다.  ]");
+
+            communityDao.updateCommReply(commBoardReplyDTO);
+            communityDao.deleteCommeReply(commBoardReplyDTO);
+
             return;
           }
 

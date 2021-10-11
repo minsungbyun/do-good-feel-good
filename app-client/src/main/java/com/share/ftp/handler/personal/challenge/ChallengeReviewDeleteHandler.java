@@ -27,6 +27,10 @@ public class ChallengeReviewDeleteHandler implements Command {
       ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
 
       int challengeReviewNo = (int) request.getAttribute("challengeReviewNo");
+<<<<<<< HEAD
+=======
+      ChallengeReviewDTO challengeReviewDTO = challengeDao.findByChallengeReviewNo(challengeNo, challengeReviewNo);
+>>>>>>> ea5a8a32d5c4b9f0ed9fd145634aad8c34beb240
 
       ChallengeReviewDTO challengeReviewDTO = challengeDao.findByChallengeReviewNo(challengeNo, challengeReviewNo);
 

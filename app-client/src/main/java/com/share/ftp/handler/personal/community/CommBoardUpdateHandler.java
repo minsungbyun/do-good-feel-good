@@ -6,7 +6,7 @@ import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
-public class CommBoardUpdateHandler  implements Command {
+public class CommBoardUpdateHandler implements Command {
 
   CommunityDao communityDao;
 

@@ -50,7 +50,12 @@ public class ChallengeQuestionDeleteHandler implements Command {
     } else if (input.equalsIgnoreCase("y")) {
       challenge.setQuestionCount(challenge.getQuestionCount() - 1);
 
+<<<<<<< HEAD
       challengeDao.update(challenge);      
+=======
+
+      challengeDao.update(challenge);
+>>>>>>> ea5a8a32d5c4b9f0ed9fd145634aad8c34beb240
       challengeDao.deleteQuestion(deleteChallengeQuestion);
 
       System.out.println("해당 문의사항을 삭제하였습니다.");
