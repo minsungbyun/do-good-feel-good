@@ -1,6 +1,7 @@
 package com.share.ftp.handler.admin;
 
 import java.sql.Date;
+import java.util.Collection;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
@@ -49,6 +50,17 @@ public class AdminChallengeReplyAddHandler implements Command {
       //      int index = challengeDao.questionIndexOf(challengeNo, challengeQuestionNo);
 
       challengeDao.insertAdmin(challengeQuestionNo, challengeQuestionDTO);
+
+      Collection<ChallengeQuestionDTO> challengeQuestionSort = challengeDao.findAllQuestion();
+
+      for (ChallengeQuestionDTO a : challengeQuestionSort) {
+        System.out.printf("%d, %d, %s, %s, %s\n", 
+            a.getNo(), // 테스트 끝나고 지움
+            a.getQuestionNo(),
+            a.getOwner().getId(),
+            a.getContent(),
+            a.getRegisteredDate());
+      }
 
       challengeDao.sortChallengeQuestion(challengeQuestionDTO);
 

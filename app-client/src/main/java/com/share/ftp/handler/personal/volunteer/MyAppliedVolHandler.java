@@ -1,20 +1,20 @@
 package com.share.ftp.handler.personal.volunteer;
 
-import java.util.List;
+import static com.share.util.General.check.Applied;
+import java.util.Collection;
+import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.volunteer.GeneralRequestDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 
-public class MyAppliedVolHandler extends AbstractVolGeneralHandler { // 개인 봉사신청 양식 쓰는 곳
+public class MyAppliedVolHandler implements Command { // 개인 봉사신청 양식 쓰는 곳
 
+  VolunteerDao volunteerDao;
 
-  public MyAppliedVolHandler(
-      List<GeneralRequestDTO> generalRequestDTOList,
-      List<GeneralRequestDTO> generalRequestApplyDTOList,
-      List<GeneralRequestDTO> generalRequestRejectDTOList) {
-
-    super(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList);
+  public MyAppliedVolHandler(VolunteerDao volunteerDao) {
+    this.volunteerDao = volunteerDao;
   }
 
 
@@ -25,32 +25,35 @@ public class MyAppliedVolHandler extends AbstractVolGeneralHandler { // 개인 �
 
     JoinDTO loginUser = AuthLoginHandler.getLoginUser();
 
-    if (generalRequestApplyDTOList.isEmpty()) {
+    Collection<GeneralRequestDTO> generalRequestDTOList = volunteerDao.findAll();
+
+    if (generalRequestDTOList.isEmpty()) {
       System.out.println();
       System.out.println("[  현재 승인된 봉사목록이 없습니다. ]");
       return;
     } 
 
-    for (GeneralRequestDTO generalRequestApplyDTO : generalRequestApplyDTOList) {
-      if (generalRequestApplyDTO.getOwner().getName().equals(loginUser.getName())) {
+    for (GeneralRequestDTO generalRequestApplyDTO : generalRequestDTOList) {
+      if (generalRequestApplyDTO.getStatus().equals(Applied) &&
+          generalRequestApplyDTO.getOwner().getName().equals(loginUser.getName())) {
         System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
 
-            generalRequestApplyDTO.getVolNo(),      
+            generalRequestApplyDTO.getNo(),      
             generalRequestApplyDTO.getMemberType(),      
-            generalRequestApplyDTO.getVolTitle(),     
+            generalRequestApplyDTO.getTitle(),     
             generalRequestApplyDTO.getOwner().getName(), 
-            generalRequestApplyDTO.getVolType(), 
-            generalRequestApplyDTO.getVolTel(),
-            generalRequestApplyDTO.getVolEmail(),
-            generalRequestApplyDTO.getVolStartDate(),
-            generalRequestApplyDTO.getVolEndDate(),
-            generalRequestApplyDTO.getVolStartTime(),
-            generalRequestApplyDTO.getVolEndTime(),
+            generalRequestApplyDTO.getType(), 
+            generalRequestApplyDTO.getTel(),
+            generalRequestApplyDTO.getEmail(),
+            generalRequestApplyDTO.getStartDate(),
+            generalRequestApplyDTO.getEndDate(),
+            generalRequestApplyDTO.getStartTime(),
+            generalRequestApplyDTO.getEndTime(),
             //            personalRequestApplyDTO.getVolList(),
-            generalRequestApplyDTO.getVolLimitNum(),
-            generalRequestApplyDTO.getVolContent(),
-            generalRequestApplyDTO.getVolFileUpload(),
-            generalRequestApplyDTO.getIsSigned()
+            generalRequestApplyDTO.getLimitNum(),
+            generalRequestApplyDTO.getContent(),
+            generalRequestApplyDTO.getFileUpload(),
+            generalRequestApplyDTO.getStatus()
             );
       } else {
         System.out.println();
