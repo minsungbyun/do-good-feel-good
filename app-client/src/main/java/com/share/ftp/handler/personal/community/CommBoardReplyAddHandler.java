@@ -30,7 +30,7 @@ public class CommBoardReplyAddHandler implements Command {
 
     CommBoardReplyDTO commBoardReplyDTO = new CommBoardReplyDTO();
 
-    commBoardReplyDTO.setCommNo(commBoardDTO.getCommNo());
+    commBoardReplyDTO.setNo(commBoardDTO.getNo());
     commBoardReplyDTO.setCommentcontent(Prompt.inputString("내용 ▶ "));
     commBoardReplyDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
     commBoardReplyDTO.setOwner(AuthLoginHandler.getLoginUser());
@@ -44,7 +44,7 @@ public class CommBoardReplyAddHandler implements Command {
       commBoardDTO.setReplyCount(communityDao.getNextNumCommBoardReply(commBoardDTO));
     }
 
-    commBoardReplyDTO.setCommReplyNo(commBoardDTO.getReplyCount()); 
+    commBoardReplyDTO.setReplyNo(commBoardDTO.getReplyCount()); 
 
     while (true) {
       String input = Prompt.inputString("해당 게시글에 댓글 등록을 하시겠습니까? (y/N) ");

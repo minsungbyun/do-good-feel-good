@@ -73,7 +73,7 @@ public class CommReviewTable extends JsonDataTable<CommReviewDTO> implements Dat
   private void update(Request request, Response response) throws Exception {
     CommReviewDTO updateCommReview = request.getObject(CommReviewDTO.class);
 
-    int index = indexOf(updateCommReview.getCommReviewNo());
+    int index = indexOf(updateCommReview.getNo());
 
     list.set(index, updateCommReview);
     response.setStatus(Response.SUCCESS);
@@ -98,7 +98,7 @@ public class CommReviewTable extends JsonDataTable<CommReviewDTO> implements Dat
   private void getNextNum(Request request, Response response) throws Exception {
     CommReviewDTO commReviewDTO = new CommReviewDTO();
 
-    commReviewDTO.setCommReviewNo(getLastNum());
+    commReviewDTO.setNo(getLastNum());
 
     response.setStatus(Response.SUCCESS);
     response.setValue(commReviewDTO);
@@ -106,14 +106,14 @@ public class CommReviewTable extends JsonDataTable<CommReviewDTO> implements Dat
 
   private int getLastNum() {
     if (list.size() > 0) {
-      return list.get(list.size() - 1).getCommReviewNo() + 1;
+      return list.get(list.size() - 1).getNo() + 1;
     } else {
       return 1;
     }
   }
   private CommReviewDTO findByCommReviewNo(int commNo) {
     for (CommReviewDTO commReviewDTO : list) {
-      if (commReviewDTO.getCommReviewNo() == commNo) {
+      if (commReviewDTO.getNo() == commNo) {
         return commReviewDTO;
       }
     }
@@ -122,7 +122,7 @@ public class CommReviewTable extends JsonDataTable<CommReviewDTO> implements Dat
 
   private int indexOf(int commReviewNo) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getCommReviewNo() == commReviewNo) {
+      if (list.get(i).getNo() == commReviewNo) {
         return i;
       }
     }

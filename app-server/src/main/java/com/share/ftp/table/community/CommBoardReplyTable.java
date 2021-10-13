@@ -74,7 +74,7 @@ public class CommBoardReplyTable extends JsonDataTable<CommBoardReplyDTO> implem
   private void updateReply(Request request, Response response) throws Exception {
     CommBoardReplyDTO updateCommBoardReply = request.getObject(CommBoardReplyDTO.class);
 
-    int index = indexOf(updateCommBoardReply.getCommNo(), updateCommBoardReply.getCommReplyNo());
+    int index = indexOf(updateCommBoardReply.getNo(), updateCommBoardReply.getReplyNo());
 
     list.set(index, updateCommBoardReply);
     response.setStatus(Response.SUCCESS);
@@ -90,8 +90,8 @@ public class CommBoardReplyTable extends JsonDataTable<CommBoardReplyDTO> implem
 
   private CommBoardReplyDTO findByCommBoardReplyNo(int commBoardNo, int commBoardReplyNo) {
     for (CommBoardReplyDTO commBoardReplyDTO : list) {
-      if (commBoardReplyDTO.getCommNo() == commBoardNo) {
-        if (commBoardReplyDTO.getCommReplyNo() == commBoardReplyNo) {
+      if (commBoardReplyDTO.getNo() == commBoardNo) {
+        if (commBoardReplyDTO.getReplyNo() == commBoardReplyNo) {
           return commBoardReplyDTO;
         }
       }
@@ -101,8 +101,8 @@ public class CommBoardReplyTable extends JsonDataTable<CommBoardReplyDTO> implem
 
   private int indexOf(int commBoardNo, int commBoardReplyNo) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getCommNo() == commBoardNo) {
-        if (list.get(i).getCommReplyNo() == commBoardReplyNo) {
+      if (list.get(i).getNo() == commBoardNo) {
+        if (list.get(i).getReplyNo() == commBoardReplyNo) {
           return i;
         }
       }

@@ -36,7 +36,7 @@ public class CommBoardDetailHandler implements Command {
       request.setAttribute("commBoardNo", commBoardNo); 
 
       System.out.printf("아이디 ▶ %s\n", commBoardDTO.getOwner().getId());
-      System.out.printf("번호 ▶ %s\n", commBoardDTO.getCommNo());
+      System.out.printf("번호 ▶ %s\n", commBoardDTO.getNo());
       System.out.printf("제목 ▶ %s\n", commBoardDTO.getTitle());
       System.out.printf("내용 ▶ %s\n", commBoardDTO.getContent());
       System.out.printf("첨부파일 ▶ %s\n", commBoardDTO.getFileUpload());

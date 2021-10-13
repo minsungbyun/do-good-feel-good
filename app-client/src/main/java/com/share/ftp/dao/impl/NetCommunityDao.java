@@ -111,7 +111,7 @@ public class NetCommunityDao implements CommunityDao {
     CommBoardDTO commBoardDTO = requestAgent.getObject(CommBoardDTO.class);
 
 
-    return commBoardDTO.getCommNo();
+    return commBoardDTO.getNo();
   }
 
 
@@ -198,7 +198,7 @@ public class NetCommunityDao implements CommunityDao {
     CommReviewDTO commReviewDTO = requestAgent.getObject(CommReviewDTO.class);
 
 
-    return commReviewDTO.getCommReviewNo();
+    return commReviewDTO.getNo();
   }
 
   // 나눔이야기 댓글

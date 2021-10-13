@@ -33,7 +33,7 @@ public class CommBoardAddHandler implements Command {
     commBoardDTO.setOwner(AuthLoginHandler.getLoginUser());
     // System.out.println(commNo); 게시글 넘버 확인0
 
-    commBoardDTO.setCommNo(communityDao.getNextNum());
+    commBoardDTO.setNo(communityDao.getNextNum());
 
     communityDao.insert(commBoardDTO);
 

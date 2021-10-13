@@ -10,7 +10,7 @@ import com.share.ftp.domain.join.JoinDTO;
 @SuppressWarnings("serial")
 public class CommBoardDTO implements Serializable {
 
-  private int commNo;
+  private int no;
   private int replyCount;
   private String title;
   private String id;
@@ -29,7 +29,7 @@ public class CommBoardDTO implements Serializable {
 
   @Override
   public String toString() {
-    return "CommBoardDTO [commNo=" + commNo + ", replyCount=" + replyCount + ", title=" + title
+    return "CommBoardDTO [no=" + no + ", replyCount=" + replyCount + ", title=" + title
         + ", id=" + id + ", content=" + content + ", fileUpload=" + fileUpload + ", password="
         + password + ", registeredDate=" + registeredDate + ", owner=" + owner + ", like=" + like
         + ", viewCount=" + viewCount + ", rank=" + rank + ", bestRank=" + bestRank
@@ -38,7 +38,7 @@ public class CommBoardDTO implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(bestRank, commNo, commentList, content, fileUpload, id, like, likeMembers,
+    return Objects.hash(bestRank, no, commentList, content, fileUpload, id, like, likeMembers,
         owner, password, rank, registeredDate, replyCount, title, viewCount);
   }
   @Override
@@ -50,7 +50,7 @@ public class CommBoardDTO implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     CommBoardDTO other = (CommBoardDTO) obj;
-    return bestRank == other.bestRank && commNo == other.commNo
+    return bestRank == other.bestRank && no == other.no
         && Objects.equals(commentList, other.commentList) && Objects.equals(content, other.content)
         && Objects.equals(fileUpload, other.fileUpload) && Objects.equals(id, other.id)
         && like == other.like && Objects.equals(likeMembers, other.likeMembers)
@@ -60,11 +60,11 @@ public class CommBoardDTO implements Serializable {
         && viewCount == other.viewCount;
   }
 
-  public int getCommNo() {
-    return commNo;
+  public int getNo() {
+    return no;
   }
-  public void setCommNo(int commNo) {
-    this.commNo = commNo;
+  public void setNo(int no) {
+    this.no = no;
   }
   public int getReplyCount() {
     return replyCount;

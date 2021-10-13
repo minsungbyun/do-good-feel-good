@@ -27,7 +27,7 @@ public class CommReviewListHandler implements Command {
 
     for (CommReviewDTO commReviewDTO : commReviewDTOList) {
       System.out.printf("%d, %s, %s, %s\n", 
-          commReviewDTO.getCommReviewNo(), 
+          commReviewDTO.getNo(), 
           commReviewDTO.getOwner().getId(), 
           commReviewDTO.getContent(),
           commReviewDTO.getRegisteredDate());

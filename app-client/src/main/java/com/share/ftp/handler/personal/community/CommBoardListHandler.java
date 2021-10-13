@@ -36,7 +36,7 @@ public class CommBoardListHandler implements Command {
     for(CommBoardDTO commBoardDTO : commBoardDTOList) {
 
       System.out.printf("%d, %s[%d], %s, %s, %d, %d, %s\n", 
-          commBoardDTO.getCommNo(), 
+          commBoardDTO.getNo(), 
           commBoardDTO.getTitle(), 
           commBoardDTO.getReplyCount(),
           commBoardDTO.getOwner().getId(),

@@ -33,10 +33,10 @@ public class CommBoardReplyListHandler implements Command {
     Collection<CommBoardReplyDTO> commBoardReplyDTOList = communityDao.findAllCommBoardReply();
 
     for(CommBoardReplyDTO commBoardReplyDTO : commBoardReplyDTOList) {
-      if (commBoardReplyDTO.getCommNo() == commBoardNo) {
+      if (commBoardReplyDTO.getNo() == commBoardNo) {
         System.out.printf("%d, %d, %s, %s, %s\n", 
-            commBoardReplyDTO.getCommNo(),
-            commBoardReplyDTO.getCommReplyNo(), 
+            commBoardReplyDTO.getNo(),
+            commBoardReplyDTO.getReplyNo(), 
             commBoardReplyDTO.getOwner().getId(),
             commBoardReplyDTO.getCommentcontent(),
             commBoardReplyDTO.getRegisteredDate());

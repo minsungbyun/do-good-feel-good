@@ -75,7 +75,7 @@ public class CommBoardTable extends JsonDataTable<CommBoardDTO> implements DataP
   private void update(Request request, Response response) throws Exception {
     CommBoardDTO updateCommBoard = request.getObject(CommBoardDTO.class);
 
-    int index = indexOf(updateCommBoard.getCommNo());
+    int index = indexOf(updateCommBoard.getNo());
 
     list.set(index, updateCommBoard);
     response.setStatus(Response.SUCCESS);
@@ -100,7 +100,7 @@ public class CommBoardTable extends JsonDataTable<CommBoardDTO> implements DataP
   private void like(Request request, Response response) {
     CommBoardDTO likeCommBoard = request.getObject(CommBoardDTO.class);
 
-    int index = indexOf(likeCommBoard.getCommNo());
+    int index = indexOf(likeCommBoard.getNo());
 
     list.set(index, likeCommBoard);
     response.setStatus(Response.SUCCESS);
@@ -109,7 +109,7 @@ public class CommBoardTable extends JsonDataTable<CommBoardDTO> implements DataP
   private void getNextNum(Request request, Response response) throws Exception {
     CommBoardDTO commBoardDTO = new CommBoardDTO();
 
-    commBoardDTO.setCommNo(getLastNum());
+    commBoardDTO.setNo(getLastNum());
 
     response.setStatus(Response.SUCCESS);
     response.setValue(commBoardDTO);
@@ -117,14 +117,14 @@ public class CommBoardTable extends JsonDataTable<CommBoardDTO> implements DataP
 
   private int getLastNum() {
     if (list.size() > 0) {
-      return list.get(list.size() - 1).getCommNo() + 1;
+      return list.get(list.size() - 1).getNo() + 1;
     } else {
       return 1;
     }
   }
   private CommBoardDTO findByCommBoardNo(int commBoardNo) {
     for (CommBoardDTO commBoardDTO : list) {
-      if (commBoardDTO.getCommNo() == commBoardNo) {
+      if (commBoardDTO.getNo() == commBoardNo) {
         return commBoardDTO;
       }
     }
@@ -133,7 +133,7 @@ public class CommBoardTable extends JsonDataTable<CommBoardDTO> implements DataP
 
   private int indexOf(int commBoardNo) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getCommNo() == commBoardNo) {
+      if (list.get(i).getNo() == commBoardNo) {
         return i;
       }
     }
