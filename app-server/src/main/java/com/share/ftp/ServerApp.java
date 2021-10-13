@@ -14,6 +14,8 @@ import com.share.ftp.table.donation.DonationRegisterTable;
 import com.share.ftp.table.join.JoinTable;
 import com.share.ftp.table.support.NoticeTable;
 import com.share.ftp.table.support.QuestionTable;
+import com.share.ftp.table.volunteer.VolGeneralTable;
+import com.share.ftp.table.volunteer.VolQuestionTable;
 import com.share.server.DataProcessor;
 import com.share.server.RequestProcessor;
 
@@ -32,6 +34,9 @@ public class ServerApp {
 
     // => 데이터 처리 담당자를 등록한다.
     dataProcessorMap.put("join.", new JoinTable());
+
+    dataProcessorMap.put("vol.", new VolGeneralTable());
+    dataProcessorMap.put("volQuestion.", new VolQuestionTable());
 
     dataProcessorMap.put("commBoard.", new CommBoardTable());
     dataProcessorMap.put("commReview.", new CommReviewTable());

@@ -19,7 +19,7 @@ public interface ChallengeDao {
 
   // 챌린지 문의사항 관련
   void insertQuestion(ChallengeQuestionDTO addChallengeQuestion) throws Exception;
-  void insertAdmin(int ChallengeQuestionNo, ChallengeQuestionDTO addChallengeQuestion) throws Exception;
+  void insertAdmin(int challengeQuestionNo, ChallengeQuestionDTO addChallengeQuestion) throws Exception;
   List<ChallengeQuestionDTO> findAllQuestion() throws Exception;      
   void updateQuestion(ChallengeQuestionDTO updateChallengeQuestion) throws Exception;          
   void deleteQuestion(ChallengeQuestionDTO challengeQuestion) throws Exception; 

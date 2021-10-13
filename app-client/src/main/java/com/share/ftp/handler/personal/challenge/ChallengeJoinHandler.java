@@ -26,9 +26,6 @@ public class ChallengeJoinHandler implements Command {
 
     ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
 
-    if (challengeDTO == null) {
-      System.out.println("존재하지 않는 챌린지입니다");
-    }
 
     System.out.printf("챌린지 번호 ▶ %d\n"
         +"제목[댓글] ▶ %s[%d]\n"

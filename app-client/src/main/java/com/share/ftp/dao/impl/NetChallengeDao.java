@@ -106,11 +106,11 @@ public class NetChallengeDao implements ChallengeDao {
   }
 
   @Override
-  public void insertAdmin(int ChallengeQuestionNo, ChallengeQuestionDTO addChallengeQuestion)
+  public void insertAdmin(int challengeQuestionNo, ChallengeQuestionDTO addChallengeQuestion)
       throws Exception {
 
     HashMap<String,String> params = new HashMap<>();
-    params.put("ChallengeQuestionNo", String.valueOf(ChallengeQuestionNo));
+    params.put("challengeQuestionNo", String.valueOf(challengeQuestionNo));
     params.put("addChallengeQuestion", new Gson().toJson(addChallengeQuestion));
 
     requestAgent.request("challengeQuestion.insertAdmin", params);

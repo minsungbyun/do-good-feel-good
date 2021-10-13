@@ -1,8 +1,7 @@
 package com.share.ftp.table.volunteer;
 
 import java.util.ArrayList;
-import com.share.ftp.domain.admin.ChallengeDTO;
-import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
+import com.share.ftp.domain.volunteer.GeneralRequestDTO;
 import com.share.ftp.domain.volunteer.VolQuestionDTO;
 import com.share.ftp.table.JsonDataTable;
 import com.share.server.DataProcessor;
@@ -18,20 +17,20 @@ public class VolQuestionTable extends JsonDataTable<VolQuestionDTO> implements D
   @Override
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
-      case "challengeQuestion.insert": insert(request, response); break;
-      case "challengeQuestion.selectList": selectList(request, response); break;
-      case "challengeQuestion.selectListKeyword": selectListKeyword(request, response); break;
-      case "challengeQuestion.selectOne": selectOne(request, response); break;
-      case "challengeQuestion.update": update(request, response); break;
-      case "challengeQuestion.delete": delete(request, response); break;
-      case "challengeQuestion.deleteIndex": deleteIndex(request, response); break;
-      case "challengeQuestion.getNextNum": getNextQuestionNum(request, response); break;
+      case "volQuestion.insert": insert(request, response); break;
+      case "volQuestion.selectList": selectList(request, response); break;
+      case "volQuestion.selectListKeyword": selectListKeyword(request, response); break;
+      case "volQuestion.selectOne": selectOne(request, response); break;
+      case "volQuestion.update": update(request, response); break;
+      case "volQuestion.delete": delete(request, response); break;
+      case "volQuestion.deleteIndex": deleteIndex(request, response); break;
+      case "volQuestion.getNextNum": getNextQuestionNum(request, response); break;
     }
   }
 
   private void insert(Request request, Response response) throws Exception {
-    ChallengeQuestionDTO challengeQuestion = request.getObject(ChallengeQuestionDTO.class);
-    list.add(challengeQuestion);
+    VolQuestionDTO volQuestion = request.getObject(VolQuestionDTO.class);
+    list.add(volQuestion);
     response.setStatus(Response.SUCCESS);
   }
 
@@ -42,16 +41,16 @@ public class VolQuestionTable extends JsonDataTable<VolQuestionDTO> implements D
   }
 
   private void selectListKeyword(Request request, Response response) throws Exception {
-    String keyword = request.getParameter("challengeQuestionKeyword");
+    String keyword = request.getParameter("volQuestionKeyword");
 
-    ArrayList<ChallengeQuestionDTO> searchResult = new ArrayList<>();
-    for (ChallengeQuestionDTO challengeQuestion : list) {
-      if (!challengeQuestion.getTitle().contains(keyword) &&
-          !challengeQuestion.getContent().contains(keyword) &&
-          !challengeQuestion.getOwner().getName().contains(keyword)) {
+    ArrayList<VolQuestionDTO> searchResult = new ArrayList<>();
+    for (VolQuestionDTO volQuestion : list) {
+      if (!volQuestion.getTitle().contains(keyword) &&
+          !volQuestion.getContent().contains(keyword) &&
+          !volQuestion.getOwner().getName().contains(keyword)) {
         continue;
       }
-      searchResult.add(challengeQuestion);
+      searchResult.add(volQuestion);
     }
 
     response.setStatus(Response.SUCCESS);
@@ -59,52 +58,52 @@ public class VolQuestionTable extends JsonDataTable<VolQuestionDTO> implements D
   }
 
   private void selectOne(Request request, Response response) throws Exception {
-    int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
-    int challengeQuestionNo = Integer.parseInt(request.getParameter("challengeQuestionNo"));
+    int volNo = Integer.parseInt(request.getParameter("volNo"));
+    int volQuestionNo = Integer.parseInt(request.getParameter("volQuestionNo"));
 
 
-    ChallengeQuestionDTO selectChallenge = null;
-    for (ChallengeQuestionDTO ChallengeQuestionDTO : list) {
-      if (ChallengeQuestionDTO.getNo() == challengeNo) {
-        if (ChallengeQuestionDTO.getQuestionNo() == challengeQuestionNo) {
-          selectChallenge = ChallengeQuestionDTO;
+    VolQuestionDTO selectvol = null;
+    for (VolQuestionDTO volQuestionDTO : list) {
+      if (volQuestionDTO.getNo() == volNo) {
+        if (volQuestionDTO.getQuestionNo() == volQuestionNo) {
+          selectvol = volQuestionDTO;
         }
       }
     }
 
-    if (selectChallenge == null) {
+    if (selectvol == null) {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 챌린지문의가 없습니다!");
+      response.setValue("해당 봉사문의가 없습니다!");
       return;
     }
 
     response.setStatus(Response.SUCCESS);
-    response.setValue(selectChallenge);
+    response.setValue(selectvol);
   }
 
   private void update(Request request, Response response) throws Exception {
-    int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
-    ChallengeQuestionDTO updateChallengeQuestion = request.getObject(ChallengeQuestionDTO.class);
+    int volNo = Integer.parseInt(request.getParameter("volNo"));
+    VolQuestionDTO updateVolQuestion = request.getObject(VolQuestionDTO.class);
 
-    int index = indexOf(challengeNo, updateChallengeQuestion);
+    int index = indexOf(volNo, updateVolQuestion);
 
-    list.set(index, updateChallengeQuestion);
+    list.set(index, updateVolQuestion);
     response.setStatus(Response.SUCCESS);
   }
 
   private void delete(Request request, Response response) throws Exception {
-    ChallengeQuestionDTO deleteChallenge = request.getObject(ChallengeQuestionDTO.class);
+    VolQuestionDTO deleteVol = request.getObject(VolQuestionDTO.class);
 
-    list.remove(deleteChallenge);
+    list.remove(deleteVol);
     response.setStatus(Response.SUCCESS);
   }
 
   private void deleteIndex(Request request, Response response) throws Exception {
-    int challengeNo = Integer.parseInt(request.getParameter("challengeNo"));
-    ChallengeQuestionDTO deleteChallengeQuestion = request.getObject(ChallengeQuestionDTO.class);
+    int volNo = Integer.parseInt(request.getParameter("volNo"));
+    VolQuestionDTO deleteVolQuestion = request.getObject(VolQuestionDTO.class);
 
 
-    int index = indexOf(challengeNo, deleteChallengeQuestion);
+    int index = indexOf(volNo, deleteVolQuestion);
 
     list.remove(index);
     response.setStatus(Response.SUCCESS);
@@ -112,29 +111,29 @@ public class VolQuestionTable extends JsonDataTable<VolQuestionDTO> implements D
 
 
   private void getNextQuestionNum(Request request, Response response) throws Exception {
-    ChallengeDTO challenge = request.getObject(ChallengeDTO.class);
+    GeneralRequestDTO generalRequestDTO = request.getObject(GeneralRequestDTO.class);
 
     if (list.size() > 0) {
-      challenge.setQuestionCount(challenge.getQuestionCount() + 1);
+      generalRequestDTO.setQuestionCount(generalRequestDTO.getQuestionCount() + 1);
       response.setStatus(Response.SUCCESS);
-      response.setValue(challenge);
+      response.setValue(generalRequestDTO);
     } else {
       response.setStatus(Response.FAIL);
     }
   }
 
-  //  private int getLastNum(ChallengeDTO challengeDTO) {
+  //  private int getLastNum(volDTO volDTO) {
   //    if (list.size() > 0) {
-  //      return challengeDTO.getQuestionCount() + 1;
+  //      return volDTO.getQuestionCount() + 1;
   //    } else {
   //      return 1;
   //    }
   //  }
 
-  private int indexOf(int challengeNo, ChallengeQuestionDTO challengeQuestionDTO) {
+  private int indexOf(int volNo, VolQuestionDTO volQuestionDTO) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getNo() == challengeQuestionDTO.getNo()) {
-        if (list.get(i).getQuestionNo() == challengeQuestionDTO.getQuestionNo()) {
+      if (list.get(i).getNo() == volQuestionDTO.getNo()) {
+        if (list.get(i).getQuestionNo() == volQuestionDTO.getQuestionNo()) {
           return i;
         }
       }

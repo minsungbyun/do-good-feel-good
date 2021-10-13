@@ -134,7 +134,7 @@ import com.share.ftp.handler.personal.volunteer.VolGeneralDoJoinDeleteHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralDoJoinHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralDoJoinListHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestAcceptHandler;
-import com.share.ftp.handler.personal.volunteer.VolGeneralRequestAppliedListHandler;
+import com.share.ftp.handler.personal.volunteer.VolGeneralAppliedListHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestApplyCompleteHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestApplyHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestApplyListHandler;
@@ -243,8 +243,8 @@ public class App {
 
   // 전체 봉사보기 Handler 
 
-  VolGeneralRequestAppliedListHandler volGeneralRequestAppliedListHandler = 
-      new VolGeneralRequestAppliedListHandler
+  VolGeneralAppliedListHandler volGeneralRequestAppliedListHandler = 
+      new VolGeneralAppliedListHandler
       (generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList);
 
   //  VolRequestOrgAppliedListHandler volRequestOrgAppliedListHandler = 
@@ -317,7 +317,7 @@ public class App {
     commands.put("/volGeneralRequest/applyCompleteList", new VolGeneralRequestApplyCompleteHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     commands.put("/volGeneralRequest/acceptApply", new VolGeneralRequestAcceptHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     commands.put("/volGeneralRequest/rejectApply", new VolGeneralRequestRejectHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
-    commands.put("/volGeneralRequest/appliedList", new VolGeneralRequestAppliedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+    commands.put("/volGeneralRequest/appliedList", new VolGeneralAppliedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     commands.put("/volPersonalRequest/appliedList", new VolPersonalRequestAppliedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     commands.put("/volOrgRequest/appliedList", new VolOrgRequestAppliedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     commands.put("/volGeneralRequest/rejectedList", new VolGeneralRequestRejectedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));

@@ -5,9 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import com.google.gson.Gson;
 import com.share.ftp.dao.VolunteerDao;
-import com.share.ftp.domain.admin.ChallengeDTO;
-import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
-import com.share.ftp.domain.challenge.ChallengeReviewDTO;
+import com.share.ftp.domain.volunteer.GeneralRequestDTO;
+import com.share.ftp.domain.volunteer.VolQuestionDTO;
 import com.share.request.RequestAgent;
 
 public class NetVolunteerDao implements VolunteerDao {
@@ -18,90 +17,105 @@ public class NetVolunteerDao implements VolunteerDao {
     this.requestAgent = requestAgent;
   }
 
-  ///관리자 챌린지 등록관련 메서드//////////////////////////////////////////////////////////////
+  ///봉사 등록관련 메서드//////////////////////////////////////////////////////////////
   @Override
-  public void insert(ChallengeDTO addChallenge) throws Exception {
+  public void insert(GeneralRequestDTO addVol) throws Exception {
 
-    requestAgent.request("challenge.insert", addChallenge);
+    requestAgent.request("vol.insert", addVol);
 
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      System.out.println("[ 챌린지 등록이 정상적으로 완료되었습니다! ]");
+      System.out.println("[ 봉사 등록이 정상적으로 완료되었습니다! ]");
 
     } else {
-      throw new Exception("챌린지 등록 실패!");
+      throw new Exception("봉사 등록 실패!");
     }
   }
 
   @Override
-  public List<ChallengeDTO> findAll() throws Exception {
+  public List<GeneralRequestDTO> findAll() throws Exception {
 
-    requestAgent.request("challenge.selectList", null);
+    requestAgent.request("vol.selectList", null);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("챌린지 목록 조회 실패!");
+      throw new Exception("봉사 목록 조회 실패!");
     }
-    return new ArrayList<>(requestAgent.getObjects(ChallengeDTO.class));
+    return new ArrayList<>(requestAgent.getObjects(GeneralRequestDTO.class));
   }
 
   @Override
-  public void update(ChallengeDTO updateChallenge) throws Exception {
-    requestAgent.request("challenge.update", updateChallenge);
+  public void update(GeneralRequestDTO updateVol) throws Exception {
+    requestAgent.request("vol.update", updateVol);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("챌린지 변경 실패!");
+      throw new Exception("봉사 변경 실패!");
     }
 
   }
 
   @Override
-  public void delete(ChallengeDTO deleteChallenge) throws Exception {
-    requestAgent.request("challenge.delete", deleteChallenge);
+  public void delete(GeneralRequestDTO deleteVol) throws Exception {
+    requestAgent.request("vol.delete", deleteVol);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("챌린지 삭제 실패!");
+      throw new Exception("봉사 삭제 실패!");
     }
   }
 
   @Override
   public int getNextNum() throws Exception {
 
-    requestAgent.request("challenge.getNextNum", null);
+    requestAgent.request("vol.getNextNum", null);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("고유번호 부여 중 오류 발생!");
     }
-    ChallengeDTO challengeDTO = requestAgent.getObject(ChallengeDTO.class);
+    GeneralRequestDTO GeneralRequestDTO = requestAgent.getObject(GeneralRequestDTO.class);
 
 
-    return challengeDTO.getNo();
+    return GeneralRequestDTO.getNo();
   }
 
   @Override
-  public ChallengeDTO findByChallengeNo(int challengeNo) throws Exception {
+  public GeneralRequestDTO findByVolNo(int volNo) throws Exception {
 
     HashMap<String,String> params = new HashMap<>();
-    params.put("challengeNo", String.valueOf(challengeNo));
+    params.put("volNo", String.valueOf(volNo));
 
-    requestAgent.request("challenge.selectOne", params);
+    requestAgent.request("vol.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;
     }
 
-    return requestAgent.getObject(ChallengeDTO.class);
+    return requestAgent.getObject(GeneralRequestDTO.class);
   }
 
-  ///챌린지 문의하기///////////////////////////////////////////////////////////////////
+  @Override
+  public GeneralRequestDTO findByApplyVol(int volApplyNo) throws Exception {
+
+    HashMap<String,String> params = new HashMap<>();
+    params.put("volApplyNo", String.valueOf(volApplyNo));
+
+    requestAgent.request("vol.selectApplyOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      return null;
+    }
+
+    return requestAgent.getObject(GeneralRequestDTO.class);
+  }
+
+  ///봉사 문의하기///////////////////////////////////////////////////////////////////
 
   @Override
-  public void insertQuestion(ChallengeQuestionDTO addChallengeQuestion) throws Exception {
-    requestAgent.request("challengeQuestion.insert", addChallengeQuestion);
+  public void insertQuestion(VolQuestionDTO addVolQuestion) throws Exception {
+    requestAgent.request("volQuestion.insert", addVolQuestion);
 
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      System.out.println("[ 챌린지 문의 등록이 정상적으로 완료되었습니다! ]");
+      System.out.println("[ 봉사 문의 등록이 정상적으로 완료되었습니다! ]");
 
     } else {
-      throw new Exception("챌린지 문의 등록 실패!");
+      throw new Exception("봉사 문의 등록 실패!");
     }
 
 
@@ -109,218 +123,77 @@ public class NetVolunteerDao implements VolunteerDao {
   }
 
   @Override
-  public List<ChallengeQuestionDTO> findAllQuestion() throws Exception {
+  public List<VolQuestionDTO> findAllQuestion() throws Exception {
 
 
-    requestAgent.request("challengeQuestion.selectList", null);
+    requestAgent.request("volQuestion.selectList", null);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("실패했어요");
-      throw new Exception("챌린지 문의 목록 조회 실패!");
+      throw new Exception("봉사 문의 목록 조회 실패!");
     }
-    return new ArrayList<>(requestAgent.getObjects(ChallengeQuestionDTO.class));
+    return new ArrayList<>(requestAgent.getObjects(VolQuestionDTO.class));
   }
 
   @Override
-  public void updateQuestion(int challengeNo, ChallengeQuestionDTO updateChallengeQuestion) throws Exception {
-    HashMap<String,String> params = new HashMap<>();
-    params.put("challengeNo", String.valueOf(challengeNo));
-    params.put("updateChallengeQuestion", new Gson().toJson(updateChallengeQuestion));
+  public void updateQuestion(VolQuestionDTO updateVolQuestion) throws Exception {
 
-    requestAgent.request("challengeQuestion.update", params);
+    requestAgent.request("volQuestion.update", updateVolQuestion);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("챌린지 문의 변경 실패!");
+      throw new Exception("봉사 문의 변경 실패!");
     }
   }
 
   @Override
-  public void deleteQuestion(ChallengeQuestionDTO deleteChallengeQuestion) throws Exception {
-    requestAgent.request("challengeQuestion.delete", deleteChallengeQuestion);
+  public void deleteQuestion(VolQuestionDTO deleteVolQuestion) throws Exception {
+    requestAgent.request("volQuestion.delete", deleteVolQuestion);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("챌린지 문의 삭제 실패!");
+      throw new Exception("봉사 문의 삭제 실패!");
     }
-
-  }
-
-  @Override
-  public void deleteQuestion(int challengeNo, ChallengeQuestionDTO deleteChallengeQuestion) throws Exception {
-    HashMap<String,String> params = new HashMap<>();
-    params.put("challengeNo", String.valueOf(challengeNo));
-    params.put("deleteChallengeQuestion", new Gson().toJson(deleteChallengeQuestion));
-
-
-    requestAgent.request("challengeQuestion.deleteIndex", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("챌린지 문의 삭제 실패!");
-    }
-  }
-
-
-  @Override
-  public List<ChallengeQuestionDTO> findByQuestionKeyword(String questionKeyword) throws Exception {
-
-    HashMap<String,String> params = new HashMap<>();
-    params.put("challengeQuestionKeyword", questionKeyword);
-    requestAgent.request("challengeQuestion.selectListByKeyword", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("챌린지 문의 검색 실패!");
-    }
-
-    return new ArrayList<>(requestAgent.getObjects(ChallengeQuestionDTO.class));
 
   }
 
 
   @Override
-  public ChallengeQuestionDTO findByChallengeQuestionNo(int challengeNo, int challengeQuestionNo) throws Exception {
+  public VolQuestionDTO findByVolQuestionNo(int volNo, int volQuestionNo) throws Exception {
 
     HashMap<String,String> params = new HashMap<>();
-    params.put("challengeNo", String.valueOf(challengeNo));
-    params.put("challengeQuestionNo", String.valueOf(challengeQuestionNo));
-    requestAgent.request("challengeQuestion.selectOne", params);
+    params.put("volNo", String.valueOf(volNo));
+    params.put("volQuestionNo", String.valueOf(volQuestionNo));
+    requestAgent.request("volQuestion.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;
     }
 
-    return requestAgent.getObject(ChallengeQuestionDTO.class);
+    return requestAgent.getObject(VolQuestionDTO.class);
 
   }
 
   @Override
-  public int getNextQuestionNum(ChallengeDTO challengeDTO) throws Exception {
-    requestAgent.request("challengeQuestion.getNextNum", challengeDTO);
+  public int getNextQuestionNum(GeneralRequestDTO GeneralRequestDTO) throws Exception {
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      return 1;
-    }
-
-    ChallengeDTO challenge = requestAgent.getObject(ChallengeDTO.class);
-
-    return challenge.getQuestionCount();
+    return GeneralRequestDTO.getQuestionCount() + 1;
   }
 
-
-
   @Override
-  public int indexOf(int challengeQuestionNo, ChallengeQuestionDTO challengeQuestionDTO)
+  public void insertAdmin(int volQuestionNo, VolQuestionDTO addVolQuestion)
       throws Exception {
-    // TODO Auto-generated method stub
-    return 0;
-  }
 
-  @Override
-  public void insertAdmin(int index, ChallengeQuestionDTO challengeQuestionDTO) throws Exception {
-    // TODO Auto-generated method stub
+    HashMap<String,String> params = new HashMap<>();
+    params.put("volQuestionNo", String.valueOf(volQuestionNo));
+    params.put("addVolQuestion", new Gson().toJson(addVolQuestion));
 
-  }
-
-  @Override
-  public void sortChallengeQuestion() throws Exception {
-    // TODO Auto-generated method stub
-
-  }
-
-  ///챌린지 참여인증&댓글//////////////////////////////////////////////////////////////
-
-  @Override
-  public void insertReview(ChallengeReviewDTO addChallengeReview) throws Exception {
-    requestAgent.request("challengeReview.insert", addChallengeReview);
+    requestAgent.request("volQuestion.insertAdmin", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      System.out.println("[ 참여인증&댓글 등록이 정상적으로 완료되었습니다! ]");
+      System.out.println("[ 봉사 문의 등록이 정상적으로 완료되었습니다! ]");
 
     } else {
-      throw new Exception("참여인증&댓글 등록 실패!");
+      throw new Exception("봉사 문의 등록 실패!");
     }
-
-  }
-
-  @Override
-  public int getNextReviewNum(ChallengeDTO challengeDTO) throws Exception {
-    //    requestAgent.request("challengeReview.getNextNum", null);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("고유번호 부여 중 오류 발생!");
-    //    }
-    //    ChallengeReviewDTO challengeReviewDTO = requestAgent.getObject(ChallengeReviewDTO.class);
-
-
-    return challengeDTO.getReviewCount() + 1;
-  }
-
-  @Override
-  public ChallengeReviewDTO findByChallengeReviewNo(int challengeNo, int challengeReviewNo)
-      throws Exception {
-    HashMap<String,String> params = new HashMap<>();
-    params.put("challengeNo", String.valueOf(challengeNo));
-    params.put("reviewNo", String.valueOf(challengeReviewNo));
-    requestAgent.request("challengeReview.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      return null;
-    }
-
-    return requestAgent.getObject(ChallengeReviewDTO.class);
-
-  }
-
-  @Override
-  public void deleteReview(ChallengeReviewDTO deleteChallengeReviewNo) throws Exception {
-    requestAgent.request("challengeReview.delete", deleteChallengeReviewNo);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("참여인증&댓글 삭제 실패!");
-    }    
-  }
-
-  @Override
-  public void updateReview(ChallengeReviewDTO updateChallengeReview) throws Exception {
-    requestAgent.request("challengeReview.update", updateChallengeReview);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("참여인증&댓글 변경 실패!");
-    }
-
-  }
-
-  @Override
-  public List<ChallengeReviewDTO> findAllReview() throws Exception {
-    requestAgent.request("challengeReview.selectList", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("참여인증&댓글 목록 조회 실패!");
-    }
-    return new ArrayList<>(requestAgent.getObjects(ChallengeReviewDTO.class));
-  }
-
-  @Override
-  public ChallengeQuestionDTO findByChallengeQuestionNo(int challengeQuestionNo) throws Exception {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-
-
-
-  // 다른 클래스 만들어서 static 메서드로 뺄 예정
-  @Override
-  public String getRemainTime(long millis) {
-
-    long sec =  millis / 1000;
-    long min = sec / 60;
-    long hour = min / 60;
-    long day = (millis / 1000) / (24 * 60 * 60);
-
-    hour = hour % 24; 
-    sec = sec % 60;
-    min = min % 60;
-
-    return String.format("남은시간 ▶ %d일 %d시간 %d분 %d초 남았습니다\n", day, hour, min, sec);
   }
 
 

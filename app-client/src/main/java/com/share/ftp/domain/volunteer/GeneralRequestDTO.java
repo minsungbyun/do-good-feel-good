@@ -1,5 +1,6 @@
 package com.share.ftp.domain.volunteer;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,34 +8,36 @@ import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
 
-public abstract class GeneralRequestDTO {
+public class GeneralRequestDTO implements Serializable {
 
-  private int volNo;
-  private int volMemberType; 
-  private String volTitle;
-  private String volName;
-  private String volStatus;
-  private JoinDTO volOwner; 
-  private String volType;
-  private String volTel;
-  private String volEmail;
-  private Date volStartDate;
-  private Date volEndDate;
-  private String volStartTime;
-  private String volEndTime;
-  private String volContent;
-  private String volFileUpload;
-  private Date volSubmitTime; 
-  private int volLimitNum; // 총 정원
-  private int volTotalJoinCount = 1; // 현재 참여 인원 (주최자는 미리 포함)
-  private List<JoinDTO> volMembers = new ArrayList<>(); // 봉사 참여한 멤버들
+  private static final long serialVersionUID = 1L;
+  private int no;
+  private int memberType; 
+  private String title;
+  private String name;
+  private String status;
+  private JoinDTO owner; 
+  private String type;
+  private String tel;
+  private String email;
+  private Date startDate;
+  private Date endDate;
+  private String startTime;
+  private String endTime;
+  private String content;
+  private String fileUpload;
+  private Date submitTime; 
+  private int limitNum; // 총 정원
+  private int totalJoinCount = 1; // 현재 참여 인원 (주최자는 미리 포함)
+  private int questionCount;
+  private List<JoinDTO> members = new ArrayList<>(); // 봉사 참여한 멤버들
 
 
   @Override
   public int hashCode() {
-    return Objects.hash(volContent, volEmail, volEndDate, volEndTime, volFileUpload, volLimitNum,
-        volMemberType, volMembers, volName, volNo, volOwner, volStartDate, volStartTime, volStatus,
-        volSubmitTime, volTel, volTitle, volTotalJoinCount, volType);
+    return Objects.hash(content, email, endDate, endTime, fileUpload, limitNum, memberType, members,
+        name, no, owner, questionCount, startDate, startTime, status, submitTime, tel, title,
+        totalJoinCount, type);
   }
 
   @Override
@@ -46,198 +49,205 @@ public abstract class GeneralRequestDTO {
     if (getClass() != obj.getClass())
       return false;
     GeneralRequestDTO other = (GeneralRequestDTO) obj;
-    return Objects.equals(volContent, other.volContent) && Objects.equals(volEmail, other.volEmail)
-        && Objects.equals(volEndDate, other.volEndDate)
-        && Objects.equals(volEndTime, other.volEndTime)
-        && Objects.equals(volFileUpload, other.volFileUpload) && volLimitNum == other.volLimitNum
-        && volMemberType == other.volMemberType && Objects.equals(volMembers, other.volMembers)
-        && Objects.equals(volName, other.volName) && volNo == other.volNo
-        && Objects.equals(volOwner, other.volOwner)
-        && Objects.equals(volStartDate, other.volStartDate)
-        && Objects.equals(volStartTime, other.volStartTime)
-        && Objects.equals(volStatus, other.volStatus)
-        && Objects.equals(volSubmitTime, other.volSubmitTime)
-        && Objects.equals(volTel, other.volTel) && Objects.equals(volTitle, other.volTitle)
-        && volTotalJoinCount == other.volTotalJoinCount && Objects.equals(volType, other.volType);
+    return Objects.equals(content, other.content) && Objects.equals(email, other.email)
+        && Objects.equals(endDate, other.endDate) && Objects.equals(endTime, other.endTime)
+        && Objects.equals(fileUpload, other.fileUpload) && limitNum == other.limitNum
+        && memberType == other.memberType && Objects.equals(members, other.members)
+        && Objects.equals(name, other.name) && no == other.no && Objects.equals(owner, other.owner)
+        && questionCount == other.questionCount && Objects.equals(startDate, other.startDate)
+        && Objects.equals(startTime, other.startTime) && Objects.equals(status, other.status)
+        && Objects.equals(submitTime, other.submitTime) && Objects.equals(tel, other.tel)
+        && Objects.equals(title, other.title) && totalJoinCount == other.totalJoinCount
+        && Objects.equals(type, other.type);
   }
 
   @Override
   public String toString() {
-    return "GeneralRequestDTO [volNo=" + volNo + ", volMemberType=" + volMemberType + ", volTitle="
-        + volTitle + ", volName=" + volName + ", volStatus=" + volStatus + ", volOwner=" + volOwner
-        + ", volType=" + volType + ", volTel=" + volTel + ", volEmail=" + volEmail
-        + ", volStartDate=" + volStartDate + ", volEndDate=" + volEndDate + ", volStartTime="
-        + volStartTime + ", volEndTime=" + volEndTime + ", volContent=" + volContent
-        + ", volFileUpload=" + volFileUpload + ", volSubmitTime=" + volSubmitTime + ", volLimitNum="
-        + volLimitNum + ", volTotalJoinCount=" + volTotalJoinCount + ", volMembers=" + volMembers
-        + "]";
+    return "GeneralRequestDTO [no=" + no + ", memberType=" + memberType + ", title=" + title
+        + ", name=" + name + ", status=" + status + ", owner=" + owner + ", type=" + type + ", tel="
+        + tel + ", email=" + email + ", startDate=" + startDate + ", endDate=" + endDate
+        + ", startTime=" + startTime + ", endTime=" + endTime + ", content=" + content
+        + ", fileUpload=" + fileUpload + ", submitTime=" + submitTime + ", limitNum=" + limitNum
+        + ", totalJoinCount=" + totalJoinCount + ", questionCount=" + questionCount + ", members="
+        + members + "]";
   }
 
-  public int getVolNo() {
-    return volNo;
+  public int getNo() {
+    return no;
   }
 
-  public void setVolNo(int volNo) {
-    this.volNo = volNo;
+  public void setNo(int no) {
+    this.no = no;
   }
 
-  public int getVolMemberType() {
-    return volMemberType;
+  public int getMemberType() {
+    return memberType;
   }
 
-  public void setVolMemberType(int memberType) {
-    this.volMemberType = memberType;
+  public void setMemberType(int memberType) {
+    this.memberType = memberType;
   }
 
-  public String getVolTitle() {
-    return volTitle;
+  public String getTitle() {
+    return title;
   }
 
-  public void setVolTitle(String volTitle) {
-    this.volTitle = volTitle;
+  public void setTitle(String title) {
+    this.title = title;
   }
 
-  public String getVolName() {
-    return volName;
+  public String getName() {
+    return name;
   }
 
-  public void setVolName(String volName) {
-    this.volName = volName;
+  public void setName(String name) {
+    this.name = name;
   }
 
-  public JoinDTO getVolOwner() {
-    return volOwner;
+  public String getStatus() {
+    return status;
   }
 
-  public void setOwner(JoinDTO volOwner) {
-    this.volOwner = volOwner;
+  public void setStatus(String status) {
+    this.status = status;
   }
 
-
-  public String getVolType() {
-    return volType;
+  public JoinDTO getOwner() {
+    return owner;
   }
 
-  public void setVolType(String volType) {
-    this.volType = volType;
+  public void setOwner(JoinDTO owner) {
+    this.owner = owner;
   }
 
-  public String getVolTel() {
-    return volTel;
+  public String getType() {
+    return type;
   }
 
-  public void setVolTel(String volTel) {
-    this.volTel = volTel;
+  public void setType(String type) {
+    this.type = type;
   }
 
-  public String getVolEmail() {
-    return volEmail;
+  public String getTel() {
+    return tel;
   }
 
-  public void setVolEmail(String volEmail) {
-    this.volEmail = volEmail;
+  public void setTel(String tel) {
+    this.tel = tel;
   }
 
-  public Date getVolStartDate() {
-    return volStartDate;
+  public String getEmail() {
+    return email;
   }
 
-  public void setVolStartDate(Date volStartDate) {
-    this.volStartDate = volStartDate;
+  public void setEmail(String email) {
+    this.email = email;
   }
 
-  public Date getVolEndDate() {
-    return volEndDate;
+  public Date getStartDate() {
+    return startDate;
   }
 
-  public void setVolEndDate(Date volEndDate) {
-    this.volEndDate = volEndDate;
+  public void setStartDate(Date startDate) {
+    this.startDate = startDate;
   }
 
-  public String getVolStartTime() {
-    return volStartTime;
+  public Date getEndDate() {
+    return endDate;
   }
 
-  public void setVolStartTime(String volStartTime) {
-    this.volStartTime = volStartTime;
+  public void setEndDate(Date endDate) {
+    this.endDate = endDate;
   }
 
-  public String getVolEndTime() {
-    return volEndTime;
+  public String getStartTime() {
+    return startTime;
   }
 
-  public void setVolEndTime(String volEndTime) {
-    this.volEndTime = volEndTime;
+  public void setStartTime(String startTime) {
+    this.startTime = startTime;
   }
 
-  public int getVolLimitNum() {
-    return volLimitNum;
+  public String getEndTime() {
+    return endTime;
   }
 
-  public void setVolLimitNum(int volLimitNum) {
-    this.volLimitNum = volLimitNum;
+  public void setEndTime(String endTime) {
+    this.endTime = endTime;
   }
 
-  public String getVolContent() {
-    return volContent;
+  public String getContent() {
+    return content;
   }
 
-  public void setVolContent(String volContent) {
-    this.volContent = volContent;
+  public void setContent(String content) {
+    this.content = content;
   }
 
-  public String getVolFileUpload() {
-    return volFileUpload;
+  public String getFileUpload() {
+    return fileUpload;
   }
 
-  public void setVolFileUpload(String volFileUpload) {
-    this.volFileUpload = volFileUpload;
+  public void setFileUpload(String fileUpload) {
+    this.fileUpload = fileUpload;
   }
 
-
-  public Date getVolSubmitTime() {
-    return volSubmitTime;
+  public Date getSubmitTime() {
+    return submitTime;
   }
 
-  public void setVolSubmitTime(Date volSubmitTime) {
-    this.volSubmitTime = volSubmitTime;
+  public void setSubmitTime(Date submitTime) {
+    this.submitTime = submitTime;
   }
 
-
-  public int getVolTotalJoinCount() {
-    return volTotalJoinCount;
+  public int getLimitNum() {
+    return limitNum;
   }
 
-  public void setVolTotalJoinCount(int volTotalJoinCount) {
-    this.volTotalJoinCount = volTotalJoinCount;
+  public void setLimitNum(int limitNum) {
+    this.limitNum = limitNum;
   }
 
-  public List<JoinDTO> getVolMembers() {
-    return volMembers;
+  public int getTotalJoinCount() {
+    return totalJoinCount;
   }
 
-  public void setMembers(List<JoinDTO> volMembers) {
-    this.volMembers = volMembers;
+  public void setTotalJoinCount(int totalJoinCount) {
+    this.totalJoinCount = totalJoinCount;
   }
 
+  public List<JoinDTO> getMembers() {
+    return members;
+  }
 
-  public void addVolMembers(JoinDTO volMember) {
-    this.volMembers.add(volMember);
+  public void setMembers(List<JoinDTO> members) {
+    this.members = members;
+  }
+
+  public void addMembers(JoinDTO volMember) {
+    this.members.add(volMember);
   }
 
   public void removeMembers(JoinDTO volMember) {
-    this.volMembers.remove(volMember);
+    this.members.remove(volMember);
   }
 
+  public int getQuestionCount() {
+    return questionCount;
+  }
 
-  public String getVolMemberNames() {
-    if (volMembers == null) {
+  public void setQuestionCount(int questionCount) {
+    this.questionCount = questionCount;
+  }
+
+  public String getMemberNames() {
+    if (members == null) {
       return "";
     }
     StringBuilder names = new StringBuilder();
 
 
-    for (JoinDTO joinDTO : volMembers) {
+    for (JoinDTO joinDTO : members) {
       if (names.length() > 0) {
         names.append("\n");
       }
