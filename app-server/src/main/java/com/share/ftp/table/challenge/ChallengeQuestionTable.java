@@ -17,17 +17,29 @@ public class ChallengeQuestionTable extends JsonDataTable<ChallengeQuestionDTO> 
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
       case "challengeQuestion.insert": insert(request, response); break;
+      case "challengeQuestion.insertAdmin": insertAdmin(request, response); break;
       case "challengeQuestion.selectList": selectList(request, response); break;
       case "challengeQuestion.selectListKeyword": selectListKeyword(request, response); break;
       case "challengeQuestion.selectOne": selectOne(request, response); break;
       case "challengeQuestion.update": update(request, response); break;
       case "challengeQuestion.delete": delete(request, response); break;
+      case "challengeQuestion.sort": sort(request, response); break;
     }
   }
 
   private void insert(Request request, Response response) throws Exception {
     ChallengeQuestionDTO challengeQuestion = request.getObject(ChallengeQuestionDTO.class);
     list.add(challengeQuestion);
+    response.setStatus(Response.SUCCESS);
+  }
+
+  private void insertAdmin(Request request, Response response) throws Exception {
+    int challengeQuestionNo = Integer.parseInt(request.getParameter("challengeQuestionNo"));
+    ChallengeQuestionDTO challengeQuestion = request.getObject(ChallengeQuestionDTO.class);
+
+    int index = indexOf(challengeQuestion.getNo(), challengeQuestionNo);
+
+    list.add(index + 1, challengeQuestion);
     response.setStatus(Response.SUCCESS);
   }
 
@@ -89,6 +101,24 @@ public class ChallengeQuestionTable extends JsonDataTable<ChallengeQuestionDTO> 
     response.setStatus(Response.SUCCESS);
   }
 
+  private void sort(Request request, Response response) throws Exception {
+
+    ChallengeQuestionDTO challengeQuestion = request.getObject(ChallengeQuestionDTO.class);
+
+
+    ChallengeQuestionDTO sortChallengeQuestion = sortChallengeQuestion(challengeQuestion.getNo());
+    //
+    //    int i = 1;
+    //    for (ChallengeQuestionDTO challengeQuestionList : list) {
+    //      if (challengeQuestionList.getNo() == challengeQuestion.getNo()) {
+    //        challengeQuestionList.setQuestionNo(i++);
+    //
+    //      }
+    //    }
+    list.remove(challengeQuestion);
+    list.add(sortChallengeQuestion);
+    response.setStatus(Response.SUCCESS);
+  }
 
   private ChallengeQuestionDTO findByChallengeQuestionNo(int challengeNo, int challengeQuestionNo) {
     for (ChallengeQuestionDTO challengeQuestionList : list) {
@@ -96,6 +126,17 @@ public class ChallengeQuestionTable extends JsonDataTable<ChallengeQuestionDTO> 
         if (challengeQuestionList.getQuestionNo() == challengeQuestionNo) {
           return challengeQuestionList; 
         }
+      }
+    }
+    return null;
+  }
+
+  private ChallengeQuestionDTO sortChallengeQuestion(int challengeNo) {
+    int i = 1;
+    for (ChallengeQuestionDTO challengeQuestionList : list) {
+      if (challengeQuestionList.getNo() == challengeNo) {
+        challengeQuestionList.setQuestionNo(i++);
+        return challengeQuestionList;
       }
     }
     return null;

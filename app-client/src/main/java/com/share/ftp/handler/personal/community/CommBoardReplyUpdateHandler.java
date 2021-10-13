@@ -22,7 +22,6 @@ public class CommBoardReplyUpdateHandler implements Command {
     System.out.println();
 
     int commBoardNo = (int) request.getAttribute("commBoardNo");
-
     int commBoardReplyNo = (int) request.getAttribute("commBoardReplyNo");
 
     CommBoardReplyDTO commBoardReplyDTO = communityDao.findByCommBoardReplyNo(commBoardNo, commBoardReplyNo);
@@ -45,6 +44,7 @@ public class CommBoardReplyUpdateHandler implements Command {
       String input = Prompt.inputString("[  정말 변경하시겠습니까?(y/N)  ]");
 
       if (input.equalsIgnoreCase("n") || input.length() == 0)  {
+        System.out.println();
         System.out.println("[  댓글 변경을 취소하였습니다.  ]");
         return;
 

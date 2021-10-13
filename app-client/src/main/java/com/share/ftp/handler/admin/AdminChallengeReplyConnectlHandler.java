@@ -1,20 +1,20 @@
 package com.share.ftp.handler.admin;
 
-import java.util.List;
+import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
-import com.share.ftp.handler.personal.challenge.AbstractChallengeQuestionHandler;
 import com.share.util.Prompt;
 
-public class AdminChallengeReplyConnectlHandler extends AbstractChallengeQuestionHandler {
+public class AdminChallengeReplyConnectlHandler implements Command {
 
-  public AdminChallengeReplyConnectlHandler(List<ChallengeQuestionDTO> challengeQuestionDTOList,
-      List<ChallengeDTO> challengeDTOList, List<ChallengeQuestionDTO> challengeReplyList) {
-    super(challengeQuestionDTOList, challengeDTOList, challengeReplyList);
+  ChallengeDao challengeDao;
+
+  public AdminChallengeReplyConnectlHandler(ChallengeDao challengeDao) {
+    this.challengeDao = challengeDao;
   }
-
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
@@ -23,16 +23,16 @@ public class AdminChallengeReplyConnectlHandler extends AbstractChallengeQuestio
 
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeList = findByChallengeNo(challengeNo); 
+    ChallengeDTO challengeList = challengeDao.findByChallengeNo(challengeNo); 
 
     if (challengeList == null) {
       System.out.println("해당 챌린지가 없습니다.");
       return;
     }
 
-    int questionNo = Prompt.inputInt("문의답글 번호를 입력해주세요 ▶ ");
+    int challengQuestionNo = Prompt.inputInt("문의답글 번호를 입력해주세요 ▶ ");
 
-    ChallengeQuestionDTO challengeQuestion = findByQuestionNo(questionNo, challengeList);
+    ChallengeQuestionDTO challengeQuestion = challengeDao.findByChallengeQuestionNo(challengeNo, challengQuestionNo);
 
     if (challengeQuestion == null) {
       System.out.println("해당 번호의 답글문의가 없습니다.");
@@ -57,7 +57,7 @@ public class AdminChallengeReplyConnectlHandler extends AbstractChallengeQuestio
 
     System.out.println();
 
-    request.setAttribute("questionNo", questionNo); 
+    request.setAttribute("challengQuestionNo", challengQuestionNo); 
 
 
     while (true) {

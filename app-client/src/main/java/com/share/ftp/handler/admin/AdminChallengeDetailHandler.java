@@ -31,16 +31,6 @@ public class AdminChallengeDetailHandler implements Command {
 
     request.setAttribute("challengeNo", challengeNo); 
 
-    //    System.out.printf("번호: %d\n", challengeDTO.getNo());
-    // System.out.printf("관리자 아이디: %s\n", challengeDTO.getAdminId());
-
-    //    for (ChallengeDTO challengeDTO : challengeDTOList) {
-    //    System.out.println();
-    //    System.out.printf("제목 ▶ %s\n", challengeDTO.getTitle());
-    //    System.out.printf("내용▶ %s\n", challengeDTO.getContent());
-    //    System.out.printf("첨부파일 ▶ %s\n", challengeDTO.getFileUpload());
-    //    System.out.printf("등록일 ▶ %s\n", challengeDTO.getRegisteredDate());
-
     System.out.printf("챌린지 번호 ▶ %d\n "
         + "제목[댓글] ▶ %s[%d]\n"
         + "내용 ▶ %s\n"
