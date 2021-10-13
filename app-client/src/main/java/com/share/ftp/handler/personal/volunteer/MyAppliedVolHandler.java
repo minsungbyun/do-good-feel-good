@@ -2,7 +2,9 @@ package com.share.ftp.handler.personal.volunteer;
 
 import static com.share.util.General.check.Applied;
 import java.util.Collection;
+import java.util.List;
 import com.share.ftp.dao.VolunteerDao;
+import com.share.ftp.domain.donation.DonationBoardDTO;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.volunteer.GeneralRequestDTO;
 import com.share.ftp.handler.Command;
@@ -24,7 +26,7 @@ public class MyAppliedVolHandler implements Command { // 개인 봉사신청 양
     System.out.println("[ 봉사승인 목록 ]");
 
     JoinDTO loginUser = AuthLoginHandler.getLoginUser();
-
+    
     Collection<GeneralRequestDTO> generalRequestDTOList = volunteerDao.findAll();
 
     if (generalRequestDTOList.isEmpty()) {

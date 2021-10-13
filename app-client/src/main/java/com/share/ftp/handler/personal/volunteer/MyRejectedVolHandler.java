@@ -56,11 +56,12 @@ public class MyRejectedVolHandler implements Command {
             generalRequestRejectDTO.getFileUpload(),
             generalRequestRejectDTO.getStatus()
             );
-      } else {
-        System.out.println();
-        System.out.println("[  현재 반려된 봉사목록이 없습니다. ]");
-        return;
-      }
+      } 
+      //      else {
+      //        System.out.println();
+      //        System.out.println("[  현재 반려된 봉사목록이 없습니다. ]");
+      //        return;
+      //      }
     }
   }
 }

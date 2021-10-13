@@ -65,11 +65,12 @@ public class MyAppliedVolDetailHandler implements Command { // 개인 봉사신�
             generalRequestDTO.getFileUpload(),
             generalRequestDTO.getStatus()
             );
-      } else {
-        System.out.println();
-        System.out.println("[  현재 등록된 봉사목록이 없습니다. ]");
-        return;
-      }
+      } 
+      //      else {
+      //        System.out.println();
+      //        System.out.println("[  현재 등록된 봉사목록이 없습니다. ]");
+      //        return;
+      //      }
     }
   }
 }

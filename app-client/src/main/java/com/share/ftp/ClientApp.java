@@ -150,6 +150,7 @@ import com.share.ftp.handler.personal.volunteer.VolGeneralDoJoinHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralDoJoinListHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestAcceptHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestApplyHandler;
+import com.share.ftp.handler.personal.volunteer.VolGeneralRequestRejectHandler;
 import com.share.ftp.listener.AppInitListener;
 import com.share.menu.Menu;
 import com.share.menu.MenuFilter;
@@ -304,7 +305,7 @@ public class ClientApp {
     //    commands.put("/volPersonalRequest/applyList", new VolPersonalRequestApplyListHandler(generalRequestDTOList));
     //    commands.put("/volGeneralRequest/applyCompleteList", new VolGeneralRequestApplyCompleteHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     commands.put("/volGeneralRequest/acceptApply", new VolGeneralRequestAcceptHandler(netVolunteerDao));
-    //    commands.put("/volGeneralRequest/rejectApply", new VolGeneralRequestRejectHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+    commands.put("/volGeneralRequest/rejectApply", new VolGeneralRequestRejectHandler(netVolunteerDao));
     commands.put("/volGeneral/appliedList", new VolGeneralAppliedListHandler(netVolunteerDao));  // 승인된 봉사 목록
     //    commands.put("/volPersonalRequest/appliedList", new VolPersonalRequestAppliedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     //    commands.put("/volGeneralRequest/rejectedList", new VolGeneralRequestRejectedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
@@ -908,6 +909,7 @@ public class ClientApp {
     adminVolMenu.setMenuFilter(menuFilter);
 
     adminVolMenu.add(new MenuItem("봉사신청승인하기",ACCESS_ADMIN,"/volGeneralRequest/acceptApply"));
+    adminVolMenu.add(new MenuItem("봉사신청반려하기",ACCESS_ADMIN,"/volGeneralRequest/rejectApply"));
     //    adminVolMenu.add(new MenuItem("개인봉사신청내역",ACCESS_ADMIN,"/volPersonalRequest/applyList"));
     //    adminVolMenu.add(new MenuItem("기관봉사신청내역",ACCESS_ADMIN,"/volOrgRequest/applyList")); // 구현예정
     //    adminVolMenu.add(new MenuItem("개인봉사승인하기",ACCESS_ADMIN,"/volGeneralRequest/acceptApply"));
