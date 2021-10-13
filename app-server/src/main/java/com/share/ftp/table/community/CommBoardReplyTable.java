@@ -101,7 +101,7 @@ public class CommBoardReplyTable extends JsonDataTable<CommBoardReplyDTO> implem
 
   private int indexOf(int commBoardNo, int commBoardReplyNo) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getCommReplyNo() == commBoardNo) {
+      if (list.get(i).getCommNo() == commBoardNo) {
         if (list.get(i).getCommReplyNo() == commBoardReplyNo) {
           return i;
         }
