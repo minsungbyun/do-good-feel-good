@@ -14,7 +14,7 @@ public interface CommunityDao {
   void insert(CommBoardDTO addcommBoard) throws Exception;
   List<CommBoardDTO> findAll() throws Exception;
   List<CommBoardDTO> findByKeyword(String commBoardkeyword) throws Exception;
-  CommBoardDTO findByCommNo(int commBoardNo) throws Exception;
+  CommBoardDTO findByCommBoardNo(int commBoardNo) throws Exception;
   void update(CommBoardDTO updateCommBoard) throws Exception;
   void delete(CommBoardDTO deleteCommBoard) throws Exception;
   void like(CommBoardDTO likeCommBoard) throws Exception;
@@ -22,12 +22,12 @@ public interface CommunityDao {
 
 
   // 나눔이야기 게시판 댓글 
-  void insertReply(CommBoardReplyDTO addcommReply) throws Exception;
-  List<CommBoardReplyDTO> findAllCommReply() throws Exception;
-  CommBoardReplyDTO findByCommReplyNo(int commBoardNo, int commReplyNo) throws Exception;
-  void updateCommReply(CommBoardReplyDTO updateCommReply) throws Exception;
-  void deleteCommeReply(CommBoardReplyDTO deleteCommReply) throws Exception;
-  int getNextNumCommReply(CommBoardDTO commBoardDTO) throws Exception;            // 게시글 번호 지정
+  void insertCommBoardReply(CommBoardReplyDTO addcommBoardReply) throws Exception;
+  List<CommBoardReplyDTO> findAllCommBoardReply() throws Exception;
+  CommBoardReplyDTO findByCommBoardReplyNo(int commBoardNo, int commBoardReplyNo) throws Exception;
+  void updateCommBoardReply(CommBoardReplyDTO updateCommBoardReply) throws Exception;
+  void deleteCommBoardReply(CommBoardReplyDTO deleteCommBoardReply) throws Exception;
+  int getNextNumCommBoardReply(CommBoardDTO commBoardDTO) throws Exception;            // 게시글 번호 지정
   //  CommBoardReplyDTO findByCommReplyNo(int commReplyNo) throws Exception;
 
 

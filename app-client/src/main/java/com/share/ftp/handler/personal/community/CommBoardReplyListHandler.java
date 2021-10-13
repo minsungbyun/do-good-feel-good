@@ -23,14 +23,14 @@ public class CommBoardReplyListHandler implements Command {
     System.out.println();
 
     int commBoardNo = (int) request.getAttribute("commBoardNo");
-    communityDao.findByCommNo(commBoardNo);
+    communityDao.findByCommBoardNo(commBoardNo);
 
     //    if (commBoardReplyDTO.isEmpty()) {
     //      System.out.println("[  작성된 댓글이 없습니다.  ]");
     //      //return;
     //    }
 
-    Collection<CommBoardReplyDTO> commBoardReplyDTOList = communityDao.findAllCommReply();
+    Collection<CommBoardReplyDTO> commBoardReplyDTOList = communityDao.findAllCommBoardReply();
 
     for(CommBoardReplyDTO commBoardReplyDTO : commBoardReplyDTOList) {
       if (commBoardReplyDTO.getCommNo() == commBoardNo) {
@@ -62,32 +62,3 @@ public class CommBoardReplyListHandler implements Command {
     } 
   } 
 }
-
-//    System.out.println();
-//    int replyNo = Prompt.inputInt("변경, 삭제하고자 하는 댓글 번호를 입력해주세요 (이전: 0) ▶ ");
-//
-//    if (replyNo == 0) {
-//      return;
-//    }
-//
-//    CommBoardReplyDTO commBoardReplyDTO = findByReplyNo(replyNo);
-//
-//    if (commBoardReplyDTO == null) {
-//      System.out.println("해당 번호의 댓글이 없습니다.");
-//      return;
-//    }
-//
-//    if (!commBoardReplyDTO.getOwner().getId().contains(AuthLoginHandler.getLoginUser().getId())) {
-//      System.out.println("변경 권한이 없습니다.");
-//      return;
-//    }
-//
-//    request.setAttribute("replyNo", replyNo); 
-
-//JoinDTO loginUser = AuthLoginHandler.getLoginUser(); 
-//    if (CommBoardReplyDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
-//}
-
-
-
-

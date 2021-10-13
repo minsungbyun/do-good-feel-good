@@ -19,16 +19,21 @@ public class CommReviewListHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
 
-    Collection<CommReviewDTO> commReviewDTOList = communityDao.findAllCommReview();
 
     System.out.println();
     System.out.println("[  한줄후기 목록  ]");
     System.out.println();
 
-    if (commReviewDTOList.isEmpty()) {
-      System.out.println("[  작성된 후기가 없습니다.  ]");
-      return;
-    }
+    int commBoardNo = (int) request.getAttribute("commBoardNo");
+    communityDao.findByCommBoardNo(commBoardNo);
+
+    //
+    //    if (commReviewDTOList.isEmpty()) {
+    //      System.out.println("[  작성된 후기가 없습니다.  ]");
+    //      return;
+    //    }
+
+    Collection<CommReviewDTO> commReviewDTOList = communityDao.findAllCommReview();
 
     for (CommReviewDTO commReviewDTO : commReviewDTOList) {
       System.out.printf("%d, %s, %s, %s\n", 

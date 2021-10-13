@@ -45,10 +45,6 @@ import com.share.ftp.handler.admin.AdminChallengeDeleteHandler;
 import com.share.ftp.handler.admin.AdminChallengeDetailHandler;
 import com.share.ftp.handler.admin.AdminChallengeListHandler;
 import com.share.ftp.handler.admin.AdminChallengeQuestionListHandler;
-import com.share.ftp.handler.admin.AdminChallengeReplyAddHandler;
-import com.share.ftp.handler.admin.AdminChallengeReplyConnectlHandler;
-import com.share.ftp.handler.admin.AdminChallengeReplyDeleteHandler;
-import com.share.ftp.handler.admin.AdminChallengeReplyUpdateHandler;
 import com.share.ftp.handler.admin.AdminChallengeUpdateHandler;
 import com.share.ftp.handler.admin.AdminMemberDeleteHandler;
 import com.share.ftp.handler.admin.AdminNoticeAddHandler;
@@ -503,10 +499,10 @@ public class ClientApp {
     commands.put("/adminChallenge/update", new AdminChallengeUpdateHandler(netChallengeDao));
     commands.put("/adminChallenge/delete", new AdminChallengeDeleteHandler(netChallengeDao));
     commands.put("/adminChallenge/QuestionList", new AdminChallengeQuestionListHandler(netChallengeDao));
-    commands.put("/adminChallenge/replyAdd", new AdminChallengeReplyAddHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList)); // 챌린지 답글 등록
-    commands.put("/adminChallenge/replyUpdate", new AdminChallengeReplyUpdateHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList)); // 챌린지 답글 변경
-    commands.put("/adminChallenge/replyDelete", new AdminChallengeReplyDeleteHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList)); // 챌린지 답글 삭제
-    commands.put("/adminChallenge/replyConnect", new AdminChallengeReplyConnectlHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList)); // 챌린지 답글 등록, 변경, 삭제 연결
+    //    commands.put("/adminChallenge/replyAdd", new AdminChallengeReplyAddHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList)); // 챌린지 답글 등록
+    //    commands.put("/adminChallenge/replyUpdate", new AdminChallengeReplyUpdateHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList)); // 챌린지 답글 변경
+    //    commands.put("/adminChallenge/replyDelete", new AdminChallengeReplyDeleteHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList)); // 챌린지 답글 삭제
+    //    commands.put("/adminChallenge/replyConnect", new AdminChallengeReplyConnectlHandler(challengeQuestionDTOList, challengeDTOList, challengeReplyList)); // 챌린지 답글 등록, 변경, 삭제 연결
 
     // 관리자 기관승인
 

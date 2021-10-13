@@ -16,53 +16,71 @@ public class CommBoardReplyTable extends JsonDataTable<CommBoardReplyDTO> implem
   @Override
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
-      case "commReply.insert": insert(request, response); break;
-      case "commReply.selectList": selectList(request, response); break;
-      case "commReply.selectOne": selectOne(request, response); break;
-      case "commReply.update": update(request, response); break;
-      case "commReply.delete": delete(request, response); break;
-      case "commReply.getNextNum": getNextNum(request, response); break;
+      case "commBoardReply.insert": insertReply(request, response); break;
+      case "commBoardReply.selectList": selectReplyList(request, response); break;
+      case "commBoardReply.selectOne": selectOne(request, response); break;
+      case "commBoardReply.update": updateReply(request, response); break;
+      case "commBoardReply.delete": deleteReply(request, response); break;
+      //      case "commBoardReply.getNextNum": getNextNum(request, response); break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
     }
   }
 
-  private void insert(Request request, Response response) throws Exception {
+  private void insertReply(Request request, Response response) throws Exception {
     CommBoardReplyDTO commBoardReplyDTO = request.getObject(CommBoardReplyDTO.class);
     System.out.println(commBoardReplyDTO);
     list.add(commBoardReplyDTO);
     response.setStatus(Response.SUCCESS);
   }
 
-  private void selectList(Request request, Response response) throws Exception {
+
+  private void selectReplyList(Request request, Response response) throws Exception {
     response.setStatus(Response.SUCCESS);
     response.setValue(list);
   }
 
   private void selectOne(Request request, Response response) throws Exception {
+    int commBoardNo = Integer.parseInt(request.getParameter("commBoardNo"));
     int commBoardReplyNo = Integer.parseInt(request.getParameter("commBoardReplyNo"));
-    CommBoardReplyDTO commBoardReplyDTO = findByCommReplyNo(commBoardReplyNo);
 
-    if (commBoardReplyDTO != null) {
-      response.setStatus(Response.SUCCESS);
-      response.setValue(commBoardReplyDTO);
-    } else {
+    CommBoardReplyDTO commBoardReplyDTO = null;
+
+    commBoardReplyDTO = findByCommBoardReplyNo(commBoardNo, commBoardReplyNo);
+
+    if (commBoardReplyDTO == null) {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
+      response.setValue("해당 챌린지가 없습니다!");
+      return;
     }
+
+    response.setStatus(Response.SUCCESS);
+    response.setValue(commBoardReplyDTO);
   }
 
-  private void update(Request request, Response response) throws Exception {
+
+  //    CommBoardReplyDTO commBoardReplyDTO = findByCommReplyNo(commBoardReplyNo);
+  //
+  //    if (commBoardReplyDTO != null) {
+  //      response.setStatus(Response.SUCCESS);
+  //      response.setValue(commBoardReplyDTO);
+  //    } else {
+  //      response.setStatus(Response.FAIL);
+  //      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
+  //    }
+  //  }
+
+  private void updateReply(Request request, Response response) throws Exception {
     CommBoardReplyDTO updateCommBoardReply = request.getObject(CommBoardReplyDTO.class);
 
-    int index = indexOf(updateCommBoardReply.getCommReplyNo());
+    int index = indexOf(updateCommBoardReply.getCommNo(), updateCommBoardReply.getCommReplyNo());
 
     list.set(index, updateCommBoardReply);
     response.setStatus(Response.SUCCESS);
   }
 
-  private void delete(Request request, Response response) throws Exception {
+  private void deleteReply(Request request, Response response) throws Exception {
     CommBoardReplyDTO deleteCommBoardReply = request.getObject(CommBoardReplyDTO.class);
 
     list.remove(deleteCommBoardReply);
@@ -70,38 +88,42 @@ public class CommBoardReplyTable extends JsonDataTable<CommBoardReplyDTO> implem
   }
 
 
-  private void getNextNum(Request request, Response response) throws Exception {
-    CommBoardReplyDTO commBoardReplyDTO = new CommBoardReplyDTO();
-
-    commBoardReplyDTO.setCommReplyNo(getLastNum());
-
-    response.setStatus(Response.SUCCESS);
-    response.setValue(commBoardReplyDTO);
-  }
-
-  private int getLastNum() {
-    if (list.size() > 0) {
-      return list.get(list.size() - 1).getCommReplyNo() + 1;
-    } else {
-      return 1;
-    }
-  }
-  private CommBoardReplyDTO findByCommReplyNo(int commReplyNo) {
+  private CommBoardReplyDTO findByCommBoardReplyNo(int commBoardNo, int commBoardReplyNo) {
     for (CommBoardReplyDTO commBoardReplyDTO : list) {
-      if (commBoardReplyDTO.getCommReplyNo() == commReplyNo) {
-        return commBoardReplyDTO;
+      if (commBoardReplyDTO.getCommNo() == commBoardNo) {
+        if (commBoardReplyDTO.getCommReplyNo() == commBoardReplyNo) {
+          return commBoardReplyDTO;
+        }
       }
     }
     return null;
   }
 
-  private int indexOf(int commReplyNo) {
+  private int indexOf(int commBoardNo, int commBoardReplyNo) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getCommReplyNo() == commReplyNo) {
-        return i;
+      if (list.get(i).getCommReplyNo() == commBoardNo) {
+        if (list.get(i).getCommReplyNo() == commBoardReplyNo) {
+          return i;
+        }
       }
     }
     return -1;
   }
-
 }
+
+//private void getNextNum(Request request, Response response) throws Exception {
+//  CommBoardReplyDTO commBoardReplyDTO = new CommBoardReplyDTO();
+//  
+//  commBoardReplyDTO.setCommReplyNo(getLastNum());
+//  
+//  response.setStatus(Response.SUCCESS);
+//  response.setValue(commBoardReplyDTO);
+//}
+//
+//private int getLastNum() {
+//  if (list.size() > 0) {
+//    return list.get(list.size() - 1).getCommReplyNo() + 1;
+//  } else {
+//    return 1;
+//  }
+//}

@@ -61,7 +61,7 @@ public class CommBoardTable extends JsonDataTable<CommBoardDTO> implements DataP
 
   private void selectOne(Request request, Response response) throws Exception {
     int commNo = Integer.parseInt(request.getParameter("commBoardNo"));
-    CommBoardDTO commBoardDTO = findByCommNo(commNo);
+    CommBoardDTO commBoardDTO = findByCommBoardNo(commNo);
 
     if (commBoardDTO != null) {
       response.setStatus(Response.SUCCESS);
@@ -122,18 +122,18 @@ public class CommBoardTable extends JsonDataTable<CommBoardDTO> implements DataP
       return 1;
     }
   }
-  private CommBoardDTO findByCommNo(int commNo) {
+  private CommBoardDTO findByCommBoardNo(int commBoardNo) {
     for (CommBoardDTO commBoardDTO : list) {
-      if (commBoardDTO.getCommNo() == commNo) {
+      if (commBoardDTO.getCommNo() == commBoardNo) {
         return commBoardDTO;
       }
     }
     return null;
   }
 
-  private int indexOf(int commNo) {
+  private int indexOf(int commBoardNo) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getCommNo() == commNo) {
+      if (list.get(i).getCommNo() == commBoardNo) {
         return i;
       }
     }

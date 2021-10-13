@@ -23,15 +23,9 @@ public class CommBoardReplyAddHandler implements Command {
     System.out.println();
     System.out.println("[  나눔이야기 댓글 등록  ]");
     System.out.println();
-
     int commBoardNo = (int) request.getAttribute("commBoardNo");
 
-    CommBoardDTO commBoardDTO = communityDao.findByCommNo(commBoardNo);
-
-    if (commBoardDTO == null) {
-      System.out.println();
-      System.out.println("해당 게시글이 없습니다!");
-    }
+    CommBoardDTO commBoardDTO = communityDao.findByCommBoardNo(commBoardNo);
 
 
     CommBoardReplyDTO commBoardReplyDTO = new CommBoardReplyDTO();
@@ -47,7 +41,7 @@ public class CommBoardReplyAddHandler implements Command {
       commBoardDTO.setReplyCount(1);
       //      System.out.println("각 게시글의 첫 댓글입니다");
     } else {
-      commBoardDTO.setReplyCount(communityDao.getNextNumCommReply(commBoardDTO));
+      commBoardDTO.setReplyCount(communityDao.getNextNumCommBoardReply(commBoardDTO));
     }
 
     commBoardReplyDTO.setCommReplyNo(commBoardDTO.getReplyCount()); 
@@ -63,7 +57,7 @@ public class CommBoardReplyAddHandler implements Command {
       } else if (input.equalsIgnoreCase("y")) {
 
         communityDao.update(commBoardDTO);
-        communityDao.insertReply(commBoardReplyDTO);
+        communityDao.insertCommBoardReply(commBoardReplyDTO);
 
         System.out.println();
         System.out.println("[  댓글 등록이 완료되었습니다.  ]");
@@ -74,6 +68,4 @@ public class CommBoardReplyAddHandler implements Command {
       }
     }
   }
-
-
 }

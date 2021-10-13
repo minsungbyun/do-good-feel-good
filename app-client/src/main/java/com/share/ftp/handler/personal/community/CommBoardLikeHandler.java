@@ -23,13 +23,13 @@ public class CommBoardLikeHandler implements Command {
     // while (true) {
     System.out.println("[  LIKE  ]");
     System.out.println();
-    int commNo = (int) request.getAttribute("commNo");
+    int commBoardNo = (int) request.getAttribute("commBoardNo");
     System.out.println();
 
     // CommBoardDTO commBoard = findByCommNo(commNo); 
     //  Collection<CommBoardDTO> CommBoardDTOList = communityDao.findAll();
 
-    CommBoardDTO commBoardDTO = communityDao.findByCommNo(commNo);
+    CommBoardDTO commBoardDTO = communityDao.findByCommBoardNo(commBoardNo);
 
     String input = Prompt.inputString("[  공감이 되셨다면 좋아요를 눌러주세요(y/N)  ] ");
 

@@ -22,21 +22,28 @@ public class CommBoardReplyConnectHandler implements Command {
     System.out.println();
 
     int commBoardNo = (int) request.getAttribute("commBoardNo");
-    //    CommBoardDTO commBoardDTO = communityDao.findByCommNo(commNo);
-
     int commBoardReplyNo = Prompt.inputInt("댓글 번호를 입력해주세요 ▶ ");
-    CommBoardReplyDTO commBoardReplyDTO = communityDao.findByCommReplyNo(commBoardNo, commBoardReplyNo);
 
+    CommBoardReplyDTO commBoardReplyDTO = communityDao.findByCommBoardReplyNo(commBoardNo, commBoardReplyNo);
 
     if (commBoardReplyDTO == null) {
       System.out.println("해당 번호의 댓글이 없습니다.");
       return;
     }
 
-    if (!commBoardReplyDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
-      System.out.println("변경 권한이 없습니다.");
+    if ((commBoardReplyDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
+        AuthLoginHandler.getLoginUser().getId().equals("admin")) {
+
+      System.out.printf("아이디: %s\n", commBoardReplyDTO.getOwner().getId());
+      System.out.printf("내용: %s\n", commBoardReplyDTO.getCommentcontent());
+      System.out.printf("등록날짜: %s\n", commBoardReplyDTO.getRegisteredDate());
+
+    } else {
+      System.out.println("본인이 작성한 글만 변경할 수 있습니다.");
       return;
     }
+
+    System.out.println();
 
     request.setAttribute("commBoardReplyNo", commBoardReplyNo); 
 
