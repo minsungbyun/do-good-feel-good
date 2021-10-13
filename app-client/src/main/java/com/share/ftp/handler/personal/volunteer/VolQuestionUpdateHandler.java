@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.volunteer;
 
-import com.share.ftp.dao.ChallengeDao;
-import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
+import com.share.ftp.dao.VolunteerDao;
+import com.share.ftp.domain.volunteer.VolQuestionDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -9,36 +9,37 @@ import com.share.util.Prompt;
 
 public class VolQuestionUpdateHandler implements Command {
 
-  ChallengeDao challengeDao;
+  VolunteerDao volunteerDao;
 
-  public VolQuestionUpdateHandler(ChallengeDao challengeDao) {
-    this.challengeDao = challengeDao;
+  public VolQuestionUpdateHandler(VolunteerDao volunteerDao) {
+    this.volunteerDao = volunteerDao;
   }
+
 
   @Override
   public void execute(CommandRequest request) throws Exception {
 
     System.out.println("[ 문의 수정 ]");
     System.out.println();
-    int challengeNo = (int) request.getAttribute("challengeNo");
+    int volNo = (int) request.getAttribute("volNo");
 
-    int challengeQuestionNo = (int) request.getAttribute("challengeQuestionNo");
+    int volQuestionNo = (int) request.getAttribute("volQuestionNo");
 
-    ChallengeQuestionDTO challengeQuestion = challengeDao.findByChallengeQuestionNo(challengeNo, challengeQuestionNo);
+    VolQuestionDTO volQuestionDTO = volunteerDao.findByVolQuestionNo(volNo, volQuestionNo);
 
-    if (challengeQuestion == null) {
+    if (volQuestionDTO == null) {
       System.out.println("해당 번호의 문의가 없습니다.");
       return;
     }
 
-    if ((challengeQuestion.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
+    if ((volQuestionDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
         AuthLoginHandler.getLoginUser().getId().equals("admin")) {
     } else {
       System.out.println("변경 권한이 없습니다.");
       return;
     }
 
-    String content = Prompt.inputString(String.format("내용(%s)? ", challengeQuestion.getContent()));
+    String content = Prompt.inputString(String.format("내용(%s)? ", volQuestionDTO.getContent()));
 
     while (true) {
       String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
@@ -49,8 +50,8 @@ public class VolQuestionUpdateHandler implements Command {
 
       } else if (input.equals("y")) {
         System.out.println();
-        challengeQuestion.setContent(content);
-        challengeDao.updateQuestion(challengeQuestion);
+        volQuestionDTO.setContent(content);
+        volunteerDao.updateQuestion(volQuestionDTO);
 
         System.out.println("문의를 수정하였습니다.");
         return;

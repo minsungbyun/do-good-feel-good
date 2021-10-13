@@ -9,7 +9,7 @@ import com.share.server.Response;
 public class VolGeneralTable extends JsonDataTable<GeneralRequestDTO> implements DataProcessor {
 
   public VolGeneralTable() {
-    super("generalRequestDTO.json",GeneralRequestDTO.class);
+    super("generalRequest.json",GeneralRequestDTO.class);
   }
 
   @Override

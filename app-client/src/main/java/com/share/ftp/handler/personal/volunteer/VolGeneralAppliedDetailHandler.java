@@ -79,7 +79,7 @@ public class VolGeneralAppliedDetailHandler implements Command {
       switch (input) {
         case 1: request.getRequestDispatcher("/volGeneralDoJoin/add").forward(request); break;
         case 2: request.getRequestDispatcher("/volGeneralDoJoin/list").forward(request); break;
-        case 3: request.getRequestDispatcher("/challengeQuestion/list").forward(request); break;
+        case 3: request.getRequestDispatcher("/volQuestion/list").forward(request); break;
         case 4: request.getRequestDispatcher("/volGeneralRequest/bookmark").forward(request); break;
         case 0: return;
         default:

@@ -1,5 +1,6 @@
 package com.share.ftp.handler.personal.volunteer;
 
+import static com.share.util.General.check.Waiting;
 import static com.share.util.General.member.ORG;
 import static com.share.util.General.member.PERSONAL;
 import static com.share.util.General.type.ANIMAL;
@@ -11,23 +12,20 @@ import static com.share.util.General.type.OTHER;
 import static com.share.util.General.type.TEEN;
 import static com.share.util.General.type.UNTACT;
 import java.sql.Date;
-import java.util.List;
+import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.volunteer.GeneralRequestDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class VolGeneralRequestApplyHandler extends AbstractVolGeneralHandler { // 개인 봉사신청 양식 쓰는 곳
-  //  int volNo;  // 봉사 번호 자동 부여
-  List<JoinDTO> joinDTOList;
+public class VolGeneralRequestApplyHandler implements Command { // 개인 봉사신청 양식 쓰는 곳
 
-  public VolGeneralRequestApplyHandler(
-      List<GeneralRequestDTO> generalRequestDTOList,
-      List<JoinDTO> joinDTOList) {
+  VolunteerDao volunteerDao;
 
-    super(generalRequestDTOList);
-    this.joinDTOList = joinDTOList;
+  public VolGeneralRequestApplyHandler(VolunteerDao volunteerDao) {
+    this.volunteerDao = volunteerDao;
   }
 
   @Override
@@ -69,10 +67,10 @@ public class VolGeneralRequestApplyHandler extends AbstractVolGeneralHandler { /
           break;
         }
 
-        generalRequestDTO.setVolTitle(Prompt.inputString("제목 ▶ "));
+        generalRequestDTO.setTitle(Prompt.inputString("제목 ▶ "));
         generalRequestDTO.setOwner(joinDTO);
-        generalRequestDTO.setOwnerId(joinDTO.getId());
-        generalRequestDTO.setVolName(joinDTO.getName());
+        generalRequestDTO.setOwner(joinDTO);
+        generalRequestDTO.setName(joinDTO.getName());
         System.out.println();
 
         System.out.println(" ▶ 봉사 유형 ");
@@ -91,34 +89,34 @@ public class VolGeneralRequestApplyHandler extends AbstractVolGeneralHandler { /
         int input = Prompt.inputInt("유형 ▶ ");
 
         switch (input) {
-          case 1: generalRequestDTO.setVolType(UNTACT);        break;
-          case 2: generalRequestDTO.setVolType(CHILDREN);      break;
-          case 3: generalRequestDTO.setVolType(TEEN);          break;
-          case 4: generalRequestDTO.setVolType(ELDER);         break;
-          case 5: generalRequestDTO.setVolType(HANDICAPPED);   break;
-          case 6: generalRequestDTO.setVolType(ANIMAL);        break;
-          case 7: generalRequestDTO.setVolType(ENVIRONMENT);   break;
-          case 8: generalRequestDTO.setVolType(OTHER);         break;
+          case 1: generalRequestDTO.setType(UNTACT);        break;
+          case 2: generalRequestDTO.setType(CHILDREN);      break;
+          case 3: generalRequestDTO.setType(TEEN);          break;
+          case 4: generalRequestDTO.setType(ELDER);         break;
+          case 5: generalRequestDTO.setType(HANDICAPPED);   break;
+          case 6: generalRequestDTO.setType(ANIMAL);        break;
+          case 7: generalRequestDTO.setType(ENVIRONMENT);   break;
+          case 8: generalRequestDTO.setType(OTHER);         break;
           default: System.out.println("올바른 번호를 입력해주세요"); continue;
         }
 
-        generalRequestDTO.setVolTel(Prompt.inputString("전화번호 ▶ "));
-        generalRequestDTO.setVolEmail(Prompt.inputString("이메일 ▶ ")); 
-        generalRequestDTO.setVolStartDate(Prompt.inputDate("봉사시작기간(yyyy-mm-dd) ▶ "));
-        generalRequestDTO.setVolEndDate(Prompt.inputDate("봉사종료기간(yyyy-mm-dd) ▶ ")); 
-        generalRequestDTO.setVolStartTime(Prompt.inputString("봉사시작시간 ▶ ")); 
-        generalRequestDTO.setVolEndTime(Prompt.inputString("봉사종료시간 ▶ ")); 
+        generalRequestDTO.setTel(Prompt.inputString("전화번호 ▶ "));
+        generalRequestDTO.setEmail(Prompt.inputString("이메일 ▶ ")); 
+        generalRequestDTO.setStartDate(Prompt.inputDate("봉사시작기간(yyyy-mm-dd) ▶ "));
+        generalRequestDTO.setEndDate(Prompt.inputDate("봉사종료기간(yyyy-mm-dd) ▶ ")); 
+        generalRequestDTO.setStartTime(Prompt.inputString("봉사시작시간 ▶ ")); 
+        generalRequestDTO.setEndTime(Prompt.inputString("봉사종료시간 ▶ ")); 
         //        personalRequestDTO.setVolList(Prompt.inputString("봉사목록 ▶ ")); 
-        generalRequestDTO.setVolLimitNum(Prompt.inputInt("봉사인원 ▶ "));
-        generalRequestDTO.setVolContent(Prompt.inputString("내용 ▶ ")); 
-        generalRequestDTO.setVolSubmitTime(new Date(System.currentTimeMillis())); 
-        generalRequestDTO.setVolFileUpload(Prompt.inputString("파일 ▶ ")); 
-        generalRequestDTO.getIsSigned();
+        generalRequestDTO.setLimitNum(Prompt.inputInt("봉사인원 ▶ "));
+        generalRequestDTO.setContent(Prompt.inputString("내용 ▶ ")); 
+        generalRequestDTO.setSubmitTime(new Date(System.currentTimeMillis())); 
+        generalRequestDTO.setFileUpload(Prompt.inputString("파일 ▶ ")); 
+        generalRequestDTO.setStatus(Waiting);
 
 
-        generalRequestDTO.setVolNo(getNextNum());
+        generalRequestDTO.setNo(volunteerDao.getNextNum());
 
-        generalRequestDTOList.add(generalRequestDTO);
+        volunteerDao.insert(generalRequestDTO);
 
       } catch (NumberFormatException e) {
         System.out.println("--------------------------------------------------------------");
