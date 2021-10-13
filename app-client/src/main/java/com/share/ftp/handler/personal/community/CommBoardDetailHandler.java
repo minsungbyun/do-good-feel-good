@@ -24,19 +24,19 @@ public class CommBoardDetailHandler implements Command {
       System.out.println("[  나눔이야기/ 상세보기  ]");
 
       System.out.println();
-      int commNo = Prompt.inputInt("게시글 번호를 입력해주세요 ▶ ");
+      int commBoardNo = Prompt.inputInt("게시글 번호를 입력해주세요 ▶ ");
 
-      CommBoardDTO commBoardDTO = communityDao.findByCommNo(commNo);
+      CommBoardDTO commBoardDTO = communityDao.findByCommBoardNo(commBoardNo);
 
       if (commBoardDTO == null) {
         System.out.println("[  해당 게시글이 없습니다.  ]");
         return;
       }
 
-      request.setAttribute("commNo", commNo); 
+      request.setAttribute("commBoardNo", commBoardNo); 
 
       System.out.printf("아이디 ▶ %s\n", commBoardDTO.getOwner().getId());
-      System.out.printf("번호 ▶ %s\n", commBoardDTO.getCommNo());
+      System.out.printf("번호 ▶ %s\n", commBoardDTO.getNo());
       System.out.printf("제목 ▶ %s\n", commBoardDTO.getTitle());
       System.out.printf("내용 ▶ %s\n", commBoardDTO.getContent());
       System.out.printf("첨부파일 ▶ %s\n", commBoardDTO.getFileUpload());
@@ -61,7 +61,7 @@ public class CommBoardDetailHandler implements Command {
       if ((commBoardDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
           AuthLoginHandler.getLoginUser().getId().equals("admin")) {
 
-        request.setAttribute("commNo", commNo);
+        request.setAttribute("commBoardNo", commBoardNo);
 
         while (true) {
           String input = Prompt.inputString("변경(U), 삭제(D), 댓글(R), 이전(0)>");
@@ -88,7 +88,7 @@ public class CommBoardDetailHandler implements Command {
 
       if (loginUser!= null) {
 
-        request.setAttribute("commNo", commNo);
+        request.setAttribute("commBoardNo", commBoardNo);
 
         while (true) {
           String input = Prompt.inputString("좋아요(L), 댓글(R), 이전(0)>");

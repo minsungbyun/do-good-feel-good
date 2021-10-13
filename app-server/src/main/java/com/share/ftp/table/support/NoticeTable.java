@@ -129,9 +129,9 @@ public class NoticeTable extends JsonDataTable<NoticeDTO> implements DataProcess
     return null;
   }
 
-  private int indexOf(int no) {
+  private int indexOf(int noticeNo) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getNo() == no) {
+      if (list.get(i).getNo() == noticeNo) {
         return i;
       }
     }

@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 [{"no":1,"type":3,"point":0,"rank":1,"finalRank":0,"donationMoney":0,"authNum":1004,"adminPassword":-1,"id":"go","password":"1","name":"go","birthdate":"1월 1, 1234","tel":"123","email":"@.","address":"123","registerDate":"10월 9, 2021"},{"no":2,"type":1,"point":0,"rank":1,"finalRank":0,"donationMoney":0,"authNum":1004,"adminPassword":-1,"id":"interface","password":"1","name":"interface","birthdate":"1월 1, 1234","tel":"123","email":"@.","address":"eqw","registerDate":"10월 9, 2021"},{"no":3,"type":1,"point":0,"rank":1,"finalRank":0,"donationMoney":0,"authNum":1004,"adminPassword":-1,"id":"sysout","password":"1","name":"sysout","birthdate":"1월 1, 2021","tel":"010-1111-1111","email":"@.","address":"1","registerDate":"10월 13, 2021"}]
+=======
+[{"no":1,"type":1,"point":0,"rank":1,"finalRank":0,"donationMoney":0,"authNum":1004,"adminPassword":-1,"id":"happy","password":"1","name":"happy","birthdate":"11월 11, 1111","tel":"1111-11","email":"1@.","address":"USA","registerDate":"10월 13, 2021"}]
+>>>>>>> 608105b02794ad7074fb1f7b8edae6c0f008661d

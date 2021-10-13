@@ -7,21 +7,22 @@ import com.share.ftp.domain.join.JoinDTO;
 
 @SuppressWarnings("serial")
 public class CommReviewDTO implements Serializable {
-  private int commReviewNo;
+  private int no;
   private String content;
   private JoinDTO owner;
   private Date registeredDate;
 
+
+
   @Override
   public String toString() {
-    return "CommReviewDTO [commReviewNo=" + commReviewNo + ", content=" + content + ", owner="
-        + owner + ", registeredDate=" + registeredDate + "]";
+    return "CommReviewDTO [no=" + no + ", content=" + content + ", owner=" + owner
+        + ", registeredDate=" + registeredDate + "]";
   }
-
 
   @Override
   public int hashCode() {
-    return Objects.hash(commReviewNo, content, owner, registeredDate);
+    return Objects.hash(content, no, owner, registeredDate);
   }
 
   @Override
@@ -33,18 +34,16 @@ public class CommReviewDTO implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     CommReviewDTO other = (CommReviewDTO) obj;
-    return commReviewNo == other.commReviewNo && Objects.equals(content, other.content)
+    return Objects.equals(content, other.content) && no == other.no
         && Objects.equals(owner, other.owner)
         && Objects.equals(registeredDate, other.registeredDate);
   }
 
-
-
-  public int getCommReviewNo() {
-    return commReviewNo;
+  public int getNo() {
+    return no;
   }
-  public void setCommReviewNo(int commReviewNo) {
-    this.commReviewNo = commReviewNo;
+  public void setNo(int no) {
+    this.no = no;
   }
   public String getContent() {
     return content;
@@ -64,4 +63,5 @@ public class CommReviewDTO implements Serializable {
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
+
 }

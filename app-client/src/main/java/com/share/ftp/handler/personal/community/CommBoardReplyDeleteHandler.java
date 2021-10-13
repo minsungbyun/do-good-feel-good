@@ -22,50 +22,43 @@ public class CommBoardReplyDeleteHandler implements Command {
     while (true) {
       System.out.println();
       System.out.println("[  나눔이야기 댓글 삭제  ]");
+      System.out.println();
 
       int commBoardNo = (int) request.getAttribute("commBoardNo");
-      CommBoardDTO commBoardDTO = communityDao.findByCommNo(commBoardNo);
+      CommBoardDTO commBoardDTO = communityDao.findByCommBoardNo(commBoardNo);
 
-      int updateNo = (int) request.getAttribute("commBoardReplyNo");
-      CommBoardReplyDTO commBoardReplyDTO = communityDao.findByCommReplyNo(commBoardNo, updateNo);
+      int commBoardReplyNo = (int) request.getAttribute("commBoardReplyNo");
+      CommBoardReplyDTO commBoardReplyDTO = communityDao.findByCommBoardReplyNo(commBoardNo, commBoardReplyNo);
 
-      try {
 
-        if (commBoardReplyDTO == null) {
-          System.out.println("[ 해당 번호의 댓글이 없습니다.  ]");
+      if (commBoardReplyDTO == null) {
+        System.out.println("[ 해당 번호의 댓글이 없습니다.  ]");
+        return;
+      }
+
+      if (!commBoardReplyDTO.getOwner().getId().contains(AuthLoginHandler.getLoginUser().getId())) {
+        System.out.println("삭제 권한이 없습니다.");
+        return;
+      }
+
+      while (true) {
+        String input = Prompt.inputString("[  정말 삭제하시겠습니까?(y/N)  ]");
+        if (input.equalsIgnoreCase("n") || input.length() == 0) {
+          System.out.println();
+          System.out.println("[  댓글 삭제를 취소하였습니다.  ]");
           return;
-        }
 
-        if (!commBoardReplyDTO.getOwner().getId().contains(AuthLoginHandler.getLoginUser().getId())) {
-          System.out.println("삭제 권한이 없습니다.");
+        } else if(input.equals("y")) {
+          System.out.println();
+
+          commBoardDTO.setReplyCount(commBoardDTO.getReplyCount() -1);
+          communityDao.updateCommBoardReply(commBoardReplyDTO);
+          communityDao.deleteCommBoardReply(commBoardReplyDTO);
+          System.out.println("[  댓글을 삭제하였습니다.  ]");
           return;
-        }
-
-        while (true) {
-          String input = Prompt.inputString("[  정말 삭제하시겠습니까?(y/N)  ]");
-          if (input.equalsIgnoreCase("n") || input.length() == 0) {
-            System.out.println();
-            System.out.println("[  댓글 삭제를 취소하였습니다.  ]");
-            return;
-
-          } else if(input.equals("y")) {
-            System.out.println();
-            System.out.println("[  댓글을 삭제하였습니다.  ]");
-
-            communityDao.updateCommReply(commBoardReplyDTO);
-            communityDao.deleteCommeReply(commBoardReplyDTO);
-
-            return;
-          }
-
-          else  {
-            System.out.println("[  y 또는 n을 입력하세요.  ]");
-            continue;  
-          } 
-        }
-
-      } catch (Throwable e) {
-
+        } else  {
+          System.out.println("[  y 또는 n을 입력하세요.  ]");
+        } 
       }
     }
   }

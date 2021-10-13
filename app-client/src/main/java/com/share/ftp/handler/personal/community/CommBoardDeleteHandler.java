@@ -22,9 +22,9 @@ public class CommBoardDeleteHandler implements Command {
       System.out.println();
       System.out.println("[  나눔이야기 게시글 삭제  ]");
 
-      int commNo = (int) request.getAttribute("commNo");
+      int commBoardNo = (int) request.getAttribute("commBoardNo");
 
-      CommBoardDTO commBoardDTO = communityDao.findByCommNo(commNo);
+      CommBoardDTO commBoardDTO = communityDao.findByCommBoardNo(commBoardNo);
 
 
       if (commBoardDTO == null) {

@@ -40,7 +40,7 @@ public class ServerApp {
 
     dataProcessorMap.put("commBoard.", new CommBoardTable());
     dataProcessorMap.put("commReview.", new CommReviewTable());
-    dataProcessorMap.put("commReply.", new CommBoardReplyTable());
+    dataProcessorMap.put("commBoardReply.", new CommBoardReplyTable());
 
     dataProcessorMap.put("challenge.", new ChallengeTable());
     dataProcessorMap.put("challengeReview.", new ChallengeReviewTable());

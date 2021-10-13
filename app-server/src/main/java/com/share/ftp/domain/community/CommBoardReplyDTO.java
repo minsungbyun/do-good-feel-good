@@ -8,8 +8,8 @@ import com.share.ftp.domain.join.JoinDTO;
 @SuppressWarnings("serial")
 public class CommBoardReplyDTO implements Serializable {
 
-  private int commNo;
-  private int commReplyNo;
+  private int no;
+  private int replyNo;
   private String Commentid;
   private String Commentcontent;
   private Date registeredDate;
@@ -19,15 +19,14 @@ public class CommBoardReplyDTO implements Serializable {
 
   @Override
   public String toString() {
-    return "CommBoardReplyDTO [commNo=" + commNo + ", commReplyNo=" + commReplyNo + ", Commentid="
-        + Commentid + ", Commentcontent=" + Commentcontent + ", registeredDate=" + registeredDate
-        + ", owner=" + owner + ", commReplyPassword=" + commReplyPassword + "]";
+    return "CommBoardReplyDTO [no=" + no + ", replyNo=" + replyNo + ", Commentid=" + Commentid
+        + ", Commentcontent=" + Commentcontent + ", registeredDate=" + registeredDate + ", owner="
+        + owner + ", commReplyPassword=" + commReplyPassword + "]";
   }
-
   @Override
   public int hashCode() {
-    return Objects.hash(Commentcontent, Commentid, commNo, commReplyNo, commReplyPassword, owner,
-        registeredDate);
+    return Objects.hash(Commentcontent, Commentid, commReplyPassword, no, owner, registeredDate,
+        replyNo);
   }
 
   @Override
@@ -40,23 +39,23 @@ public class CommBoardReplyDTO implements Serializable {
       return false;
     CommBoardReplyDTO other = (CommBoardReplyDTO) obj;
     return Objects.equals(Commentcontent, other.Commentcontent)
-        && Objects.equals(Commentid, other.Commentid) && commNo == other.commNo
-        && commReplyNo == other.commReplyNo && commReplyPassword == other.commReplyPassword
+        && Objects.equals(Commentid, other.Commentid)
+        && commReplyPassword == other.commReplyPassword && no == other.no
         && Objects.equals(owner, other.owner)
-        && Objects.equals(registeredDate, other.registeredDate);
+        && Objects.equals(registeredDate, other.registeredDate) && replyNo == other.replyNo;
   }
 
-  public int getCommNo() {
-    return commNo;
+  public int getNo() {
+    return no;
   }
-  public void setCommNo(int commNo) {
-    this.commNo = commNo;
+  public void setNo(int no) {
+    this.no = no;
   }
-  public int getCommReplyNo() {
-    return commReplyNo;
+  public int getReplyNo() {
+    return replyNo;
   }
-  public void setCommReplyNo(int commReplyNo) {
-    this.commReplyNo = commReplyNo;
+  public void setReplyNo(int replyNo) {
+    this.replyNo = replyNo;
   }
   public String getCommentid() {
     return Commentid;

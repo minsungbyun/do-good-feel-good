@@ -56,7 +56,7 @@ public class NetCommunityDao implements CommunityDao {
   }
 
   @Override
-  public CommBoardDTO findByCommNo(int commBoardNo) throws Exception {
+  public CommBoardDTO findByCommBoardNo(int commBoardNo) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("commBoardNo", String.valueOf(commBoardNo));
 
@@ -111,7 +111,7 @@ public class NetCommunityDao implements CommunityDao {
     CommBoardDTO commBoardDTO = requestAgent.getObject(CommBoardDTO.class);
 
 
-    return commBoardDTO.getCommNo();
+    return commBoardDTO.getNo();
   }
 
 
@@ -141,9 +141,9 @@ public class NetCommunityDao implements CommunityDao {
   }
 
   @Override
-  public List<CommReviewDTO> findByCommReviewKeyword(String keyword) throws Exception {
+  public List<CommReviewDTO> findByCommReviewKeyword(String commReviewkeyword) throws Exception {
     HashMap<String,String> params = new HashMap<>();
-    params.put("keyword", keyword);
+    params.put("keyword", commReviewkeyword);
     requestAgent.request("commReview.selectListByKeyword", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
@@ -198,14 +198,14 @@ public class NetCommunityDao implements CommunityDao {
     CommReviewDTO commReviewDTO = requestAgent.getObject(CommReviewDTO.class);
 
 
-    return commReviewDTO.getCommReviewNo();
+    return commReviewDTO.getNo();
   }
 
   // 나눔이야기 댓글
 
   @Override
-  public void insertReply(CommBoardReplyDTO addcommReply) throws Exception {
-    requestAgent.request("commReply.insert", addcommReply);
+  public void insertCommBoardReply(CommBoardReplyDTO addcommBoardReply) throws Exception {
+    requestAgent.request("commBoardReply.insert", addcommBoardReply);
 
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       System.out.println("[ 댓글 등록이 정상적으로 완료되었습니다! ]");
@@ -217,9 +217,9 @@ public class NetCommunityDao implements CommunityDao {
 
 
   @Override
-  public List<CommBoardReplyDTO> findAllCommReply() throws Exception {
+  public List<CommBoardReplyDTO> findAllCommBoardReply() throws Exception {
 
-    requestAgent.request("commReply.selectList", null);
+    requestAgent.request("commBoardReply.selectList", null);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("댓글 목록 조회 실패!");
@@ -229,11 +229,12 @@ public class NetCommunityDao implements CommunityDao {
 
 
   @Override
-  public CommBoardReplyDTO findByCommReplyNo(int commBoardNo, int commReplyNo) throws Exception {
+  public CommBoardReplyDTO findByCommBoardReplyNo(int commBoardNo, int commBoardReplyNo) 
+      throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("commBoardNo", String.valueOf(commBoardNo));
-    params.put("commReplyNo", String.valueOf(commReplyNo));
-    requestAgent.request("commReply.selectOne", params);
+    params.put("commBoardReplyNo", String.valueOf(commBoardReplyNo));
+    requestAgent.request("commBoardReply.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;
@@ -244,8 +245,8 @@ public class NetCommunityDao implements CommunityDao {
 
 
   @Override
-  public void updateCommReply(CommBoardReplyDTO updateCommReply) throws Exception {
-    requestAgent.request("commReply.update", updateCommReply);
+  public void updateCommBoardReply(CommBoardReplyDTO updateCommBoardReply) throws Exception {
+    requestAgent.request("commBoardReply.update", updateCommBoardReply);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("한 줄 후기 변경 실패!");
@@ -254,8 +255,8 @@ public class NetCommunityDao implements CommunityDao {
 
 
   @Override
-  public void deleteCommeReply(CommBoardReplyDTO deleteCommReply) throws Exception {
-    requestAgent.request("commReply.delete", deleteCommReply);
+  public void deleteCommBoardReply(CommBoardReplyDTO deleteCommBoardReply) throws Exception {
+    requestAgent.request("commBoardReply.delete", deleteCommBoardReply);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("한 줄 후기 삭제 실패!");
@@ -264,17 +265,7 @@ public class NetCommunityDao implements CommunityDao {
 
 
   @Override
-  public int getNextNumCommReply(CommBoardDTO commBoardDTO) throws Exception {
-
-    //    requestAgent.request("commReply.getNextNum", null);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("한 줄 후기 번호 부여 중 오류 발생!");
-    //    }
-    //    CommBoardReplyDTO commBoardReplyDTO = requestAgent.getObject(CommBoardReplyDTO.class);
-    //
-    //
-    //    return commBoardReplyDTO.getCommReplyNo();
+  public int getNextNumCommBoardReply(CommBoardDTO commBoardDTO) throws Exception {
 
     return commBoardDTO.getReplyCount() +1;
 

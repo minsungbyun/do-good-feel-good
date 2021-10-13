@@ -24,7 +24,7 @@ public class CommReviewAddHandler implements Command {
 
     CommReviewDTO commReviewDTO = new CommReviewDTO();
 
-    commReviewDTO.setCommReviewNo(communityDao.getNextNumCommReview());
+    commReviewDTO.setNo(communityDao.getNextNumCommReview());
     commReviewDTO.setContent(Prompt.inputString("내용  ▶ "));
     commReviewDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
     commReviewDTO.setOwner(AuthLoginHandler.getLoginUser());
