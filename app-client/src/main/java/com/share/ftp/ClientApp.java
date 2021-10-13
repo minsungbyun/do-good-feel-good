@@ -26,20 +26,6 @@ import com.share.ftp.dao.impl.NetJoinDao;
 import com.share.ftp.dao.impl.NetNoticeDao;
 import com.share.ftp.dao.impl.NetQuestionDao;
 import com.share.ftp.dao.impl.NetVolunteerDao;
-import com.share.ftp.domain.admin.ChallengeDTO;
-import com.share.ftp.domain.admin.NoticeDTO;
-import com.share.ftp.domain.challenge.ChallengeJoinDTO;
-import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
-import com.share.ftp.domain.challenge.ChallengeReviewDTO;
-import com.share.ftp.domain.community.CommBoardDTO;
-import com.share.ftp.domain.community.CommBoardReplyDTO;
-import com.share.ftp.domain.community.CommReviewDTO;
-import com.share.ftp.domain.donation.DonationBoardDTO;
-import com.share.ftp.domain.donation.DonationRegisterDTO;
-import com.share.ftp.domain.join.JoinDTO;
-import com.share.ftp.domain.mypage.MyProfileDTO;
-import com.share.ftp.domain.support.QuestionListDTO;
-import com.share.ftp.domain.volunteer.GeneralRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.admin.AdminChallengeAddHandler;
@@ -71,8 +57,6 @@ import com.share.ftp.handler.join.JoinSearchPasswordHandler;
 import com.share.ftp.handler.join.JoinSearchTelIdHandler;
 import com.share.ftp.handler.join.MyPageDeleteUserHandler;
 import com.share.ftp.handler.join.MyPageUpdateUserHandler;
-import com.share.ftp.handler.org.MyVolApplyListHandler;
-import com.share.ftp.handler.org.MyVolApproveListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeDetailHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeJoinHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeJoinListHandler;
@@ -146,10 +130,16 @@ import com.share.ftp.handler.personal.volunteer.MyAppliedVolHandler;
 import com.share.ftp.handler.personal.volunteer.MyRejectedVolHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralAppliedDetailHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralAppliedListHandler;
+import com.share.ftp.handler.personal.volunteer.VolGeneralDoJoinDeleteHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralDoJoinHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralDoJoinListHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestAcceptHandler;
+import com.share.ftp.handler.personal.volunteer.VolGeneralRequestApplyCompleteHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestApplyHandler;
+import com.share.ftp.handler.personal.volunteer.VolGeneralRequestApplyListHandler;
+import com.share.ftp.handler.personal.volunteer.VolGeneralRequestDeleteHandler;
+import com.share.ftp.handler.personal.volunteer.VolGeneralRequestRejectHandler;
+import com.share.ftp.handler.personal.volunteer.VolGeneralRequestRejectedListHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionAddHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionConnectHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionDeleteHandler;
@@ -165,44 +155,6 @@ import com.share.util.Prompt;
 public class ClientApp {
 
   RequestAgent requestAgent;
-
-  List<JoinDTO> joinDTOList = new ArrayList<>();
-  // 함께해요 도메인(값)
-
-  // 개인, 기관 봉사 도메인
-  List<GeneralRequestDTO> generalRequestDTOList = new ArrayList<>();
-  List<GeneralRequestDTO> generalRequestApplyDTOList = new ArrayList<>();
-  List<GeneralRequestDTO> generalRequestRejectDTOList = new ArrayList<>();
-
-  // 소통해요 도메인(값)
-  List<CommBoardDTO> commBoardDTOList = new ArrayList<>();
-  List<CommReviewDTO> commReviewDTOList = new ArrayList<>();
-  List<CommBoardReplyDTO> commBoardReplyDTOList = new ArrayList<>();
-
-  // 챌린지 도메인(값)
-  List<ChallengeJoinDTO> challengeJoinDTOList = new ArrayList<>();
-  List<ChallengeQuestionDTO> challengeQuestionDTOList = new ArrayList<>();
-  List<ChallengeReviewDTO> challengeReviewDTOList = new ArrayList<>();
-  List<ChallengeQuestionDTO> challengeReplyList = new ArrayList<>();
-
-  // 모금함 개설 신청 관련 도메인(값)
-  List<DonationBoardDTO> donationBoardDTOList = new ArrayList<>();
-  List<DonationBoardDTO> donationBoardApplyDTOList = new ArrayList<>();
-  List<DonationBoardDTO> donationBoardRejectDTOList = new ArrayList<>();
-
-  // 기부 도메인(값)
-  List<DonationRegisterDTO> donationRegisterDTOList = new ArrayList<>();
-  List<DonationRegisterDTO> donationMyRegisterDTOList;
-
-  // 마이페이지 도메인(값)
-  List<MyProfileDTO> myProfileDTOList = new ArrayList<>();
-  List<QuestionListDTO> myQuestionListDTOList = new ArrayList<>();
-
-  // 관리자 도메인(값)
-  List<ChallengeDTO> challengeDTOList = new ArrayList<>();
-  List<NoticeDTO> noticeDTOList = new ArrayList<>();
-  //  List<QuestionDTO> questionDTOList = new ArrayList<>();
-
 
   // HashMap
   HashMap<String,Command> challengeReviewMap = new HashMap<>();
@@ -266,16 +218,6 @@ public class ClientApp {
     }
   }
 
-  DonationRegisterDTO donationRegisterDTO = new DonationRegisterDTO();
-
-
-  // 모금함 개설 승인된 목록 Handler
-  //  DonationBoardAppliedListHandler donationBoardAppliedListHandler =
-  //      new DonationBoardAppliedListHandler(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList);
-  //
-  //  DonationPrompt donationPrompt = new DonationPrompt(donationBoardDTOList, donationRegisterDTOList);
-  //  DonationAdminPrompt donationAdminPrompt = new DonationAdminPrompt(donationBoardDTOList, donationRegisterDTOList);
-
 
   public ClientApp() throws Exception {
 
@@ -305,20 +247,20 @@ public class ClientApp {
 
     //함께해요
     commands.put("/volGeneralRequest/apply", new VolGeneralRequestApplyHandler(netVolunteerDao));
-    //    commands.put("/volGeneralRequest/applyList", new VolGeneralRequestApplyListHandler(generalRequestDTOList));
-    //    commands.put("/volPersonalRequest/applyList", new VolPersonalRequestApplyListHandler(generalRequestDTOList));
-    //    commands.put("/volGeneralRequest/applyCompleteList", new VolGeneralRequestApplyCompleteHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+    commands.put("/volGeneralRequest/applyList", new VolGeneralRequestApplyListHandler(netVolunteerDao));
+    //    commands.put("/volPersonalRequest/applyList", new VolPersonalRequestApplyListHandler(netVolunteerDao));
+    commands.put("/volGeneralRequest/applyCompleteList", new VolGeneralRequestApplyCompleteHandler(netVolunteerDao));
     commands.put("/volGeneralRequest/acceptApply", new VolGeneralRequestAcceptHandler(netVolunteerDao));
-    //    commands.put("/volGeneralRequest/rejectApply", new VolGeneralRequestRejectHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+    commands.put("/volGeneralRequest/rejectApply", new VolGeneralRequestRejectHandler(netVolunteerDao));
     commands.put("/volGeneral/appliedList", new VolGeneralAppliedListHandler(netVolunteerDao));  // 승인된 봉사 목록
-    //    commands.put("/volPersonalRequest/appliedList", new VolPersonalRequestAppliedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
-    //    commands.put("/volGeneralRequest/rejectedList", new VolGeneralRequestRejectedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
-    //    commands.put("/volGeneralRequest/delete", new VolGeneralRequestDeleteHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+    //    commands.put("/volPersonalRequest/appliedList", new VolPersonalRequestAppliedListHandler(netVolunteerDao));
+    commands.put("/volGeneralRequest/rejectedList", new VolGeneralRequestRejectedListHandler(netVolunteerDao));
+    commands.put("/volGeneralRequest/delete", new VolGeneralRequestDeleteHandler(netVolunteerDao));
     //    commands.put("/volGeneralRequest/bookmark", new VolGeneralRequestBookmarkHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     //    commands.put("/volGeneralRequest/totalApprovedList", new VolGeneralTotalApprovedListHandler(volPersonalRequestAppliedListHandler,volOrgRequestAppliedListHandler));
     commands.put("/volGeneralDoJoin/add", new VolGeneralDoJoinHandler(netVolunteerDao));
     commands.put("/volGeneralDoJoin/list", new VolGeneralDoJoinListHandler(netVolunteerDao));
-    //    commands.put("/volGeneralDoJoin/delete", new VolGeneralDoJoinDeleteHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+    commands.put("/volGeneralDoJoin/delete", new VolGeneralDoJoinDeleteHandler(netVolunteerDao));
     commands.put("/volGeneral/detail", new VolGeneralAppliedDetailHandler(netVolunteerDao));
 
     //함께해요 문의하기
@@ -452,8 +394,8 @@ public class ClientApp {
 
     commands.put("myPoint/list", new MyPointListHandler(netJoinDao)); // 나의포인트 
 
-    commands.put("/orgMyVol/apply", new MyVolApplyListHandler()); // 기관 마이페이지 승인신청 
-    commands.put("/orgMyVol/approve", new MyVolApproveListHandler()); // 기관 마이페이지 승인조회
+    //    commands.put("/orgMyVol/apply", new MyVolApplyListHandler()); // 기관 마이페이지 승인신청 
+    //    commands.put("/orgMyVol/approve", new MyVolApproveListHandler()); // 기관 마이페이지 승인조회
     commands.put("/myDonation/registerlist", new DonationRegisterMyListHandler(donationRegisterDao)); // 모금함
     commands.put("/myDonation//applyCompleteList", new DonationBoardApplyCompleteListHandler(donationBoardDao));
 
@@ -920,6 +862,7 @@ public class ClientApp {
     adminVolMenu.setMenuFilter(menuFilter);
 
     adminVolMenu.add(new MenuItem("봉사신청승인하기",ACCESS_ADMIN,"/volGeneralRequest/acceptApply"));
+    adminVolMenu.add(new MenuItem("봉사신청반려하기",ACCESS_ADMIN,"/volGeneralRequest/rejectApply"));
     //    adminVolMenu.add(new MenuItem("개인봉사신청내역",ACCESS_ADMIN,"/volPersonalRequest/applyList"));
     //    adminVolMenu.add(new MenuItem("기관봉사신청내역",ACCESS_ADMIN,"/volOrgRequest/applyList")); // 구현예정
     //    adminVolMenu.add(new MenuItem("개인봉사승인하기",ACCESS_ADMIN,"/volGeneralRequest/acceptApply"));
