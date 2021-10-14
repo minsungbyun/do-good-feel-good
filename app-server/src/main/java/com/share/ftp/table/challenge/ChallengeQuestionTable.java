@@ -37,7 +37,12 @@ public class ChallengeQuestionTable extends JsonDataTable<ChallengeQuestionDTO> 
     int challengeQuestionNo = Integer.parseInt(request.getParameter("challengeQuestionNo"));
     ChallengeQuestionDTO challengeQuestion = request.getObject(ChallengeQuestionDTO.class);
 
+    System.out.println("---------------------------------------");
+    System.out.println(challengeQuestionNo);
+    System.out.println(challengeQuestion.getNo());
+    System.out.println("---------------------------------------");
     int index = indexOf(challengeQuestion.getNo(), challengeQuestionNo);
+    System.out.println(index);
 
     list.add(index + 1, challengeQuestion);
     response.setStatus(Response.SUCCESS);

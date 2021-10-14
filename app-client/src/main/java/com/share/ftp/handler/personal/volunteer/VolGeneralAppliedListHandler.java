@@ -51,10 +51,11 @@ public class VolGeneralAppliedListHandler implements Command { // 개인 봉사�
             generalRequestApplyDTO.getStatus()
             //          this.personalRequestRejectDTO[i].getIsSigned()
             );
-      } else {
-        System.out.println("현재 등록된 봉사활동이 없습니다.");
-        return;
       } 
+      //      else {
+      //        System.out.println("현재 등록된 봉사활동이 없습니다.");
+      //        return;
+      //      } 
 
 
     }

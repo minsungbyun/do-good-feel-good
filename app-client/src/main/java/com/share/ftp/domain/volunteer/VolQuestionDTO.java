@@ -1,11 +1,13 @@
 package com.share.ftp.domain.volunteer;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
 
-public class VolQuestionDTO {
+public class VolQuestionDTO implements Serializable {
+  private static final long serialVersionUID = 1L;
 
   private int no;
   private int questionNo;

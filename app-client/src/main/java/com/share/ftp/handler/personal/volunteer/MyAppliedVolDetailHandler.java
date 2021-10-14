@@ -1,19 +1,20 @@
 package com.share.ftp.handler.personal.volunteer;
 
-import java.util.List;
+import java.util.Collection;
+import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.volunteer.GeneralRequestDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 
-public class MyAppliedVolDetailHandler extends AbstractVolGeneralHandler { // 개인 봉사신청 양식 쓰는 곳
+public class MyAppliedVolDetailHandler implements Command { // 개인 봉사신청 양식 쓰는 곳
 
+  VolunteerDao volunteerDao;
 
-  public MyAppliedVolDetailHandler(
-      List<GeneralRequestDTO> generalRequestDTOList,
-      List<GeneralRequestDTO> generalRequestApplyDTOList,
-      List<GeneralRequestDTO> generalRequestRejectDTOList) {
+  public MyAppliedVolDetailHandler(VolunteerDao volunteerDao) {
 
-    super(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList);
+    this.volunteerDao = volunteerDao;
+
   }
 
   @Override
@@ -21,12 +22,14 @@ public class MyAppliedVolDetailHandler extends AbstractVolGeneralHandler { // �
     System.out.println();
     System.out.println("[  나의 봉사 신청서 목록  ]");
 
-    if (generalRequestDTOList.isEmpty()) {
+    Collection<GeneralRequestDTO> GeneralRequestDTOList = volunteerDao.findAll();
+
+    if (GeneralRequestDTOList.isEmpty()) {
       System.out.println("[  봉사 신청서가 없습니다. ]");
     }
 
 
-    for (GeneralRequestDTO generalRequestDTO : generalRequestDTOList) {
+    for (GeneralRequestDTO generalRequestDTO : GeneralRequestDTOList) {
       if (generalRequestDTO.getOwner().getName().equals(AuthLoginHandler.getLoginUser().getName())) {
         System.out.printf("번호: %d\n"
             + "봉사유형: %s\n"
@@ -45,28 +48,29 @@ public class MyAppliedVolDetailHandler extends AbstractVolGeneralHandler { // �
             + "첨부파일: %s\n"
             + "승인여부: %s \n\n", 
 
-            generalRequestDTO.getVolNo(), 
+            generalRequestDTO.getNo(), 
             generalRequestDTO.getMemberType(), 
-            generalRequestDTO.getVolTitle(), 
+            generalRequestDTO.getTitle(), 
             generalRequestDTO.getOwner().getName(), 
-            generalRequestDTO.getVolType(), 
-            generalRequestDTO.getVolTel(),
-            generalRequestDTO.getVolEmail(),
-            generalRequestDTO.getVolStartDate(),
-            generalRequestDTO.getVolEndDate(),
-            generalRequestDTO.getVolStartTime(),
-            generalRequestDTO.getVolEndTime(),
+            generalRequestDTO.getType(), 
+            generalRequestDTO.getTel(),
+            generalRequestDTO.getEmail(),
+            generalRequestDTO.getStartDate(),
+            generalRequestDTO.getEndDate(),
+            generalRequestDTO.getStartTime(),
+            generalRequestDTO.getEndTime(),
             //            personalRequestDTO.getVolList(),
-            generalRequestDTO.getVolLimitNum(),
-            generalRequestDTO.getVolContent(),
-            generalRequestDTO.getVolFileUpload(),
-            generalRequestDTO.getIsSigned()
+            generalRequestDTO.getLimitNum(),
+            generalRequestDTO.getContent(),
+            generalRequestDTO.getFileUpload(),
+            generalRequestDTO.getStatus()
             );
-      } else {
-        System.out.println();
-        System.out.println("[  현재 등록된 봉사목록이 없습니다. ]");
-        return;
-      }
+      } 
+      //      else {
+      //        System.out.println();
+      //        System.out.println("[  현재 등록된 봉사목록이 없습니다. ]");
+      //        return;
+      //      }
     }
   }
 }
