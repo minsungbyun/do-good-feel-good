@@ -13,5 +13,6 @@ public interface QuestionDao {
   void update(QuestionListDTO updateQuestion) throws Exception;
   void delete(int questionNo) throws Exception;
   int getNextNum() throws Exception; // 회원 고유번호 지정
+  //  int getNextQuestionNum(QuestionListDTO question) throws Exception;
 
 }

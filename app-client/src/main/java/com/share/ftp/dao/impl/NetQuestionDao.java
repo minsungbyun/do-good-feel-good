@@ -96,6 +96,22 @@ public class NetQuestionDao implements QuestionDao {
 
     return questionListDTO.getNo();
   }
+
+  //  @Override
+  //  public int getNextQuestionNum(QuestionListDTO questionListDTO) throws Exception {
+  //
+  //    requestAgent.request("question.getNextNum", null);
+  //
+  //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+  //      throw new Exception("고유번호 부여 중 오류 발생!");
+  //    }
+  //    QuestionListDTO questionListDTO = requestAgent.getObject(QuestionListDTO.class);
+  //
+  //
+  //    return questionListDTO.getNo();
+  //  }
+
+
 }
 
 
