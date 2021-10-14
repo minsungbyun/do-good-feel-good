@@ -249,7 +249,7 @@ public class NetCommunityDao implements CommunityDao {
     requestAgent.request("commBoardReply.update", updateCommBoardReply);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("한 줄 후기 변경 실패!");
+      throw new Exception("댓글 변경 실패!");
     }
   }
 
@@ -259,7 +259,7 @@ public class NetCommunityDao implements CommunityDao {
     requestAgent.request("commBoardReply.delete", deleteCommBoardReply);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("한 줄 후기 삭제 실패!");
+      throw new Exception("댓글 삭제 실패!");
     }
   }
 

@@ -56,6 +56,7 @@ public class CommBoardReplyDeleteHandler implements Command {
           communityDao.deleteCommBoardReply(commBoardReplyDTO);
           System.out.println("[  댓글을 삭제하였습니다.  ]");
           return;
+
         } else  {
           System.out.println("[  y 또는 n을 입력하세요.  ]");
         } 

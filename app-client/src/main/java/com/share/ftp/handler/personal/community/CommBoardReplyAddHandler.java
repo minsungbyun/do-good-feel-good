@@ -61,7 +61,7 @@ public class CommBoardReplyAddHandler implements Command {
 
         System.out.println();
         System.out.println("[  댓글 등록이 완료되었습니다.  ]");
-        break;
+        return;
 
       } else {
         System.out.println("다시 입력해주세요.");
