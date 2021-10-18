@@ -22,12 +22,12 @@ public class AdminChallengeListHandler implements Command {
     Collection<ChallengeDTO> challengeList = challengeDao.findAll();
 
     for (ChallengeDTO challengeDTO : challengeList) {
-      System.out.printf("%d, %s[%d], %s, %d, %s ~ %s\n", 
+      System.out.printf("%d, %s[%d], %d, %s ~ %s\n", 
           challengeDTO.getNo(), 
           //          challengeDTO.getAdminId(), 
           challengeDTO.getTitle(), 
           challengeDTO.getReviewCount(), 
-          challengeDTO.getAdmin().getName(),
+          //          challengeDTO.getAdmin().getName(),
           challengeDTO.getTotalJoinCount(),
           //          challengeDTO.getFileUpload(), 
           challengeDTO.getStartDate(),
