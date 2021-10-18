@@ -6,9 +6,6 @@ import static com.share.menu.Menu.ACCESS_MEMBER;
 import static com.share.menu.Menu.ACCESS_MEMBER_ADMIN;
 import static com.share.menu.Menu.ACCESS_ORG;
 import static com.share.menu.Menu.ACCESS_PERSONAL;
-import static com.share.util.General.member.ORG;
-import static com.share.util.General.member.PERSONAL;
-import java.sql.Date;
 import com.share.ftp.dao.JoinDao;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
@@ -52,7 +49,7 @@ public class AuthLoginHandler implements Command {
       admin.setPassword("111");
       admin.setTel("010-1111-1111");
       admin.setAddress("no");
-      admin.setRegisterDate(new Date(System.currentTimeMillis()));
+      //      admin.setRegisterDate(new Date(System.currentTimeMillis()));
 
       loginUser = admin;
       userAccessLevel = ACCESS_ADMIN | ACCESS_MEMBER_ADMIN;
@@ -61,21 +58,30 @@ public class AuthLoginHandler implements Command {
 
     JoinDTO user = joinDao.selectOneByIdPassword(userId, userPassword);
 
-    if (user == null) {
+    if (user != null) {
+      System.out.printf("[  %s님 환영합니다!  ]\n", user.getName());
+      loginUser = user;
+      userAccessLevel = ACCESS_MEMBER | ACCESS_PERSONAL | ACCESS_ORG |  ACCESS_MEMBER_ADMIN;
+    } else {
       System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");
       return;
-    } else if (user.getType() == PERSONAL) {
-      userAccessLevel = ACCESS_MEMBER | ACCESS_PERSONAL | ACCESS_MEMBER_ADMIN;
-
-      System.out.printf("[  %s님 환영합니다!  ]\n", user.getName());
-
-    } else if (user.getType() == ORG) {
-      userAccessLevel = ACCESS_MEMBER | ACCESS_ORG | ACCESS_MEMBER_ADMIN;
-
-      System.out.printf("[  %s님 환영합니다!  ]\n", user.getName());
     }
 
-    loginUser = user;
+    //    if (user == null) {
+    //      System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");
+    //      return;
+    //    } else if (user.getType() == PERSONAL) {
+    //      userAccessLevel = ACCESS_MEMBER | ACCESS_PERSONAL | ACCESS_MEMBER_ADMIN;
+    //
+    //      System.out.printf("[  %s님 환영합니다!  ]\n", user.getName());
+    //
+    //    } else if (user.getType() == ORG) {
+    //      userAccessLevel = ACCESS_MEMBER | ACCESS_ORG | ACCESS_MEMBER_ADMIN;
+    //
+    //      System.out.printf("[  %s님 환영합니다!  ]\n", user.getName());
+    //    }
+    //
+    //    loginUser = user;
   } 
 }
 

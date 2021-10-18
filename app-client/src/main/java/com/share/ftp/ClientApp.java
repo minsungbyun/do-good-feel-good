@@ -6,6 +6,8 @@ import static com.share.menu.Menu.ACCESS_MEMBER;
 import static com.share.menu.Menu.ACCESS_MEMBER_ADMIN;
 import static com.share.menu.Menu.ACCESS_ORG;
 import static com.share.menu.Menu.ACCESS_PERSONAL;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,11 +20,11 @@ import com.share.ftp.dao.JoinDao;
 import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.dao.VolunteerDao;
+import com.share.ftp.dao.impl.MariadbJoinDao;
 import com.share.ftp.dao.impl.NetChallengeDao;
 import com.share.ftp.dao.impl.NetCommunityDao;
 import com.share.ftp.dao.impl.NetDonationBoardDao;
 import com.share.ftp.dao.impl.NetDonationRegisterDao;
-import com.share.ftp.dao.impl.NetJoinDao;
 import com.share.ftp.dao.impl.NetNoticeDao;
 import com.share.ftp.dao.impl.NetQuestionDao;
 import com.share.ftp.dao.impl.NetVolunteerDao;
@@ -154,6 +156,8 @@ import com.share.util.Prompt;
 
 public class ClientApp {
 
+  Connection con;
+
   RequestAgent requestAgent;
 
   // HashMap
@@ -221,9 +225,12 @@ public class ClientApp {
 
   public ClientApp() throws Exception {
 
-    requestAgent = new RequestAgent("127.0.0.1", 8888);
+    requestAgent = null;
 
-    JoinDao netJoinDao = new NetJoinDao(requestAgent);
+    con = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/happysharedb?user=happyshare&password=1111");
+
+    JoinDao netJoinDao = new MariadbJoinDao(con);
 
     VolunteerDao netVolunteerDao = new NetVolunteerDao(requestAgent);
     CommunityDao netCommunityDao = new NetCommunityDao(requestAgent);
@@ -444,7 +451,7 @@ public class ClientApp {
   }
 
 
-  void service() {
+  void service() throws Exception {
 
     notifyOnApplicationStarted();
 
@@ -452,6 +459,8 @@ public class ClientApp {
     Prompt.close();
 
     notifyOnApplicationEnded();
+
+    con.close();
 
   }
 
