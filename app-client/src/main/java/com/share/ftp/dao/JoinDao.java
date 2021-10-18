@@ -17,6 +17,5 @@ public interface JoinDao {
   JoinDTO selectOneByEmail(String userEmail) throws Exception; // 회원정보 상세보기
   JoinDTO selectOneByTel(String userTel) throws Exception; // 회원정보 상세보기
   JoinDTO validId(JoinDTO joinDTO) throws Exception;               // 아이디 유효성 검사
-  int getNextNum() throws Exception;            // 회원 고유번호 지정
 
 }
