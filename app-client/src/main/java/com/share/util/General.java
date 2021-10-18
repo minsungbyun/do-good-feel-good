@@ -2,7 +2,7 @@ package com.share.util;
 
 public class General {
 
-  public static class type {
+  public static class type {   
 
     public static final String UNTACT       = "비대면";
     public static final String CHILDREN     = "아동";
