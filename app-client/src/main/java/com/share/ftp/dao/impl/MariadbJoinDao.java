@@ -288,18 +288,6 @@ public class MariadbJoinDao implements JoinDao {
         return joinDTO;
       }
     }
-
-    //
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("userEmail", userEmail);
-    //
-    //    requestAgent.request("join.selectOneByEmail", params);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      return null;
-    //    }
-    //
-    //    return requestAgent.getObject(JoinDTO.class);
   }
 
   @Override
@@ -326,21 +314,5 @@ public class MariadbJoinDao implements JoinDao {
         return joinDTO;
       }
     }
-
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("userTel", userTel);
-    //
-    //    requestAgent.request("join.selectOneByTel", params);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      return null;
-    //    }
-    //
-    //    return requestAgent.getObject(JoinDTO.class);
   }
-
-
-
-
-
 }
