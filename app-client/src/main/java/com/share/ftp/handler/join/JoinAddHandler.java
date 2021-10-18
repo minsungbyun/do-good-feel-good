@@ -1,12 +1,5 @@
 package com.share.ftp.handler.join;
 
-import static com.share.ftp.handler.join.AuthLoginHandler.userAccessLevel;
-import static com.share.menu.Menu.ACCESS_LOGOUT;
-import static com.share.menu.Menu.ACCESS_ORG;
-import static com.share.menu.Menu.ACCESS_PERSONAL;
-import static com.share.util.General.member.ORG;
-import static com.share.util.General.member.PERSONAL;
-import java.sql.Date;
 import com.share.ftp.dao.JoinDao;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
@@ -30,19 +23,19 @@ public class JoinAddHandler implements Command {
     JoinDTO joinUser = new JoinDTO();
 
     //    아이디 유효성검사
-    while (true) {
+    //    while (true) {
 
-      joinUser.setId(Prompt.inputString("ID ▶ "));
+    joinUser.setId(Prompt.inputString("ID ▶ "));
 
-      JoinDTO userId = joinDao.validId(joinUser);
-
-      if (userId != null) {
-        System.out.println("사용가능한 아이디입니다.");
-        break;
-      }
-
-      System.out.println("해당 아이디는 중복되는 아이디입니다.");
-    }
+    //      JoinDTO userId = joinDao.validId(joinUser);
+    //
+    //      if (userId != null) {
+    //        System.out.println("사용가능한 아이디입니다.");
+    //        break;
+    //      }
+    //
+    //      System.out.println("해당 아이디는 중복되는 아이디입니다.");
+    //    }
 
     joinUser.setPassword(Prompt.inputString("Password ▶ "));
 
@@ -83,37 +76,40 @@ public class JoinAddHandler implements Command {
     }
 
     joinUser.setAddress(Prompt.inputString("Address ▶ "));
-    joinUser.setRegisterDate(new Date(System.currentTimeMillis()));
+    joinUser.setBasicAddress(Prompt.inputString("BasicAddress ▶ "));
+    joinUser.setDetailAddress(Prompt.inputString("DetailAddress ▶ "));
+    //    joinUser.setRegisterDate(new Date(System.currentTimeMillis()));
     System.out.println();
 
-    while (true) {
-      System.out.println("[회원 유형을 선택해주세요]");
-      System.out.println();
-      System.out.println("1번 ▶ Personal");
-      System.out.println("2번 ▶ Organization");
-      int userType = Prompt.inputInt("회원유형 선택 ▶ ");
-
-      if (userType == 1) {
-        joinUser.setType(PERSONAL);
-        userAccessLevel = ACCESS_PERSONAL | ACCESS_LOGOUT;
-        break;
-
-      } else if (userType == 2){
-        joinUser.setType(ORG);
-        userAccessLevel = ACCESS_ORG | ACCESS_LOGOUT;
-        break;
-
-      } else {
-        System.out.println("존재하지 않는 유형입니다. 다시입력해주세요");
-      }
-    }
+    //    while (true) {
+    //      System.out.println("[회원 유형을 선택해주세요]");
+    //      System.out.println();
+    //      System.out.println("1번 ▶ Personal");
+    //      System.out.println("2번 ▶ Organization");
+    //      int userType = Prompt.inputInt("회원유형 선택 ▶ ");
+    //
+    //      if (userType == 1) {
+    //        joinUser.setType(PERSONAL);
+    //        userAccessLevel = ACCESS_PERSONAL | ACCESS_LOGOUT;
+    //        break;
+    //
+    //      } else if (userType == 2){
+    //        joinUser.setType(ORG);
+    //        userAccessLevel = ACCESS_ORG | ACCESS_LOGOUT;
+    //        break;
+    //
+    //      } else {
+    //        System.out.println("존재하지 않는 유형입니다. 다시입력해주세요");
+    //      }
+    //    }
 
     // 고유회원번호 부여
-    joinUser.setNo(joinDao.getNextNum());
+    //    joinUser.setNo(joinDao.getNextNum());
 
     joinDao.insert(joinUser);
 
+    System.out.println("[회원 등록이 완료 되었습니다.]");
     System.out.println();
   }
-
 }
+
