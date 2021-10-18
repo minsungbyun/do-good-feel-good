@@ -22,7 +22,7 @@ public class MariadbJoinDao implements JoinDao {
   @Override
   public void insert(JoinDTO joinDTO) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
-        "insert into ftp_user(user_id,password,name,tel,email,pst_no,bas_addr,det_addr)"
+        "insert into ftp_user(id,password,name,tel,email,post_no,basic_address,detail_address)"
             + " values(?,password(?),?,?,?,?,?,?)")) {
 
       stmt.setString(1, joinDTO.getId());
@@ -46,15 +46,15 @@ public class MariadbJoinDao implements JoinDao {
     try (PreparedStatement stmt = con.prepareStatement(
         "select"
             + " user_no,"
-            + " user_id,"
+            + " id,"
             //            + " password,"
             + " email,"
             + " name,"
             + " tel,"
             + " create_dt,"
-            + " pst_no,"
-            + " bas_addr,"
-            + " det_addr"
+            + " post_no,"
+            + " basic_address,"
+            + " detail_address"
             + " from"
             + " ftp_user order by user_no asc");
         ResultSet rs = stmt.executeQuery()) {
@@ -65,29 +65,21 @@ public class MariadbJoinDao implements JoinDao {
       while (rs.next()) {
         JoinDTO joinDTO = new JoinDTO();
         joinDTO.setNo(rs.getInt("user_no"));
-        joinDTO.setId(rs.getString("user_id"));
+        joinDTO.setId(rs.getString("id"));
         //        joinDTO.setPassword(rs.getString("password"));
         joinDTO.setName(rs.getString("name"));
         joinDTO.setEmail(rs.getString("email"));
         joinDTO.setTel(rs.getString("tel"));
         joinDTO.setRegisterDate(rs.getDate("create_dt"));
-        joinDTO.setAddress(rs.getString("pst_no"));
-        joinDTO.setBasicAddress(rs.getString("bas_addr"));
-        joinDTO.setDetailAddress(rs.getString("det_addr"));
+        joinDTO.setAddress(rs.getString("post_no"));
+        joinDTO.setBasicAddress(rs.getString("basic_address"));
+        joinDTO.setDetailAddress(rs.getString("detail_address"));
 
         list.add(joinDTO);
       }
 
       return list;
     }
-
-    //    requestAgent.request("join.selectList", null);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("회원 목록 조회 실패!");
-    //    }
-    //
-    //    return new ArrayList<>(requestAgent.getObjects(JoinDTO.class));
   }
 
   @Override
@@ -95,7 +87,7 @@ public class MariadbJoinDao implements JoinDao {
 
     try (PreparedStatement stmt = con.prepareStatement(
         "update ftp_user set"
-            + " name=?,password=password(?),tel=?,pst_no,bas_addr,det_addr"
+            + " name=?,password=password(?),tel=?,post_no,basic_address,detail_address"
             + " where user_no=?")) {
 
       stmt.setString(1, joinDTO.getName());
@@ -109,12 +101,6 @@ public class MariadbJoinDao implements JoinDao {
         throw new Exception("회원 데이터 변경 실패!");
       }
     }
-
-    //    requestAgent.request("join.update", joinDTO);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("회원 정보 변경 실패!");
-    //    }
   }
 
 
@@ -129,52 +115,19 @@ public class MariadbJoinDao implements JoinDao {
         throw new Exception("회원 데이터 삭제 실패!");
       }
     }
-
-    //
-    //    requestAgent.request("join.delete", loginUser);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("회원 탈퇴 실패!");
-    //    }
-
   }
 
   @Override
   public JoinDTO validId(JoinDTO joinDTO) throws Exception {
-
-    //
-    //    requestAgent.request("join.validId", joinDTO);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      return null;
-    //
-    //    } else {
-    //      return requestAgent.getObject(JoinDTO.class);
-    //    }
     return null;
   }
 
 
   @Override
-  public int getNextNum() throws Exception {
-    //
-    //    requestAgent.request("join.getNextNum", null);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("고유번호 부여 중 오류 발생!");
-    //    }
-    //    JoinDTO joinDTO = requestAgent.getObject(JoinDTO.class);
-    //
-    //
-    //    return joinDTO.getNo();
-    return 0;
-  }
-
-  @Override
   public JoinDTO selectOneByIdPassword(String userId, String userPassword) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
-        "select user_no,user_id,name,email,tel,create_dt from ftp_user"
-            + " where user_id=? and password=password(?)")) {
+        "select user_no,id,name,email,tel,create_dt from ftp_user"
+            + " where id=? and password=password(?)")) {
 
       stmt.setString(1, userId);
       stmt.setString(2, userPassword);
@@ -193,27 +146,14 @@ public class MariadbJoinDao implements JoinDao {
         return joinDTO;
       }
     }
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("loginId", userId);
-    //    params.put("loginPassword", userPassword);
-    //
-    //    requestAgent.request("join.selectOneByIdPassword", params);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      return null;
-    //    } else {
-    //      return requestAgent.getObject(JoinDTO.class);
-    //
-    //    }
-    //    return null;
   }
 
   @Override
   public JoinDTO selectOneByIdEmail(String userId, String userEmail) throws Exception {
 
     try (PreparedStatement stmt = con.prepareStatement(
-        "select user_no,user_id,name,email,tel,create_dt from ftp_user"
-            + " where user_id=? and email=?")) {
+        "select user_no,id,name,email,tel,create_dt from ftp_user"
+            + " where id=? and email=?")) {
 
       stmt.setString(1, userId);
       stmt.setString(2, userEmail);
@@ -232,35 +172,10 @@ public class MariadbJoinDao implements JoinDao {
         return joinDTO;
       }
     }
-
-    //
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("loginId", userId);
-    //    params.put("loginEmail", userEmail);
-    //
-    //    requestAgent.request("join.selectOneByIdEmail", params);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      return null;
-    //    }
-    //
-    //    return requestAgent.getObject(JoinDTO.class);
   }
 
   @Override
   public JoinDTO selectOneByUser(String userId, String userPassword) throws Exception {
-    //
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("userId", userId);
-    //    params.put("userPassword", userPassword);
-    //
-    //    requestAgent.request("join.selectOneByUser", params);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      return null;
-    //    }
-    //
-    //    return requestAgent.getObject(JoinDTO.class);
     return null;
   }
 
@@ -268,7 +183,7 @@ public class MariadbJoinDao implements JoinDao {
   public JoinDTO selectOneByEmail(String userEmail) throws Exception {
 
     try (PreparedStatement stmt = con.prepareStatement(
-        "select user_no,user_id,name,email,tel,create_dt from ftp_user"
+        "select user_no,id,name,email,tel,create_dt from ftp_user"
             + " where email=?")) {
 
       stmt.setString(1, userEmail);
@@ -280,7 +195,7 @@ public class MariadbJoinDao implements JoinDao {
 
         JoinDTO joinDTO = new JoinDTO();
         joinDTO.setNo(rs.getInt("user_no"));
-        joinDTO.setId(rs.getString("user_id"));
+        joinDTO.setId(rs.getString("id"));
         joinDTO.setName(rs.getString("name"));
         joinDTO.setEmail(rs.getString("email"));
         joinDTO.setTel(rs.getString("tel"));
@@ -288,25 +203,13 @@ public class MariadbJoinDao implements JoinDao {
         return joinDTO;
       }
     }
-
-    //
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("userEmail", userEmail);
-    //
-    //    requestAgent.request("join.selectOneByEmail", params);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      return null;
-    //    }
-    //
-    //    return requestAgent.getObject(JoinDTO.class);
   }
 
   @Override
   public JoinDTO selectOneByTel(String userTel) throws Exception {
 
     try (PreparedStatement stmt = con.prepareStatement(
-        "select user_no,user_id,name,email,tel,create_dt from ftp_user"
+        "select user_no,id,name,email,tel,create_dt from ftp_user"
             + " where tel=?")) {
 
       stmt.setString(1, userTel);
@@ -318,7 +221,7 @@ public class MariadbJoinDao implements JoinDao {
 
         JoinDTO joinDTO = new JoinDTO();
         joinDTO.setNo(rs.getInt("user_no"));
-        joinDTO.setId(rs.getString("user_id"));
+        joinDTO.setId(rs.getString("id"));
         joinDTO.setName(rs.getString("name"));
         joinDTO.setEmail(rs.getString("email"));
         joinDTO.setTel(rs.getString("tel"));
@@ -326,17 +229,6 @@ public class MariadbJoinDao implements JoinDao {
         return joinDTO;
       }
     }
-
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("userTel", userTel);
-    //
-    //    requestAgent.request("join.selectOneByTel", params);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      return null;
-    //    }
-    //
-    //    return requestAgent.getObject(JoinDTO.class);
   }
 
 
