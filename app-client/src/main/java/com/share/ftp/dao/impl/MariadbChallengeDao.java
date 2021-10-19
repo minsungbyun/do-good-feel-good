@@ -34,7 +34,23 @@ public class MariadbChallengeDao implements ChallengeDao {
       if (stmt.executeUpdate() == 0) {
         throw new Exception("챌린지 등록 실패!");
       }
-    }
+
+      int challengeNo = 0;
+      try (ResultSet pkRS = stmt.getGeneratedKeys()) {
+        if (pkRS.next()) {
+          challengeNo = pkRS.getInt("challenge_no");
+        }
+      }
+
+//      try (PreparedStatement stmt2 = con.prepareStatement(
+//          "insert into ftp_challenge_file(challenge_no,challenge_file_no) values(?,?)")) {
+//        for (ChallengeDTO challenge : addChallenge.getFileUpload()) {
+//          stmt2.setInt(1, challengeNo);
+//          stmt2.setInt(2, challenge.getFileUpload());
+//          stmt2.executeUpdate();
+//        }
+//      }
+//    }
   }
 
   @Override

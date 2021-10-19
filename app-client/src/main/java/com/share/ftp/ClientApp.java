@@ -23,22 +23,12 @@ import com.share.ftp.dao.OrgDao;
 import com.share.ftp.dao.PersonalDao;
 import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.dao.VolunteerDao;
-<<<<<<< HEAD
 import com.share.ftp.dao.impl.MariadbChallengeDao;
-=======
 import com.share.ftp.dao.impl.MariadbGroupDao;
->>>>>>> d8cecbbe78f251b9d66a47c181bf2ba7908c3b8c
 import com.share.ftp.dao.impl.MariadbJoinDao;
-<<<<<<< HEAD
+import com.share.ftp.dao.impl.MariadbNoticeDao;
 import com.share.ftp.dao.impl.MariadbOrgDao;
 import com.share.ftp.dao.impl.MariadbPersonalDao;
-=======
-import com.share.ftp.dao.impl.MariadbNoticeDao;
-<<<<<<< HEAD
-=======
->>>>>>> 4c47e26ec1ecef1b9e65faaa24b8e775885c6b58
-import com.share.ftp.dao.impl.NetChallengeDao;
->>>>>>> d8cecbbe78f251b9d66a47c181bf2ba7908c3b8c
 import com.share.ftp.dao.impl.NetCommunityDao;
 import com.share.ftp.dao.impl.NetDonationBoardDao;
 import com.share.ftp.dao.impl.NetDonationRegisterDao;
