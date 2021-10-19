@@ -54,6 +54,13 @@ insert into ftp_vol(vol_no, user_no, vol_category_no, title, content, tel, email
 values(4, 1, 4,'사랑의 도시락','내용4','031-414-1118','soso@gmail.com','2021-8-5','2021-12-10','9:00','18:00',10,2);
 
 
+--봉사참여자 (apply_status 1.승인 2.거절)
+-- 잘못된 데이터 고쳐야함
+insert into ftp_vol_apply(user_no, vol_no, start_time, end_time, apply_status)
+values(1,1,'09:00','18:00',1);
+
+
+
 --봉사카테고리 (1.비대면 2.아동 3.청소년 4.노인 5.장애인 6.동물 7.환경 8.기타)
 insert into ftp_vol_category(vol_category_no, category_title)
 values(1,'비대면');
