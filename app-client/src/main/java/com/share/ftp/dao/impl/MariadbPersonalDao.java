@@ -62,9 +62,16 @@ public class MariadbPersonalDao implements PersonalDao {
 select
  u.user_no,
  u.id,
- u.password,
+ u.name,
+ u.tel,
  u.email,
- p.user_personal_no,
+ u.created_dt,
+ u.basic_address,
+ u.detail_address,
+ u.donation,
+ u.type,
+ p.birthdate,
+ p.rank,
  p.point
 from ftp_user u
  inner join ftp_user_personal p on u.user_no=p.user_no;
@@ -78,19 +85,21 @@ from ftp_user u
 
     try (PreparedStatement stmt = con.prepareStatement(
         "select"
-            + " user_no,"
-            + " id,"
-            //            + " password,"
-            + " email,"
-            + " name,"
-            + " tel,"
-            + " created_dt,"
-            + " post_no,"
-            + " basic_address,"
-            + " detail_address,"
-            + " birthdate"
-            + " from"
-            + " ftp_user order by user_no asc");
+            + " u.user_no,"
+            + " u.id,"
+            + " u.name,"
+            + " u.tel,"
+            + " u.email,"
+            + " u.created_dt,"
+            + " u.basic_address,"
+            + " u.detail_address,"
+            + " u.donation,"
+            + " u.type,"
+            + " p.birthdate,"
+            + " p.rank,"
+            + " p.point"
+            + " from ftp_user u"
+            + " inner join ftp_user_personal p on u.user_no=p.user_no");
         ResultSet rs = stmt.executeQuery()) {
 
 
@@ -100,14 +109,16 @@ from ftp_user u
         PersonalDTO personalDTO = new PersonalDTO();
         personalDTO.setNo(rs.getInt("user_no"));
         personalDTO.setId(rs.getString("id"));
-        //        personalDTO.setPassword(rs.getString("password"));
         personalDTO.setName(rs.getString("name"));
         personalDTO.setEmail(rs.getString("email"));
         personalDTO.setTel(rs.getString("tel"));
         personalDTO.setRegisterDate(rs.getDate("create_dt"));
-        personalDTO.setPostNo(rs.getInt("post_no"));
         personalDTO.setBasicAddress(rs.getString("basic_address"));
         personalDTO.setDetailAddress(rs.getString("detail_address"));
+        personalDTO.setDonationMoney(rs.getInt("donation"));
+        personalDTO.setType(rs.getInt("type"));
+        personalDTO.setLevel(rs.getString("rank"));
+        personalDTO.setPoint(rs.getInt("point"));
         personalDTO.setBirthdate(rs.getDate("birthdate"));
 
         list.add(personalDTO);
