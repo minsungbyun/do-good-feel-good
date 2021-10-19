@@ -1,14 +1,14 @@
 -- 회원 입력 (1=개인 2=단체 3=기관) 
-insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, user_status)
+insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, status)
 values(1,'interface', password('1'), 'interface', '010-1111-1111', 'interface@naver.com', '05541', '서울시', '강남구','1');
 
-insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, user_status)
+insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, status)
 values(2,'object', password('1'), 'object', '010-2222-2222', 'object@naver.com', '08155', '경기도', '부평구','2');
 
-insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, user_status)
+insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, status)
 values(3,'sysout', password('1'), 'sysout', '010-3333-3333', 'sysout@naver.com', '06661', '서울시', '서초구','3');
 
-insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, user_status)
+insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, status)
 values(4,'public', password('1'), 'public', '010-4444-4444', 'public@naver.com', '06661', '서울시', '송파구','1');
 
 
@@ -29,16 +29,15 @@ values(4, 2, '한강 환경 정비 봉사활동', '즐거운 일요일, 한강�
 --한 줄 후기(봉사활동 후기) - 봉사 입력 후 입력 가능
 
 insert into ftp_vol_shortreview(vol_shortreview_no, user_no, vol_no, content)
-values(1, ?, 2, '코딩 재능기부하면서 제 실력도 같이 느는 것 같아요!'); 
+values(1, 3, 1, '가을의 청취를 느낄 수 있었던 봉사'); 
 
 insert into ftp_vol_shortreview(vol_shortreview_no, user_no, vol_no, content)
-values(2, ?, 4, '저소득층 한부모 가정 이사지원 활동 추천합니다!'); 
+values(2, 2, 2, '저도 같이 성장하는 느낌이었습니다.'); 
 
 insert into ftp_vol_shortreview(vol_shortreview_no, user_no, vol_no, content)
-values(3, ?, 3, '(비대면) 애착인형만들기~ 인형도 사랑스럽고,힐링에 제격입니다.');
+values(3, 4, 3, '누구나 쉽게 참여할 수 있어요!');
 
-insert into ftp_vol_shortreview(vol_shortreview_no, user_no, vol_no, content)
-values(4, ?, 1, '수해피해 복구를 위한 사랑의 밥차, 팔근육 단련에 최고!'); 
+
 
 
 --봉사 (승인여부 : 1.승인 2.반려)
