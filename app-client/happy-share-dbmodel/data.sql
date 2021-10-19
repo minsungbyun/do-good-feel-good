@@ -1,14 +1,14 @@
--- 회원 입력 (1=개인 2=단체 3=기관) 
+-- 회원 입력 (1=개인 2=단체 3=기관)(0.탈퇴 1.가입완료 2.승인대기 3.승인반려 4.휴면회원)
 insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, type, status)
 values(1,'interface', password('1'), 'interface', '010-1111-1111', 'interface@naver.com', '05541', '서울시', '강남구',1,1);
 
-insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, status)
+insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, type, status)
 values(2,'object', password('1'), 'object', '010-2222-2222', 'object@naver.com', '08155', '경기도', '부평구',2,1);
 
-insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, status)
+insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, type, status)
 values(3,'sysout', password('1'), 'sysout', '010-3333-3333', 'sysout@naver.com', '06661', '서울시', '서초구',3,1);
 
-insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, status)
+insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, type, status)
 values(4,'public', password('1'), 'public', '010-4444-4444', 'public@naver.com', '06661', '서울시', '송파구',1,1);
 
 insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, type, status)
@@ -126,17 +126,29 @@ insert into ftp_support_qna_categroy(qna_category_no, category_title) values(5, 
 insert into ftp_support_qna_categroy(qna_category_no, category_title) values(6, '기타 문의');
 
 -- 문의하기
---insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password, qna_reply, )
-  --values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', )
-  --values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', )
-  --values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', )
-  --values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', )
-  --values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', )
-  --values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', )
-  --values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', )
-  --values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', )
-  --values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', )
-  --values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', )
+insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password, qna_reply, status)
+  values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', 1);
+insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password, qna_reply, status)
+  values(2, 4, 2, '문의2', '내용2', password('1'), '문의하기 답글2', 1);
+insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password, status)
+  values(3, 6, 5, '문의3', '내용3', password('1'), 0);
+insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password)
+  values(4, 3, 4, '문의4', '내용4', password('1'));
+insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password)
+  values(5, 1, 4, '문의5', '내용5', password('1'));
+insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password, qna_reply)
+  values(6, 5, 3, '문의6', '내용6', password('1'), '문의하기 답글6');
+  
+  
+insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password, qna_reply, status)
+  values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', 1);
+insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password, qna_reply, status)
+  values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', 1);
+insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password, qna_reply, status)
+  values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', 1);
+insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password, qna_reply, status)
+  values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', 1);
+
   
 
 -- 문의하기 첨부파일

@@ -21,11 +21,11 @@ import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.dao.impl.MariadbJoinDao;
+import com.share.ftp.dao.impl.MariadbNoticeDao;
 import com.share.ftp.dao.impl.NetChallengeDao;
 import com.share.ftp.dao.impl.NetCommunityDao;
 import com.share.ftp.dao.impl.NetDonationBoardDao;
 import com.share.ftp.dao.impl.NetDonationRegisterDao;
-import com.share.ftp.dao.impl.NetNoticeDao;
 import com.share.ftp.dao.impl.NetQuestionDao;
 import com.share.ftp.dao.impl.NetVolunteerDao;
 import com.share.ftp.handler.Command;
@@ -227,6 +227,7 @@ public class ClientApp {
 
     requestAgent = null;
 
+    // DBMS와 연결
     con = DriverManager.getConnection(
         "jdbc:mysql://localhost:3306/happysharedb?user=happyshare&password=1111");
 
@@ -236,7 +237,7 @@ public class ClientApp {
     CommunityDao netCommunityDao = new NetCommunityDao(requestAgent);
     ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
     QuestionDao netQuestionDao = new NetQuestionDao(requestAgent);
-    NoticeDao netNoticeDao = new NetNoticeDao(requestAgent);
+    NoticeDao netNoticeDao = new MariadbNoticeDao(con);
     //    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
     //    ChallengeReviewDao netChallengeReviewDao = new NetChallengeDao(requestAgent);
 
