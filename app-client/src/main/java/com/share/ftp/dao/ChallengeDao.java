@@ -15,7 +15,7 @@ public interface ChallengeDao {
 
   ChallengeDTO findByChallengeNo(int challengeNo) throws Exception;
   String getRemainTime(long millis) throws Exception;
-  int getNextNum() throws Exception;       
+  //  int getNextNum() throws Exception;       
 
   // 챌린지 문의사항 관련
   void insertQuestion(ChallengeQuestionDTO addChallengeQuestion) throws Exception;

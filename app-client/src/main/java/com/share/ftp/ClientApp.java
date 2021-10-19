@@ -20,8 +20,8 @@ import com.share.ftp.dao.JoinDao;
 import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.dao.VolunteerDao;
+import com.share.ftp.dao.impl.MariadbChallengeDao;
 import com.share.ftp.dao.impl.MariadbJoinDao;
-import com.share.ftp.dao.impl.NetChallengeDao;
 import com.share.ftp.dao.impl.NetCommunityDao;
 import com.share.ftp.dao.impl.NetDonationBoardDao;
 import com.share.ftp.dao.impl.NetDonationRegisterDao;
@@ -236,7 +236,7 @@ public class ClientApp {
 
     VolunteerDao netVolunteerDao = new NetVolunteerDao(requestAgent);
     CommunityDao netCommunityDao = new NetCommunityDao(requestAgent);
-    ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
+    ChallengeDao netChallengeDao = new MariadbChallengeDao(con);
     QuestionDao netQuestionDao = new NetQuestionDao(requestAgent);
     NoticeDao netNoticeDao = new NetNoticeDao(requestAgent);
     //    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);

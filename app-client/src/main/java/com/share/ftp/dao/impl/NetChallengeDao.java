@@ -62,19 +62,19 @@ public class NetChallengeDao implements ChallengeDao {
     }
   }
 
-  @Override
-  public int getNextNum() throws Exception {
-
-    requestAgent.request("challenge.getNextNum", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("고유번호 부여 중 오류 발생!");
-    }
-    ChallengeDTO challengeDTO = requestAgent.getObject(ChallengeDTO.class);
-
-
-    return challengeDTO.getNo();
-  }
+  //  @Override
+  //  public int getNextNum() throws Exception {
+  //
+  //    requestAgent.request("challenge.getNextNum", null);
+  //
+  //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+  //      throw new Exception("고유번호 부여 중 오류 발생!");
+  //    }
+  //    ChallengeDTO challengeDTO = requestAgent.getObject(ChallengeDTO.class);
+  //
+  //
+  //    return challengeDTO.getNo();
+  //  }
 
   @Override
   public ChallengeDTO findByChallengeNo(int challengeNo) throws Exception {

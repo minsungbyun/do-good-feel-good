@@ -44,8 +44,8 @@ public class MariadbChallengeDao implements ChallengeDao {
             + " c.challenge_no,"
             + " c.title,"
             //            + " c.content,"
-            + " c.review_cnt,"
-            + " c.current_cnt,"
+            //            + " c.review_cnt,"
+            //            + " c.current_cnt,"
             //            + " m.name," // 첨부파일 수정필요
             + " c.start_dt,"
             + " c.end_dt"
@@ -63,8 +63,8 @@ public class MariadbChallengeDao implements ChallengeDao {
         challengeDTO.setNo(rs.getInt("challenge_no"));
         challengeDTO.setTitle(rs.getString("title"));
         //        challengeDTO.setContent(rs.getString("content"));
-        challengeDTO.setReviewCount(rs.getInt("review_cnt"));
-        challengeDTO.setTotalJoinCount(rs.getInt("current_cnt"));
+        //        challengeDTO.setReviewCount(rs.getInt("review_cnt"));
+        //        challengeDTO.setTotalJoinCount(rs.getInt("current_cnt"));
         challengeDTO.setStartDate(rs.getDate("start_dt"));
         challengeDTO.setEndDate(rs.getDate("end_dt"));
 
@@ -95,20 +95,20 @@ public class MariadbChallengeDao implements ChallengeDao {
     //    }
   }
 
-  @Override
-  public int getNextNum() throws Exception {
-    //
-    //    requestAgent.request("challenge.getNextNum", null);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("고유번호 부여 중 오류 발생!");
-    //    }
-    //    ChallengeDTO challengeDTO = requestAgent.getObject(ChallengeDTO.class);
-    //
-    //
-    //    return challengeDTO.getNo();
-    return (Integer) null; // 임시 리턴
-  }
+  //  @Override
+  //  public int getNextNum() throws Exception {
+  //    
+  //        requestAgent.request("challenge.getNextNum", null);
+  //    
+  //        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+  //          throw new Exception("고유번호 부여 중 오류 발생!");
+  //        }
+  //        ChallengeDTO challengeDTO = requestAgent.getObject(ChallengeDTO.class);
+  //    
+  //    
+  //        return challengeDTO.getNo();
+  //    return (Integer) null; // 임시 리턴
+  //  }
 
   @Override
   public ChallengeDTO findByChallengeNo(int challengeNo) throws Exception {
