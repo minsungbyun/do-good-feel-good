@@ -2,15 +2,6 @@
 insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, type, status)
 values(1,'interface', password('1'), 'interface', '010-1111-1111', 'interface@naver.com', '05541', '서울시', '강남구',1,1);
 
-<<<<<<< HEAD
-insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, type,status)
-values(2,'object', password('1'), 'object', '010-2222-2222', 'object@naver.com', '08155', '경기도', '부평구',2,1);
-
-insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, type,status)
-values(3,'sysout', password('1'), 'sysout', '010-3333-3333', 'sysout@naver.com', '06661', '서울시', '서초구',3,1);
-
-insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, type,status)
-=======
 insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, type, status)
 values(2,'object', password('1'), 'object', '010-2222-2222', 'object@naver.com', '08155', '경기도', '부평구',2,1);
 
@@ -18,7 +9,6 @@ insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_add
 values(3,'sysout', password('1'), 'sysout', '010-3333-3333', 'sysout@naver.com', '06661', '서울시', '서초구',3,1);
 
 insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, type, status)
->>>>>>> 4c47e26ec1ecef1b9e65faaa24b8e775885c6b58
 values(4,'public', password('1'), 'public', '010-4444-4444', 'public@naver.com', '06661', '서울시', '송파구',1,1);
 
 insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, type, status)

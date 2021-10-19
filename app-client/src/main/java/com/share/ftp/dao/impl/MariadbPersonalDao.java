@@ -57,7 +57,18 @@ public class MariadbPersonalDao implements PersonalDao {
         stmt2.executeUpdate();
       }
 
-
+      /*
+       * 개인회원 조회 join
+select
+ u.user_no,
+ u.id,
+ u.password,
+ u.email,
+ p.user_personal_no,
+ p.point
+from ftp_user u
+ inner join ftp_user_personal p on u.user_no=p.user_no;
+       */
 
     }
   }
