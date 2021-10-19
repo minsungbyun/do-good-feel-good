@@ -108,7 +108,7 @@ CREATE TABLE ftp_user (
 	name           VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
 	tel            VARCHAR(30)  NOT NULL COMMENT '전화', -- 전화
 	email          VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
-	create_dt      DATE         NOT NULL DEFAULT CURDATE() COMMENT '가입일', -- 가입일
+	created_dt     DATE         NOT NULL DEFAULT CURDATE() COMMENT '가입일', -- 가입일
 	post_no        VARCHAR(5)   NOT NULL COMMENT '우편번호', -- 우편번호
 	basic_address  VARCHAR(255) NOT NULL COMMENT '기본주소', -- 기본주소
 	detail_address VARCHAR(255) NOT NULL COMMENT '상세주소', -- 상세주소
@@ -147,7 +147,7 @@ ALTER TABLE ftp_user
 CREATE TABLE ftp_vol_apply (
 	user_no      INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
 	vol_no       INTEGER NOT NULL COMMENT '봉사번호', -- 봉사번호
-	apply_dt     DATE    NOT NULL DEFAULT CURDATE() COMMENT '신청일', -- 신청일
+	apply_dt     DATE    NOT NULL COMMENT '참여일', -- 참여일
 	start_time   TIME    NOT NULL COMMENT '시작시간', -- 시작시간
 	end_time     TIME    NOT NULL COMMENT '종료시간', -- 종료시간
 	apply_status INTEGER NOT NULL DEFAULT 0 COMMENT '참여여부', -- 참여여부
@@ -169,7 +169,7 @@ CREATE TABLE ftp_vol_board (
 	user_no      INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
 	title        VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
 	content      TEXT         NOT NULL COMMENT '내용', -- 내용
-	create_dt    DATE         NOT NULL DEFAULT CURDATE() COMMENT '등록일', -- 등록일
+	created_dt   DATE         NOT NULL DEFAULT CURDATE() COMMENT '등록일', -- 등록일
 	view_cnt     INTEGER      NULL     DEFAULT 0 COMMENT '조회수' -- 조회수
 )
 COMMENT '봉사게시판';
@@ -190,7 +190,8 @@ CREATE TABLE ftp_challenge (
 	title        VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
 	content      TEXT         NOT NULL COMMENT '내용', -- 내용
 	start_dt     DATE         NOT NULL COMMENT '시작일', -- 시작일
-	end_dt       DATE         NOT NULL COMMENT '종료일' -- 종료일
+	end_dt       DATE         NOT NULL COMMENT '종료일', -- 종료일
+	created_dt   DATE         NOT NULL DEFAULT curdate() COMMENT '등록일' -- 등록일
 )
 COMMENT '챌린지';
 
@@ -235,7 +236,7 @@ CREATE TABLE ftp_support_qna (
 	title           VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
 	content         TEXT         NOT NULL COMMENT '내용', -- 내용
 	password        VARCHAR(100) NOT NULL COMMENT '문의비밀번호', -- 문의비밀번호
-	create_dt       DATE         NOT NULL DEFAULT CURDATE() COMMENT '등록일', -- 등록일
+	created_dt      DATE         NOT NULL DEFAULT CURDATE() COMMENT '등록일', -- 등록일
 	view_cnt        INTEGER      NULL     DEFAULT 0 COMMENT '조회수', -- 조회수
 	qna_reply       TEXT         NULL     COMMENT '답글', -- 답글
 	status          INTEGER      NOT NULL DEFAULT 0 COMMENT '답글여부' -- 답글여부
@@ -254,11 +255,11 @@ ALTER TABLE ftp_support_qna
 
 -- 공지사항
 CREATE TABLE ftp_support_notice (
-	notice_no INTEGER      NOT NULL COMMENT '공지사항게시판번호', -- 공지사항게시판번호
-	title     VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
-	content   TEXT         NOT NULL COMMENT '내용', -- 내용
-	create_dt DATE         NOT NULL DEFAULT CURDATE() COMMENT '등록일', -- 등록일
-	view_cnt  INTEGER      NULL     DEFAULT 0 COMMENT '조회수' -- 조회수
+	notice_no  INTEGER      NOT NULL COMMENT '공지사항게시판번호', -- 공지사항게시판번호
+	title      VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
+	content    TEXT         NOT NULL COMMENT '내용', -- 내용
+	created_dt DATE         NOT NULL DEFAULT CURDATE() COMMENT '등록일', -- 등록일
+	view_cnt   INTEGER      NULL     DEFAULT 0 COMMENT '조회수' -- 조회수
 )
 COMMENT '공지사항';
 
@@ -278,7 +279,7 @@ CREATE TABLE ftp_challenge_qna (
 	challenge_no     INTEGER NOT NULL COMMENT '챌린지번호', -- 챌린지번호
 	user_no          INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
 	content          TEXT    NOT NULL COMMENT '내용', -- 내용
-	create_dt        DATE    NOT NULL DEFAULT CURDATE() COMMENT '등록일', -- 등록일
+	created_dt       DATE    NOT NULL DEFAULT CURDATE() COMMENT '등록일', -- 등록일
 	reply            TEXT    NULL     COMMENT '답변' -- 답변
 )
 COMMENT '챌린지문의하기';
@@ -299,7 +300,7 @@ CREATE TABLE ftp_challenge_review (
 	challenge_no        INTEGER NOT NULL COMMENT '챌린지번호', -- 챌린지번호
 	user_no             INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
 	content             TEXT    NOT NULL COMMENT '내용', -- 내용
-	create_dt           DATE    NOT NULL DEFAULT CURDATE() COMMENT '등록일' -- 등록일
+	created_dt          DATE    NOT NULL DEFAULT CURDATE() COMMENT '등록일' -- 등록일
 )
 COMMENT '챌린지후기';
 
@@ -319,7 +320,7 @@ CREATE TABLE ftp_vol_shortreview (
 	user_no            INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
 	vol_no             INTEGER      NOT NULL COMMENT '봉사번호', -- 봉사번호
 	content            VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
-	create_dt          DATE         NOT NULL DEFAULT CURDATE() COMMENT '등록일' -- 등록일
+	created_dt         DATE         NOT NULL DEFAULT CURDATE() COMMENT '등록일' -- 등록일
 )
 COMMENT '봉사한줄후기';
 
@@ -432,7 +433,6 @@ CREATE TABLE ftp_vol (
 	start_time      TIME         NOT NULL COMMENT '시작시간', -- 시작시간
 	end_time        TIME         NOT NULL COMMENT '종료시간', -- 종료시간
 	total_cnt       INTEGER      NOT NULL COMMENT '총모집인원', -- 총모집인원
-	apply_dt        DATE         NOT NULL DEFAULT CURDATE() COMMENT '신청일', -- 신청일
 	approval        INTEGER      NOT NULL DEFAULT 0 COMMENT '승인여부', -- 승인여부
 	note            TEXT         NULL     COMMENT '비고' -- 비고
 )
@@ -728,7 +728,7 @@ CREATE TABLE ftp_user_alert (
 	user_notice_no INTEGER      NOT NULL COMMENT '알림번호', -- 알림번호
 	user_no        INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
 	content        VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
-	create_dt      DATE         NOT NULL DEFAULT CURDATE() COMMENT '등록일' -- 등록일
+	created_dt     DATE         NOT NULL DEFAULT CURDATE() COMMENT '등록일' -- 등록일
 )
 COMMENT '알림';
 
@@ -748,7 +748,7 @@ CREATE TABLE ftp_user_message (
 	user_from  INTEGER NOT NULL COMMENT '보내는이', -- 보내는이
 	user_to    INTEGER NOT NULL COMMENT '받는이', -- 받는이
 	content    TEXT    NOT NULL COMMENT '내용', -- 내용
-	create_dt  DATE    NOT NULL DEFAULT curdate() COMMENT '등록일' -- 등록일
+	created_dt DATE    NOT NULL DEFAULT curdate() COMMENT '등록일' -- 등록일
 )
 COMMENT '메세지';
 
