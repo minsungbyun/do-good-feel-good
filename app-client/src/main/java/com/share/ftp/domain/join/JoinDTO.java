@@ -5,34 +5,25 @@ import java.sql.Date;
 import java.util.Objects;
 
 
-public class JoinDTO implements Serializable {
+public abstract class JoinDTO implements Serializable {
 
   private static final long serialVersionUID = 2397935818210730479L;
 
   private int no;
   private int type; // 1. 개인, 2. 기관, 3. 그룹
-  private int point; // 유저 포인트
-  private int rank = 1; // 유저 랭킹
-  private int finalRank; // 유저 랭킹
   private int donationMoney; // 유저 기부금액
-  private int authNum = 1004; 
   private int adminPassword = -1;
   private String id;
   private String password;
   private String name;
-  private Date birthdate;
   private String tel;
   private String email;
-  private String address;
-  private String detailAddress;
+  private int postNo;
   private String basicAddress;
+  private String detailAddress;
+  private int status;
+  private String note;
   private Date registerDate;
-  private String level; // 유저등급
-
-
-
-
-
 
 
 
@@ -40,18 +31,16 @@ public class JoinDTO implements Serializable {
 
   @Override
   public String toString() {
-    return "JoinDTO [no=" + no + ", type=" + type + ", point=" + point + ", rank=" + rank
-        + ", finalRank=" + finalRank + ", donationMoney=" + donationMoney + ", authNum=" + authNum
+    return "JoinDTO [no=" + no + ", type=" + type + ", donationMoney=" + donationMoney
         + ", adminPassword=" + adminPassword + ", id=" + id + ", password=" + password + ", name="
-        + name + ", birthdate=" + birthdate + ", tel=" + tel + ", email=" + email + ", address="
-        + address + ", detailAddress=" + detailAddress + ", basicAddress=" + basicAddress
-        + ", registerDate=" + registerDate + ", level=" + level + "]";
+        + name + ", tel=" + tel + ", email=" + email + ", postNo=" + postNo + ", basicAddress="
+        + basicAddress + ", detailAddress=" + detailAddress + ", status=" + status + ", note="
+        + note + ", registerDate=" + registerDate + "]";
   }
   @Override
   public int hashCode() {
-    return Objects.hash(address, adminPassword, authNum, basicAddress, birthdate, detailAddress,
-        donationMoney, email, finalRank, id, level, name, no, password, point, rank, registerDate,
-        tel, type);
+    return Objects.hash(adminPassword, basicAddress, detailAddress, donationMoney, email, id, name,
+        no, note, password, postNo, registerDate, status, tel, type);
   }
   @Override
   public boolean equals(Object obj) {
@@ -62,16 +51,13 @@ public class JoinDTO implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     JoinDTO other = (JoinDTO) obj;
-    return Objects.equals(address, other.address) && adminPassword == other.adminPassword
-        && authNum == other.authNum && Objects.equals(basicAddress, other.basicAddress)
-        && Objects.equals(birthdate, other.birthdate)
+    return adminPassword == other.adminPassword && Objects.equals(basicAddress, other.basicAddress)
         && Objects.equals(detailAddress, other.detailAddress)
         && donationMoney == other.donationMoney && Objects.equals(email, other.email)
-        && finalRank == other.finalRank && Objects.equals(id, other.id)
-        && Objects.equals(level, other.level) && Objects.equals(name, other.name) && no == other.no
-        && Objects.equals(password, other.password) && point == other.point && rank == other.rank
-        && Objects.equals(registerDate, other.registerDate) && Objects.equals(tel, other.tel)
-        && type == other.type;
+        && Objects.equals(id, other.id) && Objects.equals(name, other.name) && no == other.no
+        && Objects.equals(note, other.note) && Objects.equals(password, other.password)
+        && postNo == other.postNo && Objects.equals(registerDate, other.registerDate)
+        && status == other.status && Objects.equals(tel, other.tel) && type == other.type;
   }
   public int getNo() {
     return no;
@@ -85,17 +71,17 @@ public class JoinDTO implements Serializable {
   public void setType(int type) {
     this.type = type;
   }
-  public int getPoint() {
-    return point;
+  public int getDonationMoney() {
+    return donationMoney;
   }
-  public void setPoint(int point) {
-    this.point = point;
+  public void setDonationMoney(int donationMoney) {
+    this.donationMoney = donationMoney;
   }
-  public int getAuthNum() {
-    return authNum;
+  public int getAdminPassword() {
+    return adminPassword;
   }
-  public void setAuthNum(int authNum) {
-    this.authNum = authNum;
+  public void setAdminPassword(int adminPassword) {
+    this.adminPassword = adminPassword;
   }
   public String getId() {
     return id;
@@ -115,12 +101,6 @@ public class JoinDTO implements Serializable {
   public void setName(String name) {
     this.name = name;
   }
-  public Date getBirthdate() {
-    return birthdate;
-  }
-  public void setBirthdate(Date birthdate) {
-    this.birthdate = birthdate;
-  }
   public String getTel() {
     return tel;
   }
@@ -133,56 +113,11 @@ public class JoinDTO implements Serializable {
   public void setEmail(String email) {
     this.email = email;
   }
-  public String getAddress() {
-    return address;
+  public int getPostNo() {
+    return postNo;
   }
-  public void setAddress(String address) {
-    this.address = address;
-  }
-  public Date getRegisterDate() {
-    return registerDate;
-  }
-  public void setRegisterDate(Date registerDate) {
-    this.registerDate = registerDate;
-  }
-  public String getLevel() {
-    return level;
-  }
-  public void setLevel(String level) {
-    this.level = level;
-  }
-  public int getDonationMoney() {
-    return donationMoney;
-  }
-  public void setDonationMoney(int donationMoney) {
-    this.donationMoney = donationMoney;
-  }
-  public int getRank() {
-    return rank;
-  }
-  public void setRank(int rank) {
-    this.rank = rank;
-  }
-
-  public int getAdminPassword() {
-    return adminPassword;
-  }
-  public void setAdminPassword(int adminPassword) {
-    this.adminPassword = adminPassword;
-  }
-
-  public int getFinalRank() {
-    return finalRank;
-  }
-  public void setFinalRank(int finalRank) {
-    this.finalRank = finalRank;
-
-  }
-  public String getDetailAddress() {
-    return detailAddress;
-  }
-  public void setDetailAddress(String detailAddress) {
-    this.detailAddress = detailAddress;
+  public void setPostNo(int postNo) {
+    this.postNo = postNo;
   }
   public String getBasicAddress() {
     return basicAddress;
@@ -190,6 +125,39 @@ public class JoinDTO implements Serializable {
   public void setBasicAddress(String basicAddress) {
     this.basicAddress = basicAddress;
   }
+  public String getDetailAddress() {
+    return detailAddress;
+  }
+  public void setDetailAddress(String detailAddress) {
+    this.detailAddress = detailAddress;
+  }
+  public String getNote() {
+    return note;
+  }
+  public void setNote(String note) {
+    this.note = note;
+  }
+  public Date getRegisterDate() {
+    return registerDate;
+  }
+  public void setRegisterDate(Date registerDate) {
+    this.registerDate = registerDate;
+  }
+  public int getStatus() {
+    return status;
+  }
+  public void setStatus(int status) {
+    this.status = status;
+  }
+
+
+
+
+
+
+
+
+
 
 
 

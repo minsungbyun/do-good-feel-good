@@ -12,20 +12,20 @@ import static com.share.util.General.level.LEVEL_E;
 import java.util.Collections;
 import java.util.List;
 import com.share.ftp.domain.join.JoinComparator;
-import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.domain.join.PersonalDTO;
 import com.share.ftp.handler.join.AuthLoginHandler;
 
 // 역할
 // - 사용자 데이터를 처리하는 static 메서드를 보관하는 클래스
 public class MemberHelper {
 
-  public static int getUserPoint(JoinDTO loginUser) {
+  public static int getUserPoint(PersonalDTO loginUser) {
 
     return loginUser.getPoint();
   }
 
 
-  public static String getUserLevel(JoinDTO loginUser) {
+  public static String getUserLevel(PersonalDTO loginUser) {
 
     int userPoint = loginUser.getPoint();
 
@@ -51,7 +51,7 @@ public class MemberHelper {
     return loginUser.getLevel();
   }
 
-  public static int getUserRemainPoint(JoinDTO loginUser) {
+  public static int getUserRemainPoint(PersonalDTO loginUser) {
 
     int needPoint = 0;
     int userPoint = loginUser.getPoint();
@@ -75,9 +75,9 @@ public class MemberHelper {
     return needPoint;
   }
 
-  public static List<JoinDTO> getUserRank(List<JoinDTO> allUser) {
+  public static List<PersonalDTO> getUserRank(List<PersonalDTO> allUser) {
 
-    List<JoinDTO> pointList = getUserPointList(allUser);
+    List<PersonalDTO> pointList = getUserPointList(allUser);
 
     for (int i = 0; i < pointList.size(); i++) {
       for (int j = 0; j < pointList.size(); j++) {
@@ -95,20 +95,20 @@ public class MemberHelper {
   }
 
 
-  public static void printUserRank(List<JoinDTO> allUser) {
+  public static void printUserRank(List<PersonalDTO> allUser) {
 
-    List<JoinDTO> userRank = getUserRank(allUser);
+    List<PersonalDTO> userRank = getUserRank(allUser);
 
-    for (JoinDTO loginUser : userRank) {
+    for (PersonalDTO loginUser : userRank) {
       System.out.printf("     %d등  %-10s   [%5d점]\n" , loginUser.getFinalRank(), loginUser.getId(), loginUser.getPoint());
     }
   }
 
-  public static int printMyRank(List<JoinDTO> allUser) {
+  public static int printMyRank(List<PersonalDTO> allUser) {
 
-    List<JoinDTO> userRank = getUserRank(allUser);
+    List<PersonalDTO> userRank = getUserRank(allUser);
 
-    for (JoinDTO loginUser : userRank) {
+    for (PersonalDTO loginUser : userRank) {
       if (loginUser.getId().equals(AuthLoginHandler.getLoginUser().getId())) {
         return loginUser.getFinalRank();
       }
@@ -116,18 +116,18 @@ public class MemberHelper {
     return -1;
   }
 
-  public static int printIndividualUserRank(JoinDTO loginUser) {
+  public static int printIndividualUserRank(PersonalDTO loginUser) {
     return loginUser.getFinalRank();
   }
 
   // 현재 로그인 한 회원의 포인트를 비교해서 나열함
-  public static List<JoinDTO> getUserPointList(List<JoinDTO> allUser) {
+  public static List<PersonalDTO> getUserPointList(List<PersonalDTO> allUser) {
 
     JoinComparator userPointComp = new JoinComparator();
 
     Collections.sort(allUser, userPointComp);
 
-    for(JoinDTO loginUser : allUser) {
+    for(PersonalDTO loginUser : allUser) {
       loginUser.setRank(1);
       //    System.out.printf("유저 이름 : %s\n포인트 : %d\n", loginUser.getName(), loginUser.getPoint());
     }

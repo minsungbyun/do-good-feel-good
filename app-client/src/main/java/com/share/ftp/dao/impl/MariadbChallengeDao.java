@@ -43,10 +43,6 @@ public class MariadbChallengeDao implements ChallengeDao {
         "select"
             + " c.challenge_no,"
             + " c.title,"
-            //            + " c.content,"
-            //            + " c.review_cnt,"
-            //            + " c.current_cnt,"
-            //            + " m.name," // 첨부파일 수정필요
             + " c.start_dt,"
             + " c.end_dt"
             //            + " c.deadline_dt"
@@ -78,12 +74,24 @@ public class MariadbChallengeDao implements ChallengeDao {
 
   @Override
   public void update(ChallengeDTO updateChallenge) throws Exception {
-    //    requestAgent.request("challenge.update", updateChallenge);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("챌린지 변경 실패!");
-    //    }
 
+    try (PreparedStatement stmt = con.prepareStatement(
+        "update ftp_challenge set"
+            + " title=?,"
+            + " content=?,"
+            + " start_dt=?,"
+            + " end_dt=?"
+            + " where challenge_no=?")) {
+
+      stmt.setString(1, updateChallenge.getTitle());
+      stmt.setString(2, updateChallenge.getContent());
+      stmt.setDate(3, updateChallenge.getStartDate());
+      stmt.setDate(4, updateChallenge.getEndDate());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("챌린지 데이터 변경 실패!");
+      }
+    }
   }
 
   @Override
@@ -112,18 +120,49 @@ public class MariadbChallengeDao implements ChallengeDao {
 
   @Override
   public ChallengeDTO findByChallengeNo(int challengeNo) throws Exception {
-    //
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("challengeNo", String.valueOf(challengeNo));
-    //
-    //    requestAgent.request("challenge.selectOne", params);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      return null;
-    //    }
-    //
-    //    return requestAgent.getObject(ChallengeDTO.class);
-    return null; // 임시 리턴
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select"
+            + " c.challenge_no,"
+            + " c.title,"
+            + " c.content,"
+            + " c.start_dt,"
+            + " c.end_dt,"
+            + " from" 
+            + " ftp_challenge c"
+            + " where c.challenge_no=" + challengeNo);
+        ResultSet rs = stmt.executeQuery()) {
+
+      ChallengeDTO challenge = null;
+
+      //      while (rs.next()) {
+      //        if (project == null) {
+      //          project = new Project();
+      //          project.setNo(rs.getInt("project_no"));
+      //          project.setTitle(rs.getString("title"));
+      //          project.setContent(rs.getString("content"));
+      //          project.setStartDate(rs.getDate("start_dt"));
+      //          project.setEndDate(rs.getDate("end_dt"));
+      //
+      //          Member owner = new Member();
+      //          owner.setNo(rs.getInt("owner_no"));
+      //          owner.setName(rs.getString("owner_name"));
+      //          owner.setEmail(rs.getString("owner_email"));
+      //
+      //          project.setOwner(owner);
+      //        }
+      //
+      //        // 프로젝트의 멤버가 있다면 기존 멤버 목록에 추가한다.
+      //        if (rs.getString("member_name") != null) {
+      //          Member member = new Member();
+      //          member.setNo(rs.getInt("member_no"));
+      //          member.setName(rs.getString("member_name"));
+      //          member.setEmail(rs.getString("member_email"));
+      //          project.getMembers().add(member);
+      //        }
+      //      }
+
+      return challenge;
+    }
   }
 
   ///챌린지 문의하기///////////////////////////////////////////////////////////////////
