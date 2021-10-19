@@ -89,20 +89,20 @@ public class NetNoticeDao implements NoticeDao {
     }
   }
 
-  @Override
-  public int getNextNum() throws Exception {
-
-    requestAgent.request("notice.getNextNum", null);
-
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("게시글 번호 부여 중 오류 발생!");
-    }
-    System.out.println("확인");
-    NoticeDTO noticeDTO = requestAgent.getObject(NoticeDTO.class);
-
-
-    return noticeDTO.getNo();
-  }
+  //  @Override
+  //  public int getNextNum() throws Exception {
+  //
+  //    requestAgent.request("notice.getNextNum", null);
+  //
+  //
+  //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+  //      throw new Exception("게시글 번호 부여 중 오류 발생!");
+  //    }
+  //    System.out.println("확인");
+  //    NoticeDTO noticeDTO = requestAgent.getObject(NoticeDTO.class);
+  //
+  //
+  //    return noticeDTO.getNo();
+  //  }
 
 }

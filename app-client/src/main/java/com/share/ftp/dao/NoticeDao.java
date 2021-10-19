@@ -12,6 +12,6 @@ public interface NoticeDao {
   NoticeDTO findByNoticeNo(int noticeNo) throws Exception;
   void update(NoticeDTO updateNotice) throws Exception;
   void delete(int noticeNo) throws Exception;
-  int getNextNum() throws Exception; // 회원 고유번호 지정
+  //  int getNextNum() throws Exception; // 회원 고유번호 지정
 
 }
