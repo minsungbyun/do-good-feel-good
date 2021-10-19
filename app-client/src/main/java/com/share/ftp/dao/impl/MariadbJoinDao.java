@@ -30,7 +30,7 @@ public class MariadbJoinDao implements JoinDao {
       stmt.setString(3, joinDTO.getName());
       stmt.setString(4, joinDTO.getTel());
       stmt.setString(5, joinDTO.getEmail());
-      stmt.setString(6, joinDTO.getAddress());
+      stmt.setInt(6, joinDTO.getPostNo());
       stmt.setString(7, joinDTO.getBasicAddress());
       stmt.setString(8, joinDTO.getDetailAddress());
 
@@ -51,7 +51,7 @@ public class MariadbJoinDao implements JoinDao {
             + " email,"
             + " name,"
             + " tel,"
-            + " create_dt,"
+            + " created_dt,"
             + " post_no,"
             + " basic_address,"
             + " detail_address"

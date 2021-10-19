@@ -24,13 +24,13 @@ public class JoinListHandler implements Command {
     System.out.println();
     System.out.println("[ 회원 목록 ]");
     for (JoinDTO loginUser : list) {
-      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s\n", 
+      System.out.printf("%d, %s, %s, %s, %d, %s, %s, %s\n", 
           loginUser.getNo(), 
           loginUser.getId(), 
           //          loginUser.getPassword(), 
           loginUser.getTel(), 
           loginUser.getEmail(), 
-          loginUser.getAddress(),
+          loginUser.getPostNo(),
           loginUser.getBasicAddress(),
           loginUser.getDetailAddress(),
           loginUser.getRegisterDate());
