@@ -16,16 +16,25 @@ import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.dao.DonationRegisterDao;
+import com.share.ftp.dao.GroupDao;
 import com.share.ftp.dao.JoinDao;
 import com.share.ftp.dao.NoticeDao;
+import com.share.ftp.dao.OrgDao;
+import com.share.ftp.dao.PersonalDao;
 import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.dao.VolunteerDao;
+import com.share.ftp.dao.impl.MariadbGroupDao;
 import com.share.ftp.dao.impl.MariadbJoinDao;
+<<<<<<< HEAD
+import com.share.ftp.dao.impl.MariadbOrgDao;
+import com.share.ftp.dao.impl.MariadbPersonalDao;
+=======
+import com.share.ftp.dao.impl.MariadbNoticeDao;
+>>>>>>> 4c47e26ec1ecef1b9e65faaa24b8e775885c6b58
 import com.share.ftp.dao.impl.NetChallengeDao;
 import com.share.ftp.dao.impl.NetCommunityDao;
 import com.share.ftp.dao.impl.NetDonationBoardDao;
 import com.share.ftp.dao.impl.NetDonationRegisterDao;
-import com.share.ftp.dao.impl.NetNoticeDao;
 import com.share.ftp.dao.impl.NetQuestionDao;
 import com.share.ftp.dao.impl.NetVolunteerDao;
 import com.share.ftp.handler.Command;
@@ -51,14 +60,20 @@ import com.share.ftp.handler.join.AuthDisplayUserHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.ftp.handler.join.AuthLogoutHandler;
 import com.share.ftp.handler.join.AuthUpdateUserHandler;
+import com.share.ftp.handler.join.GroupHandler;
 import com.share.ftp.handler.join.JoinAddHandler;
 import com.share.ftp.handler.join.JoinDetailHandler;
+import com.share.ftp.handler.join.JoinGroupHandler;
 import com.share.ftp.handler.join.JoinListHandler;
+import com.share.ftp.handler.join.JoinOrgHandler;
+import com.share.ftp.handler.join.JoinPersonalHandler;
 import com.share.ftp.handler.join.JoinSearchEmailIdHandler;
 import com.share.ftp.handler.join.JoinSearchPasswordHandler;
 import com.share.ftp.handler.join.JoinSearchTelIdHandler;
 import com.share.ftp.handler.join.MyPageDeleteUserHandler;
 import com.share.ftp.handler.join.MyPageUpdateUserHandler;
+import com.share.ftp.handler.join.OrgHandler;
+import com.share.ftp.handler.join.PersonalHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeDetailHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeJoinHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeJoinListHandler;
@@ -227,16 +242,20 @@ public class ClientApp {
 
     requestAgent = null;
 
+    // DBMS와 연결
     con = DriverManager.getConnection(
         "jdbc:mysql://localhost:3306/happysharedb?user=happyshare&password=1111");
 
     JoinDao netJoinDao = new MariadbJoinDao(con);
+    PersonalDao netPersonalDao = new MariadbPersonalDao(con);
+    GroupDao netGroupDao = new MariadbGroupDao(con);
+    OrgDao netOrgDao = new MariadbOrgDao(con);
 
     VolunteerDao netVolunteerDao = new NetVolunteerDao(requestAgent);
     CommunityDao netCommunityDao = new NetCommunityDao(requestAgent);
     ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
     QuestionDao netQuestionDao = new NetQuestionDao(requestAgent);
-    NoticeDao netNoticeDao = new NetNoticeDao(requestAgent);
+    NoticeDao netNoticeDao = new MariadbNoticeDao(con);
     //    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
     //    ChallengeReviewDao netChallengeReviewDao = new NetChallengeDao(requestAgent);
 
@@ -245,9 +264,15 @@ public class ClientApp {
     commands.put("/auth/logout", new AuthLogoutHandler()); // 로그아웃
     commands.put("/auth/changeUserInfo", new AuthUpdateUserHandler()); // 마이페이지 나의정보
     commands.put("/auth/displayUserInfo", new AuthDisplayUserHandler()); // 마이페이지 나의정보수정
+    commands.put("/userInfo/personal", new PersonalHandler()); 
+    commands.put("/userInfo/group", new GroupHandler()); 
+    commands.put("/userInfo/org", new OrgHandler()); 
 
     //회원가입
     commands.put("/join/add", new JoinAddHandler(netJoinDao)); // 회원가입
+    commands.put("/join/personal", new JoinPersonalHandler(netPersonalDao)); // 회원가입
+    commands.put("/join/group", new JoinGroupHandler(netGroupDao)); // 회원가입
+    commands.put("/join/org", new JoinOrgHandler(netOrgDao)); // 회원가입
     commands.put("/join/searchTelId", new JoinSearchTelIdHandler(netJoinDao)); // 폰번호로 아이디 찾기
     commands.put("/join/searchEmailId", new JoinSearchEmailIdHandler(netJoinDao)); // 이메일로 아이디 찾기
     commands.put("/join/searchPassword", new JoinSearchPasswordHandler(netJoinDao)); // 비밀번호 찾기

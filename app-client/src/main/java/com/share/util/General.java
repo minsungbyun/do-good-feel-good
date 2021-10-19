@@ -17,9 +17,17 @@ public class General {
   public static class member {
 
     public static final int PERSONAL        = 1;
-    public static final int AUTH_PERSONAL   = 2;
+    public static final int GROUP           = 2;
     public static final int ORG             = 3;
-    public static final int GROUP           = 4;
+  }
+
+  public static class status {
+
+    public static final int WITHDRAW        = 0;
+    public static final int ACTIVE          = 1;
+    public static final int WAITING         = 2;
+    public static final int REJECT          = 3;
+    public static final int INACTIVE        = 4;
   }
 
   public static class check {
@@ -30,44 +38,43 @@ public class General {
   }
 
   public static class point {
-    // 기준 같이 정할 것 
-    public static final int VOLUNTEER_POINT         = 100;
+
+    public static final int VOLUNTEER_POINT         = 50;
     public static final int VOLUNTEER_REVIEWPOINT   = 10;
 
-    public static final int COMMUNITY_POINT         = 10;
-    public static final int COMMUNITY_REVIEWPOINT   = 1;
+    //    public static final int COMMUNITY_POINT         = 10;
+    //    public static final int COMMUNITY_REVIEWPOINT   = 1;
 
-    public static final int CHALLENGE_POINT         = 100;
-    public static final int CHALLENGE_REVIEWPOINT   = 10;
+    //    public static final int CHALLENGE_POINT         = 100;
+    public static final int CHALLENGE_REVIEWPOINT   = 30;
 
-    public static final int DONATION_POINT          = 100;
-    public static final int DONATION_REVIEWPOINT    = 10;
+    public static final int DONATION_POINT          = 50;
 
   }
 
   public static class level {
     // 기준 같이 정할 것 
-    public static final String LEVEL_A  = "A등급";
-    public static final String LEVEL_B  = "B등급";
-    public static final String LEVEL_C  = "C등급";
-    public static final String LEVEL_D  = "D등급";
-    public static final String LEVEL_E  = "E등급";
+    public static final String LEVEL_A  = "천사콩이";
+    public static final String LEVEL_B  = "천삼콩이";
+    public static final String LEVEL_C  = "천이콩이";
+    public static final String LEVEL_D  = "천일콩이";
+    public static final String LEVEL_E  = "천콩이";
 
-    public static final int FROM_B_TO_A  = 500;
-    public static final int FROM_C_TO_B  = 400;
-    public static final int FROM_D_TO_C  = 300;
-    public static final int FROM_E_TO_D  = 200;
+    public static final int FROM_B_TO_A  = 10000;
+    public static final int FROM_C_TO_B  = 5000;
+    public static final int FROM_D_TO_C  = 1000;
+    public static final int FROM_E_TO_D  = 0;
 
   }
 
   public static class questionType {
 
-    public static final String VOLUNTEERASK   = "함께해요 문의";
-    public static final String COMMUITYASK    = "나눔이야기 문의";
-    public static final String DONATIONASK    = "모금함 문의";
-    public static final String CHALLENGEASK   = "챌린지 문의";
-    public static final String SITEASK        = "사이트이용 문의";
-    public static final String OTHERASK       = "기타 문의";
+    public static final String VOLUNTEERQNA    = "함께해요 문의";
+    public static final String COMMUITYQNA     = "나눔이야기 문의";
+    public static final String DONATIONQNA     = "모금함 문의";
+    public static final String CHALLENGEQNA    = "챌린지 문의";
+    public static final String SITEQNA         = "사이트이용 문의";
+    public static final String OTHERQNA        = "기타 문의";
 
   }
 
