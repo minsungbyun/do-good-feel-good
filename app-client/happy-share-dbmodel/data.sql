@@ -1,15 +1,21 @@
 -- 회원 입력 (1=개인 2=단체 3=기관) 
-insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, status)
-values(1,'interface', password('1'), 'interface', '010-1111-1111', 'interface@naver.com', '05541', '서울시', '강남구','1');
+insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, type, status)
+values(1,'interface', password('1'), 'interface', '010-1111-1111', 'interface@naver.com', '05541', '서울시', '강남구',1,1);
 
 insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, status)
-values(2,'object', password('1'), 'object', '010-2222-2222', 'object@naver.com', '08155', '경기도', '부평구','2');
+values(2,'object', password('1'), 'object', '010-2222-2222', 'object@naver.com', '08155', '경기도', '부평구',2,1);
 
 insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, status)
-values(3,'sysout', password('1'), 'sysout', '010-3333-3333', 'sysout@naver.com', '06661', '서울시', '서초구','3');
+values(3,'sysout', password('1'), 'sysout', '010-3333-3333', 'sysout@naver.com', '06661', '서울시', '서초구',3,1);
 
 insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, status)
-values(4,'public', password('1'), 'public', '010-4444-4444', 'public@naver.com', '06661', '서울시', '송파구','1');
+values(4,'public', password('1'), 'public', '010-4444-4444', 'public@naver.com', '06661', '서울시', '송파구',1,1);
+
+insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, type, status)
+values(5,'java', password('1'), 'java', '010-5555-1111', 'java@naver.com', '22541', '서울시', '서초구',1,2);
+
+insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, type, status)
+values(6,'eclipse', password('1'), 'eclipse', '010-6666-1111', 'eclipse@naver.com', '06641', '서울시', '강북구',1,3);
 
 
 --봉사게시판(나눔이야기)
@@ -57,8 +63,8 @@ values(4, 1, 4,'사랑의 도시락','내용4','031-414-1118','soso@gmail.com','
 
 --봉사참여자 (apply_status 1.승인 2.거절)
 -- 잘못된 데이터 고쳐야함
-insert into ftp_vol_apply(user_no, vol_no, start_time, end_time, apply_status)
-values(1,1,'09:00','18:00',1);
+insert into ftp_vol_apply(user_no, vol_no, apply_dt, start_time, end_time, apply_status)
+values(1,1,'2021-11-11','09:00','18:00',1);
 
 
 
