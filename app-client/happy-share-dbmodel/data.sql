@@ -115,6 +115,16 @@ insert into ftp_support_qna_categroy(qna_category_no, category_title) values(6, 
 -- 문의하기
 --insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password, qna_reply, )
   --values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', )
+  --values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', )
+  --values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', )
+  --values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', )
+  --values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', )
+  --values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', )
+  --values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', )
+  --values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', )
+  --values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', )
+  --values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', )
+  
 
 -- 문의하기 첨부파일
 insert into ftp_support_qna_file(qna_file, filepath, qna_no) values(11, 'qna01_1.jpg', 1);
