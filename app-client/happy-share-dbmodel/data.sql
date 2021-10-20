@@ -17,8 +17,7 @@ values(5,'java', password('1'), 'java', '010-5555-1111', 'java@naver.com', '2254
 insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, type, status)
 values(6,'eclipse', password('1'), 'eclipse', '010-6666-1111', 'eclipse@naver.com', '06641', '서울시', '강북구',1,3);
 
-<<<<<<< HEAD
-=======
+
 --개인회원
 insert into ftp_user_personal(user_personal_no, user_no, birthdate, rank)
 values(6, 3, '2020-1-1','천콩이');
@@ -58,9 +57,9 @@ insert into ftp_user_message(message_no, user_from, user_to, content)
 values(2,2,1,'반가워');
 
 
->>>>>>> f7cad83cddb97d9c92667642b74cab93669a78e4
 
---봉사게시판(나눔이야기)
+
+--봉사게시판
 insert into ftp_vol_board(vol_board_no, user_no, title, content)
 values(1, 1, '나눔이야기1', '내용1');
 
@@ -227,6 +226,15 @@ insert into ftp_support_qna_file(qna_file, filepath, qna_no) values(20, 'qna06_1
 
 
 
+
+
+
+
+
+
+
+
+-- 나중에 재입력 예정
 --봉사게시판(나눔이야기)
 insert into ftp_vol_board(vol_board_no, user_no, title, content)
 values(1, 1, '유기견 봉사 활동 후기', '입구에서부터 반갑게 맞아주는 강아지들과 함께봉사활동 하러갔다가 되려 귀요미들에게 힐링 받고 왔습니다. 견사 청소와 열악한 시설 보수 공사, 그리고 목욕시키기를 마치고나니 하루가 훌쩍 흘러갔네요.  몸은 고되었지만 뿌듯하고 보람찬 하루였습니다.');
