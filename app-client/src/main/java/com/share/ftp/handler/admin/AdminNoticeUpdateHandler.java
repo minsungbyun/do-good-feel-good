@@ -31,7 +31,7 @@ public class AdminNoticeUpdateHandler implements Command {
 
     String title = Prompt.inputString("제목(" + noticeDTO.getTitle() + ")? ");
     String content = Prompt.inputString("내용(" + noticeDTO.getContent() + ")? ");
-    String fileUpload = Prompt.inputString("첨부파일(" + noticeDTO.getFileUpload() + ")? ");
+    //    String fileUpload = Prompt.inputString("첨부파일(" + noticeDTO.getFileUpload() + ")? ");
 
     String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
 
@@ -42,7 +42,7 @@ public class AdminNoticeUpdateHandler implements Command {
     } else if (input.equals("y")) {
       noticeDTO.setTitle(title);
       noticeDTO.setContent(content);
-      noticeDTO.setFileUpload(fileUpload);
+      //      noticeDTO.setFileUpload(fileUpload);
 
       noticeDao.update(noticeDTO);
 

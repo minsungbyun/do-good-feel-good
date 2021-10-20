@@ -27,9 +27,8 @@ public class AdminNoticeListHandler implements Command {
     }
 
     for (NoticeDTO noticeDTO : noticeList) {
-      System.out.printf("%d, %s, %s, %s, %d\n", 
+      System.out.printf("%d, %s, %s, %d\n", 
           noticeDTO.getNo(), 
-          noticeDTO.getAdmin().getId(), 
           noticeDTO.getTitle(), 
           noticeDTO.getRegisteredDate(), 
           noticeDTO.getViewCount());
