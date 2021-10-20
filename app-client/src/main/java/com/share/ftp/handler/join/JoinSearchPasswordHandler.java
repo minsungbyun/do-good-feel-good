@@ -37,7 +37,7 @@ public class JoinSearchPasswordHandler implements Command {
     System.out.println();
     System.out.printf("임시비밀번호: [ %s ]\n", loginUser.getPassword());
 
-    loginUser.setPassword(loginUser.getPassword());
+    //    loginUser.setPassword(loginUser.getPassword());
     //    personalDao.update(loginUser);
   }
 }
