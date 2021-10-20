@@ -10,7 +10,7 @@ import static com.share.menu.Menu.ACCESS_PERSONAL;
 import static com.share.util.General.member.GROUP;
 import static com.share.util.General.member.ORG;
 import static com.share.util.General.member.PERSONAL;
-import com.share.ftp.dao.JoinDao;
+import com.share.ftp.dao.PersonalDao;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.join.OrgDTO;
 import com.share.ftp.handler.Command;
@@ -19,10 +19,10 @@ import com.share.util.Prompt;
 
 public class AuthLoginHandler implements Command {
 
-  JoinDao joinDao;
+  PersonalDao personalDao;
 
-  public AuthLoginHandler(JoinDao joinDao) {
-    this.joinDao = joinDao;
+  public AuthLoginHandler(PersonalDao personalDao) {
+    this.personalDao = personalDao;
   }
 
   public static JoinDTO loginUser;
@@ -59,7 +59,7 @@ public class AuthLoginHandler implements Command {
       return;
     } 
 
-    JoinDTO user = joinDao.selectOneByIdPassword(userId, userPassword);
+    JoinDTO user = personalDao.selectOneByIdPassword(userId, userPassword);
 
     if (user == null) {
       System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");

@@ -133,15 +133,14 @@ from ftp_user u
 
     try (PreparedStatement stmt = con.prepareStatement(
         "update ftp_user set"
-            + " name=?,password=password(?),tel=?,post_no,basic_address,detail_address"
+            + " password=password(?)"
             + " where user_no=?")) {
 
-      stmt.setString(1, personalDTO.getName());
-      stmt.setString(2, personalDTO.getPassword());
-      stmt.setString(3, personalDTO.getTel());
-      stmt.setInt(4, personalDTO.getPostNo());
-      stmt.setString(5, personalDTO.getBasicAddress());
-      stmt.setString(6, personalDTO.getDetailAddress());
+      stmt.setString(1, personalDTO.getPassword());
+      stmt.setInt(2, personalDTO.getNo());
+      //      stmt.setInt(4, personalDTO.getPostNo());
+      //      stmt.setString(5, personalDTO.getBasicAddress());
+      //      stmt.setString(6, personalDTO.getDetailAddress());
 
       if (stmt.executeUpdate() == 0) {
         throw new Exception("회원 데이터 변경 실패!");
@@ -172,7 +171,7 @@ from ftp_user u
   @Override
   public PersonalDTO selectOneByIdPassword(String userId, String userPassword) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
-        "select user_no,id,name,email,tel,create_dt from ftp_user"
+        "select * from ftp_user"
             + " where id=? and password=password(?)")) {
 
       stmt.setString(1, userId);
@@ -184,11 +183,13 @@ from ftp_user u
         }
 
         PersonalDTO personalDTO = new PersonalDTO();
-        personalDTO.setNo(rs.getInt("user_no"));
+        //        personalDTO.setNo(rs.getInt("user_no"));
+        //        personalDTO.setName(rs.getString("name"));
+        //        personalDTO.setEmail(rs.getString("email"));
+        //        personalDTO.setTel(rs.getString("tel"));
+        //        personalDTO.setRegisterDate(rs.getDate("create_dt"));
         personalDTO.setName(rs.getString("name"));
-        personalDTO.setEmail(rs.getString("email"));
-        personalDTO.setTel(rs.getString("tel"));
-        personalDTO.setRegisterDate(rs.getDate("create_dt"));
+        personalDTO.setType(rs.getInt("type"));
         return personalDTO;
       }
     }
@@ -198,7 +199,7 @@ from ftp_user u
   public PersonalDTO selectOneByIdEmail(String userId, String userEmail) throws Exception {
 
     try (PreparedStatement stmt = con.prepareStatement(
-        "select user_no,id,name,email,tel,create_dt from ftp_user"
+        "select password from ftp_user"
             + " where id=? and email=?")) {
 
       stmt.setString(1, userId);
@@ -209,12 +210,14 @@ from ftp_user u
           return null;
         }
 
+        //        return rs.getString("password");
         PersonalDTO personalDTO = new PersonalDTO();
-        personalDTO.setNo(rs.getInt("user_no"));
-        personalDTO.setName(rs.getString("name"));
-        personalDTO.setEmail(rs.getString("email"));
-        personalDTO.setTel(rs.getString("tel"));
-        personalDTO.setRegisterDate(rs.getDate("create_dt"));
+        //        personalDTO.setNo(rs.getInt("user_no"));
+        //        personalDTO.setName(rs.getString("name"));
+        //        personalDTO.setEmail(rs.getString("email"));
+        //        personalDTO.setTel(rs.getString("tel"));
+        //        personalDTO.setRegisterDate(rs.getDate("create_dt"));
+        personalDTO.setPassword(rs.getString("password"));
         return personalDTO;
       }
     }
