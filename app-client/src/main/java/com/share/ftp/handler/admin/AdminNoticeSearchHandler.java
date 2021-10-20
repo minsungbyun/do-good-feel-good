@@ -24,19 +24,17 @@ public class AdminNoticeSearchHandler implements Command {
 
     Collection<NoticeDTO> noticeList = noticeDao.findByKeyword(input);
 
+    System.out.println(noticeList);
+
     for (NoticeDTO noticeDTO : noticeList) {
-      if(!noticeDTO.getTitle().contains(input) &&
-          !noticeDTO.getContent().contains(input) &&
-          !noticeDTO.getAdmin().getId().contains(input)) {
-        continue;
-      }
-      System.out.printf("%d, %s, %s, %s, %s, %s\n", 
+      System.out.printf("%d, %s, %s, %d\n", 
           noticeDTO.getNo(), 
-          noticeDTO.getAdmin().getId(), 
+          //          noticeDTO.getAdmin().getId(), 
           noticeDTO.getTitle(), 
-          noticeDTO.getContent(), 
-          noticeDTO.getFileUpload(), 
-          noticeDTO.getRegisteredDate());
+          //          noticeDTO.getContent(), 
+          //          noticeDTO.getFileUpload(), 
+          noticeDTO.getRegisteredDate(),
+          noticeDTO.getViewCount());
     }
   }
 }

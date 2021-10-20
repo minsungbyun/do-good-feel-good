@@ -31,11 +31,11 @@ public class AdminNoticeDetailHandler implements Command {
     }
 
     System.out.printf("번호: %s\n", noticeDTO.getNo());
-    System.out.printf("관리자 아이디: %s\n", noticeDTO.getAdmin().getId());
     System.out.printf("제목: %s\n", noticeDTO.getTitle());
     System.out.printf("내용: %s\n", noticeDTO.getContent());
-    System.out.printf("첨부파일: %s\n", noticeDTO.getFileUpload());
+    //    System.out.printf("첨부파일: %s\n", noticeDTO.getFileUpload());
     System.out.printf("등록일: %s\n", noticeDTO.getRegisteredDate());
+    System.out.printf("조회수: %d\n", noticeDTO.getViewCount());
     System.out.println();
 
     JoinDTO loginUser = AuthLoginHandler.getLoginUser(); 

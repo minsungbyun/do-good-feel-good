@@ -114,19 +114,19 @@ insert into ftp_support_notice(notice_no, title, content) values(5, '공지사�
 insert into ftp_support_notice(notice_no, title, content) values(6, '공지사항6', '내용6');
 
 -- 공지사항 첨부파일 입력
-insert into ftp_support_notice_file(notice_file, filepath, notice_no) values(11, 'notice01_1.jpg', 1);
-insert into ftp_support_notice_file(notice_file, filepath, notice_no) values(12, 'notice01_2.gif', 1);
-insert into ftp_support_notice_file(notice_file, filepath, notice_no) values(13, 'notice02_1.png', 2);
-insert into ftp_support_notice_file(notice_file, filepath, notice_no) values(14, 'notice02_2.jpg', 2);
-insert into ftp_support_notice_file(notice_file, filepath, notice_no) values(15, 'notice02_3.jpg', 2);
-insert into ftp_support_notice_file(notice_file, filepath, notice_no) values(16, 'notice03_1.gif', 3);
-insert into ftp_support_notice_file(notice_file, filepath, notice_no) values(17, 'notic03_2.gif', 3);
-insert into ftp_support_notice_file(notice_file, filepath, notice_no) values(18, 'notice03_3.gif', 3);
-insert into ftp_support_notice_file(notice_file, filepath, notice_no) values(19, 'notice05_1.gif', 5);
-insert into ftp_support_notice_file(notice_file, filepath, notice_no) values(20, 'notice05_2.gif', 5);
-insert into ftp_support_notice_file(notice_file, filepath, notice_no) values(21, 'notice05_3.gif', 5);
-insert into ftp_support_notice_file(notice_file, filepath, notice_no) values(22, 'notice06_1.gif', 6);
-insert into ftp_support_notice_file(notice_file, filepath, notice_no) values(23, 'notice06_2.gif', 6);
+insert into ftp_support_notice_file(notice_file_no, notice_no, filepath) values(1, 1, 'notice01_1.jpg');
+insert into ftp_support_notice_file(notice_file_no, notice_no, filepath) values(2, 1, 'notice01_2.gif');
+insert into ftp_support_notice_file(notice_file_no, notice_no, filepath) values(3, 2, 'notice02_1.png');
+insert into ftp_support_notice_file(notice_file_no, notice_no, filepath) values(4, 3, 'notice02_2.jpg');
+insert into ftp_support_notice_file(notice_file_no, filepath, notice_no) values(15, 'notice02_3.jpg', 2);
+insert into ftp_support_notice_file(notice_file_no, filepath, notice_no) values(16, 'notice03_1.gif', 3);
+insert into ftp_support_notice_file(notice_file_no, filepath, notice_no) values(17, 'notic03_2.gif', 3);
+insert into ftp_support_notice_file(notice_file_no, filepath, notice_no) values(18, 'notice03_3.gif', 3);
+insert into ftp_support_notice_file(notice_file_no, filepath, notice_no) values(19, 'notice05_1.gif', 5);
+insert into ftp_support_notice_file(notice_file_no, filepath, notice_no) values(20, 'notice05_2.gif', 5);
+insert into ftp_support_notice_file(notice_file_no, filepath, notice_no) values(21, 'notice05_3.gif', 5);
+insert into ftp_support_notice_file(notice_file_no, filepath, notice_no) values(22, 'notice06_1.gif', 6);
+insert into ftp_support_notice_file(notice_fil_noe, filepath, notice_no) values(23, 'notice06_2.gif', 6);
 
 -- 문의하기 카테고리
 -- (1.함께해요 문의 2.나눔이야기 문의 3.모금함 문의 4.챌린지 문의 5.사이트이용 문의 6.기타 문의)

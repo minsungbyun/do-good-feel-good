@@ -11,6 +11,9 @@ import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.share.context.ApplicationContextListener;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.CommunityDao;
@@ -25,9 +28,9 @@ import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.dao.impl.MariadbGroupDao;
 import com.share.ftp.dao.impl.MariadbJoinDao;
-import com.share.ftp.dao.impl.MariadbNoticeDao;
 import com.share.ftp.dao.impl.MariadbOrgDao;
 import com.share.ftp.dao.impl.MariadbPersonalDao;
+import com.share.ftp.dao.impl.MybatisNoticeDao;
 import com.share.ftp.dao.impl.NetChallengeDao;
 import com.share.ftp.dao.impl.NetCommunityDao;
 import com.share.ftp.dao.impl.NetDonationBoardDao;
@@ -170,6 +173,8 @@ public class ClientApp {
 
   Connection con;
 
+  SqlSession sqlSession;
+
   RequestAgent requestAgent;
 
   // HashMap
@@ -243,6 +248,10 @@ public class ClientApp {
     con = DriverManager.getConnection(
         "jdbc:mysql://localhost:3306/happysharedb?user=happyshare&password=1111");
 
+    sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
+        "com/share/ftp/conf/mybatis-config.xml")).openSession();
+
+
     JoinDao joinDao = new MariadbJoinDao(con);
     PersonalDao personalDao = new MariadbPersonalDao(con);
     GroupDao groupDao = new MariadbGroupDao(con);
@@ -252,7 +261,7 @@ public class ClientApp {
     CommunityDao netCommunityDao = new NetCommunityDao(requestAgent);
     ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
     QuestionDao netQuestionDao = new NetQuestionDao(requestAgent);
-    NoticeDao netNoticeDao = new MariadbNoticeDao(con);
+    NoticeDao noticeDao = new MybatisNoticeDao(sqlSession);
     //    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
     //    ChallengeReviewDao netChallengeReviewDao = new NetChallengeDao(requestAgent);
 
@@ -436,12 +445,12 @@ public class ClientApp {
     commands.put("/join/delete", new AdminMemberDeleteHandler());
 
     // 관리자 공지사항 (개인 + 관리자)
-    commands.put("/adminNotice/add", new AdminNoticeAddHandler(netNoticeDao));
-    commands.put("/adminNotice/list", new AdminNoticeListHandler(netNoticeDao));
-    commands.put("/adminNotice/detail", new AdminNoticeDetailHandler(netNoticeDao));
-    commands.put("/adminNotice/update", new AdminNoticeUpdateHandler(netNoticeDao));
-    commands.put("/adminNotice/delete", new AdminNoticeDeleteHandler(netNoticeDao));
-    commands.put("/adminNotice/search", new AdminNoticeSearchHandler(netNoticeDao));
+    commands.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDao));
+    commands.put("/adminNotice/list", new AdminNoticeListHandler(noticeDao));
+    commands.put("/adminNotice/detail", new AdminNoticeDetailHandler(noticeDao));
+    commands.put("/adminNotice/update", new AdminNoticeUpdateHandler(noticeDao));
+    commands.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDao));
+    commands.put("/adminNotice/search", new AdminNoticeSearchHandler(noticeDao));
 
     // 관리자 문의사항
 
