@@ -245,10 +245,10 @@ public class ClientApp {
     con = DriverManager.getConnection(
         "jdbc:mysql://localhost:3306/happysharedb?user=happyshare&password=1111");
 
-    JoinDao netJoinDao = new MariadbJoinDao(con);
-    PersonalDao netPersonalDao = new MariadbPersonalDao(con);
-    GroupDao netGroupDao = new MariadbGroupDao(con);
-    OrgDao netOrgDao = new MariadbOrgDao(con);
+    JoinDao joinDao = new MariadbJoinDao(con);
+    PersonalDao personalDao = new MariadbPersonalDao(con);
+    GroupDao groupDao = new MariadbGroupDao(con);
+    OrgDao orgDao = new MariadbOrgDao(con);
 
     VolunteerDao netVolunteerDao = new NetVolunteerDao(requestAgent);
     CommunityDao netCommunityDao = new NetCommunityDao(requestAgent);
@@ -259,7 +259,7 @@ public class ClientApp {
     //    ChallengeReviewDao netChallengeReviewDao = new NetChallengeDao(requestAgent);
 
     //로그인, 로그아웃
-    commands.put("/auth/login", new AuthLoginHandler(netJoinDao)); // 로그인
+    commands.put("/auth/login", new AuthLoginHandler(joinDao)); // 로그인
     commands.put("/auth/logout", new AuthLogoutHandler()); // 로그아웃
     commands.put("/auth/changeUserInfo", new AuthUpdateUserHandler()); // 마이페이지 나의정보
     commands.put("/auth/displayUserInfo", new AuthDisplayUserHandler()); // 마이페이지 나의정보수정
@@ -268,13 +268,13 @@ public class ClientApp {
     commands.put("/userInfo/org", new OrgHandler()); 
 
     //회원가입
-    commands.put("/join/add", new JoinAddHandler(netJoinDao)); // 회원가입
-    commands.put("/join/personal", new JoinPersonalHandler(netPersonalDao)); // 회원가입
-    commands.put("/join/group", new JoinGroupHandler(netGroupDao)); // 회원가입
-    commands.put("/join/org", new JoinOrgHandler(netOrgDao)); // 회원가입
-    commands.put("/join/searchTelId", new JoinSearchTelIdHandler(netJoinDao)); // 폰번호로 아이디 찾기
-    commands.put("/join/searchEmailId", new JoinSearchEmailIdHandler(netJoinDao)); // 이메일로 아이디 찾기
-    commands.put("/join/searchPassword", new JoinSearchPasswordHandler(netJoinDao)); // 비밀번호 찾기
+    commands.put("/join/add", new JoinAddHandler(joinDao)); // 회원가입
+    commands.put("/join/personal", new JoinPersonalHandler(personalDao)); // 회원가입
+    commands.put("/join/group", new JoinGroupHandler(groupDao)); // 회원가입
+    commands.put("/join/org", new JoinOrgHandler(orgDao)); // 회원가입
+    commands.put("/join/searchTelId", new JoinSearchTelIdHandler(joinDao)); // 폰번호로 아이디 찾기
+    commands.put("/join/searchEmailId", new JoinSearchEmailIdHandler(joinDao)); // 이메일로 아이디 찾기
+    commands.put("/join/searchPassword", new JoinSearchPasswordHandler(joinDao)); // 비밀번호 찾기
 
     //함께해요
     commands.put("/volGeneralRequest/apply", new VolGeneralRequestApplyHandler(netVolunteerDao));
@@ -367,8 +367,8 @@ public class ClientApp {
 
 
     // 챌린지 랭킹
-    commands.put("/ranking/list", new ChallengeRankingHandler(netJoinDao));  
-    commands.put("/myRanking/list", new MyRankingHandler(netJoinDao)); 
+    commands.put("/ranking/list", new ChallengeRankingHandler(joinDao));  
+    commands.put("/myRanking/list", new MyRankingHandler(joinDao)); 
 
     // 모금함 (개설신청하기, 개설목록, 승인, 반려)
 
@@ -399,7 +399,7 @@ public class ClientApp {
     commands.put("/donationRegister/totalMoney", new DonationRegisterTotalMoneyHandler(donationRegisterDao));
 
     commands.put("/donationBoardRegister/list", new DonationBoardRegisterListHandler(donationRegisterDao));
-    commands.put("/donationBoardDetailRegister/add", new DonationBoardDetailRegisterAddHandler(donationBoardDao, donationRegisterDao, netJoinDao));
+    commands.put("/donationBoardDetailRegister/add", new DonationBoardDetailRegisterAddHandler(donationBoardDao, donationRegisterDao, joinDao));
 
     // 고객센터 문의사항
     commands.put("/question/add", new QuestionAddHandler(netQuestionDao));
@@ -413,8 +413,8 @@ public class ClientApp {
     //    commands.put("/adminQuestion/add", new AdminQuestionAddHandler(myQuestionListDTOList));
 
     // 마이페이지
-    commands.put("/myPage/info", new MyPageUpdateUserHandler(netJoinDao)); // 내정보 수정
-    commands.put("/myPage/delete", new MyPageDeleteUserHandler(netJoinDao)); // 회원탈퇴
+    commands.put("/myPage/info", new MyPageUpdateUserHandler(joinDao)); // 내정보 수정
+    commands.put("/myPage/delete", new MyPageDeleteUserHandler(joinDao)); // 회원탈퇴
 
     commands.put("/myVol/applied", new MyAppliedVolHandler(netVolunteerDao));
     commands.put("/myVol/appliedDetail", new MyAppliedVolDetailHandler(netVolunteerDao));
@@ -424,7 +424,7 @@ public class ClientApp {
     commands.put("/myChallenge/detail", new MyChallengeDetailHandler(netChallengeDao));
     commands.put("/myChallenge/wish", new MyChallengeWishHandler(netChallengeDao));
 
-    commands.put("myPoint/list", new MyPointListHandler(netJoinDao)); // 나의포인트 
+    commands.put("myPoint/list", new MyPointListHandler(joinDao)); // 나의포인트 
 
     //    commands.put("/orgMyVol/apply", new MyVolApplyListHandler()); // 기관 마이페이지 승인신청 
     //    commands.put("/orgMyVol/approve", new MyVolApproveListHandler()); // 기관 마이페이지 승인조회
@@ -434,8 +434,8 @@ public class ClientApp {
     // 관리자
 
     // 관리자 회원정보 조회
-    commands.put("/join/list", new JoinListHandler(netJoinDao)); // 관리자가 회원 목록을 조회
-    commands.put("/join/detail", new JoinDetailHandler(netJoinDao)); // 가입회원 상세보기 (관리자연결)
+    commands.put("/join/list", new JoinListHandler(personalDao)); // 관리자가 회원 목록을 조회
+    commands.put("/join/detail", new JoinDetailHandler(joinDao)); // 가입회원 상세보기 (관리자연결)
     commands.put("/join/delete", new AdminMemberDeleteHandler());
 
     // 관리자 공지사항 (개인 + 관리자)

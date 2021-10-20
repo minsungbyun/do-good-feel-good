@@ -34,23 +34,21 @@ public class MariadbChallengeDao implements ChallengeDao {
       if (stmt.executeUpdate() == 0) {
         throw new Exception("챌린지 등록 실패!");
       }
-
-      int challengeNo = 0;
-      try (ResultSet pkRS = stmt.getGeneratedKeys()) {
-        if (pkRS.next()) {
-          challengeNo = pkRS.getInt("challenge_no");
-        }
-      }
-
-//      try (PreparedStatement stmt2 = con.prepareStatement(
-//          "insert into ftp_challenge_file(challenge_no,challenge_file_no) values(?,?)")) {
-//        for (ChallengeDTO challenge : addChallenge.getFileUpload()) {
-//          stmt2.setInt(1, challengeNo);
-//          stmt2.setInt(2, challenge.getFileUpload());
-//          stmt2.executeUpdate();
-//        }
-//      }
-//    }
+      //
+      //      int challengeNo = 0;
+      //      try (ResultSet pkRS = stmt.getGeneratedKeys()) {
+      //        if (pkRS.next()) {
+      //          challengeNo = pkRS.getInt("challenge_no");
+      //        }
+      //      }
+      //
+      //      try (PreparedStatement stmt2 = con.prepareStatement(
+      //          "insert into ftp_challenge_file(challenge_no,challenge_file_no) values(?,?)")) {
+      //        stmt2.setInt(1, challengeNo);
+      //        stmt2.setInt(2, addChallenge.getFileUpload());
+      //        stmt2.executeUpdate();
+      //      }
+    }
   }
 
   @Override
@@ -111,12 +109,15 @@ public class MariadbChallengeDao implements ChallengeDao {
   }
 
   @Override
-  public void delete(ChallengeDTO deleteChallenge) throws Exception {
-    //    requestAgent.request("challenge.delete", deleteChallenge);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("챌린지 삭제 실패!");
-    //    }
+  public void delete(int challengeNo) throws Exception {
+    try (PreparedStatement stmt = con.prepareStatement(
+        "delete from ftp_challenge where challenge_no=?")) {
+
+      stmt.setInt(1, challengeNo);
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("챌린지 데이터 삭제 실패!");
+      }
+    }
   }
 
   //  @Override
@@ -142,41 +143,21 @@ public class MariadbChallengeDao implements ChallengeDao {
             + " c.title,"
             + " c.content,"
             + " c.start_dt,"
-            + " c.end_dt,"
+            + " c.end_dt"
             + " from" 
             + " ftp_challenge c"
             + " where c.challenge_no=" + challengeNo);
         ResultSet rs = stmt.executeQuery()) {
 
-      ChallengeDTO challenge = null;
-
-      //      while (rs.next()) {
-      //        if (project == null) {
-      //          project = new Project();
-      //          project.setNo(rs.getInt("project_no"));
-      //          project.setTitle(rs.getString("title"));
-      //          project.setContent(rs.getString("content"));
-      //          project.setStartDate(rs.getDate("start_dt"));
-      //          project.setEndDate(rs.getDate("end_dt"));
-      //
-      //          Member owner = new Member();
-      //          owner.setNo(rs.getInt("owner_no"));
-      //          owner.setName(rs.getString("owner_name"));
-      //          owner.setEmail(rs.getString("owner_email"));
-      //
-      //          project.setOwner(owner);
-      //        }
-      //
-      //        // 프로젝트의 멤버가 있다면 기존 멤버 목록에 추가한다.
-      //        if (rs.getString("member_name") != null) {
-      //          Member member = new Member();
-      //          member.setNo(rs.getInt("member_no"));
-      //          member.setName(rs.getString("member_name"));
-      //          member.setEmail(rs.getString("member_email"));
-      //          project.getMembers().add(member);
-      //        }
-      //      }
-
+      if (!rs.next()) {
+        return null;
+      }
+      ChallengeDTO challenge = new ChallengeDTO();
+      challenge.setNo(rs.getInt("challenge_no"));
+      challenge.setTitle(rs.getString("title"));
+      challenge.setContent(rs.getString("content"));
+      challenge.setStartDate(rs.getDate("start_dt"));
+      challenge.setEndDate(rs.getDate("end_dt"));
       return challenge;
     }
   }

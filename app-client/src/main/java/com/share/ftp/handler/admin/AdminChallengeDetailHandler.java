@@ -33,8 +33,9 @@ public class AdminChallengeDetailHandler implements Command {
 
     System.out.printf("챌린지 번호 ▶ %d\n "
         + "제목[댓글] ▶ %s[%d]\n"
+        //        + "제목[댓글] ▶ %s\n"
         + "내용 ▶ %s\n"
-        + "작성자 ▶ %s\n"
+        //        + "작성자 ▶ %s\n"
         + "참여인원 ▶ %d\n"
         + "참여기간 ▶ %s ~ %s\n", 
         challengeDTO.getNo(), 
@@ -42,7 +43,7 @@ public class AdminChallengeDetailHandler implements Command {
         challengeDTO.getTitle(), 
         challengeDTO.getReviewCount(), 
         challengeDTO.getContent(),
-        challengeDTO.getAdmin().getName(),
+        //        challengeDTO.getAdmin().getName(),
         challengeDTO.getTotalJoinCount(),
         //          challengeDTO.getFileUpload(), 
         challengeDTO.getStartDate(),
