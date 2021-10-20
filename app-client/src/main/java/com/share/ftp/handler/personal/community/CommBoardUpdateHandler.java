@@ -38,7 +38,7 @@ public class CommBoardUpdateHandler implements Command {
 
     String title = Prompt.inputString(String.format("제목(%s)? ", commBoardDTO.getTitle()));
     String content = Prompt.inputString(String.format("내용(%s)? ", commBoardDTO.getContent()));
-    String fileUpload = Prompt.inputString(String.format("첨부파일(%s)? ", commBoardDTO.getFileUpload()));
+    //    String fileUpload = Prompt.inputString(String.format("첨부파일(%s)? ", commBoardDTO.getFileUpload()));
 
     String input = Prompt.inputString("[  정말 변경하시겠습니까?(y/N)  ]");
 
@@ -49,7 +49,7 @@ public class CommBoardUpdateHandler implements Command {
     } else if(input.equals("y")) {
       commBoardDTO.setTitle(title);
       commBoardDTO.setContent(content);
-      commBoardDTO.setFileUpload(fileUpload);
+      //      commBoardDTO.setFileUpload(fileUpload);
 
       communityDao.update(commBoardDTO);
 

@@ -29,7 +29,10 @@ insert into ftp_vol_board(vol_board_no, user_no, title, content)
 values(3, 4, '나눔이야기3', '내용3');
 
 insert into ftp_vol_board(vol_board_no, user_no, title, content)
-values(4, 2, '나눔이야기3', '내용3');
+values(4, 2, '나눔이야기4', '내용4');
+
+insert into ftp_vol_board(vol_board_no, user_no, title, content)
+values(5, 1, '나눔이야기5', '내용5');
 
 
 -- 봉사게시판 첨부파일
@@ -40,6 +43,8 @@ insert into ftp_vol_board_file(vol_board_file_no, vol_board_no, filepath) values
 insert into ftp_vol_board_file(vol_board_file_no, vol_board_no, filepath) values(3, 4, 'nanoom4.jpg');
 
 insert into ftp_vol_board_file(vol_board_file_no, vol_board_no, filepath) values(4, 2, 'nanoom2.jpg');
+
+insert into ftp_vol_board_file(vol_board_file_no, vol_board_no, filepath) values(5, 5, 'nanoom5.jpg');
 
 
 

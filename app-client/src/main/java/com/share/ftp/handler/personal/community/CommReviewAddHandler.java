@@ -21,26 +21,26 @@ public class CommReviewAddHandler implements Command {
     System.out.println();
     System.out.println("[  한줄후기 등록  ]");
 
+    // 봉사 참여 회원 등록 권한 설정 필요
+    //    if (!generalRequestDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
+    //      System.out.println("봉사 참여한 회원만 등록이 가능합니다!");
+    //      return;
 
-    if (!generalRequestDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
-      System.out.println("봉사 참여한 회원만 등록이 가능합니다!");
-      return;
+    CommReviewDTO commReviewDTO = new CommReviewDTO();
 
-      CommReviewDTO commReviewDTO = new CommReviewDTO();
+    commReviewDTO.setNo(communityDao.getNextNumCommReview());
+    commReviewDTO.setContent(Prompt.inputString("내용  ▶ "));
+    commReviewDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
+    commReviewDTO.setOwner(AuthLoginHandler.getLoginUser());
 
-      commReviewDTO.setNo(communityDao.getNextNumCommReview());
-      commReviewDTO.setContent(Prompt.inputString("내용  ▶ "));
-      commReviewDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
-      commReviewDTO.setOwner(AuthLoginHandler.getLoginUser());
+    communityDao.insertReview(commReviewDTO);
 
-      communityDao.insertReview(commReviewDTO);
-
-      System.out.println();
-      System.out.println("[  후기가 등록 되었습니다. ]");
-    }
+    System.out.println();
+    System.out.println("[  후기가 등록 되었습니다. ]");
   }
-
 }
+
+
 
 
 

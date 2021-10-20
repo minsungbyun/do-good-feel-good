@@ -35,17 +35,14 @@ public class CommBoardListHandler implements Command {
 
     for(CommBoardDTO commBoardDTO : commBoardDTOList) {
 
-      System.out.printf("%d, %s[%d], %s, %s, %d, %d, %s\n", 
+      System.out.printf("%d, %s, %s, %s, %d\n", 
           commBoardDTO.getNo(), 
-          commBoardDTO.getTitle(), 
-          commBoardDTO.getReplyCount(),
           commBoardDTO.getOwner().getId(),
+          commBoardDTO.getTitle(), 
           commBoardDTO.getRegisteredDate(), 
-          commBoardDTO.getViewCount(),
-          commBoardDTO.getLike(),
-          commBoardDTO.getFileUpload());
-      // commBoardDTO.getContent(),
-      //commBoardDTO.getPassword(),
+          commBoardDTO.getViewCount());
+      //          commBoardDTO.getLike(),
+      //          commBoardDTO.getFileUpload());
     }
   }
 }
