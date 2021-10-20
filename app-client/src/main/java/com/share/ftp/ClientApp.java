@@ -259,7 +259,7 @@ public class ClientApp {
     //    ChallengeReviewDao netChallengeReviewDao = new NetChallengeDao(requestAgent);
 
     //로그인, 로그아웃
-    commands.put("/auth/login", new AuthLoginHandler(joinDao)); // 로그인
+    commands.put("/auth/login", new AuthLoginHandler(personalDao)); // 로그인
     commands.put("/auth/logout", new AuthLogoutHandler()); // 로그아웃
     commands.put("/auth/changeUserInfo", new AuthUpdateUserHandler()); // 마이페이지 나의정보
     commands.put("/auth/displayUserInfo", new AuthDisplayUserHandler()); // 마이페이지 나의정보수정
@@ -274,7 +274,7 @@ public class ClientApp {
     commands.put("/join/org", new JoinOrgHandler(orgDao)); // 회원가입
     commands.put("/join/searchTelId", new JoinSearchTelIdHandler(joinDao)); // 폰번호로 아이디 찾기
     commands.put("/join/searchEmailId", new JoinSearchEmailIdHandler(joinDao)); // 이메일로 아이디 찾기
-    commands.put("/join/searchPassword", new JoinSearchPasswordHandler(joinDao)); // 비밀번호 찾기
+    commands.put("/join/searchPassword", new JoinSearchPasswordHandler(personalDao)); // 비밀번호 찾기
 
     //함께해요
     commands.put("/volGeneralRequest/apply", new VolGeneralRequestApplyHandler(netVolunteerDao));
