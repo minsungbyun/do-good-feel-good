@@ -18,7 +18,7 @@ public class AdminNoticeSearchHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
-    System.out.println("[ 공지사항 - 검색] ");
+    System.out.println("[ 공지사항 - 검색 ] ");
 
     String input = Prompt.inputString("검색어: ");
 
