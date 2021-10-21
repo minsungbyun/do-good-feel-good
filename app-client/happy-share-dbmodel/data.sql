@@ -88,6 +88,26 @@ insert into ftp_vol_board_file(vol_board_file_no, vol_board_no, filepath) values
 insert into ftp_vol_board_file(vol_board_file_no, vol_board_no, filepath) values(5, 5, 'nanoom5.jpg');
 
 
+--봉사좋아요
+insert into ftp_vol_board_like(user_no, vol_board_no)
+values(1,1);
+
+insert into ftp_vol_board_like(user_no, vol_board_no)
+values(2,1);
+
+insert into ftp_vol_board_like(user_no, vol_board_no)
+values(3,1);
+
+insert into ftp_vol_board_like(user_no, vol_board_no)
+values(1,2);
+
+--봉사첨부파일
+insert into ftp_vol_board_file(vol_board_file_no, vol_board_no, filepath)
+values(1,1,'haha.gif');
+
+insert into ftp_vol_board_file(vol_board_file_no, vol_board_no, filepath)
+values(2,2,'hoho.gif');
+
 
 --한 줄 후기(봉사활동 후기) - 봉사 입력 후 입력 가능
 

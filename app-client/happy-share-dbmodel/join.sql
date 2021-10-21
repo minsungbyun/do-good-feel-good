@@ -25,3 +25,12 @@ select
 from 
   ftp_user user
 inner join ftp_user_personal personal on user.user_no=personal.user_no
+
+--게시판별 유저 좋아요 수
+select
+  vol_board_no 봉사게시판,
+  count(user_no) 유저수
+from
+ ftp_vol_board_like
+group by
+  vol_board_no
