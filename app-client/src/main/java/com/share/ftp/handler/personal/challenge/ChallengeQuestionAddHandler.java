@@ -52,17 +52,17 @@ public class ChallengeQuestionAddHandler implements Command {
       return;
     }
 
-    if (challengeDTO.getQuestionCount() == 0) {
-      challengeDTO.setQuestionCount(1);
-      System.out.println("각 챌린지의 첫 문의입니다");
-      System.out.println(challengeDTO.getQuestionCount());
-    } else {
-      challengeDTO.setQuestionCount(challengeDao.getNextQuestionNum(challengeDTO)); 
-    }
+    //    if (challengeDTO.getQuestionCount() == 0) {
+    //      challengeDTO.setQuestionCount(1);
+    //      System.out.println("각 챌린지의 첫 문의입니다");
+    //      System.out.println(challengeDTO.getQuestionCount());
+    //    } else {
+    //      challengeDTO.setQuestionCount(challengeDao.getNextQuestionNum(challengeDTO)); 
+    //    }
+    //
+    //    challengeQuestionDTO.setQuestionNo(challengeDTO.getQuestionCount());
 
-    challengeQuestionDTO.setQuestionNo(challengeDTO.getQuestionCount());
-
-    challengeDao.update(challengeDTO);
+    //    challengeDao.update(challengeDTO);
     challengeDao.insertQuestion(challengeQuestionDTO);
 
     System.out.println();

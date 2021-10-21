@@ -138,7 +138,7 @@ import com.share.ftp.handler.personal.volunteer.VolGeneralAppliedListHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestApplyCompleteHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestApplyHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestApplyListHandler;
-import com.share.ftp.handler.personal.volunteer.VolGeneralRequestBookmarkHandler;
+import com.share.ftp.handler.personal.volunteer.VolGeneralRequestWishHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestDeleteHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestRejectHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestRejectedListHandler;
@@ -322,7 +322,7 @@ public class App {
     commands.put("/volOrgRequest/appliedList", new VolOrgRequestAppliedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     commands.put("/volGeneralRequest/rejectedList", new VolGeneralRequestRejectedListHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     commands.put("/volGeneralRequest/delete", new VolGeneralRequestDeleteHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
-    commands.put("/volGeneralRequest/bookmark", new VolGeneralRequestBookmarkHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+    commands.put("/volGeneralRequest/bookmark", new VolGeneralRequestWishHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     commands.put("/volGeneralRequest/totalApprovedList", new VolGeneralTotalApprovedListHandler(volPersonalRequestAppliedListHandler,volOrgRequestAppliedListHandler));
     commands.put("/volGeneralDoJoin/add", new VolGeneralDoJoinHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
     commands.put("/volGeneralDoJoin/list", new VolGeneralDoJoinListHandler(generalRequestApplyDTOList, volRequestPersonalAppliedListDetailHandler));

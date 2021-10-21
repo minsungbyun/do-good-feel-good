@@ -30,10 +30,11 @@ import com.share.ftp.dao.impl.MariadbGroupDao;
 import com.share.ftp.dao.impl.MariadbJoinDao;
 import com.share.ftp.dao.impl.MariadbOrgDao;
 import com.share.ftp.dao.impl.MariadbPersonalDao;
+import com.share.ftp.dao.impl.MybatisChallengeDao;
 import com.share.ftp.dao.impl.MybatisCommunityDao;
 import com.share.ftp.dao.impl.MybatisNoticeDao;
 import com.share.ftp.dao.impl.MybatisQuestionDao;
-import com.share.ftp.dao.impl.NetChallengeDao;
+import com.share.ftp.dao.impl.NetCommunityDao;
 import com.share.ftp.dao.impl.NetDonationBoardDao;
 import com.share.ftp.dao.impl.NetDonationRegisterDao;
 import com.share.ftp.dao.impl.NetVolunteerDao;
@@ -136,6 +137,7 @@ import com.share.ftp.handler.personal.mypage.MyChallengeListHandler;
 import com.share.ftp.handler.personal.mypage.MyChallengeWishHandler;
 import com.share.ftp.handler.personal.mypage.MyPointListHandler;
 import com.share.ftp.handler.personal.mypage.MyRankingHandler;
+import com.share.ftp.handler.personal.mypage.MyVolWishHandler;
 import com.share.ftp.handler.personal.support.AdminQuestionConnectHandler;
 import com.share.ftp.handler.personal.support.QuestionAddHandler;
 import com.share.ftp.handler.personal.support.QuestionDeleteHandler;
@@ -158,6 +160,7 @@ import com.share.ftp.handler.personal.volunteer.VolGeneralRequestApplyListHandle
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestDeleteHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestRejectHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestRejectedListHandler;
+import com.share.ftp.handler.personal.volunteer.VolGeneralRequestWishHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionAddHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionConnectHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionDeleteHandler;
@@ -257,9 +260,12 @@ public class ClientApp {
     OrgDao orgDao = new MariadbOrgDao(con);
 
     VolunteerDao netVolunteerDao = new NetVolunteerDao(requestAgent);
+    CommunityDao netCommunityDao = new NetCommunityDao(requestAgent);
+    ChallengeDao netChallengeDao = new MybatisChallengeDao(sqlSession);
     CommunityDao CommunityDao = new MybatisCommunityDao(sqlSession);
-    ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
     QuestionDao qestionDao = new MybatisQuestionDao(sqlSession);
+
+
     NoticeDao noticeDao = new MybatisNoticeDao(sqlSession);
     //    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
     //    ChallengeReviewDao netChallengeReviewDao = new NetChallengeDao(requestAgent);
@@ -293,7 +299,8 @@ public class ClientApp {
     //    commands.put("/volPersonalRequest/appliedList", new VolPersonalRequestAppliedListHandler(netVolunteerDao));
     commands.put("/volGeneralRequest/rejectedList", new VolGeneralRequestRejectedListHandler(netVolunteerDao));
     commands.put("/volGeneralRequest/delete", new VolGeneralRequestDeleteHandler(netVolunteerDao));
-    //    commands.put("/volGeneralRequest/bookmark", new VolGeneralRequestBookmarkHandler(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList));
+    commands.put("/volGeneralRequest/wish", new VolGeneralRequestWishHandler(netVolunteerDao));
+    commands.put("/volGeneralRequest/wishList", new MyVolWishHandler(netVolunteerDao));
     //    commands.put("/volGeneralRequest/totalApprovedList", new VolGeneralTotalApprovedListHandler(volPersonalRequestAppliedListHandler,volOrgRequestAppliedListHandler));
     commands.put("/volGeneralDoJoin/add", new VolGeneralDoJoinHandler(netVolunteerDao));
     commands.put("/volGeneralDoJoin/list", new VolGeneralDoJoinListHandler(netVolunteerDao));
@@ -811,7 +818,7 @@ public class ClientApp {
     myVolunteer.add(new MenuItem("개인봉사 삭제",ACCESS_PERSONAL,"/volGeneralRequest/delete"));    
     myVolunteer.add(new MenuItem("기관봉사 삭제",ACCESS_ORG,"/volGeneralRequest/delete"));    
     myVolunteer.add(new MenuItem("참여한봉사 취소하기",ACCESS_MEMBER,"/volGeneralDoJoin/delete"));    
-    myVolunteer.add(new MenuItem("찜한봉사",ACCESS_MEMBER,"/volGeneralRequest/bookmark")); // 구현예정
+    myVolunteer.add(new MenuItem("찜한봉사",ACCESS_MEMBER,"/volGeneralRequest/wishList")); // 구현예정
 
     return myVolunteer;
   }

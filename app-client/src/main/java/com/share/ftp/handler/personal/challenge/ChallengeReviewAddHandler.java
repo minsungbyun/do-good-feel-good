@@ -1,6 +1,5 @@
 package com.share.ftp.handler.personal.challenge;
 
-import static com.share.util.General.point.CHALLENGE_REVIEWPOINT;
 import java.sql.Date;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
@@ -66,7 +65,7 @@ public class ChallengeReviewAddHandler implements Command {
       } else if (input.equalsIgnoreCase("y")) {
 
         // 포인트 적립 (10포인트)
-        AuthLoginHandler.getLoginUser().setPoint(AuthLoginHandler.getLoginUser().getPoint() + CHALLENGE_REVIEWPOINT);
+        //        AuthLoginHandler.getLoginUser().setPoint(AuthLoginHandler.getLoginUser().getPoint() + CHALLENGE_REVIEWPOINT);
 
         // 리뷰어 등록
         challengeDTO.addReviewer(AuthLoginHandler.getLoginUser());

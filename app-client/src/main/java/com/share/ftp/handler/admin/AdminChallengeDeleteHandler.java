@@ -32,7 +32,7 @@ public class AdminChallengeDeleteHandler implements Command {
       return; 
 
     } else if (input.equalsIgnoreCase("y")) {
-      challengeDao.delete(challengeDTO);
+      challengeDao.delete(challengeNo);
       System.out.println();
 
       System.out.println("[  챌린지를 삭제하였습니다. ]");
