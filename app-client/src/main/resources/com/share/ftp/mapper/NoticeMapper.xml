@@ -83,7 +83,7 @@
   
   
   
-  
+<!--
 select
   user.id,
   user.name,
@@ -123,11 +123,6 @@ select
 from 
   ftp_user user
 inner join ftp_user_group group on user.user_no=group.user_no
-
-
-  
-  <!--   
-
   
   
  

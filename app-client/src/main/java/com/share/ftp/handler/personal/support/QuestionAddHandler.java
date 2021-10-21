@@ -1,11 +1,5 @@
 package com.share.ftp.handler.personal.support;
 
-import static com.share.util.General.questionType.CHALLENGEASK;
-import static com.share.util.General.questionType.COMMUITYASK;
-import static com.share.util.General.questionType.DONATIONASK;
-import static com.share.util.General.questionType.OTHERASK;
-import static com.share.util.General.questionType.SITEASK;
-import static com.share.util.General.questionType.VOLUNTEERASK;
 import java.sql.Date;
 import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.domain.support.QuestionListDTO;
@@ -16,6 +10,12 @@ import com.share.util.Prompt;
 
 public class QuestionAddHandler implements Command {
 
+  private static final String VOLUNTEERASK = null;
+  private static final String COMMUITYASK = null;
+  private static final String DONATIONASK = null;
+  private static final String CHALLENGEASK = null;
+  private static final String SITEASK = null;
+  private static final String OTHERASK = null;
   QuestionDao questionDao;
 
   public QuestionAddHandler(QuestionDao questionDao) {
