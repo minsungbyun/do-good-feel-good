@@ -1,6 +1,7 @@
 package com.share.ftp;
 
 import static com.share.menu.Menu.ACCESS_ADMIN;
+import static com.share.menu.Menu.ACCESS_GROUP;
 import static com.share.menu.Menu.ACCESS_LOGOUT;
 import static com.share.menu.Menu.ACCESS_MEMBER;
 import static com.share.menu.Menu.ACCESS_MEMBER_ADMIN;
@@ -29,9 +30,9 @@ import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.dao.impl.MariadbGroupDao;
 import com.share.ftp.dao.impl.MariadbJoinDao;
 import com.share.ftp.dao.impl.MariadbOrgDao;
-import com.share.ftp.dao.impl.MariadbPersonalDao;
 import com.share.ftp.dao.impl.MybatisCommunityDao;
 import com.share.ftp.dao.impl.MybatisNoticeDao;
+import com.share.ftp.dao.impl.MybatisPersonalDao;
 import com.share.ftp.dao.impl.NetChallengeDao;
 import com.share.ftp.dao.impl.NetDonationBoardDao;
 import com.share.ftp.dao.impl.NetDonationRegisterDao;
@@ -65,6 +66,7 @@ import com.share.ftp.handler.join.JoinAddHandler;
 import com.share.ftp.handler.join.JoinDetailHandler;
 import com.share.ftp.handler.join.JoinGroupHandler;
 import com.share.ftp.handler.join.JoinListHandler;
+import com.share.ftp.handler.join.JoinListTestHandler;
 import com.share.ftp.handler.join.JoinOrgHandler;
 import com.share.ftp.handler.join.JoinPersonalHandler;
 import com.share.ftp.handler.join.JoinSearchEmailIdHandler;
@@ -74,6 +76,7 @@ import com.share.ftp.handler.join.MyPageDeleteUserHandler;
 import com.share.ftp.handler.join.MyPageUpdateUserHandler;
 import com.share.ftp.handler.join.OrgHandler;
 import com.share.ftp.handler.join.PersonalHandler;
+import com.share.ftp.handler.join.PersonalUserUpdateHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeDetailHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeJoinHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeJoinListHandler;
@@ -253,7 +256,7 @@ public class ClientApp {
 
 
     JoinDao joinDao = new MariadbJoinDao(con);
-    PersonalDao personalDao = new MariadbPersonalDao(con);
+    PersonalDao personalDao = new MybatisPersonalDao(sqlSession);
     GroupDao groupDao = new MariadbGroupDao(con);
     OrgDao orgDao = new MariadbOrgDao(con);
 
@@ -308,15 +311,6 @@ public class ClientApp {
     commands.put("/volQuestion/delete", new VolQuestionDeleteHandler(netVolunteerDao));
     commands.put("/volQuestion/connect", new VolQuestionConnectHandler(netVolunteerDao));
 
-
-    //함께해요 (기관) + 마이페이지
-    //    commands.put("/volRequestOrg/apply", new VolRequestOrgApplyHandler(orgRequestDTOList,joinDTOList));
-    //    commands.put("/volRequestOrg/applyList", new VolRequestOrgApplyListHandler(orgRequestDTOList));
-    //    commands.put("/volRequestOrg/applyCompleteList", new VolRequestOrgApplyCompleteListHandler(orgRequestDTOList, orgRequestApplyDTOList, orgRequestRejectDTOList));
-    //    commands.put("/volRequestOrg/acceptApply", new VolRequestOrgAcceptApplyHandler(orgRequestDTOList, orgRequestApplyDTOList, orgRequestRejectDTOList));
-    //    commands.put("/volRequestOrg/rejectApply", new VolRequestOrgRejectApplyHandler(orgRequestDTOList, orgRequestApplyDTOList, orgRequestRejectDTOList));
-    //    commands.put("/volRequestOrg/appliedList", new VolRequestOrgAppliedListHandler(orgRequestDTOList, orgRequestApplyDTOList, orgRequestRejectDTOList));
-    //    commands.put("/volRequestOrg/rejectedList", new VolRequestOrgRejectedListHandler(orgRequestDTOList, orgRequestApplyDTOList, orgRequestRejectDTOList));
 
     // 소통해요 나눔이야기
     commands.put("/commBoard/add", new CommBoardAddHandler(CommunityDao));
@@ -420,6 +414,7 @@ public class ClientApp {
 
     // 마이페이지
     commands.put("/myPage/info", new MyPageUpdateUserHandler(joinDao)); // 내정보 수정
+    commands.put("/myPage/personal", new PersonalUserUpdateHandler(personalDao)); // 내정보 수정
     commands.put("/myPage/delete", new MyPageDeleteUserHandler(joinDao)); // 회원탈퇴
 
     commands.put("/myVol/applied", new MyAppliedVolHandler(netVolunteerDao));
@@ -441,6 +436,7 @@ public class ClientApp {
 
     // 관리자 회원정보 조회
     commands.put("/join/list", new JoinListHandler(personalDao)); // 관리자가 회원 목록을 조회
+    commands.put("/join/test", new JoinListTestHandler(personalDao)); // 관리자가 회원 목록을 조회
     commands.put("/join/detail", new JoinDetailHandler(joinDao)); // 가입회원 상세보기 (관리자연결)
     commands.put("/join/delete", new AdminMemberDeleteHandler());
 
@@ -794,7 +790,10 @@ public class ClientApp {
     MenuGroup myProfile = new MenuGroup("회원정보", ACCESS_MEMBER);
     myProfile.setMenuFilter(menuFilter);
     myProfile.add(new MenuItem("내 정보", "/auth/displayUserInfo"));
-    myProfile.add(new MenuItem("내 정보 수정", "/auth/changeUserInfo"));
+    //    myProfile.add(new MenuItem("내 정보 수정", "/auth/changeUserInfo"));
+    myProfile.add(new MenuItem("내 정보 수정", ACCESS_PERSONAL, "/myPage/personal"));
+    myProfile.add(new MenuItem("내 정보 수정", ACCESS_GROUP, "/myPage/group"));
+    myProfile.add(new MenuItem("내 정보 수정", ACCESS_ORG, "/myPage/org"));
 
     return myProfile;
   }
@@ -879,6 +878,7 @@ public class ClientApp {
     adminMemberMenu.setMenuFilter(menuFilter);
 
     adminMemberMenu.add(new MenuItem("회원목록",ACCESS_ADMIN, "/join/list"));
+    adminMemberMenu.add(new MenuItem("개인목록(테스트)",ACCESS_ADMIN, "/join/test"));
     adminMemberMenu.add(new MenuItem("가입회원 상세보기", ACCESS_ADMIN,"/join/detail"));
     adminMemberMenu.add(new MenuItem("회원추방",ACCESS_ADMIN,"/adminMember/list"));
 

@@ -23,7 +23,7 @@
   </environments>
   
   <mappers>
-    <mapper resource="com/share/ftp/mapper/NoticeMapper.xml"/>
+    <mapper resource="com/share/ftp/mapper/PersonalMapper.xml"/>
     <mapper resource="com/share/ftp/mapper/NoticeMapper.xml"/>
  
   </mappers>

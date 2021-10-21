@@ -3,16 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="JoinMapper">
+<mapper namespace="PersonalMapper">
   
-  <resultMap type="JoinDTO" id="JoinDTOMap">
-    <id column="user_no" property="no"/> 
+  <resultMap type="PersonalDTO" id="PersonalDTOMap">
+    <id column="user_personal_no" property="no"/> 
+    <result column="birthdate" property="birthdate"/>
+    <result column="rank" property="level"/>
+    <result column="point" property="point"/>
+    
+    <result column="user_no" property="id"/>
     <result column="id" property="id"/>
     <result column="password" property="password"/>
     <result column="name" property="name"/>
     <result column="tel" property="tel"/>
     <result column="email" property="email"/>
-    <result column="created_dt" property="registeredDate"/>
+    <result column="created_dt" property="registerDate"/>
     <result column="post_no" property="postNo"/>
     <result column="basic_address" property="basicAddress"/>
     <result column="detail_address" property="detailAddress"/>
@@ -22,17 +27,22 @@
     <result column="note" property="note"/>
   <!--    <result column="last_login" property="viewCount"/>-->
   </resultMap>
+ 
   
-  <select id="findAll" resultMap="NoticeDTOMap">
-   select 
-     notice_no,
-     title,
-     created_dt,
-     view_cnt
-    from
-     ftp_support_notice
-    order by notice_no desc
+  <select id="findAllPersonal" resultMap="PersonalDTOMap">
+	   select 
+	     u.*,    
+	     p.birthdate,
+	     p.rank,
+	     p.point
+	   from
+	     ftp_user u
+	     inner join ftp_user_personal p on u.user_no=p.user_no
+	   order by
+	     user_personal_no asc
   </select>
+  
+  <!--  
   
   <insert id="insert" parameterType="NoticeDTO">
     insert into ftp_support_notice(title,content,created_dt) 
@@ -92,100 +102,7 @@
   </select>
   
   
-<!--    
-  
-select
-  user.id 아이디,
-  user.email 이메일,
-  personal.rank 등급,
-  personal.point 포인트,
-  photo.filepath 첨부파일,
-  message.content 메세지,
-  alert.content 알림
-from 
-  ftp_user user
-inner join ftp_user_personal personal on user.user_no=personal.user_no
-left outer join ftp_user_photo photo on user.user_no=photo.user_no
-left outer join ftp_user_message message on user.user_no=message.user_from
-left outer join ftp_user_alert alert on user.user_no=alert.user_no
 
-
-select
-  user.id,
-  user.name,
-  user.email,
-  user.status,
-  personal.birthdate,
-  personal.rank,
-  personal.point
-from 
-  ftp_user user
-inner join ftp_user_personal personal on user.user_no=personal.user_no
-
-select
-  user.id,
-  user.name,
-  user.email,
-  user.status,
-  group.group_cnt
-from 
-  ftp_user user
-inner join ftp_user_group group on user.user_no=group.user_no
-
-
-select
-  board.vol_board_no,
-  board.title,
-  user.id,
-  file.filepath,
-  board.view_cnt
-from
-  ftp_vol_board board
-inner join ftp_user user on board.user_no=user.user_no
-left outer join ftp_vol_board_like like on board.vol_board_no=like.vol_board_no
-left outer join ftp_vol_board_file file on board.vol_board_no=file.vol_board_no
-
-select
-  board.vol_board_no,
-  board.title,
-  user.id,
-  file.filepath,
-  like3.count(user_no),
-  board.view_cnt
-from
-  ftp_vol_board board
-inner join ftp_user user on board.user_no=user.user_no
-left outer join ftp_vol_board_file file on board.vol_board_no=file.vol_board_no
-inner join ftp_vol_board_like like3 on user.user_no=like3.user_no
-
-select
-  board.vol_board_no,
-  board.title,
-  user.id,
-  file.filepath,
-  board.view_cnt,
-
-from
-  ftp_vol_board board
-inner join ftp_user user on board.user_no=user.user_no
-left outer join ftp_vol_board_file file on board.vol_board_no=file.vol_board_no
-left outer join ftp_vol_board_like like on board.vol_board.no=like.vol_board_no
-left outer join ftp_vol_board_like like2 on user.user_no=like2.user_no
-
-
-
-select
-  vol_board_no 봉사게시판,
-  count(user_no) 유저수
-from
- ftp_vol_board_like 
-group by
-  vol_board_no
-  -->
-  <!--   
-
-  
-  
  
  
   
@@ -215,7 +132,8 @@ group by
       pms_member
     where 
       name=#{value}
-  </select>-->
+  </select>
+  -->
 </mapper>
 
 
