@@ -40,9 +40,9 @@ public class CommBoardListHandler implements Command {
           commBoardDTO.getOwner().getId(),
           commBoardDTO.getTitle(), 
           commBoardDTO.getRegisteredDate(), 
-          commBoardDTO.getViewCount());
+          commBoardDTO.getViewCount(),
+          commBoardDTO.getFileUpload());
       //          commBoardDTO.getLike(),
-      //          commBoardDTO.getFileUpload());
     }
   }
 }
