@@ -70,6 +70,26 @@ values(3, 4, '청소년 멘토링 봉사활동', '제가 아이들에게 어떤 
 insert into ftp_vol_board(vol_board_no, user_no, title, content)
 values(4, 2, '한강 환경 정비 봉사활동', '즐거운 일요일, 한강변을 걸으며 쓰레기를 주우며 보람찬 하루를 보냈습니다. 무더위로 많은 땀이 흘러내렸고 담배꽁초를 줍고 있는 와중에도 새로운 꽁초를 버리는 사람들을 보면서 아, 앞으로도 지속적인 봉사활동이 필요하겠구나 하는 생각이 들었습니다. 여러분! 쓰레기는 늘 쓰레기통에 버리는 습관을 가집시다.^^')
 
+--봉사좋아요
+insert into ftp_vol_board_like(user_no, vol_board_no)
+values(1,1);
+
+insert into ftp_vol_board_like(user_no, vol_board_no)
+values(2,1);
+
+insert into ftp_vol_board_like(user_no, vol_board_no)
+values(3,1);
+
+insert into ftp_vol_board_like(user_no, vol_board_no)
+values(1,2);
+
+--봉사첨부파일
+insert into ftp_vol_board_file(vol_board_file_no, vol_board_no, filepath)
+values(1,1,'haha.gif');
+
+insert into ftp_vol_board_file(vol_board_file_no, vol_board_no, filepath)
+values(2,2,'hoho.gif');
+
 
 --한 줄 후기(봉사활동 후기) - 봉사 입력 후 입력 가능
 
