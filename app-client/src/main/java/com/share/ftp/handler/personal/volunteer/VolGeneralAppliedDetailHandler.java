@@ -80,7 +80,7 @@ public class VolGeneralAppliedDetailHandler implements Command {
         case 1: request.getRequestDispatcher("/volGeneralDoJoin/add").forward(request); break;
         case 2: request.getRequestDispatcher("/volGeneralDoJoin/list").forward(request); break;
         case 3: request.getRequestDispatcher("/volQuestion/list").forward(request); break;
-        case 4: request.getRequestDispatcher("/volGeneralRequest/bookmark").forward(request); break;
+        case 4: request.getRequestDispatcher("/volGeneralRequest/wish").forward(request); break;
         case 0: return;
         default:
           System.out.println("명령어가 올바르지 않습니다!");

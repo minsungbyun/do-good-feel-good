@@ -1,6 +1,5 @@
 package com.share.ftp.handler.personal.challenge;
 
-import static com.share.util.General.point.CHALLENGE_REVIEWPOINT;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeReviewDTO;
@@ -51,7 +50,7 @@ public class ChallengeReviewDeleteHandler implements Command {
         } else if (input.equalsIgnoreCase("y")) {
           System.out.println();
           challengeDTO.setReviewCount(challengeDTO.getReviewCount() - 1);
-          AuthLoginHandler.getLoginUser().setPoint(AuthLoginHandler.getLoginUser().getPoint() - CHALLENGE_REVIEWPOINT);
+          //          AuthLoginHandler.getLoginUser().setPoint(AuthLoginHandler.getLoginUser().getPoint() - CHALLENGE_REVIEWPOINT);
           challengeDTO.removeReviewer(AuthLoginHandler.getLoginUser()); 
 
           challengeDao.update(challengeDTO);

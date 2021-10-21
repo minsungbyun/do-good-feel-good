@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ChallengeMapper">
+  
+  <resultMap type="ChallengeDTO" id="ChallengeDTOMap">
+    <id column="challenge_no" property="no"/> 
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="start_dt" property="startDate"/>
+    <result column="end_dt" property="endDate"/>
+    <result column="created_dt" property="registeredDate"/>
+  </resultMap>
+  
+  <select id="findAll" resultMap="ChallengeDTOMap">
+   select 
+     challenge_no,
+     title,
+     start_dt,
+     end_dt
+    from
+     ftp_challenge
+    order by challenge_no desc
+  </select>
+  
+  <insert id="insert" parameterType="ChallengeDTO">
+    insert into ftp_challenge(title,content,start_dt,end_dt,created_dt) 
+    values(#{title},#{content},#{startDate},#{endDate}, curdate())
+  </insert>
+  
+  
+  
+   <update id="update" parameterType="ChallengeDTO">
+   update ftp_challenge set
+     title=#{title},
+     content=#{content},
+     start_dt=#{startDate},
+     end_dt=#{endDate}
+   where 
+      challenge_no=#{no}
+  </update>
+  
+  
+  
+   <delete id="delete" parameterType="int">
+    delete from ftp_challenge where challenge_no=${values}
+  </delete>
+  
+  
+  
+  <select id="findByChallengeNo" resultMap="ChallengeDTOMap" parameterType="int">
+     select 
+     challenge_no,
+     title,
+     content,
+     start_dt,
+     end_dt,
+     created_dt
+    from
+     ftp_challenge
+    where 
+      challenge_no=#{values}
+  </select>
+</mapper>
+
+
+
+
+
+
+
