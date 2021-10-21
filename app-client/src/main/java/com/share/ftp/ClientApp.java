@@ -32,10 +32,10 @@ import com.share.ftp.dao.impl.MariadbOrgDao;
 import com.share.ftp.dao.impl.MariadbPersonalDao;
 import com.share.ftp.dao.impl.MybatisCommunityDao;
 import com.share.ftp.dao.impl.MybatisNoticeDao;
+import com.share.ftp.dao.impl.MybatisQuestionDao;
 import com.share.ftp.dao.impl.NetChallengeDao;
 import com.share.ftp.dao.impl.NetDonationBoardDao;
 import com.share.ftp.dao.impl.NetDonationRegisterDao;
-import com.share.ftp.dao.impl.NetQuestionDao;
 import com.share.ftp.dao.impl.NetVolunteerDao;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -56,6 +56,7 @@ import com.share.ftp.handler.admin.AdminNoticeDetailHandler;
 import com.share.ftp.handler.admin.AdminNoticeListHandler;
 import com.share.ftp.handler.admin.AdminNoticeSearchHandler;
 import com.share.ftp.handler.admin.AdminNoticeUpdateHandler;
+import com.share.ftp.handler.admin.AdminQuestionAddHandler;
 import com.share.ftp.handler.join.AuthDisplayUserHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.ftp.handler.join.AuthLogoutHandler;
@@ -239,7 +240,6 @@ public class ClientApp {
     }
   }
 
-
   public ClientApp() throws Exception {
 
     requestAgent = null;
@@ -251,7 +251,6 @@ public class ClientApp {
     sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
         "com/share/ftp/conf/mybatis-config.xml")).openSession();
 
-
     JoinDao joinDao = new MariadbJoinDao(con);
     PersonalDao personalDao = new MariadbPersonalDao(con);
     GroupDao groupDao = new MariadbGroupDao(con);
@@ -260,7 +259,7 @@ public class ClientApp {
     VolunteerDao netVolunteerDao = new NetVolunteerDao(requestAgent);
     CommunityDao CommunityDao = new MybatisCommunityDao(sqlSession);
     ChallengeDao netChallengeDao = new NetChallengeDao(requestAgent);
-    QuestionDao netQuestionDao = new NetQuestionDao(requestAgent);
+    QuestionDao qestionDao = new MybatisQuestionDao(sqlSession);
     NoticeDao noticeDao = new MybatisNoticeDao(sqlSession);
     //    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
     //    ChallengeReviewDao netChallengeReviewDao = new NetChallengeDao(requestAgent);
@@ -408,12 +407,12 @@ public class ClientApp {
     commands.put("/donationBoardDetailRegister/add", new DonationBoardDetailRegisterAddHandler(donationBoardDao, donationRegisterDao, joinDao));
 
     // 고객센터 문의사항
-    commands.put("/question/add", new QuestionAddHandler(netQuestionDao));
-    commands.put("/question/list", new QuestionListHandler(netQuestionDao));
-    commands.put("/question/detail", new QuestionDetailHandler(netQuestionDao));
-    commands.put("/question/update", new QuestionUpdateHandler(netQuestionDao));
-    commands.put("/question/delete", new QuestionDeleteHandler(netQuestionDao));
-    commands.put("/question/search", new QuestionSearchHandler(netQuestionDao));
+    commands.put("/question/add", new QuestionAddHandler(qestionDao));
+    commands.put("/question/list", new QuestionListHandler(qestionDao));
+    commands.put("/question/detail", new QuestionDetailHandler(qestionDao));
+    commands.put("/question/update", new QuestionUpdateHandler(qestionDao));
+    commands.put("/question/delete", new QuestionDeleteHandler(qestionDao));
+    commands.put("/question/search", new QuestionSearchHandler(qestionDao));
 
     commands.put("/adminQuestion/connect", new AdminQuestionConnectHandler());
     //    commands.put("/adminQuestion/add", new AdminQuestionAddHandler(myQuestionListDTOList));
@@ -454,7 +453,7 @@ public class ClientApp {
 
     // 관리자 문의사항
 
-    //    commands.put("/adminQuestion/add", new AdminQuestionAddHandler(netQuestionDao));
+    commands.put("/adminQuestion/add", new AdminQuestionAddHandler(qestionDao));
     //        commands.put("/adminAsk/detail", new AdminQuestionDetailHandler(myQuestionListDTOList));
     //        commands.put("/adminAsk/update", new AdminQuestionUpdateHandler(myQuestionListDTOList));
     //        commands.put("/adminAsk/delete", new AdminQuestionDeleteHandler(myQuestionListDTOList));

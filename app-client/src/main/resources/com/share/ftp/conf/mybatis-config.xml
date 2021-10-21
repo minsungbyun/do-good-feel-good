@@ -24,7 +24,7 @@
   
   <mappers>
     <mapper resource="com/share/ftp/mapper/NoticeMapper.xml"/>
-    <mapper resource="com/share/ftp/mapper/NoticeMapper.xml"/>
+    <mapper resource="com/share/ftp/mapper/QuestionMapper.xml"/>
  
   </mappers>
 </configuration>
