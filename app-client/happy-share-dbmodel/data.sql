@@ -29,7 +29,6 @@ insert into ftp_user_personal(user_personal_no, user_no, birthdate, rank)
 values(3, 1, '2021-2-5','천콩이');
 
 --알림
-
 insert into ftp_user_alert(user_notice_no, user_no, content)
 values(1,1,'게시글이 등록되었습니다');
 
@@ -74,6 +73,17 @@ values(4, 2, '나눔이야기4', '내용4');
 
 insert into ftp_vol_board(vol_board_no, user_no, title, content)
 values(5, 1, '나눔이야기5', '내용5');
+
+--봉사게시판댓글
+insert into ftp_vol_comment(vol_comment_no, vol_board_no, user_no, content)
+values(1, 1, 1, '댓글1');
+insert into ftp_vol_comment(vol_comment_no, vol_board_no, user_no, content)
+values(2, 2, 2, '댓글2');
+insert into ftp_vol_comment(vol_comment_no, vol_board_no, user_no, content)
+values(3, 3, 3, '댓글3');
+insert into ftp_vol_comment(vol_comment_no, vol_board_no, user_no, content)
+values(4, 1, 1, '댓글');
+
 
 
 -- 봉사게시판 첨부파일
@@ -145,29 +155,29 @@ values(1,1,'2021-11-11','09:00','18:00',1);
 
 
 
---봉사카테고리 (1.비대면 2.아동 3.청소년 4.노인 5.장애인 6.동물 7.환경 8.기타)
-insert into ftp_vol_category(vol_category_no, category_title)
+--카테고리 (1.비대면 2.아동 3.청소년 4.노인 5.장애인 6.동물 7.환경 8.기타)
+insert into ftp_category(category_no, category_title)
 values(1,'비대면');
 
-insert into ftp_vol_category(vol_category_no, category_title)
+insert into ftp_category(category_no, category_title)
 values(2,'아동');
 
-insert into ftp_vol_category(vol_category_no, category_title)
+insert into ftp_category(category_no, category_title)
 values(3,'청소년');
 
-insert into ftp_vol_category(vol_category_no, category_title)
+insert into ftp_category(category_no, category_title)
 values(4,'노인');
 
-insert into ftp_vol_category(vol_category_no, category_title)
+insert into ftp_category(category_no, category_title)
 values(5,'장애인');
 
-insert into ftp_vol_category(vol_category_no, category_title)
+insert into ftp_category(category_no, category_title)
 values(6,'동물');
 
-insert into ftp_vol_category(vol_category_no, category_title)
+insert into ftp_category(category_no, category_title)
 values(7,'환경');
 
-insert into ftp_vol_category(vol_category_no, category_title)
+insert into ftp_category(category_no, category_title)
 values(8,'기타');
 
 
