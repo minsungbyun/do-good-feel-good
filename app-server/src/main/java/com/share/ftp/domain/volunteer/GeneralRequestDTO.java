@@ -27,6 +27,7 @@ public class GeneralRequestDTO implements Serializable {
   private String content;
   private String fileUpload;
   private Date submitTime; 
+  private JoinDTO wish;
   private int limitNum; // 총 정원
   private int totalJoinCount = 1; // 현재 참여 인원 (주최자는 미리 포함)
   private int questionCount;
@@ -37,7 +38,7 @@ public class GeneralRequestDTO implements Serializable {
   public int hashCode() {
     return Objects.hash(content, email, endDate, endTime, fileUpload, limitNum, memberType, members,
         name, no, owner, questionCount, startDate, startTime, status, submitTime, tel, title,
-        totalJoinCount, type);
+        totalJoinCount, type, wish);
   }
 
   @Override
@@ -58,7 +59,7 @@ public class GeneralRequestDTO implements Serializable {
         && Objects.equals(startTime, other.startTime) && Objects.equals(status, other.status)
         && Objects.equals(submitTime, other.submitTime) && Objects.equals(tel, other.tel)
         && Objects.equals(title, other.title) && totalJoinCount == other.totalJoinCount
-        && Objects.equals(type, other.type);
+        && Objects.equals(type, other.type) && Objects.equals(wish, other.wish);
   }
 
   @Override
@@ -67,9 +68,9 @@ public class GeneralRequestDTO implements Serializable {
         + ", name=" + name + ", status=" + status + ", owner=" + owner + ", type=" + type + ", tel="
         + tel + ", email=" + email + ", startDate=" + startDate + ", endDate=" + endDate
         + ", startTime=" + startTime + ", endTime=" + endTime + ", content=" + content
-        + ", fileUpload=" + fileUpload + ", submitTime=" + submitTime + ", limitNum=" + limitNum
-        + ", totalJoinCount=" + totalJoinCount + ", questionCount=" + questionCount + ", members="
-        + members + "]";
+        + ", fileUpload=" + fileUpload + ", submitTime=" + submitTime + ", wish=" + wish
+        + ", limitNum=" + limitNum + ", totalJoinCount=" + totalJoinCount + ", questionCount="
+        + questionCount + ", members=" + members + "]";
   }
 
   public int getNo() {
@@ -198,6 +199,14 @@ public class GeneralRequestDTO implements Serializable {
 
   public void setSubmitTime(Date submitTime) {
     this.submitTime = submitTime;
+  }
+
+  public JoinDTO getWish() {
+    return wish;
+  }
+
+  public void setWish(JoinDTO wish) {
+    this.wish = wish;
   }
 
   public int getLimitNum() {
