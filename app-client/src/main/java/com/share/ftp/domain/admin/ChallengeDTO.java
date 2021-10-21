@@ -17,7 +17,7 @@ public class ChallengeDTO implements Serializable {
   private JoinDTO admin;
   private String title;
   private String content;
-  private int fileUpload;
+  private String fileUpload;
   private String remainTime;
   private Date registeredDate;
   private Date startDate;
@@ -63,7 +63,7 @@ public class ChallengeDTO implements Serializable {
       return false;
     ChallengeDTO other = (ChallengeDTO) obj;
     return Objects.equals(admin, other.admin) && Objects.equals(content, other.content)
-        && Objects.equals(endDate, other.endDate) && fileUpload == other.fileUpload
+        && Objects.equals(endDate, other.endDate) && Objects.equals(fileUpload, other.fileUpload)
         && Objects.equals(members, other.members) && no == other.no && point == other.point
         && questionCount == other.questionCount
         && Objects.equals(registeredDate, other.registeredDate)
@@ -102,10 +102,10 @@ public class ChallengeDTO implements Serializable {
   public void setContent(String content) {
     this.content = content;
   }
-  public int getFileUpload() {
+  public String getFileUpload() {
     return fileUpload;
   }
-  public void setFileUpload(int fileUpload) {
+  public void setFileUpload(String fileUpload) {
     this.fileUpload = fileUpload;
   }
   public Date getRegisteredDate() {

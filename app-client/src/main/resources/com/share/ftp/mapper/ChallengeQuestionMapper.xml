@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ChallengeQuestionMapper">
+  
+  <resultMap type="ChallengeQuestionDTO" id="ChallengeQuestionDTOMap">
+    <id column="challenge_no" property="no"/> 
+    <id column="challenge_qna_no" property="questionNo"/> 
+    <result column="content" property="content"/>
+    <result column="created_dt" property="registeredDate"/>
+    <association property="owner" javaType="joinDTO">
+      <id column="user_no" property="no"/>
+      <result column="id" property="id"/>
+    </association>
+  </resultMap>
+  
+  <sql id="select1">
+     select 
+     q.challenge_no,
+     q.challenge_qna_no,
+     q.content,
+     q.created_dt,
+     u.user_no,
+     u.id
+    from
+     ftp_challenge_qna q
+     inner join ftp_user u on q.user_no=u.user_no
+  </sql>
+
+  <select id="findAll" resultMap="ChallengeQuestionDTOMap">
+    <include refid="select1"/>
+    order by q.challenge_qna_no desc
+  </select>
+  
+  <insert id="insert" parameterType="ChallengeQuestionDTO">
+    insert into ftp_challenge_qna(content,created_dt) 
+    values(#{content}, curdate())
+  </insert>
+  
+  
+  
+   <update id="update" parameterType="ChallengeQuestionDTO">
+   update ftp_challenge_qna set
+     content=#{content},
+   where 
+      challenge_qna_no=#{questionNo}
+  </update>
+  
+  
+  
+   <delete id="delete" parameterType="int">
+    delete from ftp_challenge_qna where challenge_qna_no=${values}
+  </delete>
+  
+  
+  
+  <select id="findByNo" resultMap="ChallengeQuestionDTOMap" parameterType="int">
+    <include refid="select1"/>
+    where 
+      challenge_qna_no=#{values}
+  </select>
+</mapper>
+
+
+
+
+
+
+

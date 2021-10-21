@@ -1,6 +1,5 @@
 package com.share.ftp.handler.personal.challenge;
 
-import static com.share.util.General.point.CHALLENGE_POINT;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.handler.Command;
@@ -62,9 +61,9 @@ public class ChallengeJoinHandler implements Command {
     challengeDTO.addMembers(AuthLoginHandler.getLoginUser());
 
     // 포인트 부여 (참여 100포인트)
-    AuthLoginHandler.getLoginUser().setPoint(AuthLoginHandler.getLoginUser().getPoint() + CHALLENGE_POINT);
+    //    AuthLoginHandler.getLoginUser().setPoint(AuthLoginHandler.getLoginUser().getPoint() + CHALLENGE_POINT);
 
-    //    // 총 참여 인원(주최자1명 포함)을 누적시킨다.
+    //    // 총 참여 인원을 누적시킨다.
     int count = challengeDTO.getTotalJoinCount();
     challengeDTO.setTotalJoinCount(count += 1); 
 

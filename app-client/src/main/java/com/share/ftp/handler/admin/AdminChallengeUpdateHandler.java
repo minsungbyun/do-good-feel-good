@@ -29,7 +29,7 @@ public class AdminChallengeUpdateHandler implements Command {
 
     String title = Prompt.inputString(String.format("제목(%s)? ", challengeDTO.getTitle()));
     String content = Prompt.inputString(String.format("내용(%s)? ", challengeDTO.getContent()));
-    String fileUpload = Prompt.inputString(String.format("첨부파일(%s)? ", challengeDTO.getFileUpload()));
+    //    String fileUpload = Prompt.inputString(String.format("첨부파일(%s)? ", challengeDTO.getFileUpload()));
     Date startDate = Prompt.inputDate(String.format("시작일(%s)? ", challengeDTO.getStartDate()));
     Date endDate = Prompt.inputDate(String.format("종료일(%s)? ", challengeDTO.getEndDate()));
 
@@ -40,7 +40,7 @@ public class AdminChallengeUpdateHandler implements Command {
     } else if (input.equalsIgnoreCase("y")) {
       challengeDTO.setTitle(title);
       challengeDTO.setContent(content);
-      challengeDTO.setFileUpload(fileUpload);
+      //      challengeDTO.setFileUpload(fileUpload);
       challengeDTO.setStartDate(startDate);
       challengeDTO.setEndDate(endDate);
 

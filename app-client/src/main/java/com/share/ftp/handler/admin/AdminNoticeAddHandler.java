@@ -1,6 +1,5 @@
 package com.share.ftp.handler.admin;
 
-import java.sql.Date;
 import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.domain.admin.NoticeDTO;
 import com.share.ftp.handler.Command;
@@ -26,10 +25,8 @@ public class AdminNoticeAddHandler implements Command {
     noticeDTO.setTitle(Prompt.inputString("제목: "));
     noticeDTO.setContent(Prompt.inputString("내용: ")); 
     noticeDTO.setFileUpload(Prompt.inputString("첨부파일: ")); 
-    noticeDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     // 고유회원번호 부여
-    noticeDTO.setNo(noticeDao.getNextNum());
 
     noticeDao.insert(noticeDTO);
 

@@ -54,7 +54,7 @@ public class NetChallengeDao implements ChallengeDao {
   }
 
   @Override
-  public void delete(ChallengeDTO deleteChallenge) throws Exception {
+  public void delete(int deleteChallenge) throws Exception {
     requestAgent.request("challenge.delete", deleteChallenge);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
