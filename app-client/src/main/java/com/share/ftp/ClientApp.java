@@ -31,6 +31,7 @@ import com.share.ftp.dao.impl.MariadbJoinDao;
 import com.share.ftp.dao.impl.MariadbOrgDao;
 import com.share.ftp.dao.impl.MariadbPersonalDao;
 import com.share.ftp.dao.impl.MybatisChallengeDao;
+import com.share.ftp.dao.impl.MybatisCommunityDao;
 import com.share.ftp.dao.impl.MybatisNoticeDao;
 import com.share.ftp.dao.impl.NetCommunityDao;
 import com.share.ftp.dao.impl.NetDonationBoardDao;
@@ -262,6 +263,7 @@ public class ClientApp {
     VolunteerDao netVolunteerDao = new NetVolunteerDao(requestAgent);
     CommunityDao netCommunityDao = new NetCommunityDao(requestAgent);
     ChallengeDao netChallengeDao = new MybatisChallengeDao(sqlSession);
+    CommunityDao CommunityDao = new MybatisCommunityDao(sqlSession);
     QuestionDao netQuestionDao = new NetQuestionDao(requestAgent);
     NoticeDao noticeDao = new MybatisNoticeDao(sqlSession);
     //    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
@@ -322,32 +324,32 @@ public class ClientApp {
     //    commands.put("/volRequestOrg/rejectedList", new VolRequestOrgRejectedListHandler(orgRequestDTOList, orgRequestApplyDTOList, orgRequestRejectDTOList));
 
     // 소통해요 나눔이야기
-    commands.put("/commBoard/add", new CommBoardAddHandler(netCommunityDao));
-    commands.put("/commBoard/list", new CommBoardListHandler(netCommunityDao));
-    commands.put("/commBoard/detail", new CommBoardDetailHandler(netCommunityDao));
-    commands.put("/commBoard/update", new CommBoardUpdateHandler(netCommunityDao));
-    commands.put("/commBoard/delete", new CommBoardDeleteHandler(netCommunityDao));
-    commands.put("/commBoard/search", new CommBoardSearchHandler(netCommunityDao));
-    commands.put("/commBoard/like", new CommBoardLikeHandler(netCommunityDao)); 
+    commands.put("/commBoard/add", new CommBoardAddHandler(CommunityDao));
+    commands.put("/commBoard/list", new CommBoardListHandler(CommunityDao));
+    commands.put("/commBoard/detail", new CommBoardDetailHandler(CommunityDao));
+    commands.put("/commBoard/update", new CommBoardUpdateHandler(CommunityDao));
+    commands.put("/commBoard/delete", new CommBoardDeleteHandler(CommunityDao));
+    commands.put("/commBoard/search", new CommBoardSearchHandler(CommunityDao));
+    commands.put("/commBoard/like", new CommBoardLikeHandler(CommunityDao)); 
 
     // 소통해요 한줄후기
-    commands.put("/commReview/add", new CommReviewAddHandler(netCommunityDao));
-    commands.put("/commReview/list", new CommReviewListHandler(netCommunityDao));
-    commands.put("/commReview/update", new CommReviewUpdateHandler(netCommunityDao));
-    commands.put("/commReview/delete", new CommReviewDeleteHandler(netCommunityDao));
-    commands.put("/commReview/search", new CommReviewSearchHandler(netCommunityDao));
+    commands.put("/commReview/add", new CommReviewAddHandler(CommunityDao));
+    commands.put("/commReview/list", new CommReviewListHandler(CommunityDao));
+    commands.put("/commReview/update", new CommReviewUpdateHandler(CommunityDao));
+    commands.put("/commReview/delete", new CommReviewDeleteHandler(CommunityDao));
+    commands.put("/commReview/search", new CommReviewSearchHandler(CommunityDao));
 
     // 소통해요 댓글
-    commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler(netCommunityDao));
-    commands.put("/commBoardReply/add", new CommBoardReplyAddHandler(netCommunityDao));
-    commands.put("/commBoardReply/list", new CommBoardReplyListHandler(netCommunityDao));
-    commands.put("/commBoardReply/update", new CommBoardReplyUpdateHandler(netCommunityDao));
-    commands.put("/commBoardReply/delete", new CommBoardReplyDeleteHandler(netCommunityDao));
+    commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler(CommunityDao));
+    commands.put("/commBoardReply/add", new CommBoardReplyAddHandler(CommunityDao));
+    commands.put("/commBoardReply/list", new CommBoardReplyListHandler(CommunityDao));
+    commands.put("/commBoardReply/update", new CommBoardReplyUpdateHandler(CommunityDao));
+    commands.put("/commBoardReply/delete", new CommBoardReplyDeleteHandler(CommunityDao));
 
 
     // 소통해요 나눔이야기 BEST
-    commands.put("/commBest/list", new CommBestListHandler(netCommunityDao));
-    commands.put("/commBest/detail", new CommBestDetailHandler(netCommunityDao));
+    commands.put("/commBest/list", new CommBestListHandler(CommunityDao));
+    commands.put("/commBest/detail", new CommBestDetailHandler(CommunityDao));
 
     // 챌린지
     commands.put("/adminChallenge/list", new AdminChallengeListHandler(netChallengeDao));  // 챌린지 목록

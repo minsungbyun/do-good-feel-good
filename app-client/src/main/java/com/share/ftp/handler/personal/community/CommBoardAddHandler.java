@@ -28,12 +28,9 @@ public class CommBoardAddHandler implements Command {
     commBoardDTO.setTitle(Prompt.inputString("제목 ▶ "));
     commBoardDTO.setContent(Prompt.inputString("내용 ▶ "));
     commBoardDTO.setFileUpload(Prompt.inputString("첨부파일 ▶ "));
-    // commBoardDTO.setPassword(Prompt.inputString("비밀번호 ▶ "));
     commBoardDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
     commBoardDTO.setOwner(AuthLoginHandler.getLoginUser());
-    // System.out.println(commNo); 게시글 넘버 확인0
 
-    commBoardDTO.setNo(communityDao.getNextNum());
 
     communityDao.insert(commBoardDTO);
 

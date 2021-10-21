@@ -23,10 +23,10 @@
   </environments>
   
   <mappers>
-    <mapper resource="com/share/ftp/mapper/NoticeMapper.xml"/>
     <mapper resource="com/share/ftp/mapper/ChallengeMapper.xml"/>
     <mapper resource="com/share/ftp/mapper/ChallengeQuestionMapper.xml"/>
     <mapper resource="com/share/ftp/mapper/ChallengeReviewMapper.xml"/>
+    <mapper resource="com/share/ftp/mapper/NoticeMapper.xml"/>
  
   </mappers>
 </configuration>

@@ -15,12 +15,16 @@ public class CommReviewAddHandler implements Command {
   public CommReviewAddHandler(CommunityDao communityDao) {
     this.communityDao = communityDao;
   }
-
   @Override
   public void execute(CommandRequest request) throws Exception {
 
     System.out.println();
     System.out.println("[  한줄후기 등록  ]");
+
+    // 봉사 참여 회원 등록 권한 설정 필요
+    //    if (!generalRequestDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
+    //      System.out.println("봉사 참여한 회원만 등록이 가능합니다!");
+    //      return;
 
     CommReviewDTO commReviewDTO = new CommReviewDTO();
 
