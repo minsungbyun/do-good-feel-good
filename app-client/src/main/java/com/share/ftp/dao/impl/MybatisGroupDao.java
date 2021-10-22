@@ -1,5 +1,6 @@
 package com.share.ftp.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.GroupDao;
@@ -58,7 +59,6 @@ public class MybatisGroupDao implements GroupDao {
   @Override
   public List<GroupDTO> findAll() throws Exception {
     return sqlSession.selectList("GroupMapper.findAllGroup");
-
   }
 
   @Override
@@ -105,11 +105,16 @@ public class MybatisGroupDao implements GroupDao {
     // TODO Auto-generated method stub
     return null;
   }
+
   @Override
   public GroupDTO selectOneByIdPassword(String userId, String userPassword) throws Exception {
-    // TODO Auto-generated method stub
-    return null;
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("userId", userId);
+    params.put("userPassword", userPassword);
+
+    return sqlSession.selectOne("PersonalMapper.findByIdPassword", params);
   }
+
   @Override
   public GroupDTO selectOneByTel(String userTel) throws Exception {
     // TODO Auto-generated method stub

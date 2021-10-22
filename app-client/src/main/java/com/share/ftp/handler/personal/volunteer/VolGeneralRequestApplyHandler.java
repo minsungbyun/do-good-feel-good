@@ -1,6 +1,7 @@
 package com.share.ftp.handler.personal.volunteer;
 
 import static com.share.util.General.check.Waiting;
+import static com.share.util.General.member.GROUP;
 import static com.share.util.General.member.ORG;
 import static com.share.util.General.member.PERSONAL;
 import static com.share.util.General.type.ANIMAL;
@@ -48,14 +49,16 @@ public class VolGeneralRequestApplyHandler implements Command { // 개인 봉사
           System.out.println(" ▶ 번호를 선택해주세요");
           System.out.println();
           System.out.println(" ▶ 1. 개인봉사신청");
-          System.out.println(" ▶ 2. 기관봉사신청");
+          System.out.println(" ▶ 2. 단체봉사신청");
+          System.out.println(" ▶ 3. 기관봉사신청");
           System.out.println();
 
           int num = Prompt.inputInt("번호입력 ▶ ");
 
           switch (num) {
             case 1: generalRequestDTO.setMemberType(PERSONAL);          break;
-            case 2: generalRequestDTO.setMemberType(ORG);               break;
+            case 2: generalRequestDTO.setMemberType(GROUP);               break;
+            case 3: generalRequestDTO.setMemberType(ORG);               break;
             default: System.out.println("올바를 숫자를 입력해주세요."); continue;
           }
 

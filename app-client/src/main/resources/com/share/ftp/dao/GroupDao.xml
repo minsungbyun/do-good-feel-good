@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="GroupMapper">
+<mapper namespace="com.share.ftp.dao.GroupDao">
   
   <resultMap type="GroupDTO" id="GroupDTOMap">
     <id column="user_group_no" property="groupNo"/> 
@@ -37,6 +37,19 @@
 	     inner join ftp_user_group g on u.user_no=g.user_no
 	   order by
 	     user_group_no asc
+  </select>
+  
+  <select id="findByIdPassword" resultMap="GroupDTOMap" parameterType="map">
+    select
+      u.*,
+      g.user_group_no,
+      g.group_cnt
+    from 
+      ftp_user u
+      inner join ftp_user_group g on u.user_no=g.user_no
+    where
+      id=#{userId} and password=password(#{userPassword})
+      
   </select>
   
   <!--  

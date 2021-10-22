@@ -62,10 +62,8 @@ import com.share.ftp.handler.admin.AdminQuestionAddHandler;
 import com.share.ftp.handler.join.AuthDisplayUserHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.ftp.handler.join.AuthLogoutHandler;
-import com.share.ftp.handler.join.AuthUpdateUserHandler;
 import com.share.ftp.handler.join.GroupHandler;
 import com.share.ftp.handler.join.JoinAddHandler;
-import com.share.ftp.handler.join.JoinDetailHandler;
 import com.share.ftp.handler.join.JoinGroupHandler;
 import com.share.ftp.handler.join.JoinListHandler;
 import com.share.ftp.handler.join.JoinListTestHandler;
@@ -74,7 +72,6 @@ import com.share.ftp.handler.join.JoinPersonalHandler;
 import com.share.ftp.handler.join.JoinSearchEmailIdHandler;
 import com.share.ftp.handler.join.JoinSearchPasswordHandler;
 import com.share.ftp.handler.join.JoinSearchTelIdHandler;
-import com.share.ftp.handler.join.MyPageUpdateUserHandler;
 import com.share.ftp.handler.join.OrgHandler;
 import com.share.ftp.handler.join.PersonalHandler;
 import com.share.ftp.handler.join.PersonalUserDeleteHandler;
@@ -257,18 +254,17 @@ public class ClientApp {
     sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
         "com/share/ftp/conf/mybatis-config.xml")).openSession();
 
+    // 로그인
     JoinDao joinDao = new MariadbJoinDao(con);
     PersonalDao personalDao = new MybatisPersonalDao(sqlSession);
     GroupDao groupDao = new MybatisGroupDao(sqlSession);
     OrgDao orgDao = new MariadbOrgDao(con);
 
     VolunteerDao netVolunteerDao = new NetVolunteerDao(requestAgent);
-    CommunityDao netCommunityDao = new NetCommunityDao(requestAgent);
+    CommunityDao communityDao = new NetCommunityDao(requestAgent);
     ChallengeDao netChallengeDao = new MybatisChallengeDao(sqlSession);
     CommunityDao CommunityDao = new MybatisCommunityDao(sqlSession);
     QuestionDao qestionDao = new MybatisQuestionDao(sqlSession);
-
-
     NoticeDao noticeDao = new MybatisNoticeDao(sqlSession);
     //    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
     //    ChallengeReviewDao netChallengeReviewDao = new NetChallengeDao(requestAgent);
@@ -276,19 +272,18 @@ public class ClientApp {
     //로그인, 로그아웃
     commands.put("/auth/login", new AuthLoginHandler(personalDao)); // 로그인
     commands.put("/auth/logout", new AuthLogoutHandler()); // 로그아웃
-    commands.put("/auth/changeUserInfo", new AuthUpdateUserHandler()); // 마이페이지 나의정보
     commands.put("/auth/displayUserInfo", new AuthDisplayUserHandler()); // 마이페이지 나의정보수정
     commands.put("/userInfo/personal", new PersonalHandler()); 
     commands.put("/userInfo/group", new GroupHandler()); 
     commands.put("/userInfo/org", new OrgHandler()); 
 
     //회원가입
-    commands.put("/join/add", new JoinAddHandler(joinDao)); // 회원가입
-    commands.put("/join/personal", new JoinPersonalHandler(personalDao)); // 회원가입
-    commands.put("/join/group", new JoinGroupHandler(groupDao)); // 회원가입
-    commands.put("/join/org", new JoinOrgHandler(orgDao)); // 회원가입
-    commands.put("/join/searchTelId", new JoinSearchTelIdHandler(joinDao)); // 폰번호로 아이디 찾기
-    commands.put("/join/searchEmailId", new JoinSearchEmailIdHandler(joinDao)); // 이메일로 아이디 찾기
+    commands.put("/join/add", new JoinAddHandler()); // 회원가입
+    commands.put("/join/personal", new JoinPersonalHandler(personalDao,sqlSession)); // 회원가입
+    commands.put("/join/group", new JoinGroupHandler(groupDao,sqlSession)); // 회원가입
+    commands.put("/join/org", new JoinOrgHandler(orgDao,sqlSession)); // 회원가입
+    commands.put("/join/searchTelId", new JoinSearchTelIdHandler(personalDao)); // 폰번호로 아이디 찾기
+    commands.put("/join/searchEmailId", new JoinSearchEmailIdHandler(personalDao)); // 이메일로 아이디 찾기kvp
     commands.put("/join/searchPassword", new JoinSearchPasswordHandler(personalDao)); // 비밀번호 찾기
 
     //함께해요
@@ -319,32 +314,32 @@ public class ClientApp {
 
 
     // 소통해요 나눔이야기
-    commands.put("/commBoard/add", new CommBoardAddHandler(CommunityDao));
-    commands.put("/commBoard/list", new CommBoardListHandler(CommunityDao));
-    commands.put("/commBoard/detail", new CommBoardDetailHandler(CommunityDao));
-    commands.put("/commBoard/update", new CommBoardUpdateHandler(CommunityDao));
-    commands.put("/commBoard/delete", new CommBoardDeleteHandler(CommunityDao));
-    commands.put("/commBoard/search", new CommBoardSearchHandler(CommunityDao));
-    commands.put("/commBoard/like", new CommBoardLikeHandler(CommunityDao)); 
+    commands.put("/commBoard/add", new CommBoardAddHandler(communityDao));
+    commands.put("/commBoard/list", new CommBoardListHandler(communityDao));
+    commands.put("/commBoard/detail", new CommBoardDetailHandler(communityDao));
+    commands.put("/commBoard/update", new CommBoardUpdateHandler(communityDao));
+    commands.put("/commBoard/delete", new CommBoardDeleteHandler(communityDao));
+    commands.put("/commBoard/search", new CommBoardSearchHandler(communityDao));
+    commands.put("/commBoard/like", new CommBoardLikeHandler(communityDao)); 
 
     // 소통해요 한줄후기
-    commands.put("/commReview/add", new CommReviewAddHandler(CommunityDao));
-    commands.put("/commReview/list", new CommReviewListHandler(CommunityDao));
-    commands.put("/commReview/update", new CommReviewUpdateHandler(CommunityDao));
-    commands.put("/commReview/delete", new CommReviewDeleteHandler(CommunityDao));
-    commands.put("/commReview/search", new CommReviewSearchHandler(CommunityDao));
+    commands.put("/commReview/add", new CommReviewAddHandler(communityDao));
+    commands.put("/commReview/list", new CommReviewListHandler(communityDao));
+    commands.put("/commReview/update", new CommReviewUpdateHandler(communityDao));
+    commands.put("/commReview/delete", new CommReviewDeleteHandler(communityDao));
+    commands.put("/commReview/search", new CommReviewSearchHandler(communityDao));
 
     // 소통해요 댓글
-    commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler(CommunityDao));
-    commands.put("/commBoardReply/add", new CommBoardReplyAddHandler(CommunityDao));
-    commands.put("/commBoardReply/list", new CommBoardReplyListHandler(CommunityDao));
-    commands.put("/commBoardReply/update", new CommBoardReplyUpdateHandler(CommunityDao));
-    commands.put("/commBoardReply/delete", new CommBoardReplyDeleteHandler(CommunityDao));
+    commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler(communityDao));
+    commands.put("/commBoardReply/add", new CommBoardReplyAddHandler(communityDao));
+    commands.put("/commBoardReply/list", new CommBoardReplyListHandler(communityDao));
+    commands.put("/commBoardReply/update", new CommBoardReplyUpdateHandler(communityDao));
+    commands.put("/commBoardReply/delete", new CommBoardReplyDeleteHandler(communityDao));
 
 
     // 소통해요 나눔이야기 BEST
-    commands.put("/commBest/list", new CommBestListHandler(CommunityDao));
-    commands.put("/commBest/detail", new CommBestDetailHandler(CommunityDao));
+    commands.put("/commBest/list", new CommBestListHandler(communityDao));
+    commands.put("/commBest/detail", new CommBestDetailHandler(communityDao));
 
     // 챌린지
     commands.put("/adminChallenge/list", new AdminChallengeListHandler(netChallengeDao));  // 챌린지 목록
@@ -419,7 +414,8 @@ public class ClientApp {
     //    commands.put("/adminQuestion/add", new AdminQuestionAddHandler(myQuestionListDTOList));
 
     // 마이페이지
-    commands.put("/myPage/info", new MyPageUpdateUserHandler(joinDao)); // 내정보 수정
+
+    // 회원정보 변경 및 삭제
     commands.put("/myPage/personal", new PersonalUserUpdateHandler(personalDao)); // 내정보 수정
     commands.put("/myPage/delete", new PersonalUserDeleteHandler(personalDao)); // 회원탈퇴
 
@@ -443,7 +439,6 @@ public class ClientApp {
     // 관리자 회원정보 조회
     commands.put("/join/list", new JoinListHandler(personalDao)); // 관리자가 회원 목록을 조회
     commands.put("/join/test", new JoinListTestHandler(personalDao)); // 관리자가 회원 목록을 조회
-    commands.put("/join/detail", new JoinDetailHandler(joinDao)); // 가입회원 상세보기 (관리자연결)
     commands.put("/join/delete", new AdminMemberDeleteHandler());
 
     // 관리자 공지사항 (개인 + 관리자)

@@ -3,30 +3,27 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="PersonalMapper">
+<mapper namespace="com.share.ftp.dao.VolunteerDao">
   
-  <resultMap type="PersonalDTO" id="PersonalDTOMap">
-    <id column="user_personal_no" property="personalNo"/> 
-    <result column="birthdate" property="birthdate"/>
-    <result column="rank" property="level"/>
-    <result column="point" property="point"/>
-    
-    <result column="user_no" property="no"/>
-    <result column="id" property="id"/>
-    <result column="password" property="password"/>
-    <result column="name" property="name"/>
+  <resultMap type="GeneralRequestDTO" id="GeneralRequestDTOMap">
+    <id column="vol_no" property="no"/> 
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
     <result column="tel" property="tel"/>
     <result column="email" property="email"/>
-    <result column="created_dt" property="registerDate"/>
-    <result column="post_no" property="postNo"/>
-    <result column="basic_address" property="basicAddress"/>
-    <result column="detail_address" property="detailAddress"/>
-    <result column="donation" property="donationMoney"/>
-    <result column="type" property="type"/>
-    <result column="status" property="status"/>
-    <result column="note" property="note"/>
-  <!--    <result column="last_login" property="viewCount"/>-->
+    <result column="start_dt" property="startDate"/>
+    <result column="end_dt" property="endDate"/>
+    <result column="total_cnt" property="totalJoinCount"/>
+    <result column="approval" property="registerDate"/>
+    <result column="note" property="postNo"/>
+    
+    
+    
+    <result column="category_no" property="level"/>
+    <result column="user_no" property="birthdate"/>
+    <result column="note" property="postNo"/>
   </resultMap>
+  
  
   
   <insert id="insert" parameterType="PersonalDTO"

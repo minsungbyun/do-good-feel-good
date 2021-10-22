@@ -23,13 +23,9 @@
   </environments>
   
   <mappers>
-    <mapper resource="com/share/ftp/mapper/PersonalMapper.xml"/>
-    <mapper resource="com/share/ftp/mapper/GroupMapper.xml"/>
-    <mapper resource="com/share/ftp/mapper/ChallengeMapper.xml"/>
-    <mapper resource="com/share/ftp/mapper/ChallengeQuestionMapper.xml"/>
-    <mapper resource="com/share/ftp/mapper/ChallengeReviewMapper.xml"/>
-    <mapper resource="com/share/ftp/mapper/NoticeMapper.xml"/>
-    <mapper resource="com/share/ftp/mapper/QuestionMapper.xml"/>
+
+  <package name="com.share.ftp.dao"/>
+
   </mappers>
 </configuration>
 
