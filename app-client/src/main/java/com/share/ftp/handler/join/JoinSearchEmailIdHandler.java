@@ -1,6 +1,6 @@
 package com.share.ftp.handler.join;
 
-import com.share.ftp.dao.JoinDao;
+import com.share.ftp.dao.PersonalDao;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -8,11 +8,10 @@ import com.share.util.Prompt;
 
 public class JoinSearchEmailIdHandler implements Command {
 
-  JoinDao joinDao;
+  PersonalDao personalDao;
 
-  public JoinSearchEmailIdHandler(JoinDao joinDao) {
-    this.joinDao = joinDao;
-
+  public JoinSearchEmailIdHandler(PersonalDao personalDao) {
+    this.personalDao = personalDao;
   }
 
   // 아이디찾기 -> 이메일을 통해 찾는다.
@@ -22,7 +21,7 @@ public class JoinSearchEmailIdHandler implements Command {
     System.out.println("[이메일을 입력해주세요.]");
     String userEmail = Prompt.inputString("이메일? ");
 
-    JoinDTO loginUserEmail = joinDao.selectOneByEmail(userEmail);
+    JoinDTO loginUserEmail = personalDao.selectOneByEmail(userEmail);
 
     if (loginUserEmail  == null) {
       System.out.println("일치하는 이메일이 없습니다.");

@@ -12,7 +12,7 @@
     <result column="point" property="point"/>
     
     <result column="user_no" property="no"/>
-    <result column="id" property="id"/>
+    <result column="id  " property="id"/>
     <result column="password" property="password"/>
     <result column="name" property="name"/>
     <result column="tel" property="tel"/>
@@ -27,6 +27,7 @@
     <result column="note" property="note"/>
   <!--    <result column="last_login" property="viewCount"/>-->
   </resultMap>
+  
  
   
   <insert id="insert" parameterType="PersonalDTO"
