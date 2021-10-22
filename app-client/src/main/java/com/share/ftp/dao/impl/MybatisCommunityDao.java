@@ -41,6 +41,12 @@ public class MybatisCommunityDao implements CommunityDao {
   }
 
   @Override
+  public void updateCount(int no) throws Exception {
+    sqlSession.update("CommBoardMapper.updateCount", no);
+    sqlSession.commit();
+  }
+
+  @Override
   public void update(CommBoardDTO updateCommBoard) throws Exception {
     sqlSession.update("CommBoardMapper.update", updateCommBoard);
     sqlSession.commit();
@@ -129,6 +135,8 @@ public class MybatisCommunityDao implements CommunityDao {
   public void deleteCommBoardReply(CommBoardReplyDTO deleteCommBoardReply) throws Exception {
 
   }
+
+
 
 
 

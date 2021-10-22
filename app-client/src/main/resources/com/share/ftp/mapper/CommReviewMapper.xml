@@ -3,22 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="CommBoardMapper">
+<mapper namespace="CommReviewMapper">
   
-  <resultMap type="CommBoardDTO" id="CommBoardDTOMap">
-    <id column="vol_board_no" property="no"/> 
-    <result column="title" property="title"/>
+  <resultMap type="CommBoardReplyDTO" id="CommBoardReplyDTOMap">
+    <id column="vol_shortreview_no" property="no"/> 
     <result column="content" property="content"/>
     <result column="created_dt" property="registeredDate"/>
-    <result column="view_cnt" property="viewCount"/>
-      <!-- <result column="vol_board_file_no" property="fileUpload"/>
-           <result column="like" property="viewCount"/>--> 
 
     <association property="owner" javaType="joinDTO">
       <id column="userNo" property="no"/>
       <result column="userId" property="id"/>
     </association>
   </resultMap>
+  
 <!--    
   <insert id="insert" parameterType="CommBoardDTO">
     insert into ftp_vol_board(title,content,created_dt) 

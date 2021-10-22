@@ -15,6 +15,7 @@ public interface CommunityDao {
   List<CommBoardDTO> findAll() throws Exception;
   List<CommBoardDTO> findByKeyword(String commBoardkeyword) throws Exception;
   CommBoardDTO findByCommBoardNo(int commBoardNo) throws Exception;
+  void updateCount(int no) throws Exception;
   void update(CommBoardDTO updateCommBoard) throws Exception;
   void delete(CommBoardDTO deleteCommBoard) throws Exception;
   //  void like(CommBoardDTO likeCommBoard) throws Exception;

@@ -34,7 +34,6 @@ import com.share.ftp.dao.impl.MybatisChallengeDao;
 import com.share.ftp.dao.impl.MybatisCommunityDao;
 import com.share.ftp.dao.impl.MybatisNoticeDao;
 import com.share.ftp.dao.impl.MybatisPersonalDao;
-import com.share.ftp.dao.impl.NetCommunityDao;
 import com.share.ftp.dao.impl.NetDonationBoardDao;
 import com.share.ftp.dao.impl.NetDonationRegisterDao;
 import com.share.ftp.dao.impl.NetQuestionDao;
@@ -264,13 +263,13 @@ public class ClientApp {
     OrgDao orgDao = new MariadbOrgDao(con);
 
     VolunteerDao netVolunteerDao = new NetVolunteerDao(requestAgent);
-    CommunityDao netCommunityDao = new NetCommunityDao(requestAgent);
     ChallengeDao netChallengeDao = new MybatisChallengeDao(sqlSession);
     CommunityDao CommunityDao = new MybatisCommunityDao(sqlSession);
     QuestionDao netQuestionDao = new NetQuestionDao(requestAgent);
     NoticeDao noticeDao = new MybatisNoticeDao(sqlSession);
     //    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
     //    ChallengeReviewDao netChallengeReviewDao = new NetChallengeDao(requestAgent);
+    // CommunityDao netCommunityDao = new NetCommunityDao(requestAgent);
 
     //로그인, 로그아웃
     commands.put("/auth/login", new AuthLoginHandler(personalDao)); // 로그인
