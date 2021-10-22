@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.community;
 
 import java.util.Collection;
-import com.share.ftp.dao.CommunityDao;
+import com.share.ftp.dao.VolBoardDao;
 import com.share.ftp.domain.community.CommBoardDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -9,10 +9,10 @@ import com.share.util.Prompt;
 
 public class CommBoardSearchHandler implements Command {
 
-  CommunityDao communityDao;
+  VolBoardDao volBoardDao;
 
-  public CommBoardSearchHandler(CommunityDao communityDao) {
-    this.communityDao =  communityDao;
+  public CommBoardSearchHandler(VolBoardDao volBoardDao) {
+    this.volBoardDao =  volBoardDao;
   }
 
   @Override
@@ -21,7 +21,7 @@ public class CommBoardSearchHandler implements Command {
 
     String input = Prompt.inputString("검색어?  ");
 
-    Collection<CommBoardDTO> commBoardDTOList = communityDao.findByKeyword(input);
+    Collection<CommBoardDTO> commBoardDTOList = volBoardDao.findByKeyword(input);
 
     for(CommBoardDTO commBoardDTO : commBoardDTOList) {
       if(!commBoardDTO.getTitle().contains(input) &&

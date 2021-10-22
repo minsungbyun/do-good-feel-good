@@ -3,6 +3,7 @@ package com.share.ftp.handler.join;
 import static com.share.util.General.level.LEVEL_E;
 import static com.share.util.General.member.PERSONAL;
 import static com.share.util.General.status.ACTIVE;
+import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.PersonalDao;
 import com.share.ftp.domain.join.PersonalDTO;
 import com.share.ftp.handler.Command;
@@ -12,9 +13,11 @@ import com.share.util.Prompt;
 public class JoinPersonalHandler implements Command {
 
   PersonalDao personalDao;
+  SqlSession sqlSession;
 
-  public JoinPersonalHandler(PersonalDao personalDao) {
+  public JoinPersonalHandler(PersonalDao personalDao, SqlSession sqlSession) {
     this.personalDao = personalDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -87,6 +90,7 @@ public class JoinPersonalHandler implements Command {
     personalUser.setLevel(LEVEL_E);
 
     personalDao.insert(personalUser);
+    sqlSession.commit();
 
     System.out.println("happyshare 가입을 환영합니다.");
     System.out.println();

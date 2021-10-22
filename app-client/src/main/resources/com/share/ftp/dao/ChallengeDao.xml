@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="ChallengeMapper">
+<mapper namespace="com.share.ftp.dao.ChallengeDao">
   
   <resultMap type="ChallengeDTO" id="ChallengeDTOMap">
     <id column="challenge_no" property="no"/> 

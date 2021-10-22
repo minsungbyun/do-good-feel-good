@@ -1,17 +1,10 @@
 package com.share.ftp.handler.join;
 
-import com.share.ftp.dao.JoinDao;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
 public class JoinAddHandler implements Command {
-
-  JoinDao joinDao;
-
-  public JoinAddHandler(JoinDao joinDao) {
-    this.joinDao = joinDao;
-  }
 
   @Override
   public void execute(CommandRequest request) throws Exception {

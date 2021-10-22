@@ -3,8 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="PersonalMapper">
-  
+<mapper namespace="com.share.ftp.dao.OrgDao">
+  <!--
   <resultMap type="PersonalDTO" id="PersonalDTOMap">
     <id column="user_personal_no" property="no"/> 
     <result column="birthdate" property="birthdate"/>
@@ -25,7 +25,7 @@
     <result column="type" property="type"/>
     <result column="status" property="status"/>
     <result column="note" property="note"/>
-  <!--    <result column="last_login" property="viewCount"/>-->
+<result column="last_login" property="viewCount"/>
   </resultMap>
  
   
@@ -42,7 +42,7 @@
 	     user_personal_no asc
   </select>
   
-  <!--  
+    
   
   <insert id="insert" parameterType="NoticeDTO">
     insert into ftp_support_notice(title,content,created_dt) 

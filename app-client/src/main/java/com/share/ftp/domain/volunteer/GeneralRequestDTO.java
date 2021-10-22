@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import com.share.ftp.domain.Category;
 import com.share.ftp.domain.join.JoinDTO;
 
 
@@ -13,65 +13,28 @@ public class GeneralRequestDTO implements Serializable {
   private static final long serialVersionUID = 1L;
   private int no;
   private int memberType; 
+  private Category type;
   private String title;
-  private String name;
-  private String status;
-  private JoinDTO owner; 
-  private String type;
+  private String content;
   private String tel;
   private String email;
   private Date startDate;
   private Date endDate;
   private String startTime;
   private String endTime;
-  private String content;
+  private int totalJoinCount = 1; // 현재 참여 인원 (주최자는 미리 포함)
+  private String name;
+  private String status;
+  private JoinDTO owner; 
   private String fileUpload;
   private Date submitTime; 
   private JoinDTO wish;
   private int limitNum; // 총 정원
-  private int totalJoinCount = 1; // 현재 참여 인원 (주최자는 미리 포함)
   private int questionCount;
   private List<JoinDTO> members = new ArrayList<>(); // 봉사 참여한 멤버들
 
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(content, email, endDate, endTime, fileUpload, limitNum, memberType, members,
-        name, no, owner, questionCount, startDate, startTime, status, submitTime, tel, title,
-        totalJoinCount, type, wish);
-  }
 
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    GeneralRequestDTO other = (GeneralRequestDTO) obj;
-    return Objects.equals(content, other.content) && Objects.equals(email, other.email)
-        && Objects.equals(endDate, other.endDate) && Objects.equals(endTime, other.endTime)
-        && Objects.equals(fileUpload, other.fileUpload) && limitNum == other.limitNum
-        && memberType == other.memberType && Objects.equals(members, other.members)
-        && Objects.equals(name, other.name) && no == other.no && Objects.equals(owner, other.owner)
-        && questionCount == other.questionCount && Objects.equals(startDate, other.startDate)
-        && Objects.equals(startTime, other.startTime) && Objects.equals(status, other.status)
-        && Objects.equals(submitTime, other.submitTime) && Objects.equals(tel, other.tel)
-        && Objects.equals(title, other.title) && totalJoinCount == other.totalJoinCount
-        && Objects.equals(type, other.type) && Objects.equals(wish, other.wish);
-  }
-
-  @Override
-  public String toString() {
-    return "GeneralRequestDTO [no=" + no + ", memberType=" + memberType + ", title=" + title
-        + ", name=" + name + ", status=" + status + ", owner=" + owner + ", type=" + type + ", tel="
-        + tel + ", email=" + email + ", startDate=" + startDate + ", endDate=" + endDate
-        + ", startTime=" + startTime + ", endTime=" + endTime + ", content=" + content
-        + ", fileUpload=" + fileUpload + ", submitTime=" + submitTime + ", wish=" + wish
-        + ", limitNum=" + limitNum + ", totalJoinCount=" + totalJoinCount + ", questionCount="
-        + questionCount + ", members=" + members + "]";
-  }
 
   public int getNo() {
     return no;
@@ -121,13 +84,7 @@ public class GeneralRequestDTO implements Serializable {
     this.owner = owner;
   }
 
-  public String getType() {
-    return type;
-  }
 
-  public void setType(String type) {
-    this.type = type;
-  }
 
   public String getTel() {
     return tel;
@@ -247,6 +204,14 @@ public class GeneralRequestDTO implements Serializable {
 
   public void setQuestionCount(int questionCount) {
     this.questionCount = questionCount;
+  }
+
+  public Category getType() {
+    return type;
+  }
+
+  public void setType(Category type) {
+    this.type = type;
   }
 
   public String getMemberNames() {
