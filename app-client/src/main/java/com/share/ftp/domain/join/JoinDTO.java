@@ -1,13 +1,11 @@
 package com.share.ftp.domain.join;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
 
-public abstract class JoinDTO implements Serializable {
+public abstract class JoinDTO {
 
-  private static final long serialVersionUID = 2397935818210730479L;
 
   private int no;
   private int type; // 1. 개인, 2. 기관, 3. 그룹

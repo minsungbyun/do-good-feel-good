@@ -58,17 +58,23 @@
    <update id="update" parameterType="PersonalDTO">
 	   update ftp_user set
 	     tel=#{tel},
-	     email=#{email}
+	     email=#{email},
+	     post_no=#{postNo},
+	     basic_address=#{basicAddress},
+	     detail_address=#{detailAddress},
+	     password=password(#{password})
 	   where 
 	      user_no=#{no}
   </update>
   
+  <!--  
    <update id="updatePersonal" parameterType="PersonalDTO">
 	   update ftp_user_personal set
 	     birthdate=#{birthdate}
 	   where 
 	      user_personal_no=#{personalNo}
   </update>
+-->
   
   <select id="findByIdPassword" resultMap="PersonalDTOMap" parameterType="map">
     select 
@@ -83,15 +89,36 @@
     where 
       id=#{userId} and password=password(#{userPassword})
   </select>
+  
+  
+   <update id="delete" parameterType="PersonalDTO">
+     update ftp_user set
+      id=#{id},
+      password=password(#{password}),
+      name=#{name},
+      tel=#{tel},
+      email=#{email},
+      post_no=#{postNo},
+      basic_address=#{basicAddress},
+      detail_address=#{detailAddress},
+      status=#{status},
+      type=#{type}
+     where 
+        user_no=#{no}
+  </update>
+  
+   <update id="deletePersonal" parameterType="PersonalDTO">
+      update ftp_user_personal set
+	      birthdate=#{birthdate},
+	      rank=#{level},
+	      point=#{point}
+      where 
+        user_personal_no=#{personalNo}
+  </update>
+  
+  
   <!--  
   
-  
-  
-  
-  
-   <delete id="delete" parameterType="int">
-    delete from ftp_support_notice where notice_no=${values}
-  </delete>
   
   
   

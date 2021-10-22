@@ -30,6 +30,7 @@
   <select id="findAllGroup" resultMap="GroupDTOMap">
 	   select 
 	     u.*,    
+	     g.user_group_no,
 	     g.group_cnt
 	   from
 	     ftp_user u

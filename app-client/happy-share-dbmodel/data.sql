@@ -20,13 +20,24 @@ values(6,'eclipse', password('1'), 'eclipse', '010-6666-1111', 'eclipse@naver.co
 
 --개인회원
 insert into ftp_user_personal(user_personal_no, user_no, birthdate, rank)
-values(6, 3, '2020-1-1','천콩이');
+values(10, 3, '2020-1-1','천콩이');
 
 insert into ftp_user_personal(user_personal_no, user_no, birthdate, rank)
-values(7, 2, '2021-1-1','천이콩이');
+values(11, 2, '2021-1-1','천이콩이');
 
 insert into ftp_user_personal(user_personal_no, user_no, birthdate, rank)
-values(3, 1, '2021-2-5','천콩이');
+values(12, 1, '2021-2-5','천콩이');
+
+insert into ftp_user_personal(user_personal_no, user_no, birthdate, rank)
+values(13, 6, '2021-2-5','천콩이');
+
+--단체회원
+insert into ftp_user_group(user_group_no, user_no, group_cnt)
+values(2, 4, 5);
+
+insert into ftp_user_group(user_group_no, user_no, group_cnt)
+values(3, 5, 3);
+
 
 --알림
 insert into ftp_user_alert(user_notice_no, user_no, content)

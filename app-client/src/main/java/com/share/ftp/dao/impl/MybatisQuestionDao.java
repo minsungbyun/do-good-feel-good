@@ -21,7 +21,7 @@ public class MybatisQuestionDao implements QuestionDao {
   }
   @Override
   public List<QuestionListDTO> findAll() throws Exception {
-    return null;
+    return sqlSession.selectList("QuestionMapper.findAllQuestion");
   }
 
   @Override
