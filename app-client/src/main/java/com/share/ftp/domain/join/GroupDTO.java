@@ -8,6 +8,7 @@ public class GroupDTO extends JoinDTO implements Serializable {
 
   private static final long serialVersionUID = 2397935818210730479L;
 
+  private int groupNo;
   private int groupCount;
 
   @Override
@@ -25,6 +26,16 @@ public class GroupDTO extends JoinDTO implements Serializable {
       return false;
     GroupDTO other = (GroupDTO) obj;
     return groupCount == other.groupCount;
+  }
+
+
+
+  public int getGroupNo() {
+    return groupNo;
+  }
+
+  public void setGroupNo(int groupNo) {
+    this.groupNo = groupNo;
   }
 
   @Override
