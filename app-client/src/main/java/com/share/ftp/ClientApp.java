@@ -25,9 +25,7 @@ import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.dao.OrgDao;
 import com.share.ftp.dao.PersonalDao;
 import com.share.ftp.dao.QuestionDao;
-import com.share.ftp.dao.VolBoardCommentDao;
 import com.share.ftp.dao.VolBoardDao;
-import com.share.ftp.dao.VolShortReviewDao;
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.dao.impl.MariadbJoinDao;
 import com.share.ftp.dao.impl.MariadbOrgDao;
@@ -95,18 +93,8 @@ import com.share.ftp.handler.personal.community.CommBoardAddHandler;
 import com.share.ftp.handler.personal.community.CommBoardDeleteHandler;
 import com.share.ftp.handler.personal.community.CommBoardDetailHandler;
 import com.share.ftp.handler.personal.community.CommBoardListHandler;
-import com.share.ftp.handler.personal.community.CommBoardReplyAddHandler;
-import com.share.ftp.handler.personal.community.CommBoardReplyConnectHandler;
-import com.share.ftp.handler.personal.community.CommBoardReplyDeleteHandler;
-import com.share.ftp.handler.personal.community.CommBoardReplyListHandler;
-import com.share.ftp.handler.personal.community.CommBoardReplyUpdateHandler;
 import com.share.ftp.handler.personal.community.CommBoardSearchHandler;
 import com.share.ftp.handler.personal.community.CommBoardUpdateHandler;
-import com.share.ftp.handler.personal.community.CommReviewAddHandler;
-import com.share.ftp.handler.personal.community.CommReviewDeleteHandler;
-import com.share.ftp.handler.personal.community.CommReviewListHandler;
-import com.share.ftp.handler.personal.community.CommReviewSearchHandler;
-import com.share.ftp.handler.personal.community.CommReviewUpdateHandler;
 import com.share.ftp.handler.personal.donation.DonationAdminPrompt;
 import com.share.ftp.handler.personal.donation.DonationBoardAcceptApplyHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardAdminApplyDetailHandler;
@@ -258,9 +246,9 @@ public class ClientApp {
     OrgDao orgDao = new MariadbOrgDao(con);
 
     // 봉사활동 게시글
-    VolBoardDao volBoardDao = sqlSession.getMapper(volBoardDao.class);
-    VolBoardCommentDao volBoardComment = sqlSession.getMapper(volBoardComment.class);
-    VolShortReviewDao volShortReview = sqlSession.getMapper(volShortReview.class);    
+    VolBoardDao volBoardDao = sqlSession.getMapper(VolBoardDao.class);
+    //    VolBoardCommentDao volBoardComment = sqlSession.getMapper(VolBoardComment.class);
+    //    VolShortReviewDao volShortReview = sqlSession.getMapper(VolShortReview.class);    
 
 
     VolunteerDao netVolunteerDao = new NetVolunteerDao(requestAgent);
@@ -325,18 +313,18 @@ public class ClientApp {
     //    commands.put("/commBoard/like", new CommBoardLikeHandler(volboardDao, sqlSession)); 
 
     // 소통해요 댓글
-    commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler(volBoardCommentDao));
-    commands.put("/commBoardReply/add", new CommBoardReplyAddHandler(volBoardCommentDao, sqlSession));
-    commands.put("/commBoardReply/list", new CommBoardReplyListHandler(volBoardCommentDao));
-    commands.put("/commBoardReply/update", new CommBoardReplyUpdateHandler(volBoardCommentDao, sqlSession));
-    commands.put("/commBoardReply/delete", new CommBoardReplyDeleteHandler(volBoardCommentDao, sqlSession));
+    //    commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler(volBoardCommentDao));
+    //    commands.put("/commBoardReply/add", new CommBoardReplyAddHandler(volBoardCommentDao, sqlSession));
+    //    commands.put("/commBoardReply/list", new CommBoardReplyListHandler(volBoardCommentDao));
+    //    commands.put("/commBoardReply/update", new CommBoardReplyUpdateHandler(volBoardCommentDao, sqlSession));
+    //    commands.put("/commBoardReply/delete", new CommBoardReplyDeleteHandler(volBoardCommentDao, sqlSession));
 
     // 소통해요 한줄후기
-    commands.put("/commReview/add", new CommReviewAddHandler(volShortReviewDao, sqlSession));
-    commands.put("/commReview/list", new CommReviewListHandler(volShortReviewDao));
-    commands.put("/commReview/update", new CommReviewUpdateHandler(volShortReviewDao, sqlSession));
-    commands.put("/commReview/delete", new CommReviewDeleteHandler(volShortReviewDao, sqlSession));
-    commands.put("/commReview/search", new CommReviewSearchHandler(volShortReviewDao));
+    //    commands.put("/commReview/add", new CommReviewAddHandler(volShortReviewDao, sqlSession));
+    //    commands.put("/commReview/list", new CommReviewListHandler(volShortReviewDao));
+    //    commands.put("/commReview/update", new CommReviewUpdateHandler(volShortReviewDao, sqlSession));
+    //    commands.put("/commReview/delete", new CommReviewDeleteHandler(volShortReviewDao, sqlSession));
+    //    commands.put("/commReview/search", new CommReviewSearchHandler(volShortReviewDao));
 
 
 
