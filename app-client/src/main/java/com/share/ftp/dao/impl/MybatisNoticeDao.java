@@ -1,6 +1,5 @@
 package com.share.ftp.dao.impl;
 
-import java.sql.Connection;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.NoticeDao;
@@ -10,7 +9,6 @@ import com.share.ftp.domain.admin.NoticeDTO;
 
 public class MybatisNoticeDao implements NoticeDao {
 
-  Connection con;
   SqlSession sqlSession;
 
   public MybatisNoticeDao(SqlSession sqlSession) {

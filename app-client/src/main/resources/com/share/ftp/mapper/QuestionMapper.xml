@@ -4,21 +4,26 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="QuestionMapper">
-  
   <resultMap type="QuestionListDTO" id="QuestionDTOMap">
     <id column="qna_no" property="no"/> 
-    <result column="user_no" property="no"/>
     <result column="title" property="title"/>
     <result column="content" property="content"/>
     <result column="password" property="password"/>
     <result column="created_dt" property="registeredDate"/>
     <result column="view_cnt" property="viewCount"/>
     <result column="gnq_reply" property="title"/>
+    
+    <association property="owner" javaType="joinDTO">
+      <id column="user_no" property="no"/>
+      <result column="name" property="name"/>
+    </association>
+    
+    
   </resultMap>
   
-  <select id="findAll" resultMap="QuestionMap">
+  <select id="findAll" resultMap="QuestionDTOMap">
    select 
-     notice_no,
+     qna_no,
      title,
      created_dt,
      view_cnt
@@ -27,11 +32,11 @@
     order by notice_no desc
   </select>
   
+      <!-- 
   <insert id="insert" parameterType="NoticeDTO">
     insert into ftp_support_notice(title,content,created_dt) 
     values(#{title},#{content}, curdate())
   </insert>
-  
   
   
    <update id="update" parameterType="NoticeDTO">
@@ -85,8 +90,7 @@
   </select>
   
   
-
-<!--    
+   
   
 select
   user.id 아이디,
@@ -175,14 +179,6 @@ from
  ftp_vol_board_like 
 group by
   vol_board_no
-  -->
-  <!--   
-
-
-  
-  
- 
- 
   
   <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
     select 
