@@ -1,6 +1,5 @@
 package com.share.ftp.handler.join;
 
-import java.sql.Date;
 import com.share.ftp.dao.PersonalDao;
 import com.share.ftp.domain.join.PersonalDTO;
 import com.share.ftp.handler.Command;
@@ -20,6 +19,7 @@ public class PersonalUserUpdateHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("[회원 변경]");
+
     String userPassword = Prompt.inputString("비밀번호? ");
 
     PersonalDTO loginUser = personalDao.selectOneByIdPassword(AuthLoginHandler.getLoginUser().getId(), userPassword);
@@ -29,11 +29,13 @@ public class PersonalUserUpdateHandler implements Command {
       return;
     }
 
-    Date birthdate = Prompt.inputDate("생년월일(" + loginUser.getBirthdate()  + ")? ");
+    //    Date birthdate = Prompt.inputDate("생년월일(" + loginUser.getBirthdate()  + ")? ");
     String tel = Prompt.inputString("전화(" + loginUser.getTel() + ")? ");
     String email = Prompt.inputString("이메일(" + loginUser.getEmail() + ")? ");
-    //    String adress = Prompt.inputString("주소(" + loginUser.getAddress() + ")? ");
-    //    String password = Prompt.inputString("암호? ");
+    int postNo = Prompt.inputInt("우편번호(" + loginUser.getPostNo() + ")? ");
+    String basicAddress = Prompt.inputString("기본주소(" + loginUser.getBasicAddress() + ")? ");
+    String detailAddress = Prompt.inputString("상세주소(" + loginUser.getDetailAddress() + ")? ");
+    String password = Prompt.inputString("암호? ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -41,11 +43,13 @@ public class PersonalUserUpdateHandler implements Command {
       return;
     }
 
-    loginUser.setBirthdate(birthdate);
+    //    loginUser.setBirthdate(birthdate);
     loginUser.setTel(tel);
     loginUser.setEmail(email);
-    //    loginUser.setAddress(adress);
-    //    loginUser.setPassword(passwords);
+    loginUser.setPostNo(postNo);
+    loginUser.setBasicAddress(basicAddress);
+    loginUser.setDetailAddress(detailAddress);
+    loginUser.setPassword(password);
 
 
     personalDao.update(loginUser);
