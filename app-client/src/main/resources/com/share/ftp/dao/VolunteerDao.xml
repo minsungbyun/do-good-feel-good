@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="VolMapper">
+  
+  <resultMap type="GeneralRequestDTO" id="GeneralRequestDTOMap">
+    <id column="vol_no" property="no"/> 
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="tel" property="tel"/>
+    <result column="email" property="email"/>
+    <result column="start_dt" property="startDate"/>
+    <result column="end_dt" property="endDate"/>
+    <result column="total_cnt" property="totalJoinCount"/>
+    <result column="approval" property="registerDate"/>
+    <result column="note" property="postNo"/>
+    
+    
+    
+    <result column="category_no" property="level"/>
+    <result column="user_no" property="birthdate"/>
+    <result column="note" property="postNo"/>
+  </resultMap>
+  
+ 
+  
+  <insert id="insert" parameterType="PersonalDTO"
+          useGeneratedKeys="true" keyColumn="user_no" keyProperty="no">
+    insert into ftp_user(id,password,name,tel,email,post_no,basic_address,detail_address,type,status)
+    values(#{id},password(#{password}),#{name},#{tel},#{email},#{postNo},#{basicAddress},#{detailAddress},#{type},#{status})
+  </insert>
+  
+  <insert id="insertPersonal" parameterType="map">
+    insert into ftp_user_personal(user_no,birthdate,rank)
+    values(#{userNo},#{userBirthdate},#{userLevel})
+  </insert>
+  
+  
+  <select id="findAllPersonal" resultMap="PersonalDTOMap">
+	   select 
+       u.*,  
+       p.user_personal_no,  
+       p.birthdate,
+       p.rank,
+       p.point
+     from
+       ftp_user u
+       inner join ftp_user_personal p on u.user_no=p.user_no
+     order by
+       user_personal_no asc 
+  </select>
+  
+   <update id="update" parameterType="PersonalDTO">
+	   update ftp_user set
+	     tel=#{tel},
+	     email=#{email},
+	     post_no=#{postNo},
+	     basic_address=#{basicAddress},
+	     detail_address=#{detailAddress},
+	     password=password(#{password})
+	   where 
+	      user_no=#{no}
+  </update>
+  
+  <!--  
+   <update id="updatePersonal" parameterType="PersonalDTO">
+	   update ftp_user_personal set
+	     birthdate=#{birthdate}
+	   where 
+	      user_personal_no=#{personalNo}
+  </update>
+-->
+  
+  <select id="findByIdPassword" resultMap="PersonalDTOMap" parameterType="map">
+    select 
+       u.*,  
+       p.user_personal_no,  
+       p.birthdate,
+       p.rank,
+       p.point
+     from
+       ftp_user u
+       inner join ftp_user_personal p on u.user_no=p.user_no
+    where 
+      id=#{userId} and password=password(#{userPassword})
+  </select>
+  
+  
+   <update id="delete" parameterType="PersonalDTO">
+     update ftp_user set
+      id=#{id},
+      password=password(#{password}),
+      name=#{name},
+      tel=#{tel},
+      email=#{email},
+      post_no=#{postNo},
+      basic_address=#{basicAddress},
+      detail_address=#{detailAddress},
+      status=#{status},
+      type=#{type}
+     where 
+        user_no=#{no}
+  </update>
+  
+   <update id="deletePersonal" parameterType="PersonalDTO">
+      update ftp_user_personal set
+	      birthdate=#{birthdate},
+	      rank=#{level},
+	      point=#{point}
+      where 
+        user_personal_no=#{personalNo}
+  </update>
+  
+  
+  <!--  
+  
+  
+  
+  
+  <select id="findByNoticeNo" resultMap="NoticeDTOMap" parameterType="int">
+     select 
+     notice_no,
+     title,
+     content,
+     created_dt,
+     view_cnt
+    from
+     ftp_support_notice
+    where 
+      notice_no=#{values}
+  </select>
+  
+  
+  
+  <select id="findByKeyword" resultMap="NoticeDTOMap" parameterType="string">
+     select 
+       notice_no,
+       title,   
+       created_dt,
+       view_cnt
+    from
+     ftp_support_notice
+     <where>
+      <if test="title != null">
+         title like concat('%', #{value}, '%')
+      </if>
+      <if test="content != null">
+         or content like concat('%', #{value}, '%') 
+      </if>
+     </where>
+     order by notice_no desc
+  </select>
+  
+  
+
+ 
+ 
+  
+  <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
+    select 
+      member_no,
+      name,
+      email,
+      photo,
+      tel,
+      created_dt 
+    from 
+      pms_member
+    where 
+      email=#{email} and password=password(#{password})
+  </select>
+  
+  <select id="findByName" resultMap="MemberMap" parameterType="string">
+    select 
+      member_no,
+      name,
+      email,
+      photo,
+      tel,
+      created_dt 
+    from 
+      pms_member
+    where 
+      name=#{value}
+  </select>
+  -->
+</mapper>
+
+
+
+
+
+
+
