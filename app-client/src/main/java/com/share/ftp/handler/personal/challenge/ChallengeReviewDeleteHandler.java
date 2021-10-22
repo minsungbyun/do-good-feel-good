@@ -1,6 +1,7 @@
 package com.share.ftp.handler.personal.challenge;
 
 import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeReviewDTO;
 import com.share.ftp.handler.Command;
@@ -10,9 +11,11 @@ import com.share.util.Prompt;
 public class ChallengeReviewDeleteHandler implements Command {
 
   ChallengeDao challengeDao;
+  ChallengeReviewDao challengeReviewDao;
 
-  public ChallengeReviewDeleteHandler(ChallengeDao challengeDao) {
+  public ChallengeReviewDeleteHandler(ChallengeDao challengeDao, ChallengeReviewDao challengeReviewDao) {
     this.challengeDao = challengeDao;
+    this.challengeReviewDao = challengeReviewDao;
   }
 
   @Override
@@ -23,10 +26,10 @@ public class ChallengeReviewDeleteHandler implements Command {
       System.out.println();
 
       int challengeNo = (int) request.getAttribute("challengeNo");
-      ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
+      ChallengeDTO challengeDTO = challengeDao.findByNo(challengeNo);
 
       int challengeReviewNo = (int) request.getAttribute("challengeReviewNo");
-      ChallengeReviewDTO challengeReviewDTO = challengeDao.findByChallengeReviewNo(challengeNo, challengeReviewNo);
+      ChallengeReviewDTO challengeReviewDTO = challengeReviewDao.findByNo(challengeNo, challengeReviewNo);
 
       if (challengeReviewDTO == null) {
         System.out.println("해당 번호의 참여인증&댓글이 없습니다.");
@@ -54,7 +57,7 @@ public class ChallengeReviewDeleteHandler implements Command {
           challengeDTO.removeReviewer(AuthLoginHandler.getLoginUser()); 
 
           challengeDao.update(challengeDTO);
-          challengeDao.deleteReview(challengeReviewDTO);
+          challengeReviewDao.delete(challengeReviewDTO);
           System.out.println("참여인증&댓글을 삭제하였습니다.");
           return;
 

@@ -1,6 +1,7 @@
 package com.share.ftp.handler.personal.challenge;
 
 import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
@@ -12,10 +13,11 @@ public class ChallengeQuestionAddHandler implements Command {
 
 
   ChallengeDao challengeDao;
+  ChallengeQuestionDao challengeQuestionDao;
 
-
-  public ChallengeQuestionAddHandler(ChallengeDao challengeDao) {
+  public ChallengeQuestionAddHandler(ChallengeDao challengeDao, ChallengeQuestionDao challengeQuestionDao) {
     this.challengeDao = challengeDao;
+    this.challengeQuestionDao = challengeQuestionDao;
   }
 
   @Override
@@ -24,7 +26,7 @@ public class ChallengeQuestionAddHandler implements Command {
     System.out.println();
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
+    ChallengeDTO challengeDTO = challengeDao.findByNo(challengeNo);
 
     if (challengeDTO == null) {
       System.out.println();
@@ -61,7 +63,7 @@ public class ChallengeQuestionAddHandler implements Command {
     //    challengeQuestionDTO.setQuestionNo(challengeDTO.getQuestionCount());
 
     //    challengeDao.update(challengeDTO);
-    challengeDao.insertQuestion(challengeQuestionDTO);
+    challengeQuestionDao.insert(challengeQuestionDTO);
 
     System.out.println();
     System.out.println("문의 등록이 완료되었습니다.");

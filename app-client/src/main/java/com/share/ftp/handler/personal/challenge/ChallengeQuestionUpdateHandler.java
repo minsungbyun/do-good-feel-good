@@ -1,6 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
-import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -9,10 +9,10 @@ import com.share.util.Prompt;
 
 public class ChallengeQuestionUpdateHandler implements Command {
 
-  ChallengeDao challengeDao;
+  ChallengeQuestionDao challengeQuestionDao;
 
-  public ChallengeQuestionUpdateHandler(ChallengeDao challengeDao) {
-    this.challengeDao = challengeDao;
+  public ChallengeQuestionUpdateHandler(ChallengeQuestionDao challengeQuestionDao) {
+    this.challengeQuestionDao = challengeQuestionDao;
   }
 
   @Override
@@ -24,7 +24,7 @@ public class ChallengeQuestionUpdateHandler implements Command {
 
     int challengeQuestionNo = (int) request.getAttribute("challengeQuestionNo");
 
-    ChallengeQuestionDTO challengeQuestion = challengeDao.findByChallengeQuestionNo(challengeNo, challengeQuestionNo);
+    ChallengeQuestionDTO challengeQuestion = challengeQuestionDao.findByNo(challengeNo, challengeQuestionNo);
 
     if (challengeQuestion == null) {
       System.out.println("해당 번호의 문의가 없습니다.");
@@ -50,7 +50,7 @@ public class ChallengeQuestionUpdateHandler implements Command {
       } else if (input.equals("y")) {
         System.out.println();
         challengeQuestion.setContent(content);
-        challengeDao.updateQuestion(challengeQuestion);
+        challengeQuestionDao.update(challengeQuestion);
 
         System.out.println("문의를 수정하였습니다.");
         return;

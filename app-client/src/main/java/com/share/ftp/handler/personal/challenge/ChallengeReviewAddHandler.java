@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.challenge;
 
 import java.sql.Date;
 import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeReviewDTO;
 import com.share.ftp.handler.Command;
@@ -12,9 +13,11 @@ import com.share.util.Prompt;
 public class ChallengeReviewAddHandler implements Command {
 
   ChallengeDao challengeDao;
+  ChallengeReviewDao challengeReviewDao;
 
-  public ChallengeReviewAddHandler(ChallengeDao challengeDao) {
+  public ChallengeReviewAddHandler(ChallengeDao challengeDao, ChallengeReviewDao challengeReviewDao) {
     this.challengeDao = challengeDao;
+    this.challengeReviewDao = challengeReviewDao;
   }
 
   @Override
@@ -25,7 +28,7 @@ public class ChallengeReviewAddHandler implements Command {
     System.out.println();
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
+    ChallengeDTO challengeDTO = challengeDao.findByNo(challengeNo);
 
     if (!challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
       System.out.println("챌린지 참여한 회원만 등록이 가능합니다!");
@@ -49,7 +52,7 @@ public class ChallengeReviewAddHandler implements Command {
     if (challengeDTO.getReviewCount() == 0) {
       challengeDTO.setReviewCount(1);
     } else {
-      challengeDTO.setReviewCount(challengeDao.getNextReviewNum(challengeDTO));
+      challengeDTO.setReviewCount(challengeReviewDao.getNextNum(challengeDTO));
     }
 
     challengeReviewDTO.setReviewNo(challengeDTO.getReviewCount()); // 해당 챌린지 리뷰의 마지막 번호기억 + 1
@@ -72,7 +75,7 @@ public class ChallengeReviewAddHandler implements Command {
         System.out.println(challengeDTO.getReviewerNames()); // 리뷰어 등록 테스트
 
         challengeDao.update(challengeDTO);
-        challengeDao.insertReview(challengeReviewDTO);
+        challengeReviewDao.insert(challengeReviewDTO);
 
         System.out.println();
         System.out.println("참여인증&댓글이 등록이 완료되었습니다.");

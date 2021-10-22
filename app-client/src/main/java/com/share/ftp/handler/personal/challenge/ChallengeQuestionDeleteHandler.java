@@ -1,6 +1,7 @@
 package com.share.ftp.handler.personal.challenge;
 
 import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
@@ -11,9 +12,11 @@ import com.share.util.Prompt;
 public class ChallengeQuestionDeleteHandler implements Command {
 
   ChallengeDao challengeDao;
+  ChallengeQuestionDao challengeQuestionDao;
 
-  public ChallengeQuestionDeleteHandler(ChallengeDao challengeDao) {
+  public ChallengeQuestionDeleteHandler(ChallengeDao challengeDao, ChallengeQuestionDao challengeQuestionDao) {
     this.challengeDao = challengeDao;
+    this.challengeQuestionDao = challengeQuestionDao;
   }
 
   @Override
@@ -24,11 +27,11 @@ public class ChallengeQuestionDeleteHandler implements Command {
 
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challenge = challengeDao.findByChallengeNo(challengeNo); 
+    ChallengeDTO challenge = challengeDao.findByNo(challengeNo); 
 
     int challengeQuestionNo = (int) request.getAttribute("challengeQuestionNo");
 
-    ChallengeQuestionDTO deleteChallengeQuestion = challengeDao.findByChallengeQuestionNo(challengeNo, challengeQuestionNo);
+    ChallengeQuestionDTO deleteChallengeQuestion = challengeQuestionDao.findByNo(challengeNo, challengeQuestionNo);
 
     if (deleteChallengeQuestion == null) {
       System.out.println("해당 번호의 문의가 없습니다.");
@@ -51,7 +54,7 @@ public class ChallengeQuestionDeleteHandler implements Command {
       challenge.setQuestionCount(challenge.getQuestionCount() - 1);
 
       challengeDao.update(challenge);
-      challengeDao.deleteQuestion(deleteChallengeQuestion);
+      challengeQuestionDao.delete(deleteChallengeQuestion);
 
       System.out.println("해당 문의사항을 삭제하였습니다.");
     }

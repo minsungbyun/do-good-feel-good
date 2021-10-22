@@ -21,6 +21,7 @@ import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.dao.GroupDao;
+import com.share.ftp.dao.JoinDao;
 import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.dao.OrgDao;
 import com.share.ftp.dao.PersonalDao;
@@ -246,6 +247,7 @@ public class ClientApp {
     sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
         "com/share/ftp/conf/mybatis-config.xml")).openSession();
 
+    JoinDao joinDao = sqlSession.getMapper(JoinDao.class);
     // 로그인
     PersonalDao personalDao = sqlSession.getMapper(PersonalDao.class);
     GroupDao groupDao = sqlSession.getMapper(GroupDao.class);
