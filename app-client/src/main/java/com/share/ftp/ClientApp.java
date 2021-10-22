@@ -73,10 +73,10 @@ import com.share.ftp.handler.join.JoinPersonalHandler;
 import com.share.ftp.handler.join.JoinSearchEmailIdHandler;
 import com.share.ftp.handler.join.JoinSearchPasswordHandler;
 import com.share.ftp.handler.join.JoinSearchTelIdHandler;
-import com.share.ftp.handler.join.MyPageDeleteUserHandler;
 import com.share.ftp.handler.join.MyPageUpdateUserHandler;
 import com.share.ftp.handler.join.OrgHandler;
 import com.share.ftp.handler.join.PersonalHandler;
+import com.share.ftp.handler.join.PersonalUserDeleteHandler;
 import com.share.ftp.handler.join.PersonalUserUpdateHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeDetailHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeJoinHandler;
@@ -420,7 +420,7 @@ public class ClientApp {
     // 마이페이지
     commands.put("/myPage/info", new MyPageUpdateUserHandler(joinDao)); // 내정보 수정
     commands.put("/myPage/personal", new PersonalUserUpdateHandler(personalDao)); // 내정보 수정
-    commands.put("/myPage/delete", new MyPageDeleteUserHandler(joinDao)); // 회원탈퇴
+    commands.put("/myPage/delete", new PersonalUserDeleteHandler(personalDao)); // 회원탈퇴
 
     commands.put("/myVol/applied", new MyAppliedVolHandler(netVolunteerDao));
     commands.put("/myVol/appliedDetail", new MyAppliedVolDetailHandler(netVolunteerDao));
@@ -795,7 +795,6 @@ public class ClientApp {
     MenuGroup myProfile = new MenuGroup("회원정보", ACCESS_MEMBER);
     myProfile.setMenuFilter(menuFilter);
     myProfile.add(new MenuItem("내 정보", "/auth/displayUserInfo"));
-    //    myProfile.add(new MenuItem("내 정보 수정", "/auth/changeUserInfo"));
     myProfile.add(new MenuItem("내 정보 수정", ACCESS_PERSONAL, "/myPage/personal"));
     myProfile.add(new MenuItem("내 정보 수정", ACCESS_GROUP, "/myPage/group"));
     myProfile.add(new MenuItem("내 정보 수정", ACCESS_ORG, "/myPage/org"));
