@@ -1,6 +1,7 @@
 package com.share.ftp.dao.impl;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.ChallengeDao;
@@ -106,7 +107,11 @@ public class MybatisChallengeDao implements ChallengeDao {
 
   @Override
   public ChallengeQuestionDTO findByChallengeQuestionNo(int challengeNo, int challengeQuestionNo) throws Exception {
-    return sqlSession.selectOne("ChallengeQuestionMapper.findByNo", challengeQuestionNo);
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("challengeNo", challengeNo);
+    params.put("challengeQuestionNo", challengeQuestionNo);
+
+    return sqlSession.selectOne("ChallengeQuestionMapper.findByNo", params);
   }
 
   @Override

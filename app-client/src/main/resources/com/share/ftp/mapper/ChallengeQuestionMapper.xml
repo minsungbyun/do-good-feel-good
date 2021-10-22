@@ -12,8 +12,8 @@
     <result column="created_dt" property="registeredDate"/>
     
     <association property="owner" javaType="joinDTO">
-      <id column="userNo" property="no"/>
-      <result column="userId" property="id"/>
+      <id column="user_No" property="no"/>
+      <result column="id" property="id"/>
     </association>
   </resultMap>
   
@@ -24,8 +24,8 @@
       q.challenge_qna_no,
       q.content,
       q.created_dt,
-      u.user_no userNo,
-      u.id userId
+      u.user_no user_No,
+      u.id id
     from
       ftp_challenge_qna q
       inner join ftp_user u on q.user_no=u.user_no
@@ -34,8 +34,8 @@
   </select>
  
   <insert id="insert" parameterType="ChallengeQuestionDTO">
-    insert into ftp_challenge_qna(content,created_dt) 
-    values(#{content}, curdate())
+    insert into ftp_challenge_qna(challenge_no,content,user_no,created_dt) 
+    values(#{no},#{content},#{owner.no}, curdate())
   </insert>
   
   

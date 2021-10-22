@@ -30,18 +30,11 @@ import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.dao.impl.MariadbGroupDao;
 import com.share.ftp.dao.impl.MariadbJoinDao;
 import com.share.ftp.dao.impl.MariadbOrgDao;
-<<<<<<< HEAD
-import com.share.ftp.dao.impl.MybatisCommunityDao;
-import com.share.ftp.dao.impl.MybatisNoticeDao;
-import com.share.ftp.dao.impl.MybatisPersonalDao;
-import com.share.ftp.dao.impl.NetChallengeDao;
-=======
-import com.share.ftp.dao.impl.MariadbPersonalDao;
 import com.share.ftp.dao.impl.MybatisChallengeDao;
 import com.share.ftp.dao.impl.MybatisCommunityDao;
 import com.share.ftp.dao.impl.MybatisNoticeDao;
+import com.share.ftp.dao.impl.MybatisPersonalDao;
 import com.share.ftp.dao.impl.NetCommunityDao;
->>>>>>> 04e5cbee9d7d4969dda950be4c4ae8344cc7defc
 import com.share.ftp.dao.impl.NetDonationBoardDao;
 import com.share.ftp.dao.impl.NetDonationRegisterDao;
 import com.share.ftp.dao.impl.NetQuestionDao;

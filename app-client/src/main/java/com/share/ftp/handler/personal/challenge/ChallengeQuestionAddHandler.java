@@ -1,6 +1,5 @@
 package com.share.ftp.handler.personal.challenge;
 
-import java.sql.Date;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
@@ -32,16 +31,15 @@ public class ChallengeQuestionAddHandler implements Command {
       System.out.println("해당 챌린지가 없습니다!");
     }
 
-    if (!challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
-      System.out.println("챌린지 참여한 회원만 등록이 가능합니다!");
-      return;
-    }
+    //    if (!challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
+    //      System.out.println("챌린지 참여한 회원만 등록이 가능합니다!");
+    //      return;
+    //    }
 
     ChallengeQuestionDTO challengeQuestionDTO = new ChallengeQuestionDTO();
 
     challengeQuestionDTO.setNo(challengeDTO.getNo());
     challengeQuestionDTO.setContent(Prompt.inputString("내용: "));
-    challengeQuestionDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     challengeQuestionDTO.setOwner(AuthLoginHandler.getLoginUser());
 
