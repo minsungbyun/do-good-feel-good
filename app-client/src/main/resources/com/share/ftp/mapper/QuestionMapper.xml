@@ -5,31 +5,33 @@
 
 <mapper namespace="QuestionMapper">
   <resultMap type="QuestionListDTO" id="QuestionDTOMap">
-    <id column="qna_no" property="no"/> 
+    <id column="qna_no" property="no"/>
+    <result column="qna_category_no" property="qnaCateNo"/> 
     <result column="title" property="title"/>
     <result column="content" property="content"/>
     <result column="password" property="password"/>
     <result column="created_dt" property="registeredDate"/>
     <result column="view_cnt" property="viewCount"/>
-    <result column="gnq_reply" property="title"/>
+    <result column="gnq_reply" property="qnaReply"/>
+    <result column="status" property="status"/>
     
     <association property="owner" javaType="joinDTO">
       <id column="user_no" property="no"/>
-      <result column="name" property="name"/>
+      <result column="id" property="id"/>
     </association>
-    
-    
   </resultMap>
   
   <select id="findAll" resultMap="QuestionDTOMap">
    select 
      qna_no,
+     qna_category_no,
      title,
      created_dt,
-     view_cnt
+     view_cnt,
+     status
     from
-     ftp_support_notice
-    order by notice_no desc
+     ftp_support_qna
+    order by qna_no desc
   </select>
   
       <!-- 
