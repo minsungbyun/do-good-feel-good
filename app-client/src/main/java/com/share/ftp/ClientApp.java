@@ -21,6 +21,7 @@ import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.dao.GroupDao;
+import com.share.ftp.dao.JoinDao;
 import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.dao.OrgDao;
 import com.share.ftp.dao.PersonalDao;
@@ -124,13 +125,11 @@ import com.share.ftp.handler.personal.volunteer.MyAppliedVolDetailHandler;
 import com.share.ftp.handler.personal.volunteer.MyAppliedVolHandler;
 import com.share.ftp.handler.personal.volunteer.MyRejectedVolHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralAppliedDetailHandler;
-import com.share.ftp.handler.personal.volunteer.VolGeneralAppliedListHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralDoJoinDeleteHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralDoJoinHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralDoJoinListHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestAcceptHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestApplyCompleteHandler;
-import com.share.ftp.handler.personal.volunteer.VolGeneralRequestApplyHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestApplyListHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestDeleteHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestRejectHandler;
@@ -141,6 +140,8 @@ import com.share.ftp.handler.personal.volunteer.VolQuestionConnectHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionDeleteHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionListHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionUpdateHandler;
+import com.share.ftp.handler.personal.volunteer.VolunteerListHandler;
+import com.share.ftp.handler.personal.volunteer.VolunteerRequestApplyHandler;
 import com.share.ftp.listener.AppInitListener;
 import com.share.menu.Menu;
 import com.share.menu.MenuFilter;
@@ -230,6 +231,7 @@ public class ClientApp {
         "com/share/ftp/conf/mybatis-config.xml")).openSession();
 
     // 로그인
+    JoinDao joinDao = sqlSession.getMapper(JoinDao.class);
     PersonalDao personalDao = sqlSession.getMapper(PersonalDao.class);
     GroupDao groupDao = sqlSession.getMapper(GroupDao.class);
     OrgDao orgDao = sqlSession.getMapper(OrgDao.class);
@@ -253,7 +255,7 @@ public class ClientApp {
     // CommunityDao netCommunityDao = new NetCommunityDao(requestAgent);
 
     //로그인, 로그아웃
-    commands.put("/auth/login", new AuthLoginHandler(personalDao)); // 로그인
+    commands.put("/auth/login", new AuthLoginHandler(personalDao, joinDao)); // 로그인
     commands.put("/auth/logout", new AuthLogoutHandler()); // 로그아웃
     commands.put("/auth/displayUserInfo", new AuthDisplayUserHandler()); // 마이페이지 나의정보수정
     commands.put("/userInfo/personal", new PersonalHandler()); 
@@ -270,13 +272,12 @@ public class ClientApp {
     commands.put("/join/searchPassword", new JoinSearchPasswordHandler(personalDao)); // 비밀번호 찾기
 
     //함께해요
-    commands.put("/volGeneralRequest/apply", new VolGeneralRequestApplyHandler(volunteerDao,generalDao,sqlSession));
+    commands.put("/volRequest/apply", new VolunteerRequestApplyHandler(volunteerDao,generalDao,sqlSession));
+    commands.put("/vol/list", new VolunteerListHandler(volunteerDao));  // 승인된 봉사 목록
     commands.put("/volGeneralRequest/applyList", new VolGeneralRequestApplyListHandler(volunteerDao));
-    //    commands.put("/volPersonalRequest/applyList", new VolPersonalRequestApplyListHandler(netVolunteerDao));
     commands.put("/volGeneralRequest/applyCompleteList", new VolGeneralRequestApplyCompleteHandler(volunteerDao));
     commands.put("/volGeneralRequest/acceptApply", new VolGeneralRequestAcceptHandler(volunteerDao));
     commands.put("/volGeneralRequest/rejectApply", new VolGeneralRequestRejectHandler(volunteerDao));
-    commands.put("/volGeneral/appliedList", new VolGeneralAppliedListHandler(volunteerDao));  // 승인된 봉사 목록
     //    commands.put("/volPersonalRequest/appliedList", new VolPersonalRequestAppliedListHandler(netVolunteerDao));
     commands.put("/volGeneralRequest/rejectedList", new VolGeneralRequestRejectedListHandler(volunteerDao));
     commands.put("/volGeneralRequest/delete", new VolGeneralRequestDeleteHandler(volunteerDao));
@@ -500,8 +501,8 @@ public class ClientApp {
     mainMenuGroup.add(doVolMenu);
     doVolMenu.setMenuFilter(menuFilter);
 
-    doVolMenu.add(new MenuItem("봉사 등록", "/volGeneralRequest/apply"));
-    doVolMenu.add(new MenuItem("봉사 목록", "/volGeneral/appliedList"));
+    doVolMenu.add(new MenuItem("봉사 등록", "/volRequest/apply"));
+    doVolMenu.add(new MenuItem("봉사 목록", "/vol/list"));
     doVolMenu.add(new MenuItem("봉사 상세정보", "/volGeneral/detail"));
 
     //    doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volGeneralRequest/apply"));
