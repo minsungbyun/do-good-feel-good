@@ -19,7 +19,7 @@ public class AdminChallengeDeleteHandler implements Command {
     System.out.println("[ 챌린지 삭제 ]");
     int challengeNo = (int) request.getAttribute("challengeNo"); 
 
-    ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
+    ChallengeDTO challengeDTO = challengeDao.findByNo(challengeNo);
 
     if (challengeDTO == null) {
       System.out.println("해당 번호의 챌린지가 없습니다.");

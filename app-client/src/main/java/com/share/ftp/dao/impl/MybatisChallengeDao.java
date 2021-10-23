@@ -43,7 +43,7 @@ public class MybatisChallengeDao implements ChallengeDao {
   }
 
   @Override
-  public ChallengeDTO findByChallengeNo(int challengeNo) throws Exception {
+  public ChallengeDTO findByNo(int challengeNo) throws Exception {
     return sqlSession.selectOne("ChallengeMapper.findByChallengeNo", challengeNo);
   }
 

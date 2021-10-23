@@ -3,6 +3,7 @@ package com.share.ftp.handler.admin;
 import java.sql.Date;
 import java.util.Collection;
 import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
@@ -13,9 +14,11 @@ import com.share.util.Prompt;
 public class AdminChallengeReplyAddHandler implements Command {
 
   ChallengeDao challengeDao;
+  ChallengeQuestionDao challengeQuestionDao;
 
-  public AdminChallengeReplyAddHandler(ChallengeDao challengeDao) {
+  public AdminChallengeReplyAddHandler(ChallengeDao challengeDao, ChallengeQuestionDao challengeQuestionDao) {
     this.challengeDao = challengeDao;
+    this.challengeQuestionDao = challengeQuestionDao;
   }
 
   @Override
@@ -25,7 +28,7 @@ public class AdminChallengeReplyAddHandler implements Command {
     System.out.println();
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
+    ChallengeDTO challengeDTO = challengeDao.findByNo(challengeNo);
 
     int challengeQuestionNo = Prompt.inputInt("문의 번호를 입력해주세요 ▶ ");
 
@@ -44,14 +47,14 @@ public class AdminChallengeReplyAddHandler implements Command {
 
     } else if (input.equalsIgnoreCase("y")) {
 
-      challengeDTO.setQuestionCount(challengeDao.getNextQuestionNum(challengeDTO));
+      challengeDTO.setQuestionCount(challengeQuestionDao.getNextNum(challengeDTO));
       challengeQuestionDTO.setQuestionNo(challengeDTO.getQuestionCount()); // 해당 챌린지 문의의 마지막 번호기억 + 1
 
       //      int index = challengeDao.questionIndexOf(challengeNo, challengeQuestionNo);
 
-      challengeDao.insertAdmin(challengeQuestionNo, challengeQuestionDTO);
+      challengeQuestionDao.insertAdmin(challengeQuestionNo, challengeQuestionDTO);
 
-      Collection<ChallengeQuestionDTO> challengeQuestionSort = challengeDao.findAllQuestion();
+      Collection<ChallengeQuestionDTO> challengeQuestionSort = challengeQuestionDao.findAll();
 
       for (ChallengeQuestionDTO a : challengeQuestionSort) {
         System.out.printf("%d, %d, %s, %s, %s\n", 
@@ -62,7 +65,7 @@ public class AdminChallengeReplyAddHandler implements Command {
             a.getRegisteredDate());
       }
 
-      challengeDao.sortChallengeQuestion(challengeQuestionDTO);
+      challengeQuestionDao.sortChallengeQuestion(challengeQuestionDTO);
 
       System.out.println();
       System.out.println("문의답글 등록이 완료되었습니다.");

@@ -23,7 +23,7 @@ public class ChallengeJoinHandler implements Command {
     System.out.println();
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
+    ChallengeDTO challengeDTO = challengeDao.findByNo(challengeNo);
 
 
     System.out.printf("챌린지 번호 ▶ %d\n"

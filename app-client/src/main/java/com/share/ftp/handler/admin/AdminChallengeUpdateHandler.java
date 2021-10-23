@@ -2,6 +2,7 @@ package com.share.ftp.handler.admin;
 
 import java.sql.Date;
 import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -10,9 +11,11 @@ import com.share.util.Prompt;
 public class AdminChallengeUpdateHandler implements Command {
 
   ChallengeDao challengeDao;
+  ChallengeQuestionDao challengeQuestionDao;
 
-  public AdminChallengeUpdateHandler(ChallengeDao challengeDao) {
+  public AdminChallengeUpdateHandler(ChallengeDao challengeDao, ChallengeQuestionDao challengeQuestionDao) {
     this.challengeDao = challengeDao;
+    this.challengeQuestionDao = challengeQuestionDao;
   }
 
   @Override
@@ -20,7 +23,7 @@ public class AdminChallengeUpdateHandler implements Command {
     System.out.println("[ 챌린지 변경 ]");
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
+    ChallengeDTO challengeDTO = challengeDao.findByNo(challengeNo);
 
     if (challengeDTO == null) {
       System.out.println("해당 번호의 챌린지가 없습니다.");

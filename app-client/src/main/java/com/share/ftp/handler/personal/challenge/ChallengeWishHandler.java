@@ -22,7 +22,7 @@ public class ChallengeWishHandler implements Command {
 
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeList = challengeDao.findByChallengeNo(challengeNo); 
+    ChallengeDTO challengeList = challengeDao.findByNo(challengeNo); 
 
     while (true) {
       String input = Prompt.inputString("[  🎈 관심 챌린지로 추가하시겠습니까?(y/N) 🎈 ] ");

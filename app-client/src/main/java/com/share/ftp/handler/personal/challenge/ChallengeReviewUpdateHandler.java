@@ -1,6 +1,7 @@
 package com.share.ftp.handler.personal.challenge;
 
 import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.domain.challenge.ChallengeReviewDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -10,9 +11,11 @@ import com.share.util.Prompt;
 public class ChallengeReviewUpdateHandler implements Command {
 
   ChallengeDao challengeDao;
+  ChallengeReviewDao challengeReviewDao;
 
-  public ChallengeReviewUpdateHandler(ChallengeDao challengeDao) {
+  public ChallengeReviewUpdateHandler(ChallengeDao challengeDao, ChallengeReviewDao challengeReviewDao) {
     this.challengeDao = challengeDao;
+    this.challengeReviewDao = challengeReviewDao;
   }
 
   @Override
@@ -23,7 +26,7 @@ public class ChallengeReviewUpdateHandler implements Command {
 
     int challengeReviewNo = (int) request.getAttribute("challengeReviewNo");
 
-    ChallengeReviewDTO challengeReviewDTO = challengeDao.findByChallengeReviewNo(challengeNo, challengeReviewNo);
+    ChallengeReviewDTO challengeReviewDTO = challengeReviewDao.findByNo(challengeNo, challengeReviewNo);
 
     if (challengeReviewDTO == null) {
       System.out.println("해당 번호의 참여인증&댓글이 없습니다.");
@@ -50,7 +53,7 @@ public class ChallengeReviewUpdateHandler implements Command {
         System.out.println();
         challengeReviewDTO.setContent(content);
         challengeReviewDTO.setFileUpload(fileUpload);
-        challengeDao.updateReview(challengeReviewDTO);
+        challengeReviewDao.update(challengeReviewDTO);
 
         System.out.println("참여인증&댓글을 수정하였습니다.");
         return;

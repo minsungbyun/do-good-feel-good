@@ -22,7 +22,7 @@ public class ChallengeDetailHandler implements Command {
     System.out.println();
     int challengeNo = Prompt.inputInt("챌린지 번호를 입력해주세요 ▶ ");
 
-    ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
+    ChallengeDTO challengeDTO = challengeDao.findByNo(challengeNo);
 
     if (challengeDTO == null) {
       System.out.println("해당 번호의 챌린지가 없습니다.");

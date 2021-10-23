@@ -2,6 +2,7 @@ package com.share.ftp.handler.admin;
 
 import java.util.Collection;
 import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
@@ -11,9 +12,11 @@ import com.share.util.Prompt;
 public class AdminChallengeQuestionListHandler implements Command {
 
   ChallengeDao challengeDao;
+  ChallengeQuestionDao challengeQuestionDao;
 
-  public AdminChallengeQuestionListHandler(ChallengeDao challengeDao) {
+  public AdminChallengeQuestionListHandler(ChallengeDao challengeDao, ChallengeQuestionDao challengeQuestionDao) {
     this.challengeDao = challengeDao;
+    this.challengeQuestionDao = challengeQuestionDao;
   }
 
   @Override
@@ -22,7 +25,7 @@ public class AdminChallengeQuestionListHandler implements Command {
 
       int challengeNo = (int) request.getAttribute("challengeNo");
 
-      ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
+      ChallengeDTO challengeDTO = challengeDao.findByNo(challengeNo);
 
       //      int questionNo = (int) request.getAttribute("questionNo");
       //      ChallengeQuestionDTO detailNo = findByQuestionNo();
@@ -39,7 +42,7 @@ public class AdminChallengeQuestionListHandler implements Command {
 
       }
 
-      Collection<ChallengeQuestionDTO> list = challengeDao.findAllQuestion();
+      Collection<ChallengeQuestionDTO> list = challengeQuestionDao.findAll();
 
       for (ChallengeQuestionDTO challengeQuestionDTO : list) {
         if (challengeQuestionDTO.getNo() == challengeNo) {

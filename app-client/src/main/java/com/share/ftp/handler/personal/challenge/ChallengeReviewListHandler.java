@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.challenge;
 
 import java.util.Collection;
 import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.domain.challenge.ChallengeReviewDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -10,9 +11,11 @@ import com.share.util.Prompt;
 public class ChallengeReviewListHandler implements Command {
 
   ChallengeDao challengeDao;
+  ChallengeReviewDao challengeReviewDao;
 
-  public ChallengeReviewListHandler(ChallengeDao challengeDao) {
+  public ChallengeReviewListHandler(ChallengeDao challengeDao, ChallengeReviewDao challengeReviewDao) {
     this.challengeDao = challengeDao;
+    this.challengeReviewDao = challengeReviewDao;
   }
 
   @Override
@@ -22,13 +25,13 @@ public class ChallengeReviewListHandler implements Command {
     System.out.println();
 
     int challengeNo = (int) request.getAttribute("challengeNo");
-    challengeDao.findByChallengeNo(challengeNo);
+    challengeDao.findByNo(challengeNo);
 
     //    if (challengeReviewDao.isEmpty()) {
     //      System.out.println("참여인증&댓글이 없습니다.");
     //    }
 
-    Collection<ChallengeReviewDTO> challengeReviewList = challengeDao.findAllReview();
+    Collection<ChallengeReviewDTO> challengeReviewList = challengeReviewDao.findAll();
 
     for (ChallengeReviewDTO challengeReviewDTO : challengeReviewList) {
       if (challengeReviewDTO.getNo() == challengeNo) {

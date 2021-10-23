@@ -3,32 +3,42 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.share.ftp.dao.NoticeDao">
-  
-  <resultMap type="NoticeDTO" id="NoticeDTOMap">
-    <id column="notice_no" property="no"/> 
+<mapper namespace="com.share.ftp.dao.QuestionDao">
+      <!-- 
+  <resultMap type="QuestionListDTO" id="QuestionDTOMap">
+    <id column="qna_no" property="no"/>
+    <result column="qna_category_no" property="qnaCateNo"/> 
     <result column="title" property="title"/>
     <result column="content" property="content"/>
+    <result column="password" property="password"/>
     <result column="created_dt" property="registeredDate"/>
     <result column="view_cnt" property="viewCount"/>
+    <result column="qna_reply" property="qnaReply"/>
+    <result column="status" property="status"/>
+    
+    <association property="owner" javaType="joinDTO">
+      <id column="user_no" property="no"/>
+      <result column="id" property="id"/>
+    </association>
   </resultMap>
   
-  <select id="findAll" resultMap="NoticeDTOMap">
+  <select id="findAllQuestion" resultMap="QuestionDTOMap">
    select 
-     notice_no,
+     qna_no,
+     qna_category_no,
      title,
      created_dt,
-     view_cnt
+     view_cnt,
+     status
     from
-     ftp_support_notice
-    order by notice_no desc
+     ftp_support_qna
+    order by qna_no desc
   </select>
   
   <insert id="insert" parameterType="NoticeDTO">
     insert into ftp_support_notice(title,content,created_dt) 
     values(#{title},#{content}, curdate())
   </insert>
-  
   
   
    <update id="update" parameterType="NoticeDTO">
@@ -47,7 +57,7 @@
   
   
   
-  <select id="findByNoticeNo" resultMap="NoticeDTOMap" parameterType="int">
+  <select id="findByQuestionNo" resultMap="NoticeDTOMap" parameterType="int">
      select 
      notice_no,
      title,
@@ -82,8 +92,7 @@
   </select>
   
   
-
-<!--    
+   
   
 select
   user.id 아이디,
@@ -172,14 +181,6 @@ from
  ftp_vol_board_like 
 group by
   vol_board_no
-  -->
-  <!--   
-
-
-  
-  
- 
- 
   
   <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
     select 

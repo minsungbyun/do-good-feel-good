@@ -1,6 +1,7 @@
 package com.share.ftp.handler.admin;
 
 import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
@@ -10,9 +11,11 @@ import com.share.util.Prompt;
 public class AdminChallengeReplyDeleteHandler implements Command {
 
   ChallengeDao challengeDao;
+  ChallengeQuestionDao challengeQuestionDao;
 
-  public AdminChallengeReplyDeleteHandler(ChallengeDao challengeDao) {
+  public AdminChallengeReplyDeleteHandler(ChallengeDao challengeDao, ChallengeQuestionDao challengeQuestionDao) {
     this.challengeDao = challengeDao;
+    this.challengeQuestionDao = challengeQuestionDao;
   }
 
   @Override
@@ -22,7 +25,7 @@ public class AdminChallengeReplyDeleteHandler implements Command {
 
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeList = challengeDao.findByChallengeNo(challengeNo); 
+    ChallengeDTO challengeList = challengeDao.findByNo(challengeNo); 
 
     if (challengeList == null) {
       System.out.println("해당 챌린지가 없습니다.");
@@ -31,7 +34,7 @@ public class AdminChallengeReplyDeleteHandler implements Command {
 
     int challengQuestionNo = (int) request.getAttribute("challengQuestionNo");
 
-    ChallengeQuestionDTO challengeQuestion = challengeDao.findByChallengeQuestionNo(challengeNo, challengQuestionNo);
+    ChallengeQuestionDTO challengeQuestion = challengeQuestionDao.findByNo(challengeNo, challengQuestionNo);
 
 
     if (challengeQuestion == null) {
@@ -57,7 +60,7 @@ public class AdminChallengeReplyDeleteHandler implements Command {
 
 
         //          challengeQuestion.setQuestionNo(challengeQuestion.getQuestionNo() - 1);
-        challengeDao.deleteQuestion(challengeQuestion);
+        challengeQuestionDao.delete(challengeQuestion);
         return;
 
       } else {

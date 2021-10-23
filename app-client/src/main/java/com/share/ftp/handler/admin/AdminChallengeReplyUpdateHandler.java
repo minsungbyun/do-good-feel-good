@@ -1,6 +1,7 @@
 package com.share.ftp.handler.admin;
 
 import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
@@ -10,9 +11,11 @@ import com.share.util.Prompt;
 public class AdminChallengeReplyUpdateHandler implements Command {
 
   ChallengeDao challengeDao;
+  ChallengeQuestionDao challengeQuestionDao;
 
-  public AdminChallengeReplyUpdateHandler(ChallengeDao challengeDao) {
+  public AdminChallengeReplyUpdateHandler(ChallengeDao challengeDao, ChallengeQuestionDao challengeQuestionDao) {
     this.challengeDao = challengeDao;
+    this.challengeQuestionDao = challengeQuestionDao;
   }
 
   @Override
@@ -21,7 +24,7 @@ public class AdminChallengeReplyUpdateHandler implements Command {
     System.out.println();
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
+    ChallengeDTO challengeDTO = challengeDao.findByNo(challengeNo);
 
 
     if (challengeDTO == null) {
@@ -30,7 +33,7 @@ public class AdminChallengeReplyUpdateHandler implements Command {
 
     int challengQuestionNo = (int) request.getAttribute("challengQuestionNo");
 
-    ChallengeQuestionDTO challengeQuestion = challengeDao.findByChallengeQuestionNo(challengeNo, challengQuestionNo);
+    ChallengeQuestionDTO challengeQuestion = challengeQuestionDao.findByNo(challengeNo, challengQuestionNo);
 
     if (challengeQuestion == null) {
       System.out.println("해당 번호의 답글이 없습니다.");
@@ -49,7 +52,7 @@ public class AdminChallengeReplyUpdateHandler implements Command {
       } else if (input.equalsIgnoreCase("y")) {
         System.out.println("문의답글을 수정하였습니다.");
         challengeQuestion.setContent(content);
-        challengeDao.updateQuestion(challengeQuestion);
+        challengeQuestionDao.update(challengeQuestion);
         return;
 
       } else {
