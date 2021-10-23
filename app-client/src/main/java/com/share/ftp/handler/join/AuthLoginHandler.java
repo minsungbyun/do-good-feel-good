@@ -24,9 +24,15 @@ public class AuthLoginHandler implements Command {
   OrgDao orgDao;
   JoinDao joinDao;
 
-  public AuthLoginHandler(PersonalDao personalDao, GroupDao groupDao, OrgDao orgDao, JoinDao joinDao) {
+  public AuthLoginHandler(
+      PersonalDao personalDao,
+      GroupDao groupDao,
+      OrgDao orgDao,
+      JoinDao joinDao) {
     this.personalDao = personalDao;
     this.joinDao = joinDao;
+    this.groupDao = groupDao;
+    this.orgDao = orgDao;
   }
 
   public AuthLoginHandler() {
