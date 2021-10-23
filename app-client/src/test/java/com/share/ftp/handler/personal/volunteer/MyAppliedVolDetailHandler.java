@@ -1,19 +1,20 @@
 package com.share.ftp.handler.personal.volunteer;
 
-import java.util.List;
-import com.share.ftp.domain.personal.GeneralRequestDTO;
+import java.util.Collection;
+import com.share.ftp.dao.VolunteerDao;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 
-public class MyAppliedVolDetailHandler extends AbstractVolGeneralHandler { // 개인 봉사신청 양식 쓰는 곳
+public class MyAppliedVolDetailHandler implements Command { // 개인 봉사신청 양식 쓰는 곳
 
+  VolunteerDao volunteerDao;
 
-  public MyAppliedVolDetailHandler(
-      List<GeneralRequestDTO> generalRequestDTOList,
-      List<GeneralRequestDTO> generalRequestApplyDTOList,
-      List<GeneralRequestDTO> generalRequestRejectDTOList) {
+  public MyAppliedVolDetailHandler(VolunteerDao volunteerDao) {
 
-    super(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList);
+    this.volunteerDao = volunteerDao;
+
   }
 
   @Override
@@ -21,13 +22,15 @@ public class MyAppliedVolDetailHandler extends AbstractVolGeneralHandler { // �
     System.out.println();
     System.out.println("[  나의 봉사 신청서 목록  ]");
 
-    if (generalRequestDTOList.isEmpty()) {
+    Collection<VolunteerRequestDTO> GeneralRequestDTOList = volunteerDao.findAll();
+
+    if (GeneralRequestDTOList.isEmpty()) {
       System.out.println("[  봉사 신청서가 없습니다. ]");
     }
 
 
-    for (GeneralRequestDTO generalRequestDTO : generalRequestDTOList) {
-      if (generalRequestDTO.getOwner().getName().equals(AuthLoginHandler.getLoginUser().getName())) {
+    for (VolunteerRequestDTO volunteerRequestDTO : GeneralRequestDTOList) {
+      if (volunteerRequestDTO.getOwner().getName().equals(AuthLoginHandler.getLoginUser().getName())) {
         System.out.printf("번호: %d\n"
             + "봉사유형: %s\n"
             + "봉사제목: %s\n"
@@ -45,28 +48,29 @@ public class MyAppliedVolDetailHandler extends AbstractVolGeneralHandler { // �
             + "첨부파일: %s\n"
             + "승인여부: %s \n\n", 
 
-            generalRequestDTO.getVolNo(), 
-            generalRequestDTO.getMemberType(), 
-            generalRequestDTO.getVolTitle(), 
-            generalRequestDTO.getOwner().getName(), 
-            generalRequestDTO.getVolType(), 
-            generalRequestDTO.getVolTel(),
-            generalRequestDTO.getVolEmail(),
-            generalRequestDTO.getVolStartDate(),
-            generalRequestDTO.getVolEndDate(),
-            generalRequestDTO.getVolStartTime(),
-            generalRequestDTO.getVolEndTime(),
+            volunteerRequestDTO.getNo(), 
+            volunteerRequestDTO.getMemberType(), 
+            volunteerRequestDTO.getTitle(), 
+            volunteerRequestDTO.getOwner().getName(), 
+            volunteerRequestDTO.getType(), 
+            volunteerRequestDTO.getTel(),
+            volunteerRequestDTO.getEmail(),
+            volunteerRequestDTO.getStartDate(),
+            volunteerRequestDTO.getEndDate(),
+            volunteerRequestDTO.getStartTime(),
+            volunteerRequestDTO.getEndTime(),
             //            personalRequestDTO.getVolList(),
-            generalRequestDTO.getVolLimitNum(),
-            generalRequestDTO.getVolContent(),
-            generalRequestDTO.getVolFileUpload(),
-            generalRequestDTO.getIsSigned()
+            volunteerRequestDTO.getLimitNum(),
+            volunteerRequestDTO.getContent(),
+            volunteerRequestDTO.getFileUpload(),
+            volunteerRequestDTO.getStatus()
             );
-      } else {
-        System.out.println();
-        System.out.println("[  현재 등록된 봉사목록이 없습니다. ]");
-        return;
-      }
+      } 
+      //      else {
+      //        System.out.println();
+      //        System.out.println("[  현재 등록된 봉사목록이 없습니다. ]");
+      //        return;
+      //      }
     }
   }
 }

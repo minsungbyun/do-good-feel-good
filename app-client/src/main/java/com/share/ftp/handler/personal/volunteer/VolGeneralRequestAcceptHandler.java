@@ -3,7 +3,7 @@ package com.share.ftp.handler.personal.volunteer;
 import static com.share.util.General.check.Applied;
 import static com.share.util.General.check.Waiting;
 import com.share.ftp.dao.VolunteerDao;
-import com.share.ftp.domain.volunteer.GeneralRequestDTO;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
@@ -26,14 +26,14 @@ public class VolGeneralRequestAcceptHandler implements Command { // 개인 봉�
     int no = Prompt.inputInt("번호 ▶ ");
     System.out.println();
 
-    GeneralRequestDTO generalRequestDTO = volunteerDao.findByVolNo(no);
+    VolunteerRequestDTO volunteerRequestDTO = volunteerDao.findByVolNo(no);
 
-    if (generalRequestDTO == null) {
+    if (volunteerRequestDTO == null) {
       System.out.println("해당 번호의 봉사신청서가 없습니다.");
       return;
     }
 
-    if(generalRequestDTO.getStatus().equals(Waiting)) {
+    if(volunteerRequestDTO.getStatus().equals(Waiting)) {
 
       String input = Prompt.inputString("정말 승인하시겠습니까?(y/N) ");
       if (!input.equals("y") || input.length() == 0) {
@@ -41,10 +41,10 @@ public class VolGeneralRequestAcceptHandler implements Command { // 개인 봉�
         return;
       }
 
-      generalRequestDTO.setStatus(Applied);
-      generalRequestDTO.addMembers(generalRequestDTO.getOwner());
+      volunteerRequestDTO.setStatus(Applied);
+      volunteerRequestDTO.addMembers(volunteerRequestDTO.getOwner());
 
-      volunteerDao.update(generalRequestDTO);
+      volunteerDao.update(volunteerRequestDTO);
 
       System.out.println("[  ✔️ 해당 봉사신청을 승인하였습니다. ]");
 

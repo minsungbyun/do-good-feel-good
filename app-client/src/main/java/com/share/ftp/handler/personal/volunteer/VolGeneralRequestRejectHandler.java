@@ -2,7 +2,7 @@ package com.share.ftp.handler.personal.volunteer;
 
 import static com.share.util.General.check.Rejected;
 import com.share.ftp.dao.VolunteerDao;
-import com.share.ftp.domain.volunteer.GeneralRequestDTO;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
@@ -23,9 +23,9 @@ public class VolGeneralRequestRejectHandler implements Command { // 개인 봉�
 
     int no = Prompt.inputInt("봉사번호 ▶ ");
 
-    GeneralRequestDTO generalRequestDTO = volunteerDao.findByVolNo(no);
+    VolunteerRequestDTO volunteerRequestDTO = volunteerDao.findByVolNo(no);
 
-    if (generalRequestDTO == null) {
+    if (volunteerRequestDTO == null) {
       System.out.println("[  해당 번호의 봉사신청서가 없습니다.  ]");
       return;
     }
@@ -37,9 +37,9 @@ public class VolGeneralRequestRejectHandler implements Command { // 개인 봉�
       return;
     }
 
-    generalRequestDTO.setStatus(Rejected);
+    volunteerRequestDTO.setStatus(Rejected);
 
-    volunteerDao.update(generalRequestDTO);
+    volunteerDao.update(volunteerRequestDTO);
 
     System.out.println("[  ✔️ 해당 봉사신청을 반려하였습니다. ]");
   }

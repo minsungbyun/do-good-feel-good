@@ -29,7 +29,7 @@ public class PersonalUserDeleteHandler implements Command {
     String userId = Prompt.inputString("아이디? ");
     String userPassword = Prompt.inputString("비밀번호? ");
 
-    PersonalDTO loginUser = personalDao.selectOneByIdPassword(userId, userPassword);
+    PersonalDTO loginUser = personalDao.findByIdPassword(userId, userPassword);
 
     if (loginUser == null) {
       System.out.println("해당 회원은 존재하지 않습니다.");

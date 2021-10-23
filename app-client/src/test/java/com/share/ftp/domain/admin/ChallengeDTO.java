@@ -8,25 +8,24 @@ import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
 
-public class ChallengeDTO implements Serializable{
+public class ChallengeDTO implements Serializable {
 
 
   private static final long serialVersionUID = 1L;
   private int no;
-  private int reviewCount;
   private int point;
   private JoinDTO admin;
   private String title;
   private String content;
   private String fileUpload;
+  private String remainTime;
   private Date registeredDate;
   private Date startDate;
   private Date endDate;
   private int viewCount;
+  private int reviewCount;
   private int questionCount;
   private int totalJoinCount;
-  private boolean isChecked;
-  private int like;
   private JoinDTO wish;
   private List<JoinDTO> members = new ArrayList<>();  // 관리자가 등록한 챌린지에 참여한 멤버
   private List<JoinDTO> reviewers = new ArrayList<>();
@@ -37,12 +36,23 @@ public class ChallengeDTO implements Serializable{
 
 
 
+
+  @Override
+  public String toString() {
+    return "ChallengeDTO [no=" + no + ", point=" + point + ", admin=" + admin + ", title=" + title
+        + ", content=" + content + ", fileUpload=" + fileUpload + ", remainTime=" + remainTime
+        + ", registeredDate=" + registeredDate + ", startDate=" + startDate + ", endDate=" + endDate
+        + ", viewCount=" + viewCount + ", reviewCount=" + reviewCount + ", questionCount="
+        + questionCount + ", totalJoinCount=" + totalJoinCount + ", wish=" + wish + ", members="
+        + members + ", reviewers=" + reviewers + "]";
+  }
   @Override
   public int hashCode() {
-    return Objects.hash(admin, content, endDate, fileUpload, isChecked, like, members, no, point,
-        questionCount, registeredDate, reviewCount, reviewers, startDate, title, totalJoinCount,
+    return Objects.hash(admin, content, endDate, fileUpload, members, no, point, questionCount,
+        registeredDate, remainTime, reviewCount, reviewers, startDate, title, totalJoinCount,
         viewCount, wish);
   }
+
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -54,34 +64,19 @@ public class ChallengeDTO implements Serializable{
     ChallengeDTO other = (ChallengeDTO) obj;
     return Objects.equals(admin, other.admin) && Objects.equals(content, other.content)
         && Objects.equals(endDate, other.endDate) && Objects.equals(fileUpload, other.fileUpload)
-        && isChecked == other.isChecked && like == other.like
         && Objects.equals(members, other.members) && no == other.no && point == other.point
         && questionCount == other.questionCount
-        && Objects.equals(registeredDate, other.registeredDate) && reviewCount == other.reviewCount
+        && Objects.equals(registeredDate, other.registeredDate)
+        && Objects.equals(remainTime, other.remainTime) && reviewCount == other.reviewCount
         && Objects.equals(reviewers, other.reviewers) && Objects.equals(startDate, other.startDate)
         && Objects.equals(title, other.title) && totalJoinCount == other.totalJoinCount
         && viewCount == other.viewCount && Objects.equals(wish, other.wish);
-  }
-  @Override
-  public String toString() {
-    return "ChallengeDTO [no=" + no + ", reviewCount=" + reviewCount + ", point=" + point
-        + ", admin=" + admin + ", title=" + title + ", content=" + content + ", fileUpload="
-        + fileUpload + ", registeredDate=" + registeredDate + ", startDate=" + startDate
-        + ", endDate=" + endDate + ", viewCount=" + viewCount + ", questionCount=" + questionCount
-        + ", totalJoinCount=" + totalJoinCount + ", isChecked=" + isChecked + ", like=" + like
-        + ", wish=" + wish + ", members=" + members + ", reviewers=" + reviewers + "]";
   }
   public JoinDTO getWish() {
     return wish;
   }
   public void setWish(JoinDTO wish) {
     this.wish = wish;
-  }
-  public int getLike() {
-    return like;
-  }
-  public void setLike(int like) {
-    this.like = like;
   }
   public int getNo() {
     return no;
@@ -208,9 +203,12 @@ public class ChallengeDTO implements Serializable{
     this.reviewers.remove(reviwer);
   }
 
-
-
-
+  public String getRemainTime() {
+    return remainTime;
+  }
+  public void setRemainTime(String remainTime) {
+    this.remainTime = remainTime;
+  }
   public String getMemberNames() {
     if (members == null) {
       return "";
@@ -224,11 +222,20 @@ public class ChallengeDTO implements Serializable{
     }
     return names.toString();
   }
-  public boolean isChecked() {
-    return isChecked;
+  public String getReviewerNames() {
+    if (reviewers == null) {
+      return "";
+    }
+    StringBuilder names = new StringBuilder();
+    for (JoinDTO joinDTO : reviewers) {
+      if (names.length() > 0) {
+        names.append("\n");
+      }
+      names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
+    }
+    return names.toString();
   }
-  public void setChecked(boolean isChecked) {
-    this.isChecked = isChecked;
-  }
+
+
 
 }

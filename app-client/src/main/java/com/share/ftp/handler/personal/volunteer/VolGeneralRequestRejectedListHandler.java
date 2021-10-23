@@ -2,7 +2,7 @@ package com.share.ftp.handler.personal.volunteer;
 
 import java.util.Collection;
 import com.share.ftp.dao.VolunteerDao;
-import com.share.ftp.domain.volunteer.GeneralRequestDTO;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 
@@ -19,14 +19,14 @@ public class VolGeneralRequestRejectedListHandler implements Command {
     System.out.println();
     System.out.println("[  봉사반려 목록  ]");
 
-    Collection<GeneralRequestDTO> list = volunteerDao.findAll();
+    Collection<VolunteerRequestDTO> list = volunteerDao.findAll();
 
     if (list.isEmpty()) {
       System.out.println("[  현재 반려된 봉사목록이 없습니다. ]");
       return;
     }
 
-    for (GeneralRequestDTO generalRequestRejectDTO : list) {
+    for (VolunteerRequestDTO generalRequestRejectDTO : list) {
       System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
           generalRequestRejectDTO.getNo(),      
           generalRequestRejectDTO.getMemberType(),      

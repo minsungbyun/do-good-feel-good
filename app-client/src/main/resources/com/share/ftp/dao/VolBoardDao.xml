@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.share.ftp.dao.ComBoardDao">
+<mapper namespace="com.share.ftp.dao.VolBoardDao">
   
   <resultMap type="CommBoardDTO" id="CommBoardDTOMap">
     <id column="vol_board_no" property="no"/> 

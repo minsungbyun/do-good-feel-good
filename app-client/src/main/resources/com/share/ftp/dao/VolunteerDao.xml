@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+  
 <mapper namespace="com.share.ftp.dao.VolunteerDao">
   
-  <resultMap type="GeneralRequestDTO" id="GeneralRequestDTOMap">
+  <resultMap type="VolunteerRequestDTO" id="VolunteerRequestDTOMap">
     <id column="vol_no" property="no"/> 
     <result column="title" property="title"/>
     <result column="content" property="content"/>
@@ -15,15 +15,13 @@
     <result column="end_dt" property="endDate"/>
     <result column="total_cnt" property="totalJoinCount"/>
     <result column="approval" property="registerDate"/>
-    <result column="note" property="postNo"/>
+   <!--  <result column="note" property="postNo"/> --> 
     
     
     
-    <result column="category_no" property="level"/>
-    <result column="user_no" property="birthdate"/>
-    <result column="note" property="postNo"/>
+   
   </resultMap>
-  
+
  <!--  
   
   <insert id="insert" parameterType="PersonalDTO"
@@ -113,8 +111,13 @@
         user_personal_no=#{personalNo}
   </update>
   
+<<<<<<< HEAD
   
   
+=======
+  -->
+  <!--  
+>>>>>>> 049453ea137d661fb81e6295f5e00704445815b2
   
   
   

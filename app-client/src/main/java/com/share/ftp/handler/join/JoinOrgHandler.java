@@ -1,7 +1,7 @@
 package com.share.ftp.handler.join;
 
 import static com.share.util.General.member.ORG;
-import static com.share.util.General.status.WAITING;
+import static com.share.util.General.status.ACTIVE;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.OrgDao;
 import com.share.ftp.domain.join.OrgDTO;
@@ -90,9 +90,14 @@ public class JoinOrgHandler implements Command {
     System.out.println();
 
     orgUser.setType(ORG);
-    orgUser.setStatus(WAITING);
+    orgUser.setStatus(ACTIVE);
 
     orgDao.insert(orgUser);
+    orgDao.insertOrg(
+        orgUser.getNo(),
+        orgUser.getCorpNo(),
+        orgUser.getFax(),
+        orgUser.getHomepage());
     sqlSession.commit();
 
     System.out.println("happyshare 가입을 환영합니다.");

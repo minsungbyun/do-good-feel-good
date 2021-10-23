@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.Objects;
 
 
-public abstract class JoinDTO {
+public class JoinDTO {
 
 
   private int no;

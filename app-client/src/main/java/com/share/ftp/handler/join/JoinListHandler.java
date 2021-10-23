@@ -1,18 +1,18 @@
 package com.share.ftp.handler.join;
 
 import java.util.Collection;
-import com.share.ftp.dao.PersonalDao;
+import com.share.ftp.dao.GroupDao;
+import com.share.ftp.domain.join.GroupDTO;
 import com.share.ftp.domain.join.JoinDTO;
-import com.share.ftp.domain.join.PersonalDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 
 public class JoinListHandler implements Command {
 
-  PersonalDao personalDao;
+  GroupDao groupDao;
 
-  public JoinListHandler(PersonalDao personalDao) {
-    this.personalDao = personalDao;
+  public JoinListHandler(GroupDao groupDao) {
+    this.groupDao = groupDao;
 
   }
 
@@ -20,7 +20,7 @@ public class JoinListHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
 
-    Collection<PersonalDTO> list = joinDao.findAll();
+    Collection<GroupDTO> list = groupDao.findAllGroup();
 
     System.out.println();
     System.out.println("[ 회원 목록 ]");

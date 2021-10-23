@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.share.ftp.dao.JoinDao">
+  
+  <resultMap type="JoinDTO" id="JoinDTOMap">
+    <id column="user_no" property="no"/> 
+    <result column="user_no" property="no"/>
+    <result column="id" property="id"/>
+    <result column="password" property="password"/>
+    <result column="name" property="name"/>
+    <result column="tel" property="tel"/>
+    <result column="email" property="email"/>
+    <result column="created_dt" property="registerDate"/>
+    <result column="post_no" property="postNo"/>
+    <result column="basic_address" property="basicAddress"/>
+    <result column="detail_address" property="detailAddress"/>
+    <result column="donation" property="donationMoney"/>
+    <result column="type" property="type"/>
+    <result column="status" property="status"/>
+    <result column="note" property="note"/>
+  <!--    <result column="last_login" property="viewCount"/>-->
+  </resultMap>
+  
+  
+  <select id="findAll" resultMap="JoinDTOMap">
+	   select 
+       u.*
+     from
+       ftp_user u
+     order by
+       user_no desc
+  </select>
+  
+  <select id="findByIdPassword" resultMap="JoinDTOMap">
+    select 
+       u.* 
+     from
+       ftp_user u
+    where 
+      id=#{userId} and password=password(#{userPassword})
+  </select>
+  
+  <select id="findByType" resultMap="JoinDTOMap" parameterType="string">
+    select 
+       u.type
+     from
+       ftp_user u      
+    where 
+      id=#{userId}
+  </select>
+  
+  
+  
+   <!-- 
+   <update id="deletePersonal" parameterType="PersonalDTO">
+      update ftp_user_personal set
+	      birthdate=#{birthdate},
+	      rank=#{level},
+	      point=#{point}
+      where 
+        user_personal_no=#{personalNo}
+  </update>
+  
+  
+  
+  <select id="findByKeyword" resultMap="NoticeDTOMap" parameterType="string">
+     select 
+       notice_no,
+       title,   
+       created_dt,
+       view_cnt
+    from
+     ftp_support_notice
+     <where>
+      <if test="title != null">
+         title like concat('%', #{value}, '%')
+      </if>
+      <if test="content != null">
+         or content like concat('%', #{value}, '%') 
+      </if>
+     </where>
+     order by notice_no desc
+  </select>
+ 
+  
+  <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
+    select 
+      member_no,
+      name,
+      email,
+      photo,
+      tel,
+      created_dt 
+    from 
+      pms_member
+    where 
+      email=#{email} and password=password(#{password})
+  </select>
+  
+  <select id="findByName" resultMap="MemberMap" parameterType="string">
+    select 
+      member_no,
+      name,
+      email,
+      photo,
+      tel,
+      created_dt 
+    from 
+      pms_member
+    where 
+      name=#{value}
+  </select>
+  -->
+</mapper>
+
+
+
+
+
+
+

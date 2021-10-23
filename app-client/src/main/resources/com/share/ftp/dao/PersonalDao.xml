@@ -12,7 +12,7 @@
     <result column="point" property="point"/>
     
     <result column="user_no" property="no"/>
-    <result column="id  " property="id"/>
+    <result column="id" property="id"/>
     <result column="password" property="password"/>
     <result column="name" property="name"/>
     <result column="tel" property="tel"/>
@@ -36,7 +36,7 @@
     values(#{id},password(#{password}),#{name},#{tel},#{email},#{postNo},#{basicAddress},#{detailAddress},#{type},#{status})
   </insert>
   
-  <insert id="insertPersonal" parameterType="map">
+  <insert id="insertPersonal">
     insert into ftp_user_personal(user_no,birthdate,rank)
     values(#{userNo},#{userBirthdate},#{userLevel})
   </insert>
@@ -119,25 +119,6 @@
   
   
   <!--  
-  
-  
-  
-  
-  <select id="findByNoticeNo" resultMap="NoticeDTOMap" parameterType="int">
-     select 
-     notice_no,
-     title,
-     content,
-     created_dt,
-     view_cnt
-    from
-     ftp_support_notice
-    where 
-      notice_no=#{values}
-  </select>
-  
-  
-  
   <select id="findByKeyword" resultMap="NoticeDTOMap" parameterType="string">
      select 
        notice_no,
@@ -156,10 +137,6 @@
      </where>
      order by notice_no desc
   </select>
-  
-  
-
- 
  
   
   <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">

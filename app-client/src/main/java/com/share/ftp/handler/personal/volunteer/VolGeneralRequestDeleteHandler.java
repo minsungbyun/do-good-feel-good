@@ -2,7 +2,7 @@ package com.share.ftp.handler.personal.volunteer;
 
 import java.util.Collection;
 import com.share.ftp.dao.VolunteerDao;
-import com.share.ftp.domain.volunteer.GeneralRequestDTO;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -22,15 +22,15 @@ public class VolGeneralRequestDeleteHandler implements Command { // 개인 봉�
     System.out.println("[  봉사신청서 삭제  ]");
     System.out.println();
 
-    Collection<GeneralRequestDTO> list = volunteerDao.findAll();
+    Collection<VolunteerRequestDTO> list = volunteerDao.findAll();
 
     if (list.isEmpty()) {
       System.out.println("봉사 신청서가 없습니다.");
       return;
     }
 
-    for (GeneralRequestDTO generalRequestDTO : list) {
-      if (generalRequestDTO.getOwner().getName().equals(AuthLoginHandler.getLoginUser().getName())) {
+    for (VolunteerRequestDTO volunteerRequestDTO : list) {
+      if (volunteerRequestDTO.getOwner().getName().equals(AuthLoginHandler.getLoginUser().getName())) {
         System.out.println("봉사신청서가 없습니다.");
         return;
       }
@@ -45,14 +45,14 @@ public class VolGeneralRequestDeleteHandler implements Command { // 개인 봉�
     //    }
 
     int volNo = Prompt.inputInt("삭제 할 봉사번호? ");
-    GeneralRequestDTO generalRequestDTO = volunteerDao.findByVolNo(volNo);
+    VolunteerRequestDTO volunteerRequestDTO = volunteerDao.findByVolNo(volNo);
 
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
     if (!input.equals("y") || input.length() == 0) {
       System.out.println("[  해당 봉사신청 삭제를 취소하였습니다.  ]");
       return;
     }
-    volunteerDao.delete(generalRequestDTO);
+    volunteerDao.delete(volunteerRequestDTO);
 
     //    list.remove(generalRequestDTO);
     //    if (generalRequestDTO.getStatus().equals("승인됨")) {

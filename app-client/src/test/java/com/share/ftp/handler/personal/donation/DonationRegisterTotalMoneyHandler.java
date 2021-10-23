@@ -1,13 +1,16 @@
 package com.share.ftp.handler.personal.donation;
 
-import java.util.List;
-import com.share.ftp.domain.personal.DonationRegisterDTO;
+import com.share.ftp.dao.DonationRegisterDao;
+import com.share.ftp.domain.donation.DonationRegisterDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 
-public class DonationRegisterTotalMoneyHandler extends AbstractDonationRegisterHandler {
+public class DonationRegisterTotalMoneyHandler implements Command {
 
-  public DonationRegisterTotalMoneyHandler(List<DonationRegisterDTO> donationRegisterDTOList) {
-    super(donationRegisterDTOList);
+  DonationRegisterDao donationRegisterDao;
+
+  public DonationRegisterTotalMoneyHandler(DonationRegisterDao donationRegisterDao) {
+    this.donationRegisterDao = donationRegisterDao;
   }
 
   @Override

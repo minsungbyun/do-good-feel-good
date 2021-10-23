@@ -1,70 +1,64 @@
 package com.share.ftp.handler.personal.challenge;
 
-import java.util.List;
-import com.share.ftp.domain.admin.ChallengeDTO;
-import com.share.ftp.domain.personal.ChallengeQuestionDTO;
+import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class ChallengeQuestionUpdateHandler extends AbstractChallengeQuestionHandler {
+public class ChallengeQuestionUpdateHandler implements Command {
 
+  ChallengeDao challengeDao;
 
-  public ChallengeQuestionUpdateHandler(List<ChallengeQuestionDTO> challengeQuestionDTOList,
-      List<ChallengeDTO> challengeDTOList, List<ChallengeQuestionDTO> challengeReplyList) {
-    super(challengeQuestionDTOList, challengeDTOList, challengeReplyList);
+  public ChallengeQuestionUpdateHandler(ChallengeDao challengeDao) {
+    this.challengeDao = challengeDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
+
+    System.out.println("[ 문의 수정 ]");
+    System.out.println();
+    int challengeNo = (int) request.getAttribute("challengeNo");
+
+    int challengeQuestionNo = (int) request.getAttribute("challengeQuestionNo");
+
+    ChallengeQuestionDTO challengeQuestion = challengeDao.findByChallengeQuestionNo(challengeNo, challengeQuestionNo);
+
+    if (challengeQuestion == null) {
+      System.out.println("해당 번호의 문의가 없습니다.");
+      return;
+    }
+
+    if ((challengeQuestion.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
+        AuthLoginHandler.getLoginUser().getId().equals("admin")) {
+    } else {
+      System.out.println("변경 권한이 없습니다.");
+      return;
+    }
+
+    String content = Prompt.inputString(String.format("내용(%s)? ", challengeQuestion.getContent()));
+
     while (true) {
-      System.out.println("[ 문의 수정 ]");
-      System.out.println();
-      int challengeNo = (int) request.getAttribute("no");
+      String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
 
-      ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
+      if (input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println("문의 수정을 취소하였습니다.");
+        return;
 
+      } else if (input.equals("y")) {
+        System.out.println();
+        challengeQuestion.setContent(content);
+        challengeDao.updateQuestion(challengeQuestion);
 
-      if (challengeDTO == null) {
-        System.out.println("존재하지 않는 챌린지입니다");
-      }
+        System.out.println("문의를 수정하였습니다.");
+        return;
 
-      int updateNo = (int) request.getAttribute("questionNo");
+      } else {
+        System.out.println("y 또는 n을 입력하세요.");
 
-      ChallengeQuestionDTO challengeQuestion = findByQuestionNo(updateNo);
-
-      try {
-        if (challengeQuestion == null) {
-          System.out.println("해당 번호의 문의가 없습니다.");
-          return;
-        }
-
-        if ((challengeQuestion.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
-            AuthLoginHandler.getLoginUser().getId().equals("admin")) {
-        } else {
-          System.out.println("변경 권한이 없습니다.");
-          return;
-        }
-
-        String title = Prompt.inputString(String.format("제목(%s)? ", challengeQuestion.getTitle()));
-        String content = Prompt.inputString(String.format("내용(%s)? ", challengeQuestion.getContent()));
-
-        String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
-        if (input.equalsIgnoreCase("n") || input.length() == 0) {
-          System.out.println("문의 수정을 취소하였습니다.");
-          return;
-        } else if (input.equals("y")) {
-          System.out.println("문의를 수정하였습니다.");
-          challengeQuestion.setTitle(title);
-          challengeQuestion.setContent(content);
-          return;
-        } else {
-          System.out.println("y 또는 n을 입력하세요.");
-          continue;
-        } 
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
+      } 
     }
   }
 }

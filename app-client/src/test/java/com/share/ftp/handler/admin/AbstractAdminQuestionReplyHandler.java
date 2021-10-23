@@ -4,7 +4,7 @@ import com.share.ftp.handler.Command;
 
 public abstract class AbstractAdminQuestionReplyHandler implements Command {
 
-  // 에러나서 주석 막아놓음!
+  // 에러나서 주석 막아놓음! 이게 왜 있지? -정욱-
 
   //  protected List<QuestionDTO> questionDTOList;
   //

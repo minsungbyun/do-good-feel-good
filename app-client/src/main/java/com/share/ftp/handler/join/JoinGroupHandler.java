@@ -1,7 +1,7 @@
 package com.share.ftp.handler.join;
 
 import static com.share.util.General.member.GROUP;
-import static com.share.util.General.status.WAITING;
+import static com.share.util.General.status.ACTIVE;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.GroupDao;
 import com.share.ftp.domain.join.GroupDTO;
@@ -86,9 +86,11 @@ public class JoinGroupHandler implements Command {
     System.out.println();
 
     groupUser.setType(GROUP);
-    groupUser.setStatus(WAITING);
+    groupUser.setStatus(ACTIVE);
 
     groupDao.insert(groupUser);
+    groupDao.insertGroup(
+        groupUser.getNo(), groupUser.getGroupCount());
     sqlSession.commit();
 
     System.out.println("happyshare 가입을 환영합니다.");

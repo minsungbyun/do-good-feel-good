@@ -1,34 +1,38 @@
 package com.share.ftp.handler.personal.donation;
 
+import static com.share.ftp.handler.personal.donation.DonationBoardHandlerHelper.getRemainTime;
 import static com.share.util.General.check.Applied;
 import java.text.DecimalFormat;
-import java.util.List;
-import com.share.ftp.domain.personal.DonationBoardDTO;
+import java.util.Collection;
+import com.share.ftp.dao.DonationBoardDao;
+import com.share.ftp.domain.donation.DonationBoardDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 
-public class DonationBoardListHandler extends AbstractDonationBoardHandler {
+public class DonationBoardListHandler implements Command {
 
+  DonationBoardDao donationBoardDao;
 
-  public DonationBoardListHandler(
-      List<DonationBoardDTO> donationBoardDTOList) {
-
-    super(donationBoardDTOList);
+  public DonationBoardListHandler(DonationBoardDao donationBoardDao) {
+    this.donationBoardDao = donationBoardDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     DecimalFormat formatter = new DecimalFormat("###,###,###");
 
+    Collection<DonationBoardDTO> donationBoardList = donationBoardDao.findAll();
+
 
     System.out.println();
     System.out.println("[모금함 승인 목록]");
 
-    if (donationBoardDTOList.isEmpty()) {
+    if (donationBoardList.isEmpty()) {
       System.out.println("[ 현재 승인된 모금함 개설목록이 없습니다. ]");
       return;
     }
 
-    for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
+    for (DonationBoardDTO donationBoardDTO : donationBoardList) {
       if (donationBoardDTO.getIsSigned().equals(Applied)) {
         System.out.printf("개설번호: %d\n모금함 분류: %s\n제목: %s\n주최자: %s\n"
             + "개설기간: %s ~ %s\n목표금액: %s원\n승인여부: %s\n",
