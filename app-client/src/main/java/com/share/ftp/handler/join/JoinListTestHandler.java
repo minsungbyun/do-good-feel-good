@@ -19,7 +19,7 @@ public class JoinListTestHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
 
-    Collection<PersonalDTO> list = personalDao.findAll();
+    Collection<PersonalDTO> list = personalDao.findAllPersonal();
 
     System.out.println();
     System.out.println("[ 회원 목록 ]");

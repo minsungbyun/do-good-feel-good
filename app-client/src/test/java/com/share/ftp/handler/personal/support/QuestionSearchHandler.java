@@ -1,14 +1,18 @@
 package com.share.ftp.handler.personal.support;
 
-import java.util.List;
-import com.share.ftp.domain.personal.QuestionListDTO;
+import java.util.Collection;
+import com.share.ftp.dao.QuestionDao;
+import com.share.ftp.domain.support.QuestionListDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
-public class QuestionSearchHandler extends AbstractQuestionHandler {
+public class QuestionSearchHandler implements Command {
 
-  public QuestionSearchHandler(List<QuestionListDTO> myQuestionListDTOList) {
-    super(myQuestionListDTOList);
+  QuestionDao questionDao;
+
+  public QuestionSearchHandler(QuestionDao questionDao) {
+    this.questionDao = questionDao;
   }
 
   @Override
@@ -17,18 +21,25 @@ public class QuestionSearchHandler extends AbstractQuestionHandler {
 
     String input = Prompt.inputString("검색어? ");
 
-    for (QuestionListDTO myQuestionListDTO : myQuestionListDTOList) {
-      if (!myQuestionListDTO.getTitle().contains(input) &&
-          !myQuestionListDTO.getContent().contains(input) &&
-          !myQuestionListDTO.getOwner().getId().contains(input)) {
+    Collection<QuestionListDTO> questionList = questionDao.findByKeyword(input);
+
+    if (questionList.isEmpty()) {
+      System.out.println();
+      System.out.println("검색된 게시글이 없습니다.");
+    }
+
+    for (QuestionListDTO questionListDTO : questionList) {
+      if (!questionListDTO.getTitle().contains(input) &&
+          !questionListDTO.getContent().contains(input) &&
+          !questionListDTO.getOwner().getId().contains(input)) {
         continue;
       }
       System.out.printf("%d, %s, %s, %s, %d\n", 
-          myQuestionListDTO.getNo(), 
-          myQuestionListDTO.getTitle(), 
-          myQuestionListDTO.getOwner().getId(),
-          myQuestionListDTO.getRegisteredDate(),
-          myQuestionListDTO.getViewCount()); 
+          questionListDTO.getNo(), 
+          questionListDTO.getTitle(), 
+          questionListDTO.getOwner().getId(),
+          questionListDTO.getRegisteredDate(),
+          questionListDTO.getViewCount()); 
     }
   }
 }

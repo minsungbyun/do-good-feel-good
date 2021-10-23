@@ -2,7 +2,7 @@ package com.share.ftp.handler.personal.volunteer;
 
 import java.util.Collection;
 import com.share.ftp.dao.VolunteerDao;
-import com.share.ftp.domain.volunteer.GeneralRequestDTO;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -23,7 +23,7 @@ public class VolGeneralDoJoinDeleteHandler implements Command { // 개인 봉사
     System.out.println();
     System.out.println("[  봉사 참여 취소하기  ]");
 
-    Collection<GeneralRequestDTO> list = volunteerDao.findAll();
+    Collection<VolunteerRequestDTO> list = volunteerDao.findAll();
 
     if (list.isEmpty()) {
       System.out.println("봉사 신청서가 없습니다.");
@@ -41,7 +41,7 @@ public class VolGeneralDoJoinDeleteHandler implements Command { // 개인 봉사
 
     int volNo = Prompt.inputInt("봉사번호? ");
 
-    GeneralRequestDTO rejectVolNo = volunteerDao.findByApplyVol(volNo);
+    VolunteerRequestDTO rejectVolNo = volunteerDao.findByApplyVol(volNo);
 
     if (rejectVolNo == null) {
       System.out.println("[  해당 번호의 봉사가 없습니다.  ]");

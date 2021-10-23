@@ -1,19 +1,19 @@
 package com.share.ftp.handler.personal.volunteer;
 
-import java.util.List;
-import com.share.ftp.domain.personal.GeneralRequestDTO;
+import java.util.Collection;
+import com.share.ftp.dao.VolunteerDao;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class VolGeneralDoJoinDeleteHandler extends AbstractVolGeneralHandler { // 개인 봉사신청 양식 쓰는 곳
+public class VolGeneralDoJoinDeleteHandler implements Command { // 개인 봉사신청 양식 쓰는 곳
 
-  public VolGeneralDoJoinDeleteHandler(
-      List<GeneralRequestDTO> generalRequestDTOList,
-      List<GeneralRequestDTO> generalRequestApplyDTOList,
-      List<GeneralRequestDTO> generalRequestRejectDTOList) {
+  VolunteerDao volunteerDao;
 
-    super(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList);
+  public VolGeneralDoJoinDeleteHandler(VolunteerDao volunteerDao) {
+    this.volunteerDao = volunteerDao;
   }
 
 
@@ -23,23 +23,25 @@ public class VolGeneralDoJoinDeleteHandler extends AbstractVolGeneralHandler { /
     System.out.println();
     System.out.println("[  봉사 참여 취소하기  ]");
 
-    if (generalRequestApplyDTOList.isEmpty()) {
+    Collection<VolunteerRequestDTO> list = volunteerDao.findAll();
+
+    if (list.isEmpty()) {
       System.out.println("봉사 신청서가 없습니다.");
       return;
     }
 
-    for (int i = 0; i < generalRequestApplyDTOList.size(); i++) {
-
-      if (!generalRequestApplyDTOList.get(i).getOwner().getName().equals(AuthLoginHandler.getLoginUser().getName())) {
-        System.out.println("봉사신청서가 없습니다.");
-        return;
-      }
-    }
+    //    for (int i = 0; i < list.size(); i++) {
+    //
+    //      if (!list.get(i).getOwner().getName().equals(AuthLoginHandler.getLoginUser().getName())) {
+    //        System.out.println("봉사신청서가 없습니다.");
+    //        return;
+    //      }
+    //    }
 
 
     int volNo = Prompt.inputInt("봉사번호? ");
 
-    GeneralRequestDTO rejectVolNo = findByApplyVol(volNo);
+    VolunteerRequestDTO rejectVolNo = volunteerDao.findByApplyVol(volNo);
 
     if (rejectVolNo == null) {
       System.out.println("[  해당 번호의 봉사가 없습니다.  ]");
@@ -57,6 +59,7 @@ public class VolGeneralDoJoinDeleteHandler extends AbstractVolGeneralHandler { /
     int count = rejectVolNo.getTotalJoinCount();
     count -= 1;
     rejectVolNo.setTotalJoinCount(count); 
+    volunteerDao.update(rejectVolNo);
 
     System.out.println("[  ✔️ 해당 봉사신청을 취소하였습니다. ]");
   }

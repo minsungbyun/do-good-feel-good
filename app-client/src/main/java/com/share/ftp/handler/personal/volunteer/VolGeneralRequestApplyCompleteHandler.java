@@ -2,7 +2,7 @@ package com.share.ftp.handler.personal.volunteer;
 
 import java.util.Collection;
 import com.share.ftp.dao.VolunteerDao;
-import com.share.ftp.domain.volunteer.GeneralRequestDTO;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 
@@ -22,14 +22,14 @@ public class VolGeneralRequestApplyCompleteHandler implements Command { // 개�
     System.out.println("[  나의 봉사 신청서 목록  ]");
     System.out.println();
 
-    Collection<GeneralRequestDTO> list = volunteerDao.findAll();
+    Collection<VolunteerRequestDTO> list = volunteerDao.findAll();
 
     if (list.isEmpty()) {
       System.out.println("[  현재 등록된 봉사목록이 없습니다. ]");
       return;
     }
 
-    for (GeneralRequestDTO generalRequestDTO : list) {
+    for (VolunteerRequestDTO volunteerRequestDTO : list) {
       System.out.printf("번호: %d\n"
           + "봉사제목: %s\n"
           + "주최자: %s\n"
@@ -46,22 +46,22 @@ public class VolGeneralRequestApplyCompleteHandler implements Command { // 개�
           + "첨부파일: %s\n"
           + "승인여부: %s \n\n", 
 
-          generalRequestDTO.getNo(), 
-          generalRequestDTO.getTitle(), 
-          generalRequestDTO.getOwner().getName(), 
-          generalRequestDTO.getType(), 
-          generalRequestDTO.getTel(),
-          generalRequestDTO.getEmail(),
-          generalRequestDTO.getStartDate(),
-          generalRequestDTO.getEndDate(),
-          generalRequestDTO.getStartTime(),
-          generalRequestDTO.getEndTime(),
+          volunteerRequestDTO.getNo(), 
+          volunteerRequestDTO.getTitle(), 
+          volunteerRequestDTO.getOwner().getName(), 
+          volunteerRequestDTO.getType(), 
+          volunteerRequestDTO.getTel(),
+          volunteerRequestDTO.getEmail(),
+          volunteerRequestDTO.getStartDate(),
+          volunteerRequestDTO.getEndDate(),
+          volunteerRequestDTO.getStartTime(),
+          volunteerRequestDTO.getEndTime(),
           //          personalRequestDTO.getVolList(),
-          generalRequestDTO.getLimitNum(),
-          generalRequestDTO.getContent(),
-          generalRequestDTO.getFileUpload(),
+          volunteerRequestDTO.getLimitNum(),
+          volunteerRequestDTO.getContent(),
+          volunteerRequestDTO.getFileUpload(),
           //          personalRequestDTO.isChecked(),
-          generalRequestDTO.getStatus()
+          volunteerRequestDTO.getStatus()
           );
     }
   }

@@ -2,7 +2,7 @@ package com.share.ftp.handler.personal.volunteer;
 
 import static com.share.util.General.point.VOLUNTEER_POINT;
 import com.share.ftp.dao.VolunteerDao;
-import com.share.ftp.domain.volunteer.GeneralRequestDTO;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -26,7 +26,7 @@ public class VolGeneralDoJoinHandler implements Command {
     System.out.println();
     int volNo = (int) request.getAttribute("volNo");
 
-    GeneralRequestDTO generalRequestApplyDTO = volunteerDao.findByApplyVol(volNo);
+    VolunteerRequestDTO generalRequestApplyDTO = volunteerDao.findByApplyVol(volNo);
 
 
     System.out.printf("봉사번호: %d\n"

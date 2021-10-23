@@ -9,7 +9,7 @@ import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.join.GroupDTO;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.join.OrgDTO;
-import com.share.ftp.domain.volunteer.GeneralRequestDTO;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -43,7 +43,7 @@ public class VolGeneralRequestApplyHandler implements Command { // 개인 봉사
     while (true) {
       try {
 
-        GeneralRequestDTO generalRequestDTO = new GeneralRequestDTO();
+        VolunteerRequestDTO volunteerRequestDTO = new VolunteerRequestDTO();
 
         while (true) {
           System.out.println(" ▶ 번호를 선택해주세요");
@@ -55,12 +55,12 @@ public class VolGeneralRequestApplyHandler implements Command { // 개인 봉사
           int num = Prompt.inputInt("번호입력 ▶ ");
 
           switch (num) {
-            case 1: generalRequestDTO.setMemberType(GROUP);             break;
-            case 2: generalRequestDTO.setMemberType(ORG);               break;
+            case 1: volunteerRequestDTO.setMemberType(GROUP);             break;
+            case 2: volunteerRequestDTO.setMemberType(ORG);               break;
             default: System.out.println("올바를 숫자를 입력해주세요."); continue;
           }
 
-          if (AuthLoginHandler.getLoginUser().getType() != generalRequestDTO.getMemberType()) {
+          if (AuthLoginHandler.getLoginUser().getType() != volunteerRequestDTO.getMemberType()) {
             System.out.println("당신은 해당 유형봉사를 신청 할 수 없습니다.");
             System.out.println("단체회원인지 기관회원인지 확인하세요!");
             continue;
@@ -69,31 +69,31 @@ public class VolGeneralRequestApplyHandler implements Command { // 개인 봉사
         }
 
 
-        generalRequestDTO.setTitle(Prompt.inputString("제목 ▶ "));
+        volunteerRequestDTO.setTitle(Prompt.inputString("제목 ▶ "));
 
-        if (generalRequestDTO.getMemberType() == GROUP) {
+        if (volunteerRequestDTO.getMemberType() == GROUP) {
           GroupDTO groupUser = (GroupDTO) joinDTO;
-          generalRequestDTO.setOwner(groupUser);
+          volunteerRequestDTO.setOwner(groupUser);
 
-        } else if (generalRequestDTO.getMemberType() == ORG) {
+        } else if (volunteerRequestDTO.getMemberType() == ORG) {
           OrgDTO orgUser = (OrgDTO) joinDTO;
-          generalRequestDTO.setOwner(orgUser);
+          volunteerRequestDTO.setOwner(orgUser);
         }
 
-        generalRequestDTO.setType(new GeneralHelper(generalDao).promptCategory());
-        generalRequestDTO.setTel(Prompt.inputString("전화번호 ▶ "));
-        generalRequestDTO.setEmail(Prompt.inputString("이메일 ▶ ")); 
-        generalRequestDTO.setStartDate(Prompt.inputDate("봉사시작기간(yyyy-mm-dd) ▶ "));
-        generalRequestDTO.setEndDate(Prompt.inputDate("봉사종료기간(yyyy-mm-dd) ▶ ")); 
-        generalRequestDTO.setStartTime(Prompt.inputString("봉사시작시간 ▶ ")); 
-        generalRequestDTO.setEndTime(Prompt.inputString("봉사종료시간 ▶ ")); 
+        volunteerRequestDTO.setType(new GeneralHelper(generalDao).promptCategory());
+        volunteerRequestDTO.setTel(Prompt.inputString("전화번호 ▶ "));
+        volunteerRequestDTO.setEmail(Prompt.inputString("이메일 ▶ ")); 
+        volunteerRequestDTO.setStartDate(Prompt.inputDate("봉사시작기간(yyyy-mm-dd) ▶ "));
+        volunteerRequestDTO.setEndDate(Prompt.inputDate("봉사종료기간(yyyy-mm-dd) ▶ ")); 
+        volunteerRequestDTO.setStartTime(Prompt.inputString("봉사시작시간 ▶ ")); 
+        volunteerRequestDTO.setEndTime(Prompt.inputString("봉사종료시간 ▶ ")); 
         //        personalRequestDTO.setVolList(Prompt.inputString("봉사목록 ▶ ")); 
-        generalRequestDTO.setLimitNum(Prompt.inputInt("봉사인원 ▶ "));
-        generalRequestDTO.setContent(Prompt.inputString("내용 ▶ ")); 
-        generalRequestDTO.setFileUpload(Prompt.inputString("파일 ▶ ")); 
-        generalRequestDTO.setStatus(Waiting);
+        volunteerRequestDTO.setLimitNum(Prompt.inputInt("봉사인원 ▶ "));
+        volunteerRequestDTO.setContent(Prompt.inputString("내용 ▶ ")); 
+        volunteerRequestDTO.setFileUpload(Prompt.inputString("파일 ▶ ")); 
+        volunteerRequestDTO.setStatus(Waiting);
 
-        volunteerDao.insert(generalRequestDTO);
+        volunteerDao.insert(volunteerRequestDTO);
         sqlSession.commit();
 
 

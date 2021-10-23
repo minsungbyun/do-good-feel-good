@@ -1,30 +1,42 @@
 package com.share.ftp.handler.personal.support;
 
-import java.util.List;
-import com.share.ftp.domain.personal.QuestionListDTO;
+import java.util.Collection;
+import com.share.ftp.dao.QuestionDao;
+import com.share.ftp.domain.support.QuestionListDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 
-public class QuestionListHandler extends AbstractQuestionHandler {
+public class QuestionListHandler implements Command {
 
-  public QuestionListHandler(List<QuestionListDTO> myQuestionListDTOList) {
-    super (myQuestionListDTOList);
+  QuestionDao questionDao;
+
+  public QuestionListHandler(QuestionDao questionDao) {
+    this.questionDao = questionDao;
   }
 
+  @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("[고객센터/문의하기/문의하기 목록]");
 
-    for (QuestionListDTO myQuestionListDTO : myQuestionListDTOList) {
+    Collection<QuestionListDTO> questionList = questionDao.findAll();
+
+    if (questionList.isEmpty()) {
+      System.out.println("게시글이 없습니다.");
+      System.out.println();
+    }
+
+    for (QuestionListDTO questionListDTO : questionList) {
 
       System.out.printf("%d, %s, %s, %s, %s, %d\n", 
-          myQuestionListDTO.getNo(),
-          myQuestionListDTO.getQnaType(),
-          myQuestionListDTO.getTitle(), 
+          questionListDTO.getNo(),
+          questionListDTO.getQnaType(),
+          questionListDTO.getTitle(), 
           //          myQuestionListDTO.getContent(),
-          myQuestionListDTO.getOwner().getId(),
+          questionListDTO.getOwner().getId(),
           //          myQuestionListDTO.getFileUpload(),
-          myQuestionListDTO.getRegisteredDate(),
-          myQuestionListDTO.getViewCount());
+          questionListDTO.getRegisteredDate(),
+          questionListDTO.getViewCount());
     }
   }
 

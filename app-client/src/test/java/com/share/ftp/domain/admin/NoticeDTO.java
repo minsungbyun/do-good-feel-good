@@ -17,11 +17,9 @@ public class NoticeDTO implements Serializable{
   private Date registeredDate;
   private int viewCount;
 
-
   @Override
   public int hashCode() {
-    return Objects.hash(admin, adminId, no, content, fileUpload, registeredDate, title,
-        viewCount);
+    return Objects.hash(admin, adminId, content, fileUpload, no, registeredDate, title, viewCount);
   }
   @Override
   public boolean equals(Object obj) {
@@ -33,16 +31,15 @@ public class NoticeDTO implements Serializable{
       return false;
     NoticeDTO other = (NoticeDTO) obj;
     return Objects.equals(admin, other.admin) && Objects.equals(adminId, other.adminId)
-        && no == other.no && Objects.equals(content, other.content)
-        && Objects.equals(fileUpload, other.fileUpload)
-        && Objects.equals(registeredDate, other.registeredDate)
+        && Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
+        && no == other.no && Objects.equals(registeredDate, other.registeredDate)
         && Objects.equals(title, other.title) && viewCount == other.viewCount;
   }
   @Override
   public String toString() {
-    return "NoticeDTO [no=" + no + ", adminId=" + adminId + ", title=" + title
-        + ", content=" + content + ", admin=" + admin + ", fileUpload=" + fileUpload
-        + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount + "]";
+    return "NoticeDTO [no=" + no + ", adminId=" + adminId + ", title=" + title + ", content="
+        + content + ", admin=" + admin + ", fileUpload=" + fileUpload + ", registeredDate="
+        + registeredDate + ", viewCount=" + viewCount + "]";
   }
   public int getNo() {
     return no;
@@ -92,6 +89,10 @@ public class NoticeDTO implements Serializable{
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
+  public static long getSerialversionuid() {
+    return serialVersionUID;
+  }
+
 
 
 }

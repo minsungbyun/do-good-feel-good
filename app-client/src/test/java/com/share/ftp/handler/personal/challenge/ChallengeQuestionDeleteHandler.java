@@ -1,67 +1,60 @@
 package com.share.ftp.handler.personal.challenge;
 
-import java.util.List;
+import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
-import com.share.ftp.domain.personal.ChallengeQuestionDTO;
+import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class ChallengeQuestionDeleteHandler extends AbstractChallengeQuestionHandler {
+public class ChallengeQuestionDeleteHandler implements Command {
 
+  ChallengeDao challengeDao;
 
-  public ChallengeQuestionDeleteHandler(List<ChallengeQuestionDTO> challengeQuestionDTOList,
-      List<ChallengeDTO> challengeDTOList, List<ChallengeQuestionDTO> challengeReplyList) {
-    super(challengeQuestionDTOList, challengeDTOList, challengeReplyList);
+  public ChallengeQuestionDeleteHandler(ChallengeDao challengeDao) {
+    this.challengeDao = challengeDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    while (true) {
-      System.out.println("[ 문의 삭제 ]");
-      System.out.println();
 
-      int challengeNo = (int) request.getAttribute("no");
-      System.out.println();
+    System.out.println("[ 문의 삭제 ]");
+    System.out.println();
 
-      ChallengeDTO challengeList = findByChallengeNo(challengeNo); 
+    int challengeNo = (int) request.getAttribute("challengeNo");
 
-      if (challengeList == null) {
-        System.out.println("해당 챌린지가 없습니다.");
-        return;
-      }
+    ChallengeDTO challenge = challengeDao.findByChallengeNo(challengeNo); 
 
-      int deleteNo = (int) request.getAttribute("questionNo");
+    int challengeQuestionNo = (int) request.getAttribute("challengeQuestionNo");
 
-      ChallengeQuestionDTO challengeQuestion = findByQuestionNo(deleteNo);
+    ChallengeQuestionDTO deleteChallengeQuestion = challengeDao.findByChallengeQuestionNo(challengeNo, challengeQuestionNo);
 
-      try {
-        if (challengeQuestion == null) {
-          System.out.println("해당 번호의 문의가 없습니다.");
-          return;
-        }
+    if (deleteChallengeQuestion == null) {
+      System.out.println("해당 번호의 문의가 없습니다.");
+      return;
+    }
 
-        if (!challengeQuestion.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
-          System.out.println("삭제 권한이 없습니다.");
-          return;
-        }
+    if ((deleteChallengeQuestion.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
+        AuthLoginHandler.getLoginUser().getId().equals("admin")) {
+    } else {
+      System.out.println("삭제 권한이 없습니다.");
+      return;
+    }
 
-        String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
-        if (input.equalsIgnoreCase("n") || input.length() == 0) {
-          System.out.println("문의 삭제를 취소하였습니다.");
-          return;
-        } else if (input.equals("y")) {
-          System.out.println("참여인증&댓글을 삭제하였습니다.");
-          challengeQuestionDTOList.remove(challengeQuestion);
-          return;
-        } else {
-          System.out.println("y 또는 n을 입력하세요.");
-          continue;
-        } 
-      } catch (Exception e) {
-        e.printStackTrace();
+    String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
+    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      System.out.println("문의 삭제를 취소하였습니다.");
+      return; 
 
-      }
+    } else if (input.equalsIgnoreCase("y")) {
+      challenge.setQuestionCount(challenge.getQuestionCount() - 1);
+
+      challengeDao.update(challenge);
+      challengeDao.deleteQuestion(deleteChallengeQuestion);
+
+      System.out.println("해당 문의사항을 삭제하였습니다.");
     }
   }
 }
+

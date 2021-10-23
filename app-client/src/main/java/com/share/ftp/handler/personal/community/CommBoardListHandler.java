@@ -1,17 +1,17 @@
 package com.share.ftp.handler.personal.community;
 
 import java.util.Collection;
-import com.share.ftp.dao.CommunityDao;
+import com.share.ftp.dao.VolBoardDao;
 import com.share.ftp.domain.community.CommBoardDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 
 public class CommBoardListHandler implements Command {
 
-  CommunityDao communityDao;
+  VolBoardDao volBoardDao;
 
-  public CommBoardListHandler(CommunityDao communityDao) {
-    this.communityDao =  communityDao;
+  public CommBoardListHandler(VolBoardDao volBoardDao) {
+    this.volBoardDao =  volBoardDao;
   }
 
   @Override
@@ -21,7 +21,7 @@ public class CommBoardListHandler implements Command {
     System.out.println("[  메인/소통해요/나눔이야기/목록  ]");
     System.out.println();
 
-    Collection<CommBoardDTO> commBoardDTOList = communityDao.findAll();
+    Collection<CommBoardDTO> commBoardDTOList = volBoardDao.findAll();
 
     if (commBoardDTOList.isEmpty()) {
       System.out.println("게시글이 없습니다.");
@@ -35,14 +35,14 @@ public class CommBoardListHandler implements Command {
 
     for(CommBoardDTO commBoardDTO : commBoardDTOList) {
 
-      System.out.printf("%d, %s, %s, %s, %d\n", 
+      System.out.printf("%d, %s, %s, %s, %s, %d\n", 
           commBoardDTO.getNo(), 
           commBoardDTO.getOwner().getId(),
           commBoardDTO.getTitle(), 
           commBoardDTO.getRegisteredDate(), 
+          commBoardDTO.getFileUpload(),
           commBoardDTO.getViewCount());
       //          commBoardDTO.getLike(),
-      //          commBoardDTO.getFileUpload());
     }
   }
 }

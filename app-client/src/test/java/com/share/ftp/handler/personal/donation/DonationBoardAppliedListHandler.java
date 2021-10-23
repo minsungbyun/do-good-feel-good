@@ -2,20 +2,21 @@ package com.share.ftp.handler.personal.donation;
 
 import static com.share.util.General.check.Applied;
 import java.text.DecimalFormat;
-import java.util.List;
-import com.share.ftp.domain.personal.DonationBoardDTO;
+import java.util.Collection;
+import com.share.ftp.dao.DonationBoardDao;
+import com.share.ftp.domain.donation.DonationBoardDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 
-public class DonationBoardAppliedListHandler extends AbstractDonationBoardHandler {
+public class DonationBoardAppliedListHandler implements Command {
 
+  DonationBoardDao donationBoardDao;
 
-  public DonationBoardAppliedListHandler(
-      List<DonationBoardDTO> donationBoardDTOList,
-      List<DonationBoardDTO> donationBoardApplyDTOList,
-      List<DonationBoardDTO> donationBoardRejectDTOList) {
+  public DonationBoardAppliedListHandler(DonationBoardDao donationBoardDao) {
 
-    super(donationBoardDTOList, donationBoardApplyDTOList, donationBoardRejectDTOList);
+    this.donationBoardDao = donationBoardDao;
+
   }
 
   @Override
@@ -23,17 +24,19 @@ public class DonationBoardAppliedListHandler extends AbstractDonationBoardHandle
 
     DecimalFormat formatter = new DecimalFormat("###,###,###");
 
+    Collection<DonationBoardDTO> donationBoardList = donationBoardDao.findAll();
+
 
     System.out.println();
     System.out.println("[모금함 개설 승인 목록]");
 
-    if (donationBoardApplyDTOList.isEmpty()) {
+    if (donationBoardList.isEmpty()) {
       System.out.println();
       System.out.println("[  현재 승인된 모금함 개설목록이 없습니다. ]");
       return;
     }
 
-    for (DonationBoardDTO donationBoardApplyDTO : donationBoardApplyDTOList) {
+    for (DonationBoardDTO donationBoardApplyDTO : donationBoardList) {
       if (donationBoardApplyDTO.getIsSigned().equals(Applied) && 
           donationBoardApplyDTO.getLeader().equals(AuthLoginHandler.getLoginUser().getName())) {
 
@@ -51,11 +54,12 @@ public class DonationBoardAppliedListHandler extends AbstractDonationBoardHandle
             donationBoardApplyDTO.getIsSigned());
         System.out.println("--------------------------------------------------------------");
 
-      } else {
-        System.out.println();
-        System.out.println("[  현재 승인된 모금함 개설목록이 없습니다. ]");
-        return;
-      }
+      } 
+      //      else if (!donationBoardApplyDTO.getLeader().equals(AuthLoginHandler.getLoginUser().getName())) {
+      //        System.out.println();
+      //        System.out.println("[  현재 승인된 모금함 개설목록이 없습니다. ]");
+      //        return;
+      //      } 
     } 
   }
 }

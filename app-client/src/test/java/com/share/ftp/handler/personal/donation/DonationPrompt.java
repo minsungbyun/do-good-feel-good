@@ -1,27 +1,27 @@
 package com.share.ftp.handler.personal.donation;
 
 import static com.share.util.General.check.Applied;
-import java.util.List;
-import com.share.ftp.domain.donation.DonationRegisterDTO;
-import com.share.ftp.domain.personal.DonationBoardDTO;
+import java.util.Collection;
+import com.share.ftp.dao.DonationBoardDao;
+import com.share.ftp.domain.donation.DonationBoardDTO;
 import com.share.util.Prompt;
 
 public class DonationPrompt {
 
-  protected List<DonationBoardDTO> donationBoardDTOList;
-  List<DonationRegisterDTO> donationRegisterDTOList;
+  DonationBoardDao donationBoardDao;
 
-  public DonationPrompt(List<DonationBoardDTO> donationBoardDTOList,
-      List<DonationRegisterDTO> donationRegisterDTOList) {
-    this.donationBoardDTOList = donationBoardDTOList;
-    this.donationRegisterDTOList = donationRegisterDTOList;
+
+  public DonationPrompt(DonationBoardDao donationBoardDao) {
+    this.donationBoardDao = donationBoardDao;
   }
 
-  public DonationBoardDTO promptDonation() {
+  public DonationBoardDTO promptDonation() throws Exception {
     System.out.println();
     System.out.println("모금함목록:");
 
-    for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
+    Collection<DonationBoardDTO> donationBoardList = donationBoardDao.findAll();
+
+    for (DonationBoardDTO donationBoardDTO : donationBoardList) {
       if (donationBoardDTO.getIsSigned().equals(Applied)) {
         System.out.println();
         System.out.printf("  [ %d. %s ]\n", donationBoardDTO.getNo(), donationBoardDTO.getTitle());
@@ -44,11 +44,10 @@ public class DonationPrompt {
         //          donationRegisterDTO.setNo(donationBoardDTO.getNo());
         //        } 
         //      }
-        DonationBoardDTO selectedDonation = findByNo(donationBoardNo);
+        DonationBoardDTO selectedDonation = findByNo(donationBoardNo, donationBoardList);
         if (selectedDonation != null) {
           return selectedDonation;
         } 
-
       } catch (NumberFormatException e) {
         System.out.println("--------------------------------------------------------------");
         System.out.println("올바른 숫자를 입력하세요");
@@ -69,8 +68,9 @@ public class DonationPrompt {
     }
   }
 
-  protected DonationBoardDTO findByNo(int no) {
-    for (DonationBoardDTO donationBoardDTO : donationBoardDTOList) {
+  protected DonationBoardDTO findByNo(int no, Collection<DonationBoardDTO> donationBoardList) throws Exception {
+
+    for (DonationBoardDTO donationBoardDTO : donationBoardList) {
       if (donationBoardDTO.getNo() == no) {
         return donationBoardDTO;
       }

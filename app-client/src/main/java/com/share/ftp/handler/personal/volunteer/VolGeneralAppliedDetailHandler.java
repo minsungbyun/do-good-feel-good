@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.volunteer;
 
 import com.share.ftp.dao.VolunteerDao;
-import com.share.ftp.domain.volunteer.GeneralRequestDTO;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.GeneralHelper;
@@ -23,7 +23,7 @@ public class VolGeneralAppliedDetailHandler implements Command {
     System.out.println();
     int volNo = Prompt.inputInt("봉사 번호를 입력해주세요 ▶ ");
 
-    GeneralRequestDTO generalRequestApplyDTO = volunteerDao.findByApplyVol(volNo);
+    VolunteerRequestDTO generalRequestApplyDTO = volunteerDao.findByVolNo(volNo);
 
     if (generalRequestApplyDTO == null) {
       System.out.println("해당 번호의 봉사가 없습니다.");
