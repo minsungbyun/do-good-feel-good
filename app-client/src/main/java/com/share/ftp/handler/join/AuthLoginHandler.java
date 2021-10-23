@@ -7,7 +7,9 @@ import static com.share.menu.Menu.ACCESS_MEMBER;
 import static com.share.menu.Menu.ACCESS_MEMBER_ADMIN;
 import static com.share.menu.Menu.ACCESS_ORG;
 import static com.share.menu.Menu.ACCESS_PERSONAL;
+import com.share.ftp.dao.GroupDao;
 import com.share.ftp.dao.JoinDao;
+import com.share.ftp.dao.OrgDao;
 import com.share.ftp.dao.PersonalDao;
 import com.share.ftp.domain.join.GroupDTO;
 import com.share.ftp.domain.join.JoinDTO;
@@ -20,11 +22,19 @@ import com.share.util.Prompt;
 public class AuthLoginHandler implements Command {
 
   PersonalDao personalDao;
+  GroupDao groupDao;
+  OrgDao orgDao;
   JoinDao joinDao;
 
-  public AuthLoginHandler(PersonalDao personalDao,JoinDao joinDao) {
-    this.personalDao = personalDao;
+  public AuthLoginHandler(JoinDao joinDao, 
+      PersonalDao personalDao,
+      GroupDao groupDao,
+      OrgDao orgDao) {
+
     this.joinDao = joinDao;
+    this.personalDao = personalDao;
+    this.groupDao = groupDao;
+    this.orgDao = orgDao;
   }
 
   public AuthLoginHandler() {
@@ -65,16 +75,19 @@ public class AuthLoginHandler implements Command {
     } 
 
     JoinDTO loginUser = joinDao.findByType(userId);
+    try {
+      if (loginUser.getType() == 1) {
+        loginPersonal(userId, userPassword);
 
-    if (loginUser.getType() == 1) {
-      loginPersonal(userId, userPassword);
+      } else if (loginUser.getType() == 2) {
+        loginGroup(userId, userPassword);
 
-    } else if (loginUser.getType() == 2) {
-      loginGroup(userId, userPassword);
+      } else if (loginUser.getType() == 3) {
+        loginOrg(userId, userPassword);
 
-    } else if (loginUser.getType() == 3) {
-      loginOrg(userId, userPassword);
-
+      }
+    } catch(Exception e) {
+      System.out.println("로그인을 실패하였습니다!");
     }
   } 
 
@@ -113,4 +126,5 @@ public class AuthLoginHandler implements Command {
     System.out.printf("[  %s님 환영합니다!  ]\n", user.getName());
     loginUser = user;
   }
+
 }

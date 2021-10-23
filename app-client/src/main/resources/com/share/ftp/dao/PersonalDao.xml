@@ -91,6 +91,15 @@
       id=#{userId} and password=password(#{userPassword})
   </select>
   
+  <select id="validId" resultMap="PersonalDTOMap" parameterType="string">
+    select 
+       id
+     from
+       ftp_user     
+    where 
+      id=#{id}
+  </select>
+  
   
    <update id="delete" parameterType="PersonalDTO">
      update ftp_user set
@@ -119,25 +128,6 @@
   
   
   <!--  
-  
-  
-  
-  
-  <select id="findByNoticeNo" resultMap="NoticeDTOMap" parameterType="int">
-     select 
-     notice_no,
-     title,
-     content,
-     created_dt,
-     view_cnt
-    from
-     ftp_support_notice
-    where 
-      notice_no=#{values}
-  </select>
-  
-  
-  
   <select id="findByKeyword" resultMap="NoticeDTOMap" parameterType="string">
      select 
        notice_no,
@@ -156,10 +146,6 @@
      </where>
      order by notice_no desc
   </select>
-  
-  
-
- 
  
   
   <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">

@@ -7,8 +7,6 @@ import java.util.Objects;
 public class JoinDTO {
 
 
-
-
   private int no;
   private int type; // 1. 개인, 2. 기관, 3. 그룹
   private int donationMoney; // 유저 기부금액

@@ -48,13 +48,15 @@
     <result column="user_name" property="name"/>
    </collection>
   </resultMap>
+
+ <!--  
+>>>>>>> b9fe4a4c382816c2f7a4adee0aa838b0255b1dcb
   
   <resultMap type="category" id="CategoryMap">
     <id column="category_no" property="no"/> 
     <result column="category_title" property="title"/>
   </resultMap>
   
-  <!--  
   <resultMap type="Status" id="StatusMap">
     <id column="category_no" property="no"/> 
     <result column="category_title" property="title"/>
@@ -133,6 +135,13 @@
   
   
 
+   <update id="updatePersonal" parameterType="PersonalDTO">
+	   update ftp_user_personal set
+	     birthdate=#{birthdate}
+	   where 
+	      user_personal_no=#{personalNo}
+  </update>
+
   
   <select id="findByIdPassword" resultMap="PersonalDTOMap" parameterType="map">
     select 
@@ -174,8 +183,13 @@
         user_personal_no=#{personalNo}
   </update>
   
+<<<<<<< HEAD
+  
+  
+=======
   -->
   <!--  
+>>>>>>> 049453ea137d661fb81e6295f5e00704445815b2
   
   
   

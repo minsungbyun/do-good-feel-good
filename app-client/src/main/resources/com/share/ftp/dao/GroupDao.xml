@@ -25,8 +25,19 @@
     <result column="note" property="note"/>
   <!--    <result column="last_login" property="viewCount"/>-->
   </resultMap>
- 
   
+  <insert id="insert" parameterType="GroupDTO"
+          useGeneratedKeys="true" keyColumn="user_no" keyProperty="no">
+    insert into ftp_user(id,password,name,tel,email,post_no,basic_address,detail_address,type,status)
+    values(#{id},password(#{password}),#{name},#{tel},#{email},#{postNo},#{basicAddress},#{detailAddress},#{type},#{status})
+  </insert>
+  
+  <insert id="insertGroup">
+    insert into ftp_user_group(user_no,group_cnt)
+    values(#{userNo},#{groupCnt})
+  </insert>
+ 
+ 
   <select id="findAllGroup" resultMap="GroupDTOMap">
 	   select 
 	     u.*,    
@@ -39,7 +50,7 @@
 	     user_group_no asc
   </select>
   
-  <select id="findByIdPassword" resultMap="GroupDTOMap" parameterType="map">
+  <select id="findByIdPassword" resultMap="GroupDTOMap">
     select
       u.*,
       g.user_group_no,
@@ -52,45 +63,60 @@
       
   </select>
   
-  <!--  
+  <update id="update" parameterType="GroupDTO">
+     update ftp_user set
+       tel=#{tel},
+       email=#{email},
+       post_no=#{postNo},
+       basic_address=#{basicAddress},
+       detail_address=#{detailAddress},
+       password=password(#{password})
+     where 
+        user_no=#{no}
+  </update>
   
-  <insert id="insert" parameterType="NoticeDTO">
-    insert into ftp_support_notice(title,content,created_dt) 
-    values(#{title},#{content}, curdate())
-  </insert>
-  
-  
-  
-   <update id="update" parameterType="NoticeDTO">
-   update ftp_support_notice set
-     title=#{title},
-     content=#{content}
-   where 
-      notice_no=#{no}
+ 
+   <update id="updateOrg" parameterType="GroupDTO">
+     update ftp_user_group set
+       group_cnt=#{groupCount}
+     where 
+        user_group_no=#{grouplNo}
   </update>
   
   
+  <update id="delete" parameterType="GroupDTO">
+     update ftp_user set
+      id=#{id},
+      password=password(#{password}),
+      name=#{name},
+      tel=#{tel},
+      email=#{email},
+      post_no=#{postNo},
+      basic_address=#{basicAddress},
+      detail_address=#{detailAddress},
+      status=#{status},
+      type=#{type}
+     where 
+        user_no=#{no}
+  </update>
   
-   <delete id="delete" parameterType="int">
-    delete from ftp_support_notice where notice_no=${values}
-  </delete>
+   <update id="deleteGroup" parameterType="GroupDTO">
+      update ftp_user_group set
+        group_cnt=#{groupCnt},
+      where 
+        user_group_no=#{groupNo}
+  </update>
   
-  
-  
-  <select id="findByNoticeNo" resultMap="NoticeDTOMap" parameterType="int">
-     select 
-     notice_no,
-     title,
-     content,
-     created_dt,
-     view_cnt
-    from
-     ftp_support_notice
+  <select id="validId" resultMap="GroupDTOMap" parameterType="string">
+    select 
+       id
+     from
+       ftp_user     
     where 
-      notice_no=#{values}
+      id=#{id}
   </select>
   
-  
+  <!-- 
   
   <select id="findByKeyword" resultMap="NoticeDTOMap" parameterType="string">
      select 
@@ -110,11 +136,6 @@
      </where>
      order by notice_no desc
   </select>
-  
-  
-
- 
- 
   
   <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
     select 

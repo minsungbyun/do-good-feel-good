@@ -5,6 +5,7 @@
 
 <mapper namespace="com.share.ftp.dao.JoinDao">
   
+
   <resultMap type="joinDTO" id="JoinDTOMap">
     <id column="user_no" property="no"/>
     <result column="id" property="id"/>
@@ -25,9 +26,6 @@
   <!--    <result column="last_login" property="viewCount"/>-->
   </resultMap>
   
- 
-  
-  
   
   <select id="findAll" resultMap="JoinDTOMap">
 	   select 
@@ -37,6 +35,7 @@
      order by
        user_no desc 
   </select>
+  
   
   <select id="findByType" resultMap="JoinDTOMap" parameterType="string">
     select 
@@ -58,6 +57,15 @@
       id=#{userId} and password=password(#{userPassword})
   </select>
   
+  <select id="validId" resultMap="JoinDTOMap" parameterType="string">
+    select 
+       id
+     from
+       ftp_user     
+    where 
+      id=#{userId}
+  </select>
+  
   <!--  
    <update id="delete" parameterType="PersonalDTO">
      update ftp_user set
@@ -75,6 +83,15 @@
         user_no=#{no}
   </update>
   
+     <result column="last_login" property="viewCount"/>-->
+  
+  
+  
+  
+  
+  
+   <!-- 
+>>>>>>> b9fe4a4c382816c2f7a4adee0aa838b0255b1dcb
    <update id="deletePersonal" parameterType="PersonalDTO">
       update ftp_user_personal set
 	      birthdate=#{birthdate},
@@ -86,6 +103,7 @@
   
   
   
+<<<<<<< HEAD
   
   
   
@@ -104,6 +122,8 @@
   
   
   
+=======
+>>>>>>> b9fe4a4c382816c2f7a4adee0aa838b0255b1dcb
   <select id="findByKeyword" resultMap="NoticeDTOMap" parameterType="string">
      select 
        notice_no,
@@ -122,10 +142,13 @@
      </where>
      order by notice_no desc
   </select>
+<<<<<<< HEAD
   
   
 
  
+=======
+>>>>>>> b9fe4a4c382816c2f7a4adee0aa838b0255b1dcb
  
   
   <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">

@@ -28,19 +28,7 @@ public class JoinPersonalHandler implements Command {
     PersonalDTO personalUser = new PersonalDTO();
 
     //    아이디 유효성검사
-    //    while (true) {
-
-    personalUser.setId(Prompt.inputString("ID ▶ "));
-
-    //          JoinDTO userId = joinDao.validId(joinUser);
-    //
-    //      if (userId != null) {
-    //        System.out.println("사용가능한 아이디입니다.");
-    //        break;
-    //      }
-    //
-    //      System.out.println("해당 아이디는 중복되는 아이디입니다.");
-    //    }
+    validId(personalUser);
 
     personalUser.setPassword(Prompt.inputString("Password ▶ "));
 
@@ -94,6 +82,7 @@ public class JoinPersonalHandler implements Command {
         personalUser.getNo(), 
         personalUser.getBirthdate(), 
         personalUser.getLevel());
+
     sqlSession.commit();
 
 
@@ -102,6 +91,22 @@ public class JoinPersonalHandler implements Command {
     System.out.println("[회원 등록이 완료 되었습니다.]");
     System.out.println();
   }
-  //    AuthLoginHandler.userAccessLevel = ACCESS_PERSONAL | ACCESS_LOGOUT;
+
+  private void validId(PersonalDTO personalUser) throws Exception {
+    while (true) {
+
+      personalUser.setId(Prompt.inputString("ID ▶ "));
+
+      PersonalDTO userId = personalDao.validId(personalUser);
+
+      if (userId == null) {
+        System.out.println("사용가능한 아이디입니다.");
+        break;
+      }
+
+      System.out.println("해당 아이디는 중복되는 아이디입니다.");
+      System.out.println();
+    }
+  }
 }
 

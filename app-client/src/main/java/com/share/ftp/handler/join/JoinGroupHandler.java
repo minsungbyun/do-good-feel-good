@@ -25,23 +25,9 @@ public class JoinGroupHandler implements Command {
     System.out.println("[ 단체회원 양식 ]");
     System.out.println();
 
-
     GroupDTO groupUser = new GroupDTO();
 
-    //    아이디 유효성검사
-    //    while (true) {
-
-    groupUser.setId(Prompt.inputString("ID ▶ "));
-
-    //      JoinDTO userId = joinDao.validId(joinUser);
-    //
-    //      if (userId != null) {
-    //        System.out.println("사용가능한 아이디입니다.");
-    //        break;
-    //      }
-    //
-    //      System.out.println("해당 아이디는 중복되는 아이디입니다.");
-    //    }
+    validId(groupUser);
 
     groupUser.setPassword(Prompt.inputString("Password ▶ "));
 
@@ -89,12 +75,31 @@ public class JoinGroupHandler implements Command {
     groupUser.setStatus(WAITING);
 
     groupDao.insert(groupUser);
+    groupDao.insertGroup(
+        groupUser.getNo(), groupUser.getGroupCount());
     sqlSession.commit();
 
     System.out.println("happyshare 가입을 환영합니다.");
     System.out.println();
     System.out.println("[ 관리자의 승인 후 활동가능합니다. ]");
     System.out.println();
+  }
+
+  private void validId(GroupDTO groupUser) throws Exception {
+    while (true) {
+
+      groupUser.setId(Prompt.inputString("ID ▶ "));
+
+      GroupDTO userId = groupDao.validId(groupUser);
+
+      if (userId == null) {
+        System.out.println("사용가능한 아이디입니다.");
+        break;
+      }
+
+      System.out.println("해당 아이디는 중복되는 아이디입니다.");
+      System.out.println();
+    }
   }
 }
 //    AuthLoginHandler.userAccessLevel = ACCESS_GROUP | ACCESS_LOGOUT;

@@ -52,9 +52,11 @@ import com.share.ftp.handler.join.AuthDisplayUserHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.ftp.handler.join.AuthLogoutHandler;
 import com.share.ftp.handler.join.GroupHandler;
+import com.share.ftp.handler.join.GroupListHandler;
+import com.share.ftp.handler.join.GroupUserDeleteHandler;
+import com.share.ftp.handler.join.GroupUserUpdateHandler;
 import com.share.ftp.handler.join.JoinAddHandler;
 import com.share.ftp.handler.join.JoinGroupHandler;
-import com.share.ftp.handler.join.JoinListHandler;
 import com.share.ftp.handler.join.JoinListTestHandler;
 import com.share.ftp.handler.join.JoinOrgHandler;
 import com.share.ftp.handler.join.JoinPersonalHandler;
@@ -62,6 +64,9 @@ import com.share.ftp.handler.join.JoinSearchEmailIdHandler;
 import com.share.ftp.handler.join.JoinSearchPasswordHandler;
 import com.share.ftp.handler.join.JoinSearchTelIdHandler;
 import com.share.ftp.handler.join.OrgHandler;
+import com.share.ftp.handler.join.OrgListHandler;
+import com.share.ftp.handler.join.OrgUserDeleteHandler;
+import com.share.ftp.handler.join.OrgUserUpdateHandler;
 import com.share.ftp.handler.join.PersonalHandler;
 import com.share.ftp.handler.join.PersonalUserDeleteHandler;
 import com.share.ftp.handler.join.PersonalUserUpdateHandler;
@@ -239,23 +244,25 @@ public class ClientApp {
     // 공통 메서드
     GeneralDao generalDao = sqlSession.getMapper(GeneralDao.class);
 
+
     // 봉사활동 게시글
     VolBoardDao volBoardDao = sqlSession.getMapper(VolBoardDao.class);
     //    VolBoardCommentDao volBoardComment = sqlSession.getMapper(VolBoardComment.class);
     //    VolShortReviewDao volShortReview = sqlSession.getMapper(VolShortReview.class);    
 
 
-
     VolunteerDao volunteerDao = sqlSession.getMapper(VolunteerDao.class);
     ChallengeDao challengeDao = sqlSession.getMapper(ChallengeDao.class);
     QuestionDao questionDao = sqlSession.getMapper(QuestionDao.class);
     NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
+
     //    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
     //    ChallengeReviewDao netChallengeReviewDao = new NetChallengeDao(requestAgent);
     // CommunityDao netCommunityDao = new NetCommunityDao(requestAgent);
 
     //로그인, 로그아웃
-    commands.put("/auth/login", new AuthLoginHandler(personalDao, joinDao)); // 로그인
+
+    commands.put("/auth/login", new AuthLoginHandler(joinDao, personalDao, groupDao, orgDao)); // 로그인
     commands.put("/auth/logout", new AuthLogoutHandler()); // 로그아웃
     commands.put("/auth/displayUserInfo", new AuthDisplayUserHandler()); // 마이페이지 나의정보수정
     commands.put("/userInfo/personal", new PersonalHandler()); 
@@ -401,8 +408,12 @@ public class ClientApp {
     // 마이페이지
 
     // 회원정보 변경 및 삭제
-    commands.put("/myPage/personal", new PersonalUserUpdateHandler(personalDao)); // 내정보 수정
-    commands.put("/myPage/delete", new PersonalUserDeleteHandler(personalDao)); // 회원탈퇴
+    commands.put("/myPage/personal", new PersonalUserUpdateHandler(personalDao)); // 개인회원 내정보 수정
+    commands.put("/myPage/delete", new PersonalUserDeleteHandler(personalDao)); // 개인회원탈퇴
+    commands.put("/myPage/group", new GroupUserUpdateHandler(groupDao)); // 단체회원 내정보 수정
+    commands.put("/myPage/delete", new GroupUserDeleteHandler(groupDao)); // 단체회원탈퇴
+    commands.put("/myPage/org", new OrgUserUpdateHandler(orgDao)); // 기관회원 내정보 수정
+    commands.put("/myPage/delete", new OrgUserDeleteHandler(orgDao)); // 기관회원탈퇴
 
     commands.put("/myVol/applied", new MyAppliedVolHandler(volunteerDao));
     commands.put("/myVol/appliedDetail", new MyAppliedVolDetailHandler(volunteerDao));
@@ -422,8 +433,10 @@ public class ClientApp {
     // 관리자
 
     // 관리자 회원정보 조회
-    commands.put("/join/list", new JoinListHandler(personalDao)); // 관리자가 회원 목록을 조회
-    commands.put("/join/test", new JoinListTestHandler(personalDao)); // 관리자가 회원 목록을 조회
+    //    commands.put("/join/list", new JoinListHandler(personalDao)); // 관리자가 회원 목록을 조회
+    commands.put("/join/test", new JoinListTestHandler(personalDao)); // 관리자가 개인회원 목록을 조회
+    commands.put("/join/groupList", new GroupListHandler(groupDao)); // 관리자가 단체회원 목록을 조회
+    commands.put("/join/orgList", new OrgListHandler(orgDao)); // 관리자가 단체회원 목록을 조회
     commands.put("/join/delete", new AdminMemberDeleteHandler());
 
     // 관리자 공지사항 (개인 + 관리자)
@@ -862,8 +875,10 @@ public class ClientApp {
     MenuGroup adminMemberMenu = new MenuGroup("회원정보 관리", ACCESS_ADMIN);
     adminMemberMenu.setMenuFilter(menuFilter);
 
-    adminMemberMenu.add(new MenuItem("회원목록",ACCESS_ADMIN, "/join/list"));
-    adminMemberMenu.add(new MenuItem("개인목록(테스트)",ACCESS_ADMIN, "/join/test"));
+    //    adminMemberMenu.add(new MenuItem("회원목록",ACCESS_ADMIN, "/join/list"));
+    adminMemberMenu.add(new MenuItem("개인목록",ACCESS_ADMIN, "/join/test"));
+    adminMemberMenu.add(new MenuItem("단체목록",ACCESS_ADMIN, "/join/groupList"));
+    adminMemberMenu.add(new MenuItem("그룹목록",ACCESS_ADMIN, "/join/orgList"));
     adminMemberMenu.add(new MenuItem("가입회원 상세보기", ACCESS_ADMIN,"/join/detail"));
     adminMemberMenu.add(new MenuItem("회원추방",ACCESS_ADMIN,"/adminMember/list"));
 
