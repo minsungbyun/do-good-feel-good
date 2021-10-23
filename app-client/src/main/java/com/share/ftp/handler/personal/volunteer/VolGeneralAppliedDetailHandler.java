@@ -4,7 +4,7 @@ import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.volunteer.GeneralRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
-import com.share.util.Helper;
+import com.share.util.GeneralHelper;
 import com.share.util.Prompt;
 
 public class VolGeneralAppliedDetailHandler implements Command {
@@ -59,7 +59,7 @@ public class VolGeneralAppliedDetailHandler implements Command {
         generalRequestApplyDTO.getEndDate(),
         generalRequestApplyDTO.getStartTime(),
         generalRequestApplyDTO.getEndTime(),
-        Helper.getRemainTime(generalRequestApplyDTO.getEndDate().getTime() - System.currentTimeMillis()),
+        GeneralHelper.getRemainTime(generalRequestApplyDTO.getEndDate().getTime() - System.currentTimeMillis()),
         //        personalRequestApplyDTO.getVolList(),
         generalRequestApplyDTO.getTotalJoinCount(),
         generalRequestApplyDTO.getLimitNum(),

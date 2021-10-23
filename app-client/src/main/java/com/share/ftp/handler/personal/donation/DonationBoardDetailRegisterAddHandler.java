@@ -3,7 +3,7 @@ package com.share.ftp.handler.personal.donation;
 import java.sql.Date;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.dao.DonationRegisterDao;
-import com.share.ftp.dao.JoinDao;
+import com.share.ftp.dao.OrgDao;
 import com.share.ftp.domain.donation.DonationBoardDTO;
 import com.share.ftp.domain.donation.DonationRegisterDTO;
 import com.share.ftp.domain.join.JoinDTO;
@@ -16,15 +16,15 @@ public class DonationBoardDetailRegisterAddHandler implements Command { // 모�
 
   DonationBoardDao donationBoardDao;
   DonationRegisterDao donationRegisterDao;
-  JoinDao joinDao;
+  OrgDao orgDao;
 
   public DonationBoardDetailRegisterAddHandler(
       DonationBoardDao donationBoardDao,
       DonationRegisterDao donationRegisterDao,
-      JoinDao joinDao) {
+      OrgDao orgDao) {
     this.donationBoardDao = donationBoardDao;
     this.donationRegisterDao = donationRegisterDao;
-    this.joinDao = joinDao;
+    this.orgDao = orgDao;
   }
 
   // 모금함 기부하기
@@ -70,7 +70,7 @@ public class DonationBoardDetailRegisterAddHandler implements Command { // 모�
         DonationRegisterDTO.totalDonationMoney += donationRegister.getDonationMoney();
 
         donationRegisterDao.insert(donationRegister);
-        joinDao.update(joinDTO);
+        //        orgDao.update(joinDTO);
 
       } catch (NumberFormatException e) {
         System.out.println("--------------------------------------------------------------");

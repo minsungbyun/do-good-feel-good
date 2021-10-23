@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="VolMapper">
+<mapper namespace="com.share.ftp.dao.VolunteerDao">
   
   <resultMap type="GeneralRequestDTO" id="GeneralRequestDTOMap">
     <id column="vol_no" property="no"/> 

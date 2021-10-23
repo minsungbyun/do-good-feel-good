@@ -2,18 +2,18 @@ package com.share.ftp.handler.personal.challenge;
 
 import java.util.Collection;
 import java.util.List;
-import com.share.ftp.dao.JoinDao;
-import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.dao.PersonalDao;
+import com.share.ftp.domain.join.PersonalDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.MemberHelper;
 
 public class ChallengeRankingHandler implements Command {
 
-  JoinDao joinDao;
+  PersonalDao personalDao;
 
-  public ChallengeRankingHandler(JoinDao joinDao) {
-    this.joinDao = joinDao;
+  public ChallengeRankingHandler(PersonalDao personalDao) {
+    this.personalDao = personalDao;
   }
 
   @Override
@@ -32,11 +32,11 @@ public class ChallengeRankingHandler implements Command {
         + "                                                                 \"Y88888P'  \r\n"
         + "                                                                            ");
 
-    Collection<JoinDTO> joinList = joinDao.findAll();
+    Collection<PersonalDTO> joinList = personalDao.findAll();
 
     System.out.println("    랭킹  아이디        포인트");
     System.out.println("   ==============================");
-    MemberHelper.printUserRank((List<JoinDTO>) joinList);     
+    MemberHelper.printUserRank((List<PersonalDTO>) joinList);     
   }
 
 

@@ -6,27 +6,27 @@ import static com.share.util.MemberHelper.getUserRemainPoint;
 import static com.share.util.MemberHelper.printMyRank;
 import java.util.Collection;
 import java.util.List;
-import com.share.ftp.dao.JoinDao;
-import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.dao.PersonalDao;
+import com.share.ftp.domain.join.PersonalDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 
 public class MyPointListHandler implements Command {
 
-  JoinDao joinDao;
+  PersonalDao personalDao;
 
-  public MyPointListHandler(JoinDao joinDao) {
-    this.joinDao = joinDao;
+  public MyPointListHandler(PersonalDao personalDao) {
+    this.personalDao = personalDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
 
-    Collection<JoinDTO> joinList = joinDao.findAll();
+    Collection<PersonalDTO> joinList = personalDao.findAll();
 
 
-    JoinDTO loginUser = AuthLoginHandler.getLoginUser();
+    PersonalDTO loginUser = (PersonalDTO) AuthLoginHandler.getLoginUser();
 
     if (loginUser == null) {
       System.out.println("로그인 하지 않았습니다.");
@@ -52,7 +52,7 @@ public class MyPointListHandler implements Command {
     System.out.println();
     System.out.printf("▶ 다음 등급까지 %d point 남았습니다. ", getUserRemainPoint(loginUser)); 
     System.out.println();
-    System.out.printf("▶ 축하합니다! 당신의 랭킹은 %d등입니다. ", printMyRank((List<JoinDTO>) joinList)); 
+    System.out.printf("▶ 축하합니다! 당신의 랭킹은 %d등입니다. ", printMyRank((List<PersonalDTO>) joinList)); 
     System.out.println();
     System.out.println("-----------------------------------------------");
 

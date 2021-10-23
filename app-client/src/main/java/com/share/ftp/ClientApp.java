@@ -20,6 +20,7 @@ import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.CommunityDao;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.dao.DonationRegisterDao;
+import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.dao.GroupDao;
 import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.dao.OrgDao;
@@ -250,6 +251,7 @@ public class ClientApp {
     PersonalDao personalDao = sqlSession.getMapper(PersonalDao.class);
     GroupDao groupDao = sqlSession.getMapper(GroupDao.class);
     OrgDao orgDao = sqlSession.getMapper(OrgDao.class);
+    GeneralDao generalDao = sqlSession.getMapper(GeneralDao.class);
 
     VolunteerDao netVolunteerDao = new NetVolunteerDao(requestAgent);
     CommunityDao netCommunityDao = new NetCommunityDao(requestAgent);
@@ -278,7 +280,7 @@ public class ClientApp {
     commands.put("/join/searchPassword", new JoinSearchPasswordHandler(personalDao)); // 비밀번호 찾기
 
     //함께해요
-    commands.put("/volGeneralRequest/apply", new VolGeneralRequestApplyHandler(netVolunteerDao));
+    commands.put("/volGeneralRequest/apply", new VolGeneralRequestApplyHandler(netVolunteerDao,generalDao,sqlSession));
     commands.put("/volGeneralRequest/applyList", new VolGeneralRequestApplyListHandler(netVolunteerDao));
     //    commands.put("/volPersonalRequest/applyList", new VolPersonalRequestApplyListHandler(netVolunteerDao));
     commands.put("/volGeneralRequest/applyCompleteList", new VolGeneralRequestApplyCompleteHandler(netVolunteerDao));
@@ -359,8 +361,8 @@ public class ClientApp {
 
 
     // 챌린지 랭킹
-    commands.put("/ranking/list", new ChallengeRankingHandler(joinDao));  
-    commands.put("/myRanking/list", new MyRankingHandler(joinDao)); 
+    commands.put("/ranking/list", new ChallengeRankingHandler(personalDao));  
+    commands.put("/myRanking/list", new MyRankingHandler(personalDao)); 
 
     // 모금함 (개설신청하기, 개설목록, 승인, 반려)
 
@@ -391,7 +393,7 @@ public class ClientApp {
     commands.put("/donationRegister/totalMoney", new DonationRegisterTotalMoneyHandler(donationRegisterDao));
 
     commands.put("/donationBoardRegister/list", new DonationBoardRegisterListHandler(donationRegisterDao));
-    commands.put("/donationBoardDetailRegister/add", new DonationBoardDetailRegisterAddHandler(donationBoardDao, donationRegisterDao, joinDao));
+    commands.put("/donationBoardDetailRegister/add", new DonationBoardDetailRegisterAddHandler(donationBoardDao, donationRegisterDao, orgDao));
 
     // 고객센터 문의사항
     commands.put("/question/add", new QuestionAddHandler(netQuestionDao));
@@ -418,7 +420,7 @@ public class ClientApp {
     commands.put("/myChallenge/detail", new MyChallengeDetailHandler(netChallengeDao));
     commands.put("/myChallenge/wish", new MyChallengeWishHandler(netChallengeDao));
 
-    commands.put("myPoint/list", new MyPointListHandler(joinDao)); // 나의포인트 
+    commands.put("myPoint/list", new MyPointListHandler(personalDao)); // 나의포인트 
 
     //    commands.put("/orgMyVol/apply", new MyVolApplyListHandler()); // 기관 마이페이지 승인신청 
     //    commands.put("/orgMyVol/approve", new MyVolApproveListHandler()); // 기관 마이페이지 승인조회
