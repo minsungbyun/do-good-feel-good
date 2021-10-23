@@ -1,6 +1,7 @@
 package com.share.ftp.handler.personal.community;
 
-import com.share.ftp.dao.CommunityDao;
+import org.apache.ibatis.session.SqlSession;
+import com.share.ftp.dao.VolBoardDao;
 import com.share.ftp.domain.community.CommBoardDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -8,10 +9,12 @@ import com.share.util.Prompt;
 
 public class CommBoardUpdateHandler implements Command {
 
-  CommunityDao communityDao;
+  VolBoardDao volBoardDao;
+  SqlSession sqlSession;
 
-  public CommBoardUpdateHandler (CommunityDao communityDao) {
-    this.communityDao =  communityDao;
+  public CommBoardUpdateHandler (VolBoardDao volBoardDao, SqlSession sqlSession) {
+    this.volBoardDao =  volBoardDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -22,14 +25,12 @@ public class CommBoardUpdateHandler implements Command {
     System.out.println("[  나눔이야기 게시글변경  ]");
     int commBoardNo = (int) request.getAttribute("commBoardNo");
 
-    CommBoardDTO commBoardDTO = communityDao.findByCommBoardNo(commBoardNo);
+    CommBoardDTO commBoardDTO = volBoardDao.findByCommBoardNo(commBoardNo);
 
     if (commBoardDTO == null) {
       System.out.println("[  해당 게시글이 없습니다.  ]");
       return;
     }
-
-
     //    CommBoardDTO updateCommBoard = new CommBoardDTO();
     //
     //    updateCommBoard.setTitle(Prompt.inputString("제목(" + commBoardDTO.getTitle() + ")? "));
@@ -51,7 +52,8 @@ public class CommBoardUpdateHandler implements Command {
       commBoardDTO.setContent(content);
       //      commBoardDTO.setFileUpload(fileUpload);
 
-      communityDao.update(commBoardDTO);
+      volBoardDao.update(commBoardDTO);
+      sqlSession.commit();
 
       System.out.println();
       System.out.println("[  게시글을 변경하였습니다.  ]");
