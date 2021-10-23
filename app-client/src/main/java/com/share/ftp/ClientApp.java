@@ -255,10 +255,9 @@ public class ClientApp {
         "com/share/ftp/conf/mybatis-config.xml")).openSession();
 
     // 로그인
-    JoinDao joinDao = new MariadbJoinDao(con);
-    PersonalDao personalDao = new MybatisPersonalDao(sqlSession);
-    GroupDao groupDao = new MybatisGroupDao(sqlSession);
-    OrgDao orgDao = new MariadbOrgDao(con);
+    PersonalDao personalDao = sqlSession.getMapper(PersonalDao.class)
+        GroupDao groupDao = sqlSession.getMapper(GroupDao.class)
+    OrgDao orgDao = sqlSession.getMapper(OrgDao.class)
 
     VolunteerDao netVolunteerDao = new NetVolunteerDao(requestAgent);
     CommunityDao communityDao = new NetCommunityDao(requestAgent);

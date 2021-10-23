@@ -77,7 +77,7 @@
   </update>
 -->
   
-  <select id="findByIdPassword" resultMap="PersonalDTOMap" parameterType="map">
+  <select id="findByIdPassword" resultMap="PersonalDTOMap">
     select 
        u.*,  
        p.user_personal_no,  

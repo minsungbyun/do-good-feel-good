@@ -24,7 +24,7 @@
     <result column="note" property="postNo"/>
   </resultMap>
   
- 
+ <!--  
   
   <insert id="insert" parameterType="PersonalDTO"
           useGeneratedKeys="true" keyColumn="user_no" keyProperty="no">
@@ -64,14 +64,14 @@
 	      user_no=#{no}
   </update>
   
-  <!--  
+
    <update id="updatePersonal" parameterType="PersonalDTO">
 	   update ftp_user_personal set
 	     birthdate=#{birthdate}
 	   where 
 	      user_personal_no=#{personalNo}
   </update>
--->
+
   
   <select id="findByIdPassword" resultMap="PersonalDTOMap" parameterType="map">
     select 
@@ -114,7 +114,7 @@
   </update>
   
   
-  <!--  
+  
   
   
   
