@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.volunteer;
 
 import com.share.ftp.dao.VolunteerDao;
-import com.share.ftp.domain.volunteer.GeneralRequestDTO;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 
@@ -24,7 +24,7 @@ public class VolGeneralDoJoinListHandler implements Command {
     int volNo = (int) request.getAttribute("volNo");
     System.out.println();
 
-    GeneralRequestDTO volJoinList = volunteerDao.findByApplyVol(volNo); 
+    VolunteerRequestDTO volJoinList = volunteerDao.findByApplyVol(volNo); 
 
     if (volJoinList == null) {
       System.out.println("해당 봉사가 없습니다.");

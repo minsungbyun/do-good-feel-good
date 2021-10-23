@@ -59,7 +59,7 @@ public class AuthLoginHandler implements Command {
       return;
     } 
 
-    JoinDTO user = personalDao.selectOneByIdPassword(userId, userPassword);
+    JoinDTO user = personalDao.findByIdPassword(userId, userPassword);
 
     if (user == null) {
       System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");

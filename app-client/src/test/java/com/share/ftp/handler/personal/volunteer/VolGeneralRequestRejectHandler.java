@@ -1,20 +1,18 @@
 package com.share.ftp.handler.personal.volunteer;
 
-import java.util.List;
-import com.share.ftp.domain.personal.GeneralRequestDTO;
+import static com.share.util.General.check.Rejected;
+import com.share.ftp.dao.VolunteerDao;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
-public class VolGeneralRequestRejectHandler extends AbstractVolGeneralHandler { // 개인 봉사신청 양식 쓰는 곳
+public class VolGeneralRequestRejectHandler implements Command { // 개인 봉사신청 양식 쓰는 곳
 
+  VolunteerDao volunteerDao;
 
-  public VolGeneralRequestRejectHandler(
-      List<GeneralRequestDTO> generalRequestDTOList,
-      List<GeneralRequestDTO> generalRequestApplyDTOList,
-      List<GeneralRequestDTO> generalRequestRejectDTOList) {
-
-    super(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList);
-
+  public VolGeneralRequestRejectHandler(VolunteerDao volunteerDao) {
+    this.volunteerDao = volunteerDao;
   }
 
   @Override
@@ -25,9 +23,9 @@ public class VolGeneralRequestRejectHandler extends AbstractVolGeneralHandler { 
 
     int no = Prompt.inputInt("봉사번호 ▶ ");
 
-    GeneralRequestDTO generalRequestDTO = findByVol(no);
+    VolunteerRequestDTO volunteerRequestDTO = volunteerDao.findByVolNo(no);
 
-    if (generalRequestDTO == null) {
+    if (volunteerRequestDTO == null) {
       System.out.println("[  해당 번호의 봉사신청서가 없습니다.  ]");
       return;
     }
@@ -39,10 +37,24 @@ public class VolGeneralRequestRejectHandler extends AbstractVolGeneralHandler { 
       return;
     }
 
-    generalRequestDTO.setIsSigned("반려됨");
+    volunteerRequestDTO.setStatus(Rejected);
 
-    generalRequestRejectDTOList.add(generalRequestDTO);
+    volunteerDao.update(volunteerRequestDTO);
 
     System.out.println("[  ✔️ 해당 봉사신청을 반려하였습니다. ]");
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

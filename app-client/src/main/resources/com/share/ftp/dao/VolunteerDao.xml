@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+  
 <mapper namespace="com.share.ftp.dao.VolunteerDao">
   
-  <resultMap type="GeneralRequestDTO" id="GeneralRequestDTOMap">
+  <resultMap type="VolunteerRequestDTO" id="VolunteerRequestDTOMap">
     <id column="vol_no" property="no"/> 
     <result column="title" property="title"/>
     <result column="content" property="content"/>
@@ -15,16 +15,14 @@
     <result column="end_dt" property="endDate"/>
     <result column="total_cnt" property="totalJoinCount"/>
     <result column="approval" property="registerDate"/>
-    <result column="note" property="postNo"/>
+   <!--  <result column="note" property="postNo"/> --> 
     
     
     
-    <result column="category_no" property="level"/>
-    <result column="user_no" property="birthdate"/>
-    <result column="note" property="postNo"/>
+   
   </resultMap>
-  
  
+ <!--  
   
   <insert id="insert" parameterType="PersonalDTO"
           useGeneratedKeys="true" keyColumn="user_no" keyProperty="no">
@@ -64,14 +62,7 @@
 	      user_no=#{no}
   </update>
   
-  <!--  
-   <update id="updatePersonal" parameterType="PersonalDTO">
-	   update ftp_user_personal set
-	     birthdate=#{birthdate}
-	   where 
-	      user_personal_no=#{personalNo}
-  </update>
--->
+
   
   <select id="findByIdPassword" resultMap="PersonalDTOMap" parameterType="map">
     select 
@@ -113,7 +104,7 @@
         user_personal_no=#{personalNo}
   </update>
   
-  
+  -->
   <!--  
   
   

@@ -1,19 +1,27 @@
 package com.share.ftp.handler.personal.community;
 
-import java.util.List;
-import com.share.ftp.domain.personal.CommBoardDTO;
+import com.share.ftp.dao.CommunityDao;
+import com.share.ftp.domain.community.CommBestComparator;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 
-public class CommBestDetailHandler extends AbstractCommBestHandler {
+public class CommBestDetailHandler implements Command {
 
-  public CommBestDetailHandler(List<CommBoardDTO> commBoardDTOList) {
-    super(commBoardDTOList);
+  CommunityDao communityDao;
+
+  public CommBestDetailHandler(CommunityDao communityDao) {
+    this.communityDao =  communityDao;
+
   }
+
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("[  소통해요/나눔이야기Best/상세보기  ]");
+
+    CommBestComparator commBestComparator = new CommBestComparator();
+
 
 
 

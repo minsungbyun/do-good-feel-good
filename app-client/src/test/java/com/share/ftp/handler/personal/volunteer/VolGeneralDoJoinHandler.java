@@ -1,21 +1,22 @@
 package com.share.ftp.handler.personal.volunteer;
 
-import java.util.List;
-import com.share.ftp.domain.personal.GeneralRequestDTO;
+import static com.share.util.General.point.VOLUNTEER_POINT;
+import com.share.ftp.dao.VolunteerDao;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
+import com.share.util.Helper;
 import com.share.util.Prompt;
 
-public class VolGeneralDoJoinHandler extends AbstractVolGeneralHandler { 
+public class VolGeneralDoJoinHandler implements Command { 
 
+  VolunteerDao volunteerDao;
 
-  public VolGeneralDoJoinHandler(
-      List<GeneralRequestDTO> generalRequestDTOList,
-      List<GeneralRequestDTO> generalRequestApplyDTOList,
-      List<GeneralRequestDTO> generalRequestRejectDTOList) {
-
-    super(generalRequestDTOList, generalRequestApplyDTOList, generalRequestRejectDTOList);
+  public VolGeneralDoJoinHandler(VolunteerDao volunteerDao) {
+    this.volunteerDao = volunteerDao;
   }
+
 
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -23,18 +24,12 @@ public class VolGeneralDoJoinHandler extends AbstractVolGeneralHandler {
     System.out.println("[  봉사 참여  ]");
     System.out.println(" ▶ 참여를 원하는 봉사번호를 입력해주세요 ");
     System.out.println();
-    int volNo = Prompt.inputInt("봉사번호 ▶ ");
+    int volNo = (int) request.getAttribute("volNo");
 
-    GeneralRequestDTO generalRequestApplyDTO = findByApplyVol(volNo);
+    VolunteerRequestDTO generalRequestApplyDTO = volunteerDao.findByApplyVol(volNo);
 
-
-    if (generalRequestApplyDTO == null) {
-      System.out.println("[  ⛔ 존재하지 않는 봉사입니다 ⛔ ]");
-      return;
-    }
 
     System.out.printf("봉사번호: %d\n"
-        + "봉사유형: %s\n"
         + "봉사제목: %s\n"
         + "주최자: %s\n"
         + "봉사분류: %s\n"
@@ -44,27 +39,28 @@ public class VolGeneralDoJoinHandler extends AbstractVolGeneralHandler {
         + "봉사종료기간: %s\n"
         + "봉사시작시간: %s\n"
         + "봉사종료시간: %s\n"
+        + "봉사남은시간: %s\n"
         //        + "봉사목록: %s\n"
-        + "봉사인원: %d명  /  %d명\n"
+        + "봉사인원: %d명 / %d명\n"
         + "봉사내용: %s\n"
         + "첨부파일: %s\n\n",
 
-        generalRequestApplyDTO.getVolNo(),      
-        generalRequestApplyDTO.getMemberType(),      
-        generalRequestApplyDTO.getVolTitle(),     
+        generalRequestApplyDTO.getNo(),      
+        generalRequestApplyDTO.getTitle(),     
         generalRequestApplyDTO.getOwner().getName(), 
-        generalRequestApplyDTO.getVolType(), 
-        generalRequestApplyDTO.getVolTel(),
-        generalRequestApplyDTO.getVolEmail(),
-        generalRequestApplyDTO.getVolStartDate(),
-        generalRequestApplyDTO.getVolEndDate(),
-        generalRequestApplyDTO.getVolStartTime(),
-        generalRequestApplyDTO.getVolEndTime(),
+        generalRequestApplyDTO.getType(), 
+        generalRequestApplyDTO.getTel(),
+        generalRequestApplyDTO.getEmail(),
+        generalRequestApplyDTO.getStartDate(),
+        generalRequestApplyDTO.getEndDate(),
+        generalRequestApplyDTO.getStartTime(),
+        generalRequestApplyDTO.getEndTime(),
+        Helper.getRemainTime(generalRequestApplyDTO.getEndDate().getTime() - System.currentTimeMillis()),
         //        personalRequestApplyDTO.getVolList(),
         generalRequestApplyDTO.getTotalJoinCount(),
-        generalRequestApplyDTO.getVolLimitNum(),
-        generalRequestApplyDTO.getVolContent(),
-        generalRequestApplyDTO.getVolFileUpload()
+        generalRequestApplyDTO.getLimitNum(),
+        generalRequestApplyDTO.getContent(),
+        generalRequestApplyDTO.getFileUpload()
         );
 
     String input = Prompt.inputString("해당 봉사활동을 참가하시겠습니까?(y/N) ");
@@ -81,12 +77,12 @@ public class VolGeneralDoJoinHandler extends AbstractVolGeneralHandler {
     }
 
     // 봉사인원 유효성 검사
-    if (generalRequestApplyDTO.getTotalJoinCount() == generalRequestApplyDTO.getVolLimitNum()) {
+    if (generalRequestApplyDTO.getTotalJoinCount() == generalRequestApplyDTO.getLimitNum()) {
       System.out.println("[ 정원이 초과하였습니다! 다음에 참여해주세요! ]");
       return;
     }
 
-    if (generalRequestApplyDTO.getMembers().contains(AuthLoginHandler.getLoginUser())) {
+    if (generalRequestApplyDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId())) {
       System.out.println("이미 봉사참여를 하셨습니다!");
       return;
     } 
@@ -97,11 +93,13 @@ public class VolGeneralDoJoinHandler extends AbstractVolGeneralHandler {
     if (generalRequestApplyDTO.getMembers().contains(generalRequestApplyDTO.getOwner())) {
       generalRequestApplyDTO.getMembers().remove(generalRequestApplyDTO.getOwner());
     }
+    AuthLoginHandler.getLoginUser().setPoint(AuthLoginHandler.getLoginUser().getPoint() + VOLUNTEER_POINT);
 
     // 총 참여 인원(주최자1명 포함)을 누적시킨다.
     int count = generalRequestApplyDTO.getTotalJoinCount();
-    count += 1;
-    generalRequestApplyDTO.setTotalJoinCount(count); 
+    generalRequestApplyDTO.setTotalJoinCount(count += 1); 
+
+    volunteerDao.update(generalRequestApplyDTO);
 
     System.out.println("[  ✔️ 봉사참여가 완료되었습니다. ]");
   }

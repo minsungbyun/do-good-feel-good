@@ -1,7 +1,8 @@
 package com.share.ftp.handler.personal.community;
 
 import java.sql.Date;
-import com.share.ftp.dao.CommunityDao;
+import org.apache.ibatis.session.SqlSession;
+import com.share.ftp.dao.VolBoardDao;
 import com.share.ftp.domain.community.CommBoardDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -10,10 +11,12 @@ import com.share.util.Prompt;
 
 public class CommBoardAddHandler implements Command {
 
-  CommunityDao communityDao;
+  VolBoardDao volBoardDao;
+  SqlSession sqlSession;
 
-  public CommBoardAddHandler(CommunityDao communityDao) {
-    this.communityDao =  communityDao;
+  public CommBoardAddHandler(VolBoardDao volBoardDao, SqlSession sqlSession) {
+    this.volBoardDao =  volBoardDao;
+    this.sqlSession = sqlSession;
 
   }
 
@@ -32,7 +35,8 @@ public class CommBoardAddHandler implements Command {
     commBoardDTO.setOwner(AuthLoginHandler.getLoginUser());
 
 
-    communityDao.insert(commBoardDTO);
+    volBoardDao.insert(commBoardDTO);
+    sqlSession.commit();
 
     System.out.println();
     System.out.println("[  게시글 등록이 완료되었습니다.  ]");

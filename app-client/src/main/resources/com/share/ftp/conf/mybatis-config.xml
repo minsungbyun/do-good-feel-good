@@ -23,9 +23,7 @@
   </environments>
   
   <mappers>
-
   <package name="com.share.ftp.dao"/>
-
   </mappers>
 </configuration>
 

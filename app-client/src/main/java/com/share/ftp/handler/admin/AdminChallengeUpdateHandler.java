@@ -1,8 +1,8 @@
 package com.share.ftp.handler.admin;
 
 import java.sql.Date;
+import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.ChallengeDao;
-import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -11,11 +11,11 @@ import com.share.util.Prompt;
 public class AdminChallengeUpdateHandler implements Command {
 
   ChallengeDao challengeDao;
-  ChallengeQuestionDao challengeQuestionDao;
+  SqlSession sqlSession;
 
-  public AdminChallengeUpdateHandler(ChallengeDao challengeDao, ChallengeQuestionDao challengeQuestionDao) {
+  public AdminChallengeUpdateHandler(ChallengeDao challengeDao, SqlSession sqlSession) {
     this.challengeDao = challengeDao;
-    this.challengeQuestionDao = challengeQuestionDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -48,6 +48,7 @@ public class AdminChallengeUpdateHandler implements Command {
       challengeDTO.setEndDate(endDate);
 
       challengeDao.update(challengeDTO);
+      sqlSession.commit();
       System.out.println();
 
       System.out.println();

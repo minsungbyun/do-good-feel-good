@@ -1,5 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
+import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
@@ -14,10 +15,13 @@ public class ChallengeQuestionAddHandler implements Command {
 
   ChallengeDao challengeDao;
   ChallengeQuestionDao challengeQuestionDao;
+  SqlSession sqlSession;
 
-  public ChallengeQuestionAddHandler(ChallengeDao challengeDao, ChallengeQuestionDao challengeQuestionDao) {
+  public ChallengeQuestionAddHandler(
+      ChallengeDao challengeDao, ChallengeQuestionDao challengeQuestionDao, SqlSession sqlSession) {
     this.challengeDao = challengeDao;
     this.challengeQuestionDao = challengeQuestionDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -64,6 +68,7 @@ public class ChallengeQuestionAddHandler implements Command {
 
     //    challengeDao.update(challengeDTO);
     challengeQuestionDao.insert(challengeQuestionDTO);
+    sqlSession.commit();
 
     System.out.println();
     System.out.println("문의 등록이 완료되었습니다.");

@@ -12,7 +12,13 @@
     <result column="start_dt" property="startDate"/>
     <result column="end_dt" property="endDate"/>
     <result column="created_dt" property="registeredDate"/>
+    
+    <collection property="members" ofType="JoinDTO">
+      <id column="user_no" property="no"/>
+      <result column="id" property="id"/>
+    </collection>
   </resultMap>
+  
   
   <select id="findAll" resultMap="ChallengeDTOMap">
    select 
@@ -30,7 +36,10 @@
     values(#{title},#{content},#{startDate},#{endDate}, curdate())
   </insert>
   
-  
+  <insert id="insertUser">
+    insert into ftp_challenge_apply(challenge_no,user_no,created_dt)
+    values({#param1},#{param2}, curdate())
+  </insert>
   
    <update id="update" parameterType="ChallengeDTO">
    update ftp_challenge set
@@ -50,7 +59,7 @@
   
   
   
-  <select id="findByChallengeNo" resultMap="ChallengeDTOMap" parameterType="int">
+  <select id="findByNo" resultMap="ChallengeDTOMap" parameterType="int">
      select 
      challenge_no,
      title,

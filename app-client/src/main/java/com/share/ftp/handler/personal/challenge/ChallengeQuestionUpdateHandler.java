@@ -1,18 +1,20 @@
 package com.share.ftp.handler.personal.challenge;
 
+import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
-import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
 public class ChallengeQuestionUpdateHandler implements Command {
 
   ChallengeQuestionDao challengeQuestionDao;
+  SqlSession sqlSession;
 
-  public ChallengeQuestionUpdateHandler(ChallengeQuestionDao challengeQuestionDao) {
+  public ChallengeQuestionUpdateHandler(ChallengeQuestionDao challengeQuestionDao, SqlSession sqlSession) {
     this.challengeQuestionDao = challengeQuestionDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -31,12 +33,12 @@ public class ChallengeQuestionUpdateHandler implements Command {
       return;
     }
 
-    if ((challengeQuestion.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
-        AuthLoginHandler.getLoginUser().getId().equals("admin")) {
-    } else {
-      System.out.println("변경 권한이 없습니다.");
-      return;
-    }
+    //    if ((challengeQuestion.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
+    //        AuthLoginHandler.getLoginUser().getId().equals("admin")) {
+    //    } else {
+    //      System.out.println("변경 권한이 없습니다.");
+    //      return;
+    //    }
 
     String content = Prompt.inputString(String.format("내용(%s)? ", challengeQuestion.getContent()));
 
@@ -51,6 +53,7 @@ public class ChallengeQuestionUpdateHandler implements Command {
         System.out.println();
         challengeQuestion.setContent(content);
         challengeQuestionDao.update(challengeQuestion);
+        sqlSession.commit();
 
         System.out.println("문의를 수정하였습니다.");
         return;

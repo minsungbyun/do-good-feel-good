@@ -1,5 +1,6 @@
 package com.share.ftp.handler.admin;
 
+import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.handler.Command;
@@ -9,9 +10,11 @@ import com.share.util.Prompt;
 public class AdminChallengeAddHandler implements Command {
 
   ChallengeDao challengeDao;
+  SqlSession sqlSession;
 
-  public AdminChallengeAddHandler(ChallengeDao challengeDao) {
+  public AdminChallengeAddHandler(ChallengeDao challengeDao, SqlSession sqlSession) {
     this.challengeDao = challengeDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -43,6 +46,7 @@ public class AdminChallengeAddHandler implements Command {
     //    challengeDTO.setNo(challengeDao.getNextNum()); 
 
     challengeDao.insert(challengeDTO);
+    sqlSession.commit();
     System.out.println();
     System.out.println("[ 챌린지가 정상적으로 등록되었습니다. ]");
   }

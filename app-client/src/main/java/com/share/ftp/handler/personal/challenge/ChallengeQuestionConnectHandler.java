@@ -4,6 +4,7 @@ import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
+import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
 public class ChallengeQuestionConnectHandler implements Command {
@@ -30,17 +31,17 @@ public class ChallengeQuestionConnectHandler implements Command {
       return;
     }
 
-    //    if (challengeQuestion.getOwner().getNo() == AuthLoginHandler.getLoginUser().getNo() ||
-    //        AuthLoginHandler.getLoginUser().getId().equals("admin")) {
+    if (challengeQuestion.getOwner().getNo() == AuthLoginHandler.getLoginUser().getNo() ||
+        AuthLoginHandler.getLoginUser().getId().equals("admin")) {
 
-    //    System.out.printf("아이디: %s\n", challengeQuestion.getOwner().getId());
-    System.out.printf("내용: %s\n", challengeQuestion.getContent());
-    System.out.printf("등록날짜: %s\n", challengeQuestion.getRegisteredDate());
+      System.out.printf("아이디: %s\n", challengeQuestion.getOwner().getId());
+      System.out.printf("내용: %s\n", challengeQuestion.getContent());
+      System.out.printf("등록날짜: %s\n", challengeQuestion.getRegisteredDate());
 
-    //    } else {
-    //      System.out.println("본인이 작성한 글만 확인할 수 있습니다.");
-    //      return;
-    //    }
+    } else {
+      System.out.println("본인이 작성한 글만 확인할 수 있습니다.");
+      return;
+    }
 
     System.out.println();
 

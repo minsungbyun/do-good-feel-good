@@ -1,19 +1,21 @@
 package com.share.ftp.handler.admin;
 
 import java.sql.Date;
-import java.util.List;
+import java.util.Collection;
+import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
-import com.share.ftp.domain.personal.ChallengeQuestionDTO;
+import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
-import com.share.ftp.handler.personal.challenge.AbstractChallengeQuestionHandler;
 import com.share.util.Prompt;
 
-public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHandler {
+public class AdminChallengeReplyAddHandler implements Command {
 
-  public AdminChallengeReplyAddHandler(List<ChallengeQuestionDTO> challengeQuestionDTOList,
-      List<ChallengeDTO> challengeDTOList, List<ChallengeQuestionDTO> challengeReplyList) {
-    super(challengeQuestionDTOList, challengeDTOList, challengeReplyList);
+  ChallengeDao challengeDao;
+
+  public AdminChallengeReplyAddHandler(ChallengeDao challengeDao) {
+    this.challengeDao = challengeDao;
   }
 
   @Override
@@ -21,53 +23,52 @@ public class AdminChallengeReplyAddHandler extends AbstractChallengeQuestionHand
     System.out.println();
     System.out.println("[ 문의답글 등록 ]");
     System.out.println();
-    //    int challengeNo = (int) request.getAttribute("no");
-    //
-    //    ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
+    int challengeNo = (int) request.getAttribute("challengeNo");
 
-    int questionNo = (int) request.getAttribute("no");
-    ChallengeQuestionDTO challengeQuestion = findByQuestionNo(questionNo);
+    ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
 
+    int challengeQuestionNo = Prompt.inputInt("문의 번호를 입력해주세요 ▶ ");
+
+    ChallengeQuestionDTO challengeQuestionDTO = new ChallengeQuestionDTO();
+
+    challengeQuestionDTO.setNo(challengeDTO.getNo());
+    challengeQuestionDTO.setContent(Prompt.inputString("내용: "));
+    challengeQuestionDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
+    challengeQuestionDTO.setOwner(AuthLoginHandler.getLoginUser());
 
     String input = Prompt.inputString("해당 문의에 답글 등록을 하시겠습니까?(y/N) ");
-    if (!input.equals("y") || input.length() == 0) {
+    if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println();
       System.out.println("해당 문의에 답글 등록을 취소하였습니다.");
       return;
+
+    } else if (input.equalsIgnoreCase("y")) {
+
+      challengeDTO.setQuestionCount(challengeDao.getNextQuestionNum(challengeDTO));
+      challengeQuestionDTO.setQuestionNo(challengeDTO.getQuestionCount()); // 해당 챌린지 문의의 마지막 번호기억 + 1
+
+      //      int index = challengeDao.questionIndexOf(challengeNo, challengeQuestionNo);
+
+      challengeDao.insertAdmin(challengeQuestionNo, challengeQuestionDTO);
+
+      Collection<ChallengeQuestionDTO> challengeQuestionSort = challengeDao.findAllQuestion();
+
+      for (ChallengeQuestionDTO a : challengeQuestionSort) {
+        System.out.printf("%d, %d, %s, %s, %s\n", 
+            a.getNo(), // 테스트 끝나고 지움
+            a.getQuestionNo(),
+            a.getOwner().getId(),
+            a.getContent(),
+            a.getRegisteredDate());
+      }
+
+      challengeDao.sortChallengeQuestion(challengeQuestionDTO);
+
+      System.out.println();
+      System.out.println("문의답글 등록이 완료되었습니다.");
     }
-
-
-    //    if (!challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
-    //      System.out.println("챌린지 참여한 회원만 등록이 가능합니다!");
-    //      return;
-    //    }
-
-    ChallengeQuestionDTO challengeReply = new ChallengeQuestionDTO();
-
-    challengeReply.setNo(challengeQuestion.getNo());
-    challengeReply.setContent(Prompt.inputString("내용: "));
-    challengeReply.setRegisteredDate(new Date(System.currentTimeMillis()));
-
-    challengeReply.setOwner(AuthLoginHandler.getLoginUser());
-
-    //    challengeQuestionDTO.setNo(getNextNum());
-
-    if (challengeQuestion.getReplyCount() == 0) {
-      challengeQuestion.setReplyCount(1);
-      //      System.out.println("각 챌린지의 첫 문의입니다");
-    } else {
-      challengeQuestion.setReplyCount(getNextReplyNum(challengeQuestion));
-      //      challengeReviewDTO.setReviewNo(getNextNum2()); // 해당 챌린지 문의의 마지막 번호기억 + 1
-      //      System.out.println("현재 문의의 번호는? (challengeReviewDTO.getQuestionNo()) " + challengeQuestionDTO.getQuestionNo());
-      //      System.out.println("현재 문의의 번호는? (challengeDTO.getQuestionCount()) " + challengeDTO.getQuestionCount());
-    }
-    //    challengeDTO.setReviewCount(challengeReviewDTO.getReviewNo());
-    challengeReply.setQuestionNo(challengeQuestion.getReplyCount()); // 해당 챌린지 문의의 마지막 번호기억 + 1
-    //    System.out.println("challengeDTO.getQuestionCount() = " + challengeDTO.getQuestionCount());
-
-    challengeReplyList.add(challengeReply);
-
-    System.out.println();
-    System.out.println("문의답글 등록이 완료되었습니다.");
   }
+
+
+
 }

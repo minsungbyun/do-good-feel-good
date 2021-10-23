@@ -1,6 +1,7 @@
 package com.share.ftp.handler.personal.community;
 
-import com.share.ftp.dao.CommunityDao;
+import org.apache.ibatis.session.SqlSession;
+import com.share.ftp.dao.VolBoardDao;
 import com.share.ftp.domain.community.CommBoardDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -9,10 +10,12 @@ import com.share.util.Prompt;
 
 public class CommBoardDeleteHandler implements Command {
 
-  CommunityDao communityDao;
+  VolBoardDao volBoardDao;
+  SqlSession sqlSession;
 
-  public CommBoardDeleteHandler(CommunityDao communityDao) {
-    this.communityDao =  communityDao;
+  public CommBoardDeleteHandler(VolBoardDao volBoardDao, SqlSession sqlSession) {
+    this.volBoardDao =  volBoardDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -24,7 +27,7 @@ public class CommBoardDeleteHandler implements Command {
 
       int commBoardNo = (int) request.getAttribute("commBoardNo");
 
-      CommBoardDTO commBoardDTO = communityDao.findByCommBoardNo(commBoardNo);
+      CommBoardDTO commBoardDTO = volBoardDao.findByCommBoardNo(commBoardNo);
 
 
       if (commBoardDTO == null) {
@@ -46,7 +49,8 @@ public class CommBoardDeleteHandler implements Command {
         return;
       } 
 
-      communityDao.delete(commBoardDTO);
+      volBoardDao.delete(commBoardDTO);
+      sqlSession.commit();
 
       System.out.println();
       System.out.println("[  게시글을 삭제하였습니다. ]");

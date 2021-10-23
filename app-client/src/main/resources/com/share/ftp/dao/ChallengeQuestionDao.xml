@@ -33,7 +33,6 @@
       q.challenge_qna_no desc
   </select>
  
-  <!--  
   <insert id="insert" parameterType="ChallengeQuestionDTO">
     insert into ftp_challenge_qna(challenge_no,content,user_no,created_dt) 
     values(#{no},#{content},#{owner.no}, curdate())
@@ -42,7 +41,7 @@
   
    <update id="update" parameterType="ChallengeQuestionDTO">
    update ftp_challenge_qna set
-     content=#{content},
+     content=#{content}
    where 
       challenge_qna_no=#{questionNo}
   </update>
@@ -67,9 +66,8 @@
       ftp_challenge_qna q
       inner join ftp_user u on q.user_no=u.user_no
     where 
-      challenge_qna_no=#{values}
+      challenge_no=#{challengeNo} and challenge_qna_no=#{challengeQuestionNo}
   </select>
--->
 </mapper>
 
 

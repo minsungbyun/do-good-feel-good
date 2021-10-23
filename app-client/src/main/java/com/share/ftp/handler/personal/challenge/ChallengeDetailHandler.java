@@ -4,6 +4,7 @@ import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
+import com.share.util.GeneralHelper;
 import com.share.util.Prompt;
 
 public class ChallengeDetailHandler implements Command {
@@ -41,7 +42,7 @@ public class ChallengeDetailHandler implements Command {
     System.out.printf("시작일 ▶ %s\n", challengeDTO.getStartDate());
     System.out.printf("종료일 ▶ %s\n", challengeDTO.getEndDate());
     System.out.printf("챌린지기간 ▶ %d일\n",  ((((challengeDTO.getEndDate().getTime() - challengeDTO.getStartDate().getTime()) / 1000)) / (24*60*60)));
-    System.out.printf(challengeDao.getRemainTime(challengeDTO.getEndDate().getTime() - System.currentTimeMillis()));
+    System.out.printf(GeneralHelper.getRemainTime(challengeDTO.getEndDate().getTime() - System.currentTimeMillis()));
     System.out.printf("등록날짜 ▶ %s\n", challengeDTO.getRegisteredDate());
     System.out.println();
 

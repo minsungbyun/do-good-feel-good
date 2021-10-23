@@ -4,7 +4,7 @@ import static com.share.util.General.check.Rejected;
 import java.util.Collection;
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.join.JoinDTO;
-import com.share.ftp.domain.volunteer.GeneralRequestDTO;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -25,7 +25,7 @@ public class MyRejectedVolHandler implements Command {
 
     JoinDTO loginUser = AuthLoginHandler.getLoginUser();
 
-    Collection<GeneralRequestDTO> generalRequestDTOList = volunteerDao.findAll();
+    Collection<VolunteerRequestDTO> generalRequestDTOList = volunteerDao.findAll();
 
     if (generalRequestDTOList.isEmpty()) {
       System.out.println();
@@ -35,7 +35,7 @@ public class MyRejectedVolHandler implements Command {
 
 
 
-    for (GeneralRequestDTO generalRequestRejectDTO : generalRequestDTOList) {
+    for (VolunteerRequestDTO generalRequestRejectDTO : generalRequestDTOList) {
       if (generalRequestRejectDTO.getStatus().equals(Rejected) &&
           generalRequestRejectDTO.getOwner().getName().equals(loginUser.getName())) {
         System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 

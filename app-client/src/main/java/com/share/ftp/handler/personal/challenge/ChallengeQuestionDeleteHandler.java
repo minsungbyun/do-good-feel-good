@@ -1,22 +1,25 @@
 package com.share.ftp.handler.personal.challenge;
 
+import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
-import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
 public class ChallengeQuestionDeleteHandler implements Command {
 
   ChallengeDao challengeDao;
   ChallengeQuestionDao challengeQuestionDao;
+  SqlSession sqlSession;
 
-  public ChallengeQuestionDeleteHandler(ChallengeDao challengeDao, ChallengeQuestionDao challengeQuestionDao) {
+  public ChallengeQuestionDeleteHandler(
+      ChallengeDao challengeDao, ChallengeQuestionDao challengeQuestionDao, SqlSession sqlSession) {
     this.challengeDao = challengeDao;
     this.challengeQuestionDao = challengeQuestionDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -38,12 +41,12 @@ public class ChallengeQuestionDeleteHandler implements Command {
       return;
     }
 
-    if ((deleteChallengeQuestion.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
-        AuthLoginHandler.getLoginUser().getId().equals("admin")) {
-    } else {
-      System.out.println("삭제 권한이 없습니다.");
-      return;
-    }
+    //    if ((deleteChallengeQuestion.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
+    //        AuthLoginHandler.getLoginUser().getId().equals("admin")) {
+    //    } else {
+    //      System.out.println("삭제 권한이 없습니다.");
+    //      return;
+    //    }
 
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -54,7 +57,8 @@ public class ChallengeQuestionDeleteHandler implements Command {
       challenge.setQuestionCount(challenge.getQuestionCount() - 1);
 
       challengeDao.update(challenge);
-      challengeQuestionDao.delete(deleteChallengeQuestion);
+      challengeQuestionDao.delete(challengeQuestionNo);
+      sqlSession.commit();
 
       System.out.println("해당 문의사항을 삭제하였습니다.");
     }

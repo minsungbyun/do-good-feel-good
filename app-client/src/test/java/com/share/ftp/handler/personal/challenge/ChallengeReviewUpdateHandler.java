@@ -1,69 +1,64 @@
 package com.share.ftp.handler.personal.challenge;
 
-import java.util.List;
-import com.share.ftp.domain.admin.ChallengeDTO;
-import com.share.ftp.domain.personal.ChallengeReviewDTO;
+import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.domain.challenge.ChallengeReviewDTO;
+import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class ChallengeReviewUpdateHandler extends AbstractChallengeReviewHandler {
+public class ChallengeReviewUpdateHandler implements Command {
 
-  public ChallengeReviewUpdateHandler(List<ChallengeReviewDTO> challengeReviewDTOList,
-      List<ChallengeDTO> challengeDTOList) {
-    super(challengeReviewDTOList, challengeDTOList);
+  ChallengeDao challengeDao;
+
+  public ChallengeReviewUpdateHandler(ChallengeDao challengeDao) {
+    this.challengeDao = challengeDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
+    System.out.println("[ 참여인증&댓글 수정 ]");
+
+    int challengeNo = (int) request.getAttribute("challengeNo");
+
+    int challengeReviewNo = (int) request.getAttribute("challengeReviewNo");
+
+    ChallengeReviewDTO challengeReviewDTO = challengeDao.findByChallengeReviewNo(challengeNo, challengeReviewNo);
+
+    if (challengeReviewDTO == null) {
+      System.out.println("해당 번호의 참여인증&댓글이 없습니다.");
+      return;
+    }
+
+    if (!challengeReviewDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+      System.out.println("변경 권한이 없습니다.");
+      return;
+    }
+
+    String content = Prompt.inputString(String.format("내용(%s)? ", challengeReviewDTO.getContent()));
+    String fileUpload = Prompt.inputString(String.format("파일첨부(%s)? ", challengeReviewDTO.getFileUpload()));
+
     while (true) {
-      System.out.println("[ 참여인증&댓글 수정 ]");
-      //      System.out.println(" ▶ 챌린지 번호를 입력해주세요 ");
-      //      System.out.println();
-      //      int challengeNo = (int) request.getAttribute("no");
-      //
-      //      ChallengeDTO challengeDTO = findByChallengeNo(challengeNo);
-      //
-      //
-      //      if (challengeDTO == null) {
-      //        System.out.println("존재하지 않는 챌린지입니다");
-      //      }
+      String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
 
-      int updateNo = (int) request.getAttribute("reviewNo");
+      if (input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println();
+        System.out.println("참여인증&댓글 수정을 취소하였습니다.");
+        return;
 
-      ChallengeReviewDTO challengeReviewDTO = findByReviewNo(updateNo);
+      } else if (input.equalsIgnoreCase("y")) {
+        System.out.println();
+        challengeReviewDTO.setContent(content);
+        challengeReviewDTO.setFileUpload(fileUpload);
+        challengeDao.updateReview(challengeReviewDTO);
 
-      try {
-        if (challengeReviewDTO == null) {
-          System.out.println("해당 번호의 참여인증&댓글이 없습니다.");
-          return;
-        }
+        System.out.println("참여인증&댓글을 수정하였습니다.");
+        return;
 
-        if (!challengeReviewDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
-          System.out.println("변경 권한이 없습니다.");
-          return;
-        }
+      } else {
+        System.out.println("y 또는 n을 입력하세요.");
 
-        String content = Prompt.inputString(String.format("내용(%s)? ", challengeReviewDTO.getContent()));
-        String fileUpload = Prompt.inputString(String.format("파일첨부(%s)? ", challengeReviewDTO.getFileUpload()));
-
-        String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
-        if (input.equalsIgnoreCase("n") || input.length() == 0) {
-          System.out.println();
-          System.out.println("참여인증&댓글 수정을 취소하였습니다.");
-          return;
-        } else if (input.equals("y")) {
-          System.out.println();
-          System.out.println("참여인증&댓글을 수정하였습니다.");
-          challengeReviewDTO.setContent(content);
-          challengeReviewDTO.setFileUpload(fileUpload);
-          return;
-        } else {
-          System.out.println("y 또는 n을 입력하세요.");
-          continue;
-        } 
-      } catch (Throwable e) {
-      }
+      } 
     }
   }
 }

@@ -1,6 +1,7 @@
 package com.share.ftp.dao;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 
@@ -11,10 +12,12 @@ public interface ChallengeQuestionDao {
   void insertAdmin(int challengeQuestionNo, ChallengeQuestionDTO addChallengeQuestion) throws Exception;
   List<ChallengeQuestionDTO> findAll() throws Exception;      
   void update(ChallengeQuestionDTO updateChallengeQuestion) throws Exception;          
-  void delete(ChallengeQuestionDTO challengeQuestion) throws Exception; 
+  void delete(int no) throws Exception; 
   List<ChallengeQuestionDTO> findByKeyword(String keyword) throws Exception;
   void sortChallengeQuestion(ChallengeQuestionDTO sortChallengeQuestion) throws Exception;
 
-  ChallengeQuestionDTO findByNo(int challengeNo, int challengeQuestionNo) throws Exception;
+  ChallengeQuestionDTO findByNo(
+      @Param("challengeNo")int challengeNo,
+      @Param("challengeQuestionNo") int challengeQuestionNo) throws Exception;
   int getNextNum(ChallengeDTO challenge) throws Exception;
 }

@@ -12,7 +12,7 @@
     <result column="point" property="point"/>
     
     <result column="user_no" property="no"/>
-    <result column="id  " property="id"/>
+    <result column="id" property="id"/>
     <result column="password" property="password"/>
     <result column="name" property="name"/>
     <result column="tel" property="tel"/>
@@ -36,7 +36,7 @@
     values(#{id},password(#{password}),#{name},#{tel},#{email},#{postNo},#{basicAddress},#{detailAddress},#{type},#{status})
   </insert>
   
-  <insert id="insertPersonal" parameterType="map">
+  <insert id="insertPersonal">
     insert into ftp_user_personal(user_no,birthdate,rank)
     values(#{userNo},#{userBirthdate},#{userLevel})
   </insert>
@@ -77,7 +77,7 @@
   </update>
 -->
   
-  <select id="findByIdPassword" resultMap="PersonalDTOMap" parameterType="map">
+  <select id="findByIdPassword" resultMap="PersonalDTOMap">
     select 
        u.*,  
        p.user_personal_no,  
