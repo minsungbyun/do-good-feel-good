@@ -47,8 +47,35 @@
 	     ftp_user u
 	     inner join ftp_user_group g on u.user_no=g.user_no
 	   order by
-	     user_group_no asc
+	     user_group_no desc
   </select>
+  
+  <select id="findAllWaitGroup" resultMap="GroupDTOMap">
+	   select 
+	     u.*,    
+	     g.user_group_no,
+	     g.group_cnt
+	   from
+	     ftp_user u
+	     inner join ftp_user_group g on u.user_no=g.user_no
+	   where
+	     u.status=2
+	   order by
+	     user_group_no desc
+  </select>
+  
+  <select id="findByGroupNo" resultMap="GroupDTOMap" parameterType="int">
+    select
+      u.*,
+      g.user_group_no,
+      g.group_cnt
+    from 
+      ftp_user u
+      inner join ftp_user_group g on u.user_no=g.user_no
+    where
+      u.user_no=#{no}
+  </select>
+  
   
   <select id="findByIdPassword" resultMap="GroupDTOMap">
     select
@@ -75,12 +102,19 @@
         user_no=#{no}
   </update>
   
+  <update id="updateStatus" parameterType="GroupDTO">
+     update ftp_user set
+       status=1
+     where 
+        user_no=#{no}
+  </update>
+  
  
    <update id="updateOrg" parameterType="GroupDTO">
      update ftp_user_group set
        group_cnt=#{groupCount}
      where 
-        user_group_no=#{grouplNo}
+        user_group_no=#{groupNo}
   </update>
   
   

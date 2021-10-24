@@ -25,16 +25,16 @@ public class General {
 
     public static final int WITHDRAW        = 0; // 탈퇴회원
     public static final int ACTIVE          = 1; // 가입완료
-    public static final int WAITING         = 2; // 승인대기
+    public static final int WAIT            = 2; // 승인대기
     public static final int REJECT          = 3; // 승인반려
     public static final int INACTIVE        = 4; // 휴면회원
   }
 
   public static class check {
 
-    public static final int Rejected   = 0; // 반려됨
-    public static final int Applied    = 1; // 승인됨
-    public static final int Waiting    = 2; // 승인대기
+    public static final int REJECTED   = 0; // 반려됨
+    public static final int APPLIED    = 1; // 승인됨
+    public static final int WAITING    = 2; // 승인대기
   }
 
   public static class point {
