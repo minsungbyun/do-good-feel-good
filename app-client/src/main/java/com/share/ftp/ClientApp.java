@@ -26,8 +26,10 @@ import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.dao.OrgDao;
 import com.share.ftp.dao.PersonalDao;
 import com.share.ftp.dao.QuestionDao;
-import com.share.ftp.dao.VolBoardDao;
+import com.share.ftp.dao.VolunteerBoardCommentDao;
+import com.share.ftp.dao.VolunteerBoardDao;
 import com.share.ftp.dao.VolunteerDao;
+import com.share.ftp.dao.VolunteerShortReviewDao;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.admin.AdminChallengeAddHandler;
@@ -85,12 +87,17 @@ import com.share.ftp.handler.personal.challenge.ChallengeReviewDeleteHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewUpdateHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeWishHandler;
-import com.share.ftp.handler.personal.community.CommBoardAddHandler;
-import com.share.ftp.handler.personal.community.CommBoardDeleteHandler;
-import com.share.ftp.handler.personal.community.CommBoardDetailHandler;
-import com.share.ftp.handler.personal.community.CommBoardListHandler;
-import com.share.ftp.handler.personal.community.CommBoardSearchHandler;
-import com.share.ftp.handler.personal.community.CommBoardUpdateHandler;
+import com.share.ftp.handler.personal.community.VolunteerBoardAddHandler;
+import com.share.ftp.handler.personal.community.VolunteerBoardDeleteHandler;
+import com.share.ftp.handler.personal.community.VolunteerBoardDetailHandler;
+import com.share.ftp.handler.personal.community.VolunteerBoardListHandler;
+import com.share.ftp.handler.personal.community.VolunteerBoardSearchHandler;
+import com.share.ftp.handler.personal.community.VolunteerBoardUpdateHandler;
+import com.share.ftp.handler.personal.community.VolunteerShortReviewAddHandler;
+import com.share.ftp.handler.personal.community.VolunteerShortReviewDeleteHandler;
+import com.share.ftp.handler.personal.community.VolunteerShortReviewListHandler;
+import com.share.ftp.handler.personal.community.VolunteerShortReviewSearchHandler;
+import com.share.ftp.handler.personal.community.VolunteerShortReviewUpdateHandler;
 import com.share.ftp.handler.personal.donation.DonationAdminPrompt;
 import com.share.ftp.handler.personal.donation.DonationBoardAcceptApplyHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardAdminApplyDetailHandler;
@@ -246,9 +253,9 @@ public class ClientApp {
 
 
     // 봉사활동 게시글
-    VolBoardDao volBoardDao = sqlSession.getMapper(VolBoardDao.class);
-    //    VolBoardCommentDao volBoardComment = sqlSession.getMapper(VolBoardComment.class);
-    //    VolShortReviewDao volShortReview = sqlSession.getMapper(VolShortReview.class);    
+    VolunteerBoardDao volunteerBoardDao = sqlSession.getMapper(VolunteerBoardDao.class);
+    VolunteerBoardCommentDao volunteerBoardCommentDao = sqlSession.getMapper(VolunteerBoardCommentDao.class);
+    VolunteerShortReviewDao volunteerShortReviewDao = sqlSession.getMapper(VolunteerShortReviewDao.class);    
 
 
     VolunteerDao volunteerDao = sqlSession.getMapper(VolunteerDao.class);
@@ -256,9 +263,6 @@ public class ClientApp {
     QuestionDao questionDao = sqlSession.getMapper(QuestionDao.class);
     NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
 
-    //    ChallengeQuestionDao netChallengeQuestionDao = new NetChallengeDao(requestAgent);
-    //    ChallengeReviewDao netChallengeReviewDao = new NetChallengeDao(requestAgent);
-    // CommunityDao netCommunityDao = new NetCommunityDao(requestAgent);
 
     //로그인, 로그아웃
 
@@ -305,27 +309,27 @@ public class ClientApp {
 
 
     // 소통해요 나눔이야기
-    commands.put("/commBoard/add", new CommBoardAddHandler(volBoardDao, sqlSession));
-    commands.put("/commBoard/list", new CommBoardListHandler(volBoardDao));
-    commands.put("/commBoard/detail", new CommBoardDetailHandler(volBoardDao, sqlSession));
-    commands.put("/commBoard/update", new CommBoardUpdateHandler(volBoardDao, sqlSession));
-    commands.put("/commBoard/delete", new CommBoardDeleteHandler(volBoardDao, sqlSession));
-    commands.put("/commBoard/search", new CommBoardSearchHandler(volBoardDao));
-    //    commands.put("/commBoard/like", new CommBoardLikeHandler(volboardDao, sqlSession)); 
+    commands.put("/volunteerBoard/add", new VolunteerBoardAddHandler(volunteerBoardDao, sqlSession));
+    commands.put("/volunteerBoard/list", new VolunteerBoardListHandler(volunteerBoardDao));
+    commands.put("/volunteerBoard/detail", new VolunteerBoardDetailHandler(volunteerBoardDao, sqlSession));
+    commands.put("/volunteerBoard/update", new VolunteerBoardUpdateHandler(volunteerBoardDao, sqlSession));
+    commands.put("/volunteerBoard/delete", new VolunteerBoardDeleteHandler(volunteerBoardDao, sqlSession));
+    commands.put("/volunteerBoard/search", new VolunteerBoardSearchHandler(volunteerBoardDao));
+    //    commands.put("/volunteerBoard/like", new CommBoardLikeHandler(volboardDao, sqlSession)); 
 
     // 소통해요 댓글
-    //    commands.put("/commBoardReply/connect", new CommBoardReplyConnectHandler(volBoardCommentDao));
-    //    commands.put("/commBoardReply/add", new CommBoardReplyAddHandler(volBoardCommentDao, sqlSession));
-    //    commands.put("/commBoardReply/list", new CommBoardReplyListHandler(volBoardCommentDao));
-    //    commands.put("/commBoardReply/update", new CommBoardReplyUpdateHandler(volBoardCommentDao, sqlSession));
-    //    commands.put("/commBoardReply/delete", new CommBoardReplyDeleteHandler(volBoardCommentDao, sqlSession));
+    //    commands.put("/volunteerBoardComment/connect", new CommBoardReplyConnectHandler(volunteerBoardCommentDao));
+    //    commands.put("/volunteerBoardComment/add", new CommBoardReplyAddHandler(volunteerBoardCommentDao, sqlSession));
+    //    commands.put("/volunteerBoardComment/list", new CommBoardReplyListHandler(volunteerBoardCommentDao));
+    //    commands.put("/volunteerBoardComment/update", new CommBoardReplyUpdateHandler(volunteerBoardCommentDao, sqlSession));
+    //    commands.put("/volunteerBoardComment/delete", new CommBoardReplyDeleteHandler(volunteerBoardCommentDao, sqlSession));
 
     // 소통해요 한줄후기
-    //    commands.put("/commReview/add", new CommReviewAddHandler(volShortReviewDao, sqlSession));
-    //    commands.put("/commReview/list", new CommReviewListHandler(volShortReviewDao));
-    //    commands.put("/commReview/update", new CommReviewUpdateHandler(volShortReviewDao, sqlSession));
-    //    commands.put("/commReview/delete", new CommReviewDeleteHandler(volShortReviewDao, sqlSession));
-    //    commands.put("/commReview/search", new CommReviewSearchHandler(volShortReviewDao));
+    commands.put("/volunteerShortReview/add", new VolunteerShortReviewAddHandler(volunteerShortReviewDao, sqlSession));
+    commands.put("/volunteerShortReview/list", new VolunteerShortReviewListHandler(volunteerShortReviewDao));
+    commands.put("/volunteerShortReview/update", new VolunteerShortReviewUpdateHandler(volunteerShortReviewDao, sqlSession));
+    commands.put("/volunteerShortReview/delete", new VolunteerShortReviewDeleteHandler(volunteerShortReviewDao, sqlSession));
+    commands.put("/volunteerShortReview/search", new VolunteerShortReviewSearchHandler(volunteerShortReviewDao));
 
 
 
@@ -666,12 +670,12 @@ public class ClientApp {
     MenuGroup reviewMenu = new MenuGroup("나눔 이야기");
     reviewMenu.setMenuFilter(menuFilter);
 
-    reviewMenu.add(new MenuItem("등록", ACCESS_MEMBER_ADMIN, "/commBoard/add"));
-    reviewMenu.add(new MenuItem("목록","/commBoard/list"));
-    reviewMenu.add(new MenuItem("상세보기","/commBoard/detail"));
-    //    reviewMenu.add(new MenuItem("변경", ACCESS_MEMBER_ADMIN,"/commBoard/update"));
-    //    reviewMenu.add(new MenuItem("삭제",ACCESS_MEMBER_ADMIN,"/commBoard/delete"));
-    reviewMenu.add(new MenuItem("검색",ACCESS_MEMBER_ADMIN,"/commBoard/search"));
+    reviewMenu.add(new MenuItem("등록", ACCESS_MEMBER_ADMIN, "/volunteerBoard/add"));
+    reviewMenu.add(new MenuItem("목록","/volunteerBoard/list"));
+    reviewMenu.add(new MenuItem("상세보기","/volunteerBoard/detail"));
+    //    reviewMenu.add(new MenuItem("변경", ACCESS_MEMBER_ADMIN,"/volunteerBoard/update"));
+    //    reviewMenu.add(new MenuItem("삭제",ACCESS_MEMBER_ADMIN,"/volunteerBoard/delete"));
+    reviewMenu.add(new MenuItem("검색",ACCESS_MEMBER_ADMIN,"/volunteerBoard/search"));
 
     return reviewMenu;
   }
@@ -690,11 +694,11 @@ public class ClientApp {
     MenuGroup shortReviewMenu = new MenuGroup("한 줄 후기");
     shortReviewMenu.setMenuFilter(menuFilter);
 
-    shortReviewMenu.add(new MenuItem("등록", ACCESS_MEMBER_ADMIN, "/commReview/add"));
-    shortReviewMenu.add(new MenuItem("목록", "/commReview/list")); 
-    //    shortReviewMenu.add(new MenuItem("변경", ACCESS_MEMBER_ADMIN, "/commReview/update")); 
-    //    shortReviewMenu.add(new MenuItem("삭제", ACCESS_MEMBER_ADMIN, "/commReview/delete")); 
-    shortReviewMenu.add(new MenuItem("검색",ACCESS_MEMBER_ADMIN,"/commReview/search"));
+    shortReviewMenu.add(new MenuItem("등록", ACCESS_MEMBER_ADMIN, "/volunteerShortReview/add"));
+    shortReviewMenu.add(new MenuItem("목록", "/volunteerShortReview/list")); 
+    //    shortReviewMenu.add(new MenuItem("변경", ACCESS_MEMBER_ADMIN, "/volunteerShortReview/update")); 
+    //    shortReviewMenu.add(new MenuItem("삭제", ACCESS_MEMBER_ADMIN, "/volunteerShortReview/delete")); 
+    shortReviewMenu.add(new MenuItem("검색",ACCESS_MEMBER_ADMIN,"/volunteerShortReview/search"));
 
 
     return shortReviewMenu;
@@ -972,10 +976,9 @@ public class ClientApp {
     MenuGroup adminCommInfo = new MenuGroup("커뮤니티 관리", ACCESS_ADMIN);
     adminCommInfo.setMenuFilter(menuFilter);
 
-    adminCommInfo.add(new MenuItem("나눔이야기 목록", ACCESS_MEMBER_ADMIN, "/commBoard/list"));
-    adminCommInfo.add(new MenuItem("나눔이야기", ACCESS_MEMBER_ADMIN, "/commBoard/detail")); 
-    adminCommInfo.add(new MenuItem("나눔이야기 Best 상세보기", ACCESS_MEMBER_ADMIN, "/commBest/detail")); 
-    adminCommInfo.add(new MenuItem("한줄후기 목록",ACCESS_MEMBER_ADMIN,"/commReview/list"));
+    adminCommInfo.add(new MenuItem("나눔이야기 목록", ACCESS_MEMBER_ADMIN, "/volunteerBoard/list"));
+    adminCommInfo.add(new MenuItem("나눔이야기 상세보기", ACCESS_MEMBER_ADMIN, "/volunteerBoard/detail")); 
+    adminCommInfo.add(new MenuItem("한줄후기 목록",ACCESS_MEMBER_ADMIN,"/volunteerShortReview/list"));
 
 
     return adminCommInfo;

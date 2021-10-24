@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.community;
 
 import org.apache.ibatis.session.SqlSession;
-import com.share.ftp.dao.VolBoardDao;
+import com.share.ftp.dao.VolunteerBoardDao;
 import com.share.ftp.domain.community.CommBoardDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -10,11 +10,11 @@ import com.share.util.Prompt;
 
 public class CommBoardDeleteHandler implements Command {
 
-  VolBoardDao volBoardDao;
+  VolunteerBoardDao volunteerBoardDao;
   SqlSession sqlSession;
 
-  public CommBoardDeleteHandler(VolBoardDao volBoardDao, SqlSession sqlSession) {
-    this.volBoardDao =  volBoardDao;
+  public CommBoardDeleteHandler(VolunteerBoardDao volunteerBoardDao, SqlSession sqlSession) {
+    this.volunteerBoardDao =  volunteerBoardDao;
     this.sqlSession = sqlSession;
   }
 
@@ -27,7 +27,7 @@ public class CommBoardDeleteHandler implements Command {
 
       int commBoardNo = (int) request.getAttribute("commBoardNo");
 
-      CommBoardDTO commBoardDTO = volBoardDao.findByCommBoardNo(commBoardNo);
+      CommBoardDTO commBoardDTO = volunteerBoardDao.findByCommBoardNo(commBoardNo);
 
 
       if (commBoardDTO == null) {
@@ -49,7 +49,7 @@ public class CommBoardDeleteHandler implements Command {
         return;
       } 
 
-      volBoardDao.delete(commBoardDTO);
+      volunteerBoardDao.delete(commBoardDTO);
       sqlSession.commit();
 
       System.out.println();

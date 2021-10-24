@@ -2,15 +2,15 @@ package com.share.ftp.handler.personal.community;
 
 import java.util.Collection;
 import com.share.ftp.dao.VolunteerBoardDao;
-import com.share.ftp.domain.community.CommBoardDTO;
+import com.share.ftp.domain.community.VolunteerBoardDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 
-public class CommBoardListHandler implements Command {
+public class VolunteerBoardListHandler implements Command {
 
   VolunteerBoardDao volunteerBoardDao;
 
-  public CommBoardListHandler(VolunteerBoardDao volunteerBoardDao) {
+  public VolunteerBoardListHandler(VolunteerBoardDao volunteerBoardDao) {
     this.volunteerBoardDao =  volunteerBoardDao;
   }
 
@@ -21,9 +21,9 @@ public class CommBoardListHandler implements Command {
     System.out.println("[  메인/소통해요/나눔이야기/목록  ]");
     System.out.println();
 
-    Collection<CommBoardDTO> commBoardDTOList = volunteerBoardDao.findAll();
+    Collection<VolunteerBoardDTO> volunteerBoardDTOList = volunteerBoardDao.findAll();
 
-    if (commBoardDTOList.isEmpty()) {
+    if (volunteerBoardDTOList.isEmpty()) {
       System.out.println("게시글이 없습니다.");
       System.out.println();
     }
@@ -33,16 +33,16 @@ public class CommBoardListHandler implements Command {
     System.out.println("----------------------------------------------");
 
 
-    for(CommBoardDTO commBoardDTO : commBoardDTOList) {
+    for(VolunteerBoardDTO volunteerBoardDTO : volunteerBoardDTOList) {
 
       System.out.printf("%d, %s, %s, %s, %s, %d\n", 
-          commBoardDTO.getNo(), 
-          commBoardDTO.getOwner().getId(),
-          commBoardDTO.getTitle(), 
-          commBoardDTO.getRegisteredDate(), 
-          commBoardDTO.getFileUpload(),
-          commBoardDTO.getViewCount());
-      //          commBoardDTO.getLike(),
+          volunteerBoardDTO.getNo(), 
+          volunteerBoardDTO.getOwner().getId(),
+          volunteerBoardDTO.getTitle(), 
+          volunteerBoardDTO.getRegisteredDate(), 
+          volunteerBoardDTO.getFileUpload(),
+          volunteerBoardDTO.getViewCount());
+      //          volunteerBoardDTO.getLike(),
     }
   }
 }

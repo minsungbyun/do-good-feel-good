@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.community;
 
 import org.apache.ibatis.session.SqlSession;
-import com.share.ftp.dao.VolBoardDao;
+import com.share.ftp.dao.VolunteerBoardDao;
 import com.share.ftp.domain.community.CommBoardDTO;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
@@ -11,11 +11,11 @@ import com.share.util.Prompt;
 
 public class CommBoardDetailHandler implements Command {
 
-  VolBoardDao volBoardDao;
+  VolunteerBoardDao volunteerBoardDao;
   SqlSession sqlSession;
 
-  public CommBoardDetailHandler (VolBoardDao volBoardDao, SqlSession sqlSession) {
-    this.volBoardDao = volBoardDao;
+  public CommBoardDetailHandler (VolunteerBoardDao volunteerBoardDao, SqlSession sqlSession) {
+    this.volunteerBoardDao = volunteerBoardDao;
     this.sqlSession = sqlSession;
   }
 
@@ -29,7 +29,7 @@ public class CommBoardDetailHandler implements Command {
       System.out.println();
       int commBoardNo = Prompt.inputInt("게시글 번호를 입력해주세요 ▶ ");
 
-      CommBoardDTO commBoardDTO = volBoardDao.findByCommBoardNo(commBoardNo);
+      CommBoardDTO commBoardDTO = volunteerBoardDao.findByCommBoardNo(commBoardNo);
 
       if (commBoardDTO == null) {
         System.out.println("[  해당 게시글이 없습니다.  ]");
@@ -48,7 +48,7 @@ public class CommBoardDetailHandler implements Command {
       System.out.printf("조회수 ▶ %d\n", commBoardDTO.getViewCount());
       //      System.out.printf("좋아요♡  %d\n", commBoardDTO.getLike());
 
-      volBoardDao.update(commBoardDTO);
+      volunteerBoardDao.update(commBoardDTO);
       sqlSession.commit();
 
       JoinDTO loginUser = AuthLoginHandler.getLoginUser(); 
