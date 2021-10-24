@@ -13,18 +13,6 @@ public class QuestionCategory {
   }
 
   @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    QuestionCategory other = (QuestionCategory) obj;
-    return no == other.no && Objects.equals(title, other.title);
-  }
-
-  @Override
   public String toString() {
     return "QuestionCategory [no=" + no + ", title=" + title + "]";
   }

@@ -11,25 +11,46 @@
     <result column="content" property="content"/>
     <result column="created_dt" property="registeredDate"/>
     <result column="view_cnt" property="viewCount"/>
+  
+  <collection property="fileUpload" ofType="VolunteerAttachedFile">
+      <id column="notice_file_no" property="no"/>
+      <result column="filepath" property="filepath"/>
+  </collection>
   </resultMap>
   
   <select id="findAll" resultMap="NoticeDTOMap">
    select 
-     notice_no,
-     title,
-     created_dt,
-     view_cnt
+     n.notice_no,
+     n.title,
+     n.created_dt,
+     n.view_cnt,
+     f.filepath
     from
-     ftp_support_notice
-    order by notice_no desc
+     ftp_support_notice n
+     inner join ftp_support_notice_file f on n.notice_no=f.notice_no
+    order by
+      notice_no desc
   </select>
   
   <insert id="insert" parameterType="NoticeDTO">
-    insert into ftp_support_notice(title,content,created_dt) 
-    values(#{title},#{content}, curdate())
+    insert into ftp_support_notice(
+      title,
+      content,
+      created_dt) 
+    values(
+      #{title},
+      #{content},
+      curdate())
   </insert>
-  
-  
+  <insert id="insertFile" parameterType="string">
+    insert into
+      ftp_support_notice_file(
+      notice_no,
+      filepath)
+    values(
+      #{no},
+      #{filepath})
+  </insert>
   
    <update id="update" parameterType="NoticeDTO">
    update ftp_support_notice set
@@ -39,46 +60,59 @@
       notice_no=#{no}
   </update>
   
-  
+  <update id="updateFile" parameterType="NoticeDTO">
+   update ftp_support_notice_file set
+     title=#{title},
+     content=#{content}
+   where 
+      notice_no=#{no}
+  </update>
   
    <delete id="delete" parameterType="int">
     delete from ftp_support_notice where notice_no=${values}
   </delete>
   
+  <delete id="deleteFile" parameterType="int">
+    delete from ftp_support_notice_file
+    where
+      notice_no=${no}
+  </delete>
   
-  
-  <select id="findByNoticeNo" resultMap="NoticeDTOMap" parameterType="int">
+  <select id="findByNo" resultMap="NoticeDTOMap" parameterType="int">
      select 
-     notice_no,
-     title,
-     content,
-     created_dt,
-     view_cnt
+      n.notice_no,
+      n.title,
+      n.content,
+      n.created_dt,
+      n.view_cnt
+      f.filepath
     from
-     ftp_support_notice
+     ftp_support_notice n
+     inner join ftp_support_notice_file f on n.notice_no=f.notice_no
     where 
-      notice_no=#{values}
+      notice_no=#{no}
   </select>
-  
-  
   
   <select id="findByKeyword" resultMap="NoticeDTOMap" parameterType="string">
      select 
-       notice_no,
-       title,   
-       created_dt,
-       view_cnt
+       n.notice_no,
+       n.title,   
+       n.created_dt,
+       n.view_cnt
+       f.filepath
     from
-     ftp_support_notice
+     ftp_support_notice n
+     inner join ftp_support_notice_file f on n.notice_no=f.notice_no
      <where>
       <if test="title != null">
-         title like concat('%', #{value}, '%')
+         n.title like (concat('%', #{value}, '%'))
       </if>
       <if test="content != null">
-         or content like concat('%', #{value}, '%') 
+         or n.content like (concat('%', #{value}, '%'))
       </if>
      </where>
-     order by notice_no desc
+    order by
+      notice_no desc
   </select>
   
   

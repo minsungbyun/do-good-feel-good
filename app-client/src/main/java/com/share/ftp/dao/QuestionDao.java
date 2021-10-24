@@ -7,10 +7,13 @@ import com.share.ftp.domain.support.QuestionListDTO;
 public interface QuestionDao {
 
   void insert(QuestionListDTO addQuestion) throws Exception;
+  void insertFile(String filepath) throws Exception;
   List<QuestionListDTO> findAll() throws Exception;
   List<QuestionListDTO> findByKeyword(String keyword) throws Exception;
-  QuestionListDTO findByQuestionNo(int questionNo) throws Exception;
+  //  List<QuestionCategory> findAllQnaCategory() throws Exception;
+  QuestionListDTO findByNo(int questionNo) throws Exception;
   void update(QuestionListDTO updateQuestion) throws Exception;
+  void updateFile(QuestionListDTO updateQuestion) throws Exception;
   void delete(int questionNo) throws Exception;
   //  int getNextNum() throws Exception; // 회원 고유번호 지정
   //  int getNextQuestionNum(QuestionListDTO question) throws Exception;

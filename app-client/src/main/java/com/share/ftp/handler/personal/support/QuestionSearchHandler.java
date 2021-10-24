@@ -17,7 +17,8 @@ public class QuestionSearchHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[고객센터/문의하기/문의하기 검색]");
+    System.out.println();
+    System.out.println("[ 문의하기 - 검색 ]");
 
     String input = Prompt.inputString("검색어? ");
 
@@ -28,12 +29,7 @@ public class QuestionSearchHandler implements Command {
       System.out.println("검색된 게시글이 없습니다.");
     }
 
-    for (QuestionListDTO questionListDTO : questionList) {
-      if (!questionListDTO.getTitle().contains(input) &&
-          !questionListDTO.getContent().contains(input) &&
-          !questionListDTO.getOwner().getId().contains(input)) {
-        continue;
-      }
+    for (QuestionListDTO questionListDTO : questionList) {      
       System.out.printf("%d, %s, %s, %s, %d\n", 
           questionListDTO.getNo(), 
           questionListDTO.getTitle(), 

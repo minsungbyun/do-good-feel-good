@@ -1,21 +1,13 @@
-package com.share.ftp.domain.support;
+package com.share.ftp.domain.admin;
 
-import java.util.Objects;
-
-public class QuestionAttachedFile {
+public class NoticeAttachedFile {
   private int no;
   private String filepath;
 
   @Override
   public String toString() {
-    return "QuestionAttachedFile [no=" + no + ", filepath=" + filepath + "]";
+    return "NoticeAttachedFile [no=" + no + ", filepath=" + filepath + "]";
   }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(filepath, no);
-  }
-
   public int getNo() {
     return no;
   }
@@ -28,9 +20,5 @@ public class QuestionAttachedFile {
   public void setFilepath(String filepath) {
     this.filepath = filepath;
   }
-
-
-
-
 
 }

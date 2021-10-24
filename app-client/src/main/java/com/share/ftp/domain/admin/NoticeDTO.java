@@ -2,6 +2,7 @@ package com.share.ftp.domain.admin;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
@@ -13,7 +14,7 @@ public class NoticeDTO implements Serializable{
   private String title;
   private String content;
   private JoinDTO admin;
-  private String fileUpload;
+  private List<NoticeAttachedFile> fileUpload;
   private Date registeredDate;
   private int viewCount;
 
@@ -71,10 +72,10 @@ public class NoticeDTO implements Serializable{
   public void setAdmin(JoinDTO admin) {
     this.admin = admin;
   }
-  public String getFileUpload() {
+  public List<NoticeAttachedFile> getFileUpload() {
     return fileUpload;
   }
-  public void setFileUpload(String fileUpload) {
+  public void setFileUpload(List<NoticeAttachedFile> fileUpload) {
     this.fileUpload = fileUpload;
   }
   public Date getRegisteredDate() {
@@ -89,9 +90,7 @@ public class NoticeDTO implements Serializable{
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
-  public static long getSerialversionuid() {
-    return serialVersionUID;
-  }
+
 
 
 

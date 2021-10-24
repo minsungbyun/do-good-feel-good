@@ -2,7 +2,7 @@ package com.share.ftp.domain.support;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.Objects;
+import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
 
 
@@ -13,9 +13,9 @@ public class QuestionListDTO implements Serializable {
   private String title;
   private String memberld;
   private int password;
-  private String qnaType;
+  private QuestionCategory qnaType;
   private String content;
-  private String fileUpload;
+  private List<QuestionAttachedFile> fileUpload;
   private Date registeredDate;
   private int viewCount;
   private int status;
@@ -27,27 +27,6 @@ public class QuestionListDTO implements Serializable {
         + ", password=" + password + ", qnaType=" + qnaType + ", content=" + content
         + ", fileUpload=" + fileUpload + ", registeredDate=" + registeredDate + ", viewCount="
         + viewCount + ", status=" + status + ", owner=" + owner + "]";
-  }
-  @Override
-  public int hashCode() {
-    return Objects.hash(content, fileUpload, memberld, no, owner, password, qnaType, registeredDate,
-        status, title, viewCount);
-  }
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    QuestionListDTO other = (QuestionListDTO) obj;
-    return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
-        && Objects.equals(memberld, other.memberld) && no == other.no
-        && Objects.equals(owner, other.owner) && password == other.password
-        && Objects.equals(qnaType, other.qnaType)
-        && Objects.equals(registeredDate, other.registeredDate) && status == other.status
-        && Objects.equals(title, other.title) && viewCount == other.viewCount;
   }
   public int getNo() {
     return no;
@@ -73,10 +52,10 @@ public class QuestionListDTO implements Serializable {
   public void setPassword(int password) {
     this.password = password;
   }
-  public String getQnaType() {
+  public QuestionCategory getQnaType() {
     return qnaType;
   }
-  public void setQnaType(String qnaType) {
+  public void setQnaType(QuestionCategory qnaType) {
     this.qnaType = qnaType;
   }
   public String getContent() {
@@ -85,10 +64,10 @@ public class QuestionListDTO implements Serializable {
   public void setContent(String content) {
     this.content = content;
   }
-  public String getFileUpload() {
+  public List<QuestionAttachedFile> getFileUpload() {
     return fileUpload;
   }
-  public void setFileUpload(String fileUpload) {
+  public void setFileUpload(List<QuestionAttachedFile> fileUpload) {
     this.fileUpload = fileUpload;
   }
   public Date getRegisteredDate() {
@@ -115,6 +94,7 @@ public class QuestionListDTO implements Serializable {
   public void setOwner(JoinDTO owner) {
     this.owner = owner;
   }
+
 
 
 

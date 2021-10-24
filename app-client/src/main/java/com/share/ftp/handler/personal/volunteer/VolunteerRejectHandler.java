@@ -1,35 +1,27 @@
 package com.share.ftp.handler.personal.volunteer;
 
-import static com.share.util.General.check.Rejected;
+import static com.share.util.General.check.REJECTED;
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
 
-public class VolGeneralRequestRejectHandler implements Command { // 개인 봉사신청 양식 쓰는 곳
+public class VolunteerRejectHandler implements Command { // 개인 봉사신청 양식 쓰는 곳
 
   VolunteerDao volunteerDao;
 
-  public VolGeneralRequestRejectHandler(VolunteerDao volunteerDao) {
+  public VolunteerRejectHandler(VolunteerDao volunteerDao) {
     this.volunteerDao = volunteerDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
+
+    int volNo = (int) request.getAttribute("volNo");
     System.out.println();
-    System.out.println("[  봉사신청서 반려  ]");
-    System.out.println();
 
-    int no = Prompt.inputInt("봉사번호 ▶ ");
-
-    VolunteerRequestDTO volunteerRequestDTO = volunteerDao.findByVolNo(no);
-
-    if (volunteerRequestDTO == null) {
-      System.out.println("[  해당 번호의 봉사신청서가 없습니다.  ]");
-      return;
-    }
-
+    VolunteerRequestDTO volunteerRequestDTO = volunteerDao.findByVolunteerNo(volNo);
 
     String input = Prompt.inputString("정말 반려하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -37,7 +29,7 @@ public class VolGeneralRequestRejectHandler implements Command { // 개인 봉�
       return;
     }
 
-    volunteerRequestDTO.setStatus(Rejected);
+    volunteerRequestDTO.setStatus(REJECTED);
 
     volunteerDao.update(volunteerRequestDTO);
 

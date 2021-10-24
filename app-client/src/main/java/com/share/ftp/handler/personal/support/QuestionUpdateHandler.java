@@ -1,18 +1,23 @@
 package com.share.ftp.handler.personal.support;
 
+import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.QuestionDao;
+import com.share.ftp.domain.support.QuestionAttachedFile;
 import com.share.ftp.domain.support.QuestionListDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
+import com.share.util.GeneralHelper;
 import com.share.util.Prompt;
 
 public class QuestionUpdateHandler implements Command {
 
   QuestionDao questionDao;
+  SqlSession sqlSession;
 
-  public QuestionUpdateHandler(QuestionDao questionDao) {
+  public QuestionUpdateHandler(QuestionDao questionDao, SqlSession sqlSession) {
     this.questionDao = questionDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -24,7 +29,7 @@ public class QuestionUpdateHandler implements Command {
       System.out.println("[ 문의하기 - 수정 ]");
       int questionNo = (int)request.getAttribute("questionNo");
 
-      QuestionListDTO questionListDTO = questionDao.findByQuestionNo(questionNo);
+      QuestionListDTO questionListDTO = questionDao.findByNo(questionNo);
 
       try {
         if (questionListDTO == null) {
@@ -50,9 +55,20 @@ public class QuestionUpdateHandler implements Command {
         } else if (input.equals("y")) {
           questionListDTO.setTitle(title);
           questionListDTO.setContent(content);
-          questionListDTO.setFileUpload(fileUpload);
+          questionListDTO.setFileUpload(GeneralHelper.promptQnaFileUpload());
 
-          questionDao.update(questionListDTO);
+          try {
+            questionDao.update(questionListDTO);
+            for (QuestionAttachedFile questionAttachedFile : questionListDTO.getFileUpload()) {
+              questionDao.insertFile(questionAttachedFile.getFilepath());
+            }
+            sqlSession.commit();
+
+          } catch (Exception e) {
+            // 예외가 발생하기 전에 성공한 작업이 있으면 모두 취소한다.
+            // 그래야 다음 작업에 영향을 끼치지 않는다.
+            sqlSession.rollback();
+          }
 
           System.out.println();
           System.out.println("게시글 수정이 완료되었습니다.");

@@ -1,7 +1,7 @@
 package com.share.ftp.handler.join;
 
 import static com.share.util.General.member.ORG;
-import static com.share.util.General.status.WAITING;
+import static com.share.util.General.status.WAIT;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.OrgDao;
 import com.share.ftp.domain.join.OrgDTO;
@@ -76,7 +76,7 @@ public class JoinOrgHandler implements Command {
     System.out.println();
 
     orgUser.setType(ORG);
-    orgUser.setStatus(WAITING);
+    orgUser.setStatus(WAIT);
 
     orgDao.insert(orgUser);
     orgDao.insertOrg(

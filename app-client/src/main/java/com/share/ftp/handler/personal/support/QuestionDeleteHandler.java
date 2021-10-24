@@ -25,7 +25,7 @@ public class QuestionDeleteHandler implements Command {
 
       int questionNo = (int) request.getAttribute("questionNo");
 
-      QuestionListDTO questionListDTO = questionDao.findByQuestionNo(questionNo);
+      QuestionListDTO questionListDTO = questionDao.findByNo(questionNo);
 
       if (questionListDTO == null) {
         System.out.println("해당 번호의 게시글이 없습니다.");

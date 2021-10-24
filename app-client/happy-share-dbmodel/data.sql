@@ -123,10 +123,10 @@ insert into ftp_vol_board_like(user_no, vol_board_no)
 values(1,2);
 
 --봉사첨부파일
-insert into ftp_vol_board_file(vol_board_file_no, vol_board_no, filepath)
+insert into ftp_vol_file(vol_file_no, vol_no, filepath)
 values(1,1,'haha.gif');
 
-insert into ftp_vol_board_file(vol_board_file_no, vol_board_no, filepath)
+insert into ftp_vol_file(vol_file_no, vol_no, filepath)
 values(2,2,'hoho.gif');
 
 
@@ -144,7 +144,7 @@ values(3, 4, 3, '한줄후기3');
 
 
 
---봉사 (승인여부 : 1.승인 2.반려)
+--봉사 (승인여부 : 0.반려 1.승인 2.승인대기)
 insert into ftp_vol(vol_no, user_no, category_no, title, content, tel, email, start_dt, end_dt, start_time, end_time, total_cnt, approval) 
 values(1, 1, 7,'서울숲 자원봉사 - 떨어진 낙엽 정리하기','내용1','031-554-8888','fall@naver.com','2021-09-01','2021-11-30','9:00','18:00',100,1);
 
@@ -152,11 +152,18 @@ insert into ftp_vol(vol_no, user_no, category_no, title, content, tel, email, st
 values(2, 2, 3,'청소년 길잡이 멘토 모집','내용2','031-514-8878','child@naver.com','2021-07-02','2021-12-11','9:00','18:00',30,1);
 
 insert into ftp_vol(vol_no, user_no, category_no, title, content, tel, email, start_dt, end_dt, start_time, end_time, total_cnt, approval) 
-values(3, 3, 1,'비대면 - 베프지도(장벽없는) 만들기','내용3','031-514-1178','untact@gmail.com','2021-5-5','2021-12-30','9:00','18:00',50,1);
+values(7, 3, 1,'비대면 - 베프지도(장벽없는) 만들기','내용3','031-514-1178','untact@gmail.com','2021-5-5','2021-12-30','9:00','18:00',50,1);
 
---봉사 반려 데이터  
 insert into ftp_vol(vol_no, user_no, category_no, title, content, tel, email, start_dt, end_dt, start_time, end_time, total_cnt, approval) 
-values(4, 1, 4,'사랑의 도시락','내용4','031-414-1118','soso@gmail.com','2021-8-5','2021-12-10','9:00','18:00',10,2);
+values(5, 2, 1,'비대면','내용4','031-514-1178','untact22@gmail.com','2021-1-1','2021-12-30','11:00','14:00',10,0);
+
+
+--봉사 승인대기 데이터  
+insert into ftp_vol(vol_no, user_no, category_no, title, content, tel, email, start_dt, end_dt, start_time, end_time, total_cnt, approval) 
+values(6, 1, 4,'사랑의 도시락','내용4','031-414-1118','soso@gmail.com','2021-8-5','2021-12-10','9:00','18:00',10,2);
+
+insert into ftp_vol(vol_no, user_no, category_no, title, content, tel, email, start_dt, end_dt, start_time, end_time, total_cnt, approval) 
+values(8, 1, 4,'봉사대기sample','내용5','031-111-2222','sasa@gmail.com','2021-8-5','2021-12-10','13:00','18:00',10,2);
 
 
 --봉사참여자 (apply_status 1.승인 2.거절)
@@ -252,6 +259,9 @@ insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, pa
   values(1, 13, 4, '문의1', '내용1', password('1'));
   insert into ftp_support_qna(user_no, qna_category_no, title, content, password)
   values(13, 2, '문의2', '내용2', password('2'));
+  insert into ftp_support_qna(user_no, qna_category_no, title, content, password)
+  values(17, 6, '문의3', '내용3', password('3'));
+  
   
 -- 문의하기 첨부파일
 insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(1, 1, 'qna01_1.jpg');
