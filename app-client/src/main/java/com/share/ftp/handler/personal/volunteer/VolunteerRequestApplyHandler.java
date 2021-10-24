@@ -16,13 +16,13 @@ import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.GeneralHelper;
 import com.share.util.Prompt;
 
-public class VolGeneralRequestApplyHandler implements Command { // 개인 봉사신청 양식 쓰는 곳
+public class VolunteerRequestApplyHandler implements Command { // 개인 봉사신청 양식 쓰는 곳
 
   VolunteerDao volunteerDao;
   GeneralDao generalDao;
   SqlSession sqlSession;
 
-  public VolGeneralRequestApplyHandler(VolunteerDao volunteerDao, GeneralDao generalDao, SqlSession sqlSession) {
+  public VolunteerRequestApplyHandler(VolunteerDao volunteerDao, GeneralDao generalDao, SqlSession sqlSession) {
     this.volunteerDao = volunteerDao;
     this.generalDao = generalDao;
     this.sqlSession = sqlSession;
@@ -68,7 +68,7 @@ public class VolGeneralRequestApplyHandler implements Command { // 개인 봉사
           break;
         }
 
-
+        volunteerRequestDTO.setUserNo(AuthLoginHandler.getLoginUser().getNo());
         volunteerRequestDTO.setTitle(Prompt.inputString("제목 ▶ "));
 
         if (volunteerRequestDTO.getMemberType() == GROUP) {
@@ -80,17 +80,16 @@ public class VolGeneralRequestApplyHandler implements Command { // 개인 봉사
           volunteerRequestDTO.setOwner(orgUser);
         }
 
-        volunteerRequestDTO.setType(new GeneralHelper(generalDao).promptCategory());
+        volunteerRequestDTO.setCategory(new GeneralHelper(generalDao).promptCategory());
         volunteerRequestDTO.setTel(Prompt.inputString("전화번호 ▶ "));
         volunteerRequestDTO.setEmail(Prompt.inputString("이메일 ▶ ")); 
         volunteerRequestDTO.setStartDate(Prompt.inputDate("봉사시작기간(yyyy-mm-dd) ▶ "));
         volunteerRequestDTO.setEndDate(Prompt.inputDate("봉사종료기간(yyyy-mm-dd) ▶ ")); 
-        volunteerRequestDTO.setStartTime(Prompt.inputString("봉사시작시간 ▶ ")); 
-        volunteerRequestDTO.setEndTime(Prompt.inputString("봉사종료시간 ▶ ")); 
-        //        personalRequestDTO.setVolList(Prompt.inputString("봉사목록 ▶ ")); 
+        volunteerRequestDTO.setStartTime(Prompt.inputString("봉사시작시간(hh:mm) ▶ ")); 
+        volunteerRequestDTO.setEndTime(Prompt.inputString("봉사종료시간(hh:mm) ▶ ")); 
         volunteerRequestDTO.setLimitNum(Prompt.inputInt("봉사인원 ▶ "));
         volunteerRequestDTO.setContent(Prompt.inputString("내용 ▶ ")); 
-        volunteerRequestDTO.setFileUpload(Prompt.inputString("파일 ▶ ")); 
+        volunteerRequestDTO.setFileUpload(Prompt.inputString("첨부파일 ▶ ")); 
         volunteerRequestDTO.setStatus(Waiting);
 
         volunteerDao.insert(volunteerRequestDTO);
@@ -112,6 +111,6 @@ public class VolGeneralRequestApplyHandler implements Command { // 개인 봉사
       }
       break;
     }
-    System.out.println("[  ✔️ 개인봉사신청이 정상적으로 완료되었습니다.  ]");
+    System.out.println("[  ✔️ 봉사신청이 정상적으로 완료되었습니다. ]");
   }
 }

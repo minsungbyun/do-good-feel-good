@@ -25,23 +25,9 @@ public class JoinOrgHandler implements Command {
     System.out.println("[ 기관회원 양식 ]");
     System.out.println();
 
-
     OrgDTO orgUser = new OrgDTO();
 
-    //    아이디 유효성검사
-    //    while (true) {
-
-    orgUser.setId(Prompt.inputString("ID ▶ "));
-
-    //      JoinDTO userId = joinDao.validId(joinUser);
-    //
-    //      if (userId != null) {
-    //        System.out.println("사용가능한 아이디입니다.");
-    //        break;
-    //      }
-    //
-    //      System.out.println("해당 아이디는 중복되는 아이디입니다.");
-    //    }
+    validId(orgUser);
 
     orgUser.setPassword(Prompt.inputString("Password ▶ "));
 
@@ -93,12 +79,34 @@ public class JoinOrgHandler implements Command {
     orgUser.setStatus(WAITING);
 
     orgDao.insert(orgUser);
+    orgDao.insertOrg(
+        orgUser.getNo(),
+        orgUser.getCorpNo(),
+        orgUser.getFax(),
+        orgUser.getHomepage());
     sqlSession.commit();
 
     System.out.println("happyshare 가입을 환영합니다.");
     System.out.println();
     System.out.println("[ 관리자의 승인 후 활동가능합니다. ]");
     System.out.println();
+  }
+
+  private void validId(OrgDTO orgUser) throws Exception {
+    while (true) {
+
+      orgUser.setId(Prompt.inputString("ID ▶ "));
+
+      OrgDTO userId = orgDao.validId(orgUser);
+
+      if (userId == null) {
+        System.out.println("사용가능한 아이디입니다.");
+        break;
+      }
+
+      System.out.println("해당 아이디는 중복되는 아이디입니다.");
+      System.out.println();
+    }
   }
 }
 

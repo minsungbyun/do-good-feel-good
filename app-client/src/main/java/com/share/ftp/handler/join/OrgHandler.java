@@ -19,8 +19,8 @@ public class OrgHandler implements Command {
     System.out.printf("▶ 아이디: %s\n",       orgUser.getId());
     System.out.printf("▶ 이름: %s\n",         orgUser.getName());
     System.out.printf("▶ 전화: %s\n",         orgUser.getTel());
-    System.out.printf("▶ 팩스: %s\n",         orgUser.getFax());
     System.out.printf("▶ 사업자번호: %s\n",   orgUser.getCorpNo());
+    System.out.printf("▶ 팩스: %s\n",         orgUser.getFax());
     System.out.printf("▶ 홈페이지: %s\n",     orgUser.getHomepage());
     System.out.printf("▶ 이메일: %s\n",       orgUser.getEmail());
     System.out.printf("▶ 우편번호: %s\n",     orgUser.getPostNo());

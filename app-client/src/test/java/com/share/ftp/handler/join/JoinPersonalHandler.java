@@ -90,7 +90,12 @@ public class JoinPersonalHandler implements Command {
     personalUser.setLevel(LEVEL_E);
 
     personalDao.insert(personalUser);
+    personalDao.insertPersonal(
+        personalUser.getNo(), 
+        personalUser.getBirthdate(), 
+        personalUser.getLevel());
     sqlSession.commit();
+
 
     System.out.println("happyshare 가입을 환영합니다.");
     System.out.println();

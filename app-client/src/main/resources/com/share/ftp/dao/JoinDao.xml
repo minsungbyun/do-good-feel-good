@@ -3,15 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.share.ftp.dao.PersonalDao">
+<mapper namespace="com.share.ftp.dao.JoinDao">
   
-  <resultMap type="PersonalDTO" id="PersonalDTOMap">
-    <id column="user_personal_no" property="personalNo"/> 
-    <result column="birthdate" property="birthdate"/>
-    <result column="rank" property="level"/>
-    <result column="point" property="point"/>
-    
-    <result column="user_no" property="no"/>
+
+  <resultMap type="joinDTO" id="JoinDTOMap">
+    <id column="user_no" property="no"/>
     <result column="id" property="id"/>
     <result column="password" property="password"/>
     <result column="name" property="name"/>
@@ -25,82 +21,52 @@
     <result column="type" property="type"/>
     <result column="status" property="status"/>
     <result column="note" property="note"/>
+    
+ 
   <!--    <result column="last_login" property="viewCount"/>-->
   </resultMap>
   
- 
   
-  <insert id="insert" parameterType="PersonalDTO"
-          useGeneratedKeys="true" keyColumn="user_no" keyProperty="no">
-    insert into ftp_user(id,password,name,tel,email,post_no,basic_address,detail_address,type,status)
-    values(#{id},password(#{password}),#{name},#{tel},#{email},#{postNo},#{basicAddress},#{detailAddress},#{type},#{status})
-  </insert>
-  
-  <insert id="insertPersonal">
-    insert into ftp_user_personal(user_no,birthdate,rank)
-    values(#{userNo},#{userBirthdate},#{userLevel})
-  </insert>
-  
-  
-  <select id="findAllPersonal" resultMap="PersonalDTOMap">
+  <select id="findAll" resultMap="JoinDTOMap">
 	   select 
-       u.*,  
-       p.user_personal_no,  
-       p.birthdate,
-       p.rank,
-       p.point
+       *
      from
-       ftp_user u
-       inner join ftp_user_personal p on u.user_no=p.user_no
+       ftp_user 
      order by
-       user_personal_no asc 
+       user_no desc 
   </select>
   
-   <update id="update" parameterType="PersonalDTO">
-	   update ftp_user set
-	     tel=#{tel},
-	     email=#{email},
-	     post_no=#{postNo},
-	     basic_address=#{basicAddress},
-	     detail_address=#{detailAddress},
-	     password=password(#{password})
-	   where 
-	      user_no=#{no}
-  </update>
   
-  <!--  
-   <update id="updatePersonal" parameterType="PersonalDTO">
-	   update ftp_user_personal set
-	     birthdate=#{birthdate}
-	   where 
-	      user_personal_no=#{personalNo}
-  </update>
--->
-  
-  <select id="findByIdPassword" resultMap="PersonalDTOMap">
+  <select id="findByType" resultMap="JoinDTOMap" parameterType="string">
     select 
-       u.*,  
-       p.user_personal_no,  
-       p.birthdate,
-       p.rank,
-       p.point
+       u.type
      from
-       ftp_user u
-       inner join ftp_user_personal p on u.user_no=p.user_no
+       ftp_user u      
+    where 
+      id=#{userId}
+  </select>
+    
+  <select id="findByIdPassword" resultMap="JoinDTOMap">
+    select 
+       id,
+       password,
+       type
+     from
+       ftp_user
     where 
       id=#{userId} and password=password(#{userPassword})
   </select>
   
-  <select id="validId" resultMap="PersonalDTOMap" parameterType="string">
+  <select id="validId" resultMap="JoinDTOMap" parameterType="string">
     select 
        id
      from
        ftp_user     
     where 
-      id=#{id}
+      id=#{userId}
   </select>
   
-  
+  <!--  
    <update id="delete" parameterType="PersonalDTO">
      update ftp_user set
       id=#{id},
@@ -117,6 +83,15 @@
         user_no=#{no}
   </update>
   
+     <result column="last_login" property="viewCount"/>-->
+  
+  
+  
+  
+  
+  
+   <!-- 
+>>>>>>> b9fe4a4c382816c2f7a4adee0aa838b0255b1dcb
    <update id="deletePersonal" parameterType="PersonalDTO">
       update ftp_user_personal set
 	      birthdate=#{birthdate},
@@ -127,7 +102,28 @@
   </update>
   
   
-  <!--  
+  
+<<<<<<< HEAD
+  
+  
+  
+  <select id="findByNoticeNo" resultMap="NoticeDTOMap" parameterType="int">
+     select 
+     notice_no,
+     title,
+     content,
+     created_dt,
+     view_cnt
+    from
+     ftp_support_notice
+    where 
+      notice_no=#{values}
+  </select>
+  
+  
+  
+=======
+>>>>>>> b9fe4a4c382816c2f7a4adee0aa838b0255b1dcb
   <select id="findByKeyword" resultMap="NoticeDTOMap" parameterType="string">
      select 
        notice_no,
@@ -146,6 +142,13 @@
      </where>
      order by notice_no desc
   </select>
+<<<<<<< HEAD
+  
+  
+
+ 
+=======
+>>>>>>> b9fe4a4c382816c2f7a4adee0aa838b0255b1dcb
  
   
   <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">

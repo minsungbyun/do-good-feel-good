@@ -15,7 +15,8 @@
     
     <collection property="members" ofType="JoinDTO">
       <id column="user_no" property="no"/>
-      <result column="id" property="id"/>
+      <result column="user_id" property="id"/>
+      <result column="user_name" property="name"/>
     </collection>
   </resultMap>
   
@@ -37,8 +38,8 @@
   </insert>
   
   <insert id="insertUser">
-    insert into ftp_challenge_apply(challenge_no,user_no,created_dt)
-    values({#param1},#{param2}, curdate())
+    insert into ftp_challenge_apply(challenge_no,user_no,apply_dt) 
+    values(#{param1},#{param2}, curdate())
   </insert>
   
    <update id="update" parameterType="ChallengeDTO">

@@ -1,19 +1,18 @@
 package com.share.ftp.handler.join;
 
-import java.sql.Date;
-import com.share.ftp.dao.PersonalDao;
-import com.share.ftp.domain.join.PersonalDTO;
+import com.share.ftp.dao.OrgDao;
+import com.share.ftp.domain.join.OrgDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.menu.Menu;
 import com.share.util.Prompt;
 
-public class PersonalUserDeleteHandler implements Command {
+public class OrgUserDeleteHandler implements Command {
 
-  PersonalDao personalDao;
+  OrgDao orgDao;
 
-  public PersonalUserDeleteHandler(PersonalDao personalDao) {
-    this.personalDao = personalDao;
+  public OrgUserDeleteHandler(OrgDao orgDao) {
+    this.orgDao = orgDao;
   }
 
   @Override
@@ -29,7 +28,7 @@ public class PersonalUserDeleteHandler implements Command {
     String userId = Prompt.inputString("아이디? ");
     String userPassword = Prompt.inputString("비밀번호? ");
 
-    PersonalDTO loginUser = personalDao.findByIdPassword(userId, userPassword);
+    OrgDTO loginUser = orgDao.findByIdPassword(userId, userPassword);
 
     if (loginUser == null) {
       System.out.println("해당 회원은 존재하지 않습니다.");
@@ -57,11 +56,12 @@ public class PersonalUserDeleteHandler implements Command {
     loginUser.setStatus(0);
     loginUser.setType(0);
 
-    loginUser.setBirthdate(Date.valueOf("2021-01-01"));
-    loginUser.setLevel("비공개");
-    loginUser.setPoint(0);
+    loginUser.setCorpNo("비공개");
+    loginUser.setFax("비공개");
+    loginUser.setHomepage("비공개");
 
-    personalDao.delete(loginUser);
+    orgDao.delete(loginUser);
+    //    orgDao.deleteOrg(loginUser);
 
     System.out.println("");
     System.out.println("[  그동안 행복하share를 이용해주셔서 감사했습니다.  ]");

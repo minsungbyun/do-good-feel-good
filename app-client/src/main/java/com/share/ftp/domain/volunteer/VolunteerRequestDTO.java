@@ -12,8 +12,9 @@ public class VolunteerRequestDTO implements Serializable {
 
   private static final long serialVersionUID = 1L;
   private int no;
+  private int userNo;
   private int memberType; 
-  private Category type;
+  private Category category;
   private String title;
   private String content;
   private String tel;
@@ -24,17 +25,26 @@ public class VolunteerRequestDTO implements Serializable {
   private String endTime;
   private int totalJoinCount = 1; // 현재 참여 인원 (주최자는 미리 포함)
   private String name;
-  private String status;
+  private int status;
   private JoinDTO owner; 
-  private String fileUpload;
+  private List<VolunteerAttachedFile> fileUpload;
   private Date submitTime; 
   private JoinDTO wish;
   private int limitNum; // 총 정원
   private int questionCount;
+  private String note;
   private List<JoinDTO> members = new ArrayList<>(); // 봉사 참여한 멤버들
 
 
 
+
+  public String getNote() {
+    return note;
+  }
+
+  public void setNote(String note) {
+    this.note = note;
+  }
 
   public int getNo() {
     return no;
@@ -42,6 +52,16 @@ public class VolunteerRequestDTO implements Serializable {
 
   public void setNo(int no) {
     this.no = no;
+  }
+
+
+
+  public int getUserNo() {
+    return userNo;
+  }
+
+  public void setUserNo(int userNo) {
+    this.userNo = userNo;
   }
 
   public int getMemberType() {
@@ -68,11 +88,13 @@ public class VolunteerRequestDTO implements Serializable {
     this.name = name;
   }
 
-  public String getStatus() {
+
+
+  public int getStatus() {
     return status;
   }
 
-  public void setStatus(String status) {
+  public void setStatus(int status) {
     this.status = status;
   }
 
@@ -142,11 +164,11 @@ public class VolunteerRequestDTO implements Serializable {
     this.content = content;
   }
 
-  public String getFileUpload() {
+  public List<VolunteerAttachedFile> getFileUpload() {
     return fileUpload;
   }
 
-  public void setFileUpload(String fileUpload) {
+  public void setFileUpload(List<VolunteerAttachedFile> fileUpload) {
     this.fileUpload = fileUpload;
   }
 
@@ -206,12 +228,14 @@ public class VolunteerRequestDTO implements Serializable {
     this.questionCount = questionCount;
   }
 
-  public Category getType() {
-    return type;
+
+
+  public Category getCategory() {
+    return category;
   }
 
-  public void setType(Category type) {
-    this.type = type;
+  public void setCategory(Category category) {
+    this.category = category;
   }
 
   public String getMemberNames() {
