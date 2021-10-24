@@ -53,18 +53,21 @@ import com.share.ftp.handler.admin.AdminQuestionAddHandler;
 import com.share.ftp.handler.join.AuthDisplayUserHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.ftp.handler.join.AuthLogoutHandler;
+import com.share.ftp.handler.join.GroupFormUpdateHandler;
 import com.share.ftp.handler.join.GroupHandler;
 import com.share.ftp.handler.join.GroupListHandler;
 import com.share.ftp.handler.join.GroupUserDeleteHandler;
 import com.share.ftp.handler.join.GroupUserUpdateHandler;
 import com.share.ftp.handler.join.JoinAddHandler;
 import com.share.ftp.handler.join.JoinGroupHandler;
+import com.share.ftp.handler.join.JoinListHandler;
 import com.share.ftp.handler.join.JoinListTestHandler;
 import com.share.ftp.handler.join.JoinOrgHandler;
 import com.share.ftp.handler.join.JoinPersonalHandler;
 import com.share.ftp.handler.join.JoinSearchEmailIdHandler;
 import com.share.ftp.handler.join.JoinSearchPasswordHandler;
 import com.share.ftp.handler.join.JoinSearchTelIdHandler;
+import com.share.ftp.handler.join.OrgFormUpdateHandler;
 import com.share.ftp.handler.join.OrgHandler;
 import com.share.ftp.handler.join.OrgListHandler;
 import com.share.ftp.handler.join.OrgUserDeleteHandler;
@@ -272,6 +275,9 @@ public class ClientApp {
     commands.put("/join/personal", new JoinPersonalHandler(personalDao,sqlSession)); // 회원가입
     commands.put("/join/group", new JoinGroupHandler(groupDao,sqlSession)); // 회원가입
     commands.put("/join/org", new JoinOrgHandler(orgDao,sqlSession)); // 회원가입
+    commands.put("/join/list", new JoinListHandler(personalDao,groupDao,orgDao)); // 회원가입
+    commands.put("/join/groupForm", new GroupFormUpdateHandler(groupDao,sqlSession)); // 회원가입
+    commands.put("/join/orgForm", new OrgFormUpdateHandler(orgDao,sqlSession)); // 회원가입
     commands.put("/join/searchTelId", new JoinSearchTelIdHandler(personalDao)); // 폰번호로 아이디 찾기
     commands.put("/join/searchEmailId", new JoinSearchEmailIdHandler(personalDao)); // 이메일로 아이디 찾기kvp
     commands.put("/join/searchPassword", new JoinSearchPasswordHandler(personalDao)); // 비밀번호 찾기
@@ -506,6 +512,8 @@ public class ClientApp {
 
     mainMenuGroup.add(new MenuItem("비밀번호찾기", ACCESS_LOGOUT, "/join/searchPassword"));
     mainMenuGroup.add(new MenuItem("회원가입", ACCESS_LOGOUT, "/join/add"));
+    mainMenuGroup.add(new MenuItem("단체양식 수정", ACCESS_LOGOUT, "/join/groupForm"));
+    mainMenuGroup.add(new MenuItem("기관양식 수정", ACCESS_LOGOUT, "/join/orgForm"));
     mainMenuGroup.add(new MenuItem("로그아웃", ACCESS_MEMBER_ADMIN, "/auth/logout"));
 
 
@@ -880,7 +888,7 @@ public class ClientApp {
     adminMemberMenu.add(new MenuItem("개인목록",ACCESS_ADMIN, "/join/test"));
     adminMemberMenu.add(new MenuItem("단체목록",ACCESS_ADMIN, "/join/groupList"));
     adminMemberMenu.add(new MenuItem("기관목록",ACCESS_ADMIN, "/join/orgList"));
-    adminMemberMenu.add(new MenuItem("가입회원 상세보기", ACCESS_ADMIN,"/join/detail"));
+    adminMemberMenu.add(new MenuItem("가입회원 목록", ACCESS_ADMIN,"/join/list"));
     adminMemberMenu.add(new MenuItem("회원추방",ACCESS_ADMIN,"/adminMember/list"));
 
     return adminMemberMenu;

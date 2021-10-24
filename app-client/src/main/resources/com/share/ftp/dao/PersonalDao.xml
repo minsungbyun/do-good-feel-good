@@ -53,7 +53,7 @@
        ftp_user u
        inner join ftp_user_personal p on u.user_no=p.user_no
      order by
-       user_personal_no asc 
+       user_personal_no desc 
   </select>
   
    <update id="update" parameterType="PersonalDTO">
