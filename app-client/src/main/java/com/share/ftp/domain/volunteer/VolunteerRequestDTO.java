@@ -25,7 +25,7 @@ public class VolunteerRequestDTO implements Serializable {
   private String endTime;
   private String totalDate;
   private String remainDate;
-  private int currentNum; // 현재 참여 인원 (주최자는 미리 포함)
+  private int currentNum = 1; // 현재 참여 인원 (주최자는 미리 포함)
   private int limitNum; // 총 정원
   private String name;
   private int status;
