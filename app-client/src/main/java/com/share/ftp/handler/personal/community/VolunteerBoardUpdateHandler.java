@@ -50,7 +50,7 @@ public class VolunteerBoardUpdateHandler implements Command {
     } else if(input.equals("y")) {
       volunteerBoardDTO.setTitle(title);
       volunteerBoardDTO.setContent(content);
-      //      volunteerBoardDTO.setFileUpload(fileUpload);
+      //            volunteerBoardDTO.setFileUpload(fileUpload);
 
       volunteerBoardDao.update(volunteerBoardDTO);
       sqlSession.commit();

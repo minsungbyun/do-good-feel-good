@@ -49,6 +49,7 @@ public class VolunteerBoardDeleteHandler implements Command {
         return;
       } 
 
+      volunteerBoardDao.deleteFile(volunteerBoardDTO);
       volunteerBoardDao.delete(no);
       sqlSession.commit();
 

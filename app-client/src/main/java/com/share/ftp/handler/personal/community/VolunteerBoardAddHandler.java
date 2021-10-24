@@ -3,10 +3,12 @@ package com.share.ftp.handler.personal.community;
 import java.sql.Date;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.VolunteerBoardDao;
+import com.share.ftp.domain.community.VolunteerBoardAttachedFile;
 import com.share.ftp.domain.community.VolunteerBoardDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
+import com.share.util.GeneralHelper;
 import com.share.util.Prompt;
 
 public class VolunteerBoardAddHandler implements Command {
@@ -30,14 +32,20 @@ public class VolunteerBoardAddHandler implements Command {
 
     volunteerBoardDTO.setTitle(Prompt.inputString("제목 ▶ "));
     volunteerBoardDTO.setContent(Prompt.inputString("내용 ▶ "));
-    volunteerBoardDTO.setFileUpload(Prompt.inputString("첨부파일 ▶ "));
+    volunteerBoardDTO.setFileUpload(GeneralHelper.promptBoardFileUpload());
     volunteerBoardDTO.setOwner(AuthLoginHandler.getLoginUser());
     volunteerBoardDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 
+    try {
+      volunteerBoardDao.insert(volunteerBoardDTO);
+      for (VolunteerBoardAttachedFile volunteerBoardAttachedFile : volunteerBoardDTO.getFileUpload()) {
+        volunteerBoardDao.insertFile(volunteerBoardAttachedFile.getFilepath());
+      }
 
-    volunteerBoardDao.insert(volunteerBoardDTO);
-    sqlSession.commit();
-
+      sqlSession.commit();
+    } catch (Exception e) {
+      sqlSession.rollback();
+    }
     System.out.println();
     System.out.println("[  게시글 등록이 완료되었습니다.  ]");
   }

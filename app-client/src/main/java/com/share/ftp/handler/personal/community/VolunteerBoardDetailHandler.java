@@ -37,8 +37,8 @@ public class VolunteerBoardDetailHandler implements Command {
       }
 
 
-      System.out.printf("아이디 ▶ %s\n", volunteerBoardDTO.getOwner().getId());
       System.out.printf("번호 ▶ %s\n", volunteerBoardDTO.getNo());
+      System.out.printf("아이디 ▶ %s\n", volunteerBoardDTO.getOwner().getId());
       System.out.printf("제목 ▶ %s\n", volunteerBoardDTO.getTitle());
       System.out.printf("내용 ▶ %s\n", volunteerBoardDTO.getContent());
       System.out.printf("첨부파일 ▶ %s\n", volunteerBoardDTO.getFileUpload());

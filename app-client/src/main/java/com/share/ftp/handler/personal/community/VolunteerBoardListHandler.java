@@ -28,8 +28,7 @@ public class VolunteerBoardListHandler implements Command {
       System.out.println();
     }
 
-    System.out.println("----------------------------------------------");
-    System.out.println("NO 제목[댓글]  작성자 작성일 조회 LIKE 첨부");
+    System.out.println("[ 게시글 목록 ]");
     System.out.println("----------------------------------------------");
 
 
