@@ -7,6 +7,7 @@ import static com.share.menu.Menu.ACCESS_MEMBER;
 import static com.share.menu.Menu.ACCESS_MEMBER_ADMIN;
 import static com.share.menu.Menu.ACCESS_ORG;
 import static com.share.menu.Menu.ACCESS_PERSONAL;
+import static com.share.util.General.status.REJECT;
 import static com.share.util.General.status.WAIT;
 import com.share.ftp.dao.GroupDao;
 import com.share.ftp.dao.JoinDao;
@@ -58,8 +59,8 @@ public class AuthLoginHandler implements Command {
     System.out.println();
     System.out.println("[ Happy-Share Login Page]");
 
-    String userId = Prompt.inputString("Id : ");
-    String userPassword = Prompt.inputString("Password : ");
+    String userId = Prompt.inputString("Id ▶ ");
+    String userPassword = Prompt.inputString("Password ▶ ");
     System.out.println();
 
     if (userId.equals("admin") && userPassword.equals("111")) {
@@ -88,6 +89,7 @@ public class AuthLoginHandler implements Command {
 
       }
     } catch(Exception e) {
+      e.printStackTrace();
       System.out.println("아이디와 비밀번호가 일치하지 않습니다!");
     }
   } 
@@ -106,10 +108,20 @@ public class AuthLoginHandler implements Command {
 
   private void loginGroup(String userId, String userPassword) throws Exception {
     GroupDTO user = groupDao.findByIdPassword(userId, userPassword);
+
+    if(user.getStatus() == REJECT) {
+      System.out.println("사유 ▶ "+user.getNote());
+      System.out.println("▶ 재작성을 원할 시 단체양식 수정을 선택해주세요");
+
+      System.out.println();
+      System.out.println("관리자의 승인 후 로그인이 가능합니다!");
+      return;
+    }
     if (user.getStatus() == WAIT) {
       System.out.println("관리자의 승인 후 로그인이 가능합니다!");
       return;
     } 
+
     userAccessLevel = ACCESS_MEMBER | ACCESS_GROUP | ACCESS_MEMBER_ADMIN;
 
     System.out.printf("[  %s님 환영합니다!  ]\n", user.getName());
@@ -118,6 +130,14 @@ public class AuthLoginHandler implements Command {
 
   private void loginOrg(String userId, String userPassword) throws Exception {
     OrgDTO user = orgDao.findByIdPassword(userId, userPassword);
+
+    if(user.getStatus() == REJECT) {
+      System.out.println("사유 ▶ "+user.getNote());
+      System.out.println("▶ 재작성을 원할 시 기관양식 수정을 선택해주세요");
+      System.out.println();
+      System.out.println("관리자의 승인 후 로그인이 가능합니다!");
+      return;
+    }
 
     if (user.getStatus() == WAIT) {
       System.out.println("관리자의 승인 후 로그인이 가능합니다!");
