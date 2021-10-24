@@ -14,17 +14,24 @@ public class QuestionListDTO implements Serializable {
   private String memberld;
   private int password;
   private String qnaType;
-  private String writer;
   private String content;
   private String fileUpload;
   private Date registeredDate;
   private int viewCount;
+  private int status;
   private JoinDTO owner;
 
   @Override
+  public String toString() {
+    return "QuestionListDTO [no=" + no + ", title=" + title + ", memberld=" + memberld
+        + ", password=" + password + ", qnaType=" + qnaType + ", content=" + content
+        + ", fileUpload=" + fileUpload + ", registeredDate=" + registeredDate + ", viewCount="
+        + viewCount + ", status=" + status + ", owner=" + owner + "]";
+  }
+  @Override
   public int hashCode() {
     return Objects.hash(content, fileUpload, memberld, no, owner, password, qnaType, registeredDate,
-        title, viewCount, writer);
+        status, title, viewCount);
   }
   @Override
   public boolean equals(Object obj) {
@@ -39,16 +46,8 @@ public class QuestionListDTO implements Serializable {
         && Objects.equals(memberld, other.memberld) && no == other.no
         && Objects.equals(owner, other.owner) && password == other.password
         && Objects.equals(qnaType, other.qnaType)
-        && Objects.equals(registeredDate, other.registeredDate)
-        && Objects.equals(title, other.title) && viewCount == other.viewCount
-        && Objects.equals(writer, other.writer);
-  }
-  @Override
-  public String toString() {
-    return "QuestionListDTO [no=" + no + ", title=" + title + ", memberld=" + memberld
-        + ", password=" + password + ", qnaType=" + qnaType + ", writer=" + writer + ", content="
-        + content + ", fileUpload=" + fileUpload + ", registeredDate=" + registeredDate
-        + ", viewCount=" + viewCount + ", owner=" + owner + "]";
+        && Objects.equals(registeredDate, other.registeredDate) && status == other.status
+        && Objects.equals(title, other.title) && viewCount == other.viewCount;
   }
   public int getNo() {
     return no;
@@ -80,12 +79,6 @@ public class QuestionListDTO implements Serializable {
   public void setQnaType(String qnaType) {
     this.qnaType = qnaType;
   }
-  public String getWriter() {
-    return writer;
-  }
-  public void setWriter(String writer) {
-    this.writer = writer;
-  }
   public String getContent() {
     return content;
   }
@@ -110,14 +103,17 @@ public class QuestionListDTO implements Serializable {
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
+  public int getStatus() {
+    return status;
+  }
+  public void setStatus(int status) {
+    this.status = status;
+  }
   public JoinDTO getOwner() {
     return owner;
   }
   public void setOwner(JoinDTO owner) {
     this.owner = owner;
-  }
-  public static long getSerialversionuid() {
-    return serialVersionUID;
   }
 
 

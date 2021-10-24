@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.domain.Category;
-import com.share.ftp.domain.Status;
 import com.share.ftp.domain.volunteer.VolunteerAttachedFile;
 
 public class GeneralHelper {
@@ -52,46 +51,48 @@ public class GeneralHelper {
     }
   }
 
-  public Status promptStatus() throws Exception {
-
-    List<Status> statusList = generalDao.findAllStatus();
-
-    System.out.println(" ▶ 신청상태 ");
+  public static List<VolunteerAttachedFile> promptFileUpload() {
     System.out.println();
 
-    while (true) {
-      for (int i = 0; i < statusList.size(); i++) {
-        Status status = statusList.get(i);
-        System.out.printf("%d ▶ %s\n", i + 1, status.getTitle());
-      }
-
-      int input = Prompt.inputInt("상태 ▶ ");
-
-      if (0 < input && input < statusList.size()) {
-        return statusList.get(input - 1);
-      }
-      System.out.println("올바른 번호를 입력해주세요");
-    }
-  }
-
-  public VolunteerAttachedFile promptFileUpload() {
-
-    System.out.println();
+    VolunteerAttachedFile filepath = null;
+    String file = null;
 
     List<VolunteerAttachedFile> fileList = new ArrayList<>();
-
     while(true) {
-      for (VolunteerAttachedFile filepath : fileList) {
 
-        Prompt.inputString(" ▶ 첨부파일 (enter입력 시 종료)\n");
-        System.out.println(" ▶ 첨부파일 (enter입력 시 종료)\n");
+      filepath = new VolunteerAttachedFile();
+      file = Prompt.inputString("첨부파일 (enter입력 시 종료) ▶ ");
+      filepath.setFilepath(file);
 
+      fileList.add(filepath);
+
+      if (file.length() == 0) {
+        return fileList;
       }
     }
 
-
+    // 향후 확장성을 위해 나둠 지금은 필요없음
+    //  public Status promptStatus() throws Exception {
+    //
+    //    List<Status> statusList = generalDao.findAllStatus();
+    //
+    //    System.out.println(" ▶ 신청상태 ");
+    //    System.out.println();
+    //
+    //    while (true) {
+    //      for (int i = 0; i < statusList.size(); i++) {
+    //        Status status = statusList.get(i);
+    //        System.out.printf("%d ▶ %s\n", i + 1, status.getTitle());
+    //      }
+    //
+    //      int input = Prompt.inputInt("상태 ▶ ");
+    //
+    //      if (0 < input && input < statusList.size()) {
+    //        return statusList.get(input - 1);
+    //      }
+    //      System.out.println("올바른 번호를 입력해주세요");
+    //    }
+    //  }
 
   }
-
-
 }

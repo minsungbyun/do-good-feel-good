@@ -248,9 +248,15 @@ insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, pa
 insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password, qna_reply)
   values(6, 5, 3, '문의6', '내용6', password('1'), '문의하기 답글6');
 
+  insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password)
+  values(1, 13, 4, '문의1', '내용1', password('1'));
+  insert into ftp_support_qna(user_no, qna_category_no, title, content, password)
+  values(13, 2, '문의2', '내용2', password('2'));
+  
 -- 문의하기 첨부파일
 insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(1, 1, 'qna01_1.jpg');
 insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(2, 1, 'qna01_2.png');
+
 insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(3, 2, 'qna02_1.gif');
 insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(4, 6, 'qna06_1.gif');
 insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(5, 6, 'qna06_2.jpg');

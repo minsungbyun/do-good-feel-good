@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.share.ftp.dao.QuestionDao">
+
   <resultMap type="QuestionListDTO" id="QuestionDTOMap">
     <id column="qna_no" property="no"/>
     <result column="title" property="title"/>
@@ -15,35 +16,38 @@
     <result column="status" property="status"/>
     
     <association property="owner" javaType="joinDTO">
-      <id column="owner_no" property="no"/>
-      <result column="owner_id" property="id"/>
+      <id column="user_no" property="no"/>
+      <result column="id" property="id"/>
     </association>
-    
-    <association property="qnaType" javaType="category">    
-      <id column="qna_category_no" property="no"/>
-      <result column="category_title" property="title"/>
-    </association>
-  </resultMap>
-  
+     
   <association property="fileUpload" javaType="questionAttachedFile">
      <id column="qna_file_no" property="no"/>
      <result column="filepath" property="filepath"/>
    </association>
+   <!--
+    <association property="qnaType" javaType="category">    
+      <id column="qna_category_no" property="no"/>
+      <result column="category_title" property="title"/>
+    </association>
+   -->
+  </resultMap>
   
-      <!-- 
-  <select id="findAllQuestion" resultMap="QuestionDTOMap">
+  <select id="findAll" resultMap="QuestionDTOMap">
    select 
-     qna_no,
-     qna_category_no,
-     title,
-     created_dt,
-     view_cnt,
-     status
+     s.qna_no,
+     s.title,
+     s.created_dt,
+     s.view_cnt,
+     s.status,
+     u.id
     from
-     ftp_support_qna
-    order by qna_no desc
+     ftp_support_qna s
+     inner join ftp_user u on s.user_no=u.user_no
+    order by
+      qna_no desc
   </select>
   
+      <!-- 
   <insert id="insert" parameterType="NoticeDTO">
     insert into ftp_support_notice(title,content,created_dt) 
     values(#{title},#{content}, curdate())
