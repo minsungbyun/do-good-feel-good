@@ -1,6 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
-import java.sql.Date;
+import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
@@ -14,10 +14,13 @@ public class ChallengeReviewAddHandler implements Command {
 
   ChallengeDao challengeDao;
   ChallengeReviewDao challengeReviewDao;
+  SqlSession sqlSession;
 
-  public ChallengeReviewAddHandler(ChallengeDao challengeDao, ChallengeReviewDao challengeReviewDao) {
+  public ChallengeReviewAddHandler(
+      ChallengeDao challengeDao, ChallengeReviewDao challengeReviewDao, SqlSession sqlSession) {
     this.challengeDao = challengeDao;
     this.challengeReviewDao = challengeReviewDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -45,17 +48,17 @@ public class ChallengeReviewAddHandler implements Command {
 
     challengeReviewDTO.setNo(challengeDTO.getNo());
     challengeReviewDTO.setContent(Prompt.inputString("내용 ▶ "));
-    challengeReviewDTO.setFileUpload(Prompt.inputString("파일첨부 ▶ "));
-    challengeReviewDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
+    //    challengeReviewDTO.setFileUpload(Prompt.inputString("파일첨부 ▶ "));
+    //    challengeReviewDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
     challengeReviewDTO.setOwner(AuthLoginHandler.getLoginUser());
 
-    if (challengeDTO.getReviewCount() == 0) {
-      challengeDTO.setReviewCount(1);
-    } else {
-      challengeDTO.setReviewCount(challengeReviewDao.getNextNum(challengeDTO));
-    }
-
-    challengeReviewDTO.setReviewNo(challengeDTO.getReviewCount()); // 해당 챌린지 리뷰의 마지막 번호기억 + 1
+    //    if (challengeDTO.getReviewCount() == 0) {
+    //      challengeDTO.setReviewCount(1);
+    //    } else {
+    //      challengeDTO.setReviewCount(challengeReviewDao.getNextNum(challengeDTO));
+    //    }
+    //
+    //    challengeReviewDTO.setReviewNo(challengeDTO.getReviewCount()); // 해당 챌린지 리뷰의 마지막 번호기억 + 1
 
     while (true) {
       String input = Prompt.inputString("해당 챌린지에 참여인증&댓글등록을 하시겠습니까? (y/N) ");
@@ -74,8 +77,9 @@ public class ChallengeReviewAddHandler implements Command {
         challengeDTO.addReviewer(AuthLoginHandler.getLoginUser());
         System.out.println(challengeDTO.getReviewerNames()); // 리뷰어 등록 테스트
 
-        challengeDao.update(challengeDTO);
+        //        challengeDao.update(challengeDTO);
         challengeReviewDao.insert(challengeReviewDTO);
+        sqlSession.commit();
 
         System.out.println();
         System.out.println("참여인증&댓글이 등록이 완료되었습니다.");

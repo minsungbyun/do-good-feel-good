@@ -10,6 +10,11 @@
     <id column="challenge_review_no" property="reviewNo"/> 
     <result column="content" property="content"/>
     <result column="created_dt" property="registeredDate"/>
+    
+    <association property="owner" javaType="joinDTO">
+      <id column="user_No" property="no"/>
+      <result column="id" property="id"/>
+    </association>
   </resultMap>
   
   <select id="findAll" resultMap="ChallengeReviewDTOMap">
@@ -24,8 +29,8 @@
   </select>
   
   <insert id="insert" parameterType="ChallengeReviewDTO">
-    insert into ftp_challenge_review(content,created_dt) 
-    values(#{content}, curdate())
+    insert into ftp_challenge_review(challenge_no,content,,user_no,created_dt) 
+    values(#{no},#{content},#{owner.no}, curdate())
   </insert>
   
   

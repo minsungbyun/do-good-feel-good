@@ -62,16 +62,21 @@
   
   <select id="findByNo" resultMap="ChallengeDTOMap" parameterType="int">
      select 
-     challenge_no,
-     title,
-     content,
-     start_dt,
-     end_dt,
-     created_dt
+     c.challenge_no,
+     c.title,
+     c.content,
+     c.start_dt,
+     c.end_dt,
+     c.created_dt,
+     u.user_no user_no,
+     u.name user_name,
+     u.id user_id
     from
-     ftp_challenge
+     ftp_challenge c
+     left outer join ftp_challenge_apply cu on c.challenge_no=cu.challenge_no
+     inner join ftp_user u on cu.user_no=u.user_no
     where 
-      challenge_no=#{values}
+      c.challenge_no=#{values}
   </select>
 </mapper>
 

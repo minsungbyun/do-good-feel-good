@@ -343,7 +343,7 @@ public class ClientApp {
     commands.put("/challengeDetail/wish", new ChallengeWishHandler(challengeDao));  // 관심 챌린지 등록(찜하기)
 
     // 챌린지 참여인증&댓글
-    commands.put("/challengeReview/add", new ChallengeReviewAddHandler(challengeDao, challengeReviewDao));
+    commands.put("/challengeReview/add", new ChallengeReviewAddHandler(challengeDao, challengeReviewDao, sqlSession));
     commands.put("/challengeReview/list", new ChallengeReviewListHandler(challengeDao, challengeReviewDao));
     commands.put("/challengeReview/update", new ChallengeReviewUpdateHandler(challengeDao, challengeReviewDao));
     commands.put("/challengeReview/delete", new ChallengeReviewDeleteHandler(challengeDao, challengeReviewDao));
