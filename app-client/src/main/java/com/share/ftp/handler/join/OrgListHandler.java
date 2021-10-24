@@ -45,8 +45,8 @@ public class OrgListHandler implements Command {
           loginUser.getDetailAddress(),
           loginUser.getRegisterDate());
     }
-
-    int userNo = Prompt.inputInt("승인할 유저 번호를 입력하세요(0 입력 시 취소) ▶ ");
+    System.out.println();
+    int userNo = Prompt.inputInt("유저 번호를 입력하세요(0 입력 시 취소) ▶ ");
 
     if (userNo == 0) {
       return;
@@ -72,7 +72,9 @@ public class OrgListHandler implements Command {
 
       } else if (input == 2) {
         orgUser.setStatus(REJECT);
+        String note = Prompt.inputString("거절사유 입력 ▶ ");
         orgDao.updateStatus(orgUser);
+        orgDao.updateStatusReject(orgUser.getNo(), note);
         sqlSession.commit();
 
         System.out.println();

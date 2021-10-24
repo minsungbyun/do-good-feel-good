@@ -59,7 +59,7 @@
 	     ftp_user u
 	     inner join ftp_user_group g on u.user_no=g.user_no
 	   where
-	     u.status=2
+	     u.status=2 or u.status=3
 	   order by
 	     user_group_no desc
   </select>
@@ -102,13 +102,38 @@
         user_no=#{no}
   </update>
   
-  <update id="updateStatus" parameterType="GroupDTO">
-     update ftp_user set
-       status=1
+  <update id="updateGroup" parameterType="int">
+     update ftp_user_group set
+       group_cnt=#{groupCnt}
      where 
         user_no=#{no}
   </update>
   
+  <update id="updateStatus" parameterType="GroupDTO">
+     update ftp_user set
+       status=#{status}
+     where 
+        user_no=#{no}
+  </update>
+  
+  <update id="updateStatusReject">
+     update ftp_user set
+       note=#{note}
+     where 
+        user_no=#{userNo}
+  </update>
+  
+   <select id="printNote" resultMap="GroupDTOMap" parameterType="int">
+     select
+      u.note
+    from 
+      ftp_user u
+      inner join ftp_user_group g on u.user_no=g.user_no
+    where
+      u.user_no=#{no}
+  </select>
+  
+ 
  
    <update id="updateOrg" parameterType="GroupDTO">
      update ftp_user_group set

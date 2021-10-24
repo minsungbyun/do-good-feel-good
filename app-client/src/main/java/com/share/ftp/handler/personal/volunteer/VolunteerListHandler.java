@@ -5,6 +5,7 @@ import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
+import com.share.util.Prompt;
 
 public class VolunteerListHandler implements Command { 
 
@@ -30,8 +31,8 @@ public class VolunteerListHandler implements Command {
       System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s \n", 
           volunteerRequestDTO.getNo(),      
           volunteerRequestDTO.getTitle(),     
-          volunteerRequestDTO.getOwner().getName(), 
-          volunteerRequestDTO.getCategory(), 
+          volunteerRequestDTO.getOwner().getId(), 
+          volunteerRequestDTO.getCategory().getTitle(), 
           volunteerRequestDTO.getTel(),
           volunteerRequestDTO.getEmail(),
           volunteerRequestDTO.getStartDate(),
@@ -42,5 +43,16 @@ public class VolunteerListHandler implements Command {
           volunteerRequestDTO.getContent()
           );
     } 
+
+    System.out.println();
+
+    int no = Prompt.inputInt("상세보기 할 봉사 번호를 입력해주세요(이전 0번) ▶ ");
+    if (no == 0) {
+      return;
+    }
+
+    request.setAttribute("no", no); 
+    request.getRequestDispatcher("/vol/detail").forward(request);
+
   }
 }

@@ -14,8 +14,12 @@ public interface GroupDao {
       @Param("groupCnt") int groupCount) throws Exception;          // 단체회원 추가
   List<GroupDTO> findAllGroup() throws Exception;               // 단체회원 목록
   List<GroupDTO> findAllWaitGroup() throws Exception;               // 단체회원 목록
-  void update(GroupDTO groupDTO) throws Exception;          // 단체회원 수정
-  void updateStatus(GroupDTO groupDTO) throws Exception;          // 단체회원 수정
+  void update(GroupDTO groupDTO) throws Exception;  
+  void updateGroup(int groupCount) throws Exception;
+  void updateStatus(GroupDTO groupDTO) throws Exception;  
+  void updateStatusReject(
+      @Param("userNo") int userNo,
+      @Param("note") String note) throws Exception; // 단체회원 수정
   //  void updateGroup(GroupDTO groupDTO) throws Exception;
   void delete(GroupDTO groupDTO) throws Exception;          // 회원 삭제
   //  void deleteGroup(GroupDTO groupDTO) throws Exception;          // 회원 삭제
@@ -25,6 +29,7 @@ public interface GroupDao {
 
   GroupDTO findByGroupNo(int userNo) throws Exception;
   GroupDTO validId(String userId) throws Exception;
+  void printNote(int userNo) throws Exception;
 
 
   GroupDTO selectOneByIdEmail(String userId, String userEmail) throws Exception; // 로그인 유효성 검사

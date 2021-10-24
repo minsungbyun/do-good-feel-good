@@ -1,5 +1,6 @@
 package com.share.ftp.handler.personal.volunteer;
 
+import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
@@ -7,12 +8,14 @@ import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class VolGeneralRequestWishHandler implements Command {
+public class VolunteerWishHandler implements Command {
 
   VolunteerDao volunteerDao;
+  SqlSession sqlSession;
 
-  public VolGeneralRequestWishHandler(VolunteerDao volunteerDao) {
+  public VolunteerWishHandler(VolunteerDao volunteerDao,SqlSession sqlSession) {
     this.volunteerDao = volunteerDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -22,7 +25,7 @@ public class VolGeneralRequestWishHandler implements Command {
 
     int volNo = (int) request.getAttribute("volNo");
 
-    VolunteerRequestDTO VolunteerRequestDTO = volunteerDao.findByApplyVol(volNo); 
+    VolunteerRequestDTO VolunteerRequestDTO = volunteerDao.findByApprovedVolunteerNo(volNo); 
 
     while (true) {
       String input = Prompt.inputString("[  🎈 관심 봉사로 추가하시겠습니까?(y/N) 🎈 ] ");
@@ -35,7 +38,8 @@ public class VolGeneralRequestWishHandler implements Command {
       } else if (input.equalsIgnoreCase("y")) {
         System.out.println();
         VolunteerRequestDTO.setWish(AuthLoginHandler.getLoginUser());
-        volunteerDao.update(VolunteerRequestDTO);
+        volunteerDao.addWish(AuthLoginHandler.getLoginUser().getNo(),VolunteerRequestDTO.getNo());
+        sqlSession.commit();
         System.out.println("[  🎈 관심 봉사로 등록되었습니다. 🎈  ]");
         return;
 

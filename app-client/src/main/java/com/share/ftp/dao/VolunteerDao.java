@@ -1,6 +1,7 @@
 package com.share.ftp.dao;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import com.share.ftp.domain.Category;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 
@@ -10,8 +11,12 @@ public interface VolunteerDao {
 
   void insert(VolunteerRequestDTO addVolunteer) throws Exception;      
   void insertFile(String filepath) throws Exception;      
+  void addWish(
+      @Param("userNo") int userNo,
+      @Param("volNo") int volNo) throws Exception;      
   List<VolunteerRequestDTO> findAll() throws Exception;      
   List<VolunteerRequestDTO> findAllApproved() throws Exception;      
+  List<VolunteerRequestDTO> findAllApply() throws Exception;      
   List<VolunteerRequestDTO> findAllWait() throws Exception;      
   List<Category> findAllCategory() throws Exception;      
   void update(VolunteerRequestDTO updateVolunteer) throws Exception;          

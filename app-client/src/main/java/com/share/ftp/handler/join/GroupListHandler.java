@@ -46,8 +46,8 @@ public class GroupListHandler implements Command {
           loginUser.getDetailAddress(),
           loginUser.getRegisterDate());
     }
-
-    int userNo = Prompt.inputInt("승인할 유저 번호를 입력하세요(0 입력 시 취소) ▶ ");
+    System.out.println();
+    int userNo = Prompt.inputInt("유저 번호를 입력하세요(0 입력 시 취소) ▶ ");
 
     if (userNo == 0) {
       return;
@@ -64,7 +64,7 @@ public class GroupListHandler implements Command {
 
       if (input == 1) {
         groupUser.setStatus(ACTIVE);
-        groupDao.updateStatus(groupUser);
+        groupDao.update(groupUser);
         sqlSession.commit();
 
         System.out.println();
@@ -73,7 +73,9 @@ public class GroupListHandler implements Command {
 
       } else if (input == 2) {
         groupUser.setStatus(REJECT);
+        String note = Prompt.inputString("거절사유 입력 ▶ ");
         groupDao.updateStatus(groupUser);
+        groupDao.updateStatusReject(groupUser.getNo(), note);
         sqlSession.commit();
 
         System.out.println();
