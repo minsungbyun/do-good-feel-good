@@ -15,7 +15,9 @@ public interface OrgDao {
       @Param("fax") String fax,
       @Param("homepage") String homepage) throws Exception;          // 기관회원 추가
   List<OrgDTO> findAllOrg() throws Exception;               // 기관회원 목록
+  List<OrgDTO> findAllWaitOrg() throws Exception;               // 기관회원 목록
   void update(OrgDTO orgDTO) throws Exception;          // 기관회원 수정
+  void updateStatus(OrgDTO orgDTO) throws Exception;          // 기관회원 수정
   //  void updateOrg(OrgDTO orgDTO) throws Exception;          // 기관회원 수정
   void delete(OrgDTO orgDTO) throws Exception;          // 기관회원 삭제
   //  void deleteOrg(OrgDTO orgDTO) throws Exception;          // 기관회원 삭제
@@ -23,11 +25,14 @@ public interface OrgDao {
       @Param("userId") String userId,
       @Param("userPassword") String userPassword) throws Exception; // 로그인 유효성 검사
 
+  OrgDTO findByOrgNo(int userNo) throws Exception;
   OrgDTO validId(String userId) throws Exception;
+  OrgDTO validId(OrgDTO orgDTO) throws Exception;
+
+
   OrgDTO selectOneByIdEmail(String userId, String userEmail) throws Exception; // 로그인 유효성 검사
   OrgDTO selectOneByUser(String userId, String userPassword) throws Exception; // 회원정보 상세보기
   OrgDTO selectOneByEmail(String userEmail) throws Exception; // 회원정보 상세보기
   OrgDTO selectOneByTel(String userTel) throws Exception; // 회원정보 상세보기
-  OrgDTO validId(OrgDTO orgDTO) throws Exception;               // 아이디 유효성 검사
 
 }

@@ -7,7 +7,9 @@ import com.share.ftp.domain.Status;
 public interface GeneralDao {
 
   List<Category> findAllCategory() throws Exception;
-  List<Status> findAllStatus() throws Exception;
+
+  // 향후 확장성 위해서 나둠
+  //  List<Status> findAllStatus() throws Exception;
 
 
 

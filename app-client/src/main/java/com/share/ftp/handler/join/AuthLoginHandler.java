@@ -7,6 +7,7 @@ import static com.share.menu.Menu.ACCESS_MEMBER;
 import static com.share.menu.Menu.ACCESS_MEMBER_ADMIN;
 import static com.share.menu.Menu.ACCESS_ORG;
 import static com.share.menu.Menu.ACCESS_PERSONAL;
+import static com.share.util.General.status.WAIT;
 import com.share.ftp.dao.GroupDao;
 import com.share.ftp.dao.JoinDao;
 import com.share.ftp.dao.OrgDao;
@@ -87,7 +88,7 @@ public class AuthLoginHandler implements Command {
 
       }
     } catch(Exception e) {
-      System.out.println("로그인을 실패하였습니다!");
+      System.out.println("아이디와 비밀번호가 일치하지 않습니다!");
     }
   } 
 
@@ -105,10 +106,10 @@ public class AuthLoginHandler implements Command {
 
   private void loginGroup(String userId, String userPassword) throws Exception {
     GroupDTO user = groupDao.findByIdPassword(userId, userPassword);
-    if (user == null) {
-      System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");
+    if (user.getStatus() == WAIT) {
+      System.out.println("관리자의 승인 후 로그인이 가능합니다!");
       return;
-    }
+    } 
     userAccessLevel = ACCESS_MEMBER | ACCESS_GROUP | ACCESS_MEMBER_ADMIN;
 
     System.out.printf("[  %s님 환영합니다!  ]\n", user.getName());
@@ -117,10 +118,11 @@ public class AuthLoginHandler implements Command {
 
   private void loginOrg(String userId, String userPassword) throws Exception {
     OrgDTO user = orgDao.findByIdPassword(userId, userPassword);
-    if (user == null) {
-      System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");
+
+    if (user.getStatus() == WAIT) {
+      System.out.println("관리자의 승인 후 로그인이 가능합니다!");
       return;
-    }
+    } 
     userAccessLevel = ACCESS_MEMBER | ACCESS_ORG | ACCESS_MEMBER_ADMIN;
 
     System.out.printf("[  %s님 환영합니다!  ]\n", user.getName());

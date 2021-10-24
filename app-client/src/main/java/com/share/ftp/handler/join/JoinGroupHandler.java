@@ -1,7 +1,7 @@
 package com.share.ftp.handler.join;
 
 import static com.share.util.General.member.GROUP;
-import static com.share.util.General.status.WAITING;
+import static com.share.util.General.status.WAIT;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.GroupDao;
 import com.share.ftp.domain.join.GroupDTO;
@@ -72,7 +72,7 @@ public class JoinGroupHandler implements Command {
     System.out.println();
 
     groupUser.setType(GROUP);
-    groupUser.setStatus(WAITING);
+    groupUser.setStatus(WAIT);
 
     groupDao.insert(groupUser);
     groupDao.insertGroup(
