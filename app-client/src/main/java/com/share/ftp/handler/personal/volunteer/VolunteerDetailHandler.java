@@ -4,14 +4,13 @@ import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
-import com.share.util.GeneralHelper;
 import com.share.util.Prompt;
 
-public class VolGeneralAppliedDetailHandler implements Command {
+public class VolunteerDetailHandler implements Command {
 
   VolunteerDao volunteerDao;
 
-  public VolGeneralAppliedDetailHandler(VolunteerDao volunteerDao) {
+  public VolunteerDetailHandler(VolunteerDao volunteerDao) {
     this.volunteerDao = volunteerDao;
   }
 
@@ -23,14 +22,15 @@ public class VolGeneralAppliedDetailHandler implements Command {
     System.out.println();
     int volNo = Prompt.inputInt("봉사 번호를 입력해주세요 ▶ ");
 
-    VolunteerRequestDTO generalRequestApplyDTO = volunteerDao.findByVolNo(volNo);
+    VolunteerRequestDTO volunteerRequestDTO = volunteerDao.findByApprovedVolunteerNo(volNo);
 
-    if (generalRequestApplyDTO == null) {
+    if (volunteerRequestDTO == null) {
       System.out.println("해당 번호의 봉사가 없습니다.");
       return;
     }
 
     request.setAttribute("volNo", volNo); 
+
 
     System.out.println();
     System.out.printf("봉사번호: %d\n"
@@ -43,26 +43,27 @@ public class VolGeneralAppliedDetailHandler implements Command {
         + "봉사종료기간: %s\n"
         + "봉사시작시간: %s\n"
         + "봉사종료시간: %s\n"
-        + "봉사남은시간: %s\n"
+        + "총봉사기간: %s\n"
+        + "남은봉사기간: %s\n"
         + "봉사인원: %d명 / %d명\n"
-        + "봉사내용: %s\n\n"
-        + "첨부파일: %s\n\n",
+        + "봉사내용: %s\n\n",
 
-        generalRequestApplyDTO.getNo(),      
-        generalRequestApplyDTO.getTitle(),     
-        generalRequestApplyDTO.getOwner().getName(), 
-        generalRequestApplyDTO.getCategory(), 
-        generalRequestApplyDTO.getTel(),
-        generalRequestApplyDTO.getEmail(),
-        generalRequestApplyDTO.getStartDate(),
-        generalRequestApplyDTO.getEndDate(),
-        generalRequestApplyDTO.getStartTime(),
-        generalRequestApplyDTO.getEndTime(),
-        GeneralHelper.getRemainTime(generalRequestApplyDTO.getEndDate().getTime() - System.currentTimeMillis()),
-        generalRequestApplyDTO.getTotalJoinCount(),
-        generalRequestApplyDTO.getLimitNum(),
-        generalRequestApplyDTO.getContent(),
-        generalRequestApplyDTO.getFileUpload()
+        volunteerRequestDTO.getNo(),      
+        volunteerRequestDTO.getTitle(),     
+        volunteerRequestDTO.getOwner().getName(), 
+        volunteerRequestDTO.getCategory(), 
+        volunteerRequestDTO.getTel(),
+        volunteerRequestDTO.getEmail(),
+        volunteerRequestDTO.getStartDate(),
+        volunteerRequestDTO.getEndDate(),
+        volunteerRequestDTO.getStartTime(),
+        volunteerRequestDTO.getEndTime(),
+        volunteerDao.totalDate(volNo).getTotalDate(),
+        volunteerDao.remainDate(volNo).getRemainDate(),
+        //        GeneralHelper.getRemainTime(volunteerRequestDTO.getEndDate().getTime() - System.currentTimeMillis()),
+        volunteerRequestDTO.getCurrentNum(),
+        volunteerRequestDTO.getLimitNum(),
+        volunteerRequestDTO.getContent()
         );
     System.out.println();
 
