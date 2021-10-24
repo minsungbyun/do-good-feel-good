@@ -7,7 +7,7 @@
   
   <resultMap type="ChallengeReviewDTO" id="ChallengeReviewDTOMap">
     <id column="challenge_no" property="no"/> 
-    <id column="challenge_review_no" property="reviewNo"/> 
+    <result column="challenge_review_no" property="reviewNo"/> 
     <result column="content" property="content"/>
     <result column="created_dt" property="registeredDate"/>
     
@@ -18,27 +18,31 @@
   </resultMap>
   
   <select id="findAll" resultMap="ChallengeReviewDTOMap">
-   select 
-     challenge_no,
-     challenge_review_no,
-     content,
-     created_dt
+    select 
+      r.challenge_no,
+      r.challenge_review_no,
+      r.content,
+      r.created_dt,
+      u.user_no user_No,
+      u.id id
     from
-     ftp_challenge_review
-    order by challenge_review_no desc
+      ftp_challenge_review r
+      inner join ftp_user u on r.user_no=u.user_no
+    order by 
+      r.challenge_review_no desc
   </select>
   
   <insert id="insert" parameterType="ChallengeReviewDTO">
-    insert into ftp_challenge_review(challenge_no,content,,user_no,created_dt) 
+    insert into ftp_challenge_review(challenge_no,content,user_no,created_dt) 
     values(#{no},#{content},#{owner.no}, curdate())
   </insert>
   
   
   
-   <update id="update" parameterType="ChallengeReviewDTO">
-   update ftp_challenge_review set
+  <update id="update" parameterType="ChallengeReviewDTO">
+    update ftp_challenge_review set
      content=#{content},
-   where 
+    where 
       challenge_review_no=#{reviewNo}
   </update>
   
@@ -51,14 +55,18 @@
   
   
   <select id="findByNo" resultMap="ChallengeReviewDTOMap" parameterType="int">
-     select 
-     challenge_review_no,
-     content,
-     created_dt
+    select 
+      r.challenge_no,
+      r.challenge_review_no,
+      r.content,
+      r.created_dt,
+      u.user_no,
+      u.id
     from
-     ftp_challenge_review
+      ftp_challenge_review r
+      inner join ftp_user u on r.user_no=u.user_no
     where 
-      challenge_review_no=#{values}
+      challenge_no=#{challengeNo} and challenge_review_no=#{challengeReviewNo}
   </select>
 </mapper>
 

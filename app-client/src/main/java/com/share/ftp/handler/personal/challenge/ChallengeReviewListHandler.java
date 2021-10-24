@@ -35,10 +35,10 @@ public class ChallengeReviewListHandler implements Command {
 
     for (ChallengeReviewDTO challengeReviewDTO : challengeReviewList) {
       if (challengeReviewDTO.getNo() == challengeNo) {
-        System.out.printf("%d, %d, %s, %s\n", 
+        System.out.printf("%d, %d, %s, %s, %s\n", 
             challengeReviewDTO.getNo(),
             challengeReviewDTO.getReviewNo(),
-            //            challengeReviewDTO.getOwner().getId(),
+            challengeReviewDTO.getOwner().getId(),
             challengeReviewDTO.getContent(),
             //            challengeReviewDTO.getFileUpload(),
             challengeReviewDTO.getRegisteredDate());

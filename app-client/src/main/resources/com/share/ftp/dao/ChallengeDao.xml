@@ -74,7 +74,7 @@
     from
      ftp_challenge c
      left outer join ftp_challenge_apply cu on c.challenge_no=cu.challenge_no
-     inner join ftp_user u on cu.user_no=u.user_no
+     left outer join ftp_user u on cu.user_no=u.user_no
     where 
       c.challenge_no=#{values}
   </select>

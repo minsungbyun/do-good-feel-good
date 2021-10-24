@@ -32,10 +32,19 @@ public class ChallengeReviewConnectHandler implements Command {
       return;
     }
 
-    if (!challengeReviewDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
-      System.out.println("변경 권한이 없습니다.");
+    if (challengeReviewDTO.getOwner().getNo() == AuthLoginHandler.getLoginUser().getNo() ||
+        AuthLoginHandler.getLoginUser().getId().equals("admin")) {
+
+      System.out.printf("아이디: %s\n", challengeReviewDTO.getOwner().getId());
+      System.out.printf("내용: %s\n", challengeReviewDTO.getContent());
+      System.out.printf("등록날짜: %s\n", challengeReviewDTO.getRegisteredDate());
+
+    } else {
+      System.out.println("본인이 작성한 글만 확인할 수 있습니다.");
       return;
     }
+
+    System.out.println();
 
     request.setAttribute("challengeReviewNo", challengeReviewNo); 
 
