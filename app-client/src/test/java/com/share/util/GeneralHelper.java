@@ -1,9 +1,11 @@
 package com.share.util;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.domain.Category;
 import com.share.ftp.domain.Status;
+import com.share.ftp.domain.volunteer.VolunteerAttachedFile;
 
 public class GeneralHelper {
 
@@ -69,8 +71,27 @@ public class GeneralHelper {
         return statusList.get(input - 1);
       }
       System.out.println("올바른 번호를 입력해주세요");
-
-
     }
   }
+
+  public VolunteerAttachedFile promptFileUpload() {
+
+    System.out.println();
+
+    List<VolunteerAttachedFile> fileList = new ArrayList<>();
+
+    while(true) {
+      for (VolunteerAttachedFile filepath : fileList) {
+
+        Prompt.inputString(" ▶ 첨부파일 (enter입력 시 종료)\n");
+        System.out.println(" ▶ 첨부파일 (enter입력 시 종료)\n");
+
+      }
+    }
+
+
+
+  }
+
+
 }

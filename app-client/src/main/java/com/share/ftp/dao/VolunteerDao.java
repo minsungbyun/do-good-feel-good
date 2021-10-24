@@ -7,11 +7,11 @@ import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 // - 봉사신청서를 처리하는 객체 사용법을 정의한다.
 public interface VolunteerDao {
 
-  void insert(VolunteerRequestDTO addVol) throws Exception;      
+  void insert(VolunteerRequestDTO addVolunteer) throws Exception;      
   List<VolunteerRequestDTO> findAll() throws Exception;      
-  void update(VolunteerRequestDTO updateVol) throws Exception;          
-  void delete(VolunteerRequestDTO deleteVol) throws Exception;    
+  void update(VolunteerRequestDTO updateVolunteer) throws Exception;          
+  void delete(VolunteerRequestDTO deleteVolunteer) throws Exception;    
 
-  VolunteerRequestDTO findByVolNo(int volNo) throws Exception;
+  VolunteerRequestDTO findByVolNo(int volunteerNo) throws Exception;
 
 }

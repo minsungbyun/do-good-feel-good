@@ -20,27 +20,21 @@
     <result column="type" property="type"/>
     <result column="status" property="status"/>
     <result column="note" property="note"/>
+    
+ 
   <!--    <result column="last_login" property="viewCount"/>-->
   </resultMap>
   
   
   <select id="findAll" resultMap="JoinDTOMap">
 	   select 
-       u.*
+       *
      from
-       ftp_user u
+       ftp_user 
      order by
-       user_no desc
+       user_no desc 
   </select>
   
-  <select id="findByIdPassword" resultMap="JoinDTOMap">
-    select 
-       u.* 
-     from
-       ftp_user u
-    where 
-      id=#{userId} and password=password(#{userPassword})
-  </select>
   
   <select id="findByType" resultMap="JoinDTOMap" parameterType="string">
     select 
@@ -50,8 +44,27 @@
     where 
       id=#{userId}
   </select>
+    
+  <select id="findByIdPassword" resultMap="JoinDTOMap">
+    select 
+       id,
+       password,
+       type
+     from
+       ftp_user
+    where 
+      id=#{userId} and password=password(#{userPassword})
+  </select>
   
-  
+  <select id="validId" resultMap="JoinDTOMap" parameterType="string">
+    select 
+       id
+     from
+       ftp_user     
+    where 
+      id=#{userId}
+  </select>
+
   
    <!-- 
    <update id="deletePersonal" parameterType="PersonalDTO">
@@ -62,9 +75,7 @@
       where 
         user_personal_no=#{personalNo}
   </update>
-  
-  
-  
+
   <select id="findByKeyword" resultMap="NoticeDTOMap" parameterType="string">
      select 
        notice_no,
@@ -83,6 +94,7 @@
      </where>
      order by notice_no desc
   </select>
+
  
   
   <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">

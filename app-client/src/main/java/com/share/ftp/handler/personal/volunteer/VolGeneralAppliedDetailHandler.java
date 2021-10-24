@@ -44,15 +44,14 @@ public class VolGeneralAppliedDetailHandler implements Command {
         + "봉사시작시간: %s\n"
         + "봉사종료시간: %s\n"
         + "봉사남은시간: %s\n"
-        //        + "봉사목록: %s\n"
         + "봉사인원: %d명 / %d명\n"
-        + "봉사내용: %s\n"
+        + "봉사내용: %s\n\n"
         + "첨부파일: %s\n\n",
 
         generalRequestApplyDTO.getNo(),      
         generalRequestApplyDTO.getTitle(),     
         generalRequestApplyDTO.getOwner().getName(), 
-        generalRequestApplyDTO.getType(), 
+        generalRequestApplyDTO.getCategory(), 
         generalRequestApplyDTO.getTel(),
         generalRequestApplyDTO.getEmail(),
         generalRequestApplyDTO.getStartDate(),
@@ -60,7 +59,6 @@ public class VolGeneralAppliedDetailHandler implements Command {
         generalRequestApplyDTO.getStartTime(),
         generalRequestApplyDTO.getEndTime(),
         GeneralHelper.getRemainTime(generalRequestApplyDTO.getEndDate().getTime() - System.currentTimeMillis()),
-        //        personalRequestApplyDTO.getVolList(),
         generalRequestApplyDTO.getTotalJoinCount(),
         generalRequestApplyDTO.getLimitNum(),
         generalRequestApplyDTO.getContent(),

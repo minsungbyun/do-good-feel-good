@@ -107,6 +107,15 @@
         user_group_no=#{groupNo}
   </update>
   
+  <select id="validId" resultMap="GroupDTOMap" parameterType="string">
+    select 
+       id
+     from
+       ftp_user     
+    where 
+      id=#{id}
+  </select>
+  
   <!-- 
   
   <select id="findByKeyword" resultMap="NoticeDTOMap" parameterType="string">

@@ -115,6 +115,15 @@
         user_org_no=#{orgNo}
   </update>
   
+  <select id="validId" resultMap="OrgDTOMap" parameterType="string">
+    select 
+       id
+     from
+       ftp_user     
+    where 
+      id=#{id}
+  </select>
+  
   
   <!--
   <select id="findByKeyword" resultMap="NoticeDTOMap" parameterType="string">

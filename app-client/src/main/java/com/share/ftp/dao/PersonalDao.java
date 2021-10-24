@@ -20,6 +20,9 @@ public interface PersonalDao {
   PersonalDTO findByIdPassword(
       @Param("userId") String userId, 
       @Param("userPassword") String userPassword) throws Exception; // 로그인 유효성 검사
+
+  PersonalDTO validId(String userId) throws Exception;
+
   PersonalDTO selectOneByIdEmail(String userId, String userEmail) throws Exception; // 로그인 유효성 검사
   PersonalDTO selectOneByUser(String userId, String userPassword) throws Exception; // 회원정보 상세보기
   PersonalDTO selectOneByEmail(String userEmail) throws Exception; // 회원정보 상세보기

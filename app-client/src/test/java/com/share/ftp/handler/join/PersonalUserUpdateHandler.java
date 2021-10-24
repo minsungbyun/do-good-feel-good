@@ -22,7 +22,7 @@ public class PersonalUserUpdateHandler implements Command {
 
     String userPassword = Prompt.inputString("비밀번호? ");
 
-    PersonalDTO loginUser = personalDao.selectOneByIdPassword(AuthLoginHandler.getLoginUser().getId(), userPassword);
+    PersonalDTO loginUser = personalDao.findByIdPassword(AuthLoginHandler.getLoginUser().getId(), userPassword);
 
     if (loginUser == null) {
       System.out.println("해당 아이디의 회원이 없습니다.");

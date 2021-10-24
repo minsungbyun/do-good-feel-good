@@ -20,6 +20,10 @@ public interface GroupDao {
   GroupDTO findByIdPassword(
       @Param("userId") String userId,
       @Param("userPassword") String userPassword) throws Exception; // 로그인 유효성 검사
+
+  GroupDTO validId(String userId) throws Exception;
+
+
   GroupDTO selectOneByIdEmail(String userId, String userEmail) throws Exception; // 로그인 유효성 검사
   GroupDTO selectOneByUser(String userId, String userPassword) throws Exception; // 회원정보 상세보기
   GroupDTO selectOneByEmail(String userEmail) throws Exception; // 회원정보 상세보기

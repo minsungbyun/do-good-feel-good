@@ -22,6 +22,8 @@ public interface OrgDao {
   OrgDTO findByIdPassword(
       @Param("userId") String userId,
       @Param("userPassword") String userPassword) throws Exception; // 로그인 유효성 검사
+
+  OrgDTO validId(String userId) throws Exception;
   OrgDTO selectOneByIdEmail(String userId, String userEmail) throws Exception; // 로그인 유효성 검사
   OrgDTO selectOneByUser(String userId, String userPassword) throws Exception; // 회원정보 상세보기
   OrgDTO selectOneByEmail(String userEmail) throws Exception; // 회원정보 상세보기

@@ -91,6 +91,15 @@
       id=#{userId} and password=password(#{userPassword})
   </select>
   
+  <select id="validId" resultMap="PersonalDTOMap" parameterType="string">
+    select 
+       id
+     from
+       ftp_user     
+    where 
+      id=#{id}
+  </select>
+  
   
    <update id="delete" parameterType="PersonalDTO">
      update ftp_user set

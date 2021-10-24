@@ -11,8 +11,10 @@ import com.share.ftp.dao.GroupDao;
 import com.share.ftp.dao.JoinDao;
 import com.share.ftp.dao.OrgDao;
 import com.share.ftp.dao.PersonalDao;
+import com.share.ftp.domain.join.GroupDTO;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.join.OrgDTO;
+import com.share.ftp.domain.join.PersonalDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
@@ -73,21 +75,24 @@ public class AuthLoginHandler implements Command {
     } 
 
     JoinDTO loginUser = joinDao.findByType(userId);
+    try {
+      if (loginUser.getType() == 1) {
+        loginPersonal(userId, userPassword);
 
-    if (loginUser.getType() == 1) {
-      loginPersonal(userId, userPassword);
+      } else if (loginUser.getType() == 2) {
+        loginGroup(userId, userPassword);
 
-    } else if (loginUser.getType() == 2) {
-      loginGroup(userId, userPassword);
+      } else if (loginUser.getType() == 3) {
+        loginOrg(userId, userPassword);
 
-    } else if (loginUser.getType() == 3) {
-      loginOrg(userId, userPassword);
-
+      }
+    } catch(Exception e) {
+      System.out.println("로그인을 실패하였습니다!");
     }
   } 
 
   private void loginPersonal(String userId, String userPassword) throws Exception {
-    PersonalDao user = personalDao.findByIdPassword(userId, userPassword);
+    PersonalDTO user = personalDao.findByIdPassword(userId, userPassword);
     if (user == null) {
       System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");
       return;
@@ -99,7 +104,7 @@ public class AuthLoginHandler implements Command {
   }
 
   private void loginGroup(String userId, String userPassword) throws Exception {
-    GroupDao user = groupDao.findByIdPassword(userId, userPassword);
+    GroupDTO user = groupDao.findByIdPassword(userId, userPassword);
     if (user == null) {
       System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");
       return;
@@ -111,7 +116,7 @@ public class AuthLoginHandler implements Command {
   }
 
   private void loginOrg(String userId, String userPassword) throws Exception {
-    OrgDao user = orgDao.findByIdPassword(userId, userPassword);
+    OrgDTO user = orgDao.findByIdPassword(userId, userPassword);
     if (user == null) {
       System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");
       return;
@@ -121,4 +126,5 @@ public class AuthLoginHandler implements Command {
     System.out.printf("[  %s님 환영합니다!  ]\n", user.getName());
     loginUser = user;
   }
+
 }

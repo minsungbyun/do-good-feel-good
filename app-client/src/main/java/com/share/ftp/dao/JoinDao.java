@@ -9,11 +9,16 @@ import com.share.ftp.domain.join.JoinDTO;
 public interface JoinDao {
 
   List<JoinDTO> findAll() throws Exception;               // 회원 목록
+
+
   JoinDTO findByIdPassword(
-      @Param("userId") String userId,
-      @Param("userPassword") String userPassword) throws Exception; // 로그인 유효성 검사
-  //  JoinDTO selectOneByIdPassword(String userId, String userPassword) throws Exception; // 로그인 유효성 검사
+      @Param("userId") String userId, 
+      @Param("userPassword") String userPassword) throws Exception;
+
   JoinDTO findByType(String userId) throws Exception;
+  JoinDTO validId(String userId) throws Exception;
+  JoinDTO selectOneByIdPassword(String userId, String userPassword) throws Exception; // 로그인 유효성 검사
+
   JoinDTO selectOneByIdEmail(String userId, String userEmail) throws Exception; // 로그인 유효성 검사
   JoinDTO selectOneByUser(String userId, String userPassword) throws Exception; // 회원정보 상세보기
   JoinDTO selectOneByEmail(String userEmail) throws Exception; // 회원정보 상세보기
