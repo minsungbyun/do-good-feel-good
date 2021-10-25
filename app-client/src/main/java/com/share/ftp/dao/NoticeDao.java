@@ -8,8 +8,7 @@ import com.share.ftp.domain.admin.NoticeDTO;
 public interface NoticeDao {
 
   void insert(NoticeDTO addNotice) throws Exception;
-  void insertFile(
-      @Param("no") int no,
+  void insertFile(@Param("noticeNo") int noticeNo,
       @Param("filepath") String filepath) throws Exception;
   List<NoticeDTO> findAll() throws Exception;
   List<NoticeDTO> findByKeyword(String keyword) throws Exception;
@@ -18,5 +17,4 @@ public interface NoticeDao {
   void updateFile(NoticeDTO updateNotice) throws Exception;
   void delete(NoticeDTO deleteNotice) throws Exception;
   void deleteFile(NoticeDTO deleteNotice) throws Exception;
-
 }

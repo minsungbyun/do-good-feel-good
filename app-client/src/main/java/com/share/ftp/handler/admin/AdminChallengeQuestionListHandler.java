@@ -2,6 +2,7 @@ package com.share.ftp.handler.admin;
 
 import java.util.Collection;
 import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
@@ -11,9 +12,11 @@ import com.share.util.Prompt;
 public class AdminChallengeQuestionListHandler implements Command {
 
   ChallengeDao challengeDao;
+  ChallengeQuestionDao challengeQuestionDao;
 
-  public AdminChallengeQuestionListHandler(ChallengeDao challengeDao) {
+  public AdminChallengeQuestionListHandler(ChallengeDao challengeDao, ChallengeQuestionDao challengeQuestionDao) {
     this.challengeDao = challengeDao;
+    this.challengeQuestionDao = challengeQuestionDao;
   }
 
   @Override
@@ -22,7 +25,7 @@ public class AdminChallengeQuestionListHandler implements Command {
 
       int challengeNo = (int) request.getAttribute("challengeNo");
 
-      ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
+      ChallengeDTO challengeDTO = challengeDao.findByNo(challengeNo);
 
       //      int questionNo = (int) request.getAttribute("questionNo");
       //      ChallengeQuestionDTO detailNo = findByQuestionNo();
@@ -31,15 +34,24 @@ public class AdminChallengeQuestionListHandler implements Command {
       System.out.printf("[ %d번 챌린지 문의 목록 ]", challengeNo);
       System.out.println();
 
+      System.out.printf("챌린지 번호 ▶ %d\n"
+          + "제목[댓글] ▶ %s[%d]\n"
+          //          + "작성자 ▶ %s\n"
+          + "참여인원 ▶ %d\n"
+          + "참여기간 ▶ %s ~ %s\n", 
+          challengeDTO.getNo(), 
+          challengeDTO.getTitle(), 
+          challengeDTO.getReviewCount(), 
+          //          challengeDTO.getAdmin().getName(),
+          challengeDTO.getTotalJoinCount(),
+          challengeDTO.getStartDate(),
+          challengeDTO.getEndDate());
 
+      System.out.println();
+      System.out.println("---------------------------------------------------------");
+      System.out.println();
 
-      if (challengeDTO.getQuestionCount() == 0 ) {
-        System.out.println("문의댓글이 없습니다!");
-        System.out.println();
-
-      }
-
-      Collection<ChallengeQuestionDTO> list = challengeDao.findAllQuestion();
+      Collection<ChallengeQuestionDTO> list = challengeQuestionDao.findAll();
 
       for (ChallengeQuestionDTO challengeQuestionDTO : list) {
         if (challengeQuestionDTO.getNo() == challengeNo) {
@@ -49,6 +61,11 @@ public class AdminChallengeQuestionListHandler implements Command {
               challengeQuestionDTO.getOwner().getId(),
               challengeQuestionDTO.getContent(),
               challengeQuestionDTO.getRegisteredDate());
+          if (challengeQuestionDTO.getReply() != null) {
+            System.out.printf("↳ %s번문의 관리자 답글: %s\n",
+                challengeQuestionDTO.getQuestionNo(),
+                challengeQuestionDTO.getReply());
+          }
         } 
       }
 

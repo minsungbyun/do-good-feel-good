@@ -1,18 +1,21 @@
 package com.share.ftp.handler.personal.community;
 
-import com.share.ftp.dao.CommunityDao;
-import com.share.ftp.domain.community.CommReviewDTO;
+import org.apache.ibatis.session.SqlSession;
+import com.share.ftp.dao.VolunteerShortReviewDao;
+import com.share.ftp.domain.community.VolunteerShortReviewDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class CommReviewDeleteHandler implements Command {
+public class VolunteerShortReviewDeleteHandler implements Command {
 
-  CommunityDao communityDao;
+  VolunteerShortReviewDao volunteerShortReviewDao;
+  SqlSession sqlSession;
 
-  public CommReviewDeleteHandler(CommunityDao communityDao) {
-    this.communityDao = communityDao;
+  public VolunteerShortReviewDeleteHandler(VolunteerShortReviewDao volunteerShortReviewDao, SqlSession sqlSession) {
+    this.volunteerShortReviewDao = volunteerShortReviewDao;
+    this.sqlSession=sqlSession;
   }
 
   @Override
@@ -22,17 +25,17 @@ public class CommReviewDeleteHandler implements Command {
 
       System.out.println();
       System.out.println("[  한 줄 후기 삭제  ]");
-      int commReviewNo = (int) request.getAttribute("commReviewNo");
+      int no = (int) request.getAttribute("no");
 
-      CommReviewDTO commReviewDTO = communityDao.findByCommReviewNo(commReviewNo);
+      VolunteerShortReviewDTO volunteerShortReviewDTO = volunteerShortReviewDao.findByNo(no);
 
 
-      if (commReviewDTO == null) {
+      if (volunteerShortReviewDTO == null) {
         System.out.println("[  해당 번호의 후기가 없습니다.  ]");
         return;
       }
 
-      if ((commReviewDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
+      if ((volunteerShortReviewDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
           AuthLoginHandler.getLoginUser().getId().equals("admin")) {
 
       } else {
@@ -46,7 +49,7 @@ public class CommReviewDeleteHandler implements Command {
         return;
       } 
 
-      communityDao.deleteCommeReview(commReviewDTO);
+      volunteerShortReviewDao.delete(no);
 
       System.out.println("[  한 줄 후기가 삭제 되었습니다. ]");
     }

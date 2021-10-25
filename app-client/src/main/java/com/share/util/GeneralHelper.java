@@ -5,6 +5,7 @@ import java.util.List;
 import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.domain.Category;
 import com.share.ftp.domain.admin.NoticeAttachedFile;
+import com.share.ftp.domain.community.VolunteerBoardAttachedFile;
 import com.share.ftp.domain.support.QuestionAttachedFile;
 import com.share.ftp.domain.support.QuestionCategory;
 import com.share.ftp.domain.volunteer.VolunteerAttachedFile;
@@ -91,13 +92,14 @@ public class GeneralHelper {
 
       filepath = new VolunteerAttachedFile();
       file = Prompt.inputString("첨부파일 (enter입력 시 종료) ▶ ");
-      filepath.setFilepath(file);
-
-      fileList.add(filepath);
 
       if (file.length() == 0) {
         return fileList;
       }
+
+      filepath.setFilepath(file);
+
+      fileList.add(filepath);
     }
   }
 
@@ -112,13 +114,12 @@ public class GeneralHelper {
 
       filepath = new NoticeAttachedFile();
       file = Prompt.inputString("첨부파일 (enter입력 시 종료) ▶ ");
-      filepath.setFilepath(file);
-
-      fileList.add(filepath);
-
       if (file.length() == 0) {
         return fileList;
       }
+      filepath.setFilepath(file);
+
+      fileList.add(filepath);
     }
   }
 
@@ -165,7 +166,29 @@ public class GeneralHelper {
     //      System.out.println("올바른 번호를 입력해주세요");
     //    }
     //  }
+  }
+
+  public static List<VolunteerBoardAttachedFile> promptBoardFileUpload() {
+    System.out.println();
+
+    VolunteerBoardAttachedFile filepath = null;
+    String file = null;
+
+    List<VolunteerBoardAttachedFile> fileList = new ArrayList<>();
+    while(true) {
+
+      filepath = new VolunteerBoardAttachedFile();
+      file = Prompt.inputString("첨부파일 (enter입력 시 종료) ▶ ");
+      filepath.setFilepath(file);
+
+      fileList.add(filepath);
+
+      if (file.length() == 0) {
+        return fileList;
+      }
+    }
 
   }
 }
+
 

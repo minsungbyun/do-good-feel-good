@@ -32,7 +32,7 @@
       notice_no desc
   </select>
   
-  <insert id="insert" parameterType="NoticeDTO">
+  <insert id="insert" parameterType="NoticeDTO" useGeneratedKeys="true" keyColumn="notice_no" keyProperty="no">
     insert into ftp_support_notice(
       title,
       content) 
@@ -42,13 +42,10 @@
   </insert>
   
   <insert id="insertFile">
-    insert into ftp_support_notice_file(
-      notice_no,
-      filepath)
-    values(
-      #{no},
-      #{filepath})
+    insert into ftp_support_notice_file(notice_no,filepath)
+    values(#{noticeNo},#{filepath})
   </insert>
+  
   <!--  
    <update id="update" parameterType="NoticeDTO">
    update ftp_support_notice set

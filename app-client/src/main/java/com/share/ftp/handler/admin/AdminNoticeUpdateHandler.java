@@ -49,11 +49,6 @@ public class AdminNoticeUpdateHandler implements Command {
       System.out.println();
       System.out.println("게시물을 수정하였습니다.");
       return;
-
     }
-
   }
-
-
-
 }

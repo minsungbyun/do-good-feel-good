@@ -2,6 +2,7 @@ package com.share.ftp.handler.admin;
 
 import java.util.Collection;
 import com.share.ftp.dao.NoticeDao;
+import com.share.ftp.domain.admin.NoticeAttachedFile;
 import com.share.ftp.domain.admin.NoticeDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -32,6 +33,10 @@ public class AdminNoticeListHandler implements Command {
           noticeDTO.getTitle(), 
           noticeDTO.getRegisteredDate(), 
           noticeDTO.getViewCount());
+
+      for (NoticeAttachedFile file : noticeDTO.getFileUpload()) {
+        System.out.printf("%s\n", file.getFilepath());
+      }
     }
   }
 }

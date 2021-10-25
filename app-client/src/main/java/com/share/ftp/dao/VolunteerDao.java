@@ -10,7 +10,9 @@ import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 public interface VolunteerDao {
 
   void insert(VolunteerRequestDTO addVolunteer) throws Exception;      
-  void insertFile(String filepath) throws Exception;      
+  void insertFile(
+      @Param("volNo") int volNo,
+      @Param("filepath") String filepath) throws Exception;      
   void addWish(
       @Param("userNo") int userNo,
       @Param("volNo") int volNo) throws Exception;      

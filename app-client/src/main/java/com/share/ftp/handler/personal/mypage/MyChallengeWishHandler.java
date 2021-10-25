@@ -22,13 +22,13 @@ public class MyChallengeWishHandler implements Command {
 
     System.out.println("[ 나의 찜한목록 ]");
     for (ChallengeDTO challengeDTO : challengeList) {
-      if (challengeDTO.getWish().equals(AuthLoginHandler.getLoginUser())) {
-        System.out.printf("%d, %s[%d], %s, %d, %s ~ %s\n", 
+      if (challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getName())) {
+        System.out.printf("%d, %s[%d], %d, %s ~ %s\n", 
             challengeDTO.getNo(),
             //          challengeDTO.getAdminId(), 
             challengeDTO.getTitle(), 
             challengeDTO.getReviewCount(), 
-            challengeDTO.getAdmin().getName(),
+            //            challengeDTO.getAdmin().getName(),
             challengeDTO.getTotalJoinCount(),
             challengeDTO.getStartDate(),
             challengeDTO.getEndDate());

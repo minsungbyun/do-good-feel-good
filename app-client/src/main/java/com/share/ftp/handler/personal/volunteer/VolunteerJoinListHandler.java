@@ -39,8 +39,6 @@ public class VolunteerJoinListHandler implements Command {
         volunteer.getOwner().getId(), // 주최자 아이디
         volunteer.getOwner().getName(), // 주최자 이룸
         volunteer.getMemberNames());
-
-
   }
 }
 

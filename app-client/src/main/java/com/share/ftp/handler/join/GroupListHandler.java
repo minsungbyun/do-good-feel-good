@@ -64,7 +64,7 @@ public class GroupListHandler implements Command {
 
       if (input == 1) {
         groupUser.setStatus(ACTIVE);
-        groupDao.update(groupUser);
+        groupDao.updateStatus(groupUser);
         sqlSession.commit();
 
         System.out.println();

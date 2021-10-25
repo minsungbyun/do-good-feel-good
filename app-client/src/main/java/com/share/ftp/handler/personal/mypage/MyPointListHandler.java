@@ -4,7 +4,6 @@ import static com.share.util.MemberHelper.getUserLevel;
 import static com.share.util.MemberHelper.getUserPoint;
 import static com.share.util.MemberHelper.getUserRemainPoint;
 import static com.share.util.MemberHelper.printMyRank;
-import java.util.Collection;
 import java.util.List;
 import com.share.ftp.dao.PersonalDao;
 import com.share.ftp.domain.join.PersonalDTO;
@@ -23,7 +22,7 @@ public class MyPointListHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
 
-    Collection<PersonalDTO> joinList = personalDao.findAll();
+    List<PersonalDTO> joinList = personalDao.findAllPersonal();
 
 
     PersonalDTO loginUser = (PersonalDTO) AuthLoginHandler.getLoginUser();
@@ -52,7 +51,7 @@ public class MyPointListHandler implements Command {
     System.out.println();
     System.out.printf("▶ 다음 등급까지 %d point 남았습니다. ", getUserRemainPoint(loginUser)); 
     System.out.println();
-    System.out.printf("▶ 축하합니다! 당신의 랭킹은 %d등입니다. ", printMyRank((List<PersonalDTO>) joinList)); 
+    System.out.printf("▶ 축하합니다! 당신의 랭킹은 %d등입니다. ", printMyRank(joinList)); 
     System.out.println();
     System.out.println("-----------------------------------------------");
 

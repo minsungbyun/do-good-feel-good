@@ -7,7 +7,6 @@ import com.share.ftp.domain.admin.NoticeAttachedFile;
 import com.share.ftp.domain.admin.NoticeDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
-import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.GeneralHelper;
 import com.share.util.Prompt;
 
@@ -29,29 +28,29 @@ public class AdminNoticeAddHandler implements Command {
 
     NoticeDTO noticeDTO = new NoticeDTO();
 
-    noticeDTO.setAdmin(AuthLoginHandler.getLoginUser());
+    //    noticeDTO.setAdmin(AuthLoginHandler.getLoginUser());
     noticeDTO.setTitle(Prompt.inputString("제목: "));
     noticeDTO.setContent(Prompt.inputString("내용: ")); 
     noticeDTO.setFileUpload(GeneralHelper.promptNoticeFileUpload());
 
-    //    try {
-    noticeDao.insert(noticeDTO);
-    System.out.println("insert등록");
-    for (NoticeAttachedFile noticeAttachedFile : noticeDTO.getFileUpload()) {
-      noticeDao.insertFile(noticeDTO.getNo(), noticeAttachedFile.getFilepath());
-      System.out.println("insertFile등록");
-    }
-    sqlSession.commit();
+    try {
+      noticeDao.insert(noticeDTO);
+      System.out.println("insert등록");
+      for (NoticeAttachedFile noticeAttachedFile : noticeDTO.getFileUpload()) {
+        noticeDao.insertFile(noticeDTO.getNo(), noticeAttachedFile.getFilepath());
+        System.out.println("insertFile등록");
+      }
+      sqlSession.commit();
 
-    //    } catch (Exception e) {
-    //      sqlSession.rollback();
-    //    }
+    } catch (Exception e) {
+      e.printStackTrace();
+
+      sqlSession.rollback();
+      System.out.println("롤백");
+    }
 
     System.out.println();
     System.out.println("게시글 등록이 완료 되었습니다.");
 
   }
-
-
-
 }

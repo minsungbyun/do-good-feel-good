@@ -1,5 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
+import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.handler.Command;
@@ -10,9 +11,11 @@ import com.share.util.Prompt;
 public class ChallengeWishHandler implements Command {
 
   ChallengeDao challengeDao;
+  SqlSession sqlSession;
 
-  public ChallengeWishHandler(ChallengeDao challengeDao) {
+  public ChallengeWishHandler(ChallengeDao challengeDao, SqlSession sqlSession) {
     this.challengeDao = challengeDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -22,7 +25,7 @@ public class ChallengeWishHandler implements Command {
 
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeList = challengeDao.findByChallengeNo(challengeNo); 
+    ChallengeDTO challengeList = challengeDao.findByNo(challengeNo); 
 
     while (true) {
       String input = Prompt.inputString("[  🎈 관심 챌린지로 추가하시겠습니까?(y/N) 🎈 ] ");
@@ -34,8 +37,9 @@ public class ChallengeWishHandler implements Command {
 
       } else if (input.equalsIgnoreCase("y")) {
         System.out.println();
-        challengeList.setWish(AuthLoginHandler.getLoginUser());
-        challengeDao.update(challengeList);
+        int userNo = AuthLoginHandler.getLoginUser().getNo();
+        challengeDao.insertWish(challengeNo, userNo);
+        sqlSession.commit();
         System.out.println("[  🎈 관심 챌린지로 등록되었습니다. 🎈  ]");
         return;
 

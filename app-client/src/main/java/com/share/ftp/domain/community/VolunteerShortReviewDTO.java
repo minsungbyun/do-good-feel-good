@@ -6,7 +6,7 @@ import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
 @SuppressWarnings("serial")
-public class CommReviewDTO implements Serializable {
+public class VolunteerShortReviewDTO implements Serializable {
   private int no;
   private String content;
   private JoinDTO owner;
@@ -33,7 +33,7 @@ public class CommReviewDTO implements Serializable {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    CommReviewDTO other = (CommReviewDTO) obj;
+    VolunteerShortReviewDTO other = (VolunteerShortReviewDTO) obj;
     return Objects.equals(content, other.content) && no == other.no
         && Objects.equals(owner, other.owner)
         && Objects.equals(registeredDate, other.registeredDate);
