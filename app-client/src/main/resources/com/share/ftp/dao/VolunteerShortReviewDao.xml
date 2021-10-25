@@ -6,7 +6,8 @@
 <mapper namespace="com.share.ftp.dao.VolunteerShortReviewDao">
   
   <resultMap type="VolunteerRequestDTO" id="VolunteerRequestDTOMap">
-    <id column="vol_shortreview_no" property="no"/> 
+    <id column="vol_no" property="no"/> 
+    <result column="vol_shortreview_no" property="shortReviewNo"/>
     <result column="content" property="content"/>
     <result column="created_dt" property="registeredDate"/>
 
@@ -17,10 +18,10 @@
     
   </resultMap>
      
-  <insert id="insert" parameterType="VolunteerRequestDTO"
+ <!-- <insert id="insert" parameterType="VolunteerRequestDTO"
    useGeneratedKeys="true" keyColumn="vol_board_no" keyProperty="no">
         
-    insert into ftp_vol_board(
+    insert into ftp_vol_shortreview(
       user_no,
       title,
       content)
@@ -28,25 +29,23 @@
       #{owner.no},    
       #{title},
       #{content})
-  </insert>
+  </insert> --> 
   
   <select id="findAll" resultMap="VolunteerRequestDTOMap">
     select 
-      b.vol_board_no,
-      b.title,
-      b.created_dt,
-      b.view_cnt,
-      f.filepath,
+      s.vol_no,
+      s.vol_shortreview_no,
+      s.content,
+      s.created_dt,
       u.id owner_id
     from
-     ftp_vol_board b
-     inner join ftp_vol_board_file f on b.vol_board_no=f.vol_board_no
+     ftp_vol_shortreview s
      inner join ftp_user u on b.user_no=u.user_no
     order by 
-      b.vol_board_no desc
+      s.shortreview_no desc
   </select>
    
-  <select id="findByKeyword" resultMap="VolunteerRequestDTOMap" parameterType="string">
+  <!-- <select id="findByKeyword" resultMap="VolunteerRequestDTOMap" parameterType="string">
       
     select 
       b.vol_board_no,
@@ -100,7 +99,7 @@
   
    <delete id="delete" parameterType="volunteerBoardDTO">
     delete from ftp_vol_board where vol_board_no=${values}
-  </delete>
+  </delete> -->
     
 
 

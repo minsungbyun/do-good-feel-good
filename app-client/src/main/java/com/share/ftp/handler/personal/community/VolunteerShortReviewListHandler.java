@@ -26,7 +26,8 @@ public class VolunteerShortReviewListHandler implements Command {
     Collection<VolunteerRequestDTO> volunteerRequestDTOList = volunteerShortReviewDao.findAll();
 
     for (VolunteerRequestDTO volunteerRequestDTO : volunteerRequestDTOList) {
-      System.out.printf("%d, %s, %s, %s\n", 
+      System.out.printf("%d, %d, %s, %s, %s\n", 
+          volunteerRequestDTO.getNo(),
           volunteerRequestDTO.getShortReviewNo(), 
           volunteerRequestDTO.getShortReviewOwner().getId(), 
           volunteerRequestDTO.getShortReviewContent(),
