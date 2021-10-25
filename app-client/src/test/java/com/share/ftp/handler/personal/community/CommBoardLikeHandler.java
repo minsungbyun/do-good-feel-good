@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.community;
 
 import org.apache.ibatis.session.SqlSession;
-import com.share.ftp.dao.VolBoardDao;
+import com.share.ftp.dao.VolunteerBoardDao;
 import com.share.ftp.domain.community.CommBoardDTO;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
@@ -11,11 +11,11 @@ import com.share.util.Prompt;
 
 public class CommBoardLikeHandler implements Command {
 
-  VolBoardDao volBoardDao;
+  VolunteerBoardDao volunteerBoardDao;
   SqlSession sqlSession;
 
-  public CommBoardLikeHandler(VolBoardDao volBoardDao, SqlSession sqlSession) {
-    this.volBoardDao =  volBoardDao;
+  public CommBoardLikeHandler(VolunteerBoardDao volunteerBoardDao, SqlSession sqlSession) {
+    this.volunteerBoardDao =  volunteerBoardDao;
     this.sqlSession = sqlSession;
   }
 
@@ -32,7 +32,7 @@ public class CommBoardLikeHandler implements Command {
     // CommBoardDTO commBoard = findByCommNo(commNo); 
     //  Collection<CommBoardDTO> CommBoardDTOList = communityDao.findAll();
 
-    CommBoardDTO commBoardDTO = volBoardDao.findByCommBoardNo(commBoardNo);
+    CommBoardDTO commBoardDTO = volunteerBoardDao.findByCommBoardNo(commBoardNo);
 
     String input = Prompt.inputString("[  공감이 되셨다면 좋아요를 눌러주세요(y/N)  ] ");
 
@@ -51,7 +51,7 @@ public class CommBoardLikeHandler implements Command {
 
       System.out.println("[  LIKE 등록 완료  ]");
 
-      volBoardDao.update(commBoardDTO);
+      volunteerBoardDao.update(commBoardDTO);
       sqlSession.commit();
 
       return;

@@ -2,7 +2,7 @@ package com.share.ftp.handler.personal.community;
 
 import java.sql.Date;
 import org.apache.ibatis.session.SqlSession;
-import com.share.ftp.dao.VolBoardDao;
+import com.share.ftp.dao.VolunteerBoardDao;
 import com.share.ftp.domain.community.CommBoardDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -11,11 +11,11 @@ import com.share.util.Prompt;
 
 public class CommBoardAddHandler implements Command {
 
-  VolBoardDao volBoardDao;
+  VolunteerBoardDao volunteerBoardDao;
   SqlSession sqlSession;
 
-  public CommBoardAddHandler(VolBoardDao volBoardDao, SqlSession sqlSession) {
-    this.volBoardDao =  volBoardDao;
+  public CommBoardAddHandler(VolunteerBoardDao volunteerBoardDao, SqlSession sqlSession) {
+    this.volunteerBoardDao =  volunteerBoardDao;
     this.sqlSession = sqlSession;
 
   }
@@ -35,7 +35,7 @@ public class CommBoardAddHandler implements Command {
     commBoardDTO.setOwner(AuthLoginHandler.getLoginUser());
 
 
-    volBoardDao.insert(commBoardDTO);
+    volunteerBoardDao.insert(commBoardDTO);
     sqlSession.commit();
 
     System.out.println();
