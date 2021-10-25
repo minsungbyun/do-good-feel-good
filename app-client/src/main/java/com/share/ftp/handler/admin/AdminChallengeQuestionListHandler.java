@@ -34,13 +34,22 @@ public class AdminChallengeQuestionListHandler implements Command {
       System.out.printf("[ %d번 챌린지 문의 목록 ]", challengeNo);
       System.out.println();
 
+      System.out.printf("챌린지 번호 ▶ %d\n"
+          + "제목[댓글] ▶ %s[%d]\n"
+          //          + "작성자 ▶ %s\n"
+          + "참여인원 ▶ %d\n"
+          + "참여기간 ▶ %s ~ %s\n", 
+          challengeDTO.getNo(), 
+          challengeDTO.getTitle(), 
+          challengeDTO.getReviewCount(), 
+          //          challengeDTO.getAdmin().getName(),
+          challengeDTO.getTotalJoinCount(),
+          challengeDTO.getStartDate(),
+          challengeDTO.getEndDate());
 
-
-      if (challengeDTO.getQuestionCount() == 0 ) {
-        System.out.println("문의댓글이 없습니다!");
-        System.out.println();
-
-      }
+      System.out.println();
+      System.out.println("---------------------------------------------------------");
+      System.out.println();
 
       Collection<ChallengeQuestionDTO> list = challengeQuestionDao.findAll();
 
@@ -52,6 +61,11 @@ public class AdminChallengeQuestionListHandler implements Command {
               challengeQuestionDTO.getOwner().getId(),
               challengeQuestionDTO.getContent(),
               challengeQuestionDTO.getRegisteredDate());
+          if (challengeQuestionDTO.getReply() != null) {
+            System.out.printf("↳ %s번문의 관리자 답글: %s\n",
+                challengeQuestionDTO.getQuestionNo(),
+                challengeQuestionDTO.getReply());
+          }
         } 
       }
 

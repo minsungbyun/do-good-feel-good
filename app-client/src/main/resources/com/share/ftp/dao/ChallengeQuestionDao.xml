@@ -10,6 +10,7 @@
     <result column="challenge_no" property="no"/> 
     <result column="content" property="content"/>
     <result column="created_dt" property="registeredDate"/>
+    <result column="reply" property="reply"/>
     
     <association property="owner" javaType="joinDTO">
       <id column="user_No" property="no"/>
@@ -24,6 +25,7 @@
       q.challenge_qna_no,
       q.content,
       q.created_dt,
+      q.reply,
       u.user_no user_No,
       u.id id
     from
@@ -38,6 +40,15 @@
     values(#{no},#{content},#{owner.no}, curdate())
   </insert>
   
+<!--  
+  <insert id="insertReply" parameterType="ChallengeQuestionDTO">
+    insert into ftp_challenge_qna(challenge_no,challenge_qna_no,reply,created_dt)
+    values(#{no},#{questionNo},#{content}, curdate())
+    where 
+       challenge_qna_no=#{challengeQuestionNo}
+  </insert>
+-->
+
   
    <update id="update" parameterType="ChallengeQuestionDTO">
    update ftp_challenge_qna set
@@ -46,6 +57,13 @@
       challenge_qna_no=#{questionNo}
   </update>
   
+  
+   <update id="updateReply" parameterType="ChallengeQuestionDTO">
+   update ftp_challenge_qna set
+     reply=#{reply}
+   where
+      challenge_qna_no=#{questionNo}
+   </update>
   
   
    <delete id="delete" parameterType="int">
@@ -60,6 +78,7 @@
       q.challenge_qna_no,
       q.content,
       q.created_dt,
+      q.reply,
       u.user_no,
       u.id
     from

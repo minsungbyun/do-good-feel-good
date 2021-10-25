@@ -22,13 +22,17 @@
   
   
   <select id="findAll" resultMap="ChallengeDTOMap">
-   select 
-     challenge_no,
-     title,
-     start_dt,
-     end_dt
+    select 
+     c.challenge_no,
+     c.title,
+     c.start_dt,
+     c.end_dt,
+     u.user_no user_no,
+     u.name user_name,
     from
-     ftp_challenge
+     ftp_challenge c
+     left outer join ftp_challenge_wish cw on c.challenge_no=cw.challenge_no
+     left outer join ftp_user u on cw.user_no=u.user_no
     order by challenge_no desc
   </select>
   
@@ -40,6 +44,11 @@
   <insert id="insertUser">
     insert into ftp_challenge_apply(challenge_no,user_no,apply_dt) 
     values(#{param1},#{param2}, curdate())
+  </insert>
+  
+  <insert id="insertWish">
+    insert into ftp_challenge_wish(challenge_no,user_no) 
+    values(#{param1},#{param2})
   </insert>
   
    <update id="update" parameterType="ChallengeDTO">

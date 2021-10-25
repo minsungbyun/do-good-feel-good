@@ -41,7 +41,7 @@
   
   <update id="update" parameterType="ChallengeReviewDTO">
     update ftp_challenge_review set
-     content=#{content},
+     content=#{content}
     where 
       challenge_review_no=#{reviewNo}
   </update>

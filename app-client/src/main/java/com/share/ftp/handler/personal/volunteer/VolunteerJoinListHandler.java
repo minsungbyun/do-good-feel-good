@@ -5,11 +5,11 @@ import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 
-public class VolGeneralDoJoinListHandler implements Command {
+public class VolunteerJoinListHandler implements Command {
 
   VolunteerDao volunteerDao;
 
-  public VolGeneralDoJoinListHandler(VolunteerDao volunteerDao) {
+  public VolunteerJoinListHandler(VolunteerDao volunteerDao) {
     this.volunteerDao = volunteerDao;
   }
 
@@ -24,25 +24,21 @@ public class VolGeneralDoJoinListHandler implements Command {
     int volNo = (int) request.getAttribute("volNo");
     System.out.println();
 
-    VolunteerRequestDTO volJoinList = volunteerDao.findByApplyVol(volNo); 
+    VolunteerRequestDTO volunteer = volunteerDao.findByApprovedVolunteerNo(volNo); 
 
-    if (volJoinList == null) {
+    if (volunteer == null) {
       System.out.println("해당 봉사가 없습니다.");
       return;
     }
 
-    // 주최자 이름이 있으면 제거 (따로 명시되게끔 설정함)
-    if (volJoinList.getMembers().contains(volJoinList.getOwner())) {
-      volJoinList.getMembers().remove(volJoinList.getOwner());
-    }
 
     System.out.printf("봉사제목: %s\n현재 봉사인원: %d명 / 총 봉사인원: %d명\n\n주최자명: %s(%s)\n\n           [  봉사자명  ]\n\n%s\n",
-        volJoinList.getTitle(),
-        volJoinList.getTotalJoinCount(),
-        volJoinList.getLimitNum(),
-        volJoinList.getOwner().getId(), // 주최자 아이디
-        volJoinList.getOwner().getName(), // 주최자 이룸
-        volJoinList.getMemberNames());
+        volunteer.getTitle(),
+        volunteer.getCurrentNum(),
+        volunteer.getLimitNum(),
+        volunteer.getOwner().getId(), // 주최자 아이디
+        volunteer.getOwner().getName(), // 주최자 이룸
+        volunteer.getMemberNames());
 
 
   }

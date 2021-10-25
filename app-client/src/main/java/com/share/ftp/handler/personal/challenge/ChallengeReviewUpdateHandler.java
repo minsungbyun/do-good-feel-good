@@ -1,6 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
-import com.share.ftp.dao.ChallengeDao;
+import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.domain.challenge.ChallengeReviewDTO;
 import com.share.ftp.handler.Command;
@@ -10,12 +10,12 @@ import com.share.util.Prompt;
 
 public class ChallengeReviewUpdateHandler implements Command {
 
-  ChallengeDao challengeDao;
   ChallengeReviewDao challengeReviewDao;
+  SqlSession sqlSession;
 
-  public ChallengeReviewUpdateHandler(ChallengeDao challengeDao, ChallengeReviewDao challengeReviewDao) {
-    this.challengeDao = challengeDao;
+  public ChallengeReviewUpdateHandler(ChallengeReviewDao challengeReviewDao, SqlSession sqlSession) {
     this.challengeReviewDao = challengeReviewDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -39,7 +39,7 @@ public class ChallengeReviewUpdateHandler implements Command {
     }
 
     String content = Prompt.inputString(String.format("내용(%s)? ", challengeReviewDTO.getContent()));
-    String fileUpload = Prompt.inputString(String.format("파일첨부(%s)? ", challengeReviewDTO.getFileUpload()));
+    //    String fileUpload = Prompt.inputString(String.format("파일첨부(%s)? ", challengeReviewDTO.getFileUpload()));
 
     while (true) {
       String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
@@ -52,8 +52,9 @@ public class ChallengeReviewUpdateHandler implements Command {
       } else if (input.equalsIgnoreCase("y")) {
         System.out.println();
         challengeReviewDTO.setContent(content);
-        challengeReviewDTO.setFileUpload(fileUpload);
+        //        challengeReviewDTO.setFileUpload(fileUpload);
         challengeReviewDao.update(challengeReviewDTO);
+        sqlSession.commit();
 
         System.out.println("참여인증&댓글을 수정하였습니다.");
         return;

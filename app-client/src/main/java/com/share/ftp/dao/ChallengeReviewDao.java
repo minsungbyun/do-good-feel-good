@@ -11,7 +11,7 @@ public interface ChallengeReviewDao {
   void insert(ChallengeReviewDTO addChallengeReview) throws Exception;
   List<ChallengeReviewDTO> findAll() throws Exception;      
   void update(ChallengeReviewDTO updateChallengeReview) throws Exception;          
-  void delete(ChallengeReviewDTO deleteChallengeReviewNo) throws Exception; 
+  void delete(int no) throws Exception; 
 
   int getNextNum(ChallengeDTO challengeDTO) throws Exception;
   ChallengeReviewDTO findByNo(

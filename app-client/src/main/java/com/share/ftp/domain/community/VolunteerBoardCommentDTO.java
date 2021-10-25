@@ -6,7 +6,7 @@ import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
 @SuppressWarnings("serial")
-public class CommBoardReplyDTO implements Serializable {
+public class VolunteerBoardCommentDTO implements Serializable {
 
   private int no;
   private int replyNo;
@@ -37,7 +37,7 @@ public class CommBoardReplyDTO implements Serializable {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    CommBoardReplyDTO other = (CommBoardReplyDTO) obj;
+    VolunteerBoardCommentDTO other = (VolunteerBoardCommentDTO) obj;
     return Objects.equals(Commentcontent, other.Commentcontent)
         && Objects.equals(Commentid, other.Commentid)
         && commReplyPassword == other.commReplyPassword && no == other.no

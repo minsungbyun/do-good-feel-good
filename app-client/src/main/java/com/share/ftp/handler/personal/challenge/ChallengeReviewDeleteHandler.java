@@ -1,5 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
+import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
@@ -12,10 +13,13 @@ public class ChallengeReviewDeleteHandler implements Command {
 
   ChallengeDao challengeDao;
   ChallengeReviewDao challengeReviewDao;
+  SqlSession sqlSession;
 
-  public ChallengeReviewDeleteHandler(ChallengeDao challengeDao, ChallengeReviewDao challengeReviewDao) {
+  public ChallengeReviewDeleteHandler(
+      ChallengeDao challengeDao, ChallengeReviewDao challengeReviewDao, SqlSession sqlSession) {
     this.challengeDao = challengeDao;
     this.challengeReviewDao = challengeReviewDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -57,7 +61,8 @@ public class ChallengeReviewDeleteHandler implements Command {
           challengeDTO.removeReviewer(AuthLoginHandler.getLoginUser()); 
 
           challengeDao.update(challengeDTO);
-          challengeReviewDao.delete(challengeReviewDTO);
+          challengeReviewDao.delete(challengeReviewNo);
+          sqlSession.commit();
           System.out.println("참여인증&댓글을 삭제하였습니다.");
           return;
 

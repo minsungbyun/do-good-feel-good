@@ -58,11 +58,16 @@ public class ChallengeQuestionListHandler implements Command {
       for (ChallengeQuestionDTO challengeQuestionDTO : list) {
         if (challengeQuestionDTO.getNo() == challengeNo) {
           System.out.printf("%d, %d, %s, %s, %s\n", 
-              challengeQuestionDTO.getNo(), // 테스트 끝나고 지움
+              challengeQuestionDTO.getNo(),
               challengeQuestionDTO.getQuestionNo(),
               challengeQuestionDTO.getOwner().getId(),
               challengeQuestionDTO.getContent(),
               challengeQuestionDTO.getRegisteredDate());
+          if (challengeQuestionDTO.getReply() != null) {
+            System.out.printf("↳ %s번문의 관리자 답글: %s\n",
+                challengeQuestionDTO.getQuestionNo(),
+                challengeQuestionDTO.getReply());
+          }
         }
       }
       System.out.println();
