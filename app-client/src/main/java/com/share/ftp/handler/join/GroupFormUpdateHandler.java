@@ -36,6 +36,9 @@ public class GroupFormUpdateHandler implements Command {
       return;
     }
 
+    groupDao.deleteGroup(groupUser);
+    groupDao.delete(groupUser);
+
     groupUser.setId(userId);
     groupUser.setPassword(userPassword);
 
@@ -73,8 +76,11 @@ public class GroupFormUpdateHandler implements Command {
     groupUser.setType(GROUP);
     groupUser.setStatus(WAIT);
 
-    groupDao.update(groupUser);
-    groupDao.updateGroup(groupUser.getGroupCount());
+
+    groupDao.insert(groupUser);
+    groupDao.insertGroup(
+        groupUser.getNo(), groupUser.getGroupCount());
+
     sqlSession.commit();
 
     System.out.println("단체 신청서를 변경하였습니다.");

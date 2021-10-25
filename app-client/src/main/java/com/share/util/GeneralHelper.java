@@ -63,13 +63,14 @@ public class GeneralHelper {
 
       filepath = new VolunteerAttachedFile();
       file = Prompt.inputString("첨부파일 (enter입력 시 종료) ▶ ");
-      filepath.setFilepath(file);
-
-      fileList.add(filepath);
 
       if (file.length() == 0) {
         return fileList;
       }
+
+      filepath.setFilepath(file);
+
+      fileList.add(filepath);
     }
 
     // 향후 확장성을 위해 나둠 지금은 필요없음

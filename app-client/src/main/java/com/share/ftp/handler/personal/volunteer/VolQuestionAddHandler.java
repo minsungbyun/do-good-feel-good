@@ -2,8 +2,8 @@ package com.share.ftp.handler.personal.volunteer;
 
 import java.sql.Date;
 import com.share.ftp.dao.VolunteerDao;
-import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.domain.volunteer.VolQuestionDTO;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -23,7 +23,7 @@ public class VolQuestionAddHandler implements Command {
     System.out.println();
     int volNo = (int) request.getAttribute("volNo");
 
-    VolunteerRequestDTO volunteerRequestDTO = volunteerDao.findByApplyVol(volNo);
+    VolunteerRequestDTO volunteerRequestDTO = volunteerDao.findByApprovedVolunteerNo(volNo);
 
     if (!volunteerRequestDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
       System.out.println("봉사 참여한 회원만 등록이 가능합니다!");

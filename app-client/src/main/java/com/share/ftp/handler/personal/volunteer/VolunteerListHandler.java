@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.volunteer;
 
 import java.util.List;
 import com.share.ftp.dao.VolunteerDao;
+import com.share.ftp.domain.volunteer.VolunteerAttachedFile;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -40,8 +41,12 @@ public class VolunteerListHandler implements Command {
           volunteerRequestDTO.getStartTime(),
           volunteerRequestDTO.getEndTime(),
           volunteerRequestDTO.getLimitNum(),
-          volunteerRequestDTO.getContent()
+          volunteerRequestDTO.getContent() 
           );
+
+      for (VolunteerAttachedFile file : volunteerRequestDTO.getFileUpload()) {
+        System.out.printf("%s\n", file.getFilepath());
+      }
     } 
 
     System.out.println();

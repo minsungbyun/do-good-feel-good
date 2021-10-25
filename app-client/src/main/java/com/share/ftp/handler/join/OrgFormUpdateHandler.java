@@ -36,8 +36,12 @@ public class OrgFormUpdateHandler implements Command {
       return;
     }
 
+    orgDao.deleteOrg(orgUser);
+    orgDao.delete(orgUser);
+
     orgUser.setId(userId);
     orgUser.setPassword(userPassword);
+
     orgUser.setTel(Prompt.inputString("Tel ▶ "));
 
     while (true) {
