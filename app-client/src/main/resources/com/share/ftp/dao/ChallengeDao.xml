@@ -12,16 +12,27 @@
     <result column="start_dt" property="startDate"/>
     <result column="end_dt" property="endDate"/>
     <result column="created_dt" property="registeredDate"/>
+    
+    <collection property="members" ofType="JoinDTO">
+      <id column="user_no" property="no"/>
+      <result column="user_id" property="id"/>
+      <result column="user_name" property="name"/>
+    </collection>
   </resultMap>
   
+  
   <select id="findAll" resultMap="ChallengeDTOMap">
-   select 
-     challenge_no,
-     title,
-     start_dt,
-     end_dt
+    select 
+     c.challenge_no,
+     c.title,
+     c.start_dt,
+     c.end_dt,
+     u.user_no user_no,
+     u.name user_name,
     from
-     ftp_challenge
+     ftp_challenge c
+     left outer join ftp_challenge_wish cw on c.challenge_no=cw.challenge_no
+     left outer join ftp_user u on cw.user_no=u.user_no
     order by challenge_no desc
   </select>
   
@@ -30,7 +41,15 @@
     values(#{title},#{content},#{startDate},#{endDate}, curdate())
   </insert>
   
+  <insert id="insertUser">
+    insert into ftp_challenge_apply(challenge_no,user_no,apply_dt) 
+    values(#{param1},#{param2}, curdate())
+  </insert>
   
+  <insert id="insertWish">
+    insert into ftp_challenge_wish(challenge_no,user_no) 
+    values(#{param1},#{param2})
+  </insert>
   
    <update id="update" parameterType="ChallengeDTO">
    update ftp_challenge set
@@ -50,18 +69,23 @@
   
   
   
-  <select id="findByChallengeNo" resultMap="ChallengeDTOMap" parameterType="int">
+  <select id="findByNo" resultMap="ChallengeDTOMap" parameterType="int">
      select 
-     challenge_no,
-     title,
-     content,
-     start_dt,
-     end_dt,
-     created_dt
+     c.challenge_no,
+     c.title,
+     c.content,
+     c.start_dt,
+     c.end_dt,
+     c.created_dt,
+     u.user_no user_no,
+     u.name user_name,
+     u.id user_id
     from
-     ftp_challenge
+     ftp_challenge c
+     left outer join ftp_challenge_apply cu on c.challenge_no=cu.challenge_no
+     left outer join ftp_user u on cu.user_no=u.user_no
     where 
-      challenge_no=#{values}
+      c.challenge_no=#{values}
   </select>
 </mapper>
 

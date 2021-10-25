@@ -9,22 +9,22 @@ public class ChallengeQuestionDTO {
 
   private int no;
   private int questionNo;
-  private String title;
   private String content;
+  private String reply;
   private Date registeredDate;
   private JoinDTO owner;
   private int replyCount;
 
   @Override
   public String toString() {
-    return "ChallengeQuestionDTO [no=" + no + ", questionNo=" + questionNo + ", title=" + title
-        + ", content=" + content + ", registeredDate=" + registeredDate + ", owner=" + owner
+    return "ChallengeQuestionDTO [no=" + no + ", questionNo=" + questionNo + ", content=" + content
+        + ", reply=" + reply + ", registeredDate=" + registeredDate + ", owner=" + owner
         + ", replyCount=" + replyCount + "]";
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(content, no, owner, questionNo, registeredDate, replyCount, title);
+    return Objects.hash(content, no, owner, questionNo, registeredDate, reply, replyCount);
   }
 
   @Override
@@ -38,8 +38,8 @@ public class ChallengeQuestionDTO {
     ChallengeQuestionDTO other = (ChallengeQuestionDTO) obj;
     return Objects.equals(content, other.content) && no == other.no
         && Objects.equals(owner, other.owner) && questionNo == other.questionNo
-        && Objects.equals(registeredDate, other.registeredDate) && replyCount == other.replyCount
-        && Objects.equals(title, other.title);
+        && Objects.equals(registeredDate, other.registeredDate)
+        && Objects.equals(reply, other.reply) && replyCount == other.replyCount;
   }
 
   public int getNo() {
@@ -54,11 +54,11 @@ public class ChallengeQuestionDTO {
   public void setQuestionNo(int questionNo) {
     this.questionNo = questionNo;
   }
-  public String getTitle() {
-    return title;
+  public String getReply() {
+    return reply;
   }
-  public void setTitle(String title) {
-    this.title = title;
+  public void setReply(String reply) {
+    this.reply = reply;
   }
   public String getContent() {
     return content;

@@ -1,6 +1,6 @@
 package com.share.ftp.handler.personal.challenge;
 
-import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.domain.challenge.ChallengeReviewDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -9,10 +9,10 @@ import com.share.util.Prompt;
 
 public class ChallengeReviewConnectHandler implements Command {
 
-  ChallengeDao challengeDao;
+  ChallengeReviewDao challengeReviewDao;
 
-  public ChallengeReviewConnectHandler(ChallengeDao challengeDao) {
-    this.challengeDao = challengeDao;
+  public ChallengeReviewConnectHandler(ChallengeReviewDao challengeReviewDao) {
+    this.challengeReviewDao = challengeReviewDao;
   }
 
   @Override
@@ -25,17 +25,26 @@ public class ChallengeReviewConnectHandler implements Command {
 
     int challengeReviewNo = Prompt.inputInt("댓글 번호를 입력해주세요 ▶ ");
 
-    ChallengeReviewDTO challengeReviewDTO = challengeDao.findByChallengeReviewNo(challengeNo, challengeReviewNo);
+    ChallengeReviewDTO challengeReviewDTO = challengeReviewDao.findByNo(challengeNo, challengeReviewNo);
 
     if (challengeReviewDTO == null) {
       System.out.println("해당 번호의 참여인증&댓글이 없습니다.");
       return;
     }
 
-    if (!challengeReviewDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
-      System.out.println("변경 권한이 없습니다.");
+    if (challengeReviewDTO.getOwner().getNo() == AuthLoginHandler.getLoginUser().getNo() ||
+        AuthLoginHandler.getLoginUser().getId().equals("admin")) {
+
+      System.out.printf("아이디: %s\n", challengeReviewDTO.getOwner().getId());
+      System.out.printf("내용: %s\n", challengeReviewDTO.getContent());
+      System.out.printf("등록날짜: %s\n", challengeReviewDTO.getRegisteredDate());
+
+    } else {
+      System.out.println("본인이 작성한 글만 확인할 수 있습니다.");
       return;
     }
+
+    System.out.println();
 
     request.setAttribute("challengeReviewNo", challengeReviewNo); 
 

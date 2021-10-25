@@ -29,6 +29,7 @@ public class ChallengeDTO implements Serializable {
   private JoinDTO wish;
   private List<JoinDTO> members = new ArrayList<>();  // 관리자가 등록한 챌린지에 참여한 멤버
   private List<JoinDTO> reviewers = new ArrayList<>();
+  private List<JoinDTO> wishMembers = new ArrayList<>();
 
 
 
@@ -44,13 +45,13 @@ public class ChallengeDTO implements Serializable {
         + ", registeredDate=" + registeredDate + ", startDate=" + startDate + ", endDate=" + endDate
         + ", viewCount=" + viewCount + ", reviewCount=" + reviewCount + ", questionCount="
         + questionCount + ", totalJoinCount=" + totalJoinCount + ", wish=" + wish + ", members="
-        + members + ", reviewers=" + reviewers + "]";
+        + members + ", reviewers=" + reviewers + ", wishMembers=" + wishMembers + "]";
   }
   @Override
   public int hashCode() {
     return Objects.hash(admin, content, endDate, fileUpload, members, no, point, questionCount,
         registeredDate, remainTime, reviewCount, reviewers, startDate, title, totalJoinCount,
-        viewCount, wish);
+        viewCount, wish, wishMembers);
   }
 
   @Override
@@ -70,7 +71,8 @@ public class ChallengeDTO implements Serializable {
         && Objects.equals(remainTime, other.remainTime) && reviewCount == other.reviewCount
         && Objects.equals(reviewers, other.reviewers) && Objects.equals(startDate, other.startDate)
         && Objects.equals(title, other.title) && totalJoinCount == other.totalJoinCount
-        && viewCount == other.viewCount && Objects.equals(wish, other.wish);
+        && viewCount == other.viewCount && Objects.equals(wish, other.wish)
+        && Objects.equals(wishMembers, other.wishMembers);
   }
   public JoinDTO getWish() {
     return wish;
@@ -236,6 +238,26 @@ public class ChallengeDTO implements Serializable {
     return names.toString();
   }
 
+  public List<JoinDTO> getWishMembers() {
+    return wishMembers;
+  }
+  public void setWishMembers(List<JoinDTO> wishMembers) {
+    this.wishMembers = wishMembers;
+  }
+
+  public String getWishMemberNames() {
+    if (wishMembers == null) {
+      return "";
+    }
+    StringBuilder names = new StringBuilder();
+    for (JoinDTO joinDTO : wishMembers) {
+      if (names.length() > 0) {
+        names.append("\n");
+      }
+      names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
+    }
+    return names.toString();
+  }
 
 
 }
