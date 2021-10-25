@@ -2,7 +2,7 @@ package com.share.ftp.handler.personal.community;
 
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.VolunteerShortReviewDao;
-import com.share.ftp.domain.community.VolunteerShortReviewDTO;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
@@ -24,10 +24,10 @@ public class VolunteerShortReviewUpdateHandler implements Command {
     System.out.println("[  한 줄 후기 변경  ]");
     int no = (int) request.getAttribute("no");
 
-    VolunteerShortReviewDTO volunteerShortReviewDTO = volunteerShortReviewDao.findByNo(no);
+    VolunteerRequestDTO volunteerRequestDTO = volunteerShortReviewDao.findByNo(no);
 
 
-    if (volunteerShortReviewDTO == null) {
+    if (volunteerRequestDTO == null) {
       System.out.println("[  해당 번호의 후기가 없습니다.  ]");
       return;
     }
@@ -37,7 +37,7 @@ public class VolunteerShortReviewUpdateHandler implements Command {
     //          return;
     //        }
 
-    String content = Prompt.inputString(String.format("내용(%s)? ", volunteerShortReviewDTO.getContent()));
+    String content = Prompt.inputString(String.format("내용(%s)? ", volunteerRequestDTO.getShortReviewContent()));
     String input = Prompt.inputString("[  정말 변경하시겠습니까?(y/N)  ]");
 
     if (input.equalsIgnoreCase("n")) {
@@ -45,9 +45,9 @@ public class VolunteerShortReviewUpdateHandler implements Command {
       return;
 
     } else if(input.equals("y")) {
-      volunteerShortReviewDTO.setContent(content);
+      volunteerRequestDTO.setShortReviewContent(content);
 
-      volunteerShortReviewDao.update(volunteerShortReviewDTO);
+      volunteerShortReviewDao.update(volunteerRequestDTO);
       sqlSession.commit();
 
       System.out.println();

@@ -130,7 +130,7 @@ insert into ftp_vol_file(vol_file_no, vol_no, filepath)
 values(2,2,'hoho.gif');
 
 
---한 줄 후기(봉사활동 후기) - 봉사 입력 후 입력 가능
+--한 줄 후기(봉사활동 후기)
 
 insert into ftp_vol_shortreview(vol_shortreview_no, user_no, vol_no, content)
 values(1, 3, 1, '한줄후기1'); 
@@ -262,3 +262,5 @@ insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(3, 2, 'qn
 insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(4, 6, 'qna06_1.gif');
 insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(5, 6, 'qna06_2.jpg');
 insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(6, 6, 'qna06_3.gif');
+
+
