@@ -532,13 +532,6 @@ public class ClientApp {
 
     doVolMenu.add(new MenuItem("봉사 신청서 작성", "/volRequest/apply"));
     doVolMenu.add(new MenuItem("봉사 목록", "/vol/list"));
-    //    doVolMenu.add(new MenuItem("봉사 상세보기", "/vol/detail"));
-
-    //    doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volGeneralRequest/apply"));
-    //    doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volGeneralRequest/apply")); 
-    //    doVolMenu.add(new MenuItem("전체인증봉사리스트","/volGeneralRequest/appliedList")); 
-    //    doVolMenu.add(createVolJoinMenu()); // 봉사 참여하기
-    //    doVolMenu.add(new MenuItem("찜하기", ACCESS_MEMBER,"/volGeneralRequest/bookmark")); // 구현예정
 
     // 소통해요
     MenuGroup CommunityMenu = new MenuGroup("소통해요");

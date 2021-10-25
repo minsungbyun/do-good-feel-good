@@ -101,7 +101,7 @@ public class VolunteerRequestApplyHandler implements Command { // 개인 봉사�
         try {
           volunteerDao.insert(volunteerRequestDTO);
           for (VolunteerAttachedFile volunteerAttachedFile : volunteerRequestDTO.getFileUpload()) {
-            volunteerDao.insertFile(volunteerAttachedFile.getFilepath());
+            volunteerDao.insertFile(volunteerRequestDTO.getNo(), volunteerAttachedFile.getFilepath());
           }
           sqlSession.commit();
 

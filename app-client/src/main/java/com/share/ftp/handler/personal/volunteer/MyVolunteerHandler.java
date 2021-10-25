@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.volunteer;
 
 import java.util.List;
 import com.share.ftp.dao.VolunteerDao;
+import com.share.ftp.domain.volunteer.VolunteerAttachedFile;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -46,7 +47,6 @@ public class MyVolunteerHandler implements Command { // 개인 봉사신청 양�
             + "봉사종료시간: %s\n"
             + "봉사인원: %d\n"
             + "봉사내용: %s\n"
-            + "첨부파일: %s\n"
             + "승인여부: %s \n\n", 
 
             volunteerRequest.getNo(), 
@@ -61,9 +61,13 @@ public class MyVolunteerHandler implements Command { // 개인 봉사신청 양�
             volunteerRequest.getEndTime(),
             volunteerRequest.getLimitNum(),
             volunteerRequest.getContent(),
-            volunteerRequest.getFileUpload(),
             volunteerRequest.getStatus()
             );
+
+        for (VolunteerAttachedFile file : volunteerRequest.getFileUpload()) {
+          System.out.printf("첨부파일: %s\n", file.getFilepath());
+        }
+        System.out.println();
       }
     }
   }

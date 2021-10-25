@@ -21,7 +21,8 @@ public interface GroupDao {
       @Param("userNo") int userNo,
       @Param("note") String note) throws Exception; // 단체회원 수정
   //  void updateGroup(GroupDTO groupDTO) throws Exception;
-  void delete(GroupDTO groupDTO) throws Exception;          // 회원 삭제
+  void delete(GroupDTO groupDTO) throws Exception;   
+  void deleteGroup(GroupDTO groupDTO) throws Exception; // 회원 삭제
   //  void deleteGroup(GroupDTO groupDTO) throws Exception;          // 회원 삭제
   GroupDTO findByIdPassword(
       @Param("userId") String userId,

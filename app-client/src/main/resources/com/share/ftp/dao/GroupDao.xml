@@ -133,38 +133,14 @@
       u.user_no=#{no}
   </select>
   
- 
- 
-   <update id="updateOrg" parameterType="GroupDTO">
-     update ftp_user_group set
-       group_cnt=#{groupCount}
-     where 
-        user_group_no=#{groupNo}
-  </update>
   
+  <delete id="delete" parameterType="GroupDTO">
+     delete from ftp_user where user_no=#{no}
+  </delete>
   
-  <update id="delete" parameterType="GroupDTO">
-     update ftp_user set
-      id=#{id},
-      password=password(#{password}),
-      name=#{name},
-      tel=#{tel},
-      email=#{email},
-      post_no=#{postNo},
-      basic_address=#{basicAddress},
-      detail_address=#{detailAddress},
-      status=#{status},
-      type=#{type}
-     where 
-        user_no=#{no}
-  </update>
-  
-   <update id="deleteGroup" parameterType="GroupDTO">
-      update ftp_user_group set
-        group_cnt=#{groupCnt},
-      where 
-        user_group_no=#{groupNo}
-  </update>
+   <delete id="deleteGroup" parameterType="GroupDTO">
+      delete from ftp_user_group where user_group_no=#{groupNo}
+  </delete>
   
   <select id="validId" resultMap="GroupDTOMap" parameterType="string">
     select 

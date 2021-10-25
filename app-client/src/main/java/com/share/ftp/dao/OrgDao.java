@@ -27,7 +27,7 @@ public interface OrgDao {
       @Param("note") String note) throws Exception;         // 기관회원 수정
   //  void updateOrg(OrgDTO orgDTO) throws Exception;          // 기관회원 수정
   void delete(OrgDTO orgDTO) throws Exception;          // 기관회원 삭제
-  //  void deleteOrg(OrgDTO orgDTO) throws Exception;          // 기관회원 삭제
+  void deleteOrg(OrgDTO orgDTO) throws Exception;          // 기관회원 삭제
   OrgDTO findByIdPassword(
       @Param("userId") String userId,
       @Param("userPassword") String userPassword) throws Exception; // 로그인 유효성 검사

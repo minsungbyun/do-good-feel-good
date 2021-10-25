@@ -88,9 +88,9 @@
 	    #{status})
   </insert>
   
-  <insert id="insertFile" parameterType="string">
+  <insert id="insertFile">
     insert into ftp_vol_file(vol_no,filepath)
-    values(#{no},#{filepath})
+    values(#{volNo},#{filepath})
   </insert>
   
    <insert id="addWish">
