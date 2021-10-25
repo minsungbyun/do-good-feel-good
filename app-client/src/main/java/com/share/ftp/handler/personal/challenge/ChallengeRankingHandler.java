@@ -1,6 +1,5 @@
 package com.share.ftp.handler.personal.challenge;
 
-import java.util.Collection;
 import java.util.List;
 import com.share.ftp.dao.PersonalDao;
 import com.share.ftp.domain.join.PersonalDTO;
@@ -32,11 +31,11 @@ public class ChallengeRankingHandler implements Command {
         + "                                                                 \"Y88888P'  \r\n"
         + "                                                                            ");
 
-    Collection<PersonalDTO> joinList = personalDao.findAll();
+    List<PersonalDTO> joinList = personalDao.findAllPersonal();
 
     System.out.println("    랭킹  아이디        포인트");
     System.out.println("   ==============================");
-    MemberHelper.printUserRank((List<PersonalDTO>) joinList);     
+    MemberHelper.printUserRank(joinList);     
   }
 
 

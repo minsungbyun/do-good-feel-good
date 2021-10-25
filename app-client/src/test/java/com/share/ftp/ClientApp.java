@@ -129,7 +129,7 @@ import com.share.ftp.handler.personal.volunteer.VolGeneralDoJoinDeleteHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralDoJoinHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralDoJoinListHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestAcceptHandler;
-import com.share.ftp.handler.personal.volunteer.VolGeneralRequestApplyCompleteHandler;
+import com.share.ftp.handler.personal.volunteer.MyVolunteerHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestApplyListHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestDeleteHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestRejectHandler;
@@ -275,7 +275,7 @@ public class ClientApp {
     commands.put("/volRequest/apply", new VolunteerRequestApplyHandler(volunteerDao,generalDao,sqlSession));
     commands.put("/vol/list", new VolunteerListHandler(volunteerDao));  // 승인된 봉사 목록
     commands.put("/volGeneralRequest/applyList", new VolGeneralRequestApplyListHandler(volunteerDao));
-    commands.put("/volGeneralRequest/applyCompleteList", new VolGeneralRequestApplyCompleteHandler(volunteerDao));
+    commands.put("/volGeneralRequest/applyCompleteList", new MyVolunteerHandler(volunteerDao));
     commands.put("/volGeneralRequest/acceptApply", new VolGeneralRequestAcceptHandler(volunteerDao));
     commands.put("/volGeneralRequest/rejectApply", new VolGeneralRequestRejectHandler(volunteerDao));
     //    commands.put("/volPersonalRequest/appliedList", new VolPersonalRequestAppliedListHandler(netVolunteerDao));
