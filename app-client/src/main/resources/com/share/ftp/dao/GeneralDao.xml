@@ -11,6 +11,11 @@
     <result column="category_title" property="title"/>
   </resultMap>
   
+  <resultMap type="QuestionCategory" id="questionCategoryMap">    
+    <id column="qna_category_no" property="no"/>
+    <result column="category_title" property="title"/>
+  </resultMap>
+  
   <!-- 
   <resultMap type="status" id="statusMap">
     <id column="status_no" property="no"/> 
@@ -21,6 +26,14 @@
   
    <select id="findAllCategory" resultMap="categoryMap">
       select category_no, category_title from ftp_category  
+   </select>
+   
+   <select id="findAllQnaCategory" resultMap="questionCategoryMap">
+      select
+        qna_category_no,
+        category_title
+      from
+        ftp_support_qna_categroy  
    </select>
    
    <!-- 

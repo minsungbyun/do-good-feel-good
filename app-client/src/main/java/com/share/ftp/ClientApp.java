@@ -271,7 +271,7 @@ public class ClientApp {
 
     //로그인, 로그아웃
 
-    commands.put("/auth/login", new AuthLoginHandler(joinDao, personalDao, groupDao, orgDao)); // 로그인
+    commands.put("/auth/login", new AuthLoginHandler(personalDao, groupDao, orgDao, joinDao)); // 로그인
     commands.put("/auth/logout", new AuthLogoutHandler()); // 로그아웃
     commands.put("/auth/displayUserInfo", new AuthDisplayUserHandler()); // 마이페이지 나의정보수정
     commands.put("/userInfo/personal", new PersonalHandler()); 
@@ -409,10 +409,10 @@ public class ClientApp {
     commands.put("/donationBoardDetailRegister/add", new DonationBoardDetailRegisterAddHandler(donationBoardDao, donationRegisterDao, orgDao));
 
     // 고객센터 문의사항
-    commands.put("/question/add", new QuestionAddHandler(questionDao));
+    commands.put("/question/add", new QuestionAddHandler(questionDao,generalDao,sqlSession));
     commands.put("/question/list", new QuestionListHandler(questionDao));
     commands.put("/question/detail", new QuestionDetailHandler(questionDao));
-    commands.put("/question/update", new QuestionUpdateHandler(questionDao));
+    commands.put("/question/update", new QuestionUpdateHandler(questionDao, sqlSession));
     commands.put("/question/delete", new QuestionDeleteHandler(questionDao));
     commands.put("/question/search", new QuestionSearchHandler(questionDao));
 
@@ -455,11 +455,11 @@ public class ClientApp {
     commands.put("/join/delete", new AdminMemberDeleteHandler());
 
     // 관리자 공지사항 (개인 + 관리자)
-    commands.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDao));
+    commands.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDao,generalDao,sqlSession));
     commands.put("/adminNotice/list", new AdminNoticeListHandler(noticeDao));
     commands.put("/adminNotice/detail", new AdminNoticeDetailHandler(noticeDao));
     commands.put("/adminNotice/update", new AdminNoticeUpdateHandler(noticeDao));
-    commands.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDao));
+    commands.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDao,sqlSession));
     commands.put("/adminNotice/search", new AdminNoticeSearchHandler(noticeDao));
 
     // 관리자 문의사항

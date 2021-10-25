@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.domain.Category;
+import com.share.ftp.domain.admin.NoticeAttachedFile;
 import com.share.ftp.domain.community.VolunteerBoardAttachedFile;
+import com.share.ftp.domain.support.QuestionAttachedFile;
+import com.share.ftp.domain.support.QuestionCategory;
 import com.share.ftp.domain.volunteer.VolunteerAttachedFile;
 
 public class GeneralHelper {
@@ -52,6 +55,32 @@ public class GeneralHelper {
     }
   }
 
+  public QuestionCategory promptQnaCategory() throws Exception {
+
+    List<QuestionCategory> categoryList = generalDao.findAllQnaCategory();
+
+    System.out.println();
+    System.out.println(" ▶ 문의분야 유형을 선택해주세요. ");
+    System.out.println();
+
+    while (true) {
+      for (int i = 0; i < categoryList.size(); i++) {
+        QuestionCategory qnaCategory = categoryList.get(i);
+        System.out.printf("%d ▶ %s\n", i + 1, qnaCategory.getTitle(), qnaCategory.getNo());
+      }
+
+      System.out.println();
+      int input = Prompt.inputInt("분야선택 ▶ ");
+
+      if (0 < input && input <= categoryList.size()) {
+        return categoryList.get(input - 1);
+      }
+      System.out.println();
+      System.out.println("올바른 번호를 입력해주세요");
+
+    }
+  }
+
   public static List<VolunteerAttachedFile> promptFileUpload() {
     System.out.println();
 
@@ -71,6 +100,48 @@ public class GeneralHelper {
       filepath.setFilepath(file);
 
       fileList.add(filepath);
+    }
+  }
+
+  public static List<NoticeAttachedFile> promptNoticeFileUpload() {
+    System.out.println();
+
+    NoticeAttachedFile filepath = null;
+    String file = null;
+
+    List<NoticeAttachedFile> fileList = new ArrayList<>();
+    while(true) {
+
+      filepath = new NoticeAttachedFile();
+      file = Prompt.inputString("첨부파일 (enter입력 시 종료) ▶ ");
+      if (file.length() == 0) {
+        return fileList;
+      }
+      filepath.setFilepath(file);
+
+      fileList.add(filepath);
+    }
+  }
+
+
+  public static List<QuestionAttachedFile> promptQnaFileUpload() {
+    System.out.println();
+
+    QuestionAttachedFile filepath = null;
+    String file = null;
+
+    List<QuestionAttachedFile> fileList = new ArrayList<>();
+    while(true) {
+
+      filepath = new QuestionAttachedFile();
+      file = Prompt.inputString("첨부파일 (enter입력 시 종료) ▶ ");
+      filepath.setFilepath(file);
+
+      fileList.add(filepath);
+
+      if (file.length() == 0) {
+        return fileList;
+      }
     }
 
     // 향후 확장성을 위해 나둠 지금은 필요없음
@@ -119,3 +190,5 @@ public class GeneralHelper {
 
   }
 }
+
+

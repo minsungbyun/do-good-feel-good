@@ -24,6 +24,11 @@ public class AdminNoticeSearchHandler implements Command {
 
     Collection<NoticeDTO> noticeList = noticeDao.findByKeyword(input);
 
+    if (noticeList.isEmpty()) {
+      System.out.println();
+      System.out.println("검색된 게시글이 없습니다.");
+    }
+
     System.out.println(noticeList);
 
     for (NoticeDTO noticeDTO : noticeList) {
