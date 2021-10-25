@@ -1,6 +1,5 @@
 package com.share.ftp.handler.personal.mypage;
 
-import java.util.Collection;
 import java.util.List;
 import com.share.ftp.dao.PersonalDao;
 import com.share.ftp.domain.join.PersonalDTO;
@@ -20,7 +19,7 @@ public class MyRankingHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
 
-    Collection<PersonalDTO> joinList = personalDao.findAll();
+    List<PersonalDTO> joinList = personalDao.findAllPersonal();
 
     PersonalDTO loginUser = (PersonalDTO) AuthLoginHandler.getLoginUser();
 
@@ -40,7 +39,7 @@ public class MyRankingHandler implements Command {
         + "       /____/                                  /____/   ");
     System.out.println();
 
-    System.out.printf("▶ 축하합니다! 당신의 랭킹은 %d등입니다.\n ",MemberHelper.printMyRank((List<PersonalDTO>) joinList)); 
+    System.out.printf("▶ 축하합니다! 당신의 랭킹은 %d등입니다.\n ",MemberHelper.printMyRank(joinList)); 
     System.out.println();
     System.out.printf("▶ 당신의 현재 등급은 %s입니다. \n", MemberHelper.getUserLevel(loginUser)); 
     System.out.println();
