@@ -43,10 +43,9 @@
       #{content})
   </insert>
   
-  <insert id="insertFile" parameterType="string">
-    insert into ftp_vol_board_file(filepath)
-    values(#{file})
-    <!--  values(#{no},#{filepath}) -->   
+  <insert id="insertFile">
+    insert into ftp_vol_board_file(vol_board_no, filepath)
+      values(#{volBoardNo},#{filepath})
   </insert>
   
   <select id="findAll" resultMap="VolunteerBoardDTOMap">

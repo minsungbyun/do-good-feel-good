@@ -108,13 +108,13 @@ public class GeneralHelper {
 
       filepath = new VolunteerBoardAttachedFile();
       file = Prompt.inputString("첨부파일 (enter입력 시 종료) ▶ ");
+      if (file.length() == 0) {
+        return fileList;
+      }
       filepath.setFilepath(file);
 
       fileList.add(filepath);
 
-      if (file.length() == 0) {
-        return fileList;
-      }
     }
 
   }

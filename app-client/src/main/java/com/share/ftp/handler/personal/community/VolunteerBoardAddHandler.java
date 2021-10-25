@@ -38,7 +38,7 @@ public class VolunteerBoardAddHandler implements Command {
 
     volunteerBoardDao.insert(volunteerBoardDTO);
     for (VolunteerBoardAttachedFile volunteerBoardAttachedFile : volunteerBoardDTO.getFileUpload()) {
-      volunteerBoardDao.insertFile(volunteerBoardAttachedFile.getFilepath());
+      volunteerBoardDao.insertFile(volunteerBoardDTO.getNo(), volunteerBoardAttachedFile.getFilepath());
     }
 
     sqlSession.commit();

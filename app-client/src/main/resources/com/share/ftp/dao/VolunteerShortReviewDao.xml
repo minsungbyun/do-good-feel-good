@@ -40,9 +40,9 @@
       u.id owner_id
     from
      ftp_vol_shortreview s
-     inner join ftp_user u on b.user_no=u.user_no
+     inner join ftp_user u on s.user_no=u.user_no
     order by 
-      s.shortreview_no desc
+      s.vol_shortreview_no desc
   </select>
    
   <!-- <select id="findByKeyword" resultMap="VolunteerRequestDTOMap" parameterType="string">
