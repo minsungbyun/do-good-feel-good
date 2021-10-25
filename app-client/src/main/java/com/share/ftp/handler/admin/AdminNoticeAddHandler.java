@@ -34,17 +34,18 @@ public class AdminNoticeAddHandler implements Command {
     noticeDTO.setContent(Prompt.inputString("내용: ")); 
     noticeDTO.setFileUpload(GeneralHelper.promptNoticeFileUpload());
 
-    try {
-      noticeDao.insert(noticeDTO);
-      System.out.println("등록완료");
-      for (NoticeAttachedFile fileList : noticeDTO.getFileUpload()) {
-        noticeDao.insertFile(fileList.getFilepath());
-      }
-      sqlSession.commit();
-
-    } catch (Exception e) {
-      sqlSession.rollback();
+    //    try {
+    noticeDao.insert(noticeDTO);
+    System.out.println("insert등록");
+    for (NoticeAttachedFile noticeAttachedFile : noticeDTO.getFileUpload()) {
+      noticeDao.insertFile(noticeDTO.getNo(), noticeAttachedFile.getFilepath());
+      System.out.println("insertFile등록");
     }
+    sqlSession.commit();
+
+    //    } catch (Exception e) {
+    //      sqlSession.rollback();
+    //    }
 
     System.out.println();
     System.out.println("게시글 등록이 완료 되었습니다.");

@@ -16,8 +16,15 @@ public interface OrgDao {
       @Param("homepage") String homepage) throws Exception;          // 기관회원 추가
   List<OrgDTO> findAllOrg() throws Exception;               // 기관회원 목록
   List<OrgDTO> findAllWaitOrg() throws Exception;               // 기관회원 목록
-  void update(OrgDTO orgDTO) throws Exception;          // 기관회원 수정
+  void update(OrgDTO orgDTO) throws Exception;
+  void updateOrg(
+      @Param("corpNo") String corpNo,
+      @Param("fax") String fax,
+      @Param("homepage") String homepage) throws Exception;
   void updateStatus(OrgDTO orgDTO) throws Exception;          // 기관회원 수정
+  void updateStatusReject(
+      @Param("userNo") int userNo,
+      @Param("note") String note) throws Exception;         // 기관회원 수정
   //  void updateOrg(OrgDTO orgDTO) throws Exception;          // 기관회원 수정
   void delete(OrgDTO orgDTO) throws Exception;          // 기관회원 삭제
   //  void deleteOrg(OrgDTO orgDTO) throws Exception;          // 기관회원 삭제

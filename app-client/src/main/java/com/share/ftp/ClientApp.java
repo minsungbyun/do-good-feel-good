@@ -51,18 +51,21 @@ import com.share.ftp.handler.admin.AdminQuestionAddHandler;
 import com.share.ftp.handler.join.AuthDisplayUserHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.ftp.handler.join.AuthLogoutHandler;
+import com.share.ftp.handler.join.GroupFormUpdateHandler;
 import com.share.ftp.handler.join.GroupHandler;
 import com.share.ftp.handler.join.GroupListHandler;
 import com.share.ftp.handler.join.GroupUserDeleteHandler;
 import com.share.ftp.handler.join.GroupUserUpdateHandler;
 import com.share.ftp.handler.join.JoinAddHandler;
 import com.share.ftp.handler.join.JoinGroupHandler;
+import com.share.ftp.handler.join.JoinListHandler;
 import com.share.ftp.handler.join.JoinListTestHandler;
 import com.share.ftp.handler.join.JoinOrgHandler;
 import com.share.ftp.handler.join.JoinPersonalHandler;
 import com.share.ftp.handler.join.JoinSearchEmailIdHandler;
 import com.share.ftp.handler.join.JoinSearchPasswordHandler;
 import com.share.ftp.handler.join.JoinSearchTelIdHandler;
+import com.share.ftp.handler.join.OrgFormUpdateHandler;
 import com.share.ftp.handler.join.OrgHandler;
 import com.share.ftp.handler.join.OrgListHandler;
 import com.share.ftp.handler.join.OrgUserDeleteHandler;
@@ -129,11 +132,7 @@ import com.share.ftp.handler.personal.support.QuestionUpdateHandler;
 import com.share.ftp.handler.personal.volunteer.MyAppliedVolDetailHandler;
 import com.share.ftp.handler.personal.volunteer.MyAppliedVolHandler;
 import com.share.ftp.handler.personal.volunteer.MyRejectedVolHandler;
-import com.share.ftp.handler.personal.volunteer.VolGeneralDoJoinDeleteHandler;
-import com.share.ftp.handler.personal.volunteer.VolGeneralDoJoinHandler;
-import com.share.ftp.handler.personal.volunteer.VolGeneralDoJoinListHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestDeleteHandler;
-import com.share.ftp.handler.personal.volunteer.VolGeneralRequestWishHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionAddHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionConnectHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionDeleteHandler;
@@ -142,9 +141,15 @@ import com.share.ftp.handler.personal.volunteer.VolQuestionUpdateHandler;
 import com.share.ftp.handler.personal.volunteer.VolunteerApproveHandler;
 import com.share.ftp.handler.personal.volunteer.VolunteerApproveListHandler;
 import com.share.ftp.handler.personal.volunteer.VolunteerDetailHandler;
+import com.share.ftp.handler.personal.volunteer.VolunteerGroupJoinDeleteHandler;
+import com.share.ftp.handler.personal.volunteer.VolunteerGroupJoinHandler;
+import com.share.ftp.handler.personal.volunteer.VolunteerJoinDeleteHandler;
+import com.share.ftp.handler.personal.volunteer.VolunteerJoinHandler;
+import com.share.ftp.handler.personal.volunteer.VolunteerJoinListHandler;
 import com.share.ftp.handler.personal.volunteer.VolunteerListHandler;
 import com.share.ftp.handler.personal.volunteer.VolunteerRejectHandler;
 import com.share.ftp.handler.personal.volunteer.VolunteerRequestApplyHandler;
+import com.share.ftp.handler.personal.volunteer.VolunteerWishHandler;
 import com.share.ftp.listener.AppInitListener;
 import com.share.menu.Menu;
 import com.share.menu.MenuFilter;
@@ -272,6 +277,9 @@ public class ClientApp {
     commands.put("/join/personal", new JoinPersonalHandler(personalDao,sqlSession)); // 회원가입
     commands.put("/join/group", new JoinGroupHandler(groupDao,sqlSession)); // 회원가입
     commands.put("/join/org", new JoinOrgHandler(orgDao,sqlSession)); // 회원가입
+    commands.put("/join/list", new JoinListHandler(personalDao,groupDao,orgDao)); // 회원가입
+    commands.put("/join/groupForm", new GroupFormUpdateHandler(groupDao,sqlSession)); // 회원가입
+    commands.put("/join/orgForm", new OrgFormUpdateHandler(orgDao,sqlSession)); // 회원가입
     commands.put("/join/searchTelId", new JoinSearchTelIdHandler(personalDao)); // 폰번호로 아이디 찾기
     commands.put("/join/searchEmailId", new JoinSearchEmailIdHandler(personalDao)); // 이메일로 아이디 찾기kvp
     commands.put("/join/searchPassword", new JoinSearchPasswordHandler(personalDao)); // 비밀번호 찾기
@@ -281,21 +289,20 @@ public class ClientApp {
     commands.put("/vol/list", new VolunteerListHandler(volunteerDao));  
     commands.put("/vol/detail", new VolunteerDetailHandler(volunteerDao));
 
-    // 관리자 봉사
     commands.put("/vol/approvelist", new VolunteerApproveListHandler(volunteerDao));
     commands.put("/vol/approve", new VolunteerApproveHandler(volunteerDao));  
     commands.put("/vol/reject", new VolunteerRejectHandler(volunteerDao)); 
 
-
-
+    commands.put("/volJoin/add", new VolunteerJoinHandler(volunteerDao));
+    commands.put("/volJoin/groupAdd", new VolunteerGroupJoinHandler(volunteerDao));
+    commands.put("/volJoin/list", new VolunteerJoinListHandler(volunteerDao));
+    commands.put("/volJoin/delete", new VolunteerJoinDeleteHandler(volunteerDao));
+    commands.put("/volJoin/groupDelete", new VolunteerGroupJoinDeleteHandler(volunteerDao));
 
     commands.put("/volGeneralRequest/delete", new VolGeneralRequestDeleteHandler(volunteerDao));
-    commands.put("/volGeneralRequest/wish", new VolGeneralRequestWishHandler(volunteerDao));
-    commands.put("/volGeneralRequest/wishList", new MyVolWishHandler(volunteerDao));
+    commands.put("/vol/wish", new VolunteerWishHandler(volunteerDao,sqlSession));
+    commands.put("/vol/wishList", new MyVolWishHandler(volunteerDao));
     //    commands.put("/volGeneralRequest/totalApprovedList", new VolGeneralTotalApprovedListHandler(volPersonalRequestAppliedListHandler,volOrgRequestAppliedListHandler));
-    commands.put("/volGeneralDoJoin/add", new VolGeneralDoJoinHandler(volunteerDao));
-    commands.put("/volGeneralDoJoin/list", new VolGeneralDoJoinListHandler(volunteerDao));
-    commands.put("/volGeneralDoJoin/delete", new VolGeneralDoJoinDeleteHandler(volunteerDao));
 
     //함께해요 문의하기
     commands.put("/volQuestion/add", new VolQuestionAddHandler(volunteerDao));
@@ -506,6 +513,8 @@ public class ClientApp {
 
     mainMenuGroup.add(new MenuItem("비밀번호찾기", ACCESS_LOGOUT, "/join/searchPassword"));
     mainMenuGroup.add(new MenuItem("회원가입", ACCESS_LOGOUT, "/join/add"));
+    mainMenuGroup.add(new MenuItem("단체양식 수정", ACCESS_LOGOUT, "/join/groupForm"));
+    mainMenuGroup.add(new MenuItem("기관양식 수정", ACCESS_LOGOUT, "/join/orgForm"));
     mainMenuGroup.add(new MenuItem("로그아웃", ACCESS_MEMBER_ADMIN, "/auth/logout"));
 
 
@@ -515,9 +524,9 @@ public class ClientApp {
     mainMenuGroup.add(doVolMenu);
     doVolMenu.setMenuFilter(menuFilter);
 
-    doVolMenu.add(new MenuItem("봉사 등록", "/volRequest/apply"));
+    doVolMenu.add(new MenuItem("봉사 신청서 작성", "/volRequest/apply"));
     doVolMenu.add(new MenuItem("봉사 목록", "/vol/list"));
-    doVolMenu.add(new MenuItem("봉사 상세정보", "/volGeneral/detail"));
+    //    doVolMenu.add(new MenuItem("봉사 상세보기", "/vol/detail"));
 
     //    doVolMenu.add(new MenuItem("개인봉사신청양식", ACCESS_PERSONAL, "/volGeneralRequest/apply"));
     //    doVolMenu.add(new MenuItem("기관봉사신청양식", ACCESS_ORG, "/volGeneralRequest/apply")); 
@@ -809,8 +818,9 @@ public class ClientApp {
     myVolunteer.add(new MenuItem("반려된 봉사내역",ACCESS_ORG,"/myVol/rejected"));    
     myVolunteer.add(new MenuItem("개인봉사 삭제",ACCESS_PERSONAL,"/volGeneralRequest/delete"));    
     myVolunteer.add(new MenuItem("기관봉사 삭제",ACCESS_ORG,"/volGeneralRequest/delete"));    
-    myVolunteer.add(new MenuItem("참여한봉사 취소하기",ACCESS_MEMBER,"/volGeneralDoJoin/delete"));    
-    myVolunteer.add(new MenuItem("찜한봉사",ACCESS_MEMBER,"/volGeneralRequest/wishList")); // 구현예정
+    myVolunteer.add(new MenuItem("참여한봉사 취소하기",ACCESS_PERSONAL,"/volJoin/delete"));    
+    myVolunteer.add(new MenuItem("참여한봉사 취소하기",ACCESS_GROUP,"/volJoin/groupDelete"));    
+    myVolunteer.add(new MenuItem("찜한봉사",ACCESS_MEMBER,"/vol/wishList")); 
 
     return myVolunteer;
   }
@@ -877,13 +887,21 @@ public class ClientApp {
     adminMemberMenu.setMenuFilter(menuFilter);
 
     //    adminMemberMenu.add(new MenuItem("회원목록",ACCESS_ADMIN, "/join/list"));
-    adminMemberMenu.add(new MenuItem("개인목록",ACCESS_ADMIN, "/join/test"));
+    adminMemberMenu.add(new MenuItem("가입회원 목록", ACCESS_ADMIN,"/join/list"));
     adminMemberMenu.add(new MenuItem("단체목록",ACCESS_ADMIN, "/join/groupList"));
     adminMemberMenu.add(new MenuItem("기관목록",ACCESS_ADMIN, "/join/orgList"));
-    adminMemberMenu.add(new MenuItem("가입회원 상세보기", ACCESS_ADMIN,"/join/detail"));
     adminMemberMenu.add(new MenuItem("회원추방",ACCESS_ADMIN,"/adminMember/list"));
 
     return adminMemberMenu;
+  }
+
+  private Menu createAdminVolMenu() {
+    MenuGroup adminVolMenu = new MenuGroup("봉사활동 관리", ACCESS_ADMIN);
+    adminVolMenu.setMenuFilter(menuFilter);
+
+    adminVolMenu.add(new MenuItem("봉사신청서 확인",ACCESS_ADMIN,"/vol/approveList"));
+
+    return adminVolMenu;
   }
 
   private Menu createAdminDonationMenu() {
@@ -898,14 +916,6 @@ public class ClientApp {
     return adminDonationMenu;
   }
 
-  private Menu createAdminVolMenu() {
-    MenuGroup adminVolMenu = new MenuGroup("봉사활동 관리", ACCESS_ADMIN);
-    adminVolMenu.setMenuFilter(menuFilter);
-
-    adminVolMenu.add(new MenuItem("봉사신청서 확인",ACCESS_ADMIN,"/vol/approveList"));
-
-    return adminVolMenu;
-  }
 
   private Menu createAdminNoticeMenu() {
     MenuGroup adminNoticeMenu = new MenuGroup("공지사항 관리", ACCESS_ADMIN);

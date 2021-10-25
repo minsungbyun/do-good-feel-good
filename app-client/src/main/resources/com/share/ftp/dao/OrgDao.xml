@@ -51,7 +51,7 @@
        ftp_user u
        inner join ftp_user_org o on u.user_no=o.user_no
      order by
-       user_org_no asc
+       user_org_no desc
   </select>
   
   <select id="findAllWaitOrg" resultMap="OrgDTOMap">
@@ -65,9 +65,9 @@
        ftp_user u
        inner join ftp_user_org o on u.user_no=o.user_no
      where
-       u.status=2
+       u.status=2 or u.status=3
      order by
-       user_org_no asc
+       user_org_no desc
   </select>
   
   <select id="findByOrgNo" resultMap="OrgDTOMap" parameterType="int">
@@ -111,21 +111,29 @@
         user_no=#{no}
   </update>
   
-  <update id="updateStatus" parameterType="OrgDTO">
-     update ftp_user set
-       status=1
-     where 
-        user_no=#{no}
-  </update>
-  
-  <update id="updateOrg" parameterType="OrgDTO">
-     update ftp_user set
+  <update id="updateOrg">
+     update ftp_user_org set
        corp_no=#{corpNo},
        fax=#{fax},
        hp=#{homepage}
      where 
-        user_org_no=#{orgNo}
+        user_no=#{no}
   </update>
+  
+  <update id="updateStatus" parameterType="OrgDTO">
+     update ftp_user set
+       status=#{status}
+     where 
+        user_no=#{no}
+  </update>
+  
+  <update id="updateStatusReject">
+     update ftp_user set
+       note=#{note}
+     where 
+        user_no=#{userNo}
+  </update>
+  
   
   <update id="delete" parameterType="OrgDTO">
      update ftp_user set

@@ -12,7 +12,7 @@
     <result column="created_dt" property="registeredDate"/>
     <result column="view_cnt" property="viewCount"/>
   
-  <collection property="fileUpload" ofType="VolunteerAttachedFile">
+  <collection property="fileUpload" ofType="noticeAttachedFile">
       <id column="notice_file_no" property="no"/>
       <result column="filepath" property="filepath"/>
   </collection>
@@ -27,7 +27,7 @@
      f.filepath
     from
      ftp_support_notice n
-     inner join ftp_support_notice_file f on n.notice_no=f.notice_no
+     left outer join ftp_support_notice_file f on n.notice_no=f.notice_no
     order by
       notice_no desc
   </select>
@@ -35,23 +35,21 @@
   <insert id="insert" parameterType="NoticeDTO">
     insert into ftp_support_notice(
       title,
-      content,
-      created_dt) 
+      content) 
     values(
       #{title},
-      #{content},
-      curdate())
+      #{content})
   </insert>
-  <insert id="insertFile" parameterType="string">
-    insert into
-      ftp_support_notice_file(
+  
+  <insert id="insertFile">
+    insert into ftp_support_notice_file(
       notice_no,
       filepath)
     values(
       #{no},
       #{filepath})
   </insert>
-  
+  <!--  
    <update id="update" parameterType="NoticeDTO">
    update ftp_support_notice set
      title=#{title},
@@ -77,171 +75,13 @@
     where
       notice_no=${no}
   </delete>
-  
-  <select id="findByNo" resultMap="NoticeDTOMap" parameterType="int">
-     select 
-      n.notice_no,
-      n.title,
-      n.content,
-      n.created_dt,
-      n.view_cnt
-      f.filepath
-    from
-     ftp_support_notice n
-     inner join ftp_support_notice_file f on n.notice_no=f.notice_no
-    where 
-      notice_no=#{no}
-  </select>
-  
-  <select id="findByKeyword" resultMap="NoticeDTOMap" parameterType="string">
-     select 
-       n.notice_no,
-       n.title,   
-       n.created_dt,
-       n.view_cnt
-       f.filepath
-    from
-     ftp_support_notice n
-     inner join ftp_support_notice_file f on n.notice_no=f.notice_no
-     <where>
-      <if test="title != null">
-         n.title like (concat('%', #{value}, '%'))
-      </if>
-      <if test="content != null">
-         or n.content like (concat('%', #{value}, '%'))
-      </if>
-     </where>
-    order by
-      notice_no desc
-  </select>
-  
-  
-
-<!--    
-  
-select
-  user.id 아이디,
-  user.email 이메일,
-  personal.rank 등급,
-  personal.point 포인트,
-  photo.filepath 첨부파일,
-  message.content 메세지,
-  alert.content 알림
-from 
-  ftp_user user
-inner join ftp_user_personal personal on user.user_no=personal.user_no
-left outer join ftp_user_photo photo on user.user_no=photo.user_no
-left outer join ftp_user_message message on user.user_no=message.user_from
-left outer join ftp_user_alert alert on user.user_no=alert.user_no
-
-
-select
-  user.id,
-  user.name,
-  user.email,
-  user.status,
-  personal.birthdate,
-  personal.rank,
-  personal.point
-from 
-  ftp_user user
-inner join ftp_user_personal personal on user.user_no=personal.user_no
-
-select
-  user.id,
-  user.name,
-  user.email,
-  user.status,
-  group.group_cnt
-from 
-  ftp_user user
-inner join ftp_user_group group on user.user_no=group.user_no
-
-
-select
-  board.vol_board_no,
-  board.title,
-  user.id,
-  file.filepath,
-  board.view_cnt
-from
-  ftp_vol_board board
-inner join ftp_user user on board.user_no=user.user_no
-left outer join ftp_vol_board_like like on board.vol_board_no=like.vol_board_no
-left outer join ftp_vol_board_file file on board.vol_board_no=file.vol_board_no
-
-select
-  board.vol_board_no,
-  board.title,
-  user.id,
-  file.filepath,
-  like3.count(user_no),
-  board.view_cnt
-from
-  ftp_vol_board board
-inner join ftp_user user on board.user_no=user.user_no
-left outer join ftp_vol_board_file file on board.vol_board_no=file.vol_board_no
-inner join ftp_vol_board_like like3 on user.user_no=like3.user_no
-
-select
-  board.vol_board_no,
-  board.title,
-  user.id,
-  file.filepath,
-  board.view_cnt,
-
-from
-  ftp_vol_board board
-inner join ftp_user user on board.user_no=user.user_no
-left outer join ftp_vol_board_file file on board.vol_board_no=file.vol_board_no
-left outer join ftp_vol_board_like like on board.vol_board.no=like.vol_board_no
-left outer join ftp_vol_board_like like2 on user.user_no=like2.user_no
-
-
-
-select
-  vol_board_no 봉사게시판,
-  count(user_no) 유저수
-from
- ftp_vol_board_like 
-group by
-  vol_board_no
-  -->
-  <!--   
 
 
   
-  
+-->
  
  
-  
-  <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
-    select 
-      member_no,
-      name,
-      email,
-      photo,
-      tel,
-      created_dt 
-    from 
-      pms_member
-    where 
-      email=#{email} and password=password(#{password})
-  </select>
-  
-  <select id="findByName" resultMap="MemberMap" parameterType="string">
-    select 
-      member_no,
-      name,
-      email,
-      photo,
-      tel,
-      created_dt 
-    from 
-      pms_member
-    where 
-      name=#{value}
-  </select>-->
+
 </mapper>
 
 

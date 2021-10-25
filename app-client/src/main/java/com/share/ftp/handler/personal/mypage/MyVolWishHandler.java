@@ -18,26 +18,24 @@ public class MyVolWishHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
 
-    Collection<VolunteerRequestDTO> generalRequestList = volunteerDao.findAll();
+    Collection<VolunteerRequestDTO> volunteerwishList = volunteerDao.findAll();
 
     System.out.println("[ 나의 찜한목록 ]");
-    for (VolunteerRequestDTO volunteerRequestDTO : generalRequestList) {
-      if (volunteerRequestDTO.getWish().equals(AuthLoginHandler.getLoginUser())) {
-        System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \\n", 
-            volunteerRequestDTO.getNo(),      
-            volunteerRequestDTO.getTitle(),     
-            volunteerRequestDTO.getOwner().getName(), 
-            volunteerRequestDTO.getType(), 
-            volunteerRequestDTO.getTel(),
-            volunteerRequestDTO.getEmail(),
-            volunteerRequestDTO.getStartDate(),
-            volunteerRequestDTO.getEndDate(),
-            volunteerRequestDTO.getStartTime(),
-            volunteerRequestDTO.getEndTime(),
-            volunteerRequestDTO.getLimitNum(),
-            volunteerRequestDTO.getContent(),
-            volunteerRequestDTO.getFileUpload(),
-            volunteerRequestDTO.getStatus());
+    for (VolunteerRequestDTO volunteerWish : volunteerwishList) {
+      if (volunteerWish.getWish().equals(AuthLoginHandler.getLoginUser())) {
+        System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s\\n", 
+            volunteerWish.getNo(),      
+            volunteerWish.getTitle(),     
+            volunteerWish.getOwner().getId(), 
+            volunteerWish.getCategory().getTitle(), 
+            volunteerWish.getTel(),
+            volunteerWish.getEmail(),
+            volunteerWish.getStartDate(),
+            volunteerWish.getEndDate(),
+            volunteerWish.getStartTime(),
+            volunteerWish.getEndTime(),
+            volunteerWish.getLimitNum(),
+            volunteerWish.getContent());
       }
     }
   }

@@ -36,6 +36,11 @@ public class VolunteerRequestApplyHandler implements Command { // 개인 봉사�
 
     JoinDTO joinDTO = AuthLoginHandler.getLoginUser();
 
+    if (joinDTO.getType() == 1) {
+      System.out.println("개인 회원은 신청서를 작성할 수 없습니다!");
+      return;
+    }
+
 
     if (joinDTO == null) {
       System.out.println("[  ⛔ 로그인 후 사용가능합니다 ⛔  ]");
