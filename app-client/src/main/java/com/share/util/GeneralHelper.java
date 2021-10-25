@@ -58,18 +58,20 @@ public class GeneralHelper {
 
     List<QuestionCategory> categoryList = generalDao.findAllQnaCategory();
 
-    System.out.println(" ▶ 문의분야 유형 ");
+    System.out.println();
+    System.out.println(" ▶ 문의분야 유형을 선택해주세요. ");
     System.out.println();
 
     while (true) {
       for (int i = 0; i < categoryList.size(); i++) {
         QuestionCategory qnaCategory = categoryList.get(i);
-        System.out.printf("%d ▶ %s\n", i + 1, qnaCategory.getTitle());
+        System.out.printf("%d ▶ %s\n", i + 1, qnaCategory.getTitle(), qnaCategory.getNo());
       }
 
+      System.out.println();
       int input = Prompt.inputInt("분야선택 ▶ ");
 
-      if (0 < input && input < categoryList.size()) {
+      if (0 < input && input <= categoryList.size()) {
         return categoryList.get(input - 1);
       }
       System.out.println();

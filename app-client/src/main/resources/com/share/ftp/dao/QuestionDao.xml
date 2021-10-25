@@ -19,14 +19,19 @@
       <id column="user_no" property="no"/>
       <result column="id" property="id"/>
     </association>
-    
+    <!--  
     <collection property="fileUpload" ofType="questionAttachedFile">
       <id column="qna_file_no" property="no"/>
       <result column="filepath" property="filepath"/>
     </collection>
+    -->
+    <association property="qnaType" javaType="questionCategory">
+      <id column="qna_category_no" property="no"/>
+      <result column="category_title" property="title"/>
+    </association>
   </resultMap>
   
-  <resultMap type="QuestionCategory" id="questionCategoryMap">    
+  <resultMap type="questionCategory" id="QuestionCategoryMap">    
     <id column="qna_category_no" property="no"/>
     <result column="category_title" property="title"/>
   </resultMap>
@@ -37,7 +42,7 @@
       <result column="category_title" property="title"/>
     </resultMap>
     -->
-    
+    <!--
    <insert id="insert" parameterType="QuestionListDTO" 
           useGeneratedKeys="true" keyColumn="qna_no" keyProperty="no">
     insert into ftp_support_qna(
@@ -45,10 +50,10 @@
        qna_category_no,
        title,
        content,
-       password,
+       password)
     values(
-       #{userNo},
-       #{categoryNo},
+       #{no},
+       #{qnaType.no},
        #{title},
        #{content},
        #{password})
@@ -58,6 +63,7 @@
     insert into ftp_support_qna_file(qna_no,filepath)
     values(#{no},#{filepath})
   </insert>
+  -->
   
   <select id="findAll" resultMap="QuestionDTOMap">
    select 
@@ -67,7 +73,8 @@
      s.view_cnt,
      s.status,
      u.id,
-     c.category_title,
+     c.qna_category_no qna_category_no,
+     c.category_title category_title,
      f.filepath
     from
      ftp_support_qna s
@@ -78,6 +85,16 @@
       qna_no desc
   </select>
   
+  <select id="findAllQnaCategory" resultMap="QuestionDTOMap">
+   select 
+     qna_category_no,
+     category_title
+    from
+      ftp_support_qna_file
+    order by
+      qna_category_no desc
+  </select>
+  <!-- 
   <select id="findByNo" resultMap="QuestionDTOMap" parameterType="int">
    select 
      s.qna_no,
@@ -121,7 +138,7 @@
      order by
       qna_no desc
   </select>
-   <!-- 
+   
   insert into ftp_support_qna(
        user_no,
        qna_category_no,
@@ -171,8 +188,7 @@
   
 
   
-
-  </select>-->
+-->
 </mapper>
 
 
