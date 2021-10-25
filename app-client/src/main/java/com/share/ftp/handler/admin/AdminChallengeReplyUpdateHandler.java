@@ -26,16 +26,11 @@ public class AdminChallengeReplyUpdateHandler implements Command {
 
     ChallengeDTO challengeDTO = challengeDao.findByNo(challengeNo);
 
-
-    if (challengeDTO == null) {
-      System.out.println("존재하지 않는 챌린지입니다");
-    }
-
     int challengQuestionNo = (int) request.getAttribute("challengQuestionNo");
 
     ChallengeQuestionDTO challengeQuestion = challengeQuestionDao.findByNo(challengeNo, challengQuestionNo);
 
-    if (challengeQuestion == null) {
+    if (challengeQuestion.getReply() == null) {
       System.out.println("해당 번호의 답글이 없습니다.");
       return;
     }
