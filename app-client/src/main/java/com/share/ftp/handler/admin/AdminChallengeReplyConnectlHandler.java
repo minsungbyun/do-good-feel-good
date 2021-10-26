@@ -52,7 +52,9 @@ public class AdminChallengeReplyConnectlHandler implements Command {
       //      for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
       if (challengeQuestion.getNo() == challengeNo) {
         //        System.out.printf("아이디: %s\n", challengeQuestion.getOwner().getId());
-        System.out.printf("%s번문의 답글: %s\n", challengeQuestion.getReply());
+        System.out.printf("%s번문의 관리자 답글: %s\n", 
+            challengeQuestion.getQuestionNo(),
+            challengeQuestion.getReply());
         //        System.out.printf("등록날짜: %s\n", challengeQuestion.getRegisteredDate());
       } 
       //      }

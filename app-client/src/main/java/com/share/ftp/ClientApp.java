@@ -476,7 +476,7 @@ public class ClientApp {
     commands.put("/adminChallenge/delete", new AdminChallengeDeleteHandler(challengeDao, sqlSession));
     commands.put("/adminChallenge/QuestionList", new AdminChallengeQuestionListHandler(challengeDao, challengeQuestionDao));
     commands.put("/adminChallenge/replyAdd", new AdminChallengeReplyAddHandler(challengeDao, challengeQuestionDao, sqlSession)); // 챌린지 답글 등록
-    commands.put("/adminChallenge/replyUpdate", new AdminChallengeReplyUpdateHandler(challengeDao, challengeQuestionDao)); // 챌린지 답글 변경
+    commands.put("/adminChallenge/replyUpdate", new AdminChallengeReplyUpdateHandler(challengeDao, challengeQuestionDao, sqlSession)); // 챌린지 답글 변경
     commands.put("/adminChallenge/replyDelete", new AdminChallengeReplyDeleteHandler(challengeDao, challengeQuestionDao)); // 챌린지 답글 삭제
     commands.put("/adminChallenge/replyConnect", new AdminChallengeReplyConnectlHandler(challengeDao, challengeQuestionDao)); // 챌린지 답글 등록, 변경, 삭제 연결
 
