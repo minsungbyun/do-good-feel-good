@@ -100,194 +100,186 @@
 	       funding_no desc 
   </select>
   
-  <!-- 
+   
    <select id="findAllApproved" resultMap="DonationBoardDTOMap">
 	     select 
-	         v.vol_no,  
-	         v.title,
-	         v.content,
-	         v.tel,
-	         v.email,
-	         v.start_dt,
-	         v.end_dt,
-	         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt,
-	         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
-	         v.start_time,
-	         v.end_time,
-	         v.total_cnt,
-	         u.id owner_id,
-	         u.name owner_name,   
-	         c.category_title category_title,
-	         f.filepath
-	       from
-	         ftp_vol v
-	         inner join ftp_user u on v.user_no=u.user_no
-	         inner join ftp_category c on v.category_no=c.category_no
-	         left outer join ftp_vol_file f on v.vol_no=f.vol_no
-	        where
-	          v.approval=1
-	        order by
-	          v.vol_no desc
+         d.funding_no,  
+         d.title,
+         d.content,
+         d.tel,
+         d.email,
+         d.start_dt,
+         d.end_dt,
+         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt,
+         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
+         d.goal,
+         p.id leader_id,  
+         p.name leader_name,  
+         c.category_title category_title,
+         f.filepath
+       from
+         ftp_funding d
+         inner join ftp_user_org o on d.user_org_no=o.user_org_no
+         inner join ftp_category c on d.category_no=c.category_no
+         inner join ftp_user p on p.user_no=o.user_no
+         left outer join ftp_funding_file f on d.funding_no=f.funding_no
+	     where
+	       d.status=1
+	     order by
+	       d.funding_no desc
    </select>
+   
    
    <select id="findAllApply" resultMap="DonationBoardDTOMap">
 	     select 
-	         v.vol_no,  
-	         v.title,
-	         v.content,
-	         v.tel,
-	         v.email,
-	         v.start_dt,
-	         v.end_dt,
-	         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt,
-	         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
-	         v.start_time,
-	         v.end_time,
-	         v.total_cnt,
-	         u.id owner_id,
-	         u.name owner_name,   
-	         c.category_title category_title,
-	         f.filepath
-	       from
-	         ftp_vol v
-	         inner join ftp_user u on v.user_no=u.user_no
-	         inner join ftp_category c on v.category_no=c.category_no
-	         left outer join ftp_vol_file f on v.vol_no=f.vol_no
-	        where
-	          v.approval=1 and v.vol_no=#{no}
-	        order by
-	          v.vol_no desc
+         d.funding_no,  
+         d.title,
+         d.content,
+         d.tel,
+         d.email,
+         d.start_dt,
+         d.end_dt,
+         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt,
+         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
+         d.goal,
+         p.id leader_id,  
+         p.name leader_name,  
+         c.category_title category_title,
+         f.filepath
+       from
+         ftp_funding d
+         inner join ftp_user_org o on d.user_org_no=o.user_org_no
+         inner join ftp_category c on d.category_no=c.category_no
+         inner join ftp_user p on p.user_no=o.user_no
+         left outer join ftp_funding_file f on d.funding_no=f.funding_no
+	     where
+	       d.status=1 and d.funding_no=#{no}
+	     order by
+	       d.funding_no desc
    </select>
    
    <select id="findAllWait" resultMap="DonationBoardDTOMap">
      select 
-         v.vol_no,  
-         v.title,
-         v.content,
-         v.tel,
-         v.email,
-         v.start_dt,
-         v.end_dt,
-         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt,
-         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
-         v.start_time,
-         v.end_time,
-         v.total_cnt,
-         u.id owner_id,
-         u.name owner_name,  
+         d.funding_no,  
+         d.title,
+         d.content,
+         d.tel,
+         d.email,
+         d.start_dt,
+         d.end_dt,
+         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt,
+         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
+         d.goal,
+         p.id leader_id,  
+         p.name leader_name,  
          c.category_title category_title,
          f.filepath
        from
-         ftp_vol v
-         inner join ftp_user u on v.user_no=u.user_no
-         inner join ftp_category c on v.category_no=c.category_no
-         left outer join ftp_vol_file f on v.vol_no=f.vol_no
-        where
-          v.approval=1
-        order by
-          v.vol_no desc
+         ftp_funding d
+         inner join ftp_user_org o on d.user_org_no=o.user_org_no
+         inner join ftp_category c on d.category_no=c.category_no
+         inner join ftp_user p on p.user_no=o.user_no
+         left outer join ftp_funding_file f on d.funding_no=f.funding_no
+       where
+          d.status=1
+       order by
+          d.funding_no desc
    </select>
-   
+   <!--
     일 시간 분 초 다 계산하려면 테이블 데이터 타입을 datetime으로 변경해야함
     date_format(end_dt,'%Y-%m-%d %H:%i:%s'), date_format(curdate(),'%Y-%m-%d %H:%i:%s') datediff,
-    
+    -->
     
    <select id="totalDate" resultMap="DonationBoardDTOMap" parameterType="int">
       select 
-        datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt
+        datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt
       from
-        ftp_vol v
+        ftp_funding d
       where
-        v.vol_no=#{volNo}
+        d.funding_no=#{donationNo}
     </select>
     
    <select id="remainDate" resultMap="DonationBoardDTOMap" parameterType="int">
       select 
-        datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt
+        datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt
       from
-        ftp_vol v
+        ftp_funding d
       where
-        v.vol_no=#{volNo}
+        d.funding_no=#{donationNo}
     </select>
   
   
-  <select id="findByVolunteerNo" resultMap="DonationBoardDTOMap" parameterType="int">
-       select 
-         v.vol_no,  
-         v.title,
-         v.content,
-         v.tel,
-         v.email,
-         v.start_dt,
-         v.end_dt,
-         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) datediff,
-         v.start_time,
-         v.end_time,
-         timediff(v.end_time,v.start_time) timediff,
-         v.total_cnt,
-         u.id owner_id,
-         u.name owner_name,   
+  <select id="findByDonationNo" resultMap="DonationBoardDTOMap" parameterType="int">
+      select 
+         d.funding_no,  
+         d.title,
+         d.content,
+         d.tel,
+         d.email,
+         d.start_dt,
+         d.end_dt,
+         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) datediff,
+         d.goal,
+         p.id leader_id,  
+         p.name leader_name,  
          c.category_title category_title,
          f.filepath
        from
-         ftp_vol v
-         inner join ftp_user u on v.user_no=u.user_no
-         inner join ftp_category c on v.category_no=c.category_no
-         left outer join ftp_vol_file f on v.vol_no=f.vol_no
+         ftp_funding d
+         inner join ftp_user_org o on d.user_org_no=o.user_org_no
+         inner join ftp_category c on d.category_no=c.category_no
+         inner join ftp_user p on p.user_no=o.user_no
+         left outer join ftp_funding_file f on d.funding_no=f.funding_no
        where 
-         v.vol_no=#{volNo}
+         d.funding_no=#{donationNo}
   </select>
  
-  <select id="findByApprovedVolunteerNo" resultMap="DonationBoardDTOMap" parameterType="int">
-       select 
-         v.vol_no,  
-         v.title,
-         v.content,
-         v.tel,
-         v.email,
-         v.start_dt,
-         v.end_dt,
-         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) datediff,
-         v.start_time,
-         v.end_time,
-         timediff(v.end_time,v.start_time) timediff,
-         v.total_cnt,
-         u.id owner_id,
-         u.name owner_name,   
+  <select id="findByApprovedDonationNo" resultMap="DonationBoardDTOMap" parameterType="int">
+      select 
+         d.funding_no,  
+         d.title,
+         d.content,
+         d.tel,
+         d.email,
+         d.start_dt,
+         d.end_dt,
+         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) datediff,
+         d.goal,
+         p.id leader_id,  
+         p.name leader_name,  
          c.category_title category_title,
          f.filepath
        from
-         ftp_vol v
-         inner join ftp_user u on v.user_no=u.user_no
-         inner join ftp_category c on v.category_no=c.category_no
-         left outer join ftp_vol_file f on v.vol_no=f.vol_no
+         ftp_funding d
+         inner join ftp_user_org o on d.user_org_no=o.user_org_no
+         inner join ftp_category c on d.category_no=c.category_no
+         inner join ftp_user p on p.user_no=o.user_no
+         left outer join ftp_funding_file f on d.funding_no=f.funding_no
        where 
-         v.vol_no=#{volNo} and v.approval=1
+         d.funding_no=#{donationNo} and d.status=1
   </select>
  
   <select id="findByKeyword" resultMap="DonationBoardDTOMap" parameterType="string">
-     select 
-         v.vol_no,  
-         v.title,
-         v.content,
-         v.tel,
-         v.email,
-         v.start_dt,
-         v.end_dt,
-         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) datediff,
-         v.start_time,
-         v.end_time,
-         timediff(v.end_time,v.start_time) timediff,
-         v.total_cnt,
-         u.id owner_id,
-         u.name owner_name,   
+      select 
+         d.funding_no,  
+         d.title,
+         d.content,
+         d.tel,
+         d.email,
+         d.start_dt,
+         d.end_dt,
+         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) datediff,
+         d.goal,
+         p.id leader_id,  
+         p.name leader_name,  
          c.category_title category_title,
          f.filepath
        from
-         ftp_vol v
-         inner join ftp_user u on v.user_no=u.user_no
-         inner join ftp_category c on v.category_no=c.category_no
-         left outer join ftp_vol_file f on v.vol_no=f.vol_no
+         ftp_funding d
+         inner join ftp_user_org o on d.user_org_no=o.user_org_no
+         inner join ftp_category c on d.category_no=c.category_no
+         inner join ftp_user p on p.user_no=o.user_no
+         left outer join ftp_funding_file f on d.funding_no=f.funding_no
      <where>
       <if test="title != null">
          title like concat('%', #{value}, '%')
@@ -297,45 +289,51 @@
       </if>
      </where>
      order by
-      v.vol_no desc
+      d.funding_no desc
   </select>
   
-   <update id="update" parameterType="VolunteerRequestDTO">
-	   update ftp_vol set
-		    user_no=#{userNo},
+   <update id="update" parameterType="DonationBoardDTO">
+	   update ftp_funding set
 	      category_no=#{category.no},
+		    user_org_no=#{orgNo},
 	      title=#{title},
 	      content=#{content},
 	      tel=#{tel},
 	      email=#{email},
 	      start_dt=#{startDate},
 	      end_dt=#{endDate},
-	      start_time=#{startTime},
-	      end_time=#{endTime},
-	      total_cnt=#{limitNum}
+	      goal=#{moneyTarget},
+	      status=#{status}
 	   where 
-	      vol_no=#{no}
+	      funding_no=#{no}
+  </update>
+  
+  <update id="updateStatus" parameterType="DonationBoardDTO">
+     update ftp_funding set
+       status=#{status}
+     where 
+        funding_no=#{no}
   </update>
   
    <update id="updateFile" parameterType="string">
-	   update ftp_vol_file set
-		    vol_no=#{no},
+	   update ftp_funding_file set
+		    funding_no=#{no},
 	      filepath=#{fileUpload.filepath}
 	   where 
-	      vol_no=#{no}
+	      funding_no=#{no}
   </update>
   
   
   
-  <delete id="deleteFile" parameterType="VolunteerRequestDTO">
-       delete from ftp_vol_file where vol_no=#{no}
+  <delete id="deleteFile" parameterType="DonationBoardDTO">
+       delete from ftp_funding_file where funding_no=#{no}
   </delete>
   
-  <delete id="delete" parameterType="VolunteerRequestDTO">
-       delete from ftp_vol where vol_no=#{no}
+  <delete id="delete" parameterType="DonationBoardDTO">
+       delete from ftp_funding where funding_no=#{no}
   </delete>
   
- -->
+ 
 </mapper>
 
 

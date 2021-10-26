@@ -1,6 +1,7 @@
 package com.share.ftp.handler.personal.donation;
 
 import static com.share.util.General.check.WAITING;
+import static com.share.util.General.member.ORG;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.dao.GeneralDao;
@@ -33,7 +34,7 @@ public class DonationBoardApplyHandler implements Command {
     OrgDTO orgDTO = (OrgDTO) AuthLoginHandler.getLoginUser();
 
 
-    if (orgDTO.getType() != 3) {
+    if (orgDTO.getType() != ORG) {
       System.out.println("기관 회원만 개설 신청 가능합니다!");
       return;
     }

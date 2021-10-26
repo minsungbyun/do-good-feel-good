@@ -39,7 +39,7 @@ public class DonationBoardApplyListHandler implements Command {
           + "개설기간: %s ~ %s\n목표금액: %s원\n승인여부: %d\n", 
           donationBoardDTO.getNo(), 
           donationBoardDTO.getCategory().getTitle(), 
-          donationBoardDTO.getLeader().getId(),
+          donationBoardDTO.getLeader().getName(),
           donationBoardDTO.getTitle(), 
           donationBoardDTO.getContent(), 
           donationBoardDTO.getFileNames(), 
