@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.donation;
 
 import java.text.DecimalFormat;
-import java.util.Collection;
+import java.util.List;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.domain.donation.DonationBoardDTO;
 import com.share.ftp.handler.Command;
@@ -21,7 +21,7 @@ public class DonationBoardApplyListHandler implements Command {
 
     DecimalFormat formatter = new DecimalFormat("###,###,###");
 
-    Collection<DonationBoardDTO> donationBoardList = donationBoardDao.findAll();
+    List<DonationBoardDTO> donationBoardList = donationBoardDao.findAll();
 
 
     System.out.println();
@@ -35,18 +35,18 @@ public class DonationBoardApplyListHandler implements Command {
 
     System.out.println();
     for (DonationBoardDTO donationBoardDTO : donationBoardList) {
-      System.out.printf("개설번호: %d\n모금함 분류: %s\n제목: %s\n주최자: %s\n내용: %s\n첨부파일: %s\n"
-          + "개설기간: %s ~ %s\n목표금액: %s원\n승인여부: %s\n", 
+      System.out.printf("개설번호: %d\n모금함 분류: %s\n주최자: %s\n제목: %s\n내용: %s\n첨부파일: %s\n"
+          + "개설기간: %s ~ %s\n목표금액: %s원\n승인여부: %d\n", 
           donationBoardDTO.getNo(), 
-          donationBoardDTO.getSort(), 
+          donationBoardDTO.getCategory().getTitle(), 
+          donationBoardDTO.getLeader().getId(),
           donationBoardDTO.getTitle(), 
-          donationBoardDTO.getLeader(),
-          donationBoardDTO.getContent(),
-          donationBoardDTO.getFileUpload(), 
-          donationBoardDTO.getRegisteredStartDate(),
-          donationBoardDTO.getRegisteredEndDate(),
+          donationBoardDTO.getContent(), 
+          donationBoardDTO.getFileNames(), 
+          donationBoardDTO.getStartDate(),
+          donationBoardDTO.getEndDate(),
           formatter.format(donationBoardDTO.getMoneyTarget()),
-          donationBoardDTO.getIsSigned());
+          donationBoardDTO.getStatus());
       System.out.println("--------------------------------------------------------------");
     }
   }

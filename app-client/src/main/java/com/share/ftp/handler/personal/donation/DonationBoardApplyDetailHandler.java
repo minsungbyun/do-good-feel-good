@@ -1,6 +1,6 @@
 package com.share.ftp.handler.personal.donation;
 
-import static com.share.ftp.handler.personal.donation.DonationBoardHandlerHelper.getRemainTime;
+import static com.share.ftp.handler.personal.donation.DonationBoardHelper.getRemainTime;
 import static com.share.util.General.check.Applied;
 import static com.share.util.General.check.Rejected;
 import static com.share.util.General.check.Waiting;

@@ -1,39 +1,43 @@
 package com.share.ftp.handler.personal.donation;
 
-import static com.share.util.General.check.Waiting;
-import static com.share.util.General.type.ANIMAL;
-import static com.share.util.General.type.CHILDREN;
-import static com.share.util.General.type.ELDER;
-import static com.share.util.General.type.ENVIRONMENT;
-import static com.share.util.General.type.HANDICAPPED;
-import static com.share.util.General.type.OTHER;
-import static com.share.util.General.type.TEEN;
+import static com.share.util.General.check.WAITING;
+import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.DonationBoardDao;
+import com.share.ftp.dao.GeneralDao;
+import com.share.ftp.domain.donation.DonationBoardAttachedFile;
 import com.share.ftp.domain.donation.DonationBoardDTO;
-import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.domain.join.OrgDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
+import com.share.util.GeneralHelper;
 import com.share.util.Prompt;
 
 public class DonationBoardApplyHandler implements Command {
 
   DonationBoardDao donationBoardDao;
+  GeneralDao generalDao;
+  SqlSession sqlSession;
 
-  public DonationBoardApplyHandler(DonationBoardDao donationBoardDao) {
+  public DonationBoardApplyHandler(DonationBoardDao donationBoardDao, GeneralDao generalDao,
+      SqlSession sqlSession) {
     this.donationBoardDao = donationBoardDao;
+    this.generalDao = generalDao;
+    this.sqlSession = sqlSession;
   }
 
   // 모금함 개설 신청(기관)
   @Override
   public void execute(CommandRequest request) throws Exception {
 
-    JoinDTO joinDTO = AuthLoginHandler.getLoginUser();
+    OrgDTO orgDTO = (OrgDTO) AuthLoginHandler.getLoginUser();
 
-    if (joinDTO == null) {
-      System.out.println("로그인 후 사용가능합니다.");
+
+    if (orgDTO.getType() != 3) {
+      System.out.println("기관 회원만 개설 신청 가능합니다!");
       return;
     }
+
 
     while (true) {
       try {
@@ -41,68 +45,36 @@ public class DonationBoardApplyHandler implements Command {
         DonationBoardDTO donationBoardDTO = new DonationBoardDTO();
 
         System.out.println();
-        System.out.println("[모금함 개설 신청]");
-        System.out.println();
-
-        System.out.println("[1 ▶ 아동]");
-        System.out.println("[2 ▶ 청소년]");
-        System.out.println("[3 ▶ 노인]");
-        System.out.println("[4 ▶ 장애인]");
-        System.out.println("[5 ▶ 동물]");
-        System.out.println("[6 ▶ 환경]");
-        System.out.println("[7 ▶ 기타]");
-        System.out.println("[0 ▶ 선택안함]");
-        System.out.println();
-
-        int input = Prompt.inputInt("유형 ▶ ");
-
-        switch (input) {
-          case 1: donationBoardDTO.setSort(CHILDREN);        break;
-          case 2: donationBoardDTO.setSort(TEEN);            break;
-          case 3: donationBoardDTO.setSort(ELDER);           break;
-          case 4: donationBoardDTO.setSort(HANDICAPPED);     break;
-          case 5: donationBoardDTO.setSort(ANIMAL);          break;
-          case 6: donationBoardDTO.setSort(ENVIRONMENT);     break;
-          case 7: donationBoardDTO.setSort(OTHER);           break;
-          case 0: System.out.println("모금함 개설 신청을 취소하셨습니다.");      return;
-          default: System.out.println(" [ 양식에 있는 번호를 입력해주세요. ] "); continue;
-        }
-
-        System.out.println();
+        donationBoardDTO.setOrgNo(orgDTO.getOrgNo());
+        donationBoardDTO.setCategory(new GeneralHelper(generalDao).promptCategory());
+        donationBoardDTO.setLeader(orgDTO);
         donationBoardDTO.setTitle(Prompt.inputString("제목 ▶"));
-        donationBoardDTO.setLeader(AuthLoginHandler.getLoginUser().getName());
         donationBoardDTO.setContent(Prompt.inputString("내용 ▶ "));
+        donationBoardDTO.setTel(Prompt.inputString("전화번호 ▶ "));
+        donationBoardDTO.setEmail(Prompt.inputString("이메일 ▶ "));
         donationBoardDTO.setMoneyTarget(Prompt.inputLong("목표금액 ▶ "));
-        donationBoardDTO.setFileUpload(Prompt.inputString("첨부파일 ▶ "));
+        donationBoardDTO.setStartDate(Prompt.inputDate("시작일(yyyy-mm-dd) ▶ "));
+        donationBoardDTO.setEndDate(Prompt.inputDate("종료일(yyyy-mm-dd) ▶ "));
+        donationBoardDTO.setFileUpload(DonationBoardHelper.promptFileUpload());
+        donationBoardDTO.setStatus(WAITING);
 
-        while (true) {
-          donationBoardDTO.setRegisteredStartDate(Prompt.inputDate("시작일(yyyy-mm-dd) ▶ "));
-          donationBoardDTO.setRegisteredEndDate(Prompt.inputDate("종료일(yyyy-mm-dd) ▶ "));
-
-          if (donationBoardDTO.getRegisteredStartDate().compareTo(donationBoardDTO.getRegisteredEndDate()) > 0) {
-            System.out.println("시작일이 종료일보다 클 수 없습니다 올바른 날짜를 입력해주세요!");
-          } else if (donationBoardDTO.getRegisteredStartDate().compareTo(donationBoardDTO.getRegisteredEndDate()) == 0) {
-            System.out.println("시작일과 종료일은 같을 수 없습니다.");
-          } else {
-            break;
+        try {
+          donationBoardDao.insert(donationBoardDTO);
+          for (DonationBoardAttachedFile donationBoardAttachedFile : donationBoardDTO.getFileUpload()) {
+            donationBoardDao.insertFile(donationBoardDTO.getNo(), donationBoardAttachedFile.getFilepath());
           }
+          sqlSession.commit();
+
+        } catch (Exception e) {
+          e.printStackTrace();
+          sqlSession.rollback();
         }
-
-
-        donationBoardDTO.setIsSigned(Waiting);
-
-        donationBoardDTO.setNo(donationBoardDao.getNextNum());
-        //        donationBoardDTO.addMembers(AuthLoginHandler.getLoginUser());
-
-
-
-        donationBoardDao.insert(donationBoardDTO);
 
       } catch (NumberFormatException e) {
         System.out.println("--------------------------------------------------------------");
         System.out.println("올바른 숫자를 입력하세요");
         System.out.println("--------------------------------------------------------------");
-        continue;
+        continue; // 나중에 설정할거
 
       } catch (Exception e) {
         System.out.println("--------------------------------------------------------------");

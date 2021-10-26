@@ -389,7 +389,7 @@ public class ClientApp {
     commands.put("/donationBoard/connect", new DonationBoardConnectHandler(donationBoardDao));
     commands.put("/donationBoard/update", new DonationBoardUpdateHandler(donationBoardDao));
     commands.put("/donationBoard/delete", new DonationBoardDeleteHandler(donationBoardDao));
-    commands.put("/donationBoard/apply", new DonationBoardApplyHandler(donationBoardDao));
+    commands.put("/donationBoard/apply", new DonationBoardApplyHandler(donationBoardDao, generalDao, sqlSession));
     commands.put("/donationBoard/search", new DonationBoardSearchHandler(donationBoardDao));
     commands.put("/donationBoard/applyList", new DonationBoardApplyListHandler(donationBoardDao));
     commands.put("/donationBoard/appliedList", new DonationBoardAppliedListHandler(donationBoardDao));

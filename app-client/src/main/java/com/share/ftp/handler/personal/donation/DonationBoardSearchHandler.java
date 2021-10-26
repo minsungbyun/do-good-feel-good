@@ -1,6 +1,6 @@
 package com.share.ftp.handler.personal.donation;
 
-import static com.share.ftp.handler.personal.donation.DonationBoardHandlerHelper.getRemainTime;
+import static com.share.ftp.handler.personal.donation.DonationBoardHelper.getRemainTime;
 import java.text.DecimalFormat;
 import java.util.Collection;
 import com.share.ftp.dao.DonationBoardDao;
