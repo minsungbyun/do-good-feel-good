@@ -130,7 +130,7 @@ insert into ftp_vol_file(vol_file_no, vol_no, filepath)
 values(2,2,'hoho.gif');
 
 
---한 줄 후기(봉사활동 후기) - 봉사 입력 후 입력 가능
+--한 줄 후기(봉사활동 후기)
 
 insert into ftp_vol_shortreview(vol_shortreview_no, user_no, vol_no, content)
 values(1, 3, 1, '한줄후기1'); 
@@ -219,7 +219,8 @@ insert into ftp_challenge_review(challenge_review_no, challenge_no, user_no, con
 insert into ftp_challenge_review(challenge_review_no, challenge_no, user_no, content) values(3, 3, 2, '깜빡 챌린지 인증합니다!');
 
 -- 공지사항 입력
-insert into ftp_support_notice(notice_no, title, content) values(1, '공지사항1', '내용1');
+insert into ftp_support_notice(title, content) values('공지사항1', '내용1');
+
 insert into ftp_support_notice(notice_no, title, content) values(2, '공지사항2', '내용2');
 insert into ftp_support_notice(notice_no, title, content) values(3, '공지사항3', '내용3');
 insert into ftp_support_notice(notice_no, title, content) values(4, '공지사항4', '내용4');
@@ -227,7 +228,8 @@ insert into ftp_support_notice(notice_no, title, content) values(5, '공지사�
 insert into ftp_support_notice(notice_no, title, content) values(6, '공지사항6', '내용6');
 
 -- 공지사항 첨부파일 입력
-insert into ftp_support_notice_file(notice_file_no, notice_no, filepath) values(1, 1, 'notice01_1.jpg');
+insert into ftp_support_notice_file(notice_no, filepath) values(14, 'notice01_1.jpg');
+
 insert into ftp_support_notice_file(notice_file_no, notice_no, filepath) values(2, 1, 'notice01_2.gif');
 insert into ftp_support_notice_file(notice_file_no, notice_no, filepath) values(3, 2, 'notice02_1.png');
 insert into ftp_support_notice_file(notice_file_no, notice_no, filepath) values(4, 3, 'notice03_1.jpg');
@@ -255,10 +257,21 @@ insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, pa
 insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password, qna_reply)
   values(6, 5, 3, '문의6', '내용6', password('1'), '문의하기 답글6');
 
+  insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password)
+  values(1, 13, 4, '문의1', '내용1', password('1'));
+  insert into ftp_support_qna(user_no, qna_category_no, title, content, password)
+  values(13, 2, '문의2', '내용2', password('2'));
+  insert into ftp_support_qna(user_no, qna_category_no, title, content, password)
+  values(17, 6, '문의3', '내용3', password('3'));
+  
+  
 -- 문의하기 첨부파일
 insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(1, 1, 'qna01_1.jpg');
 insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(2, 1, 'qna01_2.png');
+
 insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(3, 2, 'qna02_1.gif');
 insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(4, 6, 'qna06_1.gif');
 insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(5, 6, 'qna06_2.jpg');
 insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(6, 6, 'qna06_3.gif');
+
+

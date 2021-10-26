@@ -1,6 +1,7 @@
 package com.share.ftp.dao;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import com.share.ftp.domain.community.VolunteerBoardDTO;
 
 //역할
@@ -9,7 +10,9 @@ import com.share.ftp.domain.community.VolunteerBoardDTO;
 public interface VolunteerBoardDao {
 
   void insert(VolunteerBoardDTO volunteerBoardDTO) throws Exception;
-  void insertFile(String filepath) throws Exception; 
+  void insertFile(
+      @Param("volBoardNo") int volBoardNo,
+      @Param("filepath") String filepath) throws Exception; 
   List<VolunteerBoardDTO> findAll() throws Exception;
   List<VolunteerBoardDTO> findByKeyword(String keyword) throws Exception;
   VolunteerBoardDTO findByNo(int no) throws Exception;

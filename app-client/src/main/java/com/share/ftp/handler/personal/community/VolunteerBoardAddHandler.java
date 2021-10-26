@@ -36,19 +36,31 @@ public class VolunteerBoardAddHandler implements Command {
     volunteerBoardDTO.setOwner(AuthLoginHandler.getLoginUser());
     volunteerBoardDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    try {
-      volunteerBoardDao.insert(volunteerBoardDTO);
-      for (VolunteerBoardAttachedFile volunteerBoardAttachedFile : volunteerBoardDTO.getFileUpload()) {
-        volunteerBoardDao.insertFile(volunteerBoardAttachedFile.getFilepath());
-      }
-
-      sqlSession.commit();
-    } catch (Exception e) {
-      sqlSession.rollback();
+    volunteerBoardDao.insert(volunteerBoardDTO);
+    for (VolunteerBoardAttachedFile volunteerBoardAttachedFile : volunteerBoardDTO.getFileUpload()) {
+      volunteerBoardDao.insertFile(volunteerBoardDTO.getNo(), volunteerBoardAttachedFile.getFilepath());
     }
+
+    sqlSession.commit();
+    sqlSession.rollback();
+
     System.out.println();
     System.out.println("[  게시글 등록이 완료되었습니다.  ]");
   }
 
-
+  //  try {
+  //    volunteerBoardDao.insert(volunteerBoardDTO);
+  //    for (VolunteerBoardAttachedFile volunteerBoardAttachedFile : volunteerBoardDTO.getFileUpload()) {
+  //      volunteerBoardDao.insertFile(volunteerBoardAttachedFile.getFilepath());
+  //    }
+  //
+  //    sqlSession.commit();
+  //  } catch (Exception e) {
+  //    sqlSession.rollback();
+  //  }
+  //  System.out.println();
+  //  System.out.println("[  게시글 등록이 완료되었습니다.  ]");
 }
+
+
+//}

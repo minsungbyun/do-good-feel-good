@@ -23,7 +23,7 @@ public class AdminNoticeDetailHandler implements Command {
 
     int noticeNo = Prompt.inputInt("번호? ");
 
-    NoticeDTO noticeDTO = noticeDao.findByNoticeNo(noticeNo);
+    NoticeDTO noticeDTO = noticeDao.findByNo(noticeNo);
 
     if (noticeDTO == null) {
       System.out.println("해당 번호의 게시물이 없습니다.");

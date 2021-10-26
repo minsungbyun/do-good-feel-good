@@ -2,7 +2,7 @@ package com.share.ftp.handler.personal.community;
 
 import java.util.Collection;
 import com.share.ftp.dao.VolunteerShortReviewDao;
-import com.share.ftp.domain.community.VolunteerShortReviewDTO;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
@@ -19,17 +19,17 @@ public class VolunteerShortReviewSearchHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     String input = Prompt.inputString("[  검색어를 입력하세요.  ]");
 
-    Collection<VolunteerShortReviewDTO> volunteerShortReviewDTOList = volunteerShortReviewDao.findByKeyword(input);
+    Collection<VolunteerRequestDTO> volunteerRequestDTOList = volunteerShortReviewDao.findByKeyword(input);
 
-    for(VolunteerShortReviewDTO volunteerShortReviewDTO : volunteerShortReviewDTOList) {
-      if(!volunteerShortReviewDTO.getContent().contains(input)) {
+    for(VolunteerRequestDTO volunteerRequestDTO : volunteerRequestDTOList) {
+      if(!volunteerRequestDTO.getShortReviewContent().contains(input)) {
         continue;
       }
 
       System.out.println();
-      System.out.printf("작성자 ▶ %s\n", volunteerShortReviewDTO.getOwner().getId());
-      System.out.printf("내용 ▶ %s\n", volunteerShortReviewDTO.getContent());
-      System.out.printf("작성일 ▶ %s\n", volunteerShortReviewDTO.getRegisteredDate());
+      System.out.printf("작성자 ▶ %s\n", volunteerRequestDTO.getOwner().getId());
+      System.out.printf("내용 ▶ %s\n", volunteerRequestDTO.getContent());
+      System.out.printf("작성일 ▶ %s\n", volunteerRequestDTO.getRegisteredDate());
       System.out.println();
     }
   }

@@ -2,7 +2,7 @@ package com.share.ftp.handler.personal.community;
 
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.VolunteerShortReviewDao;
-import com.share.ftp.domain.community.VolunteerShortReviewDTO;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -27,7 +27,7 @@ public class VolunteerShortReviewDeleteHandler implements Command {
       System.out.println("[  한 줄 후기 삭제  ]");
       int no = (int) request.getAttribute("no");
 
-      VolunteerShortReviewDTO volunteerShortReviewDTO = volunteerShortReviewDao.findByNo(no);
+      VolunteerRequestDTO volunteerShortReviewDTO = volunteerShortReviewDao.findByNo(no);
 
 
       if (volunteerShortReviewDTO == null) {

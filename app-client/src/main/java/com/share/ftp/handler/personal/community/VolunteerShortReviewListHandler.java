@@ -2,7 +2,7 @@ package com.share.ftp.handler.personal.community;
 
 import java.util.Collection;
 import com.share.ftp.dao.VolunteerShortReviewDao;
-import com.share.ftp.domain.community.VolunteerShortReviewDTO;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -23,14 +23,15 @@ public class VolunteerShortReviewListHandler implements Command {
     System.out.println("[  한줄후기 목록  ]");
     System.out.println();
 
-    Collection<VolunteerShortReviewDTO> volunteerShortReviewDTOList = volunteerShortReviewDao.findAll();
+    Collection<VolunteerRequestDTO> volunteerRequestDTOList = volunteerShortReviewDao.findAll();
 
-    for (VolunteerShortReviewDTO volunteerShortReviewDTO : volunteerShortReviewDTOList) {
-      System.out.printf("%d, %s, %s, %s\n", 
-          volunteerShortReviewDTO.getNo(), 
-          volunteerShortReviewDTO.getOwner().getId(), 
-          volunteerShortReviewDTO.getContent(),
-          volunteerShortReviewDTO.getRegisteredDate());
+    for (VolunteerRequestDTO volunteerRequestDTO : volunteerRequestDTOList) {
+      System.out.printf("%d, %d, %s, %s, %s\n", 
+          volunteerRequestDTO.getNo(),
+          volunteerRequestDTO.getShortReviewNo(), 
+          volunteerRequestDTO.getShortReviewOwner().getId(), 
+          volunteerRequestDTO.getShortReviewContent(),
+          volunteerRequestDTO.getRegisteredDate());
     }
 
     System.out.println();
@@ -41,9 +42,9 @@ public class VolunteerShortReviewListHandler implements Command {
       return;
     }
 
-    VolunteerShortReviewDTO volunteerShortReviewDTO = volunteerShortReviewDao.findByNo(no);
+    VolunteerRequestDTO volunteerRequestDTO = volunteerShortReviewDao.findByNo(no);
 
-    if (volunteerShortReviewDTO == null) {
+    if (volunteerRequestDTO == null) {
       System.out.println("해당 번호의 후기가 없습니다.");
       return;
     }
@@ -53,7 +54,7 @@ public class VolunteerShortReviewListHandler implements Command {
     //        return;  
     //      }
 
-    if (!volunteerShortReviewDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+    if (!volunteerRequestDTO.getShortReviewOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
       System.out.println("변경 권한이 없습니다.");
       return;  
     }

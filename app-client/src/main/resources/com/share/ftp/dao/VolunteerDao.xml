@@ -24,8 +24,8 @@
     <result column="remain_dt" property="remainDate"/> 
    
    <association property="owner" javaType="joinDTO">
-	   <id column="owner_no" property="no"/>
-	   <result column="owner_id" property="id"/>
+      <id column="owner_no" property="no"/>
+      <result column="owner_id" property="id"/>
      <result column="owner_name" property="name"/>
    </association>
    
@@ -61,31 +61,31 @@
   <insert id="insert" parameterType="VolunteerRequestDTO" 
           useGeneratedKeys="true" keyColumn="vol_no" keyProperty="no">
     insert into ftp_vol(
-	    user_no,
-	    category_no,
-	    title,
-	    content,
-	    tel,
-	    email,
-	    start_dt,
-	    end_dt,
-	    start_time,
-	    end_time,
-	    total_cnt,
-	    approval)
+       user_no,
+       category_no,
+       title,
+       content,
+       tel,
+       email,
+       start_dt,
+       end_dt,
+       start_time,
+       end_time,
+       total_cnt,
+       approval)
     values(
-	    #{userNo},
-	    #{category.no},
-	    #{title},
-	    #{content},
-	    #{tel},
-	    #{email},
-	    #{startDate},
-	    #{endDate},
-	    #{startTime},
-	    #{endTime},
-	    #{limitNum},
-	    #{status})
+       #{userNo},
+       #{category.no},
+       #{title},
+       #{content},
+       #{tel},
+       #{email},
+       #{startDate},
+       #{endDate},
+       #{startTime},
+       #{endTime},
+       #{limitNum},
+       #{status})
   </insert>
   
   <insert id="insertFile">
@@ -99,15 +99,15 @@
   </insert>
  
   <select id="findAll" resultMap="VolunteerRequestDTOMap">
-		   select 
-	       v.vol_no,  
-	       v.title,
-	       v.content,
-	       v.tel,
-	       v.email,
-	       v.start_dt,
-	       v.end_dt,
-	       datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt,
+         select 
+          v.vol_no,  
+          v.title,
+          v.content,
+          v.tel,
+          v.email,
+          v.start_dt,
+          v.end_dt,
+          datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt,
          datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
 	       v.start_time,
 	       v.end_time,
@@ -325,23 +325,24 @@
   </select>
   
    <update id="update" parameterType="VolunteerRequestDTO">
-	   update ftp_vol set
-		    user_no=#{userNo},
-	      category_no=#{category.no},
-	      title=#{title},
-	      content=#{content},
-	      tel=#{tel},
-	      email=#{email},
-	      start_dt=#{startDate},
-	      end_dt=#{endDate},
-	      start_time=#{startTime},
-	      end_time=#{endTime},
-	      total_cnt=#{limitNum}
-	   where 
-	      vol_no=#{no}
+      update ftp_vol set
+          user_no=#{userNo},
+         category_no=#{category.no},
+         title=#{title},
+         content=#{content},
+         tel=#{tel},
+         email=#{email},
+         start_dt=#{startDate},
+         end_dt=#{endDate},
+         start_time=#{startTime},
+         end_time=#{endTime},
+         total_cnt=#{limitNum}
+      where 
+         vol_no=#{no}
   </update>
   
    <update id="updateFile" parameterType="string">
+
 	   update ftp_vol_file set
 		    vol_no=#{no},
 	      filepath=#{fileUpload.filepath}
@@ -359,7 +360,6 @@
        delete from ftp_vol where vol_no=#{no}
   </delete>
 </mapper>
-
 
 
 

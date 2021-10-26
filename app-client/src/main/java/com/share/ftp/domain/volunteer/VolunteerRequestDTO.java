@@ -40,6 +40,11 @@ public class VolunteerRequestDTO implements Serializable {
 
 
 
+  private int shortReviewNo;
+  private String shortReviewContent;
+  private JoinDTO shortReviewOwner;
+  private Date registeredDate;
+
 
 
   public String getTotalDate() {
@@ -273,6 +278,38 @@ public class VolunteerRequestDTO implements Serializable {
       names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
     }
     return names.toString();
+  }
+
+  public int getShortReviewNo() {
+    return shortReviewNo;
+  }
+
+  public void setShortReviewNo(int shortReviewNo) {
+    this.shortReviewNo = shortReviewNo;
+  }
+
+  public String getShortReviewContent() {
+    return shortReviewContent;
+  }
+
+  public void setShortReviewContent(String shortReviewContent) {
+    this.shortReviewContent = shortReviewContent;
+  }
+
+  public JoinDTO getShortReviewOwner() {
+    return shortReviewOwner;
+  }
+
+  public void setShortReviewOwner(JoinDTO shortReviewOwner) {
+    this.shortReviewOwner = shortReviewOwner;
+  }
+
+  public Date getRegisteredDate() {
+    return registeredDate;
+  }
+
+  public void setRegisteredDate(Date registeredDate) {
+    this.registeredDate = registeredDate;
   }
 
 

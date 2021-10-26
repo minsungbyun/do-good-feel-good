@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.community;
 
 import java.util.Collection;
 import com.share.ftp.dao.VolunteerBoardDao;
+import com.share.ftp.domain.community.VolunteerBoardAttachedFile;
 import com.share.ftp.domain.community.VolunteerBoardDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -34,15 +35,20 @@ public class VolunteerBoardListHandler implements Command {
 
     for(VolunteerBoardDTO volunteerBoardDTO : volunteerBoardDTOList) {
 
-      System.out.printf("%d, %s, %s, %s, %s, %d\n", 
+      System.out.printf("%d, %s, %s, %s, %d\n", 
           volunteerBoardDTO.getNo(), 
           volunteerBoardDTO.getOwner().getId(),
           volunteerBoardDTO.getTitle(), 
           volunteerBoardDTO.getRegisteredDate(), 
-          volunteerBoardDTO.getFileUpload(),
           volunteerBoardDTO.getViewCount());
       //          volunteerBoardDTO.getLike(),
+
+      for (VolunteerBoardAttachedFile file : volunteerBoardDTO.getFileUpload()) {
+        System.out.printf("%s\n", file.getFilepath());
+      }
     }
+    System.out.println();
+
   }
 }
 
