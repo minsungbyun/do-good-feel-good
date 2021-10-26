@@ -1,6 +1,6 @@
 package com.share.ftp.handler.personal.donation;
 
-import static com.share.util.General.check.Rejected;
+import static com.share.util.General.check.REJECTED;
 import java.text.DecimalFormat;
 import java.util.Collection;
 import com.share.ftp.dao.DonationBoardDao;
@@ -35,22 +35,23 @@ public class DonationBoardRejectedListHandler implements Command {
       return;
     } 
 
+
     for (DonationBoardDTO donationBoardRejectDTO : donationBoardDTOList) {
-      if (donationBoardRejectDTO.getIsSigned().equals(Rejected) && 
-          donationBoardRejectDTO.getLeader().equals(AuthLoginHandler.getLoginUser().getName())) {
+      if (donationBoardRejectDTO.getStatus() == REJECTED && 
+          donationBoardRejectDTO.getLeader().equals(AuthLoginHandler.getLoginUser())) {
 
         System.out.printf("개설번호: %d\n모금함 분류: %s\n제목: %s\n주최자: %s\n내용: %s\n첨부파일: %s\n"
-            + "개설기간: %s ~ %s\n목표금액: %s원\n승인여부: %s\n", 
+            + "개설기간: %s ~ %s\n목표금액: %s원\n승인여부: %d\n", 
             donationBoardRejectDTO.getNo(), 
-            donationBoardRejectDTO.getSort(), 
+            donationBoardRejectDTO.getCategory().getTitle(), 
             donationBoardRejectDTO.getTitle(), 
-            donationBoardRejectDTO.getLeader(),
+            donationBoardRejectDTO.getLeader().getId(),
             donationBoardRejectDTO.getContent(),
             donationBoardRejectDTO.getFileUpload(), 
-            donationBoardRejectDTO.getRegisteredStartDate(),
-            donationBoardRejectDTO.getRegisteredEndDate(),
+            donationBoardRejectDTO.getStartDate(),
+            donationBoardRejectDTO.getEndDate(),
             formatter.format(donationBoardRejectDTO.getMoneyTarget()),
-            donationBoardRejectDTO.getIsSigned());
+            donationBoardRejectDTO.getStatus());
         System.out.println("--------------------------------------------------------------");
 
       } 

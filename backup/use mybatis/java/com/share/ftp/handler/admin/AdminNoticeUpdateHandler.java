@@ -22,7 +22,7 @@ public class AdminNoticeUpdateHandler implements Command {
 
     int noticeNo = (int) request.getAttribute("noticeNo");
 
-    NoticeDTO noticeDTO = noticeDao.findByNoticeNo(noticeNo);
+    NoticeDTO noticeDTO = noticeDao.findByNo(noticeNo);
 
     if (noticeDTO == null) {
       System.out.println("해당 번호의 게시물이 없습니다.");
@@ -49,11 +49,6 @@ public class AdminNoticeUpdateHandler implements Command {
       System.out.println();
       System.out.println("게시물을 수정하였습니다.");
       return;
-
     }
-
   }
-
-
-
 }

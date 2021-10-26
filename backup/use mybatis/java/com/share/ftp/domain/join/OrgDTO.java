@@ -8,16 +8,24 @@ public class OrgDTO extends JoinDTO implements Serializable {
 
   private static final long serialVersionUID = 2397935818210730479L;
 
+  private int orgNo;
   private String corpNo;
   private String fax;
   private String homepage;
 
 
+
+  @Override
+  public String toString() {
+    return "OrgDTO [orgNo=" + orgNo + ", corpNo=" + corpNo + ", fax=" + fax + ", homepage="
+        + homepage + "]";
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + Objects.hash(corpNo, fax, homepage);
+    result = prime * result + Objects.hash(corpNo, fax, homepage, orgNo);
     return result;
   }
   @Override
@@ -30,13 +38,13 @@ public class OrgDTO extends JoinDTO implements Serializable {
       return false;
     OrgDTO other = (OrgDTO) obj;
     return Objects.equals(corpNo, other.corpNo) && Objects.equals(fax, other.fax)
-        && Objects.equals(homepage, other.homepage);
+        && Objects.equals(homepage, other.homepage) && orgNo == other.orgNo;
   }
-
-
-  @Override
-  public String toString() {
-    return "OrgDTO [corpNo=" + corpNo + ", fax=" + fax + ", homepage=" + homepage + "]";
+  public int getOrgNo() {
+    return orgNo;
+  }
+  public void setOrgNo(int orgNo) {
+    this.orgNo = orgNo;
   }
   public String getCorpNo() {
     return corpNo;
@@ -56,11 +64,9 @@ public class OrgDTO extends JoinDTO implements Serializable {
   public void setHomepage(String homepage) {
     this.homepage = homepage;
   }
-
-
-
-
-
+  public static long getSerialversionuid() {
+    return serialVersionUID;
+  }
 
 
 

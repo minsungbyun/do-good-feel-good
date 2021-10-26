@@ -1,7 +1,8 @@
 package com.share.ftp.handler.personal.challenge;
 
-import java.sql.Date;
+import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
@@ -13,10 +14,14 @@ public class ChallengeQuestionAddHandler implements Command {
 
 
   ChallengeDao challengeDao;
+  ChallengeQuestionDao challengeQuestionDao;
+  SqlSession sqlSession;
 
-
-  public ChallengeQuestionAddHandler(ChallengeDao challengeDao) {
+  public ChallengeQuestionAddHandler(
+      ChallengeDao challengeDao, ChallengeQuestionDao challengeQuestionDao, SqlSession sqlSession) {
     this.challengeDao = challengeDao;
+    this.challengeQuestionDao = challengeQuestionDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -25,23 +30,22 @@ public class ChallengeQuestionAddHandler implements Command {
     System.out.println();
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeDTO = challengeDao.findByChallengeNo(challengeNo);
+    ChallengeDTO challengeDTO = challengeDao.findByNo(challengeNo);
 
     if (challengeDTO == null) {
       System.out.println();
       System.out.println("해당 챌린지가 없습니다!");
     }
 
-    if (!challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
-      System.out.println("챌린지 참여한 회원만 등록이 가능합니다!");
-      return;
-    }
+    //    if (!challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
+    //      System.out.println("챌린지 참여한 회원만 등록이 가능합니다!");
+    //      return;
+    //    }
 
     ChallengeQuestionDTO challengeQuestionDTO = new ChallengeQuestionDTO();
 
     challengeQuestionDTO.setNo(challengeDTO.getNo());
     challengeQuestionDTO.setContent(Prompt.inputString("내용: "));
-    challengeQuestionDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     challengeQuestionDTO.setOwner(AuthLoginHandler.getLoginUser());
 
@@ -63,7 +67,8 @@ public class ChallengeQuestionAddHandler implements Command {
     //    challengeQuestionDTO.setQuestionNo(challengeDTO.getQuestionCount());
 
     //    challengeDao.update(challengeDTO);
-    challengeDao.insertQuestion(challengeQuestionDTO);
+    challengeQuestionDao.insert(challengeQuestionDTO);
+    sqlSession.commit();
 
     System.out.println();
     System.out.println("문의 등록이 완료되었습니다.");

@@ -1,9 +1,8 @@
 package com.share.ftp.handler.personal.donation;
 
-import static com.share.ftp.handler.personal.donation.DonationBoardHandlerHelper.getRemainTime;
-import static com.share.util.General.check.Applied;
-import static com.share.util.General.check.Rejected;
-import static com.share.util.General.check.Waiting;
+import static com.share.util.General.check.APPLIED;
+import static com.share.util.General.check.REJECTED;
+import static com.share.util.General.check.WAITING;
 import java.text.DecimalFormat;
 import java.util.Collection;
 import com.share.ftp.dao.DonationBoardDao;
@@ -46,18 +45,16 @@ public class DonationBoardApplyDetailHandler implements Command {
     DecimalFormat formatter = new DecimalFormat("###,###,###");
 
 
-    if (donationBoardDTO.getIsSigned().equals(Applied)) {
+    if (donationBoardDTO.getStatus() == APPLIED) {
       System.out.println();
       System.out.printf("개설번호: %s\n", donationBoardDTO.getNo());
-      System.out.printf("개설분류: %s\n", donationBoardDTO.getSort());
+      System.out.printf("개설분류: %s\n", donationBoardDTO.getCategory().getTitle());
+      System.out.printf("주최자: %s\n", donationBoardDTO.getLeader().getName());
       System.out.printf("제목: %s\n", donationBoardDTO.getTitle());
-      System.out.printf("주최자: %s\n", donationBoardDTO.getLeader());
       System.out.printf("내용: %s\n", donationBoardDTO.getContent());
-      System.out.printf("첨부파일: %s\n", donationBoardDTO.getFileUpload());
-      System.out.printf("시작일: %s\n", donationBoardDTO.getRegisteredStartDate());
-      System.out.printf("종료일: %s\n", donationBoardDTO.getRegisteredEndDate());
-      System.out.printf("모금함기간 ▶ %d일\n",  ((((donationBoardDTO.getRegisteredEndDate().getTime() - donationBoardDTO.getRegisteredStartDate().getTime()) / 1000)) / (24*60*60)));
-      System.out.printf(getRemainTime(donationBoardDTO.getRegisteredEndDate().getTime() - System.currentTimeMillis()));
+      System.out.printf("첨부파일: %s\n", donationBoardDTO.getFileNames());
+      System.out.printf("시작일: %s\n", donationBoardDTO.getStartDate());
+      System.out.printf("종료일: %s\n", donationBoardDTO.getEndDate());
       System.out.printf("목표금액: %s원\n", formatter.format(donationBoardDTO.getMoneyTarget()));
       System.out.println();
     } else {
@@ -65,7 +62,7 @@ public class DonationBoardApplyDetailHandler implements Command {
       return;
     }
 
-    if (donationBoardDTO.getIsSigned().equals(Rejected) || donationBoardDTO.getIsSigned().equals(Waiting)) {
+    if (donationBoardDTO.getStatus() == REJECTED || donationBoardDTO.getStatus() == WAITING) {
       System.out.println();
       System.out.println("해당 번호의 모금함 개설 신청내역이 없습니다.");
       return;

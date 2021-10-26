@@ -22,7 +22,7 @@ public class JoinListTestHandler implements Command {
     Collection<PersonalDTO> list = personalDao.findAllPersonal();
 
     System.out.println();
-    System.out.println("[ 회원 목록 ]");
+    System.out.println("[ 개인회원 목록 ]");
     for (PersonalDTO loginUser : list) {
       System.out.printf("%d, %d, %s, %s, %s, %d, %s, %s, %s, %s, %s, %s\n", 
           loginUser.getPersonalNo(), 

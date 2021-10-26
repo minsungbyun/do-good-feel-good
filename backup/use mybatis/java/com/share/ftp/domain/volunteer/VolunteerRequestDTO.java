@@ -23,20 +23,45 @@ public class VolunteerRequestDTO implements Serializable {
   private Date endDate;
   private String startTime;
   private String endTime;
-  private int totalJoinCount = 1; // 현재 참여 인원 (주최자는 미리 포함)
+  private String totalDate;
+  private String remainDate;
+  private int currentNum = 1; // 현재 참여 인원 (주최자는 미리 포함)
+  private int limitNum; // 총 정원
   private String name;
   private int status;
   private JoinDTO owner; 
   private List<VolunteerAttachedFile> fileUpload;
   private Date submitTime; 
   private JoinDTO wish;
-  private int limitNum; // 총 정원
   private int questionCount;
   private String note;
   private List<JoinDTO> members = new ArrayList<>(); // 봉사 참여한 멤버들
 
 
 
+
+  private int shortReviewNo;
+  private String shortReviewContent;
+  private JoinDTO shortReviewOwner;
+  private Date registeredDate;
+
+
+
+  public String getTotalDate() {
+    return totalDate;
+  }
+
+  public void setTotalDate(String totalDate) {
+    this.totalDate = totalDate;
+  }
+
+  public String getRemainDate() {
+    return remainDate;
+  }
+
+  public void setRemainDate(String remainDate) {
+    this.remainDate = remainDate;
+  }
 
   public String getNote() {
     return note;
@@ -196,12 +221,13 @@ public class VolunteerRequestDTO implements Serializable {
     this.limitNum = limitNum;
   }
 
-  public int getTotalJoinCount() {
-    return totalJoinCount;
+
+  public int getCurrentNum() {
+    return currentNum;
   }
 
-  public void setTotalJoinCount(int totalJoinCount) {
-    this.totalJoinCount = totalJoinCount;
+  public void setCurrentNum(int currentNum) {
+    this.currentNum = currentNum;
   }
 
   public List<JoinDTO> getMembers() {
@@ -252,6 +278,38 @@ public class VolunteerRequestDTO implements Serializable {
       names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
     }
     return names.toString();
+  }
+
+  public int getShortReviewNo() {
+    return shortReviewNo;
+  }
+
+  public void setShortReviewNo(int shortReviewNo) {
+    this.shortReviewNo = shortReviewNo;
+  }
+
+  public String getShortReviewContent() {
+    return shortReviewContent;
+  }
+
+  public void setShortReviewContent(String shortReviewContent) {
+    this.shortReviewContent = shortReviewContent;
+  }
+
+  public JoinDTO getShortReviewOwner() {
+    return shortReviewOwner;
+  }
+
+  public void setShortReviewOwner(JoinDTO shortReviewOwner) {
+    this.shortReviewOwner = shortReviewOwner;
+  }
+
+  public Date getRegisteredDate() {
+    return registeredDate;
+  }
+
+  public void setRegisteredDate(Date registeredDate) {
+    this.registeredDate = registeredDate;
   }
 
 

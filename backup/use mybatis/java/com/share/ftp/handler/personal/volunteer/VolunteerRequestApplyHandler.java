@@ -1,6 +1,6 @@
 package com.share.ftp.handler.personal.volunteer;
 
-import static com.share.util.General.check.Waiting;
+import static com.share.util.General.check.WAITING;
 import static com.share.util.General.member.GROUP;
 import static com.share.util.General.member.ORG;
 import org.apache.ibatis.session.SqlSession;
@@ -9,6 +9,7 @@ import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.join.GroupDTO;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.join.OrgDTO;
+import com.share.ftp.domain.volunteer.VolunteerAttachedFile;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -34,6 +35,11 @@ public class VolunteerRequestApplyHandler implements Command { // 개인 봉사�
     System.out.println("[  봉사신청서 양식  ]");
 
     JoinDTO joinDTO = AuthLoginHandler.getLoginUser();
+
+    if (joinDTO.getType() == 1) {
+      System.out.println("개인 회원은 신청서를 작성할 수 없습니다!");
+      return;
+    }
 
 
     if (joinDTO == null) {
@@ -89,12 +95,19 @@ public class VolunteerRequestApplyHandler implements Command { // 개인 봉사�
         volunteerRequestDTO.setEndTime(Prompt.inputString("봉사종료시간(hh:mm) ▶ ")); 
         volunteerRequestDTO.setLimitNum(Prompt.inputInt("봉사인원 ▶ "));
         volunteerRequestDTO.setContent(Prompt.inputString("내용 ▶ ")); 
-        volunteerRequestDTO.setFileUpload(Prompt.inputString("첨부파일 ▶ ")); 
-        volunteerRequestDTO.setStatus(Waiting);
+        volunteerRequestDTO.setFileUpload(GeneralHelper.promptFileUpload()); 
+        volunteerRequestDTO.setStatus(WAITING);
 
-        volunteerDao.insert(volunteerRequestDTO);
-        sqlSession.commit();
+        try {
+          volunteerDao.insert(volunteerRequestDTO);
+          for (VolunteerAttachedFile volunteerAttachedFile : volunteerRequestDTO.getFileUpload()) {
+            volunteerDao.insertFile(volunteerRequestDTO.getNo(), volunteerAttachedFile.getFilepath());
+          }
+          sqlSession.commit();
 
+        } catch (Exception e) {
+          sqlSession.rollback();
+        }
 
       } catch (NumberFormatException e) {
         System.out.println("--------------------------------------------------------------");
