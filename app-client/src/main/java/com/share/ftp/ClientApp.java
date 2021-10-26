@@ -8,7 +8,6 @@ import static com.share.menu.Menu.ACCESS_MEMBER_ADMIN;
 import static com.share.menu.Menu.ACCESS_ORG;
 import static com.share.menu.Menu.ACCESS_PERSONAL;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -237,8 +236,8 @@ public class ClientApp {
     requestAgent = null;
 
     // DBMS와 연결
-    con = DriverManager.getConnection(
-        "jdbc:mysql://localhost:3306/happysharedb?user=happyshare&password=1111");
+    //    con = DriverManager.getConnection(
+    //        "jdbc:mysql://localhost:3306/happysharedb?user=happyshare&password=1111");
 
     sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
         "com/share/ftp/conf/mybatis-config.xml")).openSession();
