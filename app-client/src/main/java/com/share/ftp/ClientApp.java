@@ -8,7 +8,6 @@ import static com.share.menu.Menu.ACCESS_MEMBER_ADMIN;
 import static com.share.menu.Menu.ACCESS_ORG;
 import static com.share.menu.Menu.ACCESS_PERSONAL;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -239,8 +238,8 @@ public class ClientApp {
     requestAgent = null;
 
     // DBMS와 연결
-    con = DriverManager.getConnection(
-        "jdbc:mysql://localhost:3306/happysharedb?user=happyshare&password=1111");
+    //    con = DriverManager.getConnection(
+    //        "jdbc:mysql://localhost:3306/happysharedb?user=happyshare&password=1111");
 
     sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
         "com/share/ftp/conf/mybatis-config.xml")).openSession();
@@ -390,14 +389,14 @@ public class ClientApp {
 
     commands.put("/donationBoard/list", new DonationBoardListHandler(donationBoardDao));
     commands.put("/donationBoard/connect", new DonationBoardConnectHandler(donationBoardDao));
-    commands.put("/donationBoard/update", new DonationBoardUpdateHandler(donationBoardDao));
-    commands.put("/donationBoard/delete", new DonationBoardDeleteHandler(donationBoardDao));
-    commands.put("/donationBoard/apply", new DonationBoardApplyHandler(donationBoardDao));
+    commands.put("/donationBoard/update", new DonationBoardUpdateHandler(donationBoardDao, sqlSession));
+    commands.put("/donationBoard/delete", new DonationBoardDeleteHandler(donationBoardDao, sqlSession));
+    commands.put("/donationBoard/apply", new DonationBoardApplyHandler(donationBoardDao, generalDao, sqlSession));
     commands.put("/donationBoard/search", new DonationBoardSearchHandler(donationBoardDao));
     commands.put("/donationBoard/applyList", new DonationBoardApplyListHandler(donationBoardDao));
     commands.put("/donationBoard/appliedList", new DonationBoardAppliedListHandler(donationBoardDao));
-    commands.put("/donationBoard/acceptApply", new DonationBoardAcceptApplyHandler(donationBoardDao));
-    commands.put("/donationBoard/rejectApply", new DonationBoardRejectApplyHandler(donationBoardDao));
+    commands.put("/donationBoard/acceptApply", new DonationBoardAcceptApplyHandler(donationBoardDao, sqlSession));
+    commands.put("/donationBoard/rejectApply", new DonationBoardRejectApplyHandler(donationBoardDao, sqlSession));
     commands.put("/donationBoard/rejectedList", new DonationBoardRejectedListHandler(donationBoardDao));
     commands.put("/donationBoard/applyDetail", new DonationBoardApplyDetailHandler(donationBoardDao, donationPrompt));
     commands.put("/adminDonationBoard/applyDetail", new DonationBoardAdminApplyDetailHandler(donationBoardDao, donationAdminPrompt));
