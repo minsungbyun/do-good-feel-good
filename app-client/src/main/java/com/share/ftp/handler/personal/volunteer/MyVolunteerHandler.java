@@ -47,7 +47,7 @@ public class MyVolunteerHandler implements Command { // 개인 봉사신청 양�
             + "봉사종료시간: %s\n"
             + "봉사인원: %d\n"
             + "봉사내용: %s\n"
-            + "승인여부: %s \n\n", 
+            + "승인여부: %d \n\n", 
 
             volunteerRequest.getNo(), 
             volunteerRequest.getTitle(), 

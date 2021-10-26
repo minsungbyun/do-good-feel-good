@@ -115,7 +115,8 @@
 	       u.id owner_id,  
 	       u.name owner_name,  
 	       c.category_title category_title,
-	       f.filepath
+	       f.filepath,
+	       v.approval
 	     from
 	       ftp_vol v
 	       inner join ftp_user u on v.user_no=u.user_no
@@ -178,7 +179,7 @@
 	         inner join ftp_category c on v.category_no=c.category_no
 	         left outer join ftp_vol_file f on v.vol_no=f.vol_no
 	        where
-	          v.approval=1 and v.vol_no=#{no}
+	          v.approval=1
 	        order by
 	          v.vol_no desc
    </select>
@@ -207,7 +208,7 @@
          inner join ftp_category c on v.category_no=c.category_no
          left outer join ftp_vol_file f on v.vol_no=f.vol_no
         where
-          v.approval=1
+          v.approval=2
         order by
           v.vol_no desc
    </select>
@@ -337,8 +338,16 @@
 	      start_time=#{startTime},
 	      end_time=#{endTime},
 	      total_cnt=#{limitNum}
+	      approval=#{status}
 	   where 
 	      vol_no=#{no}
+  </update>
+  
+    <update id="updateVolunteer" parameterType="VolunteerRequestDTO">
+	     update ftp_vol set
+	        approval=#{status}
+	     where 
+	        vol_no=#{no}
   </update>
   
    <update id="updateFile" parameterType="string">

@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.volunteer;
 
 import java.util.Collection;
 import com.share.ftp.dao.VolunteerDao;
+import com.share.ftp.domain.volunteer.VolunteerAttachedFile;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -27,24 +28,30 @@ public class VolGeneralRequestRejectedListHandler implements Command {
     }
 
     for (VolunteerRequestDTO generalRequestRejectDTO : list) {
-      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s \n", 
-          generalRequestRejectDTO.getNo(),      
-          generalRequestRejectDTO.getMemberType(),      
-          generalRequestRejectDTO.getTitle(),     
-          generalRequestRejectDTO.getOwner().getName(), 
-          generalRequestRejectDTO.getType(), 
-          generalRequestRejectDTO.getTel(),
-          generalRequestRejectDTO.getEmail(),
-          generalRequestRejectDTO.getStartDate(),
-          generalRequestRejectDTO.getEndDate(),
-          generalRequestRejectDTO.getStartTime(),
-          generalRequestRejectDTO.getEndTime(),
-          //          personalRequestRejectDTO.getVolList(),
-          generalRequestRejectDTO.getLimitNum(),
-          generalRequestRejectDTO.getContent(),
-          generalRequestRejectDTO.getFileUpload(),
-          generalRequestRejectDTO.getStatus()
-          );
+      if (generalRequestRejectDTO.getStatus() == 0) {
+
+        System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s,  %s \n", 
+            generalRequestRejectDTO.getNo(),      
+            generalRequestRejectDTO.getMemberType(),      
+            generalRequestRejectDTO.getTitle(),     
+            generalRequestRejectDTO.getOwner().getName(), 
+            generalRequestRejectDTO.getCategory().getTitle(), 
+            generalRequestRejectDTO.getTel(),
+            generalRequestRejectDTO.getEmail(),
+            generalRequestRejectDTO.getStartDate(),
+            generalRequestRejectDTO.getEndDate(),
+            generalRequestRejectDTO.getStartTime(),
+            generalRequestRejectDTO.getEndTime(),
+            //          personalRequestRejectDTO.getVolList(),
+            generalRequestRejectDTO.getLimitNum(),
+            generalRequestRejectDTO.getContent(),
+            generalRequestRejectDTO.getStatus()
+            );
+
+        for (VolunteerAttachedFile file : generalRequestRejectDTO.getFileUpload()) {
+          System.out.printf("%s\n", file.getFilepath());
+        }
+      }
     }
   }
 }

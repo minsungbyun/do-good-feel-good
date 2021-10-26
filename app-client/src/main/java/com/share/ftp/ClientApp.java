@@ -294,9 +294,9 @@ public class ClientApp {
     commands.put("/vol/list", new VolunteerListHandler(volunteerDao));  
     commands.put("/vol/detail", new VolunteerDetailHandler(volunteerDao));
 
+    commands.put("/vol/approve", new VolunteerApproveHandler(volunteerDao,sqlSession));  
     commands.put("/vol/approvelist", new VolunteerApproveListHandler(volunteerDao));
-    commands.put("/vol/approve", new VolunteerApproveHandler(volunteerDao));  
-    commands.put("/vol/reject", new VolunteerRejectHandler(volunteerDao)); 
+    commands.put("/vol/reject", new VolunteerRejectHandler(volunteerDao,sqlSession)); 
 
     commands.put("/volJoin/add", new VolunteerJoinHandler(volunteerDao));
     commands.put("/volJoin/groupAdd", new VolunteerGroupJoinHandler(volunteerDao));
@@ -606,7 +606,7 @@ public class ClientApp {
 
     mainMenuGroup.add(createAdminMemberMenu());      // 회원관리
     mainMenuGroup.add(createAdminDonationMenu());    // 기부관리
-    mainMenuGroup.add(createAdminVolMenu());         // 봉사관리
+    mainMenuGroup.add(new MenuItem("봉사신청서 확인",ACCESS_ADMIN,"/vol/approvelist"));         // 봉사관리
     mainMenuGroup.add(createAdminNoticeMenu());      // 공지사항관리
     mainMenuGroup.add(createAdminAskMenu());         // 문의사항관리
     mainMenuGroup.add(createAdminChallengeMenu());   // 챌린지관리
@@ -895,14 +895,14 @@ public class ClientApp {
     return adminMemberMenu;
   }
 
-  private Menu createAdminVolMenu() {
-    MenuGroup adminVolMenu = new MenuGroup("봉사활동 관리", ACCESS_ADMIN);
-    adminVolMenu.setMenuFilter(menuFilter);
-
-    adminVolMenu.add(new MenuItem("봉사신청서 확인",ACCESS_ADMIN,"/vol/approveList"));
-
-    return adminVolMenu;
-  }
+  //  private Menu createAdminVolMenu() {
+  //    MenuGroup adminVolMenu = new MenuGroup("봉사활동 관리", ACCESS_ADMIN);
+  //    adminVolMenu.setMenuFilter(menuFilter);
+  //
+  //    adminVolMenu.add(new MenuItem("봉사신청서 확인",ACCESS_ADMIN,"/vol/approveList"));
+  //
+  //    return adminVolMenu;
+  //  }
 
   private Menu createAdminDonationMenu() {
     MenuGroup adminDonationMenu = new MenuGroup("모금함 관리" ,ACCESS_ADMIN);
