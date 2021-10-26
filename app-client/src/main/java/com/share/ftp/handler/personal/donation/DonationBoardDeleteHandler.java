@@ -22,9 +22,8 @@ public class DonationBoardDeleteHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[모금함 삭제]");
-    int donationNo = (int) request.getAttribute("myDonationBoardNo");
 
-    DonationBoardDTO donationBoardDTO = donationBoardDao.findByDonationNo(donationNo);
+    DonationBoardDTO donationBoardDTO = (DonationBoardDTO) request.getAttribute("myDonationBoardNo");
 
     if (donationBoardDTO == null) {
       System.out.println("해당 번호의 모금함이 없습니다.");

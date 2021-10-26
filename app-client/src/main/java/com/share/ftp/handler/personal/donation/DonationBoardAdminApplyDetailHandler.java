@@ -41,7 +41,7 @@ public class DonationBoardAdminApplyDetailHandler implements Command {
 
     if (donationBoardAdminDTO == null) {
       System.out.println();
-      System.out.println("[ 해당 번호의 모금함 개설 신청내역이 없습니다. ]");
+      System.out.println("[ 승인대기중인 모금함 개설 신청내역이 없습니다. ]");
       return;
     }
 

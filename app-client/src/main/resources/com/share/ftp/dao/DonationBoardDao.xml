@@ -86,6 +86,7 @@
 	       datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt,
          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
 	       d.goal,
+	       d.status,
 	       p.id leader_id,  
 	       p.name leader_name,  
 	       c.category_title category_title,

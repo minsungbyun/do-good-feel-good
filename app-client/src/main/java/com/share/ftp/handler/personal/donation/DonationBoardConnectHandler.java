@@ -45,7 +45,7 @@ public class DonationBoardConnectHandler implements Command {
     System.out.printf("승인여부: %d\n", donationBoardDTO.getStatus());
 
 
-    request.setAttribute("myDonationBoardNo", donationBoardNo); 
+    request.setAttribute("myDonationBoardNo", donationBoardDTO); 
 
 
     while (true) {

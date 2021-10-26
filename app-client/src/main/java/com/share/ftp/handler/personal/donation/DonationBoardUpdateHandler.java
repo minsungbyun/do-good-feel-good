@@ -23,9 +23,8 @@ public class DonationBoardUpdateHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[모금함 변경]");
-    int donationNo = (int) request.getAttribute("myDonationBoardNo");
 
-    DonationBoardDTO donationBoard = donationBoardDao.findByDonationNo(donationNo);
+    DonationBoardDTO donationBoard = (DonationBoardDTO) request.getAttribute("myDonationBoardNo");
 
     if (donationBoard == null) {
       System.out.println();
@@ -40,7 +39,7 @@ public class DonationBoardUpdateHandler implements Command {
       return;
     }
 
-    if (!donationBoard.getLeader().equals(AuthLoginHandler.getLoginUser())) {
+    if (!AuthLoginHandler.getLoginUser().getId().equals(donationBoard.getLeader().getId())) {
       System.out.println("변경 권한이 없습니다.");
       return;
     }
@@ -81,6 +80,7 @@ public class DonationBoardUpdateHandler implements Command {
       }
       sqlSession.commit();
     } catch (Exception e) {
+      e.printStackTrace();
       // 예외가 발생하기 전에 성공한 작업이 있으면 모두 취소한다.
       // 그래야 다음 작업에 영향을 끼치지 않는다.
       sqlSession.rollback();

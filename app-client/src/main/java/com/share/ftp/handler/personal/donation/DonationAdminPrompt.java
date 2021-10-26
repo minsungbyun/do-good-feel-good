@@ -25,7 +25,9 @@ public class DonationAdminPrompt {
       if (donationBoardDTO.getStatus() == REJECTED) {
         System.out.println();
         System.out.printf("  [ %d. %s ]\n", donationBoardDTO.getNo(), donationBoardDTO.getTitle());
-      } 
+      } else {
+        return null;
+      }
     }
 
 
