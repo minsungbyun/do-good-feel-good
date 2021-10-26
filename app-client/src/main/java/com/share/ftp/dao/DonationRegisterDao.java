@@ -10,5 +10,4 @@ public interface DonationRegisterDao {
   DonationRegisterDTO findByNo(int no) throws Exception;
   void update(DonationRegisterDTO donationBoardDTO) throws Exception;
   void delete(int no) throws Exception;
-  int getNextNum() throws Exception; 
 }

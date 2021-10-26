@@ -25,7 +25,7 @@ public class DonationBoardConnectHandler implements Command {
 
     int donationBoardNo = Prompt.inputInt("모금함 번호를 입력해주세요 ▶ ");
 
-    DonationBoardDTO donationBoardDTO = donationBoardDao.findByNo(donationBoardNo);
+    DonationBoardDTO donationBoardDTO = donationBoardDao.findByDonationNo(donationBoardNo);
 
     if (donationBoardDTO == null) {
       System.out.println("해당 번호의 모금함이 없습니다.");
@@ -34,18 +34,18 @@ public class DonationBoardConnectHandler implements Command {
 
     System.out.println();
     System.out.printf("개설번호: %s\n", donationBoardDTO.getNo());
-    System.out.printf("개설분류: %s\n", donationBoardDTO.getSort());
+    System.out.printf("개설분류: %s\n", donationBoardDTO.getCategory().getTitle());
     System.out.printf("제목: %s\n", donationBoardDTO.getTitle());
-    System.out.printf("주최자: %s\n", donationBoardDTO.getLeader());
+    System.out.printf("주최자: %s\n", donationBoardDTO.getLeader().getName());
     System.out.printf("내용: %s\n", donationBoardDTO.getContent());
-    System.out.printf("첨부파일: %s\n", donationBoardDTO.getFileUpload());
-    System.out.printf("시작일: %s\n", donationBoardDTO.getRegisteredStartDate());
-    System.out.printf("종료일: %s\n", donationBoardDTO.getRegisteredEndDate());
+    System.out.printf("첨부파일: %s\n", donationBoardDTO.getFileNames());
+    System.out.printf("시작일: %s\n", donationBoardDTO.getStartDate());
+    System.out.printf("종료일: %s\n", donationBoardDTO.getEndDate());
     System.out.printf("목표금액: %s원\n", formatter.format(donationBoardDTO.getMoneyTarget()));
-    System.out.printf("승인여부: %s\n", donationBoardDTO.getIsSigned());
+    System.out.printf("승인여부: %d\n", donationBoardDTO.getStatus());
 
 
-    request.setAttribute("myDonationBoardNo", donationBoardNo); 
+    request.setAttribute("myDonationBoardNo", donationBoardDTO); 
 
 
     while (true) {

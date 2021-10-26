@@ -1,6 +1,6 @@
 package com.share.ftp.handler.personal.donation;
 
-import static com.share.util.General.check.Waiting;
+import static com.share.util.General.check.REJECTED;
 import java.util.Collection;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.domain.donation.DonationBoardDTO;
@@ -22,10 +22,12 @@ public class DonationAdminPrompt {
 
 
     for (DonationBoardDTO donationBoardDTO : donationBoardList) {
-      if (donationBoardDTO.getIsSigned().equals(Waiting)) {
+      if (donationBoardDTO.getStatus() == REJECTED) {
         System.out.println();
         System.out.printf("  [ %d. %s ]\n", donationBoardDTO.getNo(), donationBoardDTO.getTitle());
-      } 
+      } else {
+        return null;
+      }
     }
 
 

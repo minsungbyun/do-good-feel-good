@@ -41,21 +41,21 @@ public class DonationBoardAdminApplyDetailHandler implements Command {
 
     if (donationBoardAdminDTO == null) {
       System.out.println();
-      System.out.println("[ 해당 번호의 모금함 개설 신청내역이 없습니다. ]");
+      System.out.println("[ 승인대기중인 모금함 개설 신청내역이 없습니다. ]");
       return;
     }
 
     System.out.println();
     System.out.printf("개설번호: %s\n", donationBoardAdminDTO.getNo());
-    System.out.printf("개설분류: %s\n", donationBoardAdminDTO.getSort());
+    System.out.printf("개설분류: %s\n", donationBoardAdminDTO.getCategory().getTitle());
+    System.out.printf("주최자: %s\n", donationBoardAdminDTO.getLeader().getName());
     System.out.printf("제목: %s\n", donationBoardAdminDTO.getTitle());
-    System.out.printf("주최자: %s\n", donationBoardAdminDTO.getLeader());
     System.out.printf("내용: %s\n", donationBoardAdminDTO.getContent());
-    System.out.printf("첨부파일: %s\n", donationBoardAdminDTO.getFileUpload());
-    System.out.printf("시작일: %s\n", donationBoardAdminDTO.getRegisteredStartDate());
-    System.out.printf("종료일: %s\n", donationBoardAdminDTO.getRegisteredEndDate());
+    System.out.printf("첨부파일: %s\n", donationBoardAdminDTO.getFileNames());
+    System.out.printf("시작일: %s\n", donationBoardAdminDTO.getStartDate());
+    System.out.printf("종료일: %s\n", donationBoardAdminDTO.getEndDate());
     System.out.printf("목표금액: %s원\n", formatter.format(donationBoardAdminDTO.getMoneyTarget()));
-    System.out.printf("승인여부: %s\n", donationBoardAdminDTO.getIsSigned());
+    System.out.printf("승인여부: %d\n", donationBoardAdminDTO.getStatus());
 
     request.setAttribute("donationBoardAdminDTO", donationBoardAdminDTO); 
 
