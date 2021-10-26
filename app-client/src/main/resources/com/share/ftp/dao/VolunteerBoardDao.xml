@@ -139,7 +139,10 @@
     delete from ftp_vol_board where vol_board_no=${values}
   </delete>
     
-
+   <insert id="addLike">
+    insert into ftp_vol_board_like(user_no,vol_board_no)
+    values(#{userNo},#{volBoardNo})
+  </insert>
 
   
 </mapper>

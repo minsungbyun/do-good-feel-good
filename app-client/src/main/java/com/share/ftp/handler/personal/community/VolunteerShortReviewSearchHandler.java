@@ -17,12 +17,15 @@ public class VolunteerShortReviewSearchHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
+    System.out.println("[ 게시글 검색 ]");
+
     String input = Prompt.inputString("[  검색어를 입력하세요.  ]");
 
     Collection<VolunteerRequestDTO> volunteerRequestDTOList = volunteerShortReviewDao.findByKeyword(input);
 
     for(VolunteerRequestDTO volunteerRequestDTO : volunteerRequestDTOList) {
-      if(!volunteerRequestDTO.getShortReviewContent().contains(input)) {
+      if(!volunteerRequestDTO.getShortReviewContent().contains(input) &&
+          !volunteerRequestDTO.getOwner().getId().contains(input)) {
         continue;
       }
 

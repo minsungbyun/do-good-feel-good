@@ -39,6 +39,7 @@ public class VolunteerBoardUpdateHandler implements Command {
 
     String title = Prompt.inputString(String.format("제목(%s)? ", volunteerBoardDTO.getTitle()));
     String content = Prompt.inputString(String.format("내용(%s)? ", volunteerBoardDTO.getContent()));
+
     //    String fileUpload = Prompt.inputString(String.format("첨부파일(%s)? ", volunteerBoardDTO.getFileUpload()));
 
     String input = Prompt.inputString("[  정말 변경하시겠습니까?(y/N)  ]");

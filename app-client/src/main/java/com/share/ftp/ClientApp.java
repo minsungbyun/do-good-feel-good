@@ -98,6 +98,8 @@ import com.share.ftp.handler.personal.community.VolunteerBoardListHandler;
 import com.share.ftp.handler.personal.community.VolunteerBoardSearchHandler;
 import com.share.ftp.handler.personal.community.VolunteerBoardUpdateHandler;
 import com.share.ftp.handler.personal.community.VolunteerShortReviewListHandler;
+import com.share.ftp.handler.personal.community.VolunteerShortReviewSearchHandler;
+import com.share.ftp.handler.personal.community.VolunteerShortReviewUpdateHandler;
 import com.share.ftp.handler.personal.donation.DonationAdminPrompt;
 import com.share.ftp.handler.personal.donation.DonationBoardAcceptApplyHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardAdminApplyDetailHandler;
@@ -337,9 +339,9 @@ public class ClientApp {
     // 소통해요 한줄후기
     //    commands.put("/volunteerShortReview/add", new VolunteerShortReviewAddHandler(volunteerShortReviewDao, sqlSession));
     commands.put("/volunteerShortReview/list", new VolunteerShortReviewListHandler(volunteerShortReviewDao));
-    //    commands.put("/volunteerShortReview/update", new VolunteerShortReviewUpdateHandler(volunteerShortReviewDao, sqlSession));
+    commands.put("/volunteerShortReview/update", new VolunteerShortReviewUpdateHandler(volunteerShortReviewDao, sqlSession));
     //    commands.put("/volunteerShortReview/delete", new VolunteerShortReviewDeleteHandler(volunteerShortReviewDao, sqlSession));
-    //    commands.put("/volunteerShortReview/search", new VolunteerShortReviewSearchHandler(volunteerShortReviewDao));
+    commands.put("/volunteerShortReview/search", new VolunteerShortReviewSearchHandler(volunteerShortReviewDao));
 
 
 
@@ -681,7 +683,7 @@ public class ClientApp {
     reviewMenu.add(new MenuItem("상세보기","/volunteerBoard/detail"));
     //    reviewMenu.add(new MenuItem("변경", ACCESS_MEMBER_ADMIN,"/volunteerBoard/update"));
     //    reviewMenu.add(new MenuItem("삭제",ACCESS_MEMBER_ADMIN,"/volunteerBoard/delete"));
-    reviewMenu.add(new MenuItem("검색",ACCESS_MEMBER_ADMIN,"/volunteerBoard/search"));
+    reviewMenu.add(new MenuItem("검색", "/volunteerBoard/search"));
 
     return reviewMenu;
   }
@@ -704,7 +706,7 @@ public class ClientApp {
     shortReviewMenu.add(new MenuItem("목록", "/volunteerShortReview/list")); 
     //    shortReviewMenu.add(new MenuItem("변경", ACCESS_MEMBER_ADMIN, "/volunteerShortReview/update")); 
     //    shortReviewMenu.add(new MenuItem("삭제", ACCESS_MEMBER_ADMIN, "/volunteerShortReview/delete")); 
-    shortReviewMenu.add(new MenuItem("검색",ACCESS_MEMBER_ADMIN,"/volunteerShortReview/search"));
+    shortReviewMenu.add(new MenuItem("검색", "/volunteerShortReview/search"));
 
 
     return shortReviewMenu;
