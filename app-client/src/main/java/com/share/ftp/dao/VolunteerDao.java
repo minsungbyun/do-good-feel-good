@@ -22,6 +22,10 @@ public interface VolunteerDao {
   List<VolunteerRequestDTO> findAllWait() throws Exception;      
   List<Category> findAllCategory() throws Exception;      
   void update(VolunteerRequestDTO updateVolunteer) throws Exception;          
+  void updateVolunteer(VolunteerRequestDTO updateVolunteer) throws Exception;          
+  //  void updateVolunteer(
+  //      @Param("volNo") int volNo,
+  //      @Param("status") int status) throws Exception;          
   void updateFile(VolunteerRequestDTO updateVolunteer) throws Exception;          
   void delete(VolunteerRequestDTO deleteVolunteer) throws Exception;    
   void deleteFile(VolunteerRequestDTO deleteVolunteer) throws Exception;    
