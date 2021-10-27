@@ -1,0 +1,23 @@
+    create table test01 (
+    start_dt date not null,
+    end_dt date not null,
+    deadline_dt date not null default ABS(DATEDIFF(start_dt,end_dt))+1,   
+    deadline_time time not null default timediff(end_dt,curdate())
+    );
+
+    create table test02 (
+    start_dt date not null,
+    end_dt date not null,
+   deadline_dt date not null default curdate()  
+    );
+
+    create table test04 (
+    start_dt date not null,
+    end_dt date not null,
+   deadline_dt date not null default TO_DAYS('2022-01-01') - TO_DAYS(now())  
+    ); 
+     
+     
+     
+     
+     TO_DAYS(now()) - TO_DAYS('2018-05-01')

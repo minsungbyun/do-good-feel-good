@@ -8,7 +8,6 @@ import static com.share.menu.Menu.ACCESS_MEMBER_ADMIN;
 import static com.share.menu.Menu.ACCESS_ORG;
 import static com.share.menu.Menu.ACCESS_PERSONAL;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +29,7 @@ import com.share.ftp.dao.PersonalDao;
 import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.dao.VolunteerBoardDao;
 import com.share.ftp.dao.VolunteerDao;
+import com.share.ftp.dao.VolunteerShortReviewDao;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.admin.AdminChallengeAddHandler;
@@ -96,6 +96,7 @@ import com.share.ftp.handler.personal.community.VolunteerBoardDetailHandler;
 import com.share.ftp.handler.personal.community.VolunteerBoardListHandler;
 import com.share.ftp.handler.personal.community.VolunteerBoardSearchHandler;
 import com.share.ftp.handler.personal.community.VolunteerBoardUpdateHandler;
+import com.share.ftp.handler.personal.community.VolunteerShortReviewListHandler;
 import com.share.ftp.handler.personal.donation.DonationAdminPrompt;
 import com.share.ftp.handler.personal.donation.DonationBoardAcceptApplyHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardAdminApplyDetailHandler;
@@ -235,8 +236,8 @@ public class ClientApp {
     requestAgent = null;
 
     // DBMS와 연결
-    con = DriverManager.getConnection(
-        "jdbc:mysql://localhost:3306/happysharedb?user=happyshare&password=1111");
+    //    con = DriverManager.getConnection(
+    //        "jdbc:mysql://localhost:3306/happysharedb?user=happyshare&password=1111");
 
     sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
         "com/share/ftp/conf/mybatis-config.xml")).openSession();
@@ -254,19 +255,18 @@ public class ClientApp {
 
 
     VolunteerDao volunteerDao = sqlSession.getMapper(VolunteerDao.class);
-    //    CommunityDao communityDao = new NetCommunityDao(requestAgent);
+
     // 챌린지 관련
     ChallengeDao challengeDao = sqlSession.getMapper(ChallengeDao.class);
     ChallengeQuestionDao challengeQuestionDao = sqlSession.getMapper(ChallengeQuestionDao.class);
     ChallengeReviewDao challengeReviewDao = sqlSession.getMapper(ChallengeReviewDao.class);
-    //    CommunityDao CommunityDao = new MybatisCommunityDao(sqlSession);
     QuestionDao questionDao = sqlSession.getMapper(QuestionDao.class);
     NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
 
     // 봉사활동 게시글
     VolunteerBoardDao volunteerBoardDao = sqlSession.getMapper(VolunteerBoardDao.class);
     //    VolunteerBoardCommentDao volunteerBoardCommentDao = sqlSession.getMapper(VolunteerBoardCommentDao.class);
-    //    VolunteerShortReviewDao volunteerShortReviewDao = sqlSession.getMapper(VolunteerShortReviewDao.class);    
+    VolunteerShortReviewDao volunteerShortReviewDao = sqlSession.getMapper(VolunteerShortReviewDao.class);    
 
     //로그인, 로그아웃
 
@@ -335,7 +335,7 @@ public class ClientApp {
 
     // 소통해요 한줄후기
     //    commands.put("/volunteerShortReview/add", new VolunteerShortReviewAddHandler(volunteerShortReviewDao, sqlSession));
-    //    commands.put("/volunteerShortReview/list", new VolunteerShortReviewListHandler(volunteerShortReviewDao));
+    commands.put("/volunteerShortReview/list", new VolunteerShortReviewListHandler(volunteerShortReviewDao));
     //    commands.put("/volunteerShortReview/update", new VolunteerShortReviewUpdateHandler(volunteerShortReviewDao, sqlSession));
     //    commands.put("/volunteerShortReview/delete", new VolunteerShortReviewDeleteHandler(volunteerShortReviewDao, sqlSession));
     //    commands.put("/volunteerShortReview/search", new VolunteerShortReviewSearchHandler(volunteerShortReviewDao));
@@ -387,14 +387,14 @@ public class ClientApp {
 
     commands.put("/donationBoard/list", new DonationBoardListHandler(donationBoardDao));
     commands.put("/donationBoard/connect", new DonationBoardConnectHandler(donationBoardDao));
-    commands.put("/donationBoard/update", new DonationBoardUpdateHandler(donationBoardDao));
-    commands.put("/donationBoard/delete", new DonationBoardDeleteHandler(donationBoardDao));
-    commands.put("/donationBoard/apply", new DonationBoardApplyHandler(donationBoardDao));
+    commands.put("/donationBoard/update", new DonationBoardUpdateHandler(donationBoardDao, sqlSession));
+    commands.put("/donationBoard/delete", new DonationBoardDeleteHandler(donationBoardDao, sqlSession));
+    commands.put("/donationBoard/apply", new DonationBoardApplyHandler(donationBoardDao, generalDao, sqlSession));
     commands.put("/donationBoard/search", new DonationBoardSearchHandler(donationBoardDao));
     commands.put("/donationBoard/applyList", new DonationBoardApplyListHandler(donationBoardDao));
     commands.put("/donationBoard/appliedList", new DonationBoardAppliedListHandler(donationBoardDao));
-    commands.put("/donationBoard/acceptApply", new DonationBoardAcceptApplyHandler(donationBoardDao));
-    commands.put("/donationBoard/rejectApply", new DonationBoardRejectApplyHandler(donationBoardDao));
+    commands.put("/donationBoard/acceptApply", new DonationBoardAcceptApplyHandler(donationBoardDao, sqlSession));
+    commands.put("/donationBoard/rejectApply", new DonationBoardRejectApplyHandler(donationBoardDao, sqlSession));
     commands.put("/donationBoard/rejectedList", new DonationBoardRejectedListHandler(donationBoardDao));
     commands.put("/donationBoard/applyDetail", new DonationBoardApplyDetailHandler(donationBoardDao, donationPrompt));
     commands.put("/adminDonationBoard/applyDetail", new DonationBoardAdminApplyDetailHandler(donationBoardDao, donationAdminPrompt));
