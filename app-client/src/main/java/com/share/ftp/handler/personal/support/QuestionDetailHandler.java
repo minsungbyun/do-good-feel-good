@@ -25,6 +25,8 @@ public class QuestionDetailHandler implements Command {
 
     QuestionListDTO questionListDTO = questionDao.findByNo(questionNo);
 
+    System.out.println(questionListDTO);
+
     if (questionListDTO == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
@@ -50,9 +52,11 @@ public class QuestionDetailHandler implements Command {
 
       } else if (AuthLoginHandler.getLoginUser().getId().equals(questionListDTO.getOwner().getId())) {
 
-        int password = Prompt.inputInt("비밀번호: ");
+        String password = Prompt.inputString("비밀번호: ");
 
-        if (password == questionListDTO.getPassword()) {
+        QuestionListDTO questionListDTO1 = questionDao.findByPassword(questionNo, password);
+
+        if (questionListDTO.getQnaPassword().equals(questionListDTO1.getQnaPassword())) {
 
           System.out.printf("번호: %s\n", questionListDTO.getNo());
           System.out.printf("문의분야: %s\n", questionListDTO.getQnaType().getTitle());

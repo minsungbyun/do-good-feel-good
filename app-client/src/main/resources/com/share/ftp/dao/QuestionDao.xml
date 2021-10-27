@@ -9,7 +9,7 @@
     <id column="qna_no" property="no"/>
     <result column="title" property="title"/>
     <result column="content" property="content"/>
-    <result column="password" property="password"/>
+    <result column="password" property="qnaPassword"/>
     <result column="created_dt" property="registeredDate"/>
     <result column="view_cnt" property="viewCount"/>
     <result column="qna_reply" property="qnaReply"/>
@@ -49,7 +49,7 @@
        #{qnaType.no},
        #{title},
        #{content},
-       password(#{password}))
+       password(#{qnaPassword}))
   </insert>
   
   <!--
@@ -87,7 +87,7 @@
      s.created_dt,
      s.view_cnt,
      s.status,
-     u.id,
+     u.id owner_id,
      c.category_title category_title
     from
      ftp_support_qna s
@@ -95,6 +95,15 @@
      inner join ftp_support_qna_categroy c on s.qna_category_no=c.qna_category_no
     where
       s.qna_no=#{qnaNo}
+  </select>
+  
+  <select id="findByPassword" resultMap="QuestionDTOMap">
+   select 
+     password
+    from
+     ftp_support_qna 
+    where
+     qna_no=#{qnaNo} and password=password(#{qnaPassword})
   </select>
   
   
@@ -105,7 +114,7 @@
         s.content,
         s.created_dt,
         s.view_cnt,
-        u.id,
+        u.id owner_id,
         c.category_title category_title
       from
         ftp_support_qna s
@@ -125,6 +134,19 @@
      order by
       qna_no desc
   </select>
+  
+  <update id="update" parameterType="QuestionListDTO">
+      update ftp_support_qna set
+         title=#{title},
+         content=#{content}
+      where 
+         qna_no=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from ftp_support_qna where qna_no=${no}
+  </delete>
+  
    <!--
    <select id="findAll" resultMap="QuestionDTOMap">
    select 
@@ -218,16 +240,7 @@
        #{content},
        #{password})
   
-  <update id="update" parameterType="QuestionListDTO">
-      update ftp_support_qna set
-         user_no=#{userNo},
-         category_no=#{categoryNo},
-         title=#{title},
-         content=#{content},
-         password=#{password},
-      where 
-         qna_no=#{no}
-  </update>
+  
   
    <update id="updateFile" parameterType="string">
       update ftp_support_qna_file set
@@ -248,9 +261,7 @@
   
   
   
-   <delete id="delete" parameterType="int">
-    delete from ftp_support_notice where notice_no=${values}
-  </delete>
+   
   
 
   

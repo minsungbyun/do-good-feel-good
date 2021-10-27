@@ -1,6 +1,5 @@
 package com.share.ftp.handler.personal.support;
 
-import java.sql.Date;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.dao.QuestionDao;
@@ -36,10 +35,7 @@ public class QuestionAddHandler implements Command {
     questionListDTO.setContent(Prompt.inputString("내용: "));
     questionListDTO.setOwner(AuthLoginHandler.getLoginUser());
     //    questionListDTO.setFileUpload(GeneralHelper.promptQnaFileUpload());
-    questionListDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
-    questionListDTO.setPassword(Prompt.inputInt("비밀번호: "));
-
-    System.out.println(questionListDTO.getPassword());
+    questionListDTO.setQnaPassword(Prompt.inputString("비밀번호(숫자4자리): "));
 
     //    try {
     //      questionDao.insert(questionListDTO);
