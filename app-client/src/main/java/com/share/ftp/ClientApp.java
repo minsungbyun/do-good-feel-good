@@ -457,8 +457,8 @@ public class ClientApp {
     commands.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDao,generalDao,sqlSession));
     commands.put("/adminNotice/list", new AdminNoticeListHandler(noticeDao));
     commands.put("/adminNotice/detail", new AdminNoticeDetailHandler(noticeDao));
-    commands.put("/adminNotice/update", new AdminNoticeUpdateHandler(noticeDao));
-    commands.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDao,sqlSession));
+    commands.put("/adminNotice/update", new AdminNoticeUpdateHandler(noticeDao,generalDao,sqlSession));
+    commands.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDao,generalDao,sqlSession));
     commands.put("/adminNotice/search", new AdminNoticeSearchHandler(noticeDao));
 
     // 관리자 문의사항

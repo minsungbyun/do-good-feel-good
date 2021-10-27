@@ -1,17 +1,14 @@
 package com.share.ftp.domain.support;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
 
 
-public class QuestionListDTO implements Serializable {
+public class QuestionListDTO {
 
-  private static final long serialVersionUID = 1L;
   private int no;
   private String title;
-  private String memberld;
   private int password;
   private QuestionCategory qnaType;
   private String content;
@@ -23,10 +20,10 @@ public class QuestionListDTO implements Serializable {
 
   @Override
   public String toString() {
-    return "QuestionListDTO [no=" + no + ", title=" + title + ", memberld=" + memberld
-        + ", password=" + password + ", qnaType=" + qnaType + ", content=" + content
-        + ", fileUpload=" + fileUpload + ", registeredDate=" + registeredDate + ", viewCount="
-        + viewCount + ", status=" + status + ", owner=" + owner + "]";
+    return "QuestionListDTO [no=" + no + ", title=" + title + ", password=" + password
+        + ", qnaType=" + qnaType + ", content=" + content + ", fileUpload=" + fileUpload
+        + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount + ", status=" + status
+        + ", owner=" + owner + "]";
   }
   public int getNo() {
     return no;
@@ -39,12 +36,6 @@ public class QuestionListDTO implements Serializable {
   }
   public void setTitle(String title) {
     this.title = title;
-  }
-  public String getMemberld() {
-    return memberld;
-  }
-  public void setMemberld(String memberld) {
-    this.memberld = memberld;
   }
   public int getPassword() {
     return password;
@@ -94,7 +85,6 @@ public class QuestionListDTO implements Serializable {
   public void setOwner(JoinDTO owner) {
     this.owner = owner;
   }
-
 
 
 
