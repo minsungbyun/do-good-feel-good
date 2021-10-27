@@ -30,13 +30,14 @@ public class QuestionListHandler implements Command {
 
       System.out.printf("%d, %s, %s, %s, %s, %d\n", 
           questionListDTO.getNo(),
-          questionListDTO.getQnaType(),
+          questionListDTO.getQnaType().getTitle(),
           questionListDTO.getTitle(), 
           //          myQuestionListDTO.getContent(),
           questionListDTO.getOwner().getId(),
           //          myQuestionListDTO.getFileUpload(),
           questionListDTO.getRegisteredDate(),
           questionListDTO.getViewCount());
+      //          questionListDTO.getStatus());
     }
   }
 

@@ -46,39 +46,73 @@
     values(#{noticeNo},#{filepath})
   </insert>
   
-  <!--  
+  <select id="findByNo" resultMap="NoticeDTOMap" parameterType="int">
+   select 
+     n.notice_no,
+     n.title,
+     n.content,
+     n.created_dt,
+     n.view_cnt,
+     f.filepath
+    from
+     ftp_support_notice n
+     left outer join ftp_support_notice_file f on n.notice_no=f.notice_no
+    where
+      n.notice_no=#{noticeNo}
+  </select>
+  
+  <select id="findByKeyword" resultMap="NoticeDTOMap" parameterType="string">
+     select 
+     n.notice_no,
+     n.title,
+     n.content,
+     n.created_dt,
+     n.view_cnt,
+     f.filepath
+    from
+     ftp_support_notice n
+     left outer join ftp_support_notice_file f on n.notice_no=f.notice_no
+     <where>
+      <if test="title != null">
+        n.title like (concat('%', #{value}, '%'))
+      </if>
+      <if test="content != null">
+        or n.content like (concat('%', #{value}, '%'))
+      </if>
+     </where>
+     order by
+      notice_no desc
+  </select>
+  
+ <!-- 
    <update id="update" parameterType="NoticeDTO">
-   update ftp_support_notice set
-     title=#{title},
-     content=#{content}
-   where 
-      notice_no=#{no}
+      update ftp_support_notice set
+       title=#{title},
+       content=#{content}
+      where 
+       notice_no=#{no}
   </update>
   
-  <update id="updateFile" parameterType="NoticeDTO">
-   update ftp_support_notice_file set
-     title=#{title},
-     content=#{content}
-   where 
-      notice_no=#{no}
+  <update id="updateFile">
+      update ftp_support_notice_file set
+       notice_no=#{noticeNo}
+       filepath=#{fileUpload.filepath}
+      where 
+       notice_no=#{no},
   </update>
-  
-   <delete id="delete" parameterType="int">
-    delete from ftp_support_notice where notice_no=${values}
-  </delete>
-  
-  <delete id="deleteFile" parameterType="int">
+  -->
+  <delete id="deleteFile">
     delete from ftp_support_notice_file
     where
-      notice_no=${no}
+      notice_no=#{no}
   </delete>
-
-
+    
+   <delete id="delete" parameterType="noticeDTO">
+    delete from ftp_support_notice
+    where
+     notice_no=#{no}
+  </delete>
   
--->
- 
- 
-
 </mapper>
 
 

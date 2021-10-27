@@ -3,7 +3,7 @@ package com.share.ftp.handler.personal.volunteer;
 import java.util.Collection;
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
-import com.share.ftp.domain.volunteer.VolQuestionDTO;
+import com.share.ftp.domain.volunteer.VolunteerQuestionDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.Prompt;
@@ -50,15 +50,15 @@ public class VolQuestionListHandler implements Command {
         System.out.println();
       }
 
-      Collection<VolQuestionDTO> list = volunteerDao.findAllQuestion();
-      for (VolQuestionDTO volQuestionDTO : list) {
-        if (volQuestionDTO.getNo() == volNo) {
+      Collection<VolunteerQuestionDTO> list = volunteerDao.findAllQuestion();
+      for (VolunteerQuestionDTO volunteerQuestionDTO : list) {
+        if (volunteerQuestionDTO.getNo() == volNo) {
           System.out.printf("%d, %d, %s, %s, %s\n", 
-              volQuestionDTO.getNo(), // 테스트 끝나고 지움
-              volQuestionDTO.getQuestionNo(),
-              volQuestionDTO.getOwner().getId(),
-              volQuestionDTO.getContent(),
-              volQuestionDTO.getRegisteredDate());
+              volunteerQuestionDTO.getNo(), // 테스트 끝나고 지움
+              volunteerQuestionDTO.getQuestionNo(),
+              volunteerQuestionDTO.getOwner().getId(),
+              volunteerQuestionDTO.getContent(),
+              volunteerQuestionDTO.getRegisteredDate());
         }
       }
       System.out.println();

@@ -11,6 +11,8 @@ import com.share.ftp.domain.join.JoinDTO;
 public class VolunteerRequestDTO implements Serializable {
 
   private static final long serialVersionUID = 1L;
+  public static int questionCount;
+
   private int no;
   private int userNo;
   private int memberType; 
@@ -33,7 +35,6 @@ public class VolunteerRequestDTO implements Serializable {
   private List<VolunteerAttachedFile> fileUpload;
   private Date submitTime; 
   private JoinDTO wish;
-  private int questionCount;
   private String note;
   private List<JoinDTO> members = new ArrayList<>(); // 봉사 참여한 멤버들
 

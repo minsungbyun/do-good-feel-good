@@ -1,8 +1,7 @@
 package com.share.ftp.handler.personal.volunteer;
 
-import java.sql.Date;
 import com.share.ftp.dao.VolunteerDao;
-import com.share.ftp.domain.volunteer.VolQuestionDTO;
+import com.share.ftp.domain.volunteer.VolunteerQuestionDTO;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -21,22 +20,19 @@ public class VolQuestionAddHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[ 문의 등록 ]");
     System.out.println();
-    int volNo = (int) request.getAttribute("volNo");
+    int no = (int) request.getAttribute("volNo");
 
-    VolunteerRequestDTO volunteerRequestDTO = volunteerDao.findByApprovedVolunteerNo(volNo);
+    VolunteerRequestDTO volunteerRequestDTO = volunteerDao.findByApprovedVolunteerNo(no);
 
     if (!volunteerRequestDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
       System.out.println("봉사 참여한 회원만 등록이 가능합니다!");
       return;
     }
 
-    VolQuestionDTO volQuestionDTO = new VolQuestionDTO();
+    VolunteerQuestionDTO volunteerQuestionDTO = new VolunteerQuestionDTO();
 
-    volQuestionDTO.setNo(volunteerRequestDTO.getNo());
-    volQuestionDTO.setContent(Prompt.inputString("내용: "));
-    volQuestionDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
-
-    volQuestionDTO.setOwner(AuthLoginHandler.getLoginUser());
+    volunteerQuestionDTO.setContent(Prompt.inputString("내용: "));
+    volunteerQuestionDTO.setOwner(AuthLoginHandler.getLoginUser());
 
     String input = Prompt.inputString("해당 봉사에 문의등록을 하시겠습니까?(y/N) ");
     if (!input.equals("y") || input.length() == 0) {
@@ -45,20 +41,16 @@ public class VolQuestionAddHandler implements Command {
       return;
     }
 
-    if (volunteerRequestDTO.getQuestionCount() == 0) {
-      volunteerRequestDTO.setQuestionCount(1);
-      System.out.println("각 봉사의 첫 문의입니다");
-      System.out.println(volunteerRequestDTO.getQuestionCount());
-    } else {
-      volunteerRequestDTO.setQuestionCount(volunteerDao.getNextQuestionNum(volunteerRequestDTO)); 
-    }
+    int num = VolunteerRequestDTO.questionCount;
+    num++;
 
-    volQuestionDTO.setQuestionNo(volunteerRequestDTO.getQuestionCount());
+
+
 
     volunteerDao.update(volunteerRequestDTO);
-    volunteerDao.insertQuestion(volQuestionDTO);
+    volunteerDao.insertQuestion(volunteerQuestionDTO);
 
     System.out.println();
-    System.out.println("문의 등록이 완료되었습니다.");
+    System.out.println("[  문의 등록이 완료되었습니다. ]");
   }
 }

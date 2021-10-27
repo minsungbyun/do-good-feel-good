@@ -33,7 +33,7 @@ public class General {
   public static class check {
 
     public static final int REJECTED   = 0; // 반려됨
-    public static final int APPLIED   = 1; // 승인됨
+    public static final int APPLIED    = 1; // 승인됨
     public static final int WAITING    = 2; // 승인대기
   }
 
