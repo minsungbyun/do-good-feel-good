@@ -18,20 +18,20 @@ public class MyChallengeWishHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
 
-    Collection<ChallengeDTO> challengeList = challengeDao.findAll();
+    Collection<ChallengeDTO> challengeWishList = challengeDao.findAll();
 
     System.out.println("[ 나의 찜한목록 ]");
-    for (ChallengeDTO challengeDTO : challengeList) {
-      if (challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getName())) {
+    for (ChallengeDTO challengeWish : challengeWishList) {
+      if (challengeWish.getWish().equals(AuthLoginHandler.getLoginUser())) {
         System.out.printf("%d, %s[%d], %d, %s ~ %s\n", 
-            challengeDTO.getNo(),
+            challengeWish.getNo(),
             //          challengeDTO.getAdminId(), 
-            challengeDTO.getTitle(), 
-            challengeDTO.getReviewCount(), 
+            challengeWish.getTitle(), 
+            challengeWish.getReviewCount(), 
             //            challengeDTO.getAdmin().getName(),
-            challengeDTO.getTotalJoinCount(),
-            challengeDTO.getStartDate(),
-            challengeDTO.getEndDate());
+            challengeWish.getTotalJoinCount(),
+            challengeWish.getStartDate(),
+            challengeWish.getEndDate());
       }
     }
   }

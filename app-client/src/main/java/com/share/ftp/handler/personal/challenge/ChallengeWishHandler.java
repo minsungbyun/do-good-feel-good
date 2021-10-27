@@ -37,8 +37,8 @@ public class ChallengeWishHandler implements Command {
 
       } else if (input.equalsIgnoreCase("y")) {
         System.out.println();
-        int userNo = AuthLoginHandler.getLoginUser().getNo();
-        challengeDao.insertWish(challengeNo, userNo);
+        challengeList.setWish(AuthLoginHandler.getLoginUser());
+        challengeDao.insertWish(challengeList.getNo(), AuthLoginHandler.getLoginUser().getNo());
         sqlSession.commit();
         System.out.println("[  🎈 관심 챌린지로 등록되었습니다. 🎈  ]");
         return;
