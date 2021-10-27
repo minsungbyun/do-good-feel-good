@@ -18,7 +18,6 @@ public interface VolunteerBoardDao {
   VolunteerBoardDTO findByNo(int no) throws Exception;
   void updateCount(int no) throws Exception;
   void update(VolunteerBoardDTO volunteerBoardDTO) throws Exception;
-  void updateFile(VolunteerBoardDTO volunteerBoardDTO) throws Exception; 
   void delete(int no) throws Exception;
   void deleteFile(VolunteerBoardDTO volunteerBoardDTO) throws Exception;    
   void addLike(

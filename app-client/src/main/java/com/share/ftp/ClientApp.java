@@ -96,6 +96,8 @@ import com.share.ftp.handler.personal.community.VolunteerBoardDetailHandler;
 import com.share.ftp.handler.personal.community.VolunteerBoardListHandler;
 import com.share.ftp.handler.personal.community.VolunteerBoardSearchHandler;
 import com.share.ftp.handler.personal.community.VolunteerBoardUpdateHandler;
+import com.share.ftp.handler.personal.community.VolunteerShortReviewAddHandler;
+import com.share.ftp.handler.personal.community.VolunteerShortReviewDeleteHandler;
 import com.share.ftp.handler.personal.community.VolunteerShortReviewListHandler;
 import com.share.ftp.handler.personal.community.VolunteerShortReviewSearchHandler;
 import com.share.ftp.handler.personal.community.VolunteerShortReviewUpdateHandler;
@@ -336,10 +338,10 @@ public class ClientApp {
     //    commands.put("/volunteerBoardComment/delete", new CommBoardReplyDeleteHandler(volunteerBoardCommentDao, sqlSession));
 
     // 소통해요 한줄후기
-    //    commands.put("/volunteerShortReview/add", new VolunteerShortReviewAddHandler(volunteerShortReviewDao, sqlSession));
+    commands.put("/volunteerShortReview/add", new VolunteerShortReviewAddHandler(volunteerShortReviewDao, sqlSession, volunteerDao));
     commands.put("/volunteerShortReview/list", new VolunteerShortReviewListHandler(volunteerShortReviewDao));
     commands.put("/volunteerShortReview/update", new VolunteerShortReviewUpdateHandler(volunteerShortReviewDao, sqlSession));
-    //    commands.put("/volunteerShortReview/delete", new VolunteerShortReviewDeleteHandler(volunteerShortReviewDao, sqlSession));
+    commands.put("/volunteerShortReview/delete", new VolunteerShortReviewDeleteHandler(volunteerShortReviewDao, sqlSession));
     commands.put("/volunteerShortReview/search", new VolunteerShortReviewSearchHandler(volunteerShortReviewDao));
 
 
