@@ -39,8 +39,6 @@ public class VolunteerApproveHandler implements Command { // 개인 봉사신청
     volunteerRequestDTO.setStatus(APPLIED);
     volunteerRequestDTO.addMembers(volunteerRequestDTO.getOwner());
 
-
-
     volunteerDao.updateVolunteer(volunteerRequestDTO);
     //    volunteerDao.updateVolunteer(volunteerRequestDTO.getNo(),volunteerRequestDTO.getStatus());
     SqlSession.commit();

@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.volunteer;
 
 import com.share.ftp.dao.VolunteerDao;
-import com.share.ftp.domain.volunteer.VolQuestionDTO;
+import com.share.ftp.domain.volunteer.VolunteerQuestionDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -24,19 +24,19 @@ public class VolQuestionConnectHandler implements Command {
 
     int volQuestionNo = Prompt.inputInt("문의 번호를 입력해주세요 ▶ ");
 
-    VolQuestionDTO volQuestionDTO = volunteerDao.findByVolQuestionNo(volNo, volQuestionNo);
+    VolunteerQuestionDTO volunteerQuestionDTO = volunteerDao.findByVolQuestionNo(volNo, volQuestionNo);
 
-    if (volQuestionDTO == null) {
+    if (volunteerQuestionDTO == null) {
       System.out.println("해당 번호의 문의가 없습니다.");
       return;
     }
 
-    if ((volQuestionDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
+    if ((volunteerQuestionDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
         AuthLoginHandler.getLoginUser().getId().equals("admin")) {
 
-      System.out.printf("아이디: %s\n", volQuestionDTO.getOwner().getId());
-      System.out.printf("내용: %s\n", volQuestionDTO.getContent());
-      System.out.printf("등록날짜: %s\n", volQuestionDTO.getRegisteredDate());
+      System.out.printf("아이디: %s\n", volunteerQuestionDTO.getOwner().getId());
+      System.out.printf("내용: %s\n", volunteerQuestionDTO.getContent());
+      System.out.printf("등록날짜: %s\n", volunteerQuestionDTO.getRegisteredDate());
 
     } else {
       System.out.println("본인이 작성한 글만 확인할 수 있습니다.");

@@ -100,6 +100,7 @@
  
   <select id="findAll" resultMap="VolunteerRequestDTOMap">
          select 
+          distinct
           v.vol_no,  
           v.title,
           v.content,
@@ -112,22 +113,29 @@
 	       v.start_time,
 	       v.end_time,
 	       v.total_cnt,
+	       u.id wish_id,
 	       u.id owner_id,  
 	       u.name owner_name,  
 	       c.category_title category_title,
-	       f.filepath,
+	       f.filepath filepath,
 	       v.approval
 	     from
 	       ftp_vol v
 	       inner join ftp_user u on v.user_no=u.user_no
 	       inner join ftp_category c on v.category_no=c.category_no
 	       left outer join ftp_vol_file f on v.vol_no=f.vol_no
+	       left outer join ftp_vol v2 on u.user_no=v2.user_no
 	     order by
 	       vol_no desc 
   </select>
   
+  
+  
+  
+  
    <select id="findAllApproved" resultMap="VolunteerRequestDTOMap">
-	     select 
+	     select
+	        distinct 
 	         v.vol_no,  
 	         v.title,
 	         v.content,
@@ -140,6 +148,7 @@
 	         v.start_time,
 	         v.end_time,
 	         v.total_cnt,
+	         u.id wish_id,
 	         u.id owner_id,
 	         u.name owner_name,   
 	         c.category_title category_title,
@@ -149,6 +158,7 @@
 	         inner join ftp_user u on v.user_no=u.user_no
 	         inner join ftp_category c on v.category_no=c.category_no
 	         left outer join ftp_vol_file f on v.vol_no=f.vol_no
+	         left outer join ftp_vol v2 on u.user_no=v2.user_no
 	        where
 	          v.approval=1
 	        order by
@@ -157,6 +167,7 @@
    
    <select id="findAllApply" resultMap="VolunteerRequestDTOMap">
 	     select 
+	         distinct
 	         v.vol_no,  
 	         v.title,
 	         v.content,
@@ -186,6 +197,7 @@
    
    <select id="findAllWait" resultMap="VolunteerRequestDTOMap">
      select 
+         distinct
          v.vol_no,  
          v.title,
          v.content,
@@ -326,7 +338,7 @@
   </select>
   
    <update id="update" parameterType="VolunteerRequestDTO">
-<<<<<<< HEAD
+
 	   update ftp_vol set
 		    user_no=#{userNo},
 	      category_no=#{category.no},
@@ -342,22 +354,7 @@
 	      approval=#{status}
 	   where 
 	      vol_no=#{no}
-=======
-      update ftp_vol set
-          user_no=#{userNo},
-         category_no=#{category.no},
-         title=#{title},
-         content=#{content},
-         tel=#{tel},
-         email=#{email},
-         start_dt=#{startDate},
-         end_dt=#{endDate},
-         start_time=#{startTime},
-         end_time=#{endTime},
-         total_cnt=#{limitNum}
-      where 
-         vol_no=#{no}
->>>>>>> 0b27cfab559cb71f418038a474762ca4fd3906d7
+
   </update>
   
     <update id="updateVolunteer" parameterType="VolunteerRequestDTO">

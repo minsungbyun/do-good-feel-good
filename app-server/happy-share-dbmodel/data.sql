@@ -67,6 +67,9 @@ insert into ftp_user_message(message_no, user_from, user_to, content)
 values(2,2,1,'반가워');
 
 
+insert into ftp_vol_wish(user_no, vol_no)
+values(1,4);
+
 
 
 --봉사게시판

@@ -124,7 +124,6 @@ import com.share.ftp.handler.personal.mypage.MyChallengeListHandler;
 import com.share.ftp.handler.personal.mypage.MyChallengeWishHandler;
 import com.share.ftp.handler.personal.mypage.MyPointListHandler;
 import com.share.ftp.handler.personal.mypage.MyRankingHandler;
-import com.share.ftp.handler.personal.mypage.MyVolWishHandler;
 import com.share.ftp.handler.personal.support.AdminQuestionConnectHandler;
 import com.share.ftp.handler.personal.support.QuestionAddHandler;
 import com.share.ftp.handler.personal.support.QuestionDeleteHandler;
@@ -132,11 +131,10 @@ import com.share.ftp.handler.personal.support.QuestionDetailHandler;
 import com.share.ftp.handler.personal.support.QuestionListHandler;
 import com.share.ftp.handler.personal.support.QuestionSearchHandler;
 import com.share.ftp.handler.personal.support.QuestionUpdateHandler;
-import com.share.ftp.handler.personal.volunteer.MyAppliedVolDetailHandler;
-import com.share.ftp.handler.personal.volunteer.MyAppliedVolHandler;
-import com.share.ftp.handler.personal.volunteer.MyRejectedVolHandler;
-import com.share.ftp.handler.personal.volunteer.MyVolunteerHandler;
-import com.share.ftp.handler.personal.volunteer.VolGeneralRequestDeleteHandler;
+import com.share.ftp.handler.personal.volunteer.MyVolunteerWishHandler;
+import com.share.ftp.handler.personal.volunteer.MyVolunteerAppliedHandler;
+import com.share.ftp.handler.personal.volunteer.MyVolunteerListHandler;
+import com.share.ftp.handler.personal.volunteer.MyVolunteerRejectedHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionAddHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionConnectHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionDeleteHandler;
@@ -304,9 +302,8 @@ public class ClientApp {
     commands.put("/volJoin/delete", new VolunteerJoinDeleteHandler(volunteerDao));
     commands.put("/volJoin/otherDelete", new VolunteerOtherJoinDeleteHandler(volunteerDao));
 
-    commands.put("/volGeneralRequest/delete", new VolGeneralRequestDeleteHandler(volunteerDao));
     commands.put("/vol/wish", new VolunteerWishHandler(volunteerDao,sqlSession));
-    commands.put("/vol/wishList", new MyVolWishHandler(volunteerDao));
+    commands.put("/vol/wishList", new MyVolunteerWishHandler(volunteerDao));
     //    commands.put("/volGeneralRequest/totalApprovedList", new VolGeneralTotalApprovedListHandler(volPersonalRequestAppliedListHandler,volOrgRequestAppliedListHandler));
 
     //함께해요 문의하기
@@ -428,10 +425,9 @@ public class ClientApp {
     commands.put("/myPage/org", new OrgUserUpdateHandler(orgDao)); // 기관회원 내정보 수정
     commands.put("/myPage/delete", new OrgUserDeleteHandler(orgDao)); // 기관회원탈퇴
 
-    commands.put("/myVol/list", new MyVolunteerHandler(volunteerDao));
-    commands.put("/myVol/applied", new MyAppliedVolHandler(volunteerDao));
-    commands.put("/myVol/appliedDetail", new MyAppliedVolDetailHandler(volunteerDao));
-    commands.put("/myVol/rejected", new MyRejectedVolHandler(volunteerDao));
+    commands.put("/myVol/list", new MyVolunteerListHandler(volunteerDao));
+    commands.put("/myVol/applied", new MyVolunteerAppliedHandler(volunteerDao,sqlSession));
+    commands.put("/myVol/rejected", new MyVolunteerRejectedHandler(volunteerDao,sqlSession));
 
     commands.put("/myChallenge/list", new MyChallengeListHandler(challengeDao));
     commands.put("/myChallenge/detail", new MyChallengeDetailHandler(challengeDao));

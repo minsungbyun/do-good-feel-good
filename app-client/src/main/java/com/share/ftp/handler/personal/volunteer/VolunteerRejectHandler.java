@@ -34,11 +34,8 @@ public class VolunteerRejectHandler implements Command { // 개인 봉사신청 
 
     volunteerRequestDTO.setStatus(REJECTED);
 
-    System.out.println(volunteerRequestDTO.getStatus());
-
-    volunteerDao.updateVolunteer(volunteerRequestDTO.getNo(),volunteerRequestDTO.getStatus());
+    volunteerDao.updateVolunteer(volunteerRequestDTO);
     SqlSession.commit();
-
 
     System.out.println("[  ✔️ 해당 봉사신청을 반려하였습니다. ]");
   }

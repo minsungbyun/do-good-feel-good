@@ -8,11 +8,11 @@ import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 
-public class MyVolunteerHandler implements Command { // 개인 봉사신청 양식 쓰는 곳
+public class MyVolunteerListHandler implements Command { // 개인 봉사신청 양식 쓰는 곳
 
   VolunteerDao volunteerDao;
 
-  public MyVolunteerHandler(VolunteerDao volunteerDao) {
+  public MyVolunteerListHandler(VolunteerDao volunteerDao) {
 
     this.volunteerDao = volunteerDao;
 
