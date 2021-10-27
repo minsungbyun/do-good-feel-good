@@ -124,7 +124,6 @@ import com.share.ftp.handler.personal.mypage.MyChallengeListHandler;
 import com.share.ftp.handler.personal.mypage.MyChallengeWishHandler;
 import com.share.ftp.handler.personal.mypage.MyPointListHandler;
 import com.share.ftp.handler.personal.mypage.MyRankingHandler;
-import com.share.ftp.handler.personal.mypage.MyVolWishHandler;
 import com.share.ftp.handler.personal.support.AdminQuestionConnectHandler;
 import com.share.ftp.handler.personal.support.QuestionAddHandler;
 import com.share.ftp.handler.personal.support.QuestionDeleteHandler;
@@ -132,11 +131,10 @@ import com.share.ftp.handler.personal.support.QuestionDetailHandler;
 import com.share.ftp.handler.personal.support.QuestionListHandler;
 import com.share.ftp.handler.personal.support.QuestionSearchHandler;
 import com.share.ftp.handler.personal.support.QuestionUpdateHandler;
-import com.share.ftp.handler.personal.volunteer.MyAppliedVolDetailHandler;
-import com.share.ftp.handler.personal.volunteer.MyAppliedVolHandler;
-import com.share.ftp.handler.personal.volunteer.MyRejectedVolHandler;
-import com.share.ftp.handler.personal.volunteer.MyVolunteerHandler;
-import com.share.ftp.handler.personal.volunteer.VolGeneralRequestDeleteHandler;
+import com.share.ftp.handler.personal.volunteer.MyVolunteerWishHandler;
+import com.share.ftp.handler.personal.volunteer.MyVolunteerAppliedHandler;
+import com.share.ftp.handler.personal.volunteer.MyVolunteerListHandler;
+import com.share.ftp.handler.personal.volunteer.MyVolunteerRejectedHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionAddHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionConnectHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionDeleteHandler;
@@ -294,9 +292,9 @@ public class ClientApp {
     commands.put("/vol/list", new VolunteerListHandler(volunteerDao));  
     commands.put("/vol/detail", new VolunteerDetailHandler(volunteerDao));
 
+    commands.put("/vol/approve", new VolunteerApproveHandler(volunteerDao,sqlSession));  
     commands.put("/vol/approvelist", new VolunteerApproveListHandler(volunteerDao));
-    commands.put("/vol/approve", new VolunteerApproveHandler(volunteerDao));  
-    commands.put("/vol/reject", new VolunteerRejectHandler(volunteerDao)); 
+    commands.put("/vol/reject", new VolunteerRejectHandler(volunteerDao,sqlSession)); 
 
     commands.put("/volJoin/add", new VolunteerJoinHandler(volunteerDao));
     commands.put("/volJoin/groupAdd", new VolunteerGroupJoinHandler(volunteerDao));
@@ -304,9 +302,8 @@ public class ClientApp {
     commands.put("/volJoin/delete", new VolunteerJoinDeleteHandler(volunteerDao));
     commands.put("/volJoin/otherDelete", new VolunteerOtherJoinDeleteHandler(volunteerDao));
 
-    commands.put("/volGeneralRequest/delete", new VolGeneralRequestDeleteHandler(volunteerDao));
     commands.put("/vol/wish", new VolunteerWishHandler(volunteerDao,sqlSession));
-    commands.put("/vol/wishList", new MyVolWishHandler(volunteerDao));
+    commands.put("/vol/wishList", new MyVolunteerWishHandler(volunteerDao));
     //    commands.put("/volGeneralRequest/totalApprovedList", new VolGeneralTotalApprovedListHandler(volPersonalRequestAppliedListHandler,volOrgRequestAppliedListHandler));
 
     //함께해요 문의하기
@@ -408,11 +405,11 @@ public class ClientApp {
     commands.put("/donationBoardDetailRegister/add", new DonationBoardDetailRegisterAddHandler(donationBoardDao, donationRegisterDao, orgDao));
 
     // 고객센터 문의사항
-    commands.put("/question/add", new QuestionAddHandler(questionDao,generalDao,sqlSession));
+    commands.put("/question/add", new QuestionAddHandler(questionDao, generalDao, sqlSession));
     commands.put("/question/list", new QuestionListHandler(questionDao));
     commands.put("/question/detail", new QuestionDetailHandler(questionDao));
-    commands.put("/question/update", new QuestionUpdateHandler(questionDao, sqlSession));
-    commands.put("/question/delete", new QuestionDeleteHandler(questionDao));
+    commands.put("/question/update", new QuestionUpdateHandler(questionDao, generalDao, sqlSession));
+    commands.put("/question/delete", new QuestionDeleteHandler(questionDao, sqlSession));
     commands.put("/question/search", new QuestionSearchHandler(questionDao));
 
     commands.put("/adminQuestion/connect", new AdminQuestionConnectHandler());
@@ -428,10 +425,9 @@ public class ClientApp {
     commands.put("/myPage/org", new OrgUserUpdateHandler(orgDao)); // 기관회원 내정보 수정
     commands.put("/myPage/delete", new OrgUserDeleteHandler(orgDao)); // 기관회원탈퇴
 
-    commands.put("/myVol/list", new MyVolunteerHandler(volunteerDao));
-    commands.put("/myVol/applied", new MyAppliedVolHandler(volunteerDao));
-    commands.put("/myVol/appliedDetail", new MyAppliedVolDetailHandler(volunteerDao));
-    commands.put("/myVol/rejected", new MyRejectedVolHandler(volunteerDao));
+    commands.put("/myVol/list", new MyVolunteerListHandler(volunteerDao));
+    commands.put("/myVol/applied", new MyVolunteerAppliedHandler(volunteerDao,sqlSession));
+    commands.put("/myVol/rejected", new MyVolunteerRejectedHandler(volunteerDao,sqlSession));
 
     commands.put("/myChallenge/list", new MyChallengeListHandler(challengeDao));
     commands.put("/myChallenge/detail", new MyChallengeDetailHandler(challengeDao));
@@ -454,11 +450,11 @@ public class ClientApp {
     commands.put("/join/delete", new AdminMemberDeleteHandler());
 
     // 관리자 공지사항 (개인 + 관리자)
-    commands.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDao,generalDao,sqlSession));
+    commands.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDao, generalDao, sqlSession));
     commands.put("/adminNotice/list", new AdminNoticeListHandler(noticeDao));
     commands.put("/adminNotice/detail", new AdminNoticeDetailHandler(noticeDao));
-    commands.put("/adminNotice/update", new AdminNoticeUpdateHandler(noticeDao));
-    commands.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDao,sqlSession));
+    commands.put("/adminNotice/update", new AdminNoticeUpdateHandler(noticeDao, generalDao, sqlSession));
+    commands.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDao, generalDao, sqlSession));
     commands.put("/adminNotice/search", new AdminNoticeSearchHandler(noticeDao));
 
     // 관리자 문의사항
@@ -606,7 +602,7 @@ public class ClientApp {
 
     mainMenuGroup.add(createAdminMemberMenu());      // 회원관리
     mainMenuGroup.add(createAdminDonationMenu());    // 기부관리
-    mainMenuGroup.add(createAdminVolMenu());         // 봉사관리
+    mainMenuGroup.add(new MenuItem("봉사신청서 확인",ACCESS_ADMIN,"/vol/approvelist"));         // 봉사관리
     mainMenuGroup.add(createAdminNoticeMenu());      // 공지사항관리
     mainMenuGroup.add(createAdminAskMenu());         // 문의사항관리
     mainMenuGroup.add(createAdminChallengeMenu());   // 챌린지관리
@@ -895,14 +891,14 @@ public class ClientApp {
     return adminMemberMenu;
   }
 
-  private Menu createAdminVolMenu() {
-    MenuGroup adminVolMenu = new MenuGroup("봉사활동 관리", ACCESS_ADMIN);
-    adminVolMenu.setMenuFilter(menuFilter);
-
-    adminVolMenu.add(new MenuItem("봉사신청서 확인",ACCESS_ADMIN,"/vol/approveList"));
-
-    return adminVolMenu;
-  }
+  //  private Menu createAdminVolMenu() {
+  //    MenuGroup adminVolMenu = new MenuGroup("봉사활동 관리", ACCESS_ADMIN);
+  //    adminVolMenu.setMenuFilter(menuFilter);
+  //
+  //    adminVolMenu.add(new MenuItem("봉사신청서 확인",ACCESS_ADMIN,"/vol/approveList"));
+  //
+  //    return adminVolMenu;
+  //  }
 
   private Menu createAdminDonationMenu() {
     MenuGroup adminDonationMenu = new MenuGroup("모금함 관리" ,ACCESS_ADMIN);

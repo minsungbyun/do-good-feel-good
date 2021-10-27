@@ -29,7 +29,7 @@ public class VolunteerListHandler implements Command {
     }
 
     for (VolunteerRequestDTO volunteerRequestDTO : volunteerList) {
-      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s \n", 
+      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s", 
           volunteerRequestDTO.getNo(),      
           volunteerRequestDTO.getTitle(),     
           volunteerRequestDTO.getOwner().getId(), 
@@ -45,8 +45,9 @@ public class VolunteerListHandler implements Command {
           );
 
       for (VolunteerAttachedFile file : volunteerRequestDTO.getFileUpload()) {
-        System.out.printf("%s\n", file.getFilepath());
+        System.out.printf(", %s", file.getFilepath());
       }
+      System.out.println();
     } 
 
     System.out.println();
