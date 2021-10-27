@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.volunteer;
 
 import com.share.ftp.dao.VolunteerDao;
-import com.share.ftp.domain.volunteer.VolQuestionDTO;
+import com.share.ftp.domain.volunteer.VolunteerQuestionDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -25,21 +25,21 @@ public class VolQuestionUpdateHandler implements Command {
 
     int volQuestionNo = (int) request.getAttribute("volQuestionNo");
 
-    VolQuestionDTO volQuestionDTO = volunteerDao.findByVolQuestionNo(volNo, volQuestionNo);
+    VolunteerQuestionDTO volunteerQuestionDTO = volunteerDao.findByVolQuestionNo(volNo, volQuestionNo);
 
-    if (volQuestionDTO == null) {
+    if (volunteerQuestionDTO == null) {
       System.out.println("해당 번호의 문의가 없습니다.");
       return;
     }
 
-    if ((volQuestionDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
+    if ((volunteerQuestionDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
         AuthLoginHandler.getLoginUser().getId().equals("admin")) {
     } else {
       System.out.println("변경 권한이 없습니다.");
       return;
     }
 
-    String content = Prompt.inputString(String.format("내용(%s)? ", volQuestionDTO.getContent()));
+    String content = Prompt.inputString(String.format("내용(%s)? ", volunteerQuestionDTO.getContent()));
 
     while (true) {
       String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
@@ -50,8 +50,8 @@ public class VolQuestionUpdateHandler implements Command {
 
       } else if (input.equals("y")) {
         System.out.println();
-        volQuestionDTO.setContent(content);
-        volunteerDao.updateQuestion(volQuestionDTO);
+        volunteerQuestionDTO.setContent(content);
+        volunteerDao.updateQuestion(volunteerQuestionDTO);
 
         System.out.println("문의를 수정하였습니다.");
         return;

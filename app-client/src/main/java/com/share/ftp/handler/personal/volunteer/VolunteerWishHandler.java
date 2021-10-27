@@ -37,11 +37,21 @@ public class VolunteerWishHandler implements Command {
 
       } else if (input.equalsIgnoreCase("y")) {
         System.out.println();
-        VolunteerRequestDTO.setWish(AuthLoginHandler.getLoginUser());
-        volunteerDao.addWish(AuthLoginHandler.getLoginUser().getNo(),VolunteerRequestDTO.getNo());
-        sqlSession.commit();
-        System.out.println("[  🎈 관심 봉사로 등록되었습니다. 🎈  ]");
-        return;
+
+
+        try {
+
+          VolunteerRequestDTO.setWish(AuthLoginHandler.getLoginUser());
+
+          volunteerDao.addWish(AuthLoginHandler.getLoginUser().getNo(),VolunteerRequestDTO.getNo());
+          sqlSession.commit();
+          System.out.println("[  🎈 관심 봉사로 등록되었습니다. 🎈  ]");
+          return;
+
+        } catch (Exception e) {
+          System.out.println("이미 찜하였습니다.");
+          return;
+        }
 
       } else {
         System.out.println("y 또는 n을 입력하세요.");

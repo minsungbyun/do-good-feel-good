@@ -133,7 +133,7 @@ import com.share.ftp.handler.personal.volunteer.MyVolunteerHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestApplyListHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestDeleteHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestRejectHandler;
-import com.share.ftp.handler.personal.volunteer.VolGeneralRequestRejectedListHandler;
+import com.share.ftp.handler.personal.volunteer.VolunteerRequestRejectedHandler;
 import com.share.ftp.handler.personal.volunteer.VolGeneralRequestWishHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionAddHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionConnectHandler;
@@ -279,7 +279,7 @@ public class ClientApp {
     commands.put("/volGeneralRequest/acceptApply", new VolGeneralRequestAcceptHandler(volunteerDao));
     commands.put("/volGeneralRequest/rejectApply", new VolGeneralRequestRejectHandler(volunteerDao));
     //    commands.put("/volPersonalRequest/appliedList", new VolPersonalRequestAppliedListHandler(netVolunteerDao));
-    commands.put("/volGeneralRequest/rejectedList", new VolGeneralRequestRejectedListHandler(volunteerDao));
+    commands.put("/volGeneralRequest/rejectedList", new VolunteerRequestRejectedHandler(volunteerDao));
     commands.put("/volGeneralRequest/delete", new VolGeneralRequestDeleteHandler(volunteerDao));
     commands.put("/volGeneralRequest/wish", new VolGeneralRequestWishHandler(volunteerDao));
     commands.put("/volGeneralRequest/wishList", new MyVolWishHandler(volunteerDao));

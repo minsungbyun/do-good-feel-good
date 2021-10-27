@@ -2,11 +2,10 @@ package com.share.ftp.domain.volunteer;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
 
-public class VolQuestionDTO implements Serializable {
+public class VolunteerQuestionDTO implements Serializable {
   private static final long serialVersionUID = 1L;
 
   private int no;
@@ -17,32 +16,6 @@ public class VolQuestionDTO implements Serializable {
   private JoinDTO owner;
   private int replyCount;
 
-  @Override
-  public String toString() {
-    return "ChallengeQuestionDTO [no=" + no + ", questionNo=" + questionNo + ", title=" + title
-        + ", content=" + content + ", registeredDate=" + registeredDate + ", owner=" + owner
-        + ", replyCount=" + replyCount + "]";
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(content, no, owner, questionNo, registeredDate, replyCount, title);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    VolQuestionDTO other = (VolQuestionDTO) obj;
-    return Objects.equals(content, other.content) && no == other.no
-        && Objects.equals(owner, other.owner) && questionNo == other.questionNo
-        && Objects.equals(registeredDate, other.registeredDate) && replyCount == other.replyCount
-        && Objects.equals(title, other.title);
-  }
 
   public int getNo() {
     return no;

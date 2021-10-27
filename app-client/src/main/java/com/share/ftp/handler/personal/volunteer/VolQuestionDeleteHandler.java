@@ -2,7 +2,7 @@ package com.share.ftp.handler.personal.volunteer;
 
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
-import com.share.ftp.domain.volunteer.VolQuestionDTO;
+import com.share.ftp.domain.volunteer.VolunteerQuestionDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
@@ -28,14 +28,14 @@ public class VolQuestionDeleteHandler implements Command {
 
     int volQuestionNo = (int) request.getAttribute("volQuestionNo");
 
-    VolQuestionDTO volQuestionDTO = volunteerDao.findByVolQuestionNo(volNo, volQuestionNo);
+    VolunteerQuestionDTO volunteerQuestionDTO = volunteerDao.findByVolQuestionNo(volNo, volQuestionNo);
 
-    if (volQuestionDTO == null) {
+    if (volunteerQuestionDTO == null) {
       System.out.println("해당 번호의 문의가 없습니다.");
       return;
     }
 
-    if ((volQuestionDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
+    if ((volunteerQuestionDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
         AuthLoginHandler.getLoginUser().getId().equals("admin")) {
     } else {
       System.out.println("삭제 권한이 없습니다.");
@@ -51,7 +51,7 @@ public class VolQuestionDeleteHandler implements Command {
       volunteerRequestDTO.setQuestionCount(volunteerRequestDTO.getQuestionCount() - 1);
 
       volunteerDao.update(volunteerRequestDTO);
-      volunteerDao.deleteQuestion(volQuestionDTO);
+      volunteerDao.deleteQuestion(volunteerQuestionDTO);
 
       System.out.println("해당 문의사항을 삭제하였습니다.");
     }

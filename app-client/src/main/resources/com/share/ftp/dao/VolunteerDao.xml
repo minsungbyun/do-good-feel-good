@@ -100,6 +100,7 @@
  
   <select id="findAll" resultMap="VolunteerRequestDTOMap">
          select 
+          distinct
           v.vol_no,  
           v.title,
           v.content,
@@ -112,21 +113,61 @@
 	       v.start_time,
 	       v.end_time,
 	       v.total_cnt,
+	       u.id wish_id,
 	       u.id owner_id,  
 	       u.name owner_name,  
 	       c.category_title category_title,
-	       f.filepath
+	       f.filepath filepath,
+	       v.approval
 	     from
 	       ftp_vol v
 	       inner join ftp_user u on v.user_no=u.user_no
 	       inner join ftp_category c on v.category_no=c.category_no
 	       left outer join ftp_vol_file f on v.vol_no=f.vol_no
+	       left outer join ftp_vol v2 on u.user_no=v2.user_no
 	     order by
 	       vol_no desc 
   </select>
   
+  
+  
+  
+  
    <select id="findAllApproved" resultMap="VolunteerRequestDTOMap">
+	     select
+	        distinct 
+	         v.vol_no,  
+	         v.title,
+	         v.content,
+	         v.tel,
+	         v.email,
+	         v.start_dt,
+	         v.end_dt,
+	         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt,
+	         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
+	         v.start_time,
+	         v.end_time,
+	         v.total_cnt,
+	         u.id wish_id,
+	         u.id owner_id,
+	         u.name owner_name,   
+	         c.category_title category_title,
+	         f.filepath
+	       from
+	         ftp_vol v
+	         inner join ftp_user u on v.user_no=u.user_no
+	         inner join ftp_category c on v.category_no=c.category_no
+	         left outer join ftp_vol_file f on v.vol_no=f.vol_no
+	         left outer join ftp_vol v2 on u.user_no=v2.user_no
+	        where
+	          v.approval=1
+	        order by
+	          v.vol_no desc
+   </select>
+   
+   <select id="findAllApply" resultMap="VolunteerRequestDTOMap">
 	     select 
+	         distinct
 	         v.vol_no,  
 	         v.title,
 	         v.content,
@@ -154,37 +195,9 @@
 	          v.vol_no desc
    </select>
    
-   <select id="findAllApply" resultMap="VolunteerRequestDTOMap">
-	     select 
-	         v.vol_no,  
-	         v.title,
-	         v.content,
-	         v.tel,
-	         v.email,
-	         v.start_dt,
-	         v.end_dt,
-	         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt,
-	         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
-	         v.start_time,
-	         v.end_time,
-	         v.total_cnt,
-	         u.id owner_id,
-	         u.name owner_name,   
-	         c.category_title category_title,
-	         f.filepath
-	       from
-	         ftp_vol v
-	         inner join ftp_user u on v.user_no=u.user_no
-	         inner join ftp_category c on v.category_no=c.category_no
-	         left outer join ftp_vol_file f on v.vol_no=f.vol_no
-	        where
-	          v.approval=1 and v.vol_no=#{no}
-	        order by
-	          v.vol_no desc
-   </select>
-   
    <select id="findAllWait" resultMap="VolunteerRequestDTOMap">
      select 
+         distinct
          v.vol_no,  
          v.title,
          v.content,
@@ -207,7 +220,7 @@
          inner join ftp_category c on v.category_no=c.category_no
          left outer join ftp_vol_file f on v.vol_no=f.vol_no
         where
-          v.approval=1
+          v.approval=2
         order by
           v.vol_no desc
    </select>
@@ -325,20 +338,30 @@
   </select>
   
    <update id="update" parameterType="VolunteerRequestDTO">
-      update ftp_vol set
-          user_no=#{userNo},
-         category_no=#{category.no},
-         title=#{title},
-         content=#{content},
-         tel=#{tel},
-         email=#{email},
-         start_dt=#{startDate},
-         end_dt=#{endDate},
-         start_time=#{startTime},
-         end_time=#{endTime},
-         total_cnt=#{limitNum}
-      where 
-         vol_no=#{no}
+
+	   update ftp_vol set
+		    user_no=#{userNo},
+	      category_no=#{category.no},
+	      title=#{title},
+	      content=#{content},
+	      tel=#{tel},
+	      email=#{email},
+	      start_dt=#{startDate},
+	      end_dt=#{endDate},
+	      start_time=#{startTime},
+	      end_time=#{endTime},
+	      total_cnt=#{limitNum}
+	      approval=#{status}
+	   where 
+	      vol_no=#{no}
+
+  </update>
+  
+    <update id="updateVolunteer" parameterType="VolunteerRequestDTO">
+	     update ftp_vol set
+	        approval=#{status}
+	     where 
+	        vol_no=#{no}
   </update>
   
    <update id="updateFile" parameterType="string">
