@@ -295,16 +295,13 @@
   
    <update id="update" parameterType="DonationBoardDTO">
 	   update ftp_funding set
-	      category_no=#{category.no},
-		    user_org_no=#{orgNo},
 	      title=#{title},
 	      content=#{content},
 	      tel=#{tel},
 	      email=#{email},
 	      start_dt=#{startDate},
 	      end_dt=#{endDate},
-	      goal=#{moneyTarget},
-	      status=#{status}
+	      goal=#{moneyTarget}
 	   where 
 	      funding_no=#{no}
   </update>

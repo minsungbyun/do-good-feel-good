@@ -1,5 +1,6 @@
 package com.share.ftp.handler.personal.support;
 
+import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.domain.support.QuestionListDTO;
 import com.share.ftp.handler.Command;
@@ -10,9 +11,11 @@ import com.share.util.Prompt;
 public class QuestionDeleteHandler implements Command {
 
   QuestionDao questionDao;
+  SqlSession sqlSession;
 
-  public QuestionDeleteHandler(QuestionDao questionDao) {
+  public QuestionDeleteHandler(QuestionDao questionDao, SqlSession sqlSession) {
     this.questionDao = questionDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -48,6 +51,7 @@ public class QuestionDeleteHandler implements Command {
       } 
 
       questionDao.delete(questionNo);
+      sqlSession.commit();
 
       System.out.println("게시글을 삭제하였습니다."); 
 

@@ -25,6 +25,8 @@ public class QuestionDetailHandler implements Command {
 
     QuestionListDTO questionListDTO = questionDao.findByNo(questionNo);
 
+    System.out.println(questionListDTO);
+
     if (questionListDTO == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
@@ -35,38 +37,39 @@ public class QuestionDetailHandler implements Command {
       if (AuthLoginHandler.getLoginUser().getId().equals("admin")) {
 
         System.out.printf("번호: %s\n", questionListDTO.getNo());
-        System.out.printf("문의분야: %s\n", questionListDTO.getQnaType());
+        System.out.printf("문의분야: %s\n", questionListDTO.getQnaType().getTitle());
         System.out.printf("제목: %s\n", questionListDTO.getTitle());
         System.out.printf("아이디: %s\n", questionListDTO.getOwner().getId());
         System.out.printf("내용: %s\n", questionListDTO.getContent());
-        System.out.printf("첨부파일: %s\n", questionListDTO.getFileUpload());
+        //        System.out.printf("첨부파일: %s\n", questionListDTO.getFileUpload());
         System.out.printf("등록일: %s\n", questionListDTO.getRegisteredDate());
 
         questionListDTO.setViewCount(questionListDTO.getViewCount() + 1);
         System.out.printf("조회수: %d\n", questionListDTO.getViewCount());
 
-        questionDao.update(questionListDTO);
+        //        questionDao.update(questionListDTO);
         break;
 
       } else if (AuthLoginHandler.getLoginUser().getId().equals(questionListDTO.getOwner().getId())) {
 
-        int password = Prompt.inputInt("비밀번호: ");
+        String password = Prompt.inputString("비밀번호: ");
 
+        QuestionListDTO questionListDTO1 = questionDao.findByPassword(questionNo, password);
 
-        if (password == questionListDTO.getPassword()) {
+        if (questionListDTO.getQnaPassword().equals(questionListDTO1.getQnaPassword())) {
 
           System.out.printf("번호: %s\n", questionListDTO.getNo());
-          System.out.printf("문의분야: %s\n", questionListDTO.getQnaType());
+          System.out.printf("문의분야: %s\n", questionListDTO.getQnaType().getTitle());
           System.out.printf("제목: %s\n", questionListDTO.getTitle());
           System.out.printf("아이디: %s\n", questionListDTO.getOwner().getId());
           System.out.printf("내용: %s\n", questionListDTO.getContent());
-          System.out.printf("첨부파일: %s\n", questionListDTO.getFileUpload());
+          //          System.out.printf("첨부파일: %s\n", questionListDTO.getFileUpload());
           System.out.printf("등록일: %s\n", questionListDTO.getRegisteredDate());
 
           questionListDTO.setViewCount(questionListDTO.getViewCount() + 1);
           System.out.printf("조회수: %d\n", questionListDTO.getViewCount());
 
-          questionDao.update(questionListDTO);
+          //          questionDao.update(questionListDTO);
           break;
 
         } else {

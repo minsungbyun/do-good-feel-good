@@ -9,15 +9,15 @@
     <id column="qna_no" property="no"/>
     <result column="title" property="title"/>
     <result column="content" property="content"/>
-    <result column="password" property="password"/>
+    <result column="password" property="qnaPassword"/>
     <result column="created_dt" property="registeredDate"/>
     <result column="view_cnt" property="viewCount"/>
     <result column="qna_reply" property="qnaReply"/>
     <result column="status" property="status"/>
     
     <association property="owner" javaType="joinDTO">
-      <id column="user_no" property="no"/>
-      <result column="id" property="id"/>
+      <id column="owner_no" property="no"/>
+      <result column="owner_id" property="id"/>
     </association>
     <!--  
     <collection property="fileUpload" ofType="questionAttachedFile">
@@ -36,15 +36,8 @@
     <result column="category_title" property="title"/>
   </resultMap>
   
-  <!--  
-    <resultMap type="QuestionCategory" id="QuestionCategoryMap">    
-      <id column="qna_category_no" property="no"/>
-      <result column="category_title" property="title"/>
-    </resultMap>
-    -->
-    <!--
-   <insert id="insert" parameterType="QuestionListDTO" 
-          useGeneratedKeys="true" keyColumn="qna_no" keyProperty="no">
+   <insert id="insert" parameterType="QuestionListDTO"
+      useGeneratedKeys="true" keyColumn="qna_no" keyProperty="no" >
     insert into ftp_support_qna(
        user_no,
        qna_category_no,
@@ -52,13 +45,15 @@
        content,
        password)
     values(
-       #{no},
+       #{owner.no},
        #{qnaType.no},
        #{title},
        #{content},
-       #{password})
+       password(#{qnaPassword}))
   </insert>
   
+  <!--
+          >
   <insert id="insertFile" parameterType="string">
     insert into ftp_support_qna_file(qna_no,filepath)
     values(#{no},#{filepath})
@@ -69,11 +64,99 @@
    select 
      s.qna_no,
      s.title,
+     s.content,
+     s.created_dt,
+     s.view_cnt,
+     s.status,
+     u.id owner_id,
+     c.category_title category_title
+    from
+     ftp_support_qna s
+     inner join ftp_user u on s.user_no=u.user_no
+     inner join ftp_support_qna_categroy c on s.qna_category_no=c.qna_category_no
+    order by
+      qna_no desc
+  </select>
+   
+  <select id="findByNo" resultMap="QuestionDTOMap" parameterType="int">
+   select 
+     s.qna_no,
+     s.title,
+     s.content,
+     s.password,
+     s.created_dt,
+     s.view_cnt,
+     s.status,
+     u.id owner_id,
+     c.category_title category_title
+    from
+     ftp_support_qna s
+     inner join ftp_user u on s.user_no=u.user_no
+     inner join ftp_support_qna_categroy c on s.qna_category_no=c.qna_category_no
+    where
+      s.qna_no=#{qnaNo}
+  </select>
+  
+  <select id="findByPassword" resultMap="QuestionDTOMap">
+   select 
+     password
+    from
+     ftp_support_qna 
+    where
+     qna_no=#{qnaNo} and password=password(#{qnaPassword})
+  </select>
+  
+  
+  <select id="findByKeyword" resultMap="QuestionDTOMap" parameterType="string">
+     select 
+        s.qna_no,  
+        s.title,
+        s.content,
+        s.created_dt,
+        s.view_cnt,
+        u.id owner_id,
+        c.category_title category_title
+      from
+        ftp_support_qna s
+        inner join ftp_user u on s.user_no=u.user_no
+        inner join ftp_support_qna_categroy c on s.qna_category_no=c.qna_category_no
+     <where>
+      <if test="title != null">
+        s.title like (concat('%', #{value}, '%'))
+      </if>
+      <if test="content != null">
+        or s.content like (concat('%', #{value}, '%'))
+      </if>
+      <if test="id != null">
+        or u.id like (concat('%', #{value}, '%'))
+      </if>
+     </where>
+     order by
+      qna_no desc
+  </select>
+  
+  <update id="update" parameterType="QuestionListDTO">
+      update ftp_support_qna set
+         title=#{title},
+         content=#{content}
+      where 
+         qna_no=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from ftp_support_qna where qna_no=${no}
+  </delete>
+  
+   <!--
+   <select id="findAll" resultMap="QuestionDTOMap">
+   select 
+     s.qna_no,
+     s.title,
+     s.content,
      s.created_dt,
      s.view_cnt,
      s.status,
      u.id,
-     c.qna_category_no qna_category_no,
      c.category_title category_title,
      f.filepath
     from
@@ -94,16 +177,17 @@
     order by
       qna_category_no desc
   </select>
-  <!-- 
+   
   <select id="findByNo" resultMap="QuestionDTOMap" parameterType="int">
    select 
      s.qna_no,
      s.title,
+     s.content,
      s.created_dt,
      s.view_cnt,
      s.status,
      u.id,
-     c.category_title,
+     c.category_title category_title,
      f.filepath
     from
      ftp_support_qna s
@@ -114,16 +198,21 @@
       s.qna_no=#{qnaNo}
   </select>
   
+  
   <select id="findByKeyword" resultMap="QuestionDTOMap" parameterType="string">
      select 
-         s.qna_no,  
-         s.title,
-         s.created_dt,
-         s.view_cnt,
-         u.id
+        s.qna_no,  
+        s.title,
+        s.content,
+        s.created_dt,
+        s.view_cnt,
+        u.id
+        c.category_title category_title,
+        f.filepath
       from
         ftp_support_qna s
         inner join ftp_user u on s.user_no=u.user_no
+        inner join ftp_support_qna_categroy c on s.qna_category_no=c.qna_category_no
      <where>
       <if test="title != null">
         s.title like (concat('%', #{value}, '%'))
@@ -138,7 +227,6 @@
      order by
       qna_no desc
   </select>
-   
   insert into ftp_support_qna(
        user_no,
        qna_category_no,
@@ -152,16 +240,7 @@
        #{content},
        #{password})
   
-  <update id="update" parameterType="QuestionListDTO">
-      update ftp_support_qna set
-         user_no=#{userNo},
-         category_no=#{categoryNo},
-         title=#{title},
-         content=#{content},
-         password=#{password},
-      where 
-         qna_no=#{no}
-  </update>
+  
   
    <update id="updateFile" parameterType="string">
       update ftp_support_qna_file set
@@ -182,9 +261,7 @@
   
   
   
-   <delete id="delete" parameterType="int">
-    delete from ftp_support_notice where notice_no=${values}
-  </delete>
+   
   
 
   

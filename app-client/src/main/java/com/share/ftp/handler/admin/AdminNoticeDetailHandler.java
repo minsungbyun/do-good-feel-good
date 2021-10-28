@@ -1,6 +1,7 @@
 package com.share.ftp.handler.admin;
 
 import com.share.ftp.dao.NoticeDao;
+import com.share.ftp.domain.admin.NoticeAttachedFile;
 import com.share.ftp.domain.admin.NoticeDTO;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
@@ -35,8 +36,13 @@ public class AdminNoticeDetailHandler implements Command {
     System.out.printf("내용: %s\n", noticeDTO.getContent());
     //    System.out.printf("첨부파일: %s\n", noticeDTO.getFileUpload());
     System.out.printf("등록일: %s\n", noticeDTO.getRegisteredDate());
+
+    noticeDTO.setViewCount(noticeDTO.getViewCount() + 1);
     System.out.printf("조회수: %d\n", noticeDTO.getViewCount());
-    System.out.println();
+
+    for (NoticeAttachedFile file : noticeDTO.getFileUpload()) {
+      System.out.printf("첨부파일: %s\n", file.getFilepath());
+    }
 
     JoinDTO loginUser = AuthLoginHandler.getLoginUser(); 
     if (loginUser == null || (!loginUser.getName().equals("관리자"))) {

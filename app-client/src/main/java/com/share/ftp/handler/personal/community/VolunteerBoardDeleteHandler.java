@@ -37,7 +37,6 @@ public class VolunteerBoardDeleteHandler implements Command {
 
       if ((volunteerBoardDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
           AuthLoginHandler.getLoginUser().getId().equals("admin")) {
-
       } else {
         System.out.println("삭제 권한이 없습니다.");
         return;

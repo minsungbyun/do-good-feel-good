@@ -1,20 +1,15 @@
 package com.share.ftp.domain.donation;
 
-import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
+import com.share.ftp.domain.join.JoinDTO;
 
 
-public class DonationRegisterDTO implements Serializable{
-
-
-  private static final long serialVersionUID = 1L;
-
+public class DonationRegisterDTO {
 
   private int no;
-  private int userNo;
-  private int donationBoardNo;
-  private List<DonationRegisterPayType> payTypeNo;
+  private JoinDTO donator;
+  private DonationBoardDTO donationBoard;
+  private DonationRegisterPayType payTypeNo;
   private int donationMoney;
   private int payStatus;
   private Date registeredDate;
@@ -23,11 +18,12 @@ public class DonationRegisterDTO implements Serializable{
 
   @Override
   public String toString() {
-    return "DonationRegisterDTO [no=" + no + ", userNo=" + userNo + ", donationBoardNo="
-        + donationBoardNo + ", payTypeNo=" + payTypeNo + ", donationMoney=" + donationMoney
+    return "DonationRegisterDTO [no=" + no + ", donator=" + donator + ", donationBoard="
+        + donationBoard + ", payTypeNo=" + payTypeNo + ", donationMoney=" + donationMoney
         + ", payStatus=" + payStatus + ", registeredDate=" + registeredDate
         + ", registerationNumber=" + registerationNumber + "]";
   }
+
 
   public int getNo() {
     return no;
@@ -35,22 +31,22 @@ public class DonationRegisterDTO implements Serializable{
   public void setNo(int no) {
     this.no = no;
   }
-  public int getUserNo() {
-    return userNo;
+  public JoinDTO getDonator() {
+    return donator;
   }
-  public void setUserNo(int userNo) {
-    this.userNo = userNo;
+  public void setDonator(JoinDTO donator) {
+    this.donator = donator;
   }
-  public int getDonationBoardNo() {
-    return donationBoardNo;
+  public DonationBoardDTO getDonationBoard() {
+    return donationBoard;
   }
-  public void setDonationBoardNo(int donationBoardNo) {
-    this.donationBoardNo = donationBoardNo;
+  public void setDonationBoard(DonationBoardDTO donationBoard) {
+    this.donationBoard = donationBoard;
   }
-  public List<DonationRegisterPayType> getPayTypeNo() {
+  public DonationRegisterPayType getPayTypeNo() {
     return payTypeNo;
   }
-  public void setPayTypeNo(List<DonationRegisterPayType> payTypeNo) {
+  public void setPayTypeNo(DonationRegisterPayType payTypeNo) {
     this.payTypeNo = payTypeNo;
   }
   public int getDonationMoney() {

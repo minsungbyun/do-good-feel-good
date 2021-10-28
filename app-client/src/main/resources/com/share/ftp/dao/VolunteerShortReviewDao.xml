@@ -5,39 +5,44 @@
 
 <mapper namespace="com.share.ftp.dao.VolunteerShortReviewDao">
   
-  <resultMap type="VolunteerRequestDTO" id="VolunteerRequestDTOMap">
-    <id column="vol_no" property="no"/> 
-    <result column="vol_shortreview_no" property="shortReviewNo"/>
+  <resultMap type="VolunteerShortReviewDTO" id="VolunteerShortReviewDTOMap">
+    <id column="vol_shortreview_no" property="no"/> 
     <result column="content" property="content"/>
     <result column="created_dt" property="registeredDate"/>
 
     <association property="owner" javaType="joinDTO">
       <id column="owner_no" property="no"/>
-      <result column="owner_Id" property="id"/>
+      <result column="owner_id" property="id"/>
     </association>
+    
+    <association property="volNo" javaType="VolunteerRequestDTO">
+      <id column="vol_no" property="no"/>
+    </association>
+    
+
     
   </resultMap>
      
- <!-- <insert id="insert" parameterType="VolunteerRequestDTO"
-   useGeneratedKeys="true" keyColumn="vol_board_no" keyProperty="no">
-        
+ <insert id="insert" parameterType="VolunteerShortReviewDTO"
+   useGeneratedKeys="true" keyColumn="vol_shortreview_no" keyProperty="no">
     insert into ftp_vol_shortreview(
+      vol_no,
       user_no,
-      title,
       content)
     values(
+      #{volNo.no},    
       #{owner.no},    
-      #{title},
       #{content})
-  </insert> --> 
+  </insert> 
   
-  <select id="findAll" resultMap="VolunteerRequestDTOMap">
+  <select id="findAll" resultMap="VolunteerShortReviewDTOMap">
     select 
       s.vol_no,
       s.vol_shortreview_no,
       s.content,
       s.created_dt,
-      u.id owner_id
+      u.id owner_id,
+      u.user_no 
     from
      ftp_vol_shortreview s
      inner join ftp_user u on s.user_no=u.user_no
@@ -45,65 +50,59 @@
       s.vol_shortreview_no desc
   </select>
    
-  <!-- <select id="findByKeyword" resultMap="VolunteerRequestDTOMap" parameterType="string">
-      
+  <select id="findByKeyword" resultMap="VolunteerShortReviewDTOMap" parameterType="string">
     select 
-      b.vol_board_no,
-      b.title,
-      b.content,
-      b.created_dt,
-      b.view_cnt,
-      f.filepath,
+      s.vol_no,
+      s.vol_shortreview_no,
+      s.content,
+      s.created_dt,
       u.id owner_id
     from
-      ftp_vol_board b
-      inner join ftp_vol_board_file f on b.vol_board_no=f.vol_board_no
-      inner join ftp_user u on b.user_no=u.user_no
-      
-     <where>
-      <if test="title != null">
-         title like concat('%', #{value}, '%')
-      </if>
+      ftp_vol_shortreview s
+      inner join ftp_user u on s.user_no=u.user_no
+     <!--    
+      where 
+        s.content like(concat('%',#{keyword},"%"))
+        or u.id like(concat('%',#{keyword},"%"))  -->   
+     
+    <where>
       <if test="content != null">
          or content like concat('%', #{value}, '%') 
       </if>
-     </where>
+            <if test="id != null">
+         or id like concat('%', #{value}, '%') 
+      </if>
+    </where>
     order by 
-      b.vol_board_no desc
+      s.vol_shortreview_no desc
   </select>
 
-  <select id="findByNo" resultMap="VolunteerRequestDTOMap" parameterType="int">
+  <select id="findByNo" resultMap="VolunteerShortReviewDTOMap" parameterType="int">
     select 
-      b.vol_board_no,
-      b.title,
-      b.content,
-      b.created_dt,
-      b.view_cnt,
-      f.filepath,
+      s.vol_no,
+      s.vol_shortreview_no,
+      s.content,
+      s.created_dt,
       u.id owner_id
     from
-      ftp_vol_board b
-      inner join ftp_vol_board_file f on b.vol_board_no=f.vol_board_no
-      inner join ftp_user u on b.user_no=u.user_no
+      ftp_vol_shortreview s
+      inner join ftp_user u on s.user_no=u.user_no
     where 
-      b.vol_board_no=#{values}
+      s.vol_shortreview_no=#{values}
   </select>
   
-   <update id="update" parameterType="volunteerBoardDTO">
-   update ftp_vol_board set
-     title=#{title},
+  <update id="update" parameterType="VolunteerShortReviewDTO">
+   update ftp_vol_shortreview set
      content=#{content}
    where 
-      vol_board_no=#{no}
+     vol_shortreview_no=#{no}
   </update>
   
-   <delete id="delete" parameterType="volunteerBoardDTO">
-    delete from ftp_vol_board where vol_board_no=${values}
-  </delete> -->
+  <delete id="delete" parameterType="VolunteerShortReviewDTO">
+    delete from ftp_vol_shortreview where vol_shortreview_no=${values}
+  </delete>
     
-
-
-  
+ 
 </mapper>
 
 

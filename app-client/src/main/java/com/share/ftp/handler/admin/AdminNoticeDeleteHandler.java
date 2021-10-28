@@ -1,7 +1,9 @@
 package com.share.ftp.handler.admin;
 
 import org.apache.ibatis.session.SqlSession;
+import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.dao.NoticeDao;
+import com.share.ftp.domain.admin.NoticeAttachedFile;
 import com.share.ftp.domain.admin.NoticeDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -10,10 +12,12 @@ import com.share.util.Prompt;
 public class AdminNoticeDeleteHandler implements Command {
 
   NoticeDao noticeDao;
+  GeneralDao generalDao;
   SqlSession sqlSession;
 
-  public AdminNoticeDeleteHandler(NoticeDao noticeDao, SqlSession sqlSession) {
+  public AdminNoticeDeleteHandler(NoticeDao noticeDao, GeneralDao generalDao, SqlSession sqlSession) {
     this.noticeDao = noticeDao;
+    this.generalDao = generalDao;
     this.sqlSession = sqlSession;
   }
 
@@ -38,15 +42,17 @@ public class AdminNoticeDeleteHandler implements Command {
       return;
     }
 
-    //    try {
-    //      noticeDao.deleteFile(noticeDTO.getFileUpload());
-    //      noticeDao.delete(noticeDTO);
-    //      sqlSession.commit();
-    //    } catch (Exception e) {
-    //      // 예외가 발생하기 전에 성공한 작업이 있으면 모두 취소한다.
-    //      // 그래야 다음 작업에 영향을 끼치지 않는다.
-    //      sqlSession.rollback();
-    //    }
+    try {
+      for (NoticeAttachedFile noticeAttachedFile : noticeDTO.getFileUpload()) {
+        noticeDao.deleteFile(noticeDTO.getNo());
+      }
+      noticeDao.delete(noticeNo);
+      sqlSession.commit();
+    } catch (Exception e) {
+      // 예외가 발생하기 전에 성공한 작업이 있으면 모두 취소한다.
+      // 그래야 다음 작업에 영향을 끼치지 않는다.
+      sqlSession.rollback();
+    }
 
     System.out.println("게시물을 삭제하였습니다.");
   }

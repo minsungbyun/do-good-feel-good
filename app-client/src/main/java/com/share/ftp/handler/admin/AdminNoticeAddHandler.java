@@ -35,18 +35,13 @@ public class AdminNoticeAddHandler implements Command {
 
     try {
       noticeDao.insert(noticeDTO);
-      System.out.println("insert등록");
       for (NoticeAttachedFile noticeAttachedFile : noticeDTO.getFileUpload()) {
         noticeDao.insertFile(noticeDTO.getNo(), noticeAttachedFile.getFilepath());
-        System.out.println("insertFile등록");
       }
       sqlSession.commit();
 
     } catch (Exception e) {
-      e.printStackTrace();
-
       sqlSession.rollback();
-      System.out.println("롤백");
     }
 
     System.out.println();

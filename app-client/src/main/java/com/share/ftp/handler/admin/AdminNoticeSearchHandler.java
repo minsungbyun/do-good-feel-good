@@ -34,7 +34,6 @@ public class AdminNoticeSearchHandler implements Command {
     for (NoticeDTO noticeDTO : noticeList) {
       System.out.printf("%d, %s, %s, %d\n", 
           noticeDTO.getNo(), 
-          //          noticeDTO.getAdmin().getId(), 
           noticeDTO.getTitle(), 
           //          noticeDTO.getContent(), 
           //          noticeDTO.getFileUpload(), 
