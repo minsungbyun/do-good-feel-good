@@ -47,8 +47,8 @@ public class DonationBoardListHandler implements Command {
             donationBoardDTO.getStartDate(),
             donationBoardDTO.getEndDate(),
             formatter.format(donationBoardDTO.getMoneyTarget()));
-        long remainMoney = donationRegisterDao.findByRemainMoney(donationBoardDTO.getNo());
-        System.out.printf("남은금액: %s\n", formatter.format(remainMoney));
+        //        long remainMoney = donationRegisterDao.findByRemainMoney(donationBoardDTO.getNo());
+        //        System.out.printf("남은금액: %s\n", formatter.format(remainMoney));
         System.out.println("--------------------------------------------------------------");
       } 
     }

@@ -499,7 +499,7 @@ public class ClientApp {
 
     notifyOnApplicationEnded();
 
-    con.close();
+    sqlSession.close();
 
   }
 
