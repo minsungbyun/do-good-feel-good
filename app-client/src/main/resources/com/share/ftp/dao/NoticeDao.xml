@@ -32,7 +32,8 @@
       notice_no desc
   </select>
   
-  <insert id="insert" parameterType="NoticeDTO" useGeneratedKeys="true" keyColumn="notice_no" keyProperty="no">
+  <insert id="insert" parameterType="NoticeDTO"
+  useGeneratedKeys="true" keyColumn="notice_no" keyProperty="no">
     insert into ftp_support_notice(
       title,
       content) 
@@ -84,7 +85,6 @@
       notice_no desc
   </select>
   
- <!-- 
    <update id="update" parameterType="NoticeDTO">
       update ftp_support_notice set
        title=#{title},
@@ -100,7 +100,7 @@
       where 
        notice_no=#{no},
   </update>
-  -->
+
   <delete id="deleteFile">
     delete from ftp_support_notice_file
     where

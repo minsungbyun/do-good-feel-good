@@ -1,6 +1,7 @@
 package com.share.ftp.handler.personal.support;
 
 import com.share.ftp.dao.QuestionDao;
+import com.share.ftp.domain.support.QuestionAttachedFile;
 import com.share.ftp.domain.support.QuestionListDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -19,13 +20,11 @@ public class QuestionDetailHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
 
     System.out.println();
-    System.out.println("[고객센터/문의하기/상세보기]");
+    System.out.println("[ 문의하기 - 상세보기 ]");
 
     int questionNo = Prompt.inputInt("번호? ");
 
     QuestionListDTO questionListDTO = questionDao.findByNo(questionNo);
-
-    System.out.println(questionListDTO);
 
     if (questionListDTO == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -47,18 +46,21 @@ public class QuestionDetailHandler implements Command {
         questionListDTO.setViewCount(questionListDTO.getViewCount() + 1);
         System.out.printf("조회수: %d\n", questionListDTO.getViewCount());
 
-        //        questionDao.update(questionListDTO);
+        for (QuestionAttachedFile questionAttachedFile : questionListDTO.getFileUpload()) {
+          System.out.printf("첨부파일: %s\n", questionAttachedFile.getFilepath());
+        }
+
         break;
 
       } else if (AuthLoginHandler.getLoginUser().getId().equals(questionListDTO.getOwner().getId())) {
 
         String password = Prompt.inputString("비밀번호: ");
 
-        QuestionListDTO questionListDTO1 = questionDao.findByPassword(questionNo, password);
+        QuestionListDTO qnaDTO = questionDao.findByPassword(questionNo, password);
 
         //        !questionListDTO.getQnaPassword().equals(questionListDTO1.getQnaPassword()) || 
         if (
-            questionListDTO1 == null) {
+            qnaDTO == null) {
           System.out.println();
           System.out.println("비밀번호가 틀렸습니다.");
           System.out.println("비밀번호를 다시 입력해주세요.");
@@ -77,7 +79,10 @@ public class QuestionDetailHandler implements Command {
         questionListDTO.setViewCount(questionListDTO.getViewCount() + 1);
         System.out.printf("조회수: %d\n", questionListDTO.getViewCount());
 
-        //          questionDao.update(questionListDTO);
+        for (QuestionAttachedFile questionAttachedFile : questionListDTO.getFileUpload()) {
+          System.out.printf("첨부파일: %s\n", questionAttachedFile.getFilepath());
+        }
+
         break;
 
 
@@ -95,7 +100,7 @@ public class QuestionDetailHandler implements Command {
       request.setAttribute("questionNo", questionNo);
 
       while (true) {
-        String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
+        String input = Prompt.inputString("수정(U), 삭제(D), 이전(0)>");
         switch (input) {
           case "U":
           case "u":

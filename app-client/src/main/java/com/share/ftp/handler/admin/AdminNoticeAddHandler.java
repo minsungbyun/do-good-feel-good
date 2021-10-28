@@ -28,7 +28,6 @@ public class AdminNoticeAddHandler implements Command {
 
     NoticeDTO noticeDTO = new NoticeDTO();
 
-    //    noticeDTO.setAdmin(AuthLoginHandler.getLoginUser());
     noticeDTO.setTitle(Prompt.inputString("제목: "));
     noticeDTO.setContent(Prompt.inputString("내용: ")); 
     noticeDTO.setFileUpload(GeneralHelper.promptNoticeFileUpload());

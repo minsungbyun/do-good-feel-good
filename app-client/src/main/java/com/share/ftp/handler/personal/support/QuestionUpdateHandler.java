@@ -3,10 +3,12 @@ package com.share.ftp.handler.personal.support;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.dao.QuestionDao;
+import com.share.ftp.domain.support.QuestionAttachedFile;
 import com.share.ftp.domain.support.QuestionListDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
+import com.share.util.GeneralHelper;
 import com.share.util.Prompt;
 
 public class QuestionUpdateHandler implements Command {
@@ -46,7 +48,7 @@ public class QuestionUpdateHandler implements Command {
       //        questionListDTO.setQnaType(new GeneralHelper(generalDao).promptQnaCategory());
       String title = Prompt.inputString(String.format("제목(%s): ", questionListDTO.getTitle()));
       String content = Prompt.inputString(String.format("내용(%s): ", questionListDTO.getTitle()));
-      //        String fileUpload = Prompt.inputString(String.format("첨부파일(%s): ", questionListDTO.getFileUpload()));
+      questionListDTO.setFileUpload(GeneralHelper.promptQnaFileUpload());
 
       String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -58,8 +60,19 @@ public class QuestionUpdateHandler implements Command {
       questionListDTO.setTitle(title);
       questionListDTO.setContent(content);
 
-      questionDao.update(questionListDTO);
-      sqlSession.commit();
+      try {
+        questionDao.update(questionListDTO);
+        questionDao.deleteFile(questionListDTO);
+        for (QuestionAttachedFile questionAttachedFile : questionListDTO.getFileUpload()) {
+          questionDao.insertFile(questionListDTO.getNo(), questionAttachedFile.getFilepath());
+        }
+        sqlSession.commit();
+      } catch (Exception e) {
+        // 예외검사
+        e.printStackTrace();
+        // 예외 발생하면, 발생하기 전 작업이 모두 취소됨
+        sqlSession.rollback();
+      }
 
       System.out.println("게시글 수정이 완료되었습니다.");
       break;

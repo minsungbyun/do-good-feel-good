@@ -78,6 +78,12 @@ public class General {
 
   }
 
+  public static class qnaStatus {
+
+    public static final int UNANSWERED   = 0; // 미답변
+    public static final int ANSWER    = 1; // 답변완료
+  }
+
 
 
 }

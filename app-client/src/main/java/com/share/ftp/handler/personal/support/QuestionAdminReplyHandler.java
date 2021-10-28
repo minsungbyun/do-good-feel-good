@@ -1,19 +1,24 @@
-package com.share.ftp.handler.admin;
+package com.share.ftp.handler.personal.support;
 
-import java.sql.Date;
+import static com.share.util.General.qnaStatus.ANSWER;
+import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.QuestionDao;
+import com.share.ftp.domain.support.QuestionAttachedFile;
 import com.share.ftp.domain.support.QuestionListDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
+import com.share.util.GeneralHelper;
 import com.share.util.Prompt;
 
-public class AdminQuestionAddHandler implements Command {
+public class QuestionAdminReplyHandler implements Command {
 
   QuestionDao questionDao;
+  SqlSession sqlSession;
 
-  public AdminQuestionAddHandler(QuestionDao questionDao) {
+  public QuestionAdminReplyHandler(QuestionDao questionDao, SqlSession sqlSession) {
     this.questionDao = questionDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -23,25 +28,29 @@ public class AdminQuestionAddHandler implements Command {
     System.out.println("[ 문의사항 - 답글 등록]");
 
     int questionNo = (int) request.getAttribute("questionNo");
-    QuestionListDTO adminQuestionListDTO = questionDao.findByQuestionNo(questionNo);
+    QuestionListDTO adminQuestionListDTO = questionDao.findByNo(questionNo);
 
     QuestionListDTO questionListDTO = new QuestionListDTO();
 
     questionListDTO.setTitle(Prompt.inputString("제목? "));
     questionListDTO.setContent(Prompt.inputString("내용? "));
-    questionListDTO.setQnaType(adminQuestionListDTO.getQnaType());
     questionListDTO.setOwner(AuthLoginHandler.getLoginUser());
-    questionListDTO.setPassword(AuthLoginHandler.getLoginUser().getAdminPassword());
-    questionListDTO.setFileUpload(Prompt.inputString("파일첨부? "));
-    questionListDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
+    questionListDTO.setQnaPassword(null);
+    //    questionListDTO.setPassword(AuthLoginHandler.getLoginUser().getAdminPassword());
+    questionListDTO.setFileUpload(GeneralHelper.promptQnaFileUpload());
+    questionListDTO.setStatus(ANSWER);
 
 
-    questionListDTO.setNo(adminQuestionListDTO.getNo());
+    try {
+      questionDao.insert(questionListDTO);
+      for (QuestionAttachedFile questionAttachedFile : questionListDTO.getFileUpload()) {
+        questionDao.insertFile(questionListDTO.getNo(), questionAttachedFile.getFilepath());
+      }
+      sqlSession.commit();
 
-    int a = indexOf(adminQuestionListDTO.getNo());
-
-    myQuestionListDTOList.add(a + 1, myQuestionListDTO);
-
+    } catch (Exception e) {
+      sqlSession.rollback();
+    }
 
     System.out.println();
     System.out.println("문의 답글이 등록되었습니다.");
