@@ -16,6 +16,7 @@ public class VolunteerRequestDTO implements Serializable {
   private int no;
   private int userNo;
   private int memberType; 
+  private int getCount;
   private Category category;
   private String title;
   private String content;
@@ -23,6 +24,7 @@ public class VolunteerRequestDTO implements Serializable {
   private String email;
   private Date startDate;
   private Date endDate;
+  private Date applyDate;
   private String startTime;
   private String endTime;
   private String totalDate;
@@ -31,6 +33,7 @@ public class VolunteerRequestDTO implements Serializable {
   private int limitNum; // 총 정원
   private String name;
   private int status;
+  private int applyStatus;
   private JoinDTO owner; 
   private List<VolunteerAttachedFile> fileUpload;
   private Date submitTime; 
@@ -47,6 +50,29 @@ public class VolunteerRequestDTO implements Serializable {
   private Date registeredDate;
 
 
+
+
+
+
+  public Date getApplyDate() {
+    return applyDate;
+  }
+
+  public void setApplyDate(Date applyDate) {
+    this.applyDate = applyDate;
+  }
+
+  public int getApplyStatus() {
+    return applyStatus;
+  }
+
+  public void setApplyStatus(int applyStatus) {
+    this.applyStatus = applyStatus;
+  }
+
+  public int getGetCount() {
+    return getCount;
+  }
 
   public String getTotalDate() {
     return totalDate;

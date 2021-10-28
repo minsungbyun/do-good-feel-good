@@ -27,6 +27,7 @@ import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.dao.OrgDao;
 import com.share.ftp.dao.PersonalDao;
 import com.share.ftp.dao.QuestionDao;
+import com.share.ftp.dao.VolunteerApplyDao;
 import com.share.ftp.dao.VolunteerBoardDao;
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.dao.VolunteerShortReviewDao;
@@ -131,10 +132,10 @@ import com.share.ftp.handler.personal.support.QuestionDetailHandler;
 import com.share.ftp.handler.personal.support.QuestionListHandler;
 import com.share.ftp.handler.personal.support.QuestionSearchHandler;
 import com.share.ftp.handler.personal.support.QuestionUpdateHandler;
-import com.share.ftp.handler.personal.volunteer.MyVolunteerWishHandler;
 import com.share.ftp.handler.personal.volunteer.MyVolunteerAppliedHandler;
 import com.share.ftp.handler.personal.volunteer.MyVolunteerListHandler;
 import com.share.ftp.handler.personal.volunteer.MyVolunteerRejectedHandler;
+import com.share.ftp.handler.personal.volunteer.MyVolunteerWishHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionAddHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionConnectHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionDeleteHandler;
@@ -253,6 +254,7 @@ public class ClientApp {
 
 
     VolunteerDao volunteerDao = sqlSession.getMapper(VolunteerDao.class);
+    VolunteerApplyDao volunteerApplyDao = sqlSession.getMapper(VolunteerApplyDao.class);
 
     // 챌린지 관련
     ChallengeDao challengeDao = sqlSession.getMapper(ChallengeDao.class);
@@ -296,7 +298,7 @@ public class ClientApp {
     commands.put("/vol/approvelist", new VolunteerApproveListHandler(volunteerDao));
     commands.put("/vol/reject", new VolunteerRejectHandler(volunteerDao,sqlSession)); 
 
-    commands.put("/volJoin/add", new VolunteerJoinHandler(volunteerDao));
+    commands.put("/volJoin/add", new VolunteerJoinHandler(volunteerDao,volunteerApplyDao));
     commands.put("/volJoin/groupAdd", new VolunteerGroupJoinHandler(volunteerDao));
     commands.put("/volJoin/list", new VolunteerJoinListHandler(volunteerDao));
     commands.put("/volJoin/delete", new VolunteerJoinDeleteHandler(volunteerDao));
