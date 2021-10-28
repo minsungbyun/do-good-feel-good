@@ -86,6 +86,9 @@
       <if test="content != null">
          or content like concat('%', #{value}, '%') 
       </if>
+      <if test="id != null">
+         or id like concat('%', #{value}, '%') 
+      </if>
      </where>
     order by 
       b.vol_board_no desc
@@ -123,15 +126,7 @@
       vol_board_no=#{no}
   </update>
   
-  <update id="updateFile" parameterType="string">
-    update ftp_vol_board_file set
-      vol_board_no=#{no},
-      filepath=#{filepath}
-    where 
-      vol_board_no=#{no}
-  </update>
-  
-    <delete id="deleteFile" parameterType="volunteerBoardDTO">
+  <delete id="deleteFile" parameterType="volunteerBoardDTO">
        delete from ftp_vol_board_file where vol_board_no=#{no}
   </delete>
   
@@ -139,7 +134,10 @@
     delete from ftp_vol_board where vol_board_no=${values}
   </delete>
     
-
+   <insert id="addLike">
+    insert into ftp_vol_board_like(user_no,vol_board_no)
+    values(#{userNo},#{volBoardNo})
+  </insert>
 
   
 </mapper>

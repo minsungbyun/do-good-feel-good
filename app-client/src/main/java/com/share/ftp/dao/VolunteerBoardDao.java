@@ -18,9 +18,10 @@ public interface VolunteerBoardDao {
   VolunteerBoardDTO findByNo(int no) throws Exception;
   void updateCount(int no) throws Exception;
   void update(VolunteerBoardDTO volunteerBoardDTO) throws Exception;
-  void updateFile(VolunteerBoardDTO volunteerBoardDTO) throws Exception; 
   void delete(int no) throws Exception;
   void deleteFile(VolunteerBoardDTO volunteerBoardDTO) throws Exception;    
-  //  void like(VolunteerBoardDTO volunteerBoardDTO) throws Exception;
+  void addLike(
+      @Param("userNo") int userNo,
+      @Param("volBoardNo") int volNo) throws Exception;      
 
 }

@@ -25,7 +25,6 @@ public class VolunteerBoardAddHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
 
-    System.out.println();
     System.out.println("[  나눔이야기 등록  ]");
 
     VolunteerBoardDTO volunteerBoardDTO = new VolunteerBoardDTO();
@@ -36,31 +35,18 @@ public class VolunteerBoardAddHandler implements Command {
     volunteerBoardDTO.setOwner(AuthLoginHandler.getLoginUser());
     volunteerBoardDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    volunteerBoardDao.insert(volunteerBoardDTO);
-    for (VolunteerBoardAttachedFile volunteerBoardAttachedFile : volunteerBoardDTO.getFileUpload()) {
-      volunteerBoardDao.insertFile(volunteerBoardDTO.getNo(), volunteerBoardAttachedFile.getFilepath());
+    try {
+
+      volunteerBoardDao.insert(volunteerBoardDTO);
+      for (VolunteerBoardAttachedFile volunteerBoardAttachedFile : volunteerBoardDTO.getFileUpload()) {
+        volunteerBoardDao.insertFile(volunteerBoardDTO.getNo(), volunteerBoardAttachedFile.getFilepath());
+      }
+
+      sqlSession.commit();
+    }  catch (Exception e) {
+      sqlSession.rollback();
     }
-
-    sqlSession.commit();
-    sqlSession.rollback();
-
-    System.out.println();
     System.out.println("[  게시글 등록이 완료되었습니다.  ]");
   }
-
-  //  try {
-  //    volunteerBoardDao.insert(volunteerBoardDTO);
-  //    for (VolunteerBoardAttachedFile volunteerBoardAttachedFile : volunteerBoardDTO.getFileUpload()) {
-  //      volunteerBoardDao.insertFile(volunteerBoardAttachedFile.getFilepath());
-  //    }
-  //
-  //    sqlSession.commit();
-  //  } catch (Exception e) {
-  //    sqlSession.rollback();
-  //  }
-  //  System.out.println();
-  //  System.out.println("[  게시글 등록이 완료되었습니다.  ]");
 }
 
-
-//}
