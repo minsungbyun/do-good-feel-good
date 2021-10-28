@@ -56,28 +56,31 @@ public class QuestionDetailHandler implements Command {
 
         QuestionListDTO questionListDTO1 = questionDao.findByPassword(questionNo, password);
 
-        if (questionListDTO.getQnaPassword().equals(questionListDTO1.getQnaPassword())) {
-
-          System.out.printf("번호: %s\n", questionListDTO.getNo());
-          System.out.printf("문의분야: %s\n", questionListDTO.getQnaType().getTitle());
-          System.out.printf("제목: %s\n", questionListDTO.getTitle());
-          System.out.printf("아이디: %s\n", questionListDTO.getOwner().getId());
-          System.out.printf("내용: %s\n", questionListDTO.getContent());
-          //          System.out.printf("첨부파일: %s\n", questionListDTO.getFileUpload());
-          System.out.printf("등록일: %s\n", questionListDTO.getRegisteredDate());
-
-          questionListDTO.setViewCount(questionListDTO.getViewCount() + 1);
-          System.out.printf("조회수: %d\n", questionListDTO.getViewCount());
-
-          //          questionDao.update(questionListDTO);
-          break;
-
-        } else {
+        //        !questionListDTO.getQnaPassword().equals(questionListDTO1.getQnaPassword()) || 
+        if (
+            questionListDTO1 == null) {
           System.out.println();
           System.out.println("비밀번호가 틀렸습니다.");
           System.out.println("비밀번호를 다시 입력해주세요.");
-
+          continue;
         }
+
+
+        System.out.printf("번호: %s\n", questionListDTO.getNo());
+        System.out.printf("문의분야: %s\n", questionListDTO.getQnaType().getTitle());
+        System.out.printf("제목: %s\n", questionListDTO.getTitle());
+        System.out.printf("아이디: %s\n", questionListDTO.getOwner().getId());
+        System.out.printf("내용: %s\n", questionListDTO.getContent());
+        //          System.out.printf("첨부파일: %s\n", questionListDTO.getFileUpload());
+        System.out.printf("등록일: %s\n", questionListDTO.getRegisteredDate());
+
+        questionListDTO.setViewCount(questionListDTO.getViewCount() + 1);
+        System.out.printf("조회수: %d\n", questionListDTO.getViewCount());
+
+        //          questionDao.update(questionListDTO);
+        break;
+
+
       } else if (questionListDTO.getOwner().getId() != AuthLoginHandler.getLoginUser().getId() ||
           !AuthLoginHandler.getLoginUser().getId().equals("admin")) {
         System.out.println("본인이 작성한 글만 확인할 수 있습니다.");

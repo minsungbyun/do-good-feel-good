@@ -50,13 +50,15 @@ public class AdminNoticeUpdateHandler implements Command {
       System.out.println("게시물 수정을 취소하였습니다.");
       return;
     }
+
     noticeDTO.setTitle(title);
     noticeDTO.setContent(content);
 
     try {
       noticeDao.update(noticeDTO);
+      noticeDao.deleteFile(noticeDTO);
       for (NoticeAttachedFile noticeAttachedFile : noticeDTO.getFileUpload()) {
-        noticeDao.updateFile(noticeAttachedFile.getFilepath());
+        noticeDao.insertFile(noticeDTO.getNo(), noticeAttachedFile.getFilepath());
       }
       sqlSession.commit();
 
