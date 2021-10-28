@@ -41,8 +41,8 @@ public class VolQuestionAddHandler implements Command {
       return;
     }
 
-    int num = VolunteerRequestDTO.questionCount;
-    num++;
+    int questCount = VolunteerRequestDTO.questionCount;
+    questCount++;
 
 
 

@@ -1,21 +1,27 @@
 package com.share.ftp.handler.personal.volunteer;
 
+import static com.share.util.General.check.APPLIED;
 import static com.share.util.General.member.GROUP;
 import static com.share.util.General.point.VOLUNTEER_POINT;
+import java.sql.Date;
+import com.share.ftp.dao.VolunteerApplyDao;
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.join.PersonalDTO;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
+import com.share.util.GeneralHelper;
 import com.share.util.Prompt;
 
 public class VolunteerJoinHandler implements Command { 
 
   VolunteerDao volunteerDao;
+  VolunteerApplyDao volunteerApplyDao;
 
-  public VolunteerJoinHandler(VolunteerDao volunteerDao) {
+  public VolunteerJoinHandler(VolunteerDao volunteerDao, VolunteerApplyDao volunteerApplyDao) {
     this.volunteerDao = volunteerDao;
+    this.volunteerApplyDao = volunteerApplyDao;
   }
 
 
@@ -36,39 +42,12 @@ public class VolunteerJoinHandler implements Command {
 
     VolunteerRequestDTO volunteerRequestDTO = volunteerDao.findByApprovedVolunteerNo(volNo);
 
-    //    System.out.printf("봉사번호: %d\n"
-    //        + "봉사제목: %s\n"
-    //        + "주최자: %s\n"
-    //        + "봉사분류: %s\n"
-    //        + "전화번호: %s\n"
-    //        + "이메일: %s\n"
-    //        + "봉사시작기간: %s\n"
-    //        + "봉사종료기간: %s\n"
-    //        + "봉사시작시간: %s\n"
-    //        + "봉사종료시간: %s\n"
-    //        + "봉사남은시간: %s\n"
-    //        //        + "봉사목록: %s\n"
-    //        + "봉사인원: %d명 / %d명\n"
-    //        + "봉사내용: %s\n"
-    //        + "첨부파일: %s\n\n",
-    //
-    //        generalRequestApplyDTO.getNo(),      
-    //        generalRequestApplyDTO.getTitle(),     
-    //        generalRequestApplyDTO.getOwner().getName(), 
-    //        generalRequestApplyDTO.getType(), 
-    //        generalRequestApplyDTO.getTel(),
-    //        generalRequestApplyDTO.getEmail(),
-    //        generalRequestApplyDTO.getStartDate(),
-    //        generalRequestApplyDTO.getEndDate(),
-    //        generalRequestApplyDTO.getStartTime(),
-    //        generalRequestApplyDTO.getEndTime(),
-    //        Helper.getRemainTime(generalRequestApplyDTO.getEndDate().getTime() - System.currentTimeMillis()),
-    //        //        personalRequestApplyDTO.getVolList(),
-    //        generalRequestApplyDTO.getTotalJoinCount(),
-    //        generalRequestApplyDTO.getLimitNum(),
-    //        generalRequestApplyDTO.getContent(),
-    //        generalRequestApplyDTO.getFileUpload()
-    //        );
+
+    Date applyDate = Prompt.inputDate("참여일(yyyy-mm-dd) ▶ ");
+
+    GeneralHelper.promptVolunteerTime(volunteerRequestDTO);
+
+
 
     String input = Prompt.inputString("해당 봉사활동을 참가하시겠습니까?(y/N) ▶ ");
     if (!input.equals("y") || input.length() == 0) {
@@ -94,6 +73,11 @@ public class VolunteerJoinHandler implements Command {
       return;
     } 
 
+
+    volunteerRequestDTO.setUserNo(loginUser.getNo());
+    volunteerRequestDTO.setApplyDate(applyDate);
+    volunteerRequestDTO.setApplyStatus(APPLIED);
+
     // 출력할 멤버 list에 추가시킨다
     volunteerRequestDTO.addMembers(loginUser);
     // 주최자 이름이 멤버 출력하는데 포함되어 있다면 제거
@@ -106,7 +90,7 @@ public class VolunteerJoinHandler implements Command {
     int count = volunteerRequestDTO.getCurrentNum();
     volunteerRequestDTO.setCurrentNum(count += 1); 
 
-    //    volunteerDao.update(volunteerRequestDTO);
+    volunteerApplyDao.insert(volunteerRequestDTO);
 
     System.out.println("[  ✔️ 봉사참여가 완료되었습니다. ]");
   }

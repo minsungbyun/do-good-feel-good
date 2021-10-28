@@ -12,21 +12,25 @@ public interface VolunteerDao {
   void insert(VolunteerRequestDTO addVolunteer) throws Exception;      
   void insertFile(
       @Param("volNo") int volNo,
-      @Param("filepath") String filepath) throws Exception;      
+      @Param("filepath") String filepath) throws Exception;  
+
   void addWish(
       @Param("userNo") int userNo,
-      @Param("volNo") int volNo) throws Exception;      
+      @Param("volNo") int volNo) throws Exception;     
+
   List<VolunteerRequestDTO> findAll() throws Exception;      
   List<VolunteerRequestDTO> findAllApproved() throws Exception;      
   List<VolunteerRequestDTO> findAllApply() throws Exception;      
   List<VolunteerRequestDTO> findAllWait() throws Exception;      
-  List<Category> findAllCategory() throws Exception;      
+  List<Category> findAllCategory() throws Exception;   
+
   void update(VolunteerRequestDTO updateVolunteer) throws Exception;          
   void updateVolunteer(VolunteerRequestDTO updateVolunteer) throws Exception;          
   //  void updateVolunteer(
   //      @Param("volNo") int volNo,
   //      @Param("status") int status) throws Exception;          
-  void updateFile(VolunteerRequestDTO updateVolunteer) throws Exception;          
+  void updateFile(VolunteerRequestDTO updateVolunteer) throws Exception;     
+
   void delete(VolunteerRequestDTO deleteVolunteer) throws Exception;    
   void deleteFile(VolunteerRequestDTO deleteVolunteer) throws Exception;    
 
@@ -35,5 +39,7 @@ public interface VolunteerDao {
   VolunteerRequestDTO findByVolunteerNo(int volunteerNo) throws Exception;
   VolunteerRequestDTO findByApprovedVolunteerNo(int volunteerNo) throws Exception;
   VolunteerRequestDTO findByKeyword(String keyword) throws Exception;
+
+  VolunteerRequestDTO getCount(int volunteerNo) throws Exception;
 
 }

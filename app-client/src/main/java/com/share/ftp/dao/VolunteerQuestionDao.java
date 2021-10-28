@@ -7,11 +7,12 @@ import com.share.ftp.domain.volunteer.VolunteerQuestionDTO;
 // - 봉사 문의사항를 처리하는 객체 사용법을 정의한다.
 public interface VolunteerQuestionDao {
 
-  void insertQuestion(VolunteerQuestionDTO addVolQuestionDTO) throws Exception;
-  void insertAdmin(int VolQuestionNo, VolunteerQuestionDTO addVolQuestion) throws Exception;
-  List<VolunteerQuestionDTO> findAllQuestion() throws Exception;      
-  void updateQuestion(VolunteerQuestionDTO updateVolQuestion) throws Exception;          
-  void deleteQuestion(VolunteerQuestionDTO VolQuestion) throws Exception; 
+  void insert(VolunteerQuestionDTO addVolQuestionDTO) throws Exception;
+  List<VolunteerQuestionDTO> findAll() throws Exception;      
+  void update(VolunteerQuestionDTO updateVolQuestion) throws Exception;          
+  void delete(VolunteerQuestionDTO VolQuestion) throws Exception; 
+
+  VolunteerQuestionDTO getQnaCount(int volunteerNo) throws Exception; 
 
   VolunteerQuestionDTO findByVolQuestionNo(int volNo, int volQuestionNo) throws Exception;
 }

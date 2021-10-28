@@ -18,10 +18,14 @@
     <result column="end_time" property="endTime"/>
     <result column="total_cnt" property="limitNum"/>
     <result column="approval" property="status"/>
+   
+    
     <result column="note" property="note"/> 
     
     <result column="total_dt" property="totalDate"/> 
     <result column="remain_dt" property="remainDate"/> 
+    
+
    
    <association property="owner" javaType="joinDTO">
       <id column="owner_no" property="no"/>
@@ -93,10 +97,15 @@
     values(#{volNo},#{filepath})
   </insert>
   
+ 
+  
    <insert id="addWish">
     insert into ftp_vol_wish(user_no,vol_no)
     values(#{userNo},#{volNo})
   </insert>
+  
+  
+ 
  
   <select id="findAll" resultMap="VolunteerRequestDTOMap">
          select 
@@ -128,10 +137,6 @@
 	     order by
 	       vol_no desc 
   </select>
-  
-  
-  
-  
   
    <select id="findAllApproved" resultMap="VolunteerRequestDTOMap">
 	     select
@@ -224,6 +229,9 @@
         order by
           v.vol_no desc
    </select>
+   
+     
+   
    
    <!-- 일 시간 분 초 다 계산하려면 테이블 데이터 타입을 datetime으로 변경해야함
     date_format(end_dt,'%Y-%m-%d %H:%i:%s'), date_format(curdate(),'%Y-%m-%d %H:%i:%s') datediff,

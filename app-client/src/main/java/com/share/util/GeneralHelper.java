@@ -10,6 +10,7 @@ import com.share.ftp.domain.donation.DonationRegisterPayType;
 import com.share.ftp.domain.support.QuestionAttachedFile;
 import com.share.ftp.domain.support.QuestionCategory;
 import com.share.ftp.domain.volunteer.VolunteerAttachedFile;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 
 public class GeneralHelper {
 
@@ -33,6 +34,29 @@ public class GeneralHelper {
     return String.format("남은시간 ▶ %d일 %d시간 %d분 %d초 남았습니다\n", day, hour, min, sec);
   }
 
+  public static void promptVolunteerTime(VolunteerRequestDTO volunteerRequestDTO) throws Exception {
+
+    System.out.println();
+
+    for (int i = 9; i < 18; i++) {
+      System.out.printf(" ▶ %d시 ~ %d시", i, i + 1);
+    }
+
+    String startTime = null;
+    String endTime = null;
+
+
+    startTime = Prompt.inputString("시작시간 (enter입력 시 종료) ▶ ");
+    endTime = Prompt.inputString("종료시간 (enter입력 시 종료) ▶ ");
+
+    if (startTime.length() == 0 || endTime.length() == 0) {
+      return;
+    } 
+
+    volunteerRequestDTO.setStartTime(startTime);
+    volunteerRequestDTO.setEndTime(endTime);
+
+  }
   public Category promptCategory() throws Exception {
 
     List<Category> categoryList = generalDao.findAllCategory();

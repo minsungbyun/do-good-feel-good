@@ -37,6 +37,7 @@ public class General {
     public static final int WAITING    = 2; // 승인대기
   }
 
+
   public static class point {
 
     public static final int VOLUNTEER_POINT         = 50;
