@@ -6,6 +6,7 @@ import static com.share.util.General.check.WAITING;
 import java.text.DecimalFormat;
 import java.util.Collection;
 import com.share.ftp.dao.DonationBoardDao;
+import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.domain.donation.DonationBoardDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -15,12 +16,15 @@ public class DonationBoardApplyDetailHandler implements Command {
 
   DonationBoardDao donationBoardDao;
   DonationPrompt donationPrompt;
+  DonationRegisterDao donationRegisterDao;
 
   public DonationBoardApplyDetailHandler(
       DonationBoardDao donationBoardDao,
-      DonationPrompt donationPrompt) {
+      DonationPrompt donationPrompt,
+      DonationRegisterDao donationRegisterDao) {
     this.donationBoardDao = donationBoardDao;
     this.donationPrompt = donationPrompt;
+    this.donationRegisterDao = donationRegisterDao;
   }
 
   @Override
@@ -43,6 +47,7 @@ public class DonationBoardApplyDetailHandler implements Command {
     }
 
     DecimalFormat formatter = new DecimalFormat("###,###,###");
+    long remainMoney = donationRegisterDao.findByRemainMoney(donationBoardDTO.getNo());
 
 
     if (donationBoardDTO.getStatus() == APPLIED) {
@@ -56,6 +61,7 @@ public class DonationBoardApplyDetailHandler implements Command {
       System.out.printf("시작일: %s\n", donationBoardDTO.getStartDate());
       System.out.printf("종료일: %s\n", donationBoardDTO.getEndDate());
       System.out.printf("목표금액: %s원\n", formatter.format(donationBoardDTO.getMoneyTarget()));
+      System.out.printf("남은금액: %s", formatter.format(remainMoney));
       System.out.println();
     } else {
       System.out.println("해당 번호의 모금함 개설 신청내역이 없습니다.");

@@ -28,11 +28,12 @@ public class DonationRegisterParticipationHandler implements Command { // 모금
       return;
     }
 
+    System.out.println(donationRegisterList);
+
     for (DonationRegisterDTO donationRegisterDTO : donationRegisterList) {
-      System.out.printf("[모금함번호: %d, 기부분류: %s, %s님, %s원, 기부날짜: %s]\n", 
-          donationRegisterDTO.getNo(), 
-          donationRegisterDTO.getSort(), 
-          donationRegisterDTO.getName(), 
+      System.out.printf("[모금함번호: %d, %s님, %s원, 기부날짜: %s]\n", 
+          donationRegisterDTO.getDonationBoard().getNo(), 
+          donationRegisterDTO.getDonator().getName(), 
           donationRegisterDTO.getDonationMoney(), 
           donationRegisterDTO.getRegisteredDate());
       System.out.println();

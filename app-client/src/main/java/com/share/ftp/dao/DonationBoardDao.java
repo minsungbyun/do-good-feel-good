@@ -25,5 +25,5 @@ public interface DonationBoardDao {
   DonationBoardDTO remainDate(int donationNo) throws Exception;
   DonationBoardDTO findByDonationNo(int donationNo) throws Exception;
   DonationBoardDTO findByApprovedDonatinNo(int donationNo) throws Exception;
-  DonationBoardDTO findByKeyword(String keyword) throws Exception;
+  List<DonationBoardDTO> findByKeyword(String keyword) throws Exception;
 }

@@ -14,9 +14,7 @@ public class DonationBoardAppliedListHandler implements Command {
   DonationBoardDao donationBoardDao;
 
   public DonationBoardAppliedListHandler(DonationBoardDao donationBoardDao) {
-
     this.donationBoardDao = donationBoardDao;
-
   }
 
   @Override
@@ -25,6 +23,7 @@ public class DonationBoardAppliedListHandler implements Command {
     DecimalFormat formatter = new DecimalFormat("###,###,###");
 
     Collection<DonationBoardDTO> donationBoardList = donationBoardDao.findAll();
+
 
 
     System.out.println();

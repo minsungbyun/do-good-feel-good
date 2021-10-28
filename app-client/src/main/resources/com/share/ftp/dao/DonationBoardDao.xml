@@ -281,16 +281,12 @@
          inner join ftp_category c on d.category_no=c.category_no
          inner join ftp_user p on p.user_no=o.user_no
          left outer join ftp_funding_file f on d.funding_no=f.funding_no
-     <where>
-      <if test="title != null">
-         title like concat('%', #{value}, '%')
-      </if>
-      <if test="content != null">
-         or content like concat('%', #{value}, '%') 
-      </if>
-     </where>
-     order by
-      d.funding_no desc
+       where
+		     d.title like(concat('%',#{keyword},'%'))
+		     or d.content like (concat('%',#{keyword},'%'))
+		     or p.name like (concat('%',#{keyword},'%'))         
+       order by
+         d.funding_no desc
   </select>
   
    <update id="update" parameterType="DonationBoardDTO">
