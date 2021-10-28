@@ -51,20 +51,21 @@ public class VolunteerBoardUpdateHandler implements Command {
       System.out.println("[  변경을 취소하였습니다.  ]");
       return;
     }
-
-    volunteerBoardDTO.setTitle(title);
-    volunteerBoardDTO.setContent(content);
-
-
     try {
+
+      volunteerBoardDTO.setTitle(title);
+      volunteerBoardDTO.setContent(content);
+
       volunteerBoardDao.update(volunteerBoardDTO);
       volunteerBoardDao.deleteFile(volunteerBoardDTO);
+
       for (VolunteerBoardAttachedFile volunteerBoardAttachedFile : volunteerBoardDTO.getFileUpload()) {
         volunteerBoardDao.insertFile(volunteerBoardDTO.getNo(), volunteerBoardAttachedFile.getFilepath());
       }
       sqlSession.commit();
     } catch (Exception e) {
       e.printStackTrace();
+
       sqlSession.rollback();
     }
     System.out.println("[  게시글을 변경하였습니다.  ]");

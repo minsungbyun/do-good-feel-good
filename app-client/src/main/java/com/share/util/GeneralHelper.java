@@ -166,9 +166,6 @@ public class GeneralHelper {
 
       fileList.add(filepath);
 
-      if (file.length()==0) {
-        return fileList;
-      }
     }
   }
 
