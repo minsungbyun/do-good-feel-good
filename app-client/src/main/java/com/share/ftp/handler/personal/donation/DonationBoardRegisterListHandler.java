@@ -1,5 +1,6 @@
 package com.share.ftp.handler.personal.donation;
 
+import java.text.DecimalFormat;
 import java.util.Collection;
 import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.domain.donation.DonationBoardDTO;
@@ -19,21 +20,22 @@ public class DonationBoardRegisterListHandler implements Command  { // 모금함
   // 모금함 기부 목록
   @Override
   public void execute(CommandRequest request) throws Exception {
+    DecimalFormat formatter = new DecimalFormat("###,###,###");
 
     DonationBoardDTO donationBoardDTO = (DonationBoardDTO) request.getAttribute("donationBoardDTO");
 
     Collection<DonationRegisterDTO> donationRegisterList = donationRegisterDao.findAll();
 
     System.out.println();
-    System.out.println("[모금함 기부 목록]");
+    System.out.printf("[ %d번 모금함 기부 목록]\n", donationBoardDTO.getNo());
     if (donationRegisterList.isEmpty()) {
       System.out.println("[  현재 참여된 기부 내역이 없습니다. ]");
     } else {
       for (DonationRegisterDTO donationRegisterDTO : donationRegisterList) {
-        if (donationRegisterDTO.getNo() == donationBoardDTO.getNo()) {
-          System.out.printf("[ %s님, %d원, %s ]\n", 
-              donationRegisterDTO.getName(), 
-              donationRegisterDTO.getDonationMoney(), 
+        if (donationRegisterDTO.getDonationBoard().getNo() == donationBoardDTO.getNo()) {
+          System.out.printf("[ %s님, %s원, %s ]\n", 
+              donationRegisterDTO.getDonator().getId(), 
+              formatter.format(donationRegisterDTO.getDonationMoney()), 
               donationRegisterDTO.getRegisteredDate());
         } 
       } 

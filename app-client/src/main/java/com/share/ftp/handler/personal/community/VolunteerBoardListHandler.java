@@ -30,8 +30,6 @@ public class VolunteerBoardListHandler implements Command {
     }
 
     System.out.println("[ 게시글 목록 ]");
-    System.out.println("----------------------------------------------");
-
 
     for(VolunteerBoardDTO volunteerBoardDTO : volunteerBoardDTOList) {
 

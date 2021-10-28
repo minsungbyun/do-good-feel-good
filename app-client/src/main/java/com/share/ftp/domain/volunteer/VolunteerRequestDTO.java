@@ -41,13 +41,11 @@ public class VolunteerRequestDTO implements Serializable {
   private String note;
   private List<JoinDTO> members = new ArrayList<>(); // 봉사 참여한 멤버들
 
-
-
-
   private int shortReviewNo;
   private String shortReviewContent;
   private JoinDTO shortReviewOwner;
   private Date registeredDate;
+
 
 
 
@@ -74,33 +72,13 @@ public class VolunteerRequestDTO implements Serializable {
     return getCount;
   }
 
-  public String getTotalDate() {
-    return totalDate;
-  }
-
-  public void setTotalDate(String totalDate) {
-    this.totalDate = totalDate;
-  }
-
-  public String getRemainDate() {
-    return remainDate;
-  }
-
-  public void setRemainDate(String remainDate) {
-    this.remainDate = remainDate;
-  }
-
-  public String getNote() {
-    return note;
-  }
-
-  public void setNote(String note) {
-    this.note = note;
-  }
 
   public int getNo() {
     return no;
   }
+
+
+
 
   public void setNo(int no) {
     this.no = no;
@@ -108,178 +86,32 @@ public class VolunteerRequestDTO implements Serializable {
 
 
 
+
   public int getUserNo() {
     return userNo;
   }
+
+
+
 
   public void setUserNo(int userNo) {
     this.userNo = userNo;
   }
 
+
+
+
   public int getMemberType() {
     return memberType;
   }
+
+
+
 
   public void setMemberType(int memberType) {
     this.memberType = memberType;
   }
 
-  public String getTitle() {
-    return title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-
-
-  public int getStatus() {
-    return status;
-  }
-
-  public void setStatus(int status) {
-    this.status = status;
-  }
-
-  public JoinDTO getOwner() {
-    return owner;
-  }
-
-  public void setOwner(JoinDTO owner) {
-    this.owner = owner;
-  }
-
-
-
-  public String getTel() {
-    return tel;
-  }
-
-  public void setTel(String tel) {
-    this.tel = tel;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public Date getStartDate() {
-    return startDate;
-  }
-
-  public void setStartDate(Date startDate) {
-    this.startDate = startDate;
-  }
-
-  public Date getEndDate() {
-    return endDate;
-  }
-
-  public void setEndDate(Date endDate) {
-    this.endDate = endDate;
-  }
-
-  public String getStartTime() {
-    return startTime;
-  }
-
-  public void setStartTime(String startTime) {
-    this.startTime = startTime;
-  }
-
-  public String getEndTime() {
-    return endTime;
-  }
-
-  public void setEndTime(String endTime) {
-    this.endTime = endTime;
-  }
-
-  public String getContent() {
-    return content;
-  }
-
-  public void setContent(String content) {
-    this.content = content;
-  }
-
-  public List<VolunteerAttachedFile> getFileUpload() {
-    return fileUpload;
-  }
-
-  public void setFileUpload(List<VolunteerAttachedFile> fileUpload) {
-    this.fileUpload = fileUpload;
-  }
-
-  public Date getSubmitTime() {
-    return submitTime;
-  }
-
-  public void setSubmitTime(Date submitTime) {
-    this.submitTime = submitTime;
-  }
-
-  public JoinDTO getWish() {
-    return wish;
-  }
-
-  public void setWish(JoinDTO wish) {
-    this.wish = wish;
-  }
-
-  public int getLimitNum() {
-    return limitNum;
-  }
-
-  public void setLimitNum(int limitNum) {
-    this.limitNum = limitNum;
-  }
-
-
-  public int getCurrentNum() {
-    return currentNum;
-  }
-
-  public void setCurrentNum(int currentNum) {
-    this.currentNum = currentNum;
-  }
-
-  public List<JoinDTO> getMembers() {
-    return members;
-  }
-
-  public void setMembers(List<JoinDTO> members) {
-    this.members = members;
-  }
-
-  public void addMembers(JoinDTO volMember) {
-    this.members.add(volMember);
-  }
-
-  public void removeMembers(JoinDTO volMember) {
-    this.members.remove(volMember);
-  }
-
-  public int getQuestionCount() {
-    return questionCount;
-  }
-
-  public void setQuestionCount(int questionCount) {
-    this.questionCount = questionCount;
-  }
 
 
 
@@ -287,9 +119,373 @@ public class VolunteerRequestDTO implements Serializable {
     return category;
   }
 
+
+
+
   public void setCategory(Category category) {
     this.category = category;
   }
+
+
+
+
+  public String getTitle() {
+    return title;
+  }
+
+
+
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+
+
+
+  public String getContent() {
+    return content;
+  }
+
+
+
+
+  public void setContent(String content) {
+    this.content = content;
+  }
+
+
+
+
+  public String getTel() {
+    return tel;
+  }
+
+
+
+
+  public void setTel(String tel) {
+    this.tel = tel;
+  }
+
+
+
+
+  public String getEmail() {
+    return email;
+  }
+
+
+
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+
+
+
+  public Date getStartDate() {
+    return startDate;
+  }
+
+
+
+
+  public void setStartDate(Date startDate) {
+    this.startDate = startDate;
+  }
+
+
+
+
+  public Date getEndDate() {
+    return endDate;
+  }
+
+
+
+
+  public void setEndDate(Date endDate) {
+    this.endDate = endDate;
+  }
+
+
+
+
+  public String getStartTime() {
+    return startTime;
+  }
+
+
+
+
+  public void setStartTime(String startTime) {
+    this.startTime = startTime;
+  }
+
+
+
+
+  public String getEndTime() {
+    return endTime;
+  }
+
+
+
+
+  public void setEndTime(String endTime) {
+    this.endTime = endTime;
+  }
+
+
+
+
+  public String getTotalDate() {
+    return totalDate;
+  }
+
+
+
+
+  public void setTotalDate(String totalDate) {
+    this.totalDate = totalDate;
+  }
+
+
+
+
+  public String getRemainDate() {
+    return remainDate;
+  }
+
+
+
+
+  public void setRemainDate(String remainDate) {
+    this.remainDate = remainDate;
+  }
+
+
+
+
+  public int getCurrentNum() {
+    return currentNum;
+  }
+
+
+
+
+  public void setCurrentNum(int currentNum) {
+    this.currentNum = currentNum;
+  }
+
+
+
+
+  public int getLimitNum() {
+    return limitNum;
+  }
+
+
+
+
+  public void setLimitNum(int limitNum) {
+    this.limitNum = limitNum;
+  }
+
+
+
+
+  public String getName() {
+    return name;
+  }
+
+
+
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+
+
+
+  public int getStatus() {
+    return status;
+  }
+
+
+
+
+  public void setStatus(int status) {
+    this.status = status;
+  }
+
+
+
+
+  public JoinDTO getOwner() {
+    return owner;
+  }
+
+
+
+
+  public void setOwner(JoinDTO owner) {
+    this.owner = owner;
+  }
+
+
+
+
+  public List<VolunteerAttachedFile> getFileUpload() {
+    return fileUpload;
+  }
+
+
+
+
+  public void setFileUpload(List<VolunteerAttachedFile> fileUpload) {
+    this.fileUpload = fileUpload;
+  }
+
+
+
+
+  public Date getSubmitTime() {
+    return submitTime;
+  }
+
+
+
+
+  public void setSubmitTime(Date submitTime) {
+    this.submitTime = submitTime;
+  }
+
+
+
+
+  public JoinDTO getWish() {
+    return wish;
+  }
+
+
+
+
+  public void setWish(JoinDTO wish) {
+    this.wish = wish;
+  }
+
+
+
+
+  public int getQuestionCount() {
+    return questionCount;
+  }
+
+
+
+
+  public void setQuestionCount(int questionCount) {
+    this.questionCount = questionCount;
+  }
+
+
+
+
+  public String getNote() {
+    return note;
+  }
+
+
+
+
+  public void setNote(String note) {
+    this.note = note;
+  }
+
+
+
+
+  public List<JoinDTO> getMembers() {
+    return members;
+  }
+
+
+
+
+  public void setMembers(List<JoinDTO> members) {
+    this.members = members;
+  }
+
+
+
+
+  public int getShortReviewNo() {
+    return shortReviewNo;
+  }
+
+
+
+
+  public void setShortReviewNo(int shortReviewNo) {
+    this.shortReviewNo = shortReviewNo;
+  }
+
+
+
+
+  public String getShortReviewContent() {
+    return shortReviewContent;
+  }
+
+
+
+
+  public void setShortReviewContent(String shortReviewContent) {
+    this.shortReviewContent = shortReviewContent;
+  }
+
+
+
+
+  public JoinDTO getShortReviewOwner() {
+    return shortReviewOwner;
+  }
+
+
+
+
+  public void setShortReviewOwner(JoinDTO shortReviewOwner) {
+    this.shortReviewOwner = shortReviewOwner;
+  }
+
+
+
+
+  public Date getRegisteredDate() {
+    return registeredDate;
+  }
+
+
+
+
+  public void setRegisteredDate(Date registeredDate) {
+    this.registeredDate = registeredDate;
+  }
+
+  public void addMembers(JoinDTO members) {
+    this.members.add(members);
+  }
+
+  public void removeMembers(JoinDTO members) {
+    this.members.remove(members);
+  }
+
+
+
 
   public String getMemberNames() {
     if (members == null) {
@@ -306,38 +502,5 @@ public class VolunteerRequestDTO implements Serializable {
     }
     return names.toString();
   }
-
-  public int getShortReviewNo() {
-    return shortReviewNo;
-  }
-
-  public void setShortReviewNo(int shortReviewNo) {
-    this.shortReviewNo = shortReviewNo;
-  }
-
-  public String getShortReviewContent() {
-    return shortReviewContent;
-  }
-
-  public void setShortReviewContent(String shortReviewContent) {
-    this.shortReviewContent = shortReviewContent;
-  }
-
-  public JoinDTO getShortReviewOwner() {
-    return shortReviewOwner;
-  }
-
-  public void setShortReviewOwner(JoinDTO shortReviewOwner) {
-    this.shortReviewOwner = shortReviewOwner;
-  }
-
-  public Date getRegisteredDate() {
-    return registeredDate;
-  }
-
-  public void setRegisteredDate(Date registeredDate) {
-    this.registeredDate = registeredDate;
-  }
-
-
 }
+

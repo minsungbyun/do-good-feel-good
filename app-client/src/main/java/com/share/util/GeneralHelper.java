@@ -6,6 +6,7 @@ import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.domain.Category;
 import com.share.ftp.domain.admin.NoticeAttachedFile;
 import com.share.ftp.domain.community.VolunteerBoardAttachedFile;
+import com.share.ftp.domain.donation.DonationRegisterPayType;
 import com.share.ftp.domain.support.QuestionAttachedFile;
 import com.share.ftp.domain.support.QuestionCategory;
 import com.share.ftp.domain.volunteer.VolunteerAttachedFile;
@@ -105,6 +106,32 @@ public class GeneralHelper {
     }
   }
 
+  public DonationRegisterPayType promptPayType() throws Exception {
+
+    List<DonationRegisterPayType> payTypeList = generalDao.findAllPayType();
+
+    System.out.println();
+    System.out.println(" ▶ 결제 유형을 선택해주세요. ");
+    System.out.println();
+
+    while (true) {
+      for (int i = 0; i < payTypeList.size(); i++) {
+        DonationRegisterPayType payType = payTypeList.get(i);
+        System.out.printf("%d ▶ %s\n", i + 1, payType.getTitle());
+      }
+
+      System.out.println();
+      int input = Prompt.inputInt("결제선택 ▶ ");
+
+      if (0 < input && input <= payTypeList.size()) {
+        return payTypeList.get(input - 1);
+      }
+      System.out.println();
+      System.out.println("올바른 번호를 입력해주세요");
+
+    }
+  }
+
   public static List<VolunteerAttachedFile> promptFileUpload() {
     System.out.println();
 
@@ -169,30 +196,8 @@ public class GeneralHelper {
         return fileList;
       }
     }
-
-    // 향후 확장성을 위해 나둠 지금은 필요없음
-    //  public Status promptStatus() throws Exception {
-    //
-    //    List<Status> statusList = generalDao.findAllStatus();
-    //
-    //    System.out.println(" ▶ 신청상태 ");
-    //    System.out.println();
-    //
-    //    while (true) {
-    //      for (int i = 0; i < statusList.size(); i++) {
-    //        Status status = statusList.get(i);
-    //        System.out.printf("%d ▶ %s\n", i + 1, status.getTitle());
-    //      }
-    //
-    //      int input = Prompt.inputInt("상태 ▶ ");
-    //
-    //      if (0 < input && input < statusList.size()) {
-    //        return statusList.get(input - 1);
-    //      }
-    //      System.out.println("올바른 번호를 입력해주세요");
-    //    }
-    //  }
   }
+
 
   public static List<VolunteerBoardAttachedFile> promptBoardFileUpload() {
     System.out.println();
@@ -213,8 +218,30 @@ public class GeneralHelper {
       fileList.add(filepath);
 
     }
-
   }
+
+  // 향후 확장성을 위해 나둠 지금은 필요없음
+  //  public Status promptStatus() throws Exception {
+  //
+  //    List<Status> statusList = generalDao.findAllStatus();
+  //
+  //    System.out.println(" ▶ 신청상태 ");
+  //    System.out.println();
+  //
+  //    while (true) {
+  //      for (int i = 0; i < statusList.size(); i++) {
+  //        Status status = statusList.get(i);
+  //        System.out.printf("%d ▶ %s\n", i + 1, status.getTitle());
+  //      }
+  //
+  //      int input = Prompt.inputInt("상태 ▶ ");
+  //
+  //      if (0 < input && input < statusList.size()) {
+  //        return statusList.get(input - 1);
+  //      }
+  //      System.out.println("올바른 번호를 입력해주세요");
+  //    }
+  //  }
 }
 
 

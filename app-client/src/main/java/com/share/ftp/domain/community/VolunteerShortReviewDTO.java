@@ -1,42 +1,22 @@
 package com.share.ftp.domain.community;
 
-import java.io.Serializable;
 import java.sql.Date;
-import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 
-@SuppressWarnings("serial")
-public class VolunteerShortReviewDTO implements Serializable {
+public class VolunteerShortReviewDTO {
   private int no;
   private String content;
   private JoinDTO owner;
+  private VolunteerRequestDTO volNo;
   private Date registeredDate;
 
 
 
   @Override
   public String toString() {
-    return "CommReviewDTO [no=" + no + ", content=" + content + ", owner=" + owner
-        + ", registeredDate=" + registeredDate + "]";
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(content, no, owner, registeredDate);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    VolunteerShortReviewDTO other = (VolunteerShortReviewDTO) obj;
-    return Objects.equals(content, other.content) && no == other.no
-        && Objects.equals(owner, other.owner)
-        && Objects.equals(registeredDate, other.registeredDate);
+    return "VolunteerShortReviewDTO [no=" + no + ", content=" + content + ", owner=" + owner
+        + ", volNo=" + volNo + ", registeredDate=" + registeredDate + "]";
   }
 
   public int getNo() {
@@ -57,11 +37,19 @@ public class VolunteerShortReviewDTO implements Serializable {
   public void setOwner(JoinDTO owner) {
     this.owner = owner;
   }
+  public VolunteerRequestDTO getVolNo() {
+    return volNo;
+  }
+  public void setVolNo(VolunteerRequestDTO volNo) {
+    this.volNo = volNo;
+  }
   public Date getRegisteredDate() {
     return registeredDate;
   }
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
+
+
 
 }
