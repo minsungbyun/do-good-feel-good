@@ -46,6 +46,9 @@ public class DonationBoardUpdateHandler implements Command {
 
     String title = Prompt.inputString(String.format("제목(%s) ▶ ", donationBoard.getTitle()));
     String content = Prompt.inputString(String.format("내용(%s) ▶ ", donationBoard.getContent()));
+    String tel = Prompt.inputString(String.format("전화(%s) ▶ ", donationBoard.getTel()));
+    String email = Prompt.inputString(String.format("이메일(%s) ▶ ", donationBoard.getEmail()));
+    long moneyTaget = Prompt.inputLong(String.format("목표금액(%s) ▶ ", donationBoard.getMoneyTarget()));
     //    String fileUpload = Prompt.inputString(String.format("첨부파일(%s) ▶ ", donationBoard.getFileUpload()));
     donationBoard.setFileUpload(DonationBoardHelper.promptFileUpload());
 
@@ -71,6 +74,9 @@ public class DonationBoardUpdateHandler implements Command {
 
     donationBoard.setTitle(title);
     donationBoard.setContent(content);
+    donationBoard.setTel(tel);
+    donationBoard.setEmail(email);
+    donationBoard.setMoneyTarget(moneyTaget);
 
     try {
       donationBoardDao.update(donationBoard);
