@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.community;
 
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.VolunteerBoardDao;
+import com.share.ftp.domain.community.VolunteerBoardAttachedFile;
 import com.share.ftp.domain.community.VolunteerBoardDTO;
 import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.handler.Command;
@@ -41,11 +42,14 @@ public class VolunteerBoardDetailHandler implements Command {
       System.out.printf("아이디 ▶ %s\n", volunteerBoardDTO.getOwner().getId());
       System.out.printf("제목 ▶ %s\n", volunteerBoardDTO.getTitle());
       System.out.printf("내용 ▶ %s\n", volunteerBoardDTO.getContent());
-      System.out.printf("첨부파일 ▶ %s\n", volunteerBoardDTO.getFileUpload());
 
       volunteerBoardDTO.setViewCount(volunteerBoardDTO.getViewCount() + 1);
       System.out.printf("조회수 ▶ %d\n", volunteerBoardDTO.getViewCount());
       //      System.out.printf("좋아요♡  %d\n", volunteerBoardDTO.getLike());
+
+      for (VolunteerBoardAttachedFile file : volunteerBoardDTO.getFileUpload()) {
+        System.out.printf("%s\n", file.getFilepath());
+      }
 
       volunteerBoardDao.updateCount(no);
       sqlSession.commit();
