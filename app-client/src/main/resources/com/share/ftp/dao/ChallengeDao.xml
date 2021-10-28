@@ -19,6 +19,11 @@
       <result column="wish_name" property="name"/>
     </association>
     
+    <collection property="fileUpload" ofType="challengeAttachedFile">
+      <id column="challenge_file_no" property="no"/>
+      <result column="filepath" property="filepath"/>
+    </collection>
+    
     <collection property="members" ofType="joinDTO">
       <id column="user_no" property="no"/>
       <result column="user_id" property="id"/>
@@ -42,9 +47,15 @@
     order by challenge_no desc
   </select>
   
-  <insert id="insert" parameterType="ChallengeDTO">
+  <insert id="insert" parameterType="ChallengeDTO"
+          useGeneratedKeys="true" keyColumn="challenge_no" keyProperty="no">
     insert into ftp_challenge(title,content,start_dt,end_dt,created_dt) 
     values(#{title},#{content},#{startDate},#{endDate}, curdate())
+  </insert>
+  
+  <insert id="insertFile">
+    insert into ftp_challenge_file(challenge_no,filepath)
+    values(#{challengeNo},#{filepath})
   </insert>
   
   <insert id="insertUser">
@@ -85,11 +96,13 @@
      c.created_dt,
      u.user_no user_no,
      u.name user_name,
-     u.id user_id
+     u.id user_id,
+     f.filepath
     from
      ftp_challenge c
      left outer join ftp_challenge_apply cu on c.challenge_no=cu.challenge_no
      left outer join ftp_user u on cu.user_no=u.user_no
+     left outer join ftp_challenge_file f on c.challenge_no=f.challenge_no
     where 
       c.challenge_no=#{values}
   </select>

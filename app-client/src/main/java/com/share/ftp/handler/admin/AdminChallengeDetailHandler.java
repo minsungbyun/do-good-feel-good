@@ -1,9 +1,11 @@
 package com.share.ftp.handler.admin;
 
 import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.domain.admin.ChallengeAttachedFile;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
+import com.share.util.GeneralHelper;
 import com.share.util.Prompt;
 
 public class AdminChallengeDetailHandler implements Command {
@@ -31,23 +33,21 @@ public class AdminChallengeDetailHandler implements Command {
 
     request.setAttribute("challengeNo", challengeNo); 
 
-    System.out.printf("챌린지 번호 ▶ %d\n "
-        + "제목[댓글] ▶ %s[%d]\n"
-        //        + "제목[댓글] ▶ %s\n"
-        + "내용 ▶ %s\n"
-        //        + "작성자 ▶ %s\n"
-        + "참여인원 ▶ %d\n"
-        + "참여기간 ▶ %s ~ %s\n", 
-        challengeDTO.getNo(), 
-        //          challengeDTO.getAdminId(), 
-        challengeDTO.getTitle(), 
-        challengeDTO.getReviewCount(), 
-        challengeDTO.getContent(),
-        //        challengeDTO.getAdmin().getName(),
-        challengeDTO.getTotalJoinCount(),
-        //          challengeDTO.getFileUpload(), 
-        challengeDTO.getStartDate(),
-        challengeDTO.getEndDate());
+    System.out.println();
+    System.out.printf("챌린지 번호 ▶ %d\n",  challengeDTO.getNo());
+    System.out.printf("제목 ▶ %s\n", challengeDTO.getTitle());
+    System.out.printf("내용 ▶ %s\n", challengeDTO.getContent());
+    System.out.printf("댓글수 ▶ %d\n", challengeDTO.getReviewCount());
+    System.out.printf("참여자수 ▶ %d\n", challengeDTO.getTotalJoinCount());
+    for (ChallengeAttachedFile file : challengeDTO.getFileUpload()) {
+      System.out.printf("첨부파일 ▶ %s\n", file.getFilepath());
+    }
+    System.out.printf("시작일 ▶ %s\n", challengeDTO.getStartDate());
+    System.out.printf("종료일 ▶ %s\n", challengeDTO.getEndDate());
+    System.out.printf("챌린지기간 ▶ %d일\n",  ((((challengeDTO.getEndDate().getTime() - challengeDTO.getStartDate().getTime()) / 1000)) / (24*60*60)));
+    System.out.printf(GeneralHelper.getRemainTime(challengeDTO.getEndDate().getTime() - System.currentTimeMillis()));
+    System.out.printf("등록날짜 ▶ %s\n", challengeDTO.getRegisteredDate());
+    System.out.println();
 
     while (true) {
       System.out.println();

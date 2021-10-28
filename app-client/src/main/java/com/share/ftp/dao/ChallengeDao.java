@@ -8,6 +8,9 @@ public interface ChallengeDao {
 
   // 챌린지 관련
   void insert(ChallengeDTO addChallenge) throws Exception;      
+  void insertFile(
+      @Param("challengeNo") int challengeNo,
+      @Param("filepath") String filepath) throws Exception;
   List<ChallengeDTO> findAll() throws Exception;      
   void update(ChallengeDTO updateChallenge) throws Exception;          
   void delete(int challengeNo) throws Exception;          

@@ -22,7 +22,7 @@ public class MyChallengeWishHandler implements Command {
 
     System.out.println("[ 나의 찜한목록 ]");
     for (ChallengeDTO challengeWish : challengeWishList) {
-      if (challengeWish.getWish().equals(AuthLoginHandler.getLoginUser())) {
+      if (challengeWish.getWish().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
         System.out.printf("%d, %s[%d], %d, %s ~ %s\n", 
             challengeWish.getNo(),
             //          challengeDTO.getAdminId(), 

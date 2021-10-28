@@ -37,11 +37,17 @@ public class ChallengeWishHandler implements Command {
 
       } else if (input.equalsIgnoreCase("y")) {
         System.out.println();
-        challengeList.setWish(AuthLoginHandler.getLoginUser());
-        challengeDao.insertWish(challengeList.getNo(), AuthLoginHandler.getLoginUser().getNo());
-        sqlSession.commit();
-        System.out.println("[  🎈 관심 챌린지로 등록되었습니다. 🎈  ]");
-        return;
+
+        try {
+          challengeList.setWish(AuthLoginHandler.getLoginUser());
+          challengeDao.insertWish(challengeList.getNo(), AuthLoginHandler.getLoginUser().getNo());
+          sqlSession.commit();
+          System.out.println("[  🎈 관심 챌린지로 등록되었습니다. 🎈  ]");
+          return;
+        } catch (Exception e) {
+          System.out.println("이미 찜한 챌린지입니다!");
+          return;
+        }
 
       } else {
         System.out.println("y 또는 n을 입력하세요.");
