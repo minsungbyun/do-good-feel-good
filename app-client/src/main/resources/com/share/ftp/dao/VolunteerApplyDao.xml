@@ -24,9 +24,9 @@
    </association>
    
    <collection property="members" ofType="joinDTO">
-    <id column="user_no" property="no"/>
-    <result column="user_id" property="id"/>
-    <result column="user_name" property="name"/>
+    <id column="member_no" property="no"/>
+    <result column="member_id" property="id"/>
+    <result column="member_name" property="name"/>
    </collection>
   </resultMap>
   
@@ -48,35 +48,25 @@
          ftp_vol_apply v
          inner join ftp_user u on v.user_no=u.user_no
        where
-         vol_no=#{}  
+         vol_no=#{volNo}  
    </select>
    
  
-  <select id="findAll" resultMap="VolunteerRequestDTOMap">
+  <select id="findAllApply" resultMap="VolunteerRequestDTOMap">
 		   select 
-	       v.vol_no,  
-	       v.title,
-	       v.content,
-	       v.tel,
-	       v.email,
-	       v.start_dt,
-	       v.end_dt,
-	       datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt,
-         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
-	       v.start_time,
-	       v.end_time,
-	       v.total_cnt,
-	       u.id owner_id,  
-	       u.name owner_name,  
-	       c.category_title category_title,
-	       f.filepath
+	      v.vol_no,
+	      u.user_no member_no,
+	      u.user_id member_id,
+	      u.user_name member_name,
+	      v.apply_dt,
+	      v.start_time,
+	      v.end_time,
+	      v.apply_status
 	     from
-	       ftp_vol v
-	       inner join ftp_user u on v.user_no=u.user_no
-	       inner join ftp_category c on v.category_no=c.category_no
-	       left outer join ftp_vol_file f on v.vol_no=f.vol_no
+	       ftp_vol_apply v
+	       left outer join ftp_user u on v.user_no=u.user_no
 	     order by
-	       vol_no desc 
+	       vol_no asc 
   </select>
   
   
