@@ -19,16 +19,16 @@ values(6,'eclipse', password('1'), 'eclipse', '010-6666-1111', 'eclipse@naver.co
 
 
 --개인회원
-insert into ftp_user_personal(user_personal_no, user_no, birthdate, rank)
+insert into ftp_user_personal(user_personal_no, user_no, birthdate, level)
 values(20, 3, '2020-1-1','천콩이');
 
-insert into ftp_user_personal(user_personal_no, user_no, birthdate, rank)
+insert into ftp_user_personal(user_personal_no, user_no, birthdate, level)
 values(21, 2, '2021-1-1','천이콩이');
 
-insert into ftp_user_personal(user_personal_no, user_no, birthdate, rank)
+insert into ftp_user_personal(user_personal_no, user_no, birthdate, level)
 values(22, 1, '2021-2-5','천콩이');
 
-insert into ftp_user_personal(user_personal_no, user_no, birthdate, rank)
+insert into ftp_user_personal(user_personal_no, user_no, birthdate, level)
 values(23, 6, '2021-2-5','천콩이');
 
 --단체회원
@@ -179,8 +179,7 @@ values(3,1,'2021-05-11','09:00','18:00',1);
 
 insert into ftp_vol_apply(user_no, vol_no, apply_dt, start_time, end_time, apply_status)
 values(4,2,'2021-12-11','09:00','18:00',1);
-insert into ftp_vol_apply(user_no, vol_no, apply_dt, start_time, end_time, apply_status)
-values(3,2,'2021-08-21','11:00','18:00',1);
+
 insert into ftp_vol_apply(user_no, vol_no, apply_dt, start_time, end_time, apply_status)
 values(1,3,'2021-11-11','13:00','18:00',1);
 
@@ -205,28 +204,28 @@ values(3,2,'문의합니다2');
 
 
 --카테고리 (1.비대면 2.아동 3.청소년 4.노인 5.장애인 6.동물 7.환경 8.기타)
-insert into ftp_category(category_no, category_title)
+insert into ftp_category(category_no, title)
 values(1,'비대면');
 
-insert into ftp_category(category_no, category_title)
+insert into ftp_category(category_no, title)
 values(2,'아동');
 
-insert into ftp_category(category_no, category_title)
+insert into ftp_category(category_no,title)
 values(3,'청소년');
 
-insert into ftp_category(category_no, category_title)
+insert into ftp_category(category_no, title)
 values(4,'노인');
 
-insert into ftp_category(category_no, category_title)
+insert into ftp_category(category_no, title)
 values(5,'장애인');
 
-insert into ftp_category(category_no, category_title)
+insert into ftp_category(category_no, title)
 values(6,'동물');
 
-insert into ftp_category(category_no, category_title)
+insert into ftp_category(category_no, title)
 values(7,'환경');
 
-insert into ftp_category(category_no, category_title)
+insert into ftp_category(category_no, title)
 values(8,'기타');
 
 -- 챌린지
@@ -265,31 +264,10 @@ insert into ftp_support_notice_file(notice_file_no, notice_no, filepath) values(
 
 -- 문의하기 카테고리
 -- (1.함께해요 문의 2.나눔이야기 문의 3.모금함 문의 4.챌린지 문의 5.사이트이용 문의 6.기타 문의)
-insert into ftp_support_qna_categroy(qna_category_no, category_title) values(1, '함께해요 문의');
-insert into ftp_support_qna_categroy(qna_category_no, category_title) values(2, '나눔이야기 문의');
-insert into ftp_support_qna_categroy(qna_category_no, category_title) values(3, '모금함 문의');
-insert into ftp_support_qna_categroy(qna_category_no, category_title) values(4, '챌린지 문의');
-insert into ftp_support_qna_categroy(qna_category_no, category_title) values(5, '사이트이용 문의');
-insert into ftp_support_qna_categroy(qna_category_no, category_title) values(6, '기타 문의');
+insert into ftp_support_qna_category(qna_category_no, title) values(1, '함께해요 문의');
+insert into ftp_support_qna_category(qna_category_no, title) values(2, '나눔이야기 문의');
+insert into ftp_support_qna_category(qna_category_no, title) values(3, '모금함 문의');
+insert into ftp_support_qna_category(qna_category_no, title) values(4, '챌린지 문의');
+insert into ftp_support_qna_category(qna_category_no, title) values(5, '사이트이용 문의');
+insert into ftp_support_qna_category(qna_category_no, title) values(6, '기타 문의');
 
--- 문의하기
-insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password, qna_reply, status)
-  values(1, 1, 4, '문의1', '내용1', password('1'), '문의하기 답글1', 1);
-insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password, qna_reply, status)
-  values(2, 4, 2, '문의2', '내용2', password('1'), '문의하기 답글2', 1);
-insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password, status)
-  values(3, 6, 5, '문의3', '내용3', password('1'), 0);
-insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password)
-  values(4, 3, 4, '문의4', '내용4', password('1'));
-insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password)
-  values(5, 1, 4, '문의5', '내용5', password('1'));
-insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password, qna_reply)
-  values(6, 5, 3, '문의6', '내용6', password('1'), '문의하기 답글6');
-
--- 문의하기 첨부파일
-insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(1, 1, 'qna01_1.jpg');
-insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(2, 1, 'qna01_2.png');
-insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(3, 2, 'qna02_1.gif');
-insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(4, 6, 'qna06_1.gif');
-insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(5, 6, 'qna06_2.jpg');
-insert into ftp_support_qna_file(qna_file_no, qna_no, filepath) values(6, 6, 'qna06_3.gif');

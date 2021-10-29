@@ -41,48 +41,33 @@ public class DonationBoardApplyHandler implements Command {
 
 
     while (true) {
+
+      DonationBoardDTO donationBoardDTO = new DonationBoardDTO();
+
+      System.out.println();
+      donationBoardDTO.setOrgNo(orgDTO.getOrgNo());
+      donationBoardDTO.setCategory(new GeneralHelper(generalDao).promptCategory());
+      donationBoardDTO.setLeader(orgDTO);
+      donationBoardDTO.setTitle(Prompt.inputString("제목 ▶"));
+      donationBoardDTO.setContent(Prompt.inputString("내용 ▶ "));
+      donationBoardDTO.setTel(Prompt.inputString("전화번호 ▶ "));
+      donationBoardDTO.setEmail(Prompt.inputString("이메일 ▶ "));
+      donationBoardDTO.setMoneyTarget(Prompt.inputLong("목표금액 ▶ "));
+      donationBoardDTO.setStartDate(Prompt.inputDate("시작일(yyyy-mm-dd) ▶ "));
+      donationBoardDTO.setEndDate(Prompt.inputDate("종료일(yyyy-mm-dd) ▶ "));
+      donationBoardDTO.setFileUpload(DonationBoardHelper.promptFileUpload());
+      donationBoardDTO.setStatus(WAITING);
+
       try {
-
-        DonationBoardDTO donationBoardDTO = new DonationBoardDTO();
-
-        System.out.println();
-        donationBoardDTO.setOrgNo(orgDTO.getOrgNo());
-        donationBoardDTO.setCategory(new GeneralHelper(generalDao).promptCategory());
-        donationBoardDTO.setLeader(orgDTO);
-        donationBoardDTO.setTitle(Prompt.inputString("제목 ▶"));
-        donationBoardDTO.setContent(Prompt.inputString("내용 ▶ "));
-        donationBoardDTO.setTel(Prompt.inputString("전화번호 ▶ "));
-        donationBoardDTO.setEmail(Prompt.inputString("이메일 ▶ "));
-        donationBoardDTO.setMoneyTarget(Prompt.inputLong("목표금액 ▶ "));
-        donationBoardDTO.setStartDate(Prompt.inputDate("시작일(yyyy-mm-dd) ▶ "));
-        donationBoardDTO.setEndDate(Prompt.inputDate("종료일(yyyy-mm-dd) ▶ "));
-        donationBoardDTO.setFileUpload(DonationBoardHelper.promptFileUpload());
-        donationBoardDTO.setStatus(WAITING);
-
-        try {
-          donationBoardDao.insert(donationBoardDTO);
-          for (DonationBoardAttachedFile donationBoardAttachedFile : donationBoardDTO.getFileUpload()) {
-            donationBoardDao.insertFile(donationBoardDTO.getNo(), donationBoardAttachedFile.getFilepath());
-          }
-          sqlSession.commit();
-
-        } catch (Exception e) {
-          e.printStackTrace();
-          sqlSession.rollback();
+        donationBoardDao.insert(donationBoardDTO);
+        for (DonationBoardAttachedFile donationBoardAttachedFile : donationBoardDTO.getFileUpload()) {
+          donationBoardDao.insertFile(donationBoardDTO.getNo(), donationBoardAttachedFile.getFilepath());
         }
-
-      } catch (NumberFormatException e) {
-        System.out.println("--------------------------------------------------------------");
-        System.out.println("올바른 숫자를 입력하세요");
-        System.out.println("--------------------------------------------------------------");
-        continue; // 나중에 설정할거
+        sqlSession.commit();
 
       } catch (Exception e) {
-        System.out.println("--------------------------------------------------------------");
-        //      System.out.printf("오류 발생: %s\n", e.getClass().getName());
-        System.out.println("다시 입력 바랍니다.");
-        System.out.println("--------------------------------------------------------------");
-        continue;
+        e.printStackTrace();
+        sqlSession.rollback();
       }
       break;
     }
