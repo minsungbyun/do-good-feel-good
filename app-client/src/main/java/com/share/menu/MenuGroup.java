@@ -100,15 +100,12 @@ public class MenuGroup extends Menu {
 
       } catch (NumberFormatException e) {
         System.out.println("올바른 숫자를 입력해주세요");
-        e.printStackTrace();
 
       } catch (IndexOutOfBoundsException e) {
         System.out.println("올바른 숫자를 입력해주세요");
-        e.printStackTrace();
 
       } catch (Exception e) {
         System.out.println("올바른 숫자를 입력해주세요");
-        e.printStackTrace();
       }
     }
   }
