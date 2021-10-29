@@ -8,19 +8,14 @@
   <resultMap type="volunteerRequestDTO" id="VolunteerRequestDTOMap">
     <id column="vol_no" property="no"/> 
     <result column="user_no" property="userNo"/>
-    <result column="title" property="title"/>
-    <result column="content" property="content"/>
-    <result column="tel" property="tel"/>
-    <result column="email" property="email"/>
-    <result column="start_dt" property="startDate"/>
-    <result column="end_dt" property="endDate"/>
+    <result column="apply_dt" property="applyDate"/>
     <result column="start_time" property="startTime"/>
     <result column="end_time" property="endTime"/>
-    <result column="total_cnt" property="limitNum"/>
-    <result column="approval" property="status"/>
+   <result column="apply_status" property="applyStatus"/>
     <result column="note" property="note"/> 
     
-    <result column="current_cnt" property="currentNum"/> 
+    
+   <result column="vol_apply_count" property="getCount"/>
    
    <association property="owner" javaType="joinDTO">
 	   <id column="owner_no" property="no"/>
@@ -28,71 +23,34 @@
      <result column="owner_name" property="name"/>
    </association>
    
-   <association property="wish" javaType="joinDTO">
-     <id column="wish_no" property="no"/>
-     <result column="wish_id" property="id"/>
-     <result column="wish_name" property="name"/>
-   </association>
-   
-   <association property="category" javaType="category">
-     <id column="category_no" property="no"/>
-     <result column="category_title" property="title"/>
-   </association>
-   
-   <collection property="fileUpload" ofType="volunteerAttachedFile">
-     <id column="vol_file_no" property="no"/>
-     <result column="filepath" property="filepath"/>
-   </collection>
-   
    <collection property="members" ofType="joinDTO">
     <id column="user_no" property="no"/>
     <result column="user_id" property="id"/>
     <result column="user_name" property="name"/>
    </collection>
   </resultMap>
-
-  <resultMap type="category" id="CategoryMap">
-    <id column="category_no" property="no"/> 
-    <result column="category_title" property="title"/>
-  </resultMap>
-
   
-  <insert id="insert" parameterType="VolunteerRequestDTO" 
-          useGeneratedKeys="true" keyColumn="vol_no" keyProperty="no">
-    insert into ftp_vol(
-	    user_no,
-	    vol_no,
-	    apply_dt,
-	    start_time,
-	    end_time,
-	    tel,
-	    email,
-	    start_dt,
-	    end_dt,
-	    start_time,
-	    end_time,
-	    total_cnt,
-	    approval)
-    values(
-	    #{userNo},
-	    #{category.no},
-	    #{title},
-	    #{content},
-	    #{tel},
-	    #{email},
-	    #{startDate},
-	    #{endDate},
-	    #{startTime},
-	    #{endTime},
-	    #{limitNum},
-	    #{status})
+  
+   <insert id="insert" parameterType="volunteerRequestDTO">
+    insert into ftp_vol_apply(user_no,vol_no,apply_dt,start_time,end_time,apply_status)
+    values(#{userNo},#{no},#{applyDate},#{startTime},#{endTime},#{applyStatus})
   </insert>
   
-  <insert id="insertMember" parameterType="string">
-    insert into ftp_vol_file(vol_no,user_no)
-    values(#{no},#{filepath})
+   <insert id="insertUser" parameterType="volunteerRequestDTO">
+    insert into ftp_vol_apply(user_no,vol_no,apply_dt,start_time,end_time,apply_status)
+    values(#{userNo},#{no},#{applyDate},#{startTime},#{endTime},#{applyStatus})
   </insert>
   
+   <select id="getCount" resultMap="VolunteerRequestDTOMap" parameterType="int">
+     select
+         count(v.user_no) vol_apply_count 
+       from
+         ftp_vol_apply v
+         inner join ftp_user u on v.user_no=u.user_no
+       where
+         vol_no=#{}  
+   </select>
+   
  
   <select id="findAll" resultMap="VolunteerRequestDTOMap">
 		   select 

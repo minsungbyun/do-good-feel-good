@@ -154,7 +154,7 @@
          inner join ftp_user p on p.user_no=o.user_no
          left outer join ftp_funding_file f on d.funding_no=f.funding_no
 	     where
-	       d.status=1 and d.funding_no=#{no}
+	       d.status=1 
 	     order by
 	       d.funding_no desc
    </select>
@@ -182,7 +182,7 @@
          inner join ftp_user p on p.user_no=o.user_no
          left outer join ftp_funding_file f on d.funding_no=f.funding_no
        where
-          d.status=1
+          d.status=2
        order by
           d.funding_no desc
    </select>
@@ -191,7 +191,7 @@
     date_format(end_dt,'%Y-%m-%d %H:%i:%s'), date_format(curdate(),'%Y-%m-%d %H:%i:%s') datediff,
     -->
     
-   <select id="totalDate" resultMap="DonationBoardDTOMap" parameterType="int">
+   <select id="totalDate" resultType="int" parameterType="int">
       select 
         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt
       from
@@ -200,7 +200,7 @@
         d.funding_no=#{donationNo}
     </select>
     
-   <select id="remainDate" resultMap="DonationBoardDTOMap" parameterType="int">
+   <select id="remainDate" resultType="int" parameterType="int">
       select 
         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt
       from
@@ -281,16 +281,12 @@
          inner join ftp_category c on d.category_no=c.category_no
          inner join ftp_user p on p.user_no=o.user_no
          left outer join ftp_funding_file f on d.funding_no=f.funding_no
-     <where>
-      <if test="title != null">
-         title like concat('%', #{value}, '%')
-      </if>
-      <if test="content != null">
-         or content like concat('%', #{value}, '%') 
-      </if>
-     </where>
-     order by
-      d.funding_no desc
+       where
+		     d.title like(concat('%',#{keyword},'%'))
+		     or d.content like (concat('%',#{keyword},'%'))
+		     or p.name like (concat('%',#{keyword},'%'))         
+       order by
+         d.funding_no desc
   </select>
   
    <update id="update" parameterType="DonationBoardDTO">

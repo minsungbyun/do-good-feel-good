@@ -4,6 +4,7 @@ import static com.share.util.General.check.APPLIED;
 import java.text.DecimalFormat;
 import java.util.Collection;
 import com.share.ftp.dao.DonationBoardDao;
+import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.domain.donation.DonationBoardDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -11,14 +12,17 @@ import com.share.ftp.handler.CommandRequest;
 public class DonationBoardListHandler implements Command {
 
   DonationBoardDao donationBoardDao;
+  DonationRegisterDao donationRegisterDao;
 
-  public DonationBoardListHandler(DonationBoardDao donationBoardDao) {
+  public DonationBoardListHandler(DonationBoardDao donationBoardDao, DonationRegisterDao donationRegisterDao) {
     this.donationBoardDao = donationBoardDao;
+    this.donationRegisterDao = donationRegisterDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     DecimalFormat formatter = new DecimalFormat("###,###,###");
+
 
     Collection<DonationBoardDTO> donationBoardList = donationBoardDao.findAll();
 
@@ -34,7 +38,7 @@ public class DonationBoardListHandler implements Command {
     for (DonationBoardDTO donationBoardDTO : donationBoardList) {
       if (donationBoardDTO.getStatus() == APPLIED) {
         System.out.printf("개설번호: %d\n모금함 분류: %s\n주최자: %s\n제목: %s\n내용: %s\n"
-            + "개설기간: %s ~ %s\n목표금액: %s원\n승인여부: %d\n",
+            + "개설기간: %s ~ %s\n목표금액: %s원\n",
             donationBoardDTO.getNo(), 
             donationBoardDTO.getCategory().getTitle(), 
             donationBoardDTO.getLeader().getName(),
@@ -42,10 +46,9 @@ public class DonationBoardListHandler implements Command {
             donationBoardDTO.getContent(), 
             donationBoardDTO.getStartDate(),
             donationBoardDTO.getEndDate(),
-            formatter.format(donationBoardDTO.getMoneyTarget()),
-            donationBoardDTO.getStatus());
-        //        System.out.printf("모금함 기부 기간 ▶ %d일\n",  ((((donationBoardDTO.getRegisteredEndDate().getTime() - donationBoardDTO.getRegisteredStartDate().getTime()) / 1000)) / (24*60*60)));
-        //        System.out.printf(getRemainTime(donationBoardDTO.getRegisteredEndDate().getTime() - System.currentTimeMillis()));
+            formatter.format(donationBoardDTO.getMoneyTarget()));
+        //        long remainMoney = donationRegisterDao.findByRemainMoney(donationBoardDTO.getNo());
+        //        System.out.printf("남은금액: %s\n", formatter.format(remainMoney));
         System.out.println("--------------------------------------------------------------");
       } 
     }

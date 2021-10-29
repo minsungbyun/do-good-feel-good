@@ -1,5 +1,6 @@
 package com.share.ftp.handler.personal.support;
 
+import static com.share.util.General.qnaStatus.UNANSWERED;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.dao.QuestionDao;
@@ -37,22 +38,19 @@ public class QuestionAddHandler implements Command {
     questionListDTO.setOwner(AuthLoginHandler.getLoginUser());
     questionListDTO.setFileUpload(GeneralHelper.promptQnaFileUpload());
     questionListDTO.setQnaPassword(Prompt.inputString("비밀번호(숫자4자리): "));
+    questionListDTO.setStatus(UNANSWERED);
 
 
     try {
-      System.out.println("등록");
       questionDao.insert(questionListDTO);
-      System.out.println("등록2");
       for (QuestionAttachedFile questionAttachedFile : questionListDTO.getFileUpload()) {
         questionDao.insertFile(questionListDTO.getNo(), questionAttachedFile.getFilepath());
-        System.out.println("첨부등록");
       }
       sqlSession.commit();
 
     } catch (Exception e) {
       e.printStackTrace();
       sqlSession.rollback();
-      System.out.println("롤백");
     }
 
     System.out.println();
@@ -60,10 +58,3 @@ public class QuestionAddHandler implements Command {
 
   }
 }
-//      } catch (NumberFormatException e) {
-//        System.out.println("------------------------------------");
-//        System.out.println("문의 분야를 선택해주세요.");
-//        System.out.println("------------------------------------");
-//        continue;
-//      }
-//      break;
