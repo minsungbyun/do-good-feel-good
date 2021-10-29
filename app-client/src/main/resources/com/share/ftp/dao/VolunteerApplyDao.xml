@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.share.ftp.dao.VolunteerApplyDao">
+  
+  <resultMap type="volunteerRequestDTO" id="VolunteerRequestDTOMap">
+    <id column="vol_no" property="no"/> 
+    <result column="user_no" property="userNo"/>
+    <result column="apply_dt" property="applyDate"/>
+    <result column="start_time" property="startTime"/>
+    <result column="end_time" property="endTime"/>
+   <result column="apply_status" property="applyStatus"/>
+    <result column="note" property="note"/> 
+    
+    
+   <result column="vol_apply_count" property="getCount"/>
+   
+   <association property="owner" javaType="joinDTO">
+	   <id column="owner_no" property="no"/>
+	   <result column="owner_id" property="id"/>
+     <result column="owner_name" property="name"/>
+   </association>
+   
+   <collection property="members" ofType="joinDTO">
+    <id column="member_no" property="no"/>
+    <result column="member_id" property="id"/>
+    <result column="member_name" property="name"/>
+   </collection>
+  </resultMap>
+  
+  
+   <insert id="insert" parameterType="volunteerRequestDTO">
+    insert into ftp_vol_apply(user_no,vol_no,apply_dt,start_time,end_time,apply_status)
+    values(#{userNo},#{no},#{applyDate},#{startTime},#{endTime},#{applyStatus})
+  </insert>
+  
+   <insert id="insertUser" parameterType="volunteerRequestDTO">
+    insert into ftp_vol_apply(user_no,vol_no,apply_dt,start_time,end_time,apply_status)
+    values(#{userNo},#{no},#{applyDate},#{startTime},#{endTime},#{applyStatus})
+  </insert>
+  
+   <select id="getCount" resultMap="VolunteerRequestDTOMap" parameterType="int">
+     select
+         count(v.user_no) vol_apply_count 
+       from
+         ftp_vol_apply v
+         inner join ftp_user u on v.user_no=u.user_no
+       where
+         vol_no=#{volNo}  
+   </select>
+   
+ 
+  <select id="findAllApply" resultMap="VolunteerRequestDTOMap">
+		   select 
+	      v.vol_no,
+	      u.user_no member_no,
+	      u.user_id member_id,
+	      u.user_name member_name,
+	      v.apply_dt,
+	      v.start_time,
+	      v.end_time,
+	      v.apply_status
+	     from
+	       ftp_vol_apply v
+	       left outer join ftp_user u on v.user_no=u.user_no
+	     order by
+	       vol_no asc 
+  </select>
+  
+  
+   
+   
+   
+  
+  
+  <select id="findByVolunteerNo" resultMap="VolunteerRequestDTOMap" parameterType="int">
+       select 
+         v.vol_no,  
+         v.title,
+         v.content,
+         v.tel,
+         v.email,
+         v.start_dt,
+         v.end_dt,
+         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) datediff,
+         v.start_time,
+         v.end_time,
+         timediff(v.end_time,v.start_time) timediff,
+         v.total_cnt,
+         u.id owner_id,
+         u.name owner_name,  
+         c.category_title category_title,
+         f.filepath
+       from
+         ftp_vol v
+         inner join ftp_user u on v.user_no=u.user_no
+         inner join ftp_category c on v.category_no=c.category_no
+         left outer join ftp_vol_file f on v.vol_no=f.vol_no
+       where 
+         v.vol_no=#{volNo}
+  </select>
+ 
+ 
+ 
+  <select id="findByKeyword" resultMap="VolunteerRequestDTOMap" parameterType="string">
+     select 
+         v.vol_no,  
+         v.title,
+         v.content,
+         v.tel,
+         v.email,
+         v.start_dt,
+         v.end_dt,
+         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) datediff,
+         v.start_time,
+         v.end_time,
+         timediff(v.end_time,v.start_time) timediff,
+         v.total_cnt,
+         u.id owner_id,
+         u.name owner_name,  
+         c.category_title category_title,
+         f.filepath
+       from
+         ftp_vol v
+         inner join ftp_user u on v.user_no=u.user_no
+         inner join ftp_category c on v.category_no=c.category_no
+         left outer join ftp_vol_file f on v.vol_no=f.vol_no
+     <where>
+      <if test="title != null">
+         title like concat('%', #{value}, '%')
+      </if>
+      <if test="content != null">
+         or content like concat('%', #{value}, '%') 
+      </if>
+     </where>
+     order by
+      v.vol_no desc
+  </select>
+  
+   <update id="update" parameterType="VolunteerRequestDTO">
+	   update ftp_vol set
+		    user_no=#{userNo},
+	      category_no=#{category.no},
+	      title=#{title},
+	      content=#{content},
+	      tel=#{tel},
+	      email=#{email},
+	      start_dt=#{startDate},
+	      end_dt=#{endDate},
+	      start_time=#{startTime},
+	      end_time=#{endTime},
+	      total_cnt=#{limitNum}
+	   where 
+	      vol_no=#{no}
+  </update>
+  
+  <update id="updateCount" parameterType="int">
+    update ftp_vol set
+      current_cnt = current_cnt + 1
+    where vol_no=#{no}
+  </update>
+  
+   <update id="updateFile" parameterType="string">
+	   update ftp_vol_file set
+		    vol_no=#{no},
+	      filepath=#{filepath}
+	   where 
+	      vol_no=#{no}
+  </update>
+  
+  
+  
+  <delete id="delete" parameterType="VolunteerRequestDTO">
+       delete from ftp_vol where vol_no=#{no}
+  </delete>
+</mapper>
+
+
+
+
+
+
+

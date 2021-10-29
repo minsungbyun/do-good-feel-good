@@ -6,8 +6,6 @@ import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.domain.support.QuestionListDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
-import com.share.ftp.handler.join.AuthLoginHandler;
-import com.share.util.GeneralHelper;
 import com.share.util.Prompt;
 
 public class QuestionAdminReplyHandler implements Command {
@@ -31,19 +29,16 @@ public class QuestionAdminReplyHandler implements Command {
 
     QuestionListDTO questionListDTO = new QuestionListDTO();
 
-    questionListDTO.setQnaType(adminQuestionListDTO.getQnaType());
-    questionListDTO.setTitle(Prompt.inputString("제목? "));
-    questionListDTO.setContent(Prompt.inputString("내용? "));
-    questionListDTO.setOwner(AuthLoginHandler.getLoginUser());
-    questionListDTO.setQnaPassword(adminQuestionListDTO.getQnaPassword());
-    questionListDTO.setFileUpload(GeneralHelper.promptQnaFileUpload());
+
+    //    questionListDTO.setQnaType(adminQuestionListDTO.getQnaType());
+    //    questionListDTO.setTitle(Prompt.inputString("제목? "));
+    questionListDTO.setReply(Prompt.inputString("내용? "));
+    //    questionListDTO.setQnaPassword(adminQuestionListDTO.getQnaPassword());
+    //    questionListDTO.setFileUpload(GeneralHelper.promptQnaFileUpload());
     questionListDTO.setStatus(ANSWER);
 
-    System.out.println(questionListDTO);
     questionDao.updateReply(questionListDTO);
-    System.out.println("update");
     sqlSession.commit();
-    System.out.println("commit");
 
     //    try {
     //      questionDao.insert(questionListDTO);

@@ -27,16 +27,19 @@ public class QuestionListHandler implements Command {
       System.out.println();
     }
 
-    for (QuestionListDTO questionListDTO : questionList) {
 
+    for (QuestionListDTO questionListDTO : questionList) {
       System.out.printf("%d, %s, %s, %s, %s, %d\n", 
           questionListDTO.getNo(),
           questionListDTO.getQnaType().getTitle(),
           questionListDTO.getTitle(), 
           questionListDTO.getOwner().getId(),
           questionListDTO.getRegisteredDate(),
-          questionListDTO.getViewCount());
-      //                questionListDTO.getStatus());
+          questionListDTO.getViewCount(),
+          questionListDTO.getStatus());
+      if (questionListDTO.getReply() != null) {
+        System.out.println("답변드립니다.");
+      }
 
       for (QuestionAttachedFile questionAttachedFile : questionListDTO.getFileUpload()) {
         System.out.printf("%s\n", questionAttachedFile.getFilepath());

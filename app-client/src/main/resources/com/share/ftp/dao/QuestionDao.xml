@@ -12,7 +12,7 @@
     <result column="password" property="qnaPassword"/>
     <result column="created_dt" property="registeredDate"/>
     <result column="view_cnt" property="viewCount"/>
-    <result column="qna_reply" property="qnaReply"/>
+    <result column="reply" property="reply"/>
     <result column="status" property="status"/>
     
     <association property="owner" javaType="joinDTO">
@@ -22,7 +22,7 @@
     
     <association property="qnaType" javaType="questionCategory">
       <id column="qna_category_no" property="no"/>
-      <result column="category_title" property="title"/>
+      <result column="title" property="title"/>
     </association>
 
     <collection property="fileUpload" ofType="questionAttachedFile">
@@ -34,7 +34,7 @@
   
   <resultMap type="questionCategory" id="QuestionCategoryMap">    
     <id column="qna_category_no" property="no"/>
-    <result column="category_title" property="title"/>
+    <result column="title" property="title"/>
   </resultMap>
   
   <select id="findAll" resultMap="QuestionDTOMap">
@@ -47,12 +47,12 @@
      q.qna_reply,
      q.status,
      u.id owner_id,
-     c.category_title category_title,
+     c.title category_title,
      f.filepath
     from
      ftp_support_qna q
      inner join ftp_user u on q.user_no=u.user_no
-     inner join ftp_support_qna_categroy c on q.qna_category_no=c.qna_category_no
+     inner join ftp_support_qna_category c on q.qna_category_no=c.qna_category_no
      left outer join ftp_support_qna_file f on q.qna_no=f.qna_no
     order by
       qna_no desc
@@ -80,7 +80,6 @@
     insert into ftp_support_qna_file(qna_no,filepath)
     values(#{qnaNo},#{filepath})
   </insert>
-
    
   <select id="findByNo" resultMap="QuestionDTOMap" parameterType="int">
    select 
@@ -92,12 +91,12 @@
      q.view_cnt,
      q.status,
      u.id owner_id,
-     c.category_title category_title,
+     c.title category_title,
      f.filepath
     from
      ftp_support_qna q
      inner join ftp_user u on q.user_no=u.user_no
-     inner join ftp_support_qna_categroy c on q.qna_category_no=c.qna_category_no
+     inner join ftp_support_qna_category c on q.qna_category_no=c.qna_category_no
      left outer join ftp_support_qna_file f on q.qna_no=f.qna_no
     where
       q.qna_no=#{no}
@@ -121,12 +120,12 @@
         q.created_dt,
         q.view_cnt,
         u.id owner_id,
-        c.category_title category_title,
+        c.title category_title,
         f.filepath
       from
         ftp_support_qna q
         inner join ftp_user u on q.user_no=u.user_no
-        inner join ftp_support_qna_categroy c on q.qna_category_no=c.qna_category_no
+        inner join ftp_support_qna_category c on q.qna_category_no=c.qna_category_no
         left outer join ftp_support_qna_file f on q.qna_no=f.qna_no
      <where>
       <if test="title != null">
@@ -162,7 +161,7 @@
   
   <update id="updateReply">
       update ftp_support_qna set
-          qna_reply=#{qnaReply}
+          reply=#{reply}
       where 
          qna_no=#{no}
   </update>

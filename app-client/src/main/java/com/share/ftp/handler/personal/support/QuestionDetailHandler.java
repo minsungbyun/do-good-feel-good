@@ -42,12 +42,18 @@ public class QuestionDetailHandler implements Command {
         System.out.printf("내용: %s\n", questionListDTO.getContent());
         //        System.out.printf("첨부파일: %s\n", questionListDTO.getFileUpload());
         System.out.printf("등록일: %s\n", questionListDTO.getRegisteredDate());
-
         questionListDTO.setViewCount(questionListDTO.getViewCount() + 1);
         System.out.printf("조회수: %d\n", questionListDTO.getViewCount());
-
         for (QuestionAttachedFile questionAttachedFile : questionListDTO.getFileUpload()) {
           System.out.printf("첨부파일: %s\n", questionAttachedFile.getFilepath());
+        }
+
+        if (questionListDTO.getReply() != null) {
+          System.out.println("-------------------------------------");
+          System.out.printf("제목: %s번 문의 답변드립니다.\n",
+              questionListDTO.getNo());
+          System.out.printf("%s",
+              questionListDTO.getReply());
         }
 
         break;

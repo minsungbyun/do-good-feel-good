@@ -52,7 +52,14 @@ repositories {
 // => 이렇게 다운로드 받은 라이브러리는 컴파일하거나 실행할 때 사용된다.
 dependencies {
   // 서블릿 API
-  implementation 'javax.servlet:javax.servlet-api:4.0.1'
+  providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+  
+   // JSP API
+  providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.3'
+  
+   // JSTL 구현체
+   implementation 'javax.servlet:jstl:1.2'
+     
 
   // Google JSON 라이브러리
   implementation 'com.google.code.gson:gson:2.8.8'

@@ -1,6 +1,5 @@
 package com.share.ftp.dao;
 
-import java.util.List;
 import com.share.ftp.domain.volunteer.VolunteerQuestionDTO;
 
 // 역할
@@ -8,11 +7,7 @@ import com.share.ftp.domain.volunteer.VolunteerQuestionDTO;
 public interface VolunteerQuestionDao {
 
   void insert(VolunteerQuestionDTO addVolQuestionDTO) throws Exception;
-  List<VolunteerQuestionDTO> findAll() throws Exception;      
-  void update(VolunteerQuestionDTO updateVolQuestion) throws Exception;          
-  void delete(VolunteerQuestionDTO VolQuestion) throws Exception; 
 
   VolunteerQuestionDTO getQnaCount(int volunteerNo) throws Exception; 
 
-  VolunteerQuestionDTO findByVolQuestionNo(int volNo, int volQuestionNo) throws Exception;
 }
