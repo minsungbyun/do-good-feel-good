@@ -68,7 +68,7 @@
        password,
        status)
     values(
-       #{owner.no}
+       #{owner.no},
        #{qnaType.no},
        #{title},
        #{content},

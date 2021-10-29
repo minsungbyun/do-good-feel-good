@@ -40,14 +40,19 @@ public class QuestionAddHandler implements Command {
 
 
     try {
+      System.out.println("등록");
       questionDao.insert(questionListDTO);
+      System.out.println("등록2");
       for (QuestionAttachedFile questionAttachedFile : questionListDTO.getFileUpload()) {
         questionDao.insertFile(questionListDTO.getNo(), questionAttachedFile.getFilepath());
+        System.out.println("첨부등록");
       }
       sqlSession.commit();
 
     } catch (Exception e) {
+      e.printStackTrace();
       sqlSession.rollback();
+      System.out.println("롤백");
     }
 
     System.out.println();

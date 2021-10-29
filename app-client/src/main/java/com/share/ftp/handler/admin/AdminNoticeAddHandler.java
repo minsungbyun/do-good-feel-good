@@ -40,6 +40,7 @@ public class AdminNoticeAddHandler implements Command {
       sqlSession.commit();
 
     } catch (Exception e) {
+      e.printStackTrace(); 
       sqlSession.rollback();
     }
 

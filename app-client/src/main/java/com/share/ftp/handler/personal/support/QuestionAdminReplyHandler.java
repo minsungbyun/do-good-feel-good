@@ -35,7 +35,7 @@ public class QuestionAdminReplyHandler implements Command {
     questionListDTO.setTitle(Prompt.inputString("제목? "));
     questionListDTO.setContent(Prompt.inputString("내용? "));
     questionListDTO.setOwner(AuthLoginHandler.getLoginUser());
-    questionListDTO.setQnaPassword(null);
+    //    questionListDTO.setQnaPassword(null);
     //    questionListDTO.setPassword(AuthLoginHandler.getLoginUser().getAdminPassword());
     questionListDTO.setFileUpload(GeneralHelper.promptQnaFileUpload());
     questionListDTO.setStatus(ANSWER);
