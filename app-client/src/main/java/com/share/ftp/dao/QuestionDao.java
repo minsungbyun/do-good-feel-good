@@ -18,6 +18,7 @@ public interface QuestionDao {
       @Param("qnaPassword") String password) throws Exception;
   void update(QuestionListDTO updateQuestion) throws Exception;
   void updateFile(QuestionListDTO updateQuestion) throws Exception;
+  void updateReply(QuestionListDTO updateQuestionReply) throws Exception;
   void updateStatus(QuestionListDTO updateQuestion) throws Exception;
   void delete(QuestionListDTO updateQuestion) throws Exception;
   void deleteFile(QuestionListDTO updateQuestion) throws Exception;

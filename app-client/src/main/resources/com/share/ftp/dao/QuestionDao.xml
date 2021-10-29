@@ -160,6 +160,13 @@
          qna_no=#{no}
   </update>
   
+  <update id="updateReply">
+      update ftp_support_qna set
+          qna_reply=#{qnaReply}
+      where 
+         qna_no=#{no}
+  </update>
+  
   <delete id="deleteFile">
     delete from ftp_support_qna_file
     where
