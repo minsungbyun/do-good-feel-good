@@ -48,7 +48,7 @@ public class DonationRegisterMyListHandler implements Command { // 모금함 기
     }
 
     System.out.println();
-    System.out.printf("[ 나의 기부 총 금액 %s원 ]", formatter.format(myDonationMoney));
+    System.out.printf("[ 나의 기부 총 금액: %s원 ]", formatter.format(myDonationMoney));
     System.out.println();
 
   }

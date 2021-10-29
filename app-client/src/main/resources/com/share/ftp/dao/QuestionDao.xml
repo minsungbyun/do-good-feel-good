@@ -19,16 +19,17 @@
       <id column="owner_no" property="no"/>
       <result column="owner_id" property="id"/>
     </association>
-    <!--  
-    <collection property="fileUpload" ofType="questionAttachedFile">
-      <id column="qna_file_no" property="no"/>
-      <result column="filepath" property="filepath"/>
-    </collection>
-    -->
+    
     <association property="qnaType" javaType="questionCategory">
       <id column="qna_category_no" property="no"/>
       <result column="category_title" property="title"/>
     </association>
+
+    <collection property="fileUpload" ofType="questionAttachedFile">
+      <id column="qna_file_no" property="no"/>
+      <result column="filepath" property="filepath"/>
+    </collection>
+
   </resultMap>
   
   <resultMap type="questionCategory" id="QuestionCategoryMap">    
@@ -36,6 +37,27 @@
     <result column="category_title" property="title"/>
   </resultMap>
   
+  <select id="findAll" resultMap="QuestionDTOMap">
+   select 
+     q.qna_no,
+     q.title,
+     q.content,
+     q.created_dt,
+     q.view_cnt,
+     q.qna_reply,
+     q.status,
+     u.id owner_id,
+     c.category_title category_title,
+     f.filepath
+    from
+     ftp_support_qna q
+     inner join ftp_user u on q.user_no=u.user_no
+     inner join ftp_support_qna_categroy c on q.qna_category_no=c.qna_category_no
+     left outer join ftp_support_qna_file f on q.qna_no=f.qna_no
+    order by
+      qna_no desc
+  </select>
+ 
    <insert id="insert" parameterType="QuestionListDTO"
       useGeneratedKeys="true" keyColumn="qna_no" keyProperty="no" >
     insert into ftp_support_qna(
@@ -43,58 +65,42 @@
        qna_category_no,
        title,
        content,
-       password)
+       password,
+       status)
     values(
        #{owner.no},
        #{qnaType.no},
        #{title},
        #{content},
-       password(#{qnaPassword}))
+       password(#{qnaPassword}),
+       #{status})
   </insert>
   
-  <!--
-          >
-  <insert id="insertFile" parameterType="string">
+  <insert id="insertFile">
     insert into ftp_support_qna_file(qna_no,filepath)
-    values(#{no},#{filepath})
+    values(#{qnaNo},#{filepath})
   </insert>
-  -->
-  
-  <select id="findAll" resultMap="QuestionDTOMap">
-   select 
-     s.qna_no,
-     s.title,
-     s.content,
-     s.created_dt,
-     s.view_cnt,
-     s.status,
-     u.id owner_id,
-     c.category_title category_title
-    from
-     ftp_support_qna s
-     inner join ftp_user u on s.user_no=u.user_no
-     inner join ftp_support_qna_categroy c on s.qna_category_no=c.qna_category_no
-    order by
-      qna_no desc
-  </select>
+
    
   <select id="findByNo" resultMap="QuestionDTOMap" parameterType="int">
    select 
-     s.qna_no,
-     s.title,
-     s.content,
-     s.password,
-     s.created_dt,
-     s.view_cnt,
-     s.status,
+     q.qna_no,
+     q.title,
+     q.content,
+     q.password,
+     q.created_dt,
+     q.view_cnt,
+     q.status,
      u.id owner_id,
-     c.category_title category_title
+     c.category_title category_title,
+     f.filepath
     from
-     ftp_support_qna s
-     inner join ftp_user u on s.user_no=u.user_no
-     inner join ftp_support_qna_categroy c on s.qna_category_no=c.qna_category_no
+     ftp_support_qna q
+     inner join ftp_user u on q.user_no=u.user_no
+     inner join ftp_support_qna_categroy c on q.qna_category_no=c.qna_category_no
+     left outer join ftp_support_qna_file f on q.qna_no=f.qna_no
     where
-      s.qna_no=#{qnaNo}
+      q.qna_no=#{no}
   </select>
   
   <select id="findByPassword" resultMap="QuestionDTOMap">
@@ -109,23 +115,25 @@
   
   <select id="findByKeyword" resultMap="QuestionDTOMap" parameterType="string">
      select 
-        s.qna_no,  
-        s.title,
-        s.content,
-        s.created_dt,
-        s.view_cnt,
+        q.qna_no,  
+        q.title,
+        q.content,
+        q.created_dt,
+        q.view_cnt,
         u.id owner_id,
-        c.category_title category_title
+        c.category_title category_title,
+        f.filepath
       from
-        ftp_support_qna s
-        inner join ftp_user u on s.user_no=u.user_no
-        inner join ftp_support_qna_categroy c on s.qna_category_no=c.qna_category_no
+        ftp_support_qna q
+        inner join ftp_user u on q.user_no=u.user_no
+        inner join ftp_support_qna_categroy c on q.qna_category_no=c.qna_category_no
+        left outer join ftp_support_qna_file f on q.qna_no=f.qna_no
      <where>
       <if test="title != null">
-        s.title like (concat('%', #{value}, '%'))
+        q.title like (concat('%', #{value}, '%'))
       </if>
       <if test="content != null">
-        or s.content like (concat('%', #{value}, '%'))
+        or q.content like (concat('%', #{value}, '%'))
       </if>
       <if test="id != null">
         or u.id like (concat('%', #{value}, '%'))
@@ -135,39 +143,37 @@
       qna_no desc
   </select>
   
-  <update id="update" parameterType="QuestionListDTO">
-      update ftp_support_qna set
-         title=#{title},
-         content=#{content}
+   <update id="update" parameterType="QuestionListDTO">
+   update ftp_support_qna set
+     title=#{title},
+     content=#{content}
+     password=password(#{qnaPassword})
+   where 
+      qna_no=#{no}
+  </update>
+  
+  <update id="updateFile">
+      update ftp_support_qna_file set
+          qna_no=#{qnaNo},
+         filepath=#{fileUpload.filepath}
       where 
          qna_no=#{no}
   </update>
   
-  <delete id="delete" parameterType="int">
-    delete from ftp_support_qna where qna_no=${no}
+  <delete id="deleteFile">
+    delete from ftp_support_qna_file
+    where
+      qna_no=#{no}
   </delete>
+    
+   <delete id="delete" parameterType="noticeDTO">
+    delete from ftp_support_qna
+    where
+     qna_no=#{no}
+  </delete>
+
   
-   <!--
-   <select id="findAll" resultMap="QuestionDTOMap">
-   select 
-     s.qna_no,
-     s.title,
-     s.content,
-     s.created_dt,
-     s.view_cnt,
-     s.status,
-     u.id,
-     c.category_title category_title,
-     f.filepath
-    from
-     ftp_support_qna s
-     inner join ftp_user u on s.user_no=u.user_no
-     inner join ftp_support_qna_categroy c on s.qna_category_no=c.qna_category_no
-     left outer join ftp_support_qna_file f on s.qna_no=f.qna_no
-    order by
-      qna_no desc
-  </select>
-  
+  <!--  
   <select id="findAllQnaCategory" resultMap="QuestionDTOMap">
    select 
      qna_category_no,
@@ -177,95 +183,7 @@
     order by
       qna_category_no desc
   </select>
-   
-  <select id="findByNo" resultMap="QuestionDTOMap" parameterType="int">
-   select 
-     s.qna_no,
-     s.title,
-     s.content,
-     s.created_dt,
-     s.view_cnt,
-     s.status,
-     u.id,
-     c.category_title category_title,
-     f.filepath
-    from
-     ftp_support_qna s
-     inner join ftp_user u on s.user_no=u.user_no
-     inner join ftp_support_qna_categroy c on s.qna_category_no=c.qna_category_no
-     left outer join ftp_support_qna_file f on s.qna_no=f.qna_no
-    where
-      s.qna_no=#{qnaNo}
-  </select>
-  
-  
-  <select id="findByKeyword" resultMap="QuestionDTOMap" parameterType="string">
-     select 
-        s.qna_no,  
-        s.title,
-        s.content,
-        s.created_dt,
-        s.view_cnt,
-        u.id
-        c.category_title category_title,
-        f.filepath
-      from
-        ftp_support_qna s
-        inner join ftp_user u on s.user_no=u.user_no
-        inner join ftp_support_qna_categroy c on s.qna_category_no=c.qna_category_no
-     <where>
-      <if test="title != null">
-        s.title like (concat('%', #{value}, '%'))
-      </if>
-      <if test="content != null">
-        or s.content like (concat('%', #{value}, '%'))
-      </if>
-      <if test="id != null">
-        or u.id like (concat('%', #{value}, '%'))
-      </if>
-     </where>
-     order by
-      qna_no desc
-  </select>
-  insert into ftp_support_qna(
-       user_no,
-       qna_category_no,
-       title,
-       content,
-       password,
-    values(
-       #{userNo},
-       #{categoryNo},
-       #{title},
-       #{content},
-       #{password})
-  
-  
-  
-   <update id="updateFile" parameterType="string">
-      update ftp_support_qna_file set
-          qna_no=#{no},
-         filepath=#{filepath}
-      where 
-         vol_no=#{no}
-  </update>
   -->
-      <!-- 
-   <update id="update" parameterType="NoticeDTO">
-   update ftp_support_notice set
-     title=#{title},
-     content=#{content}
-   where 
-      notice_no=#{no}
-  </update>
-  
-  
-  
-   
-  
-
-  
--->
 </mapper>
 
 

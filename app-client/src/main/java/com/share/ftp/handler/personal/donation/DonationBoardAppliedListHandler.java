@@ -38,9 +38,11 @@ public class DonationBoardAppliedListHandler implements Command {
     for (DonationBoardDTO donationBoardApplyDTO : donationBoardList) {
       if (donationBoardApplyDTO.getStatus() == APPLIED && 
           AuthLoginHandler.getLoginUser().getId().equals(donationBoardApplyDTO.getLeader().getId())) {
+        int totalDate = donationBoardDao.totalDate(donationBoardApplyDTO.getNo());
+        int remainDate = donationBoardDao.remainDate(donationBoardApplyDTO.getNo());
 
         System.out.printf("개설번호: %d\n모금함 분류: %s\n주최자: %s\n제목: %s\n내용: %s\n첨부파일: %s\n"
-            + "개설기간: %s ~ %s\n목표금액: %s원\n승인여부: %d\n",
+            + "개설기간: %s ~ %s\n목표금액: %s원\n승인여부: %d\n총기간:%d\n",
             donationBoardApplyDTO.getNo(), 
             donationBoardApplyDTO.getCategory().getTitle(), 
             donationBoardApplyDTO.getLeader().getName(),
@@ -50,7 +52,13 @@ public class DonationBoardAppliedListHandler implements Command {
             donationBoardApplyDTO.getStartDate(),
             donationBoardApplyDTO.getEndDate(),
             formatter.format(donationBoardApplyDTO.getMoneyTarget()),
-            donationBoardApplyDTO.getStatus());
+            donationBoardApplyDTO.getStatus(),
+            totalDate);
+        if (remainDate > 0) {
+          System.out.printf("남은기간:%d\n", remainDate);
+        } else {
+          System.out.println("기간이 종료된 모금함입니다.");
+        }
         System.out.println("--------------------------------------------------------------");
 
       } 

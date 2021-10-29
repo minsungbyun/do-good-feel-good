@@ -50,7 +50,6 @@ import com.share.ftp.handler.admin.AdminNoticeDetailHandler;
 import com.share.ftp.handler.admin.AdminNoticeListHandler;
 import com.share.ftp.handler.admin.AdminNoticeSearchHandler;
 import com.share.ftp.handler.admin.AdminNoticeUpdateHandler;
-import com.share.ftp.handler.admin.AdminQuestionAddHandler;
 import com.share.ftp.handler.join.AuthDisplayUserHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.ftp.handler.join.AuthLogoutHandler;
@@ -130,6 +129,7 @@ import com.share.ftp.handler.personal.mypage.MyPointListHandler;
 import com.share.ftp.handler.personal.mypage.MyRankingHandler;
 import com.share.ftp.handler.personal.support.AdminQuestionConnectHandler;
 import com.share.ftp.handler.personal.support.QuestionAddHandler;
+import com.share.ftp.handler.personal.support.QuestionAdminReplyHandler;
 import com.share.ftp.handler.personal.support.QuestionDeleteHandler;
 import com.share.ftp.handler.personal.support.QuestionDetailHandler;
 import com.share.ftp.handler.personal.support.QuestionListHandler;
@@ -414,7 +414,7 @@ public class ClientApp {
     commands.put("/question/list", new QuestionListHandler(questionDao));
     commands.put("/question/detail", new QuestionDetailHandler(questionDao));
     commands.put("/question/update", new QuestionUpdateHandler(questionDao, generalDao, sqlSession));
-    commands.put("/question/delete", new QuestionDeleteHandler(questionDao, sqlSession));
+    commands.put("/question/delete", new QuestionDeleteHandler(questionDao, generalDao, sqlSession));
     commands.put("/question/search", new QuestionSearchHandler(questionDao));
 
     commands.put("/adminQuestion/connect", new AdminQuestionConnectHandler());
@@ -464,7 +464,7 @@ public class ClientApp {
 
     // 관리자 문의사항
 
-    commands.put("/adminQuestion/add", new AdminQuestionAddHandler(questionDao));
+    commands.put("/adminQuestion/add", new QuestionAdminReplyHandler(questionDao, sqlSession));
     //        commands.put("/adminAsk/detail", new AdminQuestionDetailHandler(myQuestionListDTOList));
     //        commands.put("/adminAsk/update", new AdminQuestionUpdateHandler(myQuestionListDTOList));
     //        commands.put("/adminAsk/delete", new AdminQuestionDeleteHandler(myQuestionListDTOList));
@@ -501,7 +501,7 @@ public class ClientApp {
 
     notifyOnApplicationEnded();
 
-    con.close();
+    sqlSession.close();
 
   }
 

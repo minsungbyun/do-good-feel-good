@@ -34,8 +34,8 @@ public class AdminNoticeListHandler implements Command {
           noticeDTO.getRegisteredDate(), 
           noticeDTO.getViewCount());
 
-      for (NoticeAttachedFile file : noticeDTO.getFileUpload()) {
-        System.out.printf("%s\n", file.getFilepath());
+      for (NoticeAttachedFile noticeAttachedFile : noticeDTO.getFileUpload()) {
+        System.out.printf("첨부파일: %s\n", noticeAttachedFile.getFilepath());
       }
     }
   }
