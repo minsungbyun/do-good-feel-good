@@ -8,11 +8,11 @@ import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.util.Prompt;
 
-public class CommBoardReplyDeleteHandler implements Command {
+public class VolunteerBoardCommentDeleteHandler implements Command {
 
   CommunityDao communityDao;
 
-  public CommBoardReplyDeleteHandler (CommunityDao communityDao) {
+  public VolunteerBoardCommentDeleteHandler (CommunityDao communityDao) {
     this.communityDao = communityDao;
   }
 

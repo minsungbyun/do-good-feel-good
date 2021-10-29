@@ -55,8 +55,6 @@ public class VolunteerShortReviewAddHandler implements Command {
 
     int volNo = Prompt.inputInt("등록하고자하는 봉사 번호를 입력해주세요 (이전: 0) ▶ ");
 
-
-    System.out.println();
     System.out.println("[  한줄후기 등록  ]");
 
     VolunteerRequestDTO volunteerRequestDTO = volunteerDao.findByVolunteerNo(volNo);
@@ -66,13 +64,19 @@ public class VolunteerShortReviewAddHandler implements Command {
     //      return;
     //    }
 
+    //    if (volunteerShortReviewDTO.getReviewerNames().contains(AuthLoginHandler.getLoginUser().getId())) {
+    //      System.out.println("리뷰는 한 번만 작성할 수 있습니다!");
+    //      return;
+    //    }
 
     VolunteerShortReviewDTO volunteerShortReviewDTO = new VolunteerShortReviewDTO();
-
     volunteerShortReviewDTO.setVolNo(volunteerRequestDTO);
     volunteerShortReviewDTO.setContent(Prompt.inputString("내용  ▶ "));
     volunteerShortReviewDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
     volunteerShortReviewDTO.setOwner(AuthLoginHandler.getLoginUser());
+
+    volunteerShortReviewDTO.addReviewer(AuthLoginHandler.getLoginUser());
+    System.out.println(volunteerShortReviewDTO.getReviewerNames());
 
     volunteerShortReviewDao.insert(volunteerShortReviewDTO);
     sqlSession.commit();
