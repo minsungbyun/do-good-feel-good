@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
+import com.share.ftp.domain.challenge.ChallengeReviewAttachedFile;
 import com.share.ftp.domain.challenge.ChallengeReviewDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -78,9 +79,22 @@ public class ChallengeReviewAddHandler implements Command {
         System.out.println(challengeDTO.getReviewerNames()); // 리뷰어 등록 테스트
 
         //        challengeDao.update(challengeDTO);
-        challengeDao.update(challengeDTO);
-        challengeReviewDao.insert(challengeReviewDTO);
-        sqlSession.commit();
+
+        try {
+          challengeDao.update(challengeDTO);
+          challengeReviewDao.insert(challengeReviewDTO);
+          System.out.println("insert등록확인");
+          for (ChallengeReviewAttachedFile challengeReviewAttachedFile : challengeReviewDTO.getFileUpload()) {
+            challengeReviewDao.insertFile(challengeReviewDTO.getNo(), challengeReviewAttachedFile.getFilepath());
+            System.out.println("insert파일등록확인");
+          }
+          sqlSession.commit();
+          System.out.println("챌린지리뷰 커밋확인");
+        } catch (Exception e) {
+          e.printStackTrace();
+          sqlSession.rollback();
+          System.out.println("챌린지리뷰 롤백확인");
+        }
 
         System.out.println();
         System.out.println("참여인증&댓글이 등록이 완료되었습니다.");

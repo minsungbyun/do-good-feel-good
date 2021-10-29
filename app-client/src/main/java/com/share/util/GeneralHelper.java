@@ -6,6 +6,7 @@ import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.domain.Category;
 import com.share.ftp.domain.admin.ChallengeAttachedFile;
 import com.share.ftp.domain.admin.NoticeAttachedFile;
+import com.share.ftp.domain.challenge.ChallengeReviewAttachedFile;
 import com.share.ftp.domain.community.VolunteerBoardAttachedFile;
 import com.share.ftp.domain.support.QuestionAttachedFile;
 import com.share.ftp.domain.support.QuestionCategory;
@@ -181,6 +182,28 @@ public class GeneralHelper {
     while(true) {
 
       filepath = new ChallengeAttachedFile();
+      file = Prompt.inputString("첨부파일 (enter입력 시 종료) ▶ ");
+      if (file.length() == 0) {
+        return fileList;
+      }
+      filepath.setFilepath(file);
+
+      fileList.add(filepath);
+
+    }
+  }
+
+
+  public static List<ChallengeReviewAttachedFile> promptChllengeReviewFileUpload() {
+    System.out.println();
+
+    ChallengeReviewAttachedFile filepath = null;
+    String file = null;
+
+    List<ChallengeReviewAttachedFile> fileList = new ArrayList<>();
+    while(true) {
+
+      filepath = new ChallengeReviewAttachedFile();
       file = Prompt.inputString("첨부파일 (enter입력 시 종료) ▶ ");
       if (file.length() == 0) {
         return fileList;

@@ -9,6 +9,9 @@ public interface ChallengeReviewDao {
 
   // 챌린지 참여인증&댓글 관련
   void insert(ChallengeReviewDTO addChallengeReview) throws Exception;
+  void insertFile(
+      @Param("challengeReviewNo") int challengeReviewNo,
+      @Param("filepath") String filepath) throws Exception;
   List<ChallengeReviewDTO> findAll() throws Exception;      
   void update(ChallengeReviewDTO updateChallengeReview) throws Exception;          
   void delete(int no) throws Exception; 

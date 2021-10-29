@@ -15,7 +15,13 @@
       <id column="user_No" property="no"/>
       <result column="id" property="id"/>
     </association>
+    
+    <collection property="fileUpload" ofType="challengeReviewAttachedFile">
+      <id column="challenge_review_file_no" property="no"/>
+      <result column="filepath" property="filepath"/>
+  </collection>
   </resultMap>
+  
   
   <select id="findAll" resultMap="ChallengeReviewDTOMap">
     select 
@@ -37,7 +43,10 @@
     values(#{no},#{content},#{owner.no}, curdate())
   </insert>
   
-  
+  <insert id="insertFile">
+    insert into ftp_challenge_review_file(challenge_review_no,filepath)
+    values(#{challengeReviewNo},#{filepath})
+  </insert>
   
   <update id="update" parameterType="ChallengeReviewDTO">
     update ftp_challenge_review set
