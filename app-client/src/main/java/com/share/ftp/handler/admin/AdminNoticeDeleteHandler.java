@@ -3,7 +3,6 @@ package com.share.ftp.handler.admin;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.dao.NoticeDao;
-import com.share.ftp.domain.admin.NoticeAttachedFile;
 import com.share.ftp.domain.admin.NoticeDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -43,12 +42,11 @@ public class AdminNoticeDeleteHandler implements Command {
     }
 
     try {
-      for (NoticeAttachedFile noticeAttachedFile : noticeDTO.getFileUpload()) {
-        noticeDao.deleteFile(noticeDTO.getNo());
-      }
-      noticeDao.delete(noticeNo);
+      noticeDao.deleteFile(noticeDTO);
+      noticeDao.delete(noticeDTO);
       sqlSession.commit();
     } catch (Exception e) {
+      e.printStackTrace();
       // 예외가 발생하기 전에 성공한 작업이 있으면 모두 취소한다.
       // 그래야 다음 작업에 영향을 끼치지 않는다.
       sqlSession.rollback();

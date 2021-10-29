@@ -1,12 +1,10 @@
 package com.share.ftp.handler.admin;
 
-import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.domain.admin.NoticeAttachedFile;
 import com.share.ftp.domain.admin.NoticeDTO;
-import com.share.ftp.domain.support.QuestionAttachedFile;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.util.GeneralHelper;
@@ -40,9 +38,10 @@ public class AdminNoticeUpdateHandler implements Command {
       return;
     }
 
-    String title = Prompt.inputString("제목(" + noticeDTO.getTitle() + ")? ");
-    String content = Prompt.inputString("내용(" + noticeDTO.getContent() + ")? ");
-    List<QuestionAttachedFile> filepath = GeneralHelper.promptQnaFileUpload();
+    String title = Prompt.inputString(String.format("제목(%s) ▶ ", noticeDTO.getTitle()));
+    String content = Prompt.inputString(String.format("내용(%s) ▶ ", noticeDTO.getContent()));
+    noticeDTO.setFileUpload(GeneralHelper.promptNoticeFileUpload());
+    //    List<QuestionAttachedFile> filepath = GeneralHelper.promptQnaFileUpload();
 
     String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -50,23 +49,24 @@ public class AdminNoticeUpdateHandler implements Command {
       System.out.println("게시물 수정을 취소하였습니다.");
       return;
     }
+
     noticeDTO.setTitle(title);
     noticeDTO.setContent(content);
 
     try {
       noticeDao.update(noticeDTO);
+      noticeDao.deleteFile(noticeDTO);
       for (NoticeAttachedFile noticeAttachedFile : noticeDTO.getFileUpload()) {
-        noticeDao.updateFile(noticeAttachedFile.getFilepath());
+        noticeDao.insertFile(noticeDTO.getNo(), noticeAttachedFile.getFilepath());
       }
       sqlSession.commit();
-
     } catch (Exception e) {
+      // 예외검사
+      e.printStackTrace();
+      // 예외 발생하면, 발생하기 전 작업이 모두 취소됨
       sqlSession.rollback();
     }
-
-
     System.out.println();
     System.out.println("게시물을 수정하였습니다.");
-    return;
   }
 }

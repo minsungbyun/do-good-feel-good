@@ -8,9 +8,11 @@ import com.share.ftp.domain.admin.ChallengeAttachedFile;
 import com.share.ftp.domain.admin.NoticeAttachedFile;
 import com.share.ftp.domain.challenge.ChallengeReviewAttachedFile;
 import com.share.ftp.domain.community.VolunteerBoardAttachedFile;
+import com.share.ftp.domain.donation.DonationRegisterPayType;
 import com.share.ftp.domain.support.QuestionAttachedFile;
 import com.share.ftp.domain.support.QuestionCategory;
 import com.share.ftp.domain.volunteer.VolunteerAttachedFile;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 
 public class GeneralHelper {
 
@@ -34,6 +36,29 @@ public class GeneralHelper {
     return String.format("남은시간 ▶ %d일 %d시간 %d분 %d초 남았습니다\n", day, hour, min, sec);
   }
 
+  public static void promptVolunteerTime(VolunteerRequestDTO volunteerRequestDTO) throws Exception {
+
+    System.out.println();
+
+    for (int i = 9; i < 18; i++) {
+      System.out.printf(" ▶ %d시 ~ %d시", i, i + 1);
+    }
+
+    String startTime = null;
+    String endTime = null;
+
+
+    startTime = Prompt.inputString("시작시간 (enter입력 시 종료) ▶ ");
+    endTime = Prompt.inputString("종료시간 (enter입력 시 종료) ▶ ");
+
+    if (startTime.length() == 0 || endTime.length() == 0) {
+      return;
+    } 
+
+    volunteerRequestDTO.setStartTime(startTime);
+    volunteerRequestDTO.setEndTime(endTime);
+
+  }
   public Category promptCategory() throws Exception {
 
     List<Category> categoryList = generalDao.findAllCategory();
@@ -76,6 +101,32 @@ public class GeneralHelper {
 
       if (0 < input && input <= categoryList.size()) {
         return categoryList.get(input - 1);
+      }
+      System.out.println();
+      System.out.println("올바른 번호를 입력해주세요");
+
+    }
+  }
+
+  public DonationRegisterPayType promptPayType() throws Exception {
+
+    List<DonationRegisterPayType> payTypeList = generalDao.findAllPayType();
+
+    System.out.println();
+    System.out.println(" ▶ 결제 유형을 선택해주세요. ");
+    System.out.println();
+
+    while (true) {
+      for (int i = 0; i < payTypeList.size(); i++) {
+        DonationRegisterPayType payType = payTypeList.get(i);
+        System.out.printf("%d ▶ %s\n", i + 1, payType.getTitle());
+      }
+
+      System.out.println();
+      int input = Prompt.inputInt("결제선택 ▶ ");
+
+      if (0 < input && input <= payTypeList.size()) {
+        return payTypeList.get(input - 1);
       }
       System.out.println();
       System.out.println("올바른 번호를 입력해주세요");

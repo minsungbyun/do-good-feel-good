@@ -37,6 +37,7 @@ public class General {
     public static final int WAITING    = 2; // 승인대기
   }
 
+
   public static class point {
 
     public static final int VOLUNTEER_POINT         = 50;
@@ -76,6 +77,12 @@ public class General {
     public static final String SITEQNA         = "사이트이용 문의";
     public static final String OTHERQNA        = "기타 문의";
 
+  }
+
+  public static class qnaStatus {
+
+    public static final int UNANSWERED   = 0; // 미답변
+    public static final int ANSWER    = 1; // 답변완료
   }
 
 

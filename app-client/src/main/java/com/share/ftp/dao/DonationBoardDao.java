@@ -21,9 +21,9 @@ public interface DonationBoardDao {
   void delete(DonationBoardDTO deleteDonation) throws Exception;    
   void deleteFile(DonationBoardDTO deleteDonation) throws Exception;    
 
-  DonationBoardDTO totalDate(int donationNo) throws Exception;
-  DonationBoardDTO remainDate(int donationNo) throws Exception;
+  int totalDate(int donationNo) throws Exception;
+  int remainDate(int donationNo) throws Exception;
   DonationBoardDTO findByDonationNo(int donationNo) throws Exception;
   DonationBoardDTO findByApprovedDonatinNo(int donationNo) throws Exception;
-  DonationBoardDTO findByKeyword(String keyword) throws Exception;
+  List<DonationBoardDTO> findByKeyword(String keyword) throws Exception;
 }

@@ -27,6 +27,7 @@ import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.dao.OrgDao;
 import com.share.ftp.dao.PersonalDao;
 import com.share.ftp.dao.QuestionDao;
+import com.share.ftp.dao.VolunteerApplyDao;
 import com.share.ftp.dao.VolunteerBoardDao;
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.dao.VolunteerShortReviewDao;
@@ -49,7 +50,6 @@ import com.share.ftp.handler.admin.AdminNoticeDetailHandler;
 import com.share.ftp.handler.admin.AdminNoticeListHandler;
 import com.share.ftp.handler.admin.AdminNoticeSearchHandler;
 import com.share.ftp.handler.admin.AdminNoticeUpdateHandler;
-import com.share.ftp.handler.admin.AdminQuestionAddHandler;
 import com.share.ftp.handler.join.AuthDisplayUserHandler;
 import com.share.ftp.handler.join.AuthLoginHandler;
 import com.share.ftp.handler.join.AuthLogoutHandler;
@@ -119,7 +119,6 @@ import com.share.ftp.handler.personal.donation.DonationBoardRejectedListHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardSearchHandler;
 import com.share.ftp.handler.personal.donation.DonationBoardUpdateHandler;
 import com.share.ftp.handler.personal.donation.DonationPrompt;
-import com.share.ftp.handler.personal.donation.DonationRegisterAddHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterMyListHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterParticipationHandler;
 import com.share.ftp.handler.personal.donation.DonationRegisterTotalMoneyHandler;
@@ -130,15 +129,16 @@ import com.share.ftp.handler.personal.mypage.MyPointListHandler;
 import com.share.ftp.handler.personal.mypage.MyRankingHandler;
 import com.share.ftp.handler.personal.support.AdminQuestionConnectHandler;
 import com.share.ftp.handler.personal.support.QuestionAddHandler;
+import com.share.ftp.handler.personal.support.QuestionAdminReplyHandler;
 import com.share.ftp.handler.personal.support.QuestionDeleteHandler;
 import com.share.ftp.handler.personal.support.QuestionDetailHandler;
 import com.share.ftp.handler.personal.support.QuestionListHandler;
 import com.share.ftp.handler.personal.support.QuestionSearchHandler;
 import com.share.ftp.handler.personal.support.QuestionUpdateHandler;
-import com.share.ftp.handler.personal.volunteer.MyVolunteerWishHandler;
 import com.share.ftp.handler.personal.volunteer.MyVolunteerAppliedHandler;
 import com.share.ftp.handler.personal.volunteer.MyVolunteerListHandler;
 import com.share.ftp.handler.personal.volunteer.MyVolunteerRejectedHandler;
+import com.share.ftp.handler.personal.volunteer.MyVolunteerWishHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionAddHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionConnectHandler;
 import com.share.ftp.handler.personal.volunteer.VolQuestionDeleteHandler;
@@ -257,6 +257,7 @@ public class ClientApp {
 
 
     VolunteerDao volunteerDao = sqlSession.getMapper(VolunteerDao.class);
+    VolunteerApplyDao volunteerApplyDao = sqlSession.getMapper(VolunteerApplyDao.class);
 
     // 챌린지 관련
     ChallengeDao challengeDao = sqlSession.getMapper(ChallengeDao.class);
@@ -300,7 +301,7 @@ public class ClientApp {
     commands.put("/vol/approvelist", new VolunteerApproveListHandler(volunteerDao));
     commands.put("/vol/reject", new VolunteerRejectHandler(volunteerDao,sqlSession)); 
 
-    commands.put("/volJoin/add", new VolunteerJoinHandler(volunteerDao));
+    commands.put("/volJoin/add", new VolunteerJoinHandler(volunteerDao,volunteerApplyDao));
     commands.put("/volJoin/groupAdd", new VolunteerGroupJoinHandler(volunteerDao));
     commands.put("/volJoin/list", new VolunteerJoinListHandler(volunteerDao));
     commands.put("/volJoin/delete", new VolunteerJoinDeleteHandler(volunteerDao));
@@ -386,7 +387,7 @@ public class ClientApp {
 
     DonationRegisterDao donationRegisterDao = sqlSession.getMapper(DonationRegisterDao.class);
 
-    commands.put("/donationBoard/list", new DonationBoardListHandler(donationBoardDao));
+    commands.put("/donationBoard/list", new DonationBoardListHandler(donationBoardDao, donationRegisterDao));
     commands.put("/donationBoard/connect", new DonationBoardConnectHandler(donationBoardDao));
     commands.put("/donationBoard/update", new DonationBoardUpdateHandler(donationBoardDao, sqlSession));
     commands.put("/donationBoard/delete", new DonationBoardDeleteHandler(donationBoardDao, sqlSession));
@@ -397,23 +398,23 @@ public class ClientApp {
     commands.put("/donationBoard/acceptApply", new DonationBoardAcceptApplyHandler(donationBoardDao, sqlSession));
     commands.put("/donationBoard/rejectApply", new DonationBoardRejectApplyHandler(donationBoardDao, sqlSession));
     commands.put("/donationBoard/rejectedList", new DonationBoardRejectedListHandler(donationBoardDao));
-    commands.put("/donationBoard/applyDetail", new DonationBoardApplyDetailHandler(donationBoardDao, donationPrompt));
+    commands.put("/donationBoard/applyDetail", new DonationBoardApplyDetailHandler(donationBoardDao, donationPrompt, donationRegisterDao));
     commands.put("/adminDonationBoard/applyDetail", new DonationBoardAdminApplyDetailHandler(donationBoardDao, donationAdminPrompt));
 
     // 모금함 (기부하기)
-    commands.put("/donationRegister/add", new DonationRegisterAddHandler(donationRegisterDao, donationBoardDao));
+    //    commands.put("/donationRegister/add", new DonationRegisterAddHandler(donationRegisterDao, donationBoardDao));
     commands.put("/donationRegister/participation", new DonationRegisterParticipationHandler(donationRegisterDao));
     commands.put("/donationRegister/totalMoney", new DonationRegisterTotalMoneyHandler(donationRegisterDao));
 
     commands.put("/donationBoardRegister/list", new DonationBoardRegisterListHandler(donationRegisterDao));
-    commands.put("/donationBoardDetailRegister/add", new DonationBoardDetailRegisterAddHandler(donationBoardDao, donationRegisterDao, orgDao));
+    commands.put("/donationBoardDetailRegister/add", new DonationBoardDetailRegisterAddHandler(donationRegisterDao, generalDao, sqlSession));
 
     // 고객센터 문의사항
     commands.put("/question/add", new QuestionAddHandler(questionDao, generalDao, sqlSession));
     commands.put("/question/list", new QuestionListHandler(questionDao));
     commands.put("/question/detail", new QuestionDetailHandler(questionDao));
     commands.put("/question/update", new QuestionUpdateHandler(questionDao, generalDao, sqlSession));
-    commands.put("/question/delete", new QuestionDeleteHandler(questionDao, sqlSession));
+    commands.put("/question/delete", new QuestionDeleteHandler(questionDao, generalDao, sqlSession));
     commands.put("/question/search", new QuestionSearchHandler(questionDao));
 
     commands.put("/adminQuestion/connect", new AdminQuestionConnectHandler());
@@ -463,7 +464,7 @@ public class ClientApp {
 
     // 관리자 문의사항
 
-    commands.put("/adminQuestion/add", new AdminQuestionAddHandler(questionDao));
+    commands.put("/adminQuestion/add", new QuestionAdminReplyHandler(questionDao, sqlSession));
     //        commands.put("/adminAsk/detail", new AdminQuestionDetailHandler(myQuestionListDTOList));
     //        commands.put("/adminAsk/update", new AdminQuestionUpdateHandler(myQuestionListDTOList));
     //        commands.put("/adminAsk/delete", new AdminQuestionDeleteHandler(myQuestionListDTOList));
@@ -500,7 +501,7 @@ public class ClientApp {
 
     notifyOnApplicationEnded();
 
-    con.close();
+    sqlSession.close();
 
   }
 

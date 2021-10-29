@@ -1,6 +1,5 @@
 package com.share.ftp.handler.personal.donation;
 
-import static com.share.util.General.check.REJECTED;
 import java.util.Collection;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.domain.donation.DonationBoardDTO;
@@ -18,16 +17,11 @@ public class DonationAdminPrompt {
     System.out.println();
     System.out.println("모금함목록:");
 
-    Collection<DonationBoardDTO> donationBoardList = donationBoardDao.findAll();
-
+    Collection<DonationBoardDTO> donationBoardList = donationBoardDao.findAllWait();
 
     for (DonationBoardDTO donationBoardDTO : donationBoardList) {
-      if (donationBoardDTO.getStatus() == REJECTED) {
-        System.out.println();
-        System.out.printf("  [ %d. %s ]\n", donationBoardDTO.getNo(), donationBoardDTO.getTitle());
-      } else {
-        return null;
-      }
+      System.out.println();
+      System.out.printf("  [ %d. %s ]\n", donationBoardDTO.getNo(), donationBoardDTO.getTitle());
     }
 
 

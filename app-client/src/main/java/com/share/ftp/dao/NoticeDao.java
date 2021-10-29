@@ -14,7 +14,7 @@ public interface NoticeDao {
   List<NoticeDTO> findByKeyword(String keyword) throws Exception;
   NoticeDTO findByNo(int noticeNo) throws Exception;
   void update(NoticeDTO updateNotice) throws Exception;
-  void updateFile(String filepath) throws Exception;
+  void updateFile(NoticeDTO updateNotice) throws Exception;
   void delete(NoticeDTO deleteNotice) throws Exception;
   void deleteFile(NoticeDTO deleteNotice) throws Exception;
 }

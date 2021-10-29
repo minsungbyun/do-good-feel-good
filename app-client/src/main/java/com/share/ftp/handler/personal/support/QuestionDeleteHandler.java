@@ -1,6 +1,7 @@
 package com.share.ftp.handler.personal.support;
 
 import org.apache.ibatis.session.SqlSession;
+import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.domain.support.QuestionListDTO;
 import com.share.ftp.handler.Command;
@@ -11,10 +12,12 @@ import com.share.util.Prompt;
 public class QuestionDeleteHandler implements Command {
 
   QuestionDao questionDao;
+  GeneralDao generalDao;
   SqlSession sqlSession;
 
-  public QuestionDeleteHandler(QuestionDao questionDao, SqlSession sqlSession) {
+  public QuestionDeleteHandler(QuestionDao questionDao, GeneralDao generalDao, SqlSession sqlSession) {
     this.questionDao = questionDao;
+    this.generalDao = generalDao;
     this.sqlSession = sqlSession;
   }
 
@@ -50,8 +53,16 @@ public class QuestionDeleteHandler implements Command {
         return;
       } 
 
-      questionDao.delete(questionNo);
-      sqlSession.commit();
+      try {
+        questionDao.updateFile(questionListDTO);
+        questionDao.delete(questionListDTO);
+        sqlSession.commit();
+      } catch (Exception e) {
+        e.printStackTrace();
+        // 예외가 발생하기 전에 성공한 작업이 있으면 모두 취소한다.
+        // 그래야 다음 작업에 영향을 끼치지 않는다.
+        sqlSession.rollback();
+      }
 
       System.out.println("게시글을 삭제하였습니다."); 
 

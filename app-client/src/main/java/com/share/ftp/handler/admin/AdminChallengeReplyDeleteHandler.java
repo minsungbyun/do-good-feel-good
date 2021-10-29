@@ -56,11 +56,11 @@ public class AdminChallengeReplyDeleteHandler implements Command {
       } else if (input.equalsIgnoreCase("y")) {
         System.out.println("해당 문의답글을 삭제하였습니다.");
         challengeList.setQuestionCount(challengeList.getQuestionCount() - 1);
-        //          challengeQuestion.setContent("삭제된 답글입니다");
+        challengeQuestion.setReply("");
 
 
         //          challengeQuestion.setQuestionNo(challengeQuestion.getQuestionNo() - 1);
-        challengeQuestionDao.delete(challengeQuestion);
+        challengeQuestionDao.delete(challengQuestionNo);
         return;
 
       } else {

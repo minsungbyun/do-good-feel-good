@@ -23,8 +23,6 @@ public class DonationRegisterDTO {
         + ", payStatus=" + payStatus + ", registeredDate=" + registeredDate
         + ", registerationNumber=" + registerationNumber + "]";
   }
-
-
   public int getNo() {
     return no;
   }

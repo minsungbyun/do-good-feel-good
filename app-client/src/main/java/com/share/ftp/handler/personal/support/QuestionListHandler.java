@@ -2,6 +2,7 @@ package com.share.ftp.handler.personal.support;
 
 import java.util.Collection;
 import com.share.ftp.dao.QuestionDao;
+import com.share.ftp.domain.support.QuestionAttachedFile;
 import com.share.ftp.domain.support.QuestionListDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -17,7 +18,7 @@ public class QuestionListHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
-    System.out.println("[고객센터/문의하기/문의하기 목록]");
+    System.out.println("[ 문의하기 - 목록 ]");
 
     Collection<QuestionListDTO> questionList = questionDao.findAll();
 
@@ -32,13 +33,14 @@ public class QuestionListHandler implements Command {
           questionListDTO.getNo(),
           questionListDTO.getQnaType().getTitle(),
           questionListDTO.getTitle(), 
-          //          myQuestionListDTO.getContent(),
           questionListDTO.getOwner().getId(),
-          //          myQuestionListDTO.getFileUpload(),
           questionListDTO.getRegisteredDate(),
           questionListDTO.getViewCount());
-      //          questionListDTO.getStatus());
+      //                questionListDTO.getStatus());
+
+      for (QuestionAttachedFile questionAttachedFile : questionListDTO.getFileUpload()) {
+        System.out.printf("%s\n", questionAttachedFile.getFilepath());
+      }
     }
   }
-
 }
