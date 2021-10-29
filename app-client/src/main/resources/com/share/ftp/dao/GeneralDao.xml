@@ -8,17 +8,17 @@
  
   <resultMap type="category" id="categoryMap">
     <id column="category_no" property="no"/> 
-    <result column="category_title" property="title"/>
+    <result column="title" property="title"/>
   </resultMap>
   
   <resultMap type="questionCategory" id="QuestionCategoryMap">    
     <id column="qna_category_no" property="no"/>
-    <result column="category_title" property="title"/>
+    <result column="title" property="title"/>
   </resultMap>
   
   <resultMap type="DonationRegisterPayType" id="donationRegisterPayTypeMap">    
     <id column="pay_type_no" property="no"/>
-    <result column="type_title" property="title"/>
+    <result column="title" property="title"/>
   </resultMap>
   
   <!-- 
@@ -30,19 +30,19 @@
 
   
    <select id="findAllCategory" resultMap="categoryMap">
-      select category_no, category_title from ftp_category  
+      select category_no, title from ftp_category order by category_no asc
    </select>
    
    <select id="findAllQnaCategory" resultMap="QuestionCategoryMap">
       select
         qna_category_no,
-        category_title
+        title
       from
         ftp_support_qna_categroy  
    </select>
    
    <select id="findAllPayType" resultMap="donationRegisterPayTypeMap">
-      select pay_type_no, type_title from ftp_donation_pay_type  
+      select pay_type_no, title from ftp_donation_pay_type  
    </select>
    
    <!-- 

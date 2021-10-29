@@ -8,7 +8,7 @@
   <resultMap type="PersonalDTO" id="PersonalDTOMap">
     <id column="user_personal_no" property="personalNo"/> 
     <result column="birthdate" property="birthdate"/>
-    <result column="rank" property="level"/>
+    <result column="level" property="level"/>
     <result column="point" property="point"/>
     
     <result column="user_no" property="no"/>
@@ -37,7 +37,7 @@
   </insert>
   
   <insert id="insertPersonal">
-    insert into ftp_user_personal(user_no,birthdate,rank)
+    insert into ftp_user_personal(user_no,birthdate,level)
     values(#{userNo},#{userBirthdate},#{userLevel})
   </insert>
   
@@ -47,7 +47,7 @@
        u.*,  
        p.user_personal_no,  
        p.birthdate,
-       p.rank,
+       p.level,
        p.point
      from
        ftp_user u
@@ -82,7 +82,7 @@
        u.*,  
        p.user_personal_no,  
        p.birthdate,
-       p.rank,
+       p.level,
        p.point
      from
        ftp_user u
@@ -120,7 +120,7 @@
    <update id="deletePersonal" parameterType="PersonalDTO">
       update ftp_user_personal set
 	      birthdate=#{birthdate},
-	      rank=#{level},
+	      level=#{level},
 	      point=#{point}
       where 
         user_personal_no=#{personalNo}

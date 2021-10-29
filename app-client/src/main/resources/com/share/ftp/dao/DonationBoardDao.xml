@@ -29,7 +29,7 @@
    
    <association property="category" javaType="category">
      <id column="category_no" property="no"/>
-     <result column="category_title" property="title"/>
+     <result column="title" property="title"/>
    </association>
    
    <collection property="fileUpload" ofType="donationBoardAttachedFile">
@@ -40,7 +40,7 @@
 
   <resultMap type="category" id="CategoryMap">
     <id column="category_no" property="no"/> 
-    <result column="category_title" property="title"/>
+    <result column="title" property="title"/>
   </resultMap>
 
   
@@ -89,7 +89,7 @@
 	       d.status,
 	       p.id leader_id,  
 	       p.name leader_name,  
-	       c.category_title category_title,
+	       c.title title,
 	       f.filepath
 	     from
 	       ftp_funding d
@@ -116,7 +116,7 @@
          d.goal,
          p.id leader_id,  
          p.name leader_name,  
-         c.category_title category_title,
+         c.title title,
          f.filepath
        from
          ftp_funding d
@@ -145,7 +145,7 @@
          d.goal,
          p.id leader_id,  
          p.name leader_name,  
-         c.category_title category_title,
+         c.title title,
          f.filepath
        from
          ftp_funding d
@@ -173,7 +173,7 @@
          d.goal,
          p.id leader_id,  
          p.name leader_name,  
-         c.category_title category_title,
+         c.title title,
          f.filepath
        from
          ftp_funding d
@@ -223,7 +223,7 @@
          d.goal,
          p.id leader_id,  
          p.name leader_name,  
-         c.category_title category_title,
+         c.title title,
          f.filepath
        from
          ftp_funding d
@@ -248,7 +248,7 @@
          d.goal,
          p.id leader_id,  
          p.name leader_name,  
-         c.category_title category_title,
+         c.title title,
          f.filepath
        from
          ftp_funding d
@@ -273,7 +273,7 @@
          d.goal,
          p.id leader_id,  
          p.name leader_name,  
-         c.category_title category_title,
+         c.title title,
          f.filepath
        from
          ftp_funding d
