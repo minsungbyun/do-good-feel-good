@@ -38,8 +38,8 @@
      c.title,
      c.start_dt,
      c.end_dt,
-     u.id wish_id,
-     u.name wish_name
+     u.user_no user_no,
+     u.name user_name
     from
      ftp_challenge c
      left outer join ftp_challenge_wish cw on c.challenge_no=cw.challenge_no

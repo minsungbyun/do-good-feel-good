@@ -9,6 +9,7 @@ import com.share.ftp.domain.challenge.ChallengeReviewDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
 import com.share.ftp.handler.join.AuthLoginHandler;
+import com.share.util.GeneralHelper;
 import com.share.util.Prompt;
 
 public class ChallengeReviewAddHandler implements Command {
@@ -49,7 +50,7 @@ public class ChallengeReviewAddHandler implements Command {
 
     challengeReviewDTO.setNo(challengeDTO.getNo());
     challengeReviewDTO.setContent(Prompt.inputString("내용 ▶ "));
-    //    challengeReviewDTO.setFileUpload(Prompt.inputString("파일첨부 ▶ "));
+    challengeReviewDTO.setFileUpload(GeneralHelper.promptChllengeReviewFileUpload()); 
     //    challengeReviewDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
     challengeReviewDTO.setOwner(AuthLoginHandler.getLoginUser());
 

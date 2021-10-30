@@ -1,6 +1,6 @@
 package com.share.ftp.handler.personal.mypage;
 
-import java.util.Collection;
+import java.util.List;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.handler.Command;
@@ -18,11 +18,11 @@ public class MyChallengeWishHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
 
-    Collection<ChallengeDTO> challengeWishList = challengeDao.findAll();
+    List<ChallengeDTO> challengeList = challengeDao.findAll();
 
     System.out.println("[ 나의 찜한목록 ]");
-    for (ChallengeDTO challengeWish : challengeWishList) {
-      if (challengeWish.getWish().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+    for (ChallengeDTO challengeWish : challengeList) {
+      if (challengeWish.getMemberNames().contains(AuthLoginHandler.getLoginUser().getName())) {
         System.out.printf("%d, %s[%d], %d, %s ~ %s\n", 
             challengeWish.getNo(),
             //          challengeDTO.getAdminId(), 

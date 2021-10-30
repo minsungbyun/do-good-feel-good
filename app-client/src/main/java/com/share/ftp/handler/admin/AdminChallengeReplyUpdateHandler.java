@@ -3,7 +3,6 @@ package com.share.ftp.handler.admin;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.ChallengeQuestionDao;
-import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -28,16 +27,11 @@ public class AdminChallengeReplyUpdateHandler implements Command {
     System.out.println();
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeDTO = challengeDao.findByNo(challengeNo);
+    challengeDao.findByNo(challengeNo);
 
     int challengQuestionNo = (int) request.getAttribute("challengQuestionNo");
 
     ChallengeQuestionDTO challengeReply = challengeQuestionDao.findByNo(challengeNo, challengQuestionNo);
-
-    if (challengeReply.getReply() == null) {
-      System.out.println("해당 번호의 답글이 없습니다.");
-      return;
-    }
 
 
     String reply = Prompt.inputString(String.format("답글(%s)? ", challengeReply.getReply()));

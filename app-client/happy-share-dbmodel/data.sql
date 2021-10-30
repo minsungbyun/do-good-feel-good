@@ -19,11 +19,6 @@ values(6,'eclipse', password('1'), 'eclipse', '010-6666-1111', 'eclipse@naver.co
 
 
 --개인회원
-insert into ftp_user_personal(user_personal_no, user_no, birthdate, level)
-values(20, 3, '2020-1-1','천콩이');
-
-insert into ftp_user_personal(user_personal_no, user_no, birthdate, level)
-values(21, 2, '2021-1-1','천이콩이');
 
 insert into ftp_user_personal(user_personal_no, user_no, birthdate, level)
 values(22, 1, '2021-2-5','천콩이');
@@ -33,10 +28,12 @@ values(23, 6, '2021-2-5','천콩이');
 
 --단체회원
 insert into ftp_user_group(user_group_no, user_no, group_cnt)
-values(2, 4, 5);
+values(2, 2, 5);
 
-insert into ftp_user_group(user_group_no, user_no, group_cnt)
-values(3, 5, 3);
+--기관회원
+insert into ftp_user_org(user_org_no, user_no, corp_no)
+values(1, 3, '111111-11111');
+
 
 
 --알림
@@ -257,6 +254,20 @@ insert into ftp_challenge_review(challenge_review_no, challenge_no, user_no, con
 insert into ftp_challenge_review_file(challenge_review_file_no, challenge_review_no, filepath) values(1, 1, '덕분에 챌린지 인증 첨부.gif');
 insert into ftp_challenge_review_file(challenge_review_file_no, challenge_review_no, filepath) values(2, 2, '거리두기 챌린지 인증 첨부.gif');
 insert into ftp_challenge_review_file(challenge_review_file_no, challenge_review_no, filepath) values(3, 3, '깜빡 챌린지 인증 첨부.gif');
+
+--챌린지 찜하기
+insert into ftp_challenge_wish(challenge_no,user_no)
+values(1,1);
+insert into ftp_challenge_wish(challenge_no,user_no)
+values(1,2);
+insert into ftp_challenge_wish(challenge_no,user_no)
+values(2,1);
+insert into ftp_challenge_wish(challenge_no,user_no)
+values(2,3);
+insert into ftp_challenge_wish(challenge_no,user_no)
+values(3,4);
+
+
 
 -- 공지사항 입력
 insert into ftp_support_notice(notice_no, title, content) values(1, '공지사항1', '내용1');
