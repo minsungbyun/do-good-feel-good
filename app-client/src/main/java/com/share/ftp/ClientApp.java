@@ -98,6 +98,7 @@ import com.share.ftp.handler.personal.community.VolunteerBoardCommentListHandler
 import com.share.ftp.handler.personal.community.VolunteerBoardCommentUpdateHandler;
 import com.share.ftp.handler.personal.community.VolunteerBoardDeleteHandler;
 import com.share.ftp.handler.personal.community.VolunteerBoardDetailHandler;
+import com.share.ftp.handler.personal.community.VolunteerBoardLikeHandler;
 import com.share.ftp.handler.personal.community.VolunteerBoardListHandler;
 import com.share.ftp.handler.personal.community.VolunteerBoardSearchHandler;
 import com.share.ftp.handler.personal.community.VolunteerBoardUpdateHandler;
@@ -331,7 +332,7 @@ public class ClientApp {
     commands.put("/volunteerBoard/update", new VolunteerBoardUpdateHandler(volunteerBoardDao, sqlSession));
     commands.put("/volunteerBoard/delete", new VolunteerBoardDeleteHandler(volunteerBoardDao, sqlSession));
     commands.put("/volunteerBoard/search", new VolunteerBoardSearchHandler(volunteerBoardDao));
-    //    commands.put("/volunteerBoard/like", new CommBoardLikeHandler(volboardDao, sqlSession)); 
+    commands.put("/volunteerBoard/like", new VolunteerBoardLikeHandler(volunteerBoardDao, sqlSession)); 
 
     // 소통해요 댓글
     //    commands.put("/volunteerBoardComment/connect", new CommBoardReplyConnectHandler(volunteerBoardCommentDao));

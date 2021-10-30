@@ -33,13 +33,13 @@ public class VolunteerBoardListHandler implements Command {
 
     for(VolunteerBoardDTO volunteerBoardDTO : volunteerBoardDTOList) {
 
-      System.out.printf("%d, %s, %s, %s, %d\n", 
+      System.out.printf("%d, %s, %s, %s, %d, %d\n", 
           volunteerBoardDTO.getNo(), 
           volunteerBoardDTO.getOwner().getId(),
           volunteerBoardDTO.getTitle(), 
           volunteerBoardDTO.getRegisteredDate(), 
-          volunteerBoardDTO.getViewCount());
-      //          volunteerBoardDTO.getLike(),
+          volunteerBoardDTO.getViewCount(),
+          volunteerBoardDTO.getLike());
 
       for (VolunteerBoardAttachedFile file : volunteerBoardDTO.getFileUpload()) {
         System.out.printf("%s\n", file.getFilepath());
