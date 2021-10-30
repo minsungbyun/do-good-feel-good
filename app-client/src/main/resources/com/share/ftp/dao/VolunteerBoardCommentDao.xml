@@ -7,7 +7,8 @@
   
   <resultMap type="VolunteerBoardCommentDTO" id="VolunteerBoardCommentDTOMap">
     <id column="vol_comment_no" property="no"/> 
-    <result column="content" property="commentNo"/>
+    <result column="vol_board_no" property="volBoardNo"/> 
+    <result column="content" property="commentContent"/>
     <result column="created_dt" property="registeredDate"/>
 
     <association property="owner" javaType="joinDTO">
@@ -28,7 +29,7 @@
       user_no,
       content)
     values(
-      #{no},    
+      #{volBoardNo},    
       #{owner.no},    
       #{commentContent})
   </insert> 
@@ -75,7 +76,7 @@
       c.vol_comment_no desc
   </select>
 
-  <select id="findByNo" resultMap="VolunteerBoardCommentDTOMap" parameterType="int">
+  <select id="findByCommentNo" resultMap="VolunteerBoardCommentDTOMap">
    select 
       c.vol_board_no,
       c.vol_comment_no,
@@ -87,12 +88,12 @@
       ftp_vol_comment c
       inner join ftp_user u on c.user_no=u.user_no
     where 
-      c.vol_comment_no=#{values}
+      vol_board_no=#{volBoardNo} and vol_comment_no=#{commentNo}
   </select>
   
   <update id="update" parameterType="VolunteerBoardCommentDTO">
    update ftp_vol_comment set
-     content=#{content}
+     content=#{commentContent}
    where 
      vol_comment_no=#{no}
   </update>

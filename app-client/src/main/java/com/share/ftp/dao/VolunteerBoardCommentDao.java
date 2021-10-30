@@ -15,12 +15,8 @@ public interface VolunteerBoardCommentDao {
   List<VolunteerBoardCommentDTO> findByKeyword(String keyword) throws Exception;
   void update(VolunteerBoardCommentDTO volunteerBoardCommentDTO) throws Exception;
   void delete(int commentNo) throws Exception;
-  //  CommBoardReplyDTO findByCommReplyNo(int commReplyNo) throws Exception;
-  //  VolunteerBoardCommentDTO findByNo(int no, int commBoardReplyNo) throws Exception;
 
   VolunteerBoardCommentDTO findByCommentNo(
       @Param("volBoardNo")int volBoardNo,
       @Param("commentNo") int commentNo) throws Exception;
-  int getNextNum(VolunteerBoardCommentDTO challenge) throws Exception;
-
 }

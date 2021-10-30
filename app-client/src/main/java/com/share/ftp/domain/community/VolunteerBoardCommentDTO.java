@@ -6,14 +6,15 @@ import com.share.ftp.domain.join.JoinDTO;
 public class VolunteerBoardCommentDTO  {
 
   private int no;
-  private int commentNo;
+  private int volBoardNo;
   private String commentContent;
   private Date registeredDate;
   private JoinDTO owner;
 
+
   @Override
   public String toString() {
-    return "VolunteerBoardCommentDTO [no=" + no + ", commentNo=" + commentNo + ", commentContent="
+    return "VolunteerBoardCommentDTO [no=" + no + ", volBoardNo=" + volBoardNo + ", commentContent="
         + commentContent + ", registeredDate=" + registeredDate + ", owner=" + owner + "]";
   }
 
@@ -23,11 +24,11 @@ public class VolunteerBoardCommentDTO  {
   public void setNo(int no) {
     this.no = no;
   }
-  public int getCommentNo() {
-    return commentNo;
+  public int getVolBoardNo() {
+    return volBoardNo;
   }
-  public void setCommentNo(int commentNo) {
-    this.commentNo = commentNo;
+  public void setVolBoardNo(int volBoardNo) {
+    this.volBoardNo = volBoardNo;
   }
   public String getCommentContent() {
     return commentContent;

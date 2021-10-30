@@ -13,16 +13,16 @@ import com.share.util.Prompt;
 
 public class VolunteerBoardCommentAddHandler implements Command {
 
-  VolunteerBoardCommentDao volunteerBoardCommentDao;
   VolunteerBoardDao volunteerBoardDao;
+  VolunteerBoardCommentDao volunteerBoardCommentDao;
   SqlSession sqlSession;
 
   public VolunteerBoardCommentAddHandler(
-      VolunteerBoardCommentDao volunteerBoardCommentDao,
       VolunteerBoardDao volunteerBoardDao,
+      VolunteerBoardCommentDao volunteerBoardCommentDao,
       SqlSession sqlSession) {
-    this.volunteerBoardCommentDao = volunteerBoardCommentDao;
     this.volunteerBoardDao = volunteerBoardDao;
+    this.volunteerBoardCommentDao = volunteerBoardCommentDao;
     this.sqlSession =sqlSession;
 
   }
@@ -31,12 +31,13 @@ public class VolunteerBoardCommentAddHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[  나눔이야기 댓글 등록  ]");
 
-    int no = (int)request.getAttribute("no");
-    VolunteerBoardDTO volunteerBoardDTO = volunteerBoardDao.findByNo(no);
+    int volBoardNo = (int)request.getAttribute("volBoardNo");
+    VolunteerBoardDTO volunteerBoardDTO = volunteerBoardDao.findByNo(volBoardNo);
+
 
     VolunteerBoardCommentDTO volunteerBoardCommentDTO = new VolunteerBoardCommentDTO();
 
-    volunteerBoardCommentDTO.setVolBoardNo(volunteerBoardDTO.getNo());
+    volunteerBoardCommentDTO.setVolBoardNo(volunteerBoardDTO.getNo());   
     volunteerBoardCommentDTO.setCommentContent(Prompt.inputString("내용  ▶ "));
     volunteerBoardCommentDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
     volunteerBoardCommentDTO.setOwner(AuthLoginHandler.getLoginUser());

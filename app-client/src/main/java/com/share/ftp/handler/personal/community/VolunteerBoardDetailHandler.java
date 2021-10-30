@@ -28,9 +28,9 @@ public class VolunteerBoardDetailHandler implements Command {
       System.out.println("[  나눔이야기/ 상세보기  ]");
 
       System.out.println();
-      int no = Prompt.inputInt("게시글 번호를 입력해주세요 ▶ ");
+      int volBoardNo = Prompt.inputInt("게시글 번호를 입력해주세요 ▶ ");
 
-      VolunteerBoardDTO volunteerBoardDTO = volunteerBoardDao.findByNo(no);
+      VolunteerBoardDTO volunteerBoardDTO = volunteerBoardDao.findByNo(volBoardNo);
 
       if (volunteerBoardDTO == null) {
         System.out.println("[  해당 게시글이 없습니다.  ]");
@@ -51,7 +51,7 @@ public class VolunteerBoardDetailHandler implements Command {
         System.out.printf("%s\n", file.getFilepath());
       }
 
-      volunteerBoardDao.updateCount(no);
+      volunteerBoardDao.updateCount(volBoardNo);
       sqlSession.commit();
 
       JoinDTO loginUser = AuthLoginHandler.getLoginUser(); 
@@ -61,13 +61,10 @@ public class VolunteerBoardDetailHandler implements Command {
         return;
       }
 
-
-      // if (volunteerBoardDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
-
       if ((volunteerBoardDTO.getOwner().getId().equals(AuthLoginHandler.getLoginUser().getId())) ||
           AuthLoginHandler.getLoginUser().getId().equals("admin")) {
 
-        request.setAttribute("no", no);
+        request.setAttribute("volBoardNo", volBoardNo);
 
         while (true) {
           String input = Prompt.inputString("변경(U), 삭제(D), 댓글(R), 이전(0)>");
@@ -94,7 +91,7 @@ public class VolunteerBoardDetailHandler implements Command {
 
       if (loginUser!= null) {
 
-        request.setAttribute("no", no);
+        request.setAttribute("volBoardNo", volBoardNo);
 
         while (true) {
           String input = Prompt.inputString("좋아요(L), 댓글(R), 이전(0)>");
