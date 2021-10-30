@@ -31,18 +31,17 @@ public class VolunteerBoardAddHandler implements Command {
 
     volunteerBoardDTO.setTitle(Prompt.inputString("제목 ▶ "));
     volunteerBoardDTO.setContent(Prompt.inputString("내용 ▶ "));
-    volunteerBoardDTO.setFileUpload(GeneralHelper.promptBoardFileUpload());
     volunteerBoardDTO.setOwner(AuthLoginHandler.getLoginUser());
     volunteerBoardDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
+    volunteerBoardDTO.setFileUpload(GeneralHelper.promptBoardFileUpload());
 
     try {
-
       volunteerBoardDao.insert(volunteerBoardDTO);
       for (VolunteerBoardAttachedFile volunteerBoardAttachedFile : volunteerBoardDTO.getFileUpload()) {
         volunteerBoardDao.insertFile(volunteerBoardDTO.getNo(), volunteerBoardAttachedFile.getFilepath());
       }
-
       sqlSession.commit();
+
     }  catch (Exception e) {
       sqlSession.rollback();
     }

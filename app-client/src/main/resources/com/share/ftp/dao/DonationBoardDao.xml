@@ -29,7 +29,7 @@
    
    <association property="category" javaType="category">
      <id column="category_no" property="no"/>
-     <result column="title" property="title"/>
+     <result column="category_title" property="title"/>
    </association>
    
    <collection property="fileUpload" ofType="donationBoardAttachedFile">
@@ -89,7 +89,7 @@
 	       d.status,
 	       p.id leader_id,  
 	       p.name leader_name,  
-	       c.title title,
+	       c.title category_title,
 	       f.filepath
 	     from
 	       ftp_funding d
@@ -103,7 +103,7 @@
   
    
    <select id="findAllApproved" resultMap="DonationBoardDTOMap">
-	     select 
+       select 
          d.funding_no,  
          d.title,
          d.content,
@@ -114,9 +114,10 @@
          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt,
          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
          d.goal,
+         d.status,
          p.id leader_id,  
          p.name leader_name,  
-         c.title title,
+         c.title category_title,
          f.filepath
        from
          ftp_funding d
@@ -132,7 +133,7 @@
    
    
    <select id="findAllApply" resultMap="DonationBoardDTOMap">
-	     select 
+       select 
          d.funding_no,  
          d.title,
          d.content,
@@ -143,9 +144,10 @@
          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt,
          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
          d.goal,
+         d.status,
          p.id leader_id,  
          p.name leader_name,  
-         c.title title,
+         c.title category_title,
          f.filepath
        from
          ftp_funding d
@@ -160,7 +162,7 @@
    </select>
    
    <select id="findAllWait" resultMap="DonationBoardDTOMap">
-     select 
+       select 
          d.funding_no,  
          d.title,
          d.content,
@@ -171,9 +173,10 @@
          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt,
          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
          d.goal,
+         d.status,
          p.id leader_id,  
          p.name leader_name,  
-         c.title title,
+         c.title category_title,
          f.filepath
        from
          ftp_funding d
@@ -223,7 +226,7 @@
          d.goal,
          p.id leader_id,  
          p.name leader_name,  
-         c.title title,
+         c.title category_title,
          f.filepath
        from
          ftp_funding d
@@ -248,7 +251,7 @@
          d.goal,
          p.id leader_id,  
          p.name leader_name,  
-         c.title title,
+         c.title category_title,
          f.filepath
        from
          ftp_funding d
@@ -273,7 +276,7 @@
          d.goal,
          p.id leader_id,  
          p.name leader_name,  
-         c.title title,
+         c.title category_title,
          f.filepath
        from
          ftp_funding d

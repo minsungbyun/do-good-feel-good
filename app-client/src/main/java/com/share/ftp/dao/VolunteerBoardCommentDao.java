@@ -1,6 +1,7 @@
 package com.share.ftp.dao;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import com.share.ftp.domain.community.VolunteerBoardCommentDTO;
 
 //역할
@@ -11,10 +12,11 @@ public interface VolunteerBoardCommentDao {
   // 나눔이야기 게시판 댓글 
   void insert(VolunteerBoardCommentDTO volunteerBoardCommentDTO) throws Exception;
   List<VolunteerBoardCommentDTO> findAll() throws Exception;
-  VolunteerBoardCommentDTO findByNo(int no) throws Exception;
+  List<VolunteerBoardCommentDTO> findByKeyword(String keyword) throws Exception;
   void update(VolunteerBoardCommentDTO volunteerBoardCommentDTO) throws Exception;
-  void delete(VolunteerBoardCommentDTO no) throws Exception;
-  //  CommBoardReplyDTO findByCommReplyNo(int commReplyNo) throws Exception;
-  //  VolunteerBoardCommentDTO findByNo(int no, int commBoardReplyNo) throws Exception;
+  void delete(int commentNo) throws Exception;
 
+  VolunteerBoardCommentDTO findByCommentNo(
+      @Param("volBoardNo")int volBoardNo,
+      @Param("commentNo") int commentNo) throws Exception;
 }
