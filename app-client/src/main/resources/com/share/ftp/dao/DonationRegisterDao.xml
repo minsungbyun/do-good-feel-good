@@ -20,7 +20,7 @@
     
     <association property="payTypeNo" javaType="DonationRegisterPayType">
 	    <id column="pay_no" property="no"/>
-	    <result column="title" property="title"/>
+	    <result column="pay_title" property="title"/>
     </association>
     
     
@@ -54,12 +54,12 @@
         u.id donator_id,
         u.name donator_name,
         dt.pay_no,
-        dt.title
+        dt.title pay_title
       from
         ftp_donation d
         inner join ftp_funding f on d.funding_no=f.funding_no
         left outer join ftp_user u on d.user_no=u.user_no
-        left outer join ftp_donation_pay_type dt on d.pay_no=dt.pay_no
+        left outer join ftp_donation_pay dt on d.pay_no=dt.pay_no
         left outer join ftp_category c on f.category_no=c.category_no
   </sql>
   
@@ -83,12 +83,12 @@
   </insert>
   
   <select id="findAllDonationMoney" resultType="long">
-    select sum(donation_money) from ftp_donation
+    select ifnull(sum(donation_money), 0) from ftp_donation;
   </select>
   
   <select id="findByRemainMoney" resultType="long" parameterType="int">
     select 
-      f.goal-sum(d.donation_money)
+      ifnull(f.goal-sum(d.donation_money), 0)
     from 
       ftp_donation d 
       inner join ftp_funding f on d.funding_no=f.funding_no
