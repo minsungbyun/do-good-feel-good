@@ -136,6 +136,7 @@ import com.share.ftp.handler.personal.support.AdminQuestionConnectHandler;
 import com.share.ftp.handler.personal.support.QuestionAddHandler;
 import com.share.ftp.handler.personal.support.QuestionAdminReplyDeleteHandler;
 import com.share.ftp.handler.personal.support.QuestionAdminReplyHandler;
+import com.share.ftp.handler.personal.support.QuestionAdminReplyListHandler;
 import com.share.ftp.handler.personal.support.QuestionAdminUpdateHandler;
 import com.share.ftp.handler.personal.support.QuestionDeleteHandler;
 import com.share.ftp.handler.personal.support.QuestionDetailHandler;
@@ -474,7 +475,7 @@ public class ClientApp {
     commands.put("/adminReply/add", new QuestionAdminReplyHandler(questionDao, sqlSession));
     commands.put("/adminReply/delete", new QuestionAdminReplyDeleteHandler(questionDao, sqlSession));
     commands.put("/adminReply/update", new QuestionAdminUpdateHandler(questionDao, sqlSession));
-    //        commands.put("/adminAsk/update", new AdminQuestionUpdateHandler(myQuestionListDTOList));
+    commands.put("/adminReply/list", new QuestionAdminReplyListHandler(questionDao));
     //        commands.put("/adminAsk/delete", new AdminQuestionDeleteHandler(myQuestionListDTOList));
 
     // 관리자 챌린지
@@ -949,7 +950,7 @@ public class ClientApp {
     adminAskInfo.add(new MenuItem("문의사항 상세보기",ACCESS_ADMIN,"/question/detail"));
     //    adminAskInfo.add(new MenuItem("문의사항 변경",ACCESS_ADMIN,"/question/update"));
     adminAskInfo.add(new MenuItem("문의사항 검색",ACCESS_ADMIN,"/question/search"));
-    //    adminAskInfo.add(new MenuItem("관리자답글 목록",ACCESS_ADMIN,"/question/list"));
+    adminAskInfo.add(new MenuItem("관리자답글 목록",ACCESS_ADMIN,"/adminReply/list"));
 
     return adminAskInfo;
   }
