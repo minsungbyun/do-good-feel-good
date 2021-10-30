@@ -40,22 +40,21 @@ public class QuestionDetailHandler implements Command {
         System.out.printf("제목: %s\n", questionListDTO.getTitle());
         System.out.printf("아이디: %s\n", questionListDTO.getOwner().getId());
         System.out.printf("내용: %s\n", questionListDTO.getContent());
-        //        System.out.printf("첨부파일: %s\n", questionListDTO.getFileUpload());
         System.out.printf("등록일: %s\n", questionListDTO.getRegisteredDate());
         questionListDTO.setViewCount(questionListDTO.getViewCount() + 1);
         System.out.printf("조회수: %d\n", questionListDTO.getViewCount());
+
         for (QuestionAttachedFile questionAttachedFile : questionListDTO.getFileUpload()) {
           System.out.printf("첨부파일: %s\n", questionAttachedFile.getFilepath());
         }
 
-        if (questionListDTO.getReply() != null) {
+        if (questionListDTO.getStatus() == 1) {
           System.out.println("-------------------------------------");
           System.out.printf("제목: %s번 문의 답변드립니다.\n",
               questionListDTO.getNo());
-          System.out.printf("%s",
-              questionListDTO.getReply());
+          System.out.printf("%s", questionListDTO.getReply());
+          System.out.println();
         }
-
         break;
 
       } else if (AuthLoginHandler.getLoginUser().getId().equals(questionListDTO.getOwner().getId())) {
@@ -73,7 +72,6 @@ public class QuestionDetailHandler implements Command {
           continue;
         }
 
-
         System.out.printf("번호: %s\n", questionListDTO.getNo());
         System.out.printf("문의분야: %s\n", questionListDTO.getQnaType().getTitle());
         System.out.printf("제목: %s\n", questionListDTO.getTitle());
@@ -88,9 +86,14 @@ public class QuestionDetailHandler implements Command {
         for (QuestionAttachedFile questionAttachedFile : questionListDTO.getFileUpload()) {
           System.out.printf("첨부파일: %s\n", questionAttachedFile.getFilepath());
         }
-
+        if (questionListDTO.getStatus() == 1) {
+          System.out.println("-------------------------------------");
+          System.out.printf("제목: %s번 문의 답변드립니다.\n",
+              questionListDTO.getNo());
+          System.out.printf("%s", questionListDTO.getReply());
+          System.out.println();
+        }
         break;
-
 
       } else if (questionListDTO.getOwner().getId() != AuthLoginHandler.getLoginUser().getId() ||
           !AuthLoginHandler.getLoginUser().getId().equals("admin")) {
@@ -128,15 +131,19 @@ public class QuestionDetailHandler implements Command {
       request.setAttribute("questionNo", questionNo);
 
       while (true) {
-        String input = Prompt.inputString("삭제(D), 답글(A), 이전(0)>");
+        String input = Prompt.inputString("답변삭제(D), 답변등록(A), 답변수정(U), 이전(0)>");
         switch (input) {
           case "D":
           case "d":
-            request.getRequestDispatcher("/question/delete").forward(request);
+            request.getRequestDispatcher("/adminReply/delete").forward(request);
             return;
           case "A":
           case "a":
-            request.getRequestDispatcher("/adminQuestion/connect").forward(request);
+            request.getRequestDispatcher("/adminReply/add").forward(request);
+            return;
+          case "U":
+          case "u":
+            request.getRequestDispatcher("/adminReply/update").forward(request);
             return;
           case "0":
             return;

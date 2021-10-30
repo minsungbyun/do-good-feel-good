@@ -19,8 +19,8 @@
     </association>
     
     <association property="payTypeNo" javaType="DonationRegisterPayType">
-	    <id column="pay_type_no" property="no"/>
-	    <result column="type_title" property="title"/>
+	    <id column="pay_no" property="no"/>
+	    <result column="title" property="title"/>
     </association>
     
     
@@ -32,19 +32,19 @@
   
   <resultMap type="category" id="CategoryMap">
     <id column="category_no" property="no"/> 
-    <result column="category_title" property="title"/>
+    <result column="title" property="title"/>
   </resultMap>
   
   <resultMap type="donationRegisterPayType" id="DonationRegisterPayTypeMap">
-    <id column="pay_type_no" property="no"/>
-    <result column="type_title" property="title"/>
+    <id column="pay_no" property="no"/>
+    <result column="title" property="title"/>
   </resultMap>
   
   <sql id="select1">
       select
         f.funding_no,
         c.category_no,
-        c.category_title,
+        c.title,
         d.donation_no,
         d.donation_money,
         d.pay_status,
@@ -53,13 +53,13 @@
         u.user_no donator_no,
         u.id donator_id,
         u.name donator_name,
-        dt.pay_type_no,
-        dt.type_title
+        dt.pay_no,
+        dt.title
       from
         ftp_donation d
         inner join ftp_funding f on d.funding_no=f.funding_no
         left outer join ftp_user u on d.user_no=u.user_no
-        left outer join ftp_donation_pay_type dt on d.pay_type_no=dt.pay_type_no
+        left outer join ftp_donation_pay_type dt on d.pay_no=dt.pay_no
         left outer join ftp_category c on f.category_no=c.category_no
   </sql>
   
@@ -78,7 +78,7 @@
   
   <insert id="insert" parameterType="DonationRegisterDTO"
   useGeneratedKeys="true" keyColumn="donation_no" keyProperty="no">
-    insert into ftp_donation(user_no,funding_no,pay_type_no,donation_money,registeration_no) 
+    insert into ftp_donation(user_no,funding_no,pay_no,donation_money,registeration_no) 
     values(#{donator.no},#{donationBoard.no},#{payTypeNo.no},#{donationMoney},#{registerationNumber})
   </insert>
   

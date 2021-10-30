@@ -91,7 +91,7 @@ public class GeneralHelper {
     while (true) {
       for (int i = 0; i < categoryList.size(); i++) {
         QuestionCategory qnaCategory = categoryList.get(i);
-        System.out.printf("%d ▶ %s\n", i + 1, qnaCategory.getTitle(), qnaCategory.getNo());
+        System.out.printf("%d ▶ %s\n", i + 1, qnaCategory.getTitle());
       }
 
       System.out.println();

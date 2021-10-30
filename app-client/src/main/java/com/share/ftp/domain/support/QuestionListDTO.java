@@ -19,6 +19,8 @@ public class QuestionListDTO {
   private int status;
   private JoinDTO owner;
 
+
+
   @Override
   public String toString() {
     return "QuestionListDTO [no=" + no + ", title=" + title + ", qnaPassword=" + qnaPassword
@@ -26,17 +28,17 @@ public class QuestionListDTO {
         + fileUpload + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount
         + ", status=" + status + ", owner=" + owner + "]";
   }
-  public String getReply() {
-    return reply;
-  }
-  public void setReply(String reply) {
-    this.reply = reply;
-  }
   public int getQnaPassword() {
     return qnaPassword;
   }
   public void setQnaPassword(int qnaPassword) {
     this.qnaPassword = qnaPassword;
+  }
+  public String getReply() {
+    return reply;
+  }
+  public void setReply(String reply) {
+    this.reply = reply;
   }
 
   public int getNo() {

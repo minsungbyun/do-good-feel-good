@@ -250,17 +250,11 @@ insert into ftp_challenge_review(challenge_review_no, challenge_no, user_no, con
 
 -- 공지사항 입력
 insert into ftp_support_notice(notice_no, title, content) values(1, '공지사항1', '내용1');
-insert into ftp_support_notice(notice_no, title, content) values(2, '공지사항2', '내용2');
-insert into ftp_support_notice(notice_no, title, content) values(3, '공지사항3', '내용3');
-insert into ftp_support_notice(notice_no, title, content) values(4, '공지사항4', '내용4');
-insert into ftp_support_notice(notice_no, title, content) values(5, '공지사항5', '내용5');
-insert into ftp_support_notice(notice_no, title, content) values(6, '공지사항6', '내용6');
+
 
 -- 공지사항 첨부파일 입력
 insert into ftp_support_notice_file(notice_file_no, notice_no, filepath) values(1, 1, 'notice01_1.jpg');
-insert into ftp_support_notice_file(notice_file_no, notice_no, filepath) values(2, 1, 'notice01_2.gif');
-insert into ftp_support_notice_file(notice_file_no, notice_no, filepath) values(3, 2, 'notice02_1.png');
-insert into ftp_support_notice_file(notice_file_no, notice_no, filepath) values(4, 3, 'notice03_1.jpg');
+
 
 -- 문의하기 카테고리
 -- (1.함께해요 문의 2.나눔이야기 문의 3.모금함 문의 4.챌린지 문의 5.사이트이용 문의 6.기타 문의)

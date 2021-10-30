@@ -22,14 +22,13 @@
     
     <association property="qnaType" javaType="questionCategory">
       <id column="qna_category_no" property="no"/>
-      <result column="title" property="title"/>
+      <result column="category_title" property="title"/>
     </association>
 
     <collection property="fileUpload" ofType="questionAttachedFile">
       <id column="qna_file_no" property="no"/>
       <result column="filepath" property="filepath"/>
     </collection>
-
   </resultMap>
   
   <resultMap type="questionCategory" id="QuestionCategoryMap">    
@@ -44,7 +43,7 @@
      q.content,
      q.created_dt,
      q.view_cnt,
-     q.qna_reply,
+     q.reply,
      q.status,
      u.id owner_id,
      c.title category_title,
@@ -72,7 +71,7 @@
        #{qnaType.no},
        #{title},
        #{content},
-       password(#{qnaPassword}),
+       #{qnaPassword},
        #{status})
   </insert>
   
@@ -86,9 +85,9 @@
      q.qna_no,
      q.title,
      q.content,
-     q.password,
      q.created_dt,
      q.view_cnt,
+     q.reply,
      q.status,
      u.id owner_id,
      c.title category_title,
@@ -108,7 +107,7 @@
     from
      ftp_support_qna 
     where
-     qna_no=#{qnaNo} and password=password(#{qnaPassword})
+     qna_no=#{qnaNo} and password=#{qnaPassword}
   </select>
   
   
@@ -146,22 +145,22 @@
    update ftp_support_qna set
      title=#{title},
      content=#{content}
-     password=password(#{qnaPassword})
    where 
       qna_no=#{no}
   </update>
   
-  <update id="updateFile">
+  <update id="updateFile" parameterType="int">
       update ftp_support_qna_file set
-          qna_no=#{qnaNo},
+        qna_no=#{no},
          filepath=#{fileUpload.filepath}
       where 
          qna_no=#{no}
   </update>
   
-  <update id="updateReply">
+  <update id="updateReply" parameterType="QuestionListDTO">
       update ftp_support_qna set
-          reply=#{reply}
+          reply=#{reply},
+          status=#{status}
       where 
          qna_no=#{no}
   </update>
