@@ -1,8 +1,8 @@
 package com.share.ftp.handler.admin;
 
+import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.ChallengeQuestionDao;
-import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -12,10 +12,13 @@ public class AdminChallengeReplyDeleteHandler implements Command {
 
   ChallengeDao challengeDao;
   ChallengeQuestionDao challengeQuestionDao;
+  SqlSession sqlSession;
 
-  public AdminChallengeReplyDeleteHandler(ChallengeDao challengeDao, ChallengeQuestionDao challengeQuestionDao) {
+  public AdminChallengeReplyDeleteHandler(
+      ChallengeDao challengeDao, ChallengeQuestionDao challengeQuestionDao, SqlSession sqlSession) {
     this.challengeDao = challengeDao;
     this.challengeQuestionDao = challengeQuestionDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -25,22 +28,12 @@ public class AdminChallengeReplyDeleteHandler implements Command {
 
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeList = challengeDao.findByNo(challengeNo); 
+    challengeDao.findByNo(challengeNo); 
 
-    if (challengeList == null) {
-      System.out.println("해당 챌린지가 없습니다.");
-      return;
-    }
 
     int challengQuestionNo = (int) request.getAttribute("challengQuestionNo");
 
     ChallengeQuestionDTO challengeQuestion = challengeQuestionDao.findByNo(challengeNo, challengQuestionNo);
-
-
-    if (challengeQuestion == null) {
-      System.out.println("해당 번호의 답글이 없습니다.");
-      return;
-    }
 
 
     while (true) {
@@ -49,18 +42,19 @@ public class AdminChallengeReplyDeleteHandler implements Command {
         System.out.println("답글 삭제를 취소하였습니다.");
         return; 
 
-      } else if (challengeQuestion.getContent().equals("삭제된 댓글입니다")) {
-        System.out.println("이미 삭제 된 댓글입니다!");
-        return;
+        //      } else if (challengeQuestion.getContent().equals("삭제된 댓글입니다")) {
+        //        System.out.println("이미 삭제 된 댓글입니다!");
+        //        return;
 
       } else if (input.equalsIgnoreCase("y")) {
         System.out.println("해당 문의답글을 삭제하였습니다.");
-        challengeList.setQuestionCount(challengeList.getQuestionCount() - 1);
-        //          challengeQuestion.setContent("삭제된 답글입니다");
+        //        challengeList.setQuestionCount(challengeList.getQuestionCount() - 1);
+        challengeQuestion.setReply(null);
 
 
         //          challengeQuestion.setQuestionNo(challengeQuestion.getQuestionNo() - 1);
-        challengeQuestionDao.delete(challengeQuestion);
+        challengeQuestionDao.updateReply(challengeQuestion);
+        sqlSession.commit();
         return;
 
       } else {

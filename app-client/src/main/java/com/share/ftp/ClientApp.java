@@ -28,6 +28,7 @@ import com.share.ftp.dao.OrgDao;
 import com.share.ftp.dao.PersonalDao;
 import com.share.ftp.dao.QuestionDao;
 import com.share.ftp.dao.VolunteerApplyDao;
+import com.share.ftp.dao.VolunteerBoardCommentDao;
 import com.share.ftp.dao.VolunteerBoardDao;
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.dao.VolunteerShortReviewDao;
@@ -91,6 +92,10 @@ import com.share.ftp.handler.personal.challenge.ChallengeReviewListHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeReviewUpdateHandler;
 import com.share.ftp.handler.personal.challenge.ChallengeWishHandler;
 import com.share.ftp.handler.personal.community.VolunteerBoardAddHandler;
+import com.share.ftp.handler.personal.community.VolunteerBoardCommentAddHandler;
+import com.share.ftp.handler.personal.community.VolunteerBoardCommentDeleteHandler;
+import com.share.ftp.handler.personal.community.VolunteerBoardCommentListHandler;
+import com.share.ftp.handler.personal.community.VolunteerBoardCommentUpdateHandler;
 import com.share.ftp.handler.personal.community.VolunteerBoardDeleteHandler;
 import com.share.ftp.handler.personal.community.VolunteerBoardDetailHandler;
 import com.share.ftp.handler.personal.community.VolunteerBoardListHandler;
@@ -270,7 +275,7 @@ public class ClientApp {
 
     // 봉사활동 게시글
     VolunteerBoardDao volunteerBoardDao = sqlSession.getMapper(VolunteerBoardDao.class);
-    //    VolunteerBoardCommentDao volunteerBoardCommentDao = sqlSession.getMapper(VolunteerBoardCommentDao.class);
+    VolunteerBoardCommentDao volunteerBoardCommentDao = sqlSession.getMapper(VolunteerBoardCommentDao.class);
     VolunteerShortReviewDao volunteerShortReviewDao = sqlSession.getMapper(VolunteerShortReviewDao.class);    
 
     //로그인, 로그아웃
@@ -332,10 +337,10 @@ public class ClientApp {
 
     // 소통해요 댓글
     //    commands.put("/volunteerBoardComment/connect", new CommBoardReplyConnectHandler(volunteerBoardCommentDao));
-    //    commands.put("/volunteerBoardComment/add", new CommBoardReplyAddHandler(volunteerBoardCommentDao, sqlSession));
-    //    commands.put("/volunteerBoardComment/list", new CommBoardReplyListHandler(volunteerBoardCommentDao));
-    //    commands.put("/volunteerBoardComment/update", new CommBoardReplyUpdateHandler(volunteerBoardCommentDao, sqlSession));
-    //    commands.put("/volunteerBoardComment/delete", new CommBoardReplyDeleteHandler(volunteerBoardCommentDao, sqlSession));
+    commands.put("/volunteerBoardComment/add", new VolunteerBoardCommentAddHandler(volunteerBoardDao, volunteerBoardCommentDao, sqlSession));
+    commands.put("/volunteerBoardComment/list", new VolunteerBoardCommentListHandler(volunteerBoardDao, volunteerBoardCommentDao));
+    commands.put("/volunteerBoardComment/update", new VolunteerBoardCommentUpdateHandler(volunteerBoardDao, volunteerBoardCommentDao, sqlSession));
+    commands.put("/volunteerBoardComment/delete", new VolunteerBoardCommentDeleteHandler(volunteerBoardDao, volunteerBoardCommentDao, sqlSession));
 
     // 소통해요 한줄후기
     commands.put("/volunteerShortReview/add", new VolunteerShortReviewAddHandler(volunteerShortReviewDao, sqlSession, volunteerDao));
@@ -480,8 +485,8 @@ public class ClientApp {
     commands.put("/adminChallenge/delete", new AdminChallengeDeleteHandler(challengeDao, sqlSession));
     commands.put("/adminChallenge/QuestionList", new AdminChallengeQuestionListHandler(challengeDao, challengeQuestionDao));
     commands.put("/adminChallenge/replyAdd", new AdminChallengeReplyAddHandler(challengeDao, challengeQuestionDao, sqlSession)); // 챌린지 답글 등록
-    commands.put("/adminChallenge/replyUpdate", new AdminChallengeReplyUpdateHandler(challengeDao, challengeQuestionDao)); // 챌린지 답글 변경
-    commands.put("/adminChallenge/replyDelete", new AdminChallengeReplyDeleteHandler(challengeDao, challengeQuestionDao)); // 챌린지 답글 삭제
+    commands.put("/adminChallenge/replyUpdate", new AdminChallengeReplyUpdateHandler(challengeDao, challengeQuestionDao, sqlSession)); // 챌린지 답글 변경
+    commands.put("/adminChallenge/replyDelete", new AdminChallengeReplyDeleteHandler(challengeDao, challengeQuestionDao, sqlSession)); // 챌린지 답글 삭제
     commands.put("/adminChallenge/replyConnect", new AdminChallengeReplyConnectlHandler(challengeDao, challengeQuestionDao)); // 챌린지 답글 등록, 변경, 삭제 연결
 
     // 관리자 기관승인

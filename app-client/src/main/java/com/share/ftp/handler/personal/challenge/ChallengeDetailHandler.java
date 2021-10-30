@@ -1,6 +1,7 @@
 package com.share.ftp.handler.personal.challenge;
 
 import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.domain.admin.ChallengeAttachedFile;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -38,7 +39,9 @@ public class ChallengeDetailHandler implements Command {
     System.out.printf("내용 ▶ %s\n", challengeDTO.getContent());
     System.out.printf("댓글수 ▶ %d\n", challengeDTO.getReviewCount());
     System.out.printf("참여자수 ▶ %d\n", challengeDTO.getTotalJoinCount());
-    System.out.printf("첨부파일 ▶ %s\n", challengeDTO.getFileUpload());
+    for (ChallengeAttachedFile file : challengeDTO.getFileUpload()) {
+      System.out.printf("첨부파일 ▶ %s\n", file.getFilepath());
+    }
     System.out.printf("시작일 ▶ %s\n", challengeDTO.getStartDate());
     System.out.printf("종료일 ▶ %s\n", challengeDTO.getEndDate());
     System.out.printf("챌린지기간 ▶ %d일\n",  ((((challengeDTO.getEndDate().getTime() - challengeDTO.getStartDate().getTime()) / 1000)) / (24*60*60)));

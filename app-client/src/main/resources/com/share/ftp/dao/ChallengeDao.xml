@@ -13,7 +13,18 @@
     <result column="end_dt" property="endDate"/>
     <result column="created_dt" property="registeredDate"/>
     
-    <collection property="members" ofType="JoinDTO">
+    <association property="wish" javaType="joinDTO">
+      <id column="wish_no" property="no"/>
+      <result column="wish_id" property="id"/>
+      <result column="wish_name" property="name"/>
+    </association>
+    
+    <collection property="fileUpload" ofType="challengeAttachedFile">
+      <id column="challenge_file_no" property="no"/>
+      <result column="filepath" property="filepath"/>
+    </collection>
+    
+    <collection property="members" ofType="joinDTO">
       <id column="user_no" property="no"/>
       <result column="user_id" property="id"/>
       <result column="user_name" property="name"/>
@@ -22,13 +33,13 @@
   
   
   <select id="findAll" resultMap="ChallengeDTOMap">
-    select 
+   select 
      c.challenge_no,
      c.title,
      c.start_dt,
      c.end_dt,
      u.user_no user_no,
-     u.name user_name,
+     u.name user_name
     from
      ftp_challenge c
      left outer join ftp_challenge_wish cw on c.challenge_no=cw.challenge_no
@@ -36,9 +47,15 @@
     order by challenge_no desc
   </select>
   
-  <insert id="insert" parameterType="ChallengeDTO">
+  <insert id="insert" parameterType="ChallengeDTO"
+          useGeneratedKeys="true" keyColumn="challenge_no" keyProperty="no">
     insert into ftp_challenge(title,content,start_dt,end_dt,created_dt) 
     values(#{title},#{content},#{startDate},#{endDate}, curdate())
+  </insert>
+  
+  <insert id="insertFile">
+    insert into ftp_challenge_file(challenge_no,filepath)
+    values(#{challengeNo},#{filepath})
   </insert>
   
   <insert id="insertUser">
@@ -48,7 +65,7 @@
   
   <insert id="insertWish">
     insert into ftp_challenge_wish(challenge_no,user_no) 
-    values(#{param1},#{param2})
+    values(#{challengeNo},#{userNo})
   </insert>
   
    <update id="update" parameterType="ChallengeDTO">
@@ -79,11 +96,13 @@
      c.created_dt,
      u.user_no user_no,
      u.name user_name,
-     u.id user_id
+     u.id user_id,
+     f.filepath
     from
      ftp_challenge c
      left outer join ftp_challenge_apply cu on c.challenge_no=cu.challenge_no
      left outer join ftp_user u on cu.user_no=u.user_no
+     left outer join ftp_challenge_file f on c.challenge_no=f.challenge_no
     where 
       c.challenge_no=#{values}
   </select>

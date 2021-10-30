@@ -1,8 +1,8 @@
 package com.share.ftp.handler.admin;
 
+import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.ChallengeQuestionDao;
-import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -12,10 +12,13 @@ public class AdminChallengeReplyUpdateHandler implements Command {
 
   ChallengeDao challengeDao;
   ChallengeQuestionDao challengeQuestionDao;
+  SqlSession sqlSession;
 
-  public AdminChallengeReplyUpdateHandler(ChallengeDao challengeDao, ChallengeQuestionDao challengeQuestionDao) {
+  public AdminChallengeReplyUpdateHandler(
+      ChallengeDao challengeDao, ChallengeQuestionDao challengeQuestionDao, SqlSession sqlSession) {
     this.challengeDao = challengeDao;
     this.challengeQuestionDao = challengeQuestionDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -24,19 +27,14 @@ public class AdminChallengeReplyUpdateHandler implements Command {
     System.out.println();
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeDTO = challengeDao.findByNo(challengeNo);
+    challengeDao.findByNo(challengeNo);
 
     int challengQuestionNo = (int) request.getAttribute("challengQuestionNo");
 
-    ChallengeQuestionDTO challengeQuestion = challengeQuestionDao.findByNo(challengeNo, challengQuestionNo);
-
-    if (challengeQuestion.getReply() == null) {
-      System.out.println("해당 번호의 답글이 없습니다.");
-      return;
-    }
+    ChallengeQuestionDTO challengeReply = challengeQuestionDao.findByNo(challengeNo, challengQuestionNo);
 
 
-    String content = Prompt.inputString(String.format("내용(%s)? ", challengeQuestion.getContent()));
+    String reply = Prompt.inputString(String.format("답글(%s)? ", challengeReply.getReply()));
 
     while (true) {
       String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
@@ -46,8 +44,9 @@ public class AdminChallengeReplyUpdateHandler implements Command {
 
       } else if (input.equalsIgnoreCase("y")) {
         System.out.println("문의답글을 수정하였습니다.");
-        challengeQuestion.setContent(content);
-        challengeQuestionDao.update(challengeQuestion);
+        challengeReply.setReply(reply);
+        challengeQuestionDao.updateReply(challengeReply);
+        sqlSession.commit();
         return;
 
       } else {

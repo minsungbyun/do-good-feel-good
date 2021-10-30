@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.share.ftp.dao.VolunteerJoinDao">
+  
+  <resultMap type="VolunteerJoinDTO" id="VolunteerJoinDTOMap">
+    <id column="vol_no" property="volNo"/> 
+    <id column="user_no" property="userNo"/>
+    <result column="apply_dt" property="applyDate"/>
+    <result column="start_time" property="startTime"/>
+    <result column="end_time" property="endTime"/>
+    <result column="apply_status" property="applyStatus"/>
+    <result column="note" property="note"/> 
+    <result column="vol_joincount" property="getCount"/>
+   
+   
+   <collection property="members" ofType="joinDTO">
+    <id column="member_no" property="no"/>
+    <result column="member_id" property="id"/>
+    <result column="member_name" property="name"/>
+   </collection>
+  </resultMap>
+  
+  
+   <insert id="insert" parameterType="VolunteerJoinDTO">
+    insert into ftp_vol_apply(user_no,vol_no,apply_dt,start_time,end_time)
+    values(#{userNo},#{volNo},#{applyDate},#{startTime},#{endTime})
+  </insert>
+  
+   <insert id="insertUser" parameterType="VolunteerJoinDTO">
+    insert into ftp_vol_apply(user_no,vol_no,apply_dt,start_time,end_time)
+    values(#{userNo.no},#{volNo},#{applyDate},#{startTime},#{endTime})
+  </insert>
+  
+   <select id="getCount" resultMap="VolunteerJoinDTOMap" parameterType="int">
+     select
+         count(v.user_no) vol_apply_count 
+       from
+         ftp_vol_apply v
+         inner join ftp_user u on v.user_no=u.user_no
+       where
+         vol_no=#{volNo}  
+   </select>
+   
+ 
+  <select id="findAllUser" resultMap="VolunteerJoinDTOMap">
+				   select 
+	          v.vol_no,		      
+			      u.id member_id,
+			      u.name member_name,
+			      va.apply_dt,
+			      va.start_time,
+			      va.end_time,
+			      va.apply_status,
+			      va.note
+			     from
+			       ftp_vol v
+			       left outer join ftp_vol_apply va on v.vol_no=va.vol_no
+			       inner join ftp_user u on va.user_no=u.user_no
+			     order by
+			       vol_no asc 
+  </select>
+  
+  
+   <update id="updateStatus" parameterType="VolunteerJoinDTO">
+	   update ftp_vol_apply set
+	      apply_status=#{applyStatus}
+	   where 
+	      vol_no=#{volNo}
+  </update>
+  
+  
+  <delete id="delete" parameterType="int">
+       delete from ftp_vol_apply where vol_no=#{volNo}
+  </delete>
+</mapper>
+
+
+
+
+
+
+
