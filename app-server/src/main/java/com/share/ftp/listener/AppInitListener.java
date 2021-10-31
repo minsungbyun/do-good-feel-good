@@ -40,10 +40,15 @@ public class AppInitListener implements ServletContextListener {
       // 웹 애플리케이션 공용 저장소에 DAO 객체를 보관한다.
       // => 이 저장소에 보관된 객체는 서블릿에서 사용할 것이다.
       웹애플리케이션공용저장소.setAttribute("volunteerDao", volunteerDao);
+      웹애플리케이션공용저장소.setAttribute("volunteerBoardDao", volunteerBoardDao);
+      웹애플리케이션공용저장소.setAttribute("volunteerBoardCommentDao", volunteerBoardCommentDao);
+      웹애플리케이션공용저장소.setAttribute("volunteerShortReviewDao", volunteerShortReviewDao);
 
       웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
 
     } catch (Exception e) {
+
+      e.printStackTrace();
       System.out.println("DAO 객체 준비 중 오류 발생!");
     }
 
