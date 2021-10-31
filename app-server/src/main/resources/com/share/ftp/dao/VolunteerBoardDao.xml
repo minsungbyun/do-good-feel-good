@@ -21,6 +21,7 @@
        <association property="like" javaType="joinDTO">
      <id column="like_no" property="no"/>
      <result column="like_id" property="id"/>
+     <result column="like_name" property="name"/>
    </association>
     
     <collection property="fileUpload" ofType="volunteerBoardAttachedFile">
@@ -63,6 +64,35 @@
     order by 
       b.vol_board_no desc
   </select>
+  
+   <select id="findDetail" resultMap="VolunteerBoardDTOMap" parameterType="int">
+    select 
+      b.vol_board_no,
+      b.title,
+      b.created_dt,
+      b.view_cnt,
+      f.filepath,
+      u.id owner_id,
+      count(l.user_no) likeCount
+    from
+     ftp_vol_board b
+     inner join ftp_vol_board_file f on b.vol_board_no=f.vol_board_no
+     inner join ftp_user u on b.user_no=u.user_no
+     inner join ftp_vol_board_like l on b.vol_board_no=l.vol_board_no
+    where 
+     b.vol_board_no=#{values}
+  </select>
+  
+  <select id="findByLike" resultType="int" parameterType="int">
+    select 
+     count(c.user_no) 
+    from 
+     ftp_vol_board_like c
+     inner join ftp_vol_board b on c.vol_board_no=b.vol_board_no
+    where 
+     b.vol_board_no=#{values}
+  </select>
+  
    
   <select id="findByKeyword" resultMap="VolunteerBoardDTOMap" parameterType="string">
       
@@ -86,6 +116,9 @@
       <if test="content != null">
          or content like concat('%', #{value}, '%') 
       </if>
+      <if test="id != null">
+         or id like concat('%', #{value}, '%') 
+      </if>
      </where>
     order by 
       b.vol_board_no desc
@@ -105,7 +138,7 @@
       inner join ftp_vol_board_file f on b.vol_board_no=f.vol_board_no
       inner join ftp_user u on b.user_no=u.user_no
     where 
-      b.vol_board_no=#{values}
+      b.vol_board_no=#{no}
   </select>
   
   <update id="updateCount" parameterType="int">
@@ -123,23 +156,24 @@
       vol_board_no=#{no}
   </update>
   
-  <update id="updateFile" parameterType="string">
-    update ftp_vol_board_file set
-      vol_board_no=#{no},
-      filepath=#{filepath}
-    where 
-      vol_board_no=#{no}
-  </update>
-  
-    <delete id="deleteFile" parameterType="volunteerBoardDTO">
+  <delete id="deleteFile" parameterType="volunteerBoardDTO">
        delete from ftp_vol_board_file where vol_board_no=#{no}
   </delete>
   
    <delete id="delete" parameterType="volunteerBoardDTO">
     delete from ftp_vol_board where vol_board_no=${values}
   </delete>
+  
+  <delete id="deleteLike" parameterType="int">
+    delete from ftp_vol_board_like where user_no=${param1} and vol_board_no=#{param2}
+  </delete>
+  
+  
     
-
+   <insert id="addLike">
+    insert into ftp_vol_board_like(user_no,vol_board_no)
+    values(#{userNo},#{volBoardNo})
+  </insert>
 
   
 </mapper>
