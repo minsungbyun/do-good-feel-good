@@ -2,7 +2,6 @@ package com.share.ftp.handler.admin;
 
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.ChallengeQuestionDao;
-import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -26,19 +25,14 @@ public class AdminChallengeReplyConnectlHandler implements Command {
 
     int challengeNo = (int) request.getAttribute("challengeNo");
 
-    ChallengeDTO challengeList = challengeDao.findByNo(challengeNo); 
-
-    if (challengeList == null) {
-      System.out.println("해당 챌린지가 없습니다.");
-      return;
-    }
+    challengeDao.findByNo(challengeNo); 
 
     int challengQuestionNo = Prompt.inputInt("문의답글 번호를 입력해주세요 ▶ ");
 
     ChallengeQuestionDTO challengeQuestion = challengeQuestionDao.findByNo(challengeNo, challengQuestionNo);
 
-    if (challengeQuestion == null) {
-      System.out.println("해당 번호의 답글문의가 없습니다.");
+    if (challengeQuestion == null || challengeQuestion.getReply() == null) {
+      System.out.println("해당 번호의 문의답글이 없습니다.");
       return;
     }
 
@@ -52,7 +46,9 @@ public class AdminChallengeReplyConnectlHandler implements Command {
       //      for (ChallengeQuestionDTO challengeQuestionDTO : challengeQuestionDTOList) {
       if (challengeQuestion.getNo() == challengeNo) {
         //        System.out.printf("아이디: %s\n", challengeQuestion.getOwner().getId());
-        System.out.printf("%s번문의 답글: %s\n", challengeQuestion.getReply());
+        System.out.printf("%s번문의 관리자 답글: %s\n", 
+            challengeQuestion.getQuestionNo(),
+            challengeQuestion.getReply());
         //        System.out.printf("등록날짜: %s\n", challengeQuestion.getRegisteredDate());
       } 
       //      }

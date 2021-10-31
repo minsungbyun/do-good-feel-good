@@ -2,7 +2,6 @@ package com.share.ftp.dao;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 
 public interface ChallengeQuestionDao {
@@ -22,5 +21,4 @@ public interface ChallengeQuestionDao {
   ChallengeQuestionDTO findByNo(
       @Param("challengeNo")int challengeNo,
       @Param("challengeQuestionNo") int challengeQuestionNo) throws Exception;
-  int getNextNum(ChallengeDTO challenge) throws Exception;
 }

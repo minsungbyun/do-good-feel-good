@@ -47,7 +47,7 @@ public class QuestionUpdateHandler implements Command {
 
       //        questionListDTO.setQnaType(new GeneralHelper(generalDao).promptQnaCategory());
       String title = Prompt.inputString(String.format("제목(%s): ", questionListDTO.getTitle()));
-      String content = Prompt.inputString(String.format("내용(%s): ", questionListDTO.getTitle()));
+      String content = Prompt.inputString(String.format("내용(%s): ", questionListDTO.getContent()));
       questionListDTO.setFileUpload(GeneralHelper.promptQnaFileUpload());
 
       String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");

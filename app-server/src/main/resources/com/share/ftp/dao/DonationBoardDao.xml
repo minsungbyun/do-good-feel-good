@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.share.ftp.dao.DonationBoardDao">
+  
+  <resultMap type="DonationBoardDTO" id="DonationBoardDTOMap">
+    <id column="funding_no" property="no"/> 
+    <result column="user_org_no" property="orgNo"/>
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="tel" property="tel"/>
+    <result column="email" property="email"/>
+    <result column="start_dt" property="startDate"/>
+    <result column="end_dt" property="endDate"/>
+    <result column="goal" property="moneyTarget"/>
+    <result column="status" property="status"/>
+    <result column="note" property="note"/> 
+    
+    <result column="total_dt" property="totalDate"/> 
+    <result column="remain_dt" property="remainDate"/> 
+   
+   <association property="leader" javaType="JoinDTO">
+	   <id column="leader_no" property="no"/>
+	   <result column="leader_id" property="id"/>
+     <result column="leader_name" property="name"/>
+   </association>
+   
+   <association property="category" javaType="category">
+     <id column="category_no" property="no"/>
+     <result column="category_title" property="title"/>
+   </association>
+   
+   <collection property="fileUpload" ofType="donationBoardAttachedFile">
+     <id column="funding_file_no" property="no"/>
+     <result column="filepath" property="filepath"/>
+   </collection>
+  </resultMap>
+
+  <resultMap type="category" id="CategoryMap">
+    <id column="category_no" property="no"/> 
+    <result column="title" property="title"/>
+  </resultMap>
+
+  
+  <insert id="insert" parameterType="DonationBoardDTO" 
+          useGeneratedKeys="true" keyColumn="funding_no" keyProperty="no">
+    insert into ftp_funding(
+	    user_org_no,
+	    category_no,
+	    title,
+	    content,
+	    tel,
+	    email,
+	    start_dt,
+	    end_dt,
+	    goal,
+	    status)
+    values(
+	    #{orgNo},
+	    #{category.no},
+	    #{title},
+	    #{content},
+	    #{tel},
+	    #{email},
+	    #{startDate},
+	    #{endDate},
+	    #{moneyTarget},
+	    #{status})
+  </insert>
+  <insert id="insertFile">
+    insert into ftp_funding_file(funding_no,filepath)
+    values(#{donationNo},#{filepath})
+  </insert>
+ 
+  <select id="findAll" resultMap="DonationBoardDTOMap">
+		   select 
+	       d.funding_no,  
+	       d.title,
+	       d.content,
+	       d.tel,
+	       d.email,
+	       d.start_dt,
+	       d.end_dt,
+	       datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt,
+         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
+	       d.goal,
+	       d.status,
+	       p.id leader_id,  
+	       p.name leader_name,  
+	       c.title category_title,
+	       f.filepath
+	     from
+	       ftp_funding d
+	       inner join ftp_user_org o on d.user_org_no=o.user_org_no
+	       inner join ftp_category c on d.category_no=c.category_no
+	       inner join ftp_user p on p.user_no=o.user_no
+	       left outer join ftp_funding_file f on d.funding_no=f.funding_no
+	     order by
+	       funding_no desc 
+  </select>
+  
+   
+   <select id="findAllApproved" resultMap="DonationBoardDTOMap">
+       select 
+         d.funding_no,  
+         d.title,
+         d.content,
+         d.tel,
+         d.email,
+         d.start_dt,
+         d.end_dt,
+         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt,
+         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
+         d.goal,
+         d.status,
+         p.id leader_id,  
+         p.name leader_name,  
+         c.title category_title,
+         f.filepath
+       from
+         ftp_funding d
+         inner join ftp_user_org o on d.user_org_no=o.user_org_no
+         inner join ftp_category c on d.category_no=c.category_no
+         inner join ftp_user p on p.user_no=o.user_no
+         left outer join ftp_funding_file f on d.funding_no=f.funding_no
+	     where
+	       d.status=1
+	     order by
+	       d.funding_no desc
+   </select>
+   
+   
+   <select id="findAllApply" resultMap="DonationBoardDTOMap">
+       select 
+         d.funding_no,  
+         d.title,
+         d.content,
+         d.tel,
+         d.email,
+         d.start_dt,
+         d.end_dt,
+         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt,
+         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
+         d.goal,
+         d.status,
+         p.id leader_id,  
+         p.name leader_name,  
+         c.title category_title,
+         f.filepath
+       from
+         ftp_funding d
+         inner join ftp_user_org o on d.user_org_no=o.user_org_no
+         inner join ftp_category c on d.category_no=c.category_no
+         inner join ftp_user p on p.user_no=o.user_no
+         left outer join ftp_funding_file f on d.funding_no=f.funding_no
+	     where
+	       d.status=1 
+	     order by
+	       d.funding_no desc
+   </select>
+   
+   <select id="findAllWait" resultMap="DonationBoardDTOMap">
+       select 
+         d.funding_no,  
+         d.title,
+         d.content,
+         d.tel,
+         d.email,
+         d.start_dt,
+         d.end_dt,
+         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt,
+         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
+         d.goal,
+         d.status,
+         p.id leader_id,  
+         p.name leader_name,  
+         c.title category_title,
+         f.filepath
+       from
+         ftp_funding d
+         inner join ftp_user_org o on d.user_org_no=o.user_org_no
+         inner join ftp_category c on d.category_no=c.category_no
+         inner join ftp_user p on p.user_no=o.user_no
+         left outer join ftp_funding_file f on d.funding_no=f.funding_no
+       where
+          d.status=2
+       order by
+          d.funding_no desc
+   </select>
+   <!--
+    일 시간 분 초 다 계산하려면 테이블 데이터 타입을 datetime으로 변경해야함
+    date_format(end_dt,'%Y-%m-%d %H:%i:%s'), date_format(curdate(),'%Y-%m-%d %H:%i:%s') datediff,
+    -->
+    
+   <select id="totalDate" resultType="int" parameterType="int">
+      select 
+        datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt
+      from
+        ftp_funding d
+      where
+        d.funding_no=#{donationNo}
+    </select>
+    
+   <select id="remainDate" resultType="int" parameterType="int">
+      select 
+        datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt
+      from
+        ftp_funding d
+      where
+        d.funding_no=#{donationNo}
+    </select>
+  
+  
+  <select id="findByDonationNo" resultMap="DonationBoardDTOMap" parameterType="int">
+      select 
+         d.funding_no,  
+         d.title,
+         d.content,
+         d.tel,
+         d.email,
+         d.start_dt,
+         d.end_dt,
+         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) datediff,
+         d.goal,
+         p.id leader_id,  
+         p.name leader_name,  
+         c.title category_title,
+         f.filepath
+       from
+         ftp_funding d
+         inner join ftp_user_org o on d.user_org_no=o.user_org_no
+         inner join ftp_category c on d.category_no=c.category_no
+         inner join ftp_user p on p.user_no=o.user_no
+         left outer join ftp_funding_file f on d.funding_no=f.funding_no
+       where 
+         d.funding_no=#{donationNo}
+  </select>
+ 
+  <select id="findByApprovedDonationNo" resultMap="DonationBoardDTOMap" parameterType="int">
+      select 
+         d.funding_no,  
+         d.title,
+         d.content,
+         d.tel,
+         d.email,
+         d.start_dt,
+         d.end_dt,
+         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) datediff,
+         d.goal,
+         p.id leader_id,  
+         p.name leader_name,  
+         c.title category_title,
+         f.filepath
+       from
+         ftp_funding d
+         inner join ftp_user_org o on d.user_org_no=o.user_org_no
+         inner join ftp_category c on d.category_no=c.category_no
+         inner join ftp_user p on p.user_no=o.user_no
+         left outer join ftp_funding_file f on d.funding_no=f.funding_no
+       where 
+         d.funding_no=#{donationNo} and d.status=1
+  </select>
+ 
+  <select id="findByKeyword" resultMap="DonationBoardDTOMap" parameterType="string">
+      select 
+         d.funding_no,  
+         d.title,
+         d.content,
+         d.tel,
+         d.email,
+         d.start_dt,
+         d.end_dt,
+         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) datediff,
+         d.goal,
+         p.id leader_id,  
+         p.name leader_name,  
+         c.title category_title,
+         f.filepath
+       from
+         ftp_funding d
+         inner join ftp_user_org o on d.user_org_no=o.user_org_no
+         inner join ftp_category c on d.category_no=c.category_no
+         inner join ftp_user p on p.user_no=o.user_no
+         left outer join ftp_funding_file f on d.funding_no=f.funding_no
+       where
+		     d.title like(concat('%',#{keyword},'%'))
+		     or d.content like (concat('%',#{keyword},'%'))
+		     or p.name like (concat('%',#{keyword},'%'))         
+       order by
+         d.funding_no desc
+  </select>
+  
+   <update id="update" parameterType="DonationBoardDTO">
+	   update ftp_funding set
+	      title=#{title},
+	      content=#{content},
+	      tel=#{tel},
+	      email=#{email},
+	      start_dt=#{startDate},
+	      end_dt=#{endDate},
+	      goal=#{moneyTarget}
+	   where 
+	      funding_no=#{no}
+  </update>
+  
+  <update id="updateStatus" parameterType="DonationBoardDTO">
+     update ftp_funding set
+       status=#{status}
+     where 
+        funding_no=#{no}
+  </update>
+  
+   <update id="updateFile" parameterType="string">
+	   update ftp_funding_file set
+		    funding_no=#{no},
+	      filepath=#{fileUpload.filepath}
+	   where 
+	      funding_no=#{no}
+  </update>
+  
+  
+  
+  <delete id="deleteFile" parameterType="DonationBoardDTO">
+       delete from ftp_funding_file where funding_no=#{no}
+  </delete>
+  
+  <delete id="delete" parameterType="DonationBoardDTO">
+       delete from ftp_funding where funding_no=#{no}
+  </delete>
+  
+ 
+</mapper>
+
+
+
+
+
+
+

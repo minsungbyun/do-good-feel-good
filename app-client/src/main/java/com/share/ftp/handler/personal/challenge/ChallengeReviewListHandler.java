@@ -3,6 +3,7 @@ package com.share.ftp.handler.personal.challenge;
 import java.util.Collection;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.ChallengeReviewDao;
+import com.share.ftp.domain.challenge.ChallengeReviewAttachedFile;
 import com.share.ftp.domain.challenge.ChallengeReviewDTO;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -40,8 +41,11 @@ public class ChallengeReviewListHandler implements Command {
             challengeReviewDTO.getReviewNo(),
             challengeReviewDTO.getOwner().getId(),
             challengeReviewDTO.getContent(),
-            //            challengeReviewDTO.getFileUpload(),
             challengeReviewDTO.getRegisteredDate());
+        for (ChallengeReviewAttachedFile file : challengeReviewDTO.getFileUpload()) {
+          System.out.printf("첨부파일 ▶ %s\n", file.getFilepath());
+          System.out.println();
+        }
       } 
       //      else {
       //        System.out.println("참여인증&댓글이 없습니다.");

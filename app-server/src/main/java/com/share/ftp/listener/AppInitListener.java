@@ -7,10 +7,10 @@ import javax.servlet.annotation.WebListener;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import com.share.ftp.dao.VolunteerBoardCommentDao;
+import com.share.ftp.dao.DonationBoardDao;
+import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.dao.VolunteerBoardDao;
 import com.share.ftp.dao.VolunteerDao;
-import com.share.ftp.dao.VolunteerShortReviewDao;
 
 @WebListener
 public class AppInitListener implements ServletContextListener {
@@ -29,10 +29,13 @@ public class AppInitListener implements ServletContextListener {
       // SqlSession 객체를 통해 MemberDao 구현체를 자동 생성한다.
       VolunteerDao volunteerDao = sqlSession.getMapper(VolunteerDao.class);
       VolunteerBoardDao volunteerBoardDao = sqlSession.getMapper(VolunteerBoardDao.class);
-      VolunteerBoardCommentDao volunteerBoardCommentDao = sqlSession.getMapper(VolunteerBoardCommentDao.class);
-      VolunteerShortReviewDao volunteerShortReviewDao = sqlSession.getMapper(VolunteerShortReviewDao.class);    
+      //      VolunteerBoardCommentDao volunteerBoardCommentDao = sqlSession.getMapper(VolunteerBoardCommentDao.class);
+      //      VolunteerShortReviewDao volunteerShortReviewDao = sqlSession.getMapper(VolunteerShortReviewDao.class);    
 
 
+      DonationBoardDao donationBoardDao = sqlSession.getMapper(DonationBoardDao.class);
+      DonationRegisterDao donationRegisterDao = sqlSession.getMapper(DonationRegisterDao.class);
+      //      NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
 
       // 모든 웹 애플리케이션의 컴포넌트(서블릿, 리스너, 필터)가 공유할 객체를 두는 저장소
       ServletContext 웹애플리케이션공용저장소 = sce.getServletContext();
@@ -41,8 +44,11 @@ public class AppInitListener implements ServletContextListener {
       // => 이 저장소에 보관된 객체는 서블릿에서 사용할 것이다.
       웹애플리케이션공용저장소.setAttribute("volunteerDao", volunteerDao);
       웹애플리케이션공용저장소.setAttribute("volunteerBoardDao", volunteerBoardDao);
-      웹애플리케이션공용저장소.setAttribute("volunteerBoardCommentDao", volunteerBoardCommentDao);
-      웹애플리케이션공용저장소.setAttribute("volunteerShortReviewDao", volunteerShortReviewDao);
+      //      웹애플리케이션공용저장소.setAttribute("volunteerBoardCommentDao", volunteerBoardCommentDao);
+      //      웹애플리케이션공용저장소.setAttribute("volunteerShortReviewDao", volunteerShortReviewDao);
+      웹애플리케이션공용저장소.setAttribute("donationBoardDao", donationBoardDao);
+      웹애플리케이션공용저장소.setAttribute("donationRegisterDao", donationRegisterDao);
+      //      웹애플리케이션공용저장소.setAttribute("noticeDao", noticeDao);
 
       웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
 

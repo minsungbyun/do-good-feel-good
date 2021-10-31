@@ -17,7 +17,6 @@ public class ChallengeDTO implements Serializable {
   private JoinDTO admin;
   private String title;
   private String content;
-  private String fileUpload;
   private String remainTime;
   private Date registeredDate;
   private Date startDate;
@@ -30,6 +29,7 @@ public class ChallengeDTO implements Serializable {
   private List<JoinDTO> members = new ArrayList<>();  // 관리자가 등록한 챌린지에 참여한 멤버
   private List<JoinDTO> reviewers = new ArrayList<>();
   private List<JoinDTO> wishMembers = new ArrayList<>();
+  private List<ChallengeAttachedFile> fileUpload;
 
 
 
@@ -41,11 +41,12 @@ public class ChallengeDTO implements Serializable {
   @Override
   public String toString() {
     return "ChallengeDTO [no=" + no + ", point=" + point + ", admin=" + admin + ", title=" + title
-        + ", content=" + content + ", fileUpload=" + fileUpload + ", remainTime=" + remainTime
-        + ", registeredDate=" + registeredDate + ", startDate=" + startDate + ", endDate=" + endDate
-        + ", viewCount=" + viewCount + ", reviewCount=" + reviewCount + ", questionCount="
-        + questionCount + ", totalJoinCount=" + totalJoinCount + ", wish=" + wish + ", members="
-        + members + ", reviewers=" + reviewers + ", wishMembers=" + wishMembers + "]";
+        + ", content=" + content + ", remainTime=" + remainTime + ", registeredDate="
+        + registeredDate + ", startDate=" + startDate + ", endDate=" + endDate + ", viewCount="
+        + viewCount + ", reviewCount=" + reviewCount + ", questionCount=" + questionCount
+        + ", totalJoinCount=" + totalJoinCount + ", wish=" + wish + ", members=" + members
+        + ", reviewers=" + reviewers + ", wishMembers=" + wishMembers + ", fileUpload=" + fileUpload
+        + "]";
   }
   @Override
   public int hashCode() {
@@ -103,12 +104,6 @@ public class ChallengeDTO implements Serializable {
   }
   public void setContent(String content) {
     this.content = content;
-  }
-  public String getFileUpload() {
-    return fileUpload;
-  }
-  public void setFileUpload(String fileUpload) {
-    this.fileUpload = fileUpload;
   }
   public Date getRegisteredDate() {
     return registeredDate;
@@ -257,6 +252,13 @@ public class ChallengeDTO implements Serializable {
       names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
     }
     return names.toString();
+  }
+
+  public List<ChallengeAttachedFile> getFileUpload() {
+    return fileUpload;
+  }
+  public void setFileUpload(List<ChallengeAttachedFile> fileUpload) {
+    this.fileUpload = fileUpload;
   }
 
 

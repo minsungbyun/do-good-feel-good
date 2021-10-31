@@ -9,10 +9,10 @@ public class QuestionListDTO {
 
   private int no;
   private String title;
-  private String qnaPassword;
+  private int qnaPassword;
   private QuestionCategory qnaType;
   private String content;
-  private String qnaReply;
+  private String reply;
   private List<QuestionAttachedFile> fileUpload;
   private Date registeredDate;
   private int viewCount;
@@ -21,27 +21,26 @@ public class QuestionListDTO {
 
 
 
-
-
   @Override
   public String toString() {
     return "QuestionListDTO [no=" + no + ", title=" + title + ", qnaPassword=" + qnaPassword
-        + ", qnaType=" + qnaType + ", content=" + content + ", qnaReply=" + qnaReply
-        + ", fileUpload=" + fileUpload + ", registeredDate=" + registeredDate + ", viewCount="
-        + viewCount + ", status=" + status + ", owner=" + owner + "]";
+        + ", qnaType=" + qnaType + ", content=" + content + ", reply=" + reply + ", fileUpload="
+        + fileUpload + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount
+        + ", status=" + status + ", owner=" + owner + "]";
   }
-  public String getQnaPassword() {
+  public int getQnaPassword() {
     return qnaPassword;
   }
-  public void setQnaPassword(String qnaPassword) {
+  public void setQnaPassword(int qnaPassword) {
     this.qnaPassword = qnaPassword;
   }
-  public String getQnaReply() {
-    return qnaReply;
+  public String getReply() {
+    return reply;
   }
-  public void setQnaReply(String qnaReply) {
-    this.qnaReply = qnaReply;
+  public void setReply(String reply) {
+    this.reply = reply;
   }
+
   public int getNo() {
     return no;
   }
