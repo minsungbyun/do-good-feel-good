@@ -32,7 +32,6 @@ public class AdminNoticeUpdateController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-
     try {
       int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
 
@@ -52,47 +51,9 @@ public class AdminNoticeUpdateController extends HttpServlet {
       response.sendRedirect("noticeList");
 
     } catch (Exception e) {
+      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-
-    //    int noticeNo = (int) request.getAttribute("noticeNo");
-    //
-    //    NoticeDTO noticeDTO = noticeDao.findByNo(noticeNo);
-    //
-    //    if (noticeDTO == null) {
-    //      System.out.println("해당 번호의 게시물이 없습니다.");
-    //      return;
-    //    }
-    //
-    //    String title = Prompt.inputString(String.format("제목(%s) ▶ ", noticeDTO.getTitle()));
-    //    String content = Prompt.inputString(String.format("내용(%s) ▶ ", noticeDTO.getContent()));
-    //    noticeDTO.setFileUpload(GeneralHelper.promptNoticeFileUpload());
-    //    //    List<QuestionAttachedFile> filepath = GeneralHelper.promptQnaFileUpload();
-    //
-    //    String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
-    //    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-    //      System.out.println();
-    //      System.out.println("게시물 수정을 취소하였습니다.");
-    //      return;
-    //    }
-    //
-    //    noticeDTO.setTitle(title);
-    //    noticeDTO.setContent(content);
-    //
-    //    try {
-    //      noticeDao.update(noticeDTO);
-    //      noticeDao.deleteFile(noticeDTO);
-    //      for (NoticeAttachedFile noticeAttachedFile : noticeDTO.getFileUpload()) {
-    //        noticeDao.insertFile(noticeDTO.getNo(), noticeAttachedFile.getFilepath());
-    //      }
-    //      sqlSession.commit();
-    //    } catch (Exception e) {
-    //      // 예외검사
-    //      e.printStackTrace();
-    //      // 예외 발생하면, 발생하기 전 작업이 모두 취소됨
-    //      sqlSession.rollback();
-    //    }
-    //  }
   }
 }
