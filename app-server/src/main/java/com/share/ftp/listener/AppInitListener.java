@@ -29,6 +29,7 @@ public class AppInitListener implements ServletContextListener {
       VolunteerDao volunteerDao = sqlSession.getMapper(VolunteerDao.class);
       DonationBoardDao donationBoardDao = sqlSession.getMapper(DonationBoardDao.class);
       DonationRegisterDao donationRegisterDao = sqlSession.getMapper(DonationRegisterDao.class);
+      //      NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
 
       // 모든 웹 애플리케이션의 컴포넌트(서블릿, 리스너, 필터)가 공유할 객체를 두는 저장소
       ServletContext 웹애플리케이션공용저장소 = sce.getServletContext();
@@ -38,6 +39,7 @@ public class AppInitListener implements ServletContextListener {
       웹애플리케이션공용저장소.setAttribute("volunteerDao", volunteerDao);
       웹애플리케이션공용저장소.setAttribute("donationBoardDao", donationBoardDao);
       웹애플리케이션공용저장소.setAttribute("donationRegisterDao", donationRegisterDao);
+      //      웹애플리케이션공용저장소.setAttribute("noticeDao", noticeDao);
 
       웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
 

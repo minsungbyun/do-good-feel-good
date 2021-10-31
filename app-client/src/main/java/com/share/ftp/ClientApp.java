@@ -134,7 +134,10 @@ import com.share.ftp.handler.personal.mypage.MyPointListHandler;
 import com.share.ftp.handler.personal.mypage.MyRankingHandler;
 import com.share.ftp.handler.personal.support.AdminQuestionConnectHandler;
 import com.share.ftp.handler.personal.support.QuestionAddHandler;
+import com.share.ftp.handler.personal.support.QuestionAdminReplyDeleteHandler;
 import com.share.ftp.handler.personal.support.QuestionAdminReplyHandler;
+import com.share.ftp.handler.personal.support.QuestionAdminReplyListHandler;
+import com.share.ftp.handler.personal.support.QuestionAdminUpdateHandler;
 import com.share.ftp.handler.personal.support.QuestionDeleteHandler;
 import com.share.ftp.handler.personal.support.QuestionDetailHandler;
 import com.share.ftp.handler.personal.support.QuestionListHandler;
@@ -469,9 +472,10 @@ public class ClientApp {
 
     // 관리자 문의사항
 
-    commands.put("/adminQuestion/add", new QuestionAdminReplyHandler(questionDao, sqlSession));
-    //        commands.put("/adminAsk/detail", new AdminQuestionDetailHandler(myQuestionListDTOList));
-    //        commands.put("/adminAsk/update", new AdminQuestionUpdateHandler(myQuestionListDTOList));
+    commands.put("/adminReply/add", new QuestionAdminReplyHandler(questionDao, sqlSession));
+    commands.put("/adminReply/delete", new QuestionAdminReplyDeleteHandler(questionDao, sqlSession));
+    commands.put("/adminReply/update", new QuestionAdminUpdateHandler(questionDao, sqlSession));
+    commands.put("/adminReply/list", new QuestionAdminReplyListHandler(questionDao));
     //        commands.put("/adminAsk/delete", new AdminQuestionDeleteHandler(myQuestionListDTOList));
 
     // 관리자 챌린지
@@ -945,8 +949,8 @@ public class ClientApp {
     adminAskInfo.add(new MenuItem("문의사항 목록",ACCESS_ADMIN,"/question/list"));
     adminAskInfo.add(new MenuItem("문의사항 상세보기",ACCESS_ADMIN,"/question/detail"));
     //    adminAskInfo.add(new MenuItem("문의사항 변경",ACCESS_ADMIN,"/question/update"));
-    //    adminAskInfo.add(new MenuItem("문의사항 삭제",ACCESS_ADMIN,"/question/delete"));
     adminAskInfo.add(new MenuItem("문의사항 검색",ACCESS_ADMIN,"/question/search"));
+    adminAskInfo.add(new MenuItem("관리자답글 목록",ACCESS_ADMIN,"/adminReply/list"));
 
     return adminAskInfo;
   }

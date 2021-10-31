@@ -38,7 +38,7 @@
         qna_category_no,
         title
       from
-        ftp_support_qna_categroy  
+        ftp_support_qna_category order by qna_category_no asc
    </select>
    
    <select id="findAllPayType" resultMap="donationRegisterPayTypeMap">
