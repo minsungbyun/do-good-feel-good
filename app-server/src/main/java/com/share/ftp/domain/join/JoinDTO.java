@@ -1,7 +1,6 @@
 package com.share.ftp.domain.join;
 
 import java.sql.Date;
-import java.util.Objects;
 
 
 public class JoinDTO {
@@ -16,15 +15,12 @@ public class JoinDTO {
   private String name;
   private String tel;
   private String email;
-  private int postNo;
+  private String postNo;
   private String basicAddress;
   private String detailAddress;
   private int status;
   private String note;
   private Date registerDate;
-
-
-
 
 
   @Override
@@ -35,28 +31,7 @@ public class JoinDTO {
         + basicAddress + ", detailAddress=" + detailAddress + ", status=" + status + ", note="
         + note + ", registerDate=" + registerDate + "]";
   }
-  @Override
-  public int hashCode() {
-    return Objects.hash(adminPassword, basicAddress, detailAddress, donationMoney, email, id, name,
-        no, note, password, postNo, registerDate, status, tel, type);
-  }
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    JoinDTO other = (JoinDTO) obj;
-    return adminPassword == other.adminPassword && Objects.equals(basicAddress, other.basicAddress)
-        && Objects.equals(detailAddress, other.detailAddress)
-        && donationMoney == other.donationMoney && Objects.equals(email, other.email)
-        && Objects.equals(id, other.id) && Objects.equals(name, other.name) && no == other.no
-        && Objects.equals(note, other.note) && Objects.equals(password, other.password)
-        && postNo == other.postNo && Objects.equals(registerDate, other.registerDate)
-        && status == other.status && Objects.equals(tel, other.tel) && type == other.type;
-  }
+
   public int getNo() {
     return no;
   }
@@ -111,10 +86,10 @@ public class JoinDTO {
   public void setEmail(String email) {
     this.email = email;
   }
-  public int getPostNo() {
+  public String getPostNo() {
     return postNo;
   }
-  public void setPostNo(int postNo) {
+  public void setPostNo(String postNo) {
     this.postNo = postNo;
   }
   public String getBasicAddress() {
