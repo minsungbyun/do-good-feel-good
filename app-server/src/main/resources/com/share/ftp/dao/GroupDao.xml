@@ -102,9 +102,9 @@
         user_no=#{no}
   </update>
   
-  <update id="updateGroup" parameterType="int">
+  <update id="updateGroup" parameterType="GroupDTO">
      update ftp_user_group set
-       group_cnt=#{groupCnt}
+       group_cnt=#{groupCount}
      where 
         user_no=#{no}
   </update>

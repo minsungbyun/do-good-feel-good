@@ -1,7 +1,9 @@
-package com.share.ftp.servlet.join;
+package com.share.ftp.servlet.join.org;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.GenericServlet;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -11,9 +13,10 @@ import javax.servlet.annotation.WebServlet;
 import com.share.ftp.dao.OrgDao;
 import com.share.ftp.domain.join.OrgDTO;
 
-@WebServlet("/join/org/detail")
-public class OrgDetailController extends GenericServlet {
+@WebServlet("/join/org/list")
+public class OrgListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
+
 
   OrgDao orgDao;
 
@@ -27,29 +30,24 @@ public class OrgDetailController extends GenericServlet {
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
 
-
-
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
-      OrgDTO orgDTO = orgDao.findByOrgNo(no);
 
-      if (orgDTO == null) {
-        throw new Exception("해당 번호의 회원이 없습니다");
-      } 
+      List<OrgDTO> orgUserList = orgDao.findAllOrg();
+      request.setAttribute("orgUserList", orgUserList);
 
-      request.setAttribute("orgDTO", orgDTO);
-      request.getRequestDispatcher("/join/org/OrgUserDetail.jsp").forward(request, response);
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/join/org/OrgUserList.jsp");
+      요청배달자.forward(request, response);
 
     } catch (Exception e) {
+      // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
       request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
+
+      // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
+      요청배달자.forward(request, response);
     }
   }
 }
-
-
-
-
 
 
 

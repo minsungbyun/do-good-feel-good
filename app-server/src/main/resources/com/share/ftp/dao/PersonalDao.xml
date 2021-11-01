@@ -8,7 +8,7 @@
   <resultMap type="PersonalDTO" id="PersonalDTOMap">
     <id column="user_personal_no" property="personalNo"/> 
     <result column="birthdate" property="birthdate"/>
-    <result column="rank" property="level"/>
+    <result column="level" property="level"/>
     <result column="point" property="point"/>
     
     <result column="user_no" property="no"/>
@@ -37,7 +37,7 @@
   </insert>
   
   <insert id="insertPersonal">
-    insert into ftp_user_personal(user_no,birthdate,rank)
+    insert into ftp_user_personal(user_no,birthdate,level)
     values(#{userNo},#{userBirthdate},#{userLevel})
   </insert>
   
@@ -47,7 +47,7 @@
        u.*,  
        p.user_personal_no,  
        p.birthdate,
-       p.rank,
+       p.level,
        p.point
      from
        ftp_user u
@@ -67,28 +67,41 @@
 	   where 
 	      user_no=#{no}
   </update>
-  
-  <!--  
+   
    <update id="updatePersonal" parameterType="PersonalDTO">
 	   update ftp_user_personal set
 	     birthdate=#{birthdate}
 	   where 
-	      user_personal_no=#{personalNo}
+	      user_no=#{no}
   </update>
--->
+
   
   <select id="findByIdPassword" resultMap="PersonalDTOMap">
     select 
        u.*,  
        p.user_personal_no,  
        p.birthdate,
-       p.rank,
+       p.level,
        p.point
      from
        ftp_user u
        inner join ftp_user_personal p on u.user_no=p.user_no
     where 
       id=#{userId} and password=password(#{userPassword})
+  </select>
+  
+  <select id="findByPersonalNo" resultMap="PersonalDTOMap" parameterType="int">
+    select 
+       u.*,  
+       p.user_personal_no,  
+       p.birthdate,
+       p.level,
+       p.point
+     from
+       ftp_user u
+       inner join ftp_user_personal p on u.user_no=p.user_no
+    where 
+      u.user_no=#{no}
   </select>
   
   <select id="validId" resultMap="PersonalDTOMap" parameterType="string">
@@ -120,7 +133,7 @@
    <update id="deletePersonal" parameterType="PersonalDTO">
       update ftp_user_personal set
 	      birthdate=#{birthdate},
-	      rank=#{level},
+	      level=#{level},
 	      point=#{point}
       where 
         user_personal_no=#{personalNo}

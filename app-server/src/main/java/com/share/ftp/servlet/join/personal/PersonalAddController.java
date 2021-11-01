@@ -1,6 +1,7 @@
-package com.share.ftp.servlet.join;
+package com.share.ftp.servlet.join.personal;
 
 import java.io.IOException;
+import java.sql.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -10,21 +11,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
-import com.share.ftp.dao.OrgDao;
-import com.share.ftp.domain.join.OrgDTO;
+import com.share.ftp.dao.PersonalDao;
+import com.share.ftp.domain.join.PersonalDTO;
 
-@WebServlet("/join/org/add")
-public class OrgAddController extends HttpServlet {
+@WebServlet("/join/personal/add")
+public class PersonalAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;
-  OrgDao orgDao;
+  PersonalDao personalDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    orgDao = (OrgDao) 웹애플리케이션공용저장소.getAttribute("orgDao");
+    personalDao = (PersonalDao) 웹애플리케이션공용저장소.getAttribute("personalDao");
   }
 
   @Override
@@ -32,29 +33,29 @@ public class OrgAddController extends HttpServlet {
       throws ServletException, IOException {
 
 
-    OrgDTO orgDTO = new OrgDTO();
+    PersonalDTO personalDTO = new PersonalDTO();
 
-    orgDTO.setId(request.getParameter("id"));
-    orgDTO.setPassword(request.getParameter("password"));
-    orgDTO.setName(request.getParameter("name"));
-    orgDTO.setTel(request.getParameter("tel"));
-    orgDTO.setEmail(request.getParameter("email"));
-    orgDTO.setPostNo(request.getParameter("postNo"));
-    orgDTO.setBasicAddress(request.getParameter("basicAddress"));
-    orgDTO.setDetailAddress(request.getParameter("detailAddress"));
-    orgDTO.setCorpNo(request.getParameter("corpNo"));
-    orgDTO.setFax(request.getParameter("fax"));
-    orgDTO.setHomepage(request.getParameter("homepage"));
-    orgDTO.setType(3);
-    orgDTO.setStatus(2);
+    personalDTO.setId(request.getParameter("id"));
+    personalDTO.setPassword(request.getParameter("password"));
+    personalDTO.setName(request.getParameter("name"));
+    personalDTO.setTel(request.getParameter("tel"));
+    personalDTO.setEmail(request.getParameter("email"));
+    personalDTO.setPostNo(request.getParameter("postNo"));
+    personalDTO.setBasicAddress(request.getParameter("basicAddress"));
+    personalDTO.setDetailAddress(request.getParameter("detailAddress"));
+
+    personalDTO.setBirthdate(Date.valueOf(request.getParameter("birthdate")));
+    personalDTO.setType(1);
+    personalDTO.setStatus(1);
+    personalDTO.setLevel("천콩이");
 
     try {
-      orgDao.insert(orgDTO);
-      orgDao.insertOrg(orgDTO.getNo(), orgDTO.getCorpNo(), orgDTO.getFax(), orgDTO.getHomepage());
+      personalDao.insert(personalDTO);
+      personalDao.insertPersonal(personalDTO.getNo(), personalDTO.getBirthdate(), personalDTO.getLevel());
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list");
 
-      request.getRequestDispatcher("/join/org/OrgUserAdd.jsp").forward(request, response);
+      request.getRequestDispatcher("/join/peosonal/PeosonalUserAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.

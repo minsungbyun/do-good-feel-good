@@ -1,14 +1,12 @@
 package com.share.ftp.domain.community;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
-@SuppressWarnings("serial")
-public class VolunteerBoardDTO implements Serializable {
+public class VolunteerBoardDTO  {
 
   private int no;
   private int userNo;
@@ -198,5 +196,33 @@ public class VolunteerBoardDTO implements Serializable {
   public void removeLikeMember(JoinDTO likeMember) {
     this.likeMembers.remove(likeMember);
   }
-}
 
+  public String getLikeMemberNames() {
+    if (likeMembers == null) {
+      return "";
+    }
+    StringBuilder names = new StringBuilder();
+    for (JoinDTO joinDTO : likeMembers) {
+      if (names.length() > 0) {
+        names.append("\n");
+      }
+      names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
+    }
+    return names.toString();
+  }
+
+  //  public String getFileNames() {
+  //    if (likeMembers == null) {
+  //      return "";
+  //    }
+  //    StringBuilder names = new StringBuilder();
+  //    for (VolunteerBoardAttatchedFile joinDTO : likeMembers) {
+  //      if (names.length() > 0) {
+  //        names.append("\n");
+  //      }
+  //      names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
+  //    }
+  //    return names.toString();
+  //  }
+
+}

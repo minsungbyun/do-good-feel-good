@@ -1,4 +1,4 @@
-package com.share.ftp.servlet.join;
+package com.share.ftp.servlet.join.group;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,15 +7,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/join/org/form")
-public class OrgFormController extends HttpServlet {
+@WebServlet("/join/group/form")
+public class GroupFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     // 출력을 담당할 뷰를 호출한다.
-    request.getRequestDispatcher("/join/org/OrgUserForm.jsp").forward(request, response);
+    request.getRequestDispatcher("/join/group/GroupUserForm.jsp").forward(request, response);
   }
 }
 

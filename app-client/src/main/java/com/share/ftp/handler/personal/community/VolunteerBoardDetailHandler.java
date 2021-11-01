@@ -31,6 +31,8 @@ public class VolunteerBoardDetailHandler implements Command {
       int volBoardNo = Prompt.inputInt("게시글 번호를 입력해주세요 ▶ ");
 
       VolunteerBoardDTO volunteerBoardDTO = volunteerBoardDao.findByNo(volBoardNo);
+      int volunteerBoardLike = volunteerBoardDao.findByLike(volBoardNo);
+
 
       if (volunteerBoardDTO == null) {
         System.out.println("[  해당 게시글이 없습니다.  ]");
@@ -45,7 +47,7 @@ public class VolunteerBoardDetailHandler implements Command {
 
       volunteerBoardDTO.setViewCount(volunteerBoardDTO.getViewCount() + 1);
       System.out.printf("조회수 ▶ %d\n", volunteerBoardDTO.getViewCount());
-      //      System.out.printf("좋아요♡  %d\n", volunteerBoardDTO.getLike());
+      System.out.printf("좋아요♡  %d\n", volunteerBoardLike);
 
       for (VolunteerBoardAttachedFile file : volunteerBoardDTO.getFileUpload()) {
         System.out.printf("%s\n", file.getFilepath());

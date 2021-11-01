@@ -17,7 +17,7 @@ public interface VolunteerBoardDao {
   List<VolunteerBoardDTO> findByKeyword(String keyword) throws Exception;
   VolunteerBoardDTO findByNo(int volBoardNo) throws Exception;
   VolunteerBoardDTO findDetail(int volBoardNo) throws Exception;
-  int findByLike(int volBoardNo) throws Exception;  
+  VolunteerBoardDTO findByLike(int volBoardNo) throws Exception;  
   void updateCount(int no) throws Exception;
   void update(VolunteerBoardDTO volunteerBoardDTO) throws Exception;
   void delete(int no) throws Exception;

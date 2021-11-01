@@ -1,4 +1,4 @@
-package com.share.ftp.servlet.join;
+package com.share.ftp.servlet.join.group;
 
 import java.io.IOException;
 import javax.servlet.ServletConfig;
@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
-import com.share.ftp.dao.OrgDao;
-import com.share.ftp.domain.join.OrgDTO;
+import com.share.ftp.dao.GroupDao;
+import com.share.ftp.domain.join.GroupDTO;
 
-@WebServlet("/join/org/update")
-public class OrgUpdateController extends HttpServlet {
+@WebServlet("/join/group/update")
+public class GroupUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;
-  OrgDao orgDao;
+  GroupDao groupDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    orgDao = (OrgDao) 웹애플리케이션공용저장소.getAttribute("orgDao");
+    groupDao = (GroupDao) 웹애플리케이션공용저장소.getAttribute("groupDao");
   }
 
   @Override
@@ -34,32 +34,31 @@ public class OrgUpdateController extends HttpServlet {
       String id = request.getParameter("id");
       String password = request.getParameter("password");
 
-      OrgDTO orgDTO = orgDao.findByIdPassword(id, password);
+      GroupDTO groupDTO = groupDao.findByIdPassword(id, password);
 
-      if (orgDTO == null) {
+      if (groupDTO == null) {
         throw new Exception("해당 번호의 회원이 없습니다.<br>");
       } 
 
-      orgDTO.setId(request.getParameter("photo"));
-      orgDTO.setPassword(request.getParameter("password"));
-      orgDTO.setName(request.getParameter("name"));
-      orgDTO.setTel(request.getParameter("tel"));
-      orgDTO.setEmail(request.getParameter("email"));
-      orgDTO.setPostNo(request.getParameter("postNo"));
-      orgDTO.setBasicAddress(request.getParameter("basicAddress"));
-      orgDTO.setDetailAddress(request.getParameter("detailAddress"));
-      orgDTO.setCorpNo(request.getParameter("corpNo"));
-      orgDTO.setFax(request.getParameter("fax"));
-      orgDTO.setHomepage(request.getParameter("homepage"));
+      groupDTO.setId(request.getParameter("photo"));
+      groupDTO.setPassword(request.getParameter("password"));
+      groupDTO.setName(request.getParameter("name"));
+      groupDTO.setTel(request.getParameter("tel"));
+      groupDTO.setEmail(request.getParameter("email"));
+      groupDTO.setPostNo(request.getParameter("postNo"));
+      groupDTO.setBasicAddress(request.getParameter("basicAddress"));
+      groupDTO.setDetailAddress(request.getParameter("detailAddress"));
+      groupDTO.setGroupCount(Integer.valueOf(request.getParameter("groupCount")));
 
-      orgDao.update(orgDTO);
-      orgDao.updateOrg(orgDTO);
+      groupDao.update(groupDTO);
+      groupDao.updateGroup(groupDTO);
       sqlSession.commit();
 
 
       response.sendRedirect("list");
 
     } catch (Exception e) {
+      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

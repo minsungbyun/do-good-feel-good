@@ -1,4 +1,4 @@
-package com.share.ftp.servlet.join;
+package com.share.ftp.servlet.join.group;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,20 +10,19 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
-import com.share.ftp.dao.OrgDao;
-import com.share.ftp.domain.join.OrgDTO;
+import com.share.ftp.dao.GroupDao;
+import com.share.ftp.domain.join.GroupDTO;
 
-@WebServlet("/join/org/list")
-public class OrgListController extends GenericServlet {
+@WebServlet("/join/group/list")
+public class GroupListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
-
-  OrgDao orgDao;
+  GroupDao groupDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    orgDao = (OrgDao) 웹애플리케이션공용저장소.getAttribute("orgDao");
+    groupDao = (GroupDao) 웹애플리케이션공용저장소.getAttribute("groupDao");
   }
 
   @Override
@@ -32,10 +31,10 @@ public class OrgListController extends GenericServlet {
 
     try {
 
-      List<OrgDTO> orgUserList = orgDao.findAllOrg();
-      request.setAttribute("orgUserList", orgUserList);
+      List<GroupDTO> groupUserList = groupDao.findAllGroup();
+      request.setAttribute("groupUserList", groupUserList);
 
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/join/org/OrgUserList.jsp");
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/join/group/GroupUserList.jsp");
       요청배달자.forward(request, response);
 
     } catch (Exception e) {

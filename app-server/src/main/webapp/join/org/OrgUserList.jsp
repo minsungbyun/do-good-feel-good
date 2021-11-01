@@ -12,9 +12,9 @@
 <div><a href='form'>새회원</a></div>
 <table border='1'>
 
-<c:if test="empty orgUserList">
+<c:if test="${empty orgUserList}">
 <div>
-유저가 없습니다.
+등록된 기관회원이 없습니다.
 </div>
 </c:if>
 
