@@ -57,7 +57,11 @@
       challenge_review_no=#{reviewNo}
   </update>
   
-  
+   <delete id="deleteFile" >
+    delete from ftp_challenge_review_file
+    where
+      challenge_review_no=#{reviewNo}
+   </delete>
   
    <delete id="delete" parameterType="int">
     delete from ftp_challenge_review where challenge_review_no=${values}

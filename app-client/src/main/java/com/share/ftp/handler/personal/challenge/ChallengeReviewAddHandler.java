@@ -41,10 +41,10 @@ public class ChallengeReviewAddHandler implements Command {
     }
 
     // 리뷰어로 참여 한 경우 중복 참여 불가!
-    if (challengeDTO.getReviewerNames().contains(AuthLoginHandler.getLoginUser().getId())) {
-      System.out.println("리뷰는 한 번만 작성할 수 있습니다!");
-      return;
-    }
+    //    if (challengeDTO.getReviewerNames().contains(AuthLoginHandler.getLoginUser().getId())) {
+    //      System.out.println("리뷰는 한 번만 작성할 수 있습니다!");
+    //      return;
+    //    }
 
     ChallengeReviewDTO challengeReviewDTO = new ChallengeReviewDTO();
 

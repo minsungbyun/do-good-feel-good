@@ -56,13 +56,17 @@ public class ChallengeReviewDeleteHandler implements Command {
 
         } else if (input.equalsIgnoreCase("y")) {
           System.out.println();
-          challengeDTO.setReviewCount(challengeDTO.getReviewCount() - 1);
+          //          challengeDTO.setReviewCount(challengeDTO.getReviewCount() - 1);
           //          AuthLoginHandler.getLoginUser().setPoint(AuthLoginHandler.getLoginUser().getPoint() - CHALLENGE_REVIEWPOINT);
-          challengeDTO.removeReviewer(AuthLoginHandler.getLoginUser()); 
+          //          challengeDTO.removeReviewer(AuthLoginHandler.getLoginUser()); 
 
-          challengeDao.update(challengeDTO);
-          challengeReviewDao.delete(challengeReviewNo);
-          sqlSession.commit();
+          try {
+            challengeReviewDao.deleteFile(challengeReviewNo);
+            challengeReviewDao.delete(challengeReviewNo);
+            sqlSession.commit();
+          } catch (Exception e) {
+            sqlSession.rollback();
+          }
           System.out.println("참여인증&댓글을 삭제하였습니다.");
           return;
 

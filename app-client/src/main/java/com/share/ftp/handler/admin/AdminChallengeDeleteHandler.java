@@ -35,8 +35,13 @@ public class AdminChallengeDeleteHandler implements Command {
       return; 
 
     } else if (input.equalsIgnoreCase("y")) {
-      challengeDao.delete(challengeNo);
-      sqlSession.commit();
+      try {
+        challengeDao.deleteFile(challengeNo);
+        challengeDao.delete(challengeNo);
+        sqlSession.commit();
+      } catch (Exception e) {
+        sqlSession.rollback();
+      }
       System.out.println();
 
       System.out.println("[  챌린지를 삭제하였습니다. ]");

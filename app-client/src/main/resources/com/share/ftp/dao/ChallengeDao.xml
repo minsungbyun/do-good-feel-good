@@ -78,7 +78,11 @@
       challenge_no=#{no}
   </update>
   
-  
+  <delete id="deleteFile">
+  delete from ftp_challenge_file
+  where
+    challenge_no=#{no}
+  </delete>
   
    <delete id="delete" parameterType="int">
     delete from ftp_challenge where challenge_no=${values}

@@ -15,7 +15,13 @@
       <id column="user_No" property="no"/>
       <result column="id" property="id"/>
     </association>
+    
+    <collection property="fileUpload" ofType="challengeReviewAttachedFile">
+      <id column="challenge_review_file_no" property="no"/>
+      <result column="filepath" property="filepath"/>
+  </collection>
   </resultMap>
+  
   
   <select id="findAll" resultMap="ChallengeReviewDTOMap">
     select 
@@ -24,10 +30,12 @@
       r.content,
       r.created_dt,
       u.user_no user_No,
-      u.id id
+      u.id id,
+      f.filepath
     from
       ftp_challenge_review r
       inner join ftp_user u on r.user_no=u.user_no
+      left outer join ftp_challenge_review_file f on r.challenge_review_no=f.challenge_review_no
     order by 
       r.challenge_review_no desc
   </select>
@@ -37,7 +45,10 @@
     values(#{no},#{content},#{owner.no}, curdate())
   </insert>
   
-  
+  <insert id="insertFile">
+    insert into ftp_challenge_review_file(challenge_review_no,filepath)
+    values(#{challengeReviewNo},#{filepath})
+  </insert>
   
   <update id="update" parameterType="ChallengeReviewDTO">
     update ftp_challenge_review set
@@ -46,7 +57,11 @@
       challenge_review_no=#{reviewNo}
   </update>
   
-  
+   <delete id="deleteFile" >
+    delete from ftp_challenge_review_file
+    where
+      challenge_review_no=#{reviewNo}
+   </delete>
   
    <delete id="delete" parameterType="int">
     delete from ftp_challenge_review where challenge_review_no=${values}
