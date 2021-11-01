@@ -39,7 +39,7 @@ public class GroupAddController extends HttpServlet {
     groupDTO.setName(request.getParameter("name"));
     groupDTO.setTel(request.getParameter("tel"));
     groupDTO.setEmail(request.getParameter("email"));
-    groupDTO.setPostNo(request.getParameter("postNo"));
+    groupDTO.setPostNo(Integer.valueOf(request.getParameter("postNo")));
     groupDTO.setBasicAddress(request.getParameter("basicAddress"));
     groupDTO.setDetailAddress(request.getParameter("detailAddress"));
     groupDTO.setType(2);

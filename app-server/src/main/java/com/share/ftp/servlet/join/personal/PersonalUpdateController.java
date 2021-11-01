@@ -46,7 +46,7 @@ public class PersonalUpdateController extends HttpServlet {
       personalDTO.setName(request.getParameter("name"));
       personalDTO.setTel(request.getParameter("tel"));
       personalDTO.setEmail(request.getParameter("email"));
-      personalDTO.setPostNo(request.getParameter("postNo"));
+      personalDTO.setPostNo(Integer.valueOf(request.getParameter("postNo")));
       personalDTO.setBasicAddress(request.getParameter("basicAddress"));
       personalDTO.setDetailAddress(request.getParameter("detailAddress"));
       personalDTO.setBirthdate(Date.valueOf(request.getParameter("birthdate")));

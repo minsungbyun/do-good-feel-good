@@ -39,7 +39,7 @@ public class OrgAddController extends HttpServlet {
     orgDTO.setName(request.getParameter("name"));
     orgDTO.setTel(request.getParameter("tel"));
     orgDTO.setEmail(request.getParameter("email"));
-    orgDTO.setPostNo(request.getParameter("postNo"));
+    orgDTO.setPostNo(Integer.valueOf(request.getParameter("postNo")));
     orgDTO.setBasicAddress(request.getParameter("basicAddress"));
     orgDTO.setDetailAddress(request.getParameter("detailAddress"));
     orgDTO.setCorpNo(request.getParameter("corpNo"));

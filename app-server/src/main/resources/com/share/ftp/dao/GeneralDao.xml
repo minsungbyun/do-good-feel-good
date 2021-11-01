@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.share.ftp.dao.GeneralDao">
+  
+ 
+  <resultMap type="category" id="categoryMap">
+    <id column="category_no" property="no"/> 
+    <result column="title" property="title"/>
+  </resultMap>
+  
+  <resultMap type="questionCategory" id="QuestionCategoryMap">    
+    <id column="qna_category_no" property="no"/>
+    <result column="title" property="title"/>
+  </resultMap>
+  
+  <resultMap type="DonationRegisterPayType" id="donationRegisterPayTypeMap">    
+    <id column="pay_no" property="no"/>
+    <result column="title" property="title"/>
+  </resultMap>
+  
+  <!-- 
+  <resultMap type="status" id="statusMap">
+    <id column="status_no" property="no"/> 
+    <result column="status_title" property="title"/>
+  </resultMap>
+   -->
+
+  
+   <select id="findAllCategory" resultMap="categoryMap">
+      select category_no, title from ftp_category order by category_no asc
+   </select>
+   
+   <select id="findAllQnaCategory" resultMap="QuestionCategoryMap">
+      select
+        qna_category_no,
+        title
+      from
+        ftp_support_qna_category order by qna_category_no asc
+   </select>
+   
+   <select id="findAllPayType" resultMap="donationRegisterPayTypeMap">
+      select pay_no, title from ftp_donation_pay  
+   </select>
+   
+   <!-- 
+   <select id="findAllStatus" resultMap="statusMap">
+      select status_no, status_title from ftp_status 
+   </select>
+   -->
+ 
+</mapper>
+
+
+
+
+
+
+
