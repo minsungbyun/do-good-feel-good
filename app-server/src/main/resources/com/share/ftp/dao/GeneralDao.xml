@@ -16,12 +16,13 @@
     <result column="title" property="title"/>
   </resultMap>
   
+
   <resultMap type="DonationRegisterPayType" id="donationRegisterPayTypeMap">    
     <id column="pay_no" property="no"/>
     <result column="title" property="title"/>
   </resultMap>
   
-  <!-- 
+  <!--  
   <resultMap type="status" id="statusMap">
     <id column="status_no" property="no"/> 
     <result column="status_title" property="title"/>
@@ -44,8 +45,8 @@
    <select id="findAllPayType" resultMap="donationRegisterPayTypeMap">
       select pay_no, title from ftp_donation_pay  
    </select>
-   
    <!-- 
+   
    <select id="findAllStatus" resultMap="statusMap">
       select status_no, status_title from ftp_status 
    </select>

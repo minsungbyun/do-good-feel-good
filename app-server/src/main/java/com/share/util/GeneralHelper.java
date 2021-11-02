@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.domain.Category;
-import com.share.ftp.domain.admin.ChallengeAttachedFile;
 import com.share.ftp.domain.admin.NoticeAttachedFile;
-import com.share.ftp.domain.challenge.ChallengeReviewAttachedFile;
 import com.share.ftp.domain.community.VolunteerBoardAttachedFile;
 import com.share.ftp.domain.support.QuestionAttachedFile;
 import com.share.ftp.domain.support.QuestionCategory;
@@ -92,7 +90,7 @@ public class GeneralHelper {
     while (true) {
       for (int i = 0; i < categoryList.size(); i++) {
         QuestionCategory qnaCategory = categoryList.get(i);
-        System.out.printf("%d ▶ %s\n", i + 1, qnaCategory.getTitle());
+        System.out.printf("%d ▶ %s\n", i + 1, qnaCategory.getTitle(), qnaCategory.getNo());
       }
 
       System.out.println();
@@ -221,49 +219,6 @@ public class GeneralHelper {
     }
   }
 
-
-  public static List<ChallengeAttachedFile> promptChllengeFileUpload() {
-    System.out.println();
-
-    ChallengeAttachedFile filepath = null;
-    String file = null;
-
-    List<ChallengeAttachedFile> fileList = new ArrayList<>();
-    while(true) {
-
-      filepath = new ChallengeAttachedFile();
-      file = Prompt.inputString("첨부파일 (enter입력 시 종료) ▶ ");
-      if (file.length() == 0) {
-        return fileList;
-      }
-      filepath.setFilepath(file);
-
-      fileList.add(filepath);
-
-    }
-  }
-
-
-  public static List<ChallengeReviewAttachedFile> promptChllengeReviewFileUpload() {
-    System.out.println();
-
-    ChallengeReviewAttachedFile filepath = null;
-    String file = null;
-
-    List<ChallengeReviewAttachedFile> fileList = new ArrayList<>();
-    while(true) {
-
-      filepath = new ChallengeReviewAttachedFile();
-      file = Prompt.inputString("첨부파일 (enter입력 시 종료) ▶ ");
-      if (file.length() == 0) {
-        return fileList;
-      }
-      filepath.setFilepath(file);
-
-      fileList.add(filepath);
-
-    }
-  }
   // 향후 확장성을 위해 나둠 지금은 필요없음
   //  public Status promptStatus() throws Exception {
   //

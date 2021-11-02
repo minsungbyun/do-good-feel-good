@@ -18,20 +18,34 @@
     <result column="end_time" property="endTime"/>
     <result column="total_cnt" property="limitNum"/>
     <result column="approval" property="status"/>
-   
-    
     <result column="note" property="note"/> 
     
     <result column="total_dt" property="totalDate"/> 
     <result column="remain_dt" property="remainDate"/> 
     
+    
+    <result column="apply_dt" property="applyDate"/>
+    <result column="start_time" property="applyStartTime"/>
+    <result column="end_time" property="applyEndTime"/>
+    <result column="apply_status" property="applyStatus"/>
+    <result column="vol_joincount" property="getCount"/>
+    <result column="note" property="applyNote"/> 
+   
 
+ 
    
    <association property="owner" javaType="joinDTO">
       <id column="owner_no" property="no"/>
       <result column="owner_id" property="id"/>
      <result column="owner_name" property="name"/>
    </association>
+   
+   <association property="applyOwner" javaType="joinDTO">
+      <id column="apply_no" property="no"/>
+      <result column="apply_id" property="id"/>
+     <result column="apply_name" property="name"/>
+   </association>
+   
    
    <association property="wish" javaType="joinDTO">
      <id column="wish_no" property="no"/>
@@ -92,6 +106,12 @@
        #{status})
   </insert>
   
+  <insert id="insertUser" parameterType="VolunteerRequestDTO">
+    insert into ftp_vol_apply(user_no,vol_no,apply_dt,start_time,end_time)
+    values(#{userNo},#{volNo},#{applyDate},#{startTime},#{endTime})
+  </insert>
+  
+  
   <insert id="insertFile">
     insert into ftp_vol_file(vol_no,filepath)
     values(#{volNo},#{filepath})
@@ -125,18 +145,25 @@
 	       u.id wish_id,
 	       u.id owner_id,  
 	       u.name owner_name,  
-	       c.category_title category_title,
+	       c.title category_title,
 	       f.filepath filepath,
-	       v.approval
+	       v.approval,
+	       u.id apply_id,
+	       va.apply_dt,
+	       va.apply_status,
+	       va.start_time,
+	       va.end_time,
+	       va.note
 	     from
 	       ftp_vol v
 	       inner join ftp_user u on v.user_no=u.user_no
 	       inner join ftp_category c on v.category_no=c.category_no
 	       left outer join ftp_vol_file f on v.vol_no=f.vol_no
-	       left outer join ftp_vol v2 on u.user_no=v2.user_no
+	       left outer join ftp_vol_apply va on v.vol_no=va.vol_no
 	     order by
-	       vol_no desc 
+	       v.vol_no desc 
   </select>
+   
   
    <select id="findAllApproved" resultMap="VolunteerRequestDTOMap">
 	     select
@@ -156,7 +183,7 @@
 	         u.id wish_id,
 	         u.id owner_id,
 	         u.name owner_name,   
-	         c.category_title category_title,
+	         c.title category_title,
 	         f.filepath
 	       from
 	         ftp_vol v
@@ -187,7 +214,7 @@
 	         v.total_cnt,
 	         u.id owner_id,
 	         u.name owner_name,   
-	         c.category_title category_title,
+	         c.title category_title,
 	         f.filepath
 	       from
 	         ftp_vol v
@@ -217,7 +244,7 @@
          v.total_cnt,
          u.id owner_id,
          u.name owner_name,  
-         c.category_title category_title,
+         c.title category_title,
          f.filepath
        from
          ftp_vol v
@@ -272,7 +299,7 @@
          v.total_cnt,
          u.id owner_id,
          u.name owner_name,   
-         c.category_title category_title,
+         c.title category_title,
          f.filepath
        from
          ftp_vol v
@@ -299,7 +326,7 @@
          v.total_cnt,
          u.id owner_id,
          u.name owner_name,   
-         c.category_title category_title,
+         c.title category_title,
          f.filepath
        from
          ftp_vol v
@@ -326,7 +353,7 @@
          v.total_cnt,
          u.id owner_id,
          u.name owner_name,   
-         c.category_title category_title,
+         c.title category_title,
          f.filepath
        from
          ftp_vol v

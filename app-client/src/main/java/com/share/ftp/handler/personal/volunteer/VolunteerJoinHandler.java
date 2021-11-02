@@ -2,9 +2,9 @@ package com.share.ftp.handler.personal.volunteer;
 
 import static com.share.util.General.check.APPLIED;
 import static com.share.util.General.member.GROUP;
+import static com.share.util.General.member.ORG;
 import static com.share.util.General.point.VOLUNTEER_POINT;
 import java.sql.Date;
-import com.share.ftp.dao.VolunteerApplyDao;
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.join.PersonalDTO;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
@@ -17,11 +17,9 @@ import com.share.util.Prompt;
 public class VolunteerJoinHandler implements Command { 
 
   VolunteerDao volunteerDao;
-  VolunteerApplyDao volunteerApplyDao;
 
-  public VolunteerJoinHandler(VolunteerDao volunteerDao, VolunteerApplyDao volunteerApplyDao) {
+  public VolunteerJoinHandler(VolunteerDao volunteerDao) {
     this.volunteerDao = volunteerDao;
-    this.volunteerApplyDao = volunteerApplyDao;
   }
 
 
@@ -31,7 +29,8 @@ public class VolunteerJoinHandler implements Command {
     System.out.println("[  봉사 참여  ]");
     System.out.println();
 
-    if (AuthLoginHandler.getLoginUser().getType() == GROUP) {
+    if (AuthLoginHandler.getLoginUser().getType() == GROUP || 
+        AuthLoginHandler.getLoginUser().getType() == ORG) {
       System.out.println("개인회원만 참여할 수 있습니다!");
       return;
     }
@@ -42,18 +41,7 @@ public class VolunteerJoinHandler implements Command {
 
     VolunteerRequestDTO volunteerRequestDTO = volunteerDao.findByApprovedVolunteerNo(volNo);
 
-
-    Date applyDate = Prompt.inputDate("참여일(yyyy-mm-dd) ▶ ");
-
-    GeneralHelper.promptVolunteerTime(volunteerRequestDTO);
-
-
-
-    String input = Prompt.inputString("해당 봉사활동을 참가하시겠습니까?(y/N) ▶ ");
-    if (!input.equals("y") || input.length() == 0) {
-      System.out.println("[  해당 봉사신청 참여를 취소하였습니다. ]");
-      return;
-    }
+    //    VolunteerJoinDTO volunteerJoinDTO = new VolunteerJoinDTO();
 
     // 주최자 유효성검사
     if (volunteerRequestDTO.getOwner().getId().
@@ -68,13 +56,30 @@ public class VolunteerJoinHandler implements Command {
       return;
     }
 
+
     if (volunteerRequestDTO.getMemberNames().contains(loginUser.getId())) {
       System.out.println("이미 봉사참여를 하셨습니다!");
       return;
     } 
 
 
+    Date applyDate = Prompt.inputDate("참여일(yyyy-mm-dd) ▶ ");
+
+    GeneralHelper.promptVolunteerTime(volunteerRequestDTO);
+
+
+
+    String input = Prompt.inputString("해당 봉사활동을 참가하시겠습니까?(y/N) ▶ ");
+    if (!input.equals("y") || input.length() == 0) {
+      System.out.println("[  해당 봉사신청 참여를 취소하였습니다. ]");
+      return;
+    }
+
+
+
     volunteerRequestDTO.setUserNo(loginUser.getNo());
+    volunteerRequestDTO.setVolNo(volunteerRequestDTO.getNo());
+    volunteerRequestDTO.setApplyOwner(AuthLoginHandler.getLoginUser());
     volunteerRequestDTO.setApplyDate(applyDate);
     volunteerRequestDTO.setApplyStatus(APPLIED);
 
@@ -90,7 +95,7 @@ public class VolunteerJoinHandler implements Command {
     int count = volunteerRequestDTO.getCurrentNum();
     volunteerRequestDTO.setCurrentNum(count += 1); 
 
-    volunteerApplyDao.insert(volunteerRequestDTO);
+    volunteerDao.insertUser(volunteerRequestDTO);
 
     System.out.println("[  ✔️ 봉사참여가 완료되었습니다. ]");
   }

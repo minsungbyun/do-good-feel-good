@@ -16,7 +16,7 @@ public class VolunteerRequestDTO implements Serializable {
   private int no;
   private int userNo;
   private int memberType; 
-  private int getCount;
+
   private Category category;
   private String title;
   private String content;
@@ -24,7 +24,7 @@ public class VolunteerRequestDTO implements Serializable {
   private String email;
   private Date startDate;
   private Date endDate;
-  private Date applyDate;
+
   private String startTime;
   private String endTime;
   private String totalDate;
@@ -33,13 +33,25 @@ public class VolunteerRequestDTO implements Serializable {
   private int limitNum; // 총 정원
   private String name;
   private int status;
-  private int applyStatus;
   private JoinDTO owner; 
   private List<VolunteerAttachedFile> fileUpload;
   private Date submitTime; 
   private JoinDTO wish;
   private String note;
   private List<JoinDTO> members = new ArrayList<>(); // 봉사 참여한 멤버들
+
+
+
+  private int volNo;
+  private JoinDTO applyOwner; 
+  private String applyStartTime;
+  private String applyEndTime;
+  private int applyStatus;
+  private Date applyDate;
+  private int getCount;
+  private String applyNote;
+
+
 
   private int shortReviewNo;
   private String shortReviewContent;
@@ -51,6 +63,52 @@ public class VolunteerRequestDTO implements Serializable {
 
 
 
+
+  public int getVolNo() {
+    return volNo;
+  }
+
+  public void setVolNo(int volNo) {
+    this.volNo = volNo;
+  }
+
+  public JoinDTO getApplyOwner() {
+    return applyOwner;
+  }
+
+  public void setApplyOwner(JoinDTO applyOwner) {
+    this.applyOwner = applyOwner;
+  }
+
+  public String getApplyStartTime() {
+    return applyStartTime;
+  }
+
+  public void setApplyStartTime(String applyStartTime) {
+    this.applyStartTime = applyStartTime;
+  }
+
+  public String getApplyEndTime() {
+    return applyEndTime;
+  }
+
+  public void setApplyEndTime(String applyEndTime) {
+    this.applyEndTime = applyEndTime;
+  }
+
+
+
+  public String getApplyNote() {
+    return applyNote;
+  }
+
+  public void setApplyNote(String applyNote) {
+    this.applyNote = applyNote;
+  }
+
+  public void setGetCount(int getCount) {
+    this.getCount = getCount;
+  }
 
   public Date getApplyDate() {
     return applyDate;

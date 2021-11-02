@@ -1,5 +1,4 @@
 package com.share.ftp.listener;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -9,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.dao.DonationRegisterDao;
+import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.dao.GroupDao;
 import com.share.ftp.dao.JoinDao;
 import com.share.ftp.dao.NoticeDao;
@@ -41,6 +41,7 @@ public class AppInitListener implements ServletContextListener {
       OrgDao orgDao = sqlSession.getMapper(OrgDao.class);
 
       VolunteerDao volunteerDao = sqlSession.getMapper(VolunteerDao.class);
+      GeneralDao generalDao = sqlSession.getMapper(GeneralDao.class);
       VolunteerBoardDao volunteerBoardDao = sqlSession.getMapper(VolunteerBoardDao.class);
       VolunteerBoardCommentDao volunteerBoardCommentDao = sqlSession.getMapper(VolunteerBoardCommentDao.class);
       VolunteerShortReviewDao volunteerShortReviewDao = sqlSession.getMapper(VolunteerShortReviewDao.class);    
@@ -56,6 +57,11 @@ public class AppInitListener implements ServletContextListener {
 
       // 웹 애플리케이션 공용 저장소에 DAO 객체를 보관한다.
       // => 이 저장소에 보관된 객체는 서블릿에서 사용할 것이다.
+      웹애플리케이션공용저장소.setAttribute("volunteerDao", volunteerDao);
+      웹애플리케이션공용저장소.setAttribute("generalDao", generalDao);
+      웹애플리케이션공용저장소.setAttribute("joinDao", joinDao);
+      웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
+
       웹애플리케이션공용저장소.setAttribute("joinDao", joinDao);
       웹애플리케이션공용저장소.setAttribute("personalDao", personalDao);
       웹애플리케이션공용저장소.setAttribute("groupDao", groupDao);

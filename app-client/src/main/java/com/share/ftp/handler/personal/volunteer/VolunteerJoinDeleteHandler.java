@@ -1,7 +1,7 @@
 package com.share.ftp.handler.personal.volunteer;
 
 import static com.share.util.General.point.VOLUNTEER_POINT;
-import java.util.Collection;
+import java.util.List;
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.join.PersonalDTO;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
@@ -25,7 +25,7 @@ public class VolunteerJoinDeleteHandler implements Command { // 개인 봉사신
     System.out.println();
     System.out.println("[  봉사 참여 취소하기  ]");
     PersonalDTO loginUser = (PersonalDTO) AuthLoginHandler.getLoginUser();
-    Collection<VolunteerRequestDTO> list = volunteerDao.findAllApply();
+    List<VolunteerRequestDTO> list = volunteerDao.findAllApply();
 
     if (list.isEmpty()) {
       System.out.println("봉사 신청서가 없습니다.");
@@ -33,21 +33,23 @@ public class VolunteerJoinDeleteHandler implements Command { // 개인 봉사신
     }
 
     for (VolunteerRequestDTO volunteerRequestDTO : list) {
-      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s \n", 
-          volunteerRequestDTO.getNo(),      
-          volunteerRequestDTO.getTitle(),     
-          volunteerRequestDTO.getOwner().getId(), 
-          volunteerRequestDTO.getCategory().getTitle(), 
-          volunteerRequestDTO.getTel(),
-          volunteerRequestDTO.getEmail(),
-          volunteerRequestDTO.getStartDate(),
-          volunteerRequestDTO.getEndDate(),
-          volunteerRequestDTO.getStartTime(),
-          volunteerRequestDTO.getEndTime(),
-          volunteerRequestDTO.getLimitNum(),
-          volunteerRequestDTO.getContent()
-          );
-    } 
+      if (AuthLoginHandler.getLoginUser().getId().contains(volunteerRequestDTO.getApplyOwner().getId())) {
+        System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s \n", 
+            volunteerRequestDTO.getNo(),      
+            volunteerRequestDTO.getTitle(),     
+            volunteerRequestDTO.getOwner().getId(), 
+            volunteerRequestDTO.getCategory().getTitle(), 
+            volunteerRequestDTO.getTel(),
+            volunteerRequestDTO.getEmail(),
+            volunteerRequestDTO.getStartDate(),
+            volunteerRequestDTO.getEndDate(),
+            volunteerRequestDTO.getStartTime(),
+            volunteerRequestDTO.getEndTime(),
+            volunteerRequestDTO.getLimitNum(),
+            volunteerRequestDTO.getContent()
+            );
+      } 
+    }
 
 
     int volNo = Prompt.inputInt("참여를 취소할 봉사 번호를 입력해주세요(이전 0번) ▶ ");
