@@ -11,7 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 
-@WebServlet("/adminChallenge/detail")
+@WebServlet("/admin/challenge/detail")
 public class AdminChallengeDetailController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 

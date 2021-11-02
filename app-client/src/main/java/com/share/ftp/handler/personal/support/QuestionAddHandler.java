@@ -37,7 +37,7 @@ public class QuestionAddHandler implements Command {
     questionListDTO.setContent(Prompt.inputString("내용: "));
     questionListDTO.setOwner(AuthLoginHandler.getLoginUser());
     questionListDTO.setFileUpload(GeneralHelper.promptQnaFileUpload());
-    questionListDTO.setQnaPassword(Prompt.inputString("비밀번호(숫자4자리): "));
+    questionListDTO.setQnaPassword(Prompt.inputInt("비밀번호(숫자4자리): "));
     questionListDTO.setStatus(UNANSWERED);
 
 

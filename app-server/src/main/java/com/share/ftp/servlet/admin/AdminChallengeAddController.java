@@ -1,6 +1,7 @@
 package com.share.ftp.servlet.admin;
 
 import java.io.IOException;
+import java.sql.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -11,10 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.ChallengeDao;
-import com.share.ftp.domain.admin.ChallengeAttachedFile;
 import com.share.ftp.domain.admin.ChallengeDTO;
 
-@WebServlet("/adminChallenge/add")
+@WebServlet("/admin/challenge/add")
 public class AdminChallengeAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -38,38 +38,34 @@ public class AdminChallengeAddController extends HttpServlet {
     challengeDTO.setContent(request.getParameter("content")); 
     //    challengeDTO.setFileUpload(request.promptChllengeFileUpload()); 
 
-    while (true) {
-      challengeDTO.setStartDate(request.getParameter("startDate"));
-      challengeDTO.setEndDate(request.getParameter("endDate"));
 
+    challengeDTO.setStartDate(Date.valueOf(request.getParameter("startDate")));
+    challengeDTO.setEndDate(Date.valueOf(request.getParameter("endDate")));
+
+
+    try {
       if (challengeDTO.getStartDate().compareTo(challengeDTO.getEndDate()) > 0) {
         throw new Exception("종료일을 지난 시작일은 존재하지 않습니다. 올바른 날짜를 입력해주세요!");
+      }
 
-      } else if (challengeDTO.getStartDate().compareTo(challengeDTO.getEndDate()) == 0) {
+      if (challengeDTO.getStartDate().compareTo(challengeDTO.getEndDate()) == 0) {
         throw new Exception("시작일과 종료일은 같을 수 없습니다. 올바른 날짜를 입력해주세요!");
-
-      } else {
-        break;
       }
-      try {
-        challengeDao.insert(challengeDTO);
-        for (ChallengeAttachedFile challengeAttachedFile : challengeDTO.getFileUpload()) {
-          challengeDao.insertFile(challengeDTO.getNo(), challengeAttachedFile.getFilepath());
-        }
-        sqlSession.commit();
-        response.setHeader("Refresh", "1;url=list");
-        request.getRequestDispatcher("AdminChallengeAdd.jsp").forward(request, response);
-      } catch (Exception e) {
-        //      e.printStackTrace();
-        sqlSession.rollback();
-        request.setAttribute("error", e);
+      challengeDao.insert(challengeDTO);
+      //        for (ChallengeAttachedFile challengeAttachedFile : challengeDTO.getFileUpload()) {
+      //          challengeDao.insertFile(challengeDTO.getNo(), challengeAttachedFile.getFilepath());
+      //        }
+      sqlSession.commit();
+      response.setHeader("Refresh", "1;url=list");
+      request.getRequestDispatcher("AdminChallengeAdd.jsp").forward(request, response);
+    } catch (Exception e) {
+      e.printStackTrace();
+      //      sqlSession.rollback();
+      request.setAttribute("error", e);
 
-        RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
-        요청배달자.forward(request, response);
-      }
-      System.out.println();
-      System.out.println("[ 챌린지가 정상적으로 등록되었습니다. ]");
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
+      요청배달자.forward(request, response);
     }
   }
-
 }
+

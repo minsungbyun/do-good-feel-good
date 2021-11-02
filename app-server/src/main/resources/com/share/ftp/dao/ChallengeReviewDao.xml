@@ -40,6 +40,25 @@
       r.challenge_review_no desc
   </select>
   
+  <select id="findAllNo" resultMap="ChallengeReviewDTOMap" parameterType="int">
+    select 
+      r.challenge_no,
+      r.challenge_review_no,
+      r.content,
+      r.created_dt,
+      u.user_no user_No,
+      u.id id,
+      f.filepath
+    from
+      ftp_challenge_review r
+      inner join ftp_user u on r.user_no=u.user_no
+      left outer join ftp_challenge_review_file f on r.challenge_review_no=f.challenge_review_no
+    where
+      r.challenge_no=#{challengeNo}
+    order by 
+      r.challenge_review_no desc
+  </select>
+  
   <insert id="insert" parameterType="ChallengeReviewDTO">
     insert into ftp_challenge_review(challenge_no,content,user_no,created_dt) 
     values(#{no},#{content},#{owner.no}, curdate())

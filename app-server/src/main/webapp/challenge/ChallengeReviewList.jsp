@@ -15,17 +15,17 @@
     <th>번호</th>
     <th>내용</th>
 <!--     <th>파일첨부</th> -->
-    <th>종료일</th>
+    <th>작성자</th>
   </tr>
 </thead>
 <tbody>
 
-<c:forEach items="${challengeList}" var="challengeReviewDTO">
+<c:forEach items="${challengeReviewList}" var="challengeReviewDTO">
 <tr>
-    <td>${challengeReviewDTO.replyNo}</td>
-    <td><a href='detail?no=${challengeReviewDTO.replyNo}'>${challengeReviewDTO.content}</a></td> 
+    <td>${challengeReviewDTO.no}</td>
+    <td><a href='detail?no=${challengeReviewDTO.reviewNo}'>${challengeReviewDTO.content}</a></td> 
 <!--    <td>${challengeReviewDTO.fileUpload}</td> -->
-    <td>${challengeReviewDTO.owner}</td> 
+    <td>${challengeReviewDTO.owner.id}</td> 
 </tr>
 </c:forEach>
 

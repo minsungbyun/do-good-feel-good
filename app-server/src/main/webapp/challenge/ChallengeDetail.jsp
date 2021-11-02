@@ -33,8 +33,9 @@
 
     <label for='f-registeredDate'>등록일</label> 
     <span id='f-registeredDate'>${challengeDTO.registeredDate}</span><br>
- <a href='list'>[목록]</a><br> <a href='delete?no=${challengeDTO.no}'>[참여하기]</a>
- <a href='list'>[참여자 목록]</a><br><a href='list'>[참여인증&댓글]</a><a href='list'>[문의하기]</a>
+ <a href='list'>[목록]</a><br>
+ <a href='list'>[참여하기]</a><a href='list'>[참여자 목록]</a><br>
+ <a href='reviewList?no=${challengeDTO.no}'>[참여인증&댓글]</a><a href='questionList?no=${challengeDTO.no}'>[문의하기]</a>
 
 </body>
 </html>

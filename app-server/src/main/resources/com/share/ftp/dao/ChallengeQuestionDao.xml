@@ -34,10 +34,28 @@
     order by 
       q.challenge_qna_no desc
   </select>
+  
+    <select id="findAllNo" resultMap="ChallengeQuestionDTOMap">
+    select 
+      q.challenge_no,
+      q.challenge_qna_no,
+      q.content,
+      q.created_dt,
+      q.reply,
+      u.user_no user_No,
+      u.id id
+    from
+      ftp_challenge_qna q
+      inner join ftp_user u on q.user_no=u.user_no
+    where
+      q.challenge_no=#{challengeNo}
+    order by 
+      q.challenge_qna_no desc
+  </select>
  
   <insert id="insert" parameterType="ChallengeQuestionDTO">
-    insert into ftp_challenge_qna(challenge_no,content,user_no,created_dt) 
-    values(#{no},#{content},#{owner.no}, curdate())
+    insert into ftp_challenge_qna(challenge_no,content,user_no) 
+    values(#{no},#{content},#{owner.no})
   </insert>
   
 <!--  
@@ -79,13 +97,13 @@
       q.content,
       q.created_dt,
       q.reply,
-      u.user_no,
-      u.id
+      u.user_no user_No,
+      u.id id
     from
       ftp_challenge_qna q
       inner join ftp_user u on q.user_no=u.user_no
     where 
-      challenge_no=#{challengeNo} and challenge_qna_no=#{challengeQuestionNo}
+      q.challenge_qna_no=#{challengeQuestionNo} and q.challenge_no=#{no}
   </select>
 </mapper>
 
