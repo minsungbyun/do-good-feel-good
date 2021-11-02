@@ -7,6 +7,8 @@ import javax.servlet.annotation.WebListener;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import com.share.ftp.dao.GeneralDao;
+import com.share.ftp.dao.JoinDao;
 import com.share.ftp.dao.VolunteerDao;
 
 @WebListener
@@ -25,6 +27,8 @@ public class AppInitListener implements ServletContextListener {
 
       // SqlSession 객체를 통해 MemberDao 구현체를 자동 생성한다.
       VolunteerDao volunteerDao = sqlSession.getMapper(VolunteerDao.class);
+      GeneralDao generalDao = sqlSession.getMapper(GeneralDao.class);
+      JoinDao joinDao = sqlSession.getMapper(JoinDao.class);
 
       // 모든 웹 애플리케이션의 컴포넌트(서블릿, 리스너, 필터)가 공유할 객체를 두는 저장소
       ServletContext 웹애플리케이션공용저장소 = sce.getServletContext();
@@ -32,10 +36,12 @@ public class AppInitListener implements ServletContextListener {
       // 웹 애플리케이션 공용 저장소에 DAO 객체를 보관한다.
       // => 이 저장소에 보관된 객체는 서블릿에서 사용할 것이다.
       웹애플리케이션공용저장소.setAttribute("volunteerDao", volunteerDao);
-
+      웹애플리케이션공용저장소.setAttribute("generalDao", generalDao);
+      웹애플리케이션공용저장소.setAttribute("joinDao", joinDao);
       웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
 
     } catch (Exception e) {
+      e.printStackTrace();
       System.out.println("DAO 객체 준비 중 오류 발생!");
     }
 

@@ -33,7 +33,7 @@ public class MyVolunteerListHandler implements Command { // 개인 봉사신청 
     }
 
     for (VolunteerRequestDTO volunteerRequest : list) {
-      if (AuthLoginHandler.getLoginUser().getId().equals(volunteerRequest.getOwner().getId())) {
+      if (AuthLoginHandler.getLoginUser().getId().contains(volunteerRequest.getApplyOwner().getId())) {
 
         System.out.printf("번호: %d\n"
             + "봉사제목: %s\n"

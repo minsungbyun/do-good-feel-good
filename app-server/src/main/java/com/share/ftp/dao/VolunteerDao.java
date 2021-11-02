@@ -19,6 +19,7 @@ public interface VolunteerDao {
   List<VolunteerRequestDTO> findAllApproved() throws Exception;      
   List<VolunteerRequestDTO> findAllApply() throws Exception;      
   List<VolunteerRequestDTO> findAllWait() throws Exception;      
+
   //  List<Category> findAllCategory() throws Exception;      
   void update(VolunteerRequestDTO updateVolunteer) throws Exception;          
   void updateFile(VolunteerRequestDTO updateVolunteer) throws Exception;          

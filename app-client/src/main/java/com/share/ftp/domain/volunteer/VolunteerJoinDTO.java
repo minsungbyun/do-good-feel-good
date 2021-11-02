@@ -18,7 +18,7 @@ public class VolunteerJoinDTO implements Serializable {
   private Date applyDate;
   private String startTime;
   private String endTime;
-  private String note;
+
   private List<JoinDTO> members = new ArrayList<>(); // 봉사 참여한 멤버들
 
   private int shortReviewNo;

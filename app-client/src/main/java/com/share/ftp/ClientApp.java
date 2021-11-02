@@ -27,9 +27,9 @@ import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.dao.OrgDao;
 import com.share.ftp.dao.PersonalDao;
 import com.share.ftp.dao.QuestionDao;
-import com.share.ftp.dao.VolunteerApplyDao;
 import com.share.ftp.dao.VolunteerBoardDao;
 import com.share.ftp.dao.VolunteerDao;
+import com.share.ftp.dao.VolunteerJoinDao;
 import com.share.ftp.dao.VolunteerShortReviewDao;
 import com.share.ftp.handler.Command;
 import com.share.ftp.handler.CommandRequest;
@@ -257,7 +257,7 @@ public class ClientApp {
 
 
     VolunteerDao volunteerDao = sqlSession.getMapper(VolunteerDao.class);
-    VolunteerApplyDao volunteerApplyDao = sqlSession.getMapper(VolunteerApplyDao.class);
+    VolunteerJoinDao volunteerJoinDao = sqlSession.getMapper(VolunteerJoinDao.class);
 
     // 챌린지 관련
     ChallengeDao challengeDao = sqlSession.getMapper(ChallengeDao.class);
@@ -301,7 +301,7 @@ public class ClientApp {
     commands.put("/vol/approvelist", new VolunteerApproveListHandler(volunteerDao));
     commands.put("/vol/reject", new VolunteerRejectHandler(volunteerDao,sqlSession)); 
 
-    commands.put("/volJoin/add", new VolunteerJoinHandler(volunteerDao,volunteerApplyDao));
+    commands.put("/volJoin/add", new VolunteerJoinHandler(volunteerDao));
     commands.put("/volJoin/groupAdd", new VolunteerGroupJoinHandler(volunteerDao));
     commands.put("/volJoin/list", new VolunteerJoinListHandler(volunteerDao));
     commands.put("/volJoin/delete", new VolunteerJoinDeleteHandler(volunteerDao));
