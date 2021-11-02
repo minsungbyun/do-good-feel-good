@@ -9,7 +9,7 @@ public class QuestionListDTO {
 
   private int no;
   private String title;
-  private int qnaPassword;
+  private String qnaPassword;
   private QuestionCategory qnaType;
   private String content;
   private String reply;
@@ -28,12 +28,21 @@ public class QuestionListDTO {
         + fileUpload + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount
         + ", status=" + status + ", owner=" + owner + "]";
   }
-  public int getQnaPassword() {
+
+
+
+  public String getQnaPassword() {
     return qnaPassword;
   }
-  public void setQnaPassword(int qnaPassword) {
+
+
+
+  public void setQnaPassword(String qnaPassword) {
     this.qnaPassword = qnaPassword;
   }
+
+
+
   public String getReply() {
     return reply;
   }

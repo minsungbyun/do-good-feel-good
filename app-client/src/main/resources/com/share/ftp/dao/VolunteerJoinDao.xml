@@ -31,7 +31,7 @@
   
    <insert id="insertUser" parameterType="VolunteerJoinDTO">
     insert into ftp_vol_apply(user_no,vol_no,apply_dt,start_time,end_time)
-    values(#{userNo.no},#{volNo},#{applyDate},#{startTime},#{endTime})
+    values(#{userNo},#{volNo},#{applyDate},#{startTime},#{endTime})
   </insert>
   
    <select id="getCount" resultMap="VolunteerJoinDTOMap" parameterType="int">
@@ -62,6 +62,26 @@
 			     order by
 			       vol_no asc 
   </select>
+  
+  <select id="findByUser" resultMap="VolunteerJoinDTOMap">
+           select 
+            v.vol_no,         
+            u.id member_id,
+            u.name member_name,
+            va.apply_dt,
+            va.start_time,
+            va.end_time,
+            va.apply_status,
+            va.note
+           from
+             ftp_vol v
+             left outer join ftp_vol_apply va on v.vol_no=va.vol_no
+             inner join ftp_user u on va.user_no=u.user_no
+           where
+             u.user_no=#{userNo}
+           
+  </select>
+  
   
   
    <update id="updateStatus" parameterType="VolunteerJoinDTO">

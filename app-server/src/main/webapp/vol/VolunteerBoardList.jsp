@@ -25,7 +25,7 @@
 
 <c:forEach items="${volunteerBoardList}" var="volunteerBoardDTO">
 <tr>
-    <td><a href='detail?no=${volunteerBoardDTO.no}'>${volunteerBoardDTO.no}</a></td>
+    <td><a href='boarddetail?no=${volunteerBoardDTO.no}'>${volunteerBoardDTO.no}</a></td>
     <td>${volunteerBoardDTO.owner.id}</td> 
     <td>${volunteerBoardDTO.title}</td> 
     <td>${volunteerBoardDTO.registeredDate}</td>

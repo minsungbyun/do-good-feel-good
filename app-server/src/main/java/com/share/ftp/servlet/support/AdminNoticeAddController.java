@@ -38,7 +38,8 @@ public class AdminNoticeAddController extends HttpServlet {
 
     noticeDTO.setTitle(request.getParameter("title"));
     noticeDTO.setContent(request.getParameter("content")); 
-    //    noticeDTO.setFileUpload(request.getParameter("fileUpload"));
+    //    noticeDTO.setFileUpload((List<NoticeAttachedFile>)request.getAttribute("fileUpload"));
+    //    noticeDTO.setFileUpload((List<NoticeAttachedFile>)request.getAttribute("fileUpload"));
 
     try {
       noticeDao.insert(noticeDTO);
@@ -47,7 +48,7 @@ public class AdminNoticeAddController extends HttpServlet {
       request.getRequestDispatcher("NoticeAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
-      // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
+      e.printStackTrace();
       request.setAttribute("error", e);
 
       // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.

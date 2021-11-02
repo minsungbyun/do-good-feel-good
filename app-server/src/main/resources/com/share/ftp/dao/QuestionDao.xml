@@ -33,7 +33,7 @@
   
   <resultMap type="questionCategory" id="QuestionCategoryMap">    
     <id column="qna_category_no" property="no"/>
-    <result column="title" property="title"/>
+    <result column="category_title" property="title"/>
   </resultMap>
   
   <select id="findAll" resultMap="QuestionDTOMap">
@@ -71,7 +71,7 @@
        #{qnaType.no},
        #{title},
        #{content},
-       #{qnaPassword},
+       password(#{qnaPassword}),
        #{status})
   </insert>
   
@@ -107,7 +107,7 @@
     from
      ftp_support_qna 
     where
-     qna_no=#{qnaNo} and password=#{qnaPassword}
+     qna_no=#{qnaNo} and password=password(#{userPassword})
   </select>
   
   
@@ -141,6 +141,13 @@
       qna_no desc
   </select>
   
+  <select id="findAllQnaCategory" resultMap="QuestionDTOMap">
+   select 
+     title category_title
+    from
+      ftp_support_qna_categroy
+  </select>
+  
    <update id="update" parameterType="QuestionListDTO">
    update ftp_support_qna set
      title=#{title},
@@ -171,24 +178,13 @@
       qna_no=#{no}
   </delete>
     
-   <delete id="delete" parameterType="noticeDTO">
+   <delete id="delete" parameterType="QuestionListDTO">
     delete from ftp_support_qna
     where
      qna_no=#{no}
   </delete>
 
   
-  <!--  
-  <select id="findAllQnaCategory" resultMap="QuestionDTOMap">
-   select 
-     qna_category_no,
-     category_title
-    from
-      ftp_support_qna_file
-    order by
-      qna_category_no desc
-  </select>
-  -->
 </mapper>
 
 

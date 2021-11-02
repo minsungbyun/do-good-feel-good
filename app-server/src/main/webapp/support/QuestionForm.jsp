@@ -17,6 +17,8 @@
 	<body>
 		<h1>문의사항 등록</h1>
 		<form action='questionAdd'>
+		  <label for='f-owner'>작성자</label>
+		  <input id='f-owner' type='number' name='owner'><br>
 			<label for='f-qnaType'>문의분야</label>
 			<select id='f-qnaType' name='qnaType'>
 			 <option value='1'>함께해요 문의</option>
@@ -29,7 +31,7 @@
 			<label for='f-title'>제목</label> <input id='f-title' type='text' name='title'><br>
 			<label for='f-content'>내용</label> <input id='f-content' type='text' name='content'><br>
 			<label for='f-password'>패스워드</label> <input id='f-password' type='password' name='qnaPassword' maxlength='4'><br>
-			<!--  <label for='f-file'>파일첨부</label> <input id='f-file' type='file' name='fileUpload'><br>-->
+			<%--  <label for='f-file'>파일첨부</label> <input id='f-file' type='file' name='fileUpload'><br>--%>
 			<button>등록</button><br>
 		</form>
 	</body>

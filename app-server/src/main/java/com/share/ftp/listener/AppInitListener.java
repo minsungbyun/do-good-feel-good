@@ -1,5 +1,4 @@
 package com.share.ftp.listener;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -12,10 +11,17 @@ import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.dao.DonationRegisterDao;
+import com.share.ftp.dao.GeneralDao;
+import com.share.ftp.dao.GroupDao;
+import com.share.ftp.dao.JoinDao;
 import com.share.ftp.dao.NoticeDao;
+import com.share.ftp.dao.OrgDao;
+import com.share.ftp.dao.PersonalDao;
 import com.share.ftp.dao.QuestionDao;
+import com.share.ftp.dao.VolunteerBoardCommentDao;
 import com.share.ftp.dao.VolunteerBoardDao;
 import com.share.ftp.dao.VolunteerDao;
+import com.share.ftp.dao.VolunteerShortReviewDao;
 
 @WebListener
 public class AppInitListener implements ServletContextListener {
@@ -32,14 +38,20 @@ public class AppInitListener implements ServletContextListener {
           "com/share/ftp/conf/mybatis-config.xml")).openSession();
 
       // SqlSession 객체를 통해 MemberDao 구현체를 자동 생성한다.
+      JoinDao joinDao = sqlSession.getMapper(JoinDao.class);
+      PersonalDao personalDao = sqlSession.getMapper(PersonalDao.class);
+      GroupDao groupDao = sqlSession.getMapper(GroupDao.class);
+      OrgDao orgDao = sqlSession.getMapper(OrgDao.class);
+
       VolunteerDao volunteerDao = sqlSession.getMapper(VolunteerDao.class);
+      GeneralDao generalDao = sqlSession.getMapper(GeneralDao.class);
       VolunteerBoardDao volunteerBoardDao = sqlSession.getMapper(VolunteerBoardDao.class);
-      //      VolunteerBoardCommentDao volunteerBoardCommentDao = sqlSession.getMapper(VolunteerBoardCommentDao.class);
-      //      VolunteerShortReviewDao volunteerShortReviewDao = sqlSession.getMapper(VolunteerShortReviewDao.class);    
+      VolunteerBoardCommentDao volunteerBoardCommentDao = sqlSession.getMapper(VolunteerBoardCommentDao.class);
+      VolunteerShortReviewDao volunteerShortReviewDao = sqlSession.getMapper(VolunteerShortReviewDao.class);    
+
       ChallengeDao challengeDao = sqlSession.getMapper(ChallengeDao.class);
       ChallengeReviewDao challengeReviewDao = sqlSession.getMapper(ChallengeReviewDao.class);
       ChallengeQuestionDao challengeQuestionDao = sqlSession.getMapper(ChallengeQuestionDao.class);
-
 
       DonationBoardDao donationBoardDao = sqlSession.getMapper(DonationBoardDao.class);
       DonationRegisterDao donationRegisterDao = sqlSession.getMapper(DonationRegisterDao.class);
@@ -52,12 +64,24 @@ public class AppInitListener implements ServletContextListener {
       // 웹 애플리케이션 공용 저장소에 DAO 객체를 보관한다.
       // => 이 저장소에 보관된 객체는 서블릿에서 사용할 것이다.
       웹애플리케이션공용저장소.setAttribute("volunteerDao", volunteerDao);
+      웹애플리케이션공용저장소.setAttribute("generalDao", generalDao);
+      웹애플리케이션공용저장소.setAttribute("joinDao", joinDao);
+      웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
+
+      웹애플리케이션공용저장소.setAttribute("joinDao", joinDao);
+      웹애플리케이션공용저장소.setAttribute("personalDao", personalDao);
+      웹애플리케이션공용저장소.setAttribute("groupDao", groupDao);
+      웹애플리케이션공용저장소.setAttribute("orgDao", orgDao);
+
+      웹애플리케이션공용저장소.setAttribute("volunteerDao", volunteerDao);
       웹애플리케이션공용저장소.setAttribute("volunteerBoardDao", volunteerBoardDao);
-      //      웹애플리케이션공용저장소.setAttribute("volunteerBoardCommentDao", volunteerBoardCommentDao);
-      //      웹애플리케이션공용저장소.setAttribute("volunteerShortReviewDao", volunteerShortReviewDao);
+      웹애플리케이션공용저장소.setAttribute("volunteerBoardCommentDao", volunteerBoardCommentDao);
+      웹애플리케이션공용저장소.setAttribute("volunteerShortReviewDao", volunteerShortReviewDao);
+
       웹애플리케이션공용저장소.setAttribute("challengeDao", challengeDao);
       웹애플리케이션공용저장소.setAttribute("challengeReviewDao", challengeReviewDao);
       웹애플리케이션공용저장소.setAttribute("challengeQuestionDao", challengeQuestionDao);
+
       웹애플리케이션공용저장소.setAttribute("donationBoardDao", donationBoardDao);
       웹애플리케이션공용저장소.setAttribute("donationRegisterDao", donationRegisterDao);
       웹애플리케이션공용저장소.setAttribute("noticeDao", noticeDao);

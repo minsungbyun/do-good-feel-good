@@ -43,7 +43,8 @@ public class AdminNoticeUpdateController extends HttpServlet {
 
       noticeDTO.setTitle(request.getParameter("title"));
       noticeDTO.setContent(request.getParameter("content")); 
-      //    noticeDTO.setFileUpload(request.getParameter("fileUpload"));
+      //      noticeDTO.setFileUpload((List<NoticeAttachedFile>)request.getAttribute("fileUpload"));
+      //      noticeDTO.setFileUpload(request.getParameter("fileUpload")); 
 
       noticeDao.update(noticeDTO);
       sqlSession.commit();

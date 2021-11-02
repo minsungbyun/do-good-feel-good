@@ -75,11 +75,11 @@ public class VolunteerDetailHandler implements Command {
       System.out.println("0번 ▶ 이전");
       int input = Prompt.inputInt("번호 입력 ▶ ");
       switch (input) {
-        case 1: request.getRequestDispatcher("/volJoin/add").forward(request); break;
-        case 2: request.getRequestDispatcher("/volJoin/groupAdd").forward(request); break;
-        case 3: request.getRequestDispatcher("/volJoin/list").forward(request); break;
-        case 4: request.getRequestDispatcher("/volQuestion/list").forward(request); break;
-        case 5: request.getRequestDispatcher("/vol/wish").forward(request); break;
+        case 1: request.getRequestDispatcher("/volJoin/add").forward(request); return;
+        case 2: request.getRequestDispatcher("/volJoin/groupAdd").forward(request); return;
+        case 3: request.getRequestDispatcher("/volJoin/list").forward(request); return;
+        case 4: request.getRequestDispatcher("/volQuestion/list").forward(request); return;
+        case 5: request.getRequestDispatcher("/vol/wish").forward(request); return;
         case 0: return;
         default:
           System.out.println("명령어가 올바르지 않습니다!");

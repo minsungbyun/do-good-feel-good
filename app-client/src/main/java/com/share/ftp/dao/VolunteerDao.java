@@ -10,6 +10,7 @@ import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 public interface VolunteerDao {
 
   void insert(VolunteerRequestDTO addVolunteer) throws Exception;      
+  void insertUser(VolunteerRequestDTO addVolunteer) throws Exception;      
   void insertFile(
       @Param("volNo") int volNo,
       @Param("filepath") String filepath) throws Exception;  
@@ -18,7 +19,8 @@ public interface VolunteerDao {
       @Param("userNo") int userNo,
       @Param("volNo") int volNo) throws Exception;     
 
-  List<VolunteerRequestDTO> findAll() throws Exception;      
+  List<VolunteerRequestDTO> findAll() throws Exception;
+  List<VolunteerRequestDTO> findAllUser() throws Exception;
   List<VolunteerRequestDTO> findAllApproved() throws Exception;      
   List<VolunteerRequestDTO> findAllApply() throws Exception;      
   List<VolunteerRequestDTO> findAllWait() throws Exception;      
@@ -30,6 +32,8 @@ public interface VolunteerDao {
   //      @Param("volNo") int volNo,
   //      @Param("status") int status) throws Exception;          
   void updateFile(VolunteerRequestDTO updateVolunteer) throws Exception;     
+  void updateStatus(VolunteerRequestDTO VolunteerRequestDTO) throws Exception;
+
 
   void delete(VolunteerRequestDTO deleteVolunteer) throws Exception;    
   void deleteFile(VolunteerRequestDTO deleteVolunteer) throws Exception;    

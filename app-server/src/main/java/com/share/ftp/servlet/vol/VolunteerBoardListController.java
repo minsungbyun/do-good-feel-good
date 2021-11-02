@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import com.share.ftp.dao.VolunteerBoardDao;
 import com.share.ftp.domain.community.VolunteerBoardDTO;
 
-@WebServlet("/vol/board/list")
+@WebServlet("/vol/boardlist")
 public class VolunteerBoardListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
@@ -30,14 +30,13 @@ public class VolunteerBoardListController extends GenericServlet {
       throws ServletException, IOException {
     try {
 
-      // 클라이언트 요청을 처리하는데 필요한 데이터 준비
       Collection<VolunteerBoardDTO> volunteerBoardList = volunteerBoardDao.findAll();
 
       // 뷰 컴포넌트가 준비한 데이터를 사용할 수 있도록 저장소에 보관한다.
       request.setAttribute("volunteerBoardList", volunteerBoardList);
 
       // 출력을 담당할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/vol/board/VolunteerBoardList.jsp");
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/vol/VolunteerBoardList.jsp");
       요청배달자.forward(request, response);
 
     } catch (Exception e) {
