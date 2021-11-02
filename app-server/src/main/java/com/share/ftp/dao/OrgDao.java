@@ -17,10 +17,7 @@ public interface OrgDao {
   List<OrgDTO> findAllOrg() throws Exception;               // 기관회원 목록
   List<OrgDTO> findAllWaitOrg() throws Exception;               // 기관회원 목록
   void update(OrgDTO orgDTO) throws Exception;
-  void updateOrg(
-      @Param("corpNo") String corpNo,
-      @Param("fax") String fax,
-      @Param("homepage") String homepage) throws Exception;
+  void updateOrg(OrgDTO orgDTO) throws Exception;
   void updateStatus(OrgDTO orgDTO) throws Exception;          // 기관회원 수정
   void updateStatusReject(
       @Param("userNo") int userNo,

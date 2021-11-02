@@ -63,16 +63,16 @@
        user_no,
        <!--  na_category_no,-->
        title,
-       content)
-       <!--password,
-       status)-->
+       content,
+       password)
+       <!--status)-->
     values(
        #{owner.no},
        <!--#{qnaType.no},-->
        #{title},
-       #{content})
-       <!--#{qnaPassword},
-       #{status})-->
+       #{content},
+       password(#{qnaPassword}))
+       <!--#{status})-->
   </insert>
   
   <insert id="insertFile">
@@ -107,7 +107,7 @@
     from
      ftp_support_qna 
     where
-     qna_no=#{qnaNo} and password=#{qnaPassword}
+     qna_no=#{qnaNo} and password=password(#{userPassword})
   </select>
   
   

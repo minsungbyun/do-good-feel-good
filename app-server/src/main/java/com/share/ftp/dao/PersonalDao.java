@@ -16,11 +16,12 @@ public interface PersonalDao {
       @Param("userLevel") String level) throws Exception;          // 회원 추가
   List<PersonalDTO> findAllPersonal() throws Exception;               // 회원 목록
   void update(PersonalDTO personalDTO) throws Exception;          // 회원 수정
+  void updatePersonal(PersonalDTO personalDTO) throws Exception;          // 회원 수정
   void delete(PersonalDTO personalDTO) throws Exception;          // 회원 삭제
   PersonalDTO findByIdPassword(
       @Param("userId") String userId, 
       @Param("userPassword") String userPassword) throws Exception; // 로그인 유효성 검사
-
+  PersonalDTO findByPersonalNo(int userNo) throws Exception;
   PersonalDTO validId(String userId) throws Exception;
 
   PersonalDTO selectOneByIdEmail(String userId, String userEmail) throws Exception; // 로그인 유효성 검사

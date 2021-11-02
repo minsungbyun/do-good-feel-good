@@ -15,7 +15,9 @@ public interface GroupDao {
   List<GroupDTO> findAllGroup() throws Exception;               // 단체회원 목록
   List<GroupDTO> findAllWaitGroup() throws Exception;               // 단체회원 목록
   void update(GroupDTO groupDTO) throws Exception;  
-  void updateGroup(int groupCount) throws Exception;
+
+  void updateGroup(GroupDTO groupCount) throws Exception;
+
   void updateStatus(GroupDTO groupDTO) throws Exception;  
   void updateStatusReject(
       @Param("userNo") int userNo,

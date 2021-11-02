@@ -1,6 +1,20 @@
 /* container */
-.container {width:990px; height:inherit; margin:0 auto;}
-
+.container {width:990px; height:inherit; margin:0 auto; background:#0099a4;}
+.container2 {width:990px; height:inherit; margin:0 auto; background:#bfff00;}
 /* LAYOUT */
-
+#wrap {
+	width:100%;
+}
+#header {
+	width:100%; height:150px; background:#111;
+}
+#main {
+	width:100%; height:300px; background:#333;
+}
+#contents {
+	width:100%; height:700px;background:#555;
+}
+#footer {
+	width:100%; height:50px; background:#777;
+}
 

@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
+import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.dao.QuestionDao;
+import com.share.ftp.domain.support.QuestionCategory;
 import com.share.ftp.domain.support.QuestionListDTO;
 
 @WebServlet("/support/questionAdd")
@@ -19,14 +21,14 @@ public class QuestionAddController extends HttpServlet {
 
   SqlSession sqlSession;
   QuestionDao questionDao;
-  //  GeneralDao generalDao;
+  GeneralDao generalDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     questionDao = (QuestionDao) 웹애플리케이션공용저장소.getAttribute("questionDao");
-    //    generalDao = (GeneralDao) 웹애플리케이션공용저장소.getAttribute("generalDao");
+    generalDao = (GeneralDao) 웹애플리케이션공용저장소.getAttribute("generalDao");
   }
 
   @Override
@@ -34,11 +36,12 @@ public class QuestionAddController extends HttpServlet {
       throws ServletException, IOException {
 
     QuestionListDTO questionListDTO = new QuestionListDTO();
-
-    //    questionListDTO.setQnaType(request.setAttribute(getServletName(), questionListDTO);
+    int qnaType = Integer.valueOf(request.getParameter("qnaType"));
+    QuestionCategory questionCategory = generalDao.findAllQnaCategory(qnaType);
+    questionListDTO.setQnaType(questionCategory);
     questionListDTO.setTitle(request.getParameter("title")); 
     questionListDTO.setContent(request.getParameter("content"));
-    //        questionListDTO.getQnaPassword(parseInt(request.getParameter("qnaPassword")));
+    questionListDTO.setQnaPassword(request.getParameter("qnaPassword"));
     //    noticeDTO.setFileUpload(request.getParameter("fileUpload"));
     //    questionListDTO.setStatus(0);
 

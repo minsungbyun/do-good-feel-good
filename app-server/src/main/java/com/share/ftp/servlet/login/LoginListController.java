@@ -1,7 +1,7 @@
-package com.share.ftp.servlet.vol;
+package com.share.ftp.servlet.login;
 
 import java.io.IOException;
-import java.util.Collection;
+import java.util.List;
 import javax.servlet.GenericServlet;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -10,37 +10,34 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
-import com.share.ftp.dao.VolunteerBoardDao;
-import com.share.ftp.domain.community.VolunteerBoardDTO;
+import com.share.ftp.dao.JoinDao;
+import com.share.ftp.domain.join.JoinDTO;
 
-@WebServlet("/vol/boardlist")
-public class VolunteerBoardListController extends GenericServlet {
+@WebServlet("/login/list")
+public class LoginListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
-  VolunteerBoardDao volunteerBoardDao;
+  JoinDao joinDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    volunteerBoardDao = (VolunteerBoardDao) 웹애플리케이션공용저장소.getAttribute("volunteerBoardDao");
+    joinDao = (JoinDao) 웹애플리케이션공용저장소.getAttribute("joinDao");
   }
 
   @Override
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
+
     try {
 
-      Collection<VolunteerBoardDTO> volunteerBoardList = volunteerBoardDao.findAll();
+      List<JoinDTO> joinUserList = joinDao.findAll();
+      request.setAttribute("joinUserList", joinUserList);
 
-      // 뷰 컴포넌트가 준비한 데이터를 사용할 수 있도록 저장소에 보관한다.
-      request.setAttribute("volunteerBoardList", volunteerBoardList);
-
-      // 출력을 담당할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/vol/VolunteerBoardList.jsp");
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/login/LoginList.jsp");
       요청배달자.forward(request, response);
 
     } catch (Exception e) {
-      e.printStackTrace();
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
       request.setAttribute("error", e);
 

@@ -1,19 +1,11 @@
 package com.share.ftp.domain.join;
 
-import java.io.Serializable;
-import java.util.Objects;
-
-
-public class OrgDTO extends JoinDTO implements Serializable {
-
-  private static final long serialVersionUID = 2397935818210730479L;
+public class OrgDTO extends JoinDTO {
 
   private int orgNo;
   private String corpNo;
   private String fax;
   private String homepage;
-
-
 
   @Override
   public String toString() {
@@ -21,25 +13,6 @@ public class OrgDTO extends JoinDTO implements Serializable {
         + homepage + "]";
   }
 
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = super.hashCode();
-    result = prime * result + Objects.hash(corpNo, fax, homepage, orgNo);
-    return result;
-  }
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (!super.equals(obj))
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    OrgDTO other = (OrgDTO) obj;
-    return Objects.equals(corpNo, other.corpNo) && Objects.equals(fax, other.fax)
-        && Objects.equals(homepage, other.homepage) && orgNo == other.orgNo;
-  }
   public int getOrgNo() {
     return orgNo;
   }
@@ -64,10 +37,4 @@ public class OrgDTO extends JoinDTO implements Serializable {
   public void setHomepage(String homepage) {
     this.homepage = homepage;
   }
-  public static long getSerialversionuid() {
-    return serialVersionUID;
-  }
-
-
-
 }
