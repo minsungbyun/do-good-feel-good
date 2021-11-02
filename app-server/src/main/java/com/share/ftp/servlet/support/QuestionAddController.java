@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
-import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.dao.QuestionDao;
+import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.support.QuestionCategory;
 import com.share.ftp.domain.support.QuestionListDTO;
 
@@ -21,14 +21,12 @@ public class QuestionAddController extends HttpServlet {
 
   SqlSession sqlSession;
   QuestionDao questionDao;
-  GeneralDao generalDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     questionDao = (QuestionDao) 웹애플리케이션공용저장소.getAttribute("questionDao");
-    generalDao = (GeneralDao) 웹애플리케이션공용저장소.getAttribute("generalDao");
   }
 
   @Override
@@ -36,14 +34,20 @@ public class QuestionAddController extends HttpServlet {
       throws ServletException, IOException {
 
     QuestionListDTO questionListDTO = new QuestionListDTO();
-    int qnaType = Integer.valueOf(request.getParameter("qnaType"));
-    QuestionCategory questionCategory = generalDao.findAllQnaCategory(qnaType);
+
+    QuestionCategory questionCategory = new QuestionCategory();
+    questionCategory.setNo(Integer.parseInt(request.getParameter("qnaType")));
+
+    JoinDTO owner = new JoinDTO();
+    owner.setNo(Integer.parseInt(request.getParameter("owner")));
+
+    questionListDTO.setOwner(owner);
     questionListDTO.setQnaType(questionCategory);
     questionListDTO.setTitle(request.getParameter("title")); 
     questionListDTO.setContent(request.getParameter("content"));
     questionListDTO.setQnaPassword(request.getParameter("qnaPassword"));
     //    noticeDTO.setFileUpload(request.getParameter("fileUpload"));
-    //    questionListDTO.setStatus(0);
+    questionListDTO.setStatus(0);
 
     try {
       questionDao.insert(questionListDTO);
@@ -52,8 +56,8 @@ public class QuestionAddController extends HttpServlet {
       request.getRequestDispatcher("QuestionAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
+      sqlSession.rollback();
       e.printStackTrace();
-      // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
       request.setAttribute("error", e);
 
       // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.

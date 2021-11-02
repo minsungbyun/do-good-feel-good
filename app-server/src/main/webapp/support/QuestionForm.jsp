@@ -17,6 +17,8 @@
 	<body>
 		<h1>문의사항 등록</h1>
 		<form action='questionAdd'>
+		  <label for='f-owner'>작성자</label>
+		  <input id='f-owner' type='number' name='owner'><br>
 			<label for='f-qnaType'>문의분야</label>
 			<select id='f-qnaType' name='qnaType'>
 			 <option value='1'>함께해요 문의</option>

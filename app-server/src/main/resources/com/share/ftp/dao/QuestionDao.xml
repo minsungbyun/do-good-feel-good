@@ -33,7 +33,7 @@
   
   <resultMap type="questionCategory" id="QuestionCategoryMap">    
     <id column="qna_category_no" property="no"/>
-    <result column="title" property="title"/>
+    <result column="category_title" property="title"/>
   </resultMap>
   
   <select id="findAll" resultMap="QuestionDTOMap">
@@ -61,18 +61,18 @@
       useGeneratedKeys="true" keyColumn="qna_no" keyProperty="no" >
     insert into ftp_support_qna(
        user_no,
-       <!--  na_category_no,-->
+       qna_category_no,
        title,
        content,
-       password)
-       <!--status)-->
+       password,
+       status)
     values(
        #{owner.no},
-       <!--#{qnaType.no},-->
+       #{qnaType.no},
        #{title},
        #{content},
-       password(#{qnaPassword}))
-       <!--#{status})-->
+       password(#{qnaPassword}),
+       #{status})
   </insert>
   
   <insert id="insertFile">
@@ -141,6 +141,13 @@
       qna_no desc
   </select>
   
+  <select id="findAllQnaCategory" resultMap="QuestionDTOMap">
+   select 
+     title category_title
+    from
+      ftp_support_qna_categroy
+  </select>
+  
    <update id="update" parameterType="QuestionListDTO">
    update ftp_support_qna set
      title=#{title},
@@ -178,17 +185,6 @@
   </delete>
 
   
-  <!--  
-  <select id="findAllQnaCategory" resultMap="QuestionDTOMap">
-   select 
-     qna_category_no,
-     category_title
-    from
-      ftp_support_qna_file
-    order by
-      qna_category_no desc
-  </select>
-  -->
 </mapper>
 
 
