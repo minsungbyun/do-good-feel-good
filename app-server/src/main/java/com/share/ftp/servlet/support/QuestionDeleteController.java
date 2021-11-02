@@ -9,23 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
-import com.share.ftp.dao.NoticeDao;
-import com.share.ftp.domain.admin.NoticeDTO;
+import com.share.ftp.dao.QuestionDao;
+import com.share.ftp.domain.support.QuestionListDTO;
 
-@WebServlet("/support/noticeUpdate")
-public class AdminNoticeUpdateController extends HttpServlet {
+@WebServlet("/support/questionDelete")
+public class QuestionDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;
-  NoticeDao noticeDao;
+  QuestionDao questionDao;
   //  GeneralDao generalDao;
-
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    noticeDao = (NoticeDao) 웹애플리케이션공용저장소.getAttribute("noticeDao");
+    questionDao = (QuestionDao) 웹애플리케이션공용저장소.getAttribute("questionDao");
   }
 
   @Override
@@ -33,23 +32,16 @@ public class AdminNoticeUpdateController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
-
-      NoticeDTO noticeDTO = noticeDao.findByNo(noticeNo);
-
-      if (noticeDTO == null) {
+      int questionNo = Integer.parseInt(request.getParameter("questionNo"));
+      QuestionListDTO questionListDTO = questionDao.findByNo(questionNo);
+      if (questionListDTO == null) {
         throw new Exception("해당 번호의 게시글이 없습니다.");
-      } 
+      }
 
-      noticeDTO.setTitle(request.getParameter("title"));
-      noticeDTO.setContent(request.getParameter("content")); 
-      //      noticeDTO.setFileUpload((List<NoticeAttachedFile>)request.getAttribute("fileUpload"));
-      //      noticeDTO.setFileUpload(request.getParameter("fileUpload")); 
-
-      noticeDao.update(noticeDTO);
+      questionDao.delete(questionNo);
       sqlSession.commit();
 
-      response.sendRedirect("noticeList");
+      response.sendRedirect("questionList");
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -57,4 +49,5 @@ public class AdminNoticeUpdateController extends HttpServlet {
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
+
 }

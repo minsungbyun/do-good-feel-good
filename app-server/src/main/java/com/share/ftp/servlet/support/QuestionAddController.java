@@ -10,23 +10,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
-import com.share.ftp.dao.NoticeDao;
-import com.share.ftp.domain.admin.NoticeDTO;
+import com.share.ftp.dao.QuestionDao;
+import com.share.ftp.domain.support.QuestionListDTO;
 
-@WebServlet("/support/noticeAdd")
-public class AdminNoticeAddController extends HttpServlet {
+@WebServlet("/support/questionAdd")
+public class QuestionAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;
-  NoticeDao noticeDao;
+  QuestionDao questionDao;
   //  GeneralDao generalDao;
-
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    noticeDao = (NoticeDao) 웹애플리케이션공용저장소.getAttribute("noticeDao");
+    questionDao = (QuestionDao) 웹애플리케이션공용저장소.getAttribute("questionDao");
     //    generalDao = (GeneralDao) 웹애플리케이션공용저장소.getAttribute("generalDao");
   }
 
@@ -34,40 +33,29 @@ public class AdminNoticeAddController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    NoticeDTO noticeDTO = new NoticeDTO();
+    QuestionListDTO questionListDTO = new QuestionListDTO();
 
-    noticeDTO.setTitle(request.getParameter("title"));
-    noticeDTO.setContent(request.getParameter("content")); 
-    //    noticeDTO.setFileUpload((List<NoticeAttachedFile>)request.getAttribute("fileUpload"));
-    //    noticeDTO.setFileUpload((List<NoticeAttachedFile>)request.getAttribute("fileUpload"));
+    //    questionListDTO.setQnaType(request.setAttribute(getServletName(), questionListDTO);
+    questionListDTO.setTitle(request.getParameter("title")); 
+    questionListDTO.setContent(request.getParameter("content"));
+    //        questionListDTO.getQnaPassword(parseInt(request.getParameter("qnaPassword")));
+    //    noticeDTO.setFileUpload(request.getParameter("fileUpload"));
+    //    questionListDTO.setStatus(0);
 
     try {
-      noticeDao.insert(noticeDTO);
+      questionDao.insert(questionListDTO);
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=noticeList");
-      request.getRequestDispatcher("NoticeAdd.jsp").forward(request, response);
+      response.setHeader("Refresh", "1;url=questionList");
+      request.getRequestDispatcher("QuestionAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();
+      // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
       request.setAttribute("error", e);
 
       // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
       RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
       요청배달자.forward(request, response);
     }
-
-    //    try {
-    //      noticeDao.insert(noticeDTO);
-    //      for (NoticeAttachedFile noticeAttachedFile : noticeDTO.getFileUpload()) {
-    //        noticeDao.insertFile(noticeDTO.getNo(), noticeAttachedFile.getFilepath());
-    //      }
-    //      sqlSession.commit();
-    //
-    //    } catch (Exception e) {
-    //      e.printStackTrace(); 
-    //      sqlSession.rollback();
-    //    }
-
-
   }
 }

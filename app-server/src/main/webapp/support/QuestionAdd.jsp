@@ -3,13 +3,13 @@
     trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
-<head>
-  <title>문의사항 등록</title>
-</head>
-<body>
-<h1>문의사항 등록완료</h1>
-<p>게시글 작성을 완료하였습니다.</p>
-</body>
+	<head>
+		 <title>문의사항 등록</title>
+	</head>
+	<body>
+		<h1>문의사항 등록완료</h1>
+		<p>게시글 작성을 완료하였습니다.</p>
+	</body>
 </html>
 
 

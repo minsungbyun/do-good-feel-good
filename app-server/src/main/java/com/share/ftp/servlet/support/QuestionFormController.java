@@ -16,7 +16,13 @@ public class QuestionFormController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     // 출력을 담당할 뷰를 호출한다.
-    request.getRequestDispatcher("/support/QuestionForm.jsp").forward(request, response);
+    try {
+      request.getRequestDispatcher("/support/QuestionForm.jsp").forward(request, response);
+    } catch (Exception e) {
+      e.printStackTrace();
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
+    }
   }
 }
 

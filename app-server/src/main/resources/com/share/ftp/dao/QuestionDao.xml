@@ -61,18 +61,18 @@
       useGeneratedKeys="true" keyColumn="qna_no" keyProperty="no" >
     insert into ftp_support_qna(
        user_no,
-       qna_category_no,
+       <!--  na_category_no,-->
        title,
-       content,
-       password,
-       status)
+       content)
+       <!--password,
+       status)-->
     values(
        #{owner.no},
-       #{qnaType.no},
+       <!--#{qnaType.no},-->
        #{title},
-       #{content},
-       #{qnaPassword},
-       #{status})
+       #{content})
+       <!--#{qnaPassword},
+       #{status})-->
   </insert>
   
   <insert id="insertFile">
@@ -171,7 +171,7 @@
       qna_no=#{no}
   </delete>
     
-   <delete id="delete" parameterType="noticeDTO">
+   <delete id="delete" parameterType="QuestionListDTO">
     delete from ftp_support_qna
     where
      qna_no=#{no}
