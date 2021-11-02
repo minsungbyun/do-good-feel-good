@@ -15,10 +15,13 @@ public interface VolunteerBoardDao {
       @Param("filepath") String filepath) throws Exception; 
   List<VolunteerBoardDTO> findAll() throws Exception;
   List<VolunteerBoardDTO> findByKeyword(String keyword) throws Exception;
-  VolunteerBoardDTO findByNo(int no) throws Exception;
+  VolunteerBoardDTO findByNo(int volBoardNo) throws Exception;
+  VolunteerBoardDTO findDetail(int volBoardNo) throws Exception;
+  int findByLike(int volBoardNo) throws Exception;  
   void updateCount(int no) throws Exception;
   void update(VolunteerBoardDTO volunteerBoardDTO) throws Exception;
   void delete(int no) throws Exception;
+  void deleteLike(int userNo, int volNo) throws Exception;
   void deleteFile(VolunteerBoardDTO volunteerBoardDTO) throws Exception;    
   void addLike(
       @Param("userNo") int userNo,

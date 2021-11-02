@@ -2,6 +2,7 @@ package com.share.ftp.domain.challenge;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
 import com.share.ftp.domain.join.JoinDTO;
 
@@ -13,10 +14,9 @@ public class ChallengeReviewDTO implements Serializable {
   private int reviewNo;
   private int point;
   private String content;
-  private String fileUpload;
   private Date registeredDate;
   private JoinDTO owner;
-
+  private List<ChallengeReviewAttachedFile> fileUpload;
 
 
 
@@ -27,8 +27,8 @@ public class ChallengeReviewDTO implements Serializable {
   @Override
   public String toString() {
     return "ChallengeReviewDTO [no=" + no + ", reviewNo=" + reviewNo + ", point=" + point
-        + ", content=" + content + ", fileUpload=" + fileUpload + ", registeredDate="
-        + registeredDate + ", owner=" + owner + "]";
+        + ", content=" + content + ", registeredDate=" + registeredDate + ", owner=" + owner
+        + ", fileUpload=" + fileUpload + "]";
   }
   @Override
   public int hashCode() {
@@ -65,12 +65,6 @@ public class ChallengeReviewDTO implements Serializable {
   public void setContent(String content) {
     this.content = content;
   }
-  public String getFileUpload() {
-    return fileUpload;
-  }
-  public void setFileUpload(String fileUpload) {
-    this.fileUpload = fileUpload;
-  }
   public Date getRegisteredDate() {
     return registeredDate;
   }
@@ -88,6 +82,12 @@ public class ChallengeReviewDTO implements Serializable {
   }
   public void setPoint(int point) {
     this.point = point;
+  }
+  public List<ChallengeReviewAttachedFile> getFileUpload() {
+    return fileUpload;
+  }
+  public void setFileUpload(List<ChallengeReviewAttachedFile> fileUpload) {
+    this.fileUpload = fileUpload;
   }
 
 

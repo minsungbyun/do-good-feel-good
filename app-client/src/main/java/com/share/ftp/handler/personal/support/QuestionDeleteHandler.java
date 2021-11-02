@@ -54,8 +54,8 @@ public class QuestionDeleteHandler implements Command {
       } 
 
       try {
-        questionDao.updateFile(questionListDTO);
-        questionDao.delete(questionListDTO);
+        questionDao.deleteFile(questionListDTO);
+        questionDao.delete(questionNo);
         sqlSession.commit();
       } catch (Exception e) {
         e.printStackTrace();

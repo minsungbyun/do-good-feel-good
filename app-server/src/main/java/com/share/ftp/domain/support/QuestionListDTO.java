@@ -1,33 +1,46 @@
 package com.share.ftp.domain.support;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
 
 
-public class QuestionListDTO implements Serializable {
+public class QuestionListDTO {
 
-  private static final long serialVersionUID = 1L;
   private int no;
   private String title;
-  private String memberld;
-  private int password;
+  private int qnaPassword;
   private QuestionCategory qnaType;
   private String content;
+  private String reply;
   private List<QuestionAttachedFile> fileUpload;
   private Date registeredDate;
   private int viewCount;
   private int status;
   private JoinDTO owner;
 
+
+
   @Override
   public String toString() {
-    return "QuestionListDTO [no=" + no + ", title=" + title + ", memberld=" + memberld
-        + ", password=" + password + ", qnaType=" + qnaType + ", content=" + content
-        + ", fileUpload=" + fileUpload + ", registeredDate=" + registeredDate + ", viewCount="
-        + viewCount + ", status=" + status + ", owner=" + owner + "]";
+    return "QuestionListDTO [no=" + no + ", title=" + title + ", qnaPassword=" + qnaPassword
+        + ", qnaType=" + qnaType + ", content=" + content + ", reply=" + reply + ", fileUpload="
+        + fileUpload + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount
+        + ", status=" + status + ", owner=" + owner + "]";
   }
+  public int getQnaPassword() {
+    return qnaPassword;
+  }
+  public void setQnaPassword(int qnaPassword) {
+    this.qnaPassword = qnaPassword;
+  }
+  public String getReply() {
+    return reply;
+  }
+  public void setReply(String reply) {
+    this.reply = reply;
+  }
+
   public int getNo() {
     return no;
   }
@@ -39,18 +52,6 @@ public class QuestionListDTO implements Serializable {
   }
   public void setTitle(String title) {
     this.title = title;
-  }
-  public String getMemberld() {
-    return memberld;
-  }
-  public void setMemberld(String memberld) {
-    this.memberld = memberld;
-  }
-  public int getPassword() {
-    return password;
-  }
-  public void setPassword(int password) {
-    this.password = password;
   }
   public QuestionCategory getQnaType() {
     return qnaType;
@@ -94,7 +95,6 @@ public class QuestionListDTO implements Serializable {
   public void setOwner(JoinDTO owner) {
     this.owner = owner;
   }
-
 
 
 

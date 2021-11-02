@@ -33,6 +33,7 @@ public class DonationRegisterMyListHandler implements Command { // 모금함 기
     if (myDonationMoney == 0) {
       System.out.println();
       System.out.println("[ 나의 기부 내역이 없습니다. ]");
+      return;
     }
 
     Collection<DonationRegisterDTO> donationRegisterList = donationRegisterDao.findAll();
@@ -46,6 +47,7 @@ public class DonationRegisterMyListHandler implements Command { // 모금함 기
 
       } 
     }
+
 
     System.out.println();
     System.out.printf("[ 나의 기부 총 금액: %s원 ]", formatter.format(myDonationMoney));

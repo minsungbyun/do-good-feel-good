@@ -1,64 +1,60 @@
 package com.share.ftp.domain.donation;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import com.share.ftp.domain.Category;
 import com.share.ftp.domain.join.JoinDTO;
 
-public class DonationBoardDTO implements Serializable {
+public class DonationBoardDTO {
 
-  private static final long serialVersionUID = 1L;
-
-  private long moneyTarget;
   private int no;
-  private String sort;
+  private int orgNo;
+  private Category category;
+  private JoinDTO leader;
   private String title;
-  private String leader;
   private String content;
-  private String fileUpload;
-  private Date registeredStartDate;
-  private Date registeredEndDate;
-  private String isSigned;
+  private String tel;
+  private String email;
+  private Date startDate;
+  private Date endDate;
+  private String totalDate;
+  private String remainDate;
+  private long moneyTarget;
+  private int status;
+  private String note;
+  private List<DonationBoardAttachedFile> fileUpload = new ArrayList<>();
   private List<JoinDTO> members = new ArrayList<>();
+
+
 
 
 
   @Override
   public String toString() {
-    return "DonationBoardDTO [moneyTarget=" + moneyTarget + ", no=" + no + ", sort=" + sort
-        + ", title=" + title + ", leader=" + leader + ", content=" + content + ", fileUpload="
-        + fileUpload + ", registeredStartDate=" + registeredStartDate + ", registeredEndDate="
-        + registeredEndDate + ", isSigned=" + isSigned + ", members=" + members + "]";
+    return "DonationBoardDTO [no=" + no + ", orgNo=" + orgNo + ", category=" + category
+        + ", leader=" + leader + ", title=" + title + ", content=" + content + ", tel=" + tel
+        + ", email=" + email + ", startDate=" + startDate + ", endDate=" + endDate + ", totalDate="
+        + totalDate + ", remainDate=" + remainDate + ", moneyTarget=" + moneyTarget + ", status="
+        + status + ", note=" + note + ", fileUpload=" + fileUpload + ", members=" + members + "]";
   }
-  @Override
-  public int hashCode() {
-    return Objects.hash(content, fileUpload, isSigned, leader, members, moneyTarget, no,
-        registeredEndDate, registeredStartDate, sort, title);
+  public String getTotalDate() {
+    return totalDate;
   }
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    DonationBoardDTO other = (DonationBoardDTO) obj;
-    return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
-        && Objects.equals(isSigned, other.isSigned) && Objects.equals(leader, other.leader)
-        && Objects.equals(members, other.members) && moneyTarget == other.moneyTarget
-        && no == other.no && Objects.equals(registeredEndDate, other.registeredEndDate)
-        && Objects.equals(registeredStartDate, other.registeredStartDate)
-        && Objects.equals(sort, other.sort) && Objects.equals(title, other.title);
+  public void setTotalDate(String totalDate) {
+    this.totalDate = totalDate;
   }
-
-  public long getMoneyTarget() {
-    return moneyTarget;
+  public String getRemainDate() {
+    return remainDate;
   }
-  public void setMoneyTarget(long moneyTarget) {
-    this.moneyTarget = moneyTarget;
+  public void setRemainDate(String remainDate) {
+    this.remainDate = remainDate;
+  }
+  public int getOrgNo() {
+    return orgNo;
+  }
+  public void setOrgNo(int orgNo) {
+    this.orgNo = orgNo;
   }
   public int getNo() {
     return no;
@@ -66,11 +62,17 @@ public class DonationBoardDTO implements Serializable {
   public void setNo(int no) {
     this.no = no;
   }
-  public String getSort() {
-    return sort;
+  public Category getCategory() {
+    return category;
   }
-  public void setSort(String sort) {
-    this.sort = sort;
+  public void setCategory(Category category) {
+    this.category = category;
+  }
+  public JoinDTO getLeader() {
+    return leader;
+  }
+  public void setLeader(JoinDTO leader) {
+    this.leader = leader;
   }
   public String getTitle() {
     return title;
@@ -78,41 +80,59 @@ public class DonationBoardDTO implements Serializable {
   public void setTitle(String title) {
     this.title = title;
   }
-  public String getLeader() {
-    return leader;
-  }
-  public void setLeader(String leader) {
-    this.leader = leader;
-  }
   public String getContent() {
     return content;
   }
   public void setContent(String content) {
     this.content = content;
   }
-  public String getFileUpload() {
+  public String getTel() {
+    return tel;
+  }
+  public void setTel(String tel) {
+    this.tel = tel;
+  }
+  public String getEmail() {
+    return email;
+  }
+  public void setEmail(String email) {
+    this.email = email;
+  }
+  public Date getStartDate() {
+    return startDate;
+  }
+  public void setStartDate(Date startDate) {
+    this.startDate = startDate;
+  }
+  public Date getEndDate() {
+    return endDate;
+  }
+  public void setEndDate(Date endDate) {
+    this.endDate = endDate;
+  }
+  public long getMoneyTarget() {
+    return moneyTarget;
+  }
+  public void setMoneyTarget(long moneyTarget) {
+    this.moneyTarget = moneyTarget;
+  }
+  public int getStatus() {
+    return status;
+  }
+  public void setStatus(int status) {
+    this.status = status;
+  }
+  public String getNote() {
+    return note;
+  }
+  public void setNote(String note) {
+    this.note = note;
+  }
+  public List<DonationBoardAttachedFile> getFileUpload() {
     return fileUpload;
   }
-  public void setFileUpload(String fileUpload) {
+  public void setFileUpload(List<DonationBoardAttachedFile> fileUpload) {
     this.fileUpload = fileUpload;
-  }
-  public Date getRegisteredStartDate() {
-    return registeredStartDate;
-  }
-  public void setRegisteredStartDate(Date registeredStartDate) {
-    this.registeredStartDate = registeredStartDate;
-  }
-  public Date getRegisteredEndDate() {
-    return registeredEndDate;
-  }
-  public void setRegisteredEndDate(Date registeredEndDate) {
-    this.registeredEndDate = registeredEndDate;
-  }
-  public String getIsSigned() {
-    return isSigned;
-  }
-  public void setIsSigned(String isSigned) {
-    this.isSigned = isSigned;
   }
   public List<JoinDTO> getMembers() {
     return members;
@@ -121,29 +141,19 @@ public class DonationBoardDTO implements Serializable {
     this.members = members;
   }
 
-  public void addMembers(JoinDTO member) {
-    this.members.add(member);
-  }
 
-  public void removeMembers(JoinDTO member) {
-    this.members.remove(member);
-  }
-
-  public String getMemberNames() {
-    if (members == null) {
+  public String getFileNames() {
+    if (this.members == null) {
       return "";
     }
+
     StringBuilder names = new StringBuilder();
-    for (JoinDTO joinDTO : members) {
+    for (DonationBoardAttachedFile file : this.fileUpload) {
       if (names.length() > 0) {
-        names.append("\n");
+        names.append(", ");
       }
-      names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
+      names.append(file.getFilepath());
     }
     return names.toString();
   }
-
-
-
-
 }

@@ -22,25 +22,30 @@ public class QuestionListHandler implements Command {
 
     Collection<QuestionListDTO> questionList = questionDao.findAll();
 
+
+
     if (questionList.isEmpty()) {
       System.out.println("게시글이 없습니다.");
       System.out.println();
     }
 
-    for (QuestionListDTO questionListDTO : questionList) {
 
-      System.out.printf("%d, %s, %s, %s, %s, %d\n", 
+    for (QuestionListDTO questionListDTO : questionList) {
+      System.out.printf("%d, %s, %s, %s, %s, %d, %d\n", 
           questionListDTO.getNo(),
           questionListDTO.getQnaType().getTitle(),
           questionListDTO.getTitle(), 
           questionListDTO.getOwner().getId(),
           questionListDTO.getRegisteredDate(),
-          questionListDTO.getViewCount());
-      //                questionListDTO.getStatus());
-
+          questionListDTO.getViewCount(),
+          questionListDTO.getStatus());
       for (QuestionAttachedFile questionAttachedFile : questionListDTO.getFileUpload()) {
         System.out.printf("%s\n", questionAttachedFile.getFilepath());
       }
+      if (questionListDTO.getStatus() == 1) {
+        System.out.println("답변드립니다.");
+      }
+
     }
   }
 }
