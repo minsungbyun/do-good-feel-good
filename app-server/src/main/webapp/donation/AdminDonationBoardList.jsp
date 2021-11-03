@@ -5,17 +5,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>모금함목록</title>
-  <style>
-  #box1 {
-  visibility: hidden;
-  }
-  </style>
+  <title>관리자 모금함목록</title>
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  
+  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
 </head>
 <body>
-<h1>모금함 목록(MVC + EL + JSTL1)</h1>
-<div><a href='boardForm'>모금함 개설 신청</a></div>
-<table border='1'>
+<div class="container">
+<h1>관리자 모금함목록(MVC + EL + JSTL1)</h1>
+
+<table class="table">
 <thead>
   <tr>
     <th>개설번호</th>
@@ -32,23 +32,26 @@
 </thead>
 <tbody>
 
-<c:forEach items="${donationBoardList}" var="donationBoardDTO">
+<c:forEach items="${adminDonationBoardList}" var="donationBoardDTO">
 <tr>
 	  <td>${donationBoardDTO.no}</td> 
 	  <td>${donationBoardDTO.category.title}</td> 
 	  <td>${donationBoardDTO.leader.name}</td> 
-	  <td><a href='boardDetail?no=${donationBoardDTO.no}'>${donationBoardDTO.title}</a></td> 
+	  <td>${donationBoardDTO.title}</td> 
 	  <td>${donationBoardDTO.content}</td>
 	  <td>${donationBoardDTO.fileNames}</td>
 	  <td>${donationBoardDTO.startDate}</td>
 	  <td>${donationBoardDTO.endDate}</td>
 	  <td>${donationBoardDTO.moneyTarget}</td>
 	  <td>${donationBoardDTO.status}</td>
+<td><input id='f-adminList' type='radio' name='adminList' value="${donationBoardDTO.no}"></td>
+<th><a href='boardApprove?no=${donationBoardDTO.no}'>[승인하기]</a></th>
+<th><a href='boardReject?no=${donationBoardDTO.no}'>[반려하기]</a></th>
 </tr>
 </c:forEach>
-
 </tbody>
 </table>
+</div><!-- .container -->
 </body>
 </html>
 

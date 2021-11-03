@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
      trimDirectiveWhitespaces="true" %>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,12 +18,14 @@
 <body>
 <h1>모금함 개설신청 양식(MVC)</h1>
 <form action='boardAdd'>
-
-	  <label for='f-category'>${category.title}</label> 
-	  <input id='f-category' type='radio' name='category' value="${category.no}" >
+<c:forEach items="${categorys}" var="category">
+    <label for='f-category'>${category.title}</label> 
+    <input id='f-category' type='radio' name='category' value="${category.no}"><br>
+</c:forEach>
     
+    <br>
     <label for='f-leader'>주최자</label> 
-    <input id='f-leader' type="text" name='leader'><br>
+    <input id='f-leader' type="number" name='leader'><br>
     
     <label for='f-title'>제목</label> 
     <input id='f-title' type='text' name='title'><br>

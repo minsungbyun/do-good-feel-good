@@ -15,7 +15,6 @@
 
 <body>
   <h1>[ happyshare 봉사 승인대기목록]</h1>
-  <a href='form'>봉사 신청하기</a><br>
     <table border='1'>
       <thead>
 			  <tr>
@@ -33,7 +32,7 @@
         <c:forEach items="${volunteerList}" var="volunteerRequestDTO" >
 					<tr>
 					    <td>${volunteerRequestDTO.no}</td>
-					    <td>${volunteerRequestDTO.title}</td> 
+					   <td><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></td> 
 					    <td>${volunteerRequestDTO.owner.id}</td> 
 					    <td>${volunteerRequestDTO.category.title}</td> 
 					    <td>${volunteerRequestDTO.tel}</td> 
@@ -46,6 +45,7 @@
         </c:forEach>
       </tbody>
     </table>
+      <a href='list'>[목록]</a>
     
     
     
