@@ -1,7 +1,6 @@
 package com.share.ftp.servlet.donation;
 
 import java.io.IOException;
-import java.sql.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -11,23 +10,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
-import com.share.ftp.dao.DonationBoardDao;
-import com.share.ftp.domain.Category;
+import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.domain.donation.DonationBoardDTO;
-import com.share.ftp.domain.join.OrgDTO;
+import com.share.ftp.domain.donation.DonationRegisterDTO;
+import com.share.ftp.domain.donation.DonationRegisterPayType;
+import com.share.ftp.domain.join.JoinDTO;
 
-@WebServlet("/donation/boardAdd")
-public class DonationBoardAddController extends HttpServlet { 
+@WebServlet("/donation/registerAdd")
+public class DonationRegisterAddController extends HttpServlet { 
   private static final long serialVersionUID = 1L;
 
-  DonationBoardDao donationBoardDao;
+  DonationRegisterDao donationRegisterDao;
   SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    donationBoardDao = (DonationBoardDao) 웹애플리케이션공용저장소.getAttribute("donationBoardDao");
+    donationRegisterDao = (DonationRegisterDao) 웹애플리케이션공용저장소.getAttribute("donationRegisterDao");
 
 
   }
@@ -37,40 +37,36 @@ public class DonationBoardAddController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
+    DonationRegisterDTO donationRegisterDTO = new DonationRegisterDTO();
+
+    DonationRegisterPayType donationRegisterPayType = new DonationRegisterPayType();
+    donationRegisterPayType.setNo(Integer.parseInt(request.getParameter("payType")));
+
     DonationBoardDTO donationBoardDTO = new DonationBoardDTO();
+    donationBoardDTO.setNo(Integer.parseInt(request.getParameter("donationBoard")));
 
-    Category category = new Category();
-    category.setNo(Integer.parseInt(request.getParameter("category")));
+    JoinDTO joinDTO = new JoinDTO();
+    joinDTO.setNo(Integer.parseInt(request.getParameter("donator")));
 
-    OrgDTO orgDTO = new OrgDTO();
-    orgDTO.setOrgNo(Integer.parseInt(request.getParameter("leader")));
-    donationBoardDTO.setOrgNo(Integer.parseInt(request.getParameter("leader")));
+    donationRegisterDTO.setDonator(joinDTO);
+    donationRegisterDTO.setDonationBoard(donationBoardDTO);
+    donationRegisterDTO.setPayTypeNo(donationRegisterPayType);
+    donationRegisterDTO.setDonationMoney(Integer.parseInt(request.getParameter("donationMoney")));
+    donationRegisterDTO.setRegisterationNumber(request.getParameter("registerationNumber")); 
 
-    //    donationBoardDTO.setUserNo(Integer.parseInt(request.getParameter("owner")));
-    donationBoardDTO.setLeader(orgDTO);
-    donationBoardDTO.setCategory(category);
-    donationBoardDTO.setTitle(request.getParameter("title"));
-    donationBoardDTO.setContent(request.getParameter("content")); 
-    donationBoardDTO.setTel(request.getParameter("tel"));
-    donationBoardDTO.setEmail(request.getParameter("email"));  
-    donationBoardDTO.setMoneyTarget(Long.valueOf(request.getParameter("moneyTarget")));  
-    donationBoardDTO.setStartDate(Date.valueOf(request.getParameter("startDate")));
-    donationBoardDTO.setEndDate(Date.valueOf(request.getParameter("endDate"))); 
-    //    donationBoardDTO.setFileUpload(GeneralHelper.promptFileUpload()); 
-    donationBoardDTO.setStatus(2);
+    if (donationRegisterDTO.getPayTypeNo().getNo() == 1) {
+      donationRegisterDTO.setPayStatus(0);
+    } else {
+      donationRegisterDTO.setPayStatus(1);
+    }
 
 
     try {
-      donationBoardDao.insert(donationBoardDTO);
-      //      for (VolunteerAttachedFile volunteerAttachedFile : donationBoardDTO.getFileUpload()) {
-      //        donationBoardDao.insertFile(donationBoardDTO.getNo(), volunteerAttachedFile.getFilepath());
-      //      }
+      donationRegisterDao.insert(donationRegisterDTO);
       sqlSession.commit();
       response.sendRedirect("boardList");
 
-
     } catch (Exception e) {
-      sqlSession.rollback();
       request.setAttribute("error", e);
       e.printStackTrace();
 

@@ -22,8 +22,8 @@ public class ChallengeQuestionDeleteController extends HttpServlet {
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    challengeQuestionDao = (ChallengeQuestionDao) 웹애플리케이션공용저장소.getAttribute("challengQuestionDao");
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");      
+    challengeQuestionDao = (ChallengeQuestionDao) 웹애플리케이션공용저장소.getAttribute("challengeQuestionDao");
   }
 
   @Override
@@ -31,10 +31,11 @@ public class ChallengeQuestionDeleteController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
       int challengeQuestionNo = Integer.parseInt(request.getParameter("questionNo")); 
       System.out.println(challengeQuestionNo);
-      ChallengeQuestionDTO challengeQuestionDTO = challengeQuestionDao.findByNo(challengeQuestionNo, no);
+
+      ChallengeQuestionDTO challengeQuestionDTO = challengeQuestionDao.findByNo(challengeQuestionNo);
+
       if (challengeQuestionDTO == null) {
         throw new Exception("해당 번호의 문의가 없습니다.");
       }

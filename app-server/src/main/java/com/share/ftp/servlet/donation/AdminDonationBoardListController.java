@@ -13,8 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.domain.donation.DonationBoardDTO;
 
-@WebServlet("/donation/boardList")
-public class DonationBoardListController extends GenericServlet {
+@WebServlet("/admin/adminDonationList")
+public class AdminDonationBoardListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
   DonationBoardDao donationBoardDao;
@@ -32,11 +32,11 @@ public class DonationBoardListController extends GenericServlet {
     try {
 
 
-      Collection<DonationBoardDTO> donationBoardList = donationBoardDao.findAllApply();
+      Collection<DonationBoardDTO> adminDonationBoardList = donationBoardDao.findAllWait();
 
-      request.setAttribute("donationBoardList", donationBoardList);
+      request.setAttribute("adminDonationBoardList", adminDonationBoardList);
 
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/donation/DonationBoardList.jsp");
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/donation/AdminDonationBoardList.jsp");
       요청배달자.forward(request, response);
 
     } catch (Exception e) {

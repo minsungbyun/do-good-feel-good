@@ -40,7 +40,7 @@ public class PersonalAddController extends HttpServlet {
     personalDTO.setName(request.getParameter("name"));
     personalDTO.setTel(request.getParameter("tel"));
     personalDTO.setEmail(request.getParameter("email"));
-    personalDTO.setPostNo(Integer.valueOf(request.getParameter("postNo")));
+    personalDTO.setPostNo(request.getParameter("postNo"));
     personalDTO.setBasicAddress(request.getParameter("basicAddress"));
     personalDTO.setDetailAddress(request.getParameter("detailAddress"));
 
