@@ -69,10 +69,19 @@
     order by
       f.funding_no asc
   </select>
+  
   <select id="findByNo" resultMap="DonationRegisterDTOMap" parameterType="int">
 	  <include refid="select1"/>
     where
       f.funding_no=#{donationBoard.no}
+  </select>
+  
+  <select id="findAllNo" resultMap="DonationRegisterDTOMap" parameterType="int">
+    <include refid="select1"/>
+    where
+      f.funding_no=#{donationBoard.no}
+    order by
+      f.funding_no asc
   </select>
   
   

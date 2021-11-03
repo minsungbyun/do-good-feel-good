@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.domain.donation.DonationRegisterDTO;
 
-@WebServlet("/donationRegister/list")
+@WebServlet("/donation/registerList")
 public class DonationRegisterListController extends GenericServlet { // 모금함 기부하기 양식 쓰는곳
   private static final long serialVersionUID = 1L;
   DonationRegisterDao donationRegisterDao;
@@ -28,7 +28,9 @@ public class DonationRegisterListController extends GenericServlet { // 모금�
       throws ServletException, IOException {
 
     try {
-      Collection<DonationRegisterDTO> donationRegisterList = donationRegisterDao.findAll();
+
+      int no = Integer.parseInt(request.getParameter("no"));
+      Collection<DonationRegisterDTO> donationRegisterList = donationRegisterDao.findAllNo(no);
 
       request.setAttribute("donationRegisterList", donationRegisterList);
 

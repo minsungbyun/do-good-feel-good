@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.domain.donation.DonationBoardDTO;
 
-@WebServlet("/donationBoard/list")
+@WebServlet("/donation/boardList")
 public class DonationBoardListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 

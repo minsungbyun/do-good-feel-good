@@ -32,7 +32,7 @@
 	  <td>${donationBoardDTO.no}</td> 
 	  <td>${donationBoardDTO.category.title}</td> 
 	  <td>${donationBoardDTO.leader.name}</td> 
-	  <td><a href='detail?no=${donationBoardDTO.no}'>${donationBoardDTO.title}</a></td> 
+	  <td><a href='boardDetail?no=${donationBoardDTO.no}'>${donationBoardDTO.title}</a></td> 
 	  <td>${donationBoardDTO.content}</td>
 	  <td>${donationBoardDTO.fileNames}</td>
 	  <td>${donationBoardDTO.startDate}</td>

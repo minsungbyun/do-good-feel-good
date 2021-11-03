@@ -9,6 +9,7 @@ public interface DonationRegisterDao {
   long findAllDonationMoney() throws Exception;
   //  List<DonationRegisterDTO> findByKeyword(String keyword) throws Exception;
   DonationRegisterDTO findByNo(int no) throws Exception;
+  List<DonationRegisterDTO> findAllNo(int no) throws Exception;
   long findByRemainMoney(int donationBoardNo) throws Exception;
   long findByMyDonationMoney(int userNo) throws Exception;
   //  void update(DonationRegisterDTO donationBoardDTO) throws Exception;

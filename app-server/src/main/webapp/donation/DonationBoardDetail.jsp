@@ -15,7 +15,7 @@
 	</style>
 </head>
 <body>
-<h1>회원 상세(MVC + EL)</h1>
+<h1>모금함 상세(MVC + EL)</h1>
 <form action='update'>
     <label for='f-no'>개설번호</label> 
     <input id='f-no' type='text' name='no' value='${donationBoardDTO.no}' readonly><br>
@@ -48,7 +48,7 @@
     <input id='f-remainMoney' type='text' name='remainMoney' value='${remainMoney}'><br>
     --%>
  <button>[변경]</button>
- <a href='delete?no=${donationBoardDTO.no}'>[삭제]</a> <a href='list'>[목록]</a><br>
+ <a href='registerList?no=${donationBoardDTO.no}'>[기부자내역]</a> <a href='boardList'>[목록]</a><br>
 </form>
 </body>
 </html>
