@@ -20,13 +20,13 @@
 <body>
 <div class="container">
 <h1>봉사 게시판 목록</h1>
-<a href='boardForm' class="btn btn-outline-primary btn-sm">게시글 작성</a><br>
+<br>
 <table class="table table-hover">
 <thead>
   <tr>
     <th>번호</th>
-    <th>작성자</th>
     <th>제목</th>
+    <th>작성자</th>
     <th>등록일</th>
     <th>조회수</th>
   </tr>
@@ -35,18 +35,19 @@
 
 <c:forEach items="${volunteerBoardList}" var="volunteerBoardDTO">
 <tr>
-    <td><a href='boardDetail?no=${volunteerBoardDTO.no}'>${volunteerBoardDTO.no}</a></td>
+    <td>${volunteerBoardDTO.no}</td>
+    <td><a href='boardDetail?no=${volunteerBoardDTO.no}'>${volunteerBoardDTO.title}</a></td> 
     <td>${volunteerBoardDTO.owner.id}</td> 
-    <td>${volunteerBoardDTO.title}</td> 
     <td>${volunteerBoardDTO.registeredDate}</td>
     <td>${volunteerBoardDTO.viewCount}</td> 
 </tr>
 </c:forEach>
-      <label for='f-search'>검색어</label>
-      <input id='f-search' type="text" name='keword'>
-      <button>검색</button>
+
 </tbody>
 </table>
+      <label for='f-search'>검색어</label>
+      <input id='f-search' type="text" name='keword'>
+      <button class="btn btn-outline-primary btn-sm">검색</button>  <a href='boardForm' class="btn btn-outline-primary btn-sm float: right">게시글 작성</a><br>
 </div><!-- container -->
 </body>
 </html>
