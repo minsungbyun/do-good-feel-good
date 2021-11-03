@@ -1,4 +1,4 @@
-package com.share.ftp.servlet.volunteer;
+package com.share.ftp.servlet.admin;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,8 +13,8 @@ import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 
 
-@WebServlet("/volunteer/adminList")
-public class VolunteerAdminListController extends HttpServlet { 
+@WebServlet("/admin/volunteer/rejectedList")
+public class AdminVolunteerRejectedListController extends HttpServlet { 
 
   private static final long serialVersionUID = 1L;
 
@@ -32,10 +32,10 @@ public class VolunteerAdminListController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      List<VolunteerRequestDTO> volunteerList = volunteerDao.findAllWait();
+      List<VolunteerRequestDTO> volunteerList = volunteerDao.findAllRejected();
 
       request.setAttribute("volunteerList", volunteerList);
-      request.getRequestDispatcher("VolunteerAdminList.jsp").forward(request, response);
+      request.getRequestDispatcher("/admin/AdminVolunteerRejectedList.jsp").forward(request, response);
 
     } catch (Exception e) {
 
