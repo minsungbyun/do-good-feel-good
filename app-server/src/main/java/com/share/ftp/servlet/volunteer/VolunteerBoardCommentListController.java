@@ -1,4 +1,4 @@
-package com.share.ftp.servlet.vol;
+package com.share.ftp.servlet.volunteer;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -10,19 +10,19 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
-import com.share.ftp.dao.VolunteerBoardDao;
-import com.share.ftp.domain.community.VolunteerBoardDTO;
+import com.share.ftp.dao.VolunteerBoardCommentDao;
+import com.share.ftp.domain.community.VolunteerBoardCommentDTO;
 
-@WebServlet("/vol/boardlist")
-public class VolunteerBoardListController extends GenericServlet {
+@WebServlet("/volunteer/commentList")
+public class VolunteerBoardCommentListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
-  VolunteerBoardDao volunteerBoardDao;
+  VolunteerBoardCommentDao volunteerBoardCommentDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    volunteerBoardDao = (VolunteerBoardDao) 웹애플리케이션공용저장소.getAttribute("volunteerBoardDao");
+    volunteerBoardCommentDao = (VolunteerBoardCommentDao) 웹애플리케이션공용저장소.getAttribute("volunteerBoardCommentDao");
   }
 
   @Override
@@ -30,13 +30,14 @@ public class VolunteerBoardListController extends GenericServlet {
       throws ServletException, IOException {
     try {
 
-      Collection<VolunteerBoardDTO> volunteerBoardList = volunteerBoardDao.findAll();
+      // 클라이언트 요청을 처리하는데 필요한 데이터 준비
+      Collection<VolunteerBoardCommentDTO> volunteerBoardCommentList = volunteerBoardCommentDao.findAll();
 
       // 뷰 컴포넌트가 준비한 데이터를 사용할 수 있도록 저장소에 보관한다.
-      request.setAttribute("volunteerBoardList", volunteerBoardList);
+      request.setAttribute("volunteerBoardCommentList", volunteerBoardCommentList);
 
       // 출력을 담당할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/vol/VolunteerBoardList.jsp");
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("VolunteerBoardCommentList.jsp");
       요청배달자.forward(request, response);
 
     } catch (Exception e) {
@@ -50,6 +51,3 @@ public class VolunteerBoardListController extends GenericServlet {
     }
   }
 }
-
-
-

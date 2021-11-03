@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>나눔이야기 게시글 상세</title>
+  <title>봉사게시글상세보기</title>
   <style>
   label {
     margin-right: 5px;
@@ -15,8 +15,8 @@
   </style>
 </head>
 <body>
-<h1>나눔이야기 게시글 상세</h1>
-<form action='update'>
+<h1>봉사 게시판 상세보기</h1>
+<form action='boardUpdate'>
     <label for='f-no'>게시글 번호</label> 
     <input id='f-no' type='text' name='no' value='${volunteerBoardDTO.no}' readonly><br>
     
@@ -36,9 +36,9 @@
     <span id='f-registeredDate'>${volunteerBoardDTO.registeredDate}</span><br>
     
     <label for='f-viewCount'>조회수</label> 
-    <input id='f-viewCount' type='number' name='viewCount' value='${volunteerBoardDTO.viewCount}'><br>
+    <input id='f-viewCount' type='number' name='viewCount' value='${volunteerBoardDTO.viewCount}' readonly><br>
  <button>변경</button>
- <a href='delete?no=${volunteerBoardDTO.no}'>[삭제]</a> <a href='list'>[목록]</a><br>
+ <a href='boardDelete?no=${volunteerBoardDTO.no}'>[삭제]</a> <a href='boardList'>[목록]</a><br>
 </form>
 
 </body>

@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>봉사게시판 - 게시글 댓글 목록</h1>
-<a href='form'>후기 작성</a><br>
+<a href='commentForm'>후기 작성</a><br>
 <table border='1'>
 <thead>
   <tr>

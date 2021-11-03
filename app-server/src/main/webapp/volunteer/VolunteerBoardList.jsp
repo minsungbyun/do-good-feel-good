@@ -6,11 +6,22 @@
 <html>
 <head>
   <title>나눔이야기 목록</title>
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  
+  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  
+  <style>
+      .container {
+          width:640px;      
+      }
+    </style>
 </head>
 <body>
-<h1>봉사 게시판 - 나눔이야기 목록</h1>
-<a href='form'>게시글 작성</a><br>
-<table border='1'>
+<div class="container">
+<h1>봉사 게시판 목록</h1>
+<a href='boardForm' class="btn btn-outline-primary btn-sm">게시글 작성</a><br>
+<table class="table table-hover">
 <thead>
   <tr>
     <th>번호</th>
@@ -18,23 +29,25 @@
     <th>제목</th>
     <th>등록일</th>
     <th>조회수</th>
-
   </tr>
 </thead>
 <tbody>
 
 <c:forEach items="${volunteerBoardList}" var="volunteerBoardDTO">
 <tr>
-    <td><a href='boarddetail?no=${volunteerBoardDTO.no}'>${volunteerBoardDTO.no}</a></td>
+    <td><a href='boardDetail?no=${volunteerBoardDTO.no}'>${volunteerBoardDTO.no}</a></td>
     <td>${volunteerBoardDTO.owner.id}</td> 
     <td>${volunteerBoardDTO.title}</td> 
     <td>${volunteerBoardDTO.registeredDate}</td>
     <td>${volunteerBoardDTO.viewCount}</td> 
 </tr>
 </c:forEach>
-
+      <label for='f-search'>검색어</label>
+      <input id='f-search' type="text" name='keword'>
+      <button>검색</button>
 </tbody>
 </table>
+</div><!-- container -->
 </body>
 </html>
 
