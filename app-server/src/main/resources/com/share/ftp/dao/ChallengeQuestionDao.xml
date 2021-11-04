@@ -85,7 +85,7 @@
   
   
    <delete id="delete" parameterType="int">
-    delete from ftp_challenge_qna where challenge_qna_no=${values}
+    delete from ftp_challenge_qna where challenge_qna_no=${value}
   </delete>
   
   

@@ -9,6 +9,7 @@
 </head>
 <body>
 <h1>참여인증&댓글 목록</h1>
+<a href='reviewForm?no=${challengeDTO.no}'>참여인증&댓글 등록</a><br>
 <table border='1'>
 <thead>
   <tr>
@@ -16,16 +17,20 @@
     <th>내용</th>
 <!--     <th>파일첨부</th> -->
     <th>작성자</th>
+    <th>등록일</th>
   </tr>
 </thead>
 <tbody>
 
 <c:forEach items="${challengeReviewList}" var="challengeReviewDTO">
 <tr>
-    <td>${challengeReviewDTO.no}</td>
-    <td><a href='detail?no=${challengeReviewDTO.reviewNo}'>${challengeReviewDTO.content}</a></td> 
+    <td>${challengeReviewDTO.reviewNo}</td>
+    <td>${challengeReviewDTO.content}</td> 
 <!--    <td>${challengeReviewDTO.fileUpload}</td> -->
     <td>${challengeReviewDTO.owner.id}</td> 
+    <td>${challengeReviewDTO.registeredDate}</td>
+    <td><a href='reviewUpdateDetail?reviewNo=${challengeReviewDTO.reviewNo}&no=${challengeReviewDTO.no}'>[변경]</a></td>
+    <td><a href='reviewDelete?reviewNo=${challengeReviewDTO.reviewNo}&no=${challengeReviewDTO.no}'>[삭제]</a></td>
 </tr>
 </c:forEach>
 

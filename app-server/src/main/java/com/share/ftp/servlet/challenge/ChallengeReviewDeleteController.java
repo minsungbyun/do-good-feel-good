@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
-import com.share.ftp.dao.ChallengeQuestionDao;
-import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
+import com.share.ftp.dao.ChallengeReviewDao;
+import com.share.ftp.domain.challenge.ChallengeReviewDTO;
 
-@WebServlet("/challenge/questionDelete")
-public class ChallengeQuestionDeleteController extends HttpServlet {
+@WebServlet("/challenge/reviewDelete")
+public class ChallengeReviewDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  ChallengeQuestionDao challengeQuestionDao;
+  ChallengeReviewDao challengeReviewDao;
   SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    challengeQuestionDao = (ChallengeQuestionDao) 웹애플리케이션공용저장소.getAttribute("challengeQuestionDao");
+    challengeReviewDao = (ChallengeReviewDao) 웹애플리케이션공용저장소.getAttribute("challengeReviewDao");
   }
 
   @Override
@@ -31,17 +31,17 @@ public class ChallengeQuestionDeleteController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int challengeQuestionNo = Integer.parseInt(request.getParameter("questionNo")); 
-      ChallengeQuestionDTO challengeQuestionDTO = challengeQuestionDao.findByNo(challengeQuestionNo);
-      if (challengeQuestionDTO == null) {
+      int challengeReviewNo = Integer.parseInt(request.getParameter("reviewNo")); 
+      ChallengeReviewDTO challengeReviewDTO = challengeReviewDao.findByNo(challengeReviewNo);
+      if (challengeReviewDTO == null) {
         throw new Exception("해당 번호의 문의가 없습니다.");
       }
 
       //      challengeDao.deleteFile(challengeNo);
-      challengeQuestionDao.delete(challengeQuestionDTO.getQuestionNo());
+      challengeReviewDao.delete(challengeReviewDTO.getReviewNo());
       sqlSession.commit();
 
-      response.sendRedirect("questionList?no=" + Integer.parseInt(request.getParameter("no")));
+      response.sendRedirect("reviewList?no=" + Integer.parseInt(request.getParameter("no")));
 
     } catch (Exception e) {
       e.printStackTrace();
