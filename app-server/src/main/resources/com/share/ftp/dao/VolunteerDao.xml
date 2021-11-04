@@ -64,9 +64,9 @@
    </collection>
    
    <collection property="members" ofType="joinDTO">
-    <id column="user_no" property="no"/>
-    <result column="user_id" property="id"/>
-    <result column="user_name" property="name"/>
+    <id column="member_no" property="no"/>
+    <result column="member_id" property="id"/>
+    <result column="member_name" property="name"/>
    </collection>
   </resultMap>
 
@@ -264,7 +264,54 @@
           v.vol_no desc
    </select>
    
-     
+    <select id="findAllRejected" resultMap="VolunteerRequestDTOMap">
+     select 
+         distinct
+         v.vol_no,  
+         v.title,
+         v.content,
+         v.tel,
+         v.email,
+         v.start_dt,
+         v.end_dt,
+         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(v.start_dt,'%Y-%m-%d %H:%i:%s')) total_dt,
+         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(now(),'%Y-%m-%d %H:%i:%s')) remain_dt,
+         v.start_time,
+         v.end_time,
+         v.total_cnt,
+         u.id owner_id,
+         u.name owner_name,  
+         c.title category_title,
+         f.filepath
+       from
+         ftp_vol v
+         inner join ftp_user u on v.user_no=u.user_no
+         inner join ftp_category c on v.category_no=c.category_no
+         left outer join ftp_vol_file f on v.vol_no=f.vol_no
+        where
+          v.approval=0
+        order by
+          v.vol_no desc
+   </select>
+   
+   <select id="findAllJoin" resultMap="VolunteerRequestDTOMap" parameterType="int">
+     select 
+        v.vol_no,
+        v.title,
+        u.id member_id,
+        u.name member_name,
+        va.start_time,
+        va.end_time,
+        va.apply_dt
+       from
+         ftp_vol_apply va
+         inner join ftp_user u on va.user_no=u.user_no
+         inner join ftp_vol v on va.vol_no=v.vol_no
+        where
+          v.vol_no=#{volNo}
+        order by
+          va.apply_dt desc
+   </select>
    
    
    <!-- 일 시간 분 초 다 계산하려면 테이블 데이터 타입을 datetime으로 변경해야함
@@ -399,7 +446,7 @@
 
   </update>
   
-    <update id="updateVolunteer" parameterType="VolunteerRequestDTO">
+  <update id="updateVolunteer" parameterType="VolunteerRequestDTO">
 	     update ftp_vol set
 	        approval=#{status}
 	     where 

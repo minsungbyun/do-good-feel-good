@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.share.ftp.dao.VolunteerDao">
+  
+  <resultMap type="volunteerRequestDTO" id="VolunteerRequestDTOMap">
+    <id column="vol_no" property="no"/> 
+    <result column="user_no" property="userNo"/>
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="tel" property="tel"/>
+    <result column="email" property="email"/>
+    <result column="start_dt" property="startDate"/>
+    <result column="end_dt" property="endDate"/>
+    <result column="start_time" property="startTime"/>
+    <result column="end_time" property="endTime"/>
+    <result column="total_cnt" property="limitNum"/>
+    <result column="approval" property="status"/>
+    <result column="note" property="note"/> 
+    
+    <result column="total_dt" property="totalDate"/> 
+    <result column="remain_dt" property="remainDate"/> 
+    
+    
+    <result column="apply_dt" property="applyDate"/>
+    <result column="start_time" property="applyStartTime"/>
+    <result column="end_time" property="applyEndTime"/>
+    <result column="apply_status" property="applyStatus"/>
+    <result column="vol_joincount" property="getCount"/>
+    <result column="note" property="applyNote"/> 
+   
+
+ 
+   
+   <association property="owner" javaType="joinDTO">
+      <id column="owner_no" property="no"/>
+      <result column="owner_id" property="id"/>
+     <result column="owner_name" property="name"/>
+   </association>
+   
+   <association property="applyOwner" javaType="joinDTO">
+      <id column="apply_no" property="no"/>
+      <result column="apply_id" property="id"/>
+     <result column="apply_name" property="name"/>
+   </association>
+   
+   
+   <association property="wish" javaType="joinDTO">
+     <id column="wish_no" property="no"/>
+     <result column="wish_id" property="id"/>
+     <result column="wish_name" property="name"/>
+   </association>
+   
+   <association property="category" javaType="category">
+     <id column="category_no" property="no"/>
+     <result column="category_title" property="title"/>
+   </association>
+   
+   <collection property="fileUpload" ofType="volunteerAttachedFile">
+     <id column="vol_file_no" property="no"/>
+     <result column="filepath" property="filepath"/>
+   </collection>
+   
+   <collection property="members" ofType="joinDTO">
+    <id column="user_no" property="no"/>
+    <result column="user_id" property="id"/>
+    <result column="user_name" property="name"/>
+   </collection>
+  </resultMap>
+
+  <resultMap type="category" id="CategoryMap">
+    <id column="category_no" property="no"/> 
+    <result column="category_title" property="title"/>
+  </resultMap>
+
+  
+  <insert id="insert" parameterType="VolunteerRequestDTO" 
+          useGeneratedKeys="true" keyColumn="vol_no" keyProperty="no">
+    insert into ftp_vol(
+       user_no,
+       category_no,
+       title,
+       content,
+       tel,
+       email,
+       start_dt,
+       end_dt,
+       start_time,
+       end_time,
+       total_cnt,
+       approval)
+    values(
+       #{owner.no},
+       #{category.no},
+       #{title},
+       #{content},
+       #{tel},
+       #{email},
+       #{startDate},
+       #{endDate},
+       #{startTime},
+       #{endTime},
+       #{limitNum},
+       #{status})
+  </insert>
+  
+  <insert id="insertUser" parameterType="VolunteerRequestDTO">
+    insert into ftp_vol_apply(user_no,vol_no,apply_dt,start_time,end_time)
+    values(#{userNo},#{volNo},#{applyDate},#{startTime},#{endTime})
+  </insert>
+  
+  
+  <insert id="insertFile">
+    insert into ftp_vol_file(vol_no,filepath)
+    values(#{volNo},#{filepath})
+  </insert>
+  
+ 
+  
+   <insert id="addWish">
+    insert into ftp_vol_wish(user_no,vol_no)
+    values(#{userNo},#{volNo})
+  </insert>
+  
+  
+ 
+ 
+  <select id="findAll" resultMap="VolunteerRequestDTOMap">
+         select 
+          distinct
+          v.vol_no,  
+          v.title,
+          v.content,
+          v.tel,
+          v.email,
+          v.start_dt,
+          v.end_dt,
+          datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(v.start_dt,'%Y-%m-%d %H:%i:%s')) total_dt,
+         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(now(),'%Y-%m-%d %H:%i:%s')) remain_dt,
+	       v.start_time,
+	       v.end_time,
+	       v.total_cnt,
+	       u.id wish_id,
+	       u.id owner_id,  
+	       u.name owner_name,  
+	       c.title category_title,
+	       f.filepath filepath,
+	       v.approval,
+	       u.id apply_id,
+	       va.apply_dt,
+	       va.apply_status,
+	       va.start_time,
+	       va.end_time,
+	       va.note
+	     from
+	       ftp_vol v
+	       inner join ftp_user u on v.user_no=u.user_no
+	       inner join ftp_category c on v.category_no=c.category_no
+	       left outer join ftp_vol_file f on v.vol_no=f.vol_no
+	       left outer join ftp_vol_apply va on v.vol_no=va.vol_no
+	     order by
+	       v.vol_no desc 
+  </select>
+  
+  <select id="findAllCategory" resultMap="VolunteerRequestDTOMap" >
+       select 
+         title category_title
+       from
+         ftp_category 
+  </select>
+   
+  
+   <select id="findAllApproved" resultMap="VolunteerRequestDTOMap">
+	     select
+	        distinct 
+	         v.vol_no,  
+	         v.title,
+	         v.content,
+	         v.tel,
+	         v.email,
+	         v.start_dt,
+	         v.end_dt,
+	         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(v.start_dt,'%Y-%m-%d %H:%i:%s')) total_dt,
+	         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(curdate(),'%Y-%m-%d %H:%i:%s')) remain_dt,
+	         v.start_time,
+	         v.end_time,
+	         v.total_cnt,
+	         u.id wish_id,
+	         u.id owner_id,
+	         u.name owner_name,   
+	         c.title category_title,
+	         f.filepath
+	       from
+	         ftp_vol v
+	         inner join ftp_user u on v.user_no=u.user_no
+	         inner join ftp_category c on v.category_no=c.category_no
+	         left outer join ftp_vol_file f on v.vol_no=f.vol_no
+	         left outer join ftp_vol v2 on u.user_no=v2.user_no
+	        where
+	          v.approval=1
+	        order by
+	          v.vol_no desc
+   </select>
+   
+   <select id="findAllApply" resultMap="VolunteerRequestDTOMap">
+	     select 
+	         distinct
+	         v.vol_no,  
+	         v.title,
+	         v.content,
+	         v.tel,
+	         v.email,
+	         v.start_dt,
+	         v.end_dt,
+	         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(v.start_dt,'%Y-%m-%d %H:%i:%s')) total_dt,
+	         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(now(),'%Y-%m-%d %H:%i:%s')) remain_dt,
+	         v.start_time,
+	         v.end_time,
+	         v.total_cnt,
+	         u.id owner_id,
+	         u.name owner_name,   
+	         c.title category_title,
+	         f.filepath
+	       from
+	         ftp_vol v
+	         inner join ftp_user u on v.user_no=u.user_no
+	         inner join ftp_category c on v.category_no=c.category_no
+	         left outer join ftp_vol_file f on v.vol_no=f.vol_no
+	        where
+	          v.approval=1
+	        order by
+	          v.vol_no desc
+   </select>
+   
+   <select id="findAllWait" resultMap="VolunteerRequestDTOMap">
+     select 
+         distinct
+         v.vol_no,  
+         v.title,
+         v.content,
+         v.tel,
+         v.email,
+         v.start_dt,
+         v.end_dt,
+         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(v.start_dt,'%Y-%m-%d %H:%i:%s')) total_dt,
+         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(now(),'%Y-%m-%d %H:%i:%s')) remain_dt,
+         v.start_time,
+         v.end_time,
+         v.total_cnt,
+         u.id owner_id,
+         u.name owner_name,  
+         c.title category_title,
+         f.filepath
+       from
+         ftp_vol v
+         inner join ftp_user u on v.user_no=u.user_no
+         inner join ftp_category c on v.category_no=c.category_no
+         left outer join ftp_vol_file f on v.vol_no=f.vol_no
+        where
+          v.approval=2
+        order by
+          v.vol_no desc
+   </select>
+   
+     
+   
+   
+   <!-- 일 시간 분 초 다 계산하려면 테이블 데이터 타입을 datetime으로 변경해야함
+    date_format(end_dt,'%Y-%m-%d %H:%i:%s'), date_format(curdate(),'%Y-%m-%d %H:%i:%s') datediff,
+    -->
+    
+   <select id="totalDate" resultMap="VolunteerRequestDTOMap" parameterType="int">
+      select 
+        datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(v.start_dt,'%Y-%m-%d %H:%i:%s')) total_dt
+      from
+        ftp_vol v
+      where
+        v.vol_no=#{volNo}
+    </select>
+    
+   <select id="remainDate" resultMap="VolunteerRequestDTOMap" parameterType="int">
+      select 
+        datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(now(),'%Y-%m-%d %H:%i:%s')) remain_dt
+      from
+        ftp_vol v
+      where
+        v.vol_no=#{volNo}
+    </select>
+  
+  
+  <select id="findByVolunteerNo" resultMap="VolunteerRequestDTOMap" parameterType="int">
+       select 
+         v.vol_no,  
+         v.title,
+         v.content,
+         v.tel,
+         v.email,
+         v.start_dt,
+         v.end_dt,
+         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(v.start_dt,'%Y-%m-%d %H:%i:%s')) datediff,
+         v.start_time,
+         v.end_time,
+         timediff(v.end_time,v.start_time) timediff,
+         v.total_cnt,
+         u.id owner_id,
+         u.name owner_name,   
+         c.title category_title,
+         f.filepath
+       from
+         ftp_vol v
+         inner join ftp_user u on v.user_no=u.user_no
+         inner join ftp_category c on v.category_no=c.category_no
+         left outer join ftp_vol_file f on v.vol_no=f.vol_no
+       where 
+         v.vol_no=#{volNo}
+  </select>
+ 
+  <select id="findByApprovedVolunteerNo" resultMap="VolunteerRequestDTOMap" parameterType="int">
+       select 
+         v.vol_no,  
+         v.title,
+         v.content,
+         v.tel,
+         v.email,
+         v.start_dt,
+         v.end_dt,
+         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(v.start_dt,'%Y-%m-%d %H:%i:%s')) datediff,
+         v.start_time,
+         v.end_time,
+         timediff(v.end_time,v.start_time) timediff,
+         v.total_cnt,
+         u.id owner_id,
+         u.name owner_name,   
+         c.title category_title,
+         f.filepath
+       from
+         ftp_vol v
+         inner join ftp_user u on v.user_no=u.user_no
+         inner join ftp_category c on v.category_no=c.category_no
+         left outer join ftp_vol_file f on v.vol_no=f.vol_no
+       where 
+         v.vol_no=#{volNo} and v.approval=1
+  </select>
+ 
+  <select id="findByKeyword" resultMap="VolunteerRequestDTOMap" parameterType="string">
+     select 
+         v.vol_no,  
+         v.title,
+         v.content,
+         v.tel,
+         v.email,
+         v.start_dt,
+         v.end_dt,
+         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(v.start_dt,'%Y-%m-%d %H:%i:%s')) datediff,
+         v.start_time,
+         v.end_time,
+         timediff(v.end_time,v.start_time) timediff,
+         v.total_cnt,
+         u.id owner_id,
+         u.name owner_name,   
+         c.title category_title,
+         f.filepath
+       from
+         ftp_vol v
+         inner join ftp_user u on v.user_no=u.user_no
+         inner join ftp_category c on v.category_no=c.category_no
+         left outer join ftp_vol_file f on v.vol_no=f.vol_no
+     <where>
+      <if test="title != null">
+         title like concat('%', #{value}, '%')
+      </if>
+      <if test="content != null">
+         or content like concat('%', #{value}, '%') 
+      </if>
+     </where>
+     order by
+      v.vol_no desc
+  </select>
+  
+  
+  
+   <update id="update" parameterType="VolunteerRequestDTO">
+
+	   update ftp_vol set
+		    title=#{title},
+	      category_no=#{category.no},
+	      tel=#{tel},
+	      email=#{email},
+	      start_dt=#{startDate},
+	      end_dt=#{endDate},
+	      start_time=#{startTime},
+	      end_time=#{endTime},
+	      total_cnt=#{limitNum}
+	      content=#{content}
+	   where 
+	      vol_no=#{no}
+
+  </update>
+  
+  <update id="updateVolunteer" parameterType="VolunteerRequestDTO">
+	     update ftp_vol set
+	        approval=#{status}
+	     where 
+	        vol_no=#{no}
+  </update>
+  
+   <update id="updateFile" parameterType="string">
+
+	   update ftp_vol_file set
+		    vol_no=#{no},
+	      filepath=#{fileUpload.filepath}
+	   where 
+	      vol_no=#{no}
+  </update>
+  
+  
+  
+  <delete id="deleteFile" parameterType="VolunteerRequestDTO">
+       delete from ftp_vol_file where vol_no=#{no}
+  </delete>
+  
+  <delete id="delete" parameterType="VolunteerRequestDTO">
+       delete from ftp_vol where vol_no=#{no}
+  </delete>
+</mapper>
+
+
+
+
+
+

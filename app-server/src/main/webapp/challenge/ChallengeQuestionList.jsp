@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>문의 목록</h1>
-<a href='questionform?no=${challengeDTO.no}'>문의 등록</a><br>
+<a href='questionForm?no=${challengeDTO.no}'>문의 등록</a><br>
 <table border='1'>
 <thead>
   <tr>

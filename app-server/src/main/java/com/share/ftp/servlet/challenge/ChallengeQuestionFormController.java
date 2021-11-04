@@ -12,7 +12,7 @@ import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 
 
-@WebServlet("/challenge/questionform")
+@WebServlet("/challenge/questionForm")
 public class ChallengeQuestionFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

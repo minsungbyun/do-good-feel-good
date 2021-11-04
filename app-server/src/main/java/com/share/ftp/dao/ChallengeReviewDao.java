@@ -18,7 +18,5 @@ public interface ChallengeReviewDao {
 
   List<ChallengeReviewDTO> findAllNo(int challengeNo) throws Exception;
 
-  ChallengeReviewDTO findByNo(
-      @Param("challengeNo")int challengeNo,
-      @Param("challengeReviewNo") int challengeReviewNo) throws Exception;
+  ChallengeReviewDTO findByNo(int challengeReviewNo) throws Exception;
 }

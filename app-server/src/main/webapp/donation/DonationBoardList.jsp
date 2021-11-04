@@ -6,10 +6,15 @@
 <html>
 <head>
   <title>모금함목록</title>
+  <style>
+  #box1 {
+  visibility: hidden;
+  }
+  </style>
 </head>
 <body>
 <h1>모금함 목록(MVC + EL + JSTL1)</h1>
-<div><a href='form'>모금함 개설 신청</a></div>
+<div><a href='boardForm'>모금함 개설 신청</a></div>
 <table border='1'>
 <thead>
   <tr>
@@ -32,7 +37,7 @@
 	  <td>${donationBoardDTO.no}</td> 
 	  <td>${donationBoardDTO.category.title}</td> 
 	  <td>${donationBoardDTO.leader.name}</td> 
-	  <td><a href='detail?no=${donationBoardDTO.no}'>${donationBoardDTO.title}</a></td> 
+	  <td><a href='boardDetail?no=${donationBoardDTO.no}'>${donationBoardDTO.title}</a></td> 
 	  <td>${donationBoardDTO.content}</td>
 	  <td>${donationBoardDTO.fileNames}</td>
 	  <td>${donationBoardDTO.startDate}</td>

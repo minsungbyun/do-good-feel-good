@@ -60,8 +60,8 @@
   </select>
   
   <insert id="insert" parameterType="ChallengeReviewDTO">
-    insert into ftp_challenge_review(challenge_no,content,user_no,created_dt) 
-    values(#{no},#{content},#{owner.no}, curdate())
+    insert into ftp_challenge_review(challenge_no,content,user_no) 
+    values(#{no},#{content},#{owner.no})
   </insert>
   
   <insert id="insertFile">
@@ -83,7 +83,7 @@
    </delete>
   
    <delete id="delete" parameterType="int">
-    delete from ftp_challenge_review where challenge_review_no=${values}
+    delete from ftp_challenge_review where challenge_review_no=${value}
   </delete>
   
   
@@ -100,7 +100,7 @@
       ftp_challenge_review r
       inner join ftp_user u on r.user_no=u.user_no
     where 
-      challenge_no=#{challengeNo} and challenge_review_no=#{challengeReviewNo}
+      r.challenge_review_no=#{challengeReviewNo}
   </select>
 </mapper>
 

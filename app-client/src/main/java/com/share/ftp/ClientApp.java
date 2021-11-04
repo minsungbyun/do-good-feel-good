@@ -27,11 +27,7 @@ import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.dao.OrgDao;
 import com.share.ftp.dao.PersonalDao;
 import com.share.ftp.dao.QuestionDao;
-<<<<<<< HEAD
-=======
-import com.share.ftp.dao.VolunteerApplyDao;
 import com.share.ftp.dao.VolunteerBoardCommentDao;
->>>>>>> 62cf37732b170adafcc01f64b8807e21dbe36017
 import com.share.ftp.dao.VolunteerBoardDao;
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.dao.VolunteerJoinDao;
