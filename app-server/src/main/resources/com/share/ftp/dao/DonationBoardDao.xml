@@ -131,6 +131,35 @@
 	       d.funding_no desc
    </select>
    
+   <select id="findAllRejected" resultMap="DonationBoardDTOMap">
+       select 
+         d.funding_no,  
+         d.title,
+         d.content,
+         d.tel,
+         d.email,
+         d.start_dt,
+         d.end_dt,
+         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt,
+         datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
+         d.goal,
+         d.status,
+         p.id leader_id,  
+         p.name leader_name,  
+         c.title category_title,
+         f.filepath
+       from
+         ftp_funding d
+         inner join ftp_user_org o on d.user_org_no=o.user_org_no
+         inner join ftp_category c on d.category_no=c.category_no
+         inner join ftp_user p on p.user_no=o.user_no
+         left outer join ftp_funding_file f on d.funding_no=f.funding_no
+       where
+         d.status=0
+       order by
+         d.funding_no desc
+   </select>
+   
    
    <select id="findAllApply" resultMap="DonationBoardDTOMap">
        select 

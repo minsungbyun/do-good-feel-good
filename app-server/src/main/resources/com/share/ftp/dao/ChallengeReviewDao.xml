@@ -6,13 +6,13 @@
 <mapper namespace="com.share.ftp.dao.ChallengeReviewDao">
   
   <resultMap type="ChallengeReviewDTO" id="ChallengeReviewDTOMap">
-    <id column="challenge_no" property="no"/> 
-    <result column="challenge_review_no" property="reviewNo"/> 
+    <id column="challenge_review_no" property="reviewNo"/> 
+    <result column="challenge_no" property="no"/> 
     <result column="content" property="content"/>
     <result column="created_dt" property="registeredDate"/>
     
     <association property="owner" javaType="joinDTO">
-      <id column="user_No" property="no"/>
+      <id column="user_no" property="no"/>
       <result column="id" property="id"/>
     </association>
     

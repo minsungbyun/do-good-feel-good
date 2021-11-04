@@ -26,6 +26,8 @@
     <th>첨부파일</th>
     <th>개설시작일</th>
     <th>개설종료일</th>
+    <th>총기간</th>
+    <th>남은기간</th>
     <th>목표금액</th>
     <th>승인여부</th>
   </tr>
@@ -42,6 +44,8 @@
 	  <td>${donationBoardDTO.fileNames}</td>
 	  <td>${donationBoardDTO.startDate}</td>
 	  <td>${donationBoardDTO.endDate}</td>
+	  <td>${donationBoardDTO.totalDate}</td>
+    <td>${donationBoardDTO.remainDate}</td>
 	  <td>${donationBoardDTO.moneyTarget}</td>
 	  <td>${donationBoardDTO.status}</td>
 <td><input id='f-adminList' type='radio' name='adminList' value="${donationBoardDTO.no}"></td>
