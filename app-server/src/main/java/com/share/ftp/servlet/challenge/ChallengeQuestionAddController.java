@@ -1,47 +1,59 @@
 package com.share.ftp.servlet.challenge;
 
 import java.io.IOException;
-import java.util.Collection;
-import javax.servlet.GenericServlet;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.ChallengeQuestionDao;
-import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
+import com.share.ftp.domain.join.JoinDTO;
 
-@WebServlet("/challenge/questionList")
-public class ChallengeQuestionListController extends GenericServlet {
+@WebServlet("/challenge/questionAdd")
+public class ChallengeQuestionAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
+
 
   ChallengeDao challengeDao;
   ChallengeQuestionDao challengeQuestionDao;
+  SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     challengeDao = (ChallengeDao) 웹애플리케이션공용저장소.getAttribute("challengeDao");
     challengeQuestionDao = (ChallengeQuestionDao) 웹애플리케이션공용저장소.getAttribute("challengeQuestionDao");
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+    ChallengeQuestionDTO challengeQuestionDTO = new ChallengeQuestionDTO();
+
+    JoinDTO owner = new JoinDTO();
+    owner.setNo(Integer.parseInt(request.getParameter("owner")));
+
+    challengeQuestionDTO.setContent(request.getParameter("content"));
+    challengeQuestionDTO.setOwner(owner);
+
     try {
-      int challengeNo = Integer.parseInt(request.getParameter("no"));
-      ChallengeDTO challengeDTO = challengeDao.findByNo(challengeNo);
-      Collection<ChallengeQuestionDTO> challengeQuestionList = challengeQuestionDao.findAllNo(challengeNo);
-      request.setAttribute("challengeDTO", challengeDTO);
-      request.setAttribute("challengeQuestionList", challengeQuestionList);
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/challenge/ChallengeQuestionList.jsp");
-      요청배달자.forward(request, response);
+      challengeQuestionDTO.setNo(Integer.parseInt(request.getParameter("no")));
+      challengeQuestionDao.insert(challengeQuestionDTO);
+      sqlSession.commit();
+      response.setHeader("Refresh", "1;url=questionList?no=" + Integer.parseInt(request.getParameter("no")));
+      request.getRequestDispatcher("ChallengeQuestionAdd.jsp").forward(request, response);
+
     } catch (Exception e) {
+      e.printStackTrace();
       request.setAttribute("error", e);
+
       RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
       요청배달자.forward(request, response);
     }

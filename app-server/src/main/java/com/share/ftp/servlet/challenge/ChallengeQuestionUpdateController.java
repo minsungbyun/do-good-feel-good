@@ -12,8 +12,8 @@ import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 
-@WebServlet("/challenge/questionDelete")
-public class ChallengeQuestionDeleteController extends HttpServlet {
+@WebServlet("/challenge/questionUpdate")
+public class ChallengeQuestionUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   ChallengeQuestionDao challengeQuestionDao;
@@ -33,15 +33,17 @@ public class ChallengeQuestionDeleteController extends HttpServlet {
     try {
       int challengeQuestionNo = Integer.parseInt(request.getParameter("questionNo")); 
       ChallengeQuestionDTO challengeQuestionDTO = challengeQuestionDao.findByNo(challengeQuestionNo);
+
       if (challengeQuestionDTO == null) {
-        throw new Exception("해당 번호의 문의가 없습니다.");
+        System.out.println("해당 번호의 문의가 없습니다.");
+        return;
       }
 
-      //      challengeDao.deleteFile(challengeNo);
-      challengeQuestionDao.delete(challengeQuestionDTO.getQuestionNo());
-      sqlSession.commit();
+      challengeQuestionDTO.setContent(request.getParameter("content"));
 
       response.sendRedirect("questionList?no=" + Integer.parseInt(request.getParameter("no")));
+      challengeQuestionDao.update(challengeQuestionDTO);
+      sqlSession.commit();
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -50,4 +52,3 @@ public class ChallengeQuestionDeleteController extends HttpServlet {
     }
   }
 }
-
