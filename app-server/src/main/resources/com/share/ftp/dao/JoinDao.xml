@@ -56,6 +56,15 @@
       id=#{userId} and password=password(#{userPassword})
   </select>
   
+  <select id="findByNo" resultMap="JoinDTOMap" parameterType="int">
+    select 
+       *
+     from
+       ftp_user
+    where 
+      user_no=#{no}
+  </select>
+  
   <select id="validId" resultMap="JoinDTOMap" parameterType="string">
     select 
        id
