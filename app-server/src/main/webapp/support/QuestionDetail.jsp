@@ -38,6 +38,7 @@
 			<button>수정</button>
 			<a href='questionDelete?questionNo=${questionListDTO.no}'>[삭제]</a>
 			<a href='questionList'>[목록]</a><br>
+			<a href='questionList'>[답글쓰기]</a><br>
 	  </form>
 	</body>
 </html>

@@ -12,6 +12,7 @@ public interface VolunteerBoardCommentDao {
   // 나눔이야기 게시판 댓글 
   void insert(VolunteerBoardCommentDTO volunteerBoardCommentDTO) throws Exception;
   List<VolunteerBoardCommentDTO> findAll() throws Exception;
+  List<VolunteerBoardCommentDTO> findAllNo(int volBoardNo) throws Exception; 
   List<VolunteerBoardCommentDTO> findByKeyword(String keyword) throws Exception;
   void update(VolunteerBoardCommentDTO volunteerBoardCommentDTO) throws Exception;
   void delete(int commentNo) throws Exception;
@@ -19,4 +20,6 @@ public interface VolunteerBoardCommentDao {
   VolunteerBoardCommentDTO findByCommentNo(
       @Param("volBoardNo")int volBoardNo,
       @Param("commentNo") int commentNo) throws Exception;
+
+  VolunteerBoardCommentDTO findByNo (int commentNo) throws Exception;
 }

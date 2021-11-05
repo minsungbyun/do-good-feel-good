@@ -48,7 +48,24 @@
     order by 
       c.vol_comment_no desc
   </select>
-   
+  
+    <select id="findAllNo" resultMap="VolunteerBoardCommentDTOMap">
+    select 
+      c.vol_board_no,
+      c.vol_comment_no,
+      c.content,
+      c.created_dt,
+      u.id owner_id,
+      u.user_no 
+    from
+     ftp_vol_comment c
+     inner join ftp_user u on c.user_no=u.user_no
+    where 
+     c.vol_board_no=#{volBoardNo}
+    order by 
+      c.vol_comment_no desc
+  </select>
+    
   <select id="findByKeyword" resultMap="VolunteerBoardCommentDTOMap" parameterType="string">
      select 
       c.vol_board_no,
@@ -101,8 +118,21 @@
   <delete id="delete" parameterType="VolunteerBoardCommentDTO">
     delete from ftp_vol_comment where vol_comment_no=${values}
   </delete>
-    
- 
+   
+   <select id="findByNo" resultMap="VolunteerBoardCommentDTOMap"  parameterType="int">
+     select 
+      c.vol_board_no,
+      c.vol_comment_no,
+      c.content,
+      c.created_dt,
+      u.id owner_id,
+      u.user_no 
+    from
+      ftp_vol_comment c
+      inner join ftp_user u on c.user_no=u.user_no
+    where 
+      c.vol_comment_no=#{commentNo}
+ </select>
 </mapper>
 
 
