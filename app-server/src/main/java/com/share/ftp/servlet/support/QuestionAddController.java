@@ -53,7 +53,7 @@ public class QuestionAddController extends HttpServlet {
       questionDao.insert(questionListDTO);
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=questionList");
-      request.getRequestDispatcher("QuestionAdd.jsp").forward(request, response);
+      request.getRequestDispatcher("support/QuestionAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
       sqlSession.rollback();
