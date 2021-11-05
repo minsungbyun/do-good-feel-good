@@ -37,7 +37,7 @@
 <c:forEach items="${joinUserList}" var="joinDTO">
 <tr>
 	  <td>${joinDTO.no}</td> 
-	  <td><a href='detail?no=${joinDTO.no}'>${joinDTO.id}</a></td> 
+	  <td><a href='../donation/myDonationMoney?no=${joinDTO.no}'>${joinDTO.id}</a></td> 
 	  <td>${joinDTO.name}</td> 
 	  <td>${joinDTO.tel}</td> 
 	  <td>${joinDTO.email}</td> 

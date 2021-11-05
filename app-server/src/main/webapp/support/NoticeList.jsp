@@ -10,7 +10,7 @@
 	<body>
 		<h1>공지사항 목록</h1>
 		  <a href='noticeForm'>글쓰기</a><br>
-		<table border='1'>
+		<table class="table">
 			<thead>
 			  <tr>
 			    <th>번호</th>
@@ -21,6 +21,10 @@
 			  </tr>
 			</thead>
 			<tbody>
+			<c:if test='${empty noticeList}'>
+			 <p>작성된 게시글이 없습니다.</p>
+			</c:if>
+			
 			<c:forEach items="${noticeList}" var="noticeDTO" >
 			<tr>
 			    <td>${noticeDTO.no}</td>

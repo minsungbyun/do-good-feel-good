@@ -1,42 +1,48 @@
 package com.share.ftp.handler.personal.community;
 
-import java.util.Collection;
+import java.io.IOException;
+import javax.servlet.GenericServlet;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebServlet;
+import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.VolunteerBoardDao;
 import com.share.ftp.domain.community.VolunteerBoardDTO;
-import com.share.ftp.handler.Command;
-import com.share.ftp.handler.CommandRequest;
-import com.share.util.Prompt;
 
-public class VolunteerBoardSearchHandler implements Command {
-
+@WebServlet("/volunteer/boardSearch")
+public class VolunteerBoardSearchHandler extends GenericServlet {
+  private static final long serialVersionUID = 1L;
+  SqlSession sqlSession;
   VolunteerBoardDao volunteerBoardDao;
 
-  public VolunteerBoardSearchHandler(VolunteerBoardDao volunteerBoardDao) {
-    this.volunteerBoardDao =  volunteerBoardDao;
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    volunteerBoardDao = (VolunteerBoardDao) 웹애플리케이션공용저장소.getAttribute("volunteerBoardDao");
   }
 
   @Override
-  public void execute(CommandRequest request) throws Exception {
-    System.out.println("[ 게시글 검색 ]");
+  public void service(ServletRequest request, ServletResponse response)
+      throws ServletException, IOException {
 
-    String input = Prompt.inputString("검색어?  ");
+    try {
+      int keyword = Integer.parseInt(request.getParameter("keyword"));
+      VolunteerBoardDTO volunteerBoardDTO = volunteerBoardDao.findByNo(keyword);
 
-    Collection<VolunteerBoardDTO> volunteerBoardDTOList = volunteerBoardDao.findByKeyword(input);
-
-    for(VolunteerBoardDTO volunteerBoardDTO : volunteerBoardDTOList) {
-      if(!volunteerBoardDTO.getTitle().contains(input) &&
-          !volunteerBoardDTO.getContent().contains(input) &&
-          !volunteerBoardDTO.getOwner().getId().contains(input)) {
-        continue;
+      if (volunteerBoardDTO == null) {
+        throw new Exception("[  해당 게시글이 없습니다.  ]");
       }
+      request.setAttribute("volunteerBoardDTO", volunteerBoardDTO);
+      request.getRequestDispatcher("VolunteerBoardDetail.jsp").forward(request, response);
 
-      System.out.printf("작성자 ▶ %s\n", volunteerBoardDTO.getOwner().getId());
-      System.out.printf("제목 ▶ %s\n", volunteerBoardDTO.getTitle());
-      System.out.printf("내용 ▶ %s\n", volunteerBoardDTO.getContent());
-      System.out.printf("작성일 ▶ %s\n", volunteerBoardDTO.getRegisteredDate());
-      System.out.printf("조회수 ▶ %d\n", volunteerBoardDTO.getViewCount());
-
-      System.out.println();
+    } catch (Exception e) {
+      request.setAttribute("error", e);
+      e.printStackTrace();
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }

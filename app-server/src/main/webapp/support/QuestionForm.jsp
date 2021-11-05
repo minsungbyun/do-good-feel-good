@@ -33,6 +33,7 @@
 			<label for='f-password'>패스워드</label> <input id='f-password' type='password' name='qnaPassword' maxlength='4'><br>
 			<%--  <label for='f-file'>파일첨부</label> <input id='f-file' type='file' name='fileUpload'><br>--%>
 			<button>등록</button><br>
+			<a href='questionList'>[목록]</a>
 		</form>
 	</body>
 </html>
