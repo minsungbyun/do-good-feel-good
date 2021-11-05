@@ -32,6 +32,14 @@
     <td><a href='questionUpdateDetail?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[변경]</a></td>
     <td><a href='questionDelete?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[삭제]</a></td>
 </tr>
+<tr>
+  <c:if  test="${challengeQuestionDTO.reply != null}" >
+    <th>답글</th>
+    <td>${challengeQuestionDTO.reply}</td> 
+    <td></td>
+    <td></td>
+  </c:if>
+</tr>
 </c:forEach>
 
 </tbody>

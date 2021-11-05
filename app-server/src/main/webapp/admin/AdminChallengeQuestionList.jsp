@@ -9,7 +9,6 @@
 </head>
 <body>
 <h1>문의 목록</h1>
-<a href='questionForm?no=${challengeDTO.no}'>문의 등록</a><br>
 <table border='1'>
 <thead>
   <tr>
@@ -27,14 +26,17 @@
     <td>${challengeQuestionDTO.content}</td> 
     <td>${challengeQuestionDTO.owner.id}</td> 
     <td>${challengeQuestionDTO.registeredDate}</td>
-    <td><a href='questionUpdateDetail?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[답글등록]</a></td>
-    <td><a href='questionDelete?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[삭제]</a></td>
+    <td><a href='replyUpdateDetail?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[답글등록/변경]</a></td>
+    <td><a href='questionDelete?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[문의강제삭제]</a></td>
 </tr>
   <tr>
+  <c:if  test="${challengeQuestionDTO.reply != null}" >
     <th>답글</th>
     <td>${challengeQuestionDTO.reply}</td> 
-    <td><a href='questionUpdateDetail?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[답글변경]</a></td>
-    <td><a href='questionDelete?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[답글삭제]</a></td>
+    <td></td>
+    <td></td>
+    <td><a href='replyDelete?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[답글삭제]</a></td>
+</c:if>
 </tr>
 </c:forEach>
 
