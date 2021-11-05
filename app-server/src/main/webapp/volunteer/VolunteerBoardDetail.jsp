@@ -78,7 +78,13 @@
  <a href='boardDelete?no=${volunteerBoardDTO.no}' class="btn btn-primary">삭제</a>
  <a href='boardList' class="btn btn-primary">목록</a>
  
- <p>&nbsp;</p>
+   <a href='commentList?volBoardNo=${volunteerBoardDTO.no}' class="btn btn-primary">댓글</a><br>
+</form>
+</div><!-- .container -->
+</body>
+</html>
+
+<%-- <p>&nbsp;</p>
 <div style="border: 1px solid; width: 600px; padding: 5px">
     <form name="form1" action="board5ReplySave" method="post">
         <input type="hidden" name="brdno" value="<c:out value="${boardInfo.brdno}"/>작성자: 
@@ -88,10 +94,5 @@
     </form>
 </div>
 <br>
+ --%>
 
- 
- <%-- <a href='commentForm' class="btn btn-primary">댓글</a><br> --%>
-</form>
-</div><!-- .container -->
-</body>
-</html>

@@ -1,7 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
@@ -21,11 +17,16 @@
 <body>
 <h1>봉사게시글 댓글 등록</h1>
 <form action='commentAdd'>
-<label for='f-content'>내용</label> <input id='f-content' type='text' name='content'><br>
+<div class= "class" name="name" id="id" style="display:none">
+
+<label for='f-volBoardNo'>게시글번호</label>
+<input id='f-volBoardNo' type='text' name='volBoardNo' value='${volunteerBoardDTO.no}' readonly>
+<br></div>
+<label for='f-content'>내용</label> <input id='f-content' type='text' name='commentContent'><br>
+<%-- 댓글 등록회원 자동으로 들어가게 변경 예정 --%>
 <label for='f-owner'>작성자</label> <input id='f-owner' type='text' name='owner'><br>
-<label for='f-date'>등록일</label>
-<c:set var="ymd" value="<%=new java.util.Date()%>" /> 
-<fmt:formatDate value="${ymd}" pattern="yyyy-MM-dd" /><br>
+
+<br>
 <button>등록</button><br>
 </form>
 </body>

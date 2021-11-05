@@ -47,7 +47,9 @@
 </table>
       <label for='f-search'>검색어</label>
       <input id='f-search' type="text" name='keword'>
-      <button class="btn btn-outline-primary btn-sm">검색</button>  <a href='boardForm' class="btn btn-outline-primary btn-sm float: right">게시글 작성</a><br>
+      <button class="btn btn-outline-primary btn-sm">검색</button> 
+      <%-- <a href='boardDelete?no=${volunteerBoardDTO.no}' class="btn btn-primary"></a> --%>
+      <a href='boardForm' class="btn btn-outline-primary btn-sm float: right">게시글 작성</a><br>
 </div><!-- container -->
 </body>
 </html>

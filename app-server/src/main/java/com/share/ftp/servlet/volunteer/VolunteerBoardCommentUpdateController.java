@@ -12,8 +12,8 @@ import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.VolunteerBoardCommentDao;
 import com.share.ftp.domain.community.VolunteerBoardCommentDTO;
 
-@WebServlet("/volunteer/commentDelete")
-public class VolunteerBoardCommentDeleteController extends HttpServlet {
+@WebServlet("/volunteer/commentUpdate")
+public class VolunteerBoardCommentUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   VolunteerBoardCommentDao volunteerBoardCommentDao;
@@ -22,8 +22,8 @@ public class VolunteerBoardCommentDeleteController extends HttpServlet {
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    volunteerBoardCommentDao = (VolunteerBoardCommentDao) 웹애플리케이션공용저장소.getAttribute("volunteerBoardCommentDao");  
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    volunteerBoardCommentDao = (VolunteerBoardCommentDao) 웹애플리케이션공용저장소.getAttribute("volunteerBoardCommentDao");
   }
 
   @Override
@@ -32,15 +32,17 @@ public class VolunteerBoardCommentDeleteController extends HttpServlet {
 
     try {
       int commentNo = Integer.parseInt(request.getParameter("no"));
-      VolunteerBoardCommentDTO volunteerBoardcommentDTO = volunteerBoardCommentDao.findByNo(commentNo);
+      VolunteerBoardCommentDTO volunteerBoardCommentDTO = volunteerBoardCommentDao.findByNo(commentNo);
 
-      if (volunteerBoardcommentDTO == null) {
-        throw new Exception("해당 번호의 게시글이 없습니다.");
+      if (volunteerBoardCommentDTO == null) {
+        throw new Exception("[  해당 게시글이 없습니다.  ]");
       }
-      volunteerBoardCommentDao.delete(volunteerBoardcommentDTO.getNo());
-      sqlSession.commit();
+
+      volunteerBoardCommentDTO.setCommentContent(request.getParameter("commentContent"));
 
       response.sendRedirect("commentList?volBoardNo=" + Integer.parseInt(request.getParameter("volBoardNo")));
+      volunteerBoardCommentDao.update(volunteerBoardCommentDTO);
+      sqlSession.commit();
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -49,4 +51,8 @@ public class VolunteerBoardCommentDeleteController extends HttpServlet {
     }
   }
 }
+
+
+
+
 

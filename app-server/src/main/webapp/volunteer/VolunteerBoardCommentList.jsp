@@ -9,17 +9,15 @@
 </head>
 <body>
 <h1>봉사게시판 - 게시글 댓글 목록</h1>
-<a href='commentForm'>후기 작성</a><br>
+<a href='commentForm?volBoardno=${volunteerBoardDTO.no}'>댓글 등록 </a><br>
 <table border='1'>
 <thead>
   <tr>
     <th>번호</th>
-    <th>게시글번호</th>
-    <th>작성자</th>
+   <%-- <th>게시글번호</th> --%>
     <th>내용</th>
+    <th>작성자</th>
     <th>등록일</th>
-    <th>변경/ 삭제</th>
-    
   </tr>
 </thead>
 <tbody>
@@ -27,15 +25,13 @@
 <c:forEach items="${volunteerBoardCommentList}" var="volunteerBoardCommentDTO">
 <tr>
     <td>${volunteerBoardCommentDTO.no}</td> 
-    <td>${volunteerBoardCommentDTO.volBoardNo}</td> 
-    <td>${volunteerBoardCommentDTO.owner.id}</td> 
+    <%-- <td>${volunteerBoardCommentDTO.volBoardNo}</td> --%>
     <td>${volunteerBoardCommentDTO.commentContent}</td> 
+    <td>${volunteerBoardCommentDTO.owner.id}</td> 
     <td>${volunteerBoardCommentDTO.registeredDate}</td>
-    <td><button>변경</button> <a href='delete?no=${volunteerBoardCommentDTO.no}'>[삭제]</a></td> 
+    <td><a href='commentUpdateDetail?no=${volunteerBoardCommentDTO.no}'>[변경]</a></td>
+    <td><a href='commentDelete?no=${volunteerBoardCommentDTO.no}'>[삭제]</a></td>
 </tr>
-
-
- 
 </c:forEach>
 
 </tbody>
@@ -43,6 +39,8 @@
 </body>
 </html>
 
+<%-- &volBoardNo=${volunteerBoardCommentDTO.volBoardNo}
+&volBoardNo=${volunteerBoardCommentDTO.volBoardNo}=--%>
 
 
 

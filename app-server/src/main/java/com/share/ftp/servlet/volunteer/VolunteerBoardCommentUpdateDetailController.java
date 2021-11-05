@@ -8,32 +8,37 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.share.ftp.dao.VolunteerBoardDao;
-import com.share.ftp.domain.community.VolunteerBoardDTO;
+import com.share.ftp.dao.VolunteerBoardCommentDao;
+import com.share.ftp.domain.community.VolunteerBoardCommentDTO;
 
-
-@WebServlet("/volunteer/commentForm")
-public class VolunteerBoardCommentFormController extends HttpServlet {
+@WebServlet("/volunteer/commentUpdateDetail")
+public class VolunteerBoardCommentUpdateDetailController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  VolunteerBoardDao volunteerBoardDao;
+  VolunteerBoardCommentDao volunteerBoardCommentDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    volunteerBoardDao = (VolunteerBoardDao) 웹애플리케이션공용저장소.getAttribute("volunteerBoardDao");
+    volunteerBoardCommentDao = (VolunteerBoardCommentDao) 웹애플리케이션공용저장소.getAttribute("volunteerBoardCommentDao");
   }
 
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    try {
-      int volBoardNo = Integer.parseInt(request.getParameter("volBoardNo"));
-      VolunteerBoardDTO volunteerBoardDTO = volunteerBoardDao.findByNo(volBoardNo);
 
-      request.setAttribute("volunteerBoardDTO", volunteerBoardDTO);
+    try {
+      int commentNo = Integer.parseInt(request.getParameter("no"));
+      VolunteerBoardCommentDTO volunteerBoardCommentDTO = volunteerBoardCommentDao.findByNo(commentNo);
+
+      if (volunteerBoardCommentDTO == null) {
+        throw new Exception("[  해당 게시글이 없습니다.  ]");
+      }
+
+      request.setAttribute("volunteerBoardCommentDTO", volunteerBoardCommentDTO);
       // 출력을 담당할 뷰를 호출한다.
-      request.getRequestDispatcher("VolunteerBoardCommentForm.jsp").forward(request, response);
+      request.getRequestDispatcher("VolunteerBoardCommentUpdateDetail.jsp").forward(request, response);
+
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);
@@ -41,4 +46,8 @@ public class VolunteerBoardCommentFormController extends HttpServlet {
     }
   }
 }
+
+
+
+
 
