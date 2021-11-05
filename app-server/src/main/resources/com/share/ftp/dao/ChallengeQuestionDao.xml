@@ -85,7 +85,7 @@
   
   
    <delete id="delete" parameterType="int">
-    delete from ftp_challenge_qna where challenge_qna_no=${values}
+    delete from ftp_challenge_qna where challenge_qna_no=${value}
   </delete>
   
   
@@ -98,12 +98,12 @@
       q.created_dt,
       q.reply,
       u.user_no user_No,
-      u.id id
+      u.id
     from
       ftp_challenge_qna q
       inner join ftp_user u on q.user_no=u.user_no
     where 
-      q.challenge_qna_no=#{challengeQuestionNo} and q.challenge_no=#{no}
+      q.challenge_qna_no=#{challengeQuestionNo}
   </select>
 </mapper>
 

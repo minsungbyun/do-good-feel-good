@@ -18,18 +18,27 @@ insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_add
 values(6,'eclipse', password('1'), 'eclipse', '010-6666-1111', 'eclipse@naver.com', '06641', '서울시', '강북구',1,3);
 
 
+insert into ftp_user(user_no, id, password, name, tel, email, post_no, basic_address, detail_address, type, status)
+values(12,'soso', password('1'), 'eclipse', '010-6666-1111', 'aaipssse@naver.com', '06641', '서울시', '강북구',1,1);
+
+
 --개인회원
-insert into ftp_user_personal(user_personal_no, user_no, birthdate, rank)
+insert into ftp_user_personal(user_personal_no, user_no, birthdate, level)
 values(20, 3, '2020-1-1','천콩이');
 
-insert into ftp_user_personal(user_personal_no, user_no, birthdate, rank)
+insert into ftp_user_personal(user_personal_no, user_no, birthdate, level)
 values(21, 2, '2021-1-1','천이콩이');
 
-insert into ftp_user_personal(user_personal_no, user_no, birthdate, rank)
+insert into ftp_user_personal(user_personal_no, user_no, birthdate, level)
 values(22, 1, '2021-2-5','천콩이');
 
-insert into ftp_user_personal(user_personal_no, user_no, birthdate, rank)
+insert into ftp_user_personal(user_personal_no, user_no, birthdate, level)
 values(23, 6, '2021-2-5','천콩이');
+
+insert into ftp_user_personal(user_personal_no, user_no, birthdate, level)
+values(30, 12, '2021-2-7','천콩이');
+
+
 
 --단체회원
 insert into ftp_user_group(user_group_no, user_no, group_cnt)
@@ -173,6 +182,16 @@ values(8, 1, 4,'봉사대기sample','내용5','031-111-2222','sasa@gmail.com','2
 
 insert into ftp_vol_apply(user_no, vol_no, apply_dt, start_time, end_time, apply_status)
 values(1,1,'2021-11-11','09:00','18:00',1);
+
+insert into ftp_vol_apply(user_no, vol_no, apply_dt, start_time, end_time, apply_status)
+values(5,1,'2021-11-11','09:00','18:00',1);
+insert into ftp_vol_apply(user_no, vol_no, apply_dt, start_time, end_time, apply_status)
+values(6,1,'2021-11-11','09:00','18:00',1);
+insert into ftp_vol_apply(user_no, vol_no, apply_dt, start_time, end_time, apply_status)
+values(8,1,'2021-11-11','09:00','18:00',1);
+insert into ftp_vol_apply(user_no, vol_no, apply_dt, start_time, end_time, apply_status)
+values(12,1,'2021-09-20','09:00','18:00',1);
+
 
 
 

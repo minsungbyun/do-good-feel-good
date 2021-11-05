@@ -10,18 +10,22 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.dao.ChallengeReviewDao;
+import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeReviewDTO;
 
 @WebServlet("/challenge/reviewList")
 public class ChallengeReviewListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
+  ChallengeDao challengeDao;
   ChallengeReviewDao challengeReviewDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    challengeDao = (ChallengeDao) 웹애플리케이션공용저장소.getAttribute("challengeDao");
     challengeReviewDao = (ChallengeReviewDao) 웹애플리케이션공용저장소.getAttribute("challengeReviewDao");
   }
 
@@ -30,8 +34,9 @@ public class ChallengeReviewListController extends GenericServlet {
       throws ServletException, IOException {
     try {
       int challengeNo = Integer.parseInt(request.getParameter("no"));
-      //      challengeDao.findByNo(challengeNo);
+      ChallengeDTO challengeDTO = challengeDao.findByNo(challengeNo);
       Collection<ChallengeReviewDTO> challengeReviewList = challengeReviewDao.findAllNo(challengeNo);
+      request.setAttribute("challengeDTO", challengeDTO);
       request.setAttribute("challengeReviewList", challengeReviewList);
       RequestDispatcher 요청배달자 = request.getRequestDispatcher("/challenge/ChallengeReviewList.jsp");
       요청배달자.forward(request, response);

@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>문의 목록</h1>
-<a href='form'>문의 등록</a><br>
+<a href='questionForm?no=${challengeDTO.no}'>문의 등록</a><br>
 <table border='1'>
 <thead>
   <tr>
@@ -17,6 +17,7 @@
     <th>내용</th>
 <!--     <th>파일첨부</th> -->
     <th>작성자</th>
+    <th>등록일</th>
   </tr>
 </thead>
 <tbody>
@@ -24,10 +25,12 @@
 <c:forEach items="${challengeQuestionList}" var="challengeQuestionDTO">
 <tr>
     <td>${challengeQuestionDTO.questionNo}</td>
-    <td><a href='detail?no=${challengeQuestionDTO.questionNo}'>${challengeQuestionDTO.content}</a></td> 
+    <td>${challengeQuestionDTO.content}</td> 
 <!--    <td>${challengeReviewDTO.fileUpload}</td> -->
     <td>${challengeQuestionDTO.owner.id}</td> 
-    <td><a href='questionDelete?questionNo=${challengeQuestionDTO.questionNo}'>[삭제]</a></td>
+    <td>${challengeQuestionDTO.registeredDate}</td>
+    <td><a href='questionUpdateDetail?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[변경]</a></td>
+    <td><a href='questionDelete?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[삭제]</a></td>
 </tr>
 </c:forEach>
 

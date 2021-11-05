@@ -6,13 +6,13 @@
 <mapper namespace="com.share.ftp.dao.ChallengeReviewDao">
   
   <resultMap type="ChallengeReviewDTO" id="ChallengeReviewDTOMap">
-    <id column="challenge_no" property="no"/> 
-    <result column="challenge_review_no" property="reviewNo"/> 
+    <id column="challenge_review_no" property="reviewNo"/> 
+    <result column="challenge_no" property="no"/> 
     <result column="content" property="content"/>
     <result column="created_dt" property="registeredDate"/>
     
     <association property="owner" javaType="joinDTO">
-      <id column="user_No" property="no"/>
+      <id column="user_no" property="no"/>
       <result column="id" property="id"/>
     </association>
     
@@ -60,8 +60,8 @@
   </select>
   
   <insert id="insert" parameterType="ChallengeReviewDTO">
-    insert into ftp_challenge_review(challenge_no,content,user_no,created_dt) 
-    values(#{no},#{content},#{owner.no}, curdate())
+    insert into ftp_challenge_review(challenge_no,content,user_no) 
+    values(#{no},#{content},#{owner.no})
   </insert>
   
   <insert id="insertFile">
@@ -83,7 +83,7 @@
    </delete>
   
    <delete id="delete" parameterType="int">
-    delete from ftp_challenge_review where challenge_review_no=${values}
+    delete from ftp_challenge_review where challenge_review_no=${value}
   </delete>
   
   
@@ -100,7 +100,7 @@
       ftp_challenge_review r
       inner join ftp_user u on r.user_no=u.user_no
     where 
-      challenge_no=#{challengeNo} and challenge_review_no=#{challengeReviewNo}
+      r.challenge_review_no=#{challengeReviewNo}
   </select>
 </mapper>
 

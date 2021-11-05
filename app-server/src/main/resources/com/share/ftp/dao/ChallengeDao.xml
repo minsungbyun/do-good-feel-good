@@ -59,8 +59,8 @@
   </insert>
   
   <insert id="insertUser">
-    insert into ftp_challenge_apply(challenge_no,user_no,apply_dt) 
-    values(#{param1},#{param2}, curdate())
+    insert into ftp_challenge_apply(challenge_no,user_no) 
+    values(#{param1},#{param2})
   </insert>
   
   <insert id="insertWish">

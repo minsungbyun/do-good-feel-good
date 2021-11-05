@@ -6,10 +6,15 @@
 <html>
 <head>
   <title>모금함목록</title>
+  <style>
+  #box1 {
+  visibility: hidden;
+  }
+  </style>
 </head>
 <body>
 <h1>모금함 목록(MVC + EL + JSTL1)</h1>
-<div><a href='form'>모금함 개설 신청</a></div>
+<div><a href='boardForm'>모금함 개설 신청</a></div>
 <table border='1'>
 <thead>
   <tr>
@@ -21,6 +26,8 @@
     <th>첨부파일</th>
     <th>개설시작일</th>
     <th>개설종료일</th>
+    <th>총기간</th>
+    <th>남은기간</th>
     <th>목표금액</th>
     <th>승인여부</th>
   </tr>
@@ -37,6 +44,8 @@
 	  <td>${donationBoardDTO.fileNames}</td>
 	  <td>${donationBoardDTO.startDate}</td>
 	  <td>${donationBoardDTO.endDate}</td>
+	  <td>${donationBoardDTO.totalDate}</td>
+    <td>${donationBoardDTO.remainDate}</td>
 	  <td>${donationBoardDTO.moneyTarget}</td>
 	  <td>${donationBoardDTO.status}</td>
 </tr>

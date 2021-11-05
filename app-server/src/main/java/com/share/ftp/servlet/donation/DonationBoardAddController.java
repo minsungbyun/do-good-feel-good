@@ -44,6 +44,7 @@ public class DonationBoardAddController extends HttpServlet {
 
     OrgDTO orgDTO = new OrgDTO();
     orgDTO.setOrgNo(Integer.parseInt(request.getParameter("leader")));
+    donationBoardDTO.setOrgNo(Integer.parseInt(request.getParameter("leader")));
 
     //    donationBoardDTO.setUserNo(Integer.parseInt(request.getParameter("owner")));
     donationBoardDTO.setLeader(orgDTO);
@@ -62,10 +63,10 @@ public class DonationBoardAddController extends HttpServlet {
     try {
       donationBoardDao.insert(donationBoardDTO);
       //      for (VolunteerAttachedFile volunteerAttachedFile : donationBoardDTO.getFileUpload()) {
-      //        volunteerDao.insertFile(donationBoardDTO.getNo(), volunteerAttachedFile.getFilepath());
+      //        donationBoardDao.insertFile(donationBoardDTO.getNo(), volunteerAttachedFile.getFilepath());
       //      }
       sqlSession.commit();
-      response.sendRedirect("list");
+      response.sendRedirect("boardList");
 
 
     } catch (Exception e) {

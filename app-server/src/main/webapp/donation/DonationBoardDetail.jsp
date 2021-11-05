@@ -48,7 +48,10 @@
     <input id='f-remainMoney' type='text' name='remainMoney' value='${remainMoney}'><br>
     --%>
  <button>[변경]</button>
- <a href='registerList?no=${donationBoardDTO.no}'>[기부자내역]</a> <a href='boardList'>[목록]</a><br>
+ <a href='registerList?no=${donationBoardDTO.no}'>[기부자내역]</a>
+ <a href='boardList'>[목록]</a>
+ <a href='registerForm?boardNo=${donationBoardDTO.no}'>[해당 모금함 기부하기]</a>
+ <a href='boardDelete?no=${donationBoardDTO.no}'>[삭제]</a><br>
 </form>
 </body>
 </html>

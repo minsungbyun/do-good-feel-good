@@ -15,8 +15,8 @@ public interface ChallengeQuestionDao {
   void update(ChallengeQuestionDTO updateChallengeQuestion) throws Exception;
   void updateReply(ChallengeQuestionDTO updateChallengeQuestionReply) throws Exception;
   void delete(int no) throws Exception; 
-  List<ChallengeQuestionDTO> findByKeyword(String keyword) throws Exception;
+  //  List<ChallengeQuestionDTO> findByKeyword(String keyword) throws Exception;
   //  void sortChallengeQuestion(ChallengeQuestionDTO sortChallengeQuestion) throws Exception;
 
-  ChallengeQuestionDTO findByNo(int challengeQuestionNo,int no) throws Exception;
+  ChallengeQuestionDTO findByNo(int challengeQuestionNo) throws Exception;
 }

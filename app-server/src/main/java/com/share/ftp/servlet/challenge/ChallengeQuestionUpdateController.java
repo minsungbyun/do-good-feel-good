@@ -1,6 +1,5 @@
-package com.share.ftp.servlet.volunteer;
+package com.share.ftp.servlet.challenge;
 
-import static com.share.util.General.check.REJECTED;
 import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -10,24 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
-import com.share.ftp.dao.VolunteerDao;
-import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
+import com.share.ftp.dao.ChallengeQuestionDao;
+import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 
-
-@WebServlet("/volunteer/reject")
-public class VolunteerRejectHandler extends HttpServlet { 
-
+@WebServlet("/challenge/questionUpdate")
+public class ChallengeQuestionUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  VolunteerDao volunteerDao;
+  ChallengeQuestionDao challengeQuestionDao;
   SqlSession sqlSession;
-
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    volunteerDao = (VolunteerDao) 웹애플리케이션공용저장소.getAttribute("volunteerDao");
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    challengeQuestionDao = (ChallengeQuestionDao) 웹애플리케이션공용저장소.getAttribute("challengeQuestionDao");
   }
 
   @Override
@@ -35,39 +31,24 @@ public class VolunteerRejectHandler extends HttpServlet {
       throws ServletException, IOException {
 
     try {
+      int challengeQuestionNo = Integer.parseInt(request.getParameter("questionNo")); 
+      ChallengeQuestionDTO challengeQuestionDTO = challengeQuestionDao.findByNo(challengeQuestionNo);
 
-      int volNo = Integer.parseInt(request.getParameter("no"));
+      if (challengeQuestionDTO == null) {
+        System.out.println("해당 번호의 문의가 없습니다.");
+        return;
+      }
 
-      VolunteerRequestDTO volunteerRequest = volunteerDao.findByVolunteerNo(volNo);
+      challengeQuestionDTO.setContent(request.getParameter("content"));
 
-      volunteerRequest.setStatus(REJECTED);
-
-      volunteerDao.updateVolunteer(volunteerRequest);
+      response.sendRedirect("questionList?no=" + Integer.parseInt(request.getParameter("no")));
+      challengeQuestionDao.update(challengeQuestionDTO);
       sqlSession.commit();
 
-      response.sendRedirect("adminList");
-      //      response.setHeader("Refresh", "1;url=adminList");
-      //      request.getRequestDispatcher("VolunteerSuccess.jsp").forward(request, response);
-
     } catch (Exception e) {
-
       e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
