@@ -27,6 +27,10 @@
 		  </tr>
 		</thead>
 		<tbody>
+		  <c:if test ='${empty questionList}'>
+		    <p>작성된 게시글이 없습니다.</p>
+		  </c:if>
+		
 			<c:forEach items="${questionList}" var="QuestionListDTO" >
 			<tr>
 			    <td>${QuestionListDTO.no}</td>

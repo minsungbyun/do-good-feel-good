@@ -16,7 +16,7 @@
 	</head>
 	<body>
   <div id="wrap">
-    <div class="loginBox" action=''>  
+    <div class="loginBox " action=''>  
       <div class="loginInput">
         <label for="id" title="아이디 입력"> 아이디</label>
         <input type="text" class="loginInput" name="id" maxlength="10" style="width:180px;">

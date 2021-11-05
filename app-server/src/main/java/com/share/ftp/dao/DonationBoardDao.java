@@ -12,6 +12,7 @@ public interface DonationBoardDao {
       @Param("filepath") String filepath) throws Exception;
   List<DonationBoardDTO> findAll() throws Exception;
   List<DonationBoardDTO> findAllApproved() throws Exception;      
+  List<DonationBoardDTO> findAllRejected() throws Exception;      
   List<DonationBoardDTO> findAllApply() throws Exception;      
   List<DonationBoardDTO> findAllWait() throws Exception;      
   List<Category> findAllCategory() throws Exception;      
