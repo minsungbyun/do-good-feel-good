@@ -6,13 +6,13 @@
 <mapper namespace="com.share.ftp.dao.ChallengeReviewDao">
   
   <resultMap type="ChallengeReviewDTO" id="ChallengeReviewDTOMap">
-    <id column="challenge_no" property="no"/> 
-    <result column="challenge_review_no" property="reviewNo"/> 
+    <id column="challenge_review_no" property="reviewNo"/> 
+    <result column="challenge_no" property="no"/> 
     <result column="content" property="content"/>
     <result column="created_dt" property="registeredDate"/>
     
     <association property="owner" javaType="joinDTO">
-      <id column="user_No" property="no"/>
+      <id column="user_no" property="no"/>
       <result column="id" property="id"/>
     </association>
     
@@ -46,13 +46,11 @@
       r.challenge_review_no,
       r.content,
       r.created_dt,
-      u.user_no user_No,
-      u.id id,
-      f.filepath
+      u.user_no,
+      u.id
     from
       ftp_challenge_review r
       inner join ftp_user u on r.user_no=u.user_no
-      left outer join ftp_challenge_review_file f on r.challenge_review_no=f.challenge_review_no
     where
       r.challenge_no=#{challengeNo}
     order by 
