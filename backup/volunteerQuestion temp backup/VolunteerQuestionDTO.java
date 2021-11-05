@@ -17,6 +17,8 @@ public class VolunteerQuestionDTO implements Serializable {
   private Date registeredDate;
   private JoinDTO owner;
   private String reply;
+
+
   public int getQuestionNo() {
     return questionNo;
   }
