@@ -14,6 +14,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.Category;
 import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.domain.volunteer.VolunteerAttachedFile;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 
 @WebServlet("/volunteer/add")
@@ -64,9 +65,9 @@ public class VolunteerAddController extends HttpServlet {
 
     try {
       volunteerDao.insert(volunteerRequestDTO);
-      //      for (VolunteerAttachedFile volunteerAttachedFile : volunteerRequestDTO.getFileUpload()) {
-      //        volunteerDao.insertFile(volunteerRequestDTO.getNo(), volunteerAttachedFile.getFilepath());
-      //      }
+            for (VolunteerAttachedFile volunteerAttachedFile : volunteerRequestDTO.getFileUpload()) {
+              volunteerDao.insertFile(volunteerRequestDTO.getNo(), volunteerAttachedFile.getFilepath());
+            }
       sqlSession.commit();
       response.sendRedirect("list");
 

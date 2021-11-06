@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>봉사 후기 - 한 줄 후기 목록</h1>
-<a href='form'>후기 작성</a><br>
+<a href='reviewForm'>후기 작성</a><br>
 <table border='1'>
 <thead>
   <tr>

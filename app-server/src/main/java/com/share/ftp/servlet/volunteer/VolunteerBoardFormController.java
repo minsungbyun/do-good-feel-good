@@ -1,20 +1,21 @@
-package com.share.ftp.handler.personal.community;
+package com.share.ftp.servlet.volunteer;
 
 import java.io.IOException;
-import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.VolunteerBoardDao;
-import com.share.ftp.domain.community.VolunteerBoardDTO;
 
-@WebServlet("/volunteer/boardSearch")
-public class VolunteerBoardSearchHandler extends GenericServlet {
+
+@WebServlet("/volunteer/boardForm")
+public class VolunteerBoardFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
+
   SqlSession sqlSession;
   VolunteerBoardDao volunteerBoardDao;
 
@@ -26,23 +27,27 @@ public class VolunteerBoardSearchHandler extends GenericServlet {
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+    // 출력을 담당할 뷰를 호출한다.
+    request.getRequestDispatcher("VolunteerBoardForm.jsp").forward(request, response);
 
     try {
-      int keyword = Integer.parseInt(request.getParameter("keyword"));
-      VolunteerBoardDTO volunteerBoardDTO = volunteerBoardDao.findByNo(keyword);
-
-      if (volunteerBoardDTO == null) {
-        throw new Exception("[  해당 게시글이 없습니다.  ]");
-      }
-      request.setAttribute("volunteerBoardDTO", volunteerBoardDTO);
-      request.getRequestDispatcher("VolunteerBoardDetail.jsp").forward(request, response);
-
     } catch (Exception e) {
-      request.setAttribute("error", e);
+
       e.printStackTrace();
+
+      request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
+
   }
 }
+
+
+
+
+
+
+
+

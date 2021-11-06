@@ -1,4 +1,4 @@
-package com.share.ftp.servlet.vol;
+package com.share.ftp.servlet.volunteer;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import com.share.ftp.dao.VolunteerShortReviewDao;
 import com.share.ftp.domain.community.VolunteerShortReviewDTO;
 
-@WebServlet("/vol/shortreviewlist")
+@WebServlet("/volunteer/reviewList")
 public class VolunteerShortReviewListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
@@ -37,7 +37,7 @@ public class VolunteerShortReviewListController extends GenericServlet {
       request.setAttribute("volunteerShortReviewList", volunteerShortReviewList);
 
       // 출력을 담당할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/vol/VolunteerShortReviewList.jsp");
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("VolunteerShortReviewList.jsp");
       요청배달자.forward(request, response);
 
     } catch (Exception e) {

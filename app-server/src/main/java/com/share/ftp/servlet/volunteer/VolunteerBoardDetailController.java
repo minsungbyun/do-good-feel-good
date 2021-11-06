@@ -1,4 +1,4 @@
-package com.share.ftp.handler.personal.community;
+package com.share.ftp.servlet.volunteer;
 
 import java.io.IOException;
 import javax.servlet.GenericServlet;
@@ -12,8 +12,8 @@ import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.VolunteerBoardDao;
 import com.share.ftp.domain.community.VolunteerBoardDTO;
 
-@WebServlet("/volunteer/boardSearch")
-public class VolunteerBoardSearchHandler extends GenericServlet {
+@WebServlet("/volunteer/boardDetail")
+public class VolunteerBoardDetailController extends GenericServlet {
   private static final long serialVersionUID = 1L;
   SqlSession sqlSession;
   VolunteerBoardDao volunteerBoardDao;
@@ -30,12 +30,17 @@ public class VolunteerBoardSearchHandler extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-      int keyword = Integer.parseInt(request.getParameter("keyword"));
-      VolunteerBoardDTO volunteerBoardDTO = volunteerBoardDao.findByNo(keyword);
+      int volBoardNo = Integer.parseInt(request.getParameter("no"));
+      VolunteerBoardDTO volunteerBoardDTO = volunteerBoardDao.findByNo(volBoardNo);
 
       if (volunteerBoardDTO == null) {
         throw new Exception("[  해당 게시글이 없습니다.  ]");
       }
+
+      volunteerBoardDTO.setViewCount(volunteerBoardDTO.getViewCount() + 1); // 조회수
+      volunteerBoardDao.updateCount(volBoardNo);
+      sqlSession.commit();
+
       request.setAttribute("volunteerBoardDTO", volunteerBoardDTO);
       request.getRequestDispatcher("VolunteerBoardDetail.jsp").forward(request, response);
 
