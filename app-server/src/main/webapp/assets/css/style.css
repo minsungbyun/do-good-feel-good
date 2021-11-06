@@ -1,9 +1,28 @@
+/* 블릿 기호 초기화 */
+ul, li, ol {list-style:none;}
 
 /* login_form */
 .login_form {
-	padding:10% 10% 0;
+	width:400px;
+	margin:0 auto;
 }
-
 .login_form h1 {
 	text-align:center;
+	padding-bottom:16px;
+	font-weight:bold;
+}
+
+.navbar {
+	border-bottom: 2px solid #f0f1f6;
+}
+
+.fo {
+	margin-bottom:0;
+}
+
+.find_box {
+	padding-bottom:45px;
+}
+.find_box a {
+	color:#6d728b;
 }
