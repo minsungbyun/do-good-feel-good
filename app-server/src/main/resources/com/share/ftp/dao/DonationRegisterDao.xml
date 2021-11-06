@@ -16,6 +16,7 @@
 	    <id column="donator_no" property="no"/>
 	    <result column="donator_name" property="name"/>
 	    <result column="donator_id" property="id"/>
+	    <result column="donator_donation" property="donationMoney"/>
     </association>
     
     <association property="payTypeNo" javaType="DonationRegisterPayType">
@@ -107,7 +108,7 @@
   
   <select id="findByMyDonationMoney" resultType="long" parameterType="int">
     select 
-      sum(d.donation_money) 
+      ifnull(sum(d.donation_money), 0) donator_donation 
     from 
       ftp_donation d 
       inner join ftp_user u on d.user_no=u.user_no
