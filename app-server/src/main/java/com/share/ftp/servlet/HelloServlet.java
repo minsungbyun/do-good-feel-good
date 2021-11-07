@@ -39,6 +39,7 @@ public class HelloServlet implements Servlet {
     out.println("</head>");
     out.println("<body>");
     out.println("<h1>sorry</h1>");
+    out.println("<button>click me !</button>");
     out.println("</body>");
     out.println("</html>");
 

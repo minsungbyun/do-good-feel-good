@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="../assets/vendor/fancybox/css/jquery.fancybox.css">
     <link rel="stylesheet" href="../assets/css/theme.css">
     <link rel="stylesheet" href="../assets/css/style.css">
+    
 	</head>
 	
   <body>
@@ -88,26 +89,45 @@
 		          <!-- //비밀번호 -->		    				
 							<div class="form-group form-check">
 								<input type="checkbox" class="form-check-input form-group" id="idRemem">
-								<label class="form-check-label" for="idRemem">아이디 저장하기</label>
+								<label class="form-check-label" for="idRemem">아이디 저장하기</label> 
 							</div>
 							<!-- //아이디 저장하기 -->
 							<div class="row align-items-center">          
 		            <div class="col-md-10 text-right d-none d-md-block">
 		              <div class="social-mini-button find_box">
-		                <a href="#"><span>아이디 찾기</span></a>
-		                <a href="#"><span>비밀번호 찾기</span></a>
 		              </div>
 		            </div>
 		          </div>
+              
 		          <!-- //아이디 찾기 -->
 						</form>
-						<button type="submit" class="btn btn-primary btn-lg btn-block">로그인</button>
-						<button type="submit" class="btn btn-secondary btn-lg btn-block">회원가입</button>
+            <button type="submit" class="btn btn-primary btn-md btn-block" style="border-radius: 40px;" >로그인</button>
+            <div style="margin: 15px auto;">
+              <a href="#"><span>아이디 찾기</span></a> 
+              <a href="#"><span>비밀번호 찾기</span></a>
+            </div>
+            <div class="loginSns">
+              <a href="" class="sns-login-button sns01" snstype="naver">
+                <s></s>
+                <span>네이버 계정으로 로그인</span>
+              </a>
+
+              <a href="" class="sns-login-button sns02" snstype="kakao">
+                <s></s>
+                <span>카카오 계정으로 로그인</span>
+              </a>
+
+              <a href="" class="sns-login-button sns03" snstype="google">
+                <s></s>
+                <span>구글 계정으로 로그인</span>
+              </a>
+            </div> <!--//loginSns -->
 					</div>
 				</div>
 				<!-- //container -->
 			</div>
 		</main>  
 	</body>
+
 </html>
     
