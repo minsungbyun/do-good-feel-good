@@ -74,9 +74,9 @@
     <main>
       <div class="page-section">
 				<div class="container">
-				  <div class="login_form">
-						<h1>로그인</h1>
-						<form action='lgoin'>
+				  <div>
+						<h1 class="title-h">로그인</h1>
+						<form action='lgoin' class="login-form">
 							<div class="form-group fo">
 								<label for='f-id' class="sr-only">아이디</label> 
 								<input id='f-id' class="form-control" type='text' name='id' placeholder="아이디"><br>					    
@@ -99,33 +99,33 @@
 		            </div>
 		          </div>
               
+              <button type="submit" class="btn btn-primary btn-md btn-block" style="border-radius: 40px;" >로그인</button>
+              <div style="margin: 15px auto;">
+                <a href="#"><span>아이디 찾기</span></a> 
+                <a href="#"><span>비밀번호 찾기</span></a>
+              </div>
+              <div class="loginSns">
+                <a href="" class="sns-login-button sns01" snstype="naver">
+                  <s></s>
+                  <span>네이버 계정으로 로그인</span>
+                </a>
+  
+                <a href="" class="sns-login-button sns02" snstype="kakao">
+                  <s></s>
+                  <span>카카오 계정으로 로그인</span>
+                </a>
+  
+                <a href="" class="sns-login-button sns03" snstype="google">
+                  <s></s>
+                  <span>구글 계정으로 로그인</span>
+                </a>
+              </div> <!--//loginSns -->
+            </div>
+          </div>
+          <!-- //container -->
+        </div>
 		          <!-- //아이디 찾기 -->
 						</form>
-            <button type="submit" class="btn btn-primary btn-md btn-block" style="border-radius: 40px;" >로그인</button>
-            <div style="margin: 15px auto;">
-              <a href="#"><span>아이디 찾기</span></a> 
-              <a href="#"><span>비밀번호 찾기</span></a>
-            </div>
-            <div class="loginSns">
-              <a href="" class="sns-login-button sns01" snstype="naver">
-                <s></s>
-                <span>네이버 계정으로 로그인</span>
-              </a>
-
-              <a href="" class="sns-login-button sns02" snstype="kakao">
-                <s></s>
-                <span>카카오 계정으로 로그인</span>
-              </a>
-
-              <a href="" class="sns-login-button sns03" snstype="google">
-                <s></s>
-                <span>구글 계정으로 로그인</span>
-              </a>
-            </div> <!--//loginSns -->
-					</div>
-				</div>
-				<!-- //container -->
-			</div>
 		</main>  
 	</body>
 
