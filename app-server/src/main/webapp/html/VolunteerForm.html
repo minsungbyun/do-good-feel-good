@@ -11,6 +11,27 @@
 
   <title>함께해요 : 봉사목록</title>
 
+  <style>
+    *{margin: 0;padding: 0;box-sizing: border-box}
+    body{background-color: #f7f7f7;}
+    ul>li{list-style: none}
+    a{text-decoration: none;}
+    .clearfix::after{content: "";display: block;clear: both;}
+
+     #joinForm{width: 480px;margin: 100px auto;}
+    ul.join_box{border: 1px solid #ddd;background-color: #fff;}
+    .checkBox,.checkBox>ul{position: relative;}
+    .checkBox>ul>li{float: left;}
+    .checkBox>ul>li:first-child{width: 85%;padding: 15px; font-weight: 600; color: #888;}
+    .checkBox>ul>li:nth-child(2){position: absolute;top: 50%; right: 30px;margin-top: -12px;}
+    .checkBox textarea{width: 96%;height: 90px; margin: 0 2%; background-color: #f7f7f7;color: #888; border: none;}
+    .footBtwrap{margin-top: 20px;}
+    .footBtwrap>li{float: left;width: 50%;height: 60px;}
+    .footBtwrap>li>button{display: block; width: 100%;height: 100%; font-size: 20px; text-align: center; line-height: 60px;}
+    .fpmgBt1{background-color: #fff; color:#888}
+    .fpmgBt2{background-color: lightsalmon; color: #fff}
+  </style>
+
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
     
     <link rel="stylesheet" href="../assets/css/maicons.css">
@@ -105,7 +126,7 @@
 <!---------------------------------------- main ---------------------------------------------->
 
   <main>
-    <div class="page-section">
+    <div class="page-section" ">
       <div class="container">
         <div class="text-center">
           <h2 class="title-section mb-3">봉사신청서 양식</h2>
@@ -113,26 +134,73 @@
         </div>
         <div class="row justify-content-center mt-5">
           <div class="col-lg-8">
+
             <form action="#" class="form-contact">
               <div class="row">
-                <div class="col-sm-6 py-2">
-                  <label for="name" class="fg-grey">Name</label>
-                  <input type="text" class="form-control" id="name" placeholder="Enter name..">
+                <div class="col-sm-12 py-2">
+                  <label for="name" class="fg-grey">제목</label>
+                  <input type="text" class="form-control" id="name" placeholder="제목을 입력해주세요..">
                 </div>
-                <div class="col-sm-6 py-2">
-                  <label for="email" class="fg-grey">Email</label>
-                  <input type="text" class="form-control" id="email" placeholder="Email address..">
+               
+                <div class="col-sm-12 py-2" >
+                  <label for="category" class="fg-grey" style="margin-bottom: 20px;">카테고리</label><br>
+                  <select name="category"  >
+                    <option selected>선택하세요</option>
+                    <option value="untact">비대면</option>
+                    <option value="children">아동</option>
+                    <option value="teen">청소년</option>
+                    <option value="elder">노인</option>
+                    <option value="handicapped">장애인</option>
+                    <option value="animal">동물</option>
+                    <option value="environment">환경</option>
+                    <option value="other">기타</option>
+                </select>
+                </div>
+               
+                <div class="col-12 py-2">
+                  <label for="subject" class="fg-grey">전화번호</label>
+                  <input type="text" class="form-control" id="tel" placeholder="전화번호를 입력해주세요..">
                 </div>
                 <div class="col-12 py-2">
-                  <label for="subject" class="fg-grey">Subject</label>
-                  <input type="text" class="form-control" id="subject" placeholder="Subject..">
+                  <label for="subject" class="fg-grey">이메일</label>
+                  <input type="email" class="form-control" id="email" placeholder="이메일을 입력해주세요..">
+                </div>
+                <div class="col-6 py-2">
+                  <label for="subject" class="fg-grey">시작일</label>
+                  <input type="date" class="form-control" id="startDate">
+                </div>
+                <div class="col-6 py-2">
+                  <label for="subject" class="fg-grey">종료일</label>
+                  <input type="date" class="form-control" id="endDate">
+                </div>
+                <div class="col-6 py-2">
+                  <label for="subject" class="fg-grey">시작시간</label>
+                  <input type="time" class="form-control" id="startTime">
+                </div>
+                <div class="col-6 py-2">
+                  <label for="subject" class="fg-grey">종료시간</label>
+                  <input type="time" class="form-control" id="endTime">
                 </div>
                 <div class="col-12 py-2">
-                  <label for="message" class="fg-grey">Message</label>
-                  <textarea id="message" rows="8" class="form-control" placeholder="Enter message.."></textarea>
+                  <label for="subject" class="fg-grey">총모집인원</label>
+                  <input type="number" class="form-control" id="limitNum" placeholder="인원">
                 </div>
+                
+
+                <div class="col-12 py-2">
+                  <label for="content" class="fg-grey">내용</label>
+                  <textarea id="content" rows="8" class="form-control" placeholder="내용을 입력해주세요.."></textarea>
+                </div>
+
+                <form action="#" method="post" enctype="multipart/form-data">
+                  <input multiple="multiple" type="file" name="filename[]" style="margin: 15px;" />
+                </form>
+
+              
+                <input type='hidden' value='2' name='status'><br>
                 <div class="col-12 mt-3">
-                  <button type="submit" class="btn btn-primary px-5">Submit</button>
+                  <button type="submit" class="btn btn-primary px-5">취소하기</button>
+                  <button type="submit" class="btn btn-primary px-5">신청하기</button>
                 </div>
               </div>
             </form>
@@ -141,8 +209,9 @@
       </div> <!-- .container -->
     </div> <!-- .page-section -->
 
-    <div class="maps-container">
-      <div id="google-maps"></div>
+    
+</script>
+      
     </div>
   </main>
 
