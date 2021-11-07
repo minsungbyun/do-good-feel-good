@@ -1,9 +1,64 @@
+/* 블릿 기호 초기화 */
+ul, li, ol {list-style:none;}
 
-/* login_form */
-.login_form {
-	padding:10% 10% 0;
+* {
+	box-sizing: border-box;
 }
 
-.login_form h1 {
+/* login */
+.login-form {
+	width:400px;
+	margin:0 auto;
+}
+.title-h {
 	text-align:center;
+	padding-bottom:14px;
+	font-weight:bold;
+}
+
+.title-sh {
+	text-align:center;
+  padding-bottom:28px;
+}
+
+.navbar {
+	border-bottom: 2px solid #f0f1f6;
+}
+
+.fo {
+	margin-bottom:0;
+}
+
+.find-box {
+	padding-bottom:45px;
+}
+.find-box a {
+	color:#6d728b;
+}
+
+/* join */
+.join-type-wrap {
+	width:990px;
+	margin:0 auto;
+}
+
+.type-box {
+  position:relative;
+  display:block;
+  margin:0 auto;
+  padding:80px 55px 0 55px;
+  max-width:270px;
+  height:290px;
+  border:1px solid #c2c2c2;
+  text-align:center;
+}
+
+.type-box a {
+	margin-top:50px;
+}
+
+.type-box .type-h7 {
+	font-size:12px;
+	font-weight:bold;
+	letter-spacing:-1px;
 }

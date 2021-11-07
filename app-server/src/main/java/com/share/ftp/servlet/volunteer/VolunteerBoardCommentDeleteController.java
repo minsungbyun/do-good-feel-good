@@ -33,10 +33,10 @@ public class VolunteerBoardCommentDeleteController extends HttpServlet {
     try {
       int commentNo = Integer.parseInt(request.getParameter("no"));
       VolunteerBoardCommentDTO volunteerBoardcommentDTO = volunteerBoardCommentDao.findByNo(commentNo);
-
       if (volunteerBoardcommentDTO == null) {
         throw new Exception("해당 번호의 게시글이 없습니다.");
       }
+
       volunteerBoardCommentDao.delete(volunteerBoardcommentDTO.getNo());
       sqlSession.commit();
 
