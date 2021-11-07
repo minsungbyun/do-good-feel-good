@@ -3,38 +3,25 @@
      trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
-<head>
-  <title>로그인</title>
-	<style>
-	label {
-	margin-right: 5px;
-	text-align: right;
-	display: inline-block;
-	 width: 100px;
-	 }
-	</style>
-</head>
-<body>
-<h1>로그인</h1>
-<form action="check" name="userInfo" onsubmit="return checkValue()" >
-    
-    <label for='f-id'>아이디</label> 
-    <input id='f-id' type='text' name="id" maxlength="50"><br>
-    
-    <label for='f-password'>암호</label> 
-    <input id='f-password' type='password' name="password" maxlength="50"><br>
-    
-    
- <button>[로그인]</button>
- <a href='delete?no=${groupDTO.no}'>[삭제]</a> <a href='list'>[목록]</a><br>
-</form>
-
-<input type="submit" value="개인회원가입" onclick="goPersonalLoginForm()">
-<input type="submit" value="단체회원가입" onclick="goGroupLoginForm()">
-<input type="submit" value="기관회원가입" onclick="goOrgLoginForm()">
-
- <script type="text/javascript">
+	<head>
+	  <!-- meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    
+    <title>HappyShare : 로그인</title>
+	
+    <!--  link -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/maicons.css">
+    <link rel="stylesheet" href="../assets/vendor/animate/animate.css">
+    <link rel="stylesheet" href="../assets/vendor/owl-carousel/css/owl.carousel.css">
+    <link rel="stylesheet" href="../assets/vendor/fancybox/css/jquery.fancybox.css">
+    <link rel="stylesheet" href="../assets/css/theme.css">
+  </head>
+  
+  <!--  <script type="text/javascript">
     
         function checkValue() {
             if(!document.userInfo.id.value) {
@@ -73,28 +60,24 @@
         
        
     </script>
-</body>
-=======
-	<head>
-	  <title>로그인</title>
-=======
-  <head>
-    <!-- meta -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <body>
+<form action="check" name="userInfo" onsubmit="return checkValue()" >
     
-	  <title>HappyShare : 로그인</title>
->>>>>>> 33b733d04a2f53e15fdf96e3c8250dfcdc7d9d5a
-	  <!--  link -->
-    <link rel="stylesheet" href="../assets/css/bootstrap.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/maicons.css">
-    <link rel="stylesheet" href="../assets/vendor/animate/animate.css">
-    <link rel="stylesheet" href="../assets/vendor/owl-carousel/css/owl.carousel.css">
-    <link rel="stylesheet" href="../assets/vendor/fancybox/css/jquery.fancybox.css">
-    <link rel="stylesheet" href="../assets/css/theme.css">
-	</head>
+    <label for='f-id'>아이디</label> 
+    <input id='f-id' type='text' name="id" maxlength="50"><br>
+    
+    <label for='f-password'>암호</label> 
+    <input id='f-password' type='password' name="password" maxlength="50"><br>
+    
+    
+ <button>[로그인]</button>
+ <a href='delete?no=${groupDTO.no}'>[삭제]</a> <a href='list'>[목록]</a><br>
+</form>
+
+<input type="submit" value="개인회원가입" onclick="goPersonalLoginForm()">
+<input type="submit" value="단체회원가입" onclick="goGroupLoginForm()">
+<input type="submit" value="기관회원가입" onclick="goOrgLoginForm()">-->
 	
   <body>
     <header>
@@ -121,11 +104,10 @@
         </div>
       </div>
       <!-- //top-bar -->
-      
-  
+    
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-          <a href="index.html" class="navbar-brand">Reve<span class="text-primary">Tive.</span></a>
+          <a href="index.html" class="navbar-brand">Happy<span class="text-primary">Share</span></a>
   
           <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -153,22 +135,21 @@
         </div> <!-- .container -->
       </nav> <!-- .navbar -->
     </header>
-    	
-	
+    		
     <main>
       <div class="page-section">
 				<div class="container">
 				  <div class="login_form">
 						<h1>로그인</h1>
-						<form action='lgoin'>
+						<form action='lgoin' name="login" onsubmit="return checkValue()">
 							<div class="form-group">
 								<label for='f-id'>아이디</label> 
-								<input id='f-id' class="form-control" type='text' name='id'><br>					    
+								<input id='f-id' class="form-control" type='text' name='id' maxlength="50"><br>					    
 							</div>
 							<!-- //form-group -->
 							<div class="form-group">
 		            <label for='f-password'>암호</label> 
-		            <input id='f-password' class="form-control" type='password' name='password'><br>           
+		            <input id='f-password' class="form-control" type='password' name='password' maxlength="50"><br>           
 		          </div>		    				
 							<div class="form-group form-check">
 								<input type="checkbox" class="form-check-input form-group" id="idRemem">
@@ -183,6 +164,20 @@
 			</div>
 		</main>  
 	</body>
->>>>>>> 63b25ab60473262f12b408f1e3c616fd587c5166
+	
+	<script type="text/javascript">
+    
+        function checkValue() {
+            if(!document.login.id.value) {
+                alert("아이디를 입력하세요.");
+                return false;
+            }
+            
+            if(!document.login.password.value) {
+                alert("비밀번호를 입력하세요.");
+                return false;
+            }
+        }     
+  </script>
 </html>
     
