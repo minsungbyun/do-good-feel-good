@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>봉사게시글등록</title>
+  <title>소통해요 : 나눔이야기 등록</title>
 </head>
 <body>
 <h1>봉사게시글 등록결과(MVC)</h1>

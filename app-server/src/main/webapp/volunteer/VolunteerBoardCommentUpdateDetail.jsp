@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>봉사게시글댓글변경</title>
+    <title>소통해요 : 나눔이야기 댓글 변경</title>
     <style>
     label {
       margin-right: 5px;

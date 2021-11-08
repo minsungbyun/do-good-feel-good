@@ -46,7 +46,7 @@ public class VolunteerBoardCommentAddController extends HttpServlet {
       volunteerBoardCommentDTO.setVolBoardNo(Integer.parseInt(request.getParameter("volBoardNo")));
       volunteerBoardCommentDao.insert(volunteerBoardCommentDTO);
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=commentList?no=" + Integer.parseInt(request.getParameter("no")));
+      response.setHeader("Refresh", "1;url=commentList?volBoardNo=" + Integer.parseInt(request.getParameter("volBoardNo")));
       request.getRequestDispatcher("VolunteerBoardCommentAdd.jsp").forward(request, response);
 
     } catch (Exception e) {

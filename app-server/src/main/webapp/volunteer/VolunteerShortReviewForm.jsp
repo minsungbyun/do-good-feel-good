@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	  <title>봉사후기등록</title>
+	  <title>소통해요 : 한줄후기 등록</title>
 	  <style>
 	  label {
 	    margin-right: 5px;
