@@ -1,4 +1,4 @@
-package com.share.ftp.servlet.admin;
+package com.share.ftp.servlet.admin.challenge;
 
 import java.io.IOException;
 import java.sql.Date;
