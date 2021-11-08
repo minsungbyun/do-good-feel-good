@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
   <head>
     <!-- meta -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-	  <title>HappyShare : 회원가입</title>
+	  <title>HappyShare : 마이페이지</title>
 	  
 	  <!--  link -->
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
@@ -18,9 +18,6 @@
     <link rel="stylesheet" href="../assets/css/style.css">
 	</head>
 	
-  <style>
-    
-  </style>
   <body>
     <header>
       <div class="top-bar">
@@ -42,11 +39,11 @@
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
           <a href="index.html" class="navbar-brand">Happy<span class="text-primary logo">Share</span></a>
-  
           <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <!-- navbarContent -->
+          
           <div class="navbar-collapse collapse" id="navbarContent">
             <ul class="navbar-nav ml-auto pt-3 pt-lg-0">
               <li class="nav-item">
@@ -72,48 +69,50 @@
       </nav>
       <!-- //navbar -->
     </header>
-    <!-- //header -->
     	
     <main>
-      <div class="page-section">
-				<div class="container">
-				  <div class="join-form">
-						<h1 class="title-h">회원가입</h1>
-						<h5 class="title-sh">먼저 해당하는 회원 유형을 선택하세요.</h5>
-						<div class="row justify-content-center">
-						  <!-- row -->
-						  <div class="row col-lg-9">
-						    <!-- type-box -->
-							  <div class="col-md-6 col-lg-4 py-3type-box">
-                  <div class="type-box">
-                    <h7 class="type-h7">누구나 가입 가능</h7>
-                    <h5>개인회원</h5>
-                    <a href="#" class="btn btn-primary btn-sm btn-block">가입하기</a>
-                  </div>
-							  </div>
-							  <div class="col-md-6 col-lg-4 py-3type-box">
-                  <div class="type-box">
-                    <h7 class="type-h7">2인 이상</h7>
-                    <h5>단체회원</h5>
-                    <a href="#" class="btn btn-secondary btn-sm btn-block" >가입하기</a>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-4 py-3type-box">
-                  <div class="type-box">
-                    <h7 class="type-h7">사업자번호를 가지고 있는</h7>
-                    <h5>기관회원</h5>
-                    <a href="#" class="btn btn-secondary btn-sm btn-block">가입하기</a>
-                  </div>
-                </div>
-                <!-- //type-box -->
-						  </div>
-						  <!-- //row -->
-						</div>
-					</div>
+      <div class="main-tab">
+        <div class="container">
+          <div class="main-form-tab">
+            <ul class="sub-ui">
+              <li class="sub-li active"><a href="#" title="마이페이지">마이페이지</a></li>
+              <li class="sub-li"><a href="#" title="내정보변경">내정보변경</a></li>
+              <li class="sub-li"><a href="#" title="나의봉사">나의봉사</a></li>
+              <li class="sub-li"><a href="#" title="나의작성글">나의작성글</a></li>
+              <li class="sub-li"><a href="#" title="나의포인트">나의포인트</a></li>
+              <li class="sub-li"><a href="#" title="나의모금함">나의모금함</a></li>
+            </ul>
+          </div>
+          <!-- //main-form-tab -->
         </div>
-				</div>
-				<!-- //container -->
-			</div>
+        <!-- //container -->
+      </div>
+      <!-- //main-tab -->
+      <div class="main-form">
+        <div class="container">
+          <div class="m-form">
+            <div class="form-top">
+	            <div class="mypage-box">
+	              <h5>봉사신청</h5>
+	              <p class="mypage-box-sub"><b>5</b>건</p>
+	            </div>
+	            <div class="mypage-box">
+	              <h5>활동내역승인</h5>
+	              <p class="mypage-box-sub"><b>3</b>건</p>
+	            </div>
+	            <div class="mypage-box">
+	              <h5>찜한 봉사</h5>
+	              <p class="mypage-box-sub"><b>1</b>건</p>
+	            </div>
+            </div> 
+            <div class="total-time">
+              <h3><b class="total-user">bitcamp</b>님의 봉사시간</h3>
+              <p>총<b class="total-b">2시간 30분</b></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- //main-form -->
 		</main>  
 	</body>
 </html>
