@@ -1,60 +1,183 @@
-/* 블릿 기호 초기화 */
-ul, li, ol {list-style:none;}
-
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
+  letter-spacing: -0.04em;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: salmon;
+  border-radius: 3px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: #f8f9fa;
+  border-radius: 3px;
+}
+
+a {
+  color: #444;
+  text-decoration: none;
+  outline: none;
+  border: none;
+}
+
+a:hover {
+  color: salmon;
+  text-decoration: none;
+}
+
+s {
+  text-decoration: line-through;
+}
+
+/* 폰트 설정할 때 추가해주세요 */
+body {
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.4;
+  font-family: "Montserrat", "Noto Sans KR", "나눔고딕";
+}
+
+.loginSns a {
+  display: block;
+  position: relative;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  border-radius: 30px;
+  padding: 10px;
+}
+
+.loginSns a span {
+  padding-left: 50px;
+}
+
+.loginSns a s {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  transform: translateY(-10%);
+  background: url(../../images/login/bg_sns.png) no-repeat;
+  background-size: 100% auto;
+}
+
+.loginSns .sns02 s {
+  background-position-y: -30px;
+}
+
+.loginSns .sns03 s {
+  background-position-y: -90px;
+}
+
+.loginSns .sns01 {
+  border: 1px solid #01c33c;
+}
+
+.loginSns .sns02 {
+  border: 1px solid #ffe600;
+}
+
+.loginSns .sns03 {
+  border: 1px solid #444;
+}
+
+.loginSns a:last-child {
+  margin-bottom: 0;
+}
+
+/* 블릿 기호 초기화 */
+ul,
+li,
+ol {
+  list-style: none;
+}
+
+/* a태그 초기화 */
+a {
+	color:#000;
+	text-decoration:none;
+}
+
+caption {
+	display:none;
+}
+
+fieldset {
+	margin:0;
+	padding:0;
+	border:0;
+}
+
+.box-input {
+  letter-spacing: -0.05em;
+  font-family: 'Nanum Barun Gothic';
+  outline: none;
+  padding: 0 20px;
+  border: 1px solid #dddddd;
+  color: #666;
+  font-size: 15px;
+  max-width:400px;
+  width:100%;
+  height:50px;
 }
 
 /* login */
 .login-form {
-	width:400px;
-	margin:0 auto;
+  width: 400px;
+  margin: 0 auto;
 }
+
 .title-h {
-	text-align:center;
-	padding-bottom:14px;
-	font-weight:bold;
+  text-align: center;
+  padding-bottom: 14px;
+  font-weight: bold;
 }
 
 .title-sh {
-	text-align:center;
-  padding-bottom:28px;
+  text-align: center;
+  padding-bottom: 28px;
 }
 
 .navbar {
-	border-bottom: 2px solid #f0f1f6;
+  border-bottom: 2px solid #f0f1f6;
 }
 
 .fo {
 	margin-bottom:0;
+	margin-left:0;
 }
 
 .find-box {
-	padding-bottom:45px;
+  padding-bottom: 45px;
 }
 .find-box a {
-	color:#6d728b;
+  color: #6d728b;
 }
 
 /* join */
 .join-type-wrap {
-	width:990px;
-	margin:0 auto;
+  width: 990px;
+  margin: 0 auto;
 }
 
 .type-box {
-  position:relative;
-  display:block;
-  margin:0 auto;
-  padding:80px 55px 0 55px;
-  max-width:270px;
-  height:290px;
-  border:1px solid #c2c2c2;
-  text-align:center;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  padding: 80px 55px 0 55px;
+  max-width: 270px;
+  height: 290px;
+  border: 1px solid #c2c2c2;
+  text-align: center;
 }
 
 .type-box a {
-	margin-top:50px;
+  margin-top: 50px;
 }
 
 .type-box .type-h7 {
@@ -62,3 +185,101 @@ ul, li, ol {list-style:none;}
 	font-weight:bold;
 	letter-spacing:-1px;
 }
+
+/* join-personal */
+.join-wrap {
+	width:800px;
+	margin:0 auto;
+}
+.join-wrap h5 {
+	font-weight:bold;
+	padding:15px 0;
+	border-bottom:2px solid #3a3a3a;
+}
+.join-wrap h5 .required_title {
+  font-size:13px;
+  color:#3a3a3a;
+  text-align:right;
+  float:right;
+  line-height:1;
+  margin-top:10px;
+}
+
+.join-wrap .icon_required {
+  display:inline-block;
+	color:#ff3d44;
+  font-size:30px;
+  font-weight:500;
+  font-style:normal;
+  text-align:right;
+  width:15px;
+  line-height:6px;
+  height:10px;
+  overflow:hidden;
+  padding-right:5px;
+}
+
+.base-table {
+	width:100%;
+}
+
+.join-table {
+	width:100%;
+}
+
+.join-table tr {
+	border-bottom: 1px solid #e5e5e5;
+}
+.join-table tr:last-child {
+	border-bottom:none;
+}
+
+.join-table tr th {
+  padding: 26px 0 26px 25px;
+  width: 25%;
+  color: #555;
+}
+
+.join-table tr td {
+	width:75%;
+	padding: 14px 0;
+  letter-spacing: -0.05em;
+  color: #555;
+  font-size: 15px;
+}
+
+.join-table .postfo {
+  margin-top:10px;
+}
+
+.join-table .sr-cont {
+	float:left;
+}
+
+.join-table .form-sub-control {
+	height:50px;
+  float:left;
+}
+
+.join-table .btnj {
+  width:100px;
+  float:left;
+  height: auto;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 9px 0 10px;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.btn-regi {
+	padding-top:10px;
+	text-align:center;
+}
+
+.btn-regi a {margin-left:10px;}
+
+.nBtn {
+	display:inline-block;
+}
+

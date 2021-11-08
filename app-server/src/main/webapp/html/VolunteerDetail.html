@@ -102,132 +102,201 @@
     </div> <!-- .page-banner -->
   </header>
 
+  <style>
+.vol-widget-box {
+    position: relative;
+    display: block;
+    padding: 30px;
+    margin: 50px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #ebeefd;
+    -webkit-box-shadow: 0 4px 12px rgb(109 114 139 / 10%);
+    box-shadow: 0 4px 12px rgb(109 114 139 / 10%);
+}
+
+.vol-widget-box .vol-photo {
+  
+  
+  
+  margin-right: 50%;
+  background-color: salmon;
+    
+}
+.vol-widget-box .vol-user {
+  padding: 30px 10px 30px 10px;
+  text-align: center;
+  margin-left: 50%;
+  line-height: 1;
+    color: #333;
+    margin-bottom: 20px;
+  background-color: blanchedalmond;
+    
+}
+
+.vol-join-content {
+   font-size: 20px;
+   text-align: center;
+   line-height: 1;
+   color: #333;
+   margin-bottom: 20px;
+}
+
+.vol-widget-box .vol-owner {
+  margin-left: 50%;
+  background-color: seagreen;
+    
+}
+.vol-widget-box .vol-info {
+  margin-left: 50%;
+  background-color: darkcyan;
+    
+}
+
+  </style>
   <main>
-    <div class="page-section">
-      <div class="container">
-        <div class="filterable-btn">
-          <button class="btn active" data-filter="*">전체</button>
-          <button class="btn" data-filter=".web">비대면</button>
-          <button class="btn" data-filter=".mobile">아동</button>
-          <button class="btn" data-filter=".desktop">청소년</button>
-          <button class="btn" data-filter=".desktop">노인</button>
-          <button class="btn" data-filter=".desktop">장애인</button>
-          <button class="btn" data-filter=".desktop">동물</button>
-          <button class="btn" data-filter=".desktop">환경</button>
-          <button class="btn" data-filter=".desktop">기타</button>
-         
-       
-            </div>
-
-        
-        
-        <div class="card_body" style="overflow: hidden; box-sizing: border-box; width:100%;" >
-
-        <div class="card" style="width: 33.33%; float: left; padding:0 5%;  border: none;">
-          <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png" class="card-img-top" alt="..."> 
-          <div class="card-body">
-            <h5 class="card-title">봉사 테스트 1</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="vo" class="btn btn-secondary">상세보기</a>
-          </div>
-        </div>
-        
-         <div class="card" style="width: 33.33%; float: left;  padding: 0 5%; border: none; ">
-          <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-
-        <div class="card" style="width: 33.33%; float: left; padding: 0 5%; border: none;">
-          <img src="https://cdn-icons-png.flaticon.com/512/3039/3039788.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        
-
+        <div class="vol-widget-box"  >
+          <h3 class="widget-title">봉사 상세보기</h3>
+          <div class="divider"></div>
           
 
-      </div>
+          <div class="vol-widget-box vol-photo">
+            사진
+          </div>
+          <div class="vol-widget-box vol-user">
+                <p class="vol-join-content">총
+                  <span>
+                    20
+                  </span>
 
+                </p>
+            <button>참여자보기</button>
+          </div>
+          <div class="vol-widget-box vol-owner">
+            주최자명
+           
+          </div>
+          <div class="vol-widget-box vol-info">
+          </div>
+        </div>
+
+        <div class="vol-widget-box"  >
+          <h3 class="widget-title">상세정보</h3>
+          <div class="divider"></div>
+
+          <form action="#" class="form-contact">
+            <div class="row">
+
+            
+              <div class="col-sm-12 py-2">
+                <label for="v-title" class="fg-grey">제목</label>
+                <input type="text" class="form-control" id="v-title" value="${volunteer.title}">
+              </div>
+
+              <div class="col-sm-12 py-2">
+                <label for="v-owner" class="fg-grey">주최자</label>
+                <input type="text" class="form-control" id="v-owner" value="${volunteer.owner.id}">
+              </div>
+
+              <div class="col-sm-12 py-2">
+                <label for="v-category" class="fg-grey">카테고리</label>
+                <input type="text" class="form-control" id="v-category" value="${volunteer.category.title}">
+              </div>
+
+              <div class="col-sm-12 py-2">
+                <label for="v-tel" class="fg-grey">전화번호</label>
+                <input type="text" class="form-control" id="v-tel" value="${volunteer.tel}">
+              </div>
+              <div class="col-sm-12 py-2">
+                <label for="v-email" class="fg-grey">이메일</label>
+                <input type="text" class="form-control" id="v-email" value="${volunteer.email}">
+              </div>
+              <div class="col-sm-6 py-2">
+                <label for="v-startdate" class="fg-grey">시작일</label>
+                <input type="text" class="form-control" id="v-startdate" value="${volunteer.startDate}">
+              </div>
+              <div class="col-sm-6 py-2">
+                <label for="v-enddate" class="fg-grey">종료일</label>
+                <input type="text" class="form-control" id="v-enddate" value="${volunteer.endDate}">
+              </div>
+              <div class="col-sm-6 py-2">
+                <label for="v-starttime" class="fg-grey">시작시간</label>
+                <input type="text" class="form-control" id="v-starttime" value="${volunteer.startTime}">
+              </div>
+              <div class="col-sm-6 py-2">
+                <label for="v-endtime" class="fg-grey">종료시간</label>
+                <input type="text" class="form-control" id="v-endtime" value="${volunteer.endTime}">
+              </div>
+              <div class="col-sm-6 py-2">
+                <label for="v-totalDate" class="fg-grey">총일수</label>
+                <input type="text" class="form-control" id="v-totalDate" value="${volunteer.totalDate}일">
+              </div>
+              <div class="col-sm-6 py-2">
+                <label for="v-remainDate" class="fg-grey">남은기간</label>
+                <input type="text" class="form-control" id="v-remainDate" value="${volunteer.remainDate}일">
+              </div>
+              <div class="col-sm-6 py-2">
+                <label for="v-currentnum" class="fg-grey">현재인원</label>
+                <input type="text" class="form-control" id="v-currentnum" value="${volunteer.currentNum}명">
+              </div>
+              <div class="col-sm-6 py-2">
+                <label for="v-limitNum" class="fg-grey">총인원</label>
+                <input type="text" class="form-control" id="v-limitNum" value="${volunteer.limitNum}명">
+              </div>
+              <div class="col-12 py-2">
+                <label for="v-content" class="fg-grey">내용</label>
+                <textarea id="v-content" rows="8" class="form-control" value="${volunteer.content}"></textarea>
+              </div>
+
+            카카오 지도 넣을 예정
+
+
+
+             
+             
+             
+          </div>
+        </div>
+
+        <div class="vol-widget-box"  >
+          <h3 class="widget-title">참여댓글</h3>
+          <div class="divider"></div>
+         
+          </div>
+        </div>
+        
+
+        <div class="vol-widget-box"  >
+          <h3 class="widget-title">문의하기</h3>
+          <div class="divider"></div>
+         
+          </div>
+        </div>
+        
+
+       
+        
+        
         
      
 
 
-        <div class="grid mt-3">
-          <div class="grid-item mobile">
-            <div class="portfolio">
-              <a href="../index.html" data-fancybox="portfolio">
-                <img src="https://cdn.pixabay.com/photo/2015/08/30/04/08/people-913771__340.jpg" alt="">
-              </a>
+        <div class="col-lg-4">
+          <div class="widget">
+            <div class="widget-box">
+              <h3 class="widget-title">Search</h3>
+              <div class="divider"></div>
+              <form action="#" class="search-form">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
+                  <button type="submit" class="btn"><span class="icon mai-search"></span></button>
+                </div>
+              </form>
             </div>
-          </div>
 
-          <div class="grid-item mobile">
-            <div class="portfolio">
-              <a href="https://cdn.pixabay.com/photo/2015/08/30/04/08/people-913771__340.jpg" data-fancybox="portfolio">
-                <img src="https://cdn.pixabay.com/photo/2015/08/30/04/08/people-913771__340.jpg" alt="">
-              </a>
-            </div>
-          </div>
-          <div class="grid-item web desktop">
-            <div class="portfolio">
-              <a href="../assets/img/portfolio/work-3.jpg" data-fancybox="portfolio">
-                <img src="../assets/img/portfolio/work-3.jpg" alt="">
-              </a>
-            </div>
-          </div>
-          <div class="grid-item web">
-            <div class="portfolio">
-              <a href="../assets/img/portfolio/work-4.jpg" data-fancybox="portfolio">
-                <img src="../assets/img/portfolio/work-4.jpg" alt="">
-              </a>
-            </div>
-          </div>
-          <div class="grid-item mobile">
-            <div class="portfolio">
-              <a href="../assets/img/portfolio/work-5.jpg" data-fancybox="portfolio">
-                <img src="../assets/img/portfolio/work-5.jpg" alt="">
-              </a>
-            </div>
-          </div>
-          <div class="grid-item web desktop">
-            <div class="portfolio">
-              <a href="../assets/img/portfolio/work-6.jpg" data-fancybox="portfolio">
-                <img src="../assets/img/portfolio/work-6.jpg" alt="">
-              </a>
-            </div>
-          </div>
-          <div class="grid-item web">
-            <div class="portfolio">
-              <a href="../assets/img/portfolio/work-7.jpg" data-fancybox="portfolio">
-                <img src="../assets/img/portfolio/work-7.jpg" alt="">
-              </a>
-            </div>
-          </div>
-          <div class="grid-item mobile">
-            <div class="portfolio">
-              <a href="../assets/img/portfolio/work-8.jpg" data-fancybox="portfolio">
-                <img src="../assets/img/portfolio/work-8.jpg" alt="">
-              </a>
-            </div>
-          </div>
-          <div class="grid-item mobile">
-            <div class="portfolio">
-              <a href="../assets/img/portfolio/work-9.jpg" data-fancybox="portfolio">
-                <img src="../assets/img/portfolio/work-9.jpg" alt="">
-              </a>
-            </div>
-          </div>
-        </div> <!-- .grid -->
-        <div class="mt-5 text-center">
-          <button class="btn btn-primary">Load More</button>
-        </div>
+
+
+        
       </div> <!-- .container -->
     </div> <!-- .page-section -->
   </main>

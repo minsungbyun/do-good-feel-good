@@ -11,6 +11,27 @@
 
   <title>함께해요 : 봉사목록</title>
 
+  <style>
+    *{margin: 0;padding: 0;box-sizing: border-box}
+    body{background-color: #f7f7f7;}
+    ul>li{list-style: none}
+    a{text-decoration: none;}
+    .clearfix::after{content: "";display: block;clear: both;}
+
+     #joinForm{width: 480px;margin: 100px auto;}
+    ul.join_box{border: 1px solid #ddd;background-color: #fff;}
+    .checkBox,.checkBox>ul{position: relative;}
+    .checkBox>ul>li{float: left;}
+    .checkBox>ul>li:first-child{width: 85%;padding: 15px; font-weight: 600; color: #888;}
+    .checkBox>ul>li:nth-child(2){position: absolute;top: 50%; right: 30px;margin-top: -12px;}
+    .checkBox textarea{width: 96%;height: 90px; margin: 0 2%; background-color: #f7f7f7;color: #888; border: none;}
+    .footBtwrap{margin-top: 20px;}
+    .footBtwrap>li{float: left;width: 50%;height: 60px;}
+    .footBtwrap>li>button{display: block; width: 100%;height: 100%; font-size: 20px; text-align: center; line-height: 60px;}
+    .fpmgBt1{background-color: #fff; color:#888}
+    .fpmgBt2{background-color: lightsalmon; color: #fff}
+  </style>
+
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
     
     <link rel="stylesheet" href="../assets/css/maicons.css">
@@ -102,134 +123,96 @@
     </div> <!-- .page-banner -->
   </header>
 
+<!---------------------------------------- main ---------------------------------------------->
+
   <main>
-    <div class="page-section">
+    <div class="page-section" ">
       <div class="container">
-        <div class="filterable-btn">
-          <button class="btn active" data-filter="*">전체</button>
-          <button class="btn" data-filter=".web">비대면</button>
-          <button class="btn" data-filter=".mobile">아동</button>
-          <button class="btn" data-filter=".desktop">청소년</button>
-          <button class="btn" data-filter=".desktop">노인</button>
-          <button class="btn" data-filter=".desktop">장애인</button>
-          <button class="btn" data-filter=".desktop">동물</button>
-          <button class="btn" data-filter=".desktop">환경</button>
-          <button class="btn" data-filter=".desktop">기타</button>
-         
-       
-            </div>
-
-        
-        
-        <div class="card_body" style="overflow: hidden; box-sizing: border-box; width:100%;" >
-
-        <div class="card" style="width: 33.33%; float: left; padding:0 5%;  border: none;">
-          <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png" class="card-img-top" alt="..."> 
-          <div class="card-body">
-            <h5 class="card-title">봉사 테스트 1</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="vo" class="btn btn-secondary">상세보기</a>
-          </div>
+        <div class="text-center">
+          <h2 class="title-section mb-3">봉사신청서 양식</h2>
+          <p>아래 양식에 맞게 작성해주세요 </p>
         </div>
-        
-         <div class="card" style="width: 33.33%; float: left;  padding: 0 5%; border: none; ">
-          <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
+        <div class="row justify-content-center mt-5">
+          <div class="col-lg-8">
 
-        <div class="card" style="width: 33.33%; float: left; padding: 0 5%; border: none;">
-          <img src="https://cdn-icons-png.flaticon.com/512/3039/3039788.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        
+            <form action="#" class="form-contact">
+              <div class="row">
+                <div class="col-sm-12 py-2">
+                  <label for="name" class="fg-grey">제목</label>
+                  <input type="text" class="form-control" id="name" placeholder="제목을 입력해주세요..">
+                </div>
+               
+                <div class="col-sm-12 py-2" >
+                  <label for="category" class="fg-grey" style="margin-bottom: 20px;">카테고리</label><br>
+                  <select name="category"  >
+                    <option selected>선택하세요</option>
+                    <option value="untact">비대면</option>
+                    <option value="children">아동</option>
+                    <option value="teen">청소년</option>
+                    <option value="elder">노인</option>
+                    <option value="handicapped">장애인</option>
+                    <option value="animal">동물</option>
+                    <option value="environment">환경</option>
+                    <option value="other">기타</option>
+                </select>
+                </div>
+               
+                <div class="col-12 py-2">
+                  <label for="subject" class="fg-grey">전화번호</label>
+                  <input type="text" class="form-control" id="tel" placeholder="전화번호를 입력해주세요..">
+                </div>
+                <div class="col-12 py-2">
+                  <label for="subject" class="fg-grey">이메일</label>
+                  <input type="email" class="form-control" id="email" placeholder="이메일을 입력해주세요..">
+                </div>
+                <div class="col-6 py-2">
+                  <label for="subject" class="fg-grey">시작일</label>
+                  <input type="date" class="form-control" id="startDate">
+                </div>
+                <div class="col-6 py-2">
+                  <label for="subject" class="fg-grey">종료일</label>
+                  <input type="date" class="form-control" id="endDate">
+                </div>
+                <div class="col-6 py-2">
+                  <label for="subject" class="fg-grey">시작시간</label>
+                  <input type="time" class="form-control" id="startTime">
+                </div>
+                <div class="col-6 py-2">
+                  <label for="subject" class="fg-grey">종료시간</label>
+                  <input type="time" class="form-control" id="endTime">
+                </div>
+                <div class="col-12 py-2">
+                  <label for="subject" class="fg-grey">총모집인원</label>
+                  <input type="number" class="form-control" id="limitNum" placeholder="인원">
+                </div>
+                
 
-          
+                <div class="col-12 py-2">
+                  <label for="content" class="fg-grey">내용</label>
+                  <textarea id="content" rows="8" class="form-control" placeholder="내용을 입력해주세요.."></textarea>
+                </div>
 
-      </div>
+                <form action="#" method="post" enctype="multipart/form-data">
+                  <input multiple="multiple" type="file" name="filename[]" style="margin: 15px;" />
+                </form>
 
-        
-     
-
-
-        <div class="grid mt-3">
-          <div class="grid-item mobile">
-            <div class="portfolio">
-              <a href="../index.html" data-fancybox="portfolio">
-                <img src="https://cdn.pixabay.com/photo/2015/08/30/04/08/people-913771__340.jpg" alt="">
-              </a>
-            </div>
+              
+                <input type='hidden' value='2' name='status'><br>
+                <div class="col-12 mt-3">
+                  <button type="submit" class="btn btn-primary px-5">취소하기</button>
+                  <button type="submit" class="btn btn-primary px-5">신청하기</button>
+                </div>
+              </div>
+            </form>
           </div>
-
-          <div class="grid-item mobile">
-            <div class="portfolio">
-              <a href="https://cdn.pixabay.com/photo/2015/08/30/04/08/people-913771__340.jpg" data-fancybox="portfolio">
-                <img src="https://cdn.pixabay.com/photo/2015/08/30/04/08/people-913771__340.jpg" alt="">
-              </a>
-            </div>
-          </div>
-          <div class="grid-item web desktop">
-            <div class="portfolio">
-              <a href="../assets/img/portfolio/work-3.jpg" data-fancybox="portfolio">
-                <img src="../assets/img/portfolio/work-3.jpg" alt="">
-              </a>
-            </div>
-          </div>
-          <div class="grid-item web">
-            <div class="portfolio">
-              <a href="../assets/img/portfolio/work-4.jpg" data-fancybox="portfolio">
-                <img src="../assets/img/portfolio/work-4.jpg" alt="">
-              </a>
-            </div>
-          </div>
-          <div class="grid-item mobile">
-            <div class="portfolio">
-              <a href="../assets/img/portfolio/work-5.jpg" data-fancybox="portfolio">
-                <img src="../assets/img/portfolio/work-5.jpg" alt="">
-              </a>
-            </div>
-          </div>
-          <div class="grid-item web desktop">
-            <div class="portfolio">
-              <a href="../assets/img/portfolio/work-6.jpg" data-fancybox="portfolio">
-                <img src="../assets/img/portfolio/work-6.jpg" alt="">
-              </a>
-            </div>
-          </div>
-          <div class="grid-item web">
-            <div class="portfolio">
-              <a href="../assets/img/portfolio/work-7.jpg" data-fancybox="portfolio">
-                <img src="../assets/img/portfolio/work-7.jpg" alt="">
-              </a>
-            </div>
-          </div>
-          <div class="grid-item mobile">
-            <div class="portfolio">
-              <a href="../assets/img/portfolio/work-8.jpg" data-fancybox="portfolio">
-                <img src="../assets/img/portfolio/work-8.jpg" alt="">
-              </a>
-            </div>
-          </div>
-          <div class="grid-item mobile">
-            <div class="portfolio">
-              <a href="../assets/img/portfolio/work-9.jpg" data-fancybox="portfolio">
-                <img src="../assets/img/portfolio/work-9.jpg" alt="">
-              </a>
-            </div>
-          </div>
-        </div> <!-- .grid -->
-        <div class="mt-5 text-center">
-          <button class="btn btn-primary">Load More</button>
         </div>
       </div> <!-- .container -->
     </div> <!-- .page-section -->
+
+    
+</script>
+      
+    </div>
   </main>
 
  <!---------------------------------------- footer ---------------------------------------------->
