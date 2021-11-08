@@ -34,6 +34,8 @@ s {
   text-decoration: line-through;
 }
 
+ul {margin:0; padding:0;}
+
 /* 폰트 설정할 때 추가해주세요 */
 body {
   font-size: 1em;
@@ -169,7 +171,7 @@ fieldset {
   position: relative;
   display: block;
   margin: 0 auto;
-  padding: 80px 55px 0 55px;
+  padding: 80px 35px 0 35px;
   max-width: 270px;
   height: 290px;
   border: 1px solid #c2c2c2;
@@ -283,3 +285,53 @@ fieldset {
 	display:inline-block;
 }
 
+/* main-form-tab */
+.main-form-tab .sub-ui {
+	margin:0 auto;
+	overflow:hidden;
+	width:60%;
+}
+
+.main-form-tab .sub-ui .sub-li {
+	float:left;
+	color:#333;
+	width:16.6666666%;
+	text-align:center;
+	
+}
+
+.main-form-tab .sub-ui .sub-li.active a {
+	color:#007bff;
+	font-weight:bold;
+}
+
+
+.main-form-tab {
+	padding:50px 0 20px 0;
+	border-bottom:1px solid #d9d9d9;
+}
+
+
+
+.main-form {
+	width:100%;
+	height:inherit;
+	background:#f6f6f6;
+}
+
+.main-form .m-form {
+	overflow:hidden;
+	width:80%;
+	margin:0 auto;
+}
+
+.m-form .mypage-box {
+  width:33.33333%;
+  float:left;
+  padding:5%;
+  text-align:center;
+}
+
+.m-form .mypage-box .mypage-box-sub {
+	font-size:24px;
+}
