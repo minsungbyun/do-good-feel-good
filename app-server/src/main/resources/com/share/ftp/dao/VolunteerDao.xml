@@ -111,20 +111,21 @@
     values(#{userNo},#{volNo},#{applyDate},#{startTime},#{endTime})
   </insert>
   
+  <insert id="insertQuestion">
+    insert into ftp_vol_qna(user_no,vol_no,content)
+    values(#{userNo},#{no},#{content})
+  </insert>
+  
   
   <insert id="insertFile">
     insert into ftp_vol_file(vol_no,filepath)
     values(#{volNo},#{filepath})
   </insert>
   
- 
-  
    <insert id="addWish">
     insert into ftp_vol_wish(user_no,vol_no)
     values(#{userNo},#{volNo})
   </insert>
-  
-  
  
  
   <select id="findAll" resultMap="VolunteerRequestDTOMap">

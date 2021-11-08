@@ -77,9 +77,12 @@
     
     </div>
 <button>변경</button>
+
+
  <a href='delete?no=${volunteer.no}'>[삭제]</a> 
  <a href='list'>[목록]</a>
- <a href='join/list?no=${volunteer.no}'>[참여자 목록]</a><br>
+ <a href='join/list?no=${volunteer.no}'>[참여자 목록]</a><
+ <a href='join/add?no=${volunteer.no}'>[참여하기]</a><br>
 </form>
 </body>
 </html>

@@ -1,9 +1,4 @@
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-    trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,7 +57,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container">
-        <a href="index.html" class="navbar-brand">Reve<span class="text-primary">Tive.</span></a>
+        <a href="index.html" class="navbar-brand">Happy<span class="text-primary">Share</span></a>
 
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -71,7 +66,7 @@
         <div class="navbar-collapse collapse" id="navbarContent">
           <ul class="navbar-nav ml-auto pt-3 pt-lg-0">
             <li class="nav-item active">
-              <a href="index.html" class="nav-link">함께해요</a>
+              <a href="../volunteer/VolunteerList.jsp" class="nav-link">함께해요</a>
             </li>
             <li class="nav-item">
               <a href="about.html" class="nav-link">소통해요</a>
@@ -89,6 +84,7 @@
       </div> <!-- .container -->
     </nav> <!-- .navbar -->
 
+
     <div class="page-banner bg-img bg-img-parallax overlay-dark" style="background-image: url(../assets/img/bg_image_3.jpg);">
       <div class="container h-100">
         <div class="row justify-content-center align-items-center h-100">
@@ -99,7 +95,7 @@
                 <li class="breadcrumb-item active" aria-current="page">Portfolio</li>
               </ol>
             </nav>
-            <h1 class="fg-white text-center">Projects</h1>
+            <h1 class="fg-white text-center">함께해요</h1>
           </div>
         </div>
       </div>
@@ -119,57 +115,63 @@
           <button class="btn" data-filter=".desktop">동물</button>
           <button class="btn" data-filter=".desktop">환경</button>
           <button class="btn" data-filter=".desktop">기타</button>
-        </div>
-          <div class="card_body" style="overflow: hidden; box-sizing: border-box; width:100%;" >
-           <c:forEach items="${volunteerList}" var="volunteerRequestDTO" >
-           
-			        <div class="card" style="width: 33.33%; float: left; padding:0 5%;  box-sizing: border-box; border: none;">
-			          <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png" class="card-img-top" alt="..."> 
-			          <div class="card-body">
-			            <h5 class="card-title"><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></h5>
-			            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-			            <a href="#" class="btn btn-primary">상세보기</a>
-			          </div>
-			        </div>
-			        
-           </c:forEach>
-          </div>
-      </div>
+         
        
-    <!--  
-         <div class="card" style="width: 33.33%; float: left;  box-sizing: border-box; padding: 0 5%; border: none; ">
+            </div>
+
+        
+        
+        <div class="card_body" style="overflow: hidden; box-sizing: border-box; width:100%;" >
+
+        <div class="card" style="width: 33.33%; float: left; padding:0 5%;  border: none;">
+          <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png" class="card-img-top" alt="..."> 
+          <div class="card-body">
+            <h5 class="card-title">봉사 테스트 1</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="vo" class="btn btn-secondary">상세보기</a>
+          </div>
+        </div>
+        
+         <div class="card" style="width: 33.33%; float: left;  padding: 0 5%; border: none; ">
           <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title"><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></h5>
+            <h5 class="card-title">Card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>R
+            <a href="#" class="btn btn-primary">Go somewhere</a>
           </div>
         </div>
 
-        <div class="card" style="width: 33.33%; float: left;  box-sizing: border-box; padding: 0 5%; border: none;">
+        <div class="card" style="width: 33.33%; float: left; padding: 0 5%; border: none;">
           <img src="https://cdn-icons-png.flaticon.com/512/3039/3039788.png" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             <a href="#" class="btn btn-primary">Go somewhere</a>
           </div>
-  -->
+        </div>
+        
 
+          
+
+      </div>
+
+        
      
 
 
         <div class="grid mt-3">
           <div class="grid-item mobile">
             <div class="portfolio">
-              <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
-                <img src="../assets/img/portfolio/work-1.jpg" alt="">
+              <a href="../index.html" data-fancybox="portfolio">
+                <img src="https://cdn.pixabay.com/photo/2015/08/30/04/08/people-913771__340.jpg" alt="">
               </a>
             </div>
           </div>
+
           <div class="grid-item mobile">
             <div class="portfolio">
-              <a href="../assets/img/portfolio/work-2.jpg" data-fancybox="portfolio">
-                <img src="../assets/img/portfolio/work-2.jpg" alt="">
+              <a href="https://cdn.pixabay.com/photo/2015/08/30/04/08/people-913771__340.jpg" data-fancybox="portfolio">
+                <img src="https://cdn.pixabay.com/photo/2015/08/30/04/08/people-913771__340.jpg" alt="">
               </a>
             </div>
           </div>
@@ -298,14 +300,6 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
 
 
 
