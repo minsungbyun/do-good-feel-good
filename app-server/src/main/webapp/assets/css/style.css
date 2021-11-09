@@ -1,3 +1,5 @@
+.ir, caption {width:0; height:0; text-indent:-9999px; position:absolute; left:0; top:0; overflow:hidden; font-size:0; line-height:0;}
+
 * {
   box-sizing: border-box;
   letter-spacing: -0.04em;
@@ -311,8 +313,6 @@ fieldset {
 	border-bottom:1px solid #d9d9d9;
 }
 
-
-
 .main-form {
 	width:100%;
 	height:inherit;
@@ -352,4 +352,144 @@ fieldset {
 }
 .total-time .total-b {
 	padding-left:7px;
+}
+
+/* short-main */
+.short-main {
+	width:150px;
+	height:150px;
+	margin:0 auto;
+}
+
+.short-main img {
+	width:100%;
+}
+
+.text-wirte {
+	width:100%;
+	padding-top:50px;
+}
+
+.inner-text-wirte {
+  border: 1px solid #e4e4e4;
+  padding: 12px 10px 37px 20px;
+  background-color: #fff;
+  border-radius: 2px;
+}
+
+.inner-text-wirte .box-text textarea {
+  width: 100%;
+  height: 81px;
+  margin: -5px -5px 0;
+  padding: 5px 5px 0;
+  border: 0 none;
+  font-size: 13px;
+  background-color: transparent;
+  resize: none;
+  vertical-align: top;
+}
+
+.inner-text-wirte .wrap-menu {
+	display:block;
+	clear:both;
+}
+
+.wrap-menu .area-r {
+	float:right;
+}
+
+.num-text {
+	display: inline-block;
+  margin: 10px 0 0 3px;
+  font-size: 12px;
+  color: #959595;
+  vertical-align: top;
+}
+
+.bo {
+	padding-bottom:10px;
+}
+
+.num-count {
+	color:#333;
+}
+
+.area-r .btn-g {
+  background-color: #2F89FC;
+  color: #fff;
+  border: 0 none;
+  font-size:13px;
+  padding:6px 15px;
+}
+
+.cont-short-list {
+	margin-top:25px;
+}
+
+.s-review-list {
+	border-top:1px solid #efefef;
+}
+
+.s-review-list ul li {
+	border-bottom:1px solid #efefef;
+}
+
+.s-review-list .review-section {
+	display: table;
+  width: 100%;
+  position: relative;
+  padding: 19px 0 16px;
+  table-layout: fixed;
+  box-sizing: border-box;
+}
+
+.review-section .profile-thumb {
+	display: table-cell;
+	position: relative;
+  width: 40px;
+  height: 45px;
+  padding-right: 8px;
+}
+
+.review-section .profile-thumb img {
+	position:absolute;
+	top:0;
+	left:0;
+	width: 34px;
+  height: 38px;
+}
+
+.review-section .review-infor {
+	display: table-cell;
+  width: 100%;
+  margin-top: -2px;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+
+.review-section .review-infor .txt_date {
+	color:#959595;
+}
+
+.review-section .review-infor .ico_bbs {
+	display: inline-block;
+  vertical-align: top;
+   text-indent: -9999px;
+}
+
+.review-section .review-infor .ico_new {
+	background:url(../img/10_new.svg);
+	width:10px;
+	height:10px;
+	vertical-align:middle;
+}
+
+.review-section .review-infor .review-btn {
+	position:absolute;
+	top:40px;
+	right:0;
+}
+
+.review-section .review-infor .review-btn a {
+	font-size:14px;
 }
