@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-	  <title>HappyShare : 개인 회원가입</title>
+	  <title>HappyShare : 기관 회원가입</title>
 	  
 	  <!--  link -->
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
@@ -73,12 +73,12 @@
     <main>
       <div class="page-section">
 				<div class="container">
-					<h1 class="title-h">회원가입 - 개인</h1>
+					<h1 class="title-h">회원가입 - 기관</h1>
 				  <div class="join-wrap">
             <h5>기본정보<span class="required_title"><em class="icon_required">·</em>표시는 반드시 입력하셔야 합니다.</span></h5>
               <div class="base-table">
                 <table class="join-table">
-                  <caption>개인회원 기본정보</caption>
+                  <caption>단체 회원 기본정보</caption>
 									<tbody>
                     <tr>
                       <th><em class="icon_required">·</em><span>아이디</span></th>
@@ -141,13 +141,29 @@
                     </tr>
                     <!-- //주소 -->
                     <tr>
-                      <th><span>생년월일</span></th>
+                      <th><em class="icon_required">·</em><span>사업자번호</span></th>
                       <td>
-                        <label for=f-birthdate class="sr-only">생년월일</label> 
-                        <input id='f-birthdate' class="form-control box-input" type='date' name='birthdate'><br>
+                        <label for='f-corpNo' class="sr-only">사업자번호</label> 
+                        <input id='f-corpNo' class="form-control box-input" type='tel' name='corpNo'>
                       </td>
                     </tr>
-                    <!-- //생년월일 -->
+                    <!-- //사업자번호 -->
+                    <tr>
+                      <th><span>팩스번호</span></th>
+                      <td>
+                        <label for='f-fax' class="sr-only">팩스번호</label> 
+                        <input id='f-fax' class="form-control box-input" type='tel' name='fax'>
+                      </td>
+                    </tr>
+                    <!-- //팩스 -->
+                    <tr>
+                      <th><span>홈페이지</span></th>
+                      <td>
+                        <label for='f-homepage' class="sr-only">홈페이지</label> 
+                        <input id='f-homepage' class="form-control box-input" type='url' name='homepage'>
+                      </td>
+                    </tr>
+                    <!-- //홈페이지 -->
 									</tbody>
                 </table>
               </div>

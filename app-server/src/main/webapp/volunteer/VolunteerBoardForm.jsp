@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	  <title>봉사 게시글 등록</title>
+	  <title>함께해요 : 나눔이야기 등록</title>
 	  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   
 	  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>

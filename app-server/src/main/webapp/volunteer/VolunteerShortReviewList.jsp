@@ -5,7 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>봉사 후기 목록</title>
+<title>소통해요 : 한줄후기 등록</title>
+</title>
 </head>
 <body>
 <h1>봉사 후기 - 한 줄 후기 목록</h1>

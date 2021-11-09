@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>봉사게시글댓글등록</title>
+  <title>소통해요 : 나눔이야기 댓글</title>
 </head>
 <body>
 <h1>댓글 등록 결과</h1>

@@ -5,11 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>나눔이야기 댓글 목록</title>
+  <title>소통해요 : 나눔이야기 댓글 목록</title>
 </head>
 <body>
 <h1>봉사게시판 - 게시글 댓글 목록</h1>
-<a href='commentForm?volBoardno=${volunteerBoardDTO.no}'>댓글 등록 </a><br>
+<a href='commentForm?volBoardNo=${volunteerBoardDTO.no}'>댓글 등록 </a><br>
 <table border='1'>
 <thead>
   <tr>
@@ -30,7 +30,7 @@
     <td>${volunteerBoardCommentDTO.owner.id}</td> 
     <td>${volunteerBoardCommentDTO.registeredDate}</td>
     <td><a href='commentUpdateDetail?no=${volunteerBoardCommentDTO.no}'>[변경]</a></td>
-    <td><a href='commentDelete?no=${volunteerBoardCommentDTO.no}'>[삭제]</a></td>
+    <td><a href='commentDelete?no=${volunteerBoardCommentDTO.no}&volBoardNo=${volunteerBoardCommentDTO.volBoardNo}'>[삭제]</a></td>
 </tr>
 </c:forEach>
 
