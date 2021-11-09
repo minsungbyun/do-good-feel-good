@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>나눔이야기 목록</title>
+  <title>함께해요 : 나눔이야기 목록</title>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
@@ -51,6 +51,16 @@
       <%-- <a href='boardDelete?no=${volunteerBoardDTO.no}' class="btn btn-primary"></a> --%>
       <a href='boardForm' class="btn btn-outline-primary btn-sm float: right">게시글 작성</a><br>
 </div><!-- container -->
+
+<div class="quick_menu">
+    <ul>
+        <li><a href="/commentList" class="store">매장찾기</a></li>
+        <li><a href="/commentList" class="donation">물품기부</a></li>
+        <li><a href="/commentList" class="sponsor">후원하기</a></li>
+
+    </ul>
+</div>
+
 </body>
 </html>
 
