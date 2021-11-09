@@ -32,7 +32,7 @@ public class AdminDonationBoardListController extends GenericServlet {
     try {
 
 
-      Collection<DonationBoardDTO> adminDonationBoardList = donationBoardDao.findAllWait();
+      Collection<DonationBoardDTO> adminDonationBoardList = donationBoardDao.findAll();
 
       request.setAttribute("adminDonationBoardList", adminDonationBoardList);
 
