@@ -36,6 +36,7 @@
     <span id='f-registeredDate'>${challengeDTO.registeredDate}</span><br>
 <button>변경</button>
  <a href='delete?no=${challengeDTO.no}'>[삭제]</a> <a href='list'>[목록]</a><br>
+ <a href='questionList?no=${challengeDTO.no}'>[문의목록]</a>
 </form>
 
 </body>

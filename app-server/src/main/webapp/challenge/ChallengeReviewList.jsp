@@ -15,7 +15,6 @@
   <tr>
     <th>번호</th>
     <th>내용</th>
-<!--     <th>파일첨부</th> -->
     <th>작성자</th>
     <th>등록일</th>
   </tr>
@@ -26,7 +25,6 @@
 <tr>
     <td>${challengeReviewDTO.reviewNo}</td>
     <td>${challengeReviewDTO.content}</td> 
-<!--    <td>${challengeReviewDTO.fileUpload}</td> -->
     <td>${challengeReviewDTO.owner.id}</td> 
     <td>${challengeReviewDTO.registeredDate}</td>
     <td><a href='reviewUpdateDetail?reviewNo=${challengeReviewDTO.reviewNo}&no=${challengeReviewDTO.no}'>[변경]</a></td>

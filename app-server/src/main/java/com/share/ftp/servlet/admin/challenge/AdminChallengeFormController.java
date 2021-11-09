@@ -1,4 +1,4 @@
-package com.share.ftp.servlet.admin;
+package com.share.ftp.servlet.admin.challenge;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -16,7 +16,7 @@ public class AdminChallengeFormController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     // 출력을 담당할 뷰를 호출한다.
-    request.getRequestDispatcher("/admin/AdminChallengeForm.jsp").forward(request, response);
+    request.getRequestDispatcher("/admin/challenge/AdminChallengeForm.jsp").forward(request, response);
   }
 }
 

@@ -1,4 +1,4 @@
-package com.share.ftp.servlet.admin;
+package com.share.ftp.servlet.admin.challenge;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -11,27 +11,34 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import com.share.ftp.dao.ChallengeDao;
+import com.share.ftp.dao.ChallengeQuestionDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
+import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 
-@WebServlet("/admin/challenge/list")
-public class AdminChallengeListController extends GenericServlet {
+@WebServlet("/admin/challenge/questionList")
+public class AdminChallengeQuestionListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
   ChallengeDao challengeDao;
+  ChallengeQuestionDao challengeQuestionDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     challengeDao = (ChallengeDao) 웹애플리케이션공용저장소.getAttribute("challengeDao");
+    challengeQuestionDao = (ChallengeQuestionDao) 웹애플리케이션공용저장소.getAttribute("challengeQuestionDao");
   }
 
   @Override
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
     try {
-      Collection<ChallengeDTO> challengeList = challengeDao.findAll();
-      request.setAttribute("challengeList", challengeList);
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/admin/AdminChallengeList.jsp");
+      int challengeNo = Integer.parseInt(request.getParameter("no"));
+      ChallengeDTO challengeDTO = challengeDao.findByNo(challengeNo);
+      Collection<ChallengeQuestionDTO> challengeQuestionList = challengeQuestionDao.findAllNo(challengeNo);
+      request.setAttribute("challengeDTO", challengeDTO);
+      request.setAttribute("challengeQuestionList", challengeQuestionList);
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/admin/challenge/AdminChallengeQuestionList1.jsp");
       요청배달자.forward(request, response);
     } catch (Exception e) {
       request.setAttribute("error", e);

@@ -1,4 +1,4 @@
-package com.share.ftp.servlet.admin;
+package com.share.ftp.servlet.admin.challenge;
 
 import java.io.IOException;
 import javax.servlet.ServletConfig;
@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
-import com.share.ftp.dao.ChallengeDao;
-import com.share.ftp.domain.admin.ChallengeDTO;
+import com.share.ftp.dao.ChallengeQuestionDao;
+import com.share.ftp.domain.challenge.ChallengeQuestionDTO;
 
-@WebServlet("/admin/challenge/delete")
-public class AdminChallengeDeleteController extends HttpServlet {
+@WebServlet("/admin/challenge/replyDelete")
+public class AdminChallengeReplyDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  ChallengeDao challengeDao;
+  ChallengeQuestionDao challengeQuestionDao;
   SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    challengeDao = (ChallengeDao) 웹애플리케이션공용저장소.getAttribute("challengeDao");
+    challengeQuestionDao = (ChallengeQuestionDao) 웹애플리케이션공용저장소.getAttribute("challengeQuestionDao");
   }
 
   @Override
@@ -31,19 +31,22 @@ public class AdminChallengeDeleteController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int challengeNo = Integer.parseInt(request.getParameter("no")); 
-      ChallengeDTO challengeDTO = challengeDao.findByNo(challengeNo);
-      if (challengeDTO == null) {
-        throw new Exception("해당 번호의 챌린지가 없습니다.");
+      int challengeQuestionNo = Integer.parseInt(request.getParameter("questionNo")); 
+      ChallengeQuestionDTO challengeQuestionDTO = challengeQuestionDao.findByNo(challengeQuestionNo);
+
+      if (challengeQuestionDTO == null) {
+        System.out.println("해당 번호의 문의가 없습니다.");
+        return;
       }
 
-      //      challengeDao.deleteFile(challengeNo);
-      challengeDao.delete(challengeNo);
+      challengeQuestionDTO.setReply(null);
+
+      response.sendRedirect("questionList?no=" + Integer.parseInt(request.getParameter("no")));
+      challengeQuestionDao.updateReply(challengeQuestionDTO);
       sqlSession.commit();
 
-      response.sendRedirect("list");
-
     } catch (Exception e) {
+      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
