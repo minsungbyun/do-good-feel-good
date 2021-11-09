@@ -493,3 +493,32 @@ fieldset {
 .review-section .review-infor .review-btn a {
 	font-size:14px;
 }
+
+/* .find-group */
+.find-group {
+	overflow:hidden;
+	width:500px;
+	margin:0 auto;
+	padding-top:10px;
+}
+
+.find-group .find-button {
+	width:50%;
+	float:left;
+	text-align:center;
+  border-bottom: 3px solid rgb(229, 230, 232);
+  color: rgb(183, 184, 186);
+  font-size: 20px;
+  font-weight: bold;
+  line-height:80px;
+}
+
+.find-group .btn-active {
+  border-bottom: 3px solid #007bff;
+  color: #007bff;
+}
+
+.find-group .btn-active a {
+	color:inherit;
+}
+
