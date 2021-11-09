@@ -36,15 +36,14 @@
     
 </head>
 <body>
-    <!-- div 왼쪽, 오른쪽 바깥여백을 auto로 주면 중앙정렬된다.  -->
+  
     <div id="wrap">
         <br><br>
         <b><font size="6" color="gray">회원가입</font></b>
         <br><br><br>
         
         
-        <!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
-        <!-- 값(파라미터) 전송은 POST 방식, 전송할 페이지는 JoinPro.jsp -->
+     
         <form method="post" action="../pro/JoinPro.jsp" name="userInfo" 
                 onsubmit="return checkValue()">
             <table>

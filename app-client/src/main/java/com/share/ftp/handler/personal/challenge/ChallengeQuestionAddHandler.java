@@ -37,10 +37,10 @@ public class ChallengeQuestionAddHandler implements Command {
       System.out.println("해당 챌린지가 없습니다!");
     }
 
-    //    if (!challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
-    //      System.out.println("챌린지 참여한 회원만 등록이 가능합니다!");
-    //      return;
-    //    }
+      if (!challengeDTO.getMemberNames().contains(AuthLoginHandler.getLoginUser().getId()) ) {
+          System.out.println("챌린지 참여한 회원만 등록이 가능합니다!");
+         return;
+       }
 
     ChallengeQuestionDTO challengeQuestionDTO = new ChallengeQuestionDTO();
 
