@@ -15,6 +15,12 @@
 	  <link rel="stylesheet" href="../assets/vendor/fancybox/css/jquery.fancybox.css">
 	  <link rel="stylesheet" href="../assets/css/theme.css">
 	  <link rel="stylesheet" href="../assets/css/admin.css">
+	  
+	  <style>
+	   #f-file-image {
+	     height:100px;
+	   }
+	  </style>
 	</head>
 	
 	<body>
@@ -47,7 +53,7 @@
 	      <div class="ad-main-infor">
 	        <div class="write-wrap">
 	          <h4 class="mb-5">공지사항 상세</h4>
-	          <form action="noticeUpdate" method="post" id="notice-form">
+	          <form action="noticeUpdate" method="post" id="notice-form" enctype="multipart/form-data">
 	            <div class="form-group">
 	              <label for="f-no">번호</label>
 	              <input type="text" class="form-control col-sm-1" id="f-no" name="noticeNo" value="${noticeDTO.no}" readonly>
@@ -76,7 +82,8 @@
 	            <div class="form-group row">
 	              <label for="f-file" class="col-sm-1 col-form-label">첨부파일</label>
 	              <div class="col-sm-11">
-	                <input type="file" class="form-control-file" id="f-file" name="fileUpload" value="${notice.fileUpload}">
+	              <img  id ="f-file-image" src="../upload/notice/${notice.fileUpload}">
+	                <input type="file" class="form-control-file" id="f-file" name="fileUpload">
 	              </div>
 	            </div>
 	            <!-- //파일첨부 -->

@@ -46,7 +46,7 @@
       <div class="ad-main-infor">
         <div class="write-wrap">
           <h4 class="mb-5">공지사항 등록</h4>
-          <form action="noticeAdd" method='post'>
+          <form action="noticeAdd" enctype="multipart/form-data" method='post'>
             <div class="form-group">
               <label for="f-title">제목</label>
               <input type="text" class="form-control" id="f-title" name="title">

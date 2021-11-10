@@ -593,3 +593,22 @@ fieldset {
   padding-top:0;
 }
 
+.profile-photo {
+	padding-top:50px;
+}
+
+.my-photo {
+	width:100px;
+	height:100px;
+	margin:0 auto;
+	
+}
+
+.my-photo img {width:100px; height:100px; }
+
+.mypage-btn {
+	text-align:center;
+padding-top:15px;
+
+}
+
