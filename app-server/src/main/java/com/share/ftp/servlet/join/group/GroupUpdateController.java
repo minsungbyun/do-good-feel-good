@@ -1,17 +1,20 @@
 package com.share.ftp.servlet.join.group;
 
 import java.io.IOException;
-import javax.servlet.ServletConfig;
+import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.GroupDao;
 import com.share.ftp.domain.join.GroupDTO;
 
+@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
 @WebServlet("/join/group/update")
 public class GroupUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
@@ -20,8 +23,8 @@ public class GroupUpdateController extends HttpServlet {
   GroupDao groupDao;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     groupDao = (GroupDao) 웹애플리케이션공용저장소.getAttribute("groupDao");
   }
@@ -40,7 +43,7 @@ public class GroupUpdateController extends HttpServlet {
         throw new Exception("해당 번호의 회원이 없습니다.<br>");
       } 
 
-      groupDTO.setId(request.getParameter("photo"));
+      groupDTO.setId(request.getParameter("id"));
       groupDTO.setPassword(request.getParameter("password"));
       groupDTO.setName(request.getParameter("name"));
       groupDTO.setTel(request.getParameter("tel"));
@@ -49,6 +52,13 @@ public class GroupUpdateController extends HttpServlet {
       groupDTO.setBasicAddress(request.getParameter("basicAddress"));
       groupDTO.setDetailAddress(request.getParameter("detailAddress"));
       groupDTO.setGroupCount(Integer.valueOf(request.getParameter("groupCount")));
+
+      Part photoPart = request.getPart("photo");
+      if (photoPart.getSize() > 0) {
+        String filename = UUID.randomUUID().toString();
+        photoPart.write(getServletContext().getRealPath("/upload/join") + "/" + filename);
+        groupDTO.setPhoto(filename);
+      }
 
       groupDao.update(groupDTO);
       groupDao.updateGroup(groupDTO);
