@@ -16,7 +16,7 @@
 </head>
 <body>
 <h1>모금함 상세(MVC + EL)</h1>
-<form action='update'>
+<form action='update' method="post">
     <label for='f-no'>개설번호</label> 
     <input id='f-no' type='text' name='no' value='${donationBoardDTO.no}' readonly><br>
     

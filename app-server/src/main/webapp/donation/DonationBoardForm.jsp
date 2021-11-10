@@ -17,7 +17,7 @@
 </head>
 <body>
 <h1>모금함 개설신청 양식(MVC)</h1>
-<form action='boardAdd'>
+<form action='boardAdd' method="post">
 <c:forEach items="${categorys}" var="category">
     <label for='f-category'>${category.title}</label> 
     <input id='f-category' type='radio' name='category' value="${category.no}"><br>
@@ -51,8 +51,21 @@
     
     <label for='f-taget'>목표금액</label> 
     <input id='f-taget' type="number" name='moneyTarget'><br>
-<button>등록</button><br>
+<button id='donation-Button'>등록</button><br>
 </form>
+
+<script>
+document.querySelector("#donation-Button").onclick = () => {
+    var startDate = document.querySelector("#f-startDate");
+    var endDate = document.querySelector("#f-endDate");
+    if (startDate.value >= endDate.value) {
+      alert("시작일이 종료일보다 같거나 클 수 없습니다.");
+      return false; 
+    } 
+  }
+  
+</script>
+
 </body>
 </html>
      
