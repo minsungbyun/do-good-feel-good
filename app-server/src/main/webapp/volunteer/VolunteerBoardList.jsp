@@ -48,18 +48,9 @@
       <label for='f-search'>검색어</label>
       <input id='f-search' type="text" name='keword'>
       <button class="btn btn-outline-primary btn-sm">검색</button> 
-      <%-- <a href='boardDelete?no=${volunteerBoardDTO.no}' class="btn btn-primary"></a> --%>
+      <!-- <a href='boardDelete?no=${volunteerBoardDTO.no}' class="btn btn-primary"></a> -->
       <a href='boardForm' class="btn btn-outline-primary btn-sm float: right">게시글 작성</a><br>
 </div><!-- container -->
-
-<div class="quick_menu">
-    <ul>
-        <li><a href="/commentList" class="store">매장찾기</a></li>
-        <li><a href="/commentList" class="donation">물품기부</a></li>
-        <li><a href="/commentList" class="sponsor">후원하기</a></li>
-
-    </ul>
-</div>
 
 </body>
 </html>

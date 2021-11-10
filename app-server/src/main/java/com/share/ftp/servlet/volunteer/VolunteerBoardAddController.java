@@ -2,9 +2,9 @@ package com.share.ftp.servlet.volunteer;
 
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +14,7 @@ import com.share.ftp.dao.VolunteerBoardDao;
 import com.share.ftp.domain.community.VolunteerBoardDTO;
 import com.share.ftp.domain.join.JoinDTO;
 
+@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
 @WebServlet("/volunteer/boardAdd")
 public class VolunteerBoardAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
@@ -22,8 +23,8 @@ public class VolunteerBoardAddController extends HttpServlet {
   VolunteerBoardDao volunteerBoardDao;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     volunteerBoardDao = (VolunteerBoardDao) 웹애플리케이션공용저장소.getAttribute("volunteerBoardDao");
   }
@@ -31,26 +32,27 @@ public class VolunteerBoardAddController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
-    VolunteerBoardDTO volunteerBoardDTO = new VolunteerBoardDTO();
-
-    JoinDTO owner = new JoinDTO();
-    owner.setNo(Integer.parseInt(request.getParameter("owner")));
-
-    volunteerBoardDTO.setOwner(owner);
-    volunteerBoardDTO.setTitle(request.getParameter("title"));
-    volunteerBoardDTO.setContent(request.getParameter("content"));
-    //    volunteerBoardDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
-    //    volunteerBoardDTO.setRegisteredDate(Date.valueOf(request.getParameter("date")));
-    //    volunteerBoardDTO.setFileUpload(request.getParameter("file"));
-
     try {
+
+      VolunteerBoardDTO volunteerBoardDTO = new VolunteerBoardDTO();
+
+      JoinDTO owner = new JoinDTO();
+      owner.setNo(Integer.parseInt(request.getParameter("owner")));
+
+      volunteerBoardDTO.setOwner(owner);
+      volunteerBoardDTO.setTitle(request.getParameter("title"));
+      volunteerBoardDTO.setContent(request.getParameter("content"));
+      //    volunteerBoardDTO.setRegisteredDate(new Date(System.currentTimeMillis()));
+      //    volunteerBoardDTO.setRegisteredDate(Date.valueOf(request.getParameter("date")));
+      //    volunteerBoardDTO.setFileUpload(request.getParameter("file"));
+
+
       volunteerBoardDao.insert(volunteerBoardDTO);
+      sqlSession.commit();
 
       //      for (VolunteerBoardAttachedFile volunteerAttachedFile : volunteerBoardDTO.getFileUpload()) {
       //        volunteerBoardDao.insertFile(volunteerBoardDTO.getNo(), volunteerAttachedFile.getFilepath());
       //      }
-      sqlSession.commit();
       response.setHeader("Refresh", "1;url=boardList");
       request.getRequestDispatcher("VolunteerBoardAdd.jsp").forward(request, response);
 
