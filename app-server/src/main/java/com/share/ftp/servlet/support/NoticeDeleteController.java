@@ -44,6 +44,7 @@ public class NoticeDeleteController extends HttpServlet {
       response.sendRedirect("noticeList");
 
     } catch (Exception e) {
+      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
