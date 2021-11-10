@@ -33,6 +33,8 @@ public class VolunteerBoardListController extends GenericServlet {
 
       request.setAttribute("volunteerBoardList", volunteerBoardList);
 
+      //request.setAttribute("pageTitle", "게시글목록");
+
       RequestDispatcher 요청배달자 = request.getRequestDispatcher("VolunteerBoardList.jsp");
       요청배달자.forward(request, response);
 
