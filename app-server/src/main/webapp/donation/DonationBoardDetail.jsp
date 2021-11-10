@@ -43,10 +43,10 @@
     
     <label for='f-taget'>목표금액</label> 
     <input id='f-taget' type="number" name='moneyTarget' value='${donationBoardDTO.moneyTarget}'><br>
-    <%-- 
+    
     <label for='f-remainMoney'>남은금액</label> 
     <input id='f-remainMoney' type='text' name='remainMoney' value='${remainMoney}'><br>
-    --%>
+    
  <button>[변경]</button>
  <a href='registerList?no=${donationBoardDTO.no}'>[기부자내역]</a>
  <a href='boardList'>[목록]</a>

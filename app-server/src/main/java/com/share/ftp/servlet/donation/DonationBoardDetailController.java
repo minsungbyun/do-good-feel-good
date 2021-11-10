@@ -9,6 +9,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import com.share.ftp.dao.DonationBoardDao;
+import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.domain.donation.DonationBoardDTO;
 
 @WebServlet("/donation/boardDetail")
@@ -17,11 +18,13 @@ public class DonationBoardDetailController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
   DonationBoardDao donationBoardDao;
+  DonationRegisterDao donationRegisterDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     donationBoardDao = (DonationBoardDao) 웹애플리케이션공용저장소.getAttribute("donationBoardDao");
+    donationRegisterDao = (DonationRegisterDao) 웹애플리케이션공용저장소.getAttribute("donationRegisterDao");
   }
 
   @Override
@@ -31,6 +34,7 @@ public class DonationBoardDetailController extends GenericServlet {
     try {
 
       int no = Integer.parseInt(request.getParameter("no"));
+      long remainMoney = donationRegisterDao.findByRemainMoney(no);
       DonationBoardDTO donationBoardDTO = donationBoardDao.findByDonationNo(no);
       //      long remainMoney = donationRegisterDao.findByRemainMoney(donationBoardDTO.getNo());
 
@@ -39,6 +43,7 @@ public class DonationBoardDetailController extends GenericServlet {
       }
 
       request.setAttribute("donationBoardDTO", donationBoardDTO);
+      request.setAttribute("remainMoney", remainMoney);
       request.getRequestDispatcher("/donation/DonationBoardDetail.jsp").forward(request, response);
     } catch (Exception e) {
       request.setAttribute("error", e);
