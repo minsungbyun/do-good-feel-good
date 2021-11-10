@@ -18,11 +18,13 @@ public class DonationBoardListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
   DonationBoardDao donationBoardDao;
+  //  DonationRegisterDao donationRegisterDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     donationBoardDao = (DonationBoardDao) 웹애플리케이션공용저장소.getAttribute("donationBoardDao");
+    //    donationRegisterDao = (DonationRegisterDao) 웹애플리케이션공용저장소.getAttribute("donationRegisterDao");
   }
 
   @Override
@@ -30,7 +32,6 @@ public class DonationBoardListController extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-
 
       Collection<DonationBoardDTO> donationBoardList = donationBoardDao.findAllApply();
 
