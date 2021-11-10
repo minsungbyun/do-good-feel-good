@@ -5,6 +5,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.domain.admin.NoticeDTO;
 
+@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
 @WebServlet("/support/noticeAdd")
 public class NoticeAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
@@ -34,14 +36,17 @@ public class NoticeAddController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    NoticeDTO noticeDTO = new NoticeDTO();
-
-    noticeDTO.setTitle(request.getParameter("title"));
-    noticeDTO.setContent(request.getParameter("content")); 
-    //    noticeDTO.setFileUpload((List<NoticeAttachedFile>)request.getAttribute("fileUpload"));
-    //    noticeDTO.setFileUpload((List<NoticeAttachedFile>)request.getAttribute("fileUpload"));
 
     try {
+      NoticeDTO noticeDTO = new NoticeDTO();
+
+      noticeDTO.setTitle(request.getParameter("title"));
+      noticeDTO.setContent(request.getParameter("content")); 
+      noticeDTO.setFileUpload(request.getParameter("photo"));
+      //    noticeDTO.setFileUpload((List<NoticeAttachedFile>)request.getAttribute("fileUpload"));
+
+      Part file
+
       noticeDao.insert(noticeDTO);
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=noticeList");
