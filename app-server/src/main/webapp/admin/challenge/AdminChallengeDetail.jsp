@@ -53,7 +53,7 @@
         </div>
         <!-- //serch -->
         <h1>챌린지 상세</h1>
-    <form action='update' method='post'>
+    <form action='update' method='post' enctype="multipart/form-date">
         <label for='f-no'>번호</label> 
         <input id='f-no' type='text' name='no' value='${challengeDTO.no}' readonly><br>
         
@@ -68,7 +68,7 @@
         
         <label for='f-endDate'>종료일</label> 
         <input id='f-endDate' type='date' name='endDate' value='${challengeDTO.endDate}'><br>
-    
+
         <label for='f-registeredDate'>등록일</label> 
         <span id='f-registeredDate'>${challengeDTO.registeredDate}</span><br>
     <button>변경</button>

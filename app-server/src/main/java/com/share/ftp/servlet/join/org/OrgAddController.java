@@ -54,7 +54,7 @@ public class OrgAddController extends HttpServlet {
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list");
 
-      request.getRequestDispatcher("/join/org/OrgUserAdd.jsp").forward(request, response);
+      request.getRequestDispatcher("OrgUserAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.

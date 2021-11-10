@@ -76,6 +76,7 @@
     <main>
       <div class="page-section">
 				<div class="container">
+				<form action="add" name="form" method="post" onsubmit="validLoginForm(); return false;">
 					<h1 class="title-h">회원가입 - 기관</h1>
 				  <div class="join-wrap">
             <h5>기본정보<span class="required_title"><em class="icon_required">·</em>표시는 반드시 입력하셔야 합니다.</span></h5>
@@ -88,7 +89,7 @@
                       <td>
                         <label for='f-id' class="sr-only sr-cont">아이디</label> 
                         <input id='f-id' class="form-control form-sub-control box-input" type='text' name='id' placeholder="아이디">
-                        <button type="button" class="btnj btn btn-primary">중복확인</button>
+                        <button type="button" class="btnj btn btn-primary" id="org-id">중복확인</button>
                       </td>
                     </tr>
                     <!-- //아이디 -->
@@ -98,6 +99,13 @@
                         <label for='f-password' class="sr-only">비밀번호</label> 
                         <input id='f-password' class="form-control box-input" type='password' name='password' placeholder="8-16자의 영문 및 숫자, 특수문자를 모두 포함">
                       </td>
+                    </tr>
+                   <tr>
+                    <th><em class="icon_required">·</em><span>비밀번호확인</span></th>
+                    <td>
+                      <label for='f-passwordConfirm' class="sr-only">비밀번호확인</label> 
+                      <input id='f-passwordConfirm' class="form-control box-input" type='password' name='passwordConfirm' placeholder="8-16자의 영문 및 숫자, 특수문자를 모두 포함">
+                    </td>
                     </tr>
                     <!-- //비밀번호 -->
                     <tr>
@@ -129,7 +137,7 @@
                       <td>
                         <div>
                           <label for='f-postNo' class="sr-only">우편번호</label> 
-                          <input id='f-postNo' class="form-control form-sub-control box-input" type='number' name='number' readonly>
+                          <input id='f-postNo' class="form-control form-sub-control box-input" type='text' name='postNo' readonly>
 	                        <button type="button" onclick="findByPostNo()" value="우편번호 찾기" class="btnj btn btn-primary" id="post-no">>우편번호</button>
                         </div>
                         <div>
@@ -176,39 +184,132 @@
               </div>
             </div>
             <!-- //join-wrap -->
+            
+				</form>
 				</div>
         <!-- //container -->
 			</div>
 		</main>  
 		
-		       <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-        <script>
 
-        document.querySelector("#person-id").onclick = () => {
-        var name = document.querySelector("#f-id");
-        if (name.value == "") {
-          alert("아이디를 정확히 입력해주세요");
-          return; // submit 버튼이 아니라 일반 버튼이기 때문에 false를 리턴할 필요가 없다.
-        } 
-      }
+       <script>
+         document.querySelector("#org-id").onclick = () => {
+           var name = document.querySelector("#f-id");
+           if (name.value == "") {
+             alert("이미 존재하는 아이디입니다!");
+             name.focus();
+             return; 
 
-      //document.querySelector(".btnj").onclick = () => {
-      //  var postNo = document.querySelector("#f-postNo");
-      //  if (postNo.value == "") {
-      //    alert("우편번호를 입력해주세요.");
-      //    return; // submit 버튼이 아니라 일반 버튼이기 때문에 false를 리턴할 필요가 없다.
-      //  }
-      //}
+            } else {
+              alert("사용 가능한 아이디입니다!");
+            }
+          }
+            
+          // 유효성 검사 메서드
+          function validLoginForm() {
+          // onsubmit="validLoginForm(this); return false;"도 가능
+          var form = document.form; // name으로 form tag 찾기
+          //var form = document.querySelector("form"); // form태그 바로 찾기
+          //var form = document.querySelector("#id-tag"); // id로 찾기 
+          //var form = document.querySelector(".ccc"); // class로 찾기
 
-      
-    //  document.querySelector("#post-no").onclick = () => {
-    //    var postNo = document.querySelector("#f-postNo");
-    //    if (postNo.value.length < 5 || postNo.value == "") {
-    //      alert("우편번호를 입력해주세요");
-    //      return; // submit 버튼이 아니라 일반 버튼이기 때문에 false를 리턴할 필요가 없다.
-    //    }
-    //  }
+          var loadForm = false;
+          if (loadForm) {
+            alert("처리중입니다. 잠시만 기다려주세요");
+            return;
+          }
 
+          form.id.value = form.id.value.trim(); // 공백제거
+          
+          if(form.id.value.length == 0) {
+            alert("로그인 아이디를 입력해주세요!");
+            form.id.focus();
+            return;
+          }
+
+          form.password.value = form.password.value.trim();
+          
+          if(form.password.value.length == 0) {
+            alert("로그인 비밀번호를 입력해주세요!");
+            form.password.focus();
+            return;
+          }
+
+          form.passwordConfirm.value = form.passwordConfirm.value.trim();
+
+          if (form.password.value != form.passwordConfirm.value ) {
+            alert("비밀번호가 일치하지 않습니다! 다시 입력해주세요");
+            form.passwordConfirm.focus();
+            return;
+          }
+
+          form.name.value = form.name.value.trim();
+          
+          if(form.name.value.length == 0) {
+            alert("이름을 입력해주세요!");
+            form.name.focus();
+            return;
+          }
+
+          form.tel.value = form.tel.value.trim();
+          
+          if(form.tel.value.length == 0) {
+            alert("전화번호를 입력해주세요!");
+            form.tel.focus();
+            return;
+          } else if (form.tel.value.indexOf("-") == -1) {
+            alert("-를 포함해서 입력해주세요! ex) 010-xxxx-xxxx");
+            form.tel.focus();
+            return;
+          }
+
+          form.email.value = form.email.value.trim();
+          
+          if(form.email.value.length == 0) {
+            alert("이메일을 입력해주세요!");
+            form.email.focus();
+            return;
+
+          } else if (form.email.value.indexOf("@") == -1) {
+            alert("@를 포함해서 입력해주세요! ex) sample@naver.com");
+            form.email.focus();
+            return;
+          }
+          
+          form.postNo.value = form.postNo.value.trim();
+          
+          if(form.postNo.value.length == 0) {
+            alert("기본주소를 입력해주세요!");
+            form.postNo.focus();
+            return;
+          }
+
+          form.corpNo.value = form.corpNo.value.trim();
+          
+          if(form.corpNo.value.length == 0) {
+            alert("사업자번호를 입력해주세요!");
+            form.corpNo.focus();
+            return;
+          } else if (form.corpNo.value.indexOf("-") == -1) {
+            alert("-를 포함해서 입력해주세요! ex) xxx-xx-xxxxx");
+            form.corpNo.focus();
+            return;
+          }
+
+          form.submit();
+          loadForm = true;
+        }
+
+//document.querySelector("button").addEventListener("click", validLoginForm());
+
+
+      </script>
+
+
+        
+        
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
     function findByPostNo() {
       new daum.Postcode({
             oncomplete: function(data) {
