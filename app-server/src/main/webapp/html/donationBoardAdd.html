@@ -78,6 +78,11 @@
             <h5>기관<span class="required_title"><em class="icon_required">·</em>표시는 반드시 입력하셔야 합니다.</span></h5>
               <div class="base-table">
                 <table class="join-table">
+                <form action='boardAdd' method="post">
+								<c:forEach items="${categorys}" var="category">
+								    <label for='f-category'>${category.title}</label> 
+								    <input id='f-category' type='radio' name='category' value="${category.no}"><br>
+								</c:forEach>
                   <caption>모금함 신청 정보</caption>
 									<tbody>
                     <tr>
@@ -100,7 +105,7 @@
                       <th><em class="icon_required">·</em><span>내용</span></th>
                       <td>
                         <label for='f-content' class="sr-only">내용</label> 
-                        <input id='f-content' class="form-control box-input" type='text' name='content'>
+                        <textarea id='f-content' class="form-control box-input" name='content'></textarea>
                       </td>
                     </tr>
                     <!-- //내용 -->
@@ -123,14 +128,15 @@
                     <tr>
                       <th><em class="icon_required">·</em><span>시작일</span></th>
                       <td>
-                        <label for='f-startDate' class="sr-only">이메일</label> 
-                        <input id="startDate" class="form-control box-input" type="date">
+                        <label for='f-startDate' class="sr-only">시작일</label> 
+                        <input id="f-startDate" class="form-control box-input" type="date" name="startDate">
                     
                     <!-- //시작일 -->
                     <tr>
                       <th><em class="icon_required">·</em><span>종료일</span></th>
                       <td>
-                      <input id="endDate" class="form-control box-input" type="date">
+                      <label for='f-endDate' class="sr-only">시작일</label> 
+                      <input id="f-endDate" class="form-control box-input" type="date" name="endDate">
                     
                     <!-- //종료일 -->
                     <tr>
