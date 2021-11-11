@@ -97,7 +97,7 @@
                       <td>
                         <label for='f-id' class="sr-only sr-cont">아이디</label> 
                         <input id='f-id' class="form-control form-sub-control box-input" type='text' name='id' placeholder="아이디">
-                        <button type="button" class="btnj btn btn-primary" id="id-check">중복확인</button>
+                        <button type="button" class="btnj btn btn-primary" data-toggle="modal" id="id-check">중복확인</button>
                       </td>
                     </tr>
                     <!-- //아이디 -->
