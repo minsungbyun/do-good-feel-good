@@ -2,8 +2,6 @@ package com.share.ftp.servlet.join.personal;
 
 import java.io.IOException;
 import java.sql.Date;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,16 +20,15 @@ public class PersonalAddController extends HttpServlet {
   PersonalDao personalDao;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init()  {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     personalDao = (PersonalDao) 웹애플리케이션공용저장소.getAttribute("personalDao");
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
 
     PersonalDTO personalDTO = new PersonalDTO();
 
@@ -53,18 +50,14 @@ public class PersonalAddController extends HttpServlet {
       personalDao.insert(personalDTO);
       personalDao.insertPersonal(personalDTO.getNo(), personalDTO.getBirthdate(), personalDTO.getLevel());
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=list");
 
-      request.getRequestDispatcher("/join/peosonal/PeosonalUserAdd.jsp").forward(request, response);
+      response.setHeader("Refresh", "1;url=../../index.jsp");
+      request.getRequestDispatcher("/join/personal/PersonalUserAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
-      // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
       request.setAttribute("error", e);
-      e.printStackTrace();
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
 
-      // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
-      요청배달자.forward(request, response);
     }
   }
 }

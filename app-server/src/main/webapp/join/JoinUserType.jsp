@@ -88,23 +88,23 @@
                 <!-- type-box -->
                 <div class="col-md-6 col-lg-4 py-3type-box">
                   <div class="type-box">
-                    <h7 class="type-h7">누구나 가입 가능</h7>
+                    <h6 class="type-h7">누구나 가입 가능</h6>
                     <h5>개인회원</h5>
-                    <a href="join_personal.html" class="btn btn-primary btn-sm btn-block">가입하기</a>
+                    <a href="personal/form" class="btn btn-primary btn-sm btn-block">가입하기</a>
                   </div>
                 </div>
                 <div class="col-md-6 col-lg-4 py-3type-box">
                   <div class="type-box">
-                    <h7 class="type-h7">2인 이상</h7>
+                    <h6 class="type-h7">2인 이상</h6>
                     <h5>단체회원</h5>
-                    <a href="join_group.html" class="btn btn-secondary btn-sm btn-block" >가입하기</a>
+                    <a href="group/form" class="btn btn-secondary btn-sm btn-block" >가입하기</a>
                   </div>
                 </div>
                 <div class="col-md-6 col-lg-4 py-3type-box">
                   <div class="type-box">
-                    <h7 class="type-h7">사업자번호를 가지고 있는</h7>
+                    <h6 class="type-h7">사업자번호를 가지고 있는</h6>
                     <h5>기관회원</h5>
-                    <a href="join_org.html" class="btn btn-secondary btn-sm btn-block">가입하기</a>
+                    <a href="org/form" class="btn btn-secondary btn-sm btn-block">가입하기</a>
                   </div>
                 </div>
                 <!-- //type-box -->
@@ -115,7 +115,6 @@
         </div>
         </div>
         <!-- //container -->
-      </div>
     </main>  
   </body>
 </html>
