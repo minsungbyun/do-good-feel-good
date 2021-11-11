@@ -1,7 +1,6 @@
 package com.share.ftp.servlet.volunteer;
 
 import java.io.IOException;
-import java.sql.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -15,49 +14,43 @@ import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.dao.VolunteerShortReviewDao;
 import com.share.ftp.domain.community.VolunteerShortReviewDTO;
 import com.share.ftp.domain.join.JoinDTO;
-import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 
 @WebServlet("/volunteer/reviewAdd")
 public class VolunteerShortReviewAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
+  VolunteerDao volunteerDao;
   VolunteerShortReviewDao volunteerShortReviewDao;
   SqlSession sqlSession;
-  VolunteerDao volunteerDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    volunteerDao = (VolunteerDao) 웹애플리케이션공용저장소.getAttribute("volunteerDao");
     volunteerShortReviewDao = (VolunteerShortReviewDao) 웹애플리케이션공용저장소.getAttribute("volunteerShortReviewDao");
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
 
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-
     JoinDTO owner = new JoinDTO();
     owner.setNo(Integer.parseInt(request.getParameter("owner")));
 
-    VolunteerRequestDTO volNo = new VolunteerRequestDTO();
-    volNo.setNo(Integer.parseInt(request.getParameter("volNo")));
+    //    VolunteerRequestDTO volNo = new VolunteerRequestDTO();
+    //    volNo.setNo(Integer.parseInt(request.getParameter("volNo")));
 
     VolunteerShortReviewDTO volunteerShortReviewDTO = new VolunteerShortReviewDTO();
 
-    volunteerShortReviewDTO.setOwner(owner);
-    volunteerShortReviewDTO.setVolNo(volNo);
     volunteerShortReviewDTO.setContent(request.getParameter("content"));
-    volunteerShortReviewDTO.setRegisteredDate(Date.valueOf(request.getParameter("date")));
+    volunteerShortReviewDTO.setOwner(owner);
 
     try {
+      volunteerShortReviewDTO.setVolNo(Integer.parseInt(request.getParameter("volBoardNo")));
       volunteerShortReviewDao.insert(volunteerShortReviewDTO);
-
-      //      for (VolunteerBoardAttachedFile volunteerAttachedFile : volunteerBoardDTO.getFileUpload()) {
-      //        volunteerBoardDao.insertFile(volunteerBoardDTO.getNo(), volunteerAttachedFile.getFilepath());
-      //      }
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=reviewList");
+      response.setHeader("Refresh", "1;url=reviewList?volNo=" + Integer.parseInt(request.getParameter("volNo")));
       request.getRequestDispatcher("VolunteerShortReviewAdd.jsp").forward(request, response);
 
     } catch (Exception e) {

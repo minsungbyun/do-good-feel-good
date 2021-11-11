@@ -3,23 +3,23 @@
     trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
-	<head>
-	  <title>함께해요 : 나눔이야기 등록</title>
-	  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  <head>
+    <title>함께해요 : 나눔이야기 등록</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   
-	  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-	  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-	  
-	  <style>
-	  label {
-	    width: 640px;
-	  }
+    <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    
+    <style>
+    label {
+      width: 640px;
+    }
   </style>
 </head>
 <body>
 <div class="container">
 <h1>봉사 게시글 등록</h1><br>
-<form action='boardAdd'>
+<form action='boardAdd' method="post" enctype="multipart/form-data">
 
 <div class="mb-3 row">
     <label for='f-owner' class="col-sm-2 col-form-label">작성자</label>
@@ -43,6 +43,13 @@
   </div>
   </div>
   
+  <div class="mb-3 row">
+  <label for='f-photo' class="col-sm-2 col-form-label">사진</label> 
+  <div class="col-sm-10">
+    <input id='f-photo' type='file' name='photo' class="form-control">
+  </div>
+</div>
+  
 
 <%--  <div class="mb-3 row">
     <label for='f-content' class="col-sm-2 col-form-label">내용</label> 
@@ -59,20 +66,8 @@
   </div>  
    --%>
 
-
-
 <button class="btn btn-primary btn-sm">등록</button><br>
 </form>
 </div><!-- .container -->
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-

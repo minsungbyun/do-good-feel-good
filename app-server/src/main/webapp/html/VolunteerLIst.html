@@ -53,7 +53,7 @@
         <div class="navbar-collapse collapse" id="navbarContent">
           <ul class="navbar-nav ml-auto pt-3 pt-lg-0">
             <li class="nav-item active">
-              <a href="index.html" class="nav-link">함께해요</a>
+              <a href="#" class="nav-link">함께해요</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">소통해요</a>
@@ -71,8 +71,8 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">고객센터</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item active" href="#">공지사항</a>
                 <a class="dropdown-item" href="#">공지사항</a>
+                <a class="dropdown-item" href="#">문의사항</a>
               </div>
             </li>
           </ul>
@@ -104,6 +104,10 @@
   <main>
     <div class="page-section">
       <div class="container">
+        <div class="btn-regi" style="text-align:right;">
+          <a href="#" class="btn btn-outline-primary nBtn btn-sm" role="button" style="padding:8px 20px">개인봉사등록</a>
+          <a href="#" class="btn btn-outline-success nBtn btn-sm" role="button" style="padding:8px 20px">기관봉사등록</a>
+        </div>
         <!-- //filterable-btn -->
         <div class="filterable-btn">
           <button class="btn active" data-filter="*">전체</button>
@@ -119,38 +123,88 @@
       <!-- //filterable-btn -->
 
       <!-- card_body -->
-      <div class="card_body" style="overflow: hidden; box-sizing: border-box; width:100%;" >
+      <div class="card_body " style="overflow: hidden; box-sizing: border-box; width:100%; margin-top:45px;" >
 
-        <div class="card" style="width: 33.33%; float: left; padding:0 5%;  border: none;">
-          <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png" class="card-img-top" alt="..."> 
-          <div class="card-body">
-            <h5 class="card-title">봉사 테스트 1</h5>
-            <a href="vo" class="btn btn-secondary">상세보기</a>
-          </div>
-        </div>
-        
-         <div class="card" style="width: 33.33%; float: left;  padding: 0 5%; border: none; ">
+        <!-- 봉사목록 -->
+         <div class="card card-item" style="width: 33.33%; float: left;  padding: 0 5%; border: none; ">
           <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <h5 class="card-title vol-title">제목제목제(글자수제한걸기)</h5>
+            <p class="card-text"><span class="text-muted">2021.11.10~2021.11.25</span></p>
           </div>
           <ul class="list-group list-group-flush">
-				    <li class="list-group-item">Cras justo odio</li>
-				    <li class="list-group-item">Dapibus ac facilisis in</li>
-				    <li class="list-group-item">Vestibulum at eros</li>
-				  </ul>
-        </div>
-
-        <div class="card" style="width: 33.33%; float: left; padding: 0 5%; border: none;">
-          <img src="https://cdn-icons-png.flaticon.com/512/3039/3039788.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <li class="list-group-item" style="font-weight:bold;">
+              <span class="vol-cur">
+                  <span class="sr-only">참여인원</span>
+                  <b class="vol-count">0명</b>
+                  /
+                  <span class="sr-only">총 모집인원</span>
+                  5명
+                </span>
+              <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
+            </li>
+            <li class="list-group-item">~5일 남음</li>
+          </ul>
+          <div class="card-footer">
+            <small class="text-muted">주최자 ID</small>
           </div>
+         <span class="vol-type bu">비대면</span>
         </div>
+        <!-- //봉사목록 -->
+        
+        <!-- 봉사목록 -->
+         <div class="card card-item" style="width: 33.33%; float: left;  padding: 0 5%; border: none; ">
+          <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title vol-title">제목제목제(글자수제한걸기)</h5>
+            <p class="card-text"><span class="text-muted">2021.11.10~2021.11.25</span></p>
+          </div>
+          <ul class="list-group list-group-flush">
+				    <li class="list-group-item" style="font-weight:bold;">
+				      <span class="vol-cur">
+                  <span class="sr-only">참여인원</span>
+                  <b class="vol-count">0명</b>
+                  /
+                  <span class="sr-only">총 모집인원</span>
+                  5명
+                </span>
+				      <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
+				    </li>
+				    <li class="list-group-item">~5일 남음</li>
+				  </ul>
+				  <div class="card-footer">
+			      <small class="text-muted">주최자 ID</small>
+			    </div>
+			   <span class="vol-type bu">비대면</span>
+        </div>
+        <!-- //봉사목록 -->
+
+        <!-- 봉사목록 -->
+         <div class="card card-item" style="width: 33.33%; float: left;  padding: 0 5%; border: none; ">
+          <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title vol-title">제목제목제(글자수제한걸기)</h5>
+            <p class="card-text"><span class="text-muted">2021.11.10~2021.11.25</span></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" style="font-weight:bold;">
+              <span class="vol-cur">
+                  <span class="sr-only">참여인원</span>
+                  <b class="vol-count">0명</b>
+                  /
+                  <span class="sr-only">총 모집인원</span>
+                  5명
+                </span>
+              <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
+            </li>
+            <li class="list-group-item">~5일 남음</li>
+          </ul>
+          <div class="card-footer">
+            <small class="text-muted">주최자 ID</small>
+          </div>
+         <span class="vol-type bu">비대면</span>
+        </div>
+        <!-- //봉사목록 -->
       </div>
       <!-- //card_body -->
 
