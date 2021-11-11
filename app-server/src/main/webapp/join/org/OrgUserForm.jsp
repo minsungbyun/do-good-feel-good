@@ -76,7 +76,7 @@
     <main>
       <div class="page-section">
 				<div class="container">
-				<form action="add" name="form" method="post" onsubmit="validLoginForm(); return false;">
+				<form action="add" name="form" method="post" onsubmit="validLoginForm(); return false;" enctype="multipart/form-data">
 					<h1 class="title-h">회원가입 - 기관</h1>
 				  <div class="join-wrap">
             <h5>기본정보<span class="required_title"><em class="icon_required">·</em>표시는 반드시 입력하셔야 합니다.</span></h5>
@@ -108,6 +108,13 @@
                     </td>
                     </tr>
                     <!-- //비밀번호 -->
+                    <tr>
+			               <th><span>사진</span></th>
+			               <td>
+			               <label for='f-photo' class="sr-only">사진</label> 
+			               <input id='f-photo' class="form-control box-input" type='file' name='photo'>
+			               </td>
+			             </tr>
                     <tr>
                       <th><em class="icon_required">·</em><span>이름</span></th>
                       <td>

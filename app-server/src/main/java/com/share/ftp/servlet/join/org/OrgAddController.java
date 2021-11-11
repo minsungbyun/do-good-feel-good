@@ -1,15 +1,21 @@
 package com.share.ftp.servlet.join.org;
 
 import java.io.IOException;
+import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.OrgDao;
 import com.share.ftp.domain.join.OrgDTO;
+import net.coobird.thumbnailator.ThumbnailParameter;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+import net.coobird.thumbnailator.name.Rename;
 
 @WebServlet("/join/org/add")
 public class OrgAddController extends HttpServlet {
@@ -30,23 +36,54 @@ public class OrgAddController extends HttpServlet {
       throws ServletException, IOException {
 
 
-    OrgDTO orgDTO = new OrgDTO();
-
-    orgDTO.setId(request.getParameter("id"));
-    orgDTO.setPassword(request.getParameter("password"));
-    orgDTO.setName(request.getParameter("name"));
-    orgDTO.setTel(request.getParameter("tel"));
-    orgDTO.setEmail(request.getParameter("email"));
-    orgDTO.setPostNo(request.getParameter("postNo"));
-    orgDTO.setBasicAddress(request.getParameter("basicAddress"));
-    orgDTO.setDetailAddress(request.getParameter("detailAddress"));
-    orgDTO.setCorpNo(request.getParameter("corpNo"));
-    orgDTO.setFax(request.getParameter("fax"));
-    orgDTO.setHomepage(request.getParameter("homepage"));
-    orgDTO.setType(3);
-    orgDTO.setStatus(2);
-
     try {
+      OrgDTO orgDTO = new OrgDTO();
+
+      orgDTO.setId(request.getParameter("id"));
+      orgDTO.setPassword(request.getParameter("password"));
+      orgDTO.setName(request.getParameter("name"));
+      orgDTO.setTel(request.getParameter("tel"));
+      orgDTO.setEmail(request.getParameter("email"));
+      orgDTO.setPostNo(request.getParameter("postNo"));
+      orgDTO.setBasicAddress(request.getParameter("basicAddress"));
+      orgDTO.setDetailAddress(request.getParameter("detailAddress"));
+      orgDTO.setCorpNo(request.getParameter("corpNo"));
+      orgDTO.setFax(request.getParameter("fax"));
+      orgDTO.setHomepage(request.getParameter("homepage"));
+      orgDTO.setType(3);
+      orgDTO.setStatus(2);
+
+      Part photoPart = request.getPart("photo");
+      if (photoPart.getSize() > 0) {
+        String filename = UUID.randomUUID().toString();
+        photoPart.write(getServletContext().getRealPath("/upload/join") + "/" + filename);
+        orgDTO.setPhoto(filename);
+
+        Thumbnails.of(getServletContext().getRealPath("/upload/join") + "/" + filename)
+        .size(20, 20)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        //.toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_20x20";
+          }
+        });
+
+        Thumbnails.of(getServletContext().getRealPath("/upload/join") + "/" + filename)
+        .size(100, 100)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        //.toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_100x100";
+          }
+        });
+      }
+
       orgDao.insert(orgDTO);
       orgDao.insertOrg(orgDTO.getNo(), orgDTO.getCorpNo(), orgDTO.getFax(), orgDTO.getHomepage());
       sqlSession.commit();
