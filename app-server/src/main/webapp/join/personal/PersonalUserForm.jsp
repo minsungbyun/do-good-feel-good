@@ -84,7 +84,7 @@
   <main>
       <div class="page-section">
         <div class="container">
-          <form action="#" name="form" method="post" onsubmit="validLoginForm(); return false;" enctype="multipart/form-data">
+          <form action="add" name="form" method="post" onsubmit="validLoginForm(); return false;" enctype="multipart/form-data">
           <h1 class="title-h">회원가입 - 개인</h1>
           <div class="join-wrap">
             <h5>기본정보<span class="required_title"><em class="icon_required">·</em>표시는 반드시 입력하셔야 합니다.</span></h5>

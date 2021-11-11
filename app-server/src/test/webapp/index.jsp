@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta name="copyright" content="MACode ID, https://macodeid.com/"> -->
   
     <title>HappyShare</title>
     <!-- link -->
@@ -20,7 +21,11 @@
     <link rel="stylesheet" href="assets/css/style.css">
   </head>
   <body>
+    <!-- Back to top button -->
+    <div class="back-to-top"></div>
     <header>
+    
+    
       <div class="top-bar">
         <div class="container">
           <div class="row align-items-center">          
