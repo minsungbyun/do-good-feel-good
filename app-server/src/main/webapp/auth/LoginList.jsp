@@ -28,11 +28,7 @@
 </thead>
 <tbody>
 
-<c:if test="${empty joinUserList}">
-<div>
-등록된 개인회원이 없습니다.
-</div>
-</c:if>
+
 
 <c:forEach items="${joinUserList}" var="joinDTO">
 <tr>
