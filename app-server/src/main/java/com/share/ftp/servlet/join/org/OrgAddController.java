@@ -52,7 +52,7 @@ public class OrgAddController extends HttpServlet {
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=../../index.jsp");
 
-      request.getRequestDispatcher("/join/org/OrgUserAdd.jsp").forward(request, response);
+      request.getRequestDispatcher("OrgUserAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

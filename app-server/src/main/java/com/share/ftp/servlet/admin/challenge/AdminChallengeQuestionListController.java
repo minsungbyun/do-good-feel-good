@@ -38,7 +38,7 @@ public class AdminChallengeQuestionListController extends GenericServlet {
       Collection<ChallengeQuestionDTO> challengeQuestionList = challengeQuestionDao.findAllNo(challengeNo);
       request.setAttribute("challengeDTO", challengeDTO);
       request.setAttribute("challengeQuestionList", challengeQuestionList);
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/admin/challenge/AdminChallengeQuestionList1.jsp");
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/admin/challenge/AdminChallengeQuestionList.jsp");
       요청배달자.forward(request, response);
     } catch (Exception e) {
       request.setAttribute("error", e);

@@ -16,7 +16,7 @@
 </head>
 <body>
 <h1>새챌린지(MVC)</h1>
-<form action='add'>
+<form action='add' method='post'>
 <label for='f-title'>제목</label> <input id='f-title' type='text' name='title'><br>
 <label for='f-content'>내용</label> <input id='f-content' type='text' name='content'><br>
 <label for='f-startDate'>시작일</label> <input id='f-startDate' type='date' name='startDate'><br>
