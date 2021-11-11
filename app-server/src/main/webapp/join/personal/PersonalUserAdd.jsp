@@ -7,8 +7,8 @@
   <title>개인회원 등록</title>
 </head>
 <body>
-<h1>개인회원 등록결과(MVC)</h1>
-<p>happyshare 가입을 환영합니다.</p>
+	<h1>개인회원</h1>
+	<p>happyshare 가입을 환영합니다.</p>
 </body>
 </html>
 

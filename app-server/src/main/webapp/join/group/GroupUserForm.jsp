@@ -76,7 +76,7 @@
 		 <main>
 		   <div class="page-section">
 			<div class="container">
-			<form action="#" name="form" method="post" onsubmit="validLoginForm(); return false;">
+			<form action="add" name="form" method="post" onsubmit="validLoginForm(); return false;" enctype="multipart/form-data">
 				<h1 class="title-h">회원가입 - 단체</h1>
 				<div class="join-wrap">
 				 <h5>기본정보<span class="required_title"><em class="icon_required">·</em>표시는 반드시 입력하셔야 합니다.</span></h5>
@@ -109,6 +109,13 @@
 							  <input id='f-passwordConfirm' class="form-control box-input" type='password' name='passwordConfirm' placeholder="8-16자의 영문 및 숫자, 특수문자를 모두 포함">
 							</td>
 						  </tr>
+						  <tr>
+               <th><em class="icon_required">·</em><span>사진</span></th>
+               <td>
+               <label for='f-photo' class="sr-only">사진</label> 
+               <input id='f-photo' class="form-control box-input" type='file' name='photo'>
+               </td>
+             </tr>
 						 <tr>
 						   <th><em class="icon_required">·</em><span>이름</span></th>
 						   <td>
@@ -156,7 +163,7 @@
 						   <th><em class="icon_required">·</em><span>소속인원</span></th>
 						   <td>
 							 <label for='f-groupCount' class="sr-only">소속인원</label> 
-							 <input id='f-groupCount' class="form-control box-input" type='nember' name='groupCount'>
+							 <input id='f-groupCount' class="form-control box-input" type='number' name='groupCount'>
 						   </td>
 						 </tr>
 						 <!-- //이름 -->

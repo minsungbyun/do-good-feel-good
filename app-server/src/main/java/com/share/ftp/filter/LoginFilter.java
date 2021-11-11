@@ -9,7 +9,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-//@WebFilter("/login/*") 
+//@WebFilter("/auth/*") 
 public class LoginFilter implements Filter {
 
   @Override

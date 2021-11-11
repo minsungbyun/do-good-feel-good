@@ -16,7 +16,7 @@
 </head>
 <body>
 <h1>봉사게시글 댓글 등록</h1>
-<form action='commentAdd'>
+<form action='commentAdd' method="post">
 <div class= "class" name="name" id="id" style="display:none"></div>
 
 <label for='f-volBoardNo'>게시글번호</label>

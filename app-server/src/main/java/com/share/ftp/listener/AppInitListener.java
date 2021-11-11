@@ -89,6 +89,8 @@ public class AppInitListener implements ServletContextListener {
       웹애플리케이션공용저장소.setAttribute("questionDao", questionDao);
       웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
 
+      웹애플리케이션공용저장소.setAttribute("contextPath", 웹애플리케이션공용저장소.getContextPath());
+
     } catch (Exception e) {
 
       e.printStackTrace();

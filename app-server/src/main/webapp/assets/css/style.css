@@ -46,6 +46,11 @@ body {
   font-family: "Montserrat", "Noto Sans KR", "나눔고딕";
 }
 
+.active {
+	color:#007bff;
+  font-weight:bold;
+}
+
 .loginSns a {
   display: block;
   position: relative;
@@ -612,3 +617,103 @@ padding-top:15px;
 
 }
 
+/* volunteer */
+.vol-title {
+	height:50px;
+}
+
+.card-item {
+	position:relative;
+}
+
+.vol-type {
+	position: absolute;
+
+  min-width: 40px;
+  height: 33px;
+  line-height: 32px;
+  text-align: center;
+  background: #4967b0;
+  padding: 0 10px;
+  color: #fff;
+  border-radius: 6px;
+}
+
+.bu {
+	background: #4967b0;
+  color: #fff;
+}
+
+.vol-cur {
+  margin: 10px 0 0 3px;
+  color: #959595;
+  vertical-align: top;
+}
+
+.vol-count {
+  color:#333;
+}
+
+.vol-detail {
+	overflow:hidden;
+	box-sizing:border-box;
+	padding-top:10px;
+}
+
+.vol-de-img {
+	width:50%;
+	height:500px;
+	background:#555;
+	float:left;
+	border:1px solid #cfcfcf;
+}
+
+.vol-de-img img {
+	width:100%;
+}
+
+.vol-infor-wrap {
+	width:510px;
+	height:100px;
+	
+	float:right;
+	box-sizing:border-box;
+}
+
+.vol-joiner {
+	padding:10px;
+	height:150px;
+	border:1px solid #cfcfcf;
+	margin-bottom:20px;
+}
+
+.vol-owner {
+	height:80px;
+	border:1px solid #cfcfcf;
+	padding:10px;
+	margin-bottom:20px;
+}
+
+.vol-owner .owner-right {
+	border-right: 1px solid #dfe1eb;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.vol-detail-infor {
+	height:230px;
+	border:1px solid #cfcfcf;
+	padding:10px;
+	
+}
+
+.content-box {
+	width:100%;
+	height:700px;
+	background:#555;
+}
+
+.content-map {
+	height:500px;
+	background:#888;
+}

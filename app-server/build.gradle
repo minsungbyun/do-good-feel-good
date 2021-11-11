@@ -59,8 +59,14 @@ dependencies {
   
    // JSTL 구현체
    implementation 'javax.servlet:jstl:1.2'
+   
+   // Thumbnailator 썸네일 생성 라이브러리
+  implementation 'net.coobird:thumbnailator:0.4.14'
+  
+  // Apache의 파일업로드 처리 라이브러리
+  implementation 'commons-fileupload:commons-fileupload:1.4'
      
-
+   
   // Google JSON 라이브러리
   implementation 'com.google.code.gson:gson:2.8.8'
   

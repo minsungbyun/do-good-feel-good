@@ -20,6 +20,7 @@
     <result column="type" property="type"/>
     <result column="status" property="status"/>
     <result column="note" property="note"/>
+    <result column="photo" property="photo"/>
     
  
   <!--    <result column="last_login" property="viewCount"/>-->
