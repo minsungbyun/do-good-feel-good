@@ -4,10 +4,9 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
-import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 
 public class VolunteerShortReviewDTO {
-  private VolunteerRequestDTO volNo;
+  private int volNo;
   private int no;
   private String content;
   private JoinDTO owner;
@@ -23,12 +22,12 @@ public class VolunteerShortReviewDTO {
         + "]";
   }
 
-  public VolunteerRequestDTO getVolNo() {
+  public int getVolNo() {
 
     return volNo;
   }
 
-  public void setVolNo(VolunteerRequestDTO volNo) {
+  public void setVolNo(int volNo) {
     this.volNo = volNo;
   }
 

@@ -21,6 +21,7 @@ public class JoinDTO {
   private int status;
   private String note;
   private Date registerDate;
+  private String photo;
 
 
   @Override
@@ -29,8 +30,9 @@ public class JoinDTO {
         + ", adminPassword=" + adminPassword + ", id=" + id + ", password=" + password + ", name="
         + name + ", tel=" + tel + ", email=" + email + ", postNo=" + postNo + ", basicAddress="
         + basicAddress + ", detailAddress=" + detailAddress + ", status=" + status + ", note="
-        + note + ", registerDate=" + registerDate + "]";
+        + note + ", registerDate=" + registerDate + ", photo=" + photo + "]";
   }
+
 
   public int getNo() {
     return no;
@@ -122,6 +124,11 @@ public class JoinDTO {
   public void setRegisterDate(Date registerDate) {
     this.registerDate = registerDate;
   }
-
+  public String getPhoto() {
+    return photo;
+  }
+  public void setPhoto(String photo) {
+    this.photo = photo;
+  }
 
 }

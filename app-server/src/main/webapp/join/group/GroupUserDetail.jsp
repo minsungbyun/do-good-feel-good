@@ -16,7 +16,7 @@
 </head>
 <body>
 <h1>단체회원 상세(MVC + EL)</h1>
-<form action='update'>
+<form action='update' method="post" enctype="multipart/form-data">
     <label for='f-no'>번호</label> 
     <input id='f-no' type='text' name='no' value='${groupDTO.no}' readonly><br>
     
@@ -25,6 +25,12 @@
     
     <label for='f-password'>암호</label> 
     <input id='f-password' type='password' name='password'><br>
+    
+    <label for='f-name'>사진</label> 
+    <a href="../../upload/join/${groupDTO.photo}">
+        <img id="f-photo-image" src="../../upload/join/${groupDTO.photo}_100x100.jpg">
+    </a>
+    <input id='f-photo' type='file' name='photo' class="form-control"><br>
     
     <label for='f-name'>이름</label> 
     <input id='f-name' type='text' name='name' value='${groupDTO.name}'><br>

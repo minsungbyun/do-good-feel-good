@@ -1,18 +1,28 @@
 package com.share.ftp.servlet.support;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.NoticeDao;
+import com.share.ftp.domain.admin.NoticeAttachedFile;
 import com.share.ftp.domain.admin.NoticeDTO;
+import net.coobird.thumbnailator.ThumbnailParameter;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+import net.coobird.thumbnailator.name.Rename;
 
+@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
 @WebServlet("/support/noticeAdd")
 public class NoticeAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
@@ -23,8 +33,8 @@ public class NoticeAddController extends HttpServlet {
 
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     noticeDao = (NoticeDao) 웹애플리케이션공용저장소.getAttribute("noticeDao");
     //    generalDao = (GeneralDao) 웹애플리케이션공용저장소.getAttribute("generalDao");
@@ -34,14 +44,49 @@ public class NoticeAddController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    NoticeDTO noticeDTO = new NoticeDTO();
-
-    noticeDTO.setTitle(request.getParameter("title"));
-    noticeDTO.setContent(request.getParameter("content")); 
-    //    noticeDTO.setFileUpload((List<NoticeAttachedFile>)request.getAttribute("fileUpload"));
-    //    noticeDTO.setFileUpload((List<NoticeAttachedFile>)request.getAttribute("fileUpload"));
 
     try {
+      NoticeDTO noticeDTO = new NoticeDTO();
+
+      noticeDTO.setTitle(request.getParameter("title"));
+      noticeDTO.setContent(request.getParameter("content")); 
+      //    noticeDTO.setFileUpload((List<NoticeAttachedFile>)request.getAttribute("fileUpload"));
+
+      Part photoPart = request.getPart("fileUpload");
+      if (photoPart.getSize() > 0) {
+        String filename = UUID.randomUUID().toString();
+        photoPart.write(getServletContext().getRealPath("/upload/support") + "/" + filename);
+        NoticeAttachedFile fn = new NoticeAttachedFile();
+        fn.setFilepath(filename);
+        List<NoticeAttachedFile> fc = new ArrayList<>();
+        fc.add(fn);
+        noticeDTO.setFileUpload(fc);
+
+        Thumbnails.of(getServletContext().getRealPath("/upload/support") + "/" + filename)
+        .size(20, 20)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        //.toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_20x20";
+          }
+        });
+
+        Thumbnails.of(getServletContext().getRealPath("/upload/support") + "/" + filename)
+        .size(100, 100)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        //.toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_100x100";
+          }
+        });
+      }
+
       noticeDao.insert(noticeDTO);
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=noticeList");

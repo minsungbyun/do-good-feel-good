@@ -25,6 +25,7 @@
     <result column="type" property="type"/>
     <result column="status" property="status"/>
     <result column="note" property="note"/>
+    <result column="photo" property="photo"/>
   <!--    <result column="last_login" property="viewCount"/>-->
   </resultMap>
   
@@ -32,8 +33,8 @@
   
   <insert id="insert" parameterType="PersonalDTO"
           useGeneratedKeys="true" keyColumn="user_no" keyProperty="no">
-    insert into ftp_user(id,password,name,tel,email,post_no,basic_address,detail_address,type,status)
-    values(#{id},password(#{password}),#{name},#{tel},#{email},#{postNo},#{basicAddress},#{detailAddress},#{type},#{status})
+    insert into ftp_user(id,password,name,tel,email,post_no,basic_address,detail_address,type,status,photo)
+    values(#{id},password(#{password}),#{name},#{tel},#{email},#{postNo},#{basicAddress},#{detailAddress},#{type},#{status},#{photo})
   </insert>
   
   <insert id="insertPersonal">
@@ -63,6 +64,7 @@
 	     post_no=#{postNo},
 	     basic_address=#{basicAddress},
 	     detail_address=#{detailAddress},
+	     photo=#{photo},
 	     password=password(#{password})
 	   where 
 	      user_no=#{no}

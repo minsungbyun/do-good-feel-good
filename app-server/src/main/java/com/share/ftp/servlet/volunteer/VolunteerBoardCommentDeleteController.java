@@ -1,4 +1,4 @@
-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 package com.share.ftp.servlet.volunteer;
+package com.share.ftp.servlet.volunteer;
 
 import java.io.IOException;
 import javax.servlet.ServletConfig;

@@ -2,14 +2,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <!-- meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta name="copyright" content="MACode ID, https://macodeid.com/"> -->
 
+<<<<<<< HEAD
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <meta name="copyright" content="MACode ID, https://macodeid.com/">
 
   <title>함께해요 : 봉사신청서</title>
+=======
+  <title>함께해요 : 봉사신청</title>
+>>>>>>> 6f7e31a18f7c7a920899ee1a3682c800228896b0
 
   <style>
     *{margin: 0;padding: 0;box-sizing: border-box}
@@ -32,17 +39,14 @@
     .fpmgBt2{background-color: lightsalmon; color: #fff}
   </style>
 
+    <!-- link -->
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
-    
     <link rel="stylesheet" href="../assets/css/maicons.css">
-  
     <link rel="stylesheet" href="../assets/vendor/animate/animate.css">
-  
     <link rel="stylesheet" href="../assets/vendor/owl-carousel/css/owl.carousel.css">
-  
     <link rel="stylesheet" href="../assets/vendor/fancybox/css/jquery.fancybox.css">
-  
     <link rel="stylesheet" href="../assets/css/theme.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 
 </head>
 <body>
@@ -51,46 +55,43 @@
   <div class="back-to-top"></div>
 
 
-  <!---------------------------------------- header ---------------------------------------------->
+  <!-- header -->
   <header>
     <div class="top-bar">
       <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-8">
-            <div class="d-inline-block">
-              <span class="mai-mail fg-primary"></span> <a href="mailto:contact@mail.com">contact@mail.com</a>
-            </div>
-            <div class="d-inline-block ml-2">
-              <span class="mai-call fg-primary"></span> <a href="tel:+0011223495">+0011223495</a>
-            </div>
-          </div>
-          <div class="col-md-4 text-right d-none d-md-block">
+        <div class="row align-items-center">          
+          <div class="col-md-12 text-right d-none d-md-block">
             <div class="social-mini-button">
-              <a href="#"><span class="mai-logo-facebook-f"></span></a>
-              <a href="#"><span class="mai-logo-twitter"></span></a>
-              <a href="#"><span class="mai-logo-youtube"></span></a>
-              <a href="#"><span class="mai-logo-linkedin"></span></a>
+              <a href="#"><span>로그인</span></a>
+              <a href="#"><span>회원가입</span></a>
+               <a href="#"><span>관리자</span></a>
             </div>
           </div>
         </div>
-      </div> <!-- .container -->
-    </div> <!-- .top-bar -->
+        <!-- //row -->
+      </div>
+    </div>
+    <!-- //top-bar -->
 
+    <!-- nav -->
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container">
-        <a href="index.html" class="navbar-brand">Happy<span class="text-primary">Share</span></a>
-
+        <a href="index.html" class="navbar-brand">Happy<span class="text-primary logo">Share</span></a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-
+        <!-- navbarContent -->
         <div class="navbar-collapse collapse" id="navbarContent">
           <ul class="navbar-nav ml-auto pt-3 pt-lg-0">
             <li class="nav-item active">
-              <a href="../volunteer/VolunteerList.jsp" class="nav-link">함께해요</a>
+              <a href="#" class="nav-link">함께해요</a>
             </li>
-            <li class="nav-item">
-              <a href="about.html" class="nav-link">소통해요</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">소통해요</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">나눔이야기</a>
+                <a class="dropdown-item" href="#">한줄후기</a>
+              </div>
             </li>
             <li class="nav-item">
               <a href="services.html" class="nav-link">챌린지</a>
@@ -98,12 +99,20 @@
             <li class="nav-item">
               <a href="portfolio.html" class="nav-link">모금함</a>
             </li>
-            <li class="nav-item">
-              <a href="blog.html" class="nav-link">고객센터</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">고객센터</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item " href="#">공지사항</a>
+                <a class="dropdown-item" href="#">공지사항</a>
+              </div>
+            </li>
           </ul>
         </div>
-      </div> <!-- .container -->
-    </nav> <!-- .navbar -->
+        <!-- //navbarContent -->
+      </div>
+      <!-- //container -->
+    </nav>
+    <!-- //nav -->
 
 
     <div class="page-banner bg-img bg-img-parallax overlay-dark" style="background-image: url(../assets/img/bg_image_3.jpg);">
@@ -112,11 +121,10 @@
           <div class="col-lg-8">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Portfolio</li>
+                <li class="breadcrumb-item"><a href="index.html" style="font-size:20px;">함께해요</a></li>
+                <li class="breadcrumb-item active" aria-current="page" style="font-size:22px;">봉사신청</li>
               </ol>
             </nav>
-            <h1 class="fg-white text-center">함께해요</h1>
           </div>
         </div>
       </div>
