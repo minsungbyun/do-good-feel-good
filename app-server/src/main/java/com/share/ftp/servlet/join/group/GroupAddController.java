@@ -2,7 +2,6 @@ package com.share.ftp.servlet.join.group;
 
 import java.io.IOException;
 import java.util.UUID;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -35,7 +34,7 @@ public class GroupAddController extends HttpServlet {
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
@@ -89,18 +88,14 @@ public class GroupAddController extends HttpServlet {
       groupDao.insert(groupDTO);
       groupDao.insertGroup(groupDTO.getNo(), groupDTO.getGroupCount());
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=list");
+      response.setHeader("Refresh", "1;url=../../index.jsp");
 
       request.getRequestDispatcher("/join/group/GroupUserAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
-      // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
       request.setAttribute("error", e);
-      e.printStackTrace();
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
 
-      // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
-      요청배달자.forward(request, response);
     }
   }
 }

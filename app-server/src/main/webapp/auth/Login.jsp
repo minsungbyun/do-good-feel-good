@@ -61,38 +61,33 @@
        
     </script>
   
-  <body>
-<form action="check" name="userInfo" onsubmit="return checkValue()" >
+  <!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-    <label for='f-id'>아이디</label> 
-    <input id='f-id' type='text' name="id" maxlength="50"><br>
+    <title>HappyShare : 로그인</title>
     
-    <label for='f-password'>암호</label> 
-    <input id='f-password' type='password' name="password" maxlength="50"><br>
+    <!--  link -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/css/maicons.css">
+    <link rel="stylesheet" href="../assets/vendor/animate/animate.css">
+    <link rel="stylesheet" href="../assets/vendor/owl-carousel/css/owl.carousel.css">
+    <link rel="stylesheet" href="../assets/vendor/fancybox/css/jquery.fancybox.css">
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     
-    
- <button>[로그인]</button>
- <a href='delete?no=${groupDTO.no}'>[삭제]</a> <a href='list'>[목록]</a><br>
-</form>
-
-<input type="submit" value="개인회원가입" onclick="goPersonalLoginForm()">
-<input type="submit" value="단체회원가입" onclick="goGroupLoginForm()">
-<input type="submit" value="기관회원가입" onclick="goOrgLoginForm()">-->
-	
+  </head>
+  
   <body>
     <header>
       <div class="top-bar">
         <div class="container">
-          <div class="row align-items-center">
-            <div class="col-md-8">
-              <div class="d-inline-block">
-                <span class="mai-mail fg-primary"></span> <a href="mailto:contact@mail.com">contact@mail.com</a>
-              </div>
-              <div class="d-inline-block ml-2">
-                <span class="mai-call fg-primary"></span> <a href="tel:+0011223495">+0011223495</a>
-              </div>
-            </div>
-            <div class="col-md-4 text-right d-none d-md-block">
+          <div class="row align-items-center">          
+            <div class="col-md-12 text-right d-none d-md-block">
               <div class="social-mini-button">
                 <a href="#"><span>로그인</span></a>
                 <a href="#"><span>회원가입</span></a>
@@ -104,18 +99,18 @@
         </div>
       </div>
       <!-- //top-bar -->
-    
+      
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-          <a href="index.html" class="navbar-brand">Happy<span class="text-primary">Share</span></a>
+          <a href="index.html" class="navbar-brand">Happy<span class="text-primary logo">Share</span></a>
   
           <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-  
+          <!-- navbarContent -->
           <div class="navbar-collapse collapse" id="navbarContent">
             <ul class="navbar-nav ml-auto pt-3 pt-lg-0">
-              <li class="nav-item active">
+              <li class="nav-item">
                 <a href="index.html" class="nav-link">함께해요</a>
               </li>
               <li class="nav-item">
@@ -132,38 +127,66 @@
               </li>
             </ul>
           </div>
-        </div> <!-- .container -->
-      </nav> <!-- .navbar -->
+          <!-- //navbarContent -->
+        </div>
+        <!-- container -->
+      </nav>
+      <!-- //navbar -->
     </header>
-    		
+      
     <main>
       <div class="page-section">
-				<div class="container">
-				  <div class="login_form">
-						<h1>로그인</h1>
-						<form action='lgoin' name="login" onsubmit="return checkValue()">
-							<div class="form-group">
-								<label for='f-id'>아이디</label> 
-								<input id='f-id' class="form-control" type='text' name='id' maxlength="50"><br>					    
-							</div>
-							<!-- //form-group -->
-							<div class="form-group">
-		            <label for='f-password'>암호</label> 
-		            <input id='f-password' class="form-control" type='password' name='password' maxlength="50"><br>           
-		          </div>		    				
-							<div class="form-group form-check">
-								<input type="checkbox" class="form-check-input form-group" id="idRemem">
-								<label class="form-check-label" for="idRemem">아이디 저장하기</label>
-							</div>
-						</form>
-						<button type="submit" class="btn btn-primary">로그인</button>
-						<a href='delete?no=${groupDTO.no}'>[삭제]</a> <a href='list'>[목록]</a><br>
-					</div>
-				</div>
-				<!-- //container -->
-			</div>
-		</main>  
-	</body>
+        <div class="container">
+          <div>
+            <h1 class="title-h">로그인</h1>
+            <form action="login" class="login-form" method="post" onsubmit="return checkValue()">
+              <div class="form-group fo">
+                <label for='f-id' class="sr-only">아이디</label> 
+                <input id='f-id' class="form-control" type='text' name='id' placeholder="아이디"><br>              
+              </div>
+              <!-- //아이디 -->
+              <div class="form-group fo">
+                <label for='f-password' class="sr-only">비밀번호</label> 
+                <input id='f-password' class="form-control" type='password' name='password' placeholder="비밀번호"><br>           
+              </div>
+              <!-- //비밀번호 --> 
+              <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">아이디 저장하기</label>
+              </div>              
+              <!-- //아이디 저장하기 -->
+              
+              <button type="submit" class="btn btn-primary btn-md btn-block" style="border-radius: 40px;">로그인</button>
+              <div style="margin: 15px auto;" class="social-mini-button">
+                <a href="#"><span>아이디 찾기</span></a> 
+                <a href="#"><span>비밀번호 찾기</span></a>
+              </div>
+              <div class="loginSns">
+                <a href="" class="sns-login-button sns01" snstype="naver">
+                  <s></s>
+                  <span>네이버 계정으로 로그인</span>
+                </a>
+  
+                <a href="" class="sns-login-button sns02" snstype="kakao">
+                  <s></s>
+                  <span>카카오 계정으로 로그인</span>
+                </a>
+  
+                <a href="" class="sns-login-button sns03" snstype="google">
+                  <s></s>
+                  <span>구글 계정으로 로그인</span>
+                </a>
+              </div> <!--//loginSns -->
+             </form>
+            </div>
+          </div>  <!-- //container -->
+        </div>  <!-- //아이디 찾기 -->
+    </main>  
+  </body>
+
+</html>
+    
+	
 	
 	<script type="text/javascript">
     

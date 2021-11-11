@@ -1,4 +1,4 @@
-package com.share.ftp.servlet.join.personal;
+package com.share.ftp.servlet.auth;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,15 +7,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/join/personal/form")
-public class PersonalFormController extends HttpServlet {
+@WebServlet("/auth/logout")
+public class AuthLogoutHandler extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    
-    request.getRequestDispatcher("/join/personal/PersonalUserForm.jsp").forward(request, response);
+    request.getSession().invalidate();
+    response.sendRedirect("loginForm");
   }
 }
 
