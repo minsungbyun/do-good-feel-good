@@ -37,10 +37,12 @@ public class AuthLoginController extends HttpServlet {
       if (loginUser != null) {
         HttpSession session = request.getSession();
         session.setAttribute("loginUser", loginUser);
-        response.sendRedirect("../index.jsp");
+        response.sendRedirect("../home");
 
       } else {
-        response.sendRedirect("loginForm");
+        //        response.sendRedirect("loginForm");
+        request.setAttribute("contentUrl", "/auth/Login.jsp");
+        request.getRequestDispatcher("/template1.jsp").forward(request, response);
       }
 
     } catch (Exception e) {

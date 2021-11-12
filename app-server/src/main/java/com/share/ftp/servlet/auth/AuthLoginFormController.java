@@ -16,8 +16,10 @@ public class AuthLoginFormController extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-
-    request.getRequestDispatcher("/auth/Login.jsp").forward(request, response);
+    request.setAttribute("pageTitle", "로그인");
+    request.setAttribute("contentUrl", "/auth/Login.jsp");
+    //    request.getRequestDispatcher("/auth/Login.jsp").forward(request, response);
+    request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
   }
 }

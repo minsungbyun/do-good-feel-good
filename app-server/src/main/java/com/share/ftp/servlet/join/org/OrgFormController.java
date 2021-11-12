@@ -14,8 +14,9 @@ public class OrgFormController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    // 출력을 담당할 뷰를 호출한다.
-    request.getRequestDispatcher("/join/org/OrgUserForm.jsp").forward(request, response);
+    request.setAttribute("contentUrl", "/join/org/OrgUserForm.jsp");
+    request.getRequestDispatcher("/template1.jsp").forward(request, response);
+    //    request.getRequestDispatcher("/join/org/OrgUserForm.jsp").forward(request, response);
   }
 }
 

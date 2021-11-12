@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 import net.coobird.thumbnailator.name.Rename;
 
+@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
 @WebServlet("/join/personal/add")
 public class PersonalAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
@@ -56,10 +58,10 @@ public class PersonalAddController extends HttpServlet {
       Part photoPart = request.getPart("photo");
       if (photoPart.getSize() > 0) {
         String filename = UUID.randomUUID().toString();
-        photoPart.write(getServletContext().getRealPath("/upload/join") + "/" + filename);
+        photoPart.write(getServletContext().getRealPath("/upload/user") + "/" + filename);
         personalDTO.setPhoto(filename);
 
-        Thumbnails.of(getServletContext().getRealPath("/upload/join") + "/" + filename)
+        Thumbnails.of(getServletContext().getRealPath("/upload/user") + "/" + filename)
         .size(20, 20)
         .outputFormat("jpg")
         .crop(Positions.CENTER)
@@ -71,7 +73,7 @@ public class PersonalAddController extends HttpServlet {
           }
         });
 
-        Thumbnails.of(getServletContext().getRealPath("/upload/join") + "/" + filename)
+        Thumbnails.of(getServletContext().getRealPath("/upload/user") + "/" + filename)
         .size(100, 100)
         .outputFormat("jpg")
         .crop(Positions.CENTER)
@@ -89,8 +91,11 @@ public class PersonalAddController extends HttpServlet {
       personalDao.insertPersonal(personalDTO.getNo(), personalDTO.getBirthdate(), personalDTO.getLevel());
       sqlSession.commit();
 
-      response.setHeader("Refresh", "1;url=../../index.jsp");
-      request.getRequestDispatcher("/join/personal/PersonalUserAdd.jsp").forward(request, response);
+
+      response.setHeader("Refresh", "1;url=../../home");
+      request.setAttribute("contentUrl", "/join/personal/PersonalUserAdd.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+      //      request.getRequestDispatcher("/join/personal/PersonalUserAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
