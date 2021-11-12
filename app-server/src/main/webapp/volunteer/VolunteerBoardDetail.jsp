@@ -20,7 +20,7 @@
 <body>
 <div class="container">
 <h1>봉사 게시판 상세보기</h1><br>
-<form action='boardUpdate'>
+<form action='boardUpdate'  method='post' enctype="multipart/form-data">
 
 	<div class="mb-3 row">
 	  <label for='f-no' class="col-sm-2 col-form-label">게시글 번호</label>
@@ -50,7 +50,15 @@
 	  </textarea>
 	  </div>
 	</div>
-	
+	<div class="mb-3 row">
+  <label for='f-photo' class="col-sm-2 col-form-label">사진</label> 
+  <div class="col-sm-10">
+    <a href="../upload/volunteer/${volunteerBoardDTO.photo}" >
+        <img id="f-photo-image" src="../upload/volunteer/${volunteerBoardDTO.photo}_100x100.jpg">
+    </a>
+    <input id='f-photo' type='file' name='photo' class="form-control">
+  </div>
+</div>
 	<div class="mb-3 row">
 	  <label for='f-registeredDate' class="col-sm-2 col-form-label">등록일</label> 
 	  <div class="col-sm-8">
@@ -74,13 +82,26 @@
   </div>  
     --%>
     
- <button class="btn btn-primary">변경</button>
+ <button id="volunteer-button" class="btn btn-primary">변경</button>
  <a href='boardDelete?no=${volunteerBoardDTO.no}' class="btn btn-primary">삭제</a>
  <a href='boardList' class="btn btn-primary">목록</a>
  
    <a href='commentList?volBoardNo=${volunteerBoardDTO.no}' class="btn btn-primary">댓글</a><br>
 </form>
 </div><!-- .container -->
+
+
+<script>
+document.querySelector("#volunteer-button").onclick = () => {
+  if (document.querySelector("#f-title").value == "" ||
+      document.querySelector("#f-content").value == "") {
+    //window.alert("필수 입력 항목이 비어 있습니다.")
+    Swal.fire("필수 입력 항목이 비어 있습니다.")
+    return false;
+  }
+};
+</script>
+
 </body>
 </html>
 

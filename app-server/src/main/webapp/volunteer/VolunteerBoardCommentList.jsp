@@ -21,7 +21,7 @@
 <div class="container">
 <h1>봉사게시판 - 게시글 댓글 목록</h1>
 <a href='commentForm?volBoardNo=${volunteerBoardDTO.no}'>댓글 등록 </a><br>
-<table border='1'>
+<table class="table table-hover">
 <thead>
   <tr>
     <th>번호</th>
