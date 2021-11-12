@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   
-    <title>HappyShare</title>
+    <title>${pageTitle}</title>
     <!-- link -->
     <link rel="stylesheet" href="${contextPath}/assets/css/bootstrap.css">
     <link rel="stylesheet" href="${contextPath}/assets/css/maicons.css">
