@@ -3,89 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- meta -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  
-    <title>HappyShare</title>
-    <!-- link -->
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/maicons.css">
-    <link rel="stylesheet" href="assets/vendor/animate/animate.css">
-    <link rel="stylesheet" href="assets/vendor/owl-carousel/css/owl.carousel.css">
-    <link rel="stylesheet" href="assets/vendor/fancybox/css/jquery.fancybox.css">
-    <link rel="stylesheet" href="assets/css/theme.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-  </head>
   <body>
-    <header>
-      <div class="top-bar">
-        <div class="container">
-          <div class="row align-items-center">          
-            <div class="col-md-12 text-right d-none d-md-block">
-              <div class="social-mini-button">
-               <c:if test="${empty sessionScope.loginUser}">
-                  <a href="auth/loginForm"><span>로그인</span></a>
-                </c:if>
-                <c:if test="${not empty sessionScope.loginUser}">
-						    <c:if test="${empty sessionScope.loginUser.photo}">
-						        <img src="asset/img/default.png">
-						    </c:if>
-							    <c:if test="${not empty sessionScope.loginUser.photo}">
-							    <img src="happyshare/upload/user/${sessionScope.loginUser.photo}_100x100.jpg">
-							    </c:if>
-						        ${sessionScope.loginUser.name}<br>
-						         <a href="auth/logout"><span>로그아웃</span></a>
-						    </c:if>
-                <a href="join/userType"><span>회원가입</span></a>
-                <a href="#"><span>관리자</span></a>
-              </div>
-            </div>
-          </div>
-          <!-- //row -->
-        </div>
-      </div>
-      <!-- //top-bar -->
-  
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-           <a href="index.html" class="navbar-brand">Happy<span class="text-primary logo">Share</span></a>
-          <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-  
-          <div class="navbar-collapse collapse" id="navbarContent">
-            <ul class="navbar-nav ml-auto pt-3 pt-lg-0">
-              <li class="nav-item">
-                <a href="index.html" class="nav-link">함께해요</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">소통해요</a>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">나눔이야기</a>
-                  <a class="dropdown-item" href="#">한줄후기</a>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a href="services.html" class="nav-link">챌린지</a>
-              </li>
-              <li class="nav-item">
-                <a href="portfolio.html" class="nav-link">모금함</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">고객센터</a>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">공지사항</a>
-                  <a class="dropdown-item" href="#">문의사항</a>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div> <!-- .container -->
-      </nav> <!-- .navbar -->
-    </header>
     
     <section>
       <div class="page-banner home-banner mb-5">
@@ -537,55 +455,6 @@
   
     </main>
   
-    <footer class="page-footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 py-3">
-              <h3>Happy<span class="fg-primary">Share.</span></h3>
-            </div>
-            <div class="col-lg-3 py-3">
-              <h5>Contact Information</h5>
-              <p>서울특별시 강남구 강남대로94길 20 삼오빌딩 </p>
-              <p>Email: happyshare@mail.com</p>
-              <p>Phone: +02 1111-1111</p>
-            </div>
-            <div class="col-lg-3 py-3">
-              <h5>About us</h5>
-              <ul class="footer-menu">
-                <li><a href="#">Happyshare 소개</a></li>
-
-              </ul>
-            </div>
-            
-          </div>
-    
-          <hr>
-    
-          <div class="row mt-4">
-            <div class="col-md-6">
-              <p>Copyright 2020. This template designed by <a href="https://macodeid.com">MACode ID</a></p>
-            </div>
-          <!--  <div class="col-md-6 text-right">
-           <div class="sosmed-button">
-                <a href="#"><span class="mai-logo-facebook-f"></span></a>
-                <a href="#"><span class="mai-logo-twitter"></span></a>
-                <a href="#"><span class="mai-logo-youtube"></span></a>
-                <a href="#"><span class="mai-logo-linkedin"></span></a>
-              </div> 
-            </div> -->
-          </div>
-        </div>
-      </footer>
-    
-      
-    <script src="assets/js/jquery-3.5.1.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/owl-carousel/js/owl.carousel.min.js"></script>
-    <script src="assets/vendor/wow/wow.min.js"></script>
-    <script src="assets/vendor/fancybox/js/jquery.fancybox.min.js"></script>
-    <script src="assets/vendor/isotope/isotope.pkgd.min.js"></script>
-    <script src="assets/js/google-maps.js"></script>
-    <script src="assets/js/theme.js"></script>
     
     </body>
     </html>

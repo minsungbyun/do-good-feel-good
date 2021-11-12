@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
     <header>
       <div class="top-bar">
         <div class="container">
@@ -7,19 +8,13 @@
             <div class="col-md-12 text-right d-none d-md-block">
               <div class="social-mini-button">
                <c:if test="${empty sessionScope.loginUser}">
-                  <a href="auth/loginForm"><span>로그인</span></a>
+                  <a href="../auth/loginForm"><span>로그인</span></a>
+                <a href="join/userType"><span>회원가입</span></a>
                 </c:if>
                 <c:if test="${not empty sessionScope.loginUser}">
-                <c:if test="${empty sessionScope.loginUser.photo}">
-                    <img src="asset/img/default.png">
-                </c:if>
-                  <c:if test="${not empty sessionScope.loginUser.photo}">
-                  <img src="happyshare/upload/user/${sessionScope.loginUser.photo}_100x100.jpg">
-                  </c:if>
                     ${sessionScope.loginUser.name}<br>
-                     <a href="auth/logout"><span>로그아웃</span></a>
+                     <a href="../auth/logout"><span>로그아웃</span></a>
                 </c:if>
-                <a href="join/userType"><span>회원가입</span></a>
                 <a href="#"><span>관리자</span></a>
               </div>
             </div>
