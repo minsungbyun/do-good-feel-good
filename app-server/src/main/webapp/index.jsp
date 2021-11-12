@@ -85,7 +85,9 @@
           </div>
         </div> <!-- .container -->
       </nav> <!-- .navbar -->
-  
+    </header>
+    
+    <section>
       <div class="page-banner home-banner mb-5">
         <div class="slider-wrapper">
           <div class="owl-carousel hero-carousel">
@@ -116,7 +118,7 @@
           </div>
         </div> <!-- .slider-wrapper -->
       </div> <!-- .page-banner -->
-    </header>
+    </section>
   
     <main>
       <div class="page-section">
