@@ -5,100 +5,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>관리자페이지</title>
-  
-  <!-- link -->
-  <link rel="stylesheet" href="../../assets/css/bootstrap.css">
-  <link rel="stylesheet" href="../../assets/css/maicons.css">
-  <link rel="stylesheet" href="../../assets/vendor/animate/animate.css">
-  <link rel="stylesheet" href="../../assets/vendor/owl-carousel/css/owl.carousel.css">
-  <link rel="stylesheet" href="../../assets/vendor/fancybox/css/jquery.fancybox.css">
-  <link rel="stylesheet" href="../../assets/css/theme.css">
-  <link rel="stylesheet" href="../../assets/css/admin.css">
+  <title>챌린지문의목록</title>
 </head>
-
 <body>
-  <div id="wrap">
-    <div class="head">
-      <div class="container">
-        <div class="header">
-          <h6 class="navbar-brand">Happy<b class="text-primary logo">Share</b></h6>
-          <div class="btn-logoout">
-            <button type="button" class="btn btn-primary btn-sm btn-logo">로그아웃</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- //head -->
-    
-    <div class="menu">
-      <ul>
-        <li><a href="#" >회원정보조회</a></li>
-        <li><a href="#">모금&봉사활동관리</a></li>
-        <li><a href="#">공지사항관리</a></li>
-        <li><a href="#">문의사항관리</a></li>
-        <li><a href="#" class="on">챌린지사항관리</a></li>
-      </ul>
-    </div>
-    <!-- //menu -->
-    
-    <div class="ad-main">
-      <div class="ad-main-infor">
-        <!-- serch -->
-        <div class="serch">
-          <label for="inforSerch">검색</label>
-          <input type="text" class="" id="inforSerch">
-          <button type="submit" class="searchBtn">검색</button>
-        </div>
-        <!-- //serch -->
-        <div class="table01">
-          <table class="table">
-            <thead>
-              <tr>
-               <th scope="col">
-                 <input type="checkbox">
-               </th>
-                <th scope="col">번호</th>
-                <th scope="col">내용</th>
-                <th scope="col">작성자</th>
-                <th scope="col">등록일</th>
-              </tr>
-            </thead>
-            <tbody>
-           <c:forEach items="${challengeQuestionList}" var="challengeQuestionDTO">
-              <tr>
-                  <td><input type="checkbox" class="select-box"></td>
-                  <td>${challengeQuestionDTO.questionNo}</td>
-                  <td>${challengeQuestionDTO.content}</td> 
-                  <td>${challengeQuestionDTO.owner.id}</td> 
-                  <td>${challengeQuestionDTO.registeredDate}</td>
-                  <td><a href='replyUpdateDetail?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[답글등록/변경]</a></td>
-              </tr>
-                <tr>
-                <c:if  test="${challengeQuestionDTO.reply != null}" >
-                  <th scope="col">답글</th>
-                  <td>${challengeQuestionDTO.reply}</td> 
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td><a href='replyDelete?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[답글삭제]</a></td>
-              </c:if>
-              </tr>
-            </c:forEach>
-            </tbody>
-          </table>
-          <div class="ad-btn">
-            <a href='questionDelete?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}' class="btnSubmit">문의강제삭제</a>
-          </div>
-        </div>
-        <!-- //table01 -->
-      </div>
-      <!-- //form -->
-    </div>
-    <!-- //ad-main -->
-    
-  </div>
-  <!-- //wrap -->
+<h1>문의 목록</h1>
+<table border='1'>
+<thead>
+  <tr>
+    <th>번호</th>
+    <th>내용</th>
+    <th>작성자</th>
+    <th>등록일</th>
+  </tr>
+</thead>
+<tbody>
+
+<c:forEach items="${challengeQuestionList}" var="challengeQuestionDTO">
+<tr>
+    <td>${challengeQuestionDTO.questionNo}</td>
+    <td>${challengeQuestionDTO.content}</td> 
+    <td>${challengeQuestionDTO.owner.id}</td> 
+    <td>${challengeQuestionDTO.registeredDate}</td>
+    <td><a href='replyUpdateDetail?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[답글등록/변경]</a></td>
+    <td><a href='questionDelete?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[문의강제삭제]</a></td>
+</tr>
+  <tr>
+  <c:if  test="${challengeQuestionDTO.reply != null}" >
+    <th>답글</th>
+    <td>${challengeQuestionDTO.reply}</td> 
+    <td></td>
+    <td></td>
+    <td><a href='replyDelete?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[답글삭제]</a></td>
+</c:if>
+</tr>
+</c:forEach>
+
+</tbody>
+</table>
 </body>
 </html>

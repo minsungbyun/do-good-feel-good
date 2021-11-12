@@ -3,57 +3,191 @@
      trimDirectiveWhitespaces="true" %>
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
-<head>
-  <title>모금함 개설신청 양식</title>
-	<style>
-	label {
-		margin-right: 5px;
-		text-align: right;
-		display: inline-block;
-		 width: 100px;
-	 }
-	</style>
-</head>
-<body>
-<h1>모금함 개설신청 양식(MVC)</h1>
-<form action='boardAdd' method="post">
-<c:forEach items="${categorys}" var="category">
-    <label for='f-category'>${category.title}</label> 
-    <input id='f-category' type='radio' name='category' value="${category.no}"><br>
-</c:forEach>
+<html lang="ko">
+  <head>
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-    <br>
-    <label for='f-leader'>주최자</label> 
-    <input id='f-leader' type="number" name='leader'><br>
+    <title>HappyShare : 모금함 개설 신청</title>
     
-    <label for='f-title'>제목</label> 
-    <input id='f-title' type='text' name='title'><br>
-    
-    <label for='f-content'>내용</label> 
-    <input id='f-content' type='text' name='content'><br>
-    
-    <label for='f-tel'>전화</label> 
-    <input id='f-tel' type='tel' name='tel'><br>
-    
-    <label for='f-email'>이메일</label> 
-    <input id='f-email' type='email' name='email'><br>
-    
-    <%-- 
-    <label for='f-file'>첨부파일</label> 
-    <input id='f-file' type="file" name='fileUpload'><br>
-    --%>
-    <label for='f-startDate'>시작일</label> 
-    <input id='f-startDate' type="date" name='startDate'><br>
-    
-    <label for='f-endDate'>종료일</label> 
-    <input id='f-endDate' type="date" name='endDate'><br>
-    
-    <label for='f-taget'>목표금액</label> 
-    <input id='f-taget' type="number" name='moneyTarget'><br>
-<button id='donation-Button'>등록</button><br>
-</form>
+    <!--  link -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/css/maicons.css">
+    <link rel="stylesheet" href="../assets/vendor/animate/animate.css">
+    <link rel="stylesheet" href="../assets/vendor/owl-carousel/css/owl.carousel.css">
+    <link rel="stylesheet" href="../assets/vendor/fancybox/css/jquery.fancybox.css">
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+  </head>
+  
+  <body>
+    <header>
+      <div class="top-bar">
+        <div class="container">
+          <div class="row align-items-center">          
+            <div class="col-md-12 text-right d-none d-md-block">
+              <div class="social-mini-button">
+                <a href="#"><span>로그인</span></a>
+                <a href="#"><span>회원가입</span></a>
+                <a href="#"><span>관리자</span></a>
+              </div>
+            </div>
+          </div>
+          <!-- //row -->
+        </div>
+      </div>
+      <!-- //top-bar -->
+      
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a href="index.html" class="navbar-brand">Happy<span class="text-primary logo">Share</span></a>
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <!-- navbarContent -->
+          
+          <div class="navbar-collapse collapse" id="navbarContent">
+            <ul class="navbar-nav ml-auto pt-3 pt-lg-0">
+              <li class="nav-item">
+                <a href="index.html" class="nav-link">함께해요</a>
+              </li>
+              <li class="nav-item">
+                <a href="about.html" class="nav-link">소통해요</a>
+              </li>
+              <li class="nav-item">
+                <a href="services.html" class="nav-link">챌린지</a>
+              </li>
+              <li class="nav-item">
+                <a href="portfolio.html" class="nav-link">모금함</a>
+              </li>
+              <li class="nav-item">
+                <a href="blog.html" class="nav-link">고객센터</a>
+              </li>
+            </ul>
+          </div>
+          <!-- //navbarContent -->
+        </div>
+        <!-- container -->
+      </nav>
+      <!-- //navbar -->
+    </header>
+      
+    <main>
+      <div class="page-section">
+        <div class="container">
+          <h1 class="title-h">모금함 개설 신청</h1>
+          <div class="join-wrap">
+            <h5>기관<span class="required_title"><em class="icon_required">·</em>표시는 반드시 입력하셔야 합니다.</span></h5>
+              <div class="base-table">
+                <table class="join-table">
+                <form action='boardAdd' method="post">
+                <c:forEach items="${categorys}" var="category">
+                    <div class="form-check">
+                    <input id='f-category' type='radio' name='category' value="${category.no}" >
+                    <label for='f-category' class="form-check-label">${category.title}</label> 
+                    </div>
+                </c:forEach>
+                  <caption>모금함 신청 정보</caption>
+                  <tbody>
+                    <tr>
+                      <th><em class="icon_required">·</em><span>주최자</span></th>
+                      <td>
+                        <label for='f-leader' class="sr-only">주최자</label> 
+                        <input id='f-leader' class="form-control box-input" type='number' name='leader'>
+                      </td>
+                    </tr>
+                    <!-- //주최자 -->
+                    <tr>
+                      <th><em class="icon_required">·</em><span>제목</span></th>
+                      <td>
+                        <label for='f-title' class="sr-only">제목</label> 
+                        <input id='f-title' class="form-control box-input" type='text' name='title'>
+                      </td>
+                    </tr>
+                    <!-- //제목 -->
+                    <tr>
+                      <th><em class="icon_required">·</em><span>내용</span></th>
+                      <td>
+                        <label for='f-content' class="sr-only">내용</label> 
+                        <textarea id='f-content' class="form-control box-input" name='content'></textarea>
+                      </td>
+                    </tr>
+                    <!-- //내용 -->
+                     <tr>
+                      <th><em class="icon_required">·</em><span>전화번호</span></th>
+                      <td>
+                        <label for='f-tel' class="sr-only">전화번호</label> 
+                        <input id='f-tel' class="form-control box-input" type='tel' name='tel'>
+                      </td>
+                    </tr>
+                    <!-- //전화번호 -->
+                    <tr>
+                      <th><em class="icon_required">·</em><span>이메일</span></th>
+                      <td>
+                        <label for='f-email' class="sr-only">이메일</label> 
+                        <input id='f-email' class="form-control box-input" type='email' name='email'>
+                      </td>
+                    </tr>
+                    <!-- //이메일 -->
+                    <tr>
+                      <th><em class="icon_required">·</em><span>시작일</span></th>
+                      <td>
+                        <label for='f-startDate' class="sr-only">시작일</label> 
+                        <input id="f-startDate" class="form-control box-input" type="date" name="startDate">
+                    
+                    <!-- //시작일 -->
+                    <tr>
+                      <th><em class="icon_required">·</em><span>종료일</span></th>
+                      <td>
+                      <label for='f-endDate' class="sr-only">시작일</label> 
+                      <input id="f-endDate" class="form-control box-input" type="date" name="endDate">
+                    
+                    <!-- //종료일 -->
+                    <tr>
+                      <th><em class="icon_required">·</em><span>목표금액</span></th>
+                      <td>
+                        <label for='f-taget' class="sr-only">목표금액</label> 
+                        <input id='f-taget' class="form-control box-input" type='number' name='moneyTarget'>
+                      </td>
+                    </tr>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+                    <!-- //목표금액 -->   
+                    
+                    <!-- //파일첨부 -->
 
+                    
+                  </tbody>
+                </table>
+                    <div class="form-group row">
+                      <label for="f-file" class="col-sm-3 col-form-label">파일첨부</label>
+                      <div class="col-sm-11">
+                        <input type="file" class="form-control-file" id="f-file" name='fileUpload'>
+                      </div>
+                      
+                      <label for="f-file" class="col-sm-1 col-form-label">파일첨부</label>
+                      <div class="col-sm-11">
+                        <input type="file" class="form-control-file" id="f-file" name='fileUpload'>
+                      </div>
+                      
+                      <label for="f-file" class="col-sm-1 col-form-label">파일첨부</label>
+                      <div class="col-sm-11">
+                        <input type="file" class="form-control-file" id="f-file" name='fileUpload'>
+                      </div>
+                    </div>
+                <div class="btn-regi">
+                  <button type="submit" class="btn btn-primary nBtn">등록</button>
+                  <a href="#" class="btn btn-outline-primary nBtn" role="button">이전</a>
+                </div>
+				      </form>
+              
+              </div>
+            </div>
+            <!-- //join-wrap -->
+        </div>
+        <!-- //container -->
+      </div>
+    </main>  
 <script>
 document.querySelector("#donation-Button").onclick = () => {
     var startDate = document.querySelector("#f-startDate");
@@ -65,7 +199,6 @@ document.querySelector("#donation-Button").onclick = () => {
   }
   
 </script>
-
-</body>
+  </body>
 </html>
-     
+    

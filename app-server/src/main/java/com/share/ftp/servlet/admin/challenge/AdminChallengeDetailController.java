@@ -36,7 +36,7 @@ public class AdminChallengeDetailController extends GenericServlet {
       }
 
       request.setAttribute("challengeDTO", challengeDTO);
-      request.getRequestDispatcher("/admin/challenge/AdminChallengeDetail1.jsp").forward(request, response);
+      request.getRequestDispatcher("/admin/challenge/AdminChallengeDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

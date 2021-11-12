@@ -5,32 +5,91 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>챌린지목록</title>
+  <meta charset="UTF-8">
+  <title>관리자페이지</title>
+  
+  <!-- link -->
+  <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+  <link rel="stylesheet" href="../../assets/css/maicons.css">
+  <link rel="stylesheet" href="../../assets/vendor/animate/animate.css">
+  <link rel="stylesheet" href="../../assets/vendor/owl-carousel/css/owl.carousel.css">
+  <link rel="stylesheet" href="../../assets/vendor/fancybox/css/jquery.fancybox.css">
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/admin.css">
 </head>
+
 <body>
-<h1>챌린지 목록</h1>
-<a href='form'>챌린지 등록</a><br>
-<table border='1'>
-<thead>
-  <tr>
-    <th>번호</th>
-    <th>제목</th>
-    <th>시작일</th>
-    <th>종료일</th>
-  </tr>
-</thead>
-<tbody>
-
-<c:forEach items="${challengeList}" var="challengeDTO">
-<tr>
-    <td>${challengeDTO.no}</td>
-    <td><a href='detail?no=${challengeDTO.no}'>${challengeDTO.title}</a></td> 
-    <td>${challengeDTO.startDate}</td> 
-    <td>${challengeDTO.endDate}</td> 
-</tr>
-</c:forEach>
-
-</tbody>
-</table>
+  <div id="wrap">
+    <div class="head">
+      <div class="container">
+        <div class="header">
+          <h6 class="navbar-brand">Happy<b class="text-primary logo">Share</b></h6>
+          <div class="btn-logoout">
+            <button type="button" class="btn btn-primary btn-sm btn-logo">로그아웃</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- //head -->
+    
+    <div class="menu">
+      <ul>
+        <li><a href="#" >회원정보조회</a></li>
+        <li><a href="#">모금&봉사활동관리</a></li>
+        <li><a href="#">공지사항관리</a></li>
+        <li><a href="#">문의사항관리</a></li>
+        <li><a href="#" class="on">챌린지사항관리</a></li>
+      </ul>
+    </div>
+    <!-- //menu -->
+    
+    <div class="ad-main">
+      <div class="ad-main-infor">
+        <!-- serch -->
+        <div class="serch">
+          <label for="inforSerch">검색</label>
+          <input type="text" class="" id="inforSerch">
+          <button type="submit" class="searchBtn">검색</button>
+        </div>
+        <!-- //serch -->
+        <div class="table01">
+          <table class="table">
+            <thead>
+              <tr>
+               <th scope="col">
+                 <input type="checkbox">
+               </th>
+                <th scope="col">번호</th>
+                <th scope="col">제목</th>
+                <th scope="col">시작일</th>
+                <th scope="col">종료일</th>
+              </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${challengeList}" var="challengeDTO">
+              <tr>
+                <td><input type="checkbox" class="select-box"></td>
+                <td>${challengeDTO.no}</td>
+                <td><a href='detail?no=${challengeDTO.no}'>${challengeDTO.title}</td>
+                <td>${challengeDTO.startDate}</td>
+                <td>${challengeDTO.endDate}</td>
+              </tr>
+            </c:forEach>
+            </tbody>
+          </table>
+          <div class="ad-btn">
+            <a href="form" class="btnSubmit">등록</a>
+            <a href="#" class="btnSubmit">수정</a>
+            <a href='delete?no=${challengeDTO.no}' class="btnSubmit">삭제</a>
+          </div>
+        </div>
+        <!-- //table01 -->
+      </div>
+      <!-- //form -->
+    </div>
+    <!-- //ad-main -->
+    
+  </div>
+  <!-- //wrap -->
 </body>
 </html>

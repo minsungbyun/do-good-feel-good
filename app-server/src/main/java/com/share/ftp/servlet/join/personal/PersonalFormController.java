@@ -14,7 +14,7 @@ public class PersonalFormController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    // 출력을 담당할 뷰를 호출한다.
+    
     request.getRequestDispatcher("/join/personal/PersonalUserForm.jsp").forward(request, response);
   }
 }

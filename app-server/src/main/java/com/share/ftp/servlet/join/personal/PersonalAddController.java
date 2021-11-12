@@ -2,17 +2,21 @@ package com.share.ftp.servlet.join.personal;
 
 import java.io.IOException;
 import java.sql.Date;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
+import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.PersonalDao;
 import com.share.ftp.domain.join.PersonalDTO;
+import net.coobird.thumbnailator.ThumbnailParameter;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+import net.coobird.thumbnailator.name.Rename;
 
 @WebServlet("/join/personal/add")
 public class PersonalAddController extends HttpServlet {
@@ -22,49 +26,76 @@ public class PersonalAddController extends HttpServlet {
   PersonalDao personalDao;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init()  {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     personalDao = (PersonalDao) 웹애플리케이션공용저장소.getAttribute("personalDao");
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-
-    PersonalDTO personalDTO = new PersonalDTO();
-
-    personalDTO.setId(request.getParameter("id"));
-    personalDTO.setPassword(request.getParameter("password"));
-    personalDTO.setName(request.getParameter("name"));
-    personalDTO.setTel(request.getParameter("tel"));
-    personalDTO.setEmail(request.getParameter("email"));
-    personalDTO.setPostNo(request.getParameter("postNo"));
-    personalDTO.setBasicAddress(request.getParameter("basicAddress"));
-    personalDTO.setDetailAddress(request.getParameter("detailAddress"));
-
-    personalDTO.setBirthdate(Date.valueOf(request.getParameter("birthdate")));
-    personalDTO.setType(1);
-    personalDTO.setStatus(1);
-    personalDTO.setLevel("천콩이");
-
     try {
+      PersonalDTO personalDTO = new PersonalDTO();
+
+      personalDTO.setId(request.getParameter("id"));
+      personalDTO.setPassword(request.getParameter("password"));
+      personalDTO.setName(request.getParameter("name"));
+      personalDTO.setTel(request.getParameter("tel"));
+      personalDTO.setEmail(request.getParameter("email"));
+      personalDTO.setPostNo(request.getParameter("postNo"));
+      personalDTO.setBasicAddress(request.getParameter("basicAddress"));
+      personalDTO.setDetailAddress(request.getParameter("detailAddress"));
+
+      personalDTO.setBirthdate(Date.valueOf(request.getParameter("birthdate")));
+      personalDTO.setType(1);
+      personalDTO.setStatus(1);
+      personalDTO.setLevel("천콩이");
+
+      Part photoPart = request.getPart("photo");
+      if (photoPart.getSize() > 0) {
+        String filename = UUID.randomUUID().toString();
+        photoPart.write(getServletContext().getRealPath("/upload/join") + "/" + filename);
+        personalDTO.setPhoto(filename);
+
+        Thumbnails.of(getServletContext().getRealPath("/upload/join") + "/" + filename)
+        .size(20, 20)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        //.toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_20x20";
+          }
+        });
+
+        Thumbnails.of(getServletContext().getRealPath("/upload/join") + "/" + filename)
+        .size(100, 100)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        //.toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_100x100";
+          }
+        });
+      }
+
+
       personalDao.insert(personalDTO);
       personalDao.insertPersonal(personalDTO.getNo(), personalDTO.getBirthdate(), personalDTO.getLevel());
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=list");
 
-      request.getRequestDispatcher("/join/peosonal/PeosonalUserAdd.jsp").forward(request, response);
+      response.setHeader("Refresh", "1;url=../../index.jsp");
+      request.getRequestDispatcher("/join/personal/PersonalUserAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
-      // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
       request.setAttribute("error", e);
-      e.printStackTrace();
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
 
-      // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
-      요청배달자.forward(request, response);
     }
   }
 }
