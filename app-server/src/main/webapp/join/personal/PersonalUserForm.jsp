@@ -84,7 +84,7 @@
   <main>
       <div class="page-section">
         <div class="container">
-          <form action="add" name="form" method="post" onsubmit="validLoginForm(); return false;" enctype="multipart/form-data">
+          <form action="add" name="form" id ="needs-validation" method="post" onsubmit="validLoginForm(); return false;" enctype="multipart/form-data" novalidate>
           <h1 class="title-h">회원가입 - 개인</h1>
           <div class="join-wrap">
             <h5>기본정보<span class="required_title"><em class="icon_required">·</em>표시는 반드시 입력하셔야 합니다.</span></h5>
@@ -98,6 +98,9 @@
                         <label for='f-id' class="sr-only sr-cont">아이디</label> 
                         <input id='f-id' class="form-control form-sub-control box-input" type='text' name='id' placeholder="아이디">
                         <button type="button" class="btnj btn btn-primary" data-toggle="modal" id="id-check">중복확인</button>
+                        <div class="invalid-feedback">
+									        아이디를 입력해주세요.
+									      </div>
                       </td>
                     </tr>
                     <!-- //아이디 -->
@@ -137,6 +140,9 @@
                       <td>
                         <label for='f-tel' class="sr-only">휴대폰번호</label> 
                         <input id='f-tel' class="form-control box-input" type='tel' name='tel'>
+                        <div class="invalid-feedback">
+                          -를 포함해서 입력해주세요! ex) 010-xxxx-xxxx
+                        </div>
                       </td>
                     </tr>
                     <!-- //휴대폰번호 -->
@@ -192,6 +198,26 @@
     
     <!-- script -->
     <script>
+    (function () {
+    	  'use strict'
+
+    	  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    	  var forms = document.querySelectorAll('.needs-validation')
+
+    	  // Loop over them and prevent submission
+    	  Array.prototype.slice.call(forms)
+    	    .forEach(function (form) {
+    	      form.addEventListener('submit', function (event) {
+    	        if (!form.checkValidity()) {
+    	          event.preventDefault()
+    	          event.stopPropagation()
+    	        }
+
+    	        form.classList.add('was-validated')
+    	      }, false)
+    	    })
+    	})()
+    <!--
     document.querySelector("#id-check").onclick = () => {
         var name = document.querySelector("#f-id");
         if (name.value == "") {
@@ -285,7 +311,7 @@
 	          
 	          form.submit();
 	          loadForm = true;
-	        }
+	        }-->
     </script>
     
     <!-- //script -->
