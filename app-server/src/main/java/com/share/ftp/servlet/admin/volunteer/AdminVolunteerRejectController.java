@@ -1,6 +1,6 @@
-package com.share.ftp.servlet.admin;
+package com.share.ftp.servlet.admin.volunteer;
 
-import static com.share.util.General.check.APPLIED;
+import static com.share.util.General.check.REJECTED;
 import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -13,8 +13,9 @@ import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 
-@WebServlet("/admin/volunteer/approve")
-public class AdminVolunteerApproveController extends HttpServlet { // 개인 봉사신청 양식 쓰는 곳
+
+@WebServlet("/admin/volunteer/reject")
+public class AdminVolunteerRejectController extends HttpServlet { 
 
   private static final long serialVersionUID = 1L;
 
@@ -34,23 +35,19 @@ public class AdminVolunteerApproveController extends HttpServlet { // 개인 봉
       throws ServletException, IOException {
 
     try {
+
       int volNo = Integer.parseInt(request.getParameter("no"));
 
       VolunteerRequestDTO volunteerRequest = volunteerDao.findByVolunteerNo(volNo);
 
-      if (volunteerRequest == null) {
-        throw new Exception("해당 봉사가 없습니다.");
-      }
-
-      volunteerRequest.setStatus(APPLIED);
-      volunteerRequest.addMembers(volunteerRequest.getOwner()); 
+      volunteerRequest.setStatus(REJECTED);
 
       volunteerDao.updateVolunteer(volunteerRequest);
       sqlSession.commit();
 
-      response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("/admin/AdminVolunteerSuccess.jsp").forward(request, response);
-
+      response.sendRedirect("list");
+      //      response.setHeader("Refresh", "1;url=adminList");
+      //      request.getRequestDispatcher("VolunteerSuccess.jsp").forward(request, response);
 
     } catch (Exception e) {
 
@@ -60,3 +57,17 @@ public class AdminVolunteerApproveController extends HttpServlet { // 개인 봉
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

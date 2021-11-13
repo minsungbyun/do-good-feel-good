@@ -36,8 +36,10 @@ public class NoticeDetailController extends GenericServlet {
       }
 
       request.setAttribute("noticeDTO", noticeDTO);
-      request.getRequestDispatcher("/support/NoticeDetail.jsp").forward(request, response);
 
+      request.setAttribute("pageTitle", "공지사항 상세");
+      request.setAttribute("contentUrl", "/support/NoticeDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);

@@ -57,8 +57,8 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">고객센터</a>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">공지사항</a>
-                  <a class="dropdown-item" href="#">문의사항</a>
+                  <a class="dropdown-item" href="${contextPath}/support/noticeList">공지사항</a>
+                  <a class="dropdown-item" href="${contextPath}/support/questionList">문의사항</a>
                 </div>
               </li>
             </ul>
