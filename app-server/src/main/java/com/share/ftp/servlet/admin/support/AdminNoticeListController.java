@@ -1,4 +1,4 @@
-package com.share.ftp.servlet.support;
+package com.share.ftp.servlet.admin.support;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -13,8 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.domain.admin.NoticeDTO;
 
-@WebServlet("/support/noticeList")
-public class NoticeListController extends GenericServlet {
+@WebServlet("/admin/support/noticeList")
+public class AdminNoticeListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
   NoticeDao noticeDao;
@@ -36,9 +36,7 @@ public class NoticeListController extends GenericServlet {
       request.setAttribute("noticeList", noticeList);
 
       // 출력을 담당할 뷰를 호출한다.
-      request.setAttribute("pageTitle", "공지사항 목록");
-      request.setAttribute("contentUrl", "/support/NoticeList.jsp");
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/template1.jsp");
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/admin/support/AdminNoticeList.jsp");
       요청배달자.forward(request, response);
 
     } catch (Exception e) {

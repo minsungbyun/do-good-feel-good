@@ -1,4 +1,4 @@
-package com.share.ftp.servlet.support;
+package com.share.ftp.servlet.admin.support;
 
 import java.io.IOException;
 import javax.servlet.ServletConfig;
@@ -12,8 +12,8 @@ import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.domain.admin.NoticeDTO;
 
-@WebServlet("/support/noticeDelete")
-public class NoticeDeleteController extends HttpServlet {
+@WebServlet("/admin/support/noticeDelete")
+public class AdminNoticeDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;
