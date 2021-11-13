@@ -30,8 +30,10 @@ public class AuthLoginListController extends HttpServlet {
     try {
       List<JoinDTO> joinUserList = joinDao.findAll();
       request.setAttribute("joinUserList", joinUserList);
+      request.setAttribute("contentUrl", "/auth/LoginList.jsp");
+      request.getRequestDispatcher("/template2.jsp").forward(request, response);
 
-      request.getRequestDispatcher("/auth/LoginList.jsp").forward(request, response);
+      //      request.getRequestDispatcher("/auth/LoginList.jsp").forward(request, response);
 
 
     } catch (Exception e) {
