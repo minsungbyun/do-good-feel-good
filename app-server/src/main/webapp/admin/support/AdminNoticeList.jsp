@@ -49,7 +49,7 @@
         <!-- serch -->
         <div class="serch">
           <label for="f-search">검색</label>
-          <input type="text" class="" id="f-search" name="keword">
+          <input type="search" class="" id="f-search" name="keword" placeholder="검색">
           <button type="submit" class="searchBtn">검색</button>
         </div>
         <!-- //serch -->
@@ -86,7 +86,6 @@
           </table>
           <div class="ad-btn">
             <a href="noticeForm" class="btnSubmit">글쓰기</a>
-            <!--  <a href="#" class="btnSubmit">수정</a>-->
             <a href="noticeDelete?noticeNo=${noticeDTO.no}" class="btnSubmit">삭제</a>
           </div>
         </div>
