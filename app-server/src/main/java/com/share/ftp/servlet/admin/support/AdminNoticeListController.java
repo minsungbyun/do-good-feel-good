@@ -1,4 +1,4 @@
-package com.share.ftp.servlet.volunteer;
+package com.share.ftp.servlet.admin.support;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -10,19 +10,19 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
-import com.share.ftp.dao.VolunteerBoardDao;
-import com.share.ftp.domain.community.VolunteerBoardDTO;
+import com.share.ftp.dao.NoticeDao;
+import com.share.ftp.domain.admin.NoticeDTO;
 
-@WebServlet("/volunteer/boardList")
-public class VolunteerBoardListController extends GenericServlet {
+@WebServlet("/admin/support/noticeList")
+public class AdminNoticeListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
-  VolunteerBoardDao volunteerBoardDao;
+  NoticeDao noticeDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    volunteerBoardDao = (VolunteerBoardDao) 웹애플리케이션공용저장소.getAttribute("volunteerBoardDao");
+    noticeDao = (NoticeDao) 웹애플리케이션공용저장소.getAttribute("noticeDao");
   }
 
   @Override
@@ -30,24 +30,22 @@ public class VolunteerBoardListController extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-      Collection<VolunteerBoardDTO> volunteerBoardList = volunteerBoardDao.findAll();
+      Collection<NoticeDTO> noticeList = noticeDao.findAll();
 
-      request.setAttribute("volunteerBoardList", volunteerBoardList);
-      request.setAttribute("contentUrl", "/volunteer/VolunteerBoardList.jsp");      
+      // 뷰 컴포넌트가 준비한 데이터를 사용할 수 있도록 저장소에 보관한다.
+      request.setAttribute("noticeList", noticeList);
 
-      //request.getRequestDispatcher("VolunteerBoardList.jsp").forward(request, response);
-
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+      // 출력을 담당할 뷰를 호출한다.
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/admin/support/AdminNoticeList.jsp");
+      요청배달자.forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);
 
+      // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
       RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
       요청배달자.forward(request, response);
     }
   }
 }
-
-
-

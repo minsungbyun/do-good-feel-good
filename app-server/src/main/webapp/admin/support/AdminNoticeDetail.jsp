@@ -3,6 +3,50 @@
     trimDirectiveWhitespaces="true" %>
 <!DOCTYPE>
 <html lang="ko">
+	<head>
+	  <meta charset="UTF-8">
+	  <title>관리자 : 공지사항 상세</title>
+	  
+	  <!-- link -->
+	  <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+	  <link rel="stylesheet" href="../../assets/css/maicons.css">
+	  <link rel="stylesheet" href="../../assets/vendor/animate/animate.css">
+	  <link rel="stylesheet" href="../../assets/vendor/owl-carousel/css/owl.carousel.css">
+	  <link rel="stylesheet" href="../../assets/vendor/fancybox/css/jquery.fancybox.css">
+	  <link rel="stylesheet" href="../../assets/css/theme.css">
+	  <link rel="stylesheet" href="../../assets/css/admin.css">
+	  
+	  <style>
+	   #f-file-image {
+	     height:100px;
+	   }
+	  </style>
+	</head>
+	
+	<body>
+	  <div id="wrap">
+	    <div class="head">
+	      <div class="container">
+	        <div class="header">
+	          <h6 class="navbar-brand">Happy<b class="text-primary logo">Share</b></h6>
+	          <div class="btn-logoout">
+	            <button type="button" class="btn btn-primary btn-sm btn-logo">로그아웃</button>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    <!-- //head -->
+	    
+	    <div class="menu">
+	      <ul>
+	        <li><a href="#" >회원정보조회</a></li>
+	        <li><a href="#">봉사활동관리</a></li>
+	        <li><a href="#">모금함활동관리</a></li>
+	        <li><a href="#" class="on">공지사항관리</a></li>
+	        <li><a href="#">문의사항관리</a></li>
+	        <li><a href="#">챌린지사항관리</a></li>
+	      </ul>
+	    </div>
 	    <!-- //menu -->
 	    
 	    <div class="ad-main">
@@ -44,6 +88,8 @@
 	            </div>
 	            <!-- //파일첨부 -->
 	            <div class="form-group">
+	              <button class="btn btn-primary">수정</button>
+	              <a href="noticeDelete?noticeNo=${noticeDTO.no}" class="btn btn-primary">삭제</a>
 	              <a href="noticeList" class="btn btn-primary">목록</a>
 	            </div>
 	            <!-- //ad-btn -->

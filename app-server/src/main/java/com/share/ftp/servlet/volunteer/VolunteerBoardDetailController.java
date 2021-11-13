@@ -42,11 +42,11 @@ public class VolunteerBoardDetailController extends GenericServlet {
       sqlSession.commit();
 
       request.setAttribute("volunteerBoardDTO", volunteerBoardDTO);
-      request.getRequestDispatcher("VolunteerBoardDetail.jsp").forward(request, response);
+      request.setAttribute("contentUrl", "/volunteer/VolunteerBoardDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
-      e.printStackTrace();
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }

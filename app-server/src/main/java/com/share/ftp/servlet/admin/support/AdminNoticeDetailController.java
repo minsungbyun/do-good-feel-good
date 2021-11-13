@@ -1,9 +1,7 @@
-package com.share.ftp.servlet.support;
+package com.share.ftp.servlet.admin.support;
 
 import java.io.IOException;
-import java.util.Collection;
 import javax.servlet.GenericServlet;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -13,8 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.domain.admin.NoticeDTO;
 
-@WebServlet("/support/noticeList")
-public class NoticeListController extends GenericServlet {
+@WebServlet("/admin/support/noticeDetail")
+public class AdminNoticeDetailController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
   NoticeDao noticeDao;
@@ -30,24 +28,22 @@ public class NoticeListController extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-      Collection<NoticeDTO> noticeList = noticeDao.findAll();
+      int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+      NoticeDTO noticeDTO = noticeDao.findByNo(noticeNo);
 
-      // 뷰 컴포넌트가 준비한 데이터를 사용할 수 있도록 저장소에 보관한다.
-      request.setAttribute("noticeList", noticeList);
+      if (noticeDTO == null) {
+        throw new Exception("해당 번호의 게시물이 없습니다.");
+      }
 
-      // 출력을 담당할 뷰를 호출한다.
-      request.setAttribute("pageTitle", "공지사항 목록");
-      request.setAttribute("contentUrl", "/support/NoticeList.jsp");
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/template1.jsp");
-      요청배달자.forward(request, response);
+      request.setAttribute("noticeDTO", noticeDTO);
+      request.getRequestDispatcher("/admin/support/AdminNoticeDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);
-
-      // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
-      요청배달자.forward(request, response);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
+
+
 }
