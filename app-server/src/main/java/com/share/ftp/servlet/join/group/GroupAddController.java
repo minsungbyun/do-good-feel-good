@@ -57,10 +57,10 @@ public class GroupAddController extends HttpServlet {
       Part photoPart = request.getPart("photo");
       if (photoPart.getSize() > 0) {
         String filename = UUID.randomUUID().toString();
-        photoPart.write(getServletContext().getRealPath("/upload/join") + "/" + filename);
+        photoPart.write(getServletContext().getRealPath("/upload/user") + "/" + filename);
         groupDTO.setPhoto(filename);
 
-        Thumbnails.of(getServletContext().getRealPath("/upload/join") + "/" + filename)
+        Thumbnails.of(getServletContext().getRealPath("/upload/user") + "/" + filename)
         .size(20, 20)
         .outputFormat("jpg")
         .crop(Positions.CENTER)
@@ -72,7 +72,7 @@ public class GroupAddController extends HttpServlet {
           }
         });
 
-        Thumbnails.of(getServletContext().getRealPath("/upload/join") + "/" + filename)
+        Thumbnails.of(getServletContext().getRealPath("/upload/user") + "/" + filename)
         .size(100, 100)
         .outputFormat("jpg")
         .crop(Positions.CENTER)
@@ -88,9 +88,10 @@ public class GroupAddController extends HttpServlet {
       groupDao.insert(groupDTO);
       groupDao.insertGroup(groupDTO.getNo(), groupDTO.getGroupCount());
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=../../index.jsp");
-
-      request.getRequestDispatcher("/join/group/GroupUserAdd.jsp").forward(request, response);
+      response.setHeader("Refresh", "1;url=../../home");
+      request.setAttribute("contentUrl", "/join/group/GroupUserAdd.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+      //      request.getRequestDispatcher("/join/group/GroupUserAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

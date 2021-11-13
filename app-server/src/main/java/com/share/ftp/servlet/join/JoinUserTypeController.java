@@ -16,7 +16,9 @@ public class JoinUserTypeController extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    request.getRequestDispatcher("/join/JoinUserType.jsp").forward(request, response);
+    request.setAttribute("contentUrl", "/join/JoinUserType.jsp");
+    request.getRequestDispatcher("/template1.jsp").forward(request, response);
+    //    request.getRequestDispatcher("/join/JoinUserType.jsp").forward(request, response);
   }
 }
 

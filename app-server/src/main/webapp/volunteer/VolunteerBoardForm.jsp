@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -66,8 +67,21 @@
   </div>  
    --%>
 
-<button class="btn btn-primary btn-sm">등록</button><br>
+<button id="volunteer-button" class="btn btn-primary btn-sm">등록</button><br>
 </form>
 </div><!-- .container -->
+
+<script>
+document.querySelector("#volunteer-button").onclick = () => {
+  if (document.querySelector("#f-title").value == "" ||
+      document.querySelector("#f-content").value == "") {
+    //window.alert("필수 입력 항목이 비어 있습니다.")
+    Swal.fire("필수 입력 항목이 비어 있습니다.")
+    return false;
+  }
+}
+
+</script>
+
 </body>
 </html>

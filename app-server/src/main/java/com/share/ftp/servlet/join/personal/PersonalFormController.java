@@ -14,8 +14,9 @@ public class PersonalFormController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    
-    request.getRequestDispatcher("/join/personal/PersonalUserForm.jsp").forward(request, response);
+    request.setAttribute("contentUrl", "/join/personal/PersonalUserForm.jsp");
+    request.getRequestDispatcher("/template1.jsp").forward(request, response);
+    //    request.getRequestDispatcher("/join/personal/PersonalUserForm.jsp").forward(request, response);
   }
 }
 
