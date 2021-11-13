@@ -35,6 +35,12 @@ public class AuthLoginController extends HttpServlet {
 
 
       if (loginUser != null) {
+        if (loginUser.getId().equals("admin")) {
+          HttpSession session = request.getSession();
+          session.setAttribute("loginUser", loginUser);
+          response.sendRedirect("../admin/donationList");
+          return;
+        }
         HttpSession session = request.getSession();
         session.setAttribute("loginUser", loginUser);
         response.sendRedirect("../home");
