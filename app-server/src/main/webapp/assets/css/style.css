@@ -628,7 +628,6 @@ padding-top:15px;
 
 .vol-type {
 	position: absolute;
-
   min-width: 40px;
   height: 33px;
   line-height: 32px;
@@ -716,4 +715,81 @@ padding-top:15px;
 .content-map {
 	height:500px;
 	background:#888;
+}
+
+/* challenge */
+.challgne-type {
+  width: 100px;
+  height: 33px;
+  line-height: 32px;
+  text-align: center;
+  background: #4967b0;
+  padding: 0 10px;
+  color: #fff;
+  border-radius: 6px;
+}
+
+.challgne-item p {
+	color:#fff;
+}
+
+
+.chall-cur {
+  margin: 10px 0 0 3px;
+  color: #959595;
+  vertical-align: top;
+}
+
+.chall-count {
+  color:#333;
+}
+
+.chall-detail {
+  overflow:hidden;
+  box-sizing:border-box;
+  padding-top:10px;
+}
+
+.chall-de-img {
+  width:50%;
+  height:500px;
+  float:left;
+  border:1px solid #cfcfcf;
+}
+
+.chall-de-img img {
+  width:100%;
+}
+
+.chall-infor-wrap {
+  width:510px;
+  height:100px;
+  
+  float:right;
+  box-sizing:border-box;
+}
+
+.chall-joiner {
+  padding:10px;
+  height:190px;
+  border:1px solid #cfcfcf;
+  margin-bottom:20px;
+}
+
+.chall-detail-infor {
+  height:290px;
+  border:1px solid #cfcfcf;
+  padding:10px;
+  
+}
+
+.content-box {
+  width:100%;
+  height:700px;
+  background:#555;
+}
+
+.content-map {
+  height:500px;
+  background:#888;
 }

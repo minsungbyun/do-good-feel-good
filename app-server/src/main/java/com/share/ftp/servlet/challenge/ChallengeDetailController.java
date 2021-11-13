@@ -36,7 +36,10 @@ public class ChallengeDetailController extends GenericServlet {
       }
 
       request.setAttribute("challengeDTO", challengeDTO);
-      request.getRequestDispatcher("/challenge/ChallengeDetail.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "챌린지 상세보기");
+      request.setAttribute("contentUrl", "/challenge/ChallengeDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

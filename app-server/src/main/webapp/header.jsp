@@ -44,7 +44,7 @@
                 </div>
               </li>
               <li class="nav-item">
-                <a href="services.html" class="nav-link">챌린지</a>
+                <a href="${contextPath}/challenge/list" class="nav-link">챌린지</a>
               </li>
               <li class="nav-item">
                 <a href="${contextPath}/donation/boardList" class="nav-link">모금함</a>

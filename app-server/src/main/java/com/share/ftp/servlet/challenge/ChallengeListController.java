@@ -31,7 +31,7 @@ public class ChallengeListController extends GenericServlet {
     try {
       Collection<ChallengeDTO> challengeList = challengeDao.findAll();
       request.setAttribute("challengeList", challengeList);
-      request.setAttribute("pageTitle", "회원목록");
+      request.setAttribute("pageTitle", "챌린지 목록");
       request.setAttribute("contentUrl", "/challenge/ChallengeList.jsp");
       RequestDispatcher 요청배달자 = request.getRequestDispatcher("/template1.jsp");
       요청배달자.forward(request, response);
