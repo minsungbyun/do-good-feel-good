@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-<!DOCTYPE>
-<html lang="ko">
-	    <!-- //menu -->
 	    
 	    <div class="ad-main">
 	      <div class="ad-main-infor">
-	        <div class="write-wrap">
-	          <h4 class="mb-5">공지사항 상세</h4>
+	        <div class="board-wrap padding-board">
+	          <h4 class="mb-5">공지사항</h4>
 	          <form action="noticeUpdate" method="post" id="notice-form" enctype="multipart/form-data">
 	            <div class="form-group">
 	              <label for="f-no">번호</label>
@@ -54,12 +51,3 @@
 	      <!-- //form -->
 	    </div>
 	    <!-- //ad-main -->
-	    
-	  </div>
-	  <!-- //wrap -->
-	  
-	  <!-- sript -->
-
-		
-	</body>
-</html>

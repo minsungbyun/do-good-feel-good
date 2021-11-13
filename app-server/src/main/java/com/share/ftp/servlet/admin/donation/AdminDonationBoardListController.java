@@ -1,4 +1,4 @@
-package com.share.ftp.servlet.admin.challenge;
+package com.share.ftp.servlet.admin.donation;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -8,30 +8,31 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.share.ftp.dao.ChallengeDao;
-import com.share.ftp.domain.admin.ChallengeDTO;
+import com.share.ftp.dao.DonationBoardDao;
+import com.share.ftp.domain.donation.DonationBoardDTO;
 
-@WebServlet("/admin/challenge/list")
-public class AdminChallengeListController extends HttpServlet {
+@WebServlet("/admin/donation/list")
+public class AdminDonationBoardListController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  ChallengeDao challengeDao;
+  DonationBoardDao donationBoardDao;
 
   @Override
   public void init() {
     ServletContext 웹애플리케이션공용저장소 = getServletContext();
-    challengeDao = (ChallengeDao) 웹애플리케이션공용저장소.getAttribute("challengeDao");
+    donationBoardDao = (DonationBoardDao) 웹애플리케이션공용저장소.getAttribute("donationBoardDao");
   }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+
     try {
 
-      Collection<ChallengeDTO> challengeList = challengeDao.findAll();
+      Collection<DonationBoardDTO> adminDonationBoardList = donationBoardDao.findAll();
 
-      request.setAttribute("challengeList", challengeList);
-      request.setAttribute("contentUrl", "/admin/challenge/AdminChallengeList.jsp");
+      request.setAttribute("adminDonationBoardList", adminDonationBoardList);
+      request.setAttribute("contentUrl", "/admin/donation/AdminDonationBoardList.jsp");
       request.getRequestDispatcher("/template2.jsp").forward(request, response);
 
     } catch (Exception e) {
@@ -40,3 +41,53 @@ public class AdminChallengeListController extends HttpServlet {
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
