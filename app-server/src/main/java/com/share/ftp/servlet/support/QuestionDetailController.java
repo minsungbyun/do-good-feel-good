@@ -35,11 +35,9 @@ public class QuestionDetailController extends GenericServlet {
         throw new Exception("해당 번호의 게시글이 없습니다.");
       }
 
-
-
-      request.setAttribute("questionListDTO", questionListDTO);
-      request.getRequestDispatcher("/support/QuestionDetail.jsp").forward(request, response);
-
+      request.setAttribute("pageTitle", "문의사항 상세");
+      request.setAttribute("contentUrl", "/support/QuestionDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);
