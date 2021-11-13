@@ -28,14 +28,16 @@ public class VolunteerBoardListController extends GenericServlet {
   @Override
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
+
     try {
       Collection<VolunteerBoardDTO> volunteerBoardList = volunteerBoardDao.findAll();
 
       request.setAttribute("volunteerBoardList", volunteerBoardList);
+      request.setAttribute("contentUrl", "/volunteer/VolunteerBoardList.jsp");      
 
-      //request.setAttribute("pageTitle", "게시글목록");
+      //request.getRequestDispatcher("VolunteerBoardList.jsp").forward(request, response);
 
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("VolunteerBoardList.jsp");
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/template1.jsp");
       요청배달자.forward(request, response);
 
     } catch (Exception e) {
