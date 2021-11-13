@@ -47,6 +47,7 @@ public class VolunteerBoardDetailController extends GenericServlet {
 
     } catch (Exception e) {
       request.setAttribute("error", e);
+      e.printStackTrace();
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }

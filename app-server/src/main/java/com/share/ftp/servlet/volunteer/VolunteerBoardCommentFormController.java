@@ -35,7 +35,9 @@ public class VolunteerBoardCommentFormController extends HttpServlet {
 
       request.setAttribute("volBoardNo", volBoardNo);
       // 출력을 담당할 뷰를 호출한다.
-      request.getRequestDispatcher("VolunteerBoardCommentForm.jsp").forward(request, response);
+      request.setAttribute("contentUrl","/volunteer/VolunteerBoardCommentForm.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);

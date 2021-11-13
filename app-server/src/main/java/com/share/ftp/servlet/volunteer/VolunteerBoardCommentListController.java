@@ -40,7 +40,8 @@ public class VolunteerBoardCommentListController extends GenericServlet {
       request.setAttribute("volunteerBoardDTO", volunteerBoardDTO);
       request.setAttribute("volunteerBoardCommentList", volunteerBoardCommentList);
 
-      request.getRequestDispatcher("/volunteer/VolunteerBoardCommentList.jsp").forward(request, response);
+      request.setAttribute("contentUrl", "/volunteer/VolunteerBoardCommentList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

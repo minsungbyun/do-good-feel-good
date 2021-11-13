@@ -70,10 +70,8 @@
     </div>
     <!-- //page-section -->
     </main>
-<<<<<<< HEAD
   </body>
 </html>
-=======
     
     <script>
 			document.querySelectorAll("tbody a").forEach((aTag) => {
@@ -98,4 +96,3 @@
 
 
 
->>>>>>> 6e9bf8f20e2e44d46466b2c1c5a93611c02a259d

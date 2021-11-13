@@ -9,7 +9,7 @@
   <title>소통해요 : 나눔이야기 목록</title>
 
 
-<div class="page-banner bg-img bg-img-parallax overlay-dark" style="background-image: url(../assets/img/bg_image_3.jpg);">
+<div class="page-banner bg-img bg-img-parallax overlay-dark" style="background-image: url(../assets/img/3877820.jpg);">
     <div class="container h-100">
       <div class="row justify-content-center align-items-center h-100">
         <div class="col-lg-8">
@@ -29,6 +29,10 @@
 <main>
   <div class="page-section">
     <div class="container">
+
+ <label for="f-search">검색</label>
+      <input type="text" class="" id="f-search" name="keword">
+      <button type="submit" class="searchBtn">검색</button>
 
   <div class="table-wrap">
     <table class="table">
@@ -82,9 +86,7 @@
       </div>
       <!-- //container -->
 
-      <label for="f-search">검색</label>
-      <input type="text" class="" id="f-search" name="keword">
-      <button type="submit" class="searchBtn">검색</button>
+     
 
       <div class="form-btn">
         <a href='boardForm' class="btnSubmit">게시글 작성</a>
