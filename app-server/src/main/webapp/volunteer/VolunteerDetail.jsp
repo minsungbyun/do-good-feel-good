@@ -180,7 +180,8 @@
          </div>
        </div>
         <div class="btn-regi">
-          <button type="submit" class="btn btn-primary nBtn">참여하기</button>
+          <button type="button" class="btn btn-primary nBtn">참여하기</button>
+           <a href="join/add?no=${volunteer.no}" class="btn btn-outline-primary nBtn" role="button">참여하기</a>
             <a href="#" class="btn btn-outline-primary nBtn" role="button">이전</a>
         </div> <!-- //btn-regi -->       
       </div>  <!-- //container -->
