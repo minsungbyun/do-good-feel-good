@@ -1,4 +1,4 @@
-package com.share.ftp.servlet.support;
+package com.share.ftp.servlet.admin.support;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,8 +23,8 @@ import net.coobird.thumbnailator.geometry.Positions;
 import net.coobird.thumbnailator.name.Rename;
 
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10)
-@WebServlet("/support/noticeAdd")
-public class NoticeAddController extends HttpServlet {
+@WebServlet("/admin/support/noticeAdd")
+public class AdminNoticeAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;
@@ -90,7 +90,7 @@ public class NoticeAddController extends HttpServlet {
       noticeDao.insert(noticeDTO);
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=noticeList");
-      request.getRequestDispatcher("/support/NoticeAdd.jsp").forward(request, response);
+      request.getRequestDispatcher("/admin/support/AdminNoticeAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

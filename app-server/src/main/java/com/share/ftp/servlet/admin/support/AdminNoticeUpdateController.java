@@ -1,4 +1,4 @@
-package com.share.ftp.servlet.support;
+package com.share.ftp.servlet.admin.support;
 
 import java.io.IOException;
 import javax.servlet.ServletContext;
@@ -13,8 +13,8 @@ import com.share.ftp.dao.NoticeDao;
 import com.share.ftp.domain.admin.NoticeDTO;
 
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10)
-@WebServlet("/support/noticeUpdate")
-public class NoticeUpdateController extends HttpServlet {
+@WebServlet("/admin/support/noticeUpdate")
+public class AdminNoticeUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;
