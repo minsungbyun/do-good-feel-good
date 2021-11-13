@@ -22,15 +22,11 @@
     <link rel="stylesheet" href="${contextPath}/assets/vendor/fancybox/css/jquery.fancybox.css">
     <link rel="stylesheet" href="${contextPath}/assets/css/theme.css">
     <link rel="stylesheet" href="${contextPath}/assets/css/style.css">
+    <%--   캘린더 설정 나두세요
+    <link rel="stylesheet" href="${contextPath}/assets/calendar/css/style.css" />
+    <link rel="stylesheet" href="${contextPath}/assets/calendar/css/cal.css" />
+    --%>
     
-    <script src="${contextPath}/assets/js/jquery-3.5.1.min.js"></script>
-    <script src="${contextPath}/assets/js/bootstrap.bundle.min.js"></script>
-    <script src="${contextPath}/assets/vendor/owl-carousel/js/owl.carousel.min.js"></script>
-    <script src="${contextPath}/assets/vendor/wow/wow.min.js"></script>
-    <script src="${contextPath}/assets/vendor/fancybox/js/jquery.fancybox.min.js"></script>
-    <script src="${contextPath}/assets/vendor/isotope/isotope.pkgd.min.js"></script>
-    <script src="${contextPath}/assets/js/google-maps.js"></script>
-    <script src="${contextPath}/assets/js/theme.js"></script>
   </head>
 <body>
 <div class="container">
@@ -44,7 +40,27 @@
 <jsp:include page="footer.jsp"/>
 
 </div><!-- .container -->
-
+    <script src="${contextPath}/assets/js/jquery-3.5.1.min.js"></script>
+    <script src="${contextPath}/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="${contextPath}/assets/vendor/owl-carousel/js/owl.carousel.min.js"></script>
+    <script src="${contextPath}/assets/vendor/wow/wow.min.js"></script>
+    <script src="${contextPath}/assets/vendor/fancybox/js/jquery.fancybox.min.js"></script>
+    <script src="${contextPath}/assets/vendor/isotope/isotope.pkgd.min.js"></script>
+    <script src="${contextPath}/assets/js/google-maps.js"></script>
+    <script src="${contextPath}/assets/js/theme.js"></script>
+<%--  캘린더 설정 나두세요
+<script src="${contextPath}/assets/calendar/js/calendar.js"></script>
+    <script>
+      dycalendar.draw({
+        target:'#calendar',
+        type:'month',
+        dayformat:'full',
+        monthformat:'full',
+        highlighttargetdate:true,
+        prevnextbutton:'show'
+      })
+      </script>
+      --%>
 </body>
 </html>
 

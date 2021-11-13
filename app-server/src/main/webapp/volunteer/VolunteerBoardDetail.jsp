@@ -1,21 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
 
-  <main>
-    <div class="page-section padding-board">
-      <div class="container">
-        <h4 class="mb-3">봉사 게시판 상세보기</h4>
-        <!-- serch -->
-        <div>
-          <form action='boardUpdate' class="form-inline" style="float:right; margin-bottom:25px">
-            <input class="form-control mr-sm-2 search-box" type="search" placeholder="검색" aria-label="Search">
-            <button class="btn btn-secondary my-2 my-sm-0 search-btn" type="submit">검색</button>
-          </form>
-        </div>
-        <!-- //serch -->
+  <title>함께해요 : 나눔이야기 상세</title>
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  
+  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  
+  <style>
+  label {
+    .container {
+        width: 640px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+<h1>봉사 게시판 상세보기</h1><br>
+<form action='boardUpdate'>
 
   <div class="mb-3 row">
     <label for='f-no' class="col-sm-2 col-form-label">게시글 번호</label>
@@ -77,17 +80,6 @@
 </form>
 </div><!-- .container -->
 </body>
-</html>
 
-<%-- <p>&nbsp;</p>
-<div style="border: 1px solid; width: 600px; padding: 5px">
-    <form name="form1" action="board5ReplySave" method="post">
-        <input type="hidden" name="brdno" value="<c:out value="${boardInfo.brdno}"/>작성자: 
-        <input type="text" name="rewriter" size="20" maxlength="20"> <br/>
-        <textarea name="rememo" rows="3" cols="60" maxlength="500" placeholder="댓글을 달아주세요."></textarea>
-        <a href="#" onclick="fn_formSubmit()">저장</a>
-    </form>
-</div>
-<br>
- --%>
+
 
