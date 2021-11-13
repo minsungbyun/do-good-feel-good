@@ -84,7 +84,7 @@
   <main>
       <div class="page-section">
         <div class="container">
-          <form action="add" name="form" id ="needs-validation" method="post" onsubmit="validLoginForm(); return false;" enctype="multipart/form-data" novalidate>
+          <form action="add" name="form" method="post" onsubmit="validLoginForm(); return false;" enctype="multipart/form-data" class="needs-validation" novalidate>
           <h1 class="title-h">회원가입 - 개인</h1>
           <div class="join-wrap">
             <h5>기본정보<span class="required_title"><em class="icon_required">·</em>표시는 반드시 입력하셔야 합니다.</span></h5>
@@ -96,7 +96,7 @@
                       <th><em class="icon_required">·</em><span>아이디</span></th>
                       <td>
                         <label for='f-id' class="sr-only sr-cont">아이디</label> 
-                        <input id='f-id' class="form-control form-sub-control box-input" type='text' name='id' placeholder="아이디">
+                        <input id='f-id' class="form-control form-sub-control box-input" type='text' name='id' placeholder="아이디" required>
                         <button type="button" class="btnj btn btn-primary" data-toggle="modal" id="id-check">중복확인</button>
                         <div class="invalid-feedback">
 									        아이디를 입력해주세요.
@@ -108,7 +108,10 @@
                       <th><em class="icon_required">·</em><span>비밀번호</span></th>
                       <td>
                         <label for='f-password' class="sr-only">비밀번호</label> 
-                        <input id='f-password' class="form-control box-input" type='password' name='password' placeholder="8-16자의 영문 및 숫자, 특수문자를 모두 포함">
+                        <input id='f-password' class="form-control box-input" type='password' name='password' placeholder="8-16자의 영문 및 숫자, 특수문자를 모두 포함" required>
+                        <div class="invalid-feedback">
+                          비밀번호를 입력해주세요.
+                        </div>
                       </td>
                     </tr>
                     <!-- //비밀번호 -->
@@ -116,7 +119,10 @@
 				              <th><em class="icon_required">·</em><span>비밀번호확인</span></th>
 				              <td>
 				                <label for='f-passwordConfirm' class="sr-only">비밀번호확인</label> 
-				                <input id='f-passwordConfirm' class="form-control box-input" type='password' name='passwordConfirm' placeholder="8-16자의 영문 및 숫자, 특수문자를 모두 포함">
+				                <input id='f-passwordConfirm' class="form-control box-input" type='password' name='passwordConfirm' placeholder="8-16자의 영문 및 숫자, 특수문자를 모두 포함" required>
+				                <div class="invalid-feedback">
+										      비밀번호 확인을 해주세요.
+										    </div>
 				              </td>
 			              </tr>
 			              <!-- //비밀번호 확인 -->
@@ -131,7 +137,10 @@
                       <th><em class="icon_required">·</em><span>이름</span></th>
                       <td>
                         <label for='f-name' class="sr-only">이름</label> 
-                        <input id='f-name' class="form-control box-input" type='text' name='name'>
+                        <input id='f-name' class="form-control box-input" type='text' name='name' required>
+                        <div class="invalid-feedback">
+                          이름을 입력해주세요.
+                        </div>
                       </td>
                     </tr>
                     <!-- //이름 -->
@@ -139,9 +148,12 @@
                       <th><em class="icon_required">·</em><span>휴대폰번호</span></th>
                       <td>
                         <label for='f-tel' class="sr-only">휴대폰번호</label> 
-                        <input id='f-tel' class="form-control box-input" type='tel' name='tel'>
+                        <input id='f-tel' class="form-control box-input" type='tel' name='tel' required>
                         <div class="invalid-feedback">
                           -를 포함해서 입력해주세요! ex) 010-xxxx-xxxx
+                        </div>
+                        <div class="invalid-feedback">
+                          휴대폰번호를 입력해주세요.
                         </div>
                       </td>
                     </tr>
@@ -150,7 +162,10 @@
                       <th><em class="icon_required">·</em><span>이메일</span></th>
                       <td>
                         <label for='f-email' class="sr-only">이메일</label> 
-                        <input id='f-email' class="form-control box-input" type='email' name='email'>
+                        <input id='f-email' class="form-control box-input" type='email' name='email' required>
+                        <div class="invalid-feedback">
+                          이메일을 입력해주세요.
+                        </div>
                       </td>
                     </tr>
                     <!-- //이메일 -->
@@ -177,7 +192,7 @@
                       <th><span>생년월일</span></th>
                       <td>
                         <label for=f-birthdate class="sr-only">생년월일</label> 
-                        <input id='f-birthdate' class="form-control box-input" type='date' name='birthdate'><br>
+                        <input id='f-birthdate' class="form-control box-input" type='date' name='birthdate' required><br>
                       </td>
                     </tr>
                     <!-- //생년월일 -->
@@ -217,7 +232,7 @@
     	      }, false)
     	    })
     	})()
-    <!--
+    	
     document.querySelector("#id-check").onclick = () => {
         var name = document.querySelector("#f-id");
         if (name.value == "") {
@@ -243,8 +258,8 @@
 		      alert("처리중입니다. 잠시만 기다려주세요");
 		      return;
 		    }
-		    
-		    form.id.value = form.id.value.trim(); // 공백제거
+		    // 공백제거
+		    form.id.value = form.id.value.trim(); 
 	          
 	       if(form.id.value.length == 0) {
 	        alert("로그인 아이디를 입력해주세요!");
@@ -311,7 +326,8 @@
 	          
 	          form.submit();
 	          loadForm = true;
-	        }-->
+	        }
+        
     </script>
     
     <!-- //script -->
