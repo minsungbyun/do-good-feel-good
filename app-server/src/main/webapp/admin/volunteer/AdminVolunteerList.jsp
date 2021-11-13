@@ -1,15 +1,15 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
     
     <div class="ad-main">
       <div class="ad-main-infor">
         <!-- serch -->
         <div class="serch">
-          <label for="f-search">검색</label>
-          <input type="text" class="" id="f-search" name="keword">
+          <label for="inforSerch">검색</label>
+          <input type="text" class="" id="inforSerch">
           <button type="submit" class="searchBtn">검색</button>
         </div>
         <!-- //serch -->
@@ -18,36 +18,38 @@
             <thead>
               <tr>
                <th scope="col">
-                 <input type="checkbox" id="allCheck">
+                 <input type="checkbox">
                </th>
                 <th scope="col">번호</th>
                 <th scope="col">제목</th>
-                <th scope="col">등록일</th>
-                <th scope="col">조회수</th>
-                <th scope="col">첨부파일</th>
+              <th scope="col">주최자</th>
+              <th scope="col">카테고리</th>
+              <th scope="col">전화번호</th>
+              <th scope="col">총모집인원</th>
+              <th scope="col">총날짜</th>                
+                <th scope="col">남은기간</th>
               </tr>
             </thead>
             <tbody>
-            <c:if test='${empty noticeList}'>
-			       <p>작성된 게시글이 없습니다.</p>
-			      </c:if>
-			      
-			      <c:forEach items="${noticeList}" var="noticeDTO" >
+            <c:forEach items="${volunteerList}" var="volunteerRequestDTO" >
               <tr>
-                <td><input type="checkbox" class="select-box" value="${noticeDTO.no}"></td>
-                <td>${noticeDTO.no}</td>
-                <td><a href='noticeDetail?noticeNo=${noticeDTO.no}'>${noticeDTO.title}</a></td>
-                <td>${noticeDTO.registeredDate}</td>
-                <td>${noticeDTO.viewCount}</td>
-                <td>${noticeDTO.fileUpload}</td>
+                <td><input type="checkbox" class="select-box"></td>
+                             <td>${volunteerRequestDTO.no}</td>
+              <td><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></td> 
+              <td>${volunteerRequestDTO.owner.id}</td> 
+              <td>${volunteerRequestDTO.category.title}</td> 
+              <td>${volunteerRequestDTO.tel}</td> 
+              <td>${volunteerRequestDTO.limitNum}<span>명</span></td>
+              <td>${volunteerRequestDTO.totalDate}<span>일</span></td>
+              <td>${volunteerRequestDTO.remainDate}<span>일</span></td>
               </tr>
-            </c:forEach>
+              </c:forEach>
             </tbody>
           </table>
           <div class="ad-btn">
-            <a href="noticeForm" class="btnSubmit">글쓰기</a>
-            <!--  <a href="#" class="btnSubmit">수정</a>-->
-            <a href="noticeDelete?noticeNo=${noticeDTO.no}" class="btnSubmit">삭제</a>
+            <a href='approvedList' class="btnSubmit">[승인목록]</a>
+            <a href='rejectedList' class="btnSubmit">[반려목록]</a>
+            <a href='waitList' class="btnSubmit">[대기목록]</a>
           </div>
         </div>
         <!-- //table01 -->
@@ -77,27 +79,11 @@
     </div>
     <!-- //ad-main -->
     
-  
-  <!-- script -->
-  <script>
-	document.querySelectorAll("tbody a").forEach((aTag) => {
-	  aTag.onclick = () => false;
-	});
-	
-	var trList = document.querySelectorAll("tbody tr");.
-	trList.forEach(function(trTag) {
-	  trTag.onclick = (e) => {
-	    //console.log(e.currentTarget.querySelector("a").href);
-	    //e.currentTarget.querySelector("a").click();
-	    window.location.href = e.currentTarget.querySelector("a").href;
-	    //window.location.href = "detail?no=" + e.currentTarget.getAttribute("data-no");
-	  };
-	});
-	
-	</script>
-	
-	
-	<!-- //script -->
+
+
+
+
+
 
 
 

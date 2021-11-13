@@ -3,7 +3,6 @@ package com.share.ftp.servlet.admin.support;
 import java.io.IOException;
 import java.util.Collection;
 import javax.servlet.GenericServlet;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -34,18 +33,14 @@ public class AdminNoticeListController extends GenericServlet {
 
       // 뷰 컴포넌트가 준비한 데이터를 사용할 수 있도록 저장소에 보관한다.
       request.setAttribute("noticeList", noticeList);
-
+      request.setAttribute("contentUrl", "/admin/support/AdminNoticeList.jsp");
+      request.getRequestDispatcher("/template2.jsp").forward(request, response);
       // 출력을 담당할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/admin/support/AdminNoticeList.jsp");
-      요청배달자.forward(request, response);
+      //      request.getRequestDispatcher("/admin/support/AdminNoticeList.jsp").forward(request, response);
 
     } catch (Exception e) {
-      e.printStackTrace();
       request.setAttribute("error", e);
-
-      // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
-      요청배달자.forward(request, response);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
+    <title>모금함대기리스트</title>
     <div class="ad-main">
       <div class="ad-main-infor">
         <!-- serch -->
@@ -34,7 +34,7 @@
               </tr>
             </thead>
             <tbody>
-            <c:forEach items="${adminDonationBoardList}" var="donationBoardDTO">
+            <c:forEach items="${waitDonationList}" var="donationBoardDTO">
               <tr data-no='${donationBoardDTO.no}'>
               <td><input type="checkbox" class="select-box" id='aaa'></td>
                   <td>${donationBoardDTO.no}</td> 
@@ -54,9 +54,9 @@
             </tbody>
           </table>
           <div class="ad-btn">
-            <a href="boardReject?no=${donationBoardDTO.no}" class="btnSubmit">반려하기</a>
+            <a href="reject?no=${donationBoardDTO.no}" class="btnSubmit">반려하기</a>
             <!--  <a href="#" class="btnSubmit">수정</a>-->
-            <a href="boardApprove?no=${donationBoardDTO.no}" class="btnSubmit">승인하기</a>
+            <a href="approve?no=${donationBoardDTO.no}" class="btnSubmit">승인하기</a>
           </div>
         </div>
         <!-- //table01 -->
@@ -98,7 +98,7 @@ trList.forEach(function(trTag) {
         //console.log(e.currentTarget.querySelector("a").href);
         //e.currentTarget.querySelector("a").click();
         //window.location.href = e.currentTarget.querySelector("a").href;
-        window.location.href = "boardApprove?no=" + e.currentTarget.getAttribute("data-no");
+        window.location.href = "approve?no=" + e.currentTarget.getAttribute("data-no");
     };
 });
 

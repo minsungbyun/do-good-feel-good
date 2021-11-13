@@ -1,8 +1,7 @@
-package com.share.ftp.servlet.donation;
+package com.share.ftp.servlet.admin.donation;
 
-import static com.share.util.General.check.REJECTED;
+import static com.share.util.General.check.APPLIED;
 import java.io.IOException;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,8 +12,8 @@ import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.domain.donation.DonationBoardDTO;
 
-@WebServlet("/admin/boardReject")
-public class AdminDonationBoardRejectController extends HttpServlet { // 개인 봉사신청 양식 쓰는 곳
+@WebServlet("/admin/donation/approve")
+public class AdminDonationBoardApproveController extends HttpServlet { // 개인 봉사신청 양식 쓰는 곳
 
   private static final long serialVersionUID = 1L;
 
@@ -23,14 +22,14 @@ public class AdminDonationBoardRejectController extends HttpServlet { // 개인 
 
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     donationBoardDao = (DonationBoardDao) 웹애플리케이션공용저장소.getAttribute("donationBoardDao");
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
@@ -38,12 +37,13 @@ public class AdminDonationBoardRejectController extends HttpServlet { // 개인 
 
       DonationBoardDTO donationBoardDTO = donationBoardDao.findByDonationNo(donationNo);
 
-      donationBoardDTO.setStatus(REJECTED);
+      donationBoardDTO.setStatus(APPLIED);
 
       donationBoardDao.updateStatus(donationBoardDTO);
       sqlSession.commit();
 
-      response.sendRedirect("adminDonationList");
+      //      request.setAttribute("contentUrl", "redirect:list");
+      response.sendRedirect("list");
 
     } catch (Exception e) {
 

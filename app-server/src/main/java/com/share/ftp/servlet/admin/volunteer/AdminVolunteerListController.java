@@ -1,8 +1,7 @@
-package com.share.ftp.servlet.admin;
+package com.share.ftp.servlet.admin.volunteer;
 
 import java.io.IOException;
 import java.util.List;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,8 +12,8 @@ import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 
 
-@WebServlet("/admin/volunteer/approvedList")
-public class AdminVolunteerApprovedListController extends HttpServlet { 
+@WebServlet("/admin/volunteer/list")
+public class AdminVolunteerListController extends HttpServlet { 
 
   private static final long serialVersionUID = 1L;
 
@@ -22,8 +21,8 @@ public class AdminVolunteerApprovedListController extends HttpServlet {
   VolunteerDao volunteerDao;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     volunteerDao = (VolunteerDao) 웹애플리케이션공용저장소.getAttribute("volunteerDao");
   }
 
@@ -32,10 +31,12 @@ public class AdminVolunteerApprovedListController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      List<VolunteerRequestDTO> volunteerList = volunteerDao.findAllApproved();
+      List<VolunteerRequestDTO> volunteerList = volunteerDao.findAll();
 
       request.setAttribute("volunteerList", volunteerList);
-      request.getRequestDispatcher("/admin/AdminVolunteerApprovedList.jsp").forward(request, response);
+      request.setAttribute("contentUrl", "/admin/volunteer/AdminVolunteerList.jsp");
+      request.getRequestDispatcher("/template2.jsp").forward(request, response);
+      //      request.getRequestDispatcher("/admin/AdminVolunteerList.jsp").forward(request, response);
 
     } catch (Exception e) {
 
