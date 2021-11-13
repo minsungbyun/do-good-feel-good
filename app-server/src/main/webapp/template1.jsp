@@ -23,14 +23,6 @@
     <link rel="stylesheet" href="${contextPath}/assets/css/theme.css">
     <link rel="stylesheet" href="${contextPath}/assets/css/style.css">
     
-    <script src="${contextPath}/assets/js/jquery-3.5.1.min.js"></script>
-    <script src="${contextPath}/assets/js/bootstrap.bundle.min.js"></script>
-    <script src="${contextPath}/assets/vendor/owl-carousel/js/owl.carousel.min.js"></script>
-    <script src="${contextPath}/assets/vendor/wow/wow.min.js"></script>
-    <script src="${contextPath}/assets/vendor/fancybox/js/jquery.fancybox.min.js"></script>
-    <script src="${contextPath}/assets/vendor/isotope/isotope.pkgd.min.js"></script>
-    <script src="${contextPath}/assets/js/google-maps.js"></script>
-    <script src="${contextPath}/assets/js/theme.js"></script>
   </head>
 <body>
 <div class="container">
@@ -44,7 +36,14 @@
 <jsp:include page="footer.jsp"/>
 
 </div><!-- .container -->
-
+    <script src="${contextPath}/assets/js/jquery-3.5.1.min.js"></script>
+    <script src="${contextPath}/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="${contextPath}/assets/vendor/owl-carousel/js/owl.carousel.min.js"></script>
+    <script src="${contextPath}/assets/vendor/wow/wow.min.js"></script>
+    <script src="${contextPath}/assets/vendor/fancybox/js/jquery.fancybox.min.js"></script>
+    <script src="${contextPath}/assets/vendor/isotope/isotope.pkgd.min.js"></script>
+    <script src="${contextPath}/assets/js/google-maps.js"></script>
+    <script src="${contextPath}/assets/js/theme.js"></script>
 </body>
 </html>
 

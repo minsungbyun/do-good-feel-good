@@ -6,12 +6,12 @@
 }
 
 *::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 10px;
+  height: 10px;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: salmon;
+  background-color: #2F89FC;
   border-radius: 3px;
 }
 
@@ -618,6 +618,10 @@ padding-top:15px;
 }
 
 /* volunteer */
+
+
+
+
 .vol-title {
 	height:50px;
 }
