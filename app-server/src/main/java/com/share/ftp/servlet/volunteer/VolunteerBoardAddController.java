@@ -89,8 +89,6 @@ public class VolunteerBoardAddController extends HttpServlet {
       response.setHeader("Refresh", "1;url=boardList");
       //request.setAttribute("pageTitle", "게시글목록");
       request.getRequestDispatcher("VolunteerBoardAdd.jsp").forward(request, response);
-      //request.getRequestDispatcher("/template1.jsp").forward(request, response);
-      //템플릿 생성 후 적용 예정
 
     } catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.

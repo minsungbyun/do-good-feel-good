@@ -2,7 +2,6 @@ package com.share.ftp.servlet.volunteer;
 
 import java.io.IOException;
 import java.util.List;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,30 +19,34 @@ public class VolunteerListController extends HttpServlet {
   VolunteerDao volunteerDao;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     volunteerDao = (VolunteerDao) 웹애플리케이션공용저장소.getAttribute("volunteerDao");
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
-
       List<VolunteerRequestDTO> volunteerList = volunteerDao.findAllApproved();
 
-      request.setAttribute("volunteerList", volunteerList);
-      request.getRequestDispatcher("VolunteerList.jsp").forward(request, response);
+      int remainNum = 0;
+      for (VolunteerRequestDTO volunteer : volunteerList) {
+        remainNum = (volunteer.getLimitNum() - volunteer.getCurrentNum());
 
+      }
+
+      request.setAttribute("volunteerList", volunteerList);
+      request.setAttribute("remainNum", remainNum);
+
+      request.setAttribute("pageTitle", "함께해요 : 봉사목록");
+      request.setAttribute("contentUrl", "/volunteer/VolunteerList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
-      e.printStackTrace();
-
       request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-
   }
 
   //  @Override

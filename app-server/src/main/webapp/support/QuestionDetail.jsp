@@ -1,20 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-<!DOCTYPE html>
-<html>
-	<head>
-	  <title>문의사항 상세</title>
-	  <style>
-		  label {
-		    margin-right: 5px;
-		    text-align: right;
-		    display: inline-block;
-		    width: 60px;
-		  }
-	  </style>
-	</head>
-	<body>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 		<h1>문의사항 상세</h1>
 		<form action='questionUpdate'>
 	    <label for='f-no'>번호</label> 
@@ -40,5 +27,3 @@
 			<a href='questionList'>[목록]</a><br>
 			<a href='questionList'>[답글쓰기]</a><br>
 	  </form>
-	</body>
-</html>

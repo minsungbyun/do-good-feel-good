@@ -79,8 +79,7 @@ document.querySelector("#volunteer-button").onclick = () => {
     Swal.fire("필수 입력 항목이 비어 있습니다.")
     return false;
   }
-}
-
+};
 </script>
 
 </body>

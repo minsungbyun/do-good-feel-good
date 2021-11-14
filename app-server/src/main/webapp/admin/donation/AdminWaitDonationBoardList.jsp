@@ -2,48 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>관리자페이지 : 모금함관리</title>
-  
-  <!-- link -->
-  <link rel="stylesheet" href="../assets/css/bootstrap.css">
-  <link rel="stylesheet" href="../assets/css/maicons.css">
-  <link rel="stylesheet" href="../assets/vendor/animate/animate.css">
-  <link rel="stylesheet" href="../assets/vendor/owl-carousel/css/owl.carousel.css">
-  <link rel="stylesheet" href="../assets/vendor/fancybox/css/jquery.fancybox.css">
-  <link rel="stylesheet" href="../assets/css/theme.css">
-  <link rel="stylesheet" href="../assets/css/admin.css">
-</head>
-
-<body>
-  <div id="wrap">
-    <div class="head">
-      <div class="container">
-        <div class="header">
-          <h6 class="navbar-brand">Happy<b class="text-primary logo">Share</b></h6>
-          <div class="btn-logoout">
-            <button type="button" class="btn btn-primary btn-sm btn-logo">로그아웃</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- //head -->
-    
-    <div class="menu">
-      <ul>
-        <li><a href="#">회원정보조회</a></li>
-        <li><a href="#">봉사활동관리</a></li>
-        <li><a href="#" class="on">모금함활동관리</a></li>
-        <li><a href="#">공지사항관리</a></li>
-        <li><a href="#">문의사항관리</a></li>
-        <li><a href="#">챌린지사항관리</a></li>
-      </ul>
-    </div>
-    <!-- //menu -->
-    
+    <title>모금함대기리스트</title>
     <div class="ad-main">
       <div class="ad-main-infor">
         <!-- serch -->
@@ -75,9 +34,9 @@
               </tr>
             </thead>
             <tbody>
-            <c:forEach items="${rejectedDonationList}" var="donationBoardDTO">
+            <c:forEach items="${waitDonationList}" var="donationBoardDTO">
               <tr data-no='${donationBoardDTO.no}'>
-              <td><input type="checkbox" class="select-box"></td>
+              <td><input type="checkbox" class="select-box" id='aaa'></td>
                   <td>${donationBoardDTO.no}</td> 
                   <td>${donationBoardDTO.title}</td> 
                   <td>${donationBoardDTO.leader.name}</td> 
@@ -95,9 +54,9 @@
             </tbody>
           </table>
           <div class="ad-btn">
-            <a href="boardReject?no=${donationBoardDTO.no}" class="btnSubmit">반려하기</a>
+            <a href="reject?no=${donationBoardDTO.no}" class="btnSubmit">반려하기</a>
             <!--  <a href="#" class="btnSubmit">수정</a>-->
-            <a href="boardApprove?no=${donationBoardDTO.no}" class="btnSubmit">승인하기</a>
+            <a href="approve?no=${donationBoardDTO.no}" class="btnSubmit">승인하기</a>
           </div>
         </div>
         <!-- //table01 -->
@@ -139,7 +98,7 @@ trList.forEach(function(trTag) {
         //console.log(e.currentTarget.querySelector("a").href);
         //e.currentTarget.querySelector("a").click();
         //window.location.href = e.currentTarget.querySelector("a").href;
-        window.location.href = "boardApprove?no=" + e.currentTarget.getAttribute("data-no");
+        window.location.href = "approve?no=" + e.currentTarget.getAttribute("data-no");
     };
 });
 
@@ -152,17 +111,6 @@ trList.forEach(function(trTag) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-    
 
 
 

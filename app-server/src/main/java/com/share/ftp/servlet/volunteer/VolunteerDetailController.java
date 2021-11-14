@@ -2,9 +2,7 @@ package com.share.ftp.servlet.volunteer;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,22 +20,20 @@ public class VolunteerDetailController extends HttpServlet {
   //  GeneralDao generalDao;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     volunteerDao = (VolunteerDao) 웹애플리케이션공용저장소.getAttribute("volunteerDao");
     //    generalDao = (GeneralDao) 웹애플리케이션공용저장소.getAttribute("generalDao");
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
     try {
 
       int volNo = Integer.parseInt(request.getParameter("no"));
 
       VolunteerRequestDTO volunteer = volunteerDao.findByApprovedVolunteerNo(volNo);
-      //      List<Category> category = generalDao.findAllCategory();
       String totalDate = volunteerDao.totalDate(volNo).getTotalDate();
       String remainDate = volunteerDao.remainDate(volNo).getRemainDate();
 
@@ -45,36 +41,20 @@ public class VolunteerDetailController extends HttpServlet {
       volunteerDate.put("totalDate", totalDate);
       volunteerDate.put("remainDate", remainDate);
 
-
-      // 첨부파일을 위한 리스트
-      List<VolunteerRequestDTO> volunteerList = volunteerDao.findAll();
-
       if (volunteer == null) {
         throw new Exception("해당 번호의 봉사가 없습니다.");
       }
-
-      // 뷰 컴포넌트가 준비한 데이터를 사용할 수 있도록 저장소에 보관한다.
       request.setAttribute("volunteer", volunteer); 
-      //      request.setAttribute("category", category); 
-      request.setAttribute("volunteerList", volunteerList);
       request.setAttribute("volunteerDate", volunteerDate);
-      request.getRequestDispatcher("VolunteerDetail.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "함께해요 : 봉사내용");
+      request.setAttribute("contentUrl", "/volunteer/VolunteerDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
-      e.printStackTrace();
-
       request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
-
-
-
-
-
-
-
-
 
   //
   //  @Override

@@ -2,58 +2,103 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>함께해요 : 나눔이야기 목록</title>
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-  
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  
-  <style>
-      .container {
-          width:640px;      
-      }
-    </style>
+<!DOCTYPE>
+<html lang="ko">
+  <head>
+  <meta charset="UTF-8">
+  <title>소통해요 : 나눔이야기 목록</title>
+
+
+<div class="page-banner bg-img bg-img-parallax overlay-dark" style="background-image: url(../assets/img/3877820.jpg);">
+    <div class="container h-100">
+      <div class="row justify-content-center align-items-center h-100">
+        <div class="col-lg-8">
+            <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0">
+              <li class="breadcrumb-item"><a href="index.html">소통해요</a></li>
+              <li class="breadcrumb-item active" aria-current="page" style="font-size:24px;">나눔이야기 게시판</li>
+            </ol>
+        </div>
+      </div>
+    </div>
+  </div> <!-- .page-banner -->
 </head>
+
 <body>
-<div class="container">
-<h1>봉사 게시판 목록</h1>
-<br>
-<table class="table table-hover">
-<thead>
-  <tr>
-    <th>번호</th>
-    <th>제목</th>
-    <th>작성자</th>
-    <th>등록일</th>
-    <th>조회수</th>
-  </tr>
-</thead>
-<tbody>
+  
+ <!-- main -->
+<main>
+  <div class="page-section">
+    <div class="container">
 
-<c:forEach items="${volunteerBoardList}" var="volunteerBoardDTO">
-<tr>
-    <td>${volunteerBoardDTO.no}</td>
-    <td><a href='boardDetail?no=${volunteerBoardDTO.no}'>${volunteerBoardDTO.title}</a></td> 
-    <td>${volunteerBoardDTO.owner.id}</td> 
-    <td>${volunteerBoardDTO.registeredDate}</td>
-    <td>${volunteerBoardDTO.viewCount}</td> 
-</tr>
-</c:forEach>
+ <label for="f-search">검색</label>
+      <input type="text" class="" id="f-search" name="keword">
+      <button type="submit" class="searchBtn">검색</button>
 
-</tbody>
-</table>
-      <label for='f-search'>검색어</label>
-      <input id='f-search' type="text" name='keword'>
-      <button class="btn btn-outline-primary btn-sm">검색</button> 
-      <!-- <a href='boardDelete?no=${volunteerBoardDTO.no}' class="btn btn-primary"></a> -->
-      <a href='boardForm' class="btn btn-outline-primary btn-sm float: right">게시글 작성</a><br>
-</div><!-- container -->
+  <div class="table-wrap">
+    <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">번호</th>
+              <th scope="col">제목</th>
+              <th scope="col">작성자</th>
+              <th scope="col">등록일</th>
+              <th scope="col">조회수</th>
+            </tr>
+          </thead>
+            <tbody>
+              <c:if test='${empty volunteerBoardList}'>
+              <p>작성된 게시글이 없습니다.</p>
+              </c:if>
 
-</body>
+              <c:forEach items="${volunteerBoardList}" var="volunteerBoardDTO">
+                <tr>
+                <td>${volunteerBoardDTO.no}</td>
+                <td><a href='boardDetail?no=${volunteerBoardDTO.no}'>${volunteerBoardDTO.title}</a></td> 
+                <td>${volunteerBoardDTO.owner.id}</td> 
+                <td>${volunteerBoardDTO.registeredDate}</td>
+                <td>${volunteerBoardDTO.viewCount}</td> 
+                </tr>
+              </c:forEach>
+            </tbody>
+        </table>
+  </div>
+    <!-- //table-wrap -->
+
+        <div class="col-12 my-5">
+          <nav aria-label="Page Navigation">
+            <ul class="pagination justify-content-center">
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+              </li>
+              <li class="page-item active" aria-current="page">
+                <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">2</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!-- //container -->
+
+     
+
+      <div class="form-btn">
+        <a href='boardForm' class="btnSubmit">게시글 작성</a>
+      </div>
+
+    </div>
+      <!-- //page-section -->
+  </main>
+    </body>
 </html>
+
+
 
 
 

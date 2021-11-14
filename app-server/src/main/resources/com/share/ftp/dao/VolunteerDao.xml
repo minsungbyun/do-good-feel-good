@@ -138,8 +138,8 @@
           v.email,
           v.start_dt,
           v.end_dt,
-          datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(v.start_dt,'%Y-%m-%d %H:%i:%s')) total_dt,
-         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(now(),'%Y-%m-%d %H:%i:%s')) remain_dt,
+          datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt,
+         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(now(),'%Y-%m-%d')) remain_dt,
 	       v.start_time,
 	       v.end_time,
 	       v.total_cnt,
@@ -183,8 +183,8 @@
 	         v.email,
 	         v.start_dt,
 	         v.end_dt,
-	         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(v.start_dt,'%Y-%m-%d %H:%i:%s')) total_dt,
-	         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(curdate(),'%Y-%m-%d %H:%i:%s')) remain_dt,
+	         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt,
+	         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
 	         v.start_time,
 	         v.end_time,
 	         v.total_cnt,
@@ -215,8 +215,8 @@
 	         v.email,
 	         v.start_dt,
 	         v.end_dt,
-	         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(v.start_dt,'%Y-%m-%d %H:%i:%s')) total_dt,
-	         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(now(),'%Y-%m-%d %H:%i:%s')) remain_dt,
+	         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt,
+	         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(now(),'%Y-%m-%d')) remain_dt,
 	         v.start_time,
 	         v.end_time,
 	         v.total_cnt,
@@ -245,8 +245,8 @@
          v.email,
          v.start_dt,
          v.end_dt,
-         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(v.start_dt,'%Y-%m-%d %H:%i:%s')) total_dt,
-         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(now(),'%Y-%m-%d %H:%i:%s')) remain_dt,
+         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt,
+         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(now(),'%Y-%m-%d')) remain_dt,
          v.start_time,
          v.end_time,
          v.total_cnt,
@@ -275,8 +275,8 @@
          v.email,
          v.start_dt,
          v.end_dt,
-         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(v.start_dt,'%Y-%m-%d %H:%i:%s')) total_dt,
-         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(now(),'%Y-%m-%d %H:%i:%s')) remain_dt,
+         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt,
+         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(now(),'%Y-%m-%d')) remain_dt,
          v.start_time,
          v.end_time,
          v.total_cnt,
@@ -316,12 +316,12 @@
    
    
    <!-- 일 시간 분 초 다 계산하려면 테이블 데이터 타입을 datetime으로 변경해야함
-    date_format(end_dt,'%Y-%m-%d %H:%i:%s'), date_format(curdate(),'%Y-%m-%d %H:%i:%s') datediff,
+    date_format(end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d') datediff,
     -->
     
    <select id="totalDate" resultMap="VolunteerRequestDTOMap" parameterType="int">
       select 
-        datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(v.start_dt,'%Y-%m-%d %H:%i:%s')) total_dt
+        datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt
       from
         ftp_vol v
       where
@@ -330,12 +330,13 @@
     
    <select id="remainDate" resultMap="VolunteerRequestDTOMap" parameterType="int">
       select 
-        datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(now(),'%Y-%m-%d %H:%i:%s')) remain_dt
+        datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(now(),'%Y-%m-%d')) remain_dt
       from
         ftp_vol v
       where
         v.vol_no=#{volNo}
     </select>
+  
   
   
   <select id="findByVolunteerNo" resultMap="VolunteerRequestDTOMap" parameterType="int">
@@ -347,7 +348,7 @@
          v.email,
          v.start_dt,
          v.end_dt,
-         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(v.start_dt,'%Y-%m-%d %H:%i:%s')) datediff,
+         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) datediff,
          v.start_time,
          v.end_time,
          timediff(v.end_time,v.start_time) timediff,
@@ -374,7 +375,7 @@
          v.email,
          v.start_dt,
          v.end_dt,
-         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(v.start_dt,'%Y-%m-%d %H:%i:%s')) datediff,
+         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) datediff,
          v.start_time,
          v.end_time,
          timediff(v.end_time,v.start_time) timediff,
@@ -401,7 +402,7 @@
          v.email,
          v.start_dt,
          v.end_dt,
-         datediff(date_format(v.end_dt,'%Y-%m-%d %H:%i:%s'), date_format(v.start_dt,'%Y-%m-%d %H:%i:%s')) datediff,
+         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) datediff,
          v.start_time,
          v.end_time,
          timediff(v.end_time,v.start_time) timediff,

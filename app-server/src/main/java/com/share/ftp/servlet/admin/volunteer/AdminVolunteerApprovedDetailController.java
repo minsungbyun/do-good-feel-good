@@ -1,4 +1,4 @@
-package com.share.ftp.servlet.admin;
+package com.share.ftp.servlet.admin.volunteer;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 
-@WebServlet("/admin/volunteer/rejectedDetail")
-public class AdminVolunteerRejectedDetailController extends HttpServlet {
+@WebServlet("/admin/volunteer/approvedDetail")
+public class AdminVolunteerApprovedDetailController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   VolunteerDao volunteerDao;
@@ -58,7 +58,7 @@ public class AdminVolunteerRejectedDetailController extends HttpServlet {
       //      request.setAttribute("category", category); 
       request.setAttribute("volunteerList", volunteerList);
       request.setAttribute("volunteerDate", volunteerDate);
-      request.getRequestDispatcher("/admin/AdminVolunteerRejectedDetail.jsp").forward(request, response);
+      request.getRequestDispatcher("/admin/AdminVolunteerApprovedDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();
