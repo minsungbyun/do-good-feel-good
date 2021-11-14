@@ -4,7 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <main>
     <div class="page-section">
       <div class="container">
@@ -24,23 +23,9 @@
         </c:forEach>
         </div>
         <div class="mt-5 text-center">
-          <button class="btn btn-primary" id="loadMore">Load More</button>
+          <button class="btn btn-primary">Load More</button>
         </div>
       </div> <!-- .container -->
   </main>
-	<script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>  
-	<script src ="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"> </script>  
-	<script>  
-	$(document).ready (function () {  
-	  $(".content").slice(0, 3).show();  
-	  $("#loadMore").on("click", function(e){  
-	    e.preventDefault();  
-	    $(".content:hidden").slice(0, 3).slideDown();  
-	    if ($(".content:hidden").length == 0) {  
-	      $("#loadMore").text("No Content").addClass("noContent");  
-	    }  
-	  });  
-	  })  
-	</script>  
 </body>
 </html>

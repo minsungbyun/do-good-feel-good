@@ -41,7 +41,9 @@ public class ChallengeReviewListController extends GenericServlet {
       request.setAttribute("challengeDTO", challengeDTO);
       request.setAttribute("challengeReviewList", challengeReviewList);
 
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/challenge/ChallengeReviewList.jsp");
+      request.setAttribute("pageTitle", "챌린지 목록");
+      request.setAttribute("contentUrl", "/challenge/ChallengeReviewList.jsp");
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/template1.jsp");
       요청배달자.forward(request, response);
 
     } catch (Exception e) {

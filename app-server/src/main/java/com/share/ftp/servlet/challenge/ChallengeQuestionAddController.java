@@ -33,17 +33,14 @@ public class ChallengeQuestionAddController extends HttpServlet {
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    ChallengeQuestionDTO challengeQuestionDTO = new ChallengeQuestionDTO();
-
-    JoinDTO owner = new JoinDTO();
-    owner.setNo(Integer.parseInt(request.getParameter("owner")));
-
-    challengeQuestionDTO.setContent(request.getParameter("content"));
-    challengeQuestionDTO.setOwner(owner);
-
     try {
+      ChallengeQuestionDTO challengeQuestionDTO = new ChallengeQuestionDTO();
+
+      challengeQuestionDTO.setContent(request.getParameter("content"));
+      challengeQuestionDTO.setOwner((JoinDTO) request.getSession().getAttribute("loginUser"));
+      System.out.println(challengeQuestionDTO.getOwner().getNo());
       challengeQuestionDTO.setNo(Integer.parseInt(request.getParameter("no")));
       challengeQuestionDao.insert(challengeQuestionDTO);
       sqlSession.commit();

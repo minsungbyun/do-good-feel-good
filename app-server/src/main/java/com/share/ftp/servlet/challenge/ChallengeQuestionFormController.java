@@ -25,15 +25,17 @@ public class ChallengeQuestionFormController extends HttpServlet {
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
       int challengeNo = Integer.parseInt(request.getParameter("no"));
       ChallengeDTO challengeDTO = challengeDao.findByNo(challengeNo);
-
+      System.out.println(request.getSession().getAttribute("loginUser"));
       request.setAttribute("challengeDTO", challengeDTO);
       // 출력을 담당할 뷰를 호출한다.
-      request.getRequestDispatcher("/challenge/ChallengeQuestionForm.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "문의 등록");
+      request.setAttribute("contentUrl", "/challenge/ChallengeQuestionForm.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
     } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);

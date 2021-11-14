@@ -48,9 +48,7 @@
     
   <select id="findByIdPassword" resultMap="JoinDTOMap">
     select 
-       id,
-       password,
-       type
+       *
      from
        ftp_user
     where 

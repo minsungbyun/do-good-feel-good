@@ -7,7 +7,7 @@
       <div class="container">
         <div class="challgne-item">
           <p class="challgne-type bu">비대면</p>
-          <h3>나 혼자 요리한다!</h3>
+          <h3>${challengeDTO.title}</h3>
         </div>
         <div class="chall-detail">
           <div class="chall-de-img">
@@ -36,11 +36,11 @@
                <ul>
                  <li>
                    <span>모집기간</span>
-                   <span>2021.00.00~2021.00.00</span><span>총 00일</span>
+                   <span>${challengeDTO.startDate}~${challengeDTO.endDate}</span><span>총 00일</span>
                  </li>
                  <li>
                    <span>참여기간</span>
-                   <span>2021.00.00~2021.00.00</span>
+                   <span>${challengeDTO.startDate}~${challengeDTO.endDate}</span>
                  </li>
                  <li>
                    D-day 00일
@@ -58,25 +58,30 @@
        
        <div class="vol-con-wrap">
          <div>
-            <h3 class="widget-title" style="padding-top:30px;">상세정보</h3>
+            <h1 class="widget-title" style="padding-top:30px;">상세정보</h1>
             <div class="content-box">
-              
+              ${challengeDTO.content}
             </div>
          </div>
          <div>
-            <h3 class="widget-title" style="padding-top:30px;">위치</h3>
-            <div class="content-map">
-              
-            </div>
+            <a href='reviewList?no=${challengeDTO.no}'>
+            <h4 class="widget-title" style="padding-top:30px;">참여인증&댓글</h4>
+            </a>
+         </div>
+         <div>
+            <a href='questionList?no=${challengeDTO.no}'>
+            <h4 class="widget-title" style="padding-top:30px;">문의하기
+            </h4>
+            </a>
+         </div>
          </div>
        </div>
         <div class="btn-regi">
           <button type="submit" class="btn btn-primary nBtn">참여하기</button>
             <a href="#" class="btn btn-outline-primary nBtn" role="button">이전</a>
-        </div>       
+        </div>
       </div>
       <!-- //container -->
-    </div>
     <!-- //page-section -->
   </main>
 </body>

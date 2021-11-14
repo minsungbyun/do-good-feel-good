@@ -231,14 +231,14 @@ insert into ftp_challenge_file(challenge_file_no, challenge_no, filepath) values
 insert into ftp_challenge_file(challenge_file_no, challenge_no, filepath) values(31, 3, '깜빡 챌린지 관련 첨부.gif');
 
 -- 챌린지 문의
-insert into ftp_challenge_qna(challenge_qna_no, challenge_no, user_no, content) values(1, 1, 6, '덕분에 챌린지는 어떻게 인증하나요?');
-insert into ftp_challenge_qna(challenge_qna_no, challenge_no, user_no, content) values(2, 2, 6, '거리두기 챌린지는 어떻게 인증하나요?');
-insert into ftp_challenge_qna(challenge_qna_no, challenge_no, user_no, content) values(3, 3, 6, '깜빡 챌린지는 어떻게 인증하나요?');
+insert into ftp_challenge_qna(challenge_qna_no, challenge_no, user_no, content) values(1, 1, 8, '덕분에 챌린지는 어떻게 인증하나요?');
+insert into ftp_challenge_qna(challenge_qna_no, challenge_no, user_no, content) values(2, 2, 8, '거리두기 챌린지는 어떻게 인증하나요?');
+insert into ftp_challenge_qna(challenge_qna_no, challenge_no, user_no, content) values(3, 3, 8, '깜빡 챌린지는 어떻게 인증하나요?');
 
 -- 챌린지 리뷰
-insert into ftp_challenge_review(challenge_review_no, challenge_no, user_no, content) values(1, 1, 6, '덕분에 챌린지 인증합니다!');
-insert into ftp_challenge_review(challenge_review_no, challenge_no, user_no, content) values(2, 2, 1, '거리두기 챌린지 인증합니다!');
-insert into ftp_challenge_review(challenge_review_no, challenge_no, user_no, content) values(3, 3, 2, '깜빡 챌린지 인증합니다!');
+insert into ftp_challenge_review(challenge_review_no, challenge_no, user_no, content) values(1, 1, 9, '덕분에 챌린지 인증합니다!');
+insert into ftp_challenge_review(challenge_review_no, challenge_no, user_no, content) values(2, 2, 9, '거리두기 챌린지 인증합니다!');
+insert into ftp_challenge_review(challenge_review_no, challenge_no, user_no, content) values(3, 3, 9, '깜빡 챌린지 인증합니다!');
 
 -- 공지사항 입력
 insert into ftp_support_notice(title, content) values('공지사항1', '내용1');
