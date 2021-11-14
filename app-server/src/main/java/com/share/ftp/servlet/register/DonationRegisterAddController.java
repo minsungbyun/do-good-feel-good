@@ -1,8 +1,6 @@
-package com.share.ftp.servlet.donation;
+package com.share.ftp.servlet.register;
 
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +14,7 @@ import com.share.ftp.domain.donation.DonationRegisterDTO;
 import com.share.ftp.domain.donation.DonationRegisterPayType;
 import com.share.ftp.domain.join.JoinDTO;
 
-@WebServlet("/donation/registerAdd")
+@WebServlet("/register/add")
 public class DonationRegisterAddController extends HttpServlet { 
   private static final long serialVersionUID = 1L;
 
@@ -24,8 +22,8 @@ public class DonationRegisterAddController extends HttpServlet {
   SqlSession sqlSession;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     donationRegisterDao = (DonationRegisterDao) 웹애플리케이션공용저장소.getAttribute("donationRegisterDao");
 
@@ -34,21 +32,20 @@ public class DonationRegisterAddController extends HttpServlet {
 
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     DonationRegisterDTO donationRegisterDTO = new DonationRegisterDTO();
 
     DonationRegisterPayType donationRegisterPayType = new DonationRegisterPayType();
     donationRegisterPayType.setNo(Integer.parseInt(request.getParameter("payType")));
-
     DonationBoardDTO donationBoardDTO = new DonationBoardDTO();
     donationBoardDTO.setNo(Integer.parseInt(request.getParameter("donationBoard")));
 
-    JoinDTO joinDTO = new JoinDTO();
-    joinDTO.setNo(Integer.parseInt(request.getParameter("donator")));
+    //    JoinDTO joinDTO = new JoinDTO();
+    //    joinDTO.setNo(Integer.parseInt(request.getParameter("donator")));
 
-    donationRegisterDTO.setDonator(joinDTO);
+    donationRegisterDTO.setDonator((JoinDTO) request.getSession().getAttribute("loginUser"));
     donationRegisterDTO.setDonationBoard(donationBoardDTO);
     donationRegisterDTO.setPayTypeNo(donationRegisterPayType);
     donationRegisterDTO.setDonationMoney(Integer.parseInt(request.getParameter("donationMoney")));
@@ -64,14 +61,11 @@ public class DonationRegisterAddController extends HttpServlet {
     try {
       donationRegisterDao.insert(donationRegisterDTO);
       sqlSession.commit();
-      response.sendRedirect("boardList");
+      response.sendRedirect("../donation/list");
 
     } catch (Exception e) {
       request.setAttribute("error", e);
-      e.printStackTrace();
-
-      RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Error.jsp");
-      requestDispatcher.forward(request, response);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }

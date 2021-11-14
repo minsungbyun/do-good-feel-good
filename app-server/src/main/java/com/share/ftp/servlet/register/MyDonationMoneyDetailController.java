@@ -1,20 +1,19 @@
-package com.share.ftp.servlet.donation;
+package com.share.ftp.servlet.register;
 
 import java.io.IOException;
-import javax.servlet.GenericServlet;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.dao.JoinDao;
 import com.share.ftp.domain.join.JoinDTO;
 
-@WebServlet("/donation/myDonationMoney")
-public class MyDonationMoneyDetailController extends GenericServlet {
+@WebServlet("/register/myDonationMoney")
+public class MyDonationMoneyDetailController extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
 
@@ -23,15 +22,15 @@ public class MyDonationMoneyDetailController extends GenericServlet {
   SqlSession sqlSession;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     donationRegisterDao = (DonationRegisterDao) 웹애플리케이션공용저장소.getAttribute("donationRegisterDao");
     joinDao = (JoinDao) 웹애플리케이션공용저장소.getAttribute("joinDao");
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {

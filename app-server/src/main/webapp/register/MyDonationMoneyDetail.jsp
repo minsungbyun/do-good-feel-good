@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
      trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,10 +31,10 @@
     <input id='f-title' type='text' name='title' value='${joinDTO.donationMoney}'><br>
     
  <button>[변경]</button>
- <a href='registerList?no=${joinDTO.no}'>[기부자내역]</a>
- <a href='boardList'>[목록]</a>
- <a href='registerForm?boardNo=${joinDTO.no}'>[해당 모금함 기부하기]</a>
- <a href='boardDelete?no=${joinDTO.no}'>[삭제]</a><br>
+ <a href='list?no=${joinDTO.no}'>[기부자내역]</a>
+ <a href='${contextPath}/donation/list'>[목록]</a>
+ <a href='form?boardNo=${joinDTO.no}'>[해당 모금함 기부하기]</a>
+ <a href='delete?no=${joinDTO.no}'>[삭제]</a><br>
 </form>
 </body>
 </html>

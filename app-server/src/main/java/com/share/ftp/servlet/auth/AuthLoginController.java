@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,9 +28,19 @@ public class AuthLoginController extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
+    String id = request.getParameter("id");
+    String password = request.getParameter("password");
     try {
-      String id = request.getParameter("id");
-      String password = request.getParameter("password");
+      Cookie cookie = null;
+      if (request.getParameter("saveId") != null) {
+        cookie = new Cookie("id", id);
+        cookie.setMaxAge(60 * 60 * 24 * 7);
+        cookie.setPath(getServletContext().getContextPath() + "/auth");
+      } else {
+        cookie = new Cookie("id", "");
+        cookie.setMaxAge(0);
+      }
+      response.addCookie(cookie);
 
       JoinDTO loginUser = joinDao.findByIdPassword(id, password);
 

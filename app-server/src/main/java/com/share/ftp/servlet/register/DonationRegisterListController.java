@@ -1,4 +1,4 @@
-package com.share.ftp.servlet.donation;
+package com.share.ftp.servlet.register;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -8,21 +8,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.share.ftp.dao.DonationBoardDao;
-import com.share.ftp.domain.donation.DonationBoardDTO;
+import com.share.ftp.dao.DonationRegisterDao;
+import com.share.ftp.domain.donation.DonationRegisterDTO;
 
-@WebServlet("/donation/list")
-public class DonationBoardListController extends HttpServlet {
+@WebServlet("/register/list")
+public class DonationRegisterListController extends HttpServlet { // 모금함 기부하기 양식 쓰는곳
   private static final long serialVersionUID = 1L;
-
-  DonationBoardDao donationBoardDao;
-  //  DonationRegisterDao donationRegisterDao;
-
+  DonationRegisterDao donationRegisterDao;
   @Override
   public void init() {
     ServletContext 웹애플리케이션공용저장소 = getServletContext();
-    donationBoardDao = (DonationBoardDao) 웹애플리케이션공용저장소.getAttribute("donationBoardDao");
-    //    donationRegisterDao = (DonationRegisterDao) 웹애플리케이션공용저장소.getAttribute("donationRegisterDao");
+    donationRegisterDao = (DonationRegisterDao) 웹애플리케이션공용저장소.getAttribute("donationRegisterDao");
   }
 
   @Override
@@ -31,10 +27,12 @@ public class DonationBoardListController extends HttpServlet {
 
     try {
 
-      Collection<DonationBoardDTO> donationBoardList = donationBoardDao.findAllApply();
+      int no = Integer.parseInt(request.getParameter("no"));
+      Collection<DonationRegisterDTO> donationRegisterList = donationRegisterDao.findAllNo(no);
 
-      request.setAttribute("donationBoardList", donationBoardList);
-      request.setAttribute("contentUrl", "/donation/DonationBoardList.jsp");
+      request.setAttribute("boardNo", no);
+      request.setAttribute("donationRegisterList", donationRegisterList);
+      request.setAttribute("contentUrl", "/register/DonationRegisterList.jsp");
       request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
@@ -43,42 +41,6 @@ public class DonationBoardListController extends HttpServlet {
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
