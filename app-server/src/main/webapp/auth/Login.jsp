@@ -29,7 +29,7 @@
               </div>              
               <!-- //아이디 저장하기 -->
               
-              <button type="submit" class="btn btn-primary btn-md btn-block" style="border-radius: 40px;">로그인</button>
+              <button type="submit" class="btn btn-primary btn-md btn-block" id="login" style="border-radius: 40px;">로그인</button>
               <div style="margin: 15px auto;" class="social-mini-button">
                 <a href="#"><span>아이디 찾기</span></a> 
                 <a href="#"><span>비밀번호 찾기</span></a>
@@ -58,6 +58,15 @@
 	<script type="text/javascript">
     
         function checkValue() {
+        	
+        	var check = document.querySelector("#login");
+          check.onclick = function() {
+            alert("테스트");
+            return false;
+          }
+        	
+        	
+        	
             if(!document.login.id.value) {
                 alert("아이디를 입력하세요.");
                 return false;

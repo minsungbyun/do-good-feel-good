@@ -106,7 +106,7 @@ public class VolunteerJoinController extends HttpServlet {
 
       request.setAttribute("volunteer", volunteer); 
       request.setAttribute("pageTitle", "함께해요 : 봉사참여");
-      request.setAttribute("contentUrl", "/volunteer/VolunteerJoin.jsp");
+      request.setAttribute("contentUrl", "/volunteer/VolunteerJoinCalendarTest.jsp");
       request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
 
