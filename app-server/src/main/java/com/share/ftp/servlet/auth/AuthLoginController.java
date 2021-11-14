@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,21 +28,36 @@ public class AuthLoginController extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
+    String id = request.getParameter("id");
+    String password = request.getParameter("password");
+
     try {
-      String id = request.getParameter("id");
-      String password = request.getParameter("password");
+
+      Cookie cookie  = null;
+      if (request.getParameter("saveId") != null) {
+
+        cookie = new Cookie("id", id);
+        cookie.setMaxAge(60 * 60 * 24 * 7 * 4);
+        cookie.setPath(getServletContext().getContextPath() + "/auth");
+
+      } else {
+        cookie = new Cookie("id", "");
+        cookie.setMaxAge(0);
+      }
+
+      response.addCookie(cookie);
 
       JoinDTO loginUser = joinDao.findByIdPassword(id, password);
 
-
+      HttpSession session = null;
       if (loginUser != null) {
         if (loginUser.getId().equals("admin")) {
-          HttpSession session = request.getSession();
+          session = request.getSession();
           session.setAttribute("loginUser", loginUser);
           response.sendRedirect("../auth/loginList");
           return;
         }
-        HttpSession session = request.getSession();
+        session = request.getSession();
         session.setAttribute("loginUser", loginUser);
         response.sendRedirect("../home");
 
@@ -53,7 +69,6 @@ public class AuthLoginController extends HttpServlet {
 
     } catch (Exception e) {
       request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }

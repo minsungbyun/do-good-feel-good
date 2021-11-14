@@ -13,7 +13,7 @@
                 </c:if>
                 <c:if test="${not empty sessionScope.loginUser}">
                      <!-- a태그 마이페이지로 연동시켜야 함 -->
-                    <a href="${contextPath}/auth/logout"><span>${sessionScope.loginUser.id} 님 환영합니다!</span></a>
+                    <a href="${contextPath}/auth/logout"><span>${sessionScope.loginUser.name} 님 환영합니다!</span></a>
                     <a href="${contextPath}/auth/logout"><span>로그아웃</span></a>
                 </c:if>
                      <!-- 관리자로 로그인 했을 때 보이게 설정하고 아니면 안보이게 설정 조건 주자 -->

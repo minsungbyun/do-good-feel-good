@@ -15,7 +15,7 @@
             <form action="login" class="login-form" method="post" onsubmit="return checkValue()">
               <div class="form-group fo">
                 <label for='f-id' class="sr-only">아이디</label> 
-                <input id='f-id' class="form-control" type='text' name='id' placeholder="아이디"><br>              
+                <input id='f-id' class="form-control" type='text' name='id' placeholder="아이디" value="${cookie.id.value}"><br>              
               </div>
               <!-- //아이디 -->
               <div class="form-group fo">
@@ -24,7 +24,7 @@
               </div>
               <!-- //비밀번호 --> 
               <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="saveId"  ${not empty cookie.id ? "checked" : ""}>
                 <label class="form-check-label" for="exampleCheck1">아이디 저장하기</label>
               </div>              
               <!-- //아이디 저장하기 -->
@@ -67,6 +67,8 @@
                 alert("비밀번호를 입력하세요.");
                 return false;
             }
+            
+            
         }     
   </script>
   </body>

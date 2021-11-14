@@ -22,16 +22,16 @@
     <link rel="stylesheet" href="${contextPath}/assets/vendor/fancybox/css/jquery.fancybox.css">
     <link rel="stylesheet" href="${contextPath}/assets/css/theme.css">
     <link rel="stylesheet" href="${contextPath}/assets/css/style.css">
-    <%--   캘린더 설정 나두세요
     <link rel="stylesheet" href="${contextPath}/assets/calendar/css/style.css" />
     <link rel="stylesheet" href="${contextPath}/assets/calendar/css/cal.css" />
+    <%--   캘린더 설정 나두세요
     --%>
-    
+   
   </head>
 <body>
 <div class="container">
 
-<jsp:include page="header.jsp"/>
+ <jsp:include page="header.jsp"/> 
  
 <div id="content">
 <jsp:include page="${contentUrl}"/>
@@ -48,8 +48,7 @@
     <script src="${contextPath}/assets/vendor/isotope/isotope.pkgd.min.js"></script>
     <script src="${contextPath}/assets/js/google-maps.js"></script>
     <script src="${contextPath}/assets/js/theme.js"></script>
-<%--  캘린더 설정 나두세요
-<script src="${contextPath}/assets/calendar/js/calendar.js"></script>
+    <script src="${contextPath}/assets/calendar/js/calendar.js"></script>
     <script>
       dycalendar.draw({
         target:'#calendar',
@@ -60,14 +59,9 @@
         prevnextbutton:'show'
       })
       </script>
+      <%--  캘린더 설정 나두세요
       --%>
 </body>
 </html>
-
-
-
-
-
-
 
 
