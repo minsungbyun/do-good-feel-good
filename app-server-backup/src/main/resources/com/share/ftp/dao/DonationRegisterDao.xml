@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.share.ftp.dao.DonationRegisterDao">
+  
+  <resultMap type="DonationRegisterDTO" id="DonationRegisterDTOMap">
+    <id column="donation_no" property="no"/> 
+    <result column="donation_money" property="donationMoney"/>
+    <result column="pay_status" property="payStatus"/>
+    <result column="donation_dt" property="registeredDate"/>
+    <result column="registeration_no" property="registerationNumber"/>
+    
+    <association property="donator" javaType="JoinDTO">
+	    <id column="donator_no" property="no"/>
+	    <result column="donator_name" property="name"/>
+	    <result column="donator_id" property="id"/>
+	    <result column="donator_donation" property="donationMoney"/>
+    </association>
+    
+    <association property="payTypeNo" javaType="DonationRegisterPayType">
+	    <id column="pay_no" property="no"/>
+	    <result column="pay_title" property="title"/>
+    </association>
+    
+    
+    <association property="donationBoard" javaType="DonationBoardDTO">
+      <id column="funding_no" property="no"/>
+      <result column="goal" property="moneyTarget"/>
+    </association>
+  </resultMap>
+  
+  <resultMap type="category" id="CategoryMap">
+    <id column="category_no" property="no"/> 
+    <result column="title" property="title"/>
+  </resultMap>
+  
+  <resultMap type="donationRegisterPayType" id="DonationRegisterPayTypeMap">
+    <id column="pay_no" property="no"/>
+    <result column="title" property="title"/>
+  </resultMap>
+  
+  <sql id="select1">
+      select
+        f.funding_no,
+        c.category_no,
+        c.title,
+        d.donation_no,
+        d.donation_money,
+        d.pay_status,
+        d.donation_dt,
+        d.registeration_no,
+        u.user_no donator_no,
+        u.id donator_id,
+        u.name donator_name,
+        dt.pay_no,
+        dt.title pay_title
+      from
+        ftp_donation d
+        inner join ftp_funding f on d.funding_no=f.funding_no
+        left outer join ftp_user u on d.user_no=u.user_no
+        left outer join ftp_donation_pay dt on d.pay_no=dt.pay_no
+        left outer join ftp_category c on f.category_no=c.category_no
+  </sql>
+  
+  
+  <select id="findAll" resultMap="DonationRegisterDTOMap">
+    <include refid="select1"/>
+    order by
+      f.funding_no asc
+  </select>
+  
+  <select id="findByNo" resultMap="DonationRegisterDTOMap" parameterType="int">
+	  <include refid="select1"/>
+    where
+      f.funding_no=#{donationBoard.no}
+  </select>
+  
+  <select id="findAllNo" resultMap="DonationRegisterDTOMap" parameterType="int">
+    <include refid="select1"/>
+    where
+      f.funding_no=#{donationBoard.no}
+    order by
+      f.funding_no asc
+  </select>
+  
+  
+  <insert id="insert" parameterType="DonationRegisterDTO"
+  useGeneratedKeys="true" keyColumn="donation_no" keyProperty="no">
+    insert into ftp_donation(user_no,funding_no,pay_no,donation_money,registeration_no) 
+    values(#{donator.no},#{donationBoard.no},#{payTypeNo.no},#{donationMoney},#{registerationNumber})
+  </insert>
+  
+  <select id="findAllDonationMoney" resultType="long">
+    select ifnull(sum(donation_money), 0) from ftp_donation;
+  </select>
+  
+  <select id="findByRemainMoney" resultType="long" parameterType="int">
+    select 
+      ifnull(f.goal-sum(d.donation_money), 0)
+    from 
+      ftp_donation d 
+      inner join ftp_funding f on d.funding_no=f.funding_no
+    where
+      f.funding_no=#{donationBoardNo}
+  </select>
+  
+  <select id="findByMyDonationMoney" resultType="long" parameterType="int">
+    select 
+      ifnull(sum(d.donation_money), 0) donator_donation 
+    from 
+      ftp_donation d 
+      inner join ftp_user u on d.user_no=u.user_no
+    where
+      u.user_no=#{userNo}
+  </select>
+  
+  <!-- 
+  <update id="update" parameterType="task">
+		update pms_task set
+      content=#{content},
+      deadline=#{deadline},
+      task_status_no=#{status.no},
+      member_no=#{owner.no}
+    where task_no=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from ftp_donation where donation_no=#{donationNo}
+  </delete>
+   -->
+</mapper>
+ 
+
+
+
+
+
+
+
