@@ -2,13 +2,16 @@ package com.share.ftp.web.challenge;
 
 import java.util.Collection;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.domain.challenge.ChallengeReviewDTO;
+import com.share.ftp.domain.join.JoinDTO;
 
 @Controller
 public class ChallengeReviewController {
@@ -26,46 +29,50 @@ public class ChallengeReviewController {
   //    return mv;
   //  }
   //
-  //  @PostMapping("/member/add")
-  //  public ModelAndView add(Member member, Part photoFile) throws Exception {
-  //    if (photoFile.getSize() > 0) {
-  //      String filename = UUID.randomUUID().toString();
-  //      photoFile.write(sc.getRealPath("/upload/member") + "/" + filename);
-  //      member.setPhoto(filename);
-  //
-  //      Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
-  //      .size(20, 20)
-  //      .outputFormat("jpg")
-  //      .crop(Positions.CENTER)
-  //      .toFiles(new Rename() {
-  //        @Override
-  //        public String apply(String name, ThumbnailParameter param) {
-  //          return name + "_20x20";
-  //        }
-  //      });
-  //
-  //      Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
-  //      .size(100, 100)
-  //      .outputFormat("jpg")
-  //      .crop(Positions.CENTER)
-  //      .toFiles(new Rename() {
-  //        @Override
-  //        public String apply(String name, ThumbnailParameter param) {
-  //          return name + "_100x100";
-  //        }
-  //      });
-  //    }
-  //
-  //    memberDao.insert(member);
-  //    sqlSessionFactory.openSession().commit();
-  //
-  //    ModelAndView mv = new ModelAndView();
-  //    mv.addObject("refresh", "2;url=list");
-  //    mv.addObject("pageTitle", "회원등록");
-  //    mv.addObject("contentUrl", "member/MemberAdd.jsp");
-  //    mv.setViewName("template1");
-  //    return mv;
-  //  }
+  @PostMapping("/challenge/reviewAdd")
+  public ModelAndView add(
+      ChallengeReviewDTO challengeReviewDTO, HttpSession session, int no) throws Exception {
+    //      if (photoFile.getSize() > 0) {
+    //        String filename = UUID.randomUUID().toString();
+    //        photoFile.write(sc.getRealPath("/upload/member") + "/" + filename);
+    //        member.setPhoto(filename);
+    //  
+    //        Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
+    //        .size(20, 20)
+    //        .outputFormat("jpg")
+    //        .crop(Positions.CENTER)
+    //        .toFiles(new Rename() {
+    //          @Override
+    //          public String apply(String name, ThumbnailParameter param) {
+    //            return name + "_20x20";
+    //          }
+    //        });
+    //  
+    //        Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
+    //        .size(100, 100)
+    //        .outputFormat("jpg")
+    //        .crop(Positions.CENTER)
+    //        .toFiles(new Rename() {
+    //          @Override
+    //          public String apply(String name, ThumbnailParameter param) {
+    //            return name + "_100x100";
+    //          }
+    //        });
+    //      }
+
+    challengeReviewDTO.setNo(no);
+    challengeReviewDTO.setOwner((JoinDTO) session.getAttribute("loginUser"));
+
+    challengeReviewDao.insert(challengeReviewDTO);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("refresh", "2;url=list");
+    mv.addObject("pageTitle", "Happy share: 참여댓글등록");
+    mv.addObject("contentUrl", "challenge/ChallengeReviewAdd.jsp");
+    mv.setViewName("template1");
+    return mv;
+  }
 
   @GetMapping("/challenge/reviewList")
   public ModelAndView list(int no) throws Exception {
