@@ -93,6 +93,12 @@
        notice_no=#{no}
   </update>
   
+  <update id="updateCount" parameterType="int">
+    update ftp_support_notice set
+      view_cnt = view_cnt + 1
+    where notice_no=#{no}
+  </update>
+  
   <update id="updateFile">
       update ftp_support_notice_file set
        notice_no=#{noticeNo}

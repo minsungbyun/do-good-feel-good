@@ -37,11 +37,8 @@ public class ChallengeReviewAddController extends HttpServlet {
       throws ServletException, IOException {
     ChallengeReviewDTO challengeReviewDTO = new ChallengeReviewDTO();
 
-    JoinDTO owner = new JoinDTO();
-    owner.setNo(Integer.parseInt(request.getParameter("owner")));
-
     challengeReviewDTO.setContent(request.getParameter("content"));
-    challengeReviewDTO.setOwner(owner);
+    challengeReviewDTO.setOwner((JoinDTO) request.getSession().getAttribute("loginUser"));
 
     try {
       challengeReviewDTO.setNo(Integer.parseInt(request.getParameter("no")));

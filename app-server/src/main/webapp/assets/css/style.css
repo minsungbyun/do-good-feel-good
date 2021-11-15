@@ -962,3 +962,22 @@ padding-top:15px;
 .do-btn .do-btn-a {
 	color:#fff;
 }
+
+#pw-modal {
+  z-index : 1;
+  background-color: rgba(0,0,0,.4);
+  position:fixed;
+  left:0;
+  top: 0;
+  width:100%;
+  height:100%;
+}
+
+#pw-modal #pw-content{
+  width:350px;
+  left:50%; top:50%;
+  transform:translate(-50%, -50%);
+  padding:30px;
+  position: relative;
+  background-color:#fff;
+}

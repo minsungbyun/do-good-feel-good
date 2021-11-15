@@ -31,9 +31,14 @@ public class QuestionDetailController extends GenericServlet {
       int questionNo = Integer.parseInt(request.getParameter("questionNo"));
       QuestionListDTO questionListDTO = questionDao.findByNo(questionNo);
 
+      questionDao.findByPassword(questionNo, request.getParameter("qnaPassword"));
+
+
       if (questionListDTO == null) {
         throw new Exception("해당 번호의 게시글이 없습니다.");
       }
+
+      System.out.println(questionListDTO);
 
       request.setAttribute("questionListDTO", questionListDTO);
 
