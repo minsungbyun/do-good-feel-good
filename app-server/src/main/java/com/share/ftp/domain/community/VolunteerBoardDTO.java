@@ -19,7 +19,6 @@ public class VolunteerBoardDTO  {
   private JoinDTO owner;
   private JoinDTO like;
   private  List<VolunteerBoardAttachedFile> fileUpload;
-  private String photo;
   private int rank;
   private int bestRank; // 게시글 랭킹
 
@@ -121,14 +120,6 @@ public class VolunteerBoardDTO  {
 
   public void setFileUpload(List<VolunteerBoardAttachedFile> fileUpload) {
     this.fileUpload = fileUpload;
-  }
-
-  public String getPhoto() {
-    return photo;
-  }
-
-  public void setPhoto(String photo) {
-    this.photo = photo;
   }
 
   public int getRank() {

@@ -6,7 +6,7 @@
   <title>소통해요 : 나눔이야기 목록</title>
 
 
-<div class="page-banner bg-img bg-img-parallax overlay-dark" style="background-image: url(../assets/img/3877820.jpg);">
+<div class="page-banner bg-img bg-img-parallax overlay-dark" style="background-image: url(../../assets/img/helpinghand.jpg);">
     <div class="container h-100">
       <div class="row justify-content-center align-items-center h-100">
         <div class="col-lg-8">
