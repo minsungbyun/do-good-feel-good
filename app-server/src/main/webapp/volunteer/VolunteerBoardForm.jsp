@@ -67,7 +67,11 @@
   </div>  
    --%>
 
-<button id="volunteer-button" class="btn btn-primary btn-sm">등록</button><br>
+
+      <div class="volBoard-button">
+				<button class="btn btn-primary">등록</button><br>
+				 <a href='boardList' class="btn btn-primary">취소</a>
+      </div>
 </form>
 </div><!-- .container -->
 

@@ -7,7 +7,6 @@
   <div class="page-section padding-board">
    <div class="container">
       <h4>봉사게시판 - 게시글 댓글 목록</h4>
-      <a href='commentForm?volBoardNo=${volunteerBoardDTO.no}'>댓글 등록 </a><br>
 
         <div>
           <form class="form-inline" style="float:right; margin-bottom:25px">
@@ -28,9 +27,9 @@
 				  </tr>
 				</thead>
 				<tbody>
-				  <c:if test='${empty noticeList}'>
+				 <%--  <c:if test='${empty noticeList}'>
             <p>작성된 게시글이 없습니다.</p>
-          </c:if>
+          </c:if>--%>
 				
 					<c:forEach items="${volunteerBoardCommentList}" var="volunteerBoardCommentDTO">
 					<tr>
@@ -45,6 +44,10 @@
 					</c:forEach>
         </tbody>
 			</table>
+			      <div class="form-btn">
+			      <a href='commentForm?volBoardNo=${volunteerBoardDTO.no}' class="btnSubmit">댓글 등록 </a><br>
+			      </div>
+			
 		 </div>
     </div>
    </div>
