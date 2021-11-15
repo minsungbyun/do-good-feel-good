@@ -1,78 +1,105 @@
 package com.share.ftp.web.auth;
 
-import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.share.ftp.dao.JoinDao;
 import com.share.ftp.domain.join.JoinDTO;
 
-@WebServlet("/auth/login")
-public class AuthLoginController extends HttpServlet {
-  private static final long serialVersionUID = 1L;
 
-  JoinDao joinDao;
+@Controller
+public class AuthLoginController {
 
-  @Override
-  public void init() {
-    ServletContext 웹애플리케이션공용저장소 = getServletContext();
-    joinDao = (JoinDao) 웹애플리케이션공용저장소.getAttribute("joinDao");
+  @Autowired JoinDao joinDao;
+  @Autowired ServletContext sc;
+
+  @GetMapping("/auth/loginForm")
+  public ModelAndView loginForm() {
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("pageTitle", "HappyShare : 로그인");
+    mv.addObject("contentUrl", "auth/LoginForm.jsp");
+    mv.setViewName("template1");
+    return mv;
   }
 
-  @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  @PostMapping("/auth/login")
+  public ModelAndView login(
+      String id, 
+      String password, 
+      String saveId, 
+      HttpServletResponse response, 
+      HttpSession session)
+          throws Exception {
 
-    String id = request.getParameter("id");
-    String password = request.getParameter("password");
+    Cookie cookie  = null;
+    if (saveId != null) {
 
-    try {
+      cookie = new Cookie("id", id);
+      cookie.setMaxAge(60 * 60 * 24 * 7 * 4);
+      cookie.setPath(sc.getContextPath() + "/app/auth");
 
-      Cookie cookie  = null;
-      if (request.getParameter("saveId") != null) {
-
-        cookie = new Cookie("id", id);
-        cookie.setMaxAge(60 * 60 * 24 * 7 * 4);
-        cookie.setPath(getServletContext().getContextPath() + "/auth");
-
-      } else {
-        cookie = new Cookie("id", "");
-        cookie.setMaxAge(0);
-      }
-
-      response.addCookie(cookie);
-
-      JoinDTO loginUser = joinDao.findByIdPassword(id, password);
-
-      HttpSession session = null;
-      if (loginUser != null) {
-        if (loginUser.getId().equals("admin")) {
-          session = request.getSession();
-          session.setAttribute("loginUser", loginUser);
-          response.sendRedirect("../auth/loginList");
-          return;
-        }
-        session = request.getSession();
-        session.setAttribute("loginUser", loginUser);
-        response.sendRedirect("../home");
-
-      } else {
-        //        response.sendRedirect("loginForm");
-        request.setAttribute("contentUrl", "/auth/Login.jsp");
-        request.getRequestDispatcher("/template1.jsp").forward(request, response);
-      }
-
-    } catch (Exception e) {
-      request.setAttribute("error", e);
+    } else {
+      cookie = new Cookie("id", "");
+      cookie.setMaxAge(0);
     }
+
+    response.addCookie(cookie);
+
+    ModelAndView mv = new ModelAndView();
+
+    if (id.equals("admin") && password.equals("1111")) {
+      mv.setViewName("redirect:loginList");
+      return mv;
+    }
+
+    JoinDTO loginUser = joinDao.findByIdPassword(id, password);
+
+    if (loginUser != null) {
+      session.setAttribute("loginUser", loginUser);
+      mv.setViewName("redirect:../home");
+
+    } else {
+      //        response.sendRedirect("loginForm");
+      mv.addObject("pageTitle", "HappyShare : 로그인"); 
+      mv.addObject("contentUrl", "auth/LoginForm.jsp"); 
+      mv.setViewName("template1");
+    }
+    return mv;
+  }
+
+
+  @GetMapping("/auth/logout")
+  public ModelAndView logout(HttpSession session) throws Exception {
+
+    session.invalidate();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:loginForm");
+    return mv;
+  }
+
+  @GetMapping("/auth/loginList")
+  public ModelAndView userList(HttpServletRequest request, HttpServletResponse response)
+      throws Exception {
+
+    List<JoinDTO> joinUserList = joinDao.findAll();
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("joinUserList", joinUserList);
+    mv.addObject("pageTitle", "HappyShare : 관리자"); 
+    mv.addObject("contentUrl", "auth/LoginList.jsp");  
+    mv.setViewName("template2");
+    return mv;
   }
 }
-
 
 
 

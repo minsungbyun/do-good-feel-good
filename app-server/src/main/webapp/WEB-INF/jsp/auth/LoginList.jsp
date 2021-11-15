@@ -38,7 +38,7 @@
 <tr>
 <td><input type="checkbox" class="select-box"></td>
     <td>${joinDTO.no}</td> 
-    <td><a href='../donation/myDonationMoney?no=${joinDTO.no}'>${joinDTO.id}</a></td> 
+    <td>${joinDTO.id}</td> 
     <td>${joinDTO.name}</td> 
     <td>${joinDTO.tel}</td> 
     <td>${joinDTO.email}</td> 
