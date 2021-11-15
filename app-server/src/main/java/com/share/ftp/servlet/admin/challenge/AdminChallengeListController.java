@@ -31,6 +31,8 @@ public class AdminChallengeListController extends HttpServlet {
       Collection<ChallengeDTO> challengeList = challengeDao.findAll();
 
       request.setAttribute("challengeList", challengeList);
+
+      request.setAttribute("pageTitle", "관리자 챌린지 목록");
       request.setAttribute("contentUrl", "/admin/challenge/AdminChallengeList.jsp");
       request.getRequestDispatcher("/template2.jsp").forward(request, response);
 
