@@ -30,7 +30,8 @@ public class VolunteerBoardFormController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     // 출력을 담당할 뷰를 호출한다.
-    request.getRequestDispatcher("VolunteerBoardForm.jsp").forward(request, response);
+    request.setAttribute("contentUrl", "/volunteer/VolunteerBoardForm.jsp");
+    request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     try {
     } catch (Exception e) {

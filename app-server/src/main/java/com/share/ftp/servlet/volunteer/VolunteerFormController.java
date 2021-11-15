@@ -2,7 +2,6 @@ package com.share.ftp.servlet.volunteer;
 
 import java.io.IOException;
 import java.util.List;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,15 +23,15 @@ public class VolunteerFormController extends HttpServlet {
   JoinDao joinDao;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     volunteerDao = (VolunteerDao) 웹애플리케이션공용저장소.getAttribute("volunteerDao");
     generalDao = (GeneralDao) 웹애플리케이션공용저장소.getAttribute("generalDao");
     joinDao = (JoinDao) 웹애플리케이션공용저장소.getAttribute("joinDao");
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
@@ -41,16 +40,15 @@ public class VolunteerFormController extends HttpServlet {
 
       //      request.setAttribute("user", user);
       request.setAttribute("categorys", categorys);
-      request.getRequestDispatcher("VolunteerForm.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "함께해요 : 봉사신청");
+      request.setAttribute("contentUrl", "/volunteer/VolunteerForm.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+
 
     } catch (Exception e) {
-
-      e.printStackTrace();
       request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-
-
   }
 }
 

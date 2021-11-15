@@ -70,6 +70,8 @@
     </div>
     <!-- //page-section -->
     </main>
+  </body>
+</html>
     
     <script>
 			document.querySelectorAll("tbody a").forEach((aTag) => {
