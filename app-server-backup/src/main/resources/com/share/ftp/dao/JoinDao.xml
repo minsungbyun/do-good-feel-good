@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.share.ftp.dao.JoinDao">
+  
+  <resultMap type="JoinDTO" id="JoinDTOMap">
+    <id column="user_no" property="no"/> 
+    <result column="id" property="id"/>
+    <result column="password" property="password"/>
+    <result column="name" property="name"/>
+    <result column="tel" property="tel"/>
+    <result column="email" property="email"/>
+    <result column="created_dt" property="registerDate"/>
+    <result column="post_no" property="postNo"/>
+    <result column="basic_address" property="basicAddress"/>
+    <result column="detail_address" property="detailAddress"/>
+    <result column="donation" property="donationMoney"/>
+    <result column="type" property="type"/>
+    <result column="status" property="status"/>
+    <result column="note" property="note"/>
+    <result column="photo" property="photo"/>
+    
+ 
+  <!--    <result column="last_login" property="viewCount"/>-->
+  </resultMap>
+  
+  
+  <select id="findAll" resultMap="JoinDTOMap">
+	   select 
+       *
+     from
+       ftp_user 
+     order by
+       user_no desc 
+  </select>
+  
+  
+  <select id="findByType" resultMap="JoinDTOMap" parameterType="string">
+    select 
+       u.type
+     from
+       ftp_user u      
+    where 
+      id=#{userId}
+  </select>
+    
+  <select id="findByIdPassword" resultMap="JoinDTOMap">
+    select 
+       *
+     from
+       ftp_user
+    where 
+      id=#{userId} and password=password(#{userPassword})
+  </select>
+  
+  <select id="findByNo" resultMap="JoinDTOMap" parameterType="int">
+    select 
+       *
+     from
+       ftp_user
+    where 
+      user_no=#{no}
+  </select>
+  
+  <select id="validId" resultMap="JoinDTOMap" parameterType="string">
+    select 
+       id
+     from
+       ftp_user     
+    where 
+      id=#{userId}
+  </select>
+
+  
+   <!-- 
+   <update id="deletePersonal" parameterType="PersonalDTO">
+      update ftp_user_personal set
+	      birthdate=#{birthdate},
+	      rank=#{level},
+	      point=#{point}
+      where 
+        user_personal_no=#{personalNo}
+  </update>
+  -->
+</mapper>
+
+
+
+
+
+
+

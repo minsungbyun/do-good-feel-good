@@ -43,7 +43,7 @@
                 <span class="sr-only">총 모집인원</span>
                 ${volunteer.limitNum}명
               </span>
-              <div class="progress" >
+              <div class="progress">
                 <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
               <button type="button" class="btn btn-secondary" style="margin: 25px 165px;">참여자보기</button>

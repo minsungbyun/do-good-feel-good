@@ -2,28 +2,20 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 
-  
+    <!doctype html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width">
+      <link rel="stylesheet" href="calendarTest.css">
+      <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
       
-    <div class="page-banner bg-img bg-img-parallax overlay-dark" style="background-image: url(../assets/img/bg_image_3.jpg);">
-      <div class="container h-100">
-        <div class="row justify-content-center align-items-center h-100">
-          <div class="col-lg-8">
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0">
-                <li class="breadcrumb-item"><a href="index.html" style="font-size:20px;">함께해요</a></li>
-                <li class="breadcrumb-item active" aria-current="page" style="font-size:22px;">봉사목록</li>
-              </ol>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </div> <!-- .page-banner -->
 
         
 
-     
-  
-
+      <title>Vanilla Coding | Bootcamp Prep</title>
+    </head>
+    <body>
       <div class="main">
         <div class="content-wrap">
           <div class="content-left">
@@ -72,9 +64,10 @@
         </div>
       </div>
 
-   
+       <script src="calendartest.js"></script>
 
- 
+    </body>
+    </html>
    
 
 
