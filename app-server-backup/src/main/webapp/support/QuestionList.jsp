@@ -40,13 +40,24 @@
                 <tr>
                   <td>${QuestionListDTO.no}</td>
                   <td>${QuestionListDTO.qnaType.title}</td>
-                  <td><a href='questionDetail?questionNo=${QuestionListDTO.no}'>${QuestionListDTO.title}</a></td> 
+                  <td id="btnOpen"><a href='questionDetail?questionNo=${QuestionListDTO.no}'>${QuestionListDTO.title}</a></td> 
                   <td>${QuestionListDTO.owner.id}</td>
                   <td>${QuestionListDTO.registeredDate}</td>
                   <td>${QuestionListDTO.viewCount}</td> 
                   <td>${QuestionListDTO.status}</td>
                 </tr>
               </c:forEach>
+              
+              <!-- modal -->
+                <div id='pw-modal' style="display: none">
+								  <div id='pw-content'>
+								    <input type='button' value='X' class="close" id='btnClose'/>
+								    <label>비밀번호를 입력하세요</label><br/>
+								    <input type='password' id='pwd' value='1234' />
+								    <input type='button' value='check' id='btnCheck' />
+								  </div>
+								</div>
+              <!-- //modal -->
             </tbody>
           </table>
           <div class="form-group btn-right">
@@ -95,4 +106,24 @@
           //window.location.href = "detail?no=" + e.currentTarget.getAttribute("data-no");
         };
       });
+      
+      var btnOpen  = document.getElementById('#btnOpen');
+      var btnCheck = document.getElementById('btnCheck');
+      var btnClose = document.getElementById('btnClose');
+
+      // modal 창을 감춤
+      /* var closeRtn = function(){
+        var modal = document.getElementById('pw-modal');
+        modal.style.display = 'none';
+      } */
+
+      // modal 창을 보여줌
+      btnOpen.onclick = function(){
+        var modal = document.getElementById('pw-modal');
+        modal.style.display = 'block';
+      }
+
+      btnCheck.onclick = closeRtn;
+      btnClose.onclick = closeRtn;
+      
     </script>
