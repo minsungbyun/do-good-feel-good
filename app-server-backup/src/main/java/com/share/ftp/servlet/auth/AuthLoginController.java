@@ -30,8 +30,22 @@ public class AuthLoginController extends HttpServlet {
 
     String id = request.getParameter("id");
     String password = request.getParameter("password");
+<<<<<<< HEAD:app-server/src/main/java/com/share/ftp/servlet/auth/AuthLoginController.java
+    try {
+      Cookie cookie = null;
+      if (request.getParameter("saveId") != null) {
+        cookie = new Cookie("id", id);
+        cookie.setMaxAge(60 * 60 * 24 * 7);
+        cookie.setPath(getServletContext().getContextPath() + "/auth");
+      } else {
+        cookie = new Cookie("id", "");
+        cookie.setMaxAge(0);
+      }
+      response.addCookie(cookie);
+=======
 
     try {
+>>>>>>> 927a6172a1e99a6e899b3348ac4001899ce67632:app-server-backup/src/main/java/com/share/ftp/servlet/auth/AuthLoginController.java
 
       Cookie cookie  = null;
       if (request.getParameter("saveId") != null) {
@@ -51,6 +65,9 @@ public class AuthLoginController extends HttpServlet {
 
       HttpSession session = null;
       if (loginUser != null) {
+<<<<<<< HEAD:app-server/src/main/java/com/share/ftp/servlet/auth/AuthLoginController.java
+        HttpSession session = request.getSession();
+=======
         if (loginUser.getId().equals("admin")) {
           session = request.getSession();
           session.setAttribute("loginUser", loginUser);
@@ -58,6 +75,7 @@ public class AuthLoginController extends HttpServlet {
           return;
         }
         session = request.getSession();
+>>>>>>> 927a6172a1e99a6e899b3348ac4001899ce67632:app-server-backup/src/main/java/com/share/ftp/servlet/auth/AuthLoginController.java
         session.setAttribute("loginUser", loginUser);
         response.sendRedirect("../home");
 

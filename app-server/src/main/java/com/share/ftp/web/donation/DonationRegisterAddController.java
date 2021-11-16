@@ -5,7 +5,6 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +15,7 @@ import com.share.ftp.domain.donation.DonationRegisterDTO;
 import com.share.ftp.domain.donation.DonationRegisterPayType;
 import com.share.ftp.domain.join.JoinDTO;
 
-@WebServlet("/donation/registerAdd")
+//@WebServlet("/donation/registerAdd")
 public class DonationRegisterAddController extends HttpServlet { 
   private static final long serialVersionUID = 1L;
 

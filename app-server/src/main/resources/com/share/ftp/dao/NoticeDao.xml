@@ -43,7 +43,7 @@
   </insert>
   
   <insert id="insertFile">
-    insert into ftp_support_notice_file(notice_no,filepath)
+    insert into ftp_support_notice_file(notice_no, filepath)
     values(#{noticeNo},#{filepath})
   </insert>
   
