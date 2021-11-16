@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.share.ftp.dao.OrgDao">
+
+  <resultMap type="OrgDTO" id="OrgDTOMap">
+    <id column="user_org_no" property="orgNo"/> 
+    <result column="corp_no" property="corpNo"/>
+    <result column="fax" property="fax"/>
+    <result column="hp" property="homepage"/>
+    
+    <result column="user_no" property="no"/>
+    <result column="id" property="id"/>
+    <result column="password" property="password"/>
+    <result column="name" property="name"/>
+    <result column="tel" property="tel"/>
+    <result column="email" property="email"/>
+    <result column="created_dt" property="registerDate"/>
+    <result column="post_no" property="postNo"/>
+    <result column="basic_address" property="basicAddress"/>
+    <result column="detail_address" property="detailAddress"/>
+    <result column="donation" property="donationMoney"/>
+    <result column="type" property="type"/>
+    <result column="status" property="status"/>
+    <result column="note" property="note"/>
+    <result column="photo" property="photo"/>
+<!--  <result column="last_login" property="viewCount"/>-->
+  </resultMap>
+  
+  <insert id="insert" parameterType="OrgDTO"
+          useGeneratedKeys="true" keyColumn="user_no" keyProperty="no">
+    insert into ftp_user(id,password,name,tel,email,post_no,basic_address,detail_address,type,status,photo)
+    values(#{id},password(#{password}),#{name},#{tel},#{email},#{postNo},#{basicAddress},#{detailAddress},#{type},#{status},#{photo})
+  </insert>
+  
+  <insert id="insertOrg">
+    insert into ftp_user_org(user_no,corp_no,fax,hp)
+    values(#{userNo},#{corpNo},#{fax},#{homepage})
+  </insert>
+ 
+    
+  <select id="findAllOrg" resultMap="OrgDTOMap">
+     select 
+       u.*,    
+       o.user_org_no,
+       o.corp_no,
+       o.fax,
+       o.hp
+     from
+       ftp_user u
+       inner join ftp_user_org o on u.user_no=o.user_no
+     order by
+       user_org_no desc
+  </select>
+  
+  <select id="findAllWaitOrg" resultMap="OrgDTOMap">
+     select 
+       u.*,    
+       o.user_org_no,
+       o.corp_no,
+       o.fax,
+       o.hp
+     from
+       ftp_user u
+       inner join ftp_user_org o on u.user_no=o.user_no
+     where
+       u.status=2 or u.status=3
+     order by
+       user_org_no desc
+  </select>
+  
+  <select id="findByOrgNo" resultMap="OrgDTOMap" parameterType="int">
+	   select 
+	       u.*,    
+	       o.user_org_no,
+	       o.corp_no,
+	       o.fax,
+	       o.hp
+	     from
+	       ftp_user u
+	       inner join ftp_user_org o on u.user_no=o.user_no
+	    where
+	      u.user_no=#{no}
+    </select>
+  
+  <select id="findByIdPassword" resultMap="OrgDTOMap">
+    select
+      u.*,
+       o.user_org_no,
+       o.corp_no,
+       o.fax,
+       o.hp
+    from 
+      ftp_user u
+      inner join ftp_user_org o on u.user_no=o.user_no
+    where
+      id=#{userId} and password=password(#{userPassword})
+      
+  </select>
+  
+  <update id="update" parameterType="OrgDTO">
+     update ftp_user set
+       tel=#{tel},
+       email=#{email},
+       post_no=#{postNo},
+       basic_address=#{basicAddress},
+       detail_address=#{detailAddress},
+       photo=#{photo},
+       password=password(#{password})
+     where 
+        user_no=#{no}
+  </update>
+  
+  <update id="updateOrg" parameterType="OrgDTO">
+     update ftp_user_org set
+       corp_no=#{corpNo},
+       fax=#{fax},
+       hp=#{homepage}
+     where 
+        user_no=#{no}
+  </update>
+  
+  <update id="updateStatus" parameterType="OrgDTO">
+     update ftp_user set
+       status=#{status}
+     where 
+        user_no=#{no}
+  </update>
+  
+  <update id="updateStatusReject">
+     update ftp_user set
+       note=#{note}
+     where 
+        user_no=#{userNo}
+  </update>
+  
+  
+  <update id="delete" parameterType="OrgDTO">
+     delete from ftp_user where user_no=#{no}
+  </update>
+  
+   <update id="deleteOrg" parameterType="OrgDTO">
+      delete from ftp_user_org where user_org_no=#{orgNo}
+  </update>
+  
+  <select id="validId" resultMap="OrgDTOMap" parameterType="string">
+    select id from ftp_user where id=#{id}
+  </select>
+  
+  
+  <!--
+  <select id="findByKeyword" resultMap="NoticeDTOMap" parameterType="string">
+     select 
+       notice_no,
+       title,   
+       created_dt,
+       view_cnt
+    from
+     ftp_support_notice
+     <where>
+      <if test="title != null">
+         title like concat('%', #{value}, '%')
+      </if>
+      <if test="content != null">
+         or content like concat('%', #{value}, '%') 
+      </if>
+     </where>
+     order by notice_no desc
+  </select>
+  
+  <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
+    select 
+      member_no,
+      name,
+      email,
+      photo,
+      tel,
+      created_dt 
+    from 
+      pms_member
+    where 
+      email=#{email} and password=password(#{password})
+  </select>
+  
+  <select id="findByName" resultMap="MemberMap" parameterType="string">
+    select 
+      member_no,
+      name,
+      email,
+      photo,
+      tel,
+      created_dt 
+    from 
+      pms_member
+    where 
+      name=#{value}
+  </select>
+  -->
+</mapper>
+
+
+
+
+
+
+
