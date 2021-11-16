@@ -739,6 +739,10 @@ padding-top:15px;
 	
 }
 
+.vol-button {
+    float: left;
+}
+
 .content-box {
 	width:100%;
 	height:700px;
@@ -826,9 +830,17 @@ padding-top:15px;
   height:500px;
   background:#888;
 }
+
 .button-box {
   padding-bottom:25px;
 }
+
+.button-box-right {
+  padding-bottom:25px;
+  float: right;
+}
+
+
 /* donation */
 .do-detail {
   overflow:hidden;
@@ -992,3 +1004,5 @@ padding-top:15px;
   position: relative;
   background-color:#fff;
 }
+
+
