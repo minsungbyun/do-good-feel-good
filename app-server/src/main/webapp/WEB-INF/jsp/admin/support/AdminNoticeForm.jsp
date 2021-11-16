@@ -1,52 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-<!DOCTYPE>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>관리자 : 공지사항 등록</title>
-  
-  <!-- link -->
-  <link rel="stylesheet" href="../../assets/css/bootstrap.css">
-  <link rel="stylesheet" href="../../assets/css/maicons.css">
-  <link rel="stylesheet" href="../../assets/vendor/animate/animate.css">
-  <link rel="stylesheet" href="../../assets/vendor/owl-carousel/css/owl.carousel.css">
-  <link rel="stylesheet" href="../../assets/vendor/fancybox/css/jquery.fancybox.css">
-  <link rel="stylesheet" href="../../assets/css/theme.css">
-  <link rel="stylesheet" href="../../assets/css/admin.css">
-</head>
-
-<body>
-  <div id="wrap">
-    <div class="head">
-      <div class="container">
-        <div class="header">
-          <h6 class="navbar-brand">Happy<b class="text-primary logo">Share</b></h6>
-          <div class="btn-logoout">
-            <button type="button" class="btn btn-primary btn-sm btn-logo">로그아웃</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- //head -->
-    
-    <div class="menu">
-      <ul>
-        <li><a href="#" >회원정보조회</a></li>
-        <li><a href="#">모금&봉사활동관리</a></li>
-        <li><a href="#" class="on">공지사항관리</a></li>
-        <li><a href="#">문의사항관리</a></li>
-        <li><a href="#">챌린지사항관리</a></li>
-      </ul>
-    </div>
-    <!-- //menu -->
-    
+     
     <div class="ad-main">
       <div class="ad-main-infor">
         <div class="write-wrap">
           <h4 class="mb-5">공지사항 등록</h4>
-          <form action="noticeAdd" enctype="multipart/form-data" method='post'>
+          <form action="noticeAdd" method='post'>
             <div class="form-group">
               <label for="f-title">제목</label>
               <input type="text" class="form-control" id="f-title" name="title">
@@ -57,7 +17,7 @@
               <textarea name="content" id="f-content" cols="30" rows="8" class="form-control"></textarea>
             </div>
             <!-- //내용 -->
-            <div class="form-group row">
+          <%-- <div class="form-group row">
               <label for="f-file" class="col-sm-1 col-form-label">파일첨부</label>
               <div class="col-sm-11">
                 <input type="file" class="form-control-file" id="f-file" name='fileUpload'>
@@ -71,7 +31,7 @@
                 <input type="file" class="form-control-file" id="f-file" name='fileUpload'>
               </div>
             </div>
-            <!-- //파일첨부 -->
+            <!-- //파일첨부 -->--%>
             <div class="form-group">
               <label for="f-content" class="sr-only">등록</label>
               <input type="submit" value="등록" class="btn btn-primary">
@@ -86,10 +46,6 @@
       <!-- //form -->
     </div>
     <!-- //ad-main -->
-  </div>
-  <!-- //wrap -->
-</body>
-</html>
 
 
 

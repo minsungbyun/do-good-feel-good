@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax 파일 업로드</title>
+</head>
+<body>
+<h1>fileupload() 사용법 - 여러 개의 파일을 한 번에 전송하기</h1>
+  <div class="form-group">
+    <label for="f-title">제목</label>
+    <input type="text" class="form-control" id="f-title" name="title">
+  </div>
+  <!-- //제목 -->
+  <div class="form-group">
+    <label for="f-content">내용</label>
+    <textarea name="content" id="f-content" cols="30" rows="8" class="form-control"></textarea>
+  </div>
+  <!-- //내용 -->
+  <div class="col-sm-11">
+    <input type="file" class="form-control-file" id="input_file" name='fileUpload' multiple style="display:none;"><br>
+    <button id='btn-upload' type='button' style="border: 1px solid #ddd; outline: none;">파일추가</button>
+  </div>
+  <!-- //파일첨부 -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ <script>
+ $(function () {
+    $('#btn-upload').click(function (e) {
+        e.preventDefault();
+        $('#input_file').click();
+    });
+});
+ </script>
+
+</body>
+</html>
+
+
+
+
+
+
