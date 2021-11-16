@@ -17,8 +17,23 @@
 
 *::-webkit-scrollbar-track {
   background-color: #f8f9fa;
+  
   border-radius: 3px;
 }
+
+/* 메인 메뉴 */
+.hero-carousel-item::before {
+	
+	background-color: rgba(0,0,0,0);
+}
+
+
+.owl-carousel .owl-nav button.owl-next, .owl-carousel .owl-nav button.owl-prev {
+	
+	background-color: #ffbcaf;
+}
+
+
 
 /* a태그 초기화 */
 a {

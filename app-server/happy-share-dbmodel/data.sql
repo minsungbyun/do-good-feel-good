@@ -196,28 +196,28 @@ values(12,1,'2021-09-20','09:00','18:00',1);
 
 
 --카테고리 (1.비대면 2.아동 3.청소년 4.노인 5.장애인 6.동물 7.환경 8.기타)
-insert into ftp_category(category_no, title)
+insert into ftp_category(category_no, category_title)
 values(1,'비대면');
 
-insert into ftp_category(category_no, title)
+insert into ftp_category(category_no, category_title)
 values(2,'아동');
 
-insert into ftp_category(category_no, title)
+insert into ftp_category(category_no, category_title)
 values(3,'청소년');
 
-insert into ftp_category(category_no, title)
+insert into ftp_category(category_no, category_title)
 values(4,'노인');
 
-insert into ftp_category(category_no, title)
+insert into ftp_category(category_no, category_title)
 values(5,'장애인');
 
-insert into ftp_category(category_no, title)
+insert into ftp_category(category_no, category_title)
 values(6,'동물');
 
-insert into ftp_category(category_no, title)
+insert into ftp_category(category_no, category_title)
 values(7,'환경');
 
-insert into ftp_category(category_no, title)
+insert into ftp_category(category_no, category_title)
 values(8,'기타');
 
 -- 챌린지
