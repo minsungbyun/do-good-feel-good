@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
      trimDirectiveWhitespaces="true" %>
-  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,7 +24,11 @@
               </div>
               <!-- //비밀번호 --> 
               <div class="form-group form-check">
+<<<<<<< HEAD:app-server/src/main/webapp/auth/Login.jsp
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="saveId" ${not empty cookie.id ? "checked" : ""}>
+=======
                 <input type="checkbox" class="form-check-input" id="exampleCheck1" name="saveId"  ${not empty cookie.id ? "checked" : ""}>
+>>>>>>> 927a6172a1e99a6e899b3348ac4001899ce67632:app-server-backup/src/main/webapp/auth/Login.jsp
                 <label class="form-check-label" for="exampleCheck1">아이디 저장하기</label>
               </div>              
               <!-- //아이디 저장하기 -->

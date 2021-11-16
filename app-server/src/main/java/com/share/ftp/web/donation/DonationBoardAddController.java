@@ -6,7 +6,6 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +15,7 @@ import com.share.ftp.domain.Category;
 import com.share.ftp.domain.donation.DonationBoardDTO;
 import com.share.ftp.domain.join.OrgDTO;
 
-@WebServlet("/donation/boardAdd")
+//@WebServlet("/donation/boardAdd")
 public class DonationBoardAddController extends HttpServlet { 
   private static final long serialVersionUID = 1L;
 

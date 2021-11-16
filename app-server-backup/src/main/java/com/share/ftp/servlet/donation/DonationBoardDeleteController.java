@@ -12,7 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.domain.donation.DonationBoardDTO;
 
-@WebServlet("/donation/boardDelete")
+@WebServlet("/donation/delete")
 public class DonationBoardDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -43,7 +43,7 @@ public class DonationBoardDeleteController extends HttpServlet {
       donationBoardDao.delete(donationBoardDTO);
       sqlSession.commit();
 
-      response.sendRedirect("boardList");
+      response.sendRedirect("list");
 
     } catch (Exception e) {
       request.setAttribute("error", e);

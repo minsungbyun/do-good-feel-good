@@ -2,8 +2,6 @@ package com.share.ftp.servlet.donation;
 
 import java.io.IOException;
 import java.sql.Date;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +14,7 @@ import com.share.ftp.domain.Category;
 import com.share.ftp.domain.donation.DonationBoardDTO;
 import com.share.ftp.domain.join.OrgDTO;
 
-@WebServlet("/donation/boardAdd")
+@WebServlet("/donation/add")
 public class DonationBoardAddController extends HttpServlet { 
   private static final long serialVersionUID = 1L;
 
@@ -24,8 +22,8 @@ public class DonationBoardAddController extends HttpServlet {
   SqlSession sqlSession;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     donationBoardDao = (DonationBoardDao) 웹애플리케이션공용저장소.getAttribute("donationBoardDao");
 
@@ -34,48 +32,42 @@ public class DonationBoardAddController extends HttpServlet {
 
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    DonationBoardDTO donationBoardDTO = new DonationBoardDTO();
-
-    Category category = new Category();
-    category.setNo(Integer.parseInt(request.getParameter("category")));
-
-    OrgDTO orgDTO = new OrgDTO();
-    orgDTO.setOrgNo(Integer.parseInt(request.getParameter("leader")));
-    donationBoardDTO.setOrgNo(Integer.parseInt(request.getParameter("leader")));
-
-    //    donationBoardDTO.setUserNo(Integer.parseInt(request.getParameter("owner")));
-    donationBoardDTO.setLeader(orgDTO);
-    donationBoardDTO.setCategory(category);
-    donationBoardDTO.setTitle(request.getParameter("title"));
-    donationBoardDTO.setContent(request.getParameter("content")); 
-    donationBoardDTO.setTel(request.getParameter("tel"));
-    donationBoardDTO.setEmail(request.getParameter("email"));  
-    donationBoardDTO.setMoneyTarget(Long.valueOf(request.getParameter("moneyTarget")));  
-    donationBoardDTO.setStartDate(Date.valueOf(request.getParameter("startDate")));
-    donationBoardDTO.setEndDate(Date.valueOf(request.getParameter("endDate"))); 
-    //    donationBoardDTO.setFileUpload(GeneralHelper.promptFileUpload()); 
-    donationBoardDTO.setStatus(2);
-
-
     try {
+      DonationBoardDTO donationBoardDTO = new DonationBoardDTO();
+
+      Category category = new Category();
+      category.setNo(Integer.parseInt(request.getParameter("category")));
+      donationBoardDTO.setCategory(category);
+      donationBoardDTO.setTitle(request.getParameter("title"));
+      donationBoardDTO.setContent(request.getParameter("content")); 
+      donationBoardDTO.setTel(request.getParameter("tel"));
+      donationBoardDTO.setEmail(request.getParameter("email"));  
+      donationBoardDTO.setMoneyTarget(Long.valueOf(request.getParameter("moneyTarget")));  
+      donationBoardDTO.setStartDate(Date.valueOf(request.getParameter("startDate")));
+      donationBoardDTO.setEndDate(Date.valueOf(request.getParameter("endDate"))); 
+      //    donationBoardDTO.setFileUpload(GeneralHelper.promptFileUpload()); 
+      donationBoardDTO.setStatus(2);
+      donationBoardDTO.setLeader((OrgDTO) request.getSession().getAttribute("loginUser"));
+      //    OrgDTO orgDTO = new OrgDTO();
+      //    orgDTO.setOrgNo(Integer.parseInt(request.getParameter("leader")));
+      donationBoardDTO.setOrgNo(donationBoardDTO.getOrgNo());
+
+
+
       donationBoardDao.insert(donationBoardDTO);
       //      for (VolunteerAttachedFile volunteerAttachedFile : donationBoardDTO.getFileUpload()) {
       //        donationBoardDao.insertFile(donationBoardDTO.getNo(), volunteerAttachedFile.getFilepath());
       //      }
       sqlSession.commit();
-      response.sendRedirect("boardList");
+      response.sendRedirect("list");
 
 
     } catch (Exception e) {
-      sqlSession.rollback();
       request.setAttribute("error", e);
-      e.printStackTrace();
-
-      RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Error.jsp");
-      requestDispatcher.forward(request, response);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }

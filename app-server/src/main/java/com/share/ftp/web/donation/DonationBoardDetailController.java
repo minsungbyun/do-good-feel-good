@@ -7,12 +7,11 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebServlet;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.domain.donation.DonationBoardDTO;
 
-@WebServlet("/donation/boardDetail")
+//@WebServlet("/donation/boardDetail")
 public class DonationBoardDetailController extends GenericServlet {
 
   private static final long serialVersionUID = 1L;

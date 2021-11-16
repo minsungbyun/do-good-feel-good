@@ -1,8 +1,7 @@
-package com.share.ftp.servlet.donation;
+package com.share.ftp.servlet.register;
 
 import java.io.IOException;
 import java.util.List;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,15 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.domain.donation.DonationRegisterPayType;
 
-@WebServlet("/donation/registerForm")
+@WebServlet("/register/form")
 public class DonationRegisterFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   GeneralDao generalDao;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     generalDao = (GeneralDao) 웹애플리케이션공용저장소.getAttribute("generalDao");
   }
 
@@ -37,9 +36,8 @@ public class DonationRegisterFormController extends HttpServlet {
       // 출력을 담당할 뷰를 호출한다.
       request.setAttribute("payTypes", payTypes);
       request.setAttribute("donationBoardNo", no);
-      request.getRequestDispatcher("/donation/DonationRegisterForm.jsp").forward(request, response);
+      request.getRequestDispatcher("/register/DonationRegisterForm.jsp").forward(request, response);
     } catch (Exception e) {
-      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

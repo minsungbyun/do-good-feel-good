@@ -1,4 +1,4 @@
-package com.share.ftp.servlet.donation;
+package com.share.ftp.web.register;
 
 import java.io.IOException;
 import javax.servlet.ServletContext;
@@ -7,23 +7,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.share.ftp.dao.DonationBoardDao;
+import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.DonationRegisterDao;
-import com.share.ftp.domain.donation.DonationBoardDTO;
+import com.share.ftp.dao.JoinDao;
+import com.share.ftp.domain.join.JoinDTO;
 
-@WebServlet("/donation/detail")
-public class DonationBoardDetailController extends HttpServlet {
+@WebServlet("/register/myDonationMoney")
+public class MyDonationMoneyDetailController extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
 
-  DonationBoardDao donationBoardDao;
   DonationRegisterDao donationRegisterDao;
+  JoinDao joinDao;
+  SqlSession sqlSession;
 
   @Override
   public void init() {
     ServletContext 웹애플리케이션공용저장소 = getServletContext();
-    donationBoardDao = (DonationBoardDao) 웹애플리케이션공용저장소.getAttribute("donationBoardDao");
     donationRegisterDao = (DonationRegisterDao) 웹애플리케이션공용저장소.getAttribute("donationRegisterDao");
+    joinDao = (JoinDao) 웹애플리케이션공용저장소.getAttribute("joinDao");
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
 
   @Override
@@ -33,19 +36,15 @@ public class DonationBoardDetailController extends HttpServlet {
     try {
 
       int no = Integer.parseInt(request.getParameter("no"));
-      long remainMoney = donationRegisterDao.findByRemainMoney(no);
-      DonationBoardDTO donationBoardDTO = donationBoardDao.findByDonationNo(no);
-      //      long remainMoney = donationRegisterDao.findByRemainMoney(donationBoardDTO.getNo());
+      JoinDTO joinDTO = joinDao.findByNo(no);
 
-      if (donationBoardDTO == null) {
-        throw new Exception("[ 모금함 상세보기를 취소하셨습니다. ]");
-      }
+      joinDTO.setDonationMoney((int) donationRegisterDao.findByMyDonationMoney(no));
 
-      request.setAttribute("donationBoardDTO", donationBoardDTO);
-      request.setAttribute("remainMoney", remainMoney);
-      request.setAttribute("contentUrl", "/donation/DonationBoardDetail.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+
+      request.setAttribute("joinDTO", joinDTO);
+      request.getRequestDispatcher("/donation/MyDonationMoneyDetail.jsp").forward(request, response);
     } catch (Exception e) {
+      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
