@@ -165,6 +165,12 @@
          qna_no=#{no}
   </update>
   
+  <update id="updateCount" parameterType="int">
+    update ftp_support_qna set
+      view_cnt = view_cnt + 1
+    where qna_no=#{no}
+  </update>
+  
   <update id="updateReply" parameterType="QuestionListDTO">
       update ftp_support_qna set
           reply=#{reply},

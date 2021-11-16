@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.domain.Category;
 
+
 @WebServlet("/donation/boardForm")
 public class DonationBoardFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;

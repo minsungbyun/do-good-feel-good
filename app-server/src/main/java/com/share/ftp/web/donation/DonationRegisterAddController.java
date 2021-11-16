@@ -16,6 +16,7 @@ import com.share.ftp.domain.donation.DonationRegisterDTO;
 import com.share.ftp.domain.donation.DonationRegisterPayType;
 import com.share.ftp.domain.join.JoinDTO;
 
+
 @WebServlet("/donation/registerAdd")
 public class DonationRegisterAddController extends HttpServlet { 
   private static final long serialVersionUID = 1L;
