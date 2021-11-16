@@ -4,7 +4,7 @@
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-    <div class="page-banner bg-img bg-img-parallax overlay-dark" style="background-image: url(../assets/img/bg_image_3.jpg);">
+    <div class="page-banner bg-img bg-img-parallax overlay-dark" style="background-image: url(${contextPath}/images/volunteer1.jpg);">
       <div class="container h-100">
         <div class="row justify-content-center align-items-center h-100">
           <div class="col-lg-8">
@@ -44,8 +44,8 @@
 		       <div class="grid-item untact">
 	            <div class="portfolio">
 	              <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
-	              <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
-	                <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png" alt="봉사이미지" style="padding:10px;">
+	              <a href="${contextPath}/images/volunteer1.jpg" data-fancybox="portfolio">
+	                <img src="${contextPath}/images/volunteer1.jpg" alt="봉사이미지" style="padding:10px;">
 	              </a>
 	              <div class="card">
 	                <div class="card-body">
@@ -79,7 +79,7 @@
 	            <div class="portfolio">
                 <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
 	              <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
-	                <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png" alt="봉사이미지" style="padding:10px;">
+	                <img src="${contextPath}/images/volunteer1.jpg" alt="봉사이미지" style="padding:10px;">
 	              </a>
 	              <div class="card">
                   <div class="card-body">
@@ -113,7 +113,7 @@
 	           <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
 	            <div class="portfolio">
 	              <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
-	                <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png" alt="봉사이미지" style="padding:10px;">
+	                <img src="${contextPath}/images/volunteer1.jpg" alt="봉사이미지" style="padding:10px;">
 	              </a>
 		              <div class="card">
 	                  <div class="card-body">
@@ -147,7 +147,7 @@
 	           <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
              <div class="portfolio">
                <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
-                 <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png" alt="봉사이미지" style="padding:10px;">
+                 <img src="${contextPath}/images/volunteer1.jpg" alt="봉사이미지" style="padding:10px;">
                </a>
                <div class="card">
                   <div class="card-body">
@@ -181,7 +181,7 @@
 	           <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
              <div class="portfolio">
                <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
-                 <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png" alt="봉사이미지" style="padding:10px;">
+                 <img src="${contextPath}/images/volunteer1.jpg" alt="봉사이미지" style="padding:10px;">
                </a>
                <div class="card">
                   <div class="card-body">
@@ -215,7 +215,7 @@
 	           <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
              <div class="portfolio">
                <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
-                 <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png" alt="봉사이미지" style="padding:10px;">
+                 <img src="${contextPath}/images/volunteer1.jpg" alt="봉사이미지" style="padding:10px;">
                </a>
                <div class="card">
                   <div class="card-body">
@@ -249,7 +249,7 @@
 	           <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
              <div class="portfolio">
                <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
-                 <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png" alt="봉사이미지" style="padding:10px;">
+                 <img src="${contextPath}/images/volunteer1.jpg" alt="봉사이미지" style="padding:10px;">
                </a>
                <div class="card">
                   <div class="card-body">
@@ -283,7 +283,7 @@
 	           <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
              <div class="portfolio">
                <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
-                 <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png" alt="봉사이미지" style="padding:10px;">
+                 <img src="${contextPath}/images/volunteer1.jpg" alt="봉사이미지" style="padding:10px;">
                </a>
                <div class="card">
                   <div class="card-body">

@@ -44,15 +44,16 @@
           <div class="row align-items-center">
             <div class="col-lg-6 py-3">
               <div class="subhead">HappyShare</div>
-              <h2 class="title-section">We are <span class="fg-primary">Professional Teams</span> to Growth your Business</h2>
+              <h2 class="title-section">환영합니다 <span class="fg-primary">HappyShare</span>입니다.</h2>
   
-              <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of</p>
+              <p>HappyShare는 개인과 소규모 단체 중심의 봉사 및 모금활동 공간입니다. 봉사에 대한 진입장벽을 낮추고 참여율을 진작시키고자하는 목표를 품고 봉사활동 뿐만 아니라 기부, 챌린지 등 다양한 서비스를 지원하고 있습니다.
+특히, 챌린지 기능은 많은 회원이 함께 참여하고 인증하는 과정을 통해 재미는 물론 봉사자들의 성취감을 고취시키고, 커뮤니티를 통해 회원 간 소통할 수 있는 공간을 마련하였습니다.</p>
   
-              <a href="about.html" class="btn btn-primary mt-4">Read More</a>
+              <a href="about.html" class="btn btn-primary mt-4">더보기</a>
             </div>
             <div class="col-lg-6 py-3">
               <div class="about-img">
-                <img src="${contextPath}/assets/img/about.jpg" alt="">
+                <img src="${contextPath}/images/volunteer1.jpg" alt="">
               </div>
             </div>
           </div>
@@ -64,18 +65,19 @@
       <div class="page-section">
         <div class="container">
           <div class="text-center">
-            <div class="subhead">category</div>
-            <h2 class="title-section">Volunteer List</h2>
+            <div class="subhead">ㅇㅇㅇ</div>
+            <h2 class="title-section">진행중인 봉사목록</h2>
           </div>
   
           <div class="owl-carousel team-carousel mt-5">
+           <c:forEach items="${volunteerList}" var="volunteerDTO">
             <div class="team-wrap">
               <div class="team-profile">
-                <img src="${contextPath}/assets/img/teams/team_1.jpg" alt="">
+                <img src="${contextPath}/images/home/main.jpg" alt="봉사사진">
               </div>
               <div class="team-content">
-                <h5>${volunteerList.get(0).title}</h5>
-                <div class="text-sm fg-grey">주최자 : ${volunteerList.get(0).owner.id}</div>
+                <h5>${volunteerDTO.title}</h5>
+                <div class="text-sm fg-grey">주최자 : ${volunteerDTO.owner.id}</div>
   
                 <div class="social-button">
                   <a href="#"><span class="mai-logo-facebook-messenger"></span></a>
@@ -84,7 +86,9 @@
                 </div>
               </div>
             </div>
+            </c:forEach>
   
+  <!-- 
             <div class="team-wrap">
               <div class="team-profile">
                 <img src="${contextPath}/assets/img/teams/team_2.jpg" alt="">
@@ -116,7 +120,7 @@
                 </div>
               </div>
             </div>
-  
+   -->
           </div>
         </div> <!-- .container -->
       </div> <!-- .page-section -->
@@ -124,135 +128,144 @@
         <!-- Testimonials -->
       <div class="page-section">
         <div class="container">
+        <div class="text-center">
+            <div class="subhead">ㅇㅇㅇ</div>
+            <h2 class="title-section">봉사 참여후기를 확인해보세요:D</h2>
+          </div>
           <div class="owl-carousel testimonial-carousel">
+          
+          <c:forEach items="${volunteerShortReviewList}" var="volunteerShortReviewDTO">
             <div class="card-testimonial">
               <div class="content">
-                The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph
+                ${volunteerShortReviewDTO.content}
               </div>
               <div class="author">
                 <div class="avatar">
                   <img src="${contextPath}/assets/img/person/person_1.jpg" alt="">
                 </div>
                 <div class="d-inline-block ml-2">
-                  <div class="author-name">Sam Watson</div>
-                  <div class="author-info">CEO - Mosh Elite Ltd.</div>
+                  <div class="author-name">${volunteerShortReviewDTO.owner.id}</div>
+                  <div class="author-info">${volunteerShortReviewDTO.registeredDate}</div>
                 </div>
               </div>
             </div>
-  
-            <div class="card-testimonial">
-              <div class="content">
-                The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph
-              </div>
-              <div class="author">
-                <div class="avatar">
-                  <img src="${contextPath}/assets/img/person/person_2.jpg" alt="">
-                </div>
-                <div class="d-inline-block ml-2">
-                  <div class="author-name">Edinson Alfa</div>
-                  <div class="author-info">CEO - Mosh Elite Ltd.</div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="card-testimonial">
-              <div class="content">
-                The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph
-              </div>
-              <div class="author">
-                <div class="avatar">
-                  <img src="${contextPath}/assets/img/person/person_3.jpg" alt="">
-                </div>
-                <div class="d-inline-block ml-2">
-                  <div class="author-name">May Halloway</div>
-                  <div class="author-info">CEO - Mosh Elite Ltd.</div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="card-testimonial">
-              <div class="content">
-                The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph
-              </div>
-              <div class="author">
-                <div class="avatar">
-                  <img src="${contextPath}/assets/img/person/person_1.jpg" alt="">
-                </div>
-                <div class="d-inline-block ml-2">
-                  <div class="author-name">Sam Watson</div>
-                  <div class="author-info">CEO - Mosh Elite Ltd.</div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="card-testimonial">
-              <div class="content">
-                The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph
-              </div>
-              <div class="author">
-                <div class="avatar">
-                  <img src="${contextPath}/assets/img/person/person_2.jpg" alt="">
-                </div>
-                <div class="d-inline-block ml-2">
-                  <div class="author-name">Edinson Alfa</div>
-                  <div class="author-info">CEO - Mosh Elite Ltd.</div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="card-testimonial">
-              <div class="content">
-                The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph
-              </div>
-              <div class="author">
-                <div class="avatar">
-                  <img src="${contextPath}/assets/img/person/person_3.jpg" alt="">
-                </div>
-                <div class="d-inline-block ml-2">
-                  <div class="author-name">May Halloway</div>
-                  <div class="author-info">CEO - Mosh Elite Ltd.</div>
-                </div>
-              </div>
-            </div>
+                </c:forEach>
+ 
   
           </div> <!-- .row -->
+     
         </div> <!-- .container -->
       </div> <!-- .page-section -->
   
+  
+  
+  
       <div class="page-section">
         <div class="container">
+          <div class="text-center">
+            <div class="subhead">ㅇㅇㅇ</div>
+            <h2 class="title-section">진행중인 모금함목록</h2>
+          </div>
+  
+          <div class="owl-carousel team-carousel mt-5">
+           <c:forEach items="${donationBoardList}" var="donationBoardDTO">
+            <div class="team-wrap">
+              <div class="team-profile">
+                <img src="${contextPath}/images/donation_main.jpg" alt="모금함사진">
+              </div>
+              <div class="team-content">
+                <h5>${donationBoardDTO.title}</h5>
+                <div class="text-sm fg-grey">주최자 : ${donationBoardDTO.leader.id}</div>
+  
+                <div class="social-button">
+                  <a href="#"><span class="mai-logo-facebook-messenger"></span></a>
+                  <a href="#"><span class="mai-call"></span></a>
+                  <a href="#"><span class="mai-mail"></span></a>
+                </div>
+              </div>
+            </div>
+            </c:forEach>
+             </div>
+        </div> <!-- .container -->
+      </div> <!-- .page-section -->
+  
+  
+  <div class="page-section">
+        <div class="container">
+          <div class="text-center">
+            <div class="subhead">ㅇㅇㅇ</div>
+            <h2 class="title-section">진행중인 챌린지목록</h2>
+          </div>
+  
+          <div class="owl-carousel team-carousel mt-5">
+           <c:forEach items="${challengeList}" var="challengeDTO">
+            <div class="team-wrap">
+              <div class="team-profile">
+                <img src="${contextPath}/images/challenge_main.jpg" alt="챌린지사진">
+              </div>
+              <div class="team-content">
+                <h5>${challengeDTO.title}</h5>
+                <div class="text-sm fg-grey">${challengeDTO.content}</div>
+                <!-- 
+                <div class="social-button">
+                  <a href="#"><span class="mai-logo-facebook-messenger"></span></a>
+                  <a href="#"><span class="mai-call"></span></a>
+                  <a href="#"><span class="mai-mail"></span></a>
+                </div>
+                 -->
+              </div>
+            </div>
+            </c:forEach>
+             </div>
+        </div> <!-- .container -->
+      </div> <!-- .page-section -->
+  
+  
+  
+  
+  
+            <!--  
+      <div class="page-section">
+        <div class="container">
+        <div class="text-center">
+            <div class="subhead">ㅇㅇㅇ</div>
+            <h2 class="title-section">챌린지 목록</h2>
+          </div>
           <div class="row align-items-center">
             <div class="col-md-6 py-3">
-              <div class="subhead">Portfolio</div>
-              <h2 class="title-section">Our Latest Projects</h2>
+           
             </div>
             <div class="col-md-6 py-3 text-md-right">
               <a href="portfolio.html" class="btn btn-outline-primary">Browse Projects <span class="mai-arrow-forward ml-2"></span></a>
             </div>
+    
           </div>
   
           <div class="row mt-3">
             <div class="col-lg-4 py-3">
               <div class="portfolio">
-                <a href="${contextPath}/assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
-                  <img src="${contextPath}/assets/img/portfolio/work-1.jpg" alt="">
+                <a href="${contextPath}/images/challenge_main.jpg" data-fancybox="portfolio">
+                  <img src="${contextPath}/images/challenge_main.jpg" alt="">
                 </a>
               </div>
+              
             </div>
             <div class="col-lg-4 py-3">
               <div class="portfolio">
-                <a href="${contextPath}/assets/img/portfolio/work-2.jpg" data-fancybox="portfolio">
-                  <img src="${contextPath}/assets/img/portfolio/work-2.jpg" alt="">
+                <a href="${contextPath}/images/challenge_main.jpg" data-fancybox="portfolio">
+                  <img src="${contextPath}/images/challenge_main.jpg" alt="">
                 </a>
               </div>
             </div>
             <div class="col-lg-4 py-3">
               <div class="portfolio">
                 <a href="${contextPath}/assets/img/portfolio/work-3.jpg" data-fancybox="portfolio">
-                  <img src="${contextPath}/assets/img/portfolio/work-3.jpg" alt="">
+                  <img src="${contextPath}/images/challenge_main.jpg" alt="">
                 </a>
               </div>
             </div>
+            
+     
             <div class="col-lg-4 py-3">
               <div class="portfolio">
                 <a href="${contextPath}/assets/img/portfolio/work-4.jpg" data-fancybox="portfolio">
@@ -275,11 +288,12 @@
               </div>
             </div>
           </div>
+      
         </div> <!-- .container -->
-      </div> <!-- .page-section -->
-  
+        <!--   </div>--> <!-- .page-section -->
+          
     
-  
+   <!-- 
       <div class="page-section">
         <div class="container">
           <div class="text-center">
@@ -371,8 +385,10 @@
           </div>
   
         </div> <!-- .container -->
-      </div> <!-- .page-section -->
-      
+      <!-- </div> --> <!-- .page-section -->
+       
+       
+       <!-- 
        <div class="page-section">
         <div class="container">
           <div class="text-center">
@@ -454,8 +470,8 @@
   
           </div>
         </div> <!-- .container -->
-      </div> <!-- .page-section -->
-      
+     <!--  </div> --> <!-- .page-section -->
+       
     </main>
     </body>
     </html>
