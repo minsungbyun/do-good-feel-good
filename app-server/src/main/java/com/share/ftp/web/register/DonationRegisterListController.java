@@ -1,28 +1,22 @@
-package com.share.ftp.servlet.donation;
+package com.share.ftp.web.register;
 
 import java.io.IOException;
+import java.util.Collection;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.dao.DonationRegisterDao;
-import com.share.ftp.domain.donation.DonationBoardDTO;
+import com.share.ftp.domain.donation.DonationRegisterDTO;
 
-@WebServlet("/donation/detail")
-public class DonationBoardDetailController extends HttpServlet {
-
+//@WebServlet("/register/list")
+public class DonationRegisterListController extends HttpServlet { // 모금함 기부하기 양식 쓰는곳
   private static final long serialVersionUID = 1L;
-
-  DonationBoardDao donationBoardDao;
   DonationRegisterDao donationRegisterDao;
-
   @Override
   public void init() {
     ServletContext 웹애플리케이션공용저장소 = getServletContext();
-    donationBoardDao = (DonationBoardDao) 웹애플리케이션공용저장소.getAttribute("donationBoardDao");
     donationRegisterDao = (DonationRegisterDao) 웹애플리케이션공용저장소.getAttribute("donationRegisterDao");
   }
 
@@ -33,62 +27,19 @@ public class DonationBoardDetailController extends HttpServlet {
     try {
 
       int no = Integer.parseInt(request.getParameter("no"));
-      long remainMoney = donationRegisterDao.findByRemainMoney(no);
-      DonationBoardDTO donationBoardDTO = donationBoardDao.findByDonationNo(no);
-      //      long remainMoney = donationRegisterDao.findByRemainMoney(donationBoardDTO.getNo());
+      Collection<DonationRegisterDTO> donationRegisterList = donationRegisterDao.findAllNo(no);
 
-      if (donationBoardDTO == null) {
-        throw new Exception("[ 모금함 상세보기를 취소하셨습니다. ]");
-      }
-
-      request.setAttribute("donationBoardDTO", donationBoardDTO);
-      request.setAttribute("remainMoney", remainMoney);
-      request.setAttribute("contentUrl", "/donation/DonationBoardDetail.jsp");
+      request.setAttribute("boardNo", no);
+      request.setAttribute("donationRegisterList", donationRegisterList);
+      request.setAttribute("contentUrl", "/register/DonationRegisterList.jsp");
       request.getRequestDispatcher("/template1.jsp").forward(request, response);
+
     } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

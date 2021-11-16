@@ -16,7 +16,7 @@ public class HomeController extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     request.setAttribute("pageTitle", "HappyShare : 메인화면");
-    request.setAttribute("contentUrl", "/index.jsp");
+    request.setAttribute("contentUrl", "index.jsp");
     request.getRequestDispatcher("/template1.jsp").forward(request, response);
   }
 }

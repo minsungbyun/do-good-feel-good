@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>기부자 목록(MVC + EL + JSTL1)</h1>
-<div><a href='form'>기부하기</a></div>
+<div><a href='form?boardNo=${boardNo}'>기부하기</a></div>
 <table border='1'>
 <thead>
   <tr>

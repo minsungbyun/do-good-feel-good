@@ -4,6 +4,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> <%-- 모달 --%>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <%-- 모달 --%>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> <%-- 모달 --%>
+
   <main>    
     <div class="page-section">
       <div class="container">
@@ -75,10 +80,38 @@
                     <td>${challengeReviewDTO.registeredDate}</td>
                     <td><a href='reviewUpdateDetail?reviewNo=${challengeReviewDTO.reviewNo}&no=${challengeReviewDTO.no}'>[변경]</a></td>
                     <td><a href='reviewDelete?reviewNo=${challengeReviewDTO.reviewNo}&no=${challengeReviewDTO.no}'>[삭제]</a></td>
-                </tr>
+                </tr><br>
               </c:forEach>
 			        <div class="btn-regi">
-			          <a href='reviewForm?no=${challengeDTO.no}' class="btn btn-primary nBtn" role="button">참여댓글등록</a>
+								<!-- 부트스트랩의 모달 창을 사용할려면 아래의 class 이름들을 그대로 사용해야 한다. 변경하면 모양이 달라진다.-->
+								  <!-- Modal -->
+								  <div class="modal fade" id="myModal" role="dialog"> <!-- 사용자 지정 부분① : id명 -->
+								    <div class="modal-dialog">
+								      <!-- Modal content-->
+								      <div class="modal-content">
+								        <div class="modal-header">
+								          <h4 class="modal-title">챌린지 참여인증&댓글 등록</h4> <!-- 사용자 지정 부분② : 타이틀 -->
+								          <button type="button" class="close" data-dismiss="modal">×</button>
+								        </div>
+								          <form action='reviewAdd'>
+									        <div class="modal-body">
+														<div class= "class" name="name" id="id" style="display:none">
+														<label for='f-no'>챌린지번호</label> <input id='f-no' type='text' name='no' value='${challengeDTO.no}' readonly>
+														<br></div>
+														<textarea id='f-content' name='content' cols="55" rows="1" class="modal-body"></textarea>
+									        </div>
+									        <button>참여인증&댓글 등록</button><br>
+								        </form>
+								        <div class="modal-footer">
+								          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								        </div>
+								      </div>
+								    </div>
+								  </div>
+								<br/><br/>
+								<!-- 아래에서 data-toggle과 data-target 속성에서 data-toggle에는 modal 값을 data-target속성에는 모달 창 전체를 
+								감싸는 div의 id 이름을 지정하면 된다. -->
+								&nbsp;&nbsp;<a data-toggle="modal" href="#myModal" class="btn btn-primary nBtn" role="button">참여댓글등록</a>
 			        </div>
             </div>
          </div>

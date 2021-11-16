@@ -1,4 +1,4 @@
-package com.share.ftp.servlet.register;
+package com.share.ftp.web.register;
 
 import java.io.IOException;
 import javax.servlet.ServletContext;
