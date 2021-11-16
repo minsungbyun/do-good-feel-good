@@ -7,13 +7,12 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebServlet;
 import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.dao.JoinDao;
 import com.share.ftp.domain.join.JoinDTO;
 
-@WebServlet("/donation/myDonationMoney")
+//@WebServlet("/donation/myDonationMoney")
 public class MyDonationMoneyDetailController extends GenericServlet {
 
   private static final long serialVersionUID = 1L;

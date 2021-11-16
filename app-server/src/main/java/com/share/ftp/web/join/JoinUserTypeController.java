@@ -1,25 +1,21 @@
 package com.share.ftp.web.join;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-@WebServlet("/join/userType")
-public class JoinUserTypeController extends HttpServlet {
+@Controller
+public class JoinUserTypeController {
 
-  private static final long serialVersionUID = 1L;
-
-  @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-
-    request.setAttribute("contentUrl", "/join/JoinUserType.jsp");
-    request.getRequestDispatcher("/template1.jsp").forward(request, response);
-    //    request.getRequestDispatcher("/join/JoinUserType.jsp").forward(request, response);
+  @GetMapping("/join/userType")
+  public ModelAndView userType() {
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("pageTitle", "HappyShare : 회원가입유형");
+    mv.addObject("contentUrl", "join/JoinUserType.jsp");
+    mv.setViewName("template1");
+    return mv;
   }
+
 }
 
 

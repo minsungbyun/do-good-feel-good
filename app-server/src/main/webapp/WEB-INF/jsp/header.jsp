@@ -52,7 +52,7 @@
                 <a href="${contextPath}/app/challenge/list" class="nav-link">챌린지</a>
               </li>
               <li class="nav-item">
-                <a href="${contextPath}/app/donation/boardList" class="nav-link">모금함</a>
+                <a href="${contextPath}/app/donation/list" class="nav-link">모금함</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">고객센터</a>
