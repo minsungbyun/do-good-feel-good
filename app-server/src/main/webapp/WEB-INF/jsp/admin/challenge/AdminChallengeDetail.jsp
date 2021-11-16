@@ -4,54 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>관리자페이지</title>
-  
-  <!-- link -->
-  <link rel="stylesheet" href="../../assets/css/bootstrap.css">
-  <link rel="stylesheet" href="../../assets/css/maicons.css">
-  <link rel="stylesheet" href="../../assets/vendor/animate/animate.css">
-  <link rel="stylesheet" href="../../assets/vendor/owl-carousel/css/owl.carousel.css">
-  <link rel="stylesheet" href="../../assets/vendor/fancybox/css/jquery.fancybox.css">
-  <link rel="stylesheet" href="../../assets/css/theme.css">
-  <link rel="stylesheet" href="../../assets/css/admin.css">
-</head>
 
-<body>
-  <div id="wrap">
-    <div class="head">
-      <div class="container">
-        <div class="header">
-          <h6 class="navbar-brand">Happy<b class="text-primary logo">Share</b></h6>
-          <div class="btn-logoout">
-            <button type="button" class="btn btn-primary btn-sm btn-logo">로그아웃</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- //head -->
-    
-    <div class="menu">
-      <ul>
-        <li><a href="#" >회원정보조회</a></li>
-        <li><a href="#">모금&봉사활동관리</a></li>
-        <li><a href="#">공지사항관리</a></li>
-        <li><a href="#">문의사항관리</a></li>
-        <li><a href="#" class="on">챌린지사항관리</a></li>
-      </ul>
-    </div>
-    <!-- //menu -->
-
-    <div class="ad-main">
-      <div class="ad-main-infor">
-        <!-- serch -->
-        <div class="serch">
-          <label for="inforSerch">검색</label>
-          <input type="text" class="" id="inforSerch">
-          <button type="submit" class="searchBtn">검색</button>
-        </div>
-        <!-- //serch -->
         <h1>챌린지 상세</h1>
     <form action='update' method='post' enctype="multipart/form-date">
         <label for='f-no'>번호</label> 
@@ -80,7 +33,5 @@
     </div>
     <!-- //ad-main -->
         
-  </div>
-  <!-- //wrap -->
 </body>
 </html>
