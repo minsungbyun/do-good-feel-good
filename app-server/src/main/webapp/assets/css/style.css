@@ -815,9 +815,17 @@ padding-top:15px;
   height:500px;
   background:#888;
 }
+
 .button-box {
   padding-bottom:25px;
 }
+
+.button-box-right {
+  padding-bottom:25px;
+  float: right;
+}
+
+
 /* donation */
 .do-detail {
   overflow:hidden;
@@ -981,3 +989,5 @@ padding-top:15px;
   position: relative;
   background-color:#fff;
 }
+
+

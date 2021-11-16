@@ -32,7 +32,7 @@ public class VolunteerBoardController {
   @PostMapping("/volunteer/boardAdd")
   public ModelAndView add(VolunteerBoardDTO volunteerBoardDTO, HttpSession session) throws Exception {
 
-    volunteerBoardDTO.setOwner((JoinDTO) session.getAttribute("owner"));
+    volunteerBoardDTO.setOwner((JoinDTO) session.getAttribute("loginUser"));
 
     volunteerBoardDao.insert(volunteerBoardDTO);
     sqlSessionFactory.openSession().commit();
@@ -40,6 +40,7 @@ public class VolunteerBoardController {
     ModelAndView mv = new ModelAndView();
     mv.setViewName("redirect:boardList");
     return mv;
+
   }
 
   @GetMapping("/volunteer/boardList")
