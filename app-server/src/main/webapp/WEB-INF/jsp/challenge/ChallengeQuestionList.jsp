@@ -77,21 +77,53 @@
                     <td>${challengeQuestionDTO.content}</td> 
                     <td>${challengeQuestionDTO.owner.id}</td> 
                     <td>${challengeQuestionDTO.registeredDate}</td>
-                    <td><a href='questionUpdateDetail?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[변경]</a></td>
+                    <td><div class="modal fade" id="myModalQuestionU" role="dialog"> <!-- 사용자 지정 부분① : id명 -->
+                      <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">문의 수정</h4> <!-- 사용자 지정 부분② : 타이틀 -->
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                          </div>
+                            <form action='questionUpdate?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}' method="post">
+                            <div class="modal-body">
+                              <div class= "class" name="name" id="id" style="display:none">
+                                <label for='f-no'>챌린지번호</label> <input id='f-no' type='text' name='no' value='${challengeDTO.no}' readonly>
+                              <br></div>
+                              <textarea id='f-content' name='content' cols="55" rows="1" class="modal-body">${challengeQuestionDTO.content}</textarea>
+                                <label for='f-owner'>작성자</label> 
+                                <span id='f-owner'>${challengeQuestionDTO.owner.id}</span><br>
+                            
+                                <label for='f-registeredDate'>등록일</label> 
+                                <span id='f-registeredDate'>${challengeQuestionDTO.registeredDate}</span><br>
+                            </div>
+                            <button>수정완료</button><br>
+                          </form>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  &nbsp;&nbsp;<a data-toggle="modal" href="#myModalQuestionU">[변경]</a></td>
                     <td><a href='questionDelete?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[삭제]</a></td>
                 </tr><br>
                 <tr>
 								  <c:if  test="${challengeQuestionDTO.reply != null}" >
 								    <th>답글</th>
-								    <td>${challengeQuestionDTO.reply}</td> 
-								    <td></td>
-								    <td></td><br>
+								    <td>${challengeQuestionDTO.reply}</td><br>
 								  </c:if>
 								</tr>
               </c:forEach>
-              <div class="btn-regi">
-                <a href='questionForm?no=${challengeDTO.no}' class="btn btn-primary nBtn" role="button">문의등록</a>
-              </div>
+              <form action='questionAdd' method="post">
+                <div class="questionAdd">
+                  <div class= "class" name="name" id="id" style="display:none">
+                    <label for='f-no'>챌린지번호</label> <input id='f-no' type='text' name='no' value='${challengeDTO.no}' readonly>
+                  </div><br>
+		                  <textarea id='f-content' name='content' cols=100% rows="2" class="modal-body" style="margin-left:3.33%; float: left;"></textarea>
+                </div>
+		                    <button style="margin-left:3.33%;">문의등록</button>
+              </form>
             </div>
          </div>
        </div>
