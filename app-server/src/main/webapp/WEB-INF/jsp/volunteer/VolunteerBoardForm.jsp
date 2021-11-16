@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>함께해요 : 나눔이야기 등록</title>
+    <title>소통해요 : 나눔이야기 등록</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   
     <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
@@ -19,15 +19,15 @@
 </head>
 <body>
 <div class="container">
-<h1>봉사 게시글 등록</h1><br>
+<h4>소통해요 : 나눔이야기 등록</h4><br>
 <form action='boardAdd' method="post" enctype="multipart/form-data">
 
-<div class="mb-3 row">
+<%--<div class="mb-3 row">
     <label for='f-owner' class="col-sm-2 col-form-label">작성자</label>
     <div class="col-sm-5">
       <input id='f-owner' type='number' name='owner' class="form-control">
     </div>
-  </div>
+  </div> --%>
   
   <div class="mb-3 row">
     <label for='f-title' class="col-sm-2 col-form-label">제목</label>
@@ -52,13 +52,6 @@
 </div>
   
 
-<%--  <div class="mb-3 row">
-    <label for='f-content' class="col-sm-2 col-form-label">내용</label> 
-    <div class="col-sm-10">
-      <input id='f-content' type='text' name='content' class="form-control">
-    </div>
-  </div> --%>
-
   <%--<div class="mb-3 row">
    <label for='f-viewCount' class="col-sm-2 col-form-label">첨부파일</label> 
    <div class="col-sm-10">
@@ -67,7 +60,11 @@
   </div>  
    --%>
 
-<button id="volunteer-button" class="btn btn-primary btn-sm">등록</button><br>
+  <div class="button-box">
+    <button class="btn btn-primary" type="submit">등록</button>
+    <a class="btn btn-primary" href='boardList' role="button">취소</a>
+  </div>
+  
 </form>
 </div><!-- .container -->
 

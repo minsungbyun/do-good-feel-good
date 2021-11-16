@@ -45,7 +45,7 @@
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">소통해요</a>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="${contextPath}/app/volunteer/boardList">나눔이야기</a>
-                  <a class="dropdown-item" href="#">한줄후기</a>
+                  <a class="dropdown-item" href="${contextPath}/app/volunteer/reviewList">한줄후기</a>
                 </div>
               </li>
               <li class="nav-item">
