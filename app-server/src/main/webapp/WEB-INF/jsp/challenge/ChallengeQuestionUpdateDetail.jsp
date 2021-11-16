@@ -16,7 +16,7 @@
 </head>
 <body>
 <h1>챌린지 문의 변경</h1>
-<form action='questionUpdate'>
+<form action='questionUpdate' method="post">
 <div class= "class" name="name" id="id" style="display:none">
     <label for='f-no'>챌린지 번호</label> 
     <input id='f-no' type='text' name='no' value='${challengeQuestionDTO.no}' readonly><br>
