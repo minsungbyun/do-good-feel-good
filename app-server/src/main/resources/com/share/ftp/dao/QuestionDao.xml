@@ -85,6 +85,7 @@
      q.qna_no,
      q.title,
      q.content,
+     q.password,
      q.created_dt,
      q.view_cnt,
      q.reply,
