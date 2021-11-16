@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -22,8 +23,7 @@
 <label for='f-volBoardNo'>게시글번호</label>
 <input id='f-volBoardNo' type='text' name='volBoardNo' value='${volBoardNo}' readonly><br>
 <label for='f-content'>내용</label> <input id='f-content' type='text' name='commentContent'><br>
-<%-- 댓글 등록회원 자동으로 들어가게 변경 예정 --%>
-<label for='f-owner'>작성자</label> <input id='f-owner' type='text' name='owner'><br>
+<%-- <label for='f-owner'>작성자</label> <input id='f-owner' type='text' name='owner'><br> --%>
 
 <br>
 <button>등록</button><br>

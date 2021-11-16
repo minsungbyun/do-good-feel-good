@@ -9,12 +9,11 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebServlet;
 import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.domain.donation.DonationRegisterDTO;
 
 
-@WebServlet("/donation/registerList")
+//@WebServlet("/donation/registerList")
 public class DonationRegisterListController extends GenericServlet { // 모금함 기부하기 양식 쓰는곳
   private static final long serialVersionUID = 1L;
   DonationRegisterDao donationRegisterDao;

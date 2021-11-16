@@ -14,21 +14,21 @@
                   <div class="type-box">
                     <h6 class="type-h7">누구나 가입 가능</h6>
                     <h5>개인회원</h5>
-                    <a href="personal/form" class="btn btn-primary btn-sm btn-block">가입하기</a>
+                    <a href="${contextPath}/app/join/personal/form" class="btn btn-primary btn-sm btn-block">가입하기</a>
                   </div>
                 </div>
                 <div class="col-md-6 col-lg-4 py-3type-box">
                   <div class="type-box">
                     <h6 class="type-h7">2인 이상</h6>
                     <h5>단체회원</h5>
-                    <a href="group/form" class="btn btn-primary btn-sm btn-block" >가입하기</a>
+                    <a href="${contextPath}/app/join/group/form" class="btn btn-primary btn-sm btn-block" >가입하기</a>
                   </div>
                 </div>
                 <div class="col-md-6 col-lg-4 py-3type-box">
                   <div class="type-box">
                     <h6 class="type-h7">사업자번호를 가지고 있는</h6>
                     <h5>기관회원</h5>
-                    <a href="org/form" class="btn btn-primary btn-sm btn-block">가입하기</a>
+                    <a href="${contextPath}/app/join/org/form" class="btn btn-primary btn-sm btn-block">가입하기</a>
                   </div>
                 </div>
                 <!-- //type-box -->

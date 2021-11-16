@@ -1,6 +1,7 @@
 package com.share.ftp.web;
 
 import java.util.Collection;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.dao.DonationRegisterDao;
+import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.domain.Category;
 import com.share.ftp.domain.donation.DonationBoardDTO;
 import com.share.ftp.domain.join.OrgDTO;
@@ -20,16 +22,19 @@ public class DonationBoardController {
   @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired DonationBoardDao donationBoardDao;
   @Autowired DonationRegisterDao donationRegisterDao;
+  @Autowired GeneralDao generalDao;
 
-  //  @GetMapping("/board/form")
-  //  public ModelAndView form() {
-  //    ModelAndView mv = new ModelAndView();
-  //    mv.addObject("pageTitle", "새 글");
-  //    mv.addObject("contentUrl", "board/BoardForm.jsp");
-  //    mv.setViewName("template1");
-  //    return mv;
-  //  }
-  //
+  @GetMapping("/donation/form")
+  public ModelAndView form() throws Exception {
+    List<Category> categorys = generalDao.findAllCategory();
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("categorys", categorys);
+    mv.addObject("pageTitle", "HappyShare : 모금함신청");
+    mv.addObject("contentUrl", "donation/DonationBoardForm.jsp");
+    mv.setViewName("template1");
+    return mv;
+  }
 
 
   @PostMapping("/donation/add")
