@@ -36,11 +36,11 @@
                <p>작성된 게시글이 없습니다.</p>
               </c:if>
               
-              <c:forEach items="${questionList}" var="QuestionListDTO" >
+              <c:forEach items="${questionList}" var="QuestionListDTO" varStatus="vs" >
                 <tr>
-                  <td>${QuestionListDTO.no}</td>
+                  <td id="qna-no">${QuestionListDTO.no}</td>
                   <td>${QuestionListDTO.qnaType.title}</td>
-                  <td id="btnOpen"><a href='questionDetail?questionNo=${QuestionListDTO.no}'>${QuestionListDTO.title}</a>
+                  <td id="btnOpen"><a href='#'>${QuestionListDTO.title}</a>
                   </td> 
                   <td>${QuestionListDTO.owner.id}</td>
                   <td>${QuestionListDTO.registeredDate}</td>
@@ -73,7 +73,7 @@
               <li class="page-item active" aria-current="page">
                 <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
               </li>
-              <li class="page-item">
+              <li class="page-item">  
                 <a class="page-link" href="#">2</a>
               </li>
               <li class="page-item"><a class="page-link" href="#">3</a></li>
@@ -109,7 +109,17 @@
 		  
 		}
 		
-		btnCheck.onclick = closeRtn;
+		var no = document.getElementById('qna-no');
+		var no2 = no.textContent;
+
+		
+		btnCheck.onclick = function() {
+			window.location.href= "questionDetail?questionNo="+no;
+		};
+		
 		btnClose.onclick = closeRtn;
+		
+		
+		
 		
 		</script>
