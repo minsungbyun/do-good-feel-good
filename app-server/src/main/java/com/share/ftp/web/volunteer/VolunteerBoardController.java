@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import com.share.ftp.dao.VolunteerBoardCommentDao;
 import com.share.ftp.dao.VolunteerBoardDao;
 import com.share.ftp.domain.community.VolunteerBoardDTO;
 import com.share.ftp.domain.join.JoinDTO;
@@ -17,6 +18,7 @@ import com.share.ftp.domain.join.JoinDTO;
 public class VolunteerBoardController {
 
   @Autowired SqlSessionFactory sqlSessionFactory;
+  @Autowired VolunteerBoardCommentDao volunteerBoardCommentDao;
   @Autowired VolunteerBoardDao volunteerBoardDao;
   @Autowired ServletContext sc;
 
@@ -97,6 +99,7 @@ public class VolunteerBoardController {
       throw new Exception("해당 번호의 게시글이 없습니다.");
     }
 
+    volunteerBoardCommentDao.delete(no);
     volunteerBoardDao.deleteFile(volunteerBoardDTO);
     volunteerBoardDao.delete(no);
     sqlSessionFactory.openSession().commit();
