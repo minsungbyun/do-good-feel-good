@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="en">
   <main>    
     <div class="page-section">
       <div class="container">
@@ -72,12 +70,14 @@
              <h1 class="widget-title" style="padding-top:30px;"><a>문의하기</a></h1>
             <div class="content-box">
               <c:forEach items="${challengeQuestionList}" var="challengeQuestionDTO">
-                <tr>
-                    <td>${challengeQuestionDTO.questionNo}</td>
-                    <td>${challengeQuestionDTO.content}</td> 
-                    <td>${challengeQuestionDTO.owner.id}</td> 
-                    <td>${challengeQuestionDTO.registeredDate}</td>
-                    <td><div class="modal fade" id="myModalQuestionU" role="dialog"> <!-- 사용자 지정 부분① : id명 -->
+              <div class="ch-balloon left" style="margin-top: 1%; margin-bottom: 1%; margin-left:18%; float:center"><span>
+                <div class= "class" name="name" id="id" style="display:none">
+                    ${challengeQuestionDTO.questionNo}
+                </div>
+                    ${challengeQuestionDTO.content}
+                    ${challengeQuestionDTO.owner.id}
+                    ${challengeQuestionDTO.registeredDate}</span>
+                    <div class="modal fade" id="myModalQuestionU" role="dialog"> <!-- 사용자 지정 부분① : id명 -->
                       <div class="modal-dialog">
                         <!-- Modal content-->
                         <div class="modal-content">
@@ -105,15 +105,15 @@
                         </div>
                       </div>
                     </div>
-                  &nbsp;&nbsp;<a data-toggle="modal" href="#myModalQuestionU">[변경]</a></td>
-                    <td><a href='questionDelete?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[삭제]</a></td>
-                </tr><br>
-                <tr>
+                  &nbsp;&nbsp;<a data-toggle="modal" href="#myModalQuestionU">[변경]</a>
+                    <a href='questionDelete?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[삭제]</a>
+                </div><br>
 								  <c:if  test="${challengeQuestionDTO.reply != null}" >
-								    <th>답글</th>
-								    <td>${challengeQuestionDTO.reply}</td><br>
+                <div class="ch-balloon right" style="margin-bottom: 1%; margin-left: 60%; float:center"><span>
+								    관리자 답글 : 
+								    ${challengeQuestionDTO.reply}
+								</span></div><br>
 								  </c:if>
-								</tr>
               </c:forEach>
               <form action='questionAdd' method="post">
                 <div class="questionAdd">
@@ -135,5 +135,58 @@
       <!-- //container -->
     <!-- //page-section -->
   </main>
-</body>
-</html>
+  
+  <style>
+.ch-balloon {
+    position: relative;
+    display: inline-block;
+}
+
+.ch-balloon span {
+    display: inline-block;
+    padding: 10px;
+    color: #000000;
+    background: #FFFFFF;
+    border-radius: 20px;
+}
+
+.ch-balloon:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.ch-balloon.right:after, .ch-balloon.left:after {
+    border-width: 10px 15px;
+    top: 50%;
+    margin-top: -10px;
+}
+
+.ch-balloon.top:after, .ch-balloon.bottom:after {
+    border-width: 15px 10px;
+    left: 50%;
+    margin-left: -10px;
+}
+
+.ch-balloon.top:after {
+    border-color: #FFFFFF transparent transparent transparent;
+    bottom: -25px;
+}
+
+.ch-balloon.bottom:after {
+    border-color: transparent transparent #FFFFFF transparent;
+    top: -25px;
+}
+
+.ch-balloon.left:after {
+    border-color: transparent #FFFFFF transparent transparent;
+    left: -25px;
+}
+
+.ch-balloon.right:after {
+    border-color: transparent transparent transparent #FFFFFF;
+    right: -25px;
+}
+  </style>
