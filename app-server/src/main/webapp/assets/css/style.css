@@ -826,6 +826,11 @@ padding-top:15px;
   background:#555;
 }
 
+.chall-box {
+	height:inherit;
+	padding:10px;
+}
+
 .content-map {
   height:500px;
   background:#888;
@@ -1276,4 +1281,25 @@ padding-top:15px;
 .steps li.active{
   color: #fff;
   background-color:#3498db;
+}
+
+.form-wrapper .button {
+	background-color: #3498db;
+    display: inline-block;
+    padding: 8
+px
+ 30
+px
+;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px !important;
+    font-family: 'Open Sans', sans-serif !important;
+    position: absolute;
+    right: 20
+px
+;
+    bottom: 20
+px
+;
 }
