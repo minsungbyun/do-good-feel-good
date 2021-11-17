@@ -17,7 +17,7 @@
                     <a href="${contextPath}/app/auth/logout"><span>로그아웃</span></a>
                 </c:if>
                      <!-- 관리자로 로그인 했을 때 보이게 설정하고 아니면 안보이게 설정 조건 주자 -->
-                  <a href="#"><span>관리자</span></a>
+                  <a href="${contextPath}/app/auth/loginList"><span>관리자</span></a>
               </div>
             </div>
           </div>  <!-- // row -->

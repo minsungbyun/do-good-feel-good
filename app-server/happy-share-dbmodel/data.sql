@@ -147,16 +147,13 @@ values(2,2,'hoho.gif');
 --한 줄 후기(봉사활동 후기)
 
 insert into ftp_vol_shortreview(vol_shortreview_no, user_no, vol_no, content)
-values(1, 3, 1, '한줄후기1'); 
-
+values(1, 1, 1, '너무 유익했어요'); 
 insert into ftp_vol_shortreview(vol_shortreview_no, user_no, vol_no, content)
-values(2, 2, 2, '한줄후기2'); 
-
+values(2, 6, 1, '다른 사람이랑 같이 가고 싶어요!'); 
 insert into ftp_vol_shortreview(vol_shortreview_no, user_no, vol_no, content)
-values(3, 4, 3, '한줄후기3');
-
+values(3, 5, 1, '추천합니다.'); 
 insert into ftp_vol_shortreview(vol_shortreview_no, user_no, vol_no, content)
-values(1, 1, 1, '한줄후기1'); 
+values(4, 12, 1, '좋아요'); 
 
 
 
@@ -206,28 +203,28 @@ values(12,1,'2021-09-20','09:00','18:00',1);
 
 
 --카테고리 (1.비대면 2.아동 3.청소년 4.노인 5.장애인 6.동물 7.환경 8.기타)
-insert into ftp_category(category_no, category_title)
+insert into ftp_category(category_no, title)
 values(1,'비대면');
 
-insert into ftp_category(category_no, category_title)
+insert into ftp_category(category_no, title)
 values(2,'아동');
 
-insert into ftp_category(category_no, category_title)
+insert into ftp_category(category_no, title)
 values(3,'청소년');
 
-insert into ftp_category(category_no, category_title)
+insert into ftp_category(category_no, title)
 values(4,'노인');
 
-insert into ftp_category(category_no, category_title)
+insert into ftp_category(category_no, title)
 values(5,'장애인');
 
-insert into ftp_category(category_no, category_title)
+insert into ftp_category(category_no, title)
 values(6,'동물');
 
-insert into ftp_category(category_no, category_title)
+insert into ftp_category(category_no, title)
 values(7,'환경');
 
-insert into ftp_category(category_no, category_title)
+insert into ftp_category(category_no, title)
 values(8,'기타');
 
 -- 챌린지

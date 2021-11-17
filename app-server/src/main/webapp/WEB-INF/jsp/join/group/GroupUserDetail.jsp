@@ -30,7 +30,7 @@
     <a href="../../upload/join/${groupDTO.photo}">
         <img id="f-photo-image" src="../../upload/join/${groupDTO.photo}_100x100.jpg">
     </a>
-    <input id='f-photo' type='file' name='photo' class="form-control"><br>
+    <input id='f-photo' type='file' name='photoFile' class="form-control"><br>
     
     <label for='f-name'>이름</label> 
     <input id='f-name' type='text' name='name' value='${groupDTO.name}'><br>
