@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 
 public class VolunteerShortReviewDTO {
   private int volNo;
@@ -12,14 +13,13 @@ public class VolunteerShortReviewDTO {
   private JoinDTO owner;
   private Date registeredDate;
   private List<JoinDTO> reviewers = new ArrayList<>();
-
-
+  private VolunteerRequestDTO volTitle;
 
   @Override
   public String toString() {
     return "VolunteerShortReviewDTO [volNo=" + volNo + ", no=" + no + ", content=" + content
         + ", owner=" + owner + ", registeredDate=" + registeredDate + ", reviewers=" + reviewers
-        + "]";
+        + ", title=" + volTitle + "]";
   }
 
   public int getVolNo() {
@@ -69,6 +69,14 @@ public class VolunteerShortReviewDTO {
 
   public void setReviewers(List<JoinDTO> reviewers) {
     this.reviewers = reviewers;
+  }
+
+  public VolunteerRequestDTO getVolTitle() {
+    return volTitle;
+  }
+
+  public void setVolTitle(VolunteerRequestDTO volTitle) {
+    this.volTitle = volTitle;
   }
 
   public String getReviewerNames() {
