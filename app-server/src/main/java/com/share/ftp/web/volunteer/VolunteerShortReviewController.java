@@ -6,8 +6,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.share.ftp.dao.VolunteerShortReviewDao;
 import com.share.ftp.domain.community.VolunteerShortReviewDTO;
@@ -42,7 +42,7 @@ public class VolunteerShortReviewController {
     return mv;
   }
 
-  @GetMapping("/volunteer/reviewList")
+  @RequestMapping("/volunteer/reviewList")
   public ModelAndView list() throws Exception {
     Collection<VolunteerShortReviewDTO> volunteerShortReviewList = volunteerShortReviewDao.findAll();
 
@@ -54,7 +54,7 @@ public class VolunteerShortReviewController {
     return mv;
   }
 
-  @PostMapping("/volunteer/reviewUpdate")
+  @RequestMapping("/volunteer/reviewUpdate")
   public ModelAndView update(VolunteerShortReviewDTO volunteerShortReviewDTO) throws Exception {
 
     VolunteerShortReviewDTO oldBoard = volunteerShortReviewDao.findByNo(volunteerShortReviewDTO.getNo());
@@ -70,7 +70,7 @@ public class VolunteerShortReviewController {
     return mv;
   }
 
-  @GetMapping("/volunteer/reviewDelete")
+  @RequestMapping("/volunteer/reviewDelete")
   public ModelAndView delete(int no) throws Exception {
 
     VolunteerShortReviewDTO volunteerShortReviewDTO = volunteerShortReviewDao.findByNo(no);

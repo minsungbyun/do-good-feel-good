@@ -2,134 +2,134 @@
     pageEncoding="UTF-8"
      trimDirectiveWhitespaces="true" %>
   <main>
-      <div class="page-section">
-        <div class="container">
-          <form action="add" name="form" method="post" onsubmit="validLoginForm(); return false;" enctype="multipart/form-data" class="needs-validation" novalidate>
-          <h1 class="title-h">회원가입 - 개인</h1>
-          <div class="join-wrap">
-            <h5>기본정보<span class="required_title"><em class="icon_required">·</em>표시는 반드시 입력하셔야 합니다.</span></h5>
-              <div class="base-table">
-                <table class="join-table">
-                  <caption>개인회원 기본정보</caption>
-                  <tbody>
-                    <tr>
-                      <th><em class="icon_required">·</em><span>아이디</span></th>
-                      <td>
-                        <label for='f-id' class="sr-only sr-cont">아이디</label> 
-                        <input id='f-id' class="form-control form-sub-control box-input" type='text' name='id' placeholder="아이디" required>
-                        <button type="button" class="btnj btn btn-primary" data-toggle="modal" id="id-check">중복확인</button>
-                        <div class="invalid-feedback">
-									        아이디를 입력해주세요.
-									      </div>
-                      </td>
-                    </tr>
-                    <!-- //아이디 -->
-                    <tr>
-                      <th><em class="icon_required">·</em><span>비밀번호</span></th>
-                      <td>
-                        <label for='f-password' class="sr-only">비밀번호</label> 
-                        <input id='f-password' class="form-control box-input" type='password' name='password' placeholder="8-16자의 영문 및 숫자, 특수문자를 모두 포함" required>
-                        <div class="invalid-feedback">
-                          비밀번호를 입력해주세요.
-                        </div>
-                      </td>
-                    </tr>
-                    <!-- //비밀번호 -->
-                    <tr>
-				              <th><em class="icon_required">·</em><span>비밀번호확인</span></th>
-				              <td>
-				                <label for='f-passwordConfirm' class="sr-only">비밀번호확인</label> 
-				                <input id='f-passwordConfirm' class="form-control box-input" type='password' name='passwordConfirm' placeholder="8-16자의 영문 및 숫자, 특수문자를 모두 포함" required>
-				                <div class="invalid-feedback">
-										      비밀번호 확인을 해주세요.
-										    </div>
-				              </td>
-			              </tr>
-			              <!-- //비밀번호 확인 -->
-			              <tr>
-			               <th><span>사진</span></th>
-			               <td>
-			               <label for='f-photo' class="sr-only">사진</label> 
-			               <input id='f-photo' class="form-control box-input" type='file' name='photo'>
-			               </td>
-			             </tr>
-                    <tr>
-                      <th><em class="icon_required">·</em><span>이름</span></th>
-                      <td>
-                        <label for='f-name' class="sr-only">이름</label> 
-                        <input id='f-name' class="form-control box-input" type='text' name='name' required>
-                        <div class="invalid-feedback">
-                          이름을 입력해주세요.
-                        </div>
-                      </td>
-                    </tr>
-                    <!-- //이름 -->
-                    <tr>
-                      <th><em class="icon_required">·</em><span>휴대폰번호</span></th>
-                      <td>
-                        <label for='f-tel' class="sr-only">휴대폰번호</label> 
-                        <input id='f-tel' class="form-control box-input" type='tel' name='tel' required>
-                        <div class="invalid-feedback">
-                          -를 포함해서 입력해주세요! ex) 010-xxxx-xxxx
-                        </div>
-                        <div class="invalid-feedback">
-                          휴대폰번호를 입력해주세요.
-                        </div>
-                      </td>
-                    </tr>
-                    <!-- //휴대폰번호 -->
-                    <tr>
-                      <th><em class="icon_required">·</em><span>이메일</span></th>
-                      <td>
-                        <label for='f-email' class="sr-only">이메일</label> 
-                        <input id='f-email' class="form-control box-input" type='email' name='email' required>
-                        <div class="invalid-feedback">
-                          이메일을 입력해주세요.
-                        </div>
-                      </td>
-                    </tr>
-                    <!-- //이메일 -->
-                    <tr>
-                      <th><em class="icon_required">·</em><span>주소</span></th>
-                      <td>
-                        <div>
-                          <label for='f-postNo' class="sr-only">우편번호</label> 
-                          <input id='f-postNo' class="form-control form-sub-control box-input" type='text' name='postNo' placeholder="우편번호" readonly>
-                          <input type="button" onclick="findByPostNo()" value="우편번호 찾기" class="btnj btn btn-primary" ></input>
-                        </div>
-                        <div>
-                          <label for='f-basicAddress' class="sr-only sr-cont">기본주소</label> 
-                          <input id='f-basicAddress' class="form-control form-sub-control postfo box-input" type='text' name='basicAddress' placeholder="기본주소" readonly>          
-                        </div>
-                        <div>
-                          <label for='f-detailAddress' class="sr-only sr-cont">상세주소</label> 
-                          <input id='f-detailAddress' class="form-control form-sub-control postfo box-input" type='text' name='detailAddress' placeholder="상세주소">
-                        </div>
-                      </td>
-                    </tr>
-                    <!-- //주소 -->
-                    <tr>
-                      <th><span>생년월일</span></th>
-                      <td>
-                        <label for=f-birthdate class="sr-only">생년월일</label> 
-                        <input id='f-birthdate' class="form-control box-input" type='date' name='birthdate' required><br>
-                      </td>
-                    </tr>
-                    <!-- //생년월일 -->
-                  </tbody>
-                </table>
-              </div>
-              <div class="btn-regi">
-                <button type="submit" class="btn btn-primary nBtn">회원가입</button>
-                <a href="#" class="btn btn-outline-primary nBtn" role="button">이전</a>
-              </div>
-            </div>
-            <!-- //join-wrap -->
-            </form>
-        </div>
-        <!-- //container -->
-      </div>
-    </main>
+   <div class="page-section">
+     <div class="container">
+       <form action="add" name="form" method="post" onsubmit="validLoginForm(); return false;" enctype="multipart/form-data" class="needs-validation" novalidate>
+       <h1 class="title-h">회원가입 - 개인</h1>
+       <div class="join-wrap">
+         <h5>기본정보<span class="required_title"><em class="icon_required">·</em>표시는 반드시 입력하셔야 합니다.</span></h5>
+           <div class="base-table">
+             <table class="join-table">
+               <caption>개인회원 기본정보</caption>
+               <tbody>
+                 <tr>
+                   <th><em class="icon_required">·</em><span>아이디</span></th>
+                   <td>
+                     <label for='f-id' class="sr-only sr-cont">아이디</label> 
+                     <input id='f-id' class="form-control form-sub-control box-input" type='text' name='id' placeholder="아이디" required>
+                     <button type="button" class="btnj btn btn-primary" data-toggle="modal" id="id-check">중복확인</button>
+                     <div class="invalid-feedback">
+						        아이디를 입력해주세요.
+						      </div>
+                   </td>
+                 </tr>
+                 <!-- //아이디 -->
+                 <tr>
+                   <th><em class="icon_required">·</em><span>비밀번호</span></th>
+                   <td>
+                     <label for='f-password' class="sr-only">비밀번호</label> 
+                     <input id='f-password' class="form-control box-input" type='password' name='password' placeholder="8-16자의 영문 및 숫자, 특수문자를 모두 포함" required>
+                     <div class="invalid-feedback">
+                       비밀번호를 입력해주세요.
+                     </div>
+                   </td>
+                 </tr>
+                 <!-- //비밀번호 -->
+                 <tr>
+	              <th><em class="icon_required">·</em><span>비밀번호확인</span></th>
+	              <td>
+	                <label for='f-passwordConfirm' class="sr-only">비밀번호확인</label> 
+	                <input id='f-passwordConfirm' class="form-control box-input" type='password' name='passwordConfirm' placeholder="8-16자의 영문 및 숫자, 특수문자를 모두 포함" required>
+	                <div class="invalid-feedback">
+							      비밀번호 확인을 해주세요.
+							    </div>
+	              </td>
+              </tr>
+              <!-- //비밀번호 확인 -->
+              <tr>
+               <th><span>사진</span></th>
+               <td>
+               <label for='f-photo' class="sr-only">사진</label> 
+               <input id='f-photo' class="form-control box-input" type='file' name='photoFile'>
+               </td>
+             </tr>
+                 <tr>
+                   <th><em class="icon_required">·</em><span>이름</span></th>
+                   <td>
+                     <label for='f-name' class="sr-only">이름</label> 
+                     <input id='f-name' class="form-control box-input" type='text' name='name' required>
+                     <div class="invalid-feedback">
+                       이름을 입력해주세요.
+                     </div>
+                   </td>
+                 </tr>
+                 <!-- //이름 -->
+                 <tr>
+                   <th><em class="icon_required">·</em><span>휴대폰번호</span></th>
+                   <td>
+                     <label for='f-tel' class="sr-only">휴대폰번호</label> 
+                     <input id='f-tel' class="form-control box-input" type='tel' name='tel' required>
+                     <div class="invalid-feedback">
+                       -를 포함해서 입력해주세요! ex) 010-xxxx-xxxx
+                     </div>
+                     <div class="invalid-feedback">
+                       휴대폰번호를 입력해주세요.
+                     </div>
+                   </td>
+                 </tr>
+                 <!-- //휴대폰번호 -->
+                 <tr>
+                   <th><em class="icon_required">·</em><span>이메일</span></th>
+                   <td>
+                     <label for='f-email' class="sr-only">이메일</label> 
+                     <input id='f-email' class="form-control box-input" type='email' name='email' required>
+                     <div class="invalid-feedback">
+                       이메일을 입력해주세요.
+                     </div>
+                   </td>
+                 </tr>
+                 <!-- //이메일 -->
+                 <tr>
+                   <th><em class="icon_required">·</em><span>주소</span></th>
+                   <td>
+                     <div>
+                       <label for='f-postNo' class="sr-only">우편번호</label> 
+                       <input id='f-postNo' class="form-control form-sub-control box-input" type='text' name='postNo' placeholder="우편번호" readonly>
+                       <input type="button" onclick="findByPostNo()" value="우편번호 찾기" class="btnj btn btn-primary" ></input>
+                     </div>
+                     <div>
+                       <label for='f-basicAddress' class="sr-only sr-cont">기본주소</label> 
+                       <input id='f-basicAddress' class="form-control form-sub-control postfo box-input" type='text' name='basicAddress' placeholder="기본주소" readonly>          
+                     </div>
+                     <div>
+                       <label for='f-detailAddress' class="sr-only sr-cont">상세주소</label> 
+                       <input id='f-detailAddress' class="form-control form-sub-control postfo box-input" type='text' name='detailAddress' placeholder="상세주소">
+                     </div>
+                   </td>
+                 </tr>
+                 <!-- //주소 -->
+                 <tr>
+                   <th><span>생년월일</span></th>
+                   <td>
+                     <label for=f-birthdate class="sr-only">생년월일</label> 
+                     <input id='f-birthdate' class="form-control box-input" type='date' name='birthdate' required><br>
+                   </td>
+                 </tr>
+                 <!-- //생년월일 -->
+               </tbody>
+             </table>
+           </div>
+           <div class="btn-regi">
+             <button type="submit" class="btn btn-primary nBtn">회원가입</button>
+             <a href="#" class="btn btn-outline-primary nBtn" role="button">이전</a>
+           </div>
+         </div>
+         <!-- //join-wrap -->
+         </form>
+     </div>
+     <!-- //container -->
+   </div>
+ </main>
     
     <!-- script -->
     <script>

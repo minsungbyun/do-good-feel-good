@@ -41,7 +41,7 @@
 			               <th><span>사진</span></th>
 			               <td>
 			               <label for='f-photo' class="sr-only">사진</label> 
-			               <input id='f-photo' class="form-control box-input" type='file' name='photo'>
+			               <input id='f-photo' class="form-control box-input" type='file' name='photoFile'>
 			               </td>
 			             </tr>
                     <tr>

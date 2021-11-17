@@ -9,11 +9,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebServlet;
 import com.share.ftp.dao.GroupDao;
 import com.share.ftp.domain.join.GroupDTO;
 
-@WebServlet("/join/group/list")
+//@WebServlet("/join/group/list")
 public class GroupListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
