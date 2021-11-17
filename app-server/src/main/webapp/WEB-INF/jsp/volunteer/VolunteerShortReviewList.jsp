@@ -37,7 +37,7 @@
               <li>
                 <div class="review-section">
                   <div class="profile-thumb">
-                    <img src="${contextPath}/assets/img/level.png.png" alt="프로필사진">
+                    <img src="${contextPath}/assets/img/level.png" alt="프로필사진">
                   </div>
                   <div class="review-infor">
                     <div class="review-post">
