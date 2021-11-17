@@ -141,7 +141,7 @@
               </div>
               <div class="author">
                 <div class="avatar">
-                  <img src="${contextPath}/assets/img/person/person_1.jpg" alt="">
+                  <img src="${contextPath}/assets/img/level.png" alt="">
                 </div>
                 <div class="d-inline-block ml-2">
                   <div class="author-name">${volunteerShortReviewDTO.owner.id}</div>
