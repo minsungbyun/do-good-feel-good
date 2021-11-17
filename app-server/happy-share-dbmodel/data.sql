@@ -40,6 +40,8 @@ values(30, 12, '2021-2-7','천콩이');
 
 
 
+
+
 --단체회원
 insert into ftp_user_group(user_group_no, user_no, group_cnt)
 values(2, 4, 5);
@@ -153,6 +155,9 @@ values(2, 2, 2, '한줄후기2');
 insert into ftp_vol_shortreview(vol_shortreview_no, user_no, vol_no, content)
 values(3, 4, 3, '한줄후기3');
 
+insert into ftp_vol_shortreview(vol_shortreview_no, user_no, vol_no, content)
+values(1, 1, 1, '한줄후기1'); 
+
 
 
 
@@ -165,6 +170,11 @@ values(2, 2, 3,'청소년 길잡이 멘토 모집','내용2','031-514-8878','chi
 
 insert into ftp_vol(vol_no, user_no, category_no, title, content, tel, email, start_dt, end_dt, start_time, end_time, total_cnt, approval) 
 values(7, 3, 1,'비대면 - 베프지도(장벽없는) 만들기','내용3','031-514-1178','untact@gmail.com','2021-5-5','2021-12-30','9:00','18:00',50,1);
+
+insert into ftp_vol(vol_no, user_no, category_no, title, content, tel, email, start_dt, end_dt, start_time, end_time, total_cnt, approval) 
+values(20, 3, 1,'아동 - 사랑의도시락','내용3','071-514-1128','child@gmail.com','2021-11-25','2021-12-30','9:00','18:00',50,1);
+
+
 
 insert into ftp_vol(vol_no, user_no, category_no, title, content, tel, email, start_dt, end_dt, start_time, end_time, total_cnt, approval) 
 values(5, 2, 1,'비대면','내용4','031-514-1178','untact22@gmail.com','2021-1-1','2021-12-30','11:00','14:00',10,0);
@@ -196,28 +206,28 @@ values(12,1,'2021-09-20','09:00','18:00',1);
 
 
 --카테고리 (1.비대면 2.아동 3.청소년 4.노인 5.장애인 6.동물 7.환경 8.기타)
-insert into ftp_category(category_no, title)
+insert into ftp_category(category_no, category_title)
 values(1,'비대면');
 
-insert into ftp_category(category_no, title)
+insert into ftp_category(category_no, category_title)
 values(2,'아동');
 
-insert into ftp_category(category_no, title)
+insert into ftp_category(category_no, category_title)
 values(3,'청소년');
 
-insert into ftp_category(category_no, title)
+insert into ftp_category(category_no, category_title)
 values(4,'노인');
 
-insert into ftp_category(category_no, title)
+insert into ftp_category(category_no, category_title)
 values(5,'장애인');
 
-insert into ftp_category(category_no, title)
+insert into ftp_category(category_no, category_title)
 values(6,'동물');
 
-insert into ftp_category(category_no, title)
+insert into ftp_category(category_no, category_title)
 values(7,'환경');
 
-insert into ftp_category(category_no, title)
+insert into ftp_category(category_no, category_title)
 values(8,'기타');
 
 -- 챌린지
@@ -239,6 +249,25 @@ insert into ftp_challenge_qna(challenge_qna_no, challenge_no, user_no, content) 
 insert into ftp_challenge_review(challenge_review_no, challenge_no, user_no, content) values(1, 1, 9, '덕분에 챌린지 인증합니다!');
 insert into ftp_challenge_review(challenge_review_no, challenge_no, user_no, content) values(2, 2, 9, '거리두기 챌린지 인증합니다!');
 insert into ftp_challenge_review(challenge_review_no, challenge_no, user_no, content) values(3, 3, 9, '깜빡 챌린지 인증합니다!');
+
+
+-- 모금함
+insert into ftp_funding(funding_no,category_no, user_org_no,title, content, tel, email, start_dt,end_dt, goal, status)
+values(1, 5, 1, '장애인을 도와주세요', '내용: 장애인을 도와주세요!', '010-1234-5555', 'sysout@test.com','2021-10-18','2021-11-11', 10000000, 3);
+
+insert into ftp_funding(funding_no,category_no, user_org_no,title, content, tel, email, start_dt,end_dt, goal, status)
+values(2, 2, 1, '아동을 도와주세요', '내용: 아동을 도와주세요!', '010-1234-6666', 'sysout@test.com','2021-11-18','2021-12-11', 20000000, 3);
+
+insert into ftp_funding(funding_no,category_no, user_org_no,title, content, tel, email, start_dt,end_dt, goal, status)
+values(3, 3, 1,'청소년을 도와주세요', '내용: 청소년을 도와주세요!', '010-1234-7777', 'sysout@test.com','2022-1-18','2022-2-11', 30000000, 3);
+
+insert into ftp_funding(funding_no,category_no, user_org_no,title, content, tel, email, start_dt,end_dt, goal, status)
+values(4, 4, 1, '노인을 도와주세요', '내용: 노인을 도와주세요!', '010-1234-8888', 'sysout@test.com','2022-3-18','2022-4-11', 40000000, 3);
+
+
+
+
+
 
 -- 공지사항 입력
 insert into ftp_support_notice(title, content) values('공지사항1', '내용1');

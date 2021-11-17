@@ -26,7 +26,7 @@
     
           <div class="row mt-4">
             <div class="col-md-6">
-              <p>Copyright 2020. This template designed by MACode ID</p>
+              <p>Copyright 2021. HappyShare</p>
             </div>
             <div class="col-md-6 text-right">
              <!-- <div class="sosmed-button">

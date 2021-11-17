@@ -55,7 +55,7 @@
    
    <association property="category" javaType="category">
      <id column="category_no" property="no"/>
-     <result column="category_title" property="title"/>
+     <result column="title" property="title"/>
    </association>
    
    <collection property="fileUpload" ofType="volunteerAttachedFile">
@@ -72,7 +72,7 @@
 
   <resultMap type="category" id="CategoryMap">
     <id column="category_no" property="no"/> 
-    <result column="category_title" property="title"/>
+    <result column="title" property="title"/>
   </resultMap>
 
   
@@ -146,7 +146,7 @@
 	       u.id wish_id,
 	       u.id owner_id,  
 	       u.name owner_name,  
-	       c.title category_title,
+	       c.title title,
 	       f.filepath filepath,
 	       v.approval,
 	       u.id apply_id,
@@ -167,7 +167,7 @@
   
   <select id="findAllCategory" resultMap="VolunteerRequestDTOMap" >
        select 
-         title category_title
+         title title
        from
          ftp_category 
   </select>
@@ -191,7 +191,7 @@
 	         u.id wish_id,
 	         u.id owner_id,
 	         u.name owner_name,   
-	         c.title category_title,
+	         c.title title,
 	         f.filepath
 	       from
 	         ftp_vol v
@@ -222,7 +222,7 @@
 	         v.total_cnt,
 	         u.id owner_id,
 	         u.name owner_name,   
-	         c.title category_title,
+	         c.title title,
 	         f.filepath
 	       from
 	         ftp_vol v
@@ -252,7 +252,7 @@
          v.total_cnt,
          u.id owner_id,
          u.name owner_name,  
-         c.title category_title,
+         c.title title,
          f.filepath
        from
          ftp_vol v
@@ -282,7 +282,7 @@
          v.total_cnt,
          u.id owner_id,
          u.name owner_name,  
-         c.title category_title,
+         c.title title,
          f.filepath
        from
          ftp_vol v
@@ -355,7 +355,7 @@
          v.total_cnt,
          u.id owner_id,
          u.name owner_name,   
-         c.title category_title,
+         c.title title,
          f.filepath
        from
          ftp_vol v
@@ -382,7 +382,7 @@
          v.total_cnt,
          u.id owner_id,
          u.name owner_name,   
-         c.title category_title,
+         c.title title,
          f.filepath
        from
          ftp_vol v
@@ -409,7 +409,7 @@
          v.total_cnt,
          u.id owner_id,
          u.name owner_name,   
-         c.title category_title,
+         c.title title,
          f.filepath
        from
          ftp_vol v

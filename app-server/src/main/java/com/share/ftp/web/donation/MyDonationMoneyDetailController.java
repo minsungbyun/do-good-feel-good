@@ -12,6 +12,7 @@ import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.dao.JoinDao;
 import com.share.ftp.domain.join.JoinDTO;
 
+
 //@WebServlet("/donation/myDonationMoney")
 public class MyDonationMoneyDetailController extends GenericServlet {
 

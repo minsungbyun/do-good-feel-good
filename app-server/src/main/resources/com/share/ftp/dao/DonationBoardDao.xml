@@ -22,14 +22,14 @@
     <result column="remain_dt" property="remainDate"/> 
    
    <association property="leader" javaType="JoinDTO">
-	   <id column="leader_no" property="no"/>
-	   <result column="leader_id" property="id"/>
+      <id column="leader_no" property="no"/>
+      <result column="leader_id" property="id"/>
      <result column="leader_name" property="name"/>
    </association>
    
    <association property="category" javaType="category">
      <id column="category_no" property="no"/>
-     <result column="category_title" property="title"/>
+     <result column="title" property="title"/>
    </association>
    
    <collection property="fileUpload" ofType="donationBoardAttachedFile">
@@ -47,27 +47,27 @@
   <insert id="insert" parameterType="DonationBoardDTO" 
           useGeneratedKeys="true" keyColumn="funding_no" keyProperty="no">
     insert into ftp_funding(
-	    user_org_no,
-	    category_no,
-	    title,
-	    content,
-	    tel,
-	    email,
-	    start_dt,
-	    end_dt,
-	    goal,
-	    status)
+       user_org_no,
+       category_no,
+       title,
+       content,
+       tel,
+       email,
+       start_dt,
+       end_dt,
+       goal,
+       status)
     values(
-	    #{orgNo},
-	    #{category.no},
-	    #{title},
-	    #{content},
-	    #{tel},
-	    #{email},
-	    #{startDate},
-	    #{endDate},
-	    #{moneyTarget},
-	    #{status})
+       #{orgNo},
+       #{category.no},
+       #{title},
+       #{content},
+       #{tel},
+       #{email},
+       #{startDate},
+       #{endDate},
+       #{moneyTarget},
+       #{status})
   </insert>
   <insert id="insertFile">
     insert into ftp_funding_file(funding_no,filepath)
@@ -75,30 +75,30 @@
   </insert>
  
   <select id="findAll" resultMap="DonationBoardDTOMap">
-		   select 
-	       d.funding_no,  
-	       d.title,
-	       d.content,
-	       d.tel,
-	       d.email,
-	       d.start_dt,
-	       d.end_dt,
-	       datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt,
+         select 
+          d.funding_no,  
+          d.title,
+          d.content,
+          d.tel,
+          d.email,
+          d.start_dt,
+          d.end_dt,
+          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt,
          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
-	       d.goal,
-	       d.status,
-	       p.id leader_id,  
-	       p.name leader_name,  
-	       c.title category_title,
-	       f.filepath
-	     from
-	       ftp_funding d
-	       inner join ftp_user_org o on d.user_org_no=o.user_org_no
-	       inner join ftp_category c on d.category_no=c.category_no
-	       inner join ftp_user p on p.user_no=o.user_no
-	       left outer join ftp_funding_file f on d.funding_no=f.funding_no
-	     order by
-	       funding_no desc 
+          d.goal,
+          d.status,
+          p.id leader_id,  
+          p.name leader_name,  
+          c.title,
+          f.filepath
+        from
+          ftp_funding d
+          inner join ftp_user_org o on d.user_org_no=o.user_org_no
+          inner join ftp_category c on d.category_no=c.category_no
+          inner join ftp_user p on p.user_no=o.user_no
+          left outer join ftp_funding_file f on d.funding_no=f.funding_no
+        order by
+          funding_no desc 
   </select>
   
    
@@ -117,7 +117,7 @@
          d.status,
          p.id leader_id,  
          p.name leader_name,  
-         c.title category_title,
+         c.title,
          f.filepath
        from
          ftp_funding d
@@ -125,10 +125,10 @@
          inner join ftp_category c on d.category_no=c.category_no
          inner join ftp_user p on p.user_no=o.user_no
          left outer join ftp_funding_file f on d.funding_no=f.funding_no
-	     where
-	       d.status=1
-	     order by
-	       d.funding_no desc
+        where
+          d.status=1
+        order by
+          d.funding_no desc
    </select>
    
    <select id="findAllRejected" resultMap="DonationBoardDTOMap">
@@ -146,7 +146,7 @@
          d.status,
          p.id leader_id,  
          p.name leader_name,  
-         c.title category_title,
+         c.title,
          f.filepath
        from
          ftp_funding d
@@ -176,7 +176,7 @@
          d.status,
          p.id leader_id,  
          p.name leader_name,  
-         c.title category_title,
+         c.title,
          f.filepath
        from
          ftp_funding d
@@ -184,10 +184,10 @@
          inner join ftp_category c on d.category_no=c.category_no
          inner join ftp_user p on p.user_no=o.user_no
          left outer join ftp_funding_file f on d.funding_no=f.funding_no
-	     where
-	       d.status=1 
-	     order by
-	       d.funding_no desc
+        where
+          d.status=1 
+        order by
+          d.funding_no desc
    </select>
    
    <select id="findAllWait" resultMap="DonationBoardDTOMap">
@@ -205,7 +205,7 @@
          d.status,
          p.id leader_id,  
          p.name leader_name,  
-         c.title category_title,
+         c.title,
          f.filepath
        from
          ftp_funding d
@@ -256,7 +256,7 @@
          d.goal,
          p.id leader_id,  
          p.name leader_name,  
-         c.title category_title,
+         c.title,
          f.filepath
        from
          ftp_funding d
@@ -281,7 +281,7 @@
          d.goal,
          p.id leader_id,  
          p.name leader_name,  
-         c.title category_title,
+         c.title,
          f.filepath
        from
          ftp_funding d
@@ -306,7 +306,7 @@
          d.goal,
          p.id leader_id,  
          p.name leader_name,  
-         c.title category_title,
+         c.title,
          f.filepath
        from
          ftp_funding d
@@ -315,24 +315,24 @@
          inner join ftp_user p on p.user_no=o.user_no
          left outer join ftp_funding_file f on d.funding_no=f.funding_no
        where
-		     d.title like(concat('%',#{keyword},'%'))
-		     or d.content like (concat('%',#{keyword},'%'))
-		     or p.name like (concat('%',#{keyword},'%'))         
+           d.title like(concat('%',#{keyword},'%'))
+           or d.content like (concat('%',#{keyword},'%'))
+           or p.name like (concat('%',#{keyword},'%'))         
        order by
          d.funding_no desc
   </select>
   
    <update id="update" parameterType="DonationBoardDTO">
-	   update ftp_funding set
-	      title=#{title},
-	      content=#{content},
-	      tel=#{tel},
-	      email=#{email},
-	      start_dt=#{startDate},
-	      end_dt=#{endDate},
-	      goal=#{moneyTarget}
-	   where 
-	      funding_no=#{no}
+      update ftp_funding set
+         title=#{title},
+         content=#{content},
+         tel=#{tel},
+         email=#{email},
+         start_dt=#{startDate},
+         end_dt=#{endDate},
+         goal=#{moneyTarget}
+      where 
+         funding_no=#{no}
   </update>
   
   <update id="updateStatus" parameterType="DonationBoardDTO">
@@ -343,11 +343,11 @@
   </update>
   
    <update id="updateFile" parameterType="string">
-	   update ftp_funding_file set
-		    funding_no=#{no},
-	      filepath=#{fileUpload.filepath}
-	   where 
-	      funding_no=#{no}
+      update ftp_funding_file set
+          funding_no=#{no},
+         filepath=#{fileUpload.filepath}
+      where 
+         funding_no=#{no}
   </update>
   
   
@@ -362,7 +362,6 @@
   
  
 </mapper>
-
 
 
 

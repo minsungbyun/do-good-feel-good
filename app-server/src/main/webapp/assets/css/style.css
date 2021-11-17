@@ -17,8 +17,23 @@
 
 *::-webkit-scrollbar-track {
   background-color: #f8f9fa;
+  
   border-radius: 3px;
 }
+
+/* 메인 메뉴 */
+.hero-carousel-item::before {
+	
+	background-color: rgba(0,0,0,0);
+}
+
+
+.owl-carousel .owl-nav button.owl-next, .owl-carousel .owl-nav button.owl-prev {
+	
+	background-color: #ffbcaf;
+}
+
+
 
 /* a태그 초기화 */
 a {
@@ -811,6 +826,11 @@ padding-top:15px;
   background:#555;
 }
 
+.chall-box {
+	height:inherit;
+	padding:10px;
+}
+
 .content-map {
   height:500px;
   background:#888;
@@ -988,4 +1008,298 @@ padding-top:15px;
   padding:30px;
   position: relative;
   background-color:#fff;
+}
+
+/* 후원하기*/
+#msform {
+  width: 100%;
+  margin: 40px auto;
+  text-align: center;
+  position: relative;
+}
+#msform fieldset {
+  background: white;
+  border: 0 none;
+  border-radius: 3px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.2);
+  padding: 45px 40px;
+  box-sizing: border-box;
+  width: 80%;
+  margin: 0 10%;
+  
+  /*stacking fieldsets above each other*/
+  position: relative;
+}
+
+#msform fieldset:not(:first-of-type) {
+ /*display: none;*/
+}
+/*inputs*/
+#msform input, #msform textarea {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: montserrat;
+  color: #2C3E50;
+  font-size: 13px;
+  margin:10px auto;
+}
+
+#msform .jumin {
+	box-sizing:border-box;
+}
+
+#msform .numberJumin {
+	width:34%;
+}
+
+.form-wrapper {
+	padding-top:15px;
+}
+
+/*buttons*/
+#msform .action-button {
+  width: 100px;
+  background: #007bff;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 1px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+}
+#msform .action-button:hover, #msform .action-button:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+/*headings*/
+.fs-title {
+  font-size: 22px;
+  text-transform: uppercase;
+  color: #2C3E50;
+  margin-bottom: 45px;
+  font-weight:bold;
+}
+.fs-subtitle {
+  font-weight: normal;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 20px;
+}
+/*progressbar*/
+#progressbar {
+  margin-bottom: 36px;
+  overflow: hidden;
+  /*CSS counters to number the steps*/
+  counter-reset: step;
+}
+#progressbar li {
+  list-style-type: none;
+  color: #777;
+  text-transform: uppercase;
+  width: 33.33%;
+  float: left;
+  position: relative;
+}
+#progressbar li:before {
+  content: counter(step);
+  counter-increment: step;
+  width: 40px;
+  line-height: 40px;
+  display: block;
+  font-size: 15px;
+  color: #333;
+  background: #eeeeee;
+  border-radius: 3px;
+  margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: white;
+  position: absolute;
+  left: -50%;
+  top: 9px;
+  z-index: -1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+  /*connector not needed before the first step*/
+  content: none; 
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+  background: #007bff;
+  color: white;
+}
+
+/* 라디오버튼 */
+.container-checkbox {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.container-checkbox .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container-checkbox:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.container-checkbox input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+.container-checkbox .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.container-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.container-checkbox .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.container-radio {
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+}
+
+.container-radio input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.container-radio .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+.container-radio:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.container-radio input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+.container-radio .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.container-radio input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.container-radio .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+.form-wrapper .form-box-do {
+	margin: 0 auto;
+}
+
+/* STEPS */
+.steps{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  text-align: center;
+}
+
+.steps li{
+  display: inline-block;
+  margin: 20px;
+  color: #ccc;
+  padding: 15px;
+  color: #888;
+  border-radius:5px;
+  background: #ddd;
+}
+
+.steps li.active{
+  color: #fff;
+  background-color:#3498db;
+}
+
+.form-wrapper .button {
+	background-color: #3498db;
+    display: inline-block;
+    padding: 8
+px
+ 30
+px
+;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px !important;
+    font-family: 'Open Sans', sans-serif !important;
+    position: absolute;
+    right: 20
+px
+;
+    bottom: 20
+px
+;
 }

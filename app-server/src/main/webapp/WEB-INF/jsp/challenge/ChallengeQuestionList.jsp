@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> <%-- 모달 --%>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <%-- 모달 --%>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> <%-- 모달 --%>
+
   <main>    
     <div class="page-section">
       <div class="container">
@@ -68,14 +73,14 @@
             </a>
          </div>
              <h1 class="widget-title" style="padding-top:30px;"><a>문의하기</a></h1>
-            <div class="content-box">
+            <div class="content-box chall-box" style="background: #81BEF7">
               <c:forEach items="${challengeQuestionList}" var="challengeQuestionDTO">
               <div class="ch-balloon left" style="margin-top: 1%; margin-bottom: 1%; margin-left:18%; float:center"><span>
-                <div class= "class" name="name" id="id" style="display:none">
+                <div class= "class" id="id" style="display:none">
                     ${challengeQuestionDTO.questionNo}
                 </div>
-                    ${challengeQuestionDTO.content}
-                    ${challengeQuestionDTO.owner.id}
+                    -${challengeQuestionDTO.owner.id}-<br>
+                    ${challengeQuestionDTO.content}<br>
                     ${challengeQuestionDTO.registeredDate}</span>
                     <div class="modal fade" id="myModalQuestionU" role="dialog"> <!-- 사용자 지정 부분① : id명 -->
                       <div class="modal-dialog">
@@ -87,8 +92,11 @@
                           </div>
                             <form action='questionUpdate?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}' method="post">
                             <div class="modal-body">
-                              <div class= "class" name="name" id="id" style="display:none">
+                              <div class= "class" id="id" style="display:none">
                                 <label for='f-no'>챌린지번호</label> <input id='f-no' type='text' name='no' value='${challengeDTO.no}' readonly>
+                              <br></div>
+                              <div class= "class" id="id" style="display:none">
+                                <label for='f-questionNo'>문의번호</label> <input id='f-questionNo' type='text' name='questionNo' value='${challengeQuestionDTO.questionNo}' readonly>
                               <br></div>
                               <textarea id='f-content' name='content' cols="55" rows="1" class="modal-body">${challengeQuestionDTO.content}</textarea>
                                 <label for='f-owner'>작성자</label> 
@@ -109,20 +117,20 @@
                     <a href='questionDelete?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[삭제]</a>
                 </div><br>
 								  <c:if  test="${challengeQuestionDTO.reply != null}" >
-                <div class="ch-balloon right" style="margin-bottom: 1%; margin-left: 60%; float:center"><span>
-								    관리자 답글 : 
+                <div class="ch-balloon right" style="margin-bottom: 1%; margin-left: 70%; float:center"><span>
+								    -관리자 답글-<br>
 								    ${challengeQuestionDTO.reply}
 								</span></div><br>
 								  </c:if>
               </c:forEach>
               <form action='questionAdd' method="post">
                 <div class="questionAdd">
-                  <div class= "class" name="name" id="id" style="display:none">
+                  <div class= "class" id="id" style="display:none">
                     <label for='f-no'>챌린지번호</label> <input id='f-no' type='text' name='no' value='${challengeDTO.no}' readonly>
                   </div><br>
-		                  <textarea id='f-content' name='content' cols=100% rows="2" class="modal-body" style="margin-left:3.33%; float: left;"></textarea>
+		                  <textarea id='f-content' name='content' cols=100% rows="1" class="modal-body" style="margin-left:10%; float: left;"></textarea>
                 </div>
-		                    <button style="margin-left:3.33%;">문의등록</button>
+		                    <button style="margin-left:3%; margin-top:1.7%;">문의등록</button>
               </form>
             </div>
          </div>

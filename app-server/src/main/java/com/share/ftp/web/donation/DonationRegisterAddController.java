@@ -15,64 +15,64 @@ import com.share.ftp.domain.donation.DonationRegisterDTO;
 import com.share.ftp.domain.donation.DonationRegisterPayType;
 import com.share.ftp.domain.join.JoinDTO;
 
+
 //@WebServlet("/donation/registerAdd")
-public class DonationRegisterAddController extends HttpServlet { 
-  private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 
-  DonationRegisterDao donationRegisterDao;
-  SqlSession sqlSession;
+DonationRegisterDao donationRegisterDao;
+SqlSession sqlSession;
 
-  @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    donationRegisterDao = (DonationRegisterDao) 웹애플리케이션공용저장소.getAttribute("donationRegisterDao");
+@Override
+public void init(ServletConfig config) throws ServletException {
+  ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+  donationRegisterDao = (DonationRegisterDao) 웹애플리케이션공용저장소.getAttribute("donationRegisterDao");
 
 
+}
+
+
+@Override
+protected void service(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+
+  DonationRegisterDTO donationRegisterDTO = new DonationRegisterDTO();
+
+  DonationRegisterPayType donationRegisterPayType = new DonationRegisterPayType();
+  donationRegisterPayType.setNo(Integer.parseInt(request.getParameter("payType")));
+
+  DonationBoardDTO donationBoardDTO = new DonationBoardDTO();
+  donationBoardDTO.setNo(Integer.parseInt(request.getParameter("donationBoard")));
+
+  JoinDTO joinDTO = new JoinDTO();
+  joinDTO.setNo(Integer.parseInt(request.getParameter("donator")));
+
+  donationRegisterDTO.setDonator(joinDTO);
+  donationRegisterDTO.setDonationBoard(donationBoardDTO);
+  donationRegisterDTO.setPayTypeNo(donationRegisterPayType);
+  donationRegisterDTO.setDonationMoney(Integer.parseInt(request.getParameter("donationMoney")));
+  donationRegisterDTO.setRegisterationNumber(request.getParameter("registerationNumber")); 
+
+  if (donationRegisterDTO.getPayTypeNo().getNo() == 1) {
+    donationRegisterDTO.setPayStatus(0);
+  } else {
+    donationRegisterDTO.setPayStatus(1);
   }
 
 
-  @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  try {
+    donationRegisterDao.insert(donationRegisterDTO);
+    sqlSession.commit();
+    response.sendRedirect("boardList");
 
-    DonationRegisterDTO donationRegisterDTO = new DonationRegisterDTO();
+  } catch (Exception e) {
+    request.setAttribute("error", e);
+    e.printStackTrace();
 
-    DonationRegisterPayType donationRegisterPayType = new DonationRegisterPayType();
-    donationRegisterPayType.setNo(Integer.parseInt(request.getParameter("payType")));
-
-    DonationBoardDTO donationBoardDTO = new DonationBoardDTO();
-    donationBoardDTO.setNo(Integer.parseInt(request.getParameter("donationBoard")));
-
-    JoinDTO joinDTO = new JoinDTO();
-    joinDTO.setNo(Integer.parseInt(request.getParameter("donator")));
-
-    donationRegisterDTO.setDonator(joinDTO);
-    donationRegisterDTO.setDonationBoard(donationBoardDTO);
-    donationRegisterDTO.setPayTypeNo(donationRegisterPayType);
-    donationRegisterDTO.setDonationMoney(Integer.parseInt(request.getParameter("donationMoney")));
-    donationRegisterDTO.setRegisterationNumber(request.getParameter("registerationNumber")); 
-
-    if (donationRegisterDTO.getPayTypeNo().getNo() == 1) {
-      donationRegisterDTO.setPayStatus(0);
-    } else {
-      donationRegisterDTO.setPayStatus(1);
-    }
-
-
-    try {
-      donationRegisterDao.insert(donationRegisterDTO);
-      sqlSession.commit();
-      response.sendRedirect("boardList");
-
-    } catch (Exception e) {
-      request.setAttribute("error", e);
-      e.printStackTrace();
-
-      RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Error.jsp");
-      requestDispatcher.forward(request, response);
-    }
+    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Error.jsp");
+    requestDispatcher.forward(request, response);
   }
+}
 }
 
 
