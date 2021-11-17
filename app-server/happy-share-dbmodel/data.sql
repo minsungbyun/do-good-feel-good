@@ -155,6 +155,9 @@ values(2, 2, 2, '한줄후기2');
 insert into ftp_vol_shortreview(vol_shortreview_no, user_no, vol_no, content)
 values(3, 4, 3, '한줄후기3');
 
+insert into ftp_vol_shortreview(vol_shortreview_no, user_no, vol_no, content)
+values(1, 1, 1, '한줄후기1'); 
+
 
 
 

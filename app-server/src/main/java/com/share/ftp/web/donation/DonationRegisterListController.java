@@ -12,6 +12,7 @@ import javax.servlet.ServletResponse;
 import com.share.ftp.dao.DonationRegisterDao;
 import com.share.ftp.domain.donation.DonationRegisterDTO;
 
+
 //@WebServlet("/donation/registerList")
 public class DonationRegisterListController extends GenericServlet { // 모금함 기부하기 양식 쓰는곳
   private static final long serialVersionUID = 1L;
