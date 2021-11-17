@@ -76,14 +76,13 @@ DROP TABLE IF EXISTS ftp_support_qna_file RESTRICT;
 -- 공지사항첨부파일
 DROP TABLE IF EXISTS ftp_support_notice_file RESTRICT;
 
--- 회원사진
-DROP TABLE IF EXISTS ftp_user_photo RESTRICT;
+
 
 -- 문의카테고리
-DROP TABLE IF EXISTS ftp_support_qna_categroy RESTRICT;
+DROP TABLE IF EXISTS ftp_support_qna_category RESTRICT;
 
 -- 결제유형
-DROP TABLE IF EXISTS ftp_donation_pay_type RESTRICT;
+DROP TABLE IF EXISTS ftp_donation_pay RESTRICT;
 
 -- 카테고리
 DROP TABLE IF EXISTS ftp_category RESTRICT;
@@ -116,8 +115,9 @@ CREATE TABLE ftp_user (
 	type           INTEGER      NOT NULL COMMENT '회원유형', -- 회원유형
 	status         INTEGER      NOT NULL COMMENT '상태', -- 상태
 	note           TEXT         NULL     COMMENT '비고', -- 비고
-	last_login     DATETIME     NOT NULL DEFAULT NOW() COMMENT '마지막접속일' -- 마지막접속일
-)
+	last_login     DATETIME     NOT NULL DEFAULT NOW() COMMENT '마지막접속일', -- 마지막접속일
+	photo 		   varchar(255) NULL	 COMMENT '사진' -- 사진
+);
 COMMENT '회원';
 
 -- 회원
@@ -144,12 +144,12 @@ ALTER TABLE ftp_user
 
 -- 봉사참여자
 CREATE TABLE ftp_vol_apply (
-	vol_no       INTEGER NOT NULL COMMENT '봉사번호', -- 봉사번호
 	user_no      INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-	apply_dt     DATE    NOT NULL COMMENT '참여일', -- 참여일
+	vol_no       INTEGER NOT NULL COMMENT '봉사번호', -- 봉사번호
+	apply_dt     DATE    NOT NULL DEFAULT curdate() COMMENT '참여일', -- 참여일
 	start_time   TIME    NOT NULL COMMENT '시작시간', -- 시작시간
 	end_time     TIME    NOT NULL COMMENT '종료시간', -- 종료시간
-	apply_status INTEGER NOT NULL DEFAULT 0 COMMENT '참여여부', -- 참여여부
+	apply_status INTEGER NOT NULL DEFAULT 1 COMMENT '참여여부', -- 참여여부
 	note         TEXT    NULL     COMMENT '비고' -- 비고
 )
 COMMENT '봉사참여자';
@@ -158,8 +158,8 @@ COMMENT '봉사참여자';
 ALTER TABLE ftp_vol_apply
 	ADD CONSTRAINT PK_ftp_vol_apply -- 봉사참여자 기본키
 		PRIMARY KEY (
-			vol_no,  -- 봉사번호
-			user_no  -- 회원번호
+			user_no, -- 회원번호
+			vol_no   -- 봉사번호
 		);
 
 -- 봉사게시판
@@ -206,14 +206,14 @@ ALTER TABLE ftp_challenge
 
 -- 기부금
 CREATE TABLE ftp_donation (
-	donation_no      INTEGER     NOT NULL COMMENT '모금함기부번호', -- 모금함기부번호
-	user_no          INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
-	funding_no       INTEGER     NOT NULL COMMENT '모금함번호', -- 모금함번호
-	pay_type_no      INTEGER     NOT NULL COMMENT '결제유형번호', -- 결제유형번호
-	donation_money   INTEGER     NOT NULL COMMENT '기부금액', -- 기부금액
-	pay_status       INTEGER     NOT NULL DEFAULT 0 COMMENT '결제상태', -- 결제상태
-	donation_dt      DATE        NOT NULL DEFAULT curdate() COMMENT '기부일', -- 기부일
-	registeration_no VARCHAR(20) NOT NULL COMMENT '주민번호' -- 주민번호
+	donation_no      INTEGER      NOT NULL COMMENT '모금함기부번호', -- 모금함기부번호
+	user_no          INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+	funding_no       INTEGER      NOT NULL COMMENT '모금함번호', -- 모금함번호
+	pay_no           INTEGER      NOT NULL COMMENT '결제유형번호', -- 결제유형번호
+	donation_money   INTEGER      NOT NULL COMMENT '기부금액', -- 기부금액
+	pay_status       INTEGER      NOT NULL DEFAULT 0 COMMENT '결제상태', -- 결제상태
+	donation_dt      DATE         NOT NULL DEFAULT curdate() COMMENT '기부일', -- 기부일
+	registeration_no VARCHAR(255) NOT NULL COMMENT '주민번호' -- 주민번호
 )
 COMMENT '기부금';
 
@@ -234,10 +234,10 @@ CREATE TABLE ftp_support_qna (
 	qna_category_no INTEGER      NOT NULL COMMENT '카테고리번호', -- 카테고리번호
 	title           VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
 	content         TEXT         NOT NULL COMMENT '내용', -- 내용
-	password        VARCHAR(100) NOT NULL COMMENT '문의비밀번호', -- 문의비밀번호
+	password        INTEGER      NOT NULL COMMENT '문의비밀번호', -- 문의비밀번호
 	created_dt      DATE         NOT NULL DEFAULT CURDATE() COMMENT '등록일', -- 등록일
 	view_cnt        INTEGER      NULL     DEFAULT 0 COMMENT '조회수', -- 조회수
-	qna_reply       TEXT         NULL     COMMENT '답글', -- 답글
+	reply           TEXT         NULL     COMMENT '답글', -- 답글
 	status          INTEGER      NOT NULL DEFAULT 0 COMMENT '답글여부' -- 답글여부
 )
 COMMENT '문의하기';
@@ -316,8 +316,8 @@ ALTER TABLE ftp_challenge_review
 -- 봉사한줄후기
 CREATE TABLE ftp_vol_shortreview (
 	vol_shortreview_no INTEGER      NOT NULL COMMENT '봉사게시판한줄후기번호', -- 봉사게시판한줄후기번호
-	vol_no             INTEGER      NOT NULL COMMENT '봉사번호', -- 봉사번호
 	user_no            INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+	vol_no             INTEGER      NOT NULL COMMENT '봉사번호', -- 봉사번호
 	content            VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
 	created_dt         DATE         NOT NULL DEFAULT CURDATE() COMMENT '등록일' -- 등록일
 )
@@ -339,7 +339,7 @@ CREATE TABLE ftp_vol_qna (
 	user_no    INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
 	vol_no     INTEGER NOT NULL COMMENT '봉사번호', -- 봉사번호
 	content    TEXT    NOT NULL COMMENT '내용', -- 내용
-	create_dt  DATE    NOT NULL DEFAULT CURDATE() COMMENT '등록일', -- 등록일
+	created_dt DATE    NOT NULL DEFAULT CURDATE() COMMENT '등록일', -- 등록일
 	reply      TEXT    NULL     COMMENT '답변' -- 답변
 )
 COMMENT '봉사문의하기';
@@ -359,7 +359,7 @@ CREATE TABLE ftp_user_personal (
 	user_personal_no INTEGER     NOT NULL COMMENT '개인번호', -- 개인번호
 	user_no          INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
 	birthdate        DATE        NULL     COMMENT '생년월일', -- 생년월일
-	rank             VARCHAR(50) NOT NULL COMMENT '등급', -- 등급
+	level            VARCHAR(50) NOT NULL COMMENT '등급', -- 등급
 	point            INTEGER     NOT NULL DEFAULT 0 COMMENT '포인트' -- 포인트
 )
 COMMENT '개인';
@@ -427,12 +427,12 @@ CREATE TABLE ftp_vol (
 	content     TEXT         NOT NULL COMMENT '내용', -- 내용
 	tel         VARCHAR(30)  NOT NULL COMMENT '전화', -- 전화
 	email       VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
-	start_dt    DATE         NOT NULL COMMENT '시작일', -- 시작일
-	end_dt      DATE         NOT NULL COMMENT '종료일', -- 종료일
+	start_dt    DATETIME     NOT NULL COMMENT '시작일', -- 시작일
+	end_dt      DATETIME     NOT NULL COMMENT '종료일', -- 종료일
 	start_time  TIME         NOT NULL COMMENT '시작시간', -- 시작시간
 	end_time    TIME         NOT NULL COMMENT '종료시간', -- 종료시간
 	total_cnt   INTEGER      NOT NULL COMMENT '총모집인원', -- 총모집인원
-	approval    INTEGER      NOT NULL DEFAULT 0 COMMENT '승인여부', -- 승인여부
+	approval    INTEGER      NOT NULL DEFAULT 2 COMMENT '승인여부', -- 승인여부
 	note        TEXT         NULL     COMMENT '비고' -- 비고
 )
 COMMENT '봉사';
@@ -528,6 +528,9 @@ ALTER TABLE ftp_challenge_review_file
 			challenge_review_file_no -- 챌린지리뷰첨부파일번호
 		);
 
+ALTER TABLE ftp_challenge_review_file
+	MODIFY COLUMN challenge_review_file_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '챌린지리뷰첨부파일번호';
+
 -- 챌린지첨부파일
 CREATE TABLE ftp_challenge_file (
 	challenge_file_no INTEGER      NOT NULL COMMENT '챌린지첨부파일번호', -- 챌린지첨부파일번호
@@ -542,6 +545,9 @@ ALTER TABLE ftp_challenge_file
 		PRIMARY KEY (
 			challenge_file_no -- 챌린지첨부파일번호
 		);
+
+ALTER TABLE ftp_challenge_file
+	MODIFY COLUMN challenge_file_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '챌린지첨부파일번호';
 
 -- 챌린지찜하기
 CREATE TABLE ftp_challenge_wish (
@@ -562,7 +568,7 @@ ALTER TABLE ftp_challenge_wish
 CREATE TABLE ftp_funding (
 	funding_no  INTEGER      NOT NULL COMMENT '모금함번호', -- 모금함번호
 	user_org_no INTEGER      NOT NULL COMMENT '기관번호', -- 기관번호
-	category_no INTEGER      NOT NULL COMMENT '카테고리번호', -- 카테고리번호
+	category_no INTEGER      NULL     COMMENT '카테고리번호', -- 카테고리번호
 	title       VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
 	content     TEXT         NOT NULL COMMENT '내용', -- 내용
 	tel         VARCHAR(30)  NOT NULL COMMENT '전화', -- 전화
@@ -639,59 +645,57 @@ ALTER TABLE ftp_support_notice_file
 ALTER TABLE ftp_support_notice_file
 	MODIFY COLUMN notice_file_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '공지사항첨부파일번호';
 
--- 회원사진
-CREATE TABLE ftp_user_photo (
-	user_photo_no INTEGER      NOT NULL COMMENT '회원사진번호', -- 회원사진번호
-	user_no       INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-	filepath      VARCHAR(255) NULL     COMMENT '사진파일명' -- 사진파일명
-)
-COMMENT '회원사진';
-
--- 회원사진
-ALTER TABLE ftp_user_photo
-	ADD CONSTRAINT PK_ftp_user_photo -- 회원사진 기본키
-		PRIMARY KEY (
-			user_photo_no -- 회원사진번호
-		);
-
-ALTER TABLE ftp_user_photo
-	MODIFY COLUMN user_photo_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원사진번호';
 
 -- 문의카테고리
-CREATE TABLE ftp_support_qna_categroy (
+CREATE TABLE ftp_support_qna_category (
 	qna_category_no INTEGER     NOT NULL COMMENT '카테고리번호', -- 카테고리번호
-	category_title  VARCHAR(50) NOT NULL COMMENT '카테고리명' -- 카테고리명
+	title           VARCHAR(50) NOT NULL COMMENT '카테고리명' -- 카테고리명
 )
 COMMENT '문의카테고리';
 
 -- 문의카테고리
-ALTER TABLE ftp_support_qna_categroy
-	ADD CONSTRAINT PK_ftp_support_qna_categroy -- 문의카테고리 기본키
+ALTER TABLE ftp_support_qna_category
+	ADD CONSTRAINT PK_ftp_support_qna_category -- 문의카테고리 기본키
 		PRIMARY KEY (
 			qna_category_no -- 카테고리번호
 		);
 
-ALTER TABLE ftp_support_qna_categroy
+-- 문의카테고리 유니크 인덱스
+CREATE UNIQUE INDEX UIX_ftp_support_qna_category
+	ON ftp_support_qna_category ( -- 문의카테고리
+		title ASC -- 카테고리명
+	);
+
+ALTER TABLE ftp_support_qna_category
 	MODIFY COLUMN qna_category_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '카테고리번호';
 
 -- 결제유형
-CREATE TABLE ftp_donation_pay_type (
-	pay_type_no INTEGER     NOT NULL COMMENT '결제유형번호', -- 결제유형번호
-	type_title  VARCHAR(50) NOT NULL COMMENT '결제유형명' -- 결제유형명
+CREATE TABLE ftp_donation_pay (
+	pay_no INTEGER     NOT NULL COMMENT '결제유형번호', -- 결제유형번호
+	title  VARCHAR(50) NOT NULL COMMENT '결제유형명' -- 결제유형명
 )
 COMMENT '결제유형';
 
 -- 결제유형
-ALTER TABLE ftp_donation_pay_type
-	ADD CONSTRAINT PK_ftp_donation_pay_type -- 결제유형 기본키
+ALTER TABLE ftp_donation_pay
+	ADD CONSTRAINT PK_ftp_donation_pay -- 결제유형 기본키
 		PRIMARY KEY (
-			pay_type_no -- 결제유형번호
+			pay_no -- 결제유형번호
 		);
+
+-- 결제유형 유니크 인덱스
+CREATE UNIQUE INDEX UIX_ftp_donation_pay
+	ON ftp_donation_pay ( -- 결제유형
+		title ASC -- 결제유형명
+	);
+
+ALTER TABLE ftp_donation_pay
+	MODIFY COLUMN pay_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '결제유형번호';
 
 -- 카테고리
 CREATE TABLE ftp_category (
-	category_no    INTEGER      NOT NULL COMMENT '카테고리번호', -- 카테고리번호
-	category_title VARCHAR(255) NOT NULL COMMENT '카테고리명' -- 카테고리명
+	category_no INTEGER      NOT NULL COMMENT '카테고리번호', -- 카테고리번호
+	title       VARCHAR(255) NOT NULL COMMENT '카테고리명' -- 카테고리명
 )
 COMMENT '카테고리';
 
@@ -701,6 +705,12 @@ ALTER TABLE ftp_category
 		PRIMARY KEY (
 			category_no -- 카테고리번호
 		);
+
+-- 카테고리 유니크 인덱스
+CREATE UNIQUE INDEX UIX_ftp_category
+	ON ftp_category ( -- 카테고리
+		title ASC -- 카테고리명
+	);
 
 ALTER TABLE ftp_category
 	MODIFY COLUMN category_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '카테고리번호';
@@ -759,11 +769,11 @@ ALTER TABLE ftp_challenge_apply
 
 -- 봉사게시판댓글
 CREATE TABLE ftp_vol_comment (
-	vol_comment_no INTEGER  NOT NULL COMMENT '봉사게시판댓글번호', -- 봉사게시판댓글번호
-	vol_board_no   INTEGER  NOT NULL COMMENT '봉사게시판번호', -- 봉사게시판번호
-	user_no        INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
-	content        TEXT     NOT NULL COMMENT '내용', -- 내용
-	created_dt     DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
+	vol_comment_no INTEGER NOT NULL COMMENT '봉사게시판댓글번호', -- 봉사게시판댓글번호
+	vol_board_no   INTEGER NOT NULL COMMENT '봉사게시판번호', -- 봉사게시판번호
+	user_no        INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+	content        TEXT    NOT NULL COMMENT '내용', -- 내용
+	created_dt     DATE    NOT NULL DEFAULT curdate() COMMENT '등록일' -- 등록일
 )
 COMMENT '봉사게시판댓글';
 
@@ -773,6 +783,9 @@ ALTER TABLE ftp_vol_comment
 		PRIMARY KEY (
 			vol_comment_no -- 봉사게시판댓글번호
 		);
+
+ALTER TABLE ftp_vol_comment
+	MODIFY COLUMN vol_comment_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '봉사게시판댓글번호';
 
 -- 봉사참여자
 ALTER TABLE ftp_vol_apply
@@ -806,12 +819,12 @@ ALTER TABLE ftp_vol_board
 
 -- 기부금
 ALTER TABLE ftp_donation
-	ADD CONSTRAINT FK_ftp_donation_pay_type_TO_ftp_donation -- 결제유형 -> 기부금
+	ADD CONSTRAINT FK_ftp_donation_pay_TO_ftp_donation -- 결제유형 -> 기부금
 		FOREIGN KEY (
-			pay_type_no -- 결제유형번호
+			pay_no -- 결제유형번호
 		)
-		REFERENCES ftp_donation_pay_type ( -- 결제유형
-			pay_type_no -- 결제유형번호
+		REFERENCES ftp_donation_pay ( -- 결제유형
+			pay_no -- 결제유형번호
 		);
 
 -- 기부금
@@ -846,11 +859,11 @@ ALTER TABLE ftp_support_qna
 
 -- 문의하기
 ALTER TABLE ftp_support_qna
-	ADD CONSTRAINT FK_ftp_support_qna_categroy_TO_ftp_support_qna -- 문의카테고리 -> 문의하기
+	ADD CONSTRAINT FK_ftp_support_qna_category_TO_ftp_support_qna -- 문의카테고리 -> 문의하기
 		FOREIGN KEY (
 			qna_category_no -- 카테고리번호
 		)
-		REFERENCES ftp_support_qna_categroy ( -- 문의카테고리
+		REFERENCES ftp_support_qna_category ( -- 문의카테고리
 			qna_category_no -- 카테고리번호
 		);
 
@@ -872,6 +885,16 @@ ALTER TABLE ftp_challenge_qna
 		)
 		REFERENCES ftp_user ( -- 회원
 			user_no -- 회원번호
+		);
+
+-- 챌린지후기
+ALTER TABLE ftp_challenge_review
+	ADD CONSTRAINT FK_ftp_challenge_TO_ftp_challenge_review -- 챌린지 -> 챌린지후기
+		FOREIGN KEY (
+			challenge_no -- 챌린지번호
+		)
+		REFERENCES ftp_challenge ( -- 챌린지
+			challenge_no -- 챌린지번호
 		);
 
 -- 챌린지후기
@@ -900,12 +923,12 @@ ALTER TABLE ftp_challenge_review
 ALTER TABLE ftp_vol_shortreview
 	ADD CONSTRAINT FK_ftp_vol_apply_TO_ftp_vol_shortreview -- 봉사참여자 -> 봉사한줄후기
 		FOREIGN KEY (
-			vol_no,  -- 봉사번호
-			user_no  -- 회원번호
+			user_no, -- 회원번호
+			vol_no   -- 봉사번호
 		)
 		REFERENCES ftp_vol_apply ( -- 봉사참여자
-			vol_no,  -- 봉사번호
-			user_no  -- 회원번호
+			user_no, -- 회원번호
+			vol_no   -- 봉사번호
 		);
 
 -- 봉사문의하기
@@ -1128,15 +1151,7 @@ ALTER TABLE ftp_support_notice_file
 			notice_no -- 공지사항게시판번호
 		);
 
--- 회원사진
-ALTER TABLE ftp_user_photo
-	ADD CONSTRAINT FK_ftp_user_TO_ftp_user_photo -- 회원 -> 회원사진
-		FOREIGN KEY (
-			user_no -- 회원번호
-		)
-		REFERENCES ftp_user ( -- 회원
-			user_no -- 회원번호
-		);
+
 
 -- 알림
 ALTER TABLE ftp_user_alert
@@ -1190,20 +1205,20 @@ ALTER TABLE ftp_challenge_apply
 
 -- 봉사게시판댓글
 ALTER TABLE ftp_vol_comment
-	ADD CONSTRAINT FK_ftp_vol_board_TO_ftp_vol_comment -- 봉사게시판 -> 봉사게시판댓글
-		FOREIGN KEY (
-			vol_board_no -- 봉사게시판번호
-		)
-		REFERENCES ftp_vol_board ( -- 봉사게시판
-			vol_board_no -- 봉사게시판번호
-		);
-
--- 봉사게시판댓글
-ALTER TABLE ftp_vol_comment
 	ADD CONSTRAINT FK_ftp_user_TO_ftp_vol_comment -- 회원 -> 봉사게시판댓글
 		FOREIGN KEY (
 			user_no -- 회원번호
 		)
 		REFERENCES ftp_user ( -- 회원
 			user_no -- 회원번호
+		);
+
+-- 봉사게시판댓글
+ALTER TABLE ftp_vol_comment
+	ADD CONSTRAINT FK_ftp_vol_board_TO_ftp_vol_comment -- 봉사게시판 -> 봉사게시판댓글
+		FOREIGN KEY (
+			vol_board_no -- 봉사게시판번호
+		)
+		REFERENCES ftp_vol_board ( -- 봉사게시판
+			vol_board_no -- 봉사게시판번호
 		);

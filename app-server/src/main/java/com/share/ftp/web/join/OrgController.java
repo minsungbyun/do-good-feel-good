@@ -9,36 +9,36 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import com.share.ftp.dao.PersonalDao;
-import com.share.ftp.domain.join.PersonalDTO;
+import com.share.ftp.dao.OrgDao;
+import com.share.ftp.domain.join.OrgDTO;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 import net.coobird.thumbnailator.name.Rename;
 
 @Controller
-public class PersonalController {
+public class OrgController {
 
   @Autowired SqlSessionFactory sqlSessionFactory;
-  @Autowired PersonalDao personalDao;
+  @Autowired OrgDao orgDao;
   @Autowired ServletContext sc;
 
-  @GetMapping("/join/personal/form")
+  @GetMapping("/join/org/form")
   public ModelAndView form() {
     ModelAndView mv = new ModelAndView();
-    mv.addObject("pageTitle", "HappyShare : 개인회원가입");
-    mv.addObject("contentUrl", "join/personal/PersonalUserForm.jsp");
+    mv.addObject("pageTitle", "HappyShare : 기관회원가입");
+    mv.addObject("contentUrl", "join/org/OrgUserForm.jsp");
     mv.setViewName("template1");
     return mv;
   }
 
-  @PostMapping("/join/personal/add")
-  public ModelAndView add(PersonalDTO personalDTO, Part photoFile) throws Exception {
-
+  @PostMapping("/join/org/add")
+  public ModelAndView add(OrgDTO orgDTO, Part photoFile) throws Exception {
     if (photoFile.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
+      System.out.println(filename);
       photoFile.write(sc.getRealPath("/upload/user") + "/" + filename);
-      personalDTO.setPhoto(filename);
+      orgDTO.setPhoto(filename);
 
       Thumbnails.of(sc.getRealPath("/upload/user") + "/" + filename)
       .size(20, 20)
@@ -63,18 +63,17 @@ public class PersonalController {
       });
     }
 
-    personalDTO.setType(1);
-    personalDTO.setStatus(1);
-    personalDTO.setLevel("천콩이");
+    orgDTO.setType(3);
+    orgDTO.setStatus(2);
 
-    personalDao.insert(personalDTO);
-    personalDao.insertPersonal(personalDTO.getNo(), personalDTO.getBirthdate(), personalDTO.getLevel());
+    orgDao.insert(orgDTO);
+    orgDao.insertOrg(orgDTO.getNo(), orgDTO.getCorpNo(), orgDTO.getFax(), orgDTO.getHomepage());
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("refresh", "2;url=../../../app/home");
-    mv.addObject("pageTitle", "HappyShare : 개인회원등록");
-    mv.addObject("contentUrl", "join/personal/PersonalUserAdd.jsp");
+    mv.addObject("pageTitle", "HappyShare : 기관회원등록");
+    mv.addObject("contentUrl", "join/org/OrgUserAdd.jsp");
     mv.setViewName("template1");
     return mv;
   }
