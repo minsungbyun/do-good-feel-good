@@ -5,6 +5,10 @@
     
   <title>소통해요 : 한줄후기 메인</title>
  <main>
+ <form action='reviewAdd' method="post">
+  <div class= "class" name="name" id="id" style="display:none"></div>
+  <button>등록</button><br>
+</form>
   <div class="page-section">
     <div class="container">
       <div class="short-main">
@@ -33,16 +37,16 @@
               <li>
                 <div class="review-section">
                   <div class="profile-thumb">
-                    <img src="${contextPath}/assets/img/base_profile.png" alt="프로필사진">
+                    <img src="${contextPath}/assets/img/level.png" alt="프로필사진">
                   </div>
                   <div class="review-infor">
                     <div class="review-post">
                       <div class="profile-infor">
                         <span>${volunteerShortReviewDTO.owner.id}</span>
                         <span class="txt_date">${volunteerShortReviewDTO.registeredDate}</span>
-                        <span class="ico_bbs ico_new">새글</span>
+                   <%-- <span class="ico_bbs ico_new">새글</span>--%>          
                       </div>
-                      <div class="review-post">
+                         <div class="review-post">
                         <p><span>${volunteerShortReviewDTO.content}</span></p>
                       </div>
                       <div class="review-btn">
@@ -82,44 +86,8 @@
         
       </div>
       <!-- //container -->
-    </div>
   </main>  
 
-
-<div class="container">
-<h1>봉사 후기 - 한 줄 후기 목록</h1>
-<a href='reviewForm'>후기 작성</a><br>
-<table border='1'>
-<thead>
-  <tr>
-    <th>번호</th>
-    <th>작성자</th>
-    <th>내용</th>
-    <th>등록일</th>
-    <th>변경/ 삭제</th>
-    
-  </tr>
-</thead>
-<tbody>
-
-<c:forEach items="${volunteerShortReviewList}" var="volunteerShortReviewDTO">
-<tr>
-    <td>${volunteerShortReviewDTO.no}</td> 
-    <!-- <td>${volunteerShortReviewDTO.volNo}</td> -->
-    <td>${volunteerShortReviewDTO.content}</td> 
-    <td>${volunteerShortReviewDTO.owner.id}</td> 
-    <td>${volunteerShortReviewDTO.registeredDate}</td>
-    <td><button>변경</button> <a href='delete?no=${volunteerShortReviewDTO.no}'>[삭제]</a></td> 
-</tr>
-
-
- 
-</c:forEach>
-
-</tbody>
-</table>
-</body>
-</html>
 
 
 

@@ -86,14 +86,18 @@
 
      
 
-
+  <c:if test="${sessionScope.loginUser != null}">
       <div class="form-btn">
         <a href='boardForm' class="btnSubmit">게시글 작성</a>
       </div>
+  </c:if>
 
     </div>
       <!-- //page-section -->
   </main>
+  
+  
+  
     </body>
 </html>
 

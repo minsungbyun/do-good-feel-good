@@ -76,8 +76,7 @@ DROP TABLE IF EXISTS ftp_support_qna_file RESTRICT;
 -- 공지사항첨부파일
 DROP TABLE IF EXISTS ftp_support_notice_file RESTRICT;
 
--- 회원사진
-DROP TABLE IF EXISTS ftp_user_photo RESTRICT;
+
 
 -- 문의카테고리
 DROP TABLE IF EXISTS ftp_support_qna_category RESTRICT;
@@ -646,23 +645,6 @@ ALTER TABLE ftp_support_notice_file
 ALTER TABLE ftp_support_notice_file
 	MODIFY COLUMN notice_file_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '공지사항첨부파일번호';
 
--- 회원사진
-CREATE TABLE ftp_user_photo (
-	user_photo_no INTEGER      NOT NULL COMMENT '회원사진번호', -- 회원사진번호
-	user_no       INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-	filepath      VARCHAR(255) NULL     COMMENT '사진파일명' -- 사진파일명
-)
-COMMENT '회원사진';
-
--- 회원사진
-ALTER TABLE ftp_user_photo
-	ADD CONSTRAINT PK_ftp_user_photo -- 회원사진 기본키
-		PRIMARY KEY (
-			user_photo_no -- 회원사진번호
-		);
-
-ALTER TABLE ftp_user_photo
-	MODIFY COLUMN user_photo_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원사진번호';
 
 -- 문의카테고리
 CREATE TABLE ftp_support_qna_category (
@@ -1169,15 +1151,7 @@ ALTER TABLE ftp_support_notice_file
 			notice_no -- 공지사항게시판번호
 		);
 
--- 회원사진
-ALTER TABLE ftp_user_photo
-	ADD CONSTRAINT FK_ftp_user_TO_ftp_user_photo -- 회원 -> 회원사진
-		FOREIGN KEY (
-			user_no -- 회원번호
-		)
-		REFERENCES ftp_user ( -- 회원
-			user_no -- 회원번호
-		);
+
 
 -- 알림
 ALTER TABLE ftp_user_alert

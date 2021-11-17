@@ -826,6 +826,11 @@ padding-top:15px;
   background:#555;
 }
 
+.chall-box {
+	height:inherit;
+	padding:10px;
+}
+
 .content-map {
   height:500px;
   background:#888;
