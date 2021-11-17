@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import com.share.ftp.domain.Category;
 import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.domain.join.OrgDTO;
 
 public class DonationBoardDTO {
 
   private int no;
   private int orgNo;
   private Category category;
-  private JoinDTO leader;
+  private OrgDTO leader;
   private String title;
   private String content;
   private String tel;
@@ -29,7 +30,6 @@ public class DonationBoardDTO {
 
 
 
-
   @Override
   public String toString() {
     return "DonationBoardDTO [no=" + no + ", orgNo=" + orgNo + ", category=" + category
@@ -38,17 +38,11 @@ public class DonationBoardDTO {
         + totalDate + ", remainDate=" + remainDate + ", moneyTarget=" + moneyTarget + ", status="
         + status + ", note=" + note + ", fileUpload=" + fileUpload + ", members=" + members + "]";
   }
-  public String getTotalDate() {
-    return totalDate;
+  public int getNo() {
+    return no;
   }
-  public void setTotalDate(String totalDate) {
-    this.totalDate = totalDate;
-  }
-  public String getRemainDate() {
-    return remainDate;
-  }
-  public void setRemainDate(String remainDate) {
-    this.remainDate = remainDate;
+  public void setNo(int no) {
+    this.no = no;
   }
   public int getOrgNo() {
     return orgNo;
@@ -56,22 +50,16 @@ public class DonationBoardDTO {
   public void setOrgNo(int orgNo) {
     this.orgNo = orgNo;
   }
-  public int getNo() {
-    return no;
-  }
-  public void setNo(int no) {
-    this.no = no;
-  }
   public Category getCategory() {
     return category;
   }
   public void setCategory(Category category) {
     this.category = category;
   }
-  public JoinDTO getLeader() {
+  public OrgDTO getLeader() {
     return leader;
   }
-  public void setLeader(JoinDTO leader) {
+  public void setLeader(OrgDTO leader) {
     this.leader = leader;
   }
   public String getTitle() {
@@ -110,6 +98,18 @@ public class DonationBoardDTO {
   public void setEndDate(Date endDate) {
     this.endDate = endDate;
   }
+  public String getTotalDate() {
+    return totalDate;
+  }
+  public void setTotalDate(String totalDate) {
+    this.totalDate = totalDate;
+  }
+  public String getRemainDate() {
+    return remainDate;
+  }
+  public void setRemainDate(String remainDate) {
+    this.remainDate = remainDate;
+  }
   public long getMoneyTarget() {
     return moneyTarget;
   }
@@ -140,7 +140,6 @@ public class DonationBoardDTO {
   public void setMembers(List<JoinDTO> members) {
     this.members = members;
   }
-
 
   public String getFileNames() {
     if (this.members == null) {

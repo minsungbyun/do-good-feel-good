@@ -11,14 +11,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import com.share.ftp.dao.GroupDao;
 import com.share.ftp.dao.JoinDao;
+import com.share.ftp.dao.OrgDao;
+import com.share.ftp.dao.PersonalDao;
+import com.share.ftp.domain.join.GroupDTO;
 import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.domain.join.OrgDTO;
+import com.share.ftp.domain.join.PersonalDTO;
 
 
 @Controller
-public class AuthLoginController {
+public class AuthController {
 
   @Autowired JoinDao joinDao;
+  @Autowired OrgDao orgDao;
+  @Autowired GroupDao groupDao;
+  @Autowired PersonalDao personalDao;
   @Autowired ServletContext sc;
 
   @GetMapping("/auth/loginForm")
@@ -63,17 +72,54 @@ public class AuthLoginController {
     JoinDTO loginUser = joinDao.findByIdPassword(id, password);
 
     if (loginUser != null) {
+
+      if (loginUser.getType() == 3) {
+        OrgDTO orgLoginUser = orgDao.findByOrgNo(loginUser.getNo());
+        session.setAttribute("orgLoginUser", orgLoginUser);
+
+
+      } else if(loginUser.getType() == 2) {
+        GroupDTO groupLoginUser = groupDao.findByGroupNo(loginUser.getNo());
+        session.setAttribute("groupLoginUser", groupLoginUser);
+
+      } else if(loginUser.getType() == 1) {
+        PersonalDTO personalLoginUser = personalDao.findByPersonalNo(loginUser.getNo());
+        session.setAttribute("personalLoginUser", personalLoginUser);
+
+      }
+
       session.setAttribute("loginUser", loginUser);
       mv.setViewName("redirect:../home");
+      return mv;
 
     } else {
-      //        response.sendRedirect("loginForm");
+
       mv.addObject("pageTitle", "HappyShare : 로그인"); 
       mv.addObject("contentUrl", "auth/LoginForm.jsp"); 
       mv.setViewName("template1");
+
+      return mv;
     }
-    return mv;
+
+    //    if (loginUser == null || 
+    //        orgLoginUser == null ||
+    //        groupLoginUser == null ||
+    //        personalLoginUser == null ||
+    //        orgLoginUser.getStatus() == 2 ||
+    //        groupLoginUser.getStatus() == 2) {
+    //      System.out.println(loginUser);
+    //      System.out.println(loginUser);
+    //      //        response.sendRedirect("loginForm");
+    //      mv.addObject("pageTitle", "HappyShare : 로그인"); 
+    //      mv.addObject("contentUrl", "auth/LoginForm.jsp"); 
+    //      mv.setViewName("template1");
+    //      
+    //      return mv;
   }
+
+
+
+
 
 
   @GetMapping("/auth/logout")

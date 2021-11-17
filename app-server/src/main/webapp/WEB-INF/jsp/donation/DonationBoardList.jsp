@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
   <main>
       <div class="page-section">
@@ -41,7 +41,7 @@
                   <!--  <b class="vol-count">${donationBoardDTO.moneyTarget}</b>
                   /-->
                   <span class="sr-only">총 목표금액</span>
-                  ${donationBoardDTO.moneyTarget}원
+                  <fmt:formatNumber type="number" value="${donationBoardDTO.moneyTarget}" maxFractionDigits="3"/>원
                 </span>
               <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">${donationBoardDTO.tel}</span>
             </li>

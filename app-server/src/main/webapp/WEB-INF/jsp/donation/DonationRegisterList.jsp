@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,7 @@
 <tr>
 	  <td>${donationRegisterDTO.donationBoard.no}</td> 
 	  <td><a href='detail?no=${donationRegisterDTO.no}'>${donationRegisterDTO.donator.name}</a></td> 
-	  <td>${donationRegisterDTO.donationMoney}</td> 
+	  <td><fmt:formatNumber type="number" value="${donationRegisterDTO.donationMoney}" maxFractionDigits="3"/>원</td> 
 	  <td>${donationRegisterDTO.registeredDate}</td> 
 </tr>
 </c:forEach>
