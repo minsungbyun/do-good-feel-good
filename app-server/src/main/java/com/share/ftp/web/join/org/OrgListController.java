@@ -9,11 +9,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebServlet;
 import com.share.ftp.dao.OrgDao;
 import com.share.ftp.domain.join.OrgDTO;
 
-@WebServlet("/join/org/list")
+//@WebServlet("/join/org/list")
 public class OrgListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
