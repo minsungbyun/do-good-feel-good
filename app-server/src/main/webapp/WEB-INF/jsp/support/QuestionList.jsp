@@ -40,7 +40,8 @@
                 <tr>
                   <td>${QuestionListDTO.no}</td>
                   <td>${QuestionListDTO.qnaType.title}</td>
-                  <td><a href='questionDetail?questionNo=${QuestionListDTO.no}'>${QuestionListDTO.title}</a></td> 
+                  <td id="btnOpen"><a href='questionDetail?questionNo=${QuestionListDTO.no}'>${QuestionListDTO.title}</a>
+                  </td> 
                   <td>${QuestionListDTO.owner.id}</td>
                   <td>${QuestionListDTO.registeredDate}</td>
                   <td>${QuestionListDTO.viewCount}</td> 
@@ -49,6 +50,14 @@
               </c:forEach>
             </tbody>
           </table>
+            <div id='modal'>
+						 <div id='content'>
+						   <input type='button' value='X' class="close" id='btnClose'/>
+						   <label>암호를 입력하세요</label><br/>
+						   <input type='password' id='pwd' value='1234' />
+						   <input type='button' value='check' id='btnCheck' />
+						 </div>
+						</div>
           <div class="form-group btn-right">
             <a class="btn btn-primary search-box" href='questionForm'>글쓰기</a><br>
           </div>
@@ -82,17 +91,25 @@
     </main>
     
     <script>
-      document.querySelectorAll("tbody a").forEach((aTag) => {
-        aTag.onclick = () => false;
-      });
-      
-      var trList = document.querySelectorAll("tbody tr");
-      trList.forEach(function(trTag) {
-        trTag.onclick = (e) => {
-          //console.log(e.currentTarget.querySelector("a").href);
-          //e.currentTarget.querySelector("a").click();
-          window.location.href = e.currentTarget.querySelector("a").href;
-          //window.location.href = "detail?no=" + e.currentTarget.getAttribute("data-no");
-        };
-      });
-    </script>
+		var btnOpen  = document.getElementById('btnOpen');
+		var btnCheck = document.getElementById('btnCheck');
+		var btnClose = document.getElementById('btnClose');
+		
+		// modal 창을 감춤
+		var closeRtn = function(){
+		  var modal = document.getElementById('modal');
+		  modal.style.display = 'none';
+		  
+		}
+		
+		// modal 창을 보여줌
+		btnOpen.onclick = function(){
+		  var modal = document.getElementById('modal');
+		  modal.style.display = 'block';
+		  
+		}
+		
+		btnCheck.onclick = closeRtn;
+		btnClose.onclick = closeRtn;
+		
+		</script>

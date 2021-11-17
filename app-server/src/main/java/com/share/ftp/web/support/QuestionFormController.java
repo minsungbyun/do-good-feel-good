@@ -34,7 +34,9 @@ public class QuestionFormController extends HttpServlet {
       List<QuestionCategory> qnaCategory = generalDao.findAllQnaCategory();
 
       request.setAttribute("qnaCategory", qnaCategory);
-      request.getRequestDispatcher("/support/QuestionForm.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "문의사항 등록");
+      request.setAttribute("contentUrl", "/support/QuestionForm.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);
