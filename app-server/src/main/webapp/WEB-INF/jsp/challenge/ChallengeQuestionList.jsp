@@ -3,10 +3,6 @@
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> <%-- 모달 --%>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <%-- 모달 --%>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> <%-- 모달 --%>
-
   <main>    
     <div class="page-section">
       <div class="container">
@@ -74,7 +70,7 @@
          </div>
              <h1 class="widget-title" style="padding-top:30px;"><a>문의하기</a></h1>
             <div class="content-box chall-box" style="background: #81BEF7">
-              <c:forEach items="${challengeQuestionList}" var="challengeQuestionDTO">
+              <c:forEach items="${challengeQuestionList}" var="challengeQuestionDTO" varStatus="vs">
               <div class="ch-balloon left" style="margin-top: 1%; margin-bottom: 1%; margin-left:18%; float:center"><span>
                 <div class= "class" id="id" style="display:none">
                     ${challengeQuestionDTO.questionNo}
@@ -82,7 +78,14 @@
                     -${challengeQuestionDTO.owner.id}-<br>
                     ${challengeQuestionDTO.content}<br>
                     ${challengeQuestionDTO.registeredDate}</span>
-                    <div class="modal fade" id="myModalQuestionU" role="dialog"> <!-- 사용자 지정 부분① : id명 -->
+                    <!-- 모달 창 -->
+                    <c:if test="${sessionScope.loginUser.no == challengeQuestionDTO.owner.no}">
+                    <!-- 아래에서 data-toggle과 data-target 속성에서 data-toggle에는 modal 값을 data-target속성에는 모달 창 전체를 
+                     감싸는 div의 id 이름을 지정하면 된다. -->
+                  &nbsp;&nbsp;<a data-toggle="modal" href="#myModalQuestionU${vs.index}">[변경]</a>
+                    </c:if>
+                    <!-- 부트스트랩의 모달 창을 사용할려면 아래의 class 이름들을 그대로 사용해야 한다. 변경하면 모양이 달라진다.-->
+                    <div class="modal fade" id="myModalQuestionU${vs.index}" role="dialog"> <!-- 사용자 지정 부분① : id명 -->
                       <div class="modal-dialog">
                         <!-- Modal content-->
                         <div class="modal-content">
@@ -113,8 +116,10 @@
                         </div>
                       </div>
                     </div>
-                  &nbsp;&nbsp;<a data-toggle="modal" href="#myModalQuestionU">[변경]</a>
+                    <!-- 모달 창 -->
+                    <c:if test="${sessionScope.loginUser.no == challengeQuestionDTO.owner.no}">
                     <a href='questionDelete?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[삭제]</a>
+                    </c:if>
                 </div><br>
 								  <c:if  test="${challengeQuestionDTO.reply != null}" >
                 <div class="ch-balloon right" style="margin-bottom: 1%; margin-left: 70%; float:center"><span>
