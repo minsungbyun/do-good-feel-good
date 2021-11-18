@@ -8,13 +8,6 @@
    <div class="container">
       <h4>봉사게시판 - 게시글 댓글 목록</h4>
 
-        <div>
-          <form class="form-inline" style="float:right; margin-bottom:25px">
-            <input class="form-control mr-sm-2 search-box" type="search" placeholder="검색" aria-label="Search">
-            <button class="btn btn-secondary my-2 my-sm-0 search-btn" type="submit">검색</button>
-          </form>
-        </div>
-
        <div class="table-wrap">
          <table class="table">
           <thead>
@@ -39,7 +32,7 @@
 					    <td>${volunteerBoardCommentDTO.owner.id}</td> 
 					    <td>${volunteerBoardCommentDTO.registeredDate}</td>
 					    <td><a href='commentUpdateDetail?no=${volunteerBoardCommentDTO.no}'>[변경]</a></td>
-					    <td><a href='commentDelete?no=${volunteerBoardCommentDTO.no}&volBoardNo=${volunteerBoardCommentDTO.volBoardNo}'>[삭제]</a></td>
+					    <td><a href='commentDelete?no=${volunteerBoardCommentDTO.no}'>[삭제]</a></td>
 					</tr>
 					</c:forEach>
         </tbody>
@@ -47,7 +40,6 @@
 			      <div class="form-btn">
 			      <a href='commentForm?volBoardNo=${volunteerBoardDTO.no}' class="btnSubmit">댓글 등록 </a><br>
 			      </div>
-			
 		 </div>
     </div>
    </div>
