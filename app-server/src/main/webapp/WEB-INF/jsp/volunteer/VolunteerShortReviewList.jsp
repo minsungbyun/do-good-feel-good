@@ -28,16 +28,13 @@
       <!-- //text-wirte -->
       <div class="cont-short-list">
         <c:forEach items="${volunteerShortReviewList}" var="volunteerShortReviewDTO">
-     <div class="num-text bo">
-      </div>   
-        
         <div class="s-review-list">
           <div class="review-view">
             <ul>
               <li>
                 <div class="review-section">
                   <div class="profile-thumb">
-                    <img src="${contextPath}/assets/img/level.png.png" alt="프로필사진">
+                    <img src="${contextPath}/assets/img/level.png" alt="프로필사진">
                   </div>
                   <div class="review-infor">
                     <div class="review-post">

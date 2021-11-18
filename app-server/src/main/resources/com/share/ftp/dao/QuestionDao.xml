@@ -45,6 +45,7 @@
      q.view_cnt,
      q.reply,
      q.status,
+     q.password,
      u.id owner_id,
      c.title category_title,
      f.filepath

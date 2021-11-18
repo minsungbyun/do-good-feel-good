@@ -28,36 +28,53 @@
                 <th scope="col">등록일</th>
                 <th scope="col">조회수</th>
                 <th scope="col">답글여부</th>
+                <th scope="col">답글여부</th>
               </tr>
             </thead>
             
+
+
             <tbody>
               <c:if test='${empty questionList}'>
                <p>작성된 게시글이 없습니다.</p>
               </c:if>
               
-              <c:forEach items="${questionList}" var="QuestionListDTO" varStatus="vs" >
+              <c:if test=''>
+              
+              </c:if>
+              
+              <c:forEach items="${questionList}" var="QuestionListDTO">
                 <tr>
                   <td id="qna-no">${QuestionListDTO.no}</td>
                   <td>${QuestionListDTO.qnaType.title}</td>
-                  <td id="btnOpen"><a href='#'>${QuestionListDTO.title}</a>
+                  <td id="btnOpen">
+	                    <a href='#'>${QuestionListDTO.title}</a>
                   </td> 
                   <td>${QuestionListDTO.owner.id}</td>
                   <td>${QuestionListDTO.registeredDate}</td>
-                  <td>${QuestionListDTO.viewCount}</td> 
+                  <td>${QuestionListDTO.viewCount}</td>
                   <td>${QuestionListDTO.status}</td>
+                  <td>
+                  ${QuestionListDTO.qnaPassword}
+                  
+                  </td>
                 </tr>
               </c:forEach>
             </tbody>
           </table>
-            <div id='modal'>
-						 <div id='content'>
-						   <input type='button' value='X' class="close" id='btnClose'/>
-						   <label>암호를 입력하세요</label><br/>
-						   <input type='password' id='pwd' value='1234' />
-						   <input type='button' value='check' id='btnCheck' />
+          
+           <!-- modal -->
+           <div id='modal'>
+					 <div id='content'>
+					   <input type='button' value='X' class="close" id='btnClose'/>
+					   <div style="display: block; width: auto; font-size: 16px; text-align:center;">
+						   <label style="margin:0 auto; padding-bottom:20px; display:block;">비밀번호를 입력해주세요.</label>
+						   <input type='password' id='pwd' name="qnaPassword" style="padding:7px; background-color:#f1f1f1; border: 1px solid #ddd; width:140px; font-size:13px; margin-right:5px;"/>
+						   <button class="form-btn nooutline" type="submit" id='btnCheck'>입력</button>
 						 </div>
-						</div>
+					 </div>
+					</div>
+					<!-- //modal -->
           <div class="form-group btn-right">
             <a class="btn btn-primary search-box" href='questionForm'>글쓰기</a><br>
           </div>
@@ -78,7 +95,11 @@
               </li>
               <li class="page-item"><a class="page-link" href="#">3</a></li>
               <li class="page-item">
-                <a class="page-link" href="#">Next</a>
+                <a class="page-link" href="#">다음</a>
+                <span class="page-link" onclick="alert('다음 페이지가 없습니다.');">다음</span>
+                
+                <a href="?p=${startNum+5}&t=&q=" >다음</a>
+
               </li>
             </ul>
           </nav>
@@ -90,36 +111,44 @@
     <!-- //page-section -->
     </main>
     
+    
+    
     <script>
 		var btnOpen  = document.getElementById('btnOpen');
 		var btnCheck = document.getElementById('btnCheck');
 		var btnClose = document.getElementById('btnClose');
 		
-		// modal 창을 감춤
 		var closeRtn = function(){
 		  var modal = document.getElementById('modal');
 		  modal.style.display = 'none';
 		  
 		}
 		
-		// modal 창을 보여줌
 		btnOpen.onclick = function(){
 		  var modal = document.getElementById('modal');
 		  modal.style.display = 'block';
-		  
+
 		}
 		
-		var no = document.getElementById('qna-no');
-		var no2 = no.textContent;
+		
+		var no = document.getElementById('qna-no').textContent;
 
 		
 		btnCheck.onclick = function() {
+			
+			
+			 var password  = document.getElementById('pwd');
+			 var checkPassword  = document.getElementById('checkPwd');
+			 
+			 console.log(password);
+			 console.log(checkPassword);
+			
+			if (password.value == checkPassword.value) {
+				
 			window.location.href= "questionDetail?questionNo="+no;
+			}
+			
 		};
 		
 		btnClose.onclick = closeRtn;
-		
-		
-		
-		
 		</script>

@@ -826,6 +826,11 @@ padding-top:15px;
   background:#555;
 }
 
+.chall-box {
+	height:inherit;
+	padding:10px;
+}
+
 .content-map {
   height:500px;
   background:#888;
@@ -1349,11 +1354,12 @@ fieldset {
   background-color:#3498db;
 }
 
+
 /* modal */
 #modal{
   display : none;
   z-index : 1;
-  background-color: rgba(0,0,0,.3);
+  background-color: rgba(0,0,0,.5);
   position:fixed;
   left:0;
   top: 0;
@@ -1361,18 +1367,19 @@ fieldset {
   height:100%;
   
 }
-#modal>#content{
-  width:300px;
-  margin:100px auto;
-  padding:20px;
+#modal #content{  
+  width:380px;
+  left:50%; top:50%;
+  transform:translate(-50%, -50%);
+  padding:40px;
   position: relative;
   background-color:#fff;
 }
 
 #modal .close{
   position:absolute;
-  top:4px;
-  right:4px;  
+  top:5px;
+  right:6px;  
   font-size:20px;
   border:0;
   background-color: #fff;
@@ -1385,3 +1392,38 @@ fieldset {
   cursor :pointer;
 }
 
+.form-btn {
+    transition: color 0.28s ease, transform 0.28s ease;
+    color: #b52b27;
+    will-change: color, transform;
+    padding: 4px 17px;
+}
+
+.form-btn {
+  transition: color 0.28s ease, transform 0.28s ease;
+  color: #b52b27;
+  border: 1px solid #ddd;
+  will-change: color, transform;
+}
+
+.form-btn::before {
+  background: #b52b27;
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  will-change: opacity;
+}
+
+.form-btn::after {
+  display: none;
+}
+
+.form-btn:focus,
+.form-btn:hover {
+  color: #fff;
+  background:#b52b27;
+}
+
+.form-btn:focus::before,
+.form-btn:hover::before {
+  opacity: 1;
+}

@@ -3,6 +3,8 @@ package com.share.ftp.web.support;
 import java.util.Collection;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,9 @@ import com.share.ftp.domain.support.QuestionListDTO;
 
 @Controller
 public class QuestionController {
+
+  private static final Logger logger = LogManager.getLogger(QuestionController.class);
+
 
   @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired QuestionDao questionDao;
@@ -44,7 +49,14 @@ public class QuestionController {
 
   @GetMapping("/support/questionList")
   public ModelAndView list() throws Exception {
+
     Collection<QuestionListDTO> questionList = questionDao.findAll();
+
+
+
+    //    for ()
+    //    logger.debug("{}",questionList.get);
+
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("questionList", questionList);
