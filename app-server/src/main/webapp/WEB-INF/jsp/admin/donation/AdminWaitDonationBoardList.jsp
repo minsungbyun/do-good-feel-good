@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
     <title>모금함대기리스트</title>
     <div class="ad-main">
       <div class="ad-main-infor">
@@ -46,7 +47,7 @@
                   <td>${donationBoardDTO.endDate}</td>
                   <td>${donationBoardDTO.totalDate}</td>
                   <td>${donationBoardDTO.remainDate}</td>
-                  <td>${donationBoardDTO.moneyTarget}</td>
+                  <td><fmt:formatNumber type="number" value="${donationBoardDTO.moneyTarget}" maxFractionDigits="3"/>원</td>
                   <td>${donationBoardDTO.fileNames}</td>
                   <td>${donationBoardDTO.status}</td>
               </tr>

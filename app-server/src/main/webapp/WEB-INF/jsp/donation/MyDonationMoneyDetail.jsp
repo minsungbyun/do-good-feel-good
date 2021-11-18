@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
      trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +28,7 @@
     <input id='f-leader' type="text" name='leader' value='${joinDTO.name}'><br>
     
     <label for='f-title'>나의 기부금액</label> 
-    <input id='f-title' type='text' name='title' value='${joinDTO.donationMoney}'><br>
+    <input id='f-title' type='text' name='title' <fmt:formatNumber type="number" value="${joinDTO.donationMoney}" maxFractionDigits="3"/>><br>
     
  <button>[변경]</button>
  <a href='registerList?no=${joinDTO.no}'>[기부자내역]</a>

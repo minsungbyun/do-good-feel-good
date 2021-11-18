@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
     <title>모금함전체리스트</title>
     <div class="ad-main">
       <div class="ad-main-infor">
@@ -35,6 +36,7 @@
             </thead>
             <tbody>
             <c:forEach items="${adminDonationBoardList}" var="donationBoardDTO">
+            
               <tr data-no='${donationBoardDTO.no}'>
               <td><input type="checkbox" class="select-box" id='aaa'></td>
                   <td>${donationBoardDTO.no}</td> 
@@ -46,7 +48,7 @@
                   <td>${donationBoardDTO.endDate}</td>
                   <td>${donationBoardDTO.totalDate}</td>
                   <td>${donationBoardDTO.remainDate}</td>
-                  <td>${donationBoardDTO.moneyTarget}</td>
+                  <td><fmt:formatNumber type="number" value="${donationBoardDTO.moneyTarget}" maxFractionDigits="3"/>원</td>
                   <td>${donationBoardDTO.fileNames}</td>
                   <td>${donationBoardDTO.status}</td>
               </tr>
@@ -54,9 +56,9 @@
             </tbody>
           </table>
           <div class="ad-btn">
-            <a href="${contextPath}/admin/donation/approvedList" class="btnSubmit">[승인목록]</a>
-            <a href="${contextPath}/admin/donation/rejectedList" class="btnSubmit">[반려목록]</a>
-            <a href="${contextPath}/admin/donation/waitList" class="btnSubmit">[대기목록]</a>
+            <a href="${contextPath}/app/admin/donation/approvedList" class="btnSubmit">[승인목록]</a>
+            <a href="${contextPath}/app/admin/donation/rejectedList" class="btnSubmit">[반려목록]</a>
+            <a href="${contextPath}/app/admin/donation/waitList" class="btnSubmit">[대기목록]</a>
           </div>
         </div>
         <!-- //table01 -->

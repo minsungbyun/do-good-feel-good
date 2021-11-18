@@ -117,7 +117,7 @@ CREATE TABLE ftp_user (
 	note           TEXT         NULL     COMMENT '비고', -- 비고
 	last_login     DATETIME     NOT NULL DEFAULT NOW() COMMENT '마지막접속일', -- 마지막접속일
 	photo 		   varchar(255) NULL	 COMMENT '사진' -- 사진
-);
+)
 COMMENT '회원';
 
 -- 회원

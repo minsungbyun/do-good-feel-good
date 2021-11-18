@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
      trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
   <main>
     <div class="page-section">
       <div class="container">
@@ -29,7 +30,7 @@
              </div>
              <div class="num-area">
               <p class="do-num">
-                <span><strong>${donationBoardDTO.moneyTarget}</strong>원</span>
+                <span><strong><fmt:formatNumber type="number" value="${donationBoardDTO.moneyTarget}" maxFractionDigits="3"/></strong>원</span>
               </p>
               <p class="num-status">
                 <span>현재금액<strong>현재기부금액넣기</strong>원</span>

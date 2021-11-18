@@ -4,7 +4,6 @@ import static com.share.util.General.check.REJECTED;
 import java.io.IOException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.domain.donation.DonationBoardDTO;
 
-@WebServlet("/admin/donation/reject")
+//@WebServlet("/admin/donation/reject")
 public class AdminDonationBoardRejectController extends HttpServlet { // 개인 봉사신청 양식 쓰는 곳
 
   private static final long serialVersionUID = 1L;
