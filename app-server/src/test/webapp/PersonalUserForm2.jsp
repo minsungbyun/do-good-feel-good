@@ -4,7 +4,7 @@
   <main>
    <div class="page-section">
      <div class="container">
-       <form action="add" name="form" method="post" enctype="multipart/form-data" class="needs-validation" onclick="check();" novalidate>
+       <form action="add" name="form" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
        <h1 class="title-h">회원가입 - 개인</h1>
        <div class="join-wrap">
          <h5>기본정보<span class="required_title"><em class="icon_required">·</em>표시는 반드시 입력하셔야 합니다.</span></h5>
@@ -156,26 +156,6 @@
         }
         return true;
     }    
-    
-   
-    document.querySelector("#f-passwordConfirm").onclick = function check() {
-        
-        var checkForm = document.form;
-        
-      
-        
-        checkForm.password.value = checkForm.password.value.trim();
-        checkForm.passwordCk.value = checkForm.passwordCk.value.trim();
-        
-        if (checkForm.password.value == checkForm.passwordCk.value) {
-          alert("okok");
-          checkForm.passwordCk.focus();
-          return false;
-        } else {
-        	 alert("틀렸어");
-        }
-    }
-    
    
     
     var addBtn = document.querySelector("#x-add-btn");
