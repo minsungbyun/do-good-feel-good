@@ -4,14 +4,13 @@ import java.io.IOException;
 import java.util.Collection;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.domain.donation.DonationBoardDTO;
 
-@WebServlet("/admin/donation/waitList")
+//@WebServlet("/admin/donation/waitList")
 public class AdminDonationBoardWaitListController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

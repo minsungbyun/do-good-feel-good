@@ -41,10 +41,16 @@ public class DonationBoardController {
   public ModelAndView add(
       DonationBoardDTO donationBoardDTO,
       Category category,
+      int categoryNo,
       HttpSession session) throws Exception {
-
+    category.setNo(categoryNo);
     donationBoardDTO.setCategory(category);
-    donationBoardDTO.setLeader((OrgDTO) session.getAttribute("loginUser"));
+    donationBoardDTO.setLeader((OrgDTO) session.getAttribute("orgLoginUser"));
+    donationBoardDTO.setOrgNo(donationBoardDTO.getLeader().getOrgNo());
+
+    System.out.println(donationBoardDTO.getLeader().getNo());
+
+    donationBoardDTO.setStatus(2);
 
     donationBoardDao.insert(donationBoardDTO);
     sqlSessionFactory.openSession().commit();

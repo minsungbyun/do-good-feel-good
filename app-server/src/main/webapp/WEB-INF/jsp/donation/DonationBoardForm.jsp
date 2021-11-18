@@ -10,11 +10,11 @@
           <div class="join-wrap">
             <h5>기관<span class="required_title"><em class="icon_required">·</em>표시는 반드시 입력하셔야 합니다.</span></h5>
               <div class="base-table">
-                <form action='add' method="post" enctype="multipart/form-data">
+                <form action='add' method="post">
                 <table class="join-table">
                 <c:forEach items="${categorys}" var="category">
                     <div class="form-check">
-                    <input id='f-category' type='radio' name='category' value="${category.no}" >
+                    <input id='f-category' type='radio' name='categoryNo' value="${category.no}" >
                     <label for='f-category' class="form-check-label">${category.title}</label> 
                     </div>
                 </c:forEach>
@@ -74,7 +74,8 @@
                         <input id='f-taget' class="form-control box-input" type='number' name='moneyTarget'>
                       </td>
                     </tr>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-                    <!-- //목표금액 -->   
+                    <!-- //목표금액 -->  
+                    <!-- 
                     <tr>
                       <th><span>파일첨부</span></th>
                       <td>
@@ -84,7 +85,7 @@
 	                      </div>
                       </td>
                     </tr>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
-                    <!-- //파일첨부 -->
+                     //파일첨부 -->
 
                     
                     </tbody>

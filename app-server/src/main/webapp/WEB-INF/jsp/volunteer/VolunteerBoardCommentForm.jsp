@@ -21,6 +21,7 @@
 <div class= "class" name="name" id="id" style="display:none"></div>
 
 <label for='f-volBoardNo'>게시글번호</label>
+<%--<input id='f-volBoardNo' type='text' name='volBoardNo' value='${volBoardNo}' readonly><br> --%>
 <input id='f-volBoardNo' type='text' name='volBoardNo' value='${volBoardNo}' readonly><br>
 <label for='f-content'>내용</label> <input id='f-content' type='text' name='commentContent'><br>
 <%-- <label for='f-owner'>작성자</label> <input id='f-owner' type='text' name='owner'><br> --%>

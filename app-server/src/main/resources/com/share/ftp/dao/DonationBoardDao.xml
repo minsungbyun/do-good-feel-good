@@ -21,7 +21,7 @@
     <result column="total_dt" property="totalDate"/> 
     <result column="remain_dt" property="remainDate"/> 
    
-   <association property="leader" javaType="JoinDTO">
+   <association property="leader" javaType="orgDTO">
       <id column="leader_no" property="no"/>
       <result column="leader_id" property="id"/>
      <result column="leader_name" property="name"/>

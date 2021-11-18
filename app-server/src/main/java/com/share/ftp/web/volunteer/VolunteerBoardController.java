@@ -34,6 +34,34 @@ public class VolunteerBoardController {
   @PostMapping("/volunteer/boardAdd")
   public ModelAndView add(VolunteerBoardDTO volunteerBoardDTO, HttpSession session) throws Exception {
 
+    //      if (photoFile.getSize() > 0) {
+    //        String filename = UUID.randomUUID().toString();
+    //        photoFile.write(sc.getRealPath("/upload/member") + "/" + filename);
+    //        member.setPhoto(filename);
+    //  
+    //        Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
+    //        .size(20, 20)
+    //        .outputFormat("jpg")
+    //        .crop(Positions.CENTER)
+    //        .toFiles(new Rename() {
+    //          @Override
+    //          public String apply(String name, ThumbnailParameter param) {
+    //            return name + "_20x20";
+    //          }
+    //        });
+    //  
+    //        Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
+    //        .size(100, 100)
+    //        .outputFormat("jpg")
+    //        .crop(Positions.CENTER)
+    //        .toFiles(new Rename() {
+    //          @Override
+    //          public String apply(String name, ThumbnailParameter param) {
+    //            return name + "_100x100";
+    //          }
+    //        });
+    //      }
+
     volunteerBoardDTO.setOwner((JoinDTO) session.getAttribute("loginUser"));
 
     volunteerBoardDao.insert(volunteerBoardDTO);
