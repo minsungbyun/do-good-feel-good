@@ -88,7 +88,17 @@
     delete from ftp_challenge where challenge_no=${values}
   </delete>
   
+   <delete id="deleteApply" parameterType="int">
+    delete from ftp_challenge_apply where challenge_no=${values}
+  </delete>
   
+   <delete id="deleteReview" parameterType="int">
+    delete from ftp_challenge_review where challenge_no=${values}
+  </delete>
+  
+   <delete id="deleteQuestion" parameterType="int">
+    delete from ftp_challenge_qna where challenge_no=${values}
+  </delete>
   
   <select id="findByNo" resultMap="ChallengeDTOMap" parameterType="int">
      select 

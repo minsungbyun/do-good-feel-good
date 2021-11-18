@@ -31,7 +31,7 @@ public class AdminChallengeDeleteController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int challengeNo = Integer.parseInt(request.getParameter("no")); 
+      int challengeNo = Integer.parseInt(request.getParameter("no")); durtlsjanwhfflrnajs
       ChallengeDTO challengeDTO = challengeDao.findByNo(challengeNo);
       if (challengeDTO == null) {
         throw new Exception("해당 번호의 챌린지가 없습니다.");

@@ -14,6 +14,9 @@ public interface ChallengeDao {
   List<ChallengeDTO> findAll() throws Exception;      
   void update(ChallengeDTO updateChallenge) throws Exception;          
   void delete(int challengeNo) throws Exception;          
+  void deleteApply(int challengeNo) throws Exception;          
+  void deleteReview(int challengeNo) throws Exception;          
+  void deleteQuestion(int challengeNo) throws Exception;          
   void deleteFile(int challengeNo) throws Exception;          
   void insertUser(@Param("challengeNo")int challengeNo, int userNo) throws Exception;
   void deleteUser(int challengeNo, int UserNo) throws Exception;

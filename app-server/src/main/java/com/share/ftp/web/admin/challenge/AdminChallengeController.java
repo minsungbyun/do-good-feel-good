@@ -89,6 +89,9 @@ public class AdminChallengeController {
       throw new Exception("해당 번호의 챌린지가 없습니다.");
     }
 
+    challengeDao.deleteApply(no);
+    challengeDao.deleteReview(no);
+    challengeDao.deleteQuestion(no);
     challengeDao.delete(no);
     sqlSessionFactory.openSession().commit();
 
