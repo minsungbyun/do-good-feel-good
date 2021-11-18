@@ -49,6 +49,11 @@ values(2, 4, 5);
 insert into ftp_user_group(user_group_no, user_no, group_cnt)
 values(3, 5, 3);
 
+--기관회원
+
+insert into ftp_user_org(user_org_no, user_no, corp_no, hp)
+values(30, 3, '123214','010343');
+
 
 --알림
 insert into ftp_user_alert(user_notice_no, user_no, content)
@@ -199,6 +204,20 @@ values(8,1,'2021-11-11','09:00','18:00',1);
 insert into ftp_vol_apply(user_no, vol_no, apply_dt, start_time, end_time, apply_status)
 values(12,1,'2021-09-20','09:00','18:00',1);
 
+insert into ftp_vol_apply(user_no, vol_no, apply_dt, start_time, end_time, apply_status)
+values(12,20,'2021-1-11','09:00','18:00',1);
+insert into ftp_vol_apply(user_no, vol_no, apply_dt, start_time, end_time, apply_status)
+values(6,20,'2021-4-11','12:00','18:00',1);
+insert into ftp_vol_apply(user_no, vol_no, apply_dt, start_time, end_time, apply_status)
+values(8,20,'2021-7-11','09:00','18:00',1);
+insert into ftp_vol_apply(user_no, vol_no, apply_dt, start_time, end_time, apply_status)
+values(5,20,'2021-09-20','13:00','15:00',1);
+
+
+insert into ftp_vol_apply(user_no, vol_no, apply_dt, start_time, end_time, apply_status)
+values(1,20,'2021-11-11','09:00','18:00',1);
+
+
 
 
 
@@ -250,16 +269,16 @@ insert into ftp_challenge_review(challenge_review_no, challenge_no, user_no, con
 
 -- 모금함
 insert into ftp_funding(funding_no,category_no, user_org_no,title, content, tel, email, start_dt,end_dt, goal, status)
-values(1, 5, 1, '장애인을 도와주세요', '내용: 장애인을 도와주세요!', '010-1234-5555', 'sysout@test.com','2021-10-18','2021-11-11', 10000000, 3);
+values(1, 5, 30, '장애인을 도와주세요', '내용: 장애인을 도와주세요!', '010-1234-5555', 'sysout@test.com','2021-10-18','2021-11-11', 10000000, 1);
 
 insert into ftp_funding(funding_no,category_no, user_org_no,title, content, tel, email, start_dt,end_dt, goal, status)
-values(2, 2, 1, '아동을 도와주세요', '내용: 아동을 도와주세요!', '010-1234-6666', 'sysout@test.com','2021-11-18','2021-12-11', 20000000, 3);
+values(2, 2, 30, '아동을 도와주세요', '내용: 아동을 도와주세요!', '010-1234-6666', 'sysout@test.com','2021-11-18','2021-12-11', 20000000, 1);
 
 insert into ftp_funding(funding_no,category_no, user_org_no,title, content, tel, email, start_dt,end_dt, goal, status)
-values(3, 3, 1,'청소년을 도와주세요', '내용: 청소년을 도와주세요!', '010-1234-7777', 'sysout@test.com','2022-1-18','2022-2-11', 30000000, 3);
+values(3, 3, 30,'청소년을 도와주세요', '내용: 청소년을 도와주세요!', '010-1234-7777', 'sysout@test.com','2022-1-18','2022-2-11', 30000000, 1);
 
 insert into ftp_funding(funding_no,category_no, user_org_no,title, content, tel, email, start_dt,end_dt, goal, status)
-values(4, 4, 1, '노인을 도와주세요', '내용: 노인을 도와주세요!', '010-1234-8888', 'sysout@test.com','2022-3-18','2022-4-11', 40000000, 3);
+values(4, 4, 30, '노인을 도와주세요', '내용: 노인을 도와주세요!', '010-1234-8888', 'sysout@test.com','2022-3-18','2022-4-11', 40000000, 1);
 
 
 

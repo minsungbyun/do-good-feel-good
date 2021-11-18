@@ -92,7 +92,6 @@ public class VolunteerController {
     } 
 
     volunteerRequestDTO.setCategory(category);
-    // 파일 추가 해야 함
 
     volunteerDao.update(volunteer);
     sqlSessionFactory.openSession().commit();

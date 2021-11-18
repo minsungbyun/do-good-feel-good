@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.share.ftp.dao.VolunteerJoinDao">
+  
+  <resultMap type="volunteerJoinDTO" id="VolunteerJoinDTOMap">
+    
+    <result column="apply_dt" property="applyDate"/>
+    <result column="start_time" property="startTime"/>
+    <result column="end_time" property="endTime"/>
+    <result column="apply_status" property="status"/>
+    <result column="created_dt" property="registeredDate"/>
+    <result column="note" property="note"/> 
+   
+   <association property="volunteer" javaType="VolunteerRequestDTO">
+    <id column="volunteer_no" property="no"/>
+	    <result column="volunteer_title" property="title"/>
+	    <result column="volunteer_start_dt" property="startDate"/>
+	    <result column="volunteer_end_dt" property="endDate"/>
+	    <result column="volunteer_start_time" property="startTime"/>
+	    <result column="volunteer_end_time" property="endTime"/>
+	    <result column="volunteer_total_cnt" property="limitNum"/>
+   </association>
+   
+    <association property="joinUser" javaType="joinDTO">
+	    <id column="joinUser_no" property="no"/>
+	    <result column="joinUser_id" property="id"/>
+	    <result column="joinUser_name" property="name"/>
+    
+   </association>
+   
+  </resultMap>
+  
+   <select id="findAll" resultMap="VolunteerJoinDTOMap" parameterType="int">
+     select 
+        v.vol_no volunteer_no,
+        v.title volunteer_title,
+        v.start_dt volunteer_start_dt,
+        v.end_dt volunteer_end_dt,
+        v.start_time volunteer_start_time,
+        v.end_time volunteer_end_time,
+        v.total_cnt volunteer_total_cnt,
+        u.user_no joinUser_no, 
+        u.id joinUser_id,
+        u.name joinUser_name,
+        va.user_no,
+        va.vol_no,
+        va.start_time,
+        va.end_time,
+        va.apply_dt,
+        va.created_dt
+       from
+         ftp_vol_apply va
+         inner join ftp_vol v on va.vol_no=v.vol_no
+         inner join ftp_user u on va.user_no=u.user_no
+        where
+          v.vol_no=#{volNo}
+        order by
+          va.apply_dt desc
+   </select>
+ 
+  <insert id="insert" parameterType="volunteerJoinDTO">
+    insert into ftp_vol_apply(user_no,vol_no,apply_dt,start_time,end_time)
+    values(#{joinUser.no},#{volunteer.no},#{applyDate},#{startTime},#{endTime})
+  </insert>
+  
+  <select id="findByVolunteerNo" resultMap="VolunteerJoinDTOMap" parameterType="int">
+     select 
+        v.vol_no,
+        v.title,
+        u.id,
+        u.name,
+        va.start_time,
+        va.end_time,
+        va.apply_dt,
+        va.created_dt
+       from
+         ftp_vol_apply va
+         inner join ftp_vol v on va.vol_no=v.vol_no
+         inner join ftp_user u on va.user_no=u.user_no
+        where
+          va.user_no=#{userNo}
+        order by
+          va.apply_dt desc
+  </select>
+  
+   <update id="update" parameterType="VolunteerJoinDTO">
+
+     update ftp_vol_apply set
+        start_time=#{startTime},
+        end_time=#{endTime},
+        apply_dt=#{applyDate}
+     where 
+        vol_no=#{volunteer.no} and user_no=#{joinUser.no}
+
+  </update>
+
+  <delete id="delete" parameterType="VolunteerJoinDTO">
+       delete from ftp_vol_apply where vol_no=#{volunteer.no} and user_no=#{joinUser.no}
+  </delete>
+</mapper>
+
+
+
+
+
+
