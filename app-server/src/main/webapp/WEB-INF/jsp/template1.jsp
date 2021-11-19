@@ -16,6 +16,7 @@
     <title>${pageTitle}</title>
     <!-- link -->
     <link rel="stylesheet" href="${contextPath}/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="${contextPath}/assets/css/bootstrap.css.map">
     <link rel="stylesheet" href="${contextPath}/assets/css/maicons.css">
     <link rel="stylesheet" href="${contextPath}/assets/vendor/animate/animate.css">
     <link rel="stylesheet" href="${contextPath}/assets/vendor/owl-carousel/css/owl.carousel.css">
@@ -41,6 +42,7 @@
 </div><!-- .container -->
     <script src="${contextPath}/assets/js/jquery-3.5.1.min.js"></script>
     <script src="${contextPath}/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="${contextPath}/assets/js/bootstrap.bundle.min.js.map"></script>
     <script src="${contextPath}/assets/vendor/owl-carousel/js/owl.carousel.min.js"></script>
     <script src="${contextPath}/assets/vendor/wow/wow.min.js"></script>
     <script src="${contextPath}/assets/vendor/fancybox/js/jquery.fancybox.min.js"></script>
