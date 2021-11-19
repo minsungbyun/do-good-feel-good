@@ -12,14 +12,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.dao.VolunteerDao;
+import com.share.ftp.dao.VolunteerQuestionDao;
 import com.share.ftp.domain.Category;
 import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.domain.volunteer.VolunteerQuestionDTO;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 
 @Controller
 public class VolunteerController { 
 
   @Autowired VolunteerDao volunteerDao;
+  @Autowired VolunteerQuestionDao volunteeQuestionrDao;
   @Autowired GeneralDao generalDao;
   @Autowired SqlSessionFactory sqlSessionFactory;
 
@@ -61,6 +64,7 @@ public class VolunteerController {
   public ModelAndView detail(int no) throws Exception {
 
     VolunteerRequestDTO volunteer = volunteerDao.findByApprovedVolunteerNo(no);
+    List<VolunteerQuestionDTO> volunteerQuestion = volunteeQuestionrDao.findAllNo(no);
     String totalDate = volunteerDao.totalDate(no).getTotalDate();
     String remainDate = volunteerDao.remainDate(no).getRemainDate();
 
@@ -75,6 +79,7 @@ public class VolunteerController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("volunteer", volunteer); 
     mv.addObject("volunteerDate", volunteerDate);
+    mv.addObject("volunteerQuestion", volunteerQuestion);
     mv.addObject("pageTitle", "함께해요 : 봉사내용");
     mv.addObject("contentUrl", "volunteer/VolunteerDetail.jsp");
     mv.setViewName("template1");

@@ -28,7 +28,6 @@
 	    <id column="joinUser_no" property="no"/>
 	    <result column="joinUser_id" property="id"/>
 	    <result column="joinUser_name" property="name"/>
-    
    </association>
    
   </resultMap>

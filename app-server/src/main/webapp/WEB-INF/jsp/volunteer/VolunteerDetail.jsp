@@ -180,6 +180,95 @@
             <div class="content-map">
             </div>
          </div>
+         
+         
+            <h1 class="widget-title" style="padding-top:30px;"><a>문의하기</a></h1>
+            <div class="content-box chall-box" style="background: #81BEF7">
+              <c:forEach items="${volunteerQuestion}" var="volunteerQuestionDTO" varStatus="vs">
+              <div class="ch-balloon left" style="margin-top: 1%; margin-bottom: 1%; margin-left:18%; float:center"><span>
+                <div class= "class" id="id" style="display: none">
+                    ${volunteerQuestion.questionNo}
+                </div>
+                    -${volunteerQuestion.joinUser.id}-<br>
+                    ${volunteerQuestion.content}<br>
+                    ${volunteerQuestion.registeredDate}</span>
+                    <!-- 모달 창 -->
+                    <c:if test="${sessionScope.loginUser.no == volunteerQuestion.joinUser.no}">
+                    <!-- 아래에서 data-toggle과 data-target 속성에서 data-toggle에는 modal 값을 data-target속성에는 모달 창 전체를 
+                     감싸는 div의 id 이름을 지정하면 된다. -->
+                  &nbsp;&nbsp;<a data-toggle="modal" href="#myModalQuestionU${vs.index}">[변경]</a>
+                    </c:if>
+                    <!-- 부트스트랩의 모달 창을 사용할려면 아래의 class 이름들을 그대로 사용해야 한다. 변경하면 모양이 달라진다.-->
+                    <div class="modal fade" id="myModalQuestionU${vs.index}" role="dialog"> <!-- 사용자 지정 부분① : id명 -->
+                      <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">문의 수정</h4> <!-- 사용자 지정 부분② : 타이틀 -->
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                          </div>
+                            <form action='questionUpdate?no=${challengeQuestionDTO.no}' method="post">
+                            <div class="modal-body">
+                            <!-- 
+                              <div class= "class" id="id" style="display:none">
+                                <label for='f-no'>봉사번호</label> <input id='f-no' type='text' name='no' value='${challengeDTO.no}' readonly>
+                              <br></div>
+                               -->
+                              <div class= "class" id="id" style="display:none">
+                                <label for='f-questionNo'>문의번호</label> <input id='f-questionNo' type='text' name='no' value='${volunteerQuestion.no}' readonly>
+                              <br></div>
+                              <textarea id='f-content' name='content' cols="55" rows="1" class="modal-body">${volunteerQuestion.content}</textarea>
+                                <label for='f-owner'>작성자</label> 
+                                <span id='f-owner'>${volunteerQuestion.joinUser.id}</span><br>
+                            
+                                <label for='f-registeredDate'>등록일</label> 
+                                <span id='f-registeredDate'>${volunteerQuestion.registeredDate}</span><br>
+                            </div>
+                            <button>수정완료</button><br>
+                          </form>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 모달 창 -->
+                    <c:if test="${sessionScope.loginUser.no == volunteerQuestion.joinUser.no}">
+                    <a href='questionDelete?no=${volunteerQuestion.no}'>[삭제]</a>
+                    </c:if>
+                </div><br>
+                  <c:if  test="${volunteerQuestion.reply != null}" >
+                <div class="ch-balloon right" style="margin-bottom: 1%; margin-left: 70%; float:center"><span>
+                    -관리자 답글-<br>
+                    ${volunteerQuestion.reply}
+                </span></div><br>
+                  </c:if>
+              </c:forEach>
+              <form action='questionAdd' method="post">
+                <div class="questionAdd">
+                  <div class= "class" id="id" style="display:none">
+                    <label for='f-no'>봉사번호</label> <input id='f-no' type='text' name='no' value='${challengeQuestionDTO.no}' readonly>
+                  </div><br>
+                      <textarea id='f-content' name='content' cols=100% rows="1" class="modal-body" style="margin-left:10%; float: left;"></textarea>
+                </div>
+                        <button style="margin-left:3%; margin-top:1.7%;">문의등록</button>
+              </form>
+            </div>
+         </div>
+       </div>
+         
+         <div>
+            <h3 class="widget-title" style="padding-top:30px;">위치</h3>
+            <div class="divider"></div>
+            <div class="content-map">
+            </div>
+         </div>
+         
+         
+         
+         
+         
+         
        </div>
         <div class="btn-regi">
           <button type="button" class="btn btn-primary nBtn">참여하기</button>
@@ -198,6 +287,60 @@ function joinMember() {
 	location.href = "join/list?no="+no;
 }
 </script>
+<style>
+.ch-balloon {
+    position: relative;
+    display: inline-block;
+}
+
+.ch-balloon span {
+    display: inline-block;
+    padding: 10px;
+    color: #000000;
+    background: #FFFFFF;
+    border-radius: 20px;
+}
+
+.ch-balloon:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.ch-balloon.right:after, .ch-balloon.left:after {
+    border-width: 10px 15px;
+    top: 50%;
+    margin-top: -10px;
+}
+
+.ch-balloon.top:after, .ch-balloon.bottom:after {
+    border-width: 15px 10px;
+    left: 50%;
+    margin-left: -10px;
+}
+
+.ch-balloon.top:after {
+    border-color: #FFFFFF transparent transparent transparent;
+    bottom: -25px;
+}
+
+.ch-balloon.bottom:after {
+    border-color: transparent transparent #FFFFFF transparent;
+    top: -25px;
+}
+
+.ch-balloon.left:after {
+    border-color: transparent #FFFFFF transparent transparent;
+    left: -25px;
+}
+
+.ch-balloon.right:after {
+    border-color: transparent transparent transparent #FFFFFF;
+    right: -25px;
+}
+  </style>
 
 
 
