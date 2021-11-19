@@ -3,7 +3,7 @@
     trimDirectiveWhitespaces="true" %>
 
 
-    <div class="page-banner bg-img bg-img-parallax overlay-dark" style="background-image: url(../assets/img/bg_image_3.jpg);">
+    <div class="page-banner bg-img bg-img-parallax overlay-dark" style="background-image: url(../../assets/img/bg_image_3.jpg);">
       <div class="container h-100">
         <div class="row justify-content-center align-items-center h-100">
           <div class="col-lg-8">
@@ -183,7 +183,7 @@
        </div>
         <div class="btn-regi">
           <button type="button" class="btn btn-primary nBtn">참여하기</button>
-           <a href="join/add?no=${volunteer.no}" class="btn btn-outline-primary nBtn" role="button">참여하기</a>
+           <a href="join/detail?no=${volunteer.no}" class="btn btn-outline-primary nBtn" role="button">참여하기캘린더</a>
            <a href="join/list?no=${volunteer.no}" class="btn btn-outline-primary nBtn" role="button">참여하기22</a>
             <a href="#" class="btn btn-outline-primary nBtn" role="button">이전</a>
         </div> <!-- //btn-regi -->       
@@ -195,7 +195,7 @@
 var volunteerNo = document.querySelector("#volunteerNo");
 var no = volunteerNo.textContent;
 function joinMember() {
-	location.href = "join/list?no="+no
+	location.href = "join/list?no="+no;
 }
 </script>
 

@@ -35,8 +35,6 @@ public class VolunteerJoinController {
   public ModelAndView list(int no) throws Exception {
 
     List<VolunteerJoinDTO> volunteerList = volunteerJoinDao.findAll(no);
-    System.out.println(volunteerList);
-
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("volunteerList", volunteerList);
@@ -46,7 +44,28 @@ public class VolunteerJoinController {
     return mv;
   }
 
+  @GetMapping("/volunteer/join/detail")
+  public ModelAndView detail(int no) throws Exception {
+
+    List<VolunteerJoinDTO> volunteerList = volunteerJoinDao.findAll(no);
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("volunteerList", volunteerList);
+    mv.addObject("pageTitle", "함께해요 : 봉사참여");
+    mv.addObject("contentUrl", "volunteer/VolunteerJoin1.jsp");
+    mv.setViewName("template1");
+    return mv;
+  }
+
 }
+
+
+
+
+
+
+
+
 
 
 //  @PostMapping("/volunteer/join/add")

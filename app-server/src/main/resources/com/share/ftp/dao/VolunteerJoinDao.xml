@@ -15,7 +15,7 @@
     <result column="note" property="note"/> 
    
    <association property="volunteer" javaType="VolunteerRequestDTO">
-    <id column="volunteer_no" property="no"/>
+      <id column="volunteer_no" property="no"/>
 	    <result column="volunteer_title" property="title"/>
 	    <result column="volunteer_start_dt" property="startDate"/>
 	    <result column="volunteer_end_dt" property="endDate"/>
