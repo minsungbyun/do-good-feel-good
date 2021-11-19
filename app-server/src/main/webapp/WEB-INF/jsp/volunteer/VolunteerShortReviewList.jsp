@@ -28,9 +28,6 @@
       <!-- //text-wirte -->
       <div class="cont-short-list">
         <c:forEach items="${volunteerShortReviewList}" var="volunteerShortReviewDTO">
-     <div class="num-text bo">
-      </div>   
-        
         <div class="s-review-list">
           <div class="review-view">
             <ul>

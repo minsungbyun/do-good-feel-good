@@ -15,24 +15,24 @@ public interface VolunteerDao {
   void addWish(
       @Param("userNo") int userNo,
       @Param("volNo") int volNo) throws Exception;      
+
   List<VolunteerRequestDTO> findAll() throws Exception;      
   List<VolunteerRequestDTO> findAllApproved() throws Exception;      
   List<VolunteerRequestDTO> findAllApply() throws Exception;      
   List<VolunteerRequestDTO> findAllWait() throws Exception;      
   List<VolunteerRequestDTO> findAllRejected() throws Exception;      
-  List<VolunteerRequestDTO> findAllJoin(int volNo) throws Exception;      
-
-  //  List<Category> findAllCategory() throws Exception;      
-  void update(VolunteerRequestDTO updateVolunteer) throws Exception;          
-  void updateVolunteer(VolunteerRequestDTO updateVolunteer) throws Exception;          
-  void updateFile(VolunteerRequestDTO updateVolunteer) throws Exception;          
-  void delete(VolunteerRequestDTO deleteVolunteer) throws Exception;    
-  void deleteFile(VolunteerRequestDTO deleteVolunteer) throws Exception;    
 
   VolunteerRequestDTO totalDate(int volunteerNo) throws Exception;
   VolunteerRequestDTO remainDate(int volunteerNo) throws Exception;
   VolunteerRequestDTO findByVolunteerNo(int volunteerNo) throws Exception;
   VolunteerRequestDTO findByApprovedVolunteerNo(int volunteerNo) throws Exception;
   VolunteerRequestDTO findByKeyword(String keyword) throws Exception;
+
+  void update(VolunteerRequestDTO updateVolunteer) throws Exception;          
+  void updateVolunteer(VolunteerRequestDTO updateVolunteer) throws Exception;          
+  void updateFile(VolunteerRequestDTO updateVolunteer) throws Exception;          
+  void delete(VolunteerRequestDTO deleteVolunteer) throws Exception;    
+  void deleteFile(VolunteerRequestDTO deleteVolunteer) throws Exception;    
+
 
 }

@@ -46,7 +46,9 @@
               <div class="progress">
                 <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
-              <button type="button" class="btn btn-secondary" style="margin: 25px 165px;">참여자보기</button>
+              <input type="hidden" id="volunteerNo" value="${volunteer.no}"/>
+              <button type="button"  onclick="joinMember();" class="btn btn-secondary" style="margin: 25px 165px;">참여자보기</button>
+               <a href="join/list?no=${volunteer.no}" class="btn btn-outline-primary nBtn" style="margin: 25px 165px; role="button" >참여자보기22</a>
             </div>
              </div>  <!-- //vol-joiner -->
             
@@ -182,14 +184,20 @@
         <div class="btn-regi">
           <button type="button" class="btn btn-primary nBtn">참여하기</button>
            <a href="join/add?no=${volunteer.no}" class="btn btn-outline-primary nBtn" role="button">참여하기</a>
+           <a href="join/list?no=${volunteer.no}" class="btn btn-outline-primary nBtn" role="button">참여하기22</a>
             <a href="#" class="btn btn-outline-primary nBtn" role="button">이전</a>
         </div> <!-- //btn-regi -->       
       </div>  <!-- //container -->
     </div>  <!-- //page-section -->
   </main>
 
-
-
+<script>
+var volunteerNo = document.querySelector("#volunteerNo");
+var no = volunteerNo.textContent;
+function joinMember() {
+	location.href = "join/list?no="+no
+}
+</script>
 
 
 
