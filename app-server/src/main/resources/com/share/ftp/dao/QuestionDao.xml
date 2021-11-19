@@ -72,7 +72,7 @@
        #{qnaType.no},
        #{title},
        #{content},
-       password(#{qnaPassword}),
+       #{qnaPassword},
        #{status})
   </insert>
   
@@ -109,7 +109,7 @@
     from
      ftp_support_qna 
     where
-     qna_no=#{qnaNo} and password=password(#{userPassword})
+     qna_no=#{qnaNo} and password=#{qnaPassword}
   </select>
   
   

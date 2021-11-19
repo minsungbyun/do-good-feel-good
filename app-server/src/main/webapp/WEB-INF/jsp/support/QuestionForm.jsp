@@ -16,9 +16,15 @@
 	</head>
 	<body>
 		<h1>문의사항 등록</h1>
-		<form action='questionAdd'>
+		<form action='questionAdd' method="post">
+		
+			<%--<c:forEach items="${questionCategory}"  var="questionCategory" >
+		    <label for='f-qnaType'>${qnaType.title}</label> 
+		    <input id='f-qnaType' type='radio' name='qnaType' value="${qnaType.no}" >
+	    </c:forEach>--%>
+		
 			<label for='f-qnaType'>문의분야</label>
-			<select id='f-qnaType' name='qnaType'>
+			<select id='f-qnaType' name='qnaTypeNo'>
 			 <option value='1'>함께해요 문의</option>
 			 <option value='2'>나눔이야기 문의</option>
 			 <option value='3'>모금함 문의</option>
