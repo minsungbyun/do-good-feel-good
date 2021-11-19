@@ -22,15 +22,15 @@ public class VolunteerBoardCommentController {
   @Autowired VolunteerBoardDao volunteerBoardDao;
   @Autowired VolunteerBoardCommentDao volunteerBoardCommentDao;
 
-  @GetMapping("/volunteer/commentForm")
-  public ModelAndView form(int volBoardNo) {
-    ModelAndView mv = new ModelAndView();
-    mv.addObject("volBoardNo", volBoardNo);
-    mv.addObject("pageTitle", "새 댓글");
-    mv.addObject("contentUrl", "volunteer/VolunteerBoardCommentForm.jsp");
-    mv.setViewName("template1");
-    return mv;
-  }
+  //  @GetMapping("/volunteer/commentForm")
+  //  public ModelAndView form(int volBoardNo) {
+  //    ModelAndView mv = new ModelAndView();
+  //    mv.addObject("volBoardNo", volBoardNo);
+  //    mv.addObject("pageTitle", "새 댓글");
+  //    mv.addObject("contentUrl", "volunteer/VolunteerBoardCommentForm.jsp");
+  //    mv.setViewName("template1");
+  //    return mv;
+  //  }
 
   @PostMapping("/volunteer/commentAdd")
   public ModelAndView add(
@@ -43,7 +43,7 @@ public class VolunteerBoardCommentController {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:commentList?volBoardNo=" +volBoardNo);
+    mv.setViewName("redirect:boardDetail?no=" +volBoardNo);
     return mv;
   }
 
@@ -62,7 +62,7 @@ public class VolunteerBoardCommentController {
     return mv;
   }
 
-  @GetMapping("/volunteer/commentUpdateDetail")
+  @PostMapping("/volunteer/commentUpdateDetail")
   public ModelAndView updateDetail(int no) throws Exception {
     VolunteerBoardCommentDTO volunteerBoardCommentDTO = volunteerBoardCommentDao.findByNo(no);
 
@@ -85,7 +85,11 @@ public class VolunteerBoardCommentController {
 
     VolunteerBoardCommentDTO oldComment= volunteerBoardCommentDao.findByNo(volunteerBoardCommentDTO.getNo());
 
-    oldComment.setOwner((JoinDTO) session.getAttribute("loginUser"));
+    if (oldComment == null) {
+      throw new Exception("해당 번호의 게시글이 없습니다.");
+    } 
+
+    //    oldComment.setOwner((JoinDTO) session.getAttribute("loginUser"));
 
 
     //    if (oldComment == null) {
@@ -96,7 +100,7 @@ public class VolunteerBoardCommentController {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:commentList?volBoardNo=" + volunteerBoardCommentDTO.getVolBoardNo());
+    mv.setViewName("redirect:boardDetail?no=" + volunteerBoardCommentDTO.getVolBoardNo());
     return mv;
   }
 

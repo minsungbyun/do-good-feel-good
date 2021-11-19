@@ -37,9 +37,11 @@
 					</c:forEach>
         </tbody>
 			</table>
-			      <div class="form-btn">
-			      <a href='commentForm?volBoardNo=${volunteerBoardDTO.no}' class="btnSubmit">댓글 등록 </a><br>
-			      </div>
+         <c:if test="${sessionScope.loginUser != null}">
+         <div class="form-btn">
+        <a href='commentForm?volBoardNo=${volunteerBoardDTO.no}' class="btnSubmit">댓글 작성</a>
+        </div>
+        </c:if>
 		 </div>
     </div>
    </div>
