@@ -46,8 +46,33 @@
               <div class="progress">
                 <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
-              <button type="button" class="btn btn-secondary">참여자보기</button>
-              
+              <div class="modal fade" id="myModalQuestionU${vs.index}" role="dialog"> <!-- 사용자 지정 부분① : id명 -->
+                      <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">참여자 목록</h4> <!-- 사용자 지정 부분② : 타이틀 -->
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                          </div>
+                            <div class="modal-body">
+                            <c:forEach items="${challengeJoinList}" var="challengeDTO" varStatus="vs">
+                              <div class= "class" id="id" style="display:none">
+                                <label for='f-no'>챌린지번호</label> <input id='f-no' type='text' name='no' value='${challengeDTO.no}' readonly>
+                              <br></div>
+                                <label for='f-member'>작성자</label> 
+                                <span id='f-member'>${challengeJoinList.getMemberNames()}</span><br>
+                            
+                                <label for='f-registeredDate'>등록일</label> 
+                                <span id='f-registeredDate'>${challengeQuestionDTO.registeredDate}</span><br>
+                                </c:forEach>
+                            </div>
+                          <div class="modal-footer">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 모달 창 -->
+                  &nbsp;&nbsp;<a data-toggle="modal" href="#myModalQuestionU${vs.index}">[참여자 보기]</a>
              </div>
              <!-- //vol-joiner -->
              <!-- vol-owner -->
@@ -68,7 +93,15 @@
                   <p>획득 포인트:100포인트</p>
                  </li>
                </ul>
+               <form action="joinAdd" method="post">
+                  <div class= "class" id="id" style="display:none">
+                    <label for='f-no'>챌린지번호</label> <input id='f-no' type='text' name='no' value='${challengeDTO.no}' readonly>
+                  </div><br>
+                  <div class= "class" id="id" style="display:none">
+                    <label for='f-userNo'>회원번호</label> <input id='f-userNo' type='text' name='userNo' value='${challengeDTO.no}' readonly>
+                  </div><br>
                <button type="button" class="btn btn-secondary">참여하기</button>
+               </form>
              </div>
           </div>
           <!-- //vol-infor-wrap -->
