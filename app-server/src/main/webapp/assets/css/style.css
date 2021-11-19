@@ -199,6 +199,10 @@ fieldset {
 }
 
 /* join */
+form.was-validated input:invalid {
+  border-color:#dc3545;
+}
+
 .join-type-wrap {
   width: 990px;
   margin: 0 auto;

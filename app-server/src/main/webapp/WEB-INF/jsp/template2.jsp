@@ -32,6 +32,7 @@
 
 </div>
 <!-- //wrap -->
+<script src="${contextPath}/assets/js/jquery-3.5.1.min.js"></script>
 
 </body>
 </html>

@@ -96,10 +96,6 @@
               <li class="page-item"><a class="page-link" href="#">3</a></li>
               <li class="page-item">
                 <a class="page-link" href="#">다음</a>
-                <span class="page-link" onclick="alert('다음 페이지가 없습니다.');">다음</span>
-                
-                <a href="?p=${startNum+5}&t=&q=" >다음</a>
-
               </li>
             </ul>
           </nav>
@@ -111,9 +107,9 @@
     <!-- //page-section -->
     </main>
     
-    
-    
     <script>
+    
+
 		var btnOpen  = document.getElementById('btnOpen');
 		var btnCheck = document.getElementById('btnCheck');
 		var btnClose = document.getElementById('btnClose');
@@ -130,12 +126,10 @@
 
 		}
 		
-		
+
 		var no = document.getElementById('qna-no').textContent;
 
-		
 		btnCheck.onclick = function() {
-			
 			
 			 var password  = document.getElementById('pwd');
 			 var checkPassword  = document.getElementById('checkPwd');
