@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-     trimDirectiveWhitespaces="true" %>
+    trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
   <main>
     <div class="page-section">
@@ -16,7 +17,9 @@
             </ul>
             <div class="tab-cont">
               <p class="tab-cont-sub">${donationBoardDTO.content}</p>
-              <div class="owl-img">파일첨부넣기</div>
+              <c:forEach items="${fileList}" var="DonationBoardAttachedFile">
+              <div class="owl-img">${DonationBoardAttachedFile.filepath}</div>
+              </c:forEach>
             </div>
           </div>
           <!-- //do-left -->
@@ -51,7 +54,7 @@
               <p>${donationBoardDTO.email}</p>
              </div>
             <div class="do-btn">
-             <a href="#" class="do-btn-a">모금함 기부하기</a>
+             <a href="${contextPath}/app/register/form?boardNo=${donationBoardDTO.no}" class="do-btn-a">모금함 기부하기</a>
             </div>
           </div>
           <!-- //do-right -->
