@@ -1,7 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+    pageEncoding="UTF-8"
+    trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<div class="page-banner bg-img bg-img-parallax overlay-dark" style="background-image: url(${contextPath}/images/challenge_bg.jpg;">
+  <div class="container h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-lg-8">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0">
+            <li class="breadcrumb-item"><a href="${contextPath}/app/home">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">챌린지</li>
+          </ol>
+        </nav>
+        <h1 class="fg-white text-center">상세정보</h1>
+      </div>
+    </div>
+  </div>
+</div> <!-- .page-banner -->
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> <!-- 스크롤 js -->
+
   <main>    
     <div class="page-section">
       <div class="container">
@@ -58,31 +77,53 @@
        
        <div class="vol-con-wrap">
          <div>
-            <h1 class="widget-title" style="padding-top:30px;">상세정보</h1>
+            <h1 class="widget-title" style="padding-top:30px;" id="scroll-section1">상세정보</h1>
             <div class="content-box">
               ${challengeDTO.content}
             </div>
          </div>
          <div>
-            <a href='reviewList?no=${challengeDTO.no}'>
+            <a href='reviewList?no=${challengeDTO.no}#section2'>
             <h4 class="widget-title" style="padding-top:30px;">참여인증&댓글</h4>
             </a>
          </div>
          <div>
-            <a href='questionList?no=${challengeDTO.no}'>
-            <h4 class="widget-title" style="padding-top:30px;">문의하기
+            <a href='questionList?no=${challengeDTO.no}#section3'>
+            <h4 class="widget-title" style="padding-top:30px;" id="scroll-section2">문의하기
             </h4>
             </a>
          </div>
          </div>
        </div>
+
         <div class="btn-regi">
           <button type="submit" class="btn btn-primary nBtn">참여하기</button>
-            <a href="#" class="btn btn-outline-primary nBtn" role="button">이전</a>
+            <input type="button" class="btn btn-outline-primary nBtn" value="이전" onClick="history.go(-1)" role="button">
         </div>
       </div>
       <!-- //container -->
     <!-- //page-section -->
+    
+    <script>
+    $(document).ready(function () { 
+      var page_url = window.location.href; 
+      var page_id = page_url.substring(page_url.lastIndexOf("#") + 1); 
+      // alert(page_id); 
+      if (page_id == 'section1') { 
+        $('html, body').animate({ 
+            scrollTop: $('#scroll-' + page_id).offset().top 
+          }, 500); 
+        } else if (page_id == 'section2') { 
+          $('html, body').animate({ 
+            scrollTop: $('#scroll-' + page_id).offset().top 
+          }, 500); 
+        } else if (page_id == 'section3') { 
+          $('html, body').animate({ 
+            scrollTop: $('#scroll-' + page_id).offset().top 
+          }, 500); 
+        } 
+      });
+    </script>
   </main>
 </body>
 </html>

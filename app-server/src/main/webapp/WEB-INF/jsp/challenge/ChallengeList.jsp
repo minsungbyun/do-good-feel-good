@@ -2,8 +2,23 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="en">
+
+<div class="page-banner bg-img bg-img-parallax overlay-dark" style="background-image: url(${contextPath}/images/challenge_bg.jpg);">
+  <div class="container h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-lg-8">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0">
+            <li class="breadcrumb-item"><a href="${contextPath}/app/home">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">챌린지</li>
+          </ol>
+        </nav>
+        <h1 class="fg-white text-center">이달의 챌린지</h1>
+      </div>
+    </div>
+  </div>
+</div> <!-- .page-banner -->
+
   <main>
     <div class="page-section">
       <div class="container">
