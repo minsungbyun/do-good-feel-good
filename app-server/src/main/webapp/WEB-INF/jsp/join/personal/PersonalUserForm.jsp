@@ -4,7 +4,7 @@
   <main>
    <div class="page-section">
      <div class="container">
-       <form action="add" name="form" method="post" enctype="multipart/form-data" class="needs-validation" onclick="check();" novalidate>
+       <form action="add" name="form" method="post" enctype="multipart/form-data" class="needs-validation"  novalidate>
        <h1 class="title-h">회원가입 - 개인</h1>
        <div class="join-wrap">
          <h5>기본정보<span class="required_title"><em class="icon_required">·</em>표시는 반드시 입력하셔야 합니다.</span></h5>
@@ -30,8 +30,9 @@
                    <th><em class="icon_required">·</em><span>비밀번호</span></th>
                    <td>
                      <label for='f-password' class="sr-only">비밀번호</label> 
-                     <input id='f-password' class="form-control box-input" type='password' name='password' placeholder="4~12자의 영문 대소문자와 숫자로만 입력" required>
-                     <div class="invalid-tooltip">
+                     <input id='f-password' class="form-control box-input pw" type='password'
+                      name='pwd1' placeholder="4~12자의 영문 대소문자와 숫자로만 입력" required>
+                     <div class="invalid-feedback">
                        비밀번호를 입력해주세요.
                      </div>
                    </td>
@@ -40,11 +41,15 @@
                  <tr>
 	              <th><em class="icon_required">·</em><span>비밀번호확인</span></th>
 	              <td>
-	                <label for='f-passwordConfirm' class="sr-only">비밀번호확인</label> 
-	                <input id='f-passwordConfirm' class="form-control box-input" type='password' name='passwordCk' placeholder="4~12자의 영문 대소문자와 숫자로만 입력" required>
+	                <label for='f-passwordChk' class="sr-only">비밀번호확인</label> 
+	                <input id='f-passwordChk' class="form-control box-input pw" type='password'
+	                 name='pwd2' placeholder="4~12자의 영문 대소문자와 숫자로만 입력" onKeyUp="fn_compare_pwd();" required>
 	                <div class="invalid-feedback">
 							      비밀번호를 확인해 해주세요.
 							    </div>
+							    <div id="alert-danger" style="display: none; color: #dc3545; border-color: #dc3545; font-size: 80%">
+                    비밀번호가 일치하지 않습니다.
+                  </div>
 	              </td>
               </tr>
               <!-- //비밀번호 확인 -->
@@ -132,52 +137,26 @@
      <!-- //container -->
    </div>
  </main>
-    
-    <!-- script -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script>
     
- // 공백확인 함수
-    function checkExistData(value, dataName) {
-        if (value == "") {
-            alert(dataName + " 입력해주세요!");
-            return false;
+    //비밀번호 재확인
+    $('.pw').focusout(function () {
+        var pwd1 = $("#f-password").val();
+        var pwd2 = $("#f-passwordChk").val();
+  
+        if ( pwd1 != '' && pwd2 == '' ) {
+            null;
+        } else if (pwd1 != "" || pwd2 != "") {
+            if (pwd1 == pwd2) {
+                $("#alert-danger").css('display', 'none');
+            } else {
+                $("#alert-danger").css('display', 'inline-block');
+            }
         }
-        return true;
-    }
- 
-    function checkPassword(password, passwordCk) {
- 
-        if (password != passwordCk) {
-            alert("두 비밀번호가 맞지 않습니다.");
-            form.password.value = "";
-            form.passwordCk.value = "";
-            form.passwordCk.focus();
-            return false;
-        }
-        return true;
-    }    
-    
-   
-    document.querySelector("#f-passwordConfirm").onclick = function check() {
-        
-        var checkForm = document.form;
-        
-      
-        
-        checkForm.password.value = checkForm.password.value.trim();
-        checkForm.passwordCk.value = checkForm.passwordCk.value.trim();
-        
-        if (checkForm.password.value == checkForm.passwordCk.value) {
-          alert("okok");
-          checkForm.passwordCk.focus();
-          return false;
-        } else {
-        	 alert("틀렸어");
-        }
-    }
-    
-   
-    
+    });
+
+    // 아이디 중복검사
     var addBtn = document.querySelector("#x-add-btn");
     var idTag = document.querySelector("#f-id");
     addBtn.setAttribute("disabled", "disabled");
@@ -197,6 +176,7 @@
         xhr.send();
     };
     
+    //입력창 확인
     document.querySelectorAll("input").forEach(input => {
     	  input.addEventListener("invalid", () => {
     		  
@@ -230,7 +210,7 @@
     
     <!-- //script -->
     
-    <!-- 우편번호API -->
+    // 우편번호 API
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script>
 		function findByPostNo() {

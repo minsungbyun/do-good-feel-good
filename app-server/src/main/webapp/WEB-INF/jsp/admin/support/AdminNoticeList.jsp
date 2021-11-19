@@ -46,7 +46,7 @@
           </table>
           <div class="ad-btn">
             <a href="noticeForm" class="btnSubmit">글쓰기</a>
-            <input type="button" id="delete" value="삭제">
+            <input type="button" id="delete" value="삭제" onClick="noticeDelete?noticeNo=${noticeDTO.no})">
             <!--<a href="noticeDelete?noticeNo=${noticeDTO.no}" class="btnSubmit">삭제</a>-->
           </div>
         </div>
@@ -58,7 +58,7 @@
         <nav aria-label="Page Navigation">
           <ul class="pagination justify-content-center">
             <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">이전</a>
             </li>
             <li class="page-item active" aria-current="page">
               <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
@@ -68,7 +68,7 @@
             </li>
             <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item">
-              <a class="page-link" href="#">Next</a>
+              <a class="page-link" href="#">다음</a>
             </li>
           </ul>
         </nav>
@@ -83,9 +83,18 @@
 	  <script>
 		  $(document).ready(function() {
 		    $("#checkAll").click(function() {
-		      if($("#checkAll").is(":checked")) $("input[name=checkRow]").prop("checked", true);
+		      if($("#checkAll").is(":checked")) 
+		    	  $("input[name=checkRow]").prop("checked", true);
 		      else $("input[name=checkRow]").prop("checked", false);
 		    });
+		    
+		    $("input[name=checkRow]").click(function() {
+		        var total = $("input[name=checkRow]").length;
+		        var checked = $("input[name=checkRow]:checked").length;
+
+		        if(total != checked) $("#checkAll").prop("checked", false);
+		        else $("#checkAll").prop("checked", true); 
+		      });
 		  });
 		</script>
 
