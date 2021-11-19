@@ -47,7 +47,6 @@
               <c:if test='${empty volunteerBoardList}'>
               <p>작성된 게시글이 없습니다.</p>
               </c:if>
-
               <c:forEach items="${volunteerBoardList}" var="volunteerBoardDTO">
                 <tr>
                 <td>${volunteerBoardDTO.no}</td>

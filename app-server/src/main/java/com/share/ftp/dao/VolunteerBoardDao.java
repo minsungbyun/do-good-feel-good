@@ -22,9 +22,10 @@ public interface VolunteerBoardDao {
   void update(VolunteerBoardDTO volunteerBoardDTO) throws Exception;
   void delete(int no) throws Exception;
   void deleteLike(int userNo, int volNo) throws Exception;
+  void deleteComment(int volBoardNo);      
   void deleteFile(VolunteerBoardDTO volunteerBoardDTO) throws Exception;    
   void addLike(
       @Param("userNo") int userNo,
-      @Param("volBoardNo") int volNo) throws Exception;      
+      @Param("volBoardNo") int volNo) throws Exception;
 
 }

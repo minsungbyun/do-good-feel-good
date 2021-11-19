@@ -215,7 +215,7 @@ public class ChallengeDTO implements Serializable {
       if (names.length() > 0) {
         names.append("\n");
       }
-      names.append(joinDTO.getId()).append("("+joinDTO.getName()+")");
+      names.append(joinDTO.getId());
     }
     return names.toString();
   }

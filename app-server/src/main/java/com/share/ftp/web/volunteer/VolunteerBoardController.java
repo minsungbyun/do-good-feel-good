@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.share.ftp.dao.VolunteerBoardCommentDao;
 import com.share.ftp.dao.VolunteerBoardDao;
+import com.share.ftp.domain.community.VolunteerBoardCommentDTO;
 import com.share.ftp.domain.community.VolunteerBoardDTO;
 import com.share.ftp.domain.join.JoinDTO;
 
@@ -88,15 +89,14 @@ public class VolunteerBoardController {
   @GetMapping("/volunteer/boardDetail")
   public ModelAndView detail(int no) throws Exception {
     VolunteerBoardDTO volunteerBoardDTO = volunteerBoardDao.findByNo(no);
-
-    if (volunteerBoardDTO == null) {
-      throw new Exception("해당 번호의 게시글이 없습니다.");
-    }
+    Collection<VolunteerBoardCommentDTO> volunteerBoardCommentList = volunteerBoardCommentDao.findAllNo(no);
 
     volunteerBoardDao.updateCount(no);
+    sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("volunteerBoardDTO", volunteerBoardDTO);
+    mv.addObject("volunteerBoardCommentList", volunteerBoardCommentList);
     mv.addObject("pageTitle", "게시글 상세보기");
     mv.addObject("contentUrl", "volunteer/VolunteerBoardDetail.jsp");
     mv.setViewName("template1");
@@ -127,7 +127,7 @@ public class VolunteerBoardController {
       throw new Exception("해당 번호의 게시글이 없습니다.");
     }
 
-    volunteerBoardCommentDao.delete(no);
+    volunteerBoardDao.deleteComment(no);
     volunteerBoardDao.deleteFile(volunteerBoardDTO);
     volunteerBoardDao.delete(no);
     sqlSessionFactory.openSession().commit();
