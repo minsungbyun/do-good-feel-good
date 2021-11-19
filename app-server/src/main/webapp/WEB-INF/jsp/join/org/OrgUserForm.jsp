@@ -13,12 +13,17 @@
                 <table class="join-table">
                   <caption>단체 회원 기본정보</caption>
 									<tbody>
-                    <tr>
-                      <th><em class="icon_required">·</em><span>아이디</span></th>
-                      <td>
+                 <tr class="mb-3 row-7">
+                      <th class="col-sm-2"><em class="icon_required">·</em><span>아이디</span></th>
+                      <td class="col-sm-7 ">
                         <label for='f-id' class="sr-only sr-cont">아이디</label> 
-                        <input id='f-id' class="form-control form-sub-control box-input" type='text' name='id' placeholder="아이디">
-                        <button type="button" class="btnj btn btn-primary" id="org-id">중복확인</button>
+                        <input id='f-id' class="form-control form-sub-control box-input" type='text' name='id' placeholder="아이디" required>
+		                     <div class="invalid-feedback">
+		                       이미 존재하는 아이디입니다.
+		                     </div>
+                     <div class="col-auto" style="overflow:hidden;">
+                        <button id="x-id-check-btn" type="button" class="btnj btn btn-primary">중복확인</button>
+                     </div>
                       </td>
                     </tr>
                     <!-- //아이디 -->
@@ -127,19 +132,55 @@
 			</div>
 		</main>  
 		
-
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
        <script>
-         document.querySelector("#org-id").onclick = () => {
-           var name = document.querySelector("#f-id");
-           if (name.value == "") {
-             alert("이미 존재하는 아이디입니다!");
-             name.focus();
-             return; 
+       // 아이디 중복검사
+       var addBtn = document.querySelector("#x-add-btn");
+       var idTag = document.querySelector("#f-id");
+       addBtn.setAttribute("disabled", "disabled");
 
-            } else {
-              alert("사용 가능한 아이디입니다!");
-            }
-          }
+       document.querySelector("#x-id-check-btn").onclick = () => {
+           var xhr = new XMLHttpRequest();
+           xhr.addEventListener("load", function() {
+             if (this.responseText == "false") {
+                 addBtn.removeAttribute("disabled");
+                 idTag.classList.remove("is-invalid");
+             } else {
+               addBtn.setAttribute("disabled", "disabled");
+               idTag.classList.add("is-invalid");
+             }
+           })
+           xhr.open("get", "checkId?id=" + idTag.value);
+           xhr.send();
+       };
+       
+       //입력창 확인
+       document.querySelectorAll("input").forEach(input => {
+           input.addEventListener("invalid", () => {
+             
+             // 검증 후 폼에 was-validated 클래스로 표시
+             document.forms[0].classList.add("was-validated")
+           })
+         })
+         
+       window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+
+            var validateGroup = document.getElementsByClassName('validate-me');
+
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+
+                    for (var i = 0; i < validateGroup.length; i++) {
+                        validateGroup[i].classList.add('was-validated');
+                    }
+                }, false);
+            });
+        }, false); 
             
           // 유효성 검사 메서드
           function validLoginForm() {

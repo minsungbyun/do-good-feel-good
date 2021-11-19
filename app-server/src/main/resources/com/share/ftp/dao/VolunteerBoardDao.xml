@@ -164,6 +164,10 @@
     delete from ftp_vol_board where vol_board_no=${values}
   </delete>
   
+    <delete id="deleteComment" parameterType="int">
+    delete from ftp_vol_comment where vol_board_no=${values}
+  </delete>
+  
   <delete id="deleteLike" parameterType="int">
     delete from ftp_vol_board_like where user_no=${param1} and vol_board_no=#{param2}
   </delete>

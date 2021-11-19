@@ -6,7 +6,6 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +13,8 @@ import org.apache.ibatis.session.SqlSession;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 
-@WebServlet("/admin/challenge/add")
+// spring 적용 전
+//@WebServlet("/admin/challenge/add")
 public class AdminChallengeAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -57,7 +57,7 @@ public class AdminChallengeAddController extends HttpServlet {
       //        }
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("AdminChallengeAdd.jsp").forward(request, response);
+      //      request.getRequestDispatcher("AdminChallengeAdd.jsp").forward(request, response);
     } catch (Exception e) {
       e.printStackTrace();
       //      sqlSession.rollback();
