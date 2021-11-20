@@ -49,6 +49,7 @@
     <script src="${contextPath}/assets/vendor/isotope/isotope.pkgd.min.js"></script>
     <script src="${contextPath}/assets/js/google-maps.js"></script>
     <script src="${contextPath}/assets/js/theme.js"></script>
+    <script src="${contextPath}/assets/js/common.js"></script>
     <script src="${contextPath}/assets/calendar/js/calendar.js"></script>
     <script src="${contextPath}/calendarTest.js"></script>
     

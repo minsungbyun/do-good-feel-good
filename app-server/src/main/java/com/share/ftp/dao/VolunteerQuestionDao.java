@@ -11,4 +11,5 @@ public interface VolunteerQuestionDao {
   void update(VolunteerQuestionDTO updateVolunteerQuestion) throws Exception;
   void updateReply(VolunteerQuestionDTO updateVolunteerQuestionReply) throws Exception;
   void delete(int no) throws Exception; 
+  VolunteerQuestionDTO findByNo(int volunteerQuestionNo) throws Exception;
 }

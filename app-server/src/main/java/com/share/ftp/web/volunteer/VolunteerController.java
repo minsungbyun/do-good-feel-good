@@ -1,5 +1,6 @@
 package com.share.ftp.web.volunteer;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.dao.VolunteerDao;
+import com.share.ftp.dao.VolunteerJoinDao;
 import com.share.ftp.dao.VolunteerQuestionDao;
+import com.share.ftp.dao.VolunteerShortReviewDao;
 import com.share.ftp.domain.Category;
+import com.share.ftp.domain.community.VolunteerShortReviewDTO;
 import com.share.ftp.domain.join.JoinDTO;
+import com.share.ftp.domain.volunteer.VolunteerJoinDTO;
 import com.share.ftp.domain.volunteer.VolunteerQuestionDTO;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 
@@ -22,7 +27,9 @@ import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 public class VolunteerController { 
 
   @Autowired VolunteerDao volunteerDao;
-  @Autowired VolunteerQuestionDao volunteeQuestionrDao;
+  @Autowired VolunteerJoinDao volunteerJoinDao;
+  @Autowired VolunteerQuestionDao volunteeQuestionDao;
+  @Autowired VolunteerShortReviewDao volunteerShortReviewDao;
   @Autowired GeneralDao generalDao;
   @Autowired SqlSessionFactory sqlSessionFactory;
 
@@ -64,7 +71,15 @@ public class VolunteerController {
   public ModelAndView detail(int no) throws Exception {
 
     VolunteerRequestDTO volunteer = volunteerDao.findByApprovedVolunteerNo(no);
-    List<VolunteerQuestionDTO> volunteerQuestion = volunteeQuestionrDao.findAllNo(no);
+    List<VolunteerJoinDTO> volunteerList = volunteerJoinDao.findAll(no);
+    List<VolunteerQuestionDTO> volunteerQuestion = volunteeQuestionDao.findAllNo(no);
+    Collection<VolunteerShortReviewDTO> volunteerShortReviewList = volunteerShortReviewDao.findAll();
+
+    for (VolunteerQuestionDTO volunteerQuestionDTO : volunteerQuestion) {
+      System.out.println(volunteerQuestionDTO.getVolunteer().getNo());
+      System.out.println(volunteerQuestionDTO.getJoinUser().getId());
+      System.out.println(volunteerQuestionDTO.getNo());
+    }
     String totalDate = volunteerDao.totalDate(no).getTotalDate();
     String remainDate = volunteerDao.remainDate(no).getRemainDate();
 
@@ -79,6 +94,8 @@ public class VolunteerController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("volunteer", volunteer); 
     mv.addObject("volunteerDate", volunteerDate);
+    mv.addObject("volunteerList", volunteerList);
+    mv.addObject("volunteerShortReviewList", volunteerShortReviewList);
     mv.addObject("volunteerQuestion", volunteerQuestion);
     mv.addObject("pageTitle", "함께해요 : 봉사내용");
     mv.addObject("contentUrl", "volunteer/VolunteerDetail.jsp");

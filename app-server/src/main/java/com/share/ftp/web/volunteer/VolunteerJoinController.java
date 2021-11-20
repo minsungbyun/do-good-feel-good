@@ -39,7 +39,7 @@ public class VolunteerJoinController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("volunteerList", volunteerList);
     mv.addObject("pageTitle", "함께해요 : 봉사참여자목록");
-    mv.addObject("contentUrl", "volunteer/VolunteerJoinMember.jsp");
+    mv.addObject("contentUrl", "volunteer/join/VolunteerJoinMember.jsp");
     mv.setViewName("template1");
     return mv;
   }
@@ -52,7 +52,7 @@ public class VolunteerJoinController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("volunteerList", volunteerList);
     mv.addObject("pageTitle", "함께해요 : 봉사참여");
-    mv.addObject("contentUrl", "volunteer/VolunteerJoin1.jsp");
+    mv.addObject("contentUrl", "volunteer/join/VolunteerJoin1.jsp");
     mv.setViewName("template1");
     return mv;
   }

@@ -30,59 +30,77 @@
   </resultMap>
   
   <insert id="insert" parameterType="VolunteerQuestionDTO"
-        useGeneratedKeys="true" keyColumn="vol_qna_no" keyProperty="no">>
-    insert into ftp_vol_qna(vol_qna_no, user_no, vol_no, content) 
-    values(#{no},#{joinUser.no},#{volunteer.no},${content})
+        useGeneratedKeys="true" keyColumn="vol_qna_no" keyProperty="no">
+	    insert into ftp_vol_qna(user_no, vol_no, content) 
+	    values(#{joinUser.no},#{volunteer.no},${content})
   </insert>
 
   <select id="findAll" resultMap="VolunteerQuestionDTOMap">
-    select 
-      q.vol_qna_no,
-      q.content,
-      q.created_dt,
-      q.reply,
-      v.vol_no volunteer_no, 
-      u.user_no joinUser_no,
-      u.id joinUser_id
-    from
-      ftp_vol_qna q
-      inner join ftp_vol v on q.vol_no=v.vol_no
-      inner join ftp_user u on q.user_no=u.user_no
-    order by 
-      q.vol_qna_no desc
+	    select 
+	      q.vol_qna_no,
+	      q.content,
+	      q.created_dt,
+	      q.reply,
+	      v.vol_no volunteer_no, 
+	      u.user_no joinUser_no,
+	      u.id joinUser_id
+	    from
+	      ftp_vol_qna q
+	      inner join ftp_vol v on q.vol_no=v.vol_no
+	      inner join ftp_user u on q.user_no=u.user_no
+	    order by 
+	      q.vol_qna_no desc
   </select>
   
-    <select id="findAllNo" resultMap="VolunteerQuestionDTOMap" parameterType="int">
-    select 
-      q.vol_qna_no,
-      q.content,
-      q.created_dt,
-      q.reply,
-      v.vol_no volunteer_no, 
-      u.user_no joinUser_no,
-      u.id joinUser_id
-    from
-      ftp_vol_qna q
-      inner join ftp_vol v on q.vol_no=v.vol_no
-      inner join ftp_user u on q.user_no=u.user_no
-    where
-      q.vol_no=#{volunteerNo}
-    order by 
-      q.vol_qna_no desc
+  <select id="findAllNo" resultMap="VolunteerQuestionDTOMap" parameterType="int">
+	    select 
+	      q.vol_qna_no,
+	      q.content,
+	      q.created_dt,
+	      q.reply,
+	      v.vol_no volunteer_no, 
+	      u.user_no joinUser_no,
+	      u.id joinUser_id
+	    from
+	      ftp_vol_qna q
+	      inner join ftp_vol v on q.vol_no=v.vol_no
+	      inner join ftp_user u on q.user_no=u.user_no
+	    where
+	      q.vol_no=#{volunteerNo}
+	    order by 
+	      q.vol_qna_no desc
+  </select>
+  
+  <select id="findByNo" resultMap="VolunteerQuestionDTOMap" parameterType="int">
+	   select 
+	      q.vol_qna_no,
+	      q.content,
+	      q.created_dt,
+	      q.reply,
+	      v.vol_no volunteer_no, 
+	      u.user_no joinUser_no,
+	      u.id joinUser_id,
+	      u.id joinUser_name
+	    from
+	      ftp_vol_qna q
+	      inner join ftp_vol v on q.vol_no=v.vol_no
+	      inner join ftp_user u on q.user_no=u.user_no
+	    where
+	      q.vol_qna_no=#{volunteerQuestionNo}
   </select>
   
    <update id="update" parameterType="VolunteerQuestionDTO">
-   update ftp_vol_qna set
-     content=#{content}
-   where 
-      vol_qna_no=#{no}
+		   update ftp_vol_qna set
+		     content=#{content}
+		   where 
+		      vol_qna_no=#{no}
   </update>
   
    <update id="updateReply" parameterType="VolunteerQuestionDTO">
-   update ftp_vol_qna set
-     reply=#{reply}
-   where
-      vol_qna_no=#{no}
+		   update ftp_vol_qna set
+		     reply=#{reply}
+		   where
+		      vol_qna_no=#{no}
    </update>
   
    <delete id="delete" parameterType="int">
