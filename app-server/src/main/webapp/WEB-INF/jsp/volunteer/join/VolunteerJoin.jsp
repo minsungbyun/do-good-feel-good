@@ -5,7 +5,7 @@
 
    
 
-    <div class="page-banner bg-img bg-img-parallax overlay-dark" style="background-image: url(../assets/img/bg_image_3.jpg);">
+    <div class="page-banner bg-img bg-img-parallax overlay-dark" style="background-image: url(../../../assets/img/bg_image_3.jpg);">
       <div class="container h-100">
         <div class="row justify-content-center align-items-center h-100">
           <div class="col-lg-8">
@@ -32,14 +32,7 @@
               <div class="col-lg-12">
                 <div class="widget">
                   <div class="widget-box">
-                    <section class="section1">
-                      <div class="box1">
-                        <div class="container1">
-                          <div id="calendar">
-                          </div>
-                        </div>
-                      </div>
-                    </section>
+                   <input type="text" placeholder="하하">
 
                   </div>
             </div>

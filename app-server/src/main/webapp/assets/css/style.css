@@ -1045,35 +1045,18 @@ padding-top:15px;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   background-color: #fff;
-  opacity: 0;
-  -webkit-transform: scale(1, 0);
-  -ms-transform: scale(1, 0);
-  -o-transform: scale(1, 0);
-  transform: scale(1, 0);
-  -webkit-transform-origin: top center;
-  -moz-transform-origin: top center;
-  -ms-transform-origin: top center;
-  -o-transform-origin: top center;
-  transform-origin: top center;
-  -webkit-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
+
+
+
+
   text-align: center;
-  position: absolute;
-  width:55%;
+
 }
 
 .form-wrapper .section h3{
   margin-bottom: 30px;
 }
 
-.form-wrapper .section.is-active{
-  opacity: 1;
-  -webkit-transform: scale(1, 1);
-  -ms-transform: scale(1, 1);
-  -o-transform: scale(1, 1);
-  transform: scale(1, 1);
-}
 
 .form-wrapper .button, .form-wrapper .submit{
   background-color: #3498db;
@@ -1148,6 +1131,15 @@ padding-top:15px;
 }
 
 .form-wrapper input[type="radio"]:checked + label h6{
+  color: #3498db;
+  font-weight:bold;
+}
+
+.form-wrapper input[type="text"]:checked + label{
+  border: 1px solid #3498db;
+}
+
+.form-wrapper input[type="text"]:checked + label h6{
   color: #3498db;
   font-weight:bold;
 }
@@ -1483,4 +1475,98 @@ fieldset {
 .ch-balloon.right:after {
     border-color: transparent transparent transparent #FFFFFF;
     right: -25px;
+}
+
+
+
+/* 봉사 modal */
+ #vol-modal.vol-modal-overlay {
+     width: 100%;
+     height: 100%;
+     position: fixed;
+     left: 0;
+     top: 0;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     background: rgba(255, 255, 255, 0.25);
+     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+     backdrop-filter: blur(1.5px);
+     -webkit-backdrop-filter: blur(1.5px);
+     border-radius: 10px;
+     border: 1px solid rgba(255, 255, 255, 0.18);
+ }
+ #vol-modal .vol-modal-window {
+     background: rgba( 69, 139, 197, 0.70 );
+     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+     backdrop-filter: blur( 13.5px );
+     -webkit-backdrop-filter: blur( 13.5px );
+     border-radius: 10px;
+     border: 1px solid rgba( 255, 255, 255, 0.18 );
+     width: 400px;
+     height: 500px;
+     position: relative;
+     top: -100px;
+     padding: 10px;
+ }
+ #vol-modal .vol-title {
+     padding-left: 10px;
+     display: inline;
+     text-shadow: 1px 1px 2px gray;
+     color: white;
+     
+ }
+ #vol-modal .vol-title h2 {
+     display: inline;
+ }
+ #vol-modal .close-area {
+     display: inline;
+     float: right;
+     padding-top: 10px;
+     padding-right: 15px;
+     cursor: pointer;
+     text-shadow: 1px 1px 2px gray;
+     color: white;
+ }
+ 
+ #vol-modal .vol-content {
+     margin-top: 20px;
+     padding: 0px 10px;
+     text-shadow: 1px 1px 2px gray;
+     color: white;
+ }
+        
+       
+
+
+
+/* 댓글 */
+.reply_view {
+    width:900px;
+    margin-top:100px; 
+    word-break:break-all;
+}
+
+.dap_lo {
+    font-size: 17px;
+    padding:10px 0 15px 0;
+    border-bottom: solid 1px gray;
+}
+
+.dap_lo2 {
+  margin: 20px 20px
+}
+
+.dap_to {
+    margin-top:5px;
+}
+
+.rep_me {
+    font-size:17px;
+}
+
+.rep_me ul li {
+    float:left;
+    width: 30px;
 }

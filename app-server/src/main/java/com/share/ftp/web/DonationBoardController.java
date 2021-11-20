@@ -3,11 +3,15 @@ package com.share.ftp.web;
 import java.util.Collection;
 import java.util.List;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.share.ftp.dao.DonationBoardDao;
 import com.share.ftp.dao.DonationRegisterDao;
@@ -17,14 +21,17 @@ import com.share.ftp.domain.donation.DonationBoardDTO;
 import com.share.ftp.domain.join.OrgDTO;
 
 @Controller
+@RequestMapping("/donation")
 public class DonationBoardController {
+
+  private static final Logger logger = LogManager.getLogger(DonationBoardController.class);
 
   @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired DonationBoardDao donationBoardDao;
   @Autowired DonationRegisterDao donationRegisterDao;
   @Autowired GeneralDao generalDao;
 
-  @GetMapping("/donation/form")
+  @GetMapping("form")
   public ModelAndView form() throws Exception {
     List<Category> categorys = generalDao.findAllCategory();
     ModelAndView mv = new ModelAndView();
@@ -37,12 +44,43 @@ public class DonationBoardController {
   }
 
 
-  @PostMapping("/donation/add")
+  @PostMapping("add")
   public ModelAndView add(
       DonationBoardDTO donationBoardDTO,
       Category category,
       int categoryNo,
-      HttpSession session) throws Exception {
+      HttpSession session,
+      Part photoFile) throws Exception {
+    //    
+    //    for (int i = 0; i < photoFile.length; i++) {
+    //      if (photoFile.length() > 0) {
+    //        String filename = UUID.randomUUID().toString();
+    //        photoFile.write(sc.getRealPath("/upload/member") + "/" + filename);
+    //        member.setPhoto(filename);
+    //
+    //        Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
+    //        .size(20, 20)
+    //        .outputFormat("jpg")
+    //        .crop(Positions.CENTER)
+    //        .toFiles(new Rename() {
+    //          @Override
+    //          public String apply(String name, ThumbnailParameter param) {
+    //            return name + "_20x20";
+    //          }
+    //        });
+    //
+    //        Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
+    //        .size(100, 100)
+    //        .outputFormat("jpg")
+    //        .crop(Positions.CENTER)
+    //        .toFiles(new Rename() {
+    //          @Override
+    //          public String apply(String name, ThumbnailParameter param) {
+    //            return name + "_100x100";
+    //          }
+    //        });
+    //      }
+    //    }
     category.setNo(categoryNo);
     donationBoardDTO.setCategory(category);
     donationBoardDTO.setLeader((OrgDTO) session.getAttribute("orgLoginUser"));
@@ -60,7 +98,7 @@ public class DonationBoardController {
     return mv;
   }
 
-  @GetMapping("/donation/list")
+  @GetMapping("list")
   public ModelAndView list() throws Exception {
     Collection<DonationBoardDTO> donationBoardList = donationBoardDao.findAllApply();
 
@@ -72,7 +110,7 @@ public class DonationBoardController {
     return mv;
   }
 
-  @GetMapping("/donation/detail")
+  @GetMapping("detail")
   public ModelAndView detail(int no) throws Exception {
     DonationBoardDTO donationBoardDTO = donationBoardDao.findByDonationNo(no);
     long remainMoney = donationRegisterDao.findByRemainMoney(no);
@@ -89,7 +127,7 @@ public class DonationBoardController {
     return mv;
   }
   //
-  //  @PostMapping("/board/update")
+  //  @PostMapping("update")
   //  public ModelAndView update(Board board) throws Exception {
   //
   //    Board oldBoard = boardDao.findByNo(board.getNo());
@@ -105,7 +143,7 @@ public class DonationBoardController {
   //    return mv;
   //  }
   //
-  //  @GetMapping("/board/delete")
+  //  @GetMapping("delete")
   //  public ModelAndView delete(int no) throws Exception {
   //
   //    Board board = boardDao.findByNo(no);

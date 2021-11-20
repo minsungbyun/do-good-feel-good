@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.share.ftp.dao.VolunteerQuestionDao">
+  
+  <resultMap type="VolunteerQuestionDTO" id="VolunteerQuestionDTOMap">
+  
+    <id column="vol_qna_no" property="no"/> 
+    <result column="content" property="content"/>
+    <result column="created_dt" property="registeredDate"/>
+    <result column="reply" property="reply"/>
+    
+   <association property="joinUser" javaType="joinDTO">
+      <id column="joinUser_no" property="no"/>
+      <result column="joinUser_id" property="id"/>
+      <result column="joinUser_name" property="name"/>
+   </association>
+   
+   <association property="volunteer" javaType="VolunteerRequestDTO">
+      <id column="volunteer_no" property="no"/>
+      <result column="volunteer_title" property="title"/>
+      <result column="volunteer_start_dt" property="startDate"/>
+      <result column="volunteer_end_dt" property="endDate"/>
+      <result column="volunteer_start_time" property="startTime"/>
+      <result column="volunteer_end_time" property="endTime"/>
+      <result column="volunteer_total_cnt" property="limitNum"/>
+   </association>
+  </resultMap>
+  
+  <insert id="insert" parameterType="VolunteerQuestionDTO"
+        useGeneratedKeys="true" keyColumn="vol_qna_no" keyProperty="no">
+	    insert into ftp_vol_qna(user_no, vol_no, content) 
+	    values(#{joinUser.no}, #{volunteer.no}, ${content})
+  </insert>
+
+  <select id="findAll" resultMap="VolunteerQuestionDTOMap">
+	    select 
+	      q.vol_qna_no,
+	      q.content,
+	      q.created_dt,
+	      q.reply,
+	      v.vol_no volunteer_no, 
+	      u.user_no joinUser_no,
+	      u.id joinUser_id
+	    from
+	      ftp_vol_qna q
+	      inner join ftp_vol v on q.vol_no=v.vol_no
+	      inner join ftp_user u on q.user_no=u.user_no
+	    order by 
+	      q.vol_qna_no desc
+  </select>
+  
+  <select id="findAllNo" resultMap="VolunteerQuestionDTOMap" parameterType="int">
+	    select 
+	      q.vol_qna_no,
+	      q.content,
+	      q.created_dt,
+	      q.reply,
+	      v.vol_no volunteer_no, 
+	      u.user_no joinUser_no,
+	      u.id joinUser_id
+	    from
+	      ftp_vol_qna q
+	      inner join ftp_vol v on q.vol_no=v.vol_no
+	      inner join ftp_user u on q.user_no=u.user_no
+	    where
+	      q.vol_no=#{volunteerNo}
+	    order by 
+	      q.vol_qna_no desc
+  </select>
+  
+  <select id="findByNo" resultMap="VolunteerQuestionDTOMap">
+	   select 
+	      q.vol_qna_no,
+	      q.content,
+	      q.created_dt,
+	      q.reply,
+	      v.vol_no volunteer_no, 
+	      u.user_no joinUser_no,
+	      u.id joinUser_id,
+	      u.id joinUser_name
+	    from
+	      ftp_vol_qna q
+	      inner join ftp_vol v on q.vol_no=v.vol_no
+	      inner join ftp_user u on q.user_no=u.user_no
+	    where
+	      q.vol_qna_no=#{no} and q.vol_no=#{volunteer.no}
+  </select>
+  
+   <update id="update" parameterType="VolunteerQuestionDTO">
+		   update ftp_vol_qna set
+		     content=#{content}
+		   where 
+		      vol_qna_no=#{no}
+  </update>
+  
+   <update id="updateReply" parameterType="VolunteerQuestionDTO">
+		   update ftp_vol_qna set
+		     reply=#{reply}
+		   where
+		      vol_qna_no=#{no}
+   </update>
+  
+   <delete id="delete" parameterType="VolunteerQuestionDTO">
+       delete from ftp_vol_qna where vol_qna_no=#{no} and vol_no=#{volunteer.no}
+  </delete>
+  
+</mapper>
+
+
+
+
+
+
+

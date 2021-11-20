@@ -18,7 +18,7 @@
             <thead>
               <tr>
                <th scope="col">
-                 <input type="checkbox">
+                 <input type="checkbox" id="all">
                </th>
              <th scope="col">번호</th>
              <th scope="col">제목</th>
@@ -37,7 +37,7 @@
             <tbody>
             <c:forEach items="${approvedDonationList}" var="donationBoardDTO">
               <tr data-no='${donationBoardDTO.no}'>
-              <td><input type="checkbox" class="select-box" id='aaa'></td>
+              <td><input type="checkbox" class="select-box" id='aaa' value="${donationBoardDTO.no}"></td>
                   <td>${donationBoardDTO.no}</td> 
                   <td>${donationBoardDTO.title}</td> 
                   <td>${donationBoardDTO.leader.name}</td> 
@@ -100,6 +100,15 @@ trList.forEach(function(trTag) {
         window.location.href = "reject?no=" + e.currentTarget.getAttribute("data-no");
     };
 });
+
+function checkAll(){
+    if(document.getElementById("all").checked==true){  //id 를 사용하여 하나의 객체만을 호출
+          for(var i=0;i<3;i++) document.getElementsByName("checkBox")[i].checked=true;   //name 을 사용하여 배열 형태로 담아 호출
+       }
+       if(document.getElementById("all").checked==false){
+          for(var i=0;i<3;i++) document.getElementsByName("checkBox")[i].checked=false;  
+       }
+ }
 
 </script>
 </body>

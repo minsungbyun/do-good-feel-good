@@ -10,7 +10,7 @@
           <div class="join-wrap">
             <h5>기관<span class="required_title"><em class="icon_required">·</em>표시는 반드시 입력하셔야 합니다.</span></h5>
               <div class="base-table">
-                <form action='add' method="post">
+                <form action='add' method="post" enctype="multipart/form-data">
                 <table class="join-table">
                 <c:forEach items="${categorys}" var="category">
                     <div class="form-check">
@@ -75,17 +75,17 @@
                       </td>
                     </tr>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
                     <!-- //목표금액 -->  
-                    <!-- 
+                     
                     <tr>
                       <th><span>파일첨부</span></th>
                       <td>
                         <label for="f-file" class="sr-only">파일첨부</label>
 	                      <div class="col-sm-11">
-	                        <input type="file" class="form-control-file" id="f-file" name='fileUpload'>
+	                        <input type="file" class="form-control-file" id="f-file" name='photoFile' multiple>
 	                      </div>
                       </td>
                     </tr>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
-                     //파일첨부 -->
+                    <!-- //파일첨부 -->
 
                     
                     </tbody>

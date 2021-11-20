@@ -10,7 +10,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0">
             <li class="breadcrumb-item"><a href="${contextPath}/app/home">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">챌린지</li>
+            <li class="breadcrumb-item   active" aria-current="page">챌린지</li>
           </ol>
         </nav>
         <h1 class="fg-white text-center">문의목록</h1>
