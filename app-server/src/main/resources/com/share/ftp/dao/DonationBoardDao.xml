@@ -38,11 +38,6 @@
    </collection>
   </resultMap>
 
-  <resultMap type="category" id="CategoryMap">
-    <id column="category_no" property="no"/> 
-    <result column="title" property="title"/>
-  </resultMap>
-
   
   <insert id="insert" parameterType="DonationBoardDTO" 
           useGeneratedKeys="true" keyColumn="funding_no" keyProperty="no">
