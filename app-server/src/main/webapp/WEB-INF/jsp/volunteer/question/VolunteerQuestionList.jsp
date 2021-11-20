@@ -80,8 +80,6 @@
        </div>   <!-- //vol-detail -->
        
        
-       
-       
         <div class="vol-con-wrap">
             <h3 class="widget-title" id="scroll-section1" style="padding-top:30px;" >상세정보</h3>
             <div class="divider"></div>
@@ -95,17 +93,12 @@
           </div> <!-- vol-con-wrap -->
     
 
-
-      
-
-
          <div>
             <h3 class="widget-title" style="padding-top:30px;">위치</h3>
             <div class="divider"></div>
             <div class="content-map">
             </div>
          </div>
-         
          
             <h1 class="widget-title" style="padding-top:30px;"><a>문의하기</a></h1>
             <div class="content-box chall-box" style="background: #81BEF7">
@@ -130,38 +123,45 @@
                         <div class="modal-content">
                           <div class="modal-header">
                             <h4 class="modal-title">문의 수정</h4> <!-- 사용자 지정 부분② : 타이틀 -->
-                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <button type="button" class="close" data-dismiss="modal">X</button>
                           </div>
-                            <form action='question/update?no=${volunteerQuestionDTO.no}' method="post">
-                            <div class="modal-body">
-                            <!-- 
-                              <div class= "class" id="id" style="display:none">
-                                <label for='f-no'>봉사번호</label> <input id='f-no' type='text' name='no' value='${challengeDTO.no}' readonly>
-                              <br></div>
-                               -->
-                              <div class= "class" id="id" style="display:none">
-                                <label for='f-questionNo'>문의번호</label> <input id='f-questionNo' type='text' name='no' value='${volunteerQuestionDTO.no}' readonly>
-                              <br></div>
-                              <textarea id='f-content' name='content' cols="55" rows="1" class="modal-body">${volunteerQuestionDTO.content}</textarea>
-                                <label for='f-owner'>작성자</label> 
-                                <span id='f-owner'>${volunteerQuestionDTO.joinUser.id}</span><br>
-                            
-                                <label for='f-registeredDate'>등록일</label> 
-                                <span id='f-registeredDate'>${volunteerQuestionDTO.registeredDate}</span><br>
-                            </div>
-                            <button>수정완료</button><br>
-                          </form>
+                          
+                            <form action='question/update' method="post">
+                               <div class="modal-body">
+                                 <div class= "class" id="id" style="display:none">
+	                                <label for='f-questionNo'>문의번호</label> <input id='f-questionNo' type='text' name='no' value='${volunteerQuestionDTO.no}' readonly>
+                                 </div>
+	                                 
+                                  <textarea id='f-content' name='content' cols="55" rows="1" class="modal-body">${volunteerQuestionDTO.content}</textarea>
+	                                <label for='f-owner'>작성자</label> 
+	                                <span id='f-owner'>${volunteerQuestionDTO.joinUser.id}</span><br>
+	                            
+	                                <label for='f-registeredDate'>등록일</label> 
+                                   <span id='f-registeredDate'>${volunteerQuestionDTO.registeredDate}</span><br>
+                                  </div>
+                                  
+                                  <div class= "class" id="id" style="display:none">
+                                      <input id='f-owner' type='text' name='owner' value='${volunteerQuestionDTO.joinUser.id}' readonly>
+                                  </div>
+	                                  
+                                  <div class= "class" id="id" style="display:none">
+                                      <input id='f-registeredDate' type='text' name='registeredDate' value='${volunteerQuestionDTO.registeredDate}' readonly>   
+                                  </div>
+                                   <button>수정완료</button><br>
+                             </form>
+                          
                           <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                           </div>
                         </div>
                       </div>
                     </div>
+                    
                     <!-- 모달 창 -->
                     <c:if test="${sessionScope.loginUser.no == volunteerQuestionDTO.joinUser.no}">
                     <a href='question/delete?no=${volunteerQuestionDTO.no}'>[삭제]</a>
                     </c:if>
-                </div><br>
+                    
                   <c:if  test="${volunteerQuestionDTO.reply != null}" >
                 <div class="ch-balloon right" style="margin-bottom: 1%; margin-left: 70%; float:center"><span>
                     -관리자 답글-<br>
@@ -181,18 +181,11 @@
             </div>
          </div> <!-- col-lg-12 -->
          
-    
-         
-         
-         
-         
-         
          
        </div>
         <div class="btn-regi">
-          <button type="button" class="btn btn-primary nBtn">참여하기</button>
-           <a href="join/detail?no=${volunteer.no}" class="btn btn-outline-primary nBtn" role="button">참여하기캘린더</a>
-           <a href="join/list?no=${volunteer.no}" class="btn btn-outline-primary nBtn" role="button">참여하기22</a>
+          <button type="button" class="btn btn-primary nBtn" onclick="location.href='join/detail?no=${volunteer.no}'")>참여하기</button>
+          <button type="button" class="btn btn-primary nBtn" onclick="history.go(-1)")>참여하기111</button>
             <input type="button" class="btn btn-outline-primary nBtn" value="이전" onClick="history.go(-1)" role="button">
         </div> <!-- //btn-regi -->       
       </div>  <!-- //container -->

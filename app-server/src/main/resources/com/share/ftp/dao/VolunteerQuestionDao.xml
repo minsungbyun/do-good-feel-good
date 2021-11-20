@@ -32,7 +32,7 @@
   <insert id="insert" parameterType="VolunteerQuestionDTO"
         useGeneratedKeys="true" keyColumn="vol_qna_no" keyProperty="no">
 	    insert into ftp_vol_qna(user_no, vol_no, content) 
-	    values(#{joinUser.no},#{volunteer.no},${content})
+	    values(#{joinUser.no}, #{volunteer.no}, ${content})
   </insert>
 
   <select id="findAll" resultMap="VolunteerQuestionDTOMap">
@@ -71,7 +71,7 @@
 	      q.vol_qna_no desc
   </select>
   
-  <select id="findByNo" resultMap="VolunteerQuestionDTOMap" parameterType="int">
+  <select id="findByNo" resultMap="VolunteerQuestionDTOMap">
 	   select 
 	      q.vol_qna_no,
 	      q.content,
@@ -86,7 +86,7 @@
 	      inner join ftp_vol v on q.vol_no=v.vol_no
 	      inner join ftp_user u on q.user_no=u.user_no
 	    where
-	      q.vol_qna_no=#{volunteerQuestionNo}
+	      q.vol_qna_no=#{no} and q.vol_no=#{volunteer.no}
   </select>
   
    <update id="update" parameterType="VolunteerQuestionDTO">
@@ -103,8 +103,8 @@
 		      vol_qna_no=#{no}
    </update>
   
-   <delete id="delete" parameterType="int">
-       delete from ftp_vol_qna where vol_qna_no=${volunteerNo}
+   <delete id="delete" parameterType="VolunteerQuestionDTO">
+       delete from ftp_vol_qna where vol_qna_no=#{no} and vol_no=#{volunteer.no}
   </delete>
   
 </mapper>

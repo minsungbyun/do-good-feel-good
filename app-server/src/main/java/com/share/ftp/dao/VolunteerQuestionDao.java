@@ -10,6 +10,6 @@ public interface VolunteerQuestionDao {
   List<VolunteerQuestionDTO> findAllNo(int volunteerNo) throws Exception;      
   void update(VolunteerQuestionDTO updateVolunteerQuestion) throws Exception;
   void updateReply(VolunteerQuestionDTO updateVolunteerQuestionReply) throws Exception;
-  void delete(int no) throws Exception; 
-  VolunteerQuestionDTO findByNo(int volunteerQuestionNo) throws Exception;
+  void delete(VolunteerQuestionDTO volunteerQuestionDTO) throws Exception; 
+  VolunteerQuestionDTO findByNo(VolunteerQuestionDTO volunteerQuestionDTO) throws Exception;
 }

@@ -217,7 +217,7 @@
 								                    </div>
 								                  </div>
 								                 </div>
-								                </li>             
+							                 </li>             
 								              </ul>
 								            </div>
 								          </div>
@@ -251,9 +251,6 @@
 		            </div>
 		          </div> <!-- vol-con-wrap -->
 	                          
-	        
-		      
-
 
          <div>
             <h3 class="widget-title" style="padding-top:30px;" id="scroll-section3">위치</h3>
@@ -265,46 +262,26 @@
          </div>
          
          
-         <h1>봉사</h1>
-            </div>
-            <div class="vol-content">
-              <table>
-                <thead>
-                  <tr>
-                    <th>번호</th>
-                    <th>아이디</th>
-                    <th>이름</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <c:forEach items="${volunteerQuestion}" var="volunteerQuestionDTO" >
-                    <tr>
-                        <td>${volunteerQuestionDTO.volunteer.no}</td> 
-                        <td>${volunteerQuestionDTO.joinUser.id}</td> 
-                        <td>${volunteerQuestionDTO.joinUser.name}</td> 
-                    </tr>
-                  </c:forEach>
-                   <tbody>
-                      </table>
-                    </div>
-         
-         
          <div class="vol-con-wrap">
-             <h3 class="widget-title" style="padding-top:30px;" id="scroll-section4"><a>문의하기</a></h3>
-            <div class="divider"></div>
-              <div class="col-lg-12">
-                <div class="widget">
-                  <div class="widget-box">
+            <h3 class="widget-title" style="padding-top:30px;" id="scroll-section4"><a>문의하기</a></h3>
+		           <div class="divider"></div>
+		           <div class="col-lg-12">
+                 <div class="widget">
+                    <div class="widget-box">
                        <div class="content-box chall-box" style="background: #81BEF7">
-              <c:forEach items="${volunteerQuestion}" var="volunteerQuestionDTO" varStatus="vs">
-              <div class="ch-balloon left" style="margin-top: 1%; margin-bottom: 1%; margin-left:18%; float:center"><span>
-                <div class="class" id="id" style="display: none">
-                    ${volunteerQuestionDTO.no}
-                </div>
-                    -${volunteerQuestionDTO.joinUser.id}-<br>
-                    ${volunteerQuestionDTO.content}<br>
-                    ${volunteerQuestionDTO.volunteer.no}<br>
-                    ${volunteerQuestionDTO.registeredDate}</span>
+                        <c:forEach items="${volunteerQuestion}" var="volunteerQuestionDTO" varStatus="vs">
+                          <div> <!-- 말풍선 전체 포함 -->
+				                     <div style="margin-left: 19%; ">
+				                       <em>${volunteerQuestionDTO.joinUser.id}</em><br>
+				                     </div>
+						                <div class="ch-balloon left" style="margin-top: 1%; margin-bottom: 1%; margin-left:18%; float:center">
+						                <span>
+					                   <div class="class" id="id" style="display: none">${volunteerQuestionDTO.no}</div>
+						                    ${volunteerQuestionDTO.content}<br>
+						                  <small>${volunteerQuestionDTO.registeredDate}</small>
+		                      </span>
+		                      </div>
+		                     
                     <!-- 모달 창 -->
                     <c:if test="${sessionScope.loginUser.no == volunteerQuestionDTO.joinUser.no}">
                     <!-- 아래에서 data-toggle과 data-target 속성에서 data-toggle에는 modal 값을 data-target속성에는 모달 창 전체를 
@@ -320,24 +297,30 @@
                             <h4 class="modal-title">문의 수정</h4> <!-- 사용자 지정 부분② : 타이틀 -->
                             <button type="button" class="close" data-dismiss="modal">×</button>
                           </div>
-                            <form action='question/update?no=${volunteerQuestionDTO.no}' method="post">
-                            <div class="modal-body">
+                            <form action='question/update' method="post">
+                              <div class="modal-body">
                             <!-- 
                               <div class= "class" id="id" style="display:none">
                                 <label for='f-no'>봉사번호</label> <input id='f-no' type='text' name='no' value='${challengeDTO.no}' readonly>
                               <br></div>
                                -->
-                              <div class= "class" id="id" style="display:none">
-                                <label for='f-questionNo'>문의번호</label> <input id='f-questionNo' type='text' name='no' value='${volunteerQuestionDTO.no}' readonly>
-                              <br></div>
-                              <textarea id='f-content' name='content' cols="55" rows="1" class="modal-body">${volunteerQuestionDTO.content}</textarea>
+	                              <div class= "class" id="id" style="display:none">
+	                                <label for='f-questionNo'>문의번호</label> <input id='f-questionNo' type='text' name='no' value='${volunteerQuestionDTO.no}' readonly>
+	                             </div>
+	                             
+                                  <textarea id='f-content' name='content' cols="55" rows="1" class="modal-body">${volunteerQuestionDTO.content}</textarea>
+                                  
                                 <label for='f-owner'>작성자</label> 
                                 <span id='f-owner'>${volunteerQuestionDTO.joinUser.id}</span><br>
                             
                                 <label for='f-registeredDate'>등록일</label> 
                                 <span id='f-registeredDate'>${volunteerQuestionDTO.registeredDate}</span><br>
+                                
+                                <div class= "class" id="id" style="display:none">
+                                <label for='f-volunteerNo'>봉사번호</label> <input id='f-volunteerNo' type='text' name='volNo' value='${volunteer.no}' readonly>
+                                </div>
                             </div>
-                            <button>수정완료</button><br>
+                              <button>수정완료</button><br>
                           </form>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -347,21 +330,25 @@
                     </div>
                     <!-- 모달 창 -->
                     <c:if test="${sessionScope.loginUser.no == volunteerQuestionDTO.joinUser.no}">
-                    <a href='question/delete?no=${volunteerQuestionDTO.no}'>[삭제]</a>
+                    <a href='question/delete?no=${volunteerQuestionDTO.no}&volunteerNo=${volunteer.no}'>[삭제]</a>
                     </c:if>
                 </div><br>
+                
                   <c:if  test="${volunteerQuestionDTO.reply != null}" >
-                <div class="ch-balloon right" style="margin-bottom: 1%; margin-left: 70%; float:center"><span>
-                    -관리자 답글-<br>
-                    ${volunteerQuestionDTO.reply}
-                </span></div><br>
-                  </c:if>
+                     <div class="ch-balloon right" style="margin-bottom: 1%; margin-left: 70%; float:center">
+			                <span>
+			                    -관리자 답글-<br>
+			                    ${volunteerQuestionDTO.reply}
+			                </span></div><br>
+                 </c:if>
               </c:forEach>
+              
               <form action='question/add' method="post">
                
                   <div class= "class" id="id" style="display:none">
-                    <label for='f-no'>봉사번호</label> <input id='f-no' type='text' name='no' value='${volunteer.no}' readonly>
+                    <label for='f-no'>봉사번호</label> <input id='f-no' type='text' name='volNo' value='${volunteer.no}' readonly>
                   </div><br>
+                  
                      <textarea id='f-content' name='content' cols=100% rows="1" class="modal-body" style="margin-left:5%; float: left;"></textarea>
             
                     <button style="margin-left:1.5%; margin-top:1.7%;" onsubmit="checkValue()">문의등록</button>
@@ -369,33 +356,16 @@
             </div>
          </div>
        </div>
-         
-    
-         
-         
-                  
-                  
                   
                   
                   </div>
                </div>
              </div>
             </div>
-         
-         
-         
-         
-           
-         
-         
-         
-         
        </div>
         <div class="btn-regi">
-          <button type="button" class="btn btn-primary nBtn">참여하기</button>
-           <a href="join/detail?no=${volunteer.no}" class="btn btn-outline-primary nBtn" role="button">참여하기캘린더</a>
-           <a href="join/list?no=${volunteer.no}" class="btn btn-outline-primary nBtn" role="button">참여하기22</a>
-            <input type="button" class="btn btn-outline-primary nBtn" value="이전" onClick="history.go(-1)" role="button">
+          <button type="button" class="btn btn-primary nBtn" onclick="location.href='join/detail?no=${volunteer.no}'")>참여하기</button>
+          <button type="button" class="btn btn-primary nBtn" onclick="history.go(-1)">이전</button>
         </div> <!-- //btn-regi -->       
       </div>  <!-- //container -->
     </div>  <!-- //page-section -->

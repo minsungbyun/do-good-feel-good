@@ -6,10 +6,13 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.dao.VolunteerDao;
@@ -24,7 +27,10 @@ import com.share.ftp.domain.volunteer.VolunteerQuestionDTO;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 
 @Controller
+@RequestMapping("/volunteer")
 public class VolunteerController { 
+
+  private static final Logger logger = LogManager.getLogger(VolunteerController.class);
 
   @Autowired VolunteerDao volunteerDao;
   @Autowired VolunteerJoinDao volunteerJoinDao;
@@ -33,7 +39,7 @@ public class VolunteerController {
   @Autowired GeneralDao generalDao;
   @Autowired SqlSessionFactory sqlSessionFactory;
 
-  @PostMapping("/volunteer/add")
+  @PostMapping("add")
   public ModelAndView add(VolunteerRequestDTO volunteerRequestDTO, Category category, HttpSession session) throws Exception {
 
     volunteerRequestDTO.setOwner((JoinDTO) session.getAttribute("loginUser"));
@@ -48,7 +54,7 @@ public class VolunteerController {
   }
 
 
-  @GetMapping("/volunteer/list")
+  @GetMapping("list")
   public ModelAndView list() throws Exception {
 
     List<VolunteerRequestDTO> volunteerList = volunteerDao.findAllApproved();
@@ -67,7 +73,7 @@ public class VolunteerController {
     return mv;
   }
 
-  @GetMapping("/volunteer/detail")
+  @GetMapping("detail")
   public ModelAndView detail(int no) throws Exception {
 
     VolunteerRequestDTO volunteer = volunteerDao.findByApprovedVolunteerNo(no);
@@ -104,7 +110,7 @@ public class VolunteerController {
   }
 
 
-  @PostMapping("/volunteer/update")
+  @PostMapping("update")
   public ModelAndView update(VolunteerRequestDTO volunteerRequestDTO, Category category) throws Exception {
 
     VolunteerRequestDTO volunteer = volunteerDao.findByVolunteerNo(volunteerRequestDTO.getNo());
@@ -123,7 +129,7 @@ public class VolunteerController {
     return mv;
   }
 
-  @GetMapping("/volunteer/delete")
+  @GetMapping("delete")
   public ModelAndView delete(VolunteerRequestDTO volunteerRequestDTO) throws Exception {
 
     VolunteerRequestDTO volunteer = volunteerDao.findByVolunteerNo(volunteerRequestDTO.getNo());
@@ -141,7 +147,7 @@ public class VolunteerController {
   }
 
 
-  @GetMapping("/volunteer/form")
+  @GetMapping("form")
   public ModelAndView form() throws Exception {
 
     List<Category> categorys = generalDao.findAllCategory();
