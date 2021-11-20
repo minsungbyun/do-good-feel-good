@@ -47,7 +47,7 @@
   
                 <a href="" class="sns-login-button sns03" snstype="google">
                   <s></s>
-                  <span>구글 계정으로 로그인</span>
+                  <span>페이스북 계정으로 로그인</span>
                 </a>
               </div> <!--//loginSns -->
              </form>
@@ -57,16 +57,6 @@
     </main>
 	<script type="text/javascript">
     
-        function checkValue() {
-        	
-        	var check = document.querySelector("#login");
-          check.onclick = function() {
-            alert("테스트");
-            return false;
-          }
-        	
-        	
-        	
             if(!document.login.id.value) {
                 alert("아이디를 입력하세요.");
                 return false;
