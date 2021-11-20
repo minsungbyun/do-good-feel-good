@@ -24,9 +24,9 @@
  <main>
  <form action='reviewForm' method="post">
   <div class= "class" name="name" id="id""></div>
-  <button>등록</button><br>
-</form>
+   &nbsp;&nbsp;<a data-toggle="modal" href="#myModalQuestionU${vs.index}">[등록]</a>
   <div class="page-section">
+   
     <div class="container">
       <div class="short-main">
         <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png" alt="짧은 후기 메인이미지">
@@ -43,6 +43,37 @@
         <!-- //inner-text-wirte -->
       </div>
       <!-- //text-wirte -->
+
+<!-- 모달 창 -->
+               <div class="modal fade" id="myModalQuestionU${vs.index}" role="dialog"> <!-- 사용자 지정 부분① : id명 -->
+                   <div class="modal-dialog">
+                        <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">리뷰 등록</h4> <!-- 사용자 지정 부분② : 타이틀 -->
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                        </div>
+                            <form action='commentAdd' method="post">
+                            <div class="modal-body">
+                            <div class= "class" id="id" style="display:none">
+                                <label for='f-volNo'>봉사번호</label> 
+                                <input id='f-volNo' type='number' name='f-volNo'><br>
+                              <br></div>
+                              <div class= "class" id="id" style="display:none">
+                                <label for='f-content'>내용</label> 
+                                <input id='f-content' type='text' name='content'><br>
+                              <br></div>
+                               <button>수정완료</button><br>
+                          </form>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                      </div>
+                   </div>
+               </div>
+               <!-- 모달 창 -->
+
+</form>
       <div class="cont-short-list">
         <c:forEach items="${volunteerShortReviewList}" var="volunteerShortReviewDTO">
         <div class="s-review-list">
