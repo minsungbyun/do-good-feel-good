@@ -74,7 +74,7 @@
                       <h5 style="text-align:center; padding-bottom:20px;">비밀번호를 입력해주세요.</h5>
                       <div class="form-group">
                         <label for="recipient-name"   class="col-form-label">비밀번호</label>
-                        <input type="password" id="pwd" value="pwd" name="qnaPassword" class="form-control" id="recipient-name" maxlength='4' placeholder="숫자 4자리">
+                        <input type="password" id="pwd" name="qnaPassword" class="form-control" id="recipient-name" maxlength='4' placeholder="숫자 4자리">
                       </div>
                     </form>
                   </div>
@@ -132,7 +132,6 @@
     </main>
     
     <script>
-    
     var modalNo = document.querySelector("#f-no");
 
     document.querySelectorAll(".x-delete-btn").forEach((tag) => {
@@ -162,8 +161,4 @@
       }
       
     };
-    
-
-    
-  
     </script>
