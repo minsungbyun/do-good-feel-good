@@ -29,6 +29,15 @@ public class VolunteerShortReviewController {
   //    return mv;
   //  }
 
+  @RequestMapping("/volunteer/reviewForm")
+  public ModelAndView form() {
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("pageTitle", "새 글");
+    mv.addObject("contentUrl", "volunteer/VolunteerShortReviewForm.jsp");
+    mv.setViewName("template1");
+    return mv;
+  }
+
   @PostMapping("/volunteer/reviewAdd")
   public ModelAndView add(VolunteerShortReviewDTO volunteerShortReviewDTO, HttpSession session) throws Exception {
 

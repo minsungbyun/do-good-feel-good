@@ -23,8 +23,8 @@
     <link rel="stylesheet" href="${contextPath}/assets/vendor/fancybox/css/jquery.fancybox.css">
     <link rel="stylesheet" href="${contextPath}/assets/css/theme.css">
     <link rel="stylesheet" href="${contextPath}/assets/css/style.css">
-    <link rel="stylesheet" href="${contextPath}/volunteer/calendarTest.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
+    <link rel="stylesheet" href="${contextPath}/calendarTest.css">
+   
    
    
   </head>
@@ -49,8 +49,9 @@
     <script src="${contextPath}/assets/vendor/isotope/isotope.pkgd.min.js"></script>
     <script src="${contextPath}/assets/js/google-maps.js"></script>
     <script src="${contextPath}/assets/js/theme.js"></script>
+    <script src="${contextPath}/assets/js/common.js"></script>
     <script src="${contextPath}/assets/calendar/js/calendar.js"></script>
-    <script src="${contextPath}/volunteer/calendarTest.js"></script>
+    <script src="${contextPath}/calendarTest.js"></script>
     
 </body>
 </html>

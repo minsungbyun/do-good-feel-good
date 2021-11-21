@@ -2,20 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 
-    <!doctype html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width">
-      <link rel="stylesheet" href="../calendarTest.css">
-      <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-      
-
-        
-
-      <title>Vanilla Coding | Bootcamp Prep</title>
-    </head>
-    <body>
+  
       <div class="main">
         <div class="content-wrap">
           <div class="content-left">
@@ -63,15 +50,6 @@
           </div>
         </div>
       </div>
-
-       <script src="../calendartest.js"></script>
-
-    </body>
-    </html>
-   
-
-
-
 
 
 
