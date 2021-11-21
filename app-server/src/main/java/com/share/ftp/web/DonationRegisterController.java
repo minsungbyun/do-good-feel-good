@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.share.ftp.dao.DonationBoardDao;
@@ -49,12 +48,12 @@ public class DonationRegisterController {
     mv.addObject("cardType", cardType);
     mv.addObject("boardNo", boardNo);
     mv.addObject("pageTitle", "HappyShare : 후원하기");
-    mv.addObject("contentUrl", "register/DonationRegisterForm.jsp");
+    mv.addObject("contentUrl", "donation/DonationRegisterForm.jsp");
     mv.setViewName("template1");
     return mv;
   }
 
-  @PostMapping("add")
+  @RequestMapping("add")
   public ModelAndView add(
       DonationBoardDTO donationBoard,
       DonationRegisterDTO donationRegisterDTO,
@@ -79,9 +78,11 @@ public class DonationRegisterController {
   @GetMapping("list")
   public ModelAndView list(int no) throws Exception {
     Collection<DonationRegisterDTO> donationRegisterList = donationRegisterDao.findAllNo(no);
+    int registerUser = donationRegisterDao.findByJoinUser(no);
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("donationRegisterList", donationRegisterList);
+    mv.addObject("registerUser", registerUser);
     mv.addObject("pageTitle", "HappyShare : 기부자목록");
     mv.addObject("contentUrl", "register/DonationRegisterList.jsp");
     mv.setViewName("template1");
