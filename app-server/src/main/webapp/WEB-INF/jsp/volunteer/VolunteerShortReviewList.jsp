@@ -3,6 +3,23 @@
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
+    
+   <div class="page-banner bg-img bg-img-parallax overlay-dark" style="background-image: url(${contextPath}/images/6583.jpg);">
+      <div class="container h-100">
+        <div class="row justify-content-center align-items-center h-100">
+          <div class="col-lg-8">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0">
+                <li class="breadcrumb-item"><a href="${contextPath}/app/home">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">소통해요</li>
+              </ol>
+            </nav>
+            <h1 class="fg-white text-center">한 줄후기</h1>
+          </div>
+        </div>
+      </div>
+    </div> <!-- .page-banner -->
+    
   <title>소통해요 : 한줄후기 메인</title>
  <main>
  <form action='reviewAdd' method="post">

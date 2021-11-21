@@ -116,7 +116,7 @@ public class VolunteerBoardCommentController {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:commentList?volBoardNo=" + volunteerBoardCommentDTO.getVolBoardNo());
+    mv.setViewName("redirect:boardDetail?no=" + volunteerBoardCommentDTO.getVolBoardNo());
     return mv;
   }
 

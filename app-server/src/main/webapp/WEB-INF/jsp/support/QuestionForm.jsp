@@ -1,19 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-<!DOCTYPE html>
-<html>
-	<head>
-	  <title>문의사항 등록</title>
-	  <style>
-	  label {
-	    margin-right: 5px;
-	    text-align: right;
-	    display: inline-block;
-	    width: 60px;
-	  }
-	  </style>
-	</head>
+
+  <div class="ad-main">
+      <div class="ad-main-infor">
+        <div class="write-wrap">
+          <h4 class="mb-5">문의사항</h4>
+          <form action='questionAdd' method="post">
+            <div class="form-group">
+              <label for='f-qnaType'>문의분야</label>
+				      <select id='f-qnaType' name='qnaTypeNo'>
+				       <option value='1'>함께해요 문의</option>
+				       <option value='2'>나눔이야기 문의</option>
+				       <option value='3'>모금함 문의</option>
+				       <option value='4'>챌린지 문의</option>
+				       <option value='5'>사이트이용 문의</option>
+				       <option value='6'>기타 문의</option>
+				      </select>
+            </div>
+            <!-- //제목 -->
+            <div class="form-group">
+              <label for="f-content">내용</label>
+              <textarea name="content" id="f-content" cols="30" rows="8" class="form-control"></textarea>
+            </div>
+            <!-- //내용 -->
+          <%-- <div class="form-group row">
+              <label for="f-file" class="col-sm-1 col-form-label">파일첨부</label>
+              <div class="col-sm-11">
+                <input type="file" class="form-control-file" id="f-file" name='fileUpload'>
+              </div>
+              <label for="f-file" class="col-sm-1 col-form-label">파일첨부</label>
+              <div class="col-sm-11">
+                <input type="file" class="form-control-file" id="f-file" name='fileUpload'>
+              </div>
+              <label for="f-file" class="col-sm-1 col-form-label">파일첨부</label>
+              <div class="col-sm-11">
+                <input type="file" class="form-control-file" id="f-file" name='fileUpload'>
+              </div>
+            </div>
+            <!-- //파일첨부 -->--%>
+            <div class="form-group">
+              <label for="f-content" class="sr-only">등록</label>
+              <input type="submit" value="등록" class="btn btn-primary">
+              <label for="f-content" class="sr-only">삭제</label>
+              <input type="submit" value="이전" class="btn btn-secondary">
+            </div>
+            <!-- //등록 -->
+          </form>
+        </div>
+        <!-- //write-wrap -->
+      </div>
+      <!-- //form -->
+    </div>
+    <!-- //ad-main -->
+
+
+
+
+
 	<body>
 		<h1>문의사항 등록</h1>
 		<form action='questionAdd' method="post">
@@ -40,7 +84,7 @@
 			<a href='questionList'>[목록]</a>
 		</form>
 	</body>
-</html>
+
 
 
 

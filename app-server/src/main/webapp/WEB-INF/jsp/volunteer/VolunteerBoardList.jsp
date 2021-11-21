@@ -6,20 +6,21 @@
   <title>소통해요 : 나눔이야기 목록</title>
 
 
-<div class="page-banner bg-img bg-img-parallax overlay-dark" style="background-image: url(../../assets/img/helpinghand.jpg);">
-    <div class="container h-100">
-      <div class="row justify-content-center align-items-center h-100">
-        <div class="col-lg-8">
+    <div class="page-banner bg-img bg-img-parallax overlay-dark" style="background-image: url(${contextPath}/images/volunteer4.jpg);">
+      <div class="container h-100">
+        <div class="row justify-content-center align-items-center h-100">
+          <div class="col-lg-8">
             <nav aria-label="breadcrumb">
-            <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0">
-                <li class="breadcrumb-item"><a href="index.html">소통해요</a></li>
-                <li class="breadcrumb-item active" aria-current="page">나눔이야기 게시판</li>
+              <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0">
+                <li class="breadcrumb-item"><a href="${contextPath}/app/home">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">소통해요</li>
               </ol>
             </nav>
-        </div>
-      </div>
-    </div>
-  </div> <!-- .page-banner -->
+            <h1 class="fg-white text-center">나눔이야기</h1>
+          </div>
+        </div>
+      </div>
+    </div> <!-- .page-banner -->
 
  <!-- main -->
 <main>
@@ -36,7 +37,7 @@
     <table class="table">
           <thead>
             <tr>
-              <th scope="col">번호</th>
+              <th scope="col" style="display:none">번호</th>
               <th scope="col">제목</th>
               <th scope="col">작성자</th>
               <th scope="col">등록일</th>
@@ -49,7 +50,7 @@
               </c:if>
               <c:forEach items="${volunteerBoardList}" var="volunteerBoardDTO">
                 <tr>
-                <td>${volunteerBoardDTO.no}</td>
+                <td th scope="col" style="display:none">${volunteerBoardDTO.no}</td>
                 <td><a href='boardDetail?no=${volunteerBoardDTO.no}'>${volunteerBoardDTO.title}</a></td> 
                 <td>${volunteerBoardDTO.owner.id}</td> 
                 <td>${volunteerBoardDTO.registeredDate}</td>
@@ -85,11 +86,11 @@
 
      
 
-  <c:if test="${sessionScope.loginUser != null}">
-      <div class="form-btn">
-        <a href='boardForm' class="btnSubmit">게시글 작성</a>
-      </div>
-  </c:if>
+     <c:if test="${sessionScope.loginUser != null}">
+         <div class="btn-regi" style="text-align:right;">
+           <a href="boardForm" class="btn btn-outline-primary nBtn btn-sm" role="button" style="padding:8px 20px">등록</a>
+         </div>
+    </c:if>
 
     </div>
       <!-- //page-section -->
