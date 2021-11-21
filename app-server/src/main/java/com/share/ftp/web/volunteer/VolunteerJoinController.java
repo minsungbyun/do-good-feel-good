@@ -1,37 +1,67 @@
 package com.share.ftp.web.volunteer;
 
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.dao.VolunteerJoinDao;
+import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.volunteer.VolunteerJoinDTO;
+import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 
 @Controller
+@RequestMapping("/volunteer/join")
 public class VolunteerJoinController { 
 
 
   @Autowired VolunteerJoinDao volunteerJoinDao;
+  @Autowired VolunteerDao VolunteerDao;
   @Autowired SqlSessionFactory sqlSessionFactory;
 
 
 
-  //  @GetMapping("/volunteer/join/form")
-  //  public ModelAndView form(int no) throws Exception {
-  //
-  //    VolunteerRequestDTO volunteer = volunteerDao.findByApprovedVolunteerNo(no);
-  //
-  //    ModelAndView mv = new ModelAndView();
-  //    mv.addObject("volunteer", volunteer);
-  //    mv.addObject("pageTitle", "함께해요 : 봉사참여");
-  //    mv.addObject("contentUrl", "volunteer/VolunteerJoin.jsp");
-  //    mv.setViewName("template1");
-  //    return mv;
-  //  }
+  @GetMapping("form")
+  public ModelAndView form(int no) throws Exception {
 
-  @GetMapping("/volunteer/join/list")
+    VolunteerRequestDTO volunteer = VolunteerDao.findByVolunteerNo(no);
+
+    //    List<Category> categorys = generalDao.findAllCategory();
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("pageTitle", "함께해요 : 봉사참여");
+    mv.addObject("volunteer", volunteer);
+    mv.addObject("contentUrl", "volunteer/join/VolunteerJoinForm.jsp");
+    mv.setViewName("template1");
+    return mv;
+  }
+
+  @PostMapping("add")
+  public ModelAndView add(
+      VolunteerRequestDTO volunteerRequestDTO,
+      VolunteerJoinDTO volunteerJoinDTO, 
+      HttpSession session, 
+      int no) throws Exception {
+
+    volunteerRequestDTO.setNo(no);
+    volunteerJoinDTO.setVolunteer(volunteerRequestDTO);
+    volunteerJoinDTO.setJoinUser((JoinDTO) session.getAttribute("loginUser"));
+
+
+    volunteerJoinDao.insert(volunteerJoinDTO);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:../list");
+    return mv;
+  }
+
+  @GetMapping("list")
   public ModelAndView list(int no) throws Exception {
 
     List<VolunteerJoinDTO> volunteerList = volunteerJoinDao.findAll(no);
@@ -44,7 +74,7 @@ public class VolunteerJoinController {
     return mv;
   }
 
-  @GetMapping("/volunteer/join/detail")
+  @GetMapping("detail")
   public ModelAndView detail(int no) throws Exception {
 
     List<VolunteerJoinDTO> volunteerList = volunteerJoinDao.findAll(no);

@@ -5,14 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 
-@WebServlet("/volunteer/detail")
+//@WebServlet("/volunteer/detail")
 public class VolunteerDetailController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
