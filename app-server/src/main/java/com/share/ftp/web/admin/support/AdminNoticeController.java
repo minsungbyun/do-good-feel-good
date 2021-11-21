@@ -71,10 +71,11 @@ public class AdminNoticeController {
   @PostMapping("/admin/support/noticeUpdate")
   public ModelAndView update(NoticeDTO noticeDTO) throws Exception {
 
-    NoticeDTO oldNoticeDTO = noticeDao.findByNo(noticeDTO.getNo());
-    if (oldNoticeDTO == null) {
+    NoticeDTO notice = noticeDao.findByNo(noticeDTO.getNo());
+    if (notice == null) {
       throw new Exception("해당 번호의 게시글이 없습니다.");
     } 
+
     noticeDao.update(noticeDTO);
     sqlSessionFactory.openSession().commit();
 

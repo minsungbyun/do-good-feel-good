@@ -11,6 +11,8 @@ public interface DonationRegisterDao {
   DonationRegisterDTO findByNo(int no) throws Exception;
   List<DonationRegisterDTO> findAllNo(int no) throws Exception;
   long findByRemainMoney(int donationBoardNo) throws Exception;
+  long findByRegisterMoney(int donationBoardNo) throws Exception;
+  int findByJoinUser(int donationBoardNo) throws Exception;
   long findByMyDonationMoney(int userNo) throws Exception;
   //  void update(DonationRegisterDTO donationBoardDTO) throws Exception;
   //  void delete(int no) throws Exception;

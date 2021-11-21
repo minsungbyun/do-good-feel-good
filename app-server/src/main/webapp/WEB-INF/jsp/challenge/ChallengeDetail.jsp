@@ -95,7 +95,6 @@
 								<p>획득 포인트:100포인트</p>
 							</li>
 						</ul>
-          <c:if test="${challengeQuestionDTO.reply != null}">
 						<form action="joinAdd" method="post">
 							<div class="class" id="id" style="display: none">
 								<label for='f-no'>챌린지번호</label> <input id='f-no' type='text'
@@ -104,7 +103,6 @@
 							<br>
 							<button class="btn btn-secondary">참여하기</button>
 						</form>
-				  </c:if>
 					</div>
 				</div>
 				<!-- //vol-infor-wrap -->
