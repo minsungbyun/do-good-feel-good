@@ -17,20 +17,21 @@
 </head>
 <body>
 <h1>모금함 개설신청 양식(MVC)</h1>
-<form action='registerAdd' method="post">
+<form action="add?boardNo=${boardNo}" method="post" data-no="${boardNo}">
     
     <label for='f-donationBoard'>모금함번호</label> 
-    <input id='f-donationBoard' type='number' name='donationBoard' value="${donationBoardNo}" readonly><br>
+    <input id='f-donationBoard' type='number' name='donationBoard' value="${boardNo}" readonly><br>
     
+    <!-- 
     <label for='f-donator'>기부자</label> 
     <input id='f-donator' type="number" name='donator'><br>
-    
+     -->
     
     <label for='f-donationMoney'>기부금액</label> 
     <input id='f-donationMoney' type='number' name='donationMoney'><br>
     
     <label for='f-registerationNumber'>주민등록번호</label> 
-    <input id='f-registerationNumber' type='number' name='registerationNumber'><span>-</span><input id='f-backRegisterationNumber' type='password' name='registerationNumber'><br>
+    <input id='f-registerationNumber' type='number' name='registerationNumber'><br>
     
     <c:forEach items="${payTypes}" var="donationRegisterPayType">
     <label for='f-payType'>${donationRegisterPayType.title}</label> 
@@ -126,6 +127,9 @@ var msg = '결제에 실패하였습니다.';
 msg += '에러내용 : ' + rsp.error_msg;
 }
 alert(msg);
+
+window.location.href = "add?boardNo=11";
+
 });
 });
 </script>

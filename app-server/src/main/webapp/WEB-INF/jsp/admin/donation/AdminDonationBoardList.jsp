@@ -88,12 +88,6 @@
     </div>
     <!-- //ad-main -->
     
-  </div>
-  <!-- //wrap -->
-
-</body>
-</html>
- 
 
 
 

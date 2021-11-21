@@ -86,8 +86,6 @@ public class DonationBoardController {
     donationBoardDTO.setLeader((OrgDTO) session.getAttribute("orgLoginUser"));
     donationBoardDTO.setOrgNo(donationBoardDTO.getLeader().getOrgNo());
 
-    System.out.println(donationBoardDTO.getLeader().getNo());
-
     donationBoardDTO.setStatus(2);
 
     donationBoardDao.insert(donationBoardDTO);
@@ -114,6 +112,7 @@ public class DonationBoardController {
   public ModelAndView detail(int no) throws Exception {
     DonationBoardDTO donationBoardDTO = donationBoardDao.findByDonationNo(no);
     long remainMoney = donationRegisterDao.findByRemainMoney(no);
+    long money = donationRegisterDao.findByRegisterMoney(no);
     if (donationBoardDTO == null) {
       throw new Exception("해당 번호의 모금함이 없습니다.");
     }
@@ -121,6 +120,7 @@ public class DonationBoardController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("donationBoardDTO", donationBoardDTO);
     mv.addObject("remainMoney", remainMoney);
+    mv.addObject("money", money);
     mv.addObject("pageTitle", "HappyShare : 모금함 상세");
     mv.addObject("contentUrl", "donation/DonationBoardDetail.jsp");
     mv.setViewName("template1");

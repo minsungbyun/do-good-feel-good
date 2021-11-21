@@ -96,6 +96,24 @@
     select ifnull(sum(donation_money), 0) from ftp_donation;
   </select>
   
+  <select id="findByJoinUser" resultType="int" parameterType="int">
+    select 
+      ifnull(count(user_no), 0) 
+    from 
+      ftp_donation
+    where
+      funding_no=#{donationBoard.no}
+  </select>
+  
+  <select id="findByRegisterMoney" resultType="long" parameterType="int">
+    select 
+      ifnull(sum(donation_money), 0) 
+    from 
+      ftp_donation
+    where
+      funding_no=#{donationBoard.no}
+  </select>
+  
   <select id="findByRemainMoney" resultType="long" parameterType="int">
     select 
       ifnull(f.goal-sum(d.donation_money), 0)
