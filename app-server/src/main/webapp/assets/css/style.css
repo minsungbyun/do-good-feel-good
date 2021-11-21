@@ -995,25 +995,6 @@ padding-top:15px;
 	color:#fff;
 }
 
-#pw-modal {
-  z-index : 1;
-  background-color: rgba(0,0,0,.4);
-  position:fixed;
-  left:0;
-  top: 0;
-  width:100%;
-  height:100%;
-}
-
-#pw-modal #pw-content{
-  width:350px;
-  left:50%; top:50%;
-  transform:translate(-50%, -50%);
-  padding:30px;
-  position: relative;
-  background-color:#fff;
-}
-
 /* 후원하기*/
 /* STEPS */
 .steps{
@@ -1045,12 +1026,7 @@ padding-top:15px;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   background-color: #fff;
-
-
-
-
   text-align: center;
-
 }
 
 .form-wrapper .section h3{
@@ -1348,44 +1324,6 @@ fieldset {
 .steps li.active{
   color: #fff;
   background-color:#3498db;
-}
-
-
-/* modal */
-#modal{
-  display : none;
-  z-index : 1;
-  background-color: rgba(0,0,0,.5);
-  position:fixed;
-  left:0;
-  top: 0;
-  width:100%;
-  height:100%;
-  
-}
-#modal #content{  
-  width:380px;
-  left:50%; top:50%;
-  transform:translate(-50%, -50%);
-  padding:40px;
-  position: relative;
-  background-color:#fff;
-}
-
-#modal .close{
-  position:absolute;
-  top:5px;
-  right:6px;  
-  font-size:20px;
-  border:0;
-  background-color: #fff;
-}
-
-#modal .close:hover,
-#modal .close:focus {
-  color : #000;
-  text-decoration: none;
-  cursor :pointer;
 }
 
 .form-btn {

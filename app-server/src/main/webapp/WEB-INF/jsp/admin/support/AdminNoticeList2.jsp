@@ -17,12 +17,14 @@
           <table class="table">
             <thead>
               <tr>
+               <th scope="col">
+                 <input type="checkbox" id="checkAll" name="checkAll">
+               </th>
                 <th scope="col">번호</th>
                 <th scope="col">제목</th>
                 <th scope="col">등록일</th>
                 <th scope="col">조회수</th>
                 <th scope="col">첨부파일</th>
-                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -32,19 +34,12 @@
 			      
 			      <c:forEach items="${noticeList}" var="noticeDTO" >
               <tr>
+                <td><input type="checkbox" name="checkRow" class="select-box" value="${noticeDTO.no}"></td>
                 <td>${noticeDTO.no}</td>
                 <td><a href='noticeDetail?noticeNo=${noticeDTO.no}'>${noticeDTO.title}</a></td>
                 <td>${noticeDTO.registeredDate}</td>
                 <td>${noticeDTO.viewCount}</td>
                 <td>${noticeDTO.fileUpload}</td>
-                <td>
-                  <button type="button" class="btn btn-primary x-delete-btn" 
-					                data-bs-toggle="modal" 
-					                data-bs-target="#noticeModal"
-					                data-no="${noticeDTO.no}">
-					            삭제
-					        </button>
-                </td>
               </tr>
             </c:forEach>
             </tbody>

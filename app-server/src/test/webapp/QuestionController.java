@@ -36,16 +36,10 @@ public class QuestionController {
   }
 
   @PostMapping("/support/questionAdd")
-  public ModelAndView add(
-      QuestionListDTO questionListDTO, 
-      QuestionCategory qnaType,
-      int qnaTypeNo,  
-      HttpSession session) throws Exception {
+  public ModelAndView add(QuestionListDTO questionListDTO, QuestionCategory qnaType, HttpSession session) throws Exception {
 
-    qnaType.setNo(qnaTypeNo);
     questionListDTO.setOwner((JoinDTO)session.getAttribute("loginUser"));
     questionListDTO.setQnaType(qnaType);
-
 
     questionDao.insert(questionListDTO);
     sqlSessionFactory.openSession().commit();

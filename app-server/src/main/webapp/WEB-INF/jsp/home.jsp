@@ -470,9 +470,12 @@
   
           </div>
         </div> <!-- .container -->
-     <!--  </div> --> <!-- .page-section -->
-       
-    </main>
+	     <!--  </div> --> <!-- .page-section -->
+	       
+	    </main>
+	    
+	   
+		    
     </body>
     </html>
 

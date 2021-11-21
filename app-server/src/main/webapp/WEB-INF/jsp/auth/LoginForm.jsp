@@ -55,31 +55,9 @@
           </div>  <!-- //container -->
         </div>  <!-- //아이디 찾기 -->
     </main>
-	<script type="text/javascript">
-    
-        function checkValue() {
-        	
-        	var check = document.querySelector("#login");
-          check.onclick = function() {
-            alert("테스트");
-            return false;
-          }
-        	
-        	
-        	
-            if(!document.login.id.value) {
-                alert("아이디를 입력하세요.");
-                return false;
-            }
-            
-            if(!document.login.password.value) {
-                alert("비밀번호를 입력하세요.");
-                return false;
-            }
-            
-            
-        }     
-  </script>
+  <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+  
+  
   </body>
 
     
