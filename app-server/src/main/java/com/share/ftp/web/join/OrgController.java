@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.share.ftp.dao.OrgDao;
 import com.share.ftp.domain.join.OrgDTO;
@@ -76,6 +77,17 @@ public class OrgController {
     mv.addObject("contentUrl", "join/org/OrgUserAdd.jsp");
     mv.setViewName("template1");
     return mv;
+  }
+
+  @GetMapping("/join/org/checkId")
+  @ResponseBody
+  public String checkId(String id) throws Exception {
+    OrgDTO orgDTO = orgDao.validId(id);
+    if (orgDTO == null) {
+      return "false";
+    } else {
+      return "true";
+    }
   }
 
   //  @GetMapping("/member/list")

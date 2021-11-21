@@ -1,7 +1,6 @@
 package com.share.ftp.web;
 
 import java.util.Collection;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +12,6 @@ import com.share.ftp.dao.VolunteerShortReviewDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.community.VolunteerShortReviewDTO;
 import com.share.ftp.domain.donation.DonationBoardDTO;
-import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 
 @Controller
 public class HomeController {
@@ -27,13 +25,13 @@ public class HomeController {
   @RequestMapping("/home")
   public ModelAndView home() throws Exception {
 
-    List<VolunteerRequestDTO> volunteerList = volunteerDao.findAllApproved();
+    //    List<VolunteerRequestDTO> volunteerList = volunteerDao.findAllApproved();
     Collection<VolunteerShortReviewDTO> volunteerShortReviewList = volunteerShortReviewDao.findAll();
     Collection<DonationBoardDTO> donationBoardList = donationBoardDao.findAllApply();
     Collection<ChallengeDTO> challengeList = challengeDao.findAll();
 
     ModelAndView mv = new ModelAndView();
-    mv.addObject("volunteerList", volunteerList);
+    //    mv.addObject("volunteerList", volunteerList);
     mv.addObject("volunteerShortReviewList", volunteerShortReviewList);
     mv.addObject("donationBoardList", donationBoardList);
     mv.addObject("challengeList", challengeList);

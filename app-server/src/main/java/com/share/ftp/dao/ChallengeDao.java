@@ -24,5 +24,6 @@ public interface ChallengeDao {
       @Param("challengeNo")int challengeNo, @Param("userNo")int userNo) throws Exception;
 
   ChallengeDTO findByNo(int challengeNo) throws Exception;
+  List<ChallengeDTO> findJoin(int challengeNo) throws Exception;
   String getRemainTime(long millis) throws Exception;
 }

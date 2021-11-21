@@ -27,21 +27,33 @@
                       </td>
                     </tr>
                     <!-- //아이디 -->
-                    <tr>
-                      <th><em class="icon_required">·</em><span>비밀번호</span></th>
-                      <td>
-                        <label for='f-password' class="sr-only">비밀번호</label> 
-                        <input id='f-password' class="form-control box-input" type='password' name='password' placeholder="8-16자의 영문 및 숫자, 특수문자를 모두 포함">
-                      </td>
-                    </tr>
-                   <tr>
-                    <th><em class="icon_required">·</em><span>비밀번호확인</span></th>
-                    <td>
-                      <label for='f-passwordConfirm' class="sr-only">비밀번호확인</label> 
-                      <input id='f-passwordConfirm' class="form-control box-input" type='password' name='passwordConfirm' placeholder="8-16자의 영문 및 숫자, 특수문자를 모두 포함">
-                    </td>
-                    </tr>
+	                 <tr class="position-relative">
+	                   <th><em class="icon_required">·</em><span>비밀번호</span></th>
+	                   <td>
+	                     <label for='f-password' class="sr-only">비밀번호</label> 
+	                     <input id='f-password' class="form-control box-input pw" type='password'
+	                      name='pwd1' placeholder="4~12자의 영문 대소문자와 숫자로만 입력" required>
+	                     <div class="invalid-feedback">
+	                       비밀번호를 입력해주세요.
+	                     </div>
+	                   </td>
+	                 </tr>
                     <!-- //비밀번호 -->
+		                 <tr>
+		                <th><em class="icon_required">·</em><span>비밀번호확인</span></th>
+		                <td>
+		                  <label for='f-passwordChk' class="sr-only">비밀번호확인</label> 
+		                  <input id='f-passwordChk' class="form-control box-input pw" type='password'
+		                   name='pwd2' placeholder="4~12자의 영문 대소문자와 숫자로만 입력" onKeyUp="fn_compare_pwd();" required>
+		                  <div class="invalid-feedback">
+		                    비밀번호를 확인해 해주세요.
+		                  </div>
+		                  <div id="alert-danger" style="display: none; color: #dc3545; border-color: #dc3545; font-size: 80%">
+		                    비밀번호가 일치하지 않습니다.
+		                  </div>
+		                </td>
+		              </tr>
+		              <!-- //비밀번호 확인 -->
                     <tr>
 			               <th><span>사진</span></th>
 			               <td>
@@ -53,7 +65,10 @@
                       <th><em class="icon_required">·</em><span>이름</span></th>
                       <td>
                         <label for='f-name' class="sr-only">이름</label> 
-                        <input id='f-name' class="form-control box-input" type='text' name='name'>
+                        <input id='f-name' class="form-control box-input" type='text' name='name' required>
+	                     <div class="invalid-feedback">
+	                       이름을 입력해주세요.
+	                     </div>
                       </td>
                     </tr>
                     <!-- //이름 -->
@@ -61,7 +76,10 @@
                       <th><em class="icon_required">·</em><span>휴대폰번호</span></th>
                       <td>
                         <label for='f-tel' class="sr-only">휴대폰번호</label> 
-                        <input id='f-tel' class="form-control box-input" type='tel' name='tel'>
+                        <input id='f-tel' class="form-control box-input" type='tel' name='tel' required>
+	                     <div class="invalid-feedback">
+	                       휴대폰번호를 입력해주세요.
+	                     </div>
                       </td>
                     </tr>
                     <!-- //휴대폰번호 -->
@@ -69,7 +87,10 @@
                       <th><em class="icon_required">·</em><span>이메일</span></th>
                       <td>
                         <label for='f-email' class="sr-only">이메일</label> 
-                        <input id='f-email' class="form-control box-input" type='email' name='email'>
+                        <input id='f-email' class="form-control box-input" type='email' name='email' required>
+	                     <div class="invalid-feedback">
+	                       이메일을 입력해주세요.
+	                     </div>
                       </td>
                     </tr>
                     <!-- //이메일 -->
@@ -87,8 +108,11 @@
                         </div>
                         <div>
                           <label for='f-detailAddress' class="sr-only sr-cont">상세주소</label> 
-                          <input id='f-detailAddress' class="form-control form-sub-control postfo box-input" type='text' name='detailAddress' placeholder="상세주소">
+                          <input id='f-detailAddress' class="form-control form-sub-control postfo box-input" type='text' name='detailAddress' placeholder="상세주소" required>
                         </div>
+	                     <div class="invalid-feedback">
+	                       주소를 입력해주세요.
+	                     </div>
                       </td>
                     </tr>
                     <!-- //주소 -->
@@ -96,7 +120,10 @@
                       <th><em class="icon_required">·</em><span>사업자번호</span></th>
                       <td>
                         <label for='f-corpNo' class="sr-only">사업자번호</label> 
-                        <input id='f-corpNo' class="form-control box-input" type='tel' name='corpNo'>
+                        <input id='f-corpNo' class="form-control box-input" type='tel' name='corpNo' required>
+                       <div class="invalid-feedback">
+                         사업자 번호를 입력해주세요.
+                       </div>
                       </td>
                     </tr>
                     <!-- //사업자번호 -->
@@ -120,7 +147,7 @@
                 </table>
               </div>
               <div class="btn-regi">
-	              <button type="submit" class="btn btn-primary nBtn">회원가입</button>
+	              <button type="submit" id="x-add-btn" class="btn btn-primary nBtn">회원가입</button>
 	              <a href="#" class="btn btn-outline-primary nBtn" role="button">이전</a>
               </div>
             </div>
@@ -134,6 +161,22 @@
 		
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
        <script>
+       //비밀번호 재확인
+       $('.pw').focusout(function () {
+           var pwd1 = $("#f-password").val();
+           var pwd2 = $("#f-passwordChk").val();
+     
+           if ( pwd1 != '' && pwd2 == '' ) {
+               null;
+           } else if (pwd1 != "" || pwd2 != "") {
+               if (pwd1 == pwd2) {
+                   $("#alert-danger").css('display', 'none');
+               } else {
+                   $("#alert-danger").css('display', 'inline-block');
+               }
+           }
+       });
+       
        // 아이디 중복검사
        var addBtn = document.querySelector("#x-add-btn");
        var idTag = document.querySelector("#f-id");
@@ -182,103 +225,6 @@
             });
         }, false); 
             
-          // 유효성 검사 메서드
-          function validLoginForm() {
-          // onsubmit="validLoginForm(this); return false;"도 가능
-          var form = document.form; // name으로 form tag 찾기
-          //var form = document.querySelector("form"); // form태그 바로 찾기
-          //var form = document.querySelector("#id-tag"); // id로 찾기 
-          //var form = document.querySelector(".ccc"); // class로 찾기
-
-          var loadForm = false;
-          if (loadForm) {
-            alert("처리중입니다. 잠시만 기다려주세요");
-            return;
-          }
-
-          form.id.value = form.id.value.trim(); // 공백제거
-          
-          if(form.id.value.length == 0) {
-            alert("로그인 아이디를 입력해주세요!");
-            form.id.focus();
-            return;
-          }
-
-          form.password.value = form.password.value.trim();
-          
-          if(form.password.value.length == 0) {
-            alert("로그인 비밀번호를 입력해주세요!");
-            form.password.focus();
-            return;
-          }
-
-          form.passwordConfirm.value = form.passwordConfirm.value.trim();
-
-          if (form.password.value != form.passwordConfirm.value ) {
-            alert("비밀번호가 일치하지 않습니다! 다시 입력해주세요");
-            form.passwordConfirm.focus();
-            return;
-          }
-
-          form.name.value = form.name.value.trim();
-          
-          if(form.name.value.length == 0) {
-            alert("이름을 입력해주세요!");
-            form.name.focus();
-            return;
-          }
-
-          form.tel.value = form.tel.value.trim();
-          
-          if(form.tel.value.length == 0) {
-            alert("전화번호를 입력해주세요!");
-            form.tel.focus();
-            return;
-          } else if (form.tel.value.indexOf("-") == -1) {
-            alert("-를 포함해서 입력해주세요! ex) 010-xxxx-xxxx");
-            form.tel.focus();
-            return;
-          }
-
-          form.email.value = form.email.value.trim();
-          
-          if(form.email.value.length == 0) {
-            alert("이메일을 입력해주세요!");
-            form.email.focus();
-            return;
-
-          } else if (form.email.value.indexOf("@") == -1) {
-            alert("@를 포함해서 입력해주세요! ex) sample@naver.com");
-            form.email.focus();
-            return;
-          }
-          
-          form.postNo.value = form.postNo.value.trim();
-          
-          if(form.postNo.value.length == 0) {
-            alert("기본주소를 입력해주세요!");
-            form.postNo.focus();
-            return;
-          }
-
-          form.corpNo.value = form.corpNo.value.trim();
-          
-          if(form.corpNo.value.length == 0) {
-            alert("사업자번호를 입력해주세요!");
-            form.corpNo.focus();
-            return;
-          } else if (form.corpNo.value.indexOf("-") == -1) {
-            alert("-를 포함해서 입력해주세요! ex) xxx-xx-xxxxx");
-            form.corpNo.focus();
-            return;
-          }
-
-          form.submit();
-          loadForm = true;
-        }
-
-//document.querySelector("button").addEventListener("click", validLoginForm());
-
 
       </script>
 
