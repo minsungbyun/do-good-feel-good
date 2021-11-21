@@ -90,7 +90,7 @@
 									00일</span></li>
 							<li><span>참여기간</span> <span>${challengeDTO.startDate}~${challengeDTO.endDate}</span>
 							</li>
-							<li>D-day 00일</li>
+							<li>D-day ${challengeDTO.remainDate}일</li>
 							<li>
 								<p>획득 포인트:100포인트</p>
 							</li>

@@ -14,6 +14,9 @@
     <result column="created_dt" property="registeredDate"/>
     <result column="apply_dt" property="applyDate"/>
     
+    <result column="total_dt" property="totalDate"/> 
+    <result column="remain_dt" property="remainDate"/> 
+    
     <association property="wish" javaType="joinDTO">
       <id column="wish_no" property="no"/>
       <result column="wish_id" property="id"/>
@@ -149,6 +152,23 @@
       c.challenge_no=#{values}
   </select>
   
+   <select id="remainDate" resultType="int" parameterType="int">
+      select 
+        datediff(date_format(c.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt
+      from
+        ftp_challenge c
+      where
+        c.challenge_no=#{values}
+    </select>
+    
+   <select id="totalDate" resultType="int" parameterType="int">
+      select 
+        datediff(date_format(c.end_dt,'%Y-%m-%d'), date_format(c.start_dt,'%Y-%m-%d')) total_dt
+      from
+        ftp_challenge c
+      where
+        c.challenge_no=#{values}
+    </select>
 </mapper>
 
 
