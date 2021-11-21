@@ -35,7 +35,7 @@
                 <a href="#"><span>비밀번호 찾기</span></a>
               </div>
               <div class="loginSns">
-                <a href="" id="naverIdLogin" class="sns-login-button sns01" snstype="naver">
+                <a href="" class="sns-login-button sns01" snstype="naver">
                   <s></s>
                   <span>네이버 계정으로 로그인</span>
                 </a>
