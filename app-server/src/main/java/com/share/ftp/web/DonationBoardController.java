@@ -2,6 +2,7 @@ package com.share.ftp.web;
 
 import java.util.Collection;
 import java.util.List;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -30,6 +31,7 @@ public class DonationBoardController {
   @Autowired DonationBoardDao donationBoardDao;
   @Autowired DonationRegisterDao donationRegisterDao;
   @Autowired GeneralDao generalDao;
+  @Autowired ServletContext sc;
 
   @GetMapping("form")
   public ModelAndView form() throws Exception {
@@ -51,35 +53,13 @@ public class DonationBoardController {
       int categoryNo,
       HttpSession session,
       Part photoFile) throws Exception {
-    //    
-    //    for (int i = 0; i < photoFile.length; i++) {
-    //      if (photoFile.length() > 0) {
-    //        String filename = UUID.randomUUID().toString();
-    //        photoFile.write(sc.getRealPath("/upload/member") + "/" + filename);
-    //        member.setPhoto(filename);
+
+
+    //    if (photoFile.getSize() > 0) {
+    //      String filename = UUID.randomUUID().toString();
+    //      photoFile.write(sc.getRealPath("/upload/donation") + "/" + filename);
+    //      member.setPhoto(filename);
     //
-    //        Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
-    //        .size(20, 20)
-    //        .outputFormat("jpg")
-    //        .crop(Positions.CENTER)
-    //        .toFiles(new Rename() {
-    //          @Override
-    //          public String apply(String name, ThumbnailParameter param) {
-    //            return name + "_20x20";
-    //          }
-    //        });
-    //
-    //        Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
-    //        .size(100, 100)
-    //        .outputFormat("jpg")
-    //        .crop(Positions.CENTER)
-    //        .toFiles(new Rename() {
-    //          @Override
-    //          public String apply(String name, ThumbnailParameter param) {
-    //            return name + "_100x100";
-    //          }
-    //        });
-    //      }
     //    }
     category.setNo(categoryNo);
     donationBoardDTO.setCategory(category);

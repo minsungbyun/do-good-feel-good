@@ -51,7 +51,7 @@
 							<td>${donationBoardDTO.status}</td>
 							<td>
 								<button type="button" class="btn btn-primary x-delete-btn"
-									data-bs-toggle="modal" data-bs-target="#memberModal"
+									data-toggle="modal" data-target="#memberModal"
 									data-no="${donationBoardDTO.no}">삭제</button>
 							</td>
 						</tr>
@@ -119,7 +119,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary"
-					data-bs-dismiss="modal">닫기</button>
+					data-dismiss="modal">닫기</button>
 				<button type="button" class="btn btn-primary">삭제</button>
 			</div>
 		</div>
