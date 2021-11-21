@@ -19,7 +19,7 @@
 						<li id="do-tap-de"><a
 							href="${contextPath}/app/register/list?no=${donationBoardDTO.no}">참여내역</a></li>
 					</ul>
-					<div class="tab-cont">
+					<div class="tab-cont" style="background: #ddd;">
 						<p class="tab-cont-sub">${donationBoardDTO.content}</p>
 						<c:forEach items="${fileList}" var="DonationBoardAttachedFile">
 							<div class="owl-img">${DonationBoardAttachedFile.filepath}</div>
