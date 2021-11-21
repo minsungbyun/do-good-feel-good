@@ -1,6 +1,8 @@
 package com.share.ftp.web.challenge;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -36,12 +38,24 @@ public class ChallengeController {
   @GetMapping("/challenge/detail")
   public ModelAndView detail(int no) throws Exception {
     ChallengeDTO challengeDTO = challengeDao.findByNo(no);
-    if (challengeDTO == null) {
-      throw new Exception("해당 번호의 회원이 없습니다.");
+    Collection<ChallengeDTO> challengeJoinList = challengeDao.findJoin(no);
+
+
+    Collection<JoinDTO> joinUser = new ArrayList<>();
+
+    for (JoinDTO join : challengeDTO.getMembers()) {
+      join.setRegisterDate(challengeDTO.getApplyDate());
+      joinUser.add(join);
     }
+
+    //    if (challengeDTO == null) {
+    //      throw new Exception("해당 번호의 회원이 없습니다.");
+    //    }
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("challengeDTO", challengeDTO);
+    mv.addObject("joinUser", joinUser);
+    mv.addObject("challengeJoinList", challengeJoinList);
     mv.addObject("pageTitle", "회원정보");
     mv.addObject("contentUrl", "challenge/ChallengeDetail.jsp");
     mv.setViewName("template1");
@@ -51,9 +65,14 @@ public class ChallengeController {
   @PostMapping("/challenge/joinAdd")
   public ModelAndView joinAdd (
       ChallengeDTO challengeDTO, HttpSession session, int no) throws Exception {
-    JoinDTO user = (JoinDTO) session.getAttribute("loginUser");
 
-    challengeDao.insertUser(no, user.getNo());
+    JoinDTO joinDTO = (JoinDTO) session.getAttribute("loginUser");
+
+    List<JoinDTO> joinUser =  new ArrayList<>();
+    joinUser.add((JoinDTO) session.getAttribute("loginUser"));
+    challengeDTO.setMembers(joinUser);
+
+    challengeDao.insertUser(no, joinDTO.getNo());
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();

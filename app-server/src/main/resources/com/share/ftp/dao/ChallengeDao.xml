@@ -12,6 +12,7 @@
     <result column="start_dt" property="startDate"/>
     <result column="end_dt" property="endDate"/>
     <result column="created_dt" property="registeredDate"/>
+    <result column="apply_dt" property="applyDate"/>
     
     <association property="wish" javaType="joinDTO">
       <id column="wish_no" property="no"/>
@@ -19,16 +20,18 @@
       <result column="wish_name" property="name"/>
     </association>
     
+    <collection property="members" ofType="joinDTO">
+      <id column="user_no" property="no"/>
+      <result column="user_id" property="id"/>
+      <result column="user_name" property="name"/>
+      <result column="user_created_dt" property="registerDate"/>
+    </collection>
+    
     <collection property="fileUpload" ofType="challengeAttachedFile">
       <id column="challenge_file_no" property="no"/>
       <result column="filepath" property="filepath"/>
     </collection>
     
-    <collection property="members" ofType="joinDTO">
-      <id column="user_no" property="no"/>
-      <result column="user_id" property="id"/>
-      <result column="user_name" property="name"/>
-    </collection>
   </resultMap>
   
   
@@ -108,9 +111,11 @@
      c.start_dt,
      c.end_dt,
      c.created_dt,
+     cu.apply_dt,
      u.user_no user_no,
      u.name user_name,
      u.id user_id,
+     u.created_dt user_created_dt,
      f.filepath
     from
      ftp_challenge c
@@ -120,6 +125,30 @@
     where 
       c.challenge_no=#{values}
   </select>
+  
+  <select id="findJoin" resultMap="ChallengeDTOMap" parameterType="int">
+     select 
+     c.challenge_no,
+     c.title,
+     c.content,
+     c.start_dt,
+     c.end_dt,
+     c.created_dt,
+     cu.apply_dt,
+     cu.user_no user_no,
+     cu.challenge_no,
+     u.name user_name,
+     u.id user_id,
+     f.filepath
+    from
+     ftp_challenge_apply cu
+     left outer join ftp_challenge c on c.challenge_no=cu.challenge_no
+     left outer join ftp_user u on cu.user_no=u.user_no
+     left outer join ftp_challenge_file f on c.challenge_no=f.challenge_no
+    where 
+      c.challenge_no=#{values}
+  </select>
+  
 </mapper>
 
 
