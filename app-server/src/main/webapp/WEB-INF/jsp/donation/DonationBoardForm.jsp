@@ -14,15 +14,20 @@
 				<div class="base-table">
 					<form action='add' method="post" enctype="multipart/form-data">
 						<table class="join-table">
-							<c:forEach items="${categorys}" var="category">
-								<div class="form-check">
-									<input id='f-category' type='radio' name='categoryNo'
-										value="${category.no}"> <label for='f-category'
-										class="form-check-label">${category.title}</label>
-								</div>
-							</c:forEach>
+							<thead></thead>
 							<tbody>
-
+                <tr>
+                  <th><em class="icon_required">·</em><span>카테고리</span></th>
+                  <td>
+                    <c:forEach items="${categorys}" var="category">
+			                <div class="form-check" style="display:inline-block; width:90px;">
+			                  <input id='f-category' type='radio' name='categoryNo'
+			                    value="${category.no}"> <label for='f-category'
+			                    class="form-check-label">${category.title}</label>
+			                </div>
+			              </c:forEach>
+                  </td>
+                </tr>
 								<!-- //주최자 -->
 								<tr>
 									<th><em class="icon_required">·</em><span>제목</span></th>
