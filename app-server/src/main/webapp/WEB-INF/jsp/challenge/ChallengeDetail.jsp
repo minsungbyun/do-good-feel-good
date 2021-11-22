@@ -33,7 +33,7 @@
 			</div>
 			<div class="chall-detail">
 				<div class="chall-de-img">
-					<img src="../assets/img/201612011168_500.jpg" alt="함께해요 상세 이미지" />
+					<img src="${contextPath}/upload/challenge/${challengeDTO.photo}" alt="챌린지 상세 이미지" />
 				</div>
 				<!-- //vol-de-img -->
 				<div class="chall-infor-wrap">
@@ -87,10 +87,10 @@
 					<div class="chall-detail-infor">
 						<ul>
 							<li><span>모집기간</span> <span>${challengeDTO.startDate}~${challengeDTO.endDate}</span><span>총
-									00일</span></li>
+									${challengeDTO.totalDate}일</span></li>
 							<li><span>참여기간</span> <span>${challengeDTO.startDate}~${challengeDTO.endDate}</span>
 							</li>
-							<li>D-day 00일</li>
+							<li>D-day ${challengeDTO.remainDate}일</li>
 							<li>
 								<p>획득 포인트:100포인트</p>
 							</li>

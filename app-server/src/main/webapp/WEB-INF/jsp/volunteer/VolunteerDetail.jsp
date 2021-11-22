@@ -28,7 +28,11 @@
 			<h3 class="widget-title">${volunteer.title}</h3>
 			<div class="vol-detail">
 				<div class="vol-de-img">
-					<img src="../assets/img/201612011168_500.jpg" alt="함께해요 상세 이미지" />
+					<a href="${contextPath}/upload/volunteer/${volunteer.photo}">
+            <img style="width:100%"
+              id="f-photo-image"
+              src="${contextPath}/upload/volunteer/${volunteer.photo}">
+              </a>
 				</div>
 				<div class="vol-infor-wrap">
 					<!-- vol-joiner -->
@@ -36,7 +40,7 @@
 						<div style="padding: 10px;">
 							<span class="vol-cur" >
 							  <span class="sr-only">참여인원</span>
-							  <b class="vol-count">${volunteer.currentNum}명</b> /
+							  <b class="vol-count">${joinCount}명</b> /
 							  <span class="sr-only">총 모집인원</span> ${volunteer.limitNum}명
 							</span>
 							<div class="progress" style="margin:10px 0 15px 0;">

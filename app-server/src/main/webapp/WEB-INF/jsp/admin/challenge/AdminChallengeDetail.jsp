@@ -22,6 +22,12 @@
         <label for='f-endDate'>종료일</label> 
         <input id='f-endDate' type='date' name='endDate' value='${challengeDTO.endDate}'><br>
 
+        <label for='f-photo'>사진</label> 
+			    <a href="${contextPath}/upload/challenge/${challenge.photo}" >
+			        <img id="f-challenge-image" src="${contextPath}/upload/challenge/${challenge.photo}_100x100.jpg">
+          </a>
+        <input id='f-photo' type='file' name='photoFile'><br>
+
         <label for='f-registeredDate'>등록일</label> 
         <span id='f-registeredDate'>${challengeDTO.registeredDate}</span><br>
     <button>변경</button>

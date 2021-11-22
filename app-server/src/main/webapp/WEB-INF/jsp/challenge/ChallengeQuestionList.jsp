@@ -145,10 +145,8 @@
 							<!-- 모달 창 -->
 							<c:if
 								test="${sessionScope.loginUser.no == challengeQuestionDTO.owner.no}">
-                  &nbsp;&nbsp;<a data-toggle="modal"
-									href="#myModalQuestionU${vs.index}">[변경]</a>
-								<a
-									href='questionDelete?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[삭제]</a>
+                  &nbsp;&nbsp;<a data-toggle="modal" href="#myModalQuestionU${vs.index}">[변경]</a>
+								<a href='questionDelete?questionNo=${challengeQuestionDTO.questionNo}&no=${challengeQuestionDTO.no}'>[삭제]</a>
 							</c:if>
 						</div>
 						<br>

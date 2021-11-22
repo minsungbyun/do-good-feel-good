@@ -38,7 +38,7 @@
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">함께해요</a>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="${contextPath}/app/volunteer/list">봉사목록</a>
-                  <a class="dropdown-item" href="#">봉사신청</a>
+                  <a class="dropdown-item" href="${contextPath}/app/volunteer/form">봉사신청</a>
                 </div>
               </li>
               <li class="nav-item dropdown">

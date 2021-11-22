@@ -11,6 +11,7 @@
     <result column="content" property="content"/>
     <result column="created_dt" property="registeredDate"/>
     <result column="view_cnt" property="viewCount"/>
+    <result column="photo" property="photo"/> 
 
 
     <association property="owner" javaType="joinDTO">
@@ -37,10 +38,12 @@
     insert into ftp_vol_board(
       user_no,
       title,
+      photo,
       content)
     values(
       #{owner.no},    
       #{title},
+      #{photo},
       #{content})
   </insert>
   
@@ -55,6 +58,7 @@
       b.title,
       b.created_dt,
       b.view_cnt,
+      b.photo,
       f.filepath,
       u.id owner_id
     from
@@ -71,6 +75,7 @@
       b.title,
       b.created_dt,
       b.view_cnt,
+      b.photo,
       f.filepath,
       u.id owner_id,
       count(l.user_no) likeCount
@@ -131,6 +136,7 @@
       b.content,
       b.created_dt,
       b.view_cnt,
+      b.photo,
       f.filepath,
       u.id owner_id
     from
@@ -151,6 +157,7 @@
    <update id="update" parameterType="volunteerBoardDTO">
    update ftp_vol_board set
      title=#{title},
+     photo=#{photo},
      content=#{content}
    where 
       vol_board_no=#{no}
