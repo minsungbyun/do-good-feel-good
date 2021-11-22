@@ -17,6 +17,7 @@ public class DonationBoardDTO {
   private String content;
   private String tel;
   private String email;
+  private String photo;
   private Date startDate;
   private Date endDate;
   private String totalDate;
@@ -29,14 +30,22 @@ public class DonationBoardDTO {
 
 
 
-
   @Override
   public String toString() {
     return "DonationBoardDTO [no=" + no + ", orgNo=" + orgNo + ", category=" + category
         + ", leader=" + leader + ", title=" + title + ", content=" + content + ", tel=" + tel
-        + ", email=" + email + ", startDate=" + startDate + ", endDate=" + endDate + ", totalDate="
-        + totalDate + ", remainDate=" + remainDate + ", moneyTarget=" + moneyTarget + ", status="
-        + status + ", note=" + note + ", fileUpload=" + fileUpload + ", members=" + members + "]";
+        + ", email=" + email + ", photo=" + photo + ", startDate=" + startDate + ", endDate="
+        + endDate + ", totalDate=" + totalDate + ", remainDate=" + remainDate + ", moneyTarget="
+        + moneyTarget + ", status=" + status + ", note=" + note + ", fileUpload=" + fileUpload
+        + ", members=" + members + "]";
+  }
+
+
+  public String getPhoto() {
+    return photo;
+  }
+  public void setPhoto(String photo) {
+    this.photo = photo;
   }
   public int getNo() {
     return no;

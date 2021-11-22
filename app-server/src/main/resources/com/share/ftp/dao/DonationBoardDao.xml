@@ -17,6 +17,7 @@
     <result column="goal" property="moneyTarget"/>
     <result column="status" property="status"/>
     <result column="note" property="note"/> 
+    <result column="photo" property="photo"/> 
     
     <result column="total_dt" property="totalDate"/> 
     <result column="remain_dt" property="remainDate"/> 
@@ -51,6 +52,7 @@
        start_dt,
        end_dt,
        goal,
+       photo,
        status)
     values(
        #{orgNo},
@@ -62,6 +64,7 @@
        #{startDate},
        #{endDate},
        #{moneyTarget},
+       #{photo},
        #{status})
   </insert>
   <insert id="insertFile">
@@ -78,6 +81,7 @@
           d.email,
           d.start_dt,
           d.end_dt,
+          d.photo,
           datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt,
          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
           d.goal,
@@ -106,6 +110,7 @@
          d.email,
          d.start_dt,
          d.end_dt,
+         d.photo,
          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt,
          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
          d.goal,
@@ -135,6 +140,7 @@
          d.email,
          d.start_dt,
          d.end_dt,
+         d.photo,
          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt,
          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
          d.goal,
@@ -165,6 +171,7 @@
          d.email,
          d.start_dt,
          d.end_dt,
+         d.photo,
          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt,
          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
          d.goal,
@@ -194,6 +201,7 @@
          d.email,
          d.start_dt,
          d.end_dt,
+         d.photo,
          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt,
          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
          d.goal,
@@ -246,6 +254,7 @@
          d.email,
          d.start_dt,
          d.end_dt,
+         d.photo,
          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) total_dt,
          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
          d.goal,
@@ -272,6 +281,7 @@
          d.email,
          d.start_dt,
          d.end_dt,
+         d.photo,
          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) datediff,
          d.goal,
          p.id leader_id,  
@@ -297,6 +307,7 @@
          d.email,
          d.start_dt,
          d.end_dt,
+         d.photo,
          datediff(date_format(d.end_dt,'%Y-%m-%d'), date_format(d.start_dt,'%Y-%m-%d')) datediff,
          d.goal,
          p.id leader_id,  
@@ -325,6 +336,7 @@
          email=#{email},
          start_dt=#{startDate},
          end_dt=#{endDate},
+         photo=#{photo},
          goal=#{moneyTarget}
       where 
          funding_no=#{no}
