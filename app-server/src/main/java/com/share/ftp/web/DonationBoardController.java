@@ -2,6 +2,7 @@ package com.share.ftp.web;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
@@ -55,12 +56,12 @@ public class DonationBoardController {
       Part photoFile) throws Exception {
 
 
-    //    if (photoFile.getSize() > 0) {
-    //      String filename = UUID.randomUUID().toString();
-    //      photoFile.write(sc.getRealPath("/upload/donation") + "/" + filename);
-    //      member.setPhoto(filename);
-    //
-    //    }
+    if (photoFile.getSize() > 0) {
+      String filename = UUID.randomUUID().toString();
+      photoFile.write(sc.getRealPath("/upload/donation") + "/" + filename);
+      donationBoardDTO.setPhoto(filename);
+
+    }
     category.setNo(categoryNo);
     donationBoardDTO.setCategory(category);
     donationBoardDTO.setLeader((OrgDTO) session.getAttribute("orgLoginUser"));

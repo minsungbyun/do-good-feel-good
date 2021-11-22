@@ -20,6 +20,11 @@
 							href="${contextPath}/app/register/list?no=${donationBoardDTO.no}">참여내역</a></li>
 					</ul>
 					<div class="tab-cont" style="background: #ddd;">
+						<a href="${contextPath}/upload/donation/${donationBoardDTO.photo}">
+						<img style="width:100%"
+							id="f-photo-image"
+							src="${contextPath}/upload/donation/${donationBoardDTO.photo}">
+						</a>
 						<p class="tab-cont-sub">${donationBoardDTO.content}</p>
 						<c:forEach items="${fileList}" var="DonationBoardAttachedFile">
 							<div class="owl-img">${DonationBoardAttachedFile.filepath}</div>
