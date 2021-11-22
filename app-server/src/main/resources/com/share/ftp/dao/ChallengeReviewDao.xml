@@ -10,6 +10,7 @@
     <result column="challenge_no" property="no"/> 
     <result column="content" property="content"/>
     <result column="created_dt" property="registeredDate"/>
+    <result column="photo" property="photo"/>
     
     <association property="owner" javaType="joinDTO">
       <id column="user_no" property="no"/>
@@ -29,6 +30,7 @@
       r.challenge_review_no,
       r.content,
       r.created_dt,
+      r.photo,
       u.user_no user_No,
       u.id id,
       f.filepath
@@ -46,6 +48,7 @@
       r.challenge_review_no,
       r.content,
       r.created_dt,
+      r.photo,
       u.user_no,
       u.id
     from
@@ -58,8 +61,8 @@
   </select>
   
   <insert id="insert" parameterType="ChallengeReviewDTO">
-    insert into ftp_challenge_review(challenge_no,content,user_no) 
-    values(#{no},#{content},#{owner.no})
+    insert into ftp_challenge_review(challenge_no,content,user_no,photo) 
+    values(#{no},#{content},#{owner.no},#{photo})
   </insert>
   
   <insert id="insertFile">
@@ -69,7 +72,8 @@
   
   <update id="update" parameterType="ChallengeReviewDTO">
     update ftp_challenge_review set
-     content=#{content}
+     content=#{content},
+     photo#={photo}
     where 
       challenge_review_no=#{reviewNo}
   </update>
@@ -92,6 +96,7 @@
       r.challenge_review_no,
       r.content,
       r.created_dt,
+      r.photo,
       u.user_no,
       u.id
     from
