@@ -28,7 +28,7 @@
         </div>
         <c:forEach items="${challengeList}" var="challengeDTO">
         <div class="card" style="width: 29%; height: auto; margin-right:3.33%; margin-bottom: 3.33%; float: right; text-align : center;">
-          <img src="https://image.flaticon.com/icons/png/512/755/755151.png" class="card-img-top" alt="..." style="width:150px; height:150px; display: block; margin: 0 auto;">
+          <img src="${contextPath}/upload/challenge/${challengeDTO.photo}" class="card-img-top" alt="..." style="width:150px; height:150px; display: block; margin: 0 auto;">
           <div class="card-body" >
             <h5 class="card-title">${challengeDTO.title}</h5>
             <p class="card-text">${challengeDTO.startDate} ~ ${challengeDTO.endDate}</p>
