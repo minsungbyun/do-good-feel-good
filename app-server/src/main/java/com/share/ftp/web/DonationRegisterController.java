@@ -57,12 +57,16 @@ public class DonationRegisterController {
   public ModelAndView add(
       DonationBoardDTO donationBoard,
       DonationRegisterDTO donationRegisterDTO,
-      DonationRegisterPayType payTypeNo,
       HttpSession session,
+      int money,
+      String registeration,
       int boardNo) throws Exception {
 
+    DonationRegisterPayType payTypeNo = new DonationRegisterPayType();
+    payTypeNo.setNo(1);
     donationBoard.setNo(boardNo);
-
+    donationRegisterDTO.setDonationMoney(money);
+    donationRegisterDTO.setRegisterationNumber(registeration);
     donationRegisterDTO.setPayTypeNo(payTypeNo);
     donationRegisterDTO.setDonationBoard(donationBoard);
     donationRegisterDTO.setDonator((JoinDTO) session.getAttribute("loginUser"));
