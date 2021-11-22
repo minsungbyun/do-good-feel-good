@@ -31,15 +31,15 @@
            
               <!-- //파일첨부 -->
           
-           <%--         <div class="mb-3 row">
+                    <div class="mb-3 row">
             <label for='f-photo' class="col-sm-2 col-form-label">사진</label> 
             <div class="col-sm-10">
-              <a href="../upload/volunteer/${volunteerBoardDTO.fileUpload}" >
-                  <img id="f-photo-image" src="../upload/volunteer/${volunteerBoardDTO.fileUpload}_100x100.jpg">
+              <a href="${contextPath}/upload/volunteer/${volunteerBoardDTO.photo}" >
+                  <img id="f-photo-image" src="${contextPath}/upload/volunteer/${volunteerBoardDTO.photo}_500x500.jpg">
               </a>
-              <input id='f-photo' type='file' name='photo' class="form-control">
+              <input id='f-photo' type='file' name='photoFile' class="form-control">
             </div>
-          </div> --%>
+          </div> 
           
           <div class="form-group">
             <label for='f-registeredDate' class="col-sm-2 col-form-label"><b>등록일</b></label> 

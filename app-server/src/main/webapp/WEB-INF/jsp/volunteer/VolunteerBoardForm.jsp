@@ -45,20 +45,20 @@
   </div>
   
   <div class="mb-3 row">
-  <label for='f-photo' class="col-sm-2 col-form-label">사진</label> 
+  <label for='f-photo' class="col-sm-2 col-form-label">파일첨부</label> 
   <div class="col-sm-8">
-    <input id='f-photo' type='file' name='photo' class="form-control">
+    <input id='f-photo' type='file' name='photoFile' class="form-control">
   </div>
 </div>
   
-
-  <%--<div class="mb-3 row">
+<!-- 
+  <div class="mb-3 row">
    <label for='f-viewCount' class="col-sm-2 col-form-label">첨부파일</label> 
    <div class="col-sm-10">
-     <input id='f-viewCount' type="file" class="form-control-plaintext">
+     <input id='f-viewCount' type="file" class="form-control-plaintext" name='photoFile'>
    </div>
   </div>  
-   --%>
+    -->
 
   <div class="button-box">
     <button class="btn btn-primary" type="submit">등록</button>

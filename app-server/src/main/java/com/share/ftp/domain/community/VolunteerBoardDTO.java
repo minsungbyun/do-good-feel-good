@@ -14,6 +14,7 @@ public class VolunteerBoardDTO  {
   private String id;
   private String content;
   private String password;
+  private String photo;
   private Date registeredDate;
   private int viewCount;
   private JoinDTO owner;
@@ -25,6 +26,25 @@ public class VolunteerBoardDTO  {
   private List<VolunteerBoardCommentDTO> commentList;
   private List<JoinDTO> likeMembers = new ArrayList<>(); // 좋아요 누른 사람들
 
+
+
+  @Override
+  public String toString() {
+    return "VolunteerBoardDTO [no=" + no + ", userNo=" + userNo + ", replyCount=" + replyCount
+        + ", title=" + title + ", id=" + id + ", content=" + content + ", password=" + password
+        + ", photo=" + photo + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount
+        + ", owner=" + owner + ", like=" + like + ", fileUpload=" + fileUpload + ", rank=" + rank
+        + ", bestRank=" + bestRank + ", commentList=" + commentList + ", likeMembers=" + likeMembers
+        + "]";
+  }
+
+  public String getPhoto() {
+    return photo;
+  }
+
+  public void setPhoto(String photo) {
+    this.photo = photo;
+  }
 
   public int getNo() {
     return no;
