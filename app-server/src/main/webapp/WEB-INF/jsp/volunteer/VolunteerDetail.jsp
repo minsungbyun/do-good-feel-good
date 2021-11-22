@@ -50,8 +50,7 @@
 							</div>
 							<input type="hidden" id="volunteerNo" value="${volunteer.no}" />
 							<button type="button" class="btn btn-outline-secondary open btn-sm" id="btn-modal" style="margin:0 auto;" data-toggle="modal"
-              data-target="#myModalQuestionU${vs.index}">봉사
-								참여자 목록</button>
+              data-target="#myModalJoin${vs.index}">봉사 참여자 목록</button>
 						</div>
 					</div>
 					<!-- //vol-joiner -->
@@ -86,7 +85,7 @@
 				<!-- //vol-infor-wrap -->
 
 				<!-- modal -->
-            <div class="modal fade" id="myModalQuestionU${vs.index}"
+            <div class="modal fade" id="myModalJoin${vs.index}"
               role="dialog">
               <!-- 사용자 지정 부분① : id명 -->
               <div class="modal-dialog">
