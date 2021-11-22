@@ -12,5 +12,6 @@ public interface VolunteerJoinDao {
   void update(VolunteerJoinDTO updateVolunteer) throws Exception;          
   void delete(VolunteerJoinDTO deleteVolunteer) throws Exception;    
   VolunteerJoinDTO findByVolunteerNo(int volunteerNo) throws Exception;
+  int findByJoinUser(int volunteerNo) throws Exception;
 
 }

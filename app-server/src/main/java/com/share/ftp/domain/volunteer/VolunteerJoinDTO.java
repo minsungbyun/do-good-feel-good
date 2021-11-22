@@ -12,16 +12,19 @@ public class VolunteerJoinDTO {
   private String startTime;
   private String endTime;
   private int status;
+  private int joinCount;
   private Date registeredDate;
   private String note;
 
+
+
   @Override
   public String toString() {
-    return "VolunteerJoinDTO [joinUser=" + joinUser + ", volunteerNo=" + volunteer
-        + ", applyDate=" + applyDate + ", startTime=" + startTime + ", endTime=" + endTime
-        + ", status=" + status + ", registeredDate=" + registeredDate + ", note=" + note + "]";
+    return "VolunteerJoinDTO [joinUser=" + joinUser + ", volunteer=" + volunteer + ", applyDate="
+        + applyDate + ", startTime=" + startTime + ", endTime=" + endTime + ", status=" + status
+        + ", joinCount=" + joinCount + ", registeredDate=" + registeredDate + ", note=" + note
+        + "]";
   }
-
   public JoinDTO getJoinUser() {
     return joinUser;
   }
@@ -31,11 +34,9 @@ public class VolunteerJoinDTO {
   public VolunteerRequestDTO getVolunteer() {
     return volunteer;
   }
-
   public void setVolunteer(VolunteerRequestDTO volunteer) {
     this.volunteer = volunteer;
   }
-
   public Date getApplyDate() {
     return applyDate;
   }
@@ -60,6 +61,12 @@ public class VolunteerJoinDTO {
   public void setStatus(int status) {
     this.status = status;
   }
+  public int getJoinCount() {
+    return joinCount;
+  }
+  public void setJoinCount(int joinCount) {
+    this.joinCount = joinCount;
+  }
   public Date getRegisteredDate() {
     return registeredDate;
   }
@@ -72,6 +79,7 @@ public class VolunteerJoinDTO {
   public void setNote(String note) {
     this.note = note;
   }
+
 
 
 

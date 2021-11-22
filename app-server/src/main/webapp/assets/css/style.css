@@ -44,7 +44,7 @@ a {
 }
 
 a:hover {
-  color: salmon;
+  
   text-decoration: none;
 }
 
@@ -665,6 +665,22 @@ padding-top:15px;
 
 /* volunteer */
 
+.vol-btn {
+  width:100%;
+  display: inline-block;
+  height: 63px;
+  padding-top: 17px;
+  background: #5979c2;
+  font-size: 22px;
+  font-weight: 700;
+  text-decoration: none;
+  text-shadow: 0 0 1px #086a1e;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color:#fff;
+}
+
 .filter-v {
 	padding-bottom:20px;
 }
@@ -766,7 +782,11 @@ padding-top:15px;
 	height:230px;
 	border:1px solid #cfcfcf;
 	padding:30px;
-	
+}
+
+.vol-detail-infor ul li {
+	font-size:18px;
+	padding-bottom:5px;
 }
 
 .vol-button {
@@ -932,7 +952,6 @@ padding-top:15px;
 .tab-cont {
 	width:100%;
 	height:1200px;
-	background-color:#777;
 }
 
 .tab-cont .tab-cont-sub {
@@ -1053,6 +1072,7 @@ padding-top:15px;
   box-sizing: border-box;
   background-color: #fff;
   text-align: center;
+  margin-bottom:40px;
 }
 
 .form-wrapper .section h3{
@@ -1153,8 +1173,7 @@ fieldset {
   box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.2);
   padding: 45px 40px;
   /* box-sizing: border-box; */
-  /* width: 80%; */
-  margin: 0 10%;
+  /* width: 90%; */
   
   /*stacking fieldsets above each other*/
   position: relative;
@@ -1548,6 +1567,9 @@ fieldset {
   
 }
 
+.w-box2 {
+	padding:25px 65px;
+}
 
 /* tab menu */
 .tabArea {
@@ -1556,14 +1578,27 @@ fieldset {
 	border: 1px solid #f1f1f1; 
 	padding: 50px 10px ; 
 	}
-	 
+	
+.happy-tab {
+	padding:15px 35px;
+}
+
 .tabArea .tab li a {
-	 font-size: 15px;
-	 color: #333; font-weight: 500; }
+	width: calc(100% / 3);
+	font-size: 20px;
+	color:#9194a1;
+  padding: 10px 0;
+  border-bottom: 2.5px solid transparent;
+}
 	 
 /* 탭버튼 눌렀을시 글자 색상변경 */
 .tabArea .tab li.on a {
-	 font-weight: bold; color: crimson;
+	bottom: 0px;
+  z-index: 0;
+  overflow: hidden;
+  border-bottom: 2.5px solid #fa5757;
+  color: #252b46;
+  background: #ffffff;
 }
 
 /* 탭박스 영역 기본 옵션은 디스플레이 숨김 */

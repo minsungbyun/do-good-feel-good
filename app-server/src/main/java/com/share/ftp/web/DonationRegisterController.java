@@ -81,10 +81,16 @@ public class DonationRegisterController {
 
   @GetMapping("list")
   public ModelAndView list(int no) throws Exception {
+    DonationBoardDTO donationBoardDTO = donationBoardDao.findByDonationNo(no);
+    long remainMoney = donationRegisterDao.findByRemainMoney(no);
+    long money = donationRegisterDao.findByRegisterMoney(no);
     Collection<DonationRegisterDTO> donationRegisterList = donationRegisterDao.findAllNo(no);
     int registerUser = donationRegisterDao.findByJoinUser(no);
 
     ModelAndView mv = new ModelAndView();
+    mv.addObject("donationBoardDTO", donationBoardDTO);
+    mv.addObject("remainMoney", remainMoney);
+    mv.addObject("money", money);
     mv.addObject("donationRegisterList", donationRegisterList);
     mv.addObject("registerUser", registerUser);
     mv.addObject("pageTitle", "HappyShare : 기부자목록");

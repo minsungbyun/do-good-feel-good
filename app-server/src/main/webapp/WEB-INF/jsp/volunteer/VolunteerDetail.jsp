@@ -28,7 +28,11 @@
 			<h3 class="widget-title">${volunteer.title}</h3>
 			<div class="vol-detail">
 				<div class="vol-de-img">
-					<img src="../assets/img/201612011168_500.jpg" alt="함께해요 상세 이미지" />
+					<a href="${contextPath}/upload/volunteer/${volunteer.photo}">
+            <img style="width:100%"
+              id="f-photo-image"
+              src="${contextPath}/upload/volunteer/${volunteer.photo}">
+              </a>
 				</div>
 				<div class="vol-infor-wrap">
 					<!-- vol-joiner -->
@@ -36,7 +40,7 @@
 						<div style="padding: 10px;">
 							<span class="vol-cur" >
 							  <span class="sr-only">참여인원</span>
-							  <b class="vol-count">${volunteer.currentNum}명</b> /
+							  <b class="vol-count">${joinCount}명</b> /
 							  <span class="sr-only">총 모집인원</span> ${volunteer.limitNum}명
 							</span>
 							<div class="progress" style="margin:10px 0 15px 0;">
@@ -66,15 +70,16 @@
 					<!-- vol-detail-infor -->
 					<div class="vol-detail-infor">
 						<ul>
-							<li style="padding-bottom:10px;"><span>봉사기간</span> : <span>${volunteer.startDate}
-									~ ${volunteer.endDate}</span><span>총
+						  <li class="do-d-day" style="margin-bottom:10px;">D-day ${volunteerDate.remainDate}</li>
+							<li><span>봉사기간</span> : <span>${volunteer.startDate}
+									~ ${volunteer.endDate}</span><span style="padding-left:5px;">총
 									${volunteerDate.totalDate}일</span></li>
 							<li><span>봉사시간</span> : <span>${volunteer.startTime}
 									~ ${volunteer.endTime}</span></li>
-							<li>D-day ${volunteerDate.remainDate}일</li>
+							
 						</ul>
-						<a href="join/form?no=${volunteer.no}"
-							class="btn btn-primary open" role="button">참여하기</a>
+						<a href="join/form?no=${volunteer.no}" style="margin-top:10px;"
+							class="vol-btn open" role="button">참여하기</a>
 					</div>
 					<!-- //vol-detail-infor -->
 				</div>
@@ -126,12 +131,12 @@
 			<!-- //vol-detail -->
 
 			<!-- tabArea -->
-			<div class="tabArea" style="margin-top: 35px; text-align: center;">
-				<div class="vol-con-wrap tab">
+			<div class="tabArea" style="margin-top: 40px; text-align: center;">
+				<div class="vol-con-wrap tab" style="border-bottom: 1.3px solid #dbdbdb;">
 				  <ul class="tab">
-				    <li class="btn btn-primary on"><a href="#!"><span>상세정보</span></a></li>
-				    <li class="btn btn-primary"><a href="#!"><span>참여인증 / 댓글</span></a></li>
-				    <li class="btn btn-primary"><a href="#!"><span>위치</span></a></li>
+				    <li class="btn  happy-tab-bt on"><a href="#"><span style="font-size:21px;">상세정보</span></a></li>
+				    <li class="btn  happy-tab-bt" style="margin:0 15px;"><a href="#"><span style="font-size:21px;">참여인증 / 댓글</span></a></li>
+				    <li class="btn  happy-tab-bt"><a href="#"><span style="font-size:21px;">위치</span></a></li>
 				  </ul>
 				</div>
 				<!-- //tab -->
@@ -141,7 +146,7 @@
 					style="padding-top: 30px;">상세정보</h3>
 				<div class="col-lg-12">
 					<div class="widget">
-						<div class="widget-box">
+						<div class="widget-box w-box2">
 							<form action="#" class="form-contact" method="post"
 								enctype="multipart/form-data" name="form">
 								<div class="row">
@@ -222,7 +227,7 @@
 					참여인증 / 댓글</h3>
 				<div class="col-lg-12">
 					<div class="widget">
-						<div class="widget-box">
+						<div class="widget-box w-box2">
 							<!-- cont-short-list -->
 							<div class="cont-short-list">
 								<c:forEach items="${volunteerShortReviewList}"
@@ -265,8 +270,6 @@
 							</div>
 							<!-- //cont-short-list -->
 
-							<button class="btn btn-primary" type="button"
-								onclick="location.href='reviewList?no=${volunteer.no}'">상세정보</button>
 							<!-- col-12 -->
 							<div class="col-12 my-5">
 								<nav aria-label="Page Navigation">
@@ -310,12 +313,12 @@
 				</div>
 			</div>
 			<!-- //tabBox -->
+			<button type="button" class="btn btn-primary nBtn"
+				onclick="history.go(-1)">이전</button>
 			</div>
 			<!-- //tabArea -->
 
 			
-			<button type="button" class="btn btn-primary nBtn"
-				onclick="history.go(-1)">이전</button>
 			<button type="button" class="goupbtn" onclick="goTop()" style="color:#5979c2; font-weight:bold;">▲</button>
 
 		</div>

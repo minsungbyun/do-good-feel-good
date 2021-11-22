@@ -42,5 +42,3 @@
         </div>
       </div> <!-- .container -->
   </main>
-</body>
-</html>

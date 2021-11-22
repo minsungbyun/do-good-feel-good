@@ -5,14 +5,16 @@
 <main>
 	<div class="page-section">
 		<div class="container">
-			<h1 class="title-h">후원하기</h1>
+			<h1 class="title-h">후원하기</h1>  
 			<div class="join-wrap" style="height: 1100px">
 				<div class="wrapper">
+				  <!--
 					<ul class="steps">
 						<li class="is-active">1.후원자 정보 입력</li>
 						<li>2.후원금액 입력</li>
 						<li>3.결제하기</li>
 					</ul>
+					-->
 					<form class="form-wrapper" action='add?boardNo=${boardNo}'
 						method="post">
 						<!-- 후원자 정보 -->
@@ -26,10 +28,10 @@
 								name="donationBoard" placeholder="모금함번호 : ${boardNo}" readonly> 
 								
 								<input id="f-registerationNumber" class="numberJumin"
-									type="number" style="width: 33%;" name="registerationNumber"
+									type="number" style="width: 27%; padding:15px 20px;" name="registerationNumber"
 									placeholder="주민등록번호 앞자리"> <span>-</span> <input
 									id="f-registerationNumber" class="numberJumin"
-									type="password" style="width: 33%;" name="registerationNumber"
+									type="password" style="width: 27%; padding:15px 20px;" name="registerationNumber"
 									placeholder="주민등록번호 뒷자리">
 							</div>
 								<!--
@@ -40,19 +42,19 @@
 								name="email" placeholder="이메일주소"> 
 								-->
 								
-								<input type="button"
-								name="next" class="button action-button" value="다음" />
+								<!--  <input type="button"
+								name="next" class="button action-button" value="다음" />-->
 						</fieldset>
 						<!-- //후원자 정보 -->
 						<fieldset class="section">
 							<h4 class="form-title">2. 후원금액</h4>
 							<div class="row cf">
-								<div class="four col">
+								<!--  <div class="four col">
 									<input type="radio" name="donationMoney" id="man" class="dom"
 										value="10"> <label for="man">
 										<h6>10원</h6>
 									</label>
-								</div>
+								</div>-->
 								<div class="four col">
 									<input type="radio" name="donationMoney" id="man" class="dom"
 										value="10000"> <label for="man">
@@ -84,11 +86,11 @@
 									</label>
 								</div>
 							</div>
-							<input type="button" name="next" class="button action-button"
-								value="다음" />
+								
+							<input type="button" id="check_module" name="next" class="button action-button" value="결제하기" />
 						</fieldset>
 						<!-- //후원금액 -->
-						<fieldset class="section">
+						<!--  <fieldset class="section">
 							<h4 class="form-title">3. 결제하기</h4>
 							<div class="form-box-do">
 								<label for="f-payType" class="container-radio"
@@ -97,11 +99,11 @@
 									class="checkmark"></span>
 								</label>
 							</div>
-							<!-- <input type="button" name="next" class="button action-button" value="결제하기" />
-                -->
+							<<input type="button" name="next" class="button action-button" value="결제하기" />
+              
 							<button id="check_module" type="button"
 								class="button action-button">아임 서포트 결제 모듈 테스트 해보기</button>
-						</fieldset>
+						</fieldset>-->
 						<!-- //결제하기 -->
 					</form>
 					<!-- //form-wrapper -->

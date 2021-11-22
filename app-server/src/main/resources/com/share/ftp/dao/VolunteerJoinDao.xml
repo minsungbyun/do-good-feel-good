@@ -13,6 +13,7 @@
     <result column="apply_status" property="status"/>
     <result column="created_dt" property="registeredDate"/>
     <result column="note" property="note"/> 
+    <result column="join_cnt" property="joinCount"/> 
    
    <association property="volunteer" javaType="VolunteerRequestDTO">
       <id column="volunteer_no" property="no"/>
@@ -44,6 +45,7 @@
         u.user_no joinUser_no, 
         u.id joinUser_id,
         u.name joinUser_name,
+        ifnull(count(va.user_no), 0) join_cnt,
         va.user_no,
         va.vol_no,
         va.start_time,
@@ -83,6 +85,15 @@
           va.user_no=#{userNo}
         order by
           va.apply_dt desc
+  </select>
+  
+  <select id="findByJoinUser" resultType="int" parameterType="int">
+    select 
+      ifnull(count(user_no), 0) 
+    from 
+      ftp_vol_apply
+    where
+      vol_no=#{volNo}
   </select>
   
    <update id="update" parameterType="VolunteerJoinDTO">
