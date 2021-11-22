@@ -18,22 +18,29 @@
 						<!-- 후원자 정보 -->
 						<fieldset class="section">
 							<h4 class="form-title">1. 후원자 정보</h4>
-							<input id="f-name" class="form-control box-input" type="text"
-								name="name" placeholder="이름">
+							<!--<input id="f-name" class="form-control box-input" type="text"
+								name="name" placeholder="이름"> -->
 							<div class="jumin">
+								<input
+								id="f-donationBoard" class="form-control box-input" type="tel"
+								name="donationBoard" placeholder="모금함번호 : ${boardNo}" readonly> 
+								
 								<input id="f-registerationNumber" class="numberJumin"
 									type="number" style="width: 33%;" name="registerationNumber"
 									placeholder="주민등록번호 앞자리"> <span>-</span> <input
-									id="f-backRegisterationNumber" class="numberJumin"
+									id="f-registerationNumber" class="numberJumin"
 									type="password" style="width: 33%;" name="registerationNumber"
 									placeholder="주민등록번호 뒷자리">
 							</div>
+								<!--
 							<input id="f-tel" class="form-control box-input" type="tel"
-								name="tel" placeholder="휴대폰번호"> <input
-								id="f-donationBoard" class="form-control box-input" type="tel"
-								name="donationBoard" placeholder="모금함번호"> <input
+								name="tel" placeholder="휴대폰번호"> 
+								<input
 								id="f-email" class="form-control box-input" type="email"
-								name="email" placeholder="이메일주소"> <input type="button"
+								name="email" placeholder="이메일주소"> 
+								-->
+								
+								<input type="button"
 								name="next" class="button action-button" value="다음" />
 						</fieldset>
 						<!-- //후원자 정보 -->
@@ -168,7 +175,35 @@
 		 (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐)
 		 */
 		}, function(rsp) {
+			
 			console.log(rsp);
+			if (rsp.success) {
+			var msg1 = '결제가 완료되었습니다.';
+			/* msg += '고유ID : ' + rsp.imp_uid;
+			msg += '상점 거래ID : ' + rsp.merchant_uid;
+			msg += '결제 금액 : ' + rsp.paid_amount;
+			msg += '카드 승인번호 : ' + rsp.apply_num; */
+			alert(msg1);
+			$(document).ready(function() {
+			  var money=$("input[name='donationMoney']:checked").val();
+			  var registeration=$('#f-registerationNumber').val();
+			location.href='add?boardNo=${boardNo}&money='+money+'&registeration='+ registeration;
+			});
+			} else {
+			var msg = '결제에 실패하였습니다.';
+			/* msg += '에러내용 : ' + rsp.error_msg; */
+			alert(msg);
+			location.href='${contextPath}/app/donation/detail?no=${boardNo}';
+			}
+
+
+			//window.location.href = "add?boardNo=11";
+
+			});
+			});
+			
+			
+			/* console.log(rsp);
 			if (rsp.success) {
 				var msg = '결제가 완료되었습니다.';
 				msg += '고유ID : ' + rsp.imp_uid;
@@ -179,12 +214,14 @@
 			} else {
 				var msg = '결제에 실패하였습니다.';
 				msg += '에러내용 : ' + rsp.error_msg;
+			location.href='${contextPath}/app/donation/detail?no=${boardNo}&payMethod=0';
 			}
 			alert(msg);
-			window.location.href = "add";
+			location.href='$add?no=${boardNo}&payMethod=0';
+			//window.location.href = "add";
 
 		});
-	});
+	}); */
 </script>
 
 
