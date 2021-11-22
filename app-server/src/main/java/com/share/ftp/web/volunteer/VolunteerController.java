@@ -4,7 +4,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,11 +41,24 @@ public class VolunteerController {
   @Autowired VolunteerShortReviewDao volunteerShortReviewDao;
   @Autowired GeneralDao generalDao;
   @Autowired SqlSessionFactory sqlSessionFactory;
+  @Autowired ServletContext sc;
 
   @PostMapping("add")
-  public ModelAndView add(VolunteerRequestDTO volunteerRequestDTO, Category category, HttpSession session) throws Exception {
+  public ModelAndView add(
+      VolunteerRequestDTO volunteerRequestDTO, 
+      Category category, 
+      HttpSession session,
+      int categoryNo,
+      Part photoFile) throws Exception {
+
+    if (photoFile.getSize() > 0) {
+      String filename = UUID.randomUUID().toString();
+      photoFile.write(sc.getRealPath("/upload/volunteer") + "/" + filename);
+      volunteerRequestDTO.setPhoto(filename);
+    }
 
     volunteerRequestDTO.setOwner((JoinDTO) session.getAttribute("loginUser"));
+    category.setNo(categoryNo);
     volunteerRequestDTO.setCategory(category);
 
     volunteerDao.insert(volunteerRequestDTO);
@@ -75,7 +91,7 @@ public class VolunteerController {
 
   @GetMapping("detail")
   public ModelAndView detail(int no) throws Exception {
-
+    int joinCount = volunteerJoinDao.findByJoinUser(no);
     VolunteerRequestDTO volunteer = volunteerDao.findByApprovedVolunteerNo(no);
     List<VolunteerJoinDTO> volunteerList = volunteerJoinDao.findAll(no);
     List<VolunteerQuestionDTO> volunteerQuestion = volunteeQuestionDao.findAllNo(no);
@@ -99,6 +115,7 @@ public class VolunteerController {
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("volunteer", volunteer); 
+    mv.addObject("joinCount", joinCount); 
     mv.addObject("volunteerDate", volunteerDate);
     mv.addObject("volunteerList", volunteerList);
     mv.addObject("volunteerShortReviewList", volunteerShortReviewList);
