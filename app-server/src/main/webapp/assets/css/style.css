@@ -30,7 +30,7 @@
 
 .owl-carousel .owl-nav button.owl-next, .owl-carousel .owl-nav button.owl-prev {
 	
-	background-color: #ffbcaf;
+	background-color: #9e9e9e;
 }
 
 
@@ -141,6 +141,21 @@ fieldset {
 	border:0;
 }
 
+.happy-btn {
+	background-color:#ff8184;
+	border-color:#ff8184;
+	color:#fff;
+	font-weight:bold;
+}
+
+.happy-btn:hover {
+	color:#c85a54;
+}
+
+.happy-con {
+	color:#494949;
+}
+
 .search-box {
 	padding:5px 10px;
 	height:40px;
@@ -163,8 +178,6 @@ fieldset {
   height:50px;
 }
 
-.btn-right {}
-
 /* login */
 .login-form {
   width: 400px;
@@ -183,7 +196,7 @@ fieldset {
 }
 
 .navbar {
-  border-bottom: 2px solid #f0f1f6;
+  border-bottom: 2px solid #e0e0e0;
 }
 
 .fo {
@@ -652,7 +665,9 @@ padding-top:15px;
 
 /* volunteer */
 
-
+.filter-v {
+	padding-bottom:20px;
+}
 
 
 .vol-title {
@@ -665,6 +680,8 @@ padding-top:15px;
 
 .vol-type {
 	position: absolute;
+	top:25px;
+	left:25px;
   min-width: 40px;
   height: 33px;
   line-height: 32px;
@@ -676,18 +693,27 @@ padding-top:15px;
 }
 
 .bu {
-	background: #4967b0;
+	background: #ff8184;
   color: #fff;
+  border-radius:15px
+}
+
+.bu-d {
+	background: #5979c2;
+  color: #fff;
+  border-radius:15px
 }
 
 .vol-cur {
-  margin: 10px 0 0 3px;
+  text-align:center;
   color: #959595;
   vertical-align: top;
+  font-size:20px;
 }
 
 .vol-count {
   color:#333;
+  
 }
 
 .vol-detail {
@@ -726,7 +752,7 @@ padding-top:15px;
 .vol-owner {
 	height:80px;
 	border:1px solid #cfcfcf;
-	padding:10px;
+	padding:27px 27px 27px 21px;
 	margin-bottom:20px;
 }
 
@@ -739,7 +765,7 @@ padding-top:15px;
 .vol-detail-infor {
 	height:230px;
 	border:1px solid #cfcfcf;
-	padding:10px;
+	padding:30px;
 	
 }
 
@@ -1514,12 +1540,14 @@ fieldset {
   left: 80%;
   width: 50px;
   height: 50px;
-  border-radius: 80%;
+  border-radius: 30%;
   background-color: #ffffff;
-  border: red 3px solid;
+  border: #5979c2 2px solid;
   position: fixed;
   z-index: 2;
+  
 }
+
 
 /* tab menu */
 .tabArea {
@@ -1528,10 +1556,6 @@ fieldset {
 	border: 1px solid #f1f1f1; 
 	padding: 50px 10px ; 
 	}
-	
-.tabArea .tab {
-
-}
 	 
 .tabArea .tab li a {
 	 font-size: 15px;
@@ -1560,3 +1584,28 @@ fieldset {
 	margin-bottom: 20px;
 }
 
+/* happy-footer */
+.happy-footer {
+	background-color:#f5f5f5 !important;
+}
+
+.page-banner.home-banner {
+	height:510px;
+}
+
+.owl-carousel button.owl-dot.active {
+    background-color: #5979c2;
+}
+
+.owl-carousel button.owl-dot {
+    display: inline-block;
+    margin: 0 7px;
+    width: 25px;
+    height: 10px;
+    background-color: #c6ccd3;
+    border-radius:20px;
+}
+
+.page-footer p.happy-con {
+	color:#757575;
+}
