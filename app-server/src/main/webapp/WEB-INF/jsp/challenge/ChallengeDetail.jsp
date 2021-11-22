@@ -87,7 +87,7 @@
 					<div class="chall-detail-infor">
 						<ul>
 							<li><span>모집기간</span> <span>${challengeDTO.startDate}~${challengeDTO.endDate}</span><span>총
-									00일</span></li>
+									${challengeDTO.totalDate}일</span></li>
 							<li><span>참여기간</span> <span>${challengeDTO.startDate}~${challengeDTO.endDate}</span>
 							</li>
 							<li>D-day ${challengeDTO.remainDate}일</li>

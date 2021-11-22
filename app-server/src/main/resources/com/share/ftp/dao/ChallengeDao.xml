@@ -119,6 +119,8 @@
      u.name user_name,
      u.id user_id,
      u.created_dt user_created_dt,
+     datediff(date_format(c.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt,
+     datediff(date_format(c.end_dt,'%Y-%m-%d'), date_format(c.start_dt,'%Y-%m-%d')) total_dt,
      f.filepath
     from
      ftp_challenge c
@@ -152,23 +154,6 @@
       c.challenge_no=#{values}
   </select>
   
-   <select id="remainDate" resultType="int" parameterType="int">
-      select 
-        datediff(date_format(c.end_dt,'%Y-%m-%d'), date_format(curdate(),'%Y-%m-%d')) remain_dt
-      from
-        ftp_challenge c
-      where
-        c.challenge_no=#{values}
-    </select>
-    
-   <select id="totalDate" resultType="int" parameterType="int">
-      select 
-        datediff(date_format(c.end_dt,'%Y-%m-%d'), date_format(c.start_dt,'%Y-%m-%d')) total_dt
-      from
-        ftp_challenge c
-      where
-        c.challenge_no=#{values}
-    </select>
 </mapper>
 
 
