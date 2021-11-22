@@ -13,13 +13,13 @@
 					</h5>
 					<h2>${donationBoardDTO.title}</h2>
 					<ul class="do-tap">
-						<li id="do-tap-de" class="on"><a
-							href="${contextPath}/app/donation/list?no=${donationBoardDTO.no}"
+						<li id="do-tap-de" class="on">
+						<a href="${contextPath}/app/donation/detail?no=${donationBoardDTO.no}"
 							class="do-on">모금함 소개</a></li>
-						<li id="do-tap-de"><a
-							href="${contextPath}/app/register/list?no=${donationBoardDTO.no}">참여내역</a></li>
+						<li id="do-tap-de">
+						<a href="${contextPath}/app/register/list?no=${donationBoardDTO.no}">참여내역</a></li>
 					</ul>
-					<div class="tab-cont" style="background: #ddd;">
+					<div class="tab-cont">
 						<a href="${contextPath}/upload/donation/${donationBoardDTO.photo}">
 						<img style="width:100%"
 							id="f-photo-image"
