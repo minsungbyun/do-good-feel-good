@@ -19,6 +19,7 @@ public class VolunteerRequestDTO {
   private Date endDate;
   private String startTime;
   private String endTime;
+  private String photo;
   private int limitNum; // 총 정원
   private int status;
   private String note;
@@ -34,9 +35,9 @@ public class VolunteerRequestDTO {
     return "VolunteerRequestDTO [no=" + no + ", owner=" + owner + ", category=" + category
         + ", title=" + title + ", content=" + content + ", tel=" + tel + ", email=" + email
         + ", startDate=" + startDate + ", endDate=" + endDate + ", startTime=" + startTime
-        + ", endTime=" + endTime + ",status=" + status + ", note="
-        + note + ", fileUpload=" + fileUpload + ", wish=" + wish + ", totalDate=" + totalDate
-        + ", remainDate=" + remainDate + ", currentNum=" + currentNum + ", limitNum=" + limitNum
+        + ", endTime=" + endTime + ", photo=" + photo + ", limitNum=" + limitNum + ", status="
+        + status + ", note=" + note + ", fileUpload=" + fileUpload + ", wish=" + wish
+        + ", totalDate=" + totalDate + ", remainDate=" + remainDate + ", currentNum=" + currentNum
         + "]";
   }
 
@@ -105,6 +106,12 @@ public class VolunteerRequestDTO {
   }
   public void setEndTime(String endTime) {
     this.endTime = endTime;
+  }
+  public String getPhoto() {
+    return photo;
+  }
+  public void setPhoto(String photo) {
+    this.photo = photo;
   }
 
   public int getStatus() {

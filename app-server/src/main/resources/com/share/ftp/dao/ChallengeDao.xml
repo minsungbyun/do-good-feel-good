@@ -13,6 +13,7 @@
     <result column="end_dt" property="endDate"/>
     <result column="created_dt" property="registeredDate"/>
     <result column="apply_dt" property="applyDate"/>
+    <result column="photo" property="photo"/>
     
     <result column="total_dt" property="totalDate"/> 
     <result column="remain_dt" property="remainDate"/> 
@@ -44,6 +45,7 @@
      c.title,
      c.start_dt,
      c.end_dt,
+     c.photo,
      u.user_no user_no,
      u.name user_name
     from
@@ -55,8 +57,8 @@
   
   <insert id="insert" parameterType="ChallengeDTO"
           useGeneratedKeys="true" keyColumn="challenge_no" keyProperty="no">
-    insert into ftp_challenge(title,content,start_dt,end_dt,created_dt) 
-    values(#{title},#{content},#{startDate},#{endDate}, curdate())
+    insert into ftp_challenge(title,content,start_dt,end_dt,photo) 
+    values(#{title},#{content},#{startDate},#{endDate},#{photo})
   </insert>
   
   <insert id="insertFile">
@@ -79,7 +81,8 @@
      title=#{title},
      content=#{content},
      start_dt=#{startDate},
-     end_dt=#{endDate}
+     end_dt=#{endDate},
+     photo=#{photo}
    where 
       challenge_no=#{no}
   </update>
@@ -114,6 +117,7 @@
      c.start_dt,
      c.end_dt,
      c.created_dt,
+     c.photo,
      cu.apply_dt,
      u.user_no user_no,
      u.name user_name,

@@ -13,6 +13,7 @@ public class ChallengeDTO {
   private String content;
   private String totalDate;
   private String remainDate;
+  private String photo;
   private Date registeredDate;
   private Date applyDate;
   private Date startDate;
@@ -29,11 +30,11 @@ public class ChallengeDTO {
   @Override
   public String toString() {
     return "ChallengeDTO [no=" + no + ", point=" + point + ", title=" + title + ", content="
-        + content + ", totalDate=" + totalDate + ", remainDate=" + remainDate + ", registeredDate="
-        + registeredDate + ", applyDate=" + applyDate + ", startDate=" + startDate + ", endDate="
-        + endDate + ", viewCount=" + viewCount + ", reviewCount=" + reviewCount + ", questionCount="
-        + questionCount + ", totalJoinCount=" + totalJoinCount + ", wish=" + wish + ", members="
-        + members + ", fileUpload=" + fileUpload + "]";
+        + content + ", totalDate=" + totalDate + ", remainDate=" + remainDate + ", photo=" + photo
+        + ", registeredDate=" + registeredDate + ", applyDate=" + applyDate + ", startDate="
+        + startDate + ", endDate=" + endDate + ", viewCount=" + viewCount + ", reviewCount="
+        + reviewCount + ", questionCount=" + questionCount + ", totalJoinCount=" + totalJoinCount
+        + ", wish=" + wish + ", members=" + members + ", fileUpload=" + fileUpload + "]";
   }
 
   public Date getApplyDate() {
@@ -74,6 +75,12 @@ public class ChallengeDTO {
   }
   public String getRemainDate() {
     return remainDate;
+  }
+  public String getPhoto() {
+    return photo;
+  }
+  public void setPhoto(String photo) {
+    this.photo = photo;
   }
   public void setRemainDate(String remainDate) {
     this.remainDate = remainDate;

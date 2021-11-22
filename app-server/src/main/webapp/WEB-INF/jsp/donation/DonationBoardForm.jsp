@@ -75,7 +75,7 @@
 									<td><label for="f-file" class="sr-only">파일첨부</label>
 										<div class="col-sm-11">
 											<input type="file" class="form-control-file" id="f-file"
-												name='photoFile' multiple>
+												name='photoFile'>
 										</div></td>
 								</tr>
 								<!-- //파일첨부 -->

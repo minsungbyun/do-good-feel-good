@@ -1,7 +1,10 @@
 package com.share.ftp.web.admin.challenge;
 
 import java.util.Collection;
+import java.util.UUID;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,7 @@ public class AdminChallengeController {
 
   @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired ChallengeDao challengeDao;
+  @Autowired ServletContext sc;
 
   @GetMapping("/admin/challenge/form")
   public ModelAndView form() {
@@ -27,7 +31,14 @@ public class AdminChallengeController {
   }
 
   @PostMapping("/admin/challenge/add")
-  public ModelAndView add(ChallengeDTO challengeDTO, HttpSession session) throws Exception {
+  public ModelAndView add(
+      ChallengeDTO challengeDTO, HttpSession session, Part photoFile) throws Exception {
+
+    if (photoFile.getSize() > 0) {
+      String filename = UUID.randomUUID().toString();
+      photoFile.write(sc.getRealPath("/upload/challenge") + "/" + filename);
+      challengeDTO.setPhoto(filename);
+    }
 
     challengeDao.insert(challengeDTO);
     sqlSessionFactory.openSession().commit();
@@ -66,12 +77,23 @@ public class AdminChallengeController {
   }
 
   @PostMapping("/admin/challenge/update")
-  public ModelAndView update(ChallengeDTO challengeDTO) throws Exception {
+  public ModelAndView update(ChallengeDTO challengeDTO, Part photoFile) throws Exception {
 
     ChallengeDTO oldChallenge = challengeDao.findByNo(challengeDTO.getNo());
     if (oldChallenge == null) {
       throw new Exception("해당 번호의 챌린지가 없습니다.");
     } 
+
+    challengeDTO.setPhoto(oldChallenge.getPhoto());
+    challengeDTO.setRegisteredDate(oldChallenge.getRegisteredDate());
+
+    if (photoFile.getSize() > 0) {
+      String filename = UUID.randomUUID().toString();
+      photoFile.write(sc.getRealPath("/upload/challenge") + "/" + filename);
+      challengeDTO.setPhoto(filename);
+
+      challengeDTO.setPhoto(filename);
+    }
 
     challengeDao.update(challengeDTO);
     sqlSessionFactory.openSession().commit();
