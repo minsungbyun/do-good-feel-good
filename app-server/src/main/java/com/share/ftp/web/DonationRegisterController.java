@@ -48,7 +48,7 @@ public class DonationRegisterController {
     mv.addObject("cardType", cardType);
     mv.addObject("boardNo", boardNo);
     mv.addObject("pageTitle", "HappyShare : 후원하기");
-    mv.addObject("contentUrl", "donation/DonationRegisterForm.jsp");
+    mv.addObject("contentUrl", "register/DonationRegisterForm.jsp");
     mv.setViewName("template1");
     return mv;
   }

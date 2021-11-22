@@ -65,15 +65,15 @@
 					<!-- vol-detail-infor -->
 					<div class="vol-detail-infor">
 						<ul>
-							<li style="padding-bottom:10px;"><span>봉사기간</span> : <span>${volunteer.startDate}
-									~ ${volunteer.endDate}</span><span>총
+							<li><span>봉사기간</span> : <span>${volunteer.startDate}
+									~ ${volunteer.endDate}</span><span style="padding-left:5px;">총
 									${volunteerDate.totalDate}일</span></li>
 							<li><span>봉사시간</span> : <span>${volunteer.startTime}
 									~ ${volunteer.endTime}</span></li>
-							<li>D-day ${volunteerDate.remainDate}일</li>
+							<li class="do-d-day">D-day ${volunteerDate.remainDate}</li>
 						</ul>
-						<a href="join/form?no=${volunteer.no}"
-							class="btn btn-primary open" role="button">참여하기</a>
+						<a href="join/form?no=${volunteer.no}" style="margin-top:10px;"
+							class="vol-btn open" role="button">참여하기</a>
 					</div>
 					<!-- //vol-detail-infor -->
 				</div>
@@ -121,9 +121,9 @@
 			<div class="tabArea" style="margin-top: 35px; text-align: center;">
 				<div class="vol-con-wrap tab">
 				  <ul class="tab">
-				    <li class="btn btn-primary on"><a href="#!"><span>상세정보</span></a></li>
-				    <li class="btn btn-primary"><a href="#!"><span>참여인증 / 댓글</span></a></li>
-				    <li class="btn btn-primary"><a href="#!"><span>위치</span></a></li>
+				    <li class="btn happy-btn on"><a href="#!"><span>상세정보</span></a></li>
+				    <li class="btn happy-btn"><a href="#!"><span>참여인증 / 댓글</span></a></li>
+				    <li class="btn happy-btn"><a href="#!"><span>위치</span></a></li>
 				  </ul>
 				</div>
 				<!-- //tab -->
