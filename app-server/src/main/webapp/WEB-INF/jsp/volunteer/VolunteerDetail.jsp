@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="page-banner bg-img bg-img-parallax overlay-dark"
-	style="background-image: url(../../assets/img/bg_image_3.jpg);">
+	style="background-image: url(${contextPath}/images/volunteer1.jpg);">
 	<div class="container h-100">
 		<div class="row justify-content-center align-items-center h-100">
 			<div class="col-lg-8">
@@ -34,18 +34,18 @@
 					<!-- vol-joiner -->
 					<div class="vol-joiner">
 						<div style="padding: 10px;">
-							<span class="vol-cur">
+							<span class="vol-cur" >
 							  <span class="sr-only">참여인원</span>
 							  <b class="vol-count">${volunteer.currentNum}명</b> /
 							  <span class="sr-only">총 모집인원</span> ${volunteer.limitNum}명
 							</span>
-							<div class="progress">
+							<div class="progress" style="margin:10px 0 15px 0;">
 								<div class="progress-bar progress-bar-striped"
 									role="progressbar" style="width: 10%" aria-valuenow="10"
 									aria-valuemin="0" aria-valuemax="100"></div>
 							</div>
 							<input type="hidden" id="volunteerNo" value="${volunteer.no}" />
-							<button type="button" class="btn btn-primary open" id="btn-modal">봉사
+							<button type="button" class="btn btn-outline-secondary open btn-sm" id="btn-modal" style="margin:0 auto;">봉사
 								참여자 목록</button>
 						</div>
 					</div>
@@ -65,7 +65,7 @@
 					<!-- vol-detail-infor -->
 					<div class="vol-detail-infor">
 						<ul>
-							<li><span>봉사기간</span> : <span>${volunteer.startDate}
+							<li style="padding-bottom:10px;"><span>봉사기간</span> : <span>${volunteer.startDate}
 									~ ${volunteer.endDate}</span><span>총
 									${volunteerDate.totalDate}일</span></li>
 							<li><span>봉사시간</span> : <span>${volunteer.startTime}
@@ -308,7 +308,8 @@
 			
 			<button type="button" class="btn btn-primary nBtn"
 				onclick="history.go(-1)">이전</button>
-			<button type="button" class="goupbtn" onclick="goTop()">맨 위로</button>
+			<button type="button" class="goupbtn" onclick="goTop()" style="color:#5979c2; font-weight:bold;">▲</button>
+
 		</div>
 		<!-- //container -->
 	</div>
@@ -343,9 +344,6 @@ function goTop(){
 	  $('html').scrollTop(0);
 	}
 </script>
-
-
-
 
 <script>
 	function checkValue() {

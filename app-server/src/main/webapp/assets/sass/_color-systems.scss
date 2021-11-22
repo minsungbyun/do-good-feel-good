@@ -29,7 +29,7 @@
     color: $value !important;
   }
   a.fg-#{$key}:hover, a.fg-#{$key}:focus {
-    color: darken($value, 5%) !important;
+    color: #ff8184 !important;
   }
 }
 

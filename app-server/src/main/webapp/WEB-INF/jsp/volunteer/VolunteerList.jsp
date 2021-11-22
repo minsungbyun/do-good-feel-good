@@ -23,7 +23,7 @@
   <main>
     <div class="page-section">
       <div class="container">
-        <div class="filterable-btn">
+        <div class="filterable-btn filter-v">
           <button class="btn active" data-filter="*">전체</button>
           <button class="btn" data-filter=".untact">비대면</button>
           <button class="btn" data-filter=".children">아동</button>
