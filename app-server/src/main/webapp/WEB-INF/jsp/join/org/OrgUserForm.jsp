@@ -32,7 +32,7 @@
 	                   <td>
 	                     <label for='f-password' class="sr-only">비밀번호</label> 
 	                     <input id='f-password' class="form-control box-input pw" type='password'
-	                      name='pwd1' placeholder="4~12자의 영문 대소문자와 숫자로만 입력" required>
+	                      name='password1' placeholder="4~12자의 영문 대소문자와 숫자로만 입력" required>
 	                     <div class="invalid-feedback">
 	                       비밀번호를 입력해주세요.
 	                     </div>
@@ -44,7 +44,7 @@
 		                <td>
 		                  <label for='f-passwordChk' class="sr-only">비밀번호확인</label> 
 		                  <input id='f-passwordChk' class="form-control box-input pw" type='password'
-		                   name='pwd2' placeholder="4~12자의 영문 대소문자와 숫자로만 입력" onKeyUp="fn_compare_pwd();" required>
+		                   name='password' placeholder="4~12자의 영문 대소문자와 숫자로만 입력" onKeyUp="fn_compare_pwd();" required>
 		                  <div class="invalid-feedback">
 		                    비밀번호를 확인해 해주세요.
 		                  </div>

@@ -10,28 +10,13 @@
         <div class="slider-wrapper">
           <div class="owl-carousel hero-carousel">
             <div class="hero-carousel-item">
-              <img src="${contextPath}/images/home/main.jpg" alt="">
-              <div class="img-caption">
-           <!-- <div class="subhead">We're design studio believe in ideas</div> -->
-            <!--<h1 class="mb-4">Creative Design</h1> -->
-             <!-- <a href="#services" class="btn btn-outline-light">Get Started</a> -->
-              </div>
+              <img src="${contextPath}/images/home/main.jpg" alt="메인이미지1">
             </div>
             <div class="hero-carousel-item">
-              <img src="${contextPath}/images/home/main1.jpg" alt="">
-              <div class="img-caption">
-               <!-- <h1 class="mb-4">We combine Design, Thinking, and Technical</h1> -->
-               <!-- <a href="#services" class="btn btn-outline-light">Get Started</a> -->
-               <!-- <a href="#services" class="btn btn-primary">See Pricing</a> -->
-              </div>
+              <img src="${contextPath}/images/home/main1.jpg" alt="메인이미지2">
             </div>
             <div class="hero-carousel-item">
-              <img src="${contextPath}/images/home/volunteer.jpg" alt="">
-              <div class="img-caption">
-                <!--<div class="subhead">Easy way to build perfect website</div> -->
-               <!-- <h1 class="mb-4">Beautify handcrafted templates for your website</h1> -->
-               <!-- <a href="#services" class="btn btn-primary">Read More</a> -->
-              </div>
+              <img src="${contextPath}/images/home/volunteer.jpg" alt="메인이미지3">
             </div>
           </div>
         </div> <!-- .slider-wrapper -->

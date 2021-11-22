@@ -34,9 +34,10 @@
 					<!-- vol-joiner -->
 					<div class="vol-joiner">
 						<div style="padding: 10px;">
-							<span class="vol-cur"> <span class="sr-only">참여인원</span> <b
-								class="vol-count">${volunteer.currentNum}명</b> / <span
-								class="sr-only">총 모집인원</span> ${volunteer.limitNum}명
+							<span class="vol-cur">
+							  <span class="sr-only">참여인원</span>
+							  <b class="vol-count">${volunteer.currentNum}명</b> /
+							  <span class="sr-only">총 모집인원</span> ${volunteer.limitNum}명
 							</span>
 							<div class="progress">
 								<div class="progress-bar progress-bar-striped"
@@ -117,26 +118,17 @@
 			<!-- //vol-detail -->
 
 			<!-- tabArea -->
-			<div class="tabArea" style="margin-top: 35px; display: flex; justify-content: center; text-align: center;">
+			<div class="tabArea" style="margin-top: 35px; text-align: center;">
 				<div class="vol-con-wrap tab">
 				  <ul class="tab">
-				    <li class="on"></li>
-				    <li></li>
-				    <li></li>
-						<button class="btn btn-primary on" type="button" id="i-box1"
-							data-target="#i-box1">상세정보</button>
-						<button class="btn btn-primary" type="button" id="i-box2"
-							data-target="#i-box2">참여인증 / 댓글</button>
-						<button class="btn btn-primary" type="button" id="i-box3"
-							data-target="#i-box3">위치</button>
+				    <li class="btn btn-primary on"><a href="#!"><span>상세정보</span></a></li>
+				    <li class="btn btn-primary"><a href="#!"><span>참여인증 / 댓글</span></a></li>
+				    <li class="btn btn-primary"><a href="#!"><span>위치</span></a></li>
 				  </ul>
 				</div>
 				<!-- //tab -->
-			</div>
-			<!-- //tabArea -->
-
-			<!-- s-box1 -->
-			<div id="s-box1" class="vol-con-wrap">
+			<!-- tabBox -->
+			<div class="vol-con-wrap tabBox on">
 				<h3 class="widget-title" id="scroll-section1"
 					style="padding-top: 30px;">상세정보</h3>
 				<div class="col-lg-12">
@@ -214,10 +206,10 @@
 				</div>
 				<!-- //col-lg-12 -->
 			</div>
-			<!-- //s-box1 -->
+			<!-- //tabBox -->
 
-			<!-- s-box2 -->
-			<div id="s-box2" class="vol-con-wrap">
+			<!-- tabBox -->
+			<div class="vol-con-wrap tabBox">
 				<h3 class="widget-title" id="s-section1" style="padding-top: 30px;">
 					참여인증 / 댓글</h3>
 				<div class="col-lg-12">
@@ -292,10 +284,10 @@
 				</div>
 				<!-- //col-lg-12 -->
 			</div>
-			<!-- //s-box2 -->
+			<!-- //tabBox -->
 
-			<!-- s-box3 -->
-			<div id="s-box3" class="vol-con-wrap">
+			<!-- tabBox -->
+			<div class="vol-con-wrap tabBox">
 				<h3 class="widget-title" id="s-section1" style="padding-top: 30px;">
 					위치</h3>
 				<div class="col-lg-12">
@@ -309,7 +301,11 @@
 					</div>
 				</div>
 			</div>
-			<!-- //s-box3 -->
+			<!-- //tabBox -->
+			</div>
+			<!-- //tabArea -->
+
+			
 			<button type="button" class="btn btn-primary nBtn"
 				onclick="history.go(-1)">이전</button>
 			<button type="button" class="goupbtn" onclick="goTop()">맨 위로</button>
@@ -323,6 +319,25 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=957738e74b502a9fe5576d94da13113d"></script>
 
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
+
+<script>
+$(document).ready(function(){
+	  $(".tabArea .tab li a").on("click", function(){
+	    // 내 자신의 index 번호를 가져 옴. -> [0], [1]
+	    const num = $(".tabArea .tab li a").index($(this));
+	    // 인덱스 불러오고 on class삭제
+	    $(".tabArea .tab li").removeClass("on");
+	    $(".tabArea .tabBox").removeClass("on");
+
+	    // 클릭 후 객체 선택값이 같으면 class 추가
+	    $('.tabArea .tab li:eq(' + num + ')').addClass("on");
+	    $('.tabArea .tabBox:eq(' + num + ')').addClass("on");
+
+	  });
+	});
+</script>
+
 <script>
 function goTop(){
 	  $('html').scrollTop(0);
@@ -331,15 +346,6 @@ function goTop(){
 
 
 
-<script>
-$(".menu li").click(function() {
-	  var scrollPosition = $($(this).attr("data-target")).offset().top;
-
-	  $("body").animate({
-	        scrollTop: scrollPosition
-	  }, 500);
-	}
-</script>
 
 <script>
 	function checkValue() {
