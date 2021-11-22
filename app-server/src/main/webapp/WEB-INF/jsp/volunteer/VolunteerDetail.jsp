@@ -45,7 +45,8 @@
 									aria-valuemin="0" aria-valuemax="100"></div>
 							</div>
 							<input type="hidden" id="volunteerNo" value="${volunteer.no}" />
-							<button type="button" class="btn btn-outline-secondary open btn-sm" id="btn-modal" style="margin:0 auto;">봉사
+							<button type="button" class="btn btn-outline-secondary open btn-sm" id="btn-modal" style="margin:0 auto;" data-toggle="modal"
+              data-target="#myModalQuestionU${vs.index}">봉사
 								참여자 목록</button>
 						</div>
 					</div>
@@ -80,14 +81,19 @@
 				<!-- //vol-infor-wrap -->
 
 				<!-- modal -->
-				<div id="vol-modal" class="vol-modal-overlay">
-					<div class="vol-modal-window ">
-						<div class="close-area">X</div>
-						<div class="vol-title">
-							<h1>[ 참여자 목록 ]</h1>
-						</div>
-						<div class="vol-content">
-							<table>
+            <div class="modal fade" id="myModalQuestionU${vs.index}"
+              role="dialog">
+              <!-- 사용자 지정 부분① : id명 -->
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">참여자 목록</h4>
+                    <!-- 사용자 지정 부분② : 타이틀 -->
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                  </div>
+                  <div class="modal-body">
+							<table class="table table-hover">
 								<thead>
 									<tr>
 										<th>번호</th>
@@ -98,7 +104,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${volunteerList}" var="volunteerJoinDTO">
+									<c:forEach items="${volunteerList}" var="volunteerJoinDTO" varStatus="vs">
 										<tr>
 											<td>${volunteerJoinDTO.volunteer.no}</td>
 											<td>${volunteerJoinDTO.joinUser.id}</td>
@@ -111,8 +117,10 @@
 							</table>
 							<%-- <button type="button" class="btn btn-primary" data-toggle="modal" onclick="location.href='join/list?no=${volunteer.no}'" >참여자목록</button>--%>
 						</div>
+           <div class="modal-footer"></div>
 					</div>
 				</div>
+			  </div>
 				<!-- //modal -->
 			</div>
 			<!-- //vol-detail -->
