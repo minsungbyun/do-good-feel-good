@@ -289,16 +289,16 @@
 			</div>
 			<!-- //tabBox -->
 
-			<!-- tabBox -->
-			<div class="vol-con-wrap tabBox">
 				<h3 class="widget-title" id="s-section1" style="padding-top: 30px;">
 					위치</h3>
+							<div id="map"
+								style="width: 700x; height: 400px; align-items: center">
+							</div>
+			<!-- tabBox -->
+			<div class="vol-con-wrap tabBox">
 				<div class="col-lg-12">
 					<div class="widget">
 						<div class="widget-box">
-							<div id="map"
-								style="width: 700x; height: 400px; align-items: center"></div>
-
 						</div>
 						<!-- //widget-box -->
 					</div>
