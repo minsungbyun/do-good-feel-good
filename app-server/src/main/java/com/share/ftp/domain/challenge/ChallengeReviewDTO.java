@@ -14,6 +14,7 @@ public class ChallengeReviewDTO implements Serializable {
   private int reviewNo;
   private int point;
   private String content;
+  private String photo;
   private Date registeredDate;
   private JoinDTO owner;
   private List<ChallengeReviewAttachedFile> fileUpload;
@@ -27,12 +28,12 @@ public class ChallengeReviewDTO implements Serializable {
   @Override
   public String toString() {
     return "ChallengeReviewDTO [no=" + no + ", reviewNo=" + reviewNo + ", point=" + point
-        + ", content=" + content + ", registeredDate=" + registeredDate + ", owner=" + owner
-        + ", fileUpload=" + fileUpload + "]";
+        + ", content=" + content + ", photo=" + photo + ", registeredDate=" + registeredDate
+        + ", owner=" + owner + ", fileUpload=" + fileUpload + "]";
   }
   @Override
   public int hashCode() {
-    return Objects.hash(content, fileUpload, no, owner, point, registeredDate, reviewNo);
+    return Objects.hash(content, fileUpload, no, owner, photo, point, registeredDate, reviewNo);
   }
   @Override
   public boolean equals(Object obj) {
@@ -44,7 +45,8 @@ public class ChallengeReviewDTO implements Serializable {
       return false;
     ChallengeReviewDTO other = (ChallengeReviewDTO) obj;
     return Objects.equals(content, other.content) && Objects.equals(fileUpload, other.fileUpload)
-        && no == other.no && Objects.equals(owner, other.owner) && point == other.point
+        && no == other.no && Objects.equals(owner, other.owner)
+        && Objects.equals(photo, other.photo) && point == other.point
         && Objects.equals(registeredDate, other.registeredDate) && reviewNo == other.reviewNo;
   }
   public int getNo() {
@@ -64,6 +66,12 @@ public class ChallengeReviewDTO implements Serializable {
   }
   public void setContent(String content) {
     this.content = content;
+  }
+  public String getPhoto() {
+    return photo;
+  }
+  public void setPhoto(String photo) {
+    this.photo = photo;
   }
   public Date getRegisteredDate() {
     return registeredDate;

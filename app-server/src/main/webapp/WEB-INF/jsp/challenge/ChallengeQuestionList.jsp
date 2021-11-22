@@ -169,7 +169,9 @@
 							<textarea id='f-content' name='content' cols=100% rows="1"
 								class="modal-body" style="margin-left: 10%; float: left;"></textarea>
 						</div>
+              <c:if test="${not empty sessionScope.loginUser}">
 						<button style="margin-left: 3%; margin-top: 1.7%;">문의등록</button>
+						  </c:if>
 					</form>
 				</div>
 			</div>
