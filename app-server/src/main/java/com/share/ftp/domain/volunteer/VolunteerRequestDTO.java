@@ -19,27 +19,30 @@ public class VolunteerRequestDTO {
   private Date endDate;
   private String startTime;
   private String endTime;
-  private String photo;
   private int limitNum; // 총 정원
   private int status;
   private String note;
   private List<VolunteerAttachedFile> fileUpload;
   private JoinDTO wish;
+  private String photo;
 
   private String totalDate;
   private String remainDate;
   private int currentNum = 1; // 현재 참여 인원 (주최자는 미리 포함)
+
+
 
   @Override
   public String toString() {
     return "VolunteerRequestDTO [no=" + no + ", owner=" + owner + ", category=" + category
         + ", title=" + title + ", content=" + content + ", tel=" + tel + ", email=" + email
         + ", startDate=" + startDate + ", endDate=" + endDate + ", startTime=" + startTime
-        + ", endTime=" + endTime + ", photo=" + photo + ", limitNum=" + limitNum + ", status="
-        + status + ", note=" + note + ", fileUpload=" + fileUpload + ", wish=" + wish
+        + ", endTime=" + endTime + ", limitNum=" + limitNum + ", status=" + status + ", note="
+        + note + ", fileUpload=" + fileUpload + ", wish=" + wish + ", photo=" + photo
         + ", totalDate=" + totalDate + ", remainDate=" + remainDate + ", currentNum=" + currentNum
         + "]";
   }
+
 
   public int getNo() {
     return no;
@@ -107,13 +110,12 @@ public class VolunteerRequestDTO {
   public void setEndTime(String endTime) {
     this.endTime = endTime;
   }
-  public String getPhoto() {
-    return photo;
+  public int getLimitNum() {
+    return limitNum;
   }
-  public void setPhoto(String photo) {
-    this.photo = photo;
+  public void setLimitNum(int limitNum) {
+    this.limitNum = limitNum;
   }
-
   public int getStatus() {
     return status;
   }
@@ -138,6 +140,12 @@ public class VolunteerRequestDTO {
   public void setWish(JoinDTO wish) {
     this.wish = wish;
   }
+  public String getPhoto() {
+    return photo;
+  }
+  public void setPhoto(String photo) {
+    this.photo = photo;
+  }
   public String getTotalDate() {
     return totalDate;
   }
@@ -156,12 +164,7 @@ public class VolunteerRequestDTO {
   public void setCurrentNum(int currentNum) {
     this.currentNum = currentNum;
   }
-  public int getLimitNum() {
-    return limitNum;
-  }
-  public void setLimitNum(int limitNum) {
-    this.limitNum = limitNum;
-  }
+
 
 
 

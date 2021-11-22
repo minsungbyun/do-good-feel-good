@@ -1,57 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-     trimDirectiveWhitespaces="true" %>
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>모금함 개설신청 양식</title>
-	<style>
-	label {
-		margin-right: 5px;
-		text-align: right;
-		display: inline-block;
-		 width: 100px;
-	 }
-	</style>
+<title>모금함 개설신청 양식</title>
+<style>
+label {
+	margin-right: 5px;
+	text-align: right;
+	display: inline-block;
+	width: 100px;
+}
+</style>
 </head>
 <body>
-<h1>모금함 개설신청 양식(MVC)</h1>
-<form action="add?boardNo=${boardNo}" method="post" data-no="${boardNo}">
-    
-    <label for='f-donationBoard'>모금함번호</label> 
-    <input id='f-donationBoard' type='number' name='donationBoard' value="${boardNo}" readonly><br>
-    
-    <!-- 
+	<h1>모금함 개설신청 양식(MVC)</h1>
+	<form action="add?boardNo=${boardNo}" method="post"
+		data-no="${boardNo}">
+
+		<label for='f-donationBoard'>모금함번호</label> <input id='f-donationBoard'
+			type='number' name='donationBoard' value="${boardNo}" readonly><br>
+
+		<!-- 
     <label for='f-donator'>기부자</label> 
     <input id='f-donator' type="number" name='donator'><br>
      -->
-    
-    <label for='f-donationMoney'>기부금액</label> 
-    <input id='f-donationMoney' type='number' name='donationMoney'><br>
-    
-    <label for='f-registerationNumber'>주민등록번호</label> 
-    <input id='f-registerationNumber' type='number' name='registerationNumber'><br>
-    
-    <c:forEach items="${payTypes}" var="donationRegisterPayType">
-    <label for='f-payType'>${donationRegisterPayType.title}</label> 
-    <input id='f-payType' type='radio' name='payType' value="${donationRegisterPayType.no}"><br>
-</c:forEach>
 
-<p>
+		<label for='f-donationMoney'>기부금액</label> <input id='f-donationMoney'
+			type='number' name='donationMoney'><br> <label
+			for='f-registerationNumber'>주민등록번호</label> <input
+			id='f-registerationNumber' type='number' name='registerationNumber'><br>
 
-    <p>아임 서포트 결제 모듈 테스트 해보기</p>
-    <button id="check_module" type="button">아임 서포트 결제 모듈 테스트 해보기</button>
-</p>
 
-<br>
-<button id='register-Button'>기부하기</button><br>
-</form>
+		<p>
+		<p>아임 서포트 결제 모듈 테스트 해보기</p>
+		<button id="check_module" type="button">아임 서포트 결제 모듈 테스트 해보기</button>
+		</p>
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+		<br>
+		<button id='register-Button'>기부하기</button>
+		<br>
+	</form>
 
-<script>
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript"
+		src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+	<script>
 document.querySelector("#register-Button").onclick = () => {
     var frontRegiNumber = document.querySelector("#f-registerationNumber");
     var backRegiNumber = document.querySelector("#f-backRegisterationNumber");
@@ -62,9 +59,9 @@ document.querySelector("#register-Button").onclick = () => {
   }
   
 $("#check_module").click(function () {
-	  let donationBoard = $("#f-donationBoard").val();
-	  let donator = $("#f-donator").val();
-	  let donationMoney = $("#f-donationMoney").val();
+	  var donationBoard = $("#f-donationBoard").val();
+	  var donationMoney = $("#f-donationMoney").val();
+	  var registerationNumber = $("#f-registerationNumber").val();
 	
 var IMP = window.IMP; // 생략가능
 IMP.init('imp36238857');
@@ -117,22 +114,29 @@ m_redirect_url: 'https://www.yourdomain.com/payments/complete'
 }, function (rsp) {
 console.log(rsp);
 if (rsp.success) {
-var msg = '결제가 완료되었습니다.';
-msg += '고유ID : ' + rsp.imp_uid;
+var msg1 = '결제가 완료되었습니다.';
+/* msg += '고유ID : ' + rsp.imp_uid;
 msg += '상점 거래ID : ' + rsp.merchant_uid;
 msg += '결제 금액 : ' + rsp.paid_amount;
-msg += '카드 승인번호 : ' + rsp.apply_num;
+msg += '카드 승인번호 : ' + rsp.apply_num; */
+alert(msg1);
+$(document).ready(function() {
+	var money=$('#f-donationMoney').val();
+	var registeration=$('#f-registerationNumber').val();
+location.href='add?boardNo=${boardNo}&money='+money+'&registeration='+ registeration;
+});
 } else {
 var msg = '결제에 실패하였습니다.';
-msg += '에러내용 : ' + rsp.error_msg;
-}
+/* msg += '에러내용 : ' + rsp.error_msg; */
 alert(msg);
+location.href='${contextPath}/app/donation/detail?no=${boardNo}';
+}
 
-window.location.href = "add?boardNo=11";
+
+//window.location.href = "add?boardNo=11";
 
 });
 });
 </script>
 </body>
 </html>
-     
