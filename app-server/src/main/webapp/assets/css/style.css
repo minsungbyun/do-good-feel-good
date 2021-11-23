@@ -148,6 +148,13 @@ fieldset {
 	font-weight:bold;
 }
 
+.happy-btn2 {
+	background-color:#ff8184;
+  border-color:#ff8184;
+  color:#fff;
+  padding:5px 10px;
+}
+
 .happy-btn:hover {
 	color:#c85a54;
 }
@@ -1641,4 +1648,13 @@ fieldset {
 
 .page-footer p.happy-con {
 	color:#757575;
+}
+
+/* challenge */
+.chall-cont-img {
+	padding:0 20px;
+}
+
+.chall-cont-img img {
+	padding:20px 20px 20px 0;
 }

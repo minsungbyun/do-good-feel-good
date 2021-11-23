@@ -114,71 +114,73 @@
 			<div class="vol-con-wrap">
 				<div class="widget-box w-box2">
 					<a href='detail?no=${challengeDTO.no}#section1'>
-						<h4 class="widget-title" style="padding-top: 30px;">상세정보</h4>
+						<h4 class="widget-title" style="padding-top: 45px;">상세정보</h4>
 					</a>
 				</div>
 				<div class="widget-box w-box2">
-					<h1 class="widget-title" style="padding-top: 30px;"
+					<h1 class="widget-title" style="padding-top: 40px;"
 						id="scroll-section2">
 						<a>참여인증&댓글</a>
 					</h1>
-					<div class="content-box">
-						<c:forEach items="${challengeReviewList}" var="challengeReviewDTO">
-						<img src="${contextPath}/upload/challenge/${challengeReviewDTO.photo}" style="width:200px; height:200px;" alt="챌린지 리뷰 이미지" />
-                    ${challengeReviewDTO.reviewNo}
-                    ${challengeReviewDTO.content}
-                    <%-- ${challengeReviewDTO.photo} --%>
-                    ${challengeReviewDTO.owner.id}
-                    ${challengeReviewDTO.registeredDate}
-                    <!-- 모달 창 -->
-							<td><div class="modal fade" id="myModalReviewU"
-									role="dialog">
-									<!-- 사용자 지정 부분① : id명 -->
-									<div class="modal-dialog">
-										<!-- Modal content-->
-										<div class="modal-content">
-											<div class="modal-header">
-												<h4 class="modal-title">참여인증&댓글 수정</h4>
-												<!-- 사용자 지정 부분② : 타이틀 -->
-												<button type="button" class="close" data-dismiss="modal">×</button>
-											</div>
-											<form
-												action='reviewUpdate?reviewNo=${challengeReviewDTO.reviewNo}&no=${challengeReviewDTO.no}'
-												method="post" enctype="multipart/form-data">
-												<div class="modal-body">
-													<div class="class" name="name" id="id"
-														style="display: none">
-														<label for='f-no'>챌린지번호</label> <input id='f-no'
-															type='text' name='no' value='${challengeDTO.no}' readonly>
-														<br>
-													</div>
-													<textarea id='f-content' name='content' cols="55" rows="1"
-														class="modal-body">${challengeReviewDTO.content}</textarea>
-														
-													<label for="f-file">사진첨부</label><input type="file" id="f-file"
-                        name='photoFile'>
-														
-													<label for='f-owner'>작성자</label> <span id='f-owner'>${challengeReviewDTO.owner.id}</span><br>
-
-													<label for='f-registeredDate'>등록일</label> <span
-														id='f-registeredDate'>${challengeReviewDTO.registeredDate}</span><br>
+					<div class="content-box chall-cont-img">
+					 <diV class="cont-reply">
+							<c:forEach items="${challengeReviewList}" var="challengeReviewDTO">
+							<img src="${contextPath}/upload/challenge/${challengeReviewDTO.photo}" style="width:200px; height:200px; border-bottom: 1px solid #cecece;" alt="챌린지 리뷰 이미지" />
+	                    <span style="font-weight:bold; color:#555; padding-right:15px;">${challengeReviewDTO.owner.id}</span>
+	                    ${challengeReviewDTO.reviewNo}
+	                    ${challengeReviewDTO.content}
+	                    <%-- ${challengeReviewDTO.photo} --%>
+	                    <span style="padding-left:10px; color:#666;">${challengeReviewDTO.registeredDate}</span>
+	                    <!-- 모달 창 -->
+								<td><div class="modal fade" id="myModalReviewU"
+										role="dialog">
+										<!-- 사용자 지정 부분① : id명 -->
+										<div class="modal-dialog">
+											<!-- Modal content-->
+											<div class="modal-content">
+												<div class="modal-header">
+													<h4 class="modal-title">참여인증&댓글 수정</h4>
+													<!-- 사용자 지정 부분② : 타이틀 -->
+													<button type="button" class="close" data-dismiss="modal">×</button>
 												</div>
-												<button>수정완료</button>
-												<br>
-											</form>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default"
-													data-dismiss="modal">Close</button>
+												<form
+													action='reviewUpdate?reviewNo=${challengeReviewDTO.reviewNo}&no=${challengeReviewDTO.no}'
+													method="post" enctype="multipart/form-data">
+													<div class="modal-body">
+														<div class="class" name="name" id="id"
+															style="display: none">
+															<label for='f-no'>챌린지번호</label> <input id='f-no'
+																type='text' name='no' value='${challengeDTO.no}' readonly>
+															<br>
+														</div>
+														<textarea id='f-content' name='content' cols="55" rows="1"
+															class="modal-body">${challengeReviewDTO.content}</textarea>
+															
+														<label for="f-file">사진첨부</label><input type="file" id="f-file"
+	                        name='photoFile'>
+															
+														<label for='f-owner'>작성자</label> <span id='f-owner'>${challengeReviewDTO.owner.id}</span><br>
+	
+														<label for='f-registeredDate'>등록일</label> <span
+															id='f-registeredDate'>${challengeReviewDTO.registeredDate}</span><br>
+													</div>
+													<button>수정완료</button>
+													<br>
+												</form>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default"
+														data-dismiss="modal">Close</button>
+												</div>
 											</div>
 										</div>
-									</div>
-								</div> <!-- 모달 창 --> <c:if
-									test="${sessionScope.loginUser.no == challengeReviewDTO.owner.no}">
-											&nbsp;&nbsp;<a data-toggle="modal" href="#myModalReviewU">[변경]</a>
-									<td><a
-										href='reviewDelete?reviewNo=${challengeReviewDTO.reviewNo}&no=${challengeReviewDTO.no}'>[삭제]</a></td>
-								</c:if><br>
-						</c:forEach>
+									</div> <!-- 모달 창 --> <c:if
+										test="${sessionScope.loginUser.no == challengeReviewDTO.owner.no}">
+												&nbsp;&nbsp;<a data-toggle="modal" class="happy-btn2" href="#myModalReviewU">변경</a>
+										<td><a
+											href='reviewDelete?reviewNo=${challengeReviewDTO.reviewNo}&no=${challengeReviewDTO.no}' class="happy-btn2">삭제</a></td>
+									</c:if><br>
+							</c:forEach>
+						 </div>
 						<div class="btn-regi">
 							<!-- 부트스트랩의 모달 창을 사용할려면 아래의 class 이름들을 그대로 사용해야 한다. 변경하면 모양이 달라진다.-->
 							<!-- Modal -->
