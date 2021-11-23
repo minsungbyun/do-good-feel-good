@@ -16,6 +16,10 @@ import com.share.ftp.dao.ChallengeReviewDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
 import com.share.ftp.domain.challenge.ChallengeReviewDTO;
 import com.share.ftp.domain.join.JoinDTO;
+import net.coobird.thumbnailator.ThumbnailParameter;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+import net.coobird.thumbnailator.name.Rename;
 
 @Controller
 public class ChallengeReviewController {
@@ -41,6 +45,40 @@ public class ChallengeReviewController {
       String filename = UUID.randomUUID().toString();
       photoFile.write(sc.getRealPath("/upload/challenge") + "/" + filename);
       challengeReviewDTO.setPhoto(filename);
+
+      Thumbnails.of(sc.getRealPath("/upload/challenge") + "/" + filename)
+      .size(50, 50)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_50x50";
+        }
+      });
+
+      Thumbnails.of(sc.getRealPath("/upload/challenge") + "/" + filename)
+      .size(100, 100)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_100x100";
+        }
+      });
+
+      Thumbnails.of(sc.getRealPath("/upload/challenge") + "/" + filename)
+      .size(200, 200)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_200x200";
+        }
+      });
+
     }
 
     challengeReviewDTO.setOwner((JoinDTO) session.getAttribute("loginUser"));
