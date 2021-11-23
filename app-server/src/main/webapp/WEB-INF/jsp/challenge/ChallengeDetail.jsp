@@ -36,19 +36,22 @@
 					<img src="${contextPath}/upload/challenge/${challengeDTO.photo}" alt="챌린지 상세 이미지" />
 				</div>
 				<!-- //vol-de-img -->
-				<div class="chall-infor-wrap">
+				<div class="vol-infor-wrap">
 					<!-- vol-joiner -->
-					<div class="chall-joiner">
-						<span class="chall-cur"> <span class="sr-only">참여인원</span>
-							<b class="chall-count">0명</b> / <span class="sr-only">총
-								모집인원</span> 5명
+					<div class="chall-joiner" style="padding: 25px;">
+					 <span>
+							<span class="sr-only">참여인원</span>
+	              <b class="vol-count">0명</b> /
+	            <span class="sr-only">총 모집인원</span> 50명
 						</span>
-						<div class="progress">
+						<div class="progress" style="margin-top: 12px;">
 							<div class="progress-bar progress-bar-striped" role="progressbar"
 								style="width: 10%" aria-valuenow="10" aria-valuemin="0"
 								aria-valuemax="100"></div>
 						</div>
-						<div class="modal fade" id="myModalQuestionU${vs.index}"
+
+            <!-- 모달 창 -->
+						<div class="modal fade" id="myModalJoin${vs.index}"
 							role="dialog">
 							<!-- 사용자 지정 부분① : id명 -->
 							<div class="modal-dialog">
@@ -80,10 +83,9 @@
 						</div>
 						<!-- 모달 창 -->
 						&nbsp;&nbsp;<a data-toggle="modal"
-							href="#myModalQuestionU${vs.index}">[참여자 보기]</a>
+							href="#myModalJoin${vs.index}">[참여자 보기]</a>
 					</div>
-					<!-- //vol-joiner -->
-					<!-- vol-owner -->
+
 					<div class="chall-detail-infor">
 						<ul>
 							<li><span>모집기간</span> <span>${challengeDTO.startDate}~${challengeDTO.endDate}</span><span>총

@@ -48,11 +48,43 @@
 								style="width: 10%" aria-valuenow="10" aria-valuemin="0"
 								aria-valuemax="100"></div>
 						</div>
-						<button type="button" class="btn btn-secondary">참여자보기</button>
 
-					</div>
-					<!-- //vol-joiner -->
-					<!-- vol-owner -->
+            <!-- 모달 창 -->
+            <div class="modal fade" id="myModalJoin${vs.index}"
+              role="dialog">
+              <!-- 사용자 지정 부분① : id명 -->
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">참여자 목록</h4>
+                    <!-- 사용자 지정 부분② : 타이틀 -->
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                  </div>
+                  <div class="modal-body">
+                    <c:forEach items="${joinUser}" var="JoinDTO" varStatus="vs">
+                      <div class="class" id="id" style="display: none">
+                        <label for='f-no'>챌린지번호</label> <input id='f-no' type='text'
+                          name='no' value='${challengeDTO.no}' readonly> <br>
+                      </div>
+                      <label for='f-member'>참여자</label>
+                      <span id='f-member'>${JoinDTO.id}</span>
+                      <br>
+
+                      <label for='f-registeredDate'>등록일</label>
+                      <span id='f-registeredDate'>${JoinDTO.registerDate}</span>
+                      <br>
+                    </c:forEach>
+                  </div>
+                  <div class="modal-footer"></div>
+                </div>
+              </div>
+            </div>
+            <!-- 모달 창 -->
+            &nbsp;&nbsp;<a data-toggle="modal"
+              href="#myModalJoin${vs.index}">[참여자 보기]</a>
+          </div>
+
 					<div class="chall-detail-infor">
 						<ul>
 							<li><span>모집기간</span> <span>${challengeDTO.startDate}~${challengeDTO.endDate}</span><span>총
@@ -64,7 +96,14 @@
 								<p>획득 포인트:100포인트</p>
 							</li>
 						</ul>
-						<button type="button" class="btn btn-secondary">참여하기</button>
+            <form action="joinAdd" method="post">
+              <div class="class" id="id" style="display: none">
+                <label for='f-no'>챌린지번호</label> <input id='f-no' type='text'
+                  name='no' value='${challengeDTO.no}' readonly>
+              </div>
+              <br>
+              <button class="btn btn-secondary">참여하기</button>
+            </form>
 					</div>
 				</div>
 				<!-- //vol-infor-wrap -->
@@ -84,8 +123,10 @@
 					</h1>
 					<div class="content-box">
 						<c:forEach items="${challengeReviewList}" var="challengeReviewDTO">
+						<img src="${contextPath}/upload/challenge/${challengeReviewDTO.photo}" style="width:200px; height:200px;" alt="챌린지 리뷰 이미지" />
                     ${challengeReviewDTO.reviewNo}
                     ${challengeReviewDTO.content}
+                    <%-- ${challengeReviewDTO.photo} --%>
                     ${challengeReviewDTO.owner.id}
                     ${challengeReviewDTO.registeredDate}
                     <!-- 모달 창 -->
@@ -102,7 +143,7 @@
 											</div>
 											<form
 												action='reviewUpdate?reviewNo=${challengeReviewDTO.reviewNo}&no=${challengeReviewDTO.no}'
-												method="post">
+												method="post" enctype="multipart/form-data">
 												<div class="modal-body">
 													<div class="class" name="name" id="id"
 														style="display: none">
@@ -112,6 +153,10 @@
 													</div>
 													<textarea id='f-content' name='content' cols="55" rows="1"
 														class="modal-body">${challengeReviewDTO.content}</textarea>
+														
+													<label for="f-file">사진첨부</label><input type="file" id="f-file"
+                        name='photoFile'>
+														
 													<label for='f-owner'>작성자</label> <span id='f-owner'>${challengeReviewDTO.owner.id}</span><br>
 
 													<label for='f-registeredDate'>등록일</label> <span
@@ -127,7 +172,7 @@
 										</div>
 									</div>
 								</div> <!-- 모달 창 --> <c:if
-									test="${sessionScope.loginUser.no == challengeQuestionDTO.owner.no}">
+									test="${sessionScope.loginUser.no == challengeReviewDTO.owner.no}">
 											&nbsp;&nbsp;<a data-toggle="modal" href="#myModalReviewU">[변경]</a>
 									<td><a
 										href='reviewDelete?reviewNo=${challengeReviewDTO.reviewNo}&no=${challengeReviewDTO.no}'>[삭제]</a></td>
@@ -146,7 +191,7 @@
 											<!-- 사용자 지정 부분② : 타이틀 -->
 											<button type="button" class="close" data-dismiss="modal">×</button>
 										</div>
-										<form action='reviewAdd' method="post">
+										<form action='reviewAdd' method="post" enctype="multipart/form-data">
 											<div class="modal-body">
 												<div class="class" name="name" id="id" style="display: none">
 													<label for='f-no'>챌린지번호</label> <input id='f-no'
@@ -155,6 +200,9 @@
 												</div>
 												<textarea id='f-content' name='content' cols="55" rows="1"
 													class="modal-body"></textarea>
+                        <label for="f-file">사진첨부</label><input type="file" id="f-file"
+                        name='photoFile'>
+													
 											</div>
 											<button>참여인증&댓글 등록</button>
 											<br>
@@ -170,8 +218,10 @@
 							<br />
 							<!-- 아래에서 data-toggle과 data-target 속성에서 data-toggle에는 modal 값을 data-target속성에는 모달 창 전체를 
                 감싸는 div의 id 이름을 지정하면 된다. -->
+                <c:if test="${not empty sessionScope.loginUser}">
 							&nbsp;&nbsp;<a data-toggle="modal" href="#myModalReviewA"
 								class="btn btn-primary nBtn" role="button">참여댓글등록</a>
+							</c:if>
 						</div>
 					</div>
 				</div>

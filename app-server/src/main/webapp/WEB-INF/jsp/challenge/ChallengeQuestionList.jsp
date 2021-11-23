@@ -48,11 +48,43 @@
 								style="width: 10%" aria-valuenow="10" aria-valuemin="0"
 								aria-valuemax="100"></div>
 						</div>
-						<button type="button" class="btn btn-secondary">참여자보기</button>
 
-					</div>
-					<!-- //vol-joiner -->
-					<!-- vol-owner -->
+            <!-- 모달 창 -->
+            <div class="modal fade" id="myModalJoin${vs.index}"
+              role="dialog">
+              <!-- 사용자 지정 부분① : id명 -->
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">참여자 목록</h4>
+                    <!-- 사용자 지정 부분② : 타이틀 -->
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                  </div>
+                  <div class="modal-body">
+                    <c:forEach items="${joinUser}" var="JoinDTO" varStatus="vs">
+                      <div class="class" id="id" style="display: none">
+                        <label for='f-no'>챌린지번호</label> <input id='f-no' type='text'
+                          name='no' value='${challengeDTO.no}' readonly> <br>
+                      </div>
+                      <label for='f-member'>참여자</label>
+                      <span id='f-member'>${JoinDTO.id}</span>
+                      <br>
+
+                      <label for='f-registeredDate'>등록일</label>
+                      <span id='f-registeredDate'>${JoinDTO.registerDate}</span>
+                      <br>
+                    </c:forEach>
+                  </div>
+                  <div class="modal-footer"></div>
+                </div>
+              </div>
+            </div>
+            <!-- 모달 창 -->
+            &nbsp;&nbsp;<a data-toggle="modal"
+              href="myModalJoin${vs.index}">[참여자 보기]</a>
+          </div>
+
 					<div class="chall-detail-infor">
 						<ul>
 							<li><span>모집기간</span> <span>${challengeDTO.startDate}~${challengeDTO.endDate}</span><span>총
@@ -64,7 +96,14 @@
 								<p>획득 포인트:100포인트</p>
 							</li>
 						</ul>
-						<button type="button" class="btn btn-secondary">참여하기</button>
+            <form action="joinAdd" method="post">
+              <div class="class" id="id" style="display: none">
+                <label for='f-no'>챌린지번호</label> <input id='f-no' type='text'
+                  name='no' value='${challengeDTO.no}' readonly>
+              </div>
+              <br>
+              <button class="btn btn-secondary">참여하기</button>
+            </form>
 					</div>
 				</div>
 				<!-- //vol-infor-wrap -->
@@ -169,7 +208,9 @@
 							<textarea id='f-content' name='content' cols=100% rows="1"
 								class="modal-body" style="margin-left: 10%; float: left;"></textarea>
 						</div>
+              <c:if test="${not empty sessionScope.loginUser}">
 						<button style="margin-left: 3%; margin-top: 1.7%;">문의등록</button>
+						  </c:if>
 					</form>
 				</div>
 			</div>
