@@ -34,7 +34,7 @@
 				<tbody>
 					<c:forEach items="${waitDonationList}" var="donationBoardDTO">
 						<tr data-no='${donationBoardDTO.no}'>
-							<td><input type="checkbox" class="select-box" id='aaa'></td>
+							<td><input type="checkbox" class="select-box" id='aaa' value="${donationBoardDTO.no}"></td>
 							<td>${donationBoardDTO.no}</td>
 							<td>${donationBoardDTO.title}</td>
 							<td>${donationBoardDTO.leader.name}</td>

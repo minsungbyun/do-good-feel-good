@@ -66,7 +66,7 @@
 					                </span>
 					              <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
 				             </li>
-					            <li class="list-group-item">${remainNum}일 남음</li>
+					            <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
 				          </ul>
 					            <div class="card-footer">
 					               <small class="text-muted">주최자 : ${volunteerRequestDTO.owner.id}</small>
@@ -100,7 +100,7 @@
                           </span>
                         <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
                      </li>
-                      <li class="list-group-item">${remainNum}일 남음</li>
+                      <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
                   </ul>
                       <div class="card-footer">
                          <small class="text-muted">주최자 : ${volunteerRequestDTO.owner.id}</small>
@@ -134,7 +134,7 @@
 	                          </span>
 	                        <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
 	                     </li>
-	                      <li class="list-group-item">${remainNum}일 남음</li>
+	                      <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
 	                  </ul>
 	                      <div class="card-footer">
 	                         <small class="text-muted">주최자 : ${volunteerRequestDTO.owner.id}</small>
@@ -168,7 +168,7 @@
                           </span>
                         <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
                      </li>
-                      <li class="list-group-item">${remainNum}일 남음</li>
+                      <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
                   </ul>
                       <div class="card-footer">
                          <small class="text-muted">주최자 : ${volunteerRequestDTO.owner.id}</small>
@@ -202,7 +202,7 @@
                           </span>
                         <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
                      </li>
-                      <li class="list-group-item">${remainNum}일 남음</li>
+                      <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
                   </ul>
                       <div class="card-footer">
                          <small class="text-muted">주최자 : ${volunteerRequestDTO.owner.id}</small>
@@ -236,7 +236,7 @@
                           </span>
                         <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
                      </li>
-                      <li class="list-group-item">${remainNum}일 남음</li>
+                      <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
                   </ul>
                       <div class="card-footer">
                          <small class="text-muted">주최자 : ${volunteerRequestDTO.owner.id}</small>
@@ -270,7 +270,7 @@
                           </span>
                         <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
                      </li>
-                      <li class="list-group-item">${remainNum}일 남음</li>
+                      <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
                   </ul>
                       <div class="card-footer">
                          <small class="text-muted">주최자 : ${volunteerRequestDTO.owner.id}</small>
@@ -304,7 +304,7 @@
                           </span>
                         <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
                      </li>
-                      <li class="list-group-item">${remainNum}일 남음</li>
+                      <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
                   </ul>
                       <div class="card-footer">
                          <small class="text-muted">주최자 : ${volunteerRequestDTO.owner.id}</small>
@@ -332,7 +332,7 @@
          <div class="card-body">
            <h5 class="card-title"><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></h5>
            <p class="card-text">카테고리 : ${volunteerRequestDTO.category.title}</p>
-           <p class="card-text">남은자리 : ${remainNum}명</p>
+           <p class="card-text">남은자리 : ${volunteerRequestDTO.remainDate}명</p>
            <input type="checkbox" name="wish"> 찜하기
          </div>
        </div>

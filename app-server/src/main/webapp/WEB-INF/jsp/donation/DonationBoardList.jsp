@@ -33,7 +33,7 @@
                   style="width: 33.33%; float: left; padding: 0 5%; border: none;"
                   data-no="${donationBoardDTO.no}">
                   <span class="vol-type bu-d">${donationBoardDTO.category.title}</span>
-                  <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png"
+                  <img src="${contextPath}/upload/donation/${donationBoardDTO.photo}"
                      class="card-img-top" alt="...">
                   <div class="card-body">
                      <h5 class="card-title vol-title">

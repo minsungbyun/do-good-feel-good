@@ -303,12 +303,12 @@ insert into ftp_support_notice_file(notice_file_no, notice_no, filepath) values(
 
 -- 문의하기 카테고리
 -- (1.함께해요 문의 2.나눔이야기 문의 3.모금함 문의 4.챌린지 문의 5.사이트이용 문의 6.기타 문의)
-insert into ftp_support_qna_categroy(qna_category_no, category_title) values(1, '함께해요 문의');
-insert into ftp_support_qna_categroy(qna_category_no, category_title) values(2, '나눔이야기 문의');
-insert into ftp_support_qna_categroy(qna_category_no, category_title) values(3, '모금함 문의');
-insert into ftp_support_qna_categroy(qna_category_no, category_title) values(4, '챌린지 문의');
-insert into ftp_support_qna_categroy(qna_category_no, category_title) values(5, '사이트이용 문의');
-insert into ftp_support_qna_categroy(qna_category_no, category_title) values(6, '기타 문의');
+insert into ftp_support_qna_category(qna_category_no, title) values(1, '함께해요 문의');
+insert into ftp_support_qna_category(qna_category_no, title) values(2, '나눔이야기 문의');
+insert into ftp_support_qna_category(qna_category_no, title) values(3, '모금함 문의');
+insert into ftp_support_qna_category(qna_category_no, title) values(4, '챌린지 문의');
+insert into ftp_support_qna_category(qna_category_no, title) values(5, '사이트이용 문의');
+insert into ftp_support_qna_category(qna_category_no, title) values(6, '기타 문의');
 
 -- 문의하기
 insert into ftp_support_qna(qna_no, user_no, qna_category_no, title, content, password, qna_reply, status)

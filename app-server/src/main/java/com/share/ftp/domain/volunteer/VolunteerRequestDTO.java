@@ -25,10 +25,13 @@ public class VolunteerRequestDTO {
   private List<VolunteerAttachedFile> fileUpload;
   private JoinDTO wish;
   private String photo;
+  private int joinCount;
 
   private String totalDate;
   private String remainDate;
   private int currentNum = 1; // 현재 참여 인원 (주최자는 미리 포함)
+
+
 
 
 
@@ -39,11 +42,15 @@ public class VolunteerRequestDTO {
         + ", startDate=" + startDate + ", endDate=" + endDate + ", startTime=" + startTime
         + ", endTime=" + endTime + ", limitNum=" + limitNum + ", status=" + status + ", note="
         + note + ", fileUpload=" + fileUpload + ", wish=" + wish + ", photo=" + photo
-        + ", totalDate=" + totalDate + ", remainDate=" + remainDate + ", currentNum=" + currentNum
-        + "]";
+        + ", joinCount=" + joinCount + ", totalDate=" + totalDate + ", remainDate=" + remainDate
+        + ", currentNum=" + currentNum + "]";
   }
-
-
+  public int getJoinCount() {
+    return joinCount;
+  }
+  public void setJoinCount(int joinCount) {
+    this.joinCount = joinCount;
+  }
   public int getNo() {
     return no;
   }
