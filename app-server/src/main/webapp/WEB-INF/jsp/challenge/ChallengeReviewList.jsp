@@ -123,10 +123,10 @@
 					</h1>
 					<div class="content-box">
 						<c:forEach items="${challengeReviewList}" var="challengeReviewDTO">
-						<img src="${contextPath}/upload/challenge/${challengeReviewDTO.photo}" alt="챌린지 리뷰 이미지" />
+						<img src="${contextPath}/upload/challenge/${challengeReviewDTO.photo}" style="width:200px; height:200px;" alt="챌린지 리뷰 이미지" />
                     ${challengeReviewDTO.reviewNo}
                     ${challengeReviewDTO.content}
-                    ${challengeReviewDTO.photo}
+                    <%-- ${challengeReviewDTO.photo} --%>
                     ${challengeReviewDTO.owner.id}
                     ${challengeReviewDTO.registeredDate}
                     <!-- 모달 창 -->
