@@ -36,18 +36,19 @@
 					<img src="../assets/img/201612011168_500.jpg" alt="함께해요 상세 이미지" />
 				</div>
 				<!-- //vol-de-img -->
-				<div class="chall-infor-wrap">
+				<div class="vol-infor-wrap">
 					<!-- vol-joiner -->
-					<div class="chall-joiner">
-						<span class="chall-cur"> <span class="sr-only">참여인원</span>
-							<b class="chall-count">0명</b> / <span class="sr-only">총
-								모집인원</span> 5명
-						</span>
-						<div class="progress">
-							<div class="progress-bar progress-bar-striped" role="progressbar"
-								style="width: 10%" aria-valuenow="10" aria-valuemin="0"
-								aria-valuemax="100"></div>
-						</div>
+					<div class="chall-joiner" style="padding: 25px;">
+           <span>
+              <span class="sr-only">참여인원</span>
+                <b class="vol-count">0명</b> /
+              <span class="sr-only">총 모집인원</span> 50명
+            </span>
+            <div class="progress" style="margin-top: 12px;">
+              <div class="progress-bar progress-bar-striped" role="progressbar"
+                style="width: 10%" aria-valuenow="10" aria-valuemin="0"
+                aria-valuemax="100"></div>
+            </div>
 
             <!-- 모달 창 -->
             <div class="modal fade" id="myModalJoin${vs.index}"
@@ -81,21 +82,21 @@
               </div>
             </div>
             <!-- 모달 창 -->
-            &nbsp;&nbsp;<a data-toggle="modal"
-              href="#myModalJoin${vs.index}">[참여자 보기]</a>
+            &nbsp;&nbsp;<a data-toggle="modal" class="btn btn-outline-secondary open btn-sm"
+              style=" display:block; margin-top:18px;" href="#myModalJoin${vs.index}">[참여자 보기]</a>
           </div>
 
-					<div class="chall-detail-infor">
-						<ul>
-							<li><span>모집기간</span> <span>${challengeDTO.startDate}~${challengeDTO.endDate}</span><span>총
-									00일</span></li>
-							<li><span>참여기간</span> <span>${challengeDTO.startDate}~${challengeDTO.endDate}</span>
-							</li>
-							<li>D-day 00일</li>
-							<li>
-								<p>획득 포인트:100포인트</p>
-							</li>
-						</ul>
+					<div class="vol-detail-infor" style="height:290px">
+            <ul>
+              <li class="do-d-day" style="margin-bottom:10px;">D-day ${challengeDTO.remainDate}</li>
+              <li><span>모집기간</span> <span>${challengeDTO.startDate}~${challengeDTO.endDate}</span><span style="padding-left:5px;">총
+                  ${challengeDTO.totalDate}일</span></li>
+              <li><span>참여기간</span> <span>${challengeDTO.startDate}~${challengeDTO.endDate}</span>
+              </li>
+              <li>
+                <p>획득 포인트:100포인트</p>
+              </li>
+            </ul>
             <form action="joinAdd" method="post">
               <div class="class" id="id" style="display: none">
                 <label for='f-no'>챌린지번호</label> <input id='f-no' type='text'
@@ -104,80 +105,82 @@
               <br>
               <button class="btn btn-secondary">참여하기</button>
             </form>
-					</div>
+          </div>
 				</div>
 				<!-- //vol-infor-wrap -->
 			</div>
 			<!-- //vol-detail -->
 
 			<div class="vol-con-wrap">
-				<div>
+				<div class="widget-box w-box2">
 					<a href='detail?no=${challengeDTO.no}#section1'>
-						<h4 class="widget-title" style="padding-top: 30px;">상세정보</h4>
+						<h4 class="widget-title" style="padding-top: 45px;">상세정보</h4>
 					</a>
 				</div>
-				<div>
-					<h1 class="widget-title" style="padding-top: 30px;"
+				<div class="widget-box w-box2">
+					<h1 class="widget-title" style="padding-top: 40px;"
 						id="scroll-section2">
 						<a>참여인증&댓글</a>
 					</h1>
-					<div class="content-box">
-						<c:forEach items="${challengeReviewList}" var="challengeReviewDTO">
-						<img src="${contextPath}/upload/challenge/${challengeReviewDTO.photo}" style="width:200px; height:200px;" alt="챌린지 리뷰 이미지" />
-                    ${challengeReviewDTO.reviewNo}
-                    ${challengeReviewDTO.content}
-                    <%-- ${challengeReviewDTO.photo} --%>
-                    ${challengeReviewDTO.owner.id}
-                    ${challengeReviewDTO.registeredDate}
-                    <!-- 모달 창 -->
-							<td><div class="modal fade" id="myModalReviewU"
-									role="dialog">
-									<!-- 사용자 지정 부분① : id명 -->
-									<div class="modal-dialog">
-										<!-- Modal content-->
-										<div class="modal-content">
-											<div class="modal-header">
-												<h4 class="modal-title">참여인증&댓글 수정</h4>
-												<!-- 사용자 지정 부분② : 타이틀 -->
-												<button type="button" class="close" data-dismiss="modal">×</button>
-											</div>
-											<form
-												action='reviewUpdate?reviewNo=${challengeReviewDTO.reviewNo}&no=${challengeReviewDTO.no}'
-												method="post" enctype="multipart/form-data">
-												<div class="modal-body">
-													<div class="class" name="name" id="id"
-														style="display: none">
-														<label for='f-no'>챌린지번호</label> <input id='f-no'
-															type='text' name='no' value='${challengeDTO.no}' readonly>
-														<br>
-													</div>
-													<textarea id='f-content' name='content' cols="55" rows="1"
-														class="modal-body">${challengeReviewDTO.content}</textarea>
-														
-													<label for="f-file">사진첨부</label><input type="file" id="f-file"
-                        name='photoFile'>
-														
-													<label for='f-owner'>작성자</label> <span id='f-owner'>${challengeReviewDTO.owner.id}</span><br>
-
-													<label for='f-registeredDate'>등록일</label> <span
-														id='f-registeredDate'>${challengeReviewDTO.registeredDate}</span><br>
+					<div class="content-box chall-cont-img">
+					 <diV class="cont-reply">
+							<c:forEach items="${challengeReviewList}" var="challengeReviewDTO">
+							<img src="${contextPath}/upload/challenge/${challengeReviewDTO.photo}" style="width:200px; height:200px; border-bottom: 1px solid #cecece;" alt="챌린지 리뷰 이미지" />
+	                    <span style="font-weight:bold; color:#555; padding-right:15px;">${challengeReviewDTO.owner.id}</span>
+	                    ${challengeReviewDTO.reviewNo}
+	                    ${challengeReviewDTO.content}
+	                    <%-- ${challengeReviewDTO.photo} --%>
+	                    <span style="padding-left:10px; color:#666;">${challengeReviewDTO.registeredDate}</span>
+	                    <!-- 모달 창 -->
+								<td><div class="modal fade" id="myModalReviewU"
+										role="dialog">
+										<!-- 사용자 지정 부분① : id명 -->
+										<div class="modal-dialog">
+											<!-- Modal content-->
+											<div class="modal-content">
+												<div class="modal-header">
+													<h4 class="modal-title">참여인증&댓글 수정</h4>
+													<!-- 사용자 지정 부분② : 타이틀 -->
+													<button type="button" class="close" data-dismiss="modal">×</button>
 												</div>
-												<button>수정완료</button>
-												<br>
-											</form>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default"
-													data-dismiss="modal">Close</button>
+												<form
+													action='reviewUpdate?reviewNo=${challengeReviewDTO.reviewNo}&no=${challengeReviewDTO.no}'
+													method="post" enctype="multipart/form-data">
+													<div class="modal-body">
+														<div class="class" name="name" id="id"
+															style="display: none">
+															<label for='f-no'>챌린지번호</label> <input id='f-no'
+																type='text' name='no' value='${challengeDTO.no}' readonly>
+															<br>
+														</div>
+														<textarea id='f-content' name='content' cols="55" rows="1"
+															class="modal-body">${challengeReviewDTO.content}</textarea>
+															
+														<label for="f-file">사진첨부</label><input type="file" id="f-file"
+	                        name='photoFile'>
+															
+														<label for='f-owner'>작성자</label> <span id='f-owner'>${challengeReviewDTO.owner.id}</span><br>
+	
+														<label for='f-registeredDate'>등록일</label> <span
+															id='f-registeredDate'>${challengeReviewDTO.registeredDate}</span><br>
+													</div>
+													<button>수정완료</button>
+													<br>
+												</form>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default"
+														data-dismiss="modal">Close</button>
+												</div>
 											</div>
 										</div>
-									</div>
-								</div> <!-- 모달 창 --> <c:if
-									test="${sessionScope.loginUser.no == challengeReviewDTO.owner.no}">
-											&nbsp;&nbsp;<a data-toggle="modal" href="#myModalReviewU">[변경]</a>
-									<td><a
-										href='reviewDelete?reviewNo=${challengeReviewDTO.reviewNo}&no=${challengeReviewDTO.no}'>[삭제]</a></td>
-								</c:if><br>
-						</c:forEach>
+									</div> <!-- 모달 창 --> <c:if
+										test="${sessionScope.loginUser.no == challengeReviewDTO.owner.no}">
+												&nbsp;&nbsp;<a data-toggle="modal" class="happy-btn2" href="#myModalReviewU">변경</a>
+										<td><a
+											href='reviewDelete?reviewNo=${challengeReviewDTO.reviewNo}&no=${challengeReviewDTO.no}' class="happy-btn2">삭제</a></td>
+									</c:if><br>
+							</c:forEach>
+						 </div>
 						<div class="btn-regi">
 							<!-- 부트스트랩의 모달 창을 사용할려면 아래의 class 이름들을 그대로 사용해야 한다. 변경하면 모양이 달라진다.-->
 							<!-- Modal -->
@@ -225,7 +228,7 @@
 						</div>
 					</div>
 				</div>
-				<div>
+				<div class="widget-box w-box2">
 					<a href='questionList?no=${challengeDTO.no}#section3'>
 						<h4 class="widget-title" style="padding-top: 30px;">문의하기</h4>
 					</a>
