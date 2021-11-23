@@ -48,7 +48,9 @@
 								style="width: 10%" aria-valuenow="10" aria-valuemin="0"
 								aria-valuemax="100"></div>
 						</div>
-						<div class="modal fade" id="myModalQuestionU${vs.index}"
+
+            <!-- 모달 창 -->
+						<div class="modal fade" id="myModalJoin${vs.index}"
 							role="dialog">
 							<!-- 사용자 지정 부분① : id명 -->
 							<div class="modal-dialog">
@@ -80,10 +82,9 @@
 						</div>
 						<!-- 모달 창 -->
 						&nbsp;&nbsp;<a data-toggle="modal"
-							href="#myModalQuestionU${vs.index}">[참여자 보기]</a>
+							href="#myModalJoin${vs.index}">[참여자 보기]</a>
 					</div>
-					<!-- //vol-joiner -->
-					<!-- vol-owner -->
+
 					<div class="chall-detail-infor">
 						<ul>
 							<li><span>모집기간</span> <span>${challengeDTO.startDate}~${challengeDTO.endDate}</span><span>총
