@@ -82,17 +82,17 @@
 							</div>
 						</div>
 						<!-- 모달 창 -->
-						&nbsp;&nbsp;<a data-toggle="modal"
-							href="#myModalJoin${vs.index}">[참여자 보기]</a>
+						&nbsp;&nbsp;<a data-toggle="modal" class="btn btn-outline-secondary open btn-sm"
+							style=" display:block; margin-top:18px;" href="#myModalJoin${vs.index}">[참여자 보기]</a>
 					</div>
 
-					<div class="chall-detail-infor">
+					<div class="vol-detail-infor" style="height:290px">
 						<ul>
-							<li><span>모집기간</span> <span>${challengeDTO.startDate}~${challengeDTO.endDate}</span><span>총
+						  <li class="do-d-day" style="margin-bottom:10px;">D-day ${challengeDTO.remainDate}</li>
+							<li><span>모집기간</span> <span>${challengeDTO.startDate}~${challengeDTO.endDate}</span><span style="padding-left:5px;">총
 									${challengeDTO.totalDate}일</span></li>
 							<li><span>참여기간</span> <span>${challengeDTO.startDate}~${challengeDTO.endDate}</span>
 							</li>
-							<li>D-day ${challengeDTO.remainDate}일</li>
 							<li>
 								<p>획득 포인트:100포인트</p>
 							</li>
@@ -112,17 +112,19 @@
 			<!-- //vol-detail -->
 
 			<div class="vol-con-wrap">
-				<div>
-					<h1 class="widget-title" style="padding-top: 30px;"
-						id="scroll-section1">상세정보</h1>
-					<div class="content-box">${challengeDTO.content}</div>
+			 <div class="widget">
+					<div class="widget-box w-box2">
+						<h1 class="widget-title" style="padding-top: 30px;"
+							id="scroll-section1">상세정보</h1>
+						<div class="content-box">${challengeDTO.content}</div>
+					</div>
 				</div>
-				<div>
+				<div class="widget-box w-box2">
 					<a href='reviewList?no=${challengeDTO.no}#section2'>
 						<h4 class="widget-title" style="padding-top: 30px;">참여인증&댓글</h4>
 					</a>
 				</div>
-				<div>
+				<div class="widget-box w-box2">
 					<a href='questionList?no=${challengeDTO.no}#section3'>
 						<h4 class="widget-title" style="padding-top: 30px;"
 							id="scroll-section2">문의하기</h4>
