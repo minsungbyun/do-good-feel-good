@@ -28,6 +28,10 @@ import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.volunteer.VolunteerJoinDTO;
 import com.share.ftp.domain.volunteer.VolunteerQuestionDTO;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
+import net.coobird.thumbnailator.ThumbnailParameter;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+import net.coobird.thumbnailator.name.Rename;
 
 @Controller
 @RequestMapping("/volunteer")
@@ -55,6 +59,39 @@ public class VolunteerController {
       String filename = UUID.randomUUID().toString();
       photoFile.write(sc.getRealPath("/upload/volunteer") + "/" + filename);
       volunteerRequestDTO.setPhoto(filename);
+
+      Thumbnails.of(sc.getRealPath("/upload/volunteer") + "/" + filename)
+      .size(500, 500)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_500x500";
+        }
+      });
+
+      Thumbnails.of(sc.getRealPath("/upload/volunteer") + "/" + filename)
+      .size(550, 550)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_550x550";
+        }
+      });
+
+      Thumbnails.of(sc.getRealPath("/upload/volunteer") + "/" + filename)
+      .size(600, 600)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_600x600";
+        }
+      });
     }
 
     volunteerRequestDTO.setOwner((JoinDTO) session.getAttribute("loginUser"));

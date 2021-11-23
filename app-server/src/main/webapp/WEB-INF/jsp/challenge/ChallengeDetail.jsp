@@ -36,18 +36,23 @@
 					<img src="${contextPath}/upload/challenge/${challengeDTO.photo}" alt="챌린지 상세 이미지" />
 				</div>
 				<!-- //vol-de-img -->
-				<div class="chall-infor-wrap">
+				<div class="vol-infor-wrap">
 					<!-- vol-joiner -->
-					<div class="chall-joiner">
-						<span class="chall-cur"> <span class="sr-only">참여인원</span>
-							<b class="chall-count">0명</b> / <span class="sr-only">총
-								모집인원</span> 5명
+					<div class="chall-joiner" style="padding: 25px;">
+					 <span>
+							<span class="sr-only">참여인원</span>
+	              <b class="vol-count">0명</b> /
+	            <span class="sr-only">총 모집인원</span> 50명
 						</span>
-						<div class="progress">
+						<div class="progress" style="margin-top: 12px;">
 							<div class="progress-bar progress-bar-striped" role="progressbar"
 								style="width: 10%" aria-valuenow="10" aria-valuemin="0"
 								aria-valuemax="100"></div>
 						</div>
+						<input type="hidden" id="volunteerNo" value="${volunteer.no}" />
+              <button type="button" class="btn btn-outline-secondary open btn-sm" id="btn-modal" style=" display:block; margin-top:18px;" data-toggle="modal"
+              data-target="#myModalQuestionU${vs.index}">봉사
+                참여자 목록</button>
 						<div class="modal fade" id="myModalQuestionU${vs.index}"
 							role="dialog">
 							<!-- 사용자 지정 부분① : id명 -->

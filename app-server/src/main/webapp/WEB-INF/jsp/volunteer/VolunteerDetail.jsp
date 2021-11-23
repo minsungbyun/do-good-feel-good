@@ -29,27 +29,27 @@
 			<div class="vol-detail">
 				<div class="vol-de-img">
 					<a href="${contextPath}/upload/volunteer/${volunteer.photo}">
-            <img style="width:100%"
+            <img style="width:100%; text-align: center;"
               id="f-photo-image"
-              src="${contextPath}/upload/volunteer/${volunteer.photo}">
+              src="${contextPath}/upload/volunteer/${volunteer.photo}_550x550.jpg">
               </a>
 				</div>
 				<div class="vol-infor-wrap">
 					<!-- vol-joiner -->
 					<div class="vol-joiner">
-						<div style="padding: 10px;">
+						<div>
 							<span class="vol-cur" >
 							  <span class="sr-only">참여인원</span>
 							  <b class="vol-count">${joinCount}명</b> /
 							  <span class="sr-only">총 모집인원</span> ${volunteer.limitNum}명
 							</span>
-							<div class="progress" style="margin:10px 0 15px 0;">
-								<div class="progress-bar progress-bar-striped"
-									role="progressbar" style="width: 10%" aria-valuenow="10"
-									aria-valuemin="0" aria-valuemax="100"></div>
-							</div>
+							<div class="progress" style="margin-top: 12px;">
+	              <div class="progress-bar progress-bar-striped" role="progressbar"
+	                style="width: 10%" aria-valuenow="10" aria-valuemin="0"
+	                aria-valuemax="100"></div>
+	            </div>
 							<input type="hidden" id="volunteerNo" value="${volunteer.no}" />
-							<button type="button" class="btn btn-outline-secondary open btn-sm" id="btn-modal" style="margin:0 auto;" data-toggle="modal"
+							<button type="button" class="btn btn-outline-secondary open btn-sm" id="btn-modal" style=" display:block; margin-top:18px;" data-toggle="modal"
               data-target="#myModalQuestionU${vs.index}">봉사
 								참여자 목록</button>
 						</div>
@@ -206,7 +206,7 @@
 									<!-- //총모집인원 -->
 									<div class="col-12 py-2">
 										<label for="content" class="fg-grey">내용</label>
-										<textarea id="content" rows="8" class="form-control">${volunteer.content}</textarea>
+										<textarea id="content" rows="8" class="form-control" readonly>${volunteer.content}</textarea>
 									</div>
 									<!-- //내용 -->
 								</div>
@@ -388,7 +388,7 @@ function goTop(){
 	});
 	// 마커가 지도 위에 표시되도록 설정합니다
 	marker.setMap(map);
-	var iwContent = '<div style="padding:5px;">여기야여기! <br><a href="https://map.kakao.com/link/map/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+	var iwContent = '<div style="padding:5px;">낙엽 출몰장소 <br><a href="https://map.kakao.com/link/map/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 	iwPosition = new kakao.maps.LatLng(37.49950381717442, 127.02906340621007); //인포윈도우 표시 위치입니다
 	// 인포윈도우를 생성합니다
 	var infowindow = new kakao.maps.InfoWindow({
