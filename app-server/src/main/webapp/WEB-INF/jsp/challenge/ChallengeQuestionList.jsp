@@ -131,7 +131,7 @@
 						<c:forEach items="${challengeQuestionList}"
 							var="challengeQuestionDTO" varStatus="vs">
 							<div class="ch-balloon left"
-								style="margin-top: 1%; margin-bottom: 1%; margin-left: 18%; float: center">
+								style="margin-top: 1%; margin-bottom: 1%; margin-left: 14%; float: center">
 								<span>
 									<div class="class" id="id" style="display: none">
 										${challengeQuestionDTO.questionNo}</div>
@@ -211,7 +211,8 @@
 									class="modal-body" style="margin-left: 10%; float: left;"></textarea>
 							</div>
 	              <c:if test="${not empty sessionScope.loginUser}">
-							<button style="margin-left: 3%; margin-top: 1.7%;">문의등록</button>
+							<button class="btn btn-default btn-sm" style="margin-left: 3%; margin-top: 1.7%; background-color:#fff; border:none; padding:5px 15px;
+							border-radius:10px; ">문의등록</button>
 							  </c:if>
 						</form>
 					</div>
