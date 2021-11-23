@@ -33,12 +33,14 @@
                   style="width: 33.33%; float: left; padding: 0 5%; border: none;"
                   data-no="${donationBoardDTO.no}">
                   <span class="vol-type bu-d">${donationBoardDTO.category.title}</span>
-                  <img src="${contextPath}/upload/donation/${donationBoardDTO.photo}"
+                  <img src="${contextPath}/upload/donation/${donationBoardDTO.photo}_500x500.jpg"
                      class="card-img-top" alt="...">
                   <div class="card-body">
                      <h5 class="card-title vol-title">
                         <a href='detail?no=${donationBoardDTO.no}'>${donationBoardDTO.title}</a>
+                        
                      </h5>
+                     <br>
                      <p class="card-text">
                         <span class="text-muted">${donationBoardDTO.startDate}~${donationBoardDTO.endDate}</span>
                      </p>

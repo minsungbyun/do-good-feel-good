@@ -24,7 +24,7 @@
 
         <label for='f-photo'>사진</label> 
 			    <a href="${contextPath}/upload/challenge/${challenge.photo}" >
-			        <img id="f-challenge-image" src="${contextPath}/upload/challenge/${challenge.photo}_100x100.jpg">
+			        <img id="f-challenge-image" src="${contextPath}/upload/challenge/${challenge.photo}_150x150.jpg">
           </a>
         <input id='f-photo' type='file' name='photoFile'><br>
 

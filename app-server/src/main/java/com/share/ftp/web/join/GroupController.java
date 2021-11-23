@@ -64,7 +64,7 @@ public class GroupController {
     }
 
     groupDTO.setType(2);
-    groupDTO.setStatus(2);
+    groupDTO.setStatus(1);
 
     groupDao.insert(groupDTO);
     groupDao.insertGroup(groupDTO.getNo(), groupDTO.getGroupCount());
