@@ -111,10 +111,10 @@ public class VolunteerController {
   public ModelAndView list() throws Exception {
 
     List<VolunteerRequestDTO> volunteerList = volunteerDao.findAllApproved();
-
     int remainNum = 0;
     for (VolunteerRequestDTO volunteer : volunteerList) {
-      remainNum = (volunteer.getLimitNum() - volunteer.getCurrentNum());
+      int joinCount = volunteerJoinDao.findByJoinUser(volunteer.getNo());
+      volunteerList.get(volunteer.getNo() - 1).setJoinCount(joinCount);
     }
 
     ModelAndView mv = new ModelAndView();

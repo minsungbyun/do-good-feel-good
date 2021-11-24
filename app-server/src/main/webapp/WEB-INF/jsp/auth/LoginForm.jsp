@@ -34,7 +34,7 @@
                 <a href="#"><span>아이디 찾기</span></a> 
                 <a href="#"><span>비밀번호 찾기</span></a>
               </div>
-              <div class="loginSns">
+              <!-- <div class="loginSns">
                 <a href="" class="sns-login-button sns01" snstype="naver">
                   <s></s>
                   <span>네이버 계정으로 로그인</span>
@@ -49,7 +49,7 @@
                   <s></s>
                   <span>페이스북 계정으로 로그인</span>
                 </a>
-              </div> <!--//loginSns -->
+              </div> //loginSns -->
              </form>
             </div>
           </div>  <!-- //container -->
