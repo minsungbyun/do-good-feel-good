@@ -1,8 +1,8 @@
 # 💖 HappyShare 
 
-[![github_readme](https://www.google.co.kr/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png)
+[![github_readme](./front/public/readme/github_readme.png)](https://babble.gg)
 
-- 메인 로고 사진 넣으면 됨 (만들어야 될 듯!)
+- 메인 로고 사진 넣으면 됨
 
 ## 🚀 1. Introduction
 
@@ -26,16 +26,16 @@
 
 ## 우리팀을 소개합니다 
 
-|                     <img src="https://avatars.githubusercontent.com/u/86590036?v=4" width=200px alt="minsung"/>                      |                    <img src="https://avatars.githubusercontent.com/u/86590036?v=4" width=200px alt="_"/>                    |                      <img src="https://avatars.githubusercontent.com/u/86590036?v=4" width=200px alt="_"/>                      |                     <img src="https://avatars.githubusercontent.com/u/86590036?v=4" width=200px alt="_">                      |                    <img src="https://avatars.githubusercontent.com/u/86590036?v=4" width=200px alt="_">              |
+|                     <img src="https://avatars.githubusercontent.com/u/86590036?v=4" width=200px alt="minsung"/>                      |                    <img src="https://avatars.githubusercontent.com/u/86589601?v=4" width=200px alt="junguk img"/>                    |                      <img src="https://avatars.githubusercontent.com/u/86590036?v=4" width=200px alt="_"/>                      |                     <img src="https://avatars.githubusercontent.com/u/86590036?v=4" width=200px alt="_">                      |                    <img src="https://avatars.githubusercontent.com/u/86590036?v=4" width=200px alt="_">              |
 | :---------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: |
 |                                                           Back-End                                                            |                                                             Back-End                                                              |                                                               Back-End                                                                |                                                              Back-End                                                               |                                                             Front-End                                                             |
-| [변민성(변사부)](https://github.com/minsungbyun) <br> [🙋‍♂️]() | [이름적어주세요](https://www.naver.com) <br> [👨‍💻]() | [이름적어주세요](https://www.naver.com) <br> [👨‍💻]() | [이름적어주세요](https://www.naver.com) <br> [👨‍💻]() | [이름적어주세요](https://www.naver.com) <br> [👩‍💻]() | [이름적어주세요](https://www.naver.com) <br> [👨‍💻]() |
-|                                           [변사부 블로그](https://enjoydevelop.tistory.com)                                            |                                      [이름적어주세요 블로그](https://www.naver.com)                                      |                                             [이름적어주세요 블로그](https://www.naver.com)                                              |                                            [이름적어주세요 블로그](https://www.naver.com)                                             |                                           [이름적어주세요 블로그](https://www.naver.com)                                            |
+| [변민성(변사부)](https://github.com/minsungbyun) <br> [🙋‍♂️]() | [위정욱(우기)](https://github.com/wejunguk) <br> [👩‍💻]() | [이름적어주세요](https://github.com/unluckyjung) <br> [👨‍💻](https://github.com/woowacourse-teams/2021-babble/commits?author=unluckyjung) | [이름적어주세요](https://github.com/Hyeon9mak) <br> [👨‍💻](https://github.com/woowacourse-teams/2021-babble/commits?author=Hyeon9mak) | [이름적어주세요](https://github.com/ddongule) <br> [👩‍💻](https://github.com/woowacourse-teams/2021-babble/commits?author=ddongule) | [이름적어주세요](https://github.com/iborymagic) <br> [👨‍💻](https://github.com/woowacourse-teams/2021-babble/commits?author=iborymagic) |
+|                                           [변사부 블로그](https://enjoydevelop.tistory.com)                                            |                                      [위정욱 블로그 만들어라!](#)                                      |                                             [이름적어주세요 블로그](https://unluckyjung.github.io)                                              |                                            [이름적어주세요 블로그](https://hyeon9mak.github.io)                                             |                                           [이름적어주세요 블로그](https://mingule.tistory.com)                                            |
 
 
 <br />
 
-## 📝 3. Situation
+## ❌ 3. Issue
 
 ### 현황 및 문제점 (현존하는 봉사/ 기부 관련 사이트)
 <br />
@@ -67,14 +67,15 @@
 
 <br />
 
-### 저희는 이슈(ISSUE), 위키(WIKI), 프로젝트(PROJECT)를 통한 관리를 하고 있습니다. <br />
-
-<h4> ✔️ 이슈을 보실려면 클릭해주세요!
-<a href='https://github.com/minsungbyun/happy-share/issues'>HappyShare ISSUE</a></h4>
-</div>
+### 이슈(ISSUE) 위키(WIKI) 프로젝트(PROJECT)를 통한 관리를 하고 있습니다. <br />
 
 <h4> ✔️ 위키를 보실려면 클릭해주세요!
 <a href='https://github.com/minsungbyun/happy-share/wiki'>HappyShare WIKI</a></h4>
+</div>
+
+
+<h4> ✔️ 이슈을 보실려면 클릭해주세요!
+<a href='https://github.com/minsungbyun/happy-share/issues'>HappyShare ISSUE</a></h4>
 </div>
 
 
@@ -95,11 +96,17 @@
 * HTML 5
 * CSS 3
 * JavaScript
+* jQuery
+* Bootstrap
+* Ajax
 * MariaDB
 * Mybatis
 * Gradle
 * AWS EC2
-
+* Eclipse
+* Visual Studio
+* GitHub
+* eXERD
 
 <details>
 <summary>back-end</summary>
@@ -116,18 +123,9 @@ test
 
 <br />
 
-## 🍎 5. Use-Case Diagram 
-사진 예시니까 우리것으로 바꾸기!
-![use-case diagram](https://mblogthumb-phinf.pstatic.net/MjAxNzA1MTBfNTAg/MDAxNDk0MzkxMjEyODQy._X90dmijdHf8463ZjPWEdVo_tcPpNRdsmW11L_hfjxsg.Rl9xV80ED5PgQyuz7C16vysed3yR1xYYik48Ckg9rE0g.PNG.ljh0326s/image.png?type=w800)
-
+## 🍎 5. Use-Case Diagram
 ## 🍎 6. DB Modeling
-![use-case diagram](https://mblogthumb-phinf.pstatic.net/MjAxNzA1MTBfNTAg/MDAxNDk0MzkxMjEyODQy._X90dmijdHf8463ZjPWEdVo_tcPpNRdsmW11L_hfjxsg.Rl9xV80ED5PgQyuz7C16vysed3yR1xYYik48Ckg9rE0g.PNG.ljh0326s/image.png?type=w800)
 ## 🍎 7. Sitemap
-![use-case diagram](https://mblogthumb-phinf.pstatic.net/MjAxNzA1MTBfNTAg/MDAxNDk0MzkxMjEyODQy._X90dmijdHf8463ZjPWEdVo_tcPpNRdsmW11L_hfjxsg.Rl9xV80ED5PgQyuz7C16vysed3yR1xYYik48Ckg9rE0g.PNG.ljh0326s/image.png?type=w800)
-
-
-
-
 
 <!--
 
