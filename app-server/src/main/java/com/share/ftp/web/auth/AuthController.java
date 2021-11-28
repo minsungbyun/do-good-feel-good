@@ -145,6 +145,8 @@ public class AuthController {
     mv.setViewName("template2");
     return mv;
   }
+
+
 }
 
 

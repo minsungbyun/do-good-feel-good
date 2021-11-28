@@ -86,7 +86,7 @@
 				<!-- //vol-infor-wrap -->
 
 				<!-- modal -->
-            <div class="modal fade" id="myModalQuestionU${vs.index}"
+            <div class="modal fade" id="myModalJoin${vs.index}"
               role="dialog">
               <!-- 사용자 지정 부분① : id명 -->
               <div class="modal-dialog">
@@ -297,16 +297,16 @@
 			</div>
 			<!-- //tabBox -->
 
-				<h3 class="widget-title" id="s-section1" style="padding-top: 30px;">
-					위치</h3>
-							<div id="map"
-								style="width: 700x; height: 400px; align-items: center">
-							</div>
 			<!-- tabBox -->
 			<div class="vol-con-wrap tabBox">
 				<div class="col-lg-12">
 					<div class="widget">
 						<div class="widget-box">
+							<h3 class="widget-title" id="s-section1" style="padding-top: 30px;">
+								위치</h3>
+										<div id="map"
+											style="width: 700x; height: 400px; align-items: center">
+										</div>
 						</div>
 						<!-- //widget-box -->
 					</div>

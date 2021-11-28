@@ -20,6 +20,7 @@
     <result column="approval" property="status"/>
     <result column="note" property="note"/> 
     <result column="photo" property="photo"/> 
+    <result column="join_cnt" property="joinCount"/> 
     
     <result column="total_dt" property="totalDate"/> 
     <result column="remain_dt" property="remainDate"/> 
@@ -176,6 +177,7 @@
 	         v.end_time,
 	         v.total_cnt,
 	         v.photo,
+	         ifnull(count(va.user_no), 0) join_cnt,
 	         u.id owner_id,
 	         u.name owner_name,   
 	         c.title category_title,
@@ -184,6 +186,7 @@
 	         ftp_vol v
 	         inner join ftp_user u on v.user_no=u.user_no
 	         inner join ftp_category c on v.category_no=c.category_no
+	         inner join ftp_vol_apply va on va.vol_no=v.vol_no
 	         left outer join ftp_vol_file f on v.vol_no=f.vol_no
 	        where
 	          v.approval=1

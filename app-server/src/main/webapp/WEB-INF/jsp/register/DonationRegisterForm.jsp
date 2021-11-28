@@ -161,11 +161,11 @@
 			 참고하세요.
 			 나중에 포스팅 해볼게요.
 			 */
-			name : '주문명:결제테스트',
+			name : '모금함: 기부하기',
 			//결제창에서 보여질 이름
 			amount : donationMoney,
 			//가격
-			buyer_email : 'iamport@siot.do',
+			buyer_email : 'test@test.com',
 			buyer_name : name,
 			buyer_tel : '010-1234-5678',
 			buyer_addr : '서울특별시 강남구 삼성동',

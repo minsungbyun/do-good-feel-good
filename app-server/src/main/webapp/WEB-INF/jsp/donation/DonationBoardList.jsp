@@ -33,12 +33,14 @@
                   style="width: 33.33%; float: left; padding: 0 5%; border: none;"
                   data-no="${donationBoardDTO.no}">
                   <span class="vol-type bu-d">${donationBoardDTO.category.title}</span>
-                  <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png"
+                  <img src="${contextPath}/upload/donation/${donationBoardDTO.photo}_500x500.jpg"
                      class="card-img-top" alt="...">
                   <div class="card-body">
                      <h5 class="card-title vol-title">
                         <a href='detail?no=${donationBoardDTO.no}'>${donationBoardDTO.title}</a>
+                        
                      </h5>
+                     <br>
                      <p class="card-text">
                         <span class="text-muted">${donationBoardDTO.startDate}~${donationBoardDTO.endDate}</span>
                      </p>
@@ -49,10 +51,10 @@
                   /--> <span class="sr-only">총 목표금액</span> <fmt:formatNumber
                               type="number" value="${donationBoardDTO.moneyTarget}"
                               maxFractionDigits="3" />원
-                     </span> <span
+                     </span><br> <span
                         style="padding-left: 13px; font-weight: normal; font-size: 14px; color: #777;">${donationBoardDTO.tel}</span>
                      </li>
-                     <li class="list-group-item">~${donationBoardDTO.remainDate}일
+                     <li class="list-group-item">${donationBoardDTO.remainDate}일
                         남음</li>
                   </ul>
                   <div class="card-footer">

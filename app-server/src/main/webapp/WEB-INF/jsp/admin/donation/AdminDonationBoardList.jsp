@@ -3,6 +3,11 @@
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <title>모금함전체리스트</title>
     <div class="ad-main">
       <div class="ad-main-infor">
@@ -17,28 +22,24 @@
           <table class="table">
             <thead>
               <tr>
-               <th scope="col">
-                 <input type="checkbox">
-               </th>
-             <th scope="col">번호</th>
-             <th scope="col">제목</th>
-             <th scope="col">주최자</th>
-             <th scope="col">카테고리</th>
-             <th scope="col">내용</th>
-             <th scope="col">개설시작일</th>
-             <th scope="col">개설종료일</th>
-             <th scope="col">총기간</th>               
-             <th scope="col">남은기간</th>
-             <th scope="col">목표금액</th>
-             <th scope="col">첨부파일</th>
-             <th scope="col">승인여부</th>
+             <th scope="col" style="text-align : center;">번호</th>
+             <th scope="col" style="text-align : center;">제목</th>
+             <th scope="col" style="text-align : center;">주최자</th>
+             <th scope="col" style="text-align : center;">카테고리</th>
+             <th scope="col" style="text-align : center;">내용</th>
+             <th scope="col" style="text-align : center;">개설시작일</th>
+             <th scope="col" style="text-align : center;">개설종료일</th>
+             <th scope="col" style="text-align : center;">총기간</th>               
+             <th scope="col" style="text-align : center;">남은기간</th>
+             <th scope="col" style="text-align : center;">목표금액</th>
+             <!-- <th scope="col">첨부파일</th> -->
+             <th scope="col" style="text-align : center;">승인여부</th>
               </tr>
             </thead>
             <tbody>
-            <c:forEach items="${adminDonationBoardList}" var="donationBoardDTO">
+            <c:forEach items="${adminDonationBoardList}" var="donationBoardDTO" varStatus="vs">
             
               <tr data-no='${donationBoardDTO.no}'>
-              <td><input type="checkbox" class="select-box" id='aaa'></td>
                   <td>${donationBoardDTO.no}</td> 
                   <td>${donationBoardDTO.title}</td> 
                   <td>${donationBoardDTO.leader.name}</td> 
@@ -49,9 +50,48 @@
                   <td>${donationBoardDTO.totalDate}</td>
                   <td>${donationBoardDTO.remainDate}</td>
                   <td><fmt:formatNumber type="number" value="${donationBoardDTO.moneyTarget}" maxFractionDigits="3"/>원</td>
-                  <td>${donationBoardDTO.fileNames}</td>
+                  <%-- <td>${donationBoardDTO.fileNames}</td> --%>
                   <td>${donationBoardDTO.status}</td>
+                  <td><a data-toggle="modal" href="#myModalDonationList${vs.index}">[관리]</a></td>
               </tr>
+              <!-- 모달 창 -->
+              <div class="modal fade" id="myModalDonationList${vs.index}"
+                role="dialog">
+                <!-- 사용자 지정 부분① : id명 -->
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">모금함 관리</h4>
+                      <!-- 사용자 지정 부분② : 타이틀 -->
+                      <button type="button" class="close" data-dismiss="modal">×</button>
+                    </div>
+                      <div class="modal-body">
+                        <div class="class" id="id" style="display: none">
+                          <label for='f-no'>모금함 번호</label> <input id='f-no'
+                            type='text' name='no' value='${donationBoardDTO.no}' readonly>
+                          <br>
+                        </div>
+                        <label for='f-content'>내용</label> <span id='f-content'>${donationBoardDTO.content}</span><br>
+                        
+                        <label for='f-leader'>신청자</label> <span id='f-leader'>${donationBoardDTO.leader.name}</span><br>
+
+                        <label for='f-status'>승인상태</label> <span
+                          id='f-status'>${donationBoardDTO.status}</span><br>
+                      </div>
+							          <div class="ad-btn">
+							            <a href='approve?no=${donationBoardDTO.no}'>승인</a>
+							            <a href='reject?no=${donationBoardDTO.no}'>반려</a>
+							          </div>
+                      <br>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default"
+                        data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 모달 창 -->
               </c:forEach>
             </tbody>
           </table>

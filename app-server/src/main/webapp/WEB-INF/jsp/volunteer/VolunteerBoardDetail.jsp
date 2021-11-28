@@ -8,7 +8,7 @@
        <div class="board-wrap padding-board">
          <h4 class="mb-3">봉사 게시판 상세보기</h4>
          
-          <form action='boardUpdate' method="post"> 
+          <form action='boardUpdate' method="post" enctype="multipart/form-data"> 
           <div class="form-group" >
            <label for='f-no'></label>
             <input id='f-no' type='hidden' name='no' class="form-control col-sm-1" value='${volunteerBoardDTO.no}' readonly>

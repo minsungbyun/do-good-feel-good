@@ -21,14 +21,14 @@
 
   <main>
     <div class="page-section">
-      <div class="container">
+      <div class="container" style="overflow:hidden;">
         <div class="filterable-btn">
-          <button class="btn active" data-filter="*">최신순</button>
-          <button class="btn" data-filter=".web">인기순</button>
+          <!-- <button class="btn active" data-filter="*">최신순</button>
+          <button class="btn" data-filter=".web">인기순</button> -->
         </div>
         <c:forEach items="${challengeList}" var="challengeDTO">
-        <div class="card" style="width: 29%; height: auto; margin-right:3.33%; margin-bottom: 3.33%; float: right; text-align : center;">
-          <img src="${contextPath}/upload/challenge/${challengeDTO.photo}" class="card-img-top" alt="..." style="width:150px; height:150px; display: block; margin: 0 auto;">
+        <div class="card" style="width: 29%; height: auto; margin-right:3.33%; margin-bottom: 3.33%; float: left; text-align : center;">
+          <img src="${contextPath}/upload/challenge/${challengeDTO.photo}" class="card-img-top" alt="..." style="width:300px; height:300px; display: block; margin: 0 auto;">
           <div class="card-body" >
             <h5 class="card-title">${challengeDTO.title}</h5>
             <p class="card-text">${challengeDTO.startDate} ~ ${challengeDTO.endDate}</p>
@@ -37,8 +37,8 @@
         </div>
         </c:forEach>
         </div>
-        <div class="mt-5 text-center">
+        <!-- <div class="mt-5 text-center">
           <button class="btn btn-primary">Load More</button>
-        </div>
+        </div> -->
       </div> <!-- .container -->
   </main>

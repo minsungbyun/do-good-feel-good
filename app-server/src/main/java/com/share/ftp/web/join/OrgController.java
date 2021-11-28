@@ -65,7 +65,7 @@ public class OrgController {
     }
 
     orgDTO.setType(3);
-    orgDTO.setStatus(2);
+    orgDTO.setStatus(1);
 
     orgDao.insert(orgDTO);
     orgDao.insertOrg(orgDTO.getNo(), orgDTO.getCorpNo(), orgDTO.getFax(), orgDTO.getHomepage());

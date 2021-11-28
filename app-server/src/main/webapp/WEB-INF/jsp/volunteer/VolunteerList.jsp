@@ -47,26 +47,25 @@
 	            <div class="portfolio">
 	              <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
 	              <a href="${contextPath}/images/volunteer1.jpg" data-fancybox="portfolio">
-	                <img src="${contextPath}/images/volunteer1.jpg" alt="봉사이미지" style="padding:10px;">
+	                <img src="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" alt="봉사이미지" style="padding:10px;">
 	              </a>
 	              <div class="card">
 	                <div class="card-body">
 				              <h5 class="card-title vol-title"><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></h5>
 				              <p class="card-text"><span class="text-muted">${volunteerRequestDTO.startDate} ~ ${volunteerRequestDTO.endDate}</span></p>
-				              <input type="checkbox" name="wish"> 찜하기
                   </div> <!-- // card-body -->
 					          <ul class="list-group list-group-flush">
 					            <li class="list-group-item" style="font-weight:bold;">
-					              <span class="vol-cur">
+	<%-- 				              <span class="vol-cur">
 					                  <span class="sr-only">참여인원</span>
 					                  <b class="vol-count">${volunteerRequestDTO.currentNum}명</b>
 					                  /
 					                  <span class="sr-only">총 모집인원</span>
 					                  ${volunteerRequestDTO.limitNum}명
-					                </span>
+					                </span> --%>
 					              <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
 				             </li>
-					            <li class="list-group-item">${remainNum}일 남음</li>
+					            <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
 				          </ul>
 					            <div class="card-footer">
 					               <small class="text-muted">주최자 : ${volunteerRequestDTO.owner.id}</small>
@@ -81,26 +80,25 @@
 	            <div class="portfolio">
                 <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
 	              <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
-	                <img src="${contextPath}/images/volunteer1.jpg" alt="봉사이미지" style="padding:10px;">
+	                <img src="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" alt="봉사이미지" style="padding:10px;">
 	              </a>
 	              <div class="card">
                   <div class="card-body">
                       <h5 class="card-title vol-title"><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></h5>
                       <p class="card-text"><span class="text-muted">${volunteerRequestDTO.startDate} ~ ${volunteerRequestDTO.endDate}</span></p>
-                      <input type="checkbox" name="wish"> 찜하기
                   </div> <!-- // card-body -->
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item" style="font-weight:bold;">
-                        <span class="vol-cur">
+                        <%-- <span class="vol-cur">
                             <span class="sr-only">참여인원</span>
                             <b class="vol-count">${volunteerRequestDTO.currentNum}명</b>
                             /
                             <span class="sr-only">총 모집인원</span>
                             ${volunteerRequestDTO.limitNum}명
-                          </span>
+                          </span> --%>
                         <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
                      </li>
-                      <li class="list-group-item">${remainNum}일 남음</li>
+                      <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
                   </ul>
                       <div class="card-footer">
                          <small class="text-muted">주최자 : ${volunteerRequestDTO.owner.id}</small>
@@ -115,26 +113,25 @@
 	           <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
 	            <div class="portfolio">
 	              <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
-	                <img src="${contextPath}/images/volunteer1.jpg" alt="봉사이미지" style="padding:10px;">
+	                <img src="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" alt="봉사이미지" style="padding:10px;">
 	              </a>
 		              <div class="card">
 	                  <div class="card-body">
 	                      <h5 class="card-title vol-title"><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></h5>
 	                      <p class="card-text"><span class="text-muted">${volunteerRequestDTO.startDate} ~ ${volunteerRequestDTO.endDate}</span></p>
-	                      <input type="checkbox" name="wish"> 찜하기
 	                  </div> <!-- // card-body -->
 	                    <ul class="list-group list-group-flush">
 	                      <li class="list-group-item" style="font-weight:bold;">
-	                        <span class="vol-cur">
+	                        <%-- <span class="vol-cur">
 	                            <span class="sr-only">참여인원</span>
 	                            <b class="vol-count">${volunteerRequestDTO.currentNum}명</b>
 	                            /
 	                            <span class="sr-only">총 모집인원</span>
 	                            ${volunteerRequestDTO.limitNum}명
-	                          </span>
+	                          </span> --%>
 	                        <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
 	                     </li>
-	                      <li class="list-group-item">${remainNum}일 남음</li>
+	                      <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
 	                  </ul>
 	                      <div class="card-footer">
 	                         <small class="text-muted">주최자 : ${volunteerRequestDTO.owner.id}</small>
@@ -149,26 +146,25 @@
 	           <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
              <div class="portfolio">
                <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
-                 <img src="${contextPath}/images/volunteer1.jpg" alt="봉사이미지" style="padding:10px;">
+                 <img src="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" alt="봉사이미지" style="padding:10px;">
                </a>
                <div class="card">
                   <div class="card-body">
                       <h5 class="card-title vol-title"><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></h5>
                       <p class="card-text"><span class="text-muted">${volunteerRequestDTO.startDate} ~ ${volunteerRequestDTO.endDate}</span></p>
-                      <input type="checkbox" name="wish"> 찜하기
                   </div> <!-- // card-body -->
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item" style="font-weight:bold;">
-                        <span class="vol-cur">
+                       <%--  <span class="vol-cur">
                             <span class="sr-only">참여인원</span>
                             <b class="vol-count">${volunteerRequestDTO.currentNum}명</b>
                             /
                             <span class="sr-only">총 모집인원</span>
                             ${volunteerRequestDTO.limitNum}명
-                          </span>
+                          </span> --%>
                         <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
                      </li>
-                      <li class="list-group-item">${remainNum}일 남음</li>
+                      <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
                   </ul>
                       <div class="card-footer">
                          <small class="text-muted">주최자 : ${volunteerRequestDTO.owner.id}</small>
@@ -183,26 +179,25 @@
 	           <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
              <div class="portfolio">
                <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
-                 <img src="${contextPath}/images/volunteer1.jpg" alt="봉사이미지" style="padding:10px;">
+                 <img src="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" alt="봉사이미지" style="padding:10px;">
                </a>
                <div class="card">
                   <div class="card-body">
                       <h5 class="card-title vol-title"><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></h5>
                       <p class="card-text"><span class="text-muted">${volunteerRequestDTO.startDate} ~ ${volunteerRequestDTO.endDate}</span></p>
-                      <input type="checkbox" name="wish"> 찜하기
                   </div> <!-- // card-body -->
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item" style="font-weight:bold;">
-                        <span class="vol-cur">
+                        <%-- <span class="vol-cur">
                             <span class="sr-only">참여인원</span>
                             <b class="vol-count">${volunteerRequestDTO.currentNum}명</b>
                             /
                             <span class="sr-only">총 모집인원</span>
                             ${volunteerRequestDTO.limitNum}명
-                          </span>
+                          </span> --%>
                         <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
                      </li>
-                      <li class="list-group-item">${remainNum}일 남음</li>
+                      <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
                   </ul>
                       <div class="card-footer">
                          <small class="text-muted">주최자 : ${volunteerRequestDTO.owner.id}</small>
@@ -217,26 +212,25 @@
 	           <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
              <div class="portfolio">
                <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
-                 <img src="${contextPath}/images/volunteer1.jpg" alt="봉사이미지" style="padding:10px;">
+                 <img src="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" alt="봉사이미지" style="padding:10px;">
                </a>
                <div class="card">
                   <div class="card-body">
                       <h5 class="card-title vol-title"><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></h5>
                       <p class="card-text"><span class="text-muted">${volunteerRequestDTO.startDate} ~ ${volunteerRequestDTO.endDate}</span></p>
-                      <input type="checkbox" name="wish"> 찜하기
                   </div> <!-- // card-body -->
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item" style="font-weight:bold;">
-                        <span class="vol-cur">
+                        <%-- <span class="vol-cur">
                             <span class="sr-only">참여인원</span>
                             <b class="vol-count">${volunteerRequestDTO.currentNum}명</b>
                             /
                             <span class="sr-only">총 모집인원</span>
                             ${volunteerRequestDTO.limitNum}명
-                          </span>
+                          </span> --%>
                         <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
                      </li>
-                      <li class="list-group-item">${remainNum}일 남음</li>
+                      <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
                   </ul>
                       <div class="card-footer">
                          <small class="text-muted">주최자 : ${volunteerRequestDTO.owner.id}</small>
@@ -251,26 +245,25 @@
 	           <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
              <div class="portfolio">
                <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
-                 <img src="${contextPath}/images/volunteer1.jpg" alt="봉사이미지" style="padding:10px;">
+                 <img src="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" alt="봉사이미지" style="padding:10px;">
                </a>
                <div class="card">
                   <div class="card-body">
                       <h5 class="card-title vol-title"><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></h5>
                       <p class="card-text"><span class="text-muted">${volunteerRequestDTO.startDate} ~ ${volunteerRequestDTO.endDate}</span></p>
-                      <input type="checkbox" name="wish"> 찜하기
                   </div> <!-- // card-body -->
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item" style="font-weight:bold;">
-                        <span class="vol-cur">
+                       <%--  <span class="vol-cur">
                             <span class="sr-only">참여인원</span>
                             <b class="vol-count">${volunteerRequestDTO.currentNum}명</b>
                             /
                             <span class="sr-only">총 모집인원</span>
                             ${volunteerRequestDTO.limitNum}명
-                          </span>
+                          </span> --%>
                         <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
                      </li>
-                      <li class="list-group-item">${remainNum}일 남음</li>
+                      <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
                   </ul>
                       <div class="card-footer">
                          <small class="text-muted">주최자 : ${volunteerRequestDTO.owner.id}</small>
@@ -285,26 +278,25 @@
 	           <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
              <div class="portfolio">
                <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
-                 <img src="${contextPath}/images/volunteer1.jpg" alt="봉사이미지" style="padding:10px;">
+                 <img src="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" alt="봉사이미지" style="padding:10px;">
                </a>
                <div class="card">
                   <div class="card-body">
                       <h5 class="card-title vol-title"><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></h5>
                       <p class="card-text"><span class="text-muted">${volunteerRequestDTO.startDate} ~ ${volunteerRequestDTO.endDate}</span></p>
-                      <input type="checkbox" name="wish"> 찜하기
                   </div> <!-- // card-body -->
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item" style="font-weight:bold;">
-                        <span class="vol-cur">
+                        <%-- <span class="vol-cur">
                             <span class="sr-only">참여인원</span>
                             <b class="vol-count">${volunteerRequestDTO.currentNum}명</b>
                             /
                             <span class="sr-only">총 모집인원</span>
                             ${volunteerRequestDTO.limitNum}명
-                          </span>
+                          </span> --%>
                         <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
                      </li>
-                      <li class="list-group-item">${remainNum}일 남음</li>
+                      <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
                   </ul>
                       <div class="card-footer">
                          <small class="text-muted">주최자 : ${volunteerRequestDTO.owner.id}</small>
@@ -332,7 +324,7 @@
          <div class="card-body">
            <h5 class="card-title"><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></h5>
            <p class="card-text">카테고리 : ${volunteerRequestDTO.category.title}</p>
-           <p class="card-text">남은자리 : ${remainNum}명</p>
+           <p class="card-text">남은자리 : ${volunteerRequestDTO.remainDate}명</p>
            <input type="checkbox" name="wish"> 찜하기
          </div>
        </div>
