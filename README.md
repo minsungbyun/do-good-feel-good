@@ -1,7 +1,11 @@
 # 💖 HappyShare 
 
-![logo](https://user-images.githubusercontent.com/86590036/143688561-0d371e96-e789-40e7-ace5-b3ff4badd52c.PNG)
+![logo](https://user-images.githubusercontent.com/86590036/143727485-d17dbc6f-794e-40e6-a368-70279634deb8.jpg)
 
+
+<br />
+
+## 📌 Main 
 
 ![main](https://user-images.githubusercontent.com/86590036/143688493-f45eb512-2a38-4553-b729-7ad1b430c928.gif)
 
@@ -25,7 +29,7 @@
 
 <br />
 
-## 💚 2. About Us
+## 🌱 2. About Us
 
 ## 우리팀을 소개합니다 
 
