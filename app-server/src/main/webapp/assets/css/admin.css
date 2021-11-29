@@ -4,6 +4,10 @@
 body, div, dl, dt, dd, ul, li, ol, h1, h2, h3, h4, h5, h6, from, input, legend, textarea, select,
 fieldset, p, button {margin:0; padding:0;}
 
+* {
+	
+}
+
 /* 테두리 초기 */
 img, fieldset {border:0;}
 
@@ -12,6 +16,10 @@ em, address {font-style:normal;}
 
 /* table 초기화 */
 table {border-collapse:collapse;}
+
+a {
+	color:#5979c2;
+}
 
 fieldset {
   margin:0;
@@ -85,12 +93,12 @@ caption {
 }
 
 .menu ul {
-	padding:40px 30px;
+	padding:40px 30px 40px 50px;
 }
 
 .menu ul li {
 	font-weight:bold;
-	font-size:14px;
+	font-size:15px;
 	padding-top:20px;
 }
 
@@ -104,7 +112,7 @@ caption {
 
 /* ad-main */
 .ad-main .ad-main-infor {
-	padding:4% 0;
+	padding:3% 0;
 }
 
 .ad-main .ad-main-infor .serch {
@@ -125,24 +133,30 @@ caption {
 	border:1px solid #b0b0b0;
 	padding:3px 7px;
 }
-
+.ad-main .ad-main-infor .table01 {
+	text-align:center;
+}
 .ad-main .ad-main-infor .table01, .write-wrap {
 	padding-top:40px;
 	width:90%;
 	margin:0 auto;
+	
 }
 .ad-main .ad-main-infor .table01 table {
 	width:100%;
-	text-align:center;
+	font-size:16px;
+	border-top:2px solid #5979c2;
+	
 }
 .ad-main .ad-main-infor .table01 table thead {
 	background:#f7f7f7;
 }
 .ad-main .ad-main-infor .table01 table th {
-	padding:10px 0; 
-	border-bottom:1px solid #2F89FC;
-	border-top:2px solid #2F89FC;
+	padding:15px 0; 
+	border-bottom:1px solid #5979c2;
+	
 	border-right:1px solid #ddd;
+	text-align:center;
 }
 .ad-main .ad-main-infor .table01 table td {
 	padding:10px 0;
@@ -160,18 +174,30 @@ caption {
 
 .ad-btn a.btnSubmit {
   display: block;
-  width:85px;
-  height:35px;
+  width:90px;
+  height:40px;
   color: #FFF;
   letter-spacing: -0.5px;
-  font-size: 13px;
+  font-size: 16px;
   text-align: center;
-  line-height: 36px;
-  background:#2F89FC;
+  line-height: 40px;
+  background:#666;
   float:right;
   margin-right:5px;
+  border-radius: 4px;
+}
+
+.ad-btn a.btnSubmit:hover {
+	text-decoration: none;
 }
 
 .write-wrap {
 	padding-top:0;
 }
+.happybtn {
+	color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+
+

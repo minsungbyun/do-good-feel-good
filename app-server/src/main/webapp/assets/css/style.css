@@ -43,9 +43,9 @@ a {
   border: none;
 }
 
-a:hover {
-  
+a:hover, a:visited {
   text-decoration: none;
+  color: #444;
 }
 
 s {
@@ -63,7 +63,7 @@ body {
 }
 
 .padding-board {
-	padding-top:40px;
+	padding:40px 0 60px 0;
 }
 
 .board-wrap {
@@ -615,8 +615,8 @@ form.was-validated input:invalid {
 }
 .table-wrap table th {
   padding:10px 0; 
-  border-bottom:1px solid #2F89FC;
-  border-top:2px solid #2F89FC;
+  border-bottom:1px solid #5979c2;
+  border-top:2px solid #5979c2;
   border-right:1px solid #ddd;
 }
 .table-wrap table td {
@@ -1657,4 +1657,10 @@ fieldset {
 
 .chall-cont-img img {
 	padding:20px 20px 20px 0;
+}
+
+.no-btn {
+	background-color: #337ab7;
+  border-color: #2e6da4;
+  color:#fff;
 }
