@@ -111,15 +111,15 @@ public class VolunteerController {
   public ModelAndView list() throws Exception {
 
     List<VolunteerRequestDTO> volunteerList = volunteerDao.findAllApproved();
-    int remainNum = 0;
-    for (VolunteerRequestDTO volunteer : volunteerList) {
-      int joinCount = volunteerJoinDao.findByJoinUser(volunteer.getNo());
-      volunteerList.get(volunteer.getNo() - 1).setJoinCount(joinCount);
-    }
+    //    int remainNum = 0;
+    //    for (VolunteerRequestDTO volunteer : volunteerList) {
+    //      int joinCount = volunteerJoinDao.findByJoinUser(volunteer.getNo());
+    //      volunteerList.get(volunteer.getNo() - 1).setJoinCount(joinCount);
+    //    }
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("volunteerList", volunteerList);
-    mv.addObject("remainNum", remainNum);
+    //    mv.addObject("remainNum", remainNum);
     mv.addObject("pageTitle", "함께해요 : 봉사목록");
     mv.addObject("contentUrl", "volunteer/VolunteerList.jsp");
     mv.setViewName("template1");
