@@ -6,18 +6,31 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<style>
+	.pagination {
+		display: flex;
+		padding-left: 0;
+		list-style: none;
+		border-radius: 0.25rem;
+		margin-bottom: 110px;
+	}
+</style>
+
 <div class="ad-main">
 	<div class="ad-main-infor">
-
-		<!-- serch -->
-		<div class="serch">
-			<label for="f-search">검색</label> <input type="search" class=""
-				id="f-search" name="keword" placeholder="검색">
-			<button type="submit" class="searchBtn">검색</button>
-		</div>
-		<!-- //serch -->
-
 		<div class="table01">
+			<!-- serch -->
+			<div>
+				<form class="form-inline" style="float: right; margin-bottom: 25px">
+					<input class="form-control mr-sm-2 search-box" type="search"
+						id="f-search" name="keword" placeholder="검색" aria-label="Search">
+					<button class="btn btn-secondary my-2 my-sm-0 search-btn"
+						type="submit" style="background: #666;">검색</button>
+				</form>
+			</div>
+			<!-- //serch -->
+			
+			<!-- table -->
 			<table class="table">
 				<thead>
 					<tr>
@@ -27,7 +40,7 @@
 						<th scope="col">등록일</th>
 						<th scope="col">조회수</th>
 						<!-- <th scope="col">첨부파일</th> -->
-						<th></th>
+						<th scope="col"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -43,55 +56,64 @@
 							<td>${noticeDTO.registeredDate}</td>
 							<td>${noticeDTO.viewCount}</td>
 							<%-- <td>${noticeDTO.fileUpload}</td> --%>
-							<td>
-								<a href="#noticeList${vs.index}" class="btn btn-primary"
-								data-toggle="modal" <%-- data-no="${noticeDTO.no}" --%>>
-				            삭제
-				        </a>
-							</td>
+							<td><a href="#noticeList${vs.index}" class="btn btn-primary"
+								data-toggle="modal"<%-- data-no="${noticeDTO.no}" --%>> 삭제 </a></td>
 						</tr>
-						<!-- 모달창 -->
 						
-						<div class="modal fade" id="noticeList${vs.index}"
-                role="dialog">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 class="modal-title">공지사항 삭제</h4>
-                      <button type="button" class="close" data-dismiss="modal">×</button>
+						<!-- 모달창 -->
+						<div class="modal fade modal-p" id="noticeList${vs.index}" role="dialog">
+							<div class="modal-dialog">
+								<div class="modal-content">
+								  <!-- modal-header -->
+									<div class="modal-header">
+										<h4 class="modal-title">공지사항 삭제</h4>
+										<button type="button" class="close" data-dismiss="modal">×</button>
+									</div>
+									<!-- //modal-header -->
+									<!-- modal-body -->
+									<div class="modal-body">
+										<div class="mb-3 row">
+											<label for='f-no' class="col-sm-2 col-form-label">번호</label>
+											<input id='f-no' class="col-sm-2 form-control" type='text'
+											     name='no' value='${noticeDTO.no}' readonly>
+										</div>
+										<!-- 번호 -->
+										<div class="mb-3 row">
+										  <label for='f-title' class="col-sm-2 col-form-label">제목</label>
+										  <input id='f-title' class="col-sm-9 form-control" type="text"
+										          name="title" value="${noticeDTO.title}">
+										</div>
+                    <!-- //제목 -->
+                    <div class="mb-3 row">
+                      <label for='f-content' class="col-sm-2 col-form-label">내용</label>
+                      <textarea id='f-content' class="col-sm-9 form-control"
+                           name="content"  cols="15" rows="5">${noticeDTO.content}</textarea>
                     </div>
-                      <div class="modal-body">
-                        <div class="form-group" id="id">
-                          <label for='f-no'>번호</label>
-                          <input id='f-no' class="col-sm-2 form-control"
-                            type='text' name='no' value='${noticeDTO.no}' readonly>
-                          <br>
-                        </div>
-                        <label for='f-title'>제목</label> <span id='f-title'>${noticeDTO.title}</span><br>
-                        
-                        <label for='f-content'>내용</label>
-                        <span id='f-content'>${noticeDTO.content}</span><br>
-
-                      </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default"
-                        data-dismiss="modal">닫기</button>
-                      <a href="noticeDelete?noticeNo=${noticeDTO.no}" class="btn btn-primary">삭제</a>
-                      <!-- <button type="button" class="btn btn-primary">삭제</button> -->
-                    </div>
-                  </div>
-                </div>
-              </div>
-
+                    <!-- //내용 -->
+									</div>
+									<!-- //modal-body -->
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">닫기</button>
+										<a href="noticeDelete?noticeNo=${noticeDTO.no}"
+											class="btn btn-primary">삭제</a>
+										<!-- <button type="button" class="btn btn-primary">삭제</button> -->
+									</div>
+								</div>
+							</div>
+							<!-- //modal-dialog -->
+						</div>
+            <!-- //모달창 -->
+            
 					</c:forEach>
 				</tbody>
 			</table>
-
-
+			<!-- //table -->
 			<div class="ad-btn">
 				<a href="noticeForm" class="btnSubmit">글쓰기</a>
 				<%-- <a href="noticeDelete?noticeNo=${noticeDTO.no}" class="btnSubmit">삭제</a> --%>
 			</div>
+			<!-- //ad-btn -->
 		</div>
 		<!-- //table01 -->
 	</div>
@@ -117,9 +139,6 @@
 <!-- //ad-main -->
 
 <script src="${contextPath}/assets/js/jquery-3.5.1.min.js"></script>
-
-
-
 
 <!-- 체크박스
 <script>

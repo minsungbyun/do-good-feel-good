@@ -4,6 +4,10 @@
 body, div, dl, dt, dd, ul, li, ol, h1, h2, h3, h4, h5, h6, from, input, legend, textarea, select,
 fieldset, p, button {margin:0; padding:0;}
 
+* {
+	
+}
+
 /* 테두리 초기 */
 img, fieldset {border:0;}
 
@@ -129,24 +133,30 @@ caption {
 	border:1px solid #b0b0b0;
 	padding:3px 7px;
 }
-
+.ad-main .ad-main-infor .table01 {
+	text-align:center;
+}
 .ad-main .ad-main-infor .table01, .write-wrap {
 	padding-top:40px;
 	width:90%;
 	margin:0 auto;
+	
 }
 .ad-main .ad-main-infor .table01 table {
 	width:100%;
-	text-align:center;
+	font-size:16px;
+	border-top:2px solid #5979c2;
+	
 }
 .ad-main .ad-main-infor .table01 table thead {
 	background:#f7f7f7;
 }
 .ad-main .ad-main-infor .table01 table th {
-	padding:10px 0; 
+	padding:15px 0; 
 	border-bottom:1px solid #5979c2;
-	border-top:2px solid #5979c2;
+	
 	border-right:1px solid #ddd;
+	text-align:center;
 }
 .ad-main .ad-main-infor .table01 table td {
 	padding:10px 0;
@@ -171,9 +181,10 @@ caption {
   font-size: 16px;
   text-align: center;
   line-height: 40px;
-  background:#555;
+  background:#666;
   float:right;
   margin-right:5px;
+  border-radius: 4px;
 }
 
 .ad-btn a.btnSubmit:hover {
@@ -183,3 +194,10 @@ caption {
 .write-wrap {
 	padding-top:0;
 }
+.happybtn {
+	color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+
+
