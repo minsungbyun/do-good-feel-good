@@ -122,31 +122,31 @@
 <details>
 <summary>Actor Diagram</summary>
 <img src=https://user-images.githubusercontent.com/86590036/143687386-ce85c809-75ec-455b-a06d-22bc7e512b84.png>
-test
+
 </details>
 
 <details>
 <summary>Use-Case Diagram</summary>
 <img src=https://user-images.githubusercontent.com/86590036/143687394-82c8a3f3-412d-47d2-812c-b123069eb70d.png>
-test
+
 </details>
 
 <details>
 <summary>Admin</summary>
 <img src=https://user-images.githubusercontent.com/86590036/143687406-5a605678-9c56-46d6-a7b2-d4efb0b3b987.png>
-test
+
 </details>
 
 <details>
 <summary>Member</summary>
 <img src=https://user-images.githubusercontent.com/86590036/143687426-27784532-dd53-4e12-88a8-bc55fb9dcb8c.png>
-test
+
 </details>
 
 <details>
 <summary>Non-Member</summary>
 <img src=https://user-images.githubusercontent.com/86590036/143687433-cac9375e-914b-4651-bc45-f0222fd5f6e3.png>
-test
+
 </details>
 
 
@@ -157,37 +157,37 @@ test
 <details>
 <summary>HappyShare</summary>
 <img src=https://user-images.githubusercontent.com/86590036/143687090-294ac9c4-405b-468d-a785-aaac02768337.png>
-test
+
 </details>
 
 <details>
 <summary>User</summary>
 <img src=https://user-images.githubusercontent.com/86590036/143687252-e572ca45-fae0-4db2-ac88-a0f5a716d3ca.png>
-test
+
 </details>
 
 <details>
 <summary>Volunteer</summary>
 <img src=https://user-images.githubusercontent.com/86590036/143687226-2f2e8be9-b9c1-4014-855a-ff373756a5ea.png>
-test
+
 </details>
 
 <details>
 <summary>Donation</summary>
 <img src=https://user-images.githubusercontent.com/86590036/143687233-454907ae-7b44-4573-825b-dac6dce21679.png>
-test
+
 </details>
 
 <details>
 <summary>Challenge</summary>
 <img src=https://user-images.githubusercontent.com/86590036/143687240-6cb39ed4-6047-434e-9582-1817c0fa297d.png>
-test
+
 </details>
 
 <details>
 <summary>Support</summary>
 <img src=https://user-images.githubusercontent.com/86590036/143687244-461815f9-c793-4598-92b1-e633fdfee9bd.png>
-test
+
 </details>
 
 ## 🗺️ 7. Sitemap
