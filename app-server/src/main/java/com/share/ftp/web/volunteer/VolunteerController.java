@@ -132,6 +132,7 @@ public class VolunteerController {
     int joinCount = volunteerJoinDao.findByJoinUser(no);
     VolunteerRequestDTO volunteer = volunteerDao.findByApprovedVolunteerNo(no);
     List<VolunteerJoinDTO> volunteerList = volunteerJoinDao.findAll(no);
+    List<VolunteerJoinDTO> joinMember = volunteerJoinDao.findByJoinMember(no);
     List<VolunteerQuestionDTO> volunteerQuestion = volunteeQuestionDao.findAllNo(no);
     Collection<VolunteerShortReviewDTO> volunteerShortReviewList = volunteerShortReviewDao.findAll();
 
@@ -156,6 +157,7 @@ public class VolunteerController {
     mv.addObject("joinCount", joinCount); 
     mv.addObject("volunteerDate", volunteerDate);
     mv.addObject("volunteerList", volunteerList);
+    mv.addObject("joinMember", joinMember);
     mv.addObject("volunteerShortReviewList", volunteerShortReviewList);
     mv.addObject("volunteerQuestion", volunteerQuestion);
     mv.addObject("pageTitle", "함께해요 : 봉사내용");
@@ -214,5 +216,6 @@ public class VolunteerController {
     mv.setViewName("template1");
     return mv;
   }
+
 }
 

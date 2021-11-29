@@ -79,7 +79,7 @@
 							
 						</ul>
 						<a href="join/form?no=${volunteer.no}" style="margin-top:10px;"
-							class="vol-btn open" role="button">참여하기</a>
+							class="vol-btn open"  id="join-btn">참여하기</a>
 					</div>
 					<!-- //vol-detail-infor -->
 				</div>
@@ -107,9 +107,9 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${volunteerList}" var="volunteerJoinDTO" varStatus="vs">
+									<c:forEach items="${joinMember}" var="volunteerJoinDTO" varStatus="vs">
 										<tr>
-											<td>${vs.index}</td>
+											<td>${vs.count}</td>
 											<td>${volunteerJoinDTO.joinUser.id}</td>
 											<td>${volunteerJoinDTO.joinUser.name}</td>
 											<td>${volunteerJoinDTO.registeredDate}</td>
@@ -249,12 +249,14 @@
 																		<span>${volunteerShortReviewDTO.content}</span>
 																	</p>
 																</div>
+																<c:if test="${sessionScope.loginUser.id eq volunteerShortReviewDTO.owner.id}">
 																<div class="review-btn">
 																	<a href='reviewUpdate?no=${volunteerShortReviewDTO.no}'
-																		class="link_menu">[수정]</a> <a
-																		href='reviewDelete?no=${volunteerShortReviewDTO.no}'
+																		class="link_menu">[수정]</a> 
+																	<a href='reviewDelete?no=${volunteerShortReviewDTO.no}'
 																		class="link_menu">[삭제]</a>
 																</div>
+																</c:if>
 															</div>
 														</div>
 													</div>
@@ -308,6 +310,7 @@
 				</div>
 			</div>
 			<!-- //tabBox -->
+			<input type="hidden" id="sessoin-id" value="${sessionScope.loginUser.id}" />
 			<button type="button" class="btn btn-primary nBtn" onclick="history.go(-1);">이전</button>
 			</div>
 			<!-- //tabArea -->
@@ -350,14 +353,28 @@ function goTop() {
 </script>
 
 <script>
-	function checkValue() {
-		var content = document.querySelector("#f-content");
+	var joinBtn = document.getElementById("join-btn");
 
-		if (content.value == "") {
-			alert("내용을 입력해주세요");
-			return false;
-		}
-	}
+	
+	var volunteerNo = "<c:out value='${volunteer.no}'/>";
+	var userId = "<c:out value='${sessionScope.loginUser.id}'/>";
+
+	
+ /*  joinBtn.onclick = () => {
+        var xhr = new XMLHttpRequest();
+        xhr.addEventListener("readystatechange", function() {
+          if (this.responseText == "false") {
+        	  joinBtn.removeAttribute("disabled");
+             
+          } else {
+            alert("이미 봉사참여를 하였습니다");
+          }
+        })
+        xhr.open("GET", "checkJoin?no=<c:out value='${volunteer.no}'/>&id=" + userId);
+        xhr.send();
+    };   */
+	
+	
 </script>
 <script>
 	var volunteerNo = document.querySelector("#volunteerNo");

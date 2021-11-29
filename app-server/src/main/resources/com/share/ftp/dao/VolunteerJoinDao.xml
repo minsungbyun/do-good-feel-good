@@ -66,6 +66,24 @@
         order by
           va.apply_dt desc
    </select>
+   
+   <select id="findByJoinMember" resultMap="VolunteerJoinDTOMap" parameterType="int">
+     select
+         v.vol_no volunteer_no,
+        u.id joinUser_id,
+        u.name joinUser_name,
+        va.start_time,
+        va.end_time,
+        va.apply_dt,
+        va.created_dt
+       from
+         ftp_vol_apply va
+         inner join ftp_vol v on va.vol_no=v.vol_no
+         inner join ftp_user u on va.user_no=u.user_no
+        where
+          v.vol_no=#{volNo}
+   </select>
+ 
  
   <select id="findByVolunteerNo" resultMap="VolunteerJoinDTOMap" parameterType="int">
      select 
@@ -96,6 +114,18 @@
       vol_no=#{volNo}
   </select>
   
+  
+  <select id="checkJoin" resultMap="VolunteerJoinDTOMap">
+    select 
+      u.id joinUser_id  
+    from 
+      ftp_vol_apply va
+      inner join ftp_vol v on va.vol_no=v.vol_no
+      inner join ftp_user u on va.user_no=u.user_no 
+    where
+      v.vol_no=#{no} and u.id=#{id}
+  </select>
+
    <update id="update" parameterType="VolunteerJoinDTO">
      update ftp_vol_apply set
         start_time=#{startTime},

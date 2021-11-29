@@ -8,6 +8,7 @@
 		<div class="col-lg-12">
 			<div class="widget">
 				<div class="widget-box" style="padding:60px;">
+				
 					<form action="add?no=${volunteer.no}" class="form-contact"
 						method="post" name="form">
 						<div class="row">

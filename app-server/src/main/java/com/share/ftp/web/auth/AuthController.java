@@ -117,11 +117,6 @@ public class AuthController {
     //      return mv;
   }
 
-
-
-
-
-
   @GetMapping("/auth/logout")
   public ModelAndView logout(HttpSession session) throws Exception {
 

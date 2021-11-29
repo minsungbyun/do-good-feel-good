@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.dao.VolunteerJoinDao;
@@ -26,8 +27,6 @@ public class VolunteerJoinController {
   @Autowired VolunteerJoinDao volunteerJoinDao;
   @Autowired VolunteerDao VolunteerDao;
   @Autowired SqlSessionFactory sqlSessionFactory;
-
-
 
   @GetMapping("form")
   public ModelAndView form(int no) throws Exception {
@@ -55,13 +54,11 @@ public class VolunteerJoinController {
     volunteerJoinDTO.setVolunteer(volunteerRequestDTO);
     volunteerJoinDTO.setJoinUser((JoinDTO) session.getAttribute("loginUser"));
 
-
-
     volunteerJoinDao.insert(volunteerJoinDTO);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:../detail?no=" +no);
+    mv.setViewName("redirect:../detail?no=" + no);
     return mv;
   }
 
@@ -89,6 +86,17 @@ public class VolunteerJoinController {
     mv.addObject("contentUrl", "volunteer/join/VolunteerJoin1.jsp");
     mv.setViewName("template1");
     return mv;
+  }
+
+  @GetMapping("checkJoin")
+  @ResponseBody
+  public String checkJoin(int no, String id) throws Exception {
+    VolunteerJoinDTO volunteerJoinDTO = volunteerJoinDao.checkJoin(no, id);
+    if (volunteerJoinDTO == null) {
+      return "false";
+    } else {
+      return "true";
+    }
   }
 
 }
