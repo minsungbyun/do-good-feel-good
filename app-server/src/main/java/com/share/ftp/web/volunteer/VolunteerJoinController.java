@@ -3,6 +3,8 @@ package com.share.ftp.web.volunteer;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,7 @@ import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 @RequestMapping("/volunteer/join")
 public class VolunteerJoinController { 
 
+  private static final Logger logger = LogManager.getLogger(VolunteerJoinController.class);
 
   @Autowired VolunteerJoinDao volunteerJoinDao;
   @Autowired VolunteerDao VolunteerDao;
@@ -53,11 +56,12 @@ public class VolunteerJoinController {
     volunteerJoinDTO.setJoinUser((JoinDTO) session.getAttribute("loginUser"));
 
 
+
     volunteerJoinDao.insert(volunteerJoinDTO);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:../list");
+    mv.setViewName("redirect:../detail?no=" +no);
     return mv;
   }
 

@@ -33,6 +33,11 @@
    
   </resultMap>
   
+  <insert id="insert" parameterType="volunteerJoinDTO">
+    insert into ftp_vol_apply(user_no,vol_no,apply_dt,start_time,end_time)
+    values(#{joinUser.no},#{volunteer.no},#{applyDate},#{startTime},#{endTime})
+  </insert>
+  
    <select id="findAll" resultMap="VolunteerJoinDTOMap" parameterType="int">
      select 
         v.vol_no volunteer_no,
@@ -62,11 +67,6 @@
           va.apply_dt desc
    </select>
  
-  <insert id="insert" parameterType="volunteerJoinDTO">
-    insert into ftp_vol_apply(user_no,vol_no,apply_dt,start_time,end_time)
-    values(#{joinUser.no},#{volunteer.no},#{applyDate},#{startTime},#{endTime})
-  </insert>
-  
   <select id="findByVolunteerNo" resultMap="VolunteerJoinDTOMap" parameterType="int">
      select 
         v.vol_no,
@@ -97,14 +97,12 @@
   </select>
   
    <update id="update" parameterType="VolunteerJoinDTO">
-
      update ftp_vol_apply set
         start_time=#{startTime},
         end_time=#{endTime},
         apply_dt=#{applyDate}
      where 
         vol_no=#{volunteer.no} and user_no=#{joinUser.no}
-
   </update>
 
   <delete id="delete" parameterType="VolunteerJoinDTO">

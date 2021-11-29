@@ -50,7 +50,7 @@
 	            </div>
 							<input type="hidden" id="volunteerNo" value="${volunteer.no}" />
 							<button type="button" class="btn btn-outline-secondary open btn-sm" id="btn-modal" style=" display:block; margin-top:18px;" data-toggle="modal"
-              data-target="#myModalQuestionU${vs.index}">봉사
+              data-target="#volunteerJoin${vs.index}">봉사
 								참여자 목록</button>
 						</div>
 					</div>
@@ -58,11 +58,10 @@
 
 					<!-- vol-owner -->
 					<div class="vol-owner">
-						<!-- vol-owner -->
 						<div class="social-mini-button">
 							<span class="owner-right"><span>주최자</span> : <b>${volunteer.owner.id}</b></span>
-							<span class="owner-right">${volunteer.tel}</span> <span
-								class="owner-right">${volunteer.email}</span>
+							<span class="owner-right">${volunteer.tel}</span> 
+							<span class="owner-right">${volunteer.email}</span>
 						</div>
 					</div>
 					<!-- //vol-owner -->
@@ -70,9 +69,10 @@
 					<!-- vol-detail-infor -->
 					<div class="vol-detail-infor">
 						<ul>
-						  <li class="do-d-day" style="margin-bottom:10px;">D-day ${volunteerDate.remainDate}</li>
+						  <li class="do-d-day" style="margin-bottom:15px;">D-day ${volunteerDate.remainDate}</li>
+						  <li class="do-d-day" style="margin-bottom:15px;">${volunteer.category.title}</li>
 							<li><span>봉사기간</span> : <span>${volunteer.startDate}
-									~ ${volunteer.endDate}</span><span style="padding-left:5px;">총
+									~ ${volunteer.endDate}</span><span style="padding-left:10px;">총
 									${volunteerDate.totalDate}일</span></li>
 							<li><span>봉사시간</span> : <span>${volunteer.startTime}
 									~ ${volunteer.endTime}</span></li>
@@ -86,8 +86,7 @@
 				<!-- //vol-infor-wrap -->
 
 				<!-- modal -->
-            <div class="modal fade" id="myModalJoin${vs.index}"
-              role="dialog">
+            <div class="modal fade" id="volunteerJoin${vs.index}" role="dialog">
               <!-- 사용자 지정 부분① : id명 -->
               <div class="modal-dialog">
                 <!-- Modal content-->
@@ -104,23 +103,20 @@
 										<th>번호</th>
 										<th>아이디</th>
 										<th>이름</th>
-										<th>시작시간</th>
 										<th>신청일</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${volunteerList}" var="volunteerJoinDTO" varStatus="vs">
 										<tr>
-											<td>${volunteerJoinDTO.volunteer.no}</td>
+											<td>${vs.index}</td>
 											<td>${volunteerJoinDTO.joinUser.id}</td>
 											<td>${volunteerJoinDTO.joinUser.name}</td>
-											<td>${volunteerJoinDTO.startTime}</td>
 											<td>${volunteerJoinDTO.registeredDate}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
-							<%-- <button type="button" class="btn btn-primary" data-toggle="modal" onclick="location.href='join/list?no=${volunteer.no}'" >참여자목록</button>--%>
 						</div>
            <div class="modal-footer"></div>
 					</div>
@@ -134,15 +130,15 @@
 			<div class="tabArea" style="margin-top: 40px; text-align: center;">
 				<div class="vol-con-wrap tab" style="border-bottom: 1.3px solid #dbdbdb;">
 				  <ul class="tab">
-				    <li class="btn  happy-tab-bt on"><a href="#"><span style="font-size:21px;">상세정보</span></a></li>
-				    <li class="btn  happy-tab-bt" style="margin:0 15px;"><a href="#"><span style="font-size:21px;">참여인증 / 댓글</span></a></li>
-				    <li class="btn  happy-tab-bt"><a href="#"><span style="font-size:21px;">위치</span></a></li>
+				    <li class="btn happy-tab-bt on"><a href="#s-section1"><span style="font-size:21px;">상세정보</span></a></li>
+				    <li class="btn happy-tab-bt" style="margin:0 15px;"><a href="#s-section2"><span style="font-size:21px;">참여인증 / 댓글</span></a></li>
+				    <li class="btn happy-tab-bt"><a href="#s-section3"><span style="font-size:21px;">위치</span></a></li>
 				  </ul>
 				</div>
 				<!-- //tab -->
 			<!-- tabBox -->
 			<div class="vol-con-wrap tabBox on">
-				<h3 class="widget-title" id="scroll-section1"
+				<h3 class="widget-title" id="s-section1"
 					style="padding-top: 30px;">상세정보</h3>
 				<div class="col-lg-12">
 					<div class="widget">
@@ -223,7 +219,7 @@
 
 			<!-- tabBox -->
 			<div class="vol-con-wrap tabBox">
-				<h3 class="widget-title" id="s-section1" style="padding-top: 30px;">
+				<h3 class="widget-title" id="s-section2" style="padding-top: 30px;">
 					참여인증 / 댓글</h3>
 				<div class="col-lg-12">
 					<div class="widget">
@@ -302,23 +298,19 @@
 				<div class="col-lg-12">
 					<div class="widget">
 						<div class="widget-box">
-							<h3 class="widget-title" id="s-section1" style="padding-top: 30px;">
-								위치</h3>
-										<div id="map"
-											style="width: 700x; height: 400px; align-items: center">
-										</div>
+							<h3 class="widget-title" id="s-section3" style="padding-top: 30px;">위치</h3>
+								<div id="map"
+									style="width: 700x; height: 400px; align-items: center">
+								</div>
 						</div>
 						<!-- //widget-box -->
 					</div>
 				</div>
 			</div>
 			<!-- //tabBox -->
-			<button type="button" class="btn btn-primary nBtn"
-				onclick="history.go(-1)">이전</button>
+			<button type="button" class="btn btn-primary nBtn" onclick="history.go(-1);">이전</button>
 			</div>
 			<!-- //tabArea -->
-
-			
 			<button type="button" class="goupbtn" onclick="goTop()" style="color:#5979c2; font-weight:bold;">▲</button>
 
 		</div>
@@ -351,8 +343,9 @@ $(document).ready(function(){
 </script>
 
 <script>
-function goTop(){
-	  $('html').scrollTop(0);
+function goTop() {
+//	  $('html').scrollTop(0);
+	document.body.scrollIntoView({ behavior: 'smooth' });
 	}
 </script>
 
@@ -373,6 +366,7 @@ function goTop(){
 		location.href = "join/list?no=" + no
 	}
 </script>
+
 <script>
 	var container = document.getElementById('map');
 	var options = {

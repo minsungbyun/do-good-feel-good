@@ -18,6 +18,7 @@ public interface JoinDao {
   JoinDTO findByType(String userId) throws Exception;
   JoinDTO findByNo(int userNo) throws Exception;
   JoinDTO validId(String userId) throws Exception;
+  JoinDTO validName(String userName) throws Exception;
   JoinDTO selectOneByIdPassword(String userId, String userPassword) throws Exception; // 로그인 유효성 검사
 
   JoinDTO selectOneByIdEmail(String userId, String userEmail) throws Exception; // 로그인 유효성 검사
