@@ -2,10 +2,6 @@
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 <div class="ad-main">
 	<div class="ad-main-infor">
 
@@ -23,7 +19,6 @@
 					<tr>
 						<th scope="col">번호</th>
 						<th scope="col">제목</th>
-						<th scope="col">내용</th>
 						<th scope="col">등록일</th>
 						<th scope="col">조회수</th>
 						<!-- <th scope="col">첨부파일</th> -->
@@ -35,58 +30,75 @@
 						<p>작성된 게시글이 없습니다.</p>
 					</c:if>
 
-					<c:forEach items="${noticeList}" var="noticeDTO" varStatus="vs">
+					<c:forEach items="${noticeList}" var="noticeDTO">
 						<tr data-no="${noticeDTO.no}">
 							<td>${noticeDTO.no}</td>
 							<td><a href='noticeDetail?noticeNo=${noticeDTO.no}'>${noticeDTO.title}</a></td>
-							<td>${noticeDTO.content}</td>
 							<td>${noticeDTO.registeredDate}</td>
 							<td>${noticeDTO.viewCount}</td>
 							<%-- <td>${noticeDTO.fileUpload}</td> --%>
 							<td>
-								<a href="#noticeList${vs.index}" class="btn btn-primary"
-								data-toggle="modal" <%-- data-no="${noticeDTO.no}" --%>>
+								<button type="button" class="btn btn-primary x-delete-btn" 
+				                data-bs-toggle="modal" 
+				                data-bs-target="#memberModal"
+				                data-no="${noticeDTO.no}">
 				            삭제
-				        </a>
+				        </button>
 							</td>
 						</tr>
-						<!-- 모달창 -->
-						
-						<div class="modal fade" id="noticeList${vs.index}"
-                role="dialog">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 class="modal-title">공지사항 삭제</h4>
-                      <button type="button" class="close" data-dismiss="modal">×</button>
-                    </div>
-                      <div class="modal-body">
-                        <div class="form-group" id="id">
-                          <label for='f-no'>번호</label>
-                          <input id='f-no' class="col-sm-2 form-control"
-                            type='text' name='no' value='${noticeDTO.no}' readonly>
-                          <br>
-                        </div>
-                        <label for='f-title'>제목</label> <span id='f-title'>${noticeDTO.title}</span><br>
-                        
-                        <label for='f-content'>내용</label>
-                        <span id='f-content'>${noticeDTO.content}</span><br>
-
-                      </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default"
-                        data-dismiss="modal">닫기</button>
-                      <a href="noticeDelete?noticeNo=${noticeDTO.no}" class="btn btn-primary">삭제</a>
-                      <!-- <button type="button" class="btn btn-primary">삭제</button> -->
-                    </div>
-                  </div>
-                </div>
-              </div>
-
 					</c:forEach>
 				</tbody>
 			</table>
 
+			<!-- 모달창 -->
+			<div class="modal fade" id="memberModal" tabindex="-1"
+				aria-labelledby="memberModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<!-- 모달 header -->
+						<div class="modal-header">
+							<h5 class="modal-title" id="memberModalLabel">공지사항 삭제</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<!-- //모달 header -->
+
+						<!-- 모달 상세 -->
+						<div class="modal-body">
+							<h1>공지사항 상세</h1>
+							<div class="mb-3 row">
+								<label for='f-no' class="col-sm-2 col-form-label">번호</label>
+								<div class="col-sm-6">
+									<input id='f-no' type='text' class="form-control-plaintext"
+										value='1' readonly>
+								</div>
+							</div>
+							<div class="mb-3 row">
+								<label for='f-title' class="col-sm-2 col-form-label">제목</label>
+								<div class="col-sm-6">
+									<input id='f-title' type='text' name='title' class="form-control"
+										value="aaa">
+								</div>
+							</div>
+							<div class="mb-3 row">
+								<label for='f-content' class="col-sm-2 col-form-label">내용</label>
+								<div class="col-sm-10">
+									<input id='f-content' type='text' name='content'
+										class="form-control" value="aaaa">
+								</div>
+							</div>
+						</div>
+						<!-- //모달 상세 -->
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-bs-dismiss="modal">닫기</button>
+							<button type="button" class="btn btn-primary">삭제</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- //모달창 -->
 
 			<div class="ad-btn">
 				<a href="noticeForm" class="btnSubmit">글쓰기</a>
@@ -117,9 +129,27 @@
 <!-- //ad-main -->
 
 <script src="${contextPath}/assets/js/jquery-3.5.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<script>
+var modalNo = document.querySelector("#f-no");
+var modalTitle = document.querySelector("#f-title");
+var modalContent = document.querySelector("#f-content");
 
-
+document.querySelectorAll(".x-delete-btn").forEach((tag) => {
+  tag.onclick = (e) => {
+    e.stopPropagation();
+    var no = e.target.getAttribute("data-no");
+    var tr = document.querySelector("tbody tr[data-no='" + no + "']");
+    var title = tr.querySelector("td:nth-child(2) a").textContent;
+    var content = tr.querySelector("td:nth-child(3)").textContent;
+    
+    modalNo.value = no;
+    modalTitle.value = title;
+    modalContent.value = content;
+  }
+});
+</script>
 
 <!-- 체크박스
 <script>

@@ -22,6 +22,7 @@
    select 
      n.notice_no,
      n.title,
+     n.content,
      n.created_dt,
      n.view_cnt,
      f.filepath
