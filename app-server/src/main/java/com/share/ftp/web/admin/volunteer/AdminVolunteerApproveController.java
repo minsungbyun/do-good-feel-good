@@ -14,7 +14,7 @@ import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 
 @WebServlet("/admin/volunteer/approve")
-public class AdminVolunteerApproveController extends HttpServlet { // 개인 봉사신청 양식 쓰는 곳
+public class AdminVolunteerApproveController extends HttpServlet { 
 
   private static final long serialVersionUID = 1L;
 
