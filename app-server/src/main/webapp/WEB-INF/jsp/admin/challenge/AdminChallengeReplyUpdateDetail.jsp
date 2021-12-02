@@ -16,7 +16,7 @@
 </head>
 <body>
 <h1>답글 등록/변경</h1>
-<form action='replyUpdate' method='post' method="post">
+<form action='replyUpdate' method='post'>
 <div class= "class" name="name" id="id" style="display:none">
     <label for='f-no'>챌린지 번호</label> 
     <input id='f-no' type='text' name='no' value='${challengeQuestionDTO.no}' readonly><br>

@@ -7,7 +7,7 @@
         <li><a href="${contextPath}/app/admin/volunteer/boardList">봉사게시판관리</a></li>
         <li><a href="${contextPath}/app/admin/donation/list">모금함활동관리</a></li>
         <li><a href="${contextPath}/app/admin/support/noticeList">공지사항관리</a></li>
-        <li><a href="#">문의사항관리</a></li>
+        <li><a href="${contextPath}/app/admin/support/questionList">문의사항관리</a></li>
         <li><a href="${contextPath}/app/admin/challenge/list">챌린지사항관리</a></li>
       </ul>
     </div>
