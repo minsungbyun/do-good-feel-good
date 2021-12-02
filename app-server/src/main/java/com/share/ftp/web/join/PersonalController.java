@@ -1,30 +1,43 @@
 package com.share.ftp.web.join;
 
+import static com.share.util.General.level.FROM_E_TO_D;
+import static com.share.util.General.level.LEVEL_E;
+import static com.share.util.General.member.PERSONAL;
+import static com.share.util.General.status.ACTIVE;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import com.share.ftp.dao.JoinDao;
 import com.share.ftp.dao.PersonalDao;
+import com.share.ftp.domain.join.JoinDTO;
 import com.share.ftp.domain.join.PersonalDTO;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
-import net.coobird.thumbnailator.name.Rename;
+import net.coobird.thumbnailator.name.Rename;;
 
 @Controller
+@RequestMapping("/join/personal")
 public class PersonalController {
 
+  private static final Logger logger = LogManager.getLogger(PersonalController.class);
+
   @Autowired SqlSessionFactory sqlSessionFactory;
+  @Autowired JoinDao joinDao;
   @Autowired PersonalDao personalDao;
   @Autowired ServletContext sc;
 
-  @GetMapping("/join/personal/form")
+  @GetMapping("form")
   public ModelAndView form() {
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "HappyShare : 개인회원가입");
@@ -33,7 +46,7 @@ public class PersonalController {
     return mv;
   }
 
-  @PostMapping("/join/personal/add")
+  @PostMapping("add")
   public ModelAndView add(PersonalDTO personalDTO, Part photoFile) throws Exception {
 
     if (photoFile.getSize() > 0) {
@@ -64,9 +77,10 @@ public class PersonalController {
       });
     }
 
-    personalDTO.setType(1);
-    personalDTO.setStatus(1);
-    personalDTO.setLevel("천콩이");
+    personalDTO.setType(PERSONAL);
+    personalDTO.setStatus(ACTIVE);
+    personalDTO.setLevel(LEVEL_E);
+    personalDTO.setPoint(FROM_E_TO_D);
 
     personalDao.insert(personalDTO);
     personalDao.insertPersonal(personalDTO.getNo(), personalDTO.getBirthdate(), personalDTO.getLevel());
@@ -80,11 +94,22 @@ public class PersonalController {
     return mv;
   }
 
-  @GetMapping("/join/personal/checkId")
+  @GetMapping("checkId")
   @ResponseBody
   public String checkId(String id) throws Exception {
-    PersonalDTO personalDTO = personalDao.validId(id);
-    if (personalDTO == null) {
+    JoinDTO joinDTO = joinDao.validId(id);
+    if (joinDTO == null) {
+      return "false";
+    } else {
+      return "true";
+    }
+  }
+
+  @GetMapping("checkName")
+  @ResponseBody
+  public String checkName(String name) throws Exception {
+    JoinDTO joinDTO = joinDao.validName(name);
+    if (joinDTO == null) {
       return "false";
     } else {
       return "true";

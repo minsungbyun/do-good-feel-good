@@ -21,6 +21,10 @@ import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.domain.Category;
 import com.share.ftp.domain.donation.DonationBoardDTO;
 import com.share.ftp.domain.join.OrgDTO;
+import net.coobird.thumbnailator.ThumbnailParameter;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+import net.coobird.thumbnailator.name.Rename;
 
 @Controller
 @RequestMapping("/donation")
@@ -60,6 +64,39 @@ public class DonationBoardController {
       String filename = UUID.randomUUID().toString();
       photoFile.write(sc.getRealPath("/upload/donation") + "/" + filename);
       donationBoardDTO.setPhoto(filename);
+
+      Thumbnails.of(sc.getRealPath("/upload/donation") + "/" + filename)
+      .size(500, 500)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_500x500";
+        }
+      });
+
+      Thumbnails.of(sc.getRealPath("/upload/donation") + "/" + filename)
+      .size(550, 550)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_550x550";
+        }
+      });
+
+      Thumbnails.of(sc.getRealPath("/upload/donation") + "/" + filename)
+      .size(600, 600)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_600x600";
+        }
+      });
 
     }
     category.setNo(categoryNo);

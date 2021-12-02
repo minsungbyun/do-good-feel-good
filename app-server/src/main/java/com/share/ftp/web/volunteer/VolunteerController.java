@@ -94,6 +94,7 @@ public class VolunteerController {
       });
     }
 
+
     volunteerRequestDTO.setOwner((JoinDTO) session.getAttribute("loginUser"));
     category.setNo(categoryNo);
     volunteerRequestDTO.setCategory(category);
@@ -111,15 +112,15 @@ public class VolunteerController {
   public ModelAndView list() throws Exception {
 
     List<VolunteerRequestDTO> volunteerList = volunteerDao.findAllApproved();
-    int remainNum = 0;
-    for (VolunteerRequestDTO volunteer : volunteerList) {
-      int joinCount = volunteerJoinDao.findByJoinUser(volunteer.getNo());
-      volunteerList.get(volunteer.getNo() - 1).setJoinCount(joinCount);
-    }
+    //    int remainNum = 0;
+    //    for (VolunteerRequestDTO volunteer : volunteerList) {
+    //      int joinCount = volunteerJoinDao.findByJoinUser(volunteer.getNo());
+    //      volunteerList.get(volunteer.getNo() - 1).setJoinCount(joinCount);
+    //    }
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("volunteerList", volunteerList);
-    mv.addObject("remainNum", remainNum);
+    //    mv.addObject("remainNum", remainNum);
     mv.addObject("pageTitle", "함께해요 : 봉사목록");
     mv.addObject("contentUrl", "volunteer/VolunteerList.jsp");
     mv.setViewName("template1");
@@ -131,6 +132,7 @@ public class VolunteerController {
     int joinCount = volunteerJoinDao.findByJoinUser(no);
     VolunteerRequestDTO volunteer = volunteerDao.findByApprovedVolunteerNo(no);
     List<VolunteerJoinDTO> volunteerList = volunteerJoinDao.findAll(no);
+    List<VolunteerJoinDTO> joinMember = volunteerJoinDao.findByJoinMember(no);
     List<VolunteerQuestionDTO> volunteerQuestion = volunteeQuestionDao.findAllNo(no);
     Collection<VolunteerShortReviewDTO> volunteerShortReviewList = volunteerShortReviewDao.findAll();
 
@@ -155,6 +157,7 @@ public class VolunteerController {
     mv.addObject("joinCount", joinCount); 
     mv.addObject("volunteerDate", volunteerDate);
     mv.addObject("volunteerList", volunteerList);
+    mv.addObject("joinMember", joinMember);
     mv.addObject("volunteerShortReviewList", volunteerShortReviewList);
     mv.addObject("volunteerQuestion", volunteerQuestion);
     mv.addObject("pageTitle", "함께해요 : 봉사내용");
@@ -213,5 +216,6 @@ public class VolunteerController {
     mv.setViewName("template1");
     return mv;
   }
+
 }
 

@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+
 <div class="ad-main">
 <div class="ad-main-infor">
           <div class="write-wrap">
@@ -66,6 +67,7 @@
           <!-- //write-wrap -->
         </div>
         <!-- //form -->
+
       </div>
       <!-- //ad-main -->
 </body>

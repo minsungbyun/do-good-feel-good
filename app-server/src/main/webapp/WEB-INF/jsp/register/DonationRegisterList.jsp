@@ -14,49 +14,54 @@
 					<h2>${donationBoardDTO.title}</h2>
 					<ul class="do-tap">
 						<li id="do-tap-de"><a
-							href="${contextPath}/app/donation/detail?no=${donationBoardDTO.no}"
-							>모금함 소개</a></li>
+							href="${contextPath}/app/donation/detail?no=${donationBoardDTO.no}">모금함
+								소개</a></li>
 						<li id="do-tap-de" class="on"><a
-							href="${contextPath}/app/register/list?no=${donationBoardDTO.no}" class="do-on">참여내역</a></li>
+							href="${contextPath}/app/register/list?no=${donationBoardDTO.no}"
+							class="do-on">참여내역</a></li>
 					</ul>
-					<div class="tab-cont" style="padding:0 25px;">
+					<div class="tab-cont" style="padding: 0 25px;">
 						<p class="tab-cont-sub">
-							<div class="cont-short-list">
-								<div class="num-text bo">
-									기부자참여 <span class="sr-only">참여인원</span> <b class="num-count">${registerUser}</b>
-								</div>
-	               <c:forEach items="${donationRegisterList}" var="donationRegisterDTO">
-				          <div class="s-review-list">
-				            <div class="review-view">
-				              <ul>
-				                <li>
-				                  <div class="review-section">
-				                    <div class="profile-thumb">
-				                      <img src="${contextPath}/assets/img/level.png" alt="프로필사진">
-				                    </div>
-				                    <div class="review-infor">
-				                      <div class="review-post">
-				                        <div class="profile-infor">
-				                          <span>${donationRegisterDTO.donator.id}</span> <span
-				                            class="txt_date">${donationRegisterDTO.registeredDate}</span>
-				                          <span class="ico_bbs ico_new">기부참여내역</span>
-				                        </div>
-				                        <div class="review-post">
-				                          <p>
-				                            <span>${donationRegisterDTO.donationMoney}원</span>
-				                          </p>
-				                        </div>
-				                      </div>
-				                    </div>
-				                  </div> <!-- //review-section -->
-				                </li>
-				              </ul>
-				            </div>
-				          </div>
-				        </c:forEach>
-				        <!-- //s-review-list -->
+						<div class="cont-short-list">
+							<div class="num-text bo">
+								기부자참여 <span class="sr-only">참여인원</span> <b class="num-count">${registerUser}</b>
 							</div>
-							<!-- //cont-short-list -->
+							<c:forEach items="${donationRegisterList}"
+								var="donationRegisterDTO">
+								<div class="s-review-list">
+									<div class="review-view">
+										<ul>
+											<li>
+												<div class="review-section">
+													<div class="profile-thumb">
+														<img src="${contextPath}/assets/img/level.png" alt="프로필사진">
+													</div>
+													<div class="review-infor">
+														<div class="review-post">
+															<div class="profile-infor">
+																<span>${donationRegisterDTO.donator.id}</span> <span
+																	class="txt_date">${donationRegisterDTO.registeredDate}</span>
+																<span class="ico_bbs ico_new">기부참여내역</span>
+															</div>
+															<div class="review-post">
+																<p>
+																	<span> <fmt:formatNumber type="number"
+																			value="${donationRegisterDTO.donationMoney}"
+																			maxFractionDigits="3" />원
+																	</span>
+																</p>
+															</div>
+														</div>
+													</div>
+												</div> <!-- //review-section -->
+											</li>
+										</ul>
+									</div>
+								</div>
+							</c:forEach>
+							<!-- //s-review-list -->
+						</div>
+						<!-- //cont-short-list -->
 						</p>
 					</div>
 					<!-- //tab-cont -->

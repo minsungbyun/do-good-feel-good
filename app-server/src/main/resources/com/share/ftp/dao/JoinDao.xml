@@ -70,7 +70,16 @@
      from
        ftp_user     
     where 
-      id=#{userId}
+      id=#{id}
+  </select>
+  
+  <select id="validName" resultMap="JoinDTOMap" parameterType="string">
+    select 
+       name
+     from
+       ftp_user     
+    where 
+      name=#{name}
   </select>
 
   

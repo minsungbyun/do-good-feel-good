@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.share.ftp.dao.ChallengeDao;
 import com.share.ftp.domain.admin.ChallengeDTO;
+import net.coobird.thumbnailator.ThumbnailParameter;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+import net.coobird.thumbnailator.name.Rename;
 
 @Controller
 public class AdminChallengeController {
@@ -38,6 +42,39 @@ public class AdminChallengeController {
       String filename = UUID.randomUUID().toString();
       photoFile.write(sc.getRealPath("/upload/challenge") + "/" + filename);
       challengeDTO.setPhoto(filename);
+
+      Thumbnails.of(sc.getRealPath("/upload/challenge") + "/" + filename)
+      .size(100, 100)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_100x100";
+        }
+      });
+
+      Thumbnails.of(sc.getRealPath("/upload/challenge") + "/" + filename)
+      .size(150, 150)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_150x150";
+        }
+      });
+
+      Thumbnails.of(sc.getRealPath("/upload/challenge") + "/" + filename)
+      .size(200, 200)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_200x200";
+        }
+      });
     }
 
     challengeDao.insert(challengeDTO);
@@ -92,6 +129,39 @@ public class AdminChallengeController {
       photoFile.write(sc.getRealPath("/upload/challenge") + "/" + filename);
       challengeDTO.setPhoto(filename);
 
+      Thumbnails.of(sc.getRealPath("/upload/challenge") + "/" + filename)
+      .size(100, 100)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_100x100";
+        }
+      });
+
+      Thumbnails.of(sc.getRealPath("/upload/challenge") + "/" + filename)
+      .size(150, 150)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_150x150";
+        }
+      });
+
+      Thumbnails.of(sc.getRealPath("/upload/challenge") + "/" + filename)
+      .size(200, 200)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_200x200";
+        }
+      });
+
       challengeDTO.setPhoto(filename);
     }
 
@@ -111,9 +181,9 @@ public class AdminChallengeController {
       throw new Exception("해당 번호의 챌린지가 없습니다.");
     }
 
-    challengeDao.deleteApply(no);
     challengeDao.deleteReview(no);
     challengeDao.deleteQuestion(no);
+    challengeDao.deleteApply(no);
     challengeDao.delete(no);
     sqlSessionFactory.openSession().commit();
 

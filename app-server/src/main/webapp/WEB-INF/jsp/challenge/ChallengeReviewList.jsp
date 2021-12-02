@@ -33,7 +33,7 @@
 			</div>
 			<div class="chall-detail">
 				<div class="chall-de-img">
-					<img src="../assets/img/201612011168_500.jpg" alt="함께해요 상세 이미지" />
+					<img src="${contextPath}/upload/challenge/${challengeDTO.photo}" alt="챌린지 상세 이미지" />
 				</div>
 				<!-- //vol-de-img -->
 				<div class="vol-infor-wrap">

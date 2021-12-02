@@ -33,6 +33,11 @@
    
   </resultMap>
   
+  <insert id="insert" parameterType="volunteerJoinDTO">
+    insert into ftp_vol_apply(user_no,vol_no,apply_dt,start_time,end_time)
+    values(#{joinUser.no},#{volunteer.no},#{applyDate},#{startTime},#{endTime})
+  </insert>
+  
    <select id="findAll" resultMap="VolunteerJoinDTOMap" parameterType="int">
      select 
         v.vol_no volunteer_no,
@@ -61,12 +66,25 @@
         order by
           va.apply_dt desc
    </select>
+   
+   <select id="findByJoinMember" resultMap="VolunteerJoinDTOMap" parameterType="int">
+     select
+         v.vol_no volunteer_no,
+        u.id joinUser_id,
+        u.name joinUser_name,
+        va.start_time,
+        va.end_time,
+        va.apply_dt,
+        va.created_dt
+       from
+         ftp_vol_apply va
+         inner join ftp_vol v on va.vol_no=v.vol_no
+         inner join ftp_user u on va.user_no=u.user_no
+        where
+          v.vol_no=#{volNo}
+   </select>
  
-  <insert id="insert" parameterType="volunteerJoinDTO">
-    insert into ftp_vol_apply(user_no,vol_no,apply_dt,start_time,end_time)
-    values(#{joinUser.no},#{volunteer.no},#{applyDate},#{startTime},#{endTime})
-  </insert>
-  
+ 
   <select id="findByVolunteerNo" resultMap="VolunteerJoinDTOMap" parameterType="int">
      select 
         v.vol_no,
@@ -96,15 +114,25 @@
       vol_no=#{volNo}
   </select>
   
-   <update id="update" parameterType="VolunteerJoinDTO">
+  
+  <select id="checkJoin" resultMap="VolunteerJoinDTOMap">
+    select 
+      u.id joinUser_id  
+    from 
+      ftp_vol_apply va
+      inner join ftp_vol v on va.vol_no=v.vol_no
+      inner join ftp_user u on va.user_no=u.user_no 
+    where
+      v.vol_no=#{no} and u.id=#{id}
+  </select>
 
+   <update id="update" parameterType="VolunteerJoinDTO">
      update ftp_vol_apply set
         start_time=#{startTime},
         end_time=#{endTime},
         apply_dt=#{applyDate}
      where 
         vol_no=#{volunteer.no} and user_no=#{joinUser.no}
-
   </update>
 
   <delete id="delete" parameterType="VolunteerJoinDTO">

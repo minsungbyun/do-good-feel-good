@@ -8,6 +8,16 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<style>
+.pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
+  margin-bottom:110px;
+}
+</style>
+
     <div class="ad-main">
       <div class="ad-main-infor">
         <!-- serch -->

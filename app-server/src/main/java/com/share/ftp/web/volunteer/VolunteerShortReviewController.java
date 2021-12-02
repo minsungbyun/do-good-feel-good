@@ -64,14 +64,14 @@ public class VolunteerShortReviewController {
   }
 
   @RequestMapping("/volunteer/reviewUpdate")
-  public ModelAndView update(VolunteerShortReviewDTO volunteerShortReviewDTO) throws Exception {
+  public ModelAndView update(int no) throws Exception {
 
-    VolunteerShortReviewDTO oldBoard = volunteerShortReviewDao.findByNo(volunteerShortReviewDTO.getNo());
+    VolunteerShortReviewDTO oldBoard = volunteerShortReviewDao.findByNo(no);
     if (oldBoard == null) {
       throw new Exception("해당 번호의 댓글이 없습니다.");
     } 
 
-    volunteerShortReviewDao.update(volunteerShortReviewDTO);
+    volunteerShortReviewDao.update(oldBoard);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();

@@ -41,9 +41,9 @@
 	            </div>
 	            <!-- //파일첨부 -->--%>
 	            <div class="form-group">
-	              <button class="btn btn-primary">수정</button>
-	              <a href="noticeDelete?noticeNo=${noticeDTO.no}" class="btn btn-primary">삭제</a>
-	              <a href="noticeList" class="btn btn-primary">목록</a>
+	              <button class="btn happybtn">수정</button>
+	              <a href="noticeDelete?noticeNo=${noticeDTO.no}" class="btn happybtn">삭제</a>
+	              <a href="noticeList" class="btn happybtn">목록</a>
 	            </div>
 	            <!-- //ad-btn -->
 	          </form>
