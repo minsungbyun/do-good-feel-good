@@ -44,11 +44,8 @@ public class AdminQuestionReplyController {
       throw new Exception("해당 번호의 문의가 없습니다.");
     } 
 
-    if (questionReply.getReply() != null) {
-      questionReply.setStatus(1);
-    }
-
     questionListDTO.setQnaType(qnaType);
+    questionListDTO.setStatus(1);
 
     questionDao.updateReply(questionListDTO);
     sqlSessionFactory.openSession().commit();
