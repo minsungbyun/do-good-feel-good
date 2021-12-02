@@ -1,22 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
      trimDirectiveWhitespaces="true" %>
+     
+     <!-- -------------------------------------회원가입 폼----------------------------------------------- -->
   <main>
    <div class="page-section">
      <div class="container">
-       <form action="add" name="form" method="post" enctype="multipart/form-data" class="needs-validation"  novalidate>
-       <h1 class="title-h">회원가입 - 개인</h1>
-       <div class="join-wrap">
-         <h5>기본정보<span class="required_title"><em class="icon_required">·</em>표시는 반드시 입력하셔야 합니다.</span></h5>
+       <form action="add" name="form" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+	       <h1 class="title-h">회원가입 - 개인</h1>
+	       <div class="join-wrap">
+          <h5>기본정보<span class="required_title"><em class="icon_required">·</em>표시는 반드시 입력하셔야 합니다.</span></h5>
            <div class="base-table">
              <table class="join-table">
                <caption>개인회원 기본정보</caption>
-               <tbody>
-                 <tr class="mb-3 row-7">
+                 <tbody>
+                  <tr class="mb-3 row-7">
                    <th class="col-sm-2"><em class="icon_required">·</em><span>아이디</span></th>
-                   <td class="col-sm-7 ">
+                   <td class="col-sm-7">
                      <label for='f-id' class="sr-only sr-cont">아이디</label> 
-                     <input id='f-id' class="form-control form-sub-control box-input " type='text' name='id' placeholder="아이디" required>
+                     <input id='f-id' class="form-control form-sub-control box-input" type='text' name='id' placeholder="아이디" required>
+                     <div class="valid-feedback">
+                        사용가능한 아이디입니다.
+                    </div>
                      <div class="invalid-feedback">
 							         이미 존재하는 아이디입니다.
 							       </div>
@@ -54,7 +59,7 @@
               </tr>
               <!-- //비밀번호 확인 -->
               <tr>
-               <th><span>사진</span></th>
+               <th><em class="icon_required"></em><span>사진</span></th>
                <td>
                <label for='f-photo' class="sr-only">사진</label> 
                <input id='f-photo' class="form-control box-input" type='file' name='photoFile'>
@@ -65,8 +70,11 @@
                    <td>
                      <label for='f-name' class="sr-only">이름</label> 
                      <input id='f-name' class="form-control box-input" type='text' name='name' required>
+                      <div class="valid-feedback">
+                        사용가능한 이름입니다.
+                    </div>
                      <div class="invalid-feedback">
-                       이름을 입력해주세요.
+                       이미 존재하는 이름입니다.
                      </div>
                    </td>
                  </tr>
@@ -116,7 +124,7 @@
                  </tr>
                  <!-- //주소 -->
                  <tr>
-                   <th><span>생년월일</span></th>
+                   <th><em class="icon_required"></em><span>생년월일</span></th>
                    <td>
                      <label for=f-birthdate class="sr-only">생년월일</label> 
                      <input id='f-birthdate' class="form-control box-input" type='date' name='birthdate'><br>
@@ -128,7 +136,7 @@
            </div>
            <div class="btn-regi">
              <button type="submit" id="x-add-btn" class="btn btn-primary nBtn">회원가입</button>
-             <a href="#" class="btn btn-outline-primary nBtn" role="button">이전</a>
+             <button class="btn btn-outline-primary nBtn" onclick="history.go(-1);" >이전</button>
            </div>
          </div>
          <!-- //join-wrap -->
@@ -160,21 +168,44 @@
     var addBtn = document.querySelector("#x-add-btn");
     var idTag = document.querySelector("#f-id");
     addBtn.setAttribute("disabled", "disabled");
-
+    
     document.querySelector("#x-id-check-btn").onclick = () => {
         var xhr = new XMLHttpRequest();
-        xhr.addEventListener("load", function() {
+        xhr.addEventListener("readystatechange", function() {
           if (this.responseText == "false") {
               addBtn.removeAttribute("disabled");
               idTag.classList.remove("is-invalid");
+              idTag.classList.add("is-valid");
           } else {
             addBtn.setAttribute("disabled", "disabled");
             idTag.classList.add("is-invalid");
+            idTag.classList.remove("is-valid");
           }
         })
-        xhr.open("get", "checkId?id=" + idTag.value);
+        xhr.open("GET", "checkId?id=" + idTag.value);
         xhr.send();
     };
+    
+    // 이름 중복검사
+  var nameTag = document.querySelector("#f-name");  
+
+    nameTag.onkeyup = () => {
+    var xhr = new XMLHttpRequest();
+    xhr.addEventListener("load", function() {
+    	
+      if (this.responseText == "false") {
+        nameTag.classList.add("is-valid");
+        nameTag.classList.remove("is-invalid");
+       
+      } else {
+        nameTag.classList.remove("is-valid");
+        nameTag.classList.add("is-invalid");
+      }
+    })
+    xhr.open("GET", "checkName?name=" + nameTag.value);
+    xhr.send();
+  };
+    
     
     //입력창 확인
     document.querySelectorAll("input").forEach(input => {
@@ -210,7 +241,7 @@
     
     <!-- //script -->
     
-    // 우편번호 API
+    <!-- -------------------------------우편번호 API --------------------------------------------- --> 
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script>
 		function findByPostNo() {

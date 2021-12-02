@@ -8,6 +8,7 @@
 		<div class="col-lg-12">
 			<div class="widget">
 				<div class="widget-box" style="padding:60px;">
+				
 					<form action="add?no=${volunteer.no}" class="form-contact"
 						method="post" name="form">
 						<div class="row">
@@ -37,8 +38,8 @@
 									value="${volunteer.endDate}" readonly>
 							</div>
 							<div class="col-12 py-2">
-								<label for="subject" class="fg-grey">총모집인원</label> <input
-									type="text" class="form-control" id="limitNum"
+								<label for="subject" class="fg-grey">총모집인원</label> 
+								<input type="text" class="form-control" id="limitNum"
 									value="${volunteer.limitNum}" readonly>
 							</div>
 							<div class="col-12 py-2 ">

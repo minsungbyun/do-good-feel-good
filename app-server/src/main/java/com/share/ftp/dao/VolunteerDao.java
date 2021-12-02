@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 
 // 역할
-// - 봉사신청서를 처리하는 객체 사용법을 정의한다.
+// - 봉사를 처리하는 객체 사용법을 정의한다.
 public interface VolunteerDao {
 
   void insert(VolunteerRequestDTO addVolunteer) throws Exception;      
@@ -33,6 +33,4 @@ public interface VolunteerDao {
   void updateFile(VolunteerRequestDTO updateVolunteer) throws Exception;          
   void delete(VolunteerRequestDTO deleteVolunteer) throws Exception;    
   void deleteFile(VolunteerRequestDTO deleteVolunteer) throws Exception;    
-
-
 }

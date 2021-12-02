@@ -5,22 +5,25 @@
     <main>
       <div class="page-section">
 				<div class="container">
-				<form action="add" name="form" method="post" onsubmit="validLoginForm(); return false;" enctype="multipart/form-data">
+				<form action="add" name="form" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
 					<h1 class="title-h">회원가입 - 기관</h1>
 				  <div class="join-wrap">
             <h5>기본정보<span class="required_title"><em class="icon_required">·</em>표시는 반드시 입력하셔야 합니다.</span></h5>
               <div class="base-table">
                 <table class="join-table">
-                  <caption>단체 회원 기본정보</caption>
+                  <caption>기관 회원 기본정보</caption>
 									<tbody>
                  <tr class="mb-3 row-7">
                       <th class="col-sm-2"><em class="icon_required">·</em><span>아이디</span></th>
                       <td class="col-sm-7 ">
                         <label for='f-id' class="sr-only sr-cont">아이디</label> 
                         <input id='f-id' class="form-control form-sub-control box-input" type='text' name='id' placeholder="아이디" required>
-		                     <div class="invalid-feedback">
-		                       이미 존재하는 아이디입니다.
-		                     </div>
+		                    <div class="valid-feedback">
+                        사용가능한 아이디입니다.
+                    </div>
+                     <div class="invalid-feedback">
+                       이미 존재하는 아이디입니다.
+                     </div>
                      <div class="col-auto" style="overflow:hidden;">
                         <button id="x-id-check-btn" type="button" class="btnj btn btn-primary">중복확인</button>
                      </div>
@@ -55,7 +58,7 @@
 		              </tr>
 		              <!-- //비밀번호 확인 -->
                     <tr>
-			               <th><span>사진</span></th>
+			               <th><em class="icon_required"></em><span>사진</span></th>
 			               <td>
 			               <label for='f-photo' class="sr-only">사진</label> 
 			               <input id='f-photo' class="form-control box-input" type='file' name='photoFile'>
@@ -66,9 +69,12 @@
                       <td>
                         <label for='f-name' class="sr-only">이름</label> 
                         <input id='f-name' class="form-control box-input" type='text' name='name' required>
-	                     <div class="invalid-feedback">
-	                       이름을 입력해주세요.
-	                     </div>
+	                    <div class="valid-feedback">
+                        사용가능한 이름입니다.
+                    </div>
+                     <div class="invalid-feedback">
+                       이미 존재하는 이름입니다.
+                     </div>
                       </td>
                     </tr>
                     <!-- //이름 -->
@@ -99,16 +105,16 @@
                       <td>
                         <div>
                           <label for='f-postNo' class="sr-only">우편번호</label> 
-                          <input id='f-postNo' class="form-control form-sub-control box-input" type='text' name='postNo' readonly>
+                          <input id='f-postNo' class="form-control form-sub-control box-input" type='text' name='postNo' readonly required>
 	                        <button type="button" onclick="findByPostNo()" value="우편번호 찾기" class="btnj btn btn-primary" id="post-no">>우편번호</button>
                         </div>
                         <div>
 	                        <label for='f-basicAddress' class="sr-only sr-cont">기본주소</label> 
-                          <input id='f-basicAddress' class="form-control form-sub-control postfo box-input" type='text' name='basicAddress' placeholder="기본주소" readonly>          
+                          <input id='f-basicAddress' class="form-control form-sub-control postfo box-input" type='text' name='basicAddress' placeholder="기본주소" readonly required>          
                         </div>
                         <div>
                           <label for='f-detailAddress' class="sr-only sr-cont">상세주소</label> 
-                          <input id='f-detailAddress' class="form-control form-sub-control postfo box-input" type='text' name='detailAddress' placeholder="상세주소" required>
+                          <input id='f-detailAddress' class="form-control form-sub-control postfo box-input" type='text' name='detailAddress' placeholder="상세주소" required required>
                         </div>
 	                     <div class="invalid-feedback">
 	                       주소를 입력해주세요.
@@ -128,7 +134,7 @@
                     </tr>
                     <!-- //사업자번호 -->
                     <tr>
-                      <th><span>팩스번호</span></th>
+                      <th><em class="icon_required"></em><span>팩스번호</span></th>
                       <td>
                         <label for='f-fax' class="sr-only">팩스번호</label> 
                         <input id='f-fax' class="form-control box-input" type='tel' name='fax'>
@@ -136,7 +142,7 @@
                     </tr>
                     <!-- //팩스 -->
                     <tr>
-                      <th><span>홈페이지</span></th>
+                      <th><em class="icon_required"></em><span>홈페이지</span></th>
                       <td>
                         <label for='f-homepage' class="sr-only">홈페이지</label> 
                         <input id='f-homepage' class="form-control box-input" type='url' name='homepage'>
@@ -148,7 +154,7 @@
               </div>
               <div class="btn-regi">
 	              <button type="submit" id="x-add-btn" class="btn btn-primary nBtn">회원가입</button>
-	              <a href="#" class="btn btn-outline-primary nBtn" role="button">이전</a>
+	              <button class="btn btn-outline-primary nBtn" onclick="history.go(-1);" >이전</button>
               </div>
             </div>
             <!-- //join-wrap -->
@@ -181,21 +187,43 @@
        var addBtn = document.querySelector("#x-add-btn");
        var idTag = document.querySelector("#f-id");
        addBtn.setAttribute("disabled", "disabled");
-
+       
        document.querySelector("#x-id-check-btn").onclick = () => {
            var xhr = new XMLHttpRequest();
-           xhr.addEventListener("load", function() {
+           xhr.addEventListener("readystatechange", function() {
              if (this.responseText == "false") {
                  addBtn.removeAttribute("disabled");
                  idTag.classList.remove("is-invalid");
+                 idTag.classList.add("is-valid");
              } else {
                addBtn.setAttribute("disabled", "disabled");
                idTag.classList.add("is-invalid");
+               idTag.classList.remove("is-valid");
              }
            })
-           xhr.open("get", "checkId?id=" + idTag.value);
+           xhr.open("GET", "checkId?id=" + idTag.value);
            xhr.send();
        };
+       
+       // 이름 중복검사
+     var nameTag = document.querySelector("#f-name");  
+
+       nameTag.onkeyup = () => {
+       var xhr = new XMLHttpRequest();
+       xhr.addEventListener("load", function() {
+         
+         if (this.responseText == "false") {
+           nameTag.classList.add("is-valid");
+           nameTag.classList.remove("is-invalid");
+          
+         } else {
+           nameTag.classList.remove("is-valid");
+           nameTag.classList.add("is-invalid");
+         }
+       })
+       xhr.open("GET", "checkName?name=" + nameTag.value);
+       xhr.send();
+     };
        
        //입력창 확인
        document.querySelectorAll("input").forEach(input => {

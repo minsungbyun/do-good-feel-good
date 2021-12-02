@@ -1,38 +1,49 @@
 package com.share.ftp.web.join;
 
+import static com.share.util.General.member.GROUP;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.share.ftp.dao.GroupDao;
+import com.share.ftp.dao.JoinDao;
 import com.share.ftp.domain.join.GroupDTO;
+import com.share.ftp.domain.join.JoinDTO;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 import net.coobird.thumbnailator.name.Rename;
 
 @Controller
+@RequestMapping("/join/group")
 public class GroupController {
+
+  private static final Logger logger = LogManager.getLogger(GroupController.class);
 
   @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired GroupDao groupDao;
+  @Autowired JoinDao joinDao;
   @Autowired ServletContext sc;
 
-  @GetMapping("/join/group/form")
+  @GetMapping("form")
   public ModelAndView form() {
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "HappyShare : 단체회원가입");
-    mv.addObject("contentUrl", "join/personal/PersonalUserForm.jsp");
+    mv.addObject("contentUrl", "join/group/GroupUserForm.jsp");
     mv.setViewName("template1");
     return mv;
   }
 
-  @PostMapping("/join/group/add")
+  @PostMapping("add")
   public ModelAndView add(GroupDTO groupDTO, Part photoFile) throws Exception {
 
     if (photoFile.getSize() > 0) {
@@ -63,8 +74,8 @@ public class GroupController {
       });
     }
 
-    groupDTO.setType(2);
-    groupDTO.setStatus(1);
+    groupDTO.setType(GROUP);
+    groupDTO.setStatus(GROUP);
 
     groupDao.insert(groupDTO);
     groupDao.insertGroup(groupDTO.getNo(), groupDTO.getGroupCount());
@@ -77,6 +88,29 @@ public class GroupController {
     mv.setViewName("template1");
     return mv;
   }
+
+  @GetMapping("checkId")
+  @ResponseBody
+  public String checkId(String id) throws Exception {
+    JoinDTO joinDTO = joinDao.validId(id);
+    if (joinDTO == null) {
+      return "false";
+    } else {
+      return "true";
+    }
+  }
+
+  @GetMapping("checkName")
+  @ResponseBody
+  public String checkName(String name) throws Exception {
+    JoinDTO joinDTO = joinDao.validName(name);
+    if (joinDTO == null) {
+      return "false";
+    } else {
+      return "true";
+    }
+  }
+
 
   //  @GetMapping("/member/list")
   //  public ModelAndView list() throws Exception {
