@@ -45,7 +45,7 @@ a {
 
 a:hover, a:visited {
   text-decoration: none;
-  color: #444;
+
 }
 
 s {
@@ -608,7 +608,7 @@ form.was-validated input:invalid {
 .table-wrap table {
   width:100%;
   text-align:center;
-  margin-bottom:30px;
+  margin-bottom:40px;
 }
 .table-wrap table thead {
   background:#f7f7f7;
@@ -1663,4 +1663,33 @@ fieldset {
 	background-color: #337ab7;
   border-color: #2e6da4;
   color:#fff;
+}
+.ad-btn {
+	width:90px;
+  height:40px;
+}
+
+.ad-btn a.btnSubmit {
+  display: block;
+  width:90px;
+  height:40px;
+  color: #FFF;
+  letter-spacing: -0.5px;
+  font-size: 16px;
+  text-align: center;
+  line-height: 40px;
+  background:#666;
+  margin-right:5px;
+  border-radius: 4px;
+}
+
+.ad-btn a.btnSubmit:hover {
+  text-decoration: none;
+}
+
+.table-wrap .table th:nth-child(7) {
+  border-right:0;
+}
+.table-wrap .table td:nth-child(7) {
+  border-right:0;
 }
