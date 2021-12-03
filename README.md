@@ -14,7 +14,8 @@
 
 ## 📌 AWS 배포 
 
-[CLICK](http://3.37.193.68:8080/happyshare-server/app/home) <br>
+> [CLICK](http://3.37.193.68:8080/happyshare-server/app/home) 
+<br/>
 
 
 ## 🚀 1. Introduction
