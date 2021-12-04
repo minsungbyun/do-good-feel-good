@@ -152,6 +152,14 @@ values(2,2,'hoho.gif');
 --한 줄 후기(봉사활동 후기)
 
 insert into ftp_vol_shortreview(vol_shortreview_no, user_no, vol_no, content)
+values(1, 3, 1, '사랑의 도시락 전달! 뿌듯한 주말입니다!'); 
+insert into ftp_vol_shortreview(vol_shortreview_no, user_no, vol_no, content)
+values(2, 5, 1, '가을을 맞이해 서울숲 낙엽정리 봉사활동 하고왔습니다.^^'); 
+insert into ftp_vol_shortreview(vol_shortreview_no, user_no, vol_no, content)
+values(3, 6, 1, '시각장애우를 위한 점자 지도 만들기, 아주 보람찹니다!'); 
+
+
+insert into ftp_vol_shortreview(vol_shortreview_no, user_no, vol_no, content)
 values(1, 1, 1, '너무 유익했어요'); 
 insert into ftp_vol_shortreview(vol_shortreview_no, user_no, vol_no, content)
 values(2, 6, 1, '다른 사람이랑 같이 가고 싶어요!'); 
