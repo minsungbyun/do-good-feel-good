@@ -6,7 +6,7 @@
 <html>
 
 <div class="ad-main">
-        <div class="ad-main-infor">
+<div class="ad-main-infor">
           <div class="write-wrap">
             <h4 class="mb-5">챌린지 상세</h4>
             <form action="update" method="post" id="notice-form" enctype="multipart/form-data">
