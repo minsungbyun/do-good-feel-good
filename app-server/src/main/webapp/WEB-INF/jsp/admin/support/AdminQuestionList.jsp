@@ -49,7 +49,7 @@
 					<c:if test="${QuestionListDTO.reply != null}">
 						<th scope="col">답글</th>
 						<td colspan="4">${QuestionListDTO.reply}</td>
-						<td><form action='replyDelete?questionNo=${QuestionListDTO.no}' method="post">
+						<td><form action='replyDelete?no=${QuestionListDTO.no}' method="post">
 								<button>답글삭제</button>
 								<br>
 							</form></td>
