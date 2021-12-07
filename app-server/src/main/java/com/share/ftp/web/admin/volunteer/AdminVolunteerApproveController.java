@@ -43,7 +43,7 @@ public class AdminVolunteerApproveController extends HttpServlet {
       }
 
       volunteerRequest.setStatus(APPLIED);
-      volunteerRequest.addMembers(volunteerRequest.getOwner()); 
+      //      volunteerRequest.addMembers(volunteerRequest.getOwner()); 
 
       volunteerDao.updateVolunteer(volunteerRequest);
       sqlSession.commit();

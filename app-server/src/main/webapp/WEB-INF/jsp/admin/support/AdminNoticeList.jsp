@@ -19,7 +19,7 @@
 <div class="ad-main">
 	<div class="ad-main-infor">
 		<div class="table01">
-			<!-- serch -->
+			<!-- search -->
 			<div>
 				<form class="form-inline" style="float: right; margin-bottom: 25px">
 					<input class="form-control mr-sm-2 search-box" type="search"
@@ -28,7 +28,7 @@
 						type="submit" style="background: #666;">검색</button>
 				</form>
 			</div>
-			<!-- //serch -->
+			<!-- //search -->
 			
 			<!-- table -->
 			<table class="table">

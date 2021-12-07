@@ -49,10 +49,8 @@
               </tr>
             </thead>
             <tbody>
-            
-            <c:forEach items="${adminVolunteerRejectedList}" var="volunteerRequestDTO" varStatus="vs" >
+            <c:forEach items="${keywords}" var="volunteerRequestDTO" varStatus="vs" >
               <tr data-no="${volunteerRequestDTO.no}">
-            
                 <td><input type="checkbox" class="select-box"></td>
                 <td>${volunteerRequestDTO.no}</td>
                 <td><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></td> 
@@ -112,12 +110,12 @@
               <!-- //modal-dialog -->
             </div>
             <!-- //모달창 -->
+              
+              
+              
               </c:forEach>
             </tbody>
           </table>
-          
-          <c:if test="${empty adminVolunteerRejectedList}"> 반려 목록이 없습니다!</c:if>
-          
           <div class="ad-btn">
             <a href='list' class="btnSubmit">전체목록</a>
             <a href='approve' class="btnSubmit">승인목록</a>

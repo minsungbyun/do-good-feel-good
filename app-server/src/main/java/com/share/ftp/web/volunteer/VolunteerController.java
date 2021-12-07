@@ -1,12 +1,12 @@
 package com.share.ftp.web.volunteer;
 
+import static com.share.util.General.member.PERSONAL;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
@@ -14,8 +14,10 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import com.share.ftp.dao.GeneralDao;
 import com.share.ftp.dao.VolunteerDao;
@@ -35,6 +37,7 @@ import net.coobird.thumbnailator.name.Rename;
 
 @Controller
 @RequestMapping("/volunteer")
+@SessionAttributes("loginUser")
 public class VolunteerController { 
 
   private static final Logger logger = LogManager.getLogger(VolunteerController.class);
@@ -51,9 +54,21 @@ public class VolunteerController {
   public ModelAndView add(
       VolunteerRequestDTO volunteerRequestDTO, 
       Category category, 
-      HttpSession session,
+      @ModelAttribute("loginUser") JoinDTO loginUser,
       int categoryNo,
       Part photoFile) throws Exception {
+
+    ModelAndView mv = new ModelAndView();
+
+    if (loginUser.getType() == PERSONAL) {
+      logger.info("개인회원으로는 봉사 신청이 불가능합니다");
+      mv.addObject("pageTitle", "함께해요 : 오류페이지");
+      mv.addObject("error","개인회원으로는 봉사 신청이 불가능합니다");
+      mv.addObject("contentUrl", "Error.jsp");
+      mv.setViewName("template1");
+      return mv;
+    }
+
 
     if (photoFile.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
@@ -95,14 +110,16 @@ public class VolunteerController {
     }
 
 
-    volunteerRequestDTO.setOwner((JoinDTO) session.getAttribute("loginUser"));
+    volunteerRequestDTO.setOwner(loginUser);
     category.setNo(categoryNo);
     volunteerRequestDTO.setCategory(category);
+    logger.info("봉사정보 ==> "+ volunteerRequestDTO);
 
     volunteerDao.insert(volunteerRequestDTO);
     sqlSessionFactory.openSession().commit();
+    logger.info("봉사신청을 완료하였습니다!");
 
-    ModelAndView mv = new ModelAndView();
+
     mv.setViewName("redirect:list");
     return mv;
   }
@@ -117,11 +134,16 @@ public class VolunteerController {
     //      int joinCount = volunteerJoinDao.findByJoinUser(volunteer.getNo());
     //      volunteerList.get(volunteer.getNo() - 1).setJoinCount(joinCount);
     //    }
-
     ModelAndView mv = new ModelAndView();
+
+    if (volunteerList == null) {
+      logger.info("봉사목록 없음....");
+    }
+
     mv.addObject("volunteerList", volunteerList);
     //    mv.addObject("remainNum", remainNum);
     mv.addObject("pageTitle", "함께해요 : 봉사목록");
+    mv.addObject("info","봉사목록 없음");
     mv.addObject("contentUrl", "volunteer/VolunteerList.jsp");
     mv.setViewName("template1");
     return mv;
@@ -149,8 +171,9 @@ public class VolunteerController {
     volunteerDate.put("remainDate", remainDate);
 
     if (volunteer == null) {
-      throw new Exception("해당 번호의 봉사가 없습니다.");
+      logger.info(no+"번 봉사는 없습니다...");
     }
+    logger.info(no+"번 봉사 세부사항 보는 중...");
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("volunteer", volunteer); 
@@ -173,13 +196,14 @@ public class VolunteerController {
     VolunteerRequestDTO volunteer = volunteerDao.findByVolunteerNo(volunteerRequestDTO.getNo());
 
     if (volunteer == null) {
-      throw new Exception("해당 번호의 봉사가 없습니다");
+      logger.info(volunteerRequestDTO.getNo()+"번 봉사는 없습니다.");
     } 
 
     volunteerRequestDTO.setCategory(category);
 
     volunteerDao.update(volunteer);
     sqlSessionFactory.openSession().commit();
+    logger.info(volunteerRequestDTO.getNo()+"번 봉사 수정 완료");
 
     ModelAndView mv = new ModelAndView();
     mv.setViewName("redirect:list");
@@ -192,11 +216,12 @@ public class VolunteerController {
     VolunteerRequestDTO volunteer = volunteerDao.findByVolunteerNo(volunteerRequestDTO.getNo());
 
     if (volunteer == null) {
-      throw new Exception("해당 번호의 봉사가 없습니다");
+      logger.info(volunteerRequestDTO.getNo()+"번 봉사는 없습니다.");
     }
 
     volunteerDao.delete(volunteer);
     sqlSessionFactory.openSession().commit();
+    logger.info(volunteerRequestDTO.getNo()+"번 봉사 삭제 완료");
 
     ModelAndView mv = new ModelAndView();
     mv.setViewName("redirect:list");

@@ -1,4 +1,4 @@
-package com.share.ftp.web.admin.volunteer;
+package com.share.ftp.web.admin.volunteer.question;
 
 import java.util.List;
 import javax.servlet.ServletContext;
@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.share.ftp.dao.VolunteerDao;
 import com.share.ftp.dao.VolunteerQuestionDao;
@@ -17,7 +16,7 @@ import com.share.ftp.domain.volunteer.VolunteerQuestionDTO;
 import com.share.ftp.domain.volunteer.VolunteerRequestDTO;
 
 @Controller
-@RequestMapping("/admin/volunteer/question")
+//@RequestMapping("/admin/volunteer/question")
 public class AdminVolunteerReplyController {
 
   private static final Logger logger = LogManager.getLogger(AdminVolunteerReplyController.class);
