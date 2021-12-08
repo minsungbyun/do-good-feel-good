@@ -49,7 +49,24 @@
                 <td>${QuestionListDTO.owner.id}</td>
                 <td>${QuestionListDTO.registeredDate}</td>
                 <td>${QuestionListDTO.viewCount}</td>
-                <td>${QuestionListDTO.status}</td>
+                <td>
+	                <c:choose>
+	                  <c:when test="${QuestionListDTO.status == 0}">
+	                   처리중
+	                  </c:when>
+	                  
+	                  <c:when test="${QuestionListDTO.status == 1}">
+                     답변완료
+                    </c:when>
+	                </c:choose>
+                </td>
+                <%-- <c:if test="${QuestionListDTO.status == 0}">
+	                <td colspan="6">
+	                  
+	                    답변완료
+	                  
+	                </td>
+                </c:if> --%>
                 <td id="checkPwd" style="display: none;">${QuestionListDTO.qnaPassword}</td>
               </tr>
               
