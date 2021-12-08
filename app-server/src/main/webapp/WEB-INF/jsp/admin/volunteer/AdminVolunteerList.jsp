@@ -16,19 +16,24 @@
     border-radius: 0.25rem;
     margin-bottom: 110px;
   }
+  
+  .ad-btn .btn-default:hover {
+    background-color:#337ab7;
+  }
 </style>
     
     <div class="ad-main">
       <div class="ad-main-infor">
+      <h2 style="display:flex; justify-content:center; align-items:cetner; padding-top:50px;"><b>봉사활동 관리</b></h2>   
         <div class="table01">
         <!-- search -->
         <div>
-	         <form action="search" method="GET" class="form-inline" style="float: right; margin-bottom: 25px">
-		          <label for="search"></label>
-		          <input class="form-control mr-sm-2 search-box" type="search"
-		            id="f-search" name="keyword" placeholder="검색어를 입력해주세요..">
-		          <button class="btn btn-secondary my-2 my-sm-0 search-btn" style="background: #666;">검색</button>
-	        </form>
+          <form action="search" method="GET" class="form-inline" style="float: right; margin-bottom: 25px">
+              <label for="search"></label>
+              <input class="form-control mr-sm-2 search-box" type="search"
+                id="f-search" name="keyword" placeholder="검색어를 입력해주세요..">
+              <button class="btn btn-secondary my-2 my-sm-0 search-btn" style="background: #666;">검색</button>
+          </form>
         </div>
         <!-- //serch -->
           <table class="table">
@@ -78,23 +83,64 @@
                   <!-- modal-body -->
                   <div class="modal-body">
                     <div class="mb-3 row">
-                      <label for='f-no' class="col-sm-2 col-form-label">번호</label>
-                      <input id='f-no' class="col-sm-2 form-control" type='text'
+                      <label for='f-no' class="col-sm-3 col-form-label">번호</label>
+                      <input id='f-no' class="col-sm-8 col-sm-2 form-control" type='text'
                            name='no' value='${volunteerRequestDTO.no}' readonly>
                     </div>
                     <!-- 번호 -->
                     <div class="mb-3 row">
-                      <label for='f-title' class="col-sm-2 col-form-label">제목</label>
-                      <input id='f-title' class="col-sm-9 form-control" type="text"
+                      <label for='f-title' class="col-sm-3 col-form-label">제목</label>
+                      <input id='f-title' class="col-sm-8 col-sm-2 form-control" type="text"
                               name="title" value="${volunteerRequestDTO.title}" readonly>
                     </div>
                     <!-- //제목 -->
                     <div class="mb-3 row">
-                      <label for='f-content' class="col-sm-2 col-form-label">내용</label>
-                      <textarea id='f-content' class="col-sm-9 form-control"
+                      <label for='f-content' class="col-sm-3 col-form-label">내용</label>
+                      <textarea id='f-content' class="col-sm-8 col-sm-2 form-control"
                            name="content"  cols="15" rows="5" readonly>${volunteerRequestDTO.content}</textarea>
                     </div>
                     <!-- //내용 -->
+                    <div class="mb-3 row">
+                    <label for="f-tel" class="col-sm-3 col-form-label">전화번호</label> <input
+                      type="text" class="col-sm-8 form-control" id="tel" name="tel"
+                      value="${volunteerRequestDTO.tel}" readonly>
+                  </div>
+                  <!-- //전화번호 -->
+                  <div class="mb-3 row">
+                    <label for="f-email" class="col-sm-3 col-form-label">이메일</label> <input
+                      type="email" class="col-sm-8 form-control" id="email"
+                      value="${volunteerRequestDTO.email}" readonly>
+                  </div>
+                  <!-- //이메일 -->
+                  <div class="mb-3 row">
+                    <label for="f-startDate" class="col-sm-3 col-form-label">시작일</label> <input
+                      type="text" class="col-sm-8 form-control" id="startDate"
+                      value="${volunteerRequestDTO.startDate}" readonly>
+                  </div>
+                  <!-- //시작일 -->
+                  <div class="mb-3 row">
+                    <label for="f-endDate" class="col-sm-3 col-form-label">종료일</label> <input
+                      type="text" class="col-sm-8 form-control" id="endDate"
+                      value="${volunteerRequestDTO.endDate}" readonly>
+                  </div>
+                  <!-- //종료일 -->
+                  <div class="mb-3 row">
+                    <label for="f-startTime" class="col-sm-3 col-form-label">시작시간</label> <input
+                      type="text" class="col-sm-8 form-control" id="startTime"
+                      value="${volunteerRequestDTO.startTime}" readonly>
+                  </div>
+                  <!-- //시작시간 -->
+                  <div class="mb-3 row">
+                    <label for="f-endTime" class="col-sm-3 col-form-label">종료시간</label> <input
+                      type="text" class="col-sm-8 form-control" id="endTime"
+                      value="${volunteerRequestDTO.startTime}" readonly>
+                  </div>
+                  <!-- //종료시간 -->
+                  <div class="mb-3 row">
+                    <label for="f-limitNum" class="col-sm-3 col-form-label">총모집인원</label> <input
+                      type="text" class="col-sm-8 form-control" id="limitNum"
+                      value="${volunteerRequestDTO.limitNum}" readonly>
+                  </div>
                   </div>
                   <!-- //modal-body -->
                   <div class="modal-footer">
@@ -110,17 +156,14 @@
               <!-- //modal-dialog -->
             </div>
             <!-- //모달창 -->
-              
-              
-              
-              </c:forEach>
+             </c:forEach>
             </tbody>
           </table>
-          <div class="ad-btn">
-            <a href='list' class="btnSubmit">전체목록</a>
-            <a href='approve' class="btnSubmit">승인목록</a>
-            <a href='reject' class="btnSubmit">반려목록</a>
-            <a href='wait' class="btnSubmit">대기목록</a>
+          <div class="ad-btn" style="float: right;">
+            <a href='list' class="btn btn-default">전체목록</a>
+            <a href='approve' class="btn btn-default">승인목록</a>
+            <a href='reject' class="btn btn-default">반려목록</a>
+            <a href='wait' class="btn btn-default">대기목록</a>
           </div>
         </div>
         <!-- //table01 -->
@@ -129,7 +172,7 @@
       
      <div class="col-12 my-5">
     <nav aria-label="Page Navigation">
-      <ul class="pagination justify-content-center">
+      <ul class="pagination justify-content-center" style="margin-top:100px;">
         <li class="page-item disabled"><a class="page-link" href="#"
           tabindex="-1" aria-disabled="true">이전</a></li>
         <li class="page-item active" aria-current="page"><a

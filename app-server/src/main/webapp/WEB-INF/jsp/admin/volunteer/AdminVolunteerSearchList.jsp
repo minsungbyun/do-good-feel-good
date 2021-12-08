@@ -16,10 +16,15 @@
     border-radius: 0.25rem;
     margin-bottom: 110px;
   }
+  
+   .ad-btn .btn-default:hover {
+    background-color:#337ab7;
+  }
 </style>
     
     <div class="ad-main">
       <div class="ad-main-infor">
+      <h2 style="display:flex; justify-content:center; align-items:cetner; padding-top:50px;"><b>봉사활동 관리</b></h2>
         <div class="table01">
         <!-- search -->
         <div>
@@ -116,11 +121,11 @@
               </c:forEach>
             </tbody>
           </table>
-          <div class="ad-btn">
-            <a href='list' class="btnSubmit">전체목록</a>
-            <a href='approve' class="btnSubmit">승인목록</a>
-            <a href='reject' class="btnSubmit">반려목록</a>
-            <a href='wait' class="btnSubmit">대기목록</a>
+            <div class="ad-btn" style="float: right;">
+	            <a href='list' class="btn btn-default">전체목록</a>
+	            <a href='approve' class="btn btn-default">승인목록</a>
+	            <a href='reject' class="btn btn-default">반려목록</a>
+	            <a href='wait' class="btn btn-default">대기목록</a>
           </div>
         </div>
         <!-- //table01 -->
@@ -129,7 +134,7 @@
       
      <div class="col-12 my-5">
     <nav aria-label="Page Navigation">
-      <ul class="pagination justify-content-center">
+      <ul class="pagination justify-content-center" style="margin-top:100px;">
         <li class="page-item disabled"><a class="page-link" href="#"
           tabindex="-1" aria-disabled="true">이전</a></li>
         <li class="page-item active" aria-current="page"><a
