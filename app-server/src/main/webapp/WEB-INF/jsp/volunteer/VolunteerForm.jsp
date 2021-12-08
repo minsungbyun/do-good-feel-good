@@ -32,28 +32,28 @@
 									<th><em class="icon_required">·</em><span>제목</span></th>
 									<td><label for='f-title' class="sr-only">제목</label> <input
 										id='f-title' class="form-control box-input" type='text'
-										name='title'></td>
+										name='title' required></td>
 								</tr>
 								<!-- //제목 -->
 								<tr>
 									<th><em class="icon_required">·</em><span>내용</span></th>
 									<td><label for='f-content' class="sr-only">내용</label> <textarea
 											id='f-content' class="form-control box-input" name='content'
-											rows="8"></textarea></td>
+											rows="8" required></textarea></td>
 								</tr>
 								<!-- //내용 -->
 								<tr>
 									<th><em class="icon_required">·</em><span>전화번호</span></th>
 									<td><label for='f-tel' class="sr-only">전화번호</label> <input
 										id='f-tel' class="form-control box-input" type='tel'
-										name='tel'></td>
+										name='tel' required></td>
 								</tr>
 								<!-- //전화번호 -->
 								<tr>
 									<th><em class="icon_required">·</em><span>이메일</span></th>
 									<td><label for='f-email' class="sr-only">이메일</label> <input
 										id='f-email' class="form-control box-input" type='email'
-										name='email'></td>
+										name='email' required></td>
 								</tr>
 								<!-- //이메일 -->
 								<tr>
@@ -63,7 +63,7 @@
 										name="startDate"> <!-- //시작일 -->
 								<tr>
 									<th><em class="icon_required">·</em><span>종료일</span></th>
-									<td><label for='f-endDate' class="sr-only">시작일</label> <input
+									<td><label for='f-endDate' class="sr-only">종료일</label> <input
 										id="f-endDate" class="form-control box-input" type="date"
 										name="endDate"> <!-- //종료일 -->
 								<tr>
@@ -102,7 +102,7 @@
 						</table>
 						<div class="btn-regi">
 							<input type='hidden' value='2' name='status'><br>
-							<button type="submit" class="btn btn-primary nBtn">봉사신청</button>
+							<button class="btn btn-primary nBtn">봉사신청</button>
 							<a href="#" class="btn btn-outline-primary nBtn"
 								onClick="history.go(-1)" role="button">이전</a>
 						</div>
@@ -116,7 +116,7 @@
 	</div>
 </main>
 <script>
-document.querySelector("#donation-Button").onclick = () => {
+document.querySelector(".nBtn").onclick = () => {
     var startDate = document.querySelector("#f-startDate");
     var endDate = document.querySelector("#f-endDate");
     if (startDate.value >= endDate.value) {
@@ -124,5 +124,4 @@ document.querySelector("#donation-Button").onclick = () => {
       return false; 
     } 
   }
-  
 </script>

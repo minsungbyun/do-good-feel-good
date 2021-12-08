@@ -124,7 +124,7 @@
                  </tr>
                  <!-- //주소 -->
                  <tr>
-                   <th><em class="icon_required"></em><span>생년월일</span></th>
+                   <th><em class="icon_required">.</em><span>생년월일</span></th>
                    <td>
                      <label for=f-birthdate class="sr-only">생년월일</label> 
                      <input id='f-birthdate' class="form-control box-input" type='date' name='birthdate'><br>

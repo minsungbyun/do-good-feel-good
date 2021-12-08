@@ -147,55 +147,55 @@
 								enctype="multipart/form-data" name="form">
 								<div class="row">
 									<div class="col-sm-12 py-2">
-										<label for="no" class="fg-grey" type="hidden">번호</label> <input
+										<label for="f-no" class="fg-grey" type="hidden">번호</label> <input
 											type="number" class="form-control" id="no" name="no"
 											value="${volunteer.no}" readonly>
 									</div>
 									<!-- //번호 -->
 									<div class="col-sm-12 py-2">
-										<label for="title" class="fg-grey">제목</label> <input
+										<label for="f-title" class="fg-grey">제목</label> <input
 											type="text" class="form-control" id="title" name="title"
 											value="${volunteer.title}" readonly>
 									</div>
 									<!-- //제목 -->
 									<div class="col-12 py-2">
-										<label for="subject" class="fg-grey">전화번호</label> <input
+										<label for="f-tel" class="fg-grey">전화번호</label> <input
 											type="text" class="form-control" id="tel" name="tel"
 											value="${volunteer.tel}" readonly>
 									</div>
 									<!-- //전화번호 -->
 									<div class="col-12 py-2">
-										<label for="subject" class="fg-grey">이메일</label> <input
+										<label for="f-email" class="fg-grey">이메일</label> <input
 											type="email" class="form-control" id="email"
 											value="${volunteer.email}" readonly>
 									</div>
 									<!-- //이메일 -->
 									<div class="col-6 py-2">
-										<label for="subject" class="fg-grey">시작일</label> <input
+										<label for="f-startDate" class="fg-grey">시작일</label> <input
 											type="text" class="form-control" id="startDate"
 											value="${volunteer.startDate}" readonly>
 									</div>
 									<!-- //시작일 -->
 									<div class="col-6 py-2">
-										<label for="subject" class="fg-grey">종료일</label> <input
+										<label for="f-endDate" class="fg-grey">종료일</label> <input
 											type="text" class="form-control" id="endDate"
 											value="${volunteer.endDate}" readonly>
 									</div>
 									<!-- //종료일 -->
 									<div class="col-6 py-2">
-										<label for="subject" class="fg-grey">시작시간</label> <input
+										<label for="f-startTime" class="fg-grey">시작시간</label> <input
 											type="text" class="form-control" id="startTime"
 											value="${volunteer.startTime}" readonly>
 									</div>
 									<!-- //시작시간 -->
 									<div class="col-6 py-2">
-										<label for="subject" class="fg-grey">종료시간</label> <input
+										<label for="f-endTime" class="fg-grey">종료시간</label> <input
 											type="text" class="form-control" id="endTime"
 											value="${volunteer.startTime}" readonly>
 									</div>
 									<!-- //종료시간 -->
 									<div class="col-12 py-2">
-										<label for="subject" class="fg-grey">총모집인원</label> <input
+										<label for="f-limitNum" class="fg-grey">총모집인원</label> <input
 											type="text" class="form-control" id="limitNum"
 											value="${volunteer.limitNum}" readonly>
 									</div>

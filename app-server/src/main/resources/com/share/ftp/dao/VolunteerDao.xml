@@ -29,6 +29,9 @@
       <id column="owner_no" property="no"/>
       <result column="owner_id" property="id"/>
      <result column="owner_name" property="name"/>
+     <result column="owner_post_no" property="postNo"/>
+     <result column="owner_basic_address" property="basicAddress"/>
+     <result column="owner_detail_address" property="detailAddress"/>
    </association>
    
    <association property="wish" javaType="joinDTO">
@@ -65,7 +68,10 @@
        end_time,
        total_cnt,
        photo,
-       approval)
+       post_no,
+       basic_address,
+       detail_address
+       )
     values(
        #{owner.no},
        #{category.no},
@@ -79,7 +85,10 @@
        #{endTime},
        #{limitNum},
        #{photo},
-       #{status})
+       #{owner.postNo},
+       #{owner.basicAddress},
+       #{owner.detailAddress}
+      )
   </insert>
   
  
@@ -106,24 +115,22 @@
           v.end_dt,
           datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt,
           datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(now(),'%Y-%m-%d')) remain_dt,
-	       v.start_time,
-	       v.end_time,
-	       v.total_cnt,
-	       v.approval,
-	       v.note,
-	       v.photo,
-	       u.id wish_id,
-	       u.id owner_id,  
-	       u.name owner_name,  
-	       c.title category_title,
-	       f.filepath
-	     from
-	       ftp_vol v
-	       inner join ftp_user u on v.user_no=u.user_no
-	       inner join ftp_category c on v.category_no=c.category_no
-	       left outer join ftp_vol_file f on v.vol_no=f.vol_no
-	     order by
-	       v.vol_no desc 
+         v.start_time,
+         v.end_time,
+         v.total_cnt,
+         v.approval,
+         v.note,
+         v.photo,
+         u.id wish_id,
+         u.id owner_id,  
+         u.name owner_name,  
+         c.title category_title
+       from
+         ftp_vol v
+         inner join ftp_user u on v.user_no=u.user_no
+         inner join ftp_category c on v.category_no=c.category_no
+       order by
+         v.vol_no desc 
   </select>
   
   
@@ -147,13 +154,11 @@
 	         u.id wish_id,
 	         u.id owner_id,
 	         u.name owner_name,   
-	         c.title category_title,
-	         f.filepath
+	         c.title category_title
 	       from
 	         ftp_vol v
 	         inner join ftp_user u on v.user_no=u.user_no
 	         inner join ftp_category c on v.category_no=c.category_no
-	         left outer join ftp_vol_file f on v.vol_no=f.vol_no
 	         left outer join ftp_vol v2 on u.user_no=v2.user_no
 	        where
 	          v.approval=1
@@ -161,38 +166,6 @@
 	          v.vol_no desc
    </select>
    
-   <select id="findAllApply" resultMap="VolunteerRequestDTOMap">
-	     select 
-	         distinct
-	         v.vol_no,  
-	         v.title,
-	         v.content,
-	         v.tel,
-	         v.email,
-	         v.start_dt,
-	         v.end_dt,
-	         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt,
-	         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(now(),'%Y-%m-%d')) remain_dt,
-	         v.start_time,
-	         v.end_time,
-	         v.total_cnt,
-	         v.photo,
-	         ifnull(count(va.user_no), 0) join_cnt,
-	         u.id owner_id,
-	         u.name owner_name,   
-	         c.title category_title,
-	         f.filepath
-	       from
-	         ftp_vol v
-	         inner join ftp_user u on v.user_no=u.user_no
-	         inner join ftp_category c on v.category_no=c.category_no
-	         inner join ftp_vol_apply va on va.vol_no=v.vol_no
-	         left outer join ftp_vol_file f on v.vol_no=f.vol_no
-	        where
-	          v.approval=1
-	        order by
-	          v.vol_no desc
-   </select>
    
    <select id="findAllWait" resultMap="VolunteerRequestDTOMap">
      select 
@@ -212,13 +185,11 @@
          v.photo,
          u.id owner_id,
          u.name owner_name,  
-         c.title category_title,
-         f.filepath
+         c.title category_title
        from
          ftp_vol v
          inner join ftp_user u on v.user_no=u.user_no
          inner join ftp_category c on v.category_no=c.category_no
-         left outer join ftp_vol_file f on v.vol_no=f.vol_no
         where
           v.approval=2
         order by
@@ -243,13 +214,11 @@
          v.photo,
          u.id owner_id,
          u.name owner_name,  
-         c.title category_title,
-         f.filepath
+         c.title category_title
        from
          ftp_vol v
          inner join ftp_user u on v.user_no=u.user_no
          inner join ftp_category c on v.category_no=c.category_no
-         left outer join ftp_vol_file f on v.vol_no=f.vol_no
         where
           v.approval=0
         order by
@@ -284,16 +253,16 @@
   
   <select id="findByVolunteerNo" resultMap="VolunteerRequestDTOMap" parameterType="int">
        select 
-           distinct
-          v.vol_no,  
-          v.title,
-          v.content,
-          v.tel,
-          v.email,
-          v.start_dt,
-          v.end_dt,
-          datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt,
-          datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(now(),'%Y-%m-%d')) remain_dt,
+         distinct
+         v.vol_no,  
+         v.title,
+         v.content,
+         v.tel,
+         v.email,
+         v.start_dt,
+         v.end_dt,
+         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt,
+         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(now(),'%Y-%m-%d')) remain_dt,
          v.start_time,
          v.end_time,
          v.total_cnt,
@@ -303,29 +272,27 @@
          u.id wish_id,
          u.id owner_id,  
          u.name owner_name,  
-         c.title category_title,
-         f.filepath
+         c.title category_title
        from
          ftp_vol v
          inner join ftp_user u on v.user_no=u.user_no
          inner join ftp_category c on v.category_no=c.category_no
-         left outer join ftp_vol_file f on v.vol_no=f.vol_no
        where 
          v.vol_no=#{volNo}
   </select>
  
   <select id="findByApprovedVolunteerNo" resultMap="VolunteerRequestDTOMap" parameterType="int">
        select 
-       distinct
-          v.vol_no,  
-          v.title,
-          v.content,
-          v.tel,
-          v.email,
-          v.start_dt,
-          v.end_dt,
-          datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt,
-          datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(now(),'%Y-%m-%d')) remain_dt,
+         distinct
+         v.vol_no,  
+         v.title,
+         v.content,
+         v.tel,
+         v.email,
+         v.start_dt,
+         v.end_dt,
+         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt,
+         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(now(),'%Y-%m-%d')) remain_dt,
          v.start_time,
          v.end_time,
          v.total_cnt,
@@ -348,6 +315,7 @@
  
   <select id="findByKeyword" resultMap="VolunteerRequestDTOMap" parameterType="string">
      select 
+        distinct
          v.vol_no,  
          v.title,
          v.content,
@@ -355,31 +323,39 @@
          v.email,
          v.start_dt,
          v.end_dt,
-         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) datediff,
+         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(v.start_dt,'%Y-%m-%d')) total_dt,
+         datediff(date_format(v.end_dt,'%Y-%m-%d'), date_format(now(),'%Y-%m-%d')) remain_dt,
          v.start_time,
          v.end_time,
-         timediff(v.end_time,v.start_time) timediff,
          v.total_cnt,
-         u.id owner_id,
-         u.name owner_name,   
-         c.title category_title,
-         f.filepath
+         v.approval,
+         v.note,
+         v.photo,
+         u.id wish_id,
+         u.id owner_id,  
+         u.name owner_name,  
+         c.title category_title
        from
          ftp_vol v
          inner join ftp_user u on v.user_no=u.user_no
          inner join ftp_category c on v.category_no=c.category_no
-         left outer join ftp_vol_file f on v.vol_no=f.vol_no
-     <where>
+       where
+         v.title like concat('%', #{value}, '%') or
+         u.id like concat('%', #{value}, '%') 
+       order by
+         v.vol_no desc  
+  </select>
+  
+  <!--
+   <where>
       <if test="title != null">
          title like concat('%', #{value}, '%')
       </if>
       <if test="content != null">
          or content like concat('%', #{value}, '%') 
       </if>
-     </where>
-     order by
-      v.vol_no desc
-  </select>
+     </where> 
+   -->
   
   
   

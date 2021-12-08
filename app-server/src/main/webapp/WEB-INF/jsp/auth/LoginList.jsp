@@ -20,14 +20,18 @@
 
     <div class="ad-main">
       <div class="ad-main-infor">
-        <!-- serch -->
-        <div class="serch">
-          <label for="inforSerch">검색</label>
-          <input type="text" class="" id="inforSerch">
-          <button type="submit" class="searchBtn">검색</button>
+        <h2 style="display:flex; justify-content:center; align-items:cetner; padding-top:50px;"><b>회원정보 조회</b></h2>  
+        <div class="table01" >
+       <!-- search -->
+        <div>
+           <form action="search" method="GET" class="form-inline" style="float: right; margin-bottom: 25px" >
+              <label for="search"></label>
+              <input class="form-control mr-sm-2 search-box" type="search"
+                id="f-search" name="keyword" placeholder="검색어를 입력해주세요..">
+              <button class="btn btn-secondary my-2 my-sm-0 search-btn" style="background: #666;">검색</button>
+          </form>
         </div>
         <!-- //serch -->
-        <div class="table01">
           <table class="table">
             <thead>
               <tr>
@@ -49,21 +53,21 @@
             </thead>
             <tbody>
               <c:forEach items="${joinUserList}" var="joinDTO" varStatus="vs">
-<tr>
-<!-- <td><input type="checkbox" class="select-box"></td> -->
-    <td>${joinDTO.no}</td> 
-    <td>${joinDTO.id}</td> 
-    <td>${joinDTO.name}</td> 
-    <td>${joinDTO.tel}</td> 
-    <td>${joinDTO.email}</td> 
-    <td>${joinDTO.postNo}</td> 
-    <td>${joinDTO.basicAddress}</td> 
-    <td>${joinDTO.detailAddress}</td> 
-    <td>${joinDTO.status}</td> 
-    <td>${joinDTO.type}</td> 
-    <td>${joinDTO.registerDate}</td>
-    <td><a data-toggle="modal" href="#myModalLoginL${vs.index}">[관리]</a></td>
-</tr>
+								<tr data-no="${joinDTO.no}">
+								<!-- <td><input type="checkbox" class="select-box"></td> -->
+								    <td>${joinDTO.no}</td> 
+								    <td>${joinDTO.id}</td> 
+								    <td>${joinDTO.name}</td> 
+								    <td>${joinDTO.tel}</td> 
+								    <td>${joinDTO.email}</td> 
+								    <td>${joinDTO.postNo}</td> 
+								    <td>${joinDTO.basicAddress}</td> 
+								    <td>${joinDTO.detailAddress}</td> 
+								    <td>${joinDTO.status}</td> 
+								    <td>${joinDTO.type}</td> 
+								    <td>${joinDTO.registerDate}</td>
+								    <td><a href="#myModalLoginL${vs.index}" class="btn btn-primary" data-toggle="modal" >상세보기</a></td>
+								</tr>
 <!-- 모달 창 -->
               <div class="modal fade" id="myModalLoginL${vs.index}"
                 role="dialog">
@@ -72,43 +76,92 @@
                   <!-- Modal content-->
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h4 class="modal-title">회원 관리</h4>
+                      <h3 class="modal-title">회원 관리</h3>
                       <!-- 사용자 지정 부분② : 타이틀 -->
                       <button type="button" class="close" data-dismiss="modal">×</button>
                     </div>
                       <div class="modal-body">
-                        <div class="class" id="id" style="display: none">
-                          <label for='f-no'>회원번호</label> <input id='f-no'
-                            type='text' name='no' value='${joinDTO.no}' readonly>
-                          <br>
-                        </div>
-                        <label for='f-id'>아이디</label><span id='f-id'>${joinDTO.id}</span><br>
-                        <label for='f-name'>이름</label><span id='f-name'>${joinDTO.name}</span><br>
-                        <label for='f-tel'>전화번호</label><span id='f-tel'>${joinDTO.tel}</span><br>
-                        <label for='f-email'>이메일</label><span id='f-email'>${joinDTO.email}</span><br>
-                        <label for='f-postNo'>우편번호</label><span id='f-postNo'>${joinDTO.postNo}</span><br>
-                        <label for='f-basicAddress'>기본주소</label><span id='f-basicAddress'>${joinDTO.basicAddress}</span><br>
-                        <label for='f-detailAddress'>상세주소</label><span id='f-detailAddress'>${joinDTO.detailAddress}</span><br>
-                        <label for='f-status'>승인상태</label><span id='f-status'>${joinDTO.status}</span><br>
-                        <label for='f-type'>회원유형</label><span id='f-type'>${joinDTO.type}</span><br>
-                        <label for='f-registerDate'>등록일</label><span id='f-registerDate'>${joinDTO.registerDate}</span><br>
-                      </div>
+                        <div class="mb-3 row">
+		                      <label for='f-no' class="col-sm-3 col-form-label">번호</label>
+		                      <input id='f-no' class="col-sm-8 form-control" type='text'
+		                           name='no' value='${joinDTO.no}' readonly>
+                       </div>
+                       
+                        <div class="mb-3 row">
+                          <label for='f-no' class="col-sm-3 col-form-label">아이디</label>
+                          <input id='f-no' class="col-sm-8 form-control" type='text'
+                               name='id' value='${joinDTO.id}' readonly>
+                       </div>
+                       
+                        <div class="mb-3 row">
+                          <label for='f-name' class="col-sm-3 col-form-label">이름</label>
+                          <input id='f-name' class="col-sm-8 form-control" type='text'
+                               name='name' value='${joinDTO.name}' readonly>
+                       </div>
+                       
+                        <div class="mb-3 row">
+                          <label for='f-tel' class="col-sm-3 col-form-label">전화번호</label>
+                          <input id='f-tel' class="col-sm-8 form-control" type='text'
+                               name='tel' value='${joinDTO.tel}' readonly>
+                       </div>
+                       
+                        <div class="mb-3 row">
+                          <label for='f-email' class="col-sm-3 col-form-label">이메일</label>
+                          <input id='f-email' class="col-sm-8 form-control" type='text'
+                               name='email' value='${joinDTO.email}' readonly>
+                       </div>
+                       
+                       <div class="mb-3 row">
+                          <label for='f-postNo' class="col-sm-3 col-form-label">우편번호</label>
+                          <input id='f-postNo' class="col-sm-8 form-control" type='text'
+                               name='postNo' value='${joinDTO.postNo}' readonly>
+                       </div>
+                       
+                       <div class="mb-3 row">
+                          <label for='f-basicAddress' class="col-sm-3 col-form-label">기본주소</label>
+                          <input id='f-basicAddress' class="col-sm-8 form-control" type='text'
+                               name='basicAddress' value='${joinDTO.basicAddress}' readonly>
+                       </div>
+                       <div class="mb-3 row">
+                          <label for='f-email' class="col-sm-3 col-form-label">상세주소</label>
+                          <input id='f-email' class="col-sm-8 form-control" type='text'
+                               name='detailAddress' value='${joinDTO.detailAddress}' readonly>
+                       </div>
+                       <div class="mb-3 row">
+                          <label for='f-status' class="col-sm-3 col-form-label">승인상태</label>
+                          <input id='f-status' class="col-sm-8 form-control" type='text'
+                               name='status' value='${joinDTO.status}' readonly>
+                       </div>
+                       <div class="mb-3 row">
+                          <label for='f-type' class="col-sm-3 col-form-label">회원유형</label>
+                          <input id='f-type' class="col-sm-8 form-control" type='text'
+                               name='type' value='${joinDTO.type}' readonly>
+                       </div>
+                       
+                       <div class="mb-3 row">
+                          <label for='f-registerDate' class="col-sm-3 col-form-label">등록일</label>
+                          <input id='f-registerDate' class="col-sm-8 form-control" type='text'
+                               name='registerdDate' value='${joinDTO.registerDate}' readonly>
+                       </div>
+                        
 							          <div class="ad-btn">
-							            <a href="#" class="btnSubmit">추방</a>
-							            <a href="#" class="btnSubmit">반려하기</a>
-							            <a href="#" class="btnSubmit">승인하기</a>
 							            <!--  <a href="#" class="btnSubmit">수정</a>-->
 							          </div>
                       <br>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-default"
-                        data-dismiss="modal">Close</button>
+							            <a href="#" class="btn btn-primary">승인하기</a>
+							            <a href="#" class="btn btn-primary">반려하기</a>
+							            <a href="#" class="btn btn-primary">추방하기</a>
+							            <button type="button" class="btn btn-default"
+                           data-dismiss="modal">닫기</button>
+                      
                     </div>
                   </div>
                 </div>
               </div>
+              </div>
               <!-- 모달 창 -->
-</c:forEach>
+              </c:forEach>
             </tbody>
           </table>
         </div>
@@ -117,24 +170,19 @@
       <!-- //form -->
       
       <div class="col-12 my-5">
-        <nav aria-label="Page Navigation">
-          <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-            </li>
-            <li class="page-item active" aria-current="page">
-              <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#">Next</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+    <nav aria-label="Page Navigation">
+      <ul class="pagination justify-content-center">
+        <li class="page-item disabled"><a class="page-link" href="#"
+          tabindex="-1" aria-disabled="true">이전</a></li>
+        <li class="page-item active" aria-current="page"><a
+          class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">다음</a></li>
+      </ul>
+    </nav>
+  </div>
       
     </div>
     <!-- //ad-main -->

@@ -38,6 +38,11 @@
         <div class="grid mt-3">
         
         
+        <c:if test="${empty volunteerList}">
+          <div style="display: flex; justify-content: center; align-items: center;">
+            <p>${info}</p>
+          </div>
+        </c:if>
         
       <c:forEach items="${volunteerList}" var="volunteerRequestDTO" >
       
@@ -309,28 +314,24 @@
       </c:forEach>
        
         </div> <!-- .grid -->
-        <div class="mt-5 text-center">
-          <button class="btn btn-primary">더보기</button>
-        </div>
-      </div> <!-- .container -->
+        
+        <c:if test="${empty volunteerList}">
+          <div class="mt-5 text-center">
+            <button class="btn btn-primary" onClick="location.href='../home'">이전</button>
+          </div>
+        </c:if>
+        
+        <c:if test="${not empty volunteerList}">
+          <div class="mt-5 text-center">
+            <button class="btn btn-primary">더보기</button>
+          </div>
+        </c:if>
+        
+        </div> <!-- .container -->
     </div> <!-- .page-section -->
   </main>
 
-<%-- 
-   <div class="card_body" style="overflow: hidden; box-sizing: border-box; width:100%;" >
-    <c:forEach items="${volunteerList}" var="volunteerRequestDTO" >
-       <div class="card" style="width: 33.33%; float: left; padding:0 5%;  box-sizing: border-box; border: none;">
-         <img src="https://cdn-icons-png.flaticon.com/512/3349/3349234.png" class="card-img-top" alt="봉사이미지"> 
-         <div class="card-body">
-           <h5 class="card-title"><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></h5>
-           <p class="card-text">카테고리 : ${volunteerRequestDTO.category.title}</p>
-           <p class="card-text">남은자리 : ${volunteerRequestDTO.remainDate}명</p>
-           <input type="checkbox" name="wish"> 찜하기
-         </div>
-       </div>
-    </c:forEach>
-   </div>
---%>
+<
 
 
 

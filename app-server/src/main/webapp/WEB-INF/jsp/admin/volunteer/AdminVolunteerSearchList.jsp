@@ -24,7 +24,7 @@
     
     <div class="ad-main">
       <div class="ad-main-infor">
-      <h2 style="display:flex; justify-content:center; align-items:cetner; padding-top:50px;"><b>봉사승인 목록</b></h2>
+      <h2 style="display:flex; justify-content:center; align-items:cetner; padding-top:50px;"><b>봉사활동 관리</b></h2>
         <div class="table01">
         <!-- search -->
         <div>
@@ -54,7 +54,7 @@
               </tr>
             </thead>
             <tbody>
-            <c:forEach items="${adminVolunteerApprovedList}" var="volunteerRequestDTO" varStatus="vs" >
+            <c:forEach items="${keywords}" var="volunteerRequestDTO" varStatus="vs" >
               <tr data-no="${volunteerRequestDTO.no}">
                 <td><input type="checkbox" class="select-box"></td>
                 <td>${volunteerRequestDTO.no}</td>
@@ -115,17 +115,17 @@
               <!-- //modal-dialog -->
             </div>
             <!-- //모달창 -->
+              
+              
+              
               </c:forEach>
             </tbody>
           </table>
-          
-          <c:if test="${empty adminVolunteerApprovedList}"> 승인 목록이 없습니다!</c:if>
-          
-          <div class="ad-btn" style="float: right;">
-            <a href='list' class="btn btn-default">전체목록</a>
-            <a href='approve' class="btn btn-default">승인목록</a>
-            <a href='reject' class="btn btn-default">반려목록</a>
-            <a href='wait' class="btn btn-default">대기목록</a>
+            <div class="ad-btn" style="float: right;">
+	            <a href='list' class="btn btn-default">전체목록</a>
+	            <a href='approve' class="btn btn-default">승인목록</a>
+	            <a href='reject' class="btn btn-default">반려목록</a>
+	            <a href='wait' class="btn btn-default">대기목록</a>
           </div>
         </div>
         <!-- //table01 -->

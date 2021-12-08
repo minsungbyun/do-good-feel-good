@@ -1,4 +1,4 @@
-package com.share.ftp.web.auth;
+package com.share.ftp.web.auth.Prev;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

@@ -18,15 +18,14 @@ public interface VolunteerDao {
 
   List<VolunteerRequestDTO> findAll() throws Exception;      
   List<VolunteerRequestDTO> findAllApproved() throws Exception;      
-  List<VolunteerRequestDTO> findAllApply() throws Exception;      
   List<VolunteerRequestDTO> findAllWait() throws Exception;      
   List<VolunteerRequestDTO> findAllRejected() throws Exception;      
+  List<VolunteerRequestDTO> findByKeyword(String keyword) throws Exception;
 
   VolunteerRequestDTO totalDate(int volunteerNo) throws Exception;
   VolunteerRequestDTO remainDate(int volunteerNo) throws Exception;
   VolunteerRequestDTO findByVolunteerNo(int volunteerNo) throws Exception;
   VolunteerRequestDTO findByApprovedVolunteerNo(int volunteerNo) throws Exception;
-  VolunteerRequestDTO findByKeyword(String keyword) throws Exception;
 
   void update(VolunteerRequestDTO updateVolunteer) throws Exception;          
   void updateVolunteer(VolunteerRequestDTO updateVolunteer) throws Exception;          
