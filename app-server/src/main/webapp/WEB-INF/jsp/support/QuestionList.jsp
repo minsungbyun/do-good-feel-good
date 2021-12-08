@@ -43,7 +43,7 @@
                 <td>${QuestionListDTO.qnaType.title}</td>
                 <td>
                   <a href='#' data-toggle="modal" data-target="#questionModal" data-no="${QuestionListDTO.no}">
-                    ${QuestionListDTO.title}
+                    ${QuestionListDTO.title}<span style="color:#999;">[${QuestionListDTO.status}]</span>
                   </a>
                 </td>
                 <td>${QuestionListDTO.owner.id}</td>
@@ -51,12 +51,6 @@
                 <td>${QuestionListDTO.viewCount}</td>
                 <td>${QuestionListDTO.status}</td>
                 <td id="checkPwd" style="display: none;">${QuestionListDTO.qnaPassword}</td>
-              </tr>
-              
-              <tr>
-                <c:if  test="${QuestionListDTO.reply eq 1}" >
-                  
-                </c:if>
               </tr>
               
             </c:forEach>
