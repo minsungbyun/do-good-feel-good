@@ -9,7 +9,7 @@
 			<div class="widget">
 				<div class="widget-box" style="padding:60px;">
 				
-					<form action="add?no=${volunteer.no}" class="form-contact"
+					<form action="add" class="form-contact"
 						method="post" name="form">
 						<div class="row">
 							<div class="col-sm-12 py-2">

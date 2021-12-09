@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <body>
@@ -66,15 +67,25 @@
 				<div class="text-center">
 					<h2 class="title-section happy-con">진행중인 봉사목록</h2>
 				</div>
-
 				<div class="owl-carousel team-carousel mt-5">
 					<c:forEach items="${volunteerList}" var="volunteerDTO">
 						<div class="team-wrap">
 							<div class="team-profile">
-								<img src="${contextPath}/images/home/main.jpg" alt="봉사사진">
+								<img src="${contextPath}/upload/volunteer/${volunteerDTO.photo}" alt="봉사사진">
 							</div>
 							<div class="team-content">
-								<h5>${volunteerDTO.title}</h5>
+				        <c:set var="cropTitle" value="${volunteerDTO.title}"/>
+				          <c:if test="${fn:length(cropTitle) > 30}">
+								    <a href="volunteer/list">
+								      <h5>${fn:substring(cropTitle,0,29)}<span>${fn:replace(cropTitle,cropTitle,'....')}</span></h5>
+							      </a>
+				          </c:if>
+				           <c:if test="${fn:length(cropTitle) <= 30}">
+			               <a href="volunteer/list">
+                       <h5>${volunteerDTO.title}</h5>
+                     </a>
+                  </c:if>
+				           
 								<div class="text-sm fg-grey">주최자 :
 									${volunteerDTO.owner.id}</div>
 
