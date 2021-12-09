@@ -1693,3 +1693,13 @@ fieldset {
 .table-wrap .table td:nth-child(7) {
   border-right:0;
 }
+
+.q {
+	display:inline-block;
+}
+
+.board-reply {
+	border:1px solid #e5e5e5;
+	padding:20px;
+	margin-bottom:70px;
+}

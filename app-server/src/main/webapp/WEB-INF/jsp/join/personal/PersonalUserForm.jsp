@@ -74,7 +74,7 @@
                         사용가능한 이름입니다.
                     </div>
                      <div class="invalid-feedback">
-                       이미 존재하는 이름입니다.
+                       이름을 입력해주세요.
                      </div>
                    </td>
                  </tr>
