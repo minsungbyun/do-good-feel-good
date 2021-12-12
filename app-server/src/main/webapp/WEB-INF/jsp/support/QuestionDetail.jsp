@@ -72,7 +72,7 @@
 	          <span id='f-registeredDate' style="color:#999;">${questionListDTO.registeredDate}</span>
 	        </div> --%>
 	        <div>
-	          <label for='f-reply' class="">답글</label>
+	          <label for='f-reply' class="">관리자 답글</label>
 	          <input id='f-reply' type='text' name='reply' value='${questionListDTO.reply}' readonly>
 	        </div>
 				</div>

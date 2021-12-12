@@ -48,9 +48,7 @@
 				<tr>
 					<c:if test="${QuestionListDTO.reply != null}">
 						<th scope="col">답글</th>
-						<td colspan="2">${QuestionListDTO.reply}</td>
-						<td>${QuestionListDTO.owner.id}</td>
-						<td colspan="2">${QuestionListDTO.registeredDate}</td>
+						<td colspan="6">${QuestionListDTO.reply}</td>
 						<td><form action='replyDelete?no=${QuestionListDTO.no}' method="post">
 								<button>답글삭제</button>
 								<br>
