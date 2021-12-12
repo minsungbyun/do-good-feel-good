@@ -88,7 +88,6 @@ public class AuthController {
     JoinDTO loginUser = joinDao.findByIdPassword(id, password);
 
     if (loginUser != null) {
-
       if (loginUser.getType() == ORG) {
         OrgDTO orgLoginUser = orgDao.findByOrgNo(loginUser.getNo());
         session.setAttribute("orgLoginUser", orgLoginUser);

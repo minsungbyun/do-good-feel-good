@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
     <div class="page-banner bg-img bg-img-parallax overlay-dark" style="background-image: url(${contextPath}/images/volunteer1.jpg);">
       <div class="container h-100">
@@ -45,7 +46,7 @@
         </c:if>
         
       <c:forEach items="${volunteerList}" var="volunteerRequestDTO" >
-      
+       <c:set var="cropTitle" value="${volunteerRequestDTO.title}"/>
       <c:choose> 
 	      <c:when test="${volunteerRequestDTO.category.title eq '비대면'}">
 		       <div class="grid-item untact">
@@ -56,7 +57,18 @@
 	              </a>
 	              <div class="card">
 	                <div class="card-body">
-				              <h5 class="card-title vol-title"><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></h5>
+				              <h5 class="card-title vol-title">
+				                <a href='detail?no=${volunteerRequestDTO.no}'>
+				                   <c:if test="${fn:length(cropTitle) > 45}">
+				                    <h5>${fn:substring(cropTitle,0,45)}<span>${fn:replace(cropTitle,cropTitle,'....')}</span></h5>
+				                   </c:if>
+				                   <c:if test="${fn:length(cropTitle) <= 45}">
+				                    <h5>${volunteerRequestDTO.title}</h5>
+				                    </c:if>
+				                 </a>
+			                </h5>
+				              
+				              
 				              <p class="card-text"><span class="text-muted">${volunteerRequestDTO.startDate} ~ ${volunteerRequestDTO.endDate}</span></p>
                   </div> <!-- // card-body -->
 					          <ul class="list-group list-group-flush">
@@ -68,7 +80,7 @@
 					                  <span class="sr-only">총 모집인원</span>
 					                  ${volunteerRequestDTO.limitNum}명
 					                </span> --%>
-					              <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
+					              <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">${volunteerRequestDTO.tel}</span>
 				             </li>
 					            <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
 				          </ul>
@@ -84,12 +96,21 @@
 		       <div class="grid-item children">
 	            <div class="portfolio">
                 <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
-	              <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
+	              <a href="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" data-fancybox="portfolio">
 	                <img src="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" alt="봉사이미지" style="padding:10px;">
 	              </a>
 	              <div class="card">
                   <div class="card-body">
-                      <h5 class="card-title vol-title"><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></h5>
+                      <h5 class="card-title vol-title">
+                      <a href='detail?no=${volunteerRequestDTO.no}'>
+                           <c:if test="${fn:length(cropTitle) > 45}">
+                            <h5>${fn:substring(cropTitle,0,45)}<span>${fn:replace(cropTitle,cropTitle,'....')}</span></h5>
+                           </c:if>
+                           <c:if test="${fn:length(cropTitle) <= 45}">
+                            <h5>${volunteerRequestDTO.title}</h5>
+                            </c:if>
+                         </a>
+                      </h5>
                       <p class="card-text"><span class="text-muted">${volunteerRequestDTO.startDate} ~ ${volunteerRequestDTO.endDate}</span></p>
                   </div> <!-- // card-body -->
                     <ul class="list-group list-group-flush">
@@ -101,7 +122,7 @@
                             <span class="sr-only">총 모집인원</span>
                             ${volunteerRequestDTO.limitNum}명
                           </span> --%>
-                        <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
+                        <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">${volunteerRequestDTO.tel}</span>
                      </li>
                       <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
                   </ul>
@@ -117,12 +138,21 @@
 		       <div class="grid-item teen">
 	           <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
 	            <div class="portfolio">
-	              <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
+	              <a href="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" data-fancybox="portfolio">
 	                <img src="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" alt="봉사이미지" style="padding:10px;">
 	              </a>
 		              <div class="card">
 	                  <div class="card-body">
-	                      <h5 class="card-title vol-title"><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></h5>
+	                      <h5 class="card-title vol-title">
+	                       <a href='detail?no=${volunteerRequestDTO.no}'>
+                           <c:if test="${fn:length(cropTitle) > 45}">
+                            <h5>${fn:substring(cropTitle,0,45)}<span>${fn:replace(cropTitle,cropTitle,'....')}</span></h5>
+                           </c:if>
+                           <c:if test="${fn:length(cropTitle) <= 45}">
+                            <h5>${volunteerRequestDTO.title}</h5>
+                            </c:if>
+                         </a>
+	                       </h5>
 	                      <p class="card-text"><span class="text-muted">${volunteerRequestDTO.startDate} ~ ${volunteerRequestDTO.endDate}</span></p>
 	                  </div> <!-- // card-body -->
 	                    <ul class="list-group list-group-flush">
@@ -134,7 +164,7 @@
 	                            <span class="sr-only">총 모집인원</span>
 	                            ${volunteerRequestDTO.limitNum}명
 	                          </span> --%>
-	                        <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
+	                        <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">${volunteerRequestDTO.tel}</span>
 	                     </li>
 	                      <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
 	                  </ul>
@@ -150,12 +180,21 @@
 		       <div class="grid-item elder">
 	           <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
              <div class="portfolio">
-               <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
+               <a href="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" data-fancybox="portfolio">
                  <img src="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" alt="봉사이미지" style="padding:10px;">
                </a>
                <div class="card">
                   <div class="card-body">
-                      <h5 class="card-title vol-title"><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></h5>
+                      <h5 class="card-title vol-title">
+                      <a href='detail?no=${volunteerRequestDTO.no}'>
+                           <c:if test="${fn:length(cropTitle) > 45}">
+                            <h5>${fn:substring(cropTitle,0,45)}<span>${fn:replace(cropTitle,cropTitle,'....')}</span></h5>
+                           </c:if>
+                           <c:if test="${fn:length(cropTitle) <= 45}">
+                            <h5>${volunteerRequestDTO.title}</h5>
+                            </c:if>
+                         </a>
+                      </h5>
                       <p class="card-text"><span class="text-muted">${volunteerRequestDTO.startDate} ~ ${volunteerRequestDTO.endDate}</span></p>
                   </div> <!-- // card-body -->
                     <ul class="list-group list-group-flush">
@@ -167,7 +206,7 @@
                             <span class="sr-only">총 모집인원</span>
                             ${volunteerRequestDTO.limitNum}명
                           </span> --%>
-                        <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
+                        <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">${volunteerRequestDTO.tel}</span>
                      </li>
                       <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
                   </ul>
@@ -183,12 +222,21 @@
 		       <div class="grid-item handicapped">
 	           <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
              <div class="portfolio">
-               <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
+               <a href="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" data-fancybox="portfolio">
                  <img src="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" alt="봉사이미지" style="padding:10px;">
                </a>
                <div class="card">
                   <div class="card-body">
-                      <h5 class="card-title vol-title"><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></h5>
+                      <h5 class="card-title vol-title">
+                      <a href='detail?no=${volunteerRequestDTO.no}'>
+                           <c:if test="${fn:length(cropTitle) > 45}">
+                            <h5>${fn:substring(cropTitle,0,45)}<span>${fn:replace(cropTitle,cropTitle,'....')}</span></h5>
+                           </c:if>
+                           <c:if test="${fn:length(cropTitle) <= 45}">
+                            <h5>${volunteerRequestDTO.title}</h5>
+                            </c:if>
+                         </a>
+                     </h5>
                       <p class="card-text"><span class="text-muted">${volunteerRequestDTO.startDate} ~ ${volunteerRequestDTO.endDate}</span></p>
                   </div> <!-- // card-body -->
                     <ul class="list-group list-group-flush">
@@ -200,7 +248,7 @@
                             <span class="sr-only">총 모집인원</span>
                             ${volunteerRequestDTO.limitNum}명
                           </span> --%>
-                        <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
+                        <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">${volunteerRequestDTO.tel}</span>
                      </li>
                       <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
                   </ul>
@@ -216,12 +264,21 @@
 		       <div class="grid-item animal">
 	           <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
              <div class="portfolio">
-               <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
+               <a href="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" data-fancybox="portfolio">
                  <img src="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" alt="봉사이미지" style="padding:10px;">
                </a>
                <div class="card">
                   <div class="card-body">
-                      <h5 class="card-title vol-title"><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></h5>
+                      <h5 class="card-title vol-title">
+                      <a href='detail?no=${volunteerRequestDTO.no}'>
+                           <c:if test="${fn:length(cropTitle) > 45}">
+                            <h5>${fn:substring(cropTitle,0,45)}<span>${fn:replace(cropTitle,cropTitle,'....')}</span></h5>
+                           </c:if>
+                           <c:if test="${fn:length(cropTitle) <= 45}">
+                            <h5>${volunteerRequestDTO.title}</h5>
+                            </c:if>
+                         </a>
+                      </h5>
                       <p class="card-text"><span class="text-muted">${volunteerRequestDTO.startDate} ~ ${volunteerRequestDTO.endDate}</span></p>
                   </div> <!-- // card-body -->
                     <ul class="list-group list-group-flush">
@@ -233,7 +290,7 @@
                             <span class="sr-only">총 모집인원</span>
                             ${volunteerRequestDTO.limitNum}명
                           </span> --%>
-                        <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
+                        <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">${volunteerRequestDTO.tel}</span>
                      </li>
                       <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
                   </ul>
@@ -249,12 +306,21 @@
 		       <div class="grid-item environment">
 	           <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
              <div class="portfolio">
-               <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
+               <a href="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" data-fancybox="portfolio">
                  <img src="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" alt="봉사이미지" style="padding:10px;">
                </a>
                <div class="card">
                   <div class="card-body">
-                      <h5 class="card-title vol-title"><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></h5>
+                      <h5 class="card-title vol-title">
+                     <a href='detail?no=${volunteerRequestDTO.no}'>
+                           <c:if test="${fn:length(cropTitle) > 45}">
+                            <h5>${fn:substring(cropTitle,0,45)}<span>${fn:replace(cropTitle,cropTitle,'....')}</span></h5>
+                           </c:if>
+                           <c:if test="${fn:length(cropTitle) <= 45}">
+                            <h5>${volunteerRequestDTO.title}</h5>
+                            </c:if>
+                         </a>
+                      </h5>
                       <p class="card-text"><span class="text-muted">${volunteerRequestDTO.startDate} ~ ${volunteerRequestDTO.endDate}</span></p>
                   </div> <!-- // card-body -->
                     <ul class="list-group list-group-flush">
@@ -266,7 +332,7 @@
                             <span class="sr-only">총 모집인원</span>
                             ${volunteerRequestDTO.limitNum}명
                           </span> --%>
-                        <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
+                        <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">${volunteerRequestDTO.tel}</span>
                      </li>
                       <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
                   </ul>
@@ -282,12 +348,21 @@
 		       <div class="grid-item other">
 	           <span class="vol-type bu">${volunteerRequestDTO.category.title}</span>
              <div class="portfolio">
-               <a href="../assets/img/portfolio/work-1.jpg" data-fancybox="portfolio">
+               <a href="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" data-fancybox="portfolio">
                  <img src="${contextPath}/upload/volunteer/${volunteerRequestDTO.photo}" alt="봉사이미지" style="padding:10px;">
                </a>
                <div class="card">
                   <div class="card-body">
-                      <h5 class="card-title vol-title"><a href='detail?no=${volunteerRequestDTO.no}'>${volunteerRequestDTO.title}</a></h5>
+                      <h5 class="card-title vol-title">
+                     <a href='detail?no=${volunteerRequestDTO.no}'>
+                           <c:if test="${fn:length(cropTitle) > 45}">
+                            <h5>${fn:substring(cropTitle,0,45)}<span>${fn:replace(cropTitle,cropTitle,'....')}</span></h5>
+                           </c:if>
+                           <c:if test="${fn:length(cropTitle) <= 45}">
+                            <h5>${volunteerRequestDTO.title}</h5>
+                            </c:if>
+                         </a>
+                      </h5>
                       <p class="card-text"><span class="text-muted">${volunteerRequestDTO.startDate} ~ ${volunteerRequestDTO.endDate}</span></p>
                   </div> <!-- // card-body -->
                     <ul class="list-group list-group-flush">
@@ -299,7 +374,7 @@
                             <span class="sr-only">총 모집인원</span>
                             ${volunteerRequestDTO.limitNum}명
                           </span> --%>
-                        <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">010-1111-1111</span>
+                        <span style="padding-left:13px; font-weight:normal; font-size:14px; color:#777;">${volunteerRequestDTO.tel}</span>
                      </li>
                       <li class="list-group-item">${volunteerRequestDTO.remainDate}일 남음</li>
                   </ul>
