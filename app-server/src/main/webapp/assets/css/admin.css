@@ -171,7 +171,9 @@ caption {
 .ad-main .ad-main-infor .table01 table td:last-child {
 	border-right:0;
 }
-
+.ad-btn {
+	height:40px;
+}
 .ad-btn a.btnSubmit {
   display: block;
   width:90px;

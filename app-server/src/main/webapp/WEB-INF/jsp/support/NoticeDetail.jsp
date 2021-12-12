@@ -14,6 +14,16 @@
 							value="${noticeDTO.no}" readonly>
 					</div>
 					<!-- //번호 -->
+					<div class=" q q-date">
+						<label for="f-registeredDate">등록일</label>
+						<span id='f-registeredDate' style="color:#999;">${noticeDTO.registeredDate}</span>
+					</div>
+					<!-- //등록일 -->
+					<div class=" q q-view">
+						<label for="f-viewCount" style=" margin-left:25px;">조회수</label>
+						<span id='f-viewCount' style="color:#999;">${noticeDTO.viewCount}</span>
+					</div>
+					<!-- //조회수 -->
 					<div class="form-group">
 						<label for="f-title">제목</label> <input type="text"
 							class="form-control" id="f-title" name="title"
@@ -26,16 +36,7 @@
 							class="form-control" readonly>${noticeDTO.content}</textarea>
 					</div>
 					<!-- //내용 -->
-					<div class="form-group">
-						<label for="f-registeredDate">등록일</label> <span
-							id='f-registeredDate'>${noticeDTO.registeredDate}</span>
-					</div>
-					<!-- //등록일 -->
-					<div class="form-group">
-						<label for="f-viewCount">조회수</label> <span id='f-viewCount'>${noticeDTO.viewCount}</span>
-					</div>
-					<!-- //조회수 -->
-					<div class="form-group row">
+					<%-- <div class="form-group row">
 						<label for="f-file" class="col-sm-1 col-form-label">첨부파일</label>
 						<div class="col-sm-11">
 							<img id="f-file-image"
@@ -43,7 +44,7 @@
 								type="file" class="form-control-file" id="f-file"
 								name="fileUpload">
 						</div>
-					</div>
+					</div> --%>
 					<!-- //파일첨부 -->
 					<div>
 						<a href="noticeList" class="btn no-btn" style="color:#fff;">목록</a>
