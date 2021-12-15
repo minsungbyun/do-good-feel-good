@@ -43,73 +43,73 @@
 						</div>
 						<div class="wrap-menu">
 							<div class="area-r">
-							<button class="btn-g">등록</button>
+								<button class="btn-g">등록</button>
+							</div>
 						</div>
 					</div>
+					<!-- //inner-text-wirte -->
 				</div>
-				<!-- //inner-text-wirte -->
-			</div>
 
 
 
-	<!-- //text-wirte -->
-	<div class="cont-short-list">
-		<c:forEach items="${volunteerShortReviewList}"
-			var="volunteerShortReviewDTO">
-			<div class="s-review-list">
-				<div class="review-view">
-					<ul>
-						<li>
-							<div class="review-section">
-								<div class="profile-thumb">
-									<img src="${contextPath}/assets/img/level.png" alt="프로필사진">
-								</div>
-								<div class="review-infor">
-									<div class="review-post">
-										<div class="profile-infor">
-											<span>${volunteerShortReviewDTO.owner.id}</span> <span
-												class="txt_date">${volunteerShortReviewDTO.registeredDate}</span>
-											<%-- <span class="ico_bbs ico_new">새글</span>--%>
+				<!-- //text-wirte -->
+				<div class="cont-short-list">
+					<c:forEach items="${volunteerShortReviewList}"
+						var="volunteerShortReviewDTO">
+						<div class="s-review-list">
+							<div class="review-view">
+								<ul>
+									<li>
+										<div class="review-section">
+											<div class="profile-thumb">
+												<img src="${contextPath}/assets/img/level.png" alt="프로필사진">
+											</div>
+											<div class="review-infor">
+												<div class="review-post">
+													<div class="profile-infor">
+														<span>${volunteerShortReviewDTO.owner.id}</span> <span
+															class="txt_date">${volunteerShortReviewDTO.registeredDate}</span>
+														<%-- <span class="ico_bbs ico_new">새글</span>--%>
+													</div>
+													<div class="review-post">
+														<p>
+															<span>${volunteerShortReviewDTO.content}</span>
+														</p>
+													</div>
+													<div class="review-btn">
+														<a href='reviewUpdate?no=${volunteerShortReviewDTO.no}'
+															class="link_menu">[수정]</a> <a
+															href='reviewDelete?no=${volunteerShortReviewDTO.no}'
+															class="link_menu">[삭제]</a>
+													</div>
+												</div>
+											</div>
 										</div>
-										<div class="review-post">
-											<p>
-												<span>${volunteerShortReviewDTO.content}</span>
-											</p>
-										</div>
-										<div class="review-btn">
-											<a href='reviewUpdate?no=${volunteerShortReviewDTO.no}'
-												class="link_menu">[수정]</a> <a
-												href='reviewDelete?no=${volunteerShortReviewDTO.no}'
-												class="link_menu">[삭제]</a>
-										</div>
-									</div>
-								</div>
+									</li>
+								</ul>
 							</div>
-						</li>
-					</ul>
+						</div>
+					</c:forEach>
+					<!-- //s-review-list -->
+				</div>
+
+				<div class="col-12 my-5">
+					<nav aria-label="Page Navigation">
+						<ul class="pagination justify-content-center">
+							<li class="page-item disabled"><a class="page-link" href="#"
+								tabindex="-1" aria-disabled="true">Previous</a></li>
+							<li class="page-item active" aria-current="page"><a
+								class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
+							</li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item"><a class="page-link" href="#">Next</a></li>
+						</ul>
+					</nav>
 				</div>
 			</div>
-		</c:forEach>
-		<!-- //s-review-list -->
-	</div>
-
-	<div class="col-12 my-5">
-		<nav aria-label="Page Navigation">
-			<ul class="pagination justify-content-center">
-				<li class="page-item disabled"><a class="page-link" href="#"
-					tabindex="-1" aria-disabled="true">Previous</a></li>
-				<li class="page-item active" aria-current="page"><a
-					class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">Next</a></li>
-			</ul>
-		</nav>
-	</div>
-	        </div>
-	        </div>
-  </form>
+		</div>
+	</form>
 	<!-- //container -->
 </main>
 
