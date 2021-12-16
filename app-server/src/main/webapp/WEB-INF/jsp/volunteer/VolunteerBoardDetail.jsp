@@ -155,9 +155,10 @@
 
 						<c:if
 							test="${sessionScope.loginUser.id == volunteerBoardCommentDTO.owner.id}">
-            &nbsp;&nbsp;<a data-toggle="modal"
-								href="#myModalQuestionU${vs.index}">[수정]</a>
-							<a href='commentDelete?no=${volunteerBoardCommentDTO.no}'>[삭제]</a>
+            &nbsp;&nbsp;              <div class="area-r"><a data-toggle="modal" class="btn-g"
+								href="#myModalQuestionU${vs.index}">수정</a>
+							<td><a href='commentDelete?no=${volunteerBoardCommentDTO.no}' class="btn-g">삭제</a></td>
+					</div>
 						</c:if>
 					</div>
 					<br>
