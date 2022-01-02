@@ -13,5 +13,7 @@ public class AppInitListener implements ServletContextListener {
 
     ServletContext sc = sce.getServletContext();
     sce.getServletContext().setAttribute("contextPath", sc.getContextPath());
+    System.out.println("contextPath는 ==> "+sc.getAttribute("contextPath"));
+    System.out.println("contextPath는 ==> "+sc.getContextPath());
   }
 }

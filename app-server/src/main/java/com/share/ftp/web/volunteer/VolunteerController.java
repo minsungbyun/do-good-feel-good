@@ -49,6 +49,7 @@ public class VolunteerController {
   @Autowired GeneralDao generalDao;
   @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired ServletContext sc;
+  //@Autowired VolunteerService volunteerService;
 
   @PostMapping("add")
   public ModelAndView add(
@@ -115,6 +116,7 @@ public class VolunteerController {
     volunteerRequestDTO.setCategory(category);
     logger.info("봉사정보 ==> "+ volunteerRequestDTO);
 
+    //volunteerService.add(volunteerRequestDTO);
     volunteerDao.insert(volunteerRequestDTO);
     sqlSessionFactory.openSession().commit();
     logger.info("봉사신청을 완료하였습니다!");
